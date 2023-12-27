@@ -48,9 +48,9 @@ std::vector<std::shared_ptr<AssetRepository>> AssetManager::repositoryStack = {
 };
 SimpleAssetCache<PackageManifest> AssetManager::manifestCache = {};
 SimpleAssetCache<std::string> AssetManager::avarascriptCache = {};
-AssetCache<HullConfigRecord> AssetManager::hullCache = {};
 AssetCache<nlohmann::json> AssetManager::bspCache = {};
-AssetCache<std::vector<uint8_t>> AssetManager::sndCache = {};
+AssetCache<OggFile> AssetManager::sndCache = {};
+AssetCache<HullConfigRecord> AssetManager::hullCache = {};
 
 std::vector<std::string> AssetManager::GetAvailablePackages()
 {
@@ -110,21 +110,11 @@ std::vector<std::shared_ptr<std::string>> AssetManager::GetAllScripts()
 
 std::optional<std::shared_ptr<nlohmann::json>> AssetManager::GetBsp(int16_t id)
 {
-    // Already cached?
     if (bspCache.count(id) > 0) {
         return bspCache.at(id).data;
     }
 
-    // Attempt to load from packages in priority order.
-    for (auto const &pkg : externalPackages) {
-        LoadBsp(pkg, id);
-        if (bspCache.count(id) > 0) {
-            return bspCache.at(id).data;
-        }
-    }
-
-    // Attempt to fall back to the base package.
-    LoadBsp(NoPackage, id);
+    LoadBsp(id);
     if (bspCache.count(id) > 0) {
         return bspCache.at(id).data;
     }
@@ -132,23 +122,27 @@ std::optional<std::shared_ptr<nlohmann::json>> AssetManager::GetBsp(int16_t id)
     return std::optional<std::shared_ptr<nlohmann::json>>{};
 }
 
+std::optional<std::shared_ptr<OggFile>> AssetManager::GetOgg(int16_t id)
+{
+    if (sndCache.count(id) > 0) {
+        return sndCache.at(id).data;
+    }
+
+    LoadOgg(id);
+    if (sndCache.count(id) > 0) {
+        return sndCache.at(id).data;
+    }
+
+    return std::optional<std::shared_ptr<OggFile>>{};
+}
+
 std::optional<std::shared_ptr<HullConfigRecord>> AssetManager::GetHull(int16_t id)
 {
-    // Already cached?
     if (hullCache.count(id) > 0) {
         return hullCache.at(id).data;
     }
 
-    // Attempt to retrieve from packages in priority order.
-    for (auto const &pkg : externalPackages) {
-        LoadHull(pkg, id);
-        if (hullCache.count(id) > 0) {
-            return hullCache.at(id).data;
-        }
-    }
-
-    // Attempt to fall back to the base package.
-    LoadHull(NoPackage, id);
+    LoadHull(id);
     if (hullCache.count(id) > 0) {
         return hullCache.at(id).data;
     }
@@ -306,9 +300,7 @@ void AssetManager::LoadManifest(MaybePackage package)
     std::string path = GetManifestPath(package);
     std::ifstream file(path);
     if (file.good()) {
-        auto manifest = std::make_shared<PackageManifest>(
-            PackageManifest(nlohmann::json::parse(file))
-        );
+        auto manifest = std::make_shared<PackageManifest>(nlohmann::json::parse(file));
         manifestCache.insert_or_assign(package, manifest);
     }
 }
@@ -325,29 +317,118 @@ void AssetManager::LoadScript(MaybePackage package)
     }
 }
 
-void AssetManager::LoadBsp(MaybePackage package, int16_t id)
+void AssetManager::LoadBsp(int16_t id)
 {
-    std::string path = GetBspPath(package, id);
+    // Attempt to retrieve from packages in priority order.
+    for (auto const &pkg : externalPackages) {
+        std::string path = GetBspPath(pkg, id);
+        std::ifstream file(path);
+        if (file.good()) {
+            Asset<nlohmann::json> asset;
+            asset.data = std::make_shared<nlohmann::json>(nlohmann::json::parse(file));;
+            asset.packageName = pkg;
+            bspCache.insert_or_assign(id, asset);
+            return;
+        }
+    }
+
+    // Fallback to base package.
+    std::string path = GetBspPath(NoPackage, id);
     std::ifstream file(path);
     if (file.good()) {
-        auto bsp = std::make_shared<nlohmann::json>(nlohmann::json::parse(file));
         Asset<nlohmann::json> asset;
-        asset.data = bsp;
-        asset.packageName = package;
+        asset.data = std::make_shared<nlohmann::json>(nlohmann::json::parse(file));;
+        asset.packageName = NoPackage;
         bspCache.insert_or_assign(id, asset);
     }
 }
 
-void AssetManager::LoadHull(MaybePackage package, int16_t id)
+void AssetManager::LoadOgg(int16_t id)
 {
     // Note that all manifests should already be loaded due to `Init`, `SwitchBasePackage`, and
     // `BuildDependencyList`.
-    auto manifest = manifestCache.at(package);
+
+    std::optional<std::string> path = {};
+    std::optional<HSNDRecord> hsnd = {};
+
+    // Track which package has the highest priority for this particular asset. This is tricky for
+    // oggs since the asset is split into two parts, the actual ogg file and the HSND metadata.
+    // We need to know what the highest priority is so the cache can be cleared appropriately when
+    // needed later on.
+    size_t highestPriorityPkgIdx = externalPackages.size();
+
+    // Attempt to retrieve from packages in priority order.
+    size_t idx = 0;
+    for (auto const &pkg : externalPackages) {
+        std::string testPath = GetOggPath(pkg, id);
+        std::ifstream testFile(testPath);
+        if (testFile.good()) {
+            path = testPath;
+            highestPriorityPkgIdx = std::min(idx, highestPriorityPkgIdx);
+        }
+
+        auto manifest = manifestCache.at(pkg);
+        if (manifest->hsndResources.count(id) > 0) {
+            hsnd = manifest->hsndResources.at(id);
+            highestPriorityPkgIdx = std::min(idx, highestPriorityPkgIdx);
+        }
+
+        if (path && hsnd) {
+            break;
+        }
+
+        idx++;
+    }
+
+    // Fallback to base package.
+    if (!path) {
+        std::string testPath = GetOggPath(NoPackage, id);
+        std::ifstream testFile(testPath);
+        if (testFile.good()) {
+            path = testPath;
+        }
+    }
+
+    if (!hsnd) {
+        auto manifest = manifestCache.at(NoPackage);
+        if (manifest->hsndResources.count(id) > 0) {
+            hsnd = manifest->hsndResources.at(id);
+        }
+    }
+
+    if (path && hsnd) {
+        Asset<OggFile> asset;
+        asset.data = std::make_shared<OggFile>(*path, *hsnd);
+        asset.packageName = (highestPriorityPkgIdx < externalPackages.size())
+            ? externalPackages[highestPriorityPkgIdx]
+            : NoPackage;
+        sndCache.insert_or_assign(id, asset);
+    }
+}
+
+void AssetManager::LoadHull(int16_t id)
+{
+    // Note that all manifests should already be loaded due to `Init`, `SwitchBasePackage`, and
+    // `BuildDependencyList`.
+
+    // Attempt to retrieve from packages in priority order.
+    for (auto const &pkg : externalPackages) {
+        auto manifest = manifestCache.at(pkg);
+        if (manifest->hullResources.count(id) > 0) {
+            Asset<HullConfigRecord> asset;
+            asset.data = std::make_shared<HullConfigRecord>(manifest->hullResources.at(id));
+            asset.packageName = pkg;
+            hullCache.insert_or_assign(id, asset);
+            return;
+        }
+    }
+
+    // Fallback to base package.
+    auto manifest = manifestCache.at(NoPackage);
     if (manifest->hullResources.count(id) > 0) {
-        auto hull = std::make_shared<HullConfigRecord>(manifest->hullResources.at(id));
         Asset<HullConfigRecord> asset;
-        asset.data = hull;
-        asset.packageName = package;
+        asset.data = std::make_shared<HullConfigRecord>(manifest->hullResources.at(id));
+        asset.packageName = NoPackage;
         hullCache.insert_or_assign(id, asset);
     }
 }
@@ -357,9 +438,9 @@ void AssetManager::SwitchBasePackage(BasePackage newBase)
     std::vector<MaybePackage> packageList = {NoPackage};
     manifestCache.RemoveAll(packageList);
     avarascriptCache.RemoveAll(packageList);
-    hullCache.RemoveAll(packageList);
     bspCache.RemoveAll(packageList);
     sndCache.RemoveAll(packageList);
+    hullCache.RemoveAll(packageList);
 
     basePackage = newBase;
 
@@ -383,14 +464,15 @@ void AssetManager::SwitchContext(std::string packageName)
     if (needsCacheClear.size() > 0) {
         manifestCache.RemoveAll(needsCacheClear);
         avarascriptCache.RemoveAll(needsCacheClear);
-        hullCache.RemoveAll(needsCacheClear);
         bspCache.RemoveAll(needsCacheClear);
         sndCache.RemoveAll(needsCacheClear);
+        hullCache.RemoveAll(needsCacheClear);
     }
 
     externalPackages = newContext;
 
     ReviewPriorities(bspCache);
+    ReviewPriorities(sndCache);
     ReviewPriorities(hullCache);
 }
 
@@ -451,6 +533,47 @@ void AssetManager::ReviewPriorities(AssetCache<nlohmann::json> &cache)
         cache.erase(id);
     }
 };
+
+template <>
+void AssetManager::ReviewPriorities(AssetCache<OggFile> &cache)
+{
+    std::vector<int16_t> needsRemoval = {};
+    for (auto const &[id, asset] : cache) {
+        MaybePackage assetPkg = asset.packageName;
+        bool foundHsnd = false;
+        bool foundOgg = false;
+        for (auto const &pkg : externalPackages) {
+            if (assetPkg == pkg) {
+                // We've reached the point in the package list where the cached asset is of equal
+                // or higher priority than the remaining packages, so we can stop looking for this
+                // particular asset ID.
+                break;
+            }
+
+            auto manifest = manifestCache.at(pkg);
+            if (manifest->hsndResources.count(id) > 0) {
+                foundHsnd = true;
+            }
+
+            std::string path = GetOggPath(pkg, id);
+            std::ifstream testFile(path);
+            if (testFile.good()) {
+                foundOgg = true;
+            }
+
+            if (foundHsnd || foundOgg) {
+                needsRemoval.push_back(id);
+
+                // We've found a higher priority asset than the one in the cache, so we can stop
+                // looking for this particular asset ID.
+                break;
+            }
+        }
+    }
+    for (auto &id : needsRemoval) {
+        cache.erase(id);
+    }
+}
 
 template <>
 void AssetManager::ReviewPriorities(AssetCache<HullConfigRecord> &cache)

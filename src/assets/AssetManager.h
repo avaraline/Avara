@@ -2,8 +2,8 @@
 #include "AssetStorage.h"
 #include "AssetRepository.h"
 #include "PackageManifest.h"
+#include "OggFile.h"
 #include "PlayerConfig.h"
-#include "SoundSystemDefines.h"
 #include "Types.h"
 
 #include <json.hpp>
@@ -105,6 +105,14 @@ public:
     static std::optional<std::shared_ptr<nlohmann::json>> GetBsp(int16_t id);
 
     /**
+     * Get the OGG with the provided resource ID, if available.
+     *
+     * @param id The resource ID.
+     * @return the OGG data
+     */
+    static std::optional<std::shared_ptr<OggFile>> GetOgg(int16_t id);
+
+    /**
      * Get the hull with the provided resource ID, if available.
      *
      * @param id The resource ID.
@@ -145,7 +153,7 @@ private:
     static SimpleAssetCache<PackageManifest> manifestCache;
     static SimpleAssetCache<std::string> avarascriptCache;
     static AssetCache<nlohmann::json> bspCache;
-    static AssetCache<std::vector<Sample>> sndCache;
+    static AssetCache<OggFile> sndCache;
     static AssetCache<HullConfigRecord> hullCache;
 
     /**
@@ -231,21 +239,26 @@ private:
     static void LoadScript(MaybePackage package);
 
     /**
-     * Load the specified package's BSP json file.
+     * Load the specified BSP json file.
      *
-     * @param package The package whose BSP we want to load.
      * @param id The resource ID of the BSP.
      */
-    static void LoadBsp(MaybePackage package, int16_t id);
+    static void LoadBsp(int16_t id);
 
     /**
-     * Load the specified package's hull configuration. (Despite its name, nothing is actually
-     * loaded here--merely put into the hull cache to speed future lookups.)
+     * Load the specified OGG file.
      *
-     * @param package The package whose hull configuration we want to load.
+     * @param id The resource ID of the OGG.
+     */
+    static void LoadOgg(int16_t id);
+
+    /**
+     * Load the specified hull configuration. (Despite its name, nothing is actually loaded
+     * here--merely put into the hull cache to speed future lookups.)
+     *
      * @param id The resource ID of the hull configuration.
      */
-    static void LoadHull(MaybePackage package, int16_t id);
+    static void LoadHull(int16_t id);
 
     /**
      * Change which base package is being used (e.g. Avara vs. Aftershock). If it differs from the
@@ -287,6 +300,10 @@ private:
     /** @copydoc */
     template <>
     void ReviewPriorities(AssetCache<nlohmann::json> &cache);
+
+    /** @copydoc */
+    template <>
+    void ReviewPriorities(AssetCache<OggFile> &cache);
 
     /** @copydoc */
     template <>

@@ -15,6 +15,8 @@
 		9465BFD82B30EF680050681C /* PackageManifest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9465BFD52B30EF680050681C /* PackageManifest.cpp */; };
 		948CBF142B335A1400147E80 /* BaseAssetStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */; };
 		948CBF152B335A1400147E80 /* BaseAssetStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */; };
+		94924EAF2B3A894900197378 /* OggFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94924EAE2B3A894900197378 /* OggFile.cpp */; };
+		94924EB02B3A894900197378 /* OggFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94924EAE2B3A894900197378 /* OggFile.cpp */; };
 		94F17DDD29920D90001F5950 /* ARGBColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94F17DDC29920D90001F5950 /* ARGBColor.cpp */; };
 		E20752EF2A003EC600DCC210 /* Tags.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20752EE2A003EC600DCC210 /* Tags.cpp */; };
 		E20A3C562991CC72005741F7 /* KeyFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20A3C552991CC72005741F7 /* KeyFuncs.cpp */; };
@@ -373,6 +375,8 @@
 		948CBF112B33581D00147E80 /* AssetStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetStorage.h; sourceTree = "<group>"; };
 		948CBF122B3359D700147E80 /* BaseAssetStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseAssetStorage.h; sourceTree = "<group>"; };
 		948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BaseAssetStorage.cpp; sourceTree = "<group>"; };
+		94924EAD2B3A893900197378 /* OggFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OggFile.h; sourceTree = "<group>"; };
+		94924EAE2B3A894900197378 /* OggFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OggFile.cpp; sourceTree = "<group>"; };
 		94F17DDB2991FACE001F5950 /* ARGBColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARGBColor.h; sourceTree = "<group>"; };
 		94F17DDC29920D90001F5950 /* ARGBColor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ARGBColor.cpp; sourceTree = "<group>"; };
 		E20752ED29FF1EC500DCC210 /* Tags.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tags.h; sourceTree = "<group>"; };
@@ -1373,6 +1377,8 @@
 				E5890C7729895118007A875D /* CSoundMixer.cpp */,
 				E5890C7229895118007A875D /* CSoundMixer.h */,
 				E5890C7429895118007A875D /* DopplerPlug.cpp */,
+				94924EAE2B3A894900197378 /* OggFile.cpp */,
+				94924EAD2B3A893900197378 /* OggFile.h */,
 				E5890C7629895118007A875D /* SoundSystemDefines.h */,
 			);
 			path = audio;
@@ -2106,6 +2112,7 @@
 				E517F09A299713DB0036B206 /* CSolidActor.cpp in Sources */,
 				E517F09B299713DB0036B206 /* CSoundActor.cpp in Sources */,
 				E517F09C299713DB0036B206 /* CSphereActor.cpp in Sources */,
+				94924EB02B3A894900197378 /* OggFile.cpp in Sources */,
 				E517F09D299713DB0036B206 /* CSwitchActor.cpp in Sources */,
 				E517F09E299713DB0036B206 /* CTeleporter.cpp in Sources */,
 				E517F09F299713DB0036B206 /* CTextActor.cpp in Sources */,
@@ -2271,6 +2278,7 @@
 				E5890EF929895124007A875D /* nanogui_resources.cpp in Sources */,
 				E5890CBD29895118007A875D /* CScout.cpp in Sources */,
 				E5890CA429895118007A875D /* AvaraTCP.cpp in Sources */,
+				94924EAF2B3A894900197378 /* OggFile.cpp in Sources */,
 				E5890EFB29895124007A875D /* darwin.mm in Sources */,
 				E5890CBC29895118007A875D /* CAbstractMissile.cpp in Sources */,
 				E5890CD229895118007A875D /* CBall.cpp in Sources */,

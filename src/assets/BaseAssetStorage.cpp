@@ -5,8 +5,7 @@
 #include <sstream>
 
 std::shared_ptr<BaseAssetStorage> BaseAssetStorage::GetInstance() {
-    static std::shared_ptr<BaseAssetStorage> instance
-        = std::make_shared<BaseAssetStorage>(BaseAssetStorage());
+    static auto instance = std::make_shared<BaseAssetStorage>(BaseAssetStorage());
     return instance;
 };
 

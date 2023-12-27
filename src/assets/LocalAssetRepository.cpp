@@ -10,8 +10,7 @@
 #include <sstream>
 
 std::shared_ptr<LocalAssetRepository> LocalAssetRepository::GetInstance() {
-    static std::shared_ptr<LocalAssetRepository> instance
-        = std::make_shared<LocalAssetRepository>(LocalAssetRepository());
+    static auto instance = std::make_shared<LocalAssetRepository>(LocalAssetRepository());
     return instance;
 };
 
