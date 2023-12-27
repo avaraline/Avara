@@ -172,20 +172,6 @@ void CStringDictionary::Unlock() {
     CBaseObject::Unlock();
 }
 
-/*
-**	Read the dictionary string from a STR# resource.
-*/
-void CStringDictionary::ReadFromStringList(short strListID) {
-    Str255 theString;
-    short stringCount, i;
-
-    stringCount = **(short **)GetResource('STR#', strListID);
-    for (i = 1; i <= stringCount; i++) {
-        GetIndString(theString, strListID, i);
-        AddDictEntry(theString, -1);
-    }
-}
-
 Handle CStringDictionary::WriteToHandle() {
     Handle result;
     long neededSize;

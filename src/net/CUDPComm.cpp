@@ -523,7 +523,7 @@ CUDPConnection *CUDPComm::DoLogin(PacketInfo *thePacket, UDPpacket *udp) {
         } else {
             std::string passwordStr =  gApplication->String(kServerPassword);
             password[0] = passwordStr.length();
-            BlockMoveData(passwordStr.c_str(), password + 1, passwordStr.length());
+            BlockMoveData(passwordStr.c_str(), password + 1, password[0]);
 
             for (i = 0; i <= password[0]; i++) {
                 if (password[i] != thePacket->dataBuffer[i]) {
@@ -733,10 +733,11 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                         #endif
 
                         if (p->dataLen) {
-                            if (p->dataLen > PACKETDATABUFFERSIZE) {
-                                SDL_Log("CUDPComm::ReadComplete BUFFER TOO BIG ERROR!! cmd=%d, sndr=%d dataLen = %d\n",
-                                        p->command, p->sender, p->dataLen);
-                                p->dataLen = PACKETDATABUFFERSIZE;
+                            if (p->dataLen > PACKETDATABUFFERSIZE || p->dataLen < 0) {
+                                SDL_Log("CUDPComm::ReadComplete BUFFER SIZE ERROR (ignoring packet)!! sn=%d-%hd cmd=%d, sndr=%d dataLen = %d\n",
+                                        int(thePacket->serialNumber), thePacket->sendCount, p->command, p->sender, p->dataLen);
+                                ReleasePacket((PacketInfo *)thePacket);
+                                break;
                             }
                             BlockMoveData(inData.c, p->dataBuffer, p->dataLen);
                             inData.c += p->dataLen;
@@ -809,6 +810,16 @@ void CUDPComm::ReceivedGoodPacket(PacketInfo *thePacket) {
         ForwardPacket(thePacket);
     else
         DispatchAndReleasePacket(thePacket);
+}
+
+size_t CUDPComm::SkipLostPackets(int16_t dist) {
+    size_t sumRecvQs = 0;
+    for (CUDPConnection *conn = connections; conn; conn = conn->next) {
+        if ((1 << conn->myId) & dist) {
+            sumRecvQs += conn->ReceivedPacket(nullptr);
+        }
+    }
+    return sumRecvQs;
 }
 
 void CUDPComm::WriteComplete(int result) {
@@ -1136,7 +1147,8 @@ ClockTick CUDPComm::GetClock() {
 **	no other data to send within twice that period.
 */
 void CUDPComm::IUDPComm(short clientCount, short bufferCount, short version, ClockTick urgentTimePeriod) {
-    ICommManager(bufferCount);
+    // create queues big enough to hold UDPPacketInfo packets
+    InitializePacketQueues(bufferCount, sizeof(UDPPacketInfo));
 
     inviteString[0] = 0;
 
@@ -1206,36 +1218,6 @@ void CUDPComm::IUDPComm(short clientCount, short bufferCount, short version, Clo
     localPort = 0;
     localIP = 0;
     password[0] = 0;
-}
-
-OSErr CUDPComm::AllocatePacketBuffers(short packetSpace) {
-    OSErr theErr;
-    Ptr mem;
-    UDPPacketInfo *pp;
-    
-    if (freeQ.qHead != nullptr) {
-        // should only happen when called when extending buffer, see CCommManager::ProcessQueue
-        DBG_Log("q", "CUDPComm::AllocatePacketBuffers adding chunk of %hd packet buffers to an EXISTING &freeQ = %p\n",
-                packetSpace, &freeQ);
-    }
-
-    mem = NewPtr(sizeof(Ptr) + sizeof(UDPPacketInfo) * packetSpace);
-    theErr = MemError();
-
-    if (theErr == noErr) {
-        *(Ptr *)mem = packetBuffers;
-        packetBuffers = mem;
-
-        pp = (UDPPacketInfo *)(packetBuffers + sizeof(Ptr));
-
-        while (packetSpace--) {
-            Enqueue((QElemPtr)pp, &freeQ);
-            freeCount++;
-            pp++;
-        }
-    }
-
-    return theErr;
 }
 
 void CUDPComm::Disconnect() {
@@ -1433,20 +1415,20 @@ void CUDPComm::Connect(std::string address) {
 }
 
 void CUDPComm::Connect(std::string address, std::string passwordStr) {
-    SDL_Log("Connect address = %s pw length=%lu %s", address.c_str(), passwordStr.size(), passwordStr.c_str());
+    SDL_Log("Connect address = %s pw length=%zu %s", address.c_str(), passwordStr.size(), passwordStr.c_str());
 
     OpenAvaraTCP();
 
     long serverPort = gApplication->Number(kDefaultUDPPort);
-    // if kDefaultClientUDPPort not specified, fall back to kDefaultUDPPort
-    localPort = gApplication->Number(kDefaultClientUDPPort, serverPort);
+    // if kDefaultClientUDPPort not specified, fall back to 0 (random port) for the client
+    localPort = gApplication->Number(kDefaultClientUDPPort, 0);
 
     IPaddress addr;
     // CAvaraApp *app = (CAvaraAppImpl *)gApplication;
     ResolveHost(&addr, address.c_str(), serverPort);
 
     password[0] = passwordStr.length();
-    BlockMoveData(passwordStr.c_str(), password + 1, passwordStr.length());
+    BlockMoveData(passwordStr.c_str(), password + 1, password[0]);
 
     ContactServer(addr);
     /*
@@ -1924,10 +1906,10 @@ long CUDPComm::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
 
     for (conn = connections; conn; conn = conn->next) {
         if (conn->port && (distribution & (1 << conn->myId))) {
-            // add in 1.9*stdev (~97% prob) but max it at CLASSICFRAMETIME (don't add more than 0.5 to LT)
+            // add in 3.0*stdev (~99.7% prob) but max it at CLASSICFRAMETIME (don't add more than 0.5 to LT)
             // note: is this really a erlang distribution?  if so, what's the proper equation?
             float stdev = sqrt(conn->varRoundTripTime);
-            float rtt = conn->meanRoundTripTime + std::min(1.9*stdev, (1.0*CLASSICFRAMECLOCK));
+            float rtt = conn->meanRoundTripTime + std::min(3.0*stdev, (1.0*CLASSICFRAMECLOCK));
             if (rtt > maxTrip) {
                 maxTrip = rtt;
                 if (slowPlayerId != nullptr) {

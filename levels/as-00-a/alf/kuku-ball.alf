@@ -1,0 +1,127 @@
+<map>
+  <SkyColor color="#000000" color.1="#ffffff" />
+  <GroundColor color="#007600" />
+  <set designer="Plastic Chicken (formerly ¶£å§†¡¢ √∑N)" information="Take a pill, shoot your enemies." defaultLives="4" snKuku="1252" bspChicken="1250" snBigBoom="1251" blastSoundDefault="snBigBoom" />
+  <unique vars="mActive mTaken" />
+  <Goody shape="bspMissile" y="2" speed="5" missiles="3" start="mActive" out="mTaken" sound="snKuku" color="#ff40ff" color.1="#ab56ff" cx="40.69444444444444" cz="41.94444444444444" angle="90" />
+  <Timer in.0="@start" in.1="mTaken" wait="100" out.1="mActive" />
+  <unique vars="zHi" />
+  <Goody y="7" power="1000" shield="1000" sound="false" start="zHi" out="zHi" yon=".001" color="#008700" color.1="#008700" cx="31.04166666666667" cz="32.29166666666667" angle="135" />
+  <And in="@start" out="zHi" />
+  <Incarnator y="7" cx="31.04166666666667" cz="32.29166666666667" angle="135" />
+  <set wallHeight="10" />
+  <Wall color="#797979" color.1="#000000" x="40.3125" z="29.0625" w="23.125" d="1.875" h="0" />
+  <Wall color="#797979" color.1="#000000" x="27.8125" z="50.9375" w="1.875" d="45.625" h="0" />
+  <Wall color="#797979" color.1="#000000" x="52.8125" z="33.75" w="1.875" d="22.5" h="0" />
+  <Wall color="#797979" color.1="#000000" x="74.0625" z="21.5625" w="44.375" d="1.875" h="0" />
+  <Wall color="#797979" color.1="#000000" x="42.8125" z="53.75" w="21.875" d="11.25" h="0" />
+  <Ramp deltaY="5" color="#ffd5a9" color.1="#000000" x="41.25" z="31.5625" w="15" d="3.125" h="0" angle="270" />
+  <Wall color="#797979" color.1="#000000" x="37.8125" z="74.6875" w="21.875" d="1.875" h="0" />
+  <Wall color="#797979" color.1="#000000" x="52.8125" z="68.75" w="1.875" d="18.75" h="0" />
+  <Wall color="#797979" color.1="#000000" x="66.25" z="77.1875" w="18.75" d="1.875" h="0" />
+  <Wall color="#797979" color.1="#000000" x="47.8125" z="78.4375" w="1.875" d="5.625" h="0" />
+  <Wall color="#797979" color.1="#000000" x="76.5625" z="82.1875" w="59.375" d="1.875" h="0" />
+  <Wall color="#797979" color.1="#000000" x="76.5625" z="67.1875" w="1.875" d="21.875" h="0" />
+  <Wall color="#797979" color.1="#000000" x="90" z="57.1875" w="18.75" d="1.875" h="0" />
+  <Wall color="#797979" color.1="#000000" x="100.3125" z="38.125" w="1.875" d="40" h="0" />
+  <Wall color="#797979" color.1="#000000" x="108.75" z="14.0625" w="25" d="1.875" h="0" />
+  <Wall color="#797979" color.1="#000000" x="95.3125" z="16.875" w="1.875" d="7.5" h="0" />
+  <Wall color="#797979" color.1="#000000" x="113.75" z="34.6875" w="18.75" d="1.875" h="0" />
+  <Wall color="#797979" color.1="#000000" x="122.1875" z="23.4375" w="1.875" d="20.625" h="0" />
+  <Wall color="#797979" color.1="#000000" x="105.3125" z="58.4375" w="1.875" d="45.625" h="0" />
+  <Wall color="#797979" color.1="#000000" x="82.1875" z="35.9375" w="9.375" d="4.375" h="0" />
+  <unique vars="zHi" />
+  <Goody y="7" power="1000" shield="1000" sound="false" start="zHi" out="zHi" yon=".001" color="#008700" color.1="#008700" cx="31.04166666666667" cz="71.31944444444446" angle="45" />
+  <And in="@start" out="zHi" />
+  <Incarnator y="7" cx="31.04166666666667" cz="71.31944444444446" angle="45" />
+  <unique vars="zHi" />
+  <Goody y="7" power="1000" shield="1000" sound="false" start="zHi" out="zHi" yon=".001" color="#008700" color.1="#008700" cx="102.01388888888889" cz="78.81944444444446" angle="315" />
+  <And in="@start" out="zHi" />
+  <Incarnator y="7" cx="102.01388888888889" cz="78.81944444444446" angle="315" />
+  <unique vars="zHi" />
+  <Goody y="7" power="1000" shield="1000" sound="false" start="zHi" out="zHi" yon=".001" color="#008700" color.1="#008700" cx="118.88888888888889" cz="17.22222222222222" angle="225" />
+  <And in="@start" out="zHi" />
+  <Incarnator y="7" cx="118.88888888888889" cz="17.22222222222222" angle="225" />
+  <unique vars="zHi" />
+  <Goody y="7" power="1000" shield="1000" sound="false" start="zHi" out="zHi" yon=".001" color="#008700" color.1="#008700" cx="73.26388888888889" cz="73.81944444444446" angle="315" />
+  <And in="@start" out="zHi" />
+  <Incarnator y="7" cx="73.26388888888889" cz="73.81944444444446" angle="315" />
+  <unique vars="zHi" />
+  <Goody y="7" power="1000" shield="1000" sound="false" start="zHi" out="zHi" yon=".001" color="#008700" color.1="#008700" cx="97.01388888888889" cz="53.81944444444444" angle="315" />
+  <And in="@start" out="zHi" />
+  <Incarnator y="7" cx="97.01388888888889" cz="53.81944444444444" angle="315" />
+  <unique vars="zHi" />
+  <Goody y="7" power="1000" shield="1000" sound="false" start="zHi" out="zHi" yon=".001" color="#008700" color.1="#008700" cx="56.04166666666667" cz="24.72222222222222" angle="135" />
+  <And in="@start" out="zHi" />
+  <Incarnator y="7" cx="56.04166666666667" cz="24.72222222222222" angle="135" />
+  <unique vars="mActive mTaken" />
+  <Goody shape="bspMissile" y="2" speed="5" missiles="3" start="mActive" out="mTaken" sound="snKuku" color="#ff40ff" color.1="#ab56ff" cx="93.19444444444446" cz="70.69444444444446" angle="90" />
+  <Timer in.0="@start" in.1="mTaken" wait="100" out.1="mActive" />
+  <unique vars="mActive mTaken" />
+  <Goody shape="bspMissile" y="2" speed="5" missiles="3" start="mActive" out="mTaken" sound="snKuku" color="#ff40ff" color.1="#ab56ff" cx="111.31944444444446" cz="23.819444444444446" angle="90" />
+  <Timer in.0="@start" in.1="mTaken" wait="100" out.1="mActive" />
+  <unique vars="mActive mTaken" />
+  <Goody shape="bspGrenade" y="2" speed="5" grenades="8" start="mActive" out="mTaken" sound="snKuku" color="#ff2600" color.1="#fffb00" cx="78.19444444444446" cz="27.569444444444443" angle="90" />
+  <Timer in.0="@start" in.1="mTaken" wait="120" out.1="mActive" />
+  <Pill group="0" team="0" shotPower="0.3" burstLength="2" burstSpeed="3" burstCharge="65" shieldChargeRate="0.05" maxShield="1000" shootShield="1" grabShield="1001" changeOwnerTime="1" acceleration="0.8" ejectPitch="85" ejectPower="3" watch="playerMask + scoutMask + robotMask" mask="allTeams" mass="30" color="#797979" color.1="#ffd5a9" cx="60.06944444444444" cz="31.944444444444443" angle="90" />
+  <Pill group="0" team="0" shotPower="0.3" burstLength="2" burstSpeed="3" burstCharge="65" shieldChargeRate="0.05" maxShield="1000" shootShield="1" grabShield="1001" changeOwnerTime="1" acceleration="0.8" ejectPitch="85" ejectPower="3" watch="playerMask + scoutMask + robotMask" mask="allTeams" mass="30" color="#797979" color.1="#ffd5a9" cx="87.56944444444446" cz="47.56944444444444" angle="90" />
+  <Pill group="0" team="0" shotPower="0.3" burstLength="2" burstSpeed="3" burstCharge="65" shieldChargeRate="0.05" maxShield="1000" shootShield="1" grabShield="1001" changeOwnerTime="1" acceleration="0.8" ejectPitch="85" ejectPower="3" watch="playerMask + scoutMask + robotMask" mask="allTeams" mass="30" color="#797979" color.1="#ffd5a9" cx="60.06944444444444" cz="49.44444444444444" angle="90" />
+  <Pill group="0" team="0" shotPower="0.3" burstLength="2" burstSpeed="3" burstCharge="65" shieldChargeRate="0.05" maxShield="1000" shootShield="1" grabShield="1001" changeOwnerTime="1" acceleration="0.8" ejectPitch="85" ejectPower="3" watch="playerMask + scoutMask + robotMask" mask="allTeams" mass="30" color="#797979" color.1="#ffd5a9" cx="88.19444444444446" cz="29.444444444444443" angle="90" />
+  <Ramp deltaY="5" color="#ffd5a9" color.1="#000000" x="41.25" z="72.1875" w="15" d="3.125" h="0" angle="270" />
+  <Ramp deltaY="5" color="#ffd5a9" color.1="#000000" x="93.75" z="59.6875" w="15" d="3.125" h="0" angle="270" />
+  <Ramp deltaY="5" color="#ffd5a9" color.1="#000000" x="111.875" z="32.1875" w="15" d="3.125" h="0" angle="90" />
+  <set baseHeight="5" wallHeight="0" />
+  <Wall color="#ffd5a9" color.1="#000000" x="50.3125" z="37.5" w="3.125" d="15" h="0" />
+  <Wall color="#ffd5a9" color.1="#000000" x="55.3125" z="50.3125" w="3.125" d="55.625" h="0" />
+  <Wall color="#ffd5a9" color.1="#000000" x="41.25" z="46.5625" w="25" d="3.125" h="0" />
+  <Wall color="#ffd5a9" color.1="#000000" x="30.3125" z="55.3125" w="3.125" d="14.375" h="0" />
+  <Wall color="#ffd5a9" color.1="#000000" x="41.875" z="60.9375" w="20" d="3.125" h="0" />
+  <Wall color="#ffd5a9" color.1="#000000" x="50.3125" z="71.875" w="3.125" d="18.75" h="0" />
+  <Wall color="#ffd5a9" color.1="#000000" x="78.125" z="79.6875" w="52.5" d="3.125" h="0" />
+  <Wall color="#ffd5a9" color.1="#000000" x="79.0625" z="67.1875" w="3.125" d="21.875" h="0" />
+  <Wall color="#ffd5a9" color.1="#000000" x="102.8125" z="46.5625" w="3.125" d="63.125" h="0" />
+  <Wall color="#ffd5a9" color.1="#000000" x="97.8125" z="35.625" w="3.125" d="41.25" h="0" />
+  <Wall color="#ffd5a9" color.1="#000000" x="100.3125" z="16.5625" w="1.875" d="3.125" h="0" />
+  <Wall color="#ffd5a9" color.1="#000000" x="84.375" z="54.6875" w="23.75" d="3.125" h="0" />
+  <Wall color="#ffd5a9" color.1="#000000" x="74.0625" z="66.25" w="3.125" d="20" h="0" />
+  <Wall color="#ffd5a9" color.1="#000000" x="64.6875" z="74.6875" w="15.625" d="3.125" h="0" />
+  <Wall color="#ffd5a9" color.1="#000000" x="76.5625" z="24.0625" w="39.375" d="3.125" h="0" />
+  <set baseHeight="10" wallYon=".001" />
+  <Wall color="#ffd5a9" color.1="#000000" x="66.5625" z="51.875" w="79.375" d="47.5" h="0" />
+  <Wall color="#ffd5a9" color.1="#000000" x="87.5" z="24.375" w="71.25" d="7.5" h="0" />
+  <Wall color="#ffd5a9" color.1="#000000" x="108.75" z="16.875" w="28.75" d="7.5" h="0" />
+  <Wall color="#ffd5a9" color.1="#000000" x="114.6875" z="31.875" w="16.875" d="7.5" h="0" />
+  <Wall color="#ffd5a9" color.1="#000000" x="76.5625" z="79.375" w="59.375" d="7.5" h="0" />
+  <Teleporter win="1000" start="@winTeam" activeRange="2000" shape="false" color="#d82679" color.1="#d82679" cx="3.6111111111111116" cz="19.23611111111111" angle="45" />
+  <set baseHeight="0" />
+  <unique vars="mActive mTaken" />
+  <Goody shape="bspMissile" y="7" speed="5" missiles="3" start="mActive" out="mTaken" sound="snKuku" color="#ff40ff" color.1="#ab56ff" cx="50.06944444444444" cz="61.31944444444445" angle="90" />
+  <Timer in.0="@start" in.1="mTaken" wait="100" out.1="mActive" />
+  <unique vars="mActive mTaken" />
+  <Goody shape="bspClip" y="2" speed="5" power="100" start="mActive" out="mTaken" sound="snKuku" color="#ffd5a9" color.1="#000000" cx="36.31944444444444" cz="66.31944444444446" angle="90" />
+  <Timer in.0="@start" in.1="mTaken" wait="100" out.1="mActive" />
+  <unique vars="mActive mTaken" />
+  <Goody shape="bspClip" y="2" speed="5" power="100" start="mActive" out="mTaken" sound="snKuku" color="#ffd5a9" color.1="#000000" cx="62.56944444444445" cz="67.56944444444446" angle="90" />
+  <Timer in.0="@start" in.1="mTaken" wait="100" out.1="mActive" />
+  <unique vars="mActive mTaken" />
+  <Goody shape="bspGrenade" y="7" speed="5" grenades="8" start="mActive" out="mTaken" sound="snKuku" color="#ff2600" color.1="#fffb00" cx="52.5" cz="46.59722222222223" angle="90" />
+  <Timer in.0="@start" in.1="mTaken" wait="120" out.1="mActive" />
+  <set wallHeight="10" wallYon="0" />
+  <Wall color="#797979" color.1="#000000" x="70.3125" z="35.9375" w="9.375" d="4.375" h="0" />
+  <Wall color="#797979" color.1="#000000" x="82.1875" z="42.8125" w="9.375" d="4.375" h="0" />
+  <Wall color="#797979" color.1="#000000" x="70.3125" z="42.8125" w="9.375" d="4.375" h="0" />
+  <unique vars="mActive mTaken" />
+  <Goody shape="bspKit" y="2" speed="5" shield="100" start="mActive" out="mTaken" sound="snKuku" color="#ffffff" color.1="#f42300" cx="76.25" cz="39.375" angle="135" />
+  <Timer in.0="@start" in.1="mTaken" wait="100" out.1="mActive" />
+  <set baseHeight="5" wallHeight="0" />
+  <Wall color="#ffd5a9" color.1="#000000" x="61.25" z="39.375" w="8.75" d="3.75" h="0" />
+  <Wall color="#ffd5a9" color.1="#000000" x="91.5625" z="39.375" w="9.375" d="3.75" h="0" />
+  <Wall color="#ffd5a9" color.1="#000000" x="76.25" z="29.6875" w="3.75" d="8.125" h="0" />
+  <Wall color="#ffd5a9" color.1="#000000" x="76.25" z="49.0625" w="3.75" d="8.125" h="0" />
+  <Wall color="#ffd5a9" color.1="#000000" x="76.25" z="39.375" w="2.5" d="11.25" h="0" />
+  <Wall color="#ffd5a9" color.1="#000000" x="70.3125" z="39.375" w="9.375" d="2.5" h="0" />
+  <Wall color="#ffd5a9" color.1="#000000" x="82.1875" z="39.375" w="9.375" d="2.5" h="0" />
+  <unique vars="mActive mTaken" />
+  <Goody shape="bspClip" y="2" speed="5" power="100" start="mActive" out="mTaken" sound="snKuku" color="#ffd5a9" color.1="#000000" cx="76.25" cz="39.375" angle="135" />
+  <Timer in.0="@start" in.1="mTaken" wait="100" out.1="mActive" />
+</map>

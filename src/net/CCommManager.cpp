@@ -12,6 +12,7 @@
 #include "Memory.h"
 #include "Resource.h"
 #include "System.h"
+#include "Debug.h"
 
 #include <SDL2/SDL.h>
 
@@ -20,65 +21,44 @@
 **	for buffers.
 */
 void CCommManager::ICommManager(short packetSpace) {
-    myId = 0; //	Default to server.
-    packetBuffers = nullptr;
+    // base class creates PacketInfo buffers/queues
+    InitializePacketQueues(packetSpace, sizeof(PacketInfo));
+}
 
-    freeQ.qFlags = 0;
+void CCommManager::InitializePacketQueues(int numPackets, std::size_t pSize) {
+    packetSize = pSize;
+    myId = 0; //	Default to server.
+
     freeQ.qHead = 0;
     freeQ.qTail = 0;
-    freeCount = 0;
 
-    inQ.qFlags = 0;
     inQ.qHead = 0;
     inQ.qTail = 0;
 
     firstReceivers[0] = NULL;
     firstReceivers[1] = NULL;
 
-    genericInfoTextRes = 400;
-
-    AllocatePacketBuffers(packetSpace);
+    AllocatePacketBuffers(numPackets);
 }
 
-OSErr CCommManager::AllocatePacketBuffers(short packetSpace) {
-    OSErr theErr;
-    Ptr mem;
-    PacketInfo *pp;
+void CCommManager::AllocatePacketBuffers(int numPackets) {
+    // allocate enough space for numPackets packets
+    packetBuffers.push_back(std::vector<std::byte>(numPackets*packetSize));
 
-    mem = NewPtr(sizeof(Ptr) + sizeof(PacketInfo) * packetSpace);
-    theErr = MemError();
-
-    if (theErr == noErr) {
-        *(Ptr *)mem = packetBuffers;  // point to the previous chunk of packet buffers, if any, so they are all removed in Dispose()
-        packetBuffers = mem;
-
-        pp = (PacketInfo *)(packetBuffers + sizeof(Ptr));
-
-        while (packetSpace--) {
-            Enqueue((QElemPtr)pp, &freeQ);
-            freeCount++;
-            pp++;
-        }
+    // chop up the buffer into packetSize'd pieces and add them to the freeQ
+    std::byte* pp = packetBuffers.back().data();
+    while (numPackets--) {
+        Enqueue((QElemPtr)pp, &freeQ);
+        pp += packetSize;
     }
-
-    return theErr;
 }
 
 /*
 **	Release allocated packet buffer storage and then dispose of self.
 */
 void CCommManager::Dispose() {
-    Ptr nextDispose;
-
-    while (packetBuffers) {
-        nextDispose = *(Ptr *)packetBuffers;
-        DisposePtr(packetBuffers);
-        packetBuffers = nextDispose;
-    }
-    
     // SDL_Log("  - called Dispose with &inQ = %lx, &freeQ = %lx\n", &inQ, &freeQ);
     DisposeQueue(&freeQ);
-    freeCount = 0;
     DisposeQueue(&inQ);
 }
 
@@ -87,12 +67,13 @@ void CCommManager::Dispose() {
 **	send the packet.
 */
 OSErr CCommManager::SendPacket(short distribution,
-                               char command,
-                               char p1,
+                               int8_t command,
+                               int8_t p1,
                                int16_t p2,
                                int32_t p3,
                                int16_t dataLen,
-                               Ptr dataPtr) {
+                               Ptr dataPtr,
+                               int16_t flags) {
     Ptr ps, pd;
 
     PacketInfo *thePacket;
@@ -100,15 +81,18 @@ OSErr CCommManager::SendPacket(short distribution,
     if (distribution) {
         thePacket = GetPacket();
         if (thePacket) {
-            thePacket->flags = 0;
+            thePacket->flags = flags;
             thePacket->distribution = distribution;
             thePacket->command = command;
             thePacket->p1 = p1;
             thePacket->p2 = p2;
             thePacket->p3 = p3;
 
-            if (dataLen > PACKETDATABUFFERSIZE)
-                dataLen = PACKETDATABUFFERSIZE;
+            if (dataLen > PACKETDATABUFFERSIZE || dataLen < 0) {
+                SDL_Log("SENDPACKET ERROR, cmd=%d, dataLen = %d", command, dataLen);
+                // will be caught by nanogui event handler
+                throw std::length_error(std::string("Invalid packet buffer data size = ") + std::to_string(dataLen));
+            }
             thePacket->dataLen = dataLen;
 
             ps = dataPtr;
@@ -132,44 +116,13 @@ OSErr CCommManager::SendPacket(short distribution,
 **	send the packet.
 */
 OSErr CCommManager::SendUrgentPacket(short distribution,
-    char command,
-    char p1,
-    int16_t p2,
-    int32_t p3,
-    int16_t dataLen,
-    Ptr dataPtr) {
-    Ptr ps, pd;
-
-    PacketInfo *thePacket;
-
-    if (distribution) {
-        thePacket = GetPacket();
-        if (thePacket) {
-            thePacket->flags = kpUrgentFlag;
-            thePacket->distribution = distribution;
-            thePacket->command = command;
-            thePacket->p1 = p1;
-            thePacket->p2 = p2;
-            thePacket->p3 = p3;
-
-            if (dataLen > PACKETDATABUFFERSIZE)
-                dataLen = PACKETDATABUFFERSIZE;
-            thePacket->dataLen = dataLen;
-
-            ps = dataPtr;
-            pd = thePacket->dataBuffer;
-
-            while (dataLen--) {
-                *pd++ = *ps++;
-            }
-
-            WriteAndSignPacket(thePacket);
-        } else {
-            return tmfoErr;
-        }
-    }
-
-    return noErr;
+                                     int8_t command,
+                                     int8_t p1,
+                                     int16_t p2,
+                                     int32_t p3,
+                                     int16_t dataLen,
+                                     Ptr dataPtr) {
+    return SendPacket(distribution, command, p1, p2, p3, dataLen, dataPtr, kpUrgentFlag);
 }
 
 /*
@@ -220,24 +173,21 @@ void CCommManager::RemoveReceiver(ReceiverRecord *theReceiver, Boolean delayed) 
 }
 
 /*
-**	Get a free packet buffer from the queue.
-*/
-PacketInfo *CCommManager::GetPacket() {
-    PacketInfo *thePacket;
-    OSErr iErr;
+ * Return an unused packet from the freeQ
+ */
+PacketInfo* CCommManager::GetPacket() {
+    PacketInfo* thePacket = nullptr;
 
-    do {
-        iErr = noErr;
-        thePacket = (PacketInfo *)freeQ.qHead;
-
+    while (thePacket == nullptr) {
+        thePacket = (PacketInfo*)freeQ.qHead;
         if (thePacket) {
-            iErr = Dequeue((QElemPtr)thePacket, &freeQ);
+            Dequeue((QElemPtr)thePacket, &freeQ);
+            break;
+        } else {
+            DBG_Log("q", "CCommManager::GetPacket myId=%d, allocating %d more packets, inQ size = %zu\n", myId, FRESHALLOCSIZE, QueueSize(&inQ));
+            // no packets left? dynamically increase the freeQ then try again
+            AllocatePacketBuffers(FRESHALLOCSIZE);
         }
-    } while (iErr == qErr);
-
-    {
-        freeCount--;
-        thePacket->flags = 0;
     }
 
     return thePacket;
@@ -247,29 +197,11 @@ PacketInfo *CCommManager::GetPacket() {
 **	Duplicate the contents of a packet buffer into
 **	another one.
 */
-PacketInfo *CCommManager::DuplicatePacket(PacketInfo *original) {
-    PacketInfo *duplicate;
-
-    duplicate = GetPacket();
+PacketInfo* CCommManager::DuplicatePacket(PacketInfo* original) {
+    PacketInfo* duplicate = GetPacket();
     if (duplicate) {
-        duplicate->flags = original->flags;
-        duplicate->command = original->command;
-        duplicate->sender = original->sender;
-        duplicate->distribution = original->distribution;
-        duplicate->p1 = original->p1;
-        duplicate->p2 = original->p2;
-        duplicate->p3 = original->p3;
-        duplicate->dataLen = original->dataLen;
-        if (duplicate->dataLen) {
-            if (duplicate->dataLen > PACKETDATABUFFERSIZE) {
-                SDL_Log("CCommManager::DuplicatePacket BUFFER TOO BIG ERROR!! cmd=%d, sndr=%d dataLen = %d\n",
-                        duplicate->command, duplicate->sender, duplicate->dataLen);
-                duplicate->dataLen = PACKETDATABUFFERSIZE;
-            }
-            BlockMoveData(original->dataBuffer, duplicate->dataBuffer, duplicate->dataLen);
-        }
+        *duplicate = *original;
     }
-
     return duplicate;
 }
 
@@ -279,7 +211,6 @@ PacketInfo *CCommManager::DuplicatePacket(PacketInfo *original) {
 */
 void CCommManager::ReleasePacket(PacketInfo *thePacket) {
     if (thePacket) {
-        freeCount++;
         Enqueue((QElemPtr)thePacket, &freeQ);
     }
 }
@@ -352,10 +283,6 @@ void CCommManager::ProcessQueue() {
     PacketInfo *thePacket;
     ReceiverRecord *receiver;
     Boolean didHandle;
-
-    if (freeCount < MINIMUMBUFFERRESERVE) {
-        AllocatePacketBuffers(FRESHALLOCSIZE);
-    }
 
     do {
         thePacket = (PacketInfo *)inQ.qHead;

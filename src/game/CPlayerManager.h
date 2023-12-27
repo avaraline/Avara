@@ -9,6 +9,7 @@
 
 #pragma once
 #include "CDirectObject.h"
+#include "ColorManager.h"
 #include "KeyFuncs.h"
 #include "PlayerConfig.h"
 
@@ -17,7 +18,7 @@
 #include <deque>
 #include <string>
 
-enum {
+enum LoadingState {
     kLNotConnected,
     kLConnected,
     kLActive,
@@ -28,13 +29,22 @@ enum {
     kLNotFound,
     kLPaused,
     kLNoVehicle,
-    kLAway,
+    kLNetDelayed,
+//    kLAway,
+//    kLSpectating,
     kLReady,    // implies kLLoaded, i.e. Loaded & Ready to start
 
     kStringNorth,
     kStringSouth,
     kStringEast,
     kStringWest
+};
+
+enum PresenceType {
+    kzUnknown,
+    kzAvailable,
+    kzSpectating,
+    kzAway
 };
 
 #define FUNCTIONBUFFERS 64*8  // 512 frames at 16ms/frame = 8.192s rollover time
@@ -49,7 +59,7 @@ static const char* lThing_utf8    = "\xC2\xAC ";     // ¬
 static const char* checkMark_utf8 = "\xE2\x88\x9A";  // ✓
 static const char* triangle_utf8  = "\xCE\x94";      // Δ
 static const char* clearChat_utf8 = "\x1B";          // Fn-Del on Mac
-
+static const char* eyeballs_utf8  = "\xF0\x9F\x91\x80";
 
 class CPlayerManager {
 protected:
@@ -64,6 +74,7 @@ public:
     virtual short Slot() = 0;
     virtual void SetLocal() = 0;
     virtual void AbortRequest() = 0;
+    virtual void RemoveFromGame() = 0;
     virtual Boolean IsLocalPlayer() = 0;
     virtual bool CalculateIsLocalPlayer() = 0;
 
@@ -79,11 +90,16 @@ public:
     virtual short IsRegistered() = 0;
     virtual void IsRegistered(short) = 0;
     virtual Str255& PlayerRegName() = 0;
-    virtual short LoadingStatus() = 0;
-    virtual void SetPlayerStatus(short newStatus, FrameNumber theWin) = 0;
+    virtual LoadingState LoadingStatus() = 0;
+    template<typename ... T> bool LoadingStatusIsIn(T && ... state) {
+        return ((LoadingStatus() == state) || ...);  // compares LoadingStatus() to all args
+    }
+    virtual PresenceType Presence() = 0;
+    virtual void SetPresence(PresenceType) = 0;
+    virtual void SetPlayerStatus(LoadingState newStatus, PresenceType newPresence, FrameNumber theWin) = 0;
     virtual bool IsAway() = 0;
 
-    virtual void ChangeNameAndLocation(StringPtr theName, Point location) = 0;
+    virtual void ChangeName(StringPtr theName) = 0;
     virtual void SetPosition(short pos) = 0;
     virtual void RosterKeyPress(unsigned char c) = 0;
     virtual void RosterMessageText(short len, const char *c) = 0;
@@ -127,7 +143,7 @@ public:
     virtual bool GetShowScoreboard() = 0;
 };
 
-class CPlayerManagerImpl : public CDirectObject, public CPlayerManager {
+class CPlayerManagerImpl : public CDirectObject, public CPlayerManager, public std::enable_shared_from_this<CPlayerManagerImpl> {
 private:
 
     CAbstractPlayer *itsPlayer;
@@ -171,7 +187,8 @@ private:
     std::deque<char> lineBuffer;
 
     FrameNumber winFrame;
-    short loadingStatus;
+    LoadingState loadingStatus;
+    PresenceType presence;
     short slot;
     short playerColor;
 
@@ -184,7 +201,7 @@ private:
     OSErr levelErr;
     std::string levelTag;
 
-    PlayerConfigRecord theConfiguration;
+    PlayerConfigRecord theConfiguration {};
 
     std::unordered_map<SDL_Scancode, uint32_t> keyMap; // maps keyboard key to keyFunc
 
@@ -222,11 +239,12 @@ public:
     virtual void GameKeyPress(char c);
 
     virtual void NetDisconnect();
-    virtual void ChangeNameAndLocation(StringPtr theName, Point location);
+    virtual void ChangeName(StringPtr theName);
     virtual void SetPosition(short pos);
-    virtual void SetPlayerStatus(short newStatus, FrameNumber theWin);
+    virtual void SetPlayerStatus(LoadingState newStatus, PresenceType newPresence, FrameNumber theWin);
     virtual void SetPlayerReady(bool isReady);
     virtual bool IsAway();
+
     virtual void ResendFrame(FrameNumber theFrame, short requesterId, short commandCode);
 
     virtual void LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag);
@@ -236,6 +254,7 @@ public:
     virtual Boolean IncarnateInAnyColor();
 
     virtual void AbortRequest();
+    virtual void RemoveFromGame();
 
     virtual void DeadOrDone();
 
@@ -260,7 +279,9 @@ public:
     virtual short IsRegistered();
     virtual void IsRegistered(short);
     virtual Str255& PlayerRegName();
-    virtual short LoadingStatus();
+    virtual LoadingState LoadingStatus();
+    virtual PresenceType Presence();
+    virtual void SetPresence(PresenceType);
     virtual short LevelCRC();
     virtual OSErr LevelErr();
     virtual std::string LevelTag();

@@ -121,7 +121,7 @@ void CParasite::ClampOn(CSmartPart *clampTo) {
     invHost = hostPart->GetInverseTransform();
 
     CombineTransforms(&partList[0]->itsTransform, &relation, invHost);
-    DoSound(clampSound, location, clampVolume, FIX(1));
+    DoSound(clampSound, location, clampVolume, FIX1);
 
     clamp.me = this;
     hostIdent = host->Attach(&clamp);
@@ -208,7 +208,7 @@ void CParasite::FrameAction() {
 
         if (blastPower >= maxPower) {
             WasDestroyed();
-            SecondaryDamage(teamColor, -1);
+            SecondaryDamage(teamColor, -1, ksiParasiteBlast);
             return;
         }
     } else {

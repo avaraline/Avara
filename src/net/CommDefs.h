@@ -43,8 +43,8 @@ enum {
     kpResumeLevel, // 12
 
     kpReadySynch, // 13
-    kpUnavailableSynch, // 14
-    kpUnavailableZero, // 15
+    kpUnavailableSynch, // 14 (unused)
+    kpUnavailableZero, // 15 (unused)
     kpStartSynch, // 16
 
     kpKeyAndMouse, // 17

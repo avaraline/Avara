@@ -13,9 +13,7 @@
 #include "CShuriken.h"
 #include "CSmartPart.h"
 
-void CRealShooters::IAbstractActor() {
-    CRealMovers::IAbstractActor();
-
+CRealShooters::CRealShooters() {
     visionRange = FIX(100);
     shotPower = FIX3(500);
     burstLength = 2;
@@ -73,7 +71,7 @@ Fixed EstimateTravelTime(Fixed *delta, Fixed *targSpeed, Fixed missileSpeed, Fix
     Fixed ft, fdt;
     short i;//, j;
 
-    divMS = FDivNZ(FIX(1), missileSpeed);
+    divMS = FDivNZ(FIX1, missileSpeed);
     for (i = 0; i < 3; i++) {
         s[i] = FMul(delta[i], divMS);
         v[i] = FMul(targSpeed[i], divMS);

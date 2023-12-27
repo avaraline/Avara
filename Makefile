@@ -22,6 +22,14 @@ INCFLAGS := $(addprefix -I, $(SRC_DIRS))
 CPPFLAGS := ${CPPFLAGS}
 CPPFLAGS += $(INCFLAGS) -MMD -MP -DNANOGUI_GLAD -g -Wall
 
+# Compile with clang UBSAN
+ifeq ($(AVARA_UBSAN), TRUE)
+LD = clang++
+CPPFLAGS += -fsanitize=undefined -g -fno-omit-frame-pointer
+LDFLAGS += -fsanitize=undefined -g
+endif
+
+# Compile with extra warnings
 ifeq ($(AVARA_WARNINGS), TRUE)
 CPPFLAGS += -pedantic -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy
 CPPFLAGS += -Wdisabled-optimization -Wformat=2 -Winit-self -Wmissing-declarations
@@ -37,7 +45,7 @@ LDFLAGS := ${LDFLAGS}
 ifeq ($(UNAME), Darwin)
 	# MacOS
 	SRCS += $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.mm')
-	INC_EXTRA := -I/opt/homebrew/include
+	INC_EXTRA := -I/opt/homebrew/include -I/usr/local/include
 	CXXFLAGS += -mmacosx-version-min=10.9 $(INC_EXTRA)
 	CPPFLAGS += -mmacosx-version-min=10.9 $(INC_EXTRA)
 	CFLAGS += -mmacosx-version-min=10.9 $(INC_EXTRA)
@@ -47,8 +55,17 @@ else
 	FRAMEWORK_PATH = /Library/Frameworks
 endif
 	CPPFLAGS += -F$(FRAMEWORK_PATH)
-	LDFLAGS += -F$(FRAMEWORK_PATH) -L/opt/homebrew/lib -lstdc++ -lm -lpthread -framework SDL2 -framework OpenGL -framework AppKit
+	LDFLAGS += -F$(FRAMEWORK_PATH) -L/opt/homebrew/lib -L/usr/local/lib -lstdc++ -lm -lpthread -framework SDL2 -framework OpenGL -framework AppKit
 	POST_PROCESS ?= dsymutil
+
+	JOBS := $(shell sysctl -n hw.ncpu)
+	# if the -j option was passed, use that instead
+	MAKE_PID := $(shell echo $$PPID)
+	JOB_FLAG := $(filter -j%, $(subst -j ,-j,$(shell ps T | grep "^\s*$(MAKE_PID).*$(MAKE)")))
+	ifneq ($(JOB_FLAG),)
+		JOBS := $(subst -j,,$(JOB_FLAG))
+	endif
+
 else ifneq (,$(findstring NT-10.0,$(UNAME)))
 	# Windows - should match for MSYS2 on Win10
 	WINDRES := $(shell which windres)
@@ -57,6 +74,7 @@ else ifneq (,$(findstring NT-10.0,$(UNAME)))
 	PRE_PROCESS += $(WINDRES) $(PLATFORM)/version.rc -O coff $(BUILD_DIR)/version.o;
 	EXTRA_OBJS += $(BUILD_DIR)/appicon.o $(BUILD_DIR)/version.o
 	LDFLAGS += -lstdc++ -lm -lpthread -lmingw32 -lSDL2main -lSDL2 -lglu32 -lopengl32 -lws2_32 -lcomdlg32
+	CPPFLAGS += -Wno-unknown-pragmas
 	CFLAGS += -D_WIN32_WINNT=0x501
 	POST_PROCESS ?= ls -lh
 else
@@ -95,7 +113,7 @@ fixed: $(BUILD_DIR)/fixed
 
 macapp:
 	xcodebuild -configuration Debug -scheme Avara \
-        -IDEBuildOperationMaxNumberOfConcurrentCompileTasks=`sysctl -n hw.ncpu` \
+        -IDEBuildOperationMaxNumberOfConcurrentCompileTasks=$(JOBS) \
         -derivedDataPath $(BUILD_DIR)/DerivedData \
         ONLY_ACTIVE_ARCH=NO \
         CONFIGURATION_BUILD_DIR=$(BUILD_DIR)
@@ -106,7 +124,6 @@ macdist: macapp
 winapp: avara
 	$(RMDIR) $(BUILD_DIR)/WinAvara
 	$(MKDIR_P) $(BUILD_DIR)/WinAvara
-	if [ -f $(BUILD_DIR)/Avara ]; then mv $(BUILD_DIR)/Avara $(BUILD_DIR)/Avara.exe; fi
 	cp -r $(BUILD_DIR)/{Avara.exe,levels,rsrc} $(BUILD_DIR)/WinAvara
 	cp /mingw64/bin/{libstdc++-6,libwinpthread-1,libgcc_s_seh-1,SDL2}.dll $(BUILD_DIR)/WinAvara
 

@@ -73,7 +73,6 @@ void CreateTheObject() {
 
     currentActor = (CAbstractActor *)CreateNamedObject(nameBuf);
     if (currentActor) {
-        currentActor->IAbstractActor();
         currentActor->BeginScript();
         currentLevel++;
     }
@@ -90,7 +89,6 @@ void CreateTheAdjuster() {
 
     currentActor = (CAbstractActor *)CreateNamedObject(nameBuf);
     if (currentActor) {
-        currentActor->IAbstractActor();
         currentActor->BeginScript();
         currentLevel++;
     }
@@ -1054,12 +1052,28 @@ void AllocParser() {
     stackP = stackMem;
 
     currentActor = NULL;
+
+    // Load default script from "base" resource pack (Avara, Aftershock).
     std::string base = GetBaseScript();
-    if (base.length() > 0)
-    RunThis((StringPtr)base.c_str());
+    if (base.length() > 0) {
+        RunThis((StringPtr)base.c_str());
+    }
+
+    // Load default script from "external" resource packs required by the
+    // current level set. (If multiple are defined, they are loaded in
+    // *reverse* order.)
+    std::vector<std::string> ext = GetExternalScripts();
+    for (auto &extScript : ext) {
+        if (extScript.length() > 0) {
+            RunThis((StringPtr)extScript.c_str());
+        }
+    }
+
+    // Load default script for the current level set.
     std::string def = GetDefaultScript();
-    if (def.length() > 0)
-    RunThis((StringPtr)def.c_str());
+    if (def.length() > 0) {
+        RunThis((StringPtr)def.c_str());
+    }
 }
 
 void DeallocParser() {
@@ -1069,7 +1083,7 @@ void DeallocParser() {
         variableBase->Dispose();
     if (programBase)
         programBase->Dispose();
-    
+
     stackP = NULL;
     symTable = NULL;
     variableBase = NULL;

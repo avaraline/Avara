@@ -19,6 +19,7 @@
 #include <SDL2/SDL.h>
 #include <string>
 #include <memory>
+#include <set>
 
 #define IDENTTABLESIZE 512
 
@@ -45,7 +46,7 @@
 
 #define INACTIVE_LOOP_REFRESH 16
 
-enum { kPlayingStatus, kAbortStatus, kReadyStatus, kPauseStatus, kNoVehicleStatus, kWinStatus, kLoseStatus };
+enum GameStatus { kPlayingStatus, kAbortStatus, kReadyStatus, kPauseStatus, kNoVehicleStatus, kWinStatus, kLoseStatus };
 
 class CAbstractActor;
 class CAbstractPlayer;
@@ -71,24 +72,27 @@ class CHUD;
 
 class CAvaraGame : public CDirectObject {
 public:
-    std::string loadedTag = "";
+    std::string loadedFilename = "";
     std::string loadedLevel = "";
     std::string loadedSet = "";
     std::string loadedDesigner = "";
     std::string loadedInfo = "";
+    std::set<std::string> loadedTags;
     long loadedTimeLimit;
     int32_t timeInSeconds;
     FrameNumber frameNumber;
     bool isClassicFrame;
     int32_t frameAdjust;
 
+    int currentGameId = 0; // Increments when a new game starts
+
     FrameNumber topSentFrame;
 
     FrameTime frameTime; //	In milliseconds.
     double fpsScale;  // 0.25 => CLASSICFRAMETIME / 4
 
-    short gameStatus;
-    short statusRequest;
+    GameStatus gameStatus;
+    GameStatus statusRequest;
     short pausePlayer;
 
     CAbstractActor *actorList;
@@ -132,7 +136,7 @@ public:
 
     Rect gameRect;
 
-    MessageRecord *messageBoard[MESSAGEHASH];
+    MessageRecord *messageBoard[MESSAGEHASH] = {};
     Fixed *baseLocation;
 
     Fixed gravityRatio;
@@ -158,7 +162,7 @@ public:
     short groundStepSound;
 
     //	Networking & user control related stuff:
-    Handle mapRes; //	Keyboard mapping resource handle.
+    // Handle mapRes; //	Keyboard mapping resource handle.
 
     short moJoOptions; //	Mouse and Joystick options.
     double sensitivity;
@@ -166,7 +170,9 @@ public:
     double latencyTolerance;
 
     ScoreInterfaceReasons scoreReason;
+    ScoreInterfaceReasons killReason;
     ScoreInterfaceReasons lastReason;
+    std::deque<ScoreInterfaceEvent> scoreEventList;
 
     uint32_t nextScheduledFrame;
     uint32_t nextPingTime;
@@ -181,6 +187,8 @@ public:
     Boolean keysFromStdin;
     Boolean keysToStdout;
 
+    Boolean showNewHUD;
+
     // Moved here from GameLoop so it can run on the normal event loop
     // long            frameCredit;
     // long            frameAdvance;
@@ -194,8 +202,10 @@ public:
     virtual CBSPWorld* CreateCBSPWorld(short initialObjectSpace);
     virtual CSoundHub* CreateSoundHub();
     virtual std::unique_ptr<CNetManager> CreateNetManager();
+    virtual void LoadImages(NVGcontext *ctx);
 
     virtual void InitLocatorTable();
+    virtual void IncrementGameCounter();
 
     virtual CAbstractActor *FindIdent(long ident);
     virtual void GetIdent(CAbstractActor *theActor);
@@ -203,6 +213,7 @@ public:
 
     virtual CAbstractPlayer *GetSpectatePlayer();
     virtual CAbstractPlayer *GetLocalPlayer();
+    virtual std::string GetPlayerName(short id);
 
     virtual void AddActor(CAbstractActor *theActor);
     virtual void RemoveActor(CAbstractActor *theActor);
@@ -213,6 +224,7 @@ public:
     virtual void RunActorFrameActions();
 
     virtual void Score(short team, short player, long points, Fixed energy, short hitTeam, short hitPlayer);
+    virtual void AddScoreNotify(ScoreInterfaceEvent event);
 
     virtual void ChangeDirectoryFile();
     virtual void LevelReset(Boolean clearReset);

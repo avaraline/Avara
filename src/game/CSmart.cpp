@@ -18,15 +18,13 @@
 #define kSmartAccel itsDepot->missileAcceleration
 #define kSmartFriction FIX3(50)
 
-void CSmart::IWeapon(CDepot *theDepot) {
-    CWeapon::IWeapon(theDepot);
-
+CSmart::CSmart(CDepot *theDepot) : CWeapon(theDepot) {
     partCount = 1;
     LoadPart(0, 802);
     partList[0]->usesPrivateHither = true;
     partList[0]->hither = FIX3(100);
 
-    mass = FIX(1);
+    mass = FIX1;
 }
 
 void CSmart::ResetWeapon() {
@@ -106,6 +104,7 @@ void CSmart::ShowTarget() {
     Fixed *v, *u;
 
     dist = sightDistance - FIX3(250);
+    isTargetLocked = false;
 
     itsGame->itsApp->BrightBox(itsGame->frameNumber, inSight);
 
@@ -137,6 +136,8 @@ void CSmart::ShowTarget() {
 
             rayHit.distance = FIX(5) + NormalizeVector(3, rayHit.direction);
             rayHit.closestHit = NULL;
+
+            isTargetLocked = true;
 
             if (rayHit.distance < FIX(160)) {
                 RayTestWithGround(&rayHit, kSolidBit);
@@ -203,7 +204,7 @@ void CSmart::Fire() {
     UpdateSoundLink(itsSoundLink, location, speed, itsGame->soundTime);
 
     theSound = gHub->GetSoundSampler(hubRate, 201);
-    theSound->SetRate(FIX(1));
+    theSound->SetRate(FIX1);
     theSound->SetVolume(FIX(3));
     theSound->SetSoundLink(itsSoundLink);
     theSound->SetLoopCount(-1);
@@ -349,10 +350,10 @@ if (IsClassicInterval()) { // indented like this because hope to remove it in th
             if (speedDotAccel < 0)
                 speedDotAccel = -speedDotAccel;
         } else {
-            speedDotAccel = FIX(1);
+            speedDotAccel = FIX1;
         }
 
-        friction = kSmartFriction + ((FIX(1) - speedDotAccel) >> 3);
+        friction = kSmartFriction + ((FIX1 - speedDotAccel) >> 3);
 
         speed[0] += FMul(thrust, accel[0]) - FMul(speed[0], friction);
         speed[1] += FMul(thrust, accel[1]) - FMul(speed[1], friction);

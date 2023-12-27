@@ -7,6 +7,7 @@
     Modified: Tuesday, September 17, 1996, 03:21
 */
 #include <algorithm> // std::max
+#include <bitset>
 
 #include "CNetManager.h"
 
@@ -37,13 +38,14 @@
 #define AUTOLATENCYPERIOD 3840  // msec (divisible by 64)
 #define AUTOLATENCYDELAY  448   // msec (divisible by 64)
 #define LOWERLATENCYCOUNT   2
-#define HIGHERLATENCYCOUNT  12    // 4*(10/240) frames at fps=16ms, 1*10/60 frames at fps=64ms, works for all fps values
-#define DECREASELATENCYPERIOD (itsGame->TimeToFrameCount(AUTOLATENCYPERIOD*8))  // 30.72 seconds
+#define HIGHERLATENCYCOUNT  (0.25 * AUTOLATENCYPERIOD / itsGame->frameTime)       // 25% of frames
+#define DECREASELATENCYPERIOD (itsGame->TimeToFrameCount(AUTOLATENCYPERIOD*16))  // 16 consecutive votes ≈ 61 sec
+
 
 #if ROUTE_THRU_SERVER
     #define kAvaraNetVersion 666
 #else
-    #define kAvaraNetVersion 10
+    #define kAvaraNetVersion 12
 #endif
 
 #define kMessageBufferMaxAge 90
@@ -57,7 +59,6 @@ void CNetManager::INetManager(CAvaraGame *theGame) {
 
     itsGame = theGame;
     readyPlayers = 0;
-    unavailablePlayers = 0;
 
     netStatus = kNullNet;
     itsCommManager = std::make_unique<CCommManager>();
@@ -94,8 +95,8 @@ void CNetManager::INetManager(CAvaraGame *theGame) {
     lastLoginRefusal = 0;
 }
 
-CPlayerManager* CNetManager::CreatePlayerManager(short id) {
-    CPlayerManagerImpl *pm = new CPlayerManagerImpl;
+std::shared_ptr<CPlayerManager> CNetManager::CreatePlayerManager(short id) {
+    std::shared_ptr<CPlayerManagerImpl> pm = std::make_shared<CPlayerManagerImpl>();
     pm->IPlayerManager(itsGame, id, this);
     return pm;
 }
@@ -168,17 +169,20 @@ void CNetManager::ChangeNet(short netKind, std::string address, std::string pass
         }
 
         if (confirm && newManager) {
+            PresenceType keepPresence = playerTable[itsCommManager->myId]->Presence();
             itsCommManager->Dispose();        // send kpPacketProtocolLogout message before being destroyed
             itsProtoControl->Detach();
             itsCommManager.swap(newManager);  // newManager takes place existing CCommManager which gets deleted when out of scope
+            playerTable[itsCommManager->myId]->SetPresence(keepPresence);
             itsProtoControl->Attach(itsCommManager.get());
             netStatus = netKind;
             isConnected = true;
             DisconnectSome(kdEveryone);
 
             totalDistribution = 0;
-            itsCommManager->SendPacket(kdServerOnly, kpLogin, 0, 0, 0, 0L, NULL);
-            if (itsGame->loadedTag.length() > 0) {
+            DBG_Log("login", "sending kpLogin to server with presence=%d\n", keepPresence);
+            itsCommManager->SendPacket(kdServerOnly, kpLogin, 0, keepPresence, 0, 0L, NULL);
+            if (itsGame->loadedFilename.length() > 0) {
                 itsGame->LevelReset(true);
                 // theRoster->InvalidateArea(kBottomBox, 0);
             }
@@ -186,7 +190,7 @@ void CNetManager::ChangeNet(short netKind, std::string address, std::string pass
         }
     } else {
         playerTable[itsCommManager->myId]->NetDisconnect();
-        itsCommManager->SendPacket(kdServerOnly, kpLogin, 0, 0, 0, 0L, NULL);
+        itsCommManager->SendPacket(kdServerOnly, kpLogin, 0, playerTable[itsCommManager->myId]->Presence(), 0, 0L, NULL);
         itsCommManager->SendPacket(kdEveryone, kpZapMugShot, 0, 0, 0, 0L, NULL);
         gApplication->BroadcastCommand(kNetChangedCmd);
     }
@@ -231,20 +235,20 @@ void CNetManager::SendRealName(short toSlot) {
 void CNetManager::RealNameReport(short slotId, short regStatus, StringPtr realName) {
     CPlayerManager *thePlayer;
 
-    thePlayer = playerTable[slotId];
+    thePlayer = playerTable[slotId].get();
     if (regStatus < 0) {
         thePlayer->IsRegistered(true);
         BlockMoveData(realName, thePlayer->PlayerRegName(), realName[0] + 1);
     } else {
         thePlayer->IsRegistered(false);
-        GetIndString(thePlayer->PlayerRegName(), 133, 5 + regStatus);
+        thePlayer->PlayerRegName()[0] = 0;
+        // GetIndString(thePlayer->PlayerRegName(), 133, 5 + regStatus);
     }
 
     // theRoster->InvalidateArea(kRealNameBox, slotToPosition[slotId]);
 }
 
 void CNetManager::NameChange(StringPtr newName) {
-    short theStatus;
     /*
     MachineLocation		myLocation;
     Point				loc;
@@ -253,8 +257,9 @@ void CNetManager::NameChange(StringPtr newName) {
     loc.h = myLocation.longitude >> 16;
     loc.v = myLocation.latitude >> 16;
     */
-    theStatus = playerTable[itsCommManager->myId]->LoadingStatus();
-    itsCommManager->SendPacket(kdEveryone, kpNameChange, 0, theStatus, 0, newName[0] + 1, (Ptr)newName);
+    LoadingState status = playerTable[itsCommManager->myId]->LoadingStatus();
+    PresenceType presence = playerTable[itsCommManager->myId]->Presence();
+    itsCommManager->SendPacket(kdEveryone, kpNameChange, 0, status, presence, newName[0] + 1, (Ptr)newName);
 }
 
 void CNetManager::ValueChange(short slot, std::string attributeName, bool value) {
@@ -264,13 +269,13 @@ void CNetManager::ValueChange(short slot, std::string attributeName, bool value)
     itsCommManager->SendPacket(kdEveryone, kpJSON, slot, 0, 0, strlen(c), c);
 }
 
-void CNetManager::RecordNameAndLocation(short theId, StringPtr theName, short status, Point location) {
+void CNetManager::RecordNameAndState(short theId, StringPtr theName, LoadingState status, PresenceType presence) {
     if (theId >= 0 && theId < kMaxAvaraPlayers) {
         totalDistribution |= 1 << theId;
         if (status != 0)
-            playerTable[theId]->SetPlayerStatus(status, -1);
+            playerTable[theId]->SetPlayerStatus(status, presence, -1);
 
-        playerTable[theId]->ChangeNameAndLocation(theName, location);
+        playerTable[theId]->ChangeName(theName);
     }
 }
 
@@ -356,7 +361,7 @@ void CNetManager::ReceiveRosterMessage(short slotId, short len, char *c) {
 
         cp = c;
         i = len;
-        thePlayer = playerTable[slotId];
+        thePlayer = playerTable[slotId].get();
         while (i--) {
             thePlayer->RosterKeyPress(*cp++);
         }
@@ -383,14 +388,11 @@ void CNetManager::ReceiveColorChange(char *newColors) {
 }
 
 void CNetManager::DisconnectSome(short mask) {
-    short i;
-
-    for (i = 0; i < kMaxAvaraPlayers; i++) {
+    for (short i = 0; i < kMaxAvaraPlayers; i++) {
         if ((1L << i) & mask) {
             playerTable[i]->NetDisconnect();
         }
     }
-
     totalDistribution &= ~mask;
 }
 
@@ -432,8 +434,8 @@ void CNetManager::SendLoadLevel(std::string theSet, std::string levelTag, int16_
 
     std::string setAndLevel = theSet + "/" + levelTag;
 
-    aPacket->dataLen = setAndLevel.length() + 1;
-    BlockMoveData(setAndLevel.c_str(), aPacket->dataBuffer, setAndLevel.length() + 1);
+    aPacket->dataLen = std::min<int16_t>(setAndLevel.length() + 1, PACKETDATABUFFERSIZE);
+    BlockMoveData(setAndLevel.c_str(), aPacket->dataBuffer, aPacket->dataLen);
 
     /* TODO: implement
      itsGame->itsApp->GetDirectoryLocator((DirectoryLocator *)aPacket->dataBuffer);
@@ -475,7 +477,7 @@ void CNetManager::ReceiveLoadLevel(short senderSlot, int16_t originalSender, cha
         loaderSlot = originalSender;
     } else {
         loaderSlot = originalSender;
-        CPlayerManager *sendingPlayer = playerTable[originalSender];
+        CPlayerManager *sendingPlayer = playerTable[originalSender].get();
 
         theApp = itsGame->itsApp;
         FRandSeed = seed;
@@ -496,8 +498,8 @@ void CNetManager::ReceiveLoadLevel(short senderSlot, int16_t originalSender, cha
             //itsCommManager->SendPacket(kdEveryone, kpLevelLoaded, 0, crc, 0, 0, 0);
         }
 
-        aPacket->dataLen = tag.length() + 1;
-        BlockMoveData(tag.c_str(), aPacket->dataBuffer, tag.length() + 1);
+        aPacket->dataLen = std::min<int16_t>(tag.length() + 1, PACKETDATABUFFERSIZE);
+        BlockMoveData(tag.c_str(), aPacket->dataBuffer, aPacket->dataLen);
         itsCommManager->WriteAndSignPacket(aPacket);
     }
 
@@ -531,7 +533,7 @@ void CNetManager::LevelLoadStatus(short senderSlot, short crc, OSErr err, std::s
 
     CPlayerManager *thePlayer;
 
-    thePlayer = playerTable[senderSlot];
+    thePlayer = playerTable[senderSlot].get();
     thePlayer->LevelCRC(crc);
     thePlayer->LevelTag(theTag);
     thePlayer->LevelErr(err);
@@ -542,7 +544,7 @@ void CNetManager::LevelLoadStatus(short senderSlot, short crc, OSErr err, std::s
 
         }
 
-        SDL_Log("CNetManager::LevelLoadStatus loop x%lu\n", i);
+        SDL_Log("CNetManager::LevelLoadStatus loop x%zu\n", i);
     } else {
         thePlayer->LoadStatusChange(
             playerTable[loaderSlot]->LevelCRC(), playerTable[loaderSlot]->LevelErr(), playerTable[loaderSlot]->LevelTag());
@@ -552,48 +554,91 @@ void CNetManager::LevelLoadStatus(short senderSlot, short crc, OSErr err, std::s
     startingGame = false;
 }
 
-Boolean CNetManager::GatherPlayers(Boolean isFreshMission) {
-    short i;
-    Boolean goAhead;
-    long lastTime, debugTime;
+size_t CNetManager::SkipLostPackets(int16_t dist) {
+    CUDPComm* theComm = dynamic_cast<CUDPComm*>(itsCommManager.get());
+    size_t remaining = theComm->SkipLostPackets(dist);
+    DBG_Log("q", "SkipLostPackets: remaining recv queues for 0x%02x = %zu", dist, remaining);
+    return remaining;
+}
 
-    totalDistribution = 0;
-    for (i = 0; i < kMaxAvaraPlayers; i++) {
+Boolean CNetManager::GatherPlayers(Boolean isFreshMission) {
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        // reset frame buffers
         playerTable[i]->ResumeGame();
     }
 
-    // itsCommManager->SendUrgentPacket(kdEveryone, kpFastTrack, 0, 0, fastTrack.addr.value, 0,0);
-    SDL_Log("CNetManager::GatherPlayers activePlayersDistribution = 0x%02x\n", activePlayersDistribution);
-    itsCommManager->SendUrgentPacket(activePlayersDistribution, kpReadySynch, 0, 0, 0, 0, 0);
-    lastTime = debugTime = TickCount();
-    do {
-        if (TickCount() > debugTime) {
-            SDL_Log("CNetManager::GatherPlayers loop\n");
-            debugTime = TickCount() + MSEC_TO_TICK_COUNT(1000);
-        }
-        ProcessQueue();
-        goAhead = (TickCount() - lastTime < 1800);
-        // TODO: waiting dialog with cancel
-    } while (
-        ((activePlayersDistribution & (unavailablePlayers | readyPlayers)) ^ activePlayersDistribution) && goAhead);
+    readyPlayers = 0;
+    readyPlayersConsensus = 0;
 
-    if (unavailablePlayers) {
-        itsCommManager->SendPacket(unavailablePlayers, kpUnavailableZero, 0, 0, 0, 0, NULL);
-        if (goAhead) {
-            goAhead = isFreshMission;
-
-            if (goAhead) {
-                activePlayersDistribution &= ~unavailablePlayers;
-                startPlayersDistribution = activePlayersDistribution;
+    Boolean goAhead = false;
+    uint64_t currentTime = TickCount();
+    int loopCount = 0;
+    uint64_t resendTime = currentTime;
+    static int READY_SYNC_PERIOD = MSEC_TO_TICK_COUNT(4.0*CLASSICFRAMETIME);  // rounds to 250ms
+    uint64_t timeLimit = currentTime + READY_SYNC_PERIOD*24;  // ~6sec
+    // wait to hear from everyone, within time limit
+    while (activePlayersDistribution != readyPlayersConsensus &&
+           currentTime < timeLimit) {
+        if (currentTime >= resendTime) {
+            uint16_t distrib = activePlayersDistribution;
+//#define DONT_SEND_FIRST_READY  // debug what happens when slot 0 doesn't get packet from slot 1
+#ifdef DONT_SEND_FIRST_READY
+            if (itsCommManager->myId == 1 && loopCount == 0) {
+                distrib &= ~1; // don't send kpReadySynch from player 2 to player 1
+                // fake incrementing the serialNumber on the connection we aren't sending to
+                dynamic_cast<CUDPComm*>(itsCommManager.get())->connections[0].serialNumber += kSerialNumberStepSize;
+                SDL_Log("NOT SENDING kpReadySync to slot 0!!!\n");
             }
+#endif
+            SDL_Log("CNetManager::GatherPlayers sending kpReadySynch to 0x%02x with readyPlayers = 0x%02x\n", distrib, readyPlayers);
+            itsCommManager->SendUrgentPacket(distrib, kpReadySynch, 0, readyPlayers, 0, 0, 0);
+            resendTime += READY_SYNC_PERIOD;
+            if ((++loopCount % 5) == 0) {
+                // occasionally, skip lost packets on the connections who don't agree with consensus yet
+                // (don't do this too often because it can cause you to lose frame 0... i think)
+                SkipLostPackets(distrib & ~readyPlayersConsensus);
+            }
+        }
+        // processes kpReadySynch messages coming from other players
+        ProcessQueue();
+        currentTime = TickCount();
+    }
+
+    if (activePlayersDistribution == readyPlayersConsensus) {
+        // everybody agrees, all active players are ready (normal/good case)
+        goAhead = true;
+    } else {
+        // if less than all active players are ready, see if we have a majority
+        std::bitset<kMaxAvaraPlayers> activeBits{activePlayersDistribution};
+        std::bitset<kMaxAvaraPlayers> readyBits{readyPlayersConsensus};
+        if (readyBits.count() > activeBits.count() / 2) {
+            SDL_Log("CNetManager::GatherPlayers using majority decision to start playing with 0x%02x\n", readyPlayersConsensus);
+            // if the players in readyPlayers represent at least half of all active players
+            activePlayersDistribution = readyPlayersConsensus;
+            goAhead = true;
+        } else {
+            // i must be in the minority
+            activePlayersDistribution = 0;
         }
     }
 
-    readyPlayers = 0;
-    unavailablePlayers = 0;
+    if (isFreshMission) {
+        startPlayersDistribution = activePlayersDistribution;
+    }
+    SDL_Log("CNetManager::GatherPlayers activePlayers = 0x%02x startPlayers = 0x%02x\n", activePlayersDistribution, startPlayersDistribution);
+
     startingGame = false;
 
     return goAhead;
+}
+
+void CNetManager::ReceiveReady(short senderSlot, uint32_t senderReadyPlayers) {
+    // if sender not already in readyPlayers mask add them
+    readyPlayers |= (1 << senderSlot);
+    // combine all players' readyPlayer bits to form consensus quickly
+    readyPlayersConsensus |= senderReadyPlayers;
+    SDL_Log("CNetManager::ReceiveReady(%d, 0x%02x) -> readyPlayers / readyPlayersConsensus = 0x%02x / 0x%02x\n",
+            senderSlot, senderReadyPlayers, readyPlayers, readyPlayersConsensus);
 }
 
 void CNetManager::UngatherPlayers() {
@@ -608,26 +653,16 @@ void CNetManager::ResumeGame() {
     Boolean notReady;
 
     SDL_Log("CNetManager::ResumeGame\n");
-    config.frameLatency = gApplication ? gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale : 0;
-    config.frameTime = itsGame->frameTime;
-    config.hullType = gApplication ? gApplication->Number(kHullTypeTag) : 0;
-    config.numGrenades = 6;
-    config.numMissiles = 3;
-    config.numBoosters = 3;
+
+    UpdateLocalConfig();
 
     // Pull grenade/missile/booster counts from HULL resource
-    long hullRes = ReadLongVar(iFirstHull + config.hullType);
-    Handle hullHandle = GetResource('HULL', hullRes);
-    if (hullHandle) {
-        HullConfigRecord hull = **(HullConfigRecord **)hullHandle;
-        hull.maxMissiles = ntohs(hull.maxMissiles);
-        hull.maxGrenades = ntohs(hull.maxGrenades);
-        hull.maxBoosters = ntohs(hull.maxBoosters);
-        config.numGrenades = hull.maxGrenades;
-        config.numMissiles = hull.maxMissiles;
-        config.numBoosters = hull.maxBoosters;
-        ReleaseResource(hullHandle);
-    }
+    long hullRes = ReadLongVar(iHull01 + config.hullType);
+    HullConfigRecord hull;
+    LoadHullFromSetJSON(&hull, hullRes);
+    config.numGrenades = hull.maxGrenades;
+    config.numMissiles = hull.maxMissiles;
+    config.numBoosters = hull.maxBoosters;
 
     // This is what pulled the counts from CLevelListWind
     itsGame->itsApp->BroadcastCommand(kConfigurePlayerCmd);
@@ -638,11 +673,11 @@ void CNetManager::ResumeGame() {
     localLatencyVote = 0;
     latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD);
 
-    thePlayerManager = playerTable[itsCommManager->myId];
+    thePlayerManager = playerTable[itsCommManager->myId].get();
     if (thePlayerManager->GetPlayer()) {
         thePlayerManager->DoMouseControl(&tempPoint, !(itsGame->moJoOptions & kJoystickMode));
 
-        PlayerConfigRecord copy;
+        PlayerConfigRecord copy {};
         BlockMoveData(&config, &copy, sizeof(PlayerConfigRecord));
         copy.numGrenades = ntohs(config.numGrenades);
         copy.numMissiles = ntohs(config.numMissiles);
@@ -650,6 +685,10 @@ void CNetManager::ResumeGame() {
         copy.hullType = ntohs(config.hullType);
         copy.frameLatency = ntohs(config.frameLatency);
         copy.frameTime = ntohs(config.frameTime);
+        copy.hullColor = ntohl(config.hullColor.GetRaw());
+        copy.trimColor = ntohl(config.trimColor.GetRaw());
+        copy.cockpitColor = ntohl(config.cockpitColor.GetRaw());
+        copy.gunColor = ntohl(config.gunColor.GetRaw());
 
         itsCommManager->SendUrgentPacket(
             kdEveryone, kpStartSynch, 0, kLActive, FRandSeed, sizeof(PlayerConfigRecord), (Ptr)&copy);
@@ -678,9 +717,18 @@ void CNetManager::ResumeGame() {
             // TODO: waiting for players dialog with cancel
         } while (TickCount() - lastTime < 1800 && notReady);
 
+        bool ignoreCustomColors = itsGame->itsApp->Get(kIgnoreCustomColorsTag);
         for (i = 0; i < kMaxAvaraPlayers; i++) {
             if (activePlayersDistribution & (1 << i)) {
                 DoConfig(i);
+
+                if (!ignoreCustomColors &&
+                    itsGame->frameNumber == 0 &&
+                    playerTable[i]->GetPlayer() &&
+                    !playerTable[i]->GetPlayer()->didIncarnateMasked &&
+                    !playerTable[i]->GetPlayer()->hasTeammates) {
+                    playerTable[i]->SpecialColorControl();
+                }
             }
         }
 
@@ -726,15 +774,13 @@ void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
 
                 latencyVoteFrame = frameNumber;  // record the actual frame where the vote is initiated
                 maxRoundLatency = itsCommManager->GetMaxRoundTrip(AlivePlayersDistribution(), &maxId);
-                maxPlayer = playerTable[maxId];
+                maxPlayer = playerTable[maxId].get();
                 uint8_t llv = std::min(long(UINT8_MAX), localLatencyVote);  // just in case, p1 can only accept a max of 256
 
                 itsCommManager->SendUrgentPacket(
                     activePlayersDistribution, kpLatencyVote, llv, maxRoundLatency, FRandSeed, 0, NULL);
-                #if LATENCY_DEBUG
-                    SDL_Log("*** fn=%ld SENDING kpLatencyVote to %hx, localLatencyVote=%ld, maxRoundLatency=%ld FRandSeed=%d\n",
-                            frameNumber, activePlayersDistribution, localLatencyVote, maxRoundLatency, FRandSeed);
-                #endif
+                DBG_Log("lt+", "*** fn=%d Sending kpLatencyVote to 0x%2hx, localLatencyVote=%ld, maxRoundLatency=%ld FRandSeed=%d\n",
+                        frameNumber, activePlayersDistribution, localLatencyVote, maxRoundLatency, FRandSeed);
             } else {
                 // spectator just sends FRandSeed to self for fragmentation check
                 itsCommManager->SendUrgentPacket(
@@ -751,23 +797,23 @@ void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
 
             if (IsAutoLatencyEnabled() && autoLatencyVoteCount) {
                 autoLatencyVote /= autoLatencyVoteCount;
-                DBG_Log("lt", "====autoLatencyVote = %ld\n", autoLatencyVote);
+                DBG_Log("lt+", "====autoLatencyVote = %ld\n", autoLatencyVote);
                 // if, on average, players had to wait more than some percent of frames during this latency vote period,
                 // then add 1 frame to the LT calculation
                 if (autoLatencyVote > HIGHERLATENCYCOUNT) {
                     addOneLatency++;
                     // don't let it go above 1.0 LT
                     addOneLatency = std::min(short(1.0/itsGame->fpsScale), addOneLatency);
-                    DBG_Log("lt", "  ++addOneLatency increased = %hd\n", addOneLatency);
+                    DBG_Log("lt+", "  ++addOneLatency increased = %hd\n", addOneLatency);
                     subtractOneCheck = frameNumber + DECREASELATENCYPERIOD;
                 } else if (autoLatencyVote > LOWERLATENCYCOUNT) {
                     // vote too high to reduce addOneLatency, push subtractOneCheck forward
-                    DBG_Log("lt", "   >addOneLatency keeping = %hd\n", addOneLatency);
+                    DBG_Log("lt+", "   >addOneLatency keeping = %hd\n", addOneLatency);
                     subtractOneCheck = frameNumber + DECREASELATENCYPERIOD;
                 } else if (addOneLatency > 0 && frameNumber >= subtractOneCheck) {
-                    // if no significant waiting seen for 8 CONSECUTIVE autoLatency votes, about 30 seconds, let it creep back down 1 fps frame
+                    // if no significant waiting seen for DECREASELATENCYPERIOD, let it creep back down 1 fps frame
                     addOneLatency--;
-                    DBG_Log("lt", "  --addOneLatency decreased = %hd\n", addOneLatency);
+                    DBG_Log("lt+", "  --addOneLatency decreased = %hd\n", addOneLatency);
                     subtractOneCheck = frameNumber + DECREASELATENCYPERIOD;
                 }
 
@@ -775,7 +821,7 @@ void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
                 // but addOneLatency helps account for deficiencies in the calculation by measuring how often clients had to wait too long for packets to arrive
                 short maxFrameLatency = addOneLatency + itsGame->RoundTripToFrameLatency(maxRoundTripLatency);
 
-                SDL_Log("*** fn=%d RTT=%d, Classic LT=%.2lf, add=%lf --> FL=%d\n",
+                DBG_Log("lt", "  fn=%d RTT=%d, Classic LT=%.2lf, add=%lf --> FL=%d\n",
                         frameNumber, maxRoundTripLatency,
                         (maxRoundTripLatency) / (2.0*CLASSICFRAMETIME), addOneLatency*itsGame->fpsScale, maxFrameLatency);
 
@@ -817,7 +863,7 @@ void CNetManager::ReceiveLatencyVote(int16_t sender,
                                      int16_t p2,        // maxRoundLatency
                                      int32_t p3) {      // FRandSeed
 
-    DBG_Log("lt", "CNetManager::ReceiveLatencyVote(%d, %d, %hd, %d)\n", sender, p1, p2, p3);
+    DBG_Log("lt+", "CNetManager::ReceiveLatencyVote(%d, %d, %hd, %d)\n", sender, p1, p2, p3);
     autoLatencyVoteCount++;
     autoLatencyVote += p1;
 
@@ -876,11 +922,17 @@ void CNetManager::ViewControl() {
     playerTable[itsCommManager->myId]->ViewControl();
 }
 
-void CNetManager::SendPingCommand(int totalTrips) {
-    if (totalTrips > 0) {
-        itsCommManager->SendPacket(kdEveryone - (1 << itsCommManager->myId),
-                                   kpPing, 0, 0, totalTrips-1, 0, NULL);
-   }
+void CNetManager::SendPingCommand(int trips) {
+    // there & back = 2 trips... send less to/from players in game
+    int notMe = totalDistribution & ~(1 << itsCommManager->myId);
+    int playingDist = (itsGame->gameStatus == kPlayingStatus) ? activePlayersDistribution : 0;
+    // only send 1-way pings to/from active players just to keep the connection alive
+    int activeTrips = 1;
+    int inactiveTrips = isPlaying ? activeTrips : trips;
+    itsCommManager->SendPacket(playingDist & notMe,
+                               kpPing, 0, 0, activeTrips-1, 0, NULL);
+    itsCommManager->SendPacket(~playingDist & notMe,
+                               kpPing, 0, 0, inactiveTrips-1, 0, NULL);
 }
 
 bool CNetManager::CanPlay() {
@@ -894,13 +946,16 @@ void CNetManager::SendStartCommand(int16_t originalSender) {
     startPlayersDistribution = 0;
     // set readyPlayers partly as an indicator that a start command is being processed
     readyPlayers = 0;
-    unavailablePlayers = 0;
+    readyPlayersConsensus = 0;
 
     if (itsCommManager->myId == 0) {
         // to avoid multiple simultaneous starts, only the server sends the kpStartLevel requests to everyone
         for (int i = 0; i < kMaxAvaraPlayers; i++) {
             SDL_Log("  loadingStatus[%d] = %d\n", i, playerTable[i]->LoadingStatus());
-            if (playerTable[i]->LoadingStatus() == kLLoaded || playerTable[i]->LoadingStatus() == kLReady) {
+            if ((playerTable[i]->LoadingStatus() == kLLoaded ||
+                 playerTable[i]->LoadingStatus() == kLReady) &&
+                playerTable[i]->Presence() != kzAway)
+            {
                 activePlayersDistribution |= 1 << i;
             }
         }
@@ -940,9 +995,6 @@ void CNetManager::ReceiveStartCommand(short activeDistribution, int16_t senderSl
             itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
             isPlaying = true;
             itsGame->ResumeGame();
-        } else {
-            SDL_Log("  sending kpUnavailableSync\n");
-            itsCommManager->SendPacket(activeDistribution, kpUnavailableSynch, originalSender, 0, 0, 0, NULL);
         }
     }
 }
@@ -993,19 +1045,7 @@ void CNetManager::ReceiveResumeCommand(short activeDistribution, short senderSlo
             itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
             isPlaying = true;
             itsGame->ResumeGame();
-        } else {
-            itsCommManager->SendPacket(activePlayersDistribution, kpUnavailableSynch, originalSender, 0, 0, 0, NULL);
         }
-    }
-}
-
-void CNetManager::ReceivedUnavailable(short slot, short fromSlot) {
-    unavailablePlayers |= 1 << slot;
-
-    if (slot == itsCommManager->myId) {
-        itsGame->itsApp->ParamLine(kmStartFailure, MsgAlignment::Center, playerTable[fromSlot]->PlayerName(), NULL);
-    } else {
-        itsGame->itsApp->ParamLine(kmUnavailableNote, MsgAlignment::Center, playerTable[slot]->PlayerName(), NULL);
     }
 }
 
@@ -1033,7 +1073,12 @@ void CNetManager::StopGame(short newStatus) {
     CAbstractPlayer *thePlayer;
     FrameNumber winFrame = 0;
 
-    SDL_Log("CNetManager::StopGame\n");
+    thePlayerManager = playerTable[slot].get();
+    if (newStatus == kAbortStatus) {
+        thePlayerManager->RemoveFromGame();
+    }
+
+    SDL_Log("CNetManager::StopGame(%d)\n", newStatus);
     isPlaying = false;
     if (newStatus == kPauseStatus) {
         playerStatus = kLPaused;
@@ -1044,7 +1089,6 @@ void CNetManager::StopGame(short newStatus) {
             playerStatus = isConnected ? kLConnected : kLNotConnected;
     }
 
-    thePlayerManager = playerTable[slot];
     thePlayer = thePlayerManager->GetPlayer();
 
     if (thePlayer) {
@@ -1052,7 +1096,7 @@ void CNetManager::StopGame(short newStatus) {
 
         /*
         GetDateTime(&gameResult.r.when);
-        gameResult.levelTag = itsGame->loadedTag;
+        gameResult.levelTag = itsGame->loadedFilename;
         gameResult.directoryTag = itsGame->loadedDirectory;
         thePlayer->FillGameResultRecord(&gameResult);
 
@@ -1068,17 +1112,21 @@ void CNetManager::StopGame(short newStatus) {
     }
 
     itsCommManager->SendPacket(
-        kdEveryone, kpPlayerStatusChange, slot, playerStatus, FRandSeed, sizeof(winFrame), (Ptr)&winFrame);
+        kdEveryone, kpPlayerStatusChange, slot, playerStatus, thePlayerManager->Presence(), sizeof(winFrame), (Ptr)&winFrame);
 
     itsGame->itsApp->BroadcastCommand(kGameResultAvailableCmd);
 }
 
-void CNetManager::ReceivePlayerStatus(short slotId, short newStatus, Fixed randomKey, FrameNumber winFrame) {
+void CNetManager::ReceivePlayerStatus(short slotId, LoadingState newStatus, PresenceType newPresence, Fixed randomKey, FrameNumber winFrame) {
     if (slotId >= 0 && slotId < kMaxAvaraPlayers) {
         if (randomKey != 0) {
             playerTable[slotId]->RandomKey(randomKey);
         }
-        playerTable[slotId]->SetPlayerStatus(newStatus, winFrame);
+        if (newPresence == kzUnknown) {
+            // don't change presence
+            newPresence =  playerTable[slotId]->Presence();
+        }
+        playerTable[slotId]->SetPlayerStatus(newStatus, newPresence, winFrame);
     }
 }
 
@@ -1103,7 +1151,7 @@ short CNetManager::PlayerCount() {
     short playerCount = 0;
 
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
-        thePlayer = playerTable[i];
+        thePlayer = playerTable[i].get();
         const std::string playerName((char *)thePlayer->PlayerName() + 1, thePlayer->PlayerName()[0]);
 
         if (playerName.size() > 0) {
@@ -1132,6 +1180,8 @@ void CNetManager::AttachPlayers(CAbstractPlayer *playerActorList) {
     Boolean changedColors = false;
     char newColors[kMaxAvaraPlayers];
 
+    UpdateLocalConfig();
+
     //	Let active player managers choose actors for themselves.
     for (i = 0; i < kMaxAvaraPlayers; i++) {
         short slot = positionToSlot[i];
@@ -1146,7 +1196,7 @@ void CNetManager::AttachPlayers(CAbstractPlayer *playerActorList) {
         CPlayerManager *thePlayerMan;
 
         newColors[slot] = teamColors[i];
-        thePlayerMan = playerTable[slot];
+        thePlayerMan = playerTable[slot].get();
         if (((1 << slot) & startPlayersDistribution) && thePlayerMan->GetPlayer() == NULL) {
             if (playerActorList) //	Any actors left?
             {
@@ -1173,8 +1223,24 @@ void CNetManager::AttachPlayers(CAbstractPlayer *playerActorList) {
     }
 
     for (i = 0; i < kMaxAvaraPlayers; i++) {
-        if (playerTable[i]->GetPlayer()) {
-            playerTable[i]->SpecialColorControl();
+        short slot = positionToSlot[i];
+        short teammateCount = 0;
+        CPlayerManager *thePlayerMan = playerTable[slot].get();
+        if (thePlayerMan->Presence() == kzAvailable && thePlayerMan->GetPlayer()) {
+            for (short j = 0; j < kMaxAvaraPlayers; j++) {
+                if (i != j) {
+                    short otherSlot = positionToSlot[j];
+                    CPlayerManager *otherPlayerMan = playerTable[otherSlot].get();
+                    if (otherPlayerMan->Presence() == kzAvailable &&
+                        otherPlayerMan->GetPlayer() &&
+                        thePlayerMan->PlayerColor() == otherPlayerMan->PlayerColor()) {
+                        teammateCount++;
+                    }
+                }
+            }
+            if (teammateCount > 0) {
+                thePlayerMan->GetPlayer()->hasTeammates = true;
+            }
         }
     }
 
@@ -1198,6 +1264,10 @@ void CNetManager::ConfigPlayer(short senderSlot, Ptr configData) {
     config->hullType = ntohs(config->hullType);
     config->frameLatency = ntohs(config->frameLatency);
     config->frameTime = ntohs(config->frameTime);
+    config->hullColor = ntohl(config->hullColor.GetRaw());
+    config->trimColor = ntohl(config->trimColor.GetRaw());
+    config->cockpitColor = ntohl(config->cockpitColor.GetRaw());
+    config->gunColor = ntohl(config->gunColor.GetRaw());
     playerTable[senderSlot]->TheConfiguration() = *config;
 }
 
@@ -1217,11 +1287,43 @@ void CNetManager::DoConfig(short senderSlot) {
     }
 }
 
+void CNetManager::UpdateLocalConfig() {
+    CPlayerManager *thePlayerManager = playerTable[itsCommManager->myId].get();
+
+    config.frameLatency = gApplication
+        ? gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale
+        : 0;
+    config.frameTime = itsGame->frameTime;
+    config.hullType = gApplication ? gApplication->Number(kHullTypeTag) : 0;
+    config.hullColor = gApplication
+        ? ARGBColor::Parse(gApplication->String(kPlayerHullColorTag))
+            .value_or(
+                ColorManager::getTeamColor(thePlayerManager->PlayerColor())
+                    .value_or((*ColorManager::getMarkerColor(0)).WithA(0xff))
+            )
+        : ColorManager::getTeamColor(thePlayerManager->PlayerColor())
+            .value_or((*ColorManager::getMarkerColor(0)).WithA(0xff));
+    config.trimColor = gApplication
+        ? ARGBColor::Parse(gApplication->String(kPlayerHullTrimColorTag))
+            .value_or((*ColorManager::getMarkerColor(1)).WithA(0xff))
+        : (*ColorManager::getMarkerColor(1)).WithA(0xff);
+    config.cockpitColor = gApplication
+        ? ARGBColor::Parse(gApplication->String(kPlayerCockpitColorTag))
+            .value_or((*ColorManager::getMarkerColor(2)).WithA(0xff))
+        : (*ColorManager::getMarkerColor(2)).WithA(0xff);
+    config.gunColor = gApplication
+        ? ARGBColor::Parse(gApplication->String(kPlayerGunColorTag))
+            .value_or((*ColorManager::getMarkerColor(3)).WithA(0xff))
+        : (*ColorManager::getMarkerColor(3)).WithA(0xff);
+
+    thePlayerManager->TheConfiguration() = config;
+}
+
 void CNetManager::MugShotRequest(short sendTo, long sendFrom) {
     CPlayerManager *myPlayer;
     long mugSize;
 
-    myPlayer = playerTable[itsCommManager->myId];
+    myPlayer = playerTable[itsCommManager->myId].get();
 
     if (myPlayer->MugPict() == NULL) {
         itsGame->itsApp->BroadcastCommand(kGiveMugShotCmd);
@@ -1263,7 +1365,7 @@ void CNetManager::MugShotRequest(short sendTo, long sendFrom) {
 void CNetManager::ReceiveMugShot(short fromPlayer, short seqNumber, long totalLength, short dataLen, Ptr dataBuffer) {
     CPlayerManager *thePlayer;
 
-    thePlayer = playerTable[fromPlayer];
+    thePlayer = playerTable[fromPlayer].get();
 
     if (seqNumber == 0) {
         if (thePlayer->MugPict()) {
@@ -1312,7 +1414,7 @@ void CNetManager::ZapMugShot(short slot) {
         itsCommManager->SendPacket(kdEveryone & ~(1 << slot), kpZapMugShot, 0, 0, 0, 0, 0);
     }
 
-    thePlayer = playerTable[slot];
+    thePlayer = playerTable[slot].get();
     DisposeHandle(thePlayer->MugPict());
 
     thePlayer->MugPict(NULL);
@@ -1343,8 +1445,8 @@ void CNetManager::ChangedServerOptions(short curOptions) {
     }
 }
 
-void CNetManager::NewArrival(short slot) {
-    //CPlayerManager *thePlayer = playerTable[slot];
+void CNetManager::NewArrival(short slot, PresenceType presence) {
+    playerTable[slot]->SetPresence(presence);
     itsGame->itsApp->NotifyUser();
     SDL_Log("someone has joined in slot #%d\n", slot+1);
     itsGame->scoreKeeper->PlayerJoined();
@@ -1364,7 +1466,7 @@ void	CNetManager::BuildTrackerTags(
     CScoreKeeper	*keeper;
     char			gameStat = ktgsNotLoaded;
 
-    if(itsGame->loadedTag)
+    if(itsGame->loadedFilename)
     {	if(theApp->directorySpec.name[0])
                 tracker->WriteStringTag(ktsLevelDirectory, theApp->directorySpec.name);
         else	tracker->WriteStringTag(ktsLevelDirectory, theApp->appSpec.name);
@@ -1419,4 +1521,87 @@ void CNetManager::LoginRefused() {
 
         itsGame->itsApp->MessageLine(kmRefusedLogin, MsgAlignment::Center);
     }
+}
+
+std::vector<CPlayerManager*> CNetManager::PlayersWithPresence(PresenceType presence) {
+    std::vector<CPlayerManager*> players;
+    for (auto player: playerTable) {
+        if (player->LoadingStatus() != kLNotConnected && player->Presence() == presence) {
+            players.push_back(player.get());
+        }
+    }
+    return players;
+}
+
+std::vector<CPlayerManager*> CNetManager::AvailablePlayers() {
+    return PlayersWithPresence(kzAvailable);
+}
+
+std::vector<CPlayerManager*> CNetManager::ActivePlayers() {
+    std::vector<CPlayerManager*> players;
+    for (auto player: playerTable) {
+        // players who are actually playing in a game
+        if (player->LoadingStatus() != kLNotConnected && player->Presence() == kzAvailable && player->GetPlayer() != NULL) {
+            players.push_back(player.get());
+        }
+    }
+    return players;
+}
+
+std::vector<CPlayerManager*> CNetManager::AllPlayers() {
+    std::vector<CPlayerManager*> players;
+    for (auto player: playerTable) {
+        // All players connected to the server regardless of status
+        if (player->LoadingStatus() != kLNotConnected && player->Presence() != kzUnknown) {
+            players.push_back(player.get());
+        }
+    }
+    return players;
+}
+
+int CNetManager::PlayerSlot(std::string playerName) {
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        if (playerTable[i].get()->GetPlayerName() == playerName) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void CNetManager::ChangeTeamColors(std::map<int, std::vector<std::string>> colorTeamMap) {
+    // first set everyone to black then overwrite below
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        teamColors[i] = kBlackTeam - kGreenTeam;
+    }
+    for (auto [color, team]: colorTeamMap) {
+        for (auto playerName: team) {
+            int slot = PlayerSlot(playerName);
+            if (slot >= 0) {
+                teamColors[slot] = color - kGreenTeam;
+            }
+        }
+    }
+    
+    SendColorChange();
+}
+
+void CNetManager::SetTeamColor(int slot, int color) {
+    if (color > kNeutralTeam) {
+        teamColors[slot] = color - kGreenTeam;
+    } else {
+        // pick first color not being used by other slots
+        for (int newColor = 0; newColor < kMaxAvaraPlayers; newColor++) {
+            bool colorUsed = false;
+            for (int i = 0; i < kMaxAvaraPlayers && !colorUsed; i++) {
+                if (i != slot && teamColors[i] == newColor) {
+                    colorUsed = true;
+                }
+            }
+            if (!colorUsed) {
+                teamColors[slot] = newColor;
+                break;
+            }
+        }
+    }
+    SendColorChange();
 }

@@ -15,13 +15,13 @@
 void CRateSound::Reset() {
     CBasicSound::Reset();
 
-    midRate = FIX(1);
-    masterRate = FIX(1);
+    midRate = FIX1;
+    masterRate = FIX1;
 }
 
 void CRateSound::UseSamplePtr(Sample *samples, int numSamples) {
     CBasicSound::UseSamplePtr(samples, numSamples);
-    SetRate(FIX(1));
+    SetRate(FIX1);
 }
 
 #define MINIMUMRATE (65536L >> (16 - BASESOUNDBUFFERBITS))
@@ -107,7 +107,7 @@ short CRateSound::CalcVolume(int16_t theChannel) {
             distance = FSqroot(squareAcc);
             dopplerShift = FMul(m->distanceToSamples, startDistance - distance);
 
-            rateMultip = FIX(1) + (dopplerShift << (16 - itsMixer->soundBufferBits)); //	‚Ä¢‚Ä¢‚Ä¢
+            rateMultip = FIX1 + (dopplerShift << (16 - itsMixer->soundBufferBits)); //	‚Ä¢‚Ä¢‚Ä¢
 
             if (rateMultip > FIX(4))
                 midRate = masterRate * 4;

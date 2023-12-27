@@ -16,7 +16,7 @@
 #include "CSoundMixer.h"
 
 void CAbstractActor::LoadPart(short ind, short resId) {
-    if (partScale == FIX(1)) {
+    if (partScale == FIX1) {
         partList[ind] = new CSmartPart;
         partList[ind]->ISmartPart(resId, this, ind);
     } else {
@@ -37,6 +37,8 @@ void CAbstractActor::LoadPartWithColors(short ind, short resId) {
     LoadPart(ind, resId);
     partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(0), GetPixelColor());
     partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(1), GetOtherPixelColor());
+    partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(2), GetTertiaryColor());
+    partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(3), GetQuaternaryColor());
 }
 
 void CAbstractActor::InitLocationLinks() {
@@ -199,7 +201,7 @@ void CAbstractActor::BuildPartSpheresProximityList(MaskType filterMask) {
     BuildPartProximityList(minPoint, FDistanceOverEstimate(maxPoint[0], maxPoint[1], maxPoint[2]), filterMask);
 }
 
-void CAbstractActor::IAbstractActor() {
+CAbstractActor::CAbstractActor() {
     short i;
 
     proximityList.p = NULL;
@@ -236,7 +238,7 @@ void CAbstractActor::IAbstractActor() {
         partList[i] = NULL;
     }
 
-    partScale = FIX(1);
+    partScale = FIX1;
     partYon = 0;
 
     for (i = 0; i < kSliverSizes; i++) {
@@ -294,7 +296,7 @@ void CAbstractActor::Shatter(short firstSliverType,
     short i;
     CSmartPart **partInd, *thePart;
     long totalPolys;
-    Vector noDirection = {0, FIX(1), 0, 0};
+    Vector noDirection = {0, FIX1, 0, 0};
 
     partInd = partList;
     totalPolys = 0;
@@ -364,7 +366,7 @@ void CAbstractActor::Blast() {
         }
 
         if (maxCount && maxPart) {
-            DoSound(blastSound, maxPart->sphereGlobCenter, blastVolume, FIX(1));
+            DoSound(blastSound, maxPart->sphereGlobCenter, blastVolume, FIX1);
         }
     }
 }
@@ -722,8 +724,9 @@ void CAbstractActor::PostMortemBlast(short scoreTeam, short scoreId, Boolean doD
         Dispose();
 }
 
-void CAbstractActor::SecondaryDamage(short scoreTeam, short scoreColor) {
+bool CAbstractActor::SecondaryDamage(short scoreTeam, short scoreColor, ScoreInterfaceReasons damageSource) {
     CAbstractActor *blastToo;
+    bool imDead = false;
 
 #if DEBUG_AVARA
     proximityList.p = (CSmartPart *)-1;
@@ -732,10 +735,14 @@ void CAbstractActor::SecondaryDamage(short scoreTeam, short scoreColor) {
     while ((blastToo = gCurrentGame->postMortemList)) {
         gCurrentGame->postMortemList = blastToo->postMortemLink;
         if (blastToo != this) {
-            gCurrentGame->scoreReason = ksiSecondaryDamage;
+            gCurrentGame->scoreReason = damageSource;
+        }
+        if (blastToo == this) {
+            imDead = true;
         }
         blastToo->PostMortemBlast(scoreTeam, scoreColor, true);
     }
+    return imDead;
 }
 
 // perhaps we should rename this RayTestPlusGround because it does a RayTest on all actors and on the ground...
@@ -910,7 +917,7 @@ void CAbstractActor::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
     if (shields < 0 || shields > hitEnergy) {
         itsGame->Score(
             theHit->team, theHit->playerId, LMul(hitScore, hitEnergy), hitEnergy, teamColor, GetActorScoringId());
-        DoSound(hitSoundId, theHit->origin, hitSoundVolume * hitEnergy, FIX(1));
+        DoSound(hitSoundId, theHit->origin, hitSoundVolume * hitEnergy, FIX1);
         itsGame->FlagMessage(hitMessage);
 
         if (shields >= 0)
@@ -924,8 +931,10 @@ void CAbstractActor::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
 
             savedReason = itsGame->scoreReason;
             itsGame->scoreReason = ksiKillBonus;
+            itsGame->killReason = savedReason;
             itsGame->Score(theHit->team, theHit->playerId, destructScore, 0, teamColor, GetActorScoringId());
             itsGame->scoreReason = savedReason;
+            itsGame->killReason = ksiNoReason;
 
             itsGame->FlagMessage(hitMessage);
             itsGame->FlagMessage(destructMessage);
@@ -978,8 +987,8 @@ void CAbstractActor::BlastHit(BlastHitRecord *theHit) {
 
         distance = NormalizeVector(3, blastRay.direction) - thePart->enclosureRadius;
         FPS_DEBUG("CAbstractActor::BlastHit: len(blastRay.direction) = " << distance + thePart->enclosureRadius << ", enclosureRadius = " << thePart->enclosureRadius << ", distance = " << distance << "\n");
-        if (distance < FIX(1)) {
-            distance = FIX(1);
+        if (distance < FIX1) {
+            distance = FIX1;
             blastRay.origin[0] = theHit->blastPoint[0];
             blastRay.origin[1] = theHit->blastPoint[1];
             blastRay.origin[2] = theHit->blastPoint[2];
@@ -1210,7 +1219,11 @@ void CAbstractActor::FpsCoefficients(Fixed classicCoeff1, Fixed classicCoeff2,
         if (fpsOffset != NULL) {
             // Dividing by classicCoeff1(A) seems to improve cases like this:
             //   s=As+B
-            *fpsOffset = FDiv(FpsOffset(classicCoeff2), classicCoeff1);
+            if (classicCoeff1) {
+                *fpsOffset = FDiv(FpsOffset(classicCoeff2), classicCoeff1);
+            } else {
+                *fpsOffset = 0;
+            }
         }
     } else {
         *fpsCoeff1 = classicCoeff1;

@@ -46,7 +46,7 @@ void CGoody::BeginScript() {
     ProgramLongVar(iOutVar, 0);
 
     ProgramLongVar(iSound, kGoodySound);
-    ProgramFixedVar(iVolume, FIX(1));
+    ProgramFixedVar(iVolume, FIX1);
     ProgramLongVar(iOpenSound, 0);
     ProgramLongVar(iCloseSound, 0);
 
@@ -132,13 +132,13 @@ void CGoody::FrameAction() {
 
         if (stopMsg.triggerCount) {
             stopMsg.triggerCount = 0;
-            DoSound(closeSoundId, location, volume, FIX(1));
+            DoSound(closeSoundId, location, volume, FIX1);
             enabled = false;
         }
 
         if (startMsg.triggerCount) {
             startMsg.triggerCount = 0;
-            DoSound(openSoundId, location, volume, FIX(1));
+            DoSound(openSoundId, location, volume, FIX1);
             enabled = true;
         }
     }
@@ -164,7 +164,7 @@ void CGoody::FrameAction() {
 
                 theActor = (CAbstractPlayer *)thePart->theOwner;
                 theActor->TakeGoody(&gr);
-                DoSound(soundId, location, volume, FIX(1));
+                DoSound(soundId, location, volume, FIX1);
 
                 itsGame->FlagMessage(outMsg);
                 enabled = false;
@@ -199,7 +199,8 @@ void CGoody::FrameAction() {
         sleepTimer = frequency;
 
     // the goody heading can make a difference in determing a collision with a Hector
-    FRandSeed += heading;
+    // FRandSeed += heading;
+    UpdateFRandSeed((uint32_t)heading);
     // SDL_Log("fn = %ld, goody=%ld: heading = %8d, FRandSeed = %10d\n",
     //         itsGame->frameNumber, ident, heading, (Fixed)FRandSeed);
 }

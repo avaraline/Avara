@@ -194,21 +194,22 @@ void CTeleporter::FrameAction() {
 }
 
 void CTeleporter::TeleportPlayer(CAbstractPlayer *thePlayer) {
-    CTeleporter *theActor;
+    CAbstractActor *theActor;
     CTeleporter *thePort;
     unsigned long maxUse = 0xffffFFFF;
 
-    theActor = (CTeleporter *)itsGame->actorList;
+    theActor = (CAbstractActor *)itsGame->actorList;
     thePort = NULL;
 
     while (theActor) {
         if (theActor->maskBits & kTeleportBit) {
-            if (theActor->transportGroup == destGroup && theActor->useCount < maxUse && theActor != this) {
-                maxUse = theActor->useCount;
-                thePort = theActor;
+            CTeleporter *teleActor = (CTeleporter *)theActor;
+            if (teleActor->transportGroup == destGroup && teleActor->useCount < maxUse && theActor != this) {
+                maxUse = teleActor->useCount;
+                thePort = teleActor;
             }
         }
-        theActor = (CTeleporter *)theActor->nextActor;
+        theActor = (CAbstractActor *)theActor->nextActor;
     }
 
     if (thePort) {

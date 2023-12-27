@@ -105,7 +105,7 @@ void CDoorActor::TouchDamage() {
             }
         }
 
-        SecondaryDamage(teamColor, -1);
+        SecondaryDamage(teamColor, -1, ksiObjectCollision);
     }
 }
 
@@ -150,7 +150,7 @@ CAbstractActor *CDoorActor::EndScript() {
 
     resId = ReadLongVar(iShape);
 
-    if (GetResource('BSPT', resId)) {
+    if (HasBSP(resId)) {
         //CBSPWorld *theWorld;
 
         RegisterReceiver(&openActivator, ReadLongVar(iOpenMsg));

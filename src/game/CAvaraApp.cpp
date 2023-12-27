@@ -34,6 +34,7 @@
 #include "httplib.h"
 #include <chrono>
 #include <json.hpp>
+#include "Tags.h"
 #include "Debug.h"
 
 // included while we fake things out
@@ -43,12 +44,12 @@ std::mutex trackerLock;
 
 void TrackerPinger(CAvaraAppImpl *app) {
     while (true) {
-        if(app->Number(kTrackerRegister) == 1) {
+        if(app->Number(kTrackerRegister) == 1 && app->GetNet()->netStatus == kServerNet) {
             std::string payload = app->TrackerPayload();
             if (payload.size() > 0) {
                 // Probably not thread-safe.
                std::string address = app->String(kTrackerRegisterAddress);
-                SDL_Log("Pinging %s", address.c_str());
+                DBG_Log("tracker", "Pinging %s", address.c_str());
                 size_t sepIndex = address.find(":");
                 if (sepIndex != std::string::npos) {
                     std::string host = address.substr(0, sepIndex);
@@ -71,6 +72,7 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     gCurrentGame = itsGame.get();
     itsGame->IAvaraGame(this);
     itsGame->UpdateViewRect(mSize.x, mSize.y, mPixelRatio);
+    itsGame->LoadImages(mNVGContext);
 
     AvaraGLSetFOV(Number(kFOV));
 
@@ -153,7 +155,7 @@ void CAvaraAppImpl::idle() {
 void CAvaraAppImpl::drawContents() {
     if(animatePreview) {
         Fixed x = overhead[0] + FMul(previewRadius, FOneCos(previewAngle));
-        Fixed y = overhead[1] + FMul(FMul(extent[3], FIX(2)), FOneSin(previewAngle) + FIX(1));
+        Fixed y = overhead[1] + FMul(FMul(extent[3], FIX(2)), FOneSin(previewAngle) + FIX1);
         Fixed z = overhead[2] + FMul(previewRadius, FOneSin(previewAngle));
         itsGame->itsView->LookFrom(x, y, z);
         itsGame->itsView->LookAt(overhead[0], overhead[1], overhead[2]);
@@ -206,6 +208,7 @@ void CAvaraAppImpl::drawAll() {
 void CAvaraAppImpl::GameStarted(std::string set, std::string level) {
     animatePreview = false;
     itsGame->itsView->showTransparent = false;
+    itsGame->IncrementGameCounter();
     MessageLine(kmStarted, MsgAlignment::Center);
     levelWindow->AddRecent(set, level);
 }
@@ -214,7 +217,7 @@ bool CAvaraAppImpl::DoCommand(int theCommand) {
     std::string name = String(kPlayerNameTag);
     Str255 userName;
     userName[0] = name.length();
-    BlockMoveData(name.c_str(), userName + 1, name.length());
+    BlockMoveData(name.c_str(), userName + 1, userName[0]);
     // SDL_Log("DoCommand %d\n", theCommand);
     switch (theCommand) {
         case kReportNameCmd:
@@ -271,25 +274,62 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
 
     OSErr result = fnfErr;
     json setManifest = GetManifestJSON(set);
-    if(setManifest == -1) return result;
-    if(setManifest.find("LEDI") == setManifest.end()) return result;
+    if (setManifest == -1) return result;
+    if (setManifest.find("LEDI") == setManifest.end()) return result;
+
+    if (setManifest.find("REQD") == setManifest.end()) {
+        ClearExternalPackages();
+    } else {
+        for (auto &ext : setManifest["REQD"].items()) {
+            json pkg = ext.value();
+            std::string pkgPath = pkg.value("Package", "");
+            // TODO: Support version constraints?
+            if (!pkgPath.empty() &&
+                pkgPath.rfind(".", 0) != 0 &&
+                pkgPath.find("..") == std::string::npos &&
+                pkgPath.find("/") == std::string::npos &&
+                pkgPath.find("\\") == std::string::npos) {
+                AddExternalPackage(pkgPath);
+            }
+        }
+    }
 
     json ledi = NULL;
     for (auto &ld : setManifest["LEDI"].items()) {
         if (ld.value()["Alf"] == levelTag)
             ledi = ld.value();
     }
-    if(ledi == NULL) return result;
+    if (ledi == NULL) return result;
+
+    if (ledi.contains("Aftershock") && ledi["Aftershock"] == true) {
+        UseBaseFolder("rsrc/aftershock");
+    } else {
+        UseBaseFolder("rsrc");
+    }
+
+    LoadLevelOggFiles(set);
 
     if(LoadALF(GetALFPath(levelTag))) result = noErr;
 
     if (result == noErr) {
+        playerWindow->RepopulateHullOptions();
         itsGame->loadedLevel = ledi["Name"];
-        itsGame->loadedTag  = levelTag;
-        std::string msgPrefix = "Loaded";
-        if(sendingPlayer != NULL)
-            msgPrefix = sendingPlayer->GetPlayerName() + " loaded";
-        AddMessageLine(msgPrefix + " \"" + itsGame->loadedLevel + "\" from \"" + set + "\".");
+        itsGame->loadedFilename  = levelTag;
+        itsGame->loadedTags = Tags::GetTagsForLevel(Tags::LevelURL(itsGame->loadedSet, itsGame->loadedLevel));
+        std::string msgStr = "Loaded";
+        if (sendingPlayer != NULL) {
+            msgStr = sendingPlayer->GetPlayerName() + " loaded";
+        }
+        msgStr += " \"" + itsGame->loadedLevel + "\" from \"" + set + "\".";
+        if (!itsGame->loadedTags.empty()) {
+            msgStr += " (tags:";
+            for (auto tag: itsGame->loadedTags) {
+                msgStr += " " + tag;
+            }
+            msgStr += ")";
+        }
+        AddMessageLine(msgStr);
+
         levelWindow->SelectLevel(set, itsGame->loadedLevel);
 
         itsGame->itsWorld->OverheadPoint(overhead, extent);
@@ -338,13 +378,14 @@ void CAvaraAppImpl::AddMessageLine(
 
     msg.align = align;
     msg.category = category;
+    msg.gameId = itsGame->currentGameId;
 
     // split string on newlines
     while(std::getline(iss, line)) {
         SDL_Log("Message: %s", line.c_str());
         msg.text = line;
         messageLines.push_back(msg);
-        if (messageLines.size() > 5) {
+        if (messageLines.size() > 500) {
             messageLines.pop_front();
         }
     }

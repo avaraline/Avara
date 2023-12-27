@@ -102,7 +102,7 @@ void CSoundMixer::ISoundMixer(Fixed sampRate,
     //OSErr iErr;
     //int globTemp;
     short i, j;
-    Vector rightVect = {FIX(1), 0, 0, 0};
+    Vector rightVect = {FIX1, 0, 0, 0};
 
     sample16flag = true;
 
@@ -110,7 +110,7 @@ void CSoundMixer::ISoundMixer(Fixed sampRate,
     samplingRate = sampRate ? sampRate : rate22khz;
 
     if (samplingRate == rate22khz) {
-        standardRate = FIX(1);
+        standardRate = FIX1;
     } else {
         standardRate = FDivNZ(rate22050hz, samplingRate >> 1) >> 1;
     }
@@ -128,7 +128,7 @@ void CSoundMixer::ISoundMixer(Fixed sampRate,
 
     frameTime = FMulDivNZ(soundBufferSize, FIX(500), samplingRate >> 1);
 
-    SetSoundEnvironment(FIX(343), FIX(1), 1);
+    SetSoundEnvironment(FIX(343), FIX1, 1);
 
     UpdateRightVector(rightVect);
     motion.loc[0] = motion.loc[1] = motion.loc[2] = 0;

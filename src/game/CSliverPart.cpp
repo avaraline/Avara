@@ -12,7 +12,7 @@
 #include "CAvaraGame.h"
 #include "CAbstractPlayer.h"
 
-extern ColorRecord ***bspColorLookupTable;
+extern ARGBColor ***bspColorLookupTable;
 Fixed sliverGravity = -FIX3(20);
 
 #if 0
@@ -43,7 +43,7 @@ void CSliverPart::Activate(Fixed *origin,
     int offset = FSysRandom() % (fromObject->polyCount);
     borrowPoly = &fromObject->polyTable[offset];
 
-    ColorRecord c = borrowPoly->color;
+    ARGBColor c = fromObject->currColorTable[borrowPoly->colorIdx];
 
     ReplaceColor(*ColorManager::getMarkerColor(0), c);
 
@@ -52,14 +52,14 @@ void CSliverPart::Activate(Fixed *origin,
 
     // TODO: update for new BSP code
     /*
-    ColorRecord	*colorP;
+    ARGBColor	*colorP;
     NormalRecord	*borrowNorms;
     short		borrowPoly, borrowColor;
 
     if(fromObject->colorReplacements)
-        colorP = (ColorRecord *) *fromObject->colorReplacements;
+        colorP = (ARGBColor *) *fromObject->colorReplacements;
     else
-        colorP = (ColorRecord *) (fromObject->header.colorOffset + *fromObject->itsBSPResource);
+        colorP = (ARGBColor *) (fromObject->header.colorOffset + *fromObject->itsBSPResource);
 
     borrowPoly = (FRandomBeta() * fromObject->header.normalCount)>>16;
     borrowNorms = (NormalRecord *)(fromObject->header.normalOffset + *fromObject->itsBSPResource);

@@ -22,7 +22,7 @@
 
 void CMineActor::BeginScript() {
     maskBits |= kTargetBit + kSolidBit;
-    shields = FIX(1);
+    shields = FIX1;
     hitScore = 5;
     destructScore = 20;
 
@@ -181,7 +181,7 @@ void CMineActor::FrameAction() {
         if (activated) {
             WasDestroyed();
             itsGame->scoreReason = ksiMineBlast;
-            SecondaryDamage(teamColor, -1);
+            SecondaryDamage(teamColor, -1, ksiMineBlast);
             return;
         } else {
             lookNextTime = phase + lookTime;

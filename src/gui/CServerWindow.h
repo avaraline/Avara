@@ -18,6 +18,7 @@ public:
 
 protected:
 
+    nanogui::CheckBox *registerBox;
     nanogui::TextBox *trackerBox;
     nanogui::TextBox *descriptionBox;
     nanogui::TextBox *passwordBox;

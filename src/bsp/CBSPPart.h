@@ -10,6 +10,7 @@
 #pragma once
 #include "ARGBColor.h"
 #include "CDirectObject.h"
+#include "ColorManager.h"
 #include "FastMat.h"
 #include "Types.h"
 
@@ -38,16 +39,14 @@ typedef struct {
 } FixedPoint;
 
 typedef struct {
-    ARGBColor color;
-    ARGBColor origColor;
     float normal[3];
     uint16_t triCount;
     std::unique_ptr<uint16_t[]> triPoints;
     uint16_t front;
     uint16_t back;
+    uint16_t colorIdx;
+    uint8_t vis;
 } PolyRecord;
-
-typedef ARGBColor ColorRecord;
 
 namespace CBSPUserFlags {
     constexpr short kIsAmbient = 1;
@@ -117,7 +116,7 @@ public:
 
     CViewParameters *currentView = 0;
 
-    GLData *glData = 0;
+    std::unique_ptr<GLData[]> glData = 0;
     GLuint vertexArray, vertexBuffer = 0;
     GLsizeiptr glDataSize = 0;
 
@@ -151,9 +150,13 @@ public:
     Fixed maxY = 0;
 
     //	members used during rendering:
+    uint16_t colorCount = 0;
     uint32_t pointCount = 0;
     uint32_t polyCount = 0;
     int totalPoints = 0;
+    int openGLPoints = 0;
+    std::unique_ptr<ARGBColor[]> origColorTable;
+    std::unique_ptr<ARGBColor[]> currColorTable;
     std::unique_ptr<Vector[]> pointTable;
     std::unique_ptr<PolyRecord[]> polyTable;
 
@@ -178,6 +181,7 @@ public:
     virtual void Dispose();
 
     virtual void ReplaceColor(ARGBColor origColor, ARGBColor newColor);
+    virtual void ReplaceAllColors(ARGBColor newColor);
 
     virtual Boolean PrepareForRender(CViewParameters *vp);
     virtual void DrawPolygons();
@@ -207,10 +211,19 @@ public:
     virtual void PrependMatrix(Matrix *m); //	itsTransform = m * itsTransform
     virtual Matrix *GetInverseTransform();
 
+    virtual bool HasAlpha();
+    virtual void SetScale(Fixed x, Fixed y, Fixed z);
+    virtual void ResetScale();
+    Vector scale = {FIX1, FIX1, FIX1, FIX1};
+    bool hasScale = false;
+
     //	Compare with another part to see which one is in front:
     virtual Boolean Obscures(CBSPPart *other);
     virtual Boolean HopeNotObscure(CBSPPart *other, Vector *otherCorners);
     virtual Boolean HopeDoesObscure(CBSPPart *other, Vector *otherCorners);
 
     void PrintMatrix(Matrix *m);
+protected:
+    bool hasAlpha = false;
+    virtual void CheckForAlpha();
 };

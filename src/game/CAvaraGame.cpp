@@ -83,6 +83,10 @@ void CAvaraGame::InitLocatorTable() {
     }
 }
 
+void CAvaraGame::IncrementGameCounter() {
+    currentGameId++;
+}
+
 std::unique_ptr<CNetManager> CAvaraGame::CreateNetManager() {
     return std::make_unique<CNetManager>();
 }
@@ -132,7 +136,7 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     itsView->yonBound = LONGYON;
     itsView->horizonBound = FIX(16000); //	16 km
 
-    mapRes = GetResource(FUNMAPTYPE, FUNMAPID);
+    // mapRes = GetResource(FUNMAPTYPE, FUNMAPID);
 
     // IGameTimer(frameTime/TIMING_GRAIN);
 
@@ -145,7 +149,7 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     allowBackgroundProcessing = false;
 
-    loadedTag = "";
+    loadedFilename = "";
     loadedLevel = "";
     loadedDesigner = "";
     loadedInfo = "";
@@ -155,10 +159,11 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     keysFromStdin = false;
     keysToStdout = false;
 
-    statusRequest = -1; // who decided to make "playing" 0??
+    statusRequest = kNoVehicleStatus;
 
     nextPingTime = 0;
 
+    showNewHUD = gApplication->Get<bool>(kShowNewHUD);
     // CalcGameRect();
 
     // vg = AvaraVGContext();
@@ -175,6 +180,10 @@ CBSPWorld* CAvaraGame::CreateCBSPWorld(short initialObjectSpace) {
     CBSPWorldImpl *w = new CBSPWorldImpl;
     w->IBSPWorld(initialObjectSpace);
     return w;
+}
+
+void CAvaraGame::LoadImages(NVGcontext *ctx) {
+    hud->LoadImages(ctx);
 }
 
 void CAvaraGame::Dispose() {
@@ -210,7 +219,7 @@ void CAvaraGame::Dispose() {
 //        itsNet->Dispose();
     if (worldShader)
         worldShader->Dispose();
-    ReleaseResource(mapRes);
+    // ReleaseResource(mapRes);
 
     // DisposePolyWorld(&itsPolyWorld);
     DisposePtr((Ptr)locatorTable);
@@ -268,13 +277,21 @@ CAbstractPlayer *CAvaraGame::GetSpectatePlayer() {
 
 CAbstractPlayer *CAvaraGame::GetLocalPlayer() {
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
-        CPlayerManager *mgr = itsNet->playerTable[i];
+        CPlayerManager *mgr = itsNet->playerTable[i].get();
         if (mgr && mgr->IsLocalPlayer()) {
             return mgr->GetPlayer();
         }
     }
 
     return NULL;
+}
+
+std::string CAvaraGame::GetPlayerName(short id) {
+    if (id != -1) {
+        CPlayerManager *mgr = itsNet->playerTable[id].get();
+        return mgr->GetPlayerName();
+    }
+    return "";
 }
 
 void CAvaraGame::AddActor(CAbstractActor *theActor) {
@@ -449,6 +466,15 @@ void CAvaraGame::Score(short team, short player, long points, Fixed energy, shor
     scoreKeeper->Score(scoreReason, team, player, points, energy, hitTeam, hitPlayer);
 }
 
+void CAvaraGame::AddScoreNotify(ScoreInterfaceEvent event) {
+    event.frameNumber = frameNumber;
+    event.gameId = currentGameId;
+    scoreEventList.push_back(event);
+    if (scoreEventList.size() > 20) {
+        scoreEventList.pop_front();
+    }
+}
+
 void CAvaraGame::RunFrameActions() {
     // SDL_Log("CAvaraGame::RunFrameActions\n");
     CAbstractPlayer *thePlayer;
@@ -471,6 +497,14 @@ void CAvaraGame::RunFrameActions() {
         nextPlayer = thePlayer->nextPlayer;
         thePlayer->PlayerAction();
         thePlayer = nextPlayer;
+    }
+
+    // Time out old score events
+    if (!scoreEventList.empty()) {
+        ScoreInterfaceEvent event = scoreEventList.front();
+        if (event.frameNumber + 480 < frameNumber || event.gameId < currentGameId) {
+            scoreEventList.pop_front();
+        }
     }
 }
 
@@ -681,8 +715,8 @@ void CAvaraGame::StartIfReady() {
     if (itsNet->itsCommManager->myId == 0) {
         bool allReady = true;
         for (int i = 0; i < kMaxAvaraPlayers; i++) {
-            CPlayerManager *mgr = itsNet->playerTable[i];
-            if (mgr && mgr->LoadingStatus() == kLLoaded) {
+            CPlayerManager *mgr = itsNet->playerTable[i].get();
+            if (mgr && mgr->LoadingStatus() == kLLoaded && mgr->Presence() == kzAvailable) {
                 allReady = false;
                 break;
             }
@@ -797,13 +831,14 @@ void CAvaraGame::GameStart() {
         itsNet->FrameAction();
     }
 
-    loadedLevel = "";
-
     // SDL_ShowCursor(SDL_DISABLE);
     // SDL_CaptureMouse(SDL_TRUE);
-    SDL_SetRelativeMouseMode(SDL_TRUE);
-    SDL_SetHint(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1");
 
+    SDL_SetRelativeMouseMode(SDL_TRUE);
+#ifdef WIN32
+#else
+    SDL_SetHint(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1");
+#endif
     // HideCursor();
     // FlushEvents(everyEvent, 0);
 
@@ -858,17 +893,9 @@ bool CAvaraGame::GameTick() {
     itsNet->ProcessQueue();
 
     if (startTime > nextPingTime) {
-        uint32_t pingInterval = 2000; //msec
-        if (statusRequest == kPlayingStatus) {
-            // experimental: '/dbg ping' will turn pings on/off during game
-            if (Debug::IsEnabled("ping")) {
-                itsNet->SendPingCommand(2);
-            }
-        } else {
-            // less frequent larger bursts seems to give better LT estimates when not playing
-            // (this is better than sending 2 every 0.5 sec)
-            itsNet->SendPingCommand(8);
-        }
+        // 3 pings every second, 1 ping used by each client for RTT calc (last ping not used)
+        static uint32_t pingInterval = 1000; // msec
+        itsNet->SendPingCommand(3);
         nextPingTime = startTime + pingInterval;
     }
 
@@ -1026,9 +1053,9 @@ void CAvaraGame::SpectatePrevious() {
 CPlayerManager *CAvaraGame::FindPlayerManager(CAbstractPlayer *thePlayer) {
     for (int i = 0; i < kMaxAvaraPlayers; i++)
         if(itsNet->playerTable[i] != NULL && itsNet->playerTable[i]->GetPlayer() == thePlayer)
-            return itsNet->playerTable[i];
+            return itsNet->playerTable[i].get();
 
-    return NULL;
+    return nullptr;
 }
 
 void CAvaraGame::StopGame() {
@@ -1055,15 +1082,21 @@ void CAvaraGame::Render(NVGcontext *ctx) {
     AvaraGLSetDepthTest(false);
     hudWorld->Render(itsView);
     AvaraGLSetAmbient(ToFloat(itsView->ambientLight), itsView->ambientLightColor);
-    hud->Render(itsView, ctx);
+
+    if (showNewHUD) {
+        hud->RenderNewHUD(itsView, ctx);
+    } else {
+        hud->Render(itsView, ctx);
+    }
+
     AvaraGLSetDepthTest(true);
 }
 
 CPlayerManager *CAvaraGame::GetPlayerManager(CAbstractPlayer *thePlayer) {
-    CPlayerManager *theManager = NULL;
+    CPlayerManager *theManager = nullptr;
 
     if (itsNet->playerCount < kMaxAvaraPlayers) {
-        theManager = itsNet->playerTable[itsNet->playerCount];
+        theManager = itsNet->playerTable[itsNet->playerCount].get();
         theManager->SetPlayer(thePlayer);
         itsNet->playerCount++;
     }
@@ -1074,8 +1107,8 @@ CPlayerManager *CAvaraGame::GetPlayerManager(CAbstractPlayer *thePlayer) {
 // FrameLatency is slightly different than LatencyTolerance.  It is in terms of integer frames
 // at the current frame rate.
 long CAvaraGame::RoundTripToFrameLatency(long roundTrip) {
-    // half of the roundTripTime in units of frameTime, rounded
-    return (roundTrip + frameTime) / (2*frameTime);
+    // half of the roundTripTime in units of frameTime, rounded up (ceil)
+    return std::ceil(roundTrip/2.0/frameTime);
 }
 
 // "frameLatency" is the integer number of frames to delay;
@@ -1090,10 +1123,24 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, CPlayer
         }
 
         double oldLatency = latencyTolerance;
+
+        static int reduceLatencyCounter = 0;
+        static int increaseLatencyCounter = 0;
         if (newLatency < latencyTolerance) {
-            latencyTolerance = std::max(latencyTolerance-maxChange, std::max(newLatency, double(0.0)));
+            static const int REDUCE_LATENCY_COUNT = 8;
+            // need REDUCE_LATENCY_COUNT consecutive requests to reduce latency
+            if (maxChange == MAX_LATENCY || ++reduceLatencyCounter >= REDUCE_LATENCY_COUNT) {
+                latencyTolerance = std::max(latencyTolerance-maxChange, std::max(newLatency, double(0.0)));
+                reduceLatencyCounter = 0;
+                increaseLatencyCounter = 0;
+            }
         } else {
-            latencyTolerance = std::min(latencyTolerance+maxChange, std::min(newLatency, double(MAX_LATENCY)));
+            static const int INCREASE_LATENCY_COUNT = 1;
+            if (maxChange == MAX_LATENCY || ++increaseLatencyCounter >= INCREASE_LATENCY_COUNT) {
+                latencyTolerance = std::min(latencyTolerance+maxChange, std::min(newLatency, double(MAX_LATENCY)));
+                reduceLatencyCounter = 0;
+                increaseLatencyCounter = 0;
+            }
         }
 
         // make prettier version of the LT string (C++ sucks with strings)
@@ -1106,8 +1153,10 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, CPlayer
         // if it changed
         if (latencyTolerance != oldLatency && statusRequest == kPlayingStatus) {
             std::ostringstream oss;
-            std::time_t t = std::time(nullptr);
-            oss << std::put_time(std::localtime(&t), "%H:%M:%S> LT set to ") << ltOss.str();
+            int gameSeconds = frameNumber * frameTime / 1000;
+            int gameMinutes = gameSeconds / 60;
+            gameSeconds = gameSeconds % 60;
+            oss << "T+" << std::setfill('0') << std::setw(2) << gameMinutes << ":" << std::setw(2) << gameSeconds << "> LT set to " << ltOss.str();
             if (slowPlayer != nullptr) {
                 oss << " (" << slowPlayer->GetPlayerName() << ")";
             }

@@ -16,8 +16,8 @@
 #define DEFAULTMISSILESOUND 200
 #define MINEBLOWSOUND 301
 
-void CWeapon::IWeapon(CDepot *theDepot) {
-    IAbstractActor();
+CWeapon::CWeapon(CDepot *theDepot) {
+
 
     nextWeapon = NULL;
 
@@ -26,7 +26,7 @@ void CWeapon::IWeapon(CDepot *theDepot) {
     itsDepot = theDepot;
     itsGame = itsDepot->itsGame;
     blastSound = MINEBLOWSOUND;
-    blastPower = FIX(1);
+    blastPower = FIX1;
     sliverCounts[kSmallSliver] = 4;
 
     ResetWeapon();
@@ -133,14 +133,20 @@ void CWeapon::DoTargeting() {}
 void CWeapon::ShowTarget() {}
 
 void CWeapon::Explode() {
-    Vector temp = {0, FIX(1), 0, 0};
+    Vector temp = {0, FIX1, 0, 0};
+    ScoreInterfaceReasons source = ksiNoReason;
 
     WasDestroyed();
 
     itsDepot->FireSlivers(
         15, location, temp, partList[0]->bigRadius >> 2, blastPower << 1, 160, 20, 0, itsDepot->smartSight);
 
-    SecondaryDamage(teamColor, ownerSlot);
+    if (weaponKind == 0) {
+        source = ksiGrenadeHit;
+    } else if (weaponKind == 1) {
+        source = ksiMissileHit;
+    }
+    SecondaryDamage(teamColor, ownerSlot, source);
 }
 
 void CWeapon::PostMortemBlast(short scoreTeam, short scoreColor, Boolean doDispose) {

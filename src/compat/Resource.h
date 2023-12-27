@@ -16,7 +16,6 @@
 #endif
 
 // files stuff
-#define RSRCDIR "rsrc"
 #define LEVELDIR "levels"
 #define SETFILE "set.json"
 #define ALFDIR "alf"
@@ -27,6 +26,9 @@
 #define WAVDIR "wav"
 
 void UseResFile(std::string filename);
+void UseBaseFolder(std::string folder);
+void AddExternalPackage(std::string folder);
+void ClearExternalPackages();
 void UseLevelFolder(std::string folder);
 std::string OSTypeString(OSType t);
 OSType StringOSType(std::string s);
@@ -37,8 +39,6 @@ void WriteResource(Handle theResource);
 void ChangedResource(Handle theResource);
 void ReleaseResource(Handle theResource);
 void DetachResource(Handle theResource);
-
-void GetIndString(Str255 theString, short strListID, short index);
 
 void BundlePath(const char *rel, char *dest);
 void BundlePath(std::stringstream &buffa, char *dest);
@@ -52,8 +52,10 @@ nlohmann::json GetManifestJSON(std::string set);
 nlohmann::json GetKeyFromSetJSON(std::string rsrc, std::string key, std::string default_id);
 
 nlohmann::json GetBSPJSON(int resId);
+bool HasBSP(int resId);
 std::string GetALFPath(std::string alfname);
 std::string GetDefaultScript();
+std::vector<std::string> GetExternalScripts();
 std::string GetBaseScript();
 void LoadHullFromSetJSON(HullConfigRecord *hull, short resId);
 void LoadDefaultOggFiles();

@@ -11,9 +11,7 @@
 
 #include "CSmartPart.h"
 
-void CSphereActor::IAbstractActor() {
-    CGlowActors::IAbstractActor();
-
+CSphereActor::CSphereActor() {
     maskBits |= kTargetBit + kSolidBit;
 }
 CAbstractActor *CSphereActor::EndScript() {

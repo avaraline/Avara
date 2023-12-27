@@ -57,7 +57,7 @@ public:
     // OSErr				writeErr;
     // OSErr				readErr;
 
-    class CTagBase *prefs;
+    // class CTagBase *prefs;
     class CUDPConnection *connections;
     class CUDPConnection *nextSender;
     /*
@@ -97,7 +97,7 @@ public:
     Str255 inviteString;
 
     virtual void IUDPComm(short clientCount, short bufferCount, short version, ClockTick urgentTimePeriod);
-    virtual OSErr AllocatePacketBuffers(short numPackets);
+
     virtual void Disconnect();
     virtual void WritePrefs();
     virtual void Dispose();
@@ -129,6 +129,7 @@ public:
     virtual Boolean AsyncWrite();
 
     virtual void ReceivedGoodPacket(PacketInfo *thePacket);
+    virtual size_t SkipLostPackets(int16_t dist);
 
     virtual OSErr CreateStream(port_num streamPort);
 

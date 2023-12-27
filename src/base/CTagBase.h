@@ -100,17 +100,6 @@ public:
     virtual OSErr ReadOldHandle(long tag, Handle oldHandle);
 
     /*
-    **	TagBase objects usually have to be saved to files.
-    **	To facilitate this, the whole contents of the database
-    **	can be dumped into a single handle. The following methods
-    **	dump the contents to a handle and allow you to read it
-    **	back from a handle of the same format.
-    */
-    virtual Handle ConvertToHandle(); //	Convert to something that can be stored as a resource.
-    virtual void ConvertFromHandle(Handle theHandle); //	Does the opposite of ConvertToHandle.
-    virtual OSErr WriteToFile(short refNum);
-    virtual OSErr ReadFromFile(short refNum);
-    /*
     **	The flags field can be used to mark strings with a number. You can
     **	then use this number as you wish, although it was originally designed
     **	so that you can use any bit combination to signify a string that should

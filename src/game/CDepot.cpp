@@ -25,30 +25,7 @@
 void CDepot::IDepot(CAvaraGame *theGame) {
     itsGame = theGame;
 
-    smartSight = new CBSPPart;
-    smartSight->IBSPPart(208);
-    smartSight->ReplaceColor(0xfffffb00, ColorManager::getMissileSightPrimaryColor());
-    smartSight->ReplaceColor(0xffff2600, ColorManager::getMissileSightSecondaryColor());
-    smartSight->ignoreDirectionalLights = true;
-    smartSight->privateAmbient = FIX(1);
-
-    smartHairs = new CBSPPart;
-    smartHairs->IBSPPart(207);
-    smartHairs->ReplaceColor(0xffff2600, ColorManager::getMissileLockColor());
-    smartHairs->ignoreDirectionalLights = true;
-    smartHairs->privateAmbient = FIX(1);
-
-    grenadeSight = new CBSPPart;
-    grenadeSight->IBSPPart(200);
-    grenadeSight->ReplaceColor(0xfffffb00, ColorManager::getGrenadeSightPrimaryColor());
-    grenadeSight->ignoreDirectionalLights = true;
-    grenadeSight->privateAmbient = FIX(1);
-
-    grenadeTop = new CBSPPart;
-    grenadeTop->IBSPPart(201);
-    grenadeTop->ReplaceColor(0xffff2600, ColorManager::getGrenadeSightSecondaryColor());
-    grenadeTop->ignoreDirectionalLights = true;
-    grenadeTop->privateAmbient = FIX(1);
+    ReloadParts();
 
     bspInGame = false;
 
@@ -86,6 +63,12 @@ void CDepot::EndScript() {
     missilePower = ReadFixedVar(iMissilePower);
     missileTurnRate = ReadFixedVar(iMissileTurnRate);
     missileAcceleration = ReadFixedVar(iMissileAcceleration);
+
+    ReloadParts();
+    DisposeMissiles();
+    DisposeWeapons();
+    CreateMissiles();
+    CreateWeapons();
 }
 
 void CDepot::CreateSlivers() {
@@ -185,19 +168,18 @@ CAbstractMissile *CDepot::MakeMissile(short kind) {
 
     switch (kind) {
         case kmiFlat:
-            newMissile = new CMissile;
+            newMissile = new CMissile(this);
             break;
         case kmiTurning:
-            newMissile = new CPlayerMissile;
+            newMissile = new CPlayerMissile(this);
             break;
         case kmiShuriken:
-            newMissile = new CShuriken;
+            newMissile = new CShuriken(this);
             break;
         default:
             return newMissile;
     }
 
-    newMissile->IAbstractMissile(this);
     newMissile->missileKind = kind;
 
     return newMissile;
@@ -262,6 +244,38 @@ CAbstractMissile *CDepot::LaunchMissile(short kind,
         return NULL;
 }
 
+void CDepot::ReloadParts() {
+    if (smartHairs) smartHairs->Dispose();
+    if (smartSight) smartSight->Dispose();
+    if (grenadeSight) grenadeSight->Dispose();
+    if (grenadeTop) grenadeTop->Dispose();
+
+    smartSight = new CBSPPart;
+    smartSight->IBSPPart(208);
+    smartSight->ReplaceColor(0xfffffb00, ColorManager::getMissileSightPrimaryColor());
+    smartSight->ReplaceColor(0xffff2600, ColorManager::getMissileSightSecondaryColor());
+    smartSight->ignoreDirectionalLights = true;
+    smartSight->privateAmbient = FIX1;
+
+    smartHairs = new CBSPPart;
+    smartHairs->IBSPPart(207);
+    smartHairs->ReplaceColor(0xffff2600, ColorManager::getMissileLockColor());
+    smartHairs->ignoreDirectionalLights = true;
+    smartHairs->privateAmbient = FIX1;
+
+    grenadeSight = new CBSPPart;
+    grenadeSight->IBSPPart(200);
+    grenadeSight->ReplaceColor(0xfffffb00, ColorManager::getGrenadeSightPrimaryColor());
+    grenadeSight->ignoreDirectionalLights = true;
+    grenadeSight->privateAmbient = FIX1;
+
+    grenadeTop = new CBSPPart;
+    grenadeTop->IBSPPart(201);
+    grenadeTop->ReplaceColor(0xffff2600, ColorManager::getGrenadeSightSecondaryColor());
+    grenadeTop->ignoreDirectionalLights = true;
+    grenadeTop->privateAmbient = FIX1;
+}
+
 void CDepot::LevelReset() {
     short i;
     CSliverPart *nextSliver, *aSliver;
@@ -306,16 +320,14 @@ CWeapon *CDepot::MakeWeapon(short kind) {
 
     switch (kind) {
         case kweGrenade:
-            newWeapon = new CGrenade;
+            newWeapon = new CGrenade(this);
             break;
         case kweSmart:
-            newWeapon = new CSmart;
+            newWeapon = new CSmart(this);
             break;
         default:
             return newWeapon;
     }
-
-    newWeapon->IWeapon(this);
     newWeapon->weaponKind = kind;
 
     return newWeapon;

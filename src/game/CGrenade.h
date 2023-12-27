@@ -19,7 +19,7 @@ public:
     Fixed friction, classicFriction;
     Fixed speedOffset;
 
-    virtual void IWeapon(CDepot *theDepot);
+    CGrenade(CDepot *theDepot);
     virtual void PlaceParts();
     virtual void AdaptableSettings();
     virtual long Arm(CSmartPart *aPart);

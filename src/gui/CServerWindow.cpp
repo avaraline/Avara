@@ -38,7 +38,7 @@ CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
             avara->GetNet()->ChangeNet(kServerNet, "");
     });
 
-    nanogui::CheckBox *registerBox = new nanogui::CheckBox(this, "Register With Tracker:", [this, app](bool checked) {
+    registerBox = new nanogui::CheckBox(this, "Register With Tracker:", [this, app](bool checked) {
         this->trackerBox->setEditable(checked);
         this->trackerBox->setEnabled(checked);
         app->Set(kTrackerRegister, (int)checked);
@@ -56,8 +56,8 @@ CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
 
     latencyBox = new nanogui::TextBox(this);
     latencyBox->setValue(std::to_string(app->Get<float>(kLatencyToleranceTag)).substr(0, 5));
-    latencyBox->setEditable(false);
-    latencyBox->setEnabled(false);
+    latencyBox->setEditable(true);
+    latencyBox->setEnabled(true);
     latencyBox->setCallback([this](std::string value) -> bool {
         double newLT = std::stod(value);
         // let SetFrameLatency() enforce limits on latencyTolerance AND set the pref
@@ -68,18 +68,24 @@ CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
         return true;
     });
 
-    autoLatencyBox = new nanogui::CheckBox(this, "Auto Latency", [app](bool checked) {
+    autoLatencyBox = new nanogui::CheckBox(this, "Auto Latency", [this, app](bool checked) {
         long options = app->Number(kServerOptionsTag);
-        if (checked)
+        if (checked) {
             options |= 1 << kUseAutoLatencyBit;
-        else
+            latencyBox->setEditable(false);
+            latencyBox->setEnabled(false);
+        }
+        else {
             options &= ~(long)(1 << kUseAutoLatencyBit);
+            latencyBox->setEditable(true);
+            latencyBox->setEnabled(true);
+        }
         app->Set(kServerOptionsTag, options);
         ((CAvaraAppImpl *)app)->GetNet()->ChangedServerOptions(options);
     });
     bool autoLatency = app->Number(kServerOptionsTag) & (1 << kUseAutoLatencyBit);
     autoLatencyBox->setChecked(autoLatency);
-    autoLatencyBox->setEnabled(false);
+    autoLatencyBox->setEnabled(true);
 
     std::vector<std::string> frameTimeOptions = {
         "64 ms (15.625 fps)", "32 ms (31.25 fps)", "16 ms (62.5 fps)", "8 ms (125 fps)"
@@ -109,7 +115,7 @@ bool CServerWindow::DoCommand(int theCommand) {
                     startBtn->setEnabled(true);
                     frameTimeBox->setEnabled(true);
                     startBtn->setCaption("Start Hosting");
-                    this->EnableLatencyOptions(false);
+                    this->EnableLatencyOptions(true);
                     break;
                 case kClientNet:
                     startBtn->setEnabled(false);
@@ -129,6 +135,7 @@ bool CServerWindow::DoCommand(int theCommand) {
 void CServerWindow::PrefChanged(std::string name) {
     frameTimeBox->setSelectedIndex(6-log2(gCurrentGame->frameTime));
     latencyBox->setValue(std::to_string(mApplication->Get<float>(kLatencyToleranceTag)).substr(0, 5));
+    registerBox->setChecked(mApplication->Get<int>(kTrackerRegister) != 0);
 }
 
 void CServerWindow::EnableLatencyOptions(bool enable) {

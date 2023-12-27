@@ -224,11 +224,14 @@ void CFreeSolid::FrameAction() {
                         }
                     }
 
-                    SecondaryDamage(teamColor, -1);
+                    if (SecondaryDamage(teamColor, -1, ksiObjectCollision)) {
+                        // just deallocated myself so return
+                        return;
+                    }
 
                     BuildPartProximityList(location,
-                        partList[0]->bigRadius + FDistanceOverEstimate(locOffset[0], locOffset[1], locOffset[2]),
-                        kSolidBit);
+                                           partList[0]->bigRadius + FDistanceOverEstimate(locOffset[0], locOffset[1], locOffset[2]),
+                                           kSolidBit);
                 }
 
                 //	Move back to where we were.

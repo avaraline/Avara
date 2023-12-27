@@ -9,11 +9,13 @@
 
 #pragma once
 #include "AvaraDefines.h"
+#include "ColorManager.h"
 #include "CCommManager.h"
 #include "CDirectObject.h"
 #include "KeyFuncs.h"
 //#include "LevelScoreRecord.h"
 #include "PlayerConfig.h"
+#include "CPlayerManager.h"
 
 #include <SDL2/SDL.h>
 #include <string>
@@ -21,7 +23,7 @@
 #include <vector>
 #include <memory>
 
-#define NULLNETPACKETS (32 + MINIMUMBUFFERRESERVE)
+#define NULLNETPACKETS (MINIMUMBUFFERRESERVE)
 #define SERVERNETPACKETS (16 * 2 * kMaxAvaraPlayers)
 #define CLIENTNETPACKETS (16 * kMaxAvaraPlayers)
 #define TCPNETPACKETS (32 * kMaxAvaraPlayers)
@@ -50,7 +52,6 @@ void ServerOptionsDialog();
 #define kAllowTeamControlBitMask ((1 << kFreeColorBit) + (1 << kAllowOwnColorBit))
 class CAvaraGame;
 class CCommManager;
-class CPlayerManager;
 class CProtoControl;
 // class	CRosterWindow;
 class CAbstractPlayer;
@@ -72,17 +73,17 @@ public:
     // CRosterWindow	*theRoster;
 
     short playerCount;
-    CPlayerManager *playerTable[kMaxAvaraPlayers];
+    std::shared_ptr<CPlayerManager> playerTable[kMaxAvaraPlayers];
 
     char teamColors[kMaxAvaraPlayers];
     int8_t slotToPosition[kMaxAvaraPlayers];
     int8_t positionToSlot[kMaxAvaraPlayers];
 
-    short activePlayersDistribution;
-    short readyPlayers;
-    short unavailablePlayers;
-    short startPlayersDistribution;
-    short totalDistribution;
+    uint16_t activePlayersDistribution;
+    uint16_t readyPlayers;
+    uint16_t readyPlayersConsensus;
+    uint16_t startPlayersDistribution;
+    uint16_t totalDistribution;
     short netStatus;
     CDirectObject *netOwner;
     short deadOrDonePlayers;
@@ -93,7 +94,7 @@ public:
     short serverOptions;
     short loaderSlot;
 
-    PlayerConfigRecord config;
+    PlayerConfigRecord config {};
 
     // TaggedGameResult	gameResult;
 
@@ -120,9 +121,9 @@ public:
     //char msgBuffer[kMaxChatMessageBufferLen];
     std::vector<char> msgBuffer;
 
-    ~CNetManager() { Dispose(); };
+    virtual ~CNetManager() { Dispose(); };
     virtual void INetManager(CAvaraGame *theGame);
-    virtual CPlayerManager* CreatePlayerManager(short);
+    virtual std::shared_ptr<CPlayerManager> CreatePlayerManager(short);
     virtual void LevelReset();
     virtual void Dispose();
     virtual Boolean ConfirmNetChange();
@@ -133,7 +134,7 @@ public:
     virtual void SendRealName(short toSlot);
     virtual void RealNameReport(short slot, short regStatus, StringPtr realName);
     virtual void NameChange(StringPtr newName);
-    virtual void RecordNameAndLocation(short slotId, StringPtr theName, short status, Point location);
+    virtual void RecordNameAndState(short slotId, StringPtr theName, LoadingState status, PresenceType presence);
     virtual void ValueChange(short slot, std::string attributeName, bool value);
 
     virtual void SwapPositions(short ind1, short ind2);
@@ -143,6 +144,8 @@ public:
     virtual void BufferMessage(size_t len, char *c);
     virtual void SendRosterMessage(size_t len, char *c);
     virtual void ReceiveRosterMessage(short slotId, short len, char *c);
+
+    // Color here refers to the team color, not custom color(s)!
     virtual void SendColorChange();
     virtual void ReceiveColorChange(char *newColors);
 
@@ -153,7 +156,7 @@ public:
     virtual void ReceiveLoadLevel(short senderSlot, int16_t distribution, char *setAndTag, Fixed seed);
     virtual void LevelLoadStatus(short senderSlot, short crc, OSErr err, std::string theTag);
 
-    virtual void SendPingCommand(int totalTrips = 0);
+    virtual void SendPingCommand(int trips);
     virtual Boolean ResumeEnabled();
     virtual bool CanPlay();
     virtual void SendStartCommand(int16_t originalSender = 0);
@@ -161,9 +164,9 @@ public:
 
     virtual void SendResumeCommand(int16_t originalSender = 0);
     virtual void ReceiveResumeCommand(short activeDistribution, short fromSlot, Fixed randomKey, int16_t originalSender);
-    virtual void ReceivedUnavailable(short slot, short fromSlot);
+    virtual void ReceiveReady(short slot, uint32_t readyPlayers);
 
-    virtual void ReceivePlayerStatus(short slotId, short newStatus, Fixed randomKey, FrameNumber winFrame);
+    virtual void ReceivePlayerStatus(short slotId, LoadingState newStatus, PresenceType newPresence, Fixed randomKey, FrameNumber winFrame);
     virtual void ReceiveJSON(short slotId, Fixed randomKey, FrameNumber winFrame, std::string json);
 
     virtual short PlayerCount();
@@ -172,8 +175,17 @@ public:
     virtual short AlivePlayersDistribution();
     virtual bool IAmAlive();
 
-    //	Game loop methods:
+    std::vector<CPlayerManager*> PlayersWithPresence(PresenceType presence);
+    std::vector<CPlayerManager*> AvailablePlayers();
+    std::vector<CPlayerManager*> ActivePlayers();
+    std::vector<CPlayerManager*> AllPlayers();
 
+    virtual int PlayerSlot(std::string playerName);
+    virtual void ChangeTeamColors(std::map<int, std::vector<std::string>> colorTeamMap);
+    virtual void SetTeamColor(int slot, int color);
+
+    //	Game loop methods:
+    size_t SkipLostPackets(int16_t dist);
     virtual Boolean GatherPlayers(Boolean isFreshMission);
     virtual void UngatherPlayers();
 
@@ -194,6 +206,7 @@ public:
 
     virtual void ConfigPlayer(short senderSlot, Ptr configData);
     virtual void DoConfig(short senderSlot);
+    virtual void UpdateLocalConfig();
 
     virtual void StoreMugShot(Handle mugPict);
     virtual void MugShotRequest(short sendTo, long sendFrom);
@@ -202,7 +215,7 @@ public:
 
     virtual Boolean PermissionQuery(short reason, short index);
     virtual void ChangedServerOptions(short curOptions);
-    virtual void NewArrival(short slot);
+    virtual void NewArrival(short slot, PresenceType presence);
 
     virtual void ResultsReport(Ptr results);
 

@@ -1,0 +1,98 @@
+<map>
+  <Wall color="#ff7e79" color.1="#000000" x="19.65277777777778" z="16.180555555555557" w="5" d="5" h="0.5" y="5" />
+  <Wall color="#ff7e79" color.1="#000000" x="27.15277777777778" z="16.180555555555557" w="5" d="5" h="0.5" y="5" />
+  <Wall color="#ff7e79" color.1="#000000" x="34.65277777777778" z="16.180555555555557" w="5" d="5" h="0.5" y="5" />
+  <Wall color="#ffffff" color.1="#000000" x="7.777777777777779" z="38.05555555555556" w="6.25" d="61.25" h="10" />
+  <Wall color="#ffffff" color.1="#000000" x="46.52777777777778" z="38.05555555555556" w="6.25" d="61.25" h="10" />
+  <Wall color="#ffffff" color.1="#000000" x="27.15277777777778" z="10.555555555555555" w="32.5" d="6.25" h="10" />
+  <Wall color="#ffffff" color.1="#000000" x="27.15277777777778" z="65.55555555555556" w="32.5" d="6.25" h="10" />
+  <Wall color="#73fa79" color.1="#000000" x="19.65277777777778" z="59.93055555555556" w="5" d="5" h="0.5" y="5" />
+  <Wall color="#73fa79" color.1="#000000" x="27.15277777777778" z="59.93055555555556" w="5" d="5" h="0.5" y="5" />
+  <Wall color="#73fa79" color.1="#000000" x="34.65277777777778" z="59.93055555555556" w="5" d="5" h="0.5" y="5" />
+  <Wall color="#ffffff" color.1="#000000" x="17.15277777777778" z="38.68055555555556" w="12.5" d="7.5" h="10" />
+  <Wall color="#ffffff" color.1="#000000" x="27.15277777777778" z="38.68055555555556" w="7.5" d="7.5" h="7" y="3" />
+  <Wall color="#ffffff" color.1="#000000" x="37.15277777777778" z="38.68055555555556" w="12.5" d="7.5" h="10" />
+  <Wall color="#73fa79" color.1="#000000" x="39.02777777777778" z="46.80555555555556" w="8.75" d="8.75" h="3" />
+  <Wall color="#ff7e79" color.1="#000000" x="39.02777777777778" z="30.555555555555557" w="8.75" d="8.75" h="3" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
+  <Goody shape="bspGrenade" y="5" speed="2" grenades="4" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="38.958333333333336" cz="47.01388888888889" angle="45" />
+  <Teleporter shape="0" y="10" mask="T3" group="@Inbound" color="#ffffff" color.1="#000000" cx="27.569444444444446" cz="28.611111111111114" angle="45" />
+  <Teleporter group="-1" y="-30" activeRange="35 * 5" deadRange="30 * 5" destGroup="@Inbound" shape="0" color="#ffffff" color.1="#000000" cx="37.708333333333336" cz="21.38888888888889" angle="45" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#ffffff" color.1="#000000" cx="37.708333333333336" cz="21.38888888888889" angle="45" />
+  <Teleporter shape="0" y="10" mask="T1" group="@Inbound" color="#ffffff" color.1="#000000" cx="27.569444444444446" cz="44.861111111111114" angle="45" />
+  <Wall color="#ffffff" color.1="#000000" x="27.15277777777778" z="38.05555555555556" w="45" d="61.25" h="0.25" y="10" />
+  <Incarnator mask="T3" y="6" cx="19.583333333333336" cz="16.180555555555557" angle="180" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="6" power="1000" shield="1000" volume="0" yon=".001" start="rShow" out="rTaken" color="#009600" color.1="#000000" cx="19.583333333333336" cz="16.180555555555557" angle="180" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="500" />
+  <Goody shape="bspKit" y="2" speed="2" shield="1000" start="mShow" out="mTaken" color="#ffffff" color.1="#ff2600" cx="27.15277777777778" cz="16.180555555555557" angle="225" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="500" />
+  <Goody shape="bspKit" y="2" speed="2" shield="1000" start="mShow" out="mTaken" color="#ffffff" color.1="#ff2600" cx="27.15277777777778" cz="59.93055555555556" angle="225" />
+  <Incarnator mask="T3" y="6" cx="27.083333333333336" cz="16.180555555555557" angle="180" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="6" power="1000" shield="1000" volume="0" yon=".001" start="rShow" out="rTaken" color="#009600" color.1="#000000" cx="27.083333333333336" cz="16.180555555555557" angle="180" />
+  <Incarnator mask="T3" y="6" cx="34.583333333333336" cz="16.180555555555557" angle="180" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="6" power="1000" shield="1000" volume="0" yon=".001" start="rShow" out="rTaken" color="#009600" color.1="#000000" cx="34.583333333333336" cz="16.180555555555557" angle="180" />
+  <Incarnator mask="T1" y="6" cx="19.583333333333336" cz="59.93055555555556" angle="0" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="6" power="1000" shield="1000" volume="0" yon=".001" start="rShow" out="rTaken" color="#009600" color.1="#000000" cx="19.583333333333336" cz="59.93055555555556" angle="0" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="500" />
+  <Goody shape="bspClip" y="2" sound="snReload" speed="2" power="1000" start="mShow" out="mTaken" color="#000000" color.1="#2d2d2d" cx="19.65277777777778" cz="59.93055555555556" angle="45" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="500" />
+  <Goody shape="bspClip" y="2" sound="snReload" speed="2" power="1000" start="mShow" out="mTaken" color="#000000" color.1="#2d2d2d" cx="34.65277777777778" cz="59.93055555555556" angle="45" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="500" />
+  <Goody shape="bspClip" y="2" sound="snReload" speed="2" power="1000" start="mShow" out="mTaken" color="#000000" color.1="#2d2d2d" cx="19.65277777777778" cz="16.180555555555557" angle="45" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="500" />
+  <Goody shape="bspClip" y="2" sound="snReload" speed="2" power="1000" start="mShow" out="mTaken" color="#000000" color.1="#2d2d2d" cx="34.65277777777778" cz="16.180555555555557" angle="45" />
+  <Incarnator mask="T1" y="6" cx="27.083333333333336" cz="59.93055555555556" angle="0" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="6" power="1000" shield="1000" volume="0" yon=".001" start="rShow" out="rTaken" color="#009600" color.1="#000000" cx="27.083333333333336" cz="59.93055555555556" angle="0" />
+  <Incarnator mask="T1" y="6" cx="34.583333333333336" cz="59.93055555555556" angle="0" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="6" power="1000" shield="1000" volume="0" yon=".001" start="rShow" out="rTaken" color="#009600" color.1="#000000" cx="34.583333333333336" cz="59.93055555555556" angle="0" />
+  <Wall color="#ff7e79" color.1="#000000" x="15.277777777777779" z="30.555555555555557" w="8.75" d="8.75" h="3" />
+  <Wall color="#73fa79" color.1="#000000" x="15.277777777777779" z="46.80555555555556" w="8.75" d="8.75" h="3" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
+  <Goody shape="bspGrenade" y="5" speed="2" grenades="4" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="15.208333333333336" cz="47.01388888888889" angle="45" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
+  <Goody shape="bspGrenade" y="5" speed="2" grenades="4" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="15.208333333333336" cz="30.763888888888893" angle="45" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
+  <Goody shape="bspGrenade" y="5" speed="2" grenades="4" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="38.958333333333336" cz="30.763888888888893" angle="45" />
+  <set designer="Crimson Panther-
+cpanther@mac.com" information="This is a bottle-&#10;necked team grenade &#10;fest.  Red vs. Green  &#10;Aftershock style." maxStartMissiles="0" />
+  <SkyColor color="#00d5ff" color.1="#0080ff" />
+  <GroundColor color="#00ec00" />
+</map>

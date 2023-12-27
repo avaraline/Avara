@@ -62,7 +62,7 @@ int main(int argc, char *argv[]) {
 
     // process command-line arguments
     std::string connectAddress;
-    std::string textCommand;
+    std::vector<std::string> textCommands;
     bool host = false;
     for (int i = 1; i < argc; i++) {
         std::string arg = argv[i];
@@ -74,20 +74,27 @@ int main(int argc, char *argv[]) {
         } else if (arg == "-c" || arg == "--connect") {
             connectAddress = std::string(argv[++i]);
             app->Set(kLastAddress, connectAddress);
-        } else if (arg == "-s" || arg == "--serve") {
+        } else if (arg == "-s" || arg == "--serve" ||
+                   arg == "-S" || arg == "--Serve") {
             host = true;
+            app->Set(kTrackerRegister, arg[1] == 'S' || arg[2] == 'S');
         } else if (arg == "-f" || arg == "--frametime") {
             uint16_t frameTime = atol(argv[++i]);  // pre-inc to next arg
             app->GetGame()->SetFrameTime(frameTime);
         } else if (arg == "-i" || arg == "--keys-from-stdin") {
             app->GetGame()->SetKeysFromStdin();
+        } else if (arg == "-if" || arg == "--keys-from-file") {
+            // redirect a playback file to stdin
+            freopen(argv[++i], "r", stdin);
+            app->GetGame()->SetKeysFromStdin();
         } else if (arg == "-o" || arg == "--keys-to-stdout") {
             app->GetGame()->SetKeysToStdout();
         } else if (arg == "-/" || arg == "--command") {
-            textCommand = argv[++i];
+            std::string textCommand = argv[++i];
             if (textCommand[0] != '/') {
                 textCommand.insert(0, "/");
             }
+            textCommands.push_back(textCommand);
         } else {
             SDL_Log("Unknown command-line argument '%s'\n", argv[i]);
             exit(1);
@@ -96,9 +103,11 @@ int main(int argc, char *argv[]) {
 
     auto p = CPlayerManagerImpl::LocalPlayer();
     auto *tui = ((CAvaraAppImpl *)app)->GetTui();
-    auto defaultCmd = "/rand -normal -tre avaraline emo not-aa ex";
-    if (textCommand.size() > 0) {
-        tui->ExecuteMatchingCommand(textCommand, p);
+    auto defaultCmd = "/rand avara aa emo ex #fav -#bad -#koth";
+    if (textCommands.size() > 0) {
+        for (auto cmd: textCommands) {
+            tui->ExecuteMatchingCommand(cmd, p);
+        }
     } else {
         tui->ExecuteMatchingCommand(defaultCmd, p);
     }

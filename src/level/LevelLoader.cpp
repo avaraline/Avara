@@ -48,7 +48,12 @@ static short lastDomeAngle;
 static short lastDomeSpan;
 static Fixed lastDomeRadius;
 
-static ARGBColor fillColor(0), frameColor(0);
+static ARGBColor palette[4] = {
+    0,
+    0,
+    (*ColorManager::getMarkerColor(2)).WithA(0xff),
+    (*ColorManager::getMarkerColor(3)).WithA(0xff)
+};
 
 
 Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle) {
@@ -62,11 +67,19 @@ Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle) {
 }
 
 ARGBColor GetPixelColor() {
-    return fillColor;
+    return palette[0];
 }
 
 ARGBColor GetOtherPixelColor() {
-    return frameColor;
+    return palette[1];
+}
+
+ARGBColor GetTertiaryColor() {
+    return palette[2];
+}
+
+ARGBColor GetQuaternaryColor() {
+    return palette[3];
 }
 
 void GetLastArcLocation(Fixed *theLoc) {
@@ -92,6 +105,8 @@ Fixed GetLastArcDirection() {
 }
 
 struct ALFWalker: pugi::xml_tree_walker {
+    ALFWalker(uint8_t depth = 0): depth(depth) {};
+
     virtual bool for_each(pugi::xml_node& node) {
         std::string tag = node.name();
         std::string val;
@@ -99,9 +114,6 @@ struct ALFWalker: pugi::xml_tree_walker {
         switch (node.type()){
             case pugi::node_element:
                 handle_element(node, tag);
-                val = node.child_value();
-                if (val.length() > 0)
-                RunThis((StringPtr)val.c_str());
                 break;
             default:
                 break;
@@ -111,6 +123,9 @@ struct ALFWalker: pugi::xml_tree_walker {
     }
 
     std::string fix_attr(std::string attr) {
+        if (attr.compare("color") == 0) {
+            attr = "color.0";
+        }
         // XML attributes can't have brackets, so we turn light.0.i into light[0].i
         std::regex subscript("\\.(\\d+)");
         return std::regex_replace(attr, subscript, "[$1]");
@@ -121,8 +136,11 @@ struct ALFWalker: pugi::xml_tree_walker {
             attr.compare("text") == 0 ||
             attr.compare("designer") == 0 ||
             attr.compare("information") == 0 ||
-            attr.compare("fill") == 0 ||
-            attr.compare("frame") == 0 ||
+            attr.compare("color") == 0 ||
+            attr.compare("color[0]") == 0 ||
+            attr.compare("color[1]") == 0 ||
+            attr.compare("color[2]") == 0 ||
+            attr.compare("color[3]") == 0 ||
             (attr.size() > 2 && attr.compare(attr.size() - 2, 2, ".c") == 0)
         ) {
             if (value[0] == '$') {
@@ -165,23 +183,45 @@ struct ALFWalker: pugi::xml_tree_walker {
             handle_object(node, name);
         }
         else if (name.compare("Wall") == 0) handle_wall(node);
+        else if (name.compare("include") == 0) handle_include(node);
         else handle_object(node, name);
     }
 
     bool read_context(pugi::xml_node& node) {
         gLastBoxRounding = node.attribute("h").empty() ? 0 : ReadFixedVar("h");
 
-        if (!node.attribute("fill").empty()) {
-            const std::optional<ARGBColor> color = ReadColorVar("fill");
+        if (!node.attribute("color").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar("color[0]");
             if (color) {
-                fillColor = *color;
+                palette[0] = *color;
             }
         }
 
-        if (!node.attribute("frame").empty()) {
-            const std::optional<ARGBColor> color = ReadColorVar("frame");
+        if (!node.attribute("color.0").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar("color[0]");
             if (color) {
-                frameColor = *color;
+                palette[0] = *color;
+            }
+        }
+
+        if (!node.attribute("color.1").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar("color[1]");
+            if (color) {
+                palette[1] = *color;
+            }
+        }
+
+        if (!node.attribute("color.2").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar("color[2]");
+            if (color) {
+                palette[2] = *color;
+            }
+        }
+
+        if (!node.attribute("color.3").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar("color[3]");
+            if (color) {
+                palette[3] = *color;
             }
         }
 
@@ -283,8 +323,31 @@ struct ALFWalker: pugi::xml_tree_walker {
             RunThis((StringPtr)script.str().c_str());
         }
         CWallActor *theWall = new CWallActor;
-        theWall->IAbstractActor();
         theWall->MakeWallFromRect(&gLastBoxRect, gLastBoxRounding, 0, true);
+    }
+
+    void handle_include(pugi::xml_node& node) {
+        std::string path = node.attribute("alf").value();
+        if (depth < 5 &&
+            // Relative paths only.
+            !path.empty() &&
+            path.rfind("..", 1) != 0 &&
+            path.rfind("/", 0) != 0 &&
+            path.rfind("./", 1) != 0 &&
+            path.rfind("\\", 0) != 0 &&
+            path.rfind(".\\", 1) != 0) {
+            // Ensure path separators are appropriate for the current platform.
+            std::regex pattern("\\\\|/");
+            path = std::regex_replace(path, pattern, PATHSEP);
+            path = GetALFPath(path);
+
+            pugi::xml_document shard;
+            pugi::xml_parse_result result = shard.load_file(path.c_str());
+            if (result) {
+                ALFWalker includeWalker(depth + 1);
+                shard.traverse(includeWalker);
+            }
+        }
     }
 
     void handle_object(pugi::xml_node& node, std::string& name) {
@@ -298,14 +361,17 @@ struct ALFWalker: pugi::xml_tree_walker {
         script << "end";
         RunThis((StringPtr)script.str().c_str());
     }
+
+private:
+    uint8_t depth;
 };
 
-bool LoadALF(std::string levelName) {
+bool LoadALF(std::string levelPath) {
     AvaraGLLightDefaults();
     InitParser();
 
     pugi::xml_document doc;
-    pugi::xml_parse_result result = doc.load_file(levelName.c_str());
+    pugi::xml_parse_result result = doc.load_file(levelPath.c_str());
 
     ALFWalker walker;
     doc.traverse(walker);

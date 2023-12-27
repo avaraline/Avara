@@ -3,91 +3,91 @@
   <Timer in.0="@start" in.1="birdyCall" out="birdyCall" wait="265" />
   <Sound start="birdyCall" y="35" sound="snBirds" isAmbient="true" volume="20" />
   <set wallHeight="0.5" />
-  <Wall fill="#d6a800" frame="#000000" x="36.70138888888889" z="42.43055555555556" w="7.430555555555557" d="6.25" h="0" />
-  <SkyColor fill="#00a8aa" frame="#76d4d6" />
-  <GroundColor fill="#d6a800" />
+  <Wall color="#d6a800" color.1="#000000" x="36.70138888888889" z="42.43055555555556" w="7.430555555555557" d="6.25" h="0" />
+  <SkyColor color="#00a8aa" color.1="#76d4d6" />
+  <GroundColor color="#d6a800" />
   <set designer="SomeGuy &lt;someguy@avara.net&gt;" information="We are the knights that say...NI!&#10;NI!&#10;NI, NI!!&#10;Ni, NI, NI!!!" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="36.66666666666667" z="36.18055555555556" w="7.5" d="6.25" h="1" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="30.41666666666667" z="38.05555555555556" w="5" d="20" h="1" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="30.41666666666667" z="58.05555555555556" w="5" d="10" h="1" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="36.66666666666667" z="55.55555555555556" w="7.5" d="5" h="1" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="36.66666666666667" z="49.30555555555556" w="7.5" d="7.5" h="1" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="47.91666666666667" z="45.55555555555556" w="5" d="5" h="1" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="47.91666666666667" z="30.555555555555557" w="5" d="5" h="1" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="36.66666666666667" z="60.55555555555556" w="7.5" d="5" h="2.5" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="36.66666666666667" z="25.555555555555557" w="7.5" d="5" h="1" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="20.416666666666668" z="38.05555555555556" w="5" d="10" h="1" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="20.416666666666668" z="55.55555555555556" w="5" d="15" h="1" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="45.41666666666667" z="60.55555555555556" w="10" d="5" h="1" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="52.91666666666667" z="25.555555555555557" w="5" d="5" h="1" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="25.416666666666668" z="28.055555555555557" w="5" d="10" h="1" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="20.416666666666668" z="25.555555555555557" w="5" d="5" h="1" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="30.41666666666667" z="50.55555555555556" w="5" d="5" h="2.5" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="47.91666666666667" z="55.55555555555556" w="5" d="5" h="2.5" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="47.91666666666667" z="50.55555555555556" w="5" d="5" h="2.5" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="47.91666666666667" z="25.555555555555557" w="5" d="5" h="2.5" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="36.66666666666667" z="30.555555555555557" w="7.5" d="5" h="2.5" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="47.91666666666667" z="40.55555555555556" w="5" d="5" h="2.5" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="52.91666666666667" z="48.05555555555556" w="5" d="30" h="1" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="30.41666666666667" z="25.555555555555557" w="5" d="5" h="2.5" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="42.91666666666667" z="35.55555555555556" w="5" d="25" h="1" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="25.416666666666668" z="60.55555555555556" w="5" d="5" h="2.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="36.66666666666667" z="36.18055555555556" w="7.5" d="6.25" h="1" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="30.41666666666667" z="38.05555555555556" w="5" d="20" h="1" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="30.41666666666667" z="58.05555555555556" w="5" d="10" h="1" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="36.66666666666667" z="55.55555555555556" w="7.5" d="5" h="1" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="36.66666666666667" z="49.30555555555556" w="7.5" d="7.5" h="1" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="47.91666666666667" z="45.55555555555556" w="5" d="5" h="1" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="47.91666666666667" z="30.555555555555557" w="5" d="5" h="1" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="36.66666666666667" z="60.55555555555556" w="7.5" d="5" h="2.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="36.66666666666667" z="25.555555555555557" w="7.5" d="5" h="1" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="20.416666666666668" z="38.05555555555556" w="5" d="10" h="1" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="20.416666666666668" z="55.55555555555556" w="5" d="15" h="1" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="45.41666666666667" z="60.55555555555556" w="10" d="5" h="1" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="52.91666666666667" z="25.555555555555557" w="5" d="5" h="1" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="25.416666666666668" z="28.055555555555557" w="5" d="10" h="1" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="20.416666666666668" z="25.555555555555557" w="5" d="5" h="1" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="30.41666666666667" z="50.55555555555556" w="5" d="5" h="2.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="47.91666666666667" z="55.55555555555556" w="5" d="5" h="2.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="47.91666666666667" z="50.55555555555556" w="5" d="5" h="2.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="47.91666666666667" z="25.555555555555557" w="5" d="5" h="2.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="36.66666666666667" z="30.555555555555557" w="7.5" d="5" h="2.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="47.91666666666667" z="40.55555555555556" w="5" d="5" h="2.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="52.91666666666667" z="48.05555555555556" w="5" d="30" h="1" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="30.41666666666667" z="25.555555555555557" w="5" d="5" h="2.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="42.91666666666667" z="35.55555555555556" w="5" d="25" h="1" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="25.416666666666668" z="60.55555555555556" w="5" d="5" h="2.5" />
   <set wallHeight="15" />
-  <Wall fill="#aa7942" frame="#000000" x="20.416666666666668" z="30.555555555555557" w="5" d="5" h="0" />
+  <Wall color="#aa7942" color.1="#000000" x="20.416666666666668" z="30.555555555555557" w="5" d="5" h="0" />
   <set wallHeight="15" />
-  <Wall fill="#aa7942" frame="#000000" x="25.416666666666668" z="55.55555555555556" w="5" d="5" h="0" />
+  <Wall color="#aa7942" color.1="#000000" x="25.416666666666668" z="55.55555555555556" w="5" d="5" h="0" />
   <set wallHeight="15" />
-  <Wall fill="#aa7942" frame="#000000" x="47.91666666666667" z="35.55555555555556" w="5" d="5" h="0" />
+  <Wall color="#aa7942" color.1="#000000" x="47.91666666666667" z="35.55555555555556" w="5" d="5" h="0" />
   <set wallHeight="15" />
-  <Wall fill="#aa7942" frame="#000000" x="42.91666666666667" z="50.55555555555556" w="5" d="5" h="0" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="42.91666666666667" z="55.55555555555556" w="5" d="5" h="2.5" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="25.416666666666668" z="35.55555555555556" w="5" d="5" h="2.5" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="20.416666666666668" z="45.55555555555556" w="5" d="5" h="2.5" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="52.91666666666667" z="30.555555555555557" w="5" d="5" h="2.5" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#004242" frame="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="25.416666666666668" z="45.55555555555556" w="5" d="15" h="1" />
+  <Wall color="#aa7942" color.1="#000000" x="42.91666666666667" z="50.55555555555556" w="5" d="5" h="0" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="42.91666666666667" z="55.55555555555556" w="5" d="5" h="2.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="25.416666666666668" z="35.55555555555556" w="5" d="5" h="2.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="20.416666666666668" z="45.55555555555556" w="5" d="5" h="2.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="52.91666666666667" z="30.555555555555557" w="5" d="5" h="2.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" color="#004242" color.1="#000000" cx="11.73611111111111" cz="2.5" angle="0" x="25.416666666666668" z="45.55555555555556" w="5" d="15" h="1" />
   <set wallHeight="0.5" />
-  <Wall fill="#d6a800" frame="#000000" x="15.416666666666668" z="43.05555555555556" w="5" d="40" h="0" />
+  <Wall color="#d6a800" color.1="#000000" x="15.416666666666668" z="43.05555555555556" w="5" d="40" h="0" />
   <set wallHeight="1" />
-  <Wall fill="#d6a800" frame="#000000" x="10.416666666666668" z="43.05555555555556" w="5" d="50" h="0" />
+  <Wall color="#d6a800" color.1="#000000" x="10.416666666666668" z="43.05555555555556" w="5" d="50" h="0" />
   <set wallHeight="0.5" />
-  <Wall fill="#d6a800" frame="#000000" x="36.66666666666667" z="65.55555555555556" w="47.5" d="5" h="0" />
+  <Wall color="#d6a800" color.1="#000000" x="36.66666666666667" z="65.55555555555556" w="47.5" d="5" h="0" />
   <set wallHeight="1" />
-  <Wall fill="#d6a800" frame="#000000" x="36.66666666666667" z="70.55555555555556" w="57.5" d="5" h="0" />
+  <Wall color="#d6a800" color.1="#000000" x="36.66666666666667" z="70.55555555555556" w="57.5" d="5" h="0" />
   <set wallHeight="0.5" />
-  <Wall fill="#d6a800" frame="#000000" x="57.91666666666667" z="43.05555555555556" w="5" d="40" h="0" />
+  <Wall color="#d6a800" color.1="#000000" x="57.91666666666667" z="43.05555555555556" w="5" d="40" h="0" />
   <set wallHeight="1" />
-  <Wall fill="#d6a800" frame="#000000" x="62.91666666666667" z="43.05555555555556" w="5" d="50" h="0" />
+  <Wall color="#d6a800" color.1="#000000" x="62.91666666666667" z="43.05555555555556" w="5" d="50" h="0" />
   <set wallHeight="0.5" />
-  <Wall fill="#d6a800" frame="#000000" x="36.66666666666667" z="20.555555555555557" w="47.5" d="5" h="0" />
+  <Wall color="#d6a800" color.1="#000000" x="36.66666666666667" z="20.555555555555557" w="47.5" d="5" h="0" />
   <set wallHeight="1" />
-  <Wall fill="#d6a800" frame="#000000" x="36.66666666666667" z="15.555555555555557" w="57.5" d="5" h="0" />
+  <Wall color="#d6a800" color.1="#000000" x="36.66666666666667" z="15.555555555555557" w="57.5" d="5" h="0" />
   <Incarnator start="@t3" stop="@f3" y="10" cx="11.666666666666668" cz="69.30555555555556" angle="45" />
   <set wallHeight="50" wallYon="0.5" />
-  <Wall fill="#ffffff" frame="#000000" x="6.979166666666667" z="43.05555555555556" w="1.875" d="63.75" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="6.979166666666667" z="43.05555555555556" w="1.875" d="63.75" h="0" />
   <set wallYon="defaultYon" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
-  <Goody shape="bspMissile" y="3" yon="100" speed="5" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="10.416666666666668" cz="43.05555555555556" angle="90" />
+  <Goody shape="bspMissile" y="3" yon="100" speed="5" missiles="3" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="10.416666666666668" cz="43.05555555555556" angle="90" />
   <set wallHeight="50" wallYon="0.5" />
-  <Wall fill="#ffffff" frame="#000000" x="66.35416666666667" z="43.05555555555556" w="1.875" d="63.75" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="66.35416666666667" z="43.05555555555556" w="1.875" d="63.75" h="0" />
   <set wallYon="0.5" wallHeight="50" />
-  <Wall fill="#ffffff" frame="#000000" x="36.66666666666667" z="12.118055555555555" w="57.5" d="1.875" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="36.66666666666667" z="12.118055555555555" w="57.5" d="1.875" h="0" />
   <set wallYon="0.5" wallHeight="50" />
-  <Wall fill="#ffffff" frame="#000000" x="36.66666666666667" z="73.99305555555556" w="57.5" d="1.875" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="36.66666666666667" z="73.99305555555556" w="57.5" d="1.875" h="0" />
   <set wallYon="defaultYon" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
-  <Goody shape="bspMissile" y="3" yon="100" speed="5" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="62.91666666666667" cz="43.05555555555556" angle="90" />
+  <Goody shape="bspMissile" y="3" yon="100" speed="5" missiles="3" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="62.91666666666667" cz="43.05555555555556" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
-  <Goody shape="bspGrenade" y="3" yon="100" speed="5" grenades="6" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="36.66666666666667" cz="70.55555555555556" angle="180" />
+  <Goody shape="bspGrenade" y="3" yon="100" speed="5" grenades="6" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="36.66666666666667" cz="70.55555555555556" angle="180" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
-  <Goody shape="bspGrenade" y="3" yon="100" speed="5" grenades="6" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="36.66666666666667" cz="15.555555555555557" angle="180" />
+  <Goody shape="bspGrenade" y="3" yon="100" speed="5" grenades="6" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="36.66666666666667" cz="15.555555555555557" angle="180" />
   <Incarnator start="@t2" stop="@f2" y="10" cx="61.66666666666667" cz="69.30555555555556" angle="315" />
   <Incarnator start="@t4" stop="@f4" y="10" cx="61.66666666666667" cz="16.805555555555557" angle="225" />
   <Incarnator start="@t1" stop="@f1" y="10" cx="11.666666666666668" cz="16.805555555555557" angle="135" />
@@ -101,7 +101,7 @@
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="390" />
-  <Goody shape="bspAvaraA" y="2.5" missiles="3" grenades="6" speed="3" start="mShow" out="mTaken" fill="#00d4d6" frame="#000000" cx="36.59722222222223" cz="42.43055555555556" angle="90" />
-  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="1000" fill="#ffffff" frame="#000000" cx="36.66666666666667" cz="42.43055555555556" angle="45" />
+  <Goody shape="bspAvaraA" y="2.5" missiles="3" grenades="6" speed="3" start="mShow" out="mTaken" color="#00d4d6" color.1="#000000" cx="36.59722222222223" cz="42.43055555555556" angle="90" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="1000" color="#ffffff" color.1="#000000" cx="36.66666666666667" cz="42.43055555555556" angle="45" />
   <Sound y="50" sound="snBirds2" isPlaced="false" isAmbient="true" volume="8" loopCount="-1" cx="36.66666666666667" cz="42.43055555555556" angle="45" />
 </map>
