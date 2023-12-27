@@ -37,12 +37,11 @@ PackageManifest::PackageManifest(nlohmann::json json)
             if (tmp >= static_cast<int>(INT16_MIN) && tmp <= static_cast<int>(INT16_MAX)) {
                 int16_t id = static_cast<int16_t>(tmp);
                 HSNDRecord hsnd;
-                hsnd.versNum = rawHsnd.value("Version", 0);
+                hsnd.versNum = rawHsnd.value("Version", 1);
                 hsnd.loopStart = rawHsnd.value("Loop Start", 0);
                 hsnd.loopEnd = rawHsnd.value("Loop End", 0);
                 hsnd.loopCount = rawHsnd.value("Loop Count", 0);
-                hsnd.dataOffset = rawHsnd.value("Data offset", 0);
-                hsnd.baseRate = ToFixed(static_cast<float>(rawHsnd.value("Base Rate", 1)));
+                hsnd.baseRate = ToFixed(rawHsnd.value<float>("Base Rate", 1));
                 hsndResources.insert_or_assign(id, hsnd);
             }
         }

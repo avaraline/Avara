@@ -9,7 +9,6 @@ typedef struct {
     uint32_t loopStart;
     uint32_t loopEnd;
     uint32_t loopCount;
-    uint32_t dataOffset;
     UnsignedFixed baseRate;
 } HSNDRecord;
 
