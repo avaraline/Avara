@@ -1,10 +1,17 @@
 #include "OggFile.h"
 
+#include "FastMat.h"
+
 #include <stb_vorbis.h>
 
 OggFile::OggFile(std::string path, HSNDRecord hsnd)
 {
     this->hsnd = hsnd;
+
+    if (this->hsnd.versNum <= 1) {
+        this->hsnd.baseRate = FIX1;
+    }
+
     samples = {};
     
     int error;

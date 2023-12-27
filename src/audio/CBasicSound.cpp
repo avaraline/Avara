@@ -126,7 +126,7 @@ void CBasicSound::SetControlLink(SoundLink *linkPtr) {
 void CBasicSound::Reset() {
     motionLink = NULL;
     controlLink = NULL;
-    itsSamples = NULL;
+    itsSamples = nullptr;
     sampleLen = 0;
     loopStart = 0;
     loopEnd = 0;

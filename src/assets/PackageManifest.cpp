@@ -42,7 +42,7 @@ PackageManifest::PackageManifest(nlohmann::json json)
                 hsnd.loopEnd = rawHsnd.value("Loop End", 0);
                 hsnd.loopCount = rawHsnd.value("Loop Count", 0);
                 hsnd.dataOffset = rawHsnd.value("Data offset", 0);
-                hsnd.baseRate = ToFixed(static_cast<float>(rawHsnd.value("Base Rate", 0)));
+                hsnd.baseRate = ToFixed(static_cast<float>(rawHsnd.value("Base Rate", 1)));
                 hsndResources.insert_or_assign(id, hsnd);
             }
         }
