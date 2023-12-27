@@ -3,7 +3,6 @@
 #include "LocalAssetRepository.h"
 
 #include "LevelLoader.h"
-#include "Resource.h" // TODO: REMOVE THIS ONCE SOUND LOADING WORKS
 
 #include <algorithm>
 #include <fstream>
@@ -84,6 +83,23 @@ std::optional<std::string> AssetManager::GetResolvedAlfPath(std::string relative
     }
 
     return std::optional<std::string>{};
+}
+
+std::optional<std::shared_ptr<PackageManifest>> AssetManager::GetManifest(MaybePackage package)
+{
+    if (manifestCache.count(package) > 0) {
+        return manifestCache.at(package);
+    }
+
+    // If it isn't loaded, *don't* call `LoadManifest` to prevent it from being cached. It's
+    // most likely being requested for UI purposes.
+    std::string path = GetManifestPath(package);
+    std::ifstream file(path);
+    if (file.good()) {
+        return std::make_shared<PackageManifest>(nlohmann::json::parse(file));
+    }
+
+    return std::optional<std::shared_ptr<PackageManifest>>{};
 }
 
 std::vector<std::shared_ptr<std::string>> AssetManager::GetAllScripts()
@@ -181,19 +197,6 @@ OSErr AssetManager::LoadLevel(std::string packageName, std::string relativePath,
             SwitchBasePackage(newBase);
         }
         levelName = ledi->levelName;
-
-        // TODO: REMOVE THIS ONCE SOUND LOADING WORKS
-        UseLevelFolder(packageName);
-        switch (basePackage) {
-            case BasePackage::Avara:
-                UseBaseFolder("rsrc");
-                break;
-            case BasePackage::Aftershock:
-                UseBaseFolder("rsrc/aftershock");
-                break;
-        }
-        LoadLevelOggFiles(packageName);
-        // END OF CODE SLATED FOR DEMOLITION
     } else {
         return fnfErr;
     }
@@ -393,6 +396,9 @@ void AssetManager::LoadOgg(int16_t id)
         auto manifest = manifestCache.at(NoPackage);
         if (manifest->hsndResources.count(id) > 0) {
             hsnd = manifest->hsndResources.at(id);
+        } else {
+            // If we *still* don't have an HSND, default to 129 in the base package.
+            hsnd = manifest->hsndResources.at(129);
         }
     }
 

@@ -27,7 +27,6 @@
 #include "LevelLoader.h"
 #include "Parser.h"
 #include "Preferences.h"
-#include "Resource.h"
 #include "System.h"
 #include "InfoMessages.h"
 #include "Messages.h"
@@ -69,6 +68,7 @@ void TrackerPinger(CAvaraAppImpl *app) {
 }
 
 CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
+    AssetManager::Init();
     itsGame = std::make_unique<CAvaraGame>(Get<FrameTime>(kFrameTimeTag));
     gCurrentGame = itsGame.get();
     itsGame->IAvaraGame(this);
@@ -112,8 +112,6 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     trackerUpdatePending = false;
     trackerThread = new std::thread(TrackerPinger, this);
     trackerThread->detach();
-
-    LoadDefaultOggFiles();
 
     // register and handle text commands
     itsTui = new CommandManager(this);

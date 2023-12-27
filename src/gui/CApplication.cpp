@@ -2,7 +2,6 @@
 #include "CApplication.h"
 
 #include "AvaraGL.h"
-#include "AssetManager.h"
 #include "ColorManager.h"
 #include "Preferences.h"
 
@@ -21,7 +20,6 @@ nanogui::Screen(nanogui::Vector2i(_prefs[kWindowWidth], _prefs[kWindowHeight]), 
     AvaraGLInitContext();
     setResizeCallback([this](nanogui::Vector2i newSize) { this->WindowResized(newSize.x, newSize.y); });
 
-    AssetManager::Init();
     ColorManager::refresh(this); // Init ColorManager from prefs.
 }
 

@@ -166,9 +166,9 @@ CAbstractActor *CDoorActor::EndScript() {
         closeSoundId = ReadLongVar(iCloseSound);
         stopSoundId = ReadLongVar(iStopSound);
 
-        gHub->PreLoadSample(openSoundId);
-        gHub->PreLoadSample(closeSoundId);
-        gHub->PreLoadSample(stopSoundId);
+        auto _ = AssetManager::GetOgg(openSoundId);
+        _ = AssetManager::GetOgg(closeSoundId);
+        _ = AssetManager::GetOgg(stopSoundId);
 
         openCounter = 0;
         closeCounter = 0;

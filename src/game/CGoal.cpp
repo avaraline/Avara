@@ -53,7 +53,7 @@ CAbstractActor *CGoal::EndScript() {
 
     goalSound = ReadLongVar(iSound);
     goalVolume = ReadFixedVar(iVolume);
-    gHub->PreLoadSample(goalSound);
+    auto _ = AssetManager::GetOgg(goalSound);
 
     resId = ReadLongVar(iShape);
 

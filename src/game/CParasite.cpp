@@ -47,7 +47,7 @@ void CParasite::BeginScript() {
 
 CAbstractActor *CParasite::EndScript() {
     if (CRealMovers::EndScript()) {
-        gHub->PreLoadSample(clampSound = ReadLongVar(iSound));
+        auto _ = AssetManager::GetOgg(clampSound = ReadLongVar(iSound));
         clampVolume = ReadFixedVar(iVolume);
         maxPower = ReadFixedVar(iMaxPower);
         energyDrain = ReadFixedVar(iDrain);

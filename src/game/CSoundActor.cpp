@@ -50,7 +50,7 @@ CAbstractActor *CSoundActor::EndScript() {
         rate = ReadFixedVar(iRate);
 
         if (!isAmbient || (itsGame->soundSwitches & kAmbientSoundToggle))
-            gHub->PreLoadSample(soundId);
+            auto _ = AssetManager::GetOgg(soundId);
 
         if (isPlaced) {
             itsSoundLink = gHub->GetSoundLink();

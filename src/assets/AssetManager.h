@@ -33,8 +33,6 @@
 
 // Package structure
 #define MANIFESTFILE "set.json"
-#define OGGDIR "ogg"
-#define WAVDIR "wav"
 
 enum struct BasePackage { Avara, Aftershock };
 
@@ -88,6 +86,13 @@ public:
      * @return the full path to the ALF file
      */
     static std::optional<std::string> GetResolvedAlfPath(std::string relativePath);
+
+    /**
+     * Get the manifest for the specified package.
+     *
+     * @param package The package we want the manifest for.
+     */
+    static std::optional<std::shared_ptr<PackageManifest>> GetManifest(MaybePackage package);
 
     /**
      * Get the default scripts for all loaded packages in the order in which they should run.

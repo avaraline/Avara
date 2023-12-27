@@ -1,6 +1,6 @@
 #pragma once
+#include "OggFile.h"
 #include "PlayerConfig.h"
-#include "SoundSystemDefines.h"
 
 #include <json.hpp>
 

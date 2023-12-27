@@ -6,49 +6,18 @@
 
 #include <SDL2/SDL.h>
 #include <stdint.h>
-#include <string>
-#include <fstream>
 #include <algorithm>
 #include <cctype>
-#include <map>
-#include <sstream>
-
-#include <stb_vorbis.h>
 
 #ifndef PATH_MAX
 #define PATH_MAX 260
 #endif
-
-using json = nlohmann::json;
 
 std::string sdlBasePath = "";
 
 static std::string defaultResource(std::string(SDL_GetBasePath()) + "rsrc/Avara.r");
 
 static std::string currentResource("");
-
-static std::string currentBaseDir("rsrc");
-
-static std::vector<std::string> currentExtPkgDirs({});
-
-static std::string currentLevelDir("");
-
-void UseBaseFolder(std::string folder) {
-    currentBaseDir = folder;
-    LoadDefaultOggFiles();
-}
-
-void AddExternalPackage(std::string folder) {
-    currentExtPkgDirs.push_back(folder);
-}
-
-void ClearExternalPackages() {
-    currentExtPkgDirs.clear();
-}
-
-void UseLevelFolder(std::string folder) {
-    currentLevelDir = folder;
-}
 
 void UseResFile(std::string filename) {
     currentResource.assign(std::string(SDL_GetBasePath()) + filename);
@@ -220,185 +189,4 @@ void BundlePath(const char *rel, char *dest) {
 
 void BundlePath(std::stringstream &buffa, char *dest) {
     return BundlePath(buffa.str().c_str(), dest);
-}
-
-json LoadLevelListFromJSON(std::string set) {
-    return GetManifestJSON(set)["LEDI"];
-}
-
-json GetDefaultManifestJSON() {
-    std::stringstream setManifestName;
-    setManifestName << currentBaseDir << PATHSEP << SETFILE;
-    char * setManifestPath = new char [PATH_MAX];
-    BundlePath(setManifestName, setManifestPath);
-    std::ifstream setManifestFile((std::string(setManifestPath)));
-    delete [] setManifestPath;
-    return json::parse(setManifestFile);
-}
-
-json GetManifestJSON(std::string set) {
-    if (set.length() < 1) return GetDefaultManifestJSON();
-    std::stringstream setManifestName;
-    setManifestName << LEVELDIR << PATHSEP << set << PATHSEP << SETFILE;
-    char setManifestPath[PATH_MAX];
-    BundlePath(setManifestName, setManifestPath);
-    std::ifstream setManifestFile(setManifestPath);
-    if (setManifestFile.fail()) {
-        SDL_Log("Couldn't read %s", setManifestName.str().c_str());
-        return -1;
-    }
-
-    return json::parse(setManifestFile);
-}
-
-nlohmann::json GetKeyFromSetJSON(std::string rsrc, std::string key, std::string default_id) {
-    nlohmann::json manifest = GetManifestJSON(currentLevelDir);
-    nlohmann::json target = NULL;
-    if (manifest != -1 && manifest.find(rsrc) != manifest.end() &&
-        manifest[rsrc].find(key)  != manifest[rsrc].end())
-        return manifest[rsrc][key];
-    else {
-        manifest = GetDefaultManifestJSON();
-        if (manifest.find(rsrc) != manifest.end() &&
-            manifest[rsrc].find(key) != manifest[rsrc].end())
-            return manifest[rsrc][key];
-        else if (manifest.find(rsrc) != manifest.end() &&
-            manifest[rsrc].find(default_id) != manifest[rsrc].end())
-            return manifest[rsrc][default_id];
-        else
-            return -1;
-    }
-}
-#include <math.h>
-typedef std::vector<uint8_t> SoundCashSound;
-typedef std::map<int16_t, SoundCashSound> SoundCash;
-SoundCash app_sound_cash;
-SoundCash level_sound_cash;
-std::string current_base_sound_cash_dir;
-std::string current_level_sound_cash_dir;
-
-void LoadOggFile(short resId, std::string filename, SoundCash &cash) {
-    if (cash.count(resId) > 0) return;
-
-    std::stringstream buffa;
-    buffa << LEVELDIR << PATHSEP << currentLevelDir << PATHSEP;
-    buffa << OGGDIR << PATHSEP << filename;
-    char fullpath[PATH_MAX];
-    BundlePath(buffa.str().c_str(), fullpath);
-    std::ifstream t(fullpath);
-    if(!t.good()) {
-        std::stringstream temp;
-        buffa.swap(temp);
-        buffa << currentBaseDir << PATHSEP;
-        buffa << OGGDIR << PATHSEP << filename;
-        BundlePath(buffa.str().c_str(), fullpath);
-    }
-
-    //SDL_Log("Loading %s", fullpath);
-
-    int error;
-    stb_vorbis *v = stb_vorbis_open_filename(fullpath, &error, NULL);
-
-    //stb_vorbis_info info = stb_vorbis_get_info(v);
-    //SDL_Log("%d channels, %d samples/sec\n", info.channels, info.sample_rate);
-
-    auto sound = SoundCashSound();
-
-    for(;;) {
-        const size_t buffa_length = 512;
-        int16_t buffa[buffa_length];
-        uint8_t sample;
-        int n = stb_vorbis_get_samples_short_interleaved(v, 1, buffa, buffa_length);
-        if (n == 0) break;
-        for (size_t i = 0; i < buffa_length; ++i) {
-            // it is a mystery
-            sample = (buffa[i] + INT16_MAX + 1) >> 9;
-            sound.push_back(sample);
-        }
-    }
-    cash[resId] = sound;
-    stb_vorbis_close(v);
-}
-
-void LoadOggFiles(nlohmann::json &manifest, SoundCash &target_cash) {
-    size_t loaded = 0;
-    if (manifest != -1 && manifest.find("HSND") != manifest.end()) {
-        for (auto &hsnd: manifest["HSND"].items()) {
-            LoadOggFile(stoi(hsnd.key()), hsnd.value()["Ogg"], target_cash);
-            loaded++;
-        }
-    }
-    if (loaded > 0) {
-        SDL_Log("Loaded %zu sounds", loaded);
-    }
-}
-
-void LoadDefaultOggFiles() {
-    if (current_base_sound_cash_dir.compare(currentBaseDir) == 0) return;
-    app_sound_cash.clear();
-    current_base_sound_cash_dir = currentBaseDir;
-    SDL_Log("Loading default sounds...");
-    nlohmann::json manifest = GetDefaultManifestJSON();
-    LoadOggFiles(manifest, app_sound_cash);
-}
-
-void LoadLevelOggFiles(std::string set) {
-    if (current_level_sound_cash_dir.compare(set) == 0) return;
-    level_sound_cash.clear();
-    current_level_sound_cash_dir = set;
-    nlohmann::json manifest = GetManifestJSON(set);
-    LoadOggFiles(manifest, level_sound_cash);
-}
-
-SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle sampleList) {
-
-    std::string key = std::to_string(resId);
-    nlohmann::json hsndJson = GetKeyFromSetJSON("HSND", key, "129");
-    int8_t version = hsndJson["Version"];
-    SoundCash cash;
-
-    size_t found = 0;
-
-    if (level_sound_cash.count(resId) > 0) {
-        cash = level_sound_cash;
-        found++;
-    }
-    else if (app_sound_cash.count(resId) > 0) {
-        cash = app_sound_cash;
-        found++;
-    }
-
-    if (!found) return NULL;
-
-    Fixed arate = FIX1;
-    if (version > 1)
-        arate = ToFixed((float)hsndJson["Base Rate"]);
-
-    SampleHeaderHandle aSample;
-    SampleHeaderPtr sampP;
-    size_t len = cash[resId].size();
-
-    aSample = (SampleHeaderHandle)NewHandle(sizeof(SampleHeader) + len);
-
-    sampP = *aSample;
-    sampP->baseRate = arate;
-    sampP->resId = resId;
-    sampP->refCount = 0;
-    sampP->flags = 0;
-    sampP->loopStart = hsndJson["Loop Start"];
-    sampP->loopEnd = hsndJson["Loop End"];
-    sampP->loopCount = hsndJson["Loop Count"];
-    sampP->nextSample = sampleList;
-    sampP->len = (uint32_t)len;
-
-    uint8_t *p;
-    HLock((Handle)aSample);
-    p = sizeof(SampleHeader) + (uint8_t*)sampP;
-
-    for (size_t i = 0; i < len; ++i) {
-        *p++ = cash[resId][i];
-    }
-
-    HUnlock((Handle)aSample);
-    return aSample;
 }

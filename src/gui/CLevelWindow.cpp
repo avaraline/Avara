@@ -5,7 +5,6 @@
 #include "CAvaraGame.h"
 #include "CNetManager.h"
 #include "Preferences.h"
-#include "Resource.h"
 
 CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     // Searches "levels/" directory alongside application.
@@ -125,11 +124,11 @@ void CLevelWindow::SelectSet(std::string set) {
     levelIntros.clear();
     levelTags.clear();
 
-    nlohmann::json ledis = LoadLevelListFromJSON(set);
-    for (auto &ld : ledis.items()) {
-        levelNames.push_back(ld.value()["Name"]);
-        levelIntros.push_back(ld.value()["Message"]);
-        levelTags.push_back(ld.value()["Alf"]);
+    auto manifest = *AssetManager::GetManifest(set);
+    for (auto const &ledi : manifest->levelDirectory) {
+        levelNames.push_back(ledi.levelName);
+        levelIntros.push_back(ledi.levelInfo);
+        levelTags.push_back(ledi.alfPath);
     }
     levelBox->setItems(levelNames, levelIntros);
     levelBox->setEnabled(true);

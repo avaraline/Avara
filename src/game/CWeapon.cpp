@@ -156,7 +156,7 @@ void CWeapon::PostMortemBlast(short scoreTeam, short scoreColor, Boolean doDispo
 }
 
 void CWeapon::PreLoadSounds() {
-    gHub->PreLoadSample(blastSound);
+    auto _ = AssetManager::GetOgg(blastSound);
 }
 
 void CWeapon::Accelerate(Fixed *direction) {

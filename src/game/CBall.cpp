@@ -149,19 +149,19 @@ CAbstractActor *CBall::EndScript() {
 
         buzzSound = ReadLongVar(iSound);
         buzzVolume = ReadFixedVar(iVolume);
-        gHub->PreLoadSample(buzzSound);
+        auto _ = AssetManager::GetOgg(buzzSound);
 
         ejectSound = ReadLongVar(iEjectSound);
         ejectVolume = ReadFixedVar(iEjectVolume);
-        gHub->PreLoadSample(ejectSound);
+        _ = AssetManager::GetOgg(ejectSound);
 
         reprogramSound = ReadLongVar(iChangeOwnerSound);
         reprogramVolume = ReadFixedVar(iChangeOwnerVolume);
-        gHub->PreLoadSample(reprogramSound);
+        _ = AssetManager::GetOgg(reprogramSound);
 
         snapSound = ReadLongVar(iSnapSound);
         snapVolume = ReadFixedVar(iSnapVolume);
-        gHub->PreLoadSample(snapSound);
+        _ = AssetManager::GetOgg(snapSound);
 
         pitchZ = FMul(ejectPower, FDegCos(ejectPitch));
         pitchY = FMul(ejectPower, FDegSin(ejectPitch));
