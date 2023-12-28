@@ -58,6 +58,8 @@ CAbstractActor *CTextActor::EndScript() {
 
         soundId = ReadLongVar(iSound);
         soundVol = ReadFixedVar(iVolume);
+
+        // Preload sounds.
         auto _ = AssetManager::GetOgg(soundId);
 
         return this;

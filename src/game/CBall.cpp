@@ -149,18 +149,20 @@ CAbstractActor *CBall::EndScript() {
 
         buzzSound = ReadLongVar(iSound);
         buzzVolume = ReadFixedVar(iVolume);
-        auto _ = AssetManager::GetOgg(buzzSound);
 
         ejectSound = ReadLongVar(iEjectSound);
         ejectVolume = ReadFixedVar(iEjectVolume);
-        _ = AssetManager::GetOgg(ejectSound);
 
         reprogramSound = ReadLongVar(iChangeOwnerSound);
         reprogramVolume = ReadFixedVar(iChangeOwnerVolume);
-        _ = AssetManager::GetOgg(reprogramSound);
 
         snapSound = ReadLongVar(iSnapSound);
         snapVolume = ReadFixedVar(iSnapVolume);
+
+        // Preload sounds.
+        auto _ = AssetManager::GetOgg(buzzSound);
+        _ = AssetManager::GetOgg(ejectSound);
+        _ = AssetManager::GetOgg(reprogramSound);
         _ = AssetManager::GetOgg(snapSound);
 
         pitchZ = FMul(ejectPower, FDegCos(ejectPitch));

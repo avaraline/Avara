@@ -76,7 +76,10 @@ CAbstractActor *CMineActor::EndScript() {
 
     activateSound = ReadLongVar(iActivateSound);
     activateVolume = ReadFixedVar(iActivateVolume);
+
+    // Preload sounds.
     auto _ = AssetManager::GetOgg(activateSound);
+    
     RegisterReceiver(&activator, ReadLongVar(iBoom));
 
     radius = ReadFixedVar(iRange);

@@ -253,6 +253,7 @@ CAbstractActor *CAbstractPlayer::EndScript() {
     loseSound = ReadLongVar(iLoseSound);
     loseVolume = ReadFixedVar(iLoseVolume);
 
+    // Preload sounds.
     auto _ = AssetManager::GetOgg(incarnateSound);
     _ = AssetManager::GetOgg(winSound);
     _ = AssetManager::GetOgg(loseSound);

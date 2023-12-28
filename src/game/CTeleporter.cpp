@@ -84,6 +84,8 @@ CAbstractActor *CTeleporter::EndScript() {
 
     soundId = ReadLongVar(iSound);
     volume = ReadFixedVar(iVolume);
+
+    // Preload sounds.
     auto _ = AssetManager::GetOgg(soundId);
 
     options = ReadLongVar(iSpinFlag) ? kSpinOption : 0;

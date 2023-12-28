@@ -53,21 +53,22 @@ PackageManifest::PackageManifest(nlohmann::json json)
             if (tmp >= static_cast<int>(INT16_MIN) && tmp <= static_cast<int>(INT16_MAX)) {
                 int16_t id = static_cast<int16_t>(tmp);
                 HullConfigRecord hull;
-                hull.hullBSP = static_cast<short>(rawHull["Hull Res ID"]);
-                hull.maxMissiles = static_cast<short>(rawHull["Max Missiles"]);
-                hull.maxGrenades = static_cast<short>(rawHull["Max Grenades"]);
-                hull.maxBoosters = static_cast<short>(rawHull["Max boosters"]);
-                hull.mass = ToFixed(rawHull["Mass"]);
-                hull.energyRatio = ToFixed(rawHull["Max Energy"]);
-                hull.energyChargeRatio = ToFixed(rawHull["Energy Charge"]);
-                hull.shieldsRatio = ToFixed(rawHull["Max Shields"]);
-                hull.shieldsChargeRatio = ToFixed(rawHull["Shield Charge"]);
-                hull.minShotRatio = ToFixed(rawHull["Min Shot"]);
-                hull.maxShotRatio = ToFixed(rawHull["Max Shot"]);
-                hull.shotChargeRatio = ToFixed(rawHull["Shot Charge"]);
-                hull.rideHeight = ToFixed(rawHull["Riding Height"]);
-                hull.accelerationRatio = ToFixed(rawHull["Acceleration"]);
-                hull.jumpPowerRatio = ToFixed(rawHull["Jump Power"]);
+                hull.hullBSP = rawHull.value<short>("Hull Res ID", 0);
+                hull.maxMissiles = rawHull.value<short>("Max Missiles", 0);
+                hull.maxGrenades = rawHull.value<short>("Max Grenades", 0);
+                hull.maxBoosters = rawHull.value<short>("Max boosters", 0);
+                hull.mass = ToFixed(rawHull.value<float>("Mass", 0));
+                hull.energyRatio = ToFixed(rawHull.value<float>("Max Energy", 0));
+                hull.energyChargeRatio = ToFixed(rawHull.value<float>("Energy Charge", 0));
+                hull.shieldsRatio = ToFixed(rawHull.value<float>("Max Shields", 0));
+                hull.shieldsChargeRatio = ToFixed(rawHull.value<float>("Shield Charge", 0));
+                hull.minShotRatio = ToFixed(rawHull.value<float>("Min Shot", 0));
+                hull.maxShotRatio = ToFixed(rawHull.value<float>("Max Shot", 0));
+                hull.shotChargeRatio = ToFixed(rawHull.value<float>("Shot Charge", 0));
+                hull.rideHeight = ToFixed(rawHull.value<float>("Riding Height", 0));
+                hull.accelerationRatio = ToFixed(rawHull.value<float>("Acceleration", 0));
+                hull.jumpPowerRatio = ToFixed(rawHull.value<float>("Jump Power", 0));
+
                 hullResources.insert_or_assign(id, hull);
             }
         }

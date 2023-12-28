@@ -102,6 +102,7 @@ CAbstractActor *CGoody::EndScript() {
         closeSoundId = ReadLongVar(iCloseSound);
         volume = ReadFixedVar(iVolume);
 
+        // Preload sounds.
         auto _ = AssetManager::GetOgg(soundId);
         _ = AssetManager::GetOgg(openSoundId);
         _ = AssetManager::GetOgg(closeSoundId);

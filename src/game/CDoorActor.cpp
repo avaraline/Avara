@@ -166,6 +166,7 @@ CAbstractActor *CDoorActor::EndScript() {
         closeSoundId = ReadLongVar(iCloseSound);
         stopSoundId = ReadLongVar(iStopSound);
 
+        // Preload sounds.
         auto _ = AssetManager::GetOgg(openSoundId);
         _ = AssetManager::GetOgg(closeSoundId);
         _ = AssetManager::GetOgg(stopSoundId);

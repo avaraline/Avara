@@ -47,7 +47,9 @@ void CParasite::BeginScript() {
 
 CAbstractActor *CParasite::EndScript() {
     if (CRealMovers::EndScript()) {
+        // Preload sounds.
         auto _ = AssetManager::GetOgg(clampSound = ReadLongVar(iSound));
+        
         clampVolume = ReadFixedVar(iVolume);
         maxPower = ReadFixedVar(iMaxPower);
         energyDrain = ReadFixedVar(iDrain);

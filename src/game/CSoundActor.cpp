@@ -50,6 +50,7 @@ CAbstractActor *CSoundActor::EndScript() {
         rate = ReadFixedVar(iRate);
 
         if (!isAmbient || (itsGame->soundSwitches & kAmbientSoundToggle))
+            // Preload sounds.
             auto _ = AssetManager::GetOgg(soundId);
 
         if (isPlaced) {

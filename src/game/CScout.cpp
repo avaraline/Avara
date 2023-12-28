@@ -48,6 +48,8 @@ void CScout::IScout(CAbstractPlayer *thePlayer, short theTeam, ARGBColor longTea
     partList[0]->ReplaceColor(*ColorManager::getMarkerColor(0), longTeamColor);
 
     hitSoundId = 220;
+
+    // Preload sounds.
     auto _ = AssetManager::GetOgg(hitSoundId);
 
     glow = 0;

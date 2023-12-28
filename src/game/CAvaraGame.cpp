@@ -656,6 +656,8 @@ void CAvaraGame::EndScript() {
     groundFriction = ReadFixedVar(iDefaultFriction);
     gravityRatio = ReadFixedVar(iGravity);
     groundStepSound = ReadLongVar(iGroundStepSound);
+
+    // Preload sounds.
     auto _ = AssetManager::GetOgg(groundStepSound);
 
     itsDepot->EndScript();

@@ -53,6 +53,8 @@ CAbstractActor *CGoal::EndScript() {
 
     goalSound = ReadLongVar(iSound);
     goalVolume = ReadFixedVar(iVolume);
+
+    // Preload sounds.
     auto _ = AssetManager::GetOgg(goalSound);
 
     resId = ReadLongVar(iShape);

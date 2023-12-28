@@ -114,6 +114,8 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
         itsGame->AddActor(this);
 
         stepSound = ReadLongVar(iStepSound);
+
+        // Preload sounds.
         auto _ = AssetManager::GetOgg(stepSound);
 
         lastWallActor = this;
