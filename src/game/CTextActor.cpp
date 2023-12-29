@@ -58,7 +58,9 @@ CAbstractActor *CTextActor::EndScript() {
 
         soundId = ReadLongVar(iSound);
         soundVol = ReadFixedVar(iVolume);
-        gHub->PreLoadSample(soundId);
+
+        // Preload sounds.
+        auto _ = AssetManager::GetOgg(soundId);
 
         return this;
     } else {

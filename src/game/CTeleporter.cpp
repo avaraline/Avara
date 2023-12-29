@@ -84,7 +84,9 @@ CAbstractActor *CTeleporter::EndScript() {
 
     soundId = ReadLongVar(iSound);
     volume = ReadFixedVar(iVolume);
-    gHub->PreLoadSample(soundId);
+
+    // Preload sounds.
+    auto _ = AssetManager::GetOgg(soundId);
 
     options = ReadLongVar(iSpinFlag) ? kSpinOption : 0;
     options |= ReadLongVar(iFragmentFlag) ? kFragmentOption : 0;

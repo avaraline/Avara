@@ -285,5 +285,5 @@ void CGrenade::ShowTarget() {
 void CGrenade::PreLoadSounds() {
     CWeapon::PreLoadSounds();
 
-    gHub->PreLoadSample(201);
+    auto _ = AssetManager::GetOgg(201);
 }

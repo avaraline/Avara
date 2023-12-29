@@ -11,6 +11,7 @@
 
 #include "CNetManager.h"
 
+#include "AssetManager.h"
 #include "CApplication.h"
 #include "CAvaraGame.h"
 #include "CPlayerManager.h"
@@ -658,8 +659,7 @@ void CNetManager::ResumeGame() {
 
     // Pull grenade/missile/booster counts from HULL resource
     long hullRes = ReadLongVar(iHull01 + config.hullType);
-    HullConfigRecord hull;
-    LoadHullFromSetJSON(&hull, hullRes);
+    HullConfigRecord hull = **AssetManager::GetHull(hullRes);
     config.numGrenades = hull.maxGrenades;
     config.numMissiles = hull.maxMissiles;
     config.numBoosters = hull.maxBoosters;

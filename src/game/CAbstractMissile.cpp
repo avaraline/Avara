@@ -29,8 +29,8 @@ CAbstractMissile::CAbstractMissile(CDepot *theDepot) {
 }
 
 void CAbstractMissile::PreLoadSounds() {
-    gHub->PreLoadSample(GROUNDHITSOUNDID);
-    gHub->PreLoadSample(soundResId);
+    auto _ = AssetManager::GetOgg(GROUNDHITSOUNDID);
+    _ = AssetManager::GetOgg(soundResId);
 }
 
 void CAbstractMissile::Deactivate() {

@@ -8,6 +8,7 @@
 */
 
 #pragma once
+#include "AssetManager.h"
 #include "CAvaraGame.h"
 #include "CDirectObject.h"
 #include "ColorManager.h"

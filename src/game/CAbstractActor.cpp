@@ -436,9 +436,6 @@ CAbstractActor *CAbstractActor::EndScript() {
     teamColor = ReadLongVar(iTeam) % (kMaxTeamColors + 1);
     teamMask = 1 << teamColor;
 
-    gHub->PreLoadSample(blastSound);
-    gHub->PreLoadSample(hitSoundId);
-
     partScale = ReadFixedVar(iScale);
     partYon = ReadFixedVar(iYon);
 
@@ -446,7 +443,11 @@ CAbstractActor *CAbstractActor::EndScript() {
     friction = ReadFixedVar(iFriction);
 
     stepSound = ReadLongVar(iStepSound);
-    gHub->LoadSample(stepSound);
+
+    // Preload sounds.
+    auto _ = AssetManager::GetOgg(blastSound);
+    _ = AssetManager::GetOgg(hitSoundId);
+    _ = AssetManager::GetOgg(stepSound);
 
     return this;
 }

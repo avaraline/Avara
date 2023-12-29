@@ -102,9 +102,10 @@ CAbstractActor *CGoody::EndScript() {
         closeSoundId = ReadLongVar(iCloseSound);
         volume = ReadFixedVar(iVolume);
 
-        gHub->PreLoadSample(soundId);
-        gHub->PreLoadSample(openSoundId);
-        gHub->PreLoadSample(closeSoundId);
+        // Preload sounds.
+        auto _ = AssetManager::GetOgg(soundId);
+        _ = AssetManager::GetOgg(openSoundId);
+        _ = AssetManager::GetOgg(closeSoundId);
 
         isActive = kIsInactive;
         frequency = ReadLongVar(iFrequency);

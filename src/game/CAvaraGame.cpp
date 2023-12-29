@@ -17,6 +17,7 @@
 #define INIT_ADVANCE    (TIMING_GRAIN)
 */
 
+#include "AssetManager.h"
 #include "AvaraGL.h"
 #include "CAvaraGame.h"
 #include "CAvaraApp.h"
@@ -524,7 +525,7 @@ void CAvaraGame::RunActorFrameActions() {
 }
 
 void CAvaraGame::ChangeDirectoryFile() {
-    gHub->FreeUnusedSamples();
+    // No-op.
 }
 
 void CAvaraGame::LevelReset(Boolean clearReset) {
@@ -532,8 +533,6 @@ void CAvaraGame::LevelReset(Boolean clearReset) {
     CAbstractActor *anActor, *nextActor;
 
     gameStatus = kAbortStatus;
-
-    gHub->FlagOldSamples();
 
     loadedLevel = "";
     loadedDesigner = "";
@@ -657,11 +656,11 @@ void CAvaraGame::EndScript() {
     groundFriction = ReadFixedVar(iDefaultFriction);
     gravityRatio = ReadFixedVar(iGravity);
     groundStepSound = ReadLongVar(iGroundStepSound);
-    gHub->LoadSample(groundStepSound);
+
+    // Preload sounds.
+    auto _ = AssetManager::GetOgg(groundStepSound);
 
     itsDepot->EndScript();
-
-    gHub->FreeOldSamples();
 
     scoreKeeper->EndScript();
 }

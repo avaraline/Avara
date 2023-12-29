@@ -46,7 +46,9 @@ CScout::CScout(CAbstractPlayer *thePlayer, short theTeam, ARGBColor longTeamColo
     partList[0]->ReplaceColor(*ColorManager::getMarkerColor(0), longTeamColor);
 
     hitSoundId = 220;
-    gHub->PreLoadSample(hitSoundId);
+
+    // Preload sounds.
+    auto _ = AssetManager::GetOgg(hitSoundId);
 
     glow = 0;
 }

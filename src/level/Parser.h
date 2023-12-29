@@ -11,6 +11,8 @@
 #include "ARGBColor.h"
 #include "Types.h"
 
+#include <string>
+
 #ifdef __has_include
 #  if __has_include(<optional>)                // Check for a standard library
 #    include <optional>
@@ -103,7 +105,7 @@ void LoadLevel(short whichLevel);
 double EvalVariable(long token, Boolean forceCalc);
 void WriteVariable(long token, double value);
 
-void RunThis(StringPtr theScript);
+void RunThis(std::string theScript);
 void AllocParser();
 void DeallocParser();
 void InitParser();

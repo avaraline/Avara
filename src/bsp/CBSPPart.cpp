@@ -7,6 +7,7 @@
     Modified: Monday, September 9, 1996, 00:15
 */
 
+#include "AssetManager.h"
 #include "AvaraGL.h"
 #include "CBSPPart.h"
 
@@ -30,8 +31,6 @@ Vector **bspPointTemp = 0;
 
 ARGBColor ***bspColorLookupTable = 0;
 
-using json = nlohmann::json;
-
 void CBSPPart::IBSPPart(short resId) {
     //SDL_Log("Loading BSP: %s\n", bspName);
     lightSeed = 0;
@@ -50,8 +49,8 @@ void CBSPPart::IBSPPart(short resId) {
     yon = FIX(500); //  500 m   sets the flags above and forgets to set the values.
     userFlags = 0;
 
-    json doc = GetBSPJSON(resId);
-    if (doc == nullptr) {
+    auto json = AssetManager::GetBsp(resId);
+    if (!json) {
         colorCount = 0;
         polyCount = 0;
         pointCount = 0;
@@ -59,6 +58,7 @@ void CBSPPart::IBSPPart(short resId) {
     }
 
     // Fill in some default values in case values are missing.
+    auto doc = **json;
     doc.emplace("radius1", 0.0);
     doc.emplace("radius2", 0.0);
     doc.emplace("center", json::array({0.0, 0.0, 0.0}));
@@ -101,7 +101,7 @@ void CBSPPart::IBSPPart(short resId) {
     polyTable = std::make_unique<PolyRecord[]>(polyCount);
 
     for (uint16_t i = 0; i < colorCount; i++) {
-        json value = doc["colors"][i];
+        nlohmann::json value = doc["colors"][i];
         ARGBColor color = ARGBColor::Parse(value)
             .value_or(ARGBColor(0x00ffffff)); // Fallback to invisible "white."
         origColorTable[i] = color;
@@ -118,7 +118,7 @@ void CBSPPart::IBSPPart(short resId) {
     CheckForAlpha();
 
     for (uint32_t i = 0; i < pointCount; i++) {
-        json pt = doc["points"][i];
+        nlohmann::json pt = doc["points"][i];
         pointTable[i][0] = ToFixed(pt[0]);
         pointTable[i][1] = ToFixed(pt[1]);
         pointTable[i][2] = ToFixed(pt[2]);
@@ -128,14 +128,14 @@ void CBSPPart::IBSPPart(short resId) {
     totalPoints = 0;
 
     for (uint32_t i = 0; i < polyCount; i++) {
-        json poly = doc["polys"][i];
-        json pt;
+        nlohmann::json poly = doc["polys"][i];
+        nlohmann::json pt;
         // Color
         polyTable[i].colorIdx = static_cast<uint16_t>(poly["color"]);
         // Normal
-        json norms = doc["normals"];
+        nlohmann::json norms = doc["normals"];
         int idx = poly["normal"];
-        json norm = norms[idx];
+        nlohmann::json norm = norms[idx];
         polyTable[i].normal[0] = norm[0];
         polyTable[i].normal[1] = norm[1];
         polyTable[i].normal[2] = norm[2];

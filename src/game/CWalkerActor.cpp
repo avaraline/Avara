@@ -11,6 +11,7 @@
 
 #include "CWalkerActor.h"
 
+#include "AssetManager.h"
 #include "AvaraDefines.h"
 #include "CBSPWorld.h"
 #include "CDepot.h"
@@ -770,7 +771,7 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
 
         hullRes = ReadLongVar(iHull01 + hullRes);
 
-        LoadHullFromSetJSON(&hullConfig, hullRes);
+        hullConfig = **AssetManager::GetHull(hullRes);
 
         hullRes = hullConfig.hullBSP;
         itsGame->itsWorld->RemovePart(viewPortPart);
