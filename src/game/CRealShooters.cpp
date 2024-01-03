@@ -13,7 +13,9 @@
 #include "CShuriken.h"
 #include "CSmartPart.h"
 
-CRealShooters::CRealShooters() {
+void CRealShooters::IAbstractActor() {
+    CRealMovers::IAbstractActor();
+
     visionRange = FIX(100);
     shotPower = FIX3(500);
     burstLength = 2;

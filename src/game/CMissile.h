@@ -14,6 +14,6 @@
 
 class CMissile : public CAbstractMissile {
 public:
-    CMissile(CDepot *theDepot);
+    virtual void IAbstractMissile(CDepot *theDepot);
     virtual bool HandlesFastFPS() { return true; }
 };

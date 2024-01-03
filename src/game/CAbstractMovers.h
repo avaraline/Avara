@@ -17,7 +17,7 @@ public:
     Fixed internalImpulse[3];
     Fixed impulseSlowDown;
 
-    CAbstractMovers();
+    virtual void IAbstractActor();
     virtual void GetSpeedEstimate(Fixed *theSpeed);
     virtual void FrameAction();
     virtual void Push(Fixed *direction);

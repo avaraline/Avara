@@ -17,7 +17,7 @@ class CMarkerActor : public CGlowActors {
 public:
     short markerColor;
 
-    CMarkerActor();
+    virtual void IAbstractActor();
     virtual CAbstractActor *EndScript();
     virtual void FrameAction();
 };

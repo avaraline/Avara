@@ -9,7 +9,9 @@
 
 #include "CAbstractMovers.h"
 
-CAbstractMovers::CAbstractMovers() {
+void CAbstractMovers::IAbstractActor() {
+    CGlowActors::IAbstractActor();
+
     mass = FIX(50); //	Some default mass
     speed[0] = 0;
     speed[1] = 0;

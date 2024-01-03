@@ -14,8 +14,9 @@
 
 class CShuriken : public CAbstractMissile {
 public:
-    CShuriken(CDepot *theDepot);
     Fixed rotation;
+
+    virtual void IAbstractMissile(CDepot *theDepot);
     virtual void MoveForward();
     virtual bool HandlesFastFPS() { return true; }
 };

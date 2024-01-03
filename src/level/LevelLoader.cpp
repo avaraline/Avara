@@ -323,6 +323,7 @@ struct ALFWalker: pugi::xml_tree_walker {
             RunThis(script.str());
         }
         CWallActor *theWall = new CWallActor;
+        theWall->IAbstractActor();
         theWall->MakeWallFromRect(&gLastBoxRect, gLastBoxRounding, 0, true);
     }
 
