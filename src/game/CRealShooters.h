@@ -28,7 +28,7 @@ public:
     MaskType watchMask;
     short watchTeams;
 
-    CRealShooters();
+    virtual void IAbstractActor();
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
 

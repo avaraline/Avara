@@ -35,7 +35,7 @@ public:
     Boolean doExplode;
     Boolean isTargetLocked;
 
-    CWeapon(CDepot *theDepot);
+    virtual void IWeapon(CDepot *theDepot);
     virtual void ResetWeapon();
 
     virtual void LevelReset();

@@ -27,7 +27,9 @@
 
 #define FOLLOWRADIUS 10
 
-CScout::CScout(CAbstractPlayer *thePlayer, short theTeam, ARGBColor longTeamColor) {
+void CScout::IScout(CAbstractPlayer *thePlayer, short theTeam, ARGBColor longTeamColor) {
+    IAbstractActor();
+
     mass = FIX(20);
     baseMass = FIX(40);
     teamColor = theTeam;

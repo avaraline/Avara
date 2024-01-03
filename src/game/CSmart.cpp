@@ -18,7 +18,9 @@
 #define kSmartAccel itsDepot->missileAcceleration
 #define kSmartFriction FIX3(50)
 
-CSmart::CSmart(CDepot *theDepot) : CWeapon(theDepot) {
+void CSmart::IWeapon(CDepot *theDepot) {
+    CWeapon::IWeapon(theDepot);
+
     partCount = 1;
     LoadPart(0, 802);
     partList[0]->usesPrivateHither = true;

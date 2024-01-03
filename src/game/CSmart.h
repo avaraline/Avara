@@ -26,7 +26,7 @@ public:
     short inSight;
     FrameNumber fireFrame;
 
-    CSmart(CDepot *theDepot);
+    virtual void IWeapon(CDepot *theDepot);
     virtual void ResetWeapon();
 
     virtual void PlaceParts();

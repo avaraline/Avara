@@ -73,6 +73,7 @@ void CreateTheObject() {
 
     currentActor = (CAbstractActor *)CreateNamedObject(nameBuf);
     if (currentActor) {
+        currentActor->IAbstractActor();
         currentActor->BeginScript();
         currentLevel++;
     }
@@ -89,6 +90,7 @@ void CreateTheAdjuster() {
 
     currentActor = (CAbstractActor *)CreateNamedObject(nameBuf);
     if (currentActor) {
+        currentActor->IAbstractActor();
         currentActor->BeginScript();
         currentLevel++;
     }

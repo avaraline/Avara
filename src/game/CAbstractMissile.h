@@ -19,7 +19,6 @@ class CDepot;
 
 class CAbstractMissile : public CAbstractActor {
 public:
-    CAbstractMissile(CDepot *theDepot);
     CAbstractMissile *nextMissile;
     long ownerIdent;
     CDepot *itsDepot;
@@ -36,7 +35,7 @@ public:
     short missileKind;
     short soundResId;
 
-    
+    virtual void IAbstractMissile(CDepot *theDepot);
     virtual void Deactivate();
     virtual void Launch(Matrix *startMatrix,
         RayHitRecord *target,

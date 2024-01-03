@@ -13,7 +13,9 @@
 #define SHURIKENSPIN FpsCoefficient2(2621)
 #define SHURIKENLIFE FpsFramesPerClassic(100)
 
-CShuriken::CShuriken(CDepot *theDepot) : CAbstractMissile(theDepot) {
+void CShuriken::IAbstractMissile(CDepot *theDepot) {
+    CAbstractMissile::IAbstractMissile(theDepot);
+
     speed = SHURIKENSPEED;
     maxFrameCount = SHURIKENLIFE;
 

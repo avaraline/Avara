@@ -13,11 +13,11 @@
 
 extern Fixed FRandSeed;
 
-CGlowActors::CGlowActors() {
+void CGlowActors::IAbstractActor() {
+    CPlacedActors::IAbstractActor();
     canGlow = true;
     glow = 0;
 }
-
 void CGlowActors::BeginScript() {
     CPlacedActors::BeginScript();
 

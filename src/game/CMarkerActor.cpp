@@ -11,8 +11,8 @@
 
 #include "CSmartPart.h"
 
-CMarkerActor::CMarkerActor() {
-
+void CMarkerActor::IAbstractActor() {
+    CGlowActors::IAbstractActor();
     isActive = kIsActive;
     maskBits = kTargetBit; // + kMarkerBit; // TODO: what is this??
 }

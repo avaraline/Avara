@@ -16,7 +16,7 @@ public:
     Vector location;
     Fixed heading;
 
-    CPlacedActors();
+    virtual void IAbstractActor();
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
     virtual bool UseForRandomIncarnator() { return false; }

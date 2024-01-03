@@ -62,6 +62,7 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
             }
 
             otherWall = new CWallActor;
+            otherWall->IAbstractActor();
             otherWall->MakeWallFromRect(&smallRect, height, newDecim, false);
         }
     } while (tooBig);

@@ -9,7 +9,9 @@
 
 #include "CMissile.h"
 
-CMissile::CMissile(CDepot *theDepot) : CAbstractMissile(theDepot) {
+void CMissile::IAbstractMissile(CDepot *theDepot) {
+    CAbstractMissile::IAbstractMissile(theDepot);
+
     partCount = 1;
     LoadPart(0, kMissileBSP);
 }
