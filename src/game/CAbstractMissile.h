@@ -35,7 +35,7 @@ public:
     short missileKind;
     short soundResId;
 
-    virtual void IAbstractMissile(CDepot *theDepot);
+    CAbstractMissile(CDepot *theDepot);
     virtual void Deactivate();
     virtual void Launch(Matrix *startMatrix,
         RayHitRecord *target,

@@ -168,19 +168,18 @@ CAbstractMissile *CDepot::MakeMissile(short kind) {
 
     switch (kind) {
         case kmiFlat:
-            newMissile = new CMissile;
+            newMissile = new CMissile(this);
             break;
         case kmiTurning:
-            newMissile = new CPlayerMissile;
+            newMissile = new CPlayerMissile(this);
             break;
         case kmiShuriken:
-            newMissile = new CShuriken;
+            newMissile = new CShuriken(this);
             break;
         default:
             return newMissile;
     }
 
-    newMissile->IAbstractMissile(this);
     newMissile->missileKind = kind;
 
     return newMissile;
@@ -321,16 +320,15 @@ CWeapon *CDepot::MakeWeapon(short kind) {
 
     switch (kind) {
         case kweGrenade:
-            newWeapon = new CGrenade;
+            newWeapon = new CGrenade(this);
             break;
         case kweSmart:
-            newWeapon = new CSmart;
+            newWeapon = new CSmart(this);
             break;
         default:
             return newWeapon;
     }
 
-    newWeapon->IWeapon(this);
     newWeapon->weaponKind = kind;
 
     return newWeapon;
