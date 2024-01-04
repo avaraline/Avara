@@ -11,12 +11,10 @@
 
 #include "CSmartPart.h"
 
-void CPlacedActors::IAbstractActor() {
+CPlacedActors::CPlacedActors() {
     location[0] = 0;
     location[1] = 0;
     location[2] = 0;
-
-    CAbstractActor::IAbstractActor();
 }
 
 void CPlacedActors::BeginScript() {

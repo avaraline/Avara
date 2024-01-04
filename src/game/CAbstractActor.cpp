@@ -201,7 +201,7 @@ void CAbstractActor::BuildPartSpheresProximityList(MaskType filterMask) {
     BuildPartProximityList(minPoint, FDistanceOverEstimate(maxPoint[0], maxPoint[1], maxPoint[2]), filterMask);
 }
 
-void CAbstractActor::IAbstractActor() {
+CAbstractActor::CAbstractActor() {
     short i;
 
     proximityList.p = NULL;

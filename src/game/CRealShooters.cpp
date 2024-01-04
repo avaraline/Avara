@@ -13,9 +13,7 @@
 #include "CShuriken.h"
 #include "CSmartPart.h"
 
-void CRealShooters::IAbstractActor() {
-    CRealMovers::IAbstractActor();
-
+CRealShooters::CRealShooters() {
     visionRange = FIX(100);
     shotPower = FIX3(500);
     burstLength = 2;
@@ -25,6 +23,7 @@ void CRealShooters::IAbstractActor() {
     watchTeams = -2;
     watchMask = kPlayerBit;
 }
+
 void CRealShooters::BeginScript() {
     CRealMovers::BeginScript();
 

@@ -21,9 +21,7 @@
 #define kStandardBallMass FIX(30);
 #define kBallBaseMass FIX(50);
 
-void CBall::IAbstractActor() {
-    CRealShooters::IAbstractActor();
-
+CBall::CBall() {
     mass = kStandardBallMass;
     baseMass = kStandardBallMass;
 

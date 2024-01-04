@@ -79,7 +79,7 @@ public:
 
     Boolean playerAttach;
 
-    virtual void IAbstractActor();
+    CBall();
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
     virtual void Dispose();

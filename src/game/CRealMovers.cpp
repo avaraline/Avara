@@ -12,9 +12,7 @@
 
 #include "CSmartPart.h"
 
-void CRealMovers::IAbstractActor() {
-    CGlowActors::IAbstractActor();
-
+CRealMovers::CRealMovers() {
     maskBits |= kCanPushBit;
     baseMass = FIX(300);
     mass = FIX(50); //	Some default mass

@@ -16,9 +16,7 @@
 #define DEFAULTMISSILESOUND 200
 #define MINEBLOWSOUND 301
 
-void CWeapon::IWeapon(CDepot *theDepot) {
-    IAbstractActor();
-
+CWeapon::CWeapon(CDepot *theDepot) {
     nextWeapon = NULL;
 
     maskBits |= kSolidBit | kTargetBit | kCollisionDamageBit | kCanPushBit;

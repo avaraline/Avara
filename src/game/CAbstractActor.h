@@ -85,6 +85,7 @@ typedef union {
 
 class CAbstractActor : public CDirectObject {
 public:
+    CAbstractActor();
     CAvaraGame *itsGame;
 
     unsigned long searchCount;
@@ -144,7 +145,7 @@ public:
 
     virtual void LoadPart(short ind, short resId);
     virtual void LoadPartWithColors(short ind, short resId);
-    virtual void IAbstractActor();
+
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
     virtual void AdaptableSettings();
@@ -204,7 +205,7 @@ public:
     virtual void GetFrictionTraction(Fixed *tract, Fixed *frict);
 
     //	Location link entry handling.
-    virtual void InitLocationLinks();
+    void InitLocationLinks();
     void LinkSphere(Fixed *origin, Fixed range);
     void LinkBox(Fixed minX, Fixed minZ, Fixed maxX, Fixed maxZ);
     void LinkPartBoxes();

@@ -1032,7 +1032,6 @@ CAbstractPlayer *CPlayerManagerImpl::ChooseActor(CAbstractPlayer *actorList, sho
 
     if (itsPlayer == NULL) {
         itsPlayer = new CWalkerActor;
-        itsPlayer->IAbstractActor();
         itsPlayer->BeginScript();
         ProgramLongVar(iTeam, myTeamColor);
         FreshCalc(); //	Parser call.
@@ -1058,7 +1057,6 @@ CAbstractPlayer *CPlayerManagerImpl::ChooseActor(CAbstractPlayer *actorList, sho
 Boolean CPlayerManagerImpl::IncarnateInAnyColor() {
     for (short i = 1; i <= kMaxTeamColors; i++) {
         itsPlayer = new CWalkerActor;
-        itsPlayer->IAbstractActor();
         itsPlayer->BeginScript();
         ProgramLongVar(iTeam, i);
         FreshCalc(); //	Parser call.
