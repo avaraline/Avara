@@ -204,7 +204,6 @@ public:
         app.GetNet()->ChangeNet(kNullNet, "");
         game->LevelReset(false);
         hector = new CWalkerActor();
-        hector->IAbstractActor();
         hector->BeginScript();
         hector->EndScript();
         game->itsNet->playerTable[0]->SetPlayer(hector);
