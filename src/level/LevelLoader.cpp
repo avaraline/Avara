@@ -154,12 +154,19 @@ struct ALFWalker: pugi::xml_tree_walker {
     }
 
     void handle_element(pugi::xml_node& node, std::string& name) {
-        // eval ALL node attributes and put them into the symbol table
-        // unless it's a 'unique' and then it doesn't make any sense
-        if (name.compare("unique") != 0)
-        handle_set(node);
-        // Read any global state we can from the element.
-        read_context(node);
+        // Eval ALL node attributes and put them into the symbol table
+        // unless it's a 'unique' and then it doesn't make any sense. If
+        // it's a 'TeamColor' (ScoreKeeper plugin) we also want to ignore
+        // it just to make sure it doesn't interfere with anything.
+        if (name.compare("unique") != 0 && name.compare("TeamColor") != 0) {
+            handle_set(node);
+        }
+
+        // Read any global state we can from the element, unless it's
+        // 'TeamColor' in which case we still want to keep it separate.
+        if (name.compare("TeamColor") != 0) {
+            read_context(node);
+        }
 
         if (name.compare("map") == 0) handle_map(node);
         else if (name.compare("enum") == 0) handle_enum(node);
@@ -183,6 +190,7 @@ struct ALFWalker: pugi::xml_tree_walker {
             handle_object(node, name);
         }
         else if (name.compare("Wall") == 0) handle_wall(node);
+        else if (name.compare("TeamColor") == 0) handle_teamcolor(node);
         else if (name.compare("include") == 0) handle_include(node);
         else handle_object(node, name);
     }
@@ -324,6 +332,9 @@ struct ALFWalker: pugi::xml_tree_walker {
         }
         CWallActor *theWall = new CWallActor;
         theWall->MakeWallFromRect(&gLastBoxRect, gLastBoxRounding, 0, true);
+    }
+
+    void handle_teamcolor(pugi::xml_node& node) {
     }
 
     void handle_include(pugi::xml_node& node) {
