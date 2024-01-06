@@ -9,6 +9,7 @@
 
 #include "LinkLoose.h"
 
+#include "AssetManager.h"
 #include "CAreaActor.h"
 #include "CBall.h"
 #include "CDome.h"
@@ -49,12 +50,8 @@
 
 #include <SDL2/SDL.h>
 
-#include <fstream>
-#include <json.hpp>
+#include <memory>
 #include <string>
-
-
-static json objectDescriptor;
 
 enum {
     koNoObject = 0,
@@ -188,30 +185,15 @@ void *CreateObjectByIndex(short objectId) {
     }
 }
 
-void InitLinkLoose() {
-    char *objectsPath = new char [1024];
-    BundlePath("rsrc/objects.json", objectsPath);
-    std::ifstream infile(objectsPath);
-    if (infile.fail()) {
-        SDL_Log("*** Failed to load objects.json");
-    }
-    else {
-        objectDescriptor = json::parse(infile);
-        infile.close();
-    }
-    delete [] objectsPath;
-}
-
 void *CreateNamedObject(StringPtr theName) {
-    if (objectDescriptor.empty())
-        InitLinkLoose();
+    static auto objectDescriptor = AssetManager::GetEnumeratedObjectTypes();
 
     std::string objectName((char *)theName + 1, theName[0]);
-    if (objectDescriptor["objects"].count(objectName) == 0) {
+    if (objectDescriptor->value<nlohmann::json>("objects", {}).count(objectName) == 0) {
         SDL_Log("UNKNOWN OBJECT TYPE in CreateNamedObject(%s)\n", objectName.c_str());
         return NULL;
     }
 
-    short index = objectDescriptor["objects"][objectName]["index"];
+    short index = objectDescriptor->value<nlohmann::json>("objects", {})[objectName]["index"];
     return CreateObjectByIndex(index);
 }

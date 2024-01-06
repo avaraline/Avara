@@ -13,7 +13,6 @@
 
 #include "CViewParameters.h"
 #include "Memory.h"
-#include "Resource.h"
 #include "AvaraDefines.h"
 
 #include <fstream>

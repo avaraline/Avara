@@ -15,7 +15,6 @@
 #include "CRateSound.h"
 #include "CSoundMixer.h"
 #include "Memory.h"
-#include "Resource.h"
 
 #include <SDL2/SDL.h>
 

@@ -12,7 +12,6 @@
 #include "CAvaraApp.h"
 #include "CAvaraGame.h"
 #include "CViewParameters.h"
-#include "Resource.h"
 #include "CBSPPart.h"
 #include "AvaraGL.h"
 

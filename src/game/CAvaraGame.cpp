@@ -49,7 +49,6 @@
 //#include "Sound.h"
 #include "CHUD.h"
 #include "Preferences.h"
-#include "Resource.h"
 #include "ARGBColor.h"
 #include "Debug.h"
 

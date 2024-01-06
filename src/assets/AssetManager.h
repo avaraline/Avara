@@ -80,6 +80,15 @@ public:
     static std::vector<std::string> GetAvailablePackages();
 
     /**
+     * Get a JSON object containing descriptions of every Avarascript object that can be
+     * instantiated, listed in their properly enumerated order. The order is critical for
+     * `LinkLoose`, which maps Avarascript object names with their actual C++ types.
+     *
+     * @return the enumerated object descriptions
+     */
+    static std::shared_ptr<nlohmann::json> GetEnumeratedObjectTypes();
+
+    /**
      * Get the full filesystem path for an ALF file, if it is available.
      *
      * @param relativePath The relative path to look for.
@@ -155,6 +164,7 @@ private:
     static std::shared_ptr<AssetStorage> baseStorage;
     static std::shared_ptr<AssetStorage> assetStorage;
     static std::vector<std::shared_ptr<AssetRepository>> repositoryStack;
+    static std::shared_ptr<nlohmann::json> objectTypes;
     static SimpleAssetCache<PackageManifest> manifestCache;
     static SimpleAssetCache<std::string> avarascriptCache;
     static AssetCache<nlohmann::json> bspCache;
@@ -168,7 +178,7 @@ private:
      * @throws std::invalid_argument Thrown when there is no path defined for the base package.
      * @return the path to the base package
      */
-    static std::string GetBasePackagePath(BasePackage basePackage) throw();
+    static std::string GetBasePackagePath(BasePackage basePackage);
 
     /**
      * Get the filesystem path for the specified package, if it's available.
@@ -228,6 +238,15 @@ private:
      * @return the path to the OGG file
      */
     static std::string GetOggPath(MaybePackage package, int16_t id);
+
+    /**
+     * Load the JSON file containing descriptions of every Avarascript object that can be
+     * instantiated, listed in their properly enumerated order. The order is critical for
+     * `LinkLoose`, which maps Avarascript object names with their actual C++ types.
+     *
+     * @throws std::runtime_error Thrown when the JSON file cannot be read.
+     */
+    static void LoadEnumeratedObjectTypes();
 
     /**
      * Load the specified package's manifest file.

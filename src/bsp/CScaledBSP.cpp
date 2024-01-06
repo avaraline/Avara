@@ -10,7 +10,6 @@
 #include "CScaledBSP.h"
 
 #include "Memory.h"
-#include "Resource.h"
 #include "AvaraGL.h"
 
 void CScaledBSP::IScaledBSP(Fixed scale, short resId, CAbstractActor *anActor, short aPartCode) {
