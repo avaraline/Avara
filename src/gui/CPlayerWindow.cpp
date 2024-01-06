@@ -35,7 +35,7 @@ CPlayerWindow::CPlayerWindow(CApplication *app) : CWindow(app, "Player") {
 
     hullBox = new nanogui::ComboBox(this, hullTypes);
     hullBox->setCallback([app, this](int selectedIdx) {
-        app->Set(kHullTypeTag, hullValues[selectedIdx]);
+        app->Set(kHullTypeTag, hullValues[selectedIdx], false);
     });
     hullBox->popup()->setSize(nanogui::Vector2i(180, 140));
     hullBox->setSelectedIndex(app->Get<int>(kHullTypeTag));

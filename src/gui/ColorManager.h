@@ -186,6 +186,8 @@ public:
     static void setMissileArmedColor(ARGBColor color);
     static void setMissileLaunchedColor(ARGBColor color);
 
+    static void overrideTeamColor(uint8_t num, ARGBColor color);
+
     static void refresh(CApplication *app);
 private:
     ColorManager() {}

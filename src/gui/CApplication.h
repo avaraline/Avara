@@ -30,7 +30,7 @@ public:
     virtual bool HandleEvent(SDL_Event &event) { return false; }
 
     // Called when preference values change.
-    virtual void PrefChanged(std::string name);
+    virtual void PrefChanged(std::string name, const bool refreshColors = true);
 
     virtual void WindowResized(int width, int height) {}
 
@@ -59,9 +59,9 @@ public:
 
     std::vector<std::string> Matches(const std::string matchStr);
 
-    template <class T> void Set(const std::string name, const T value) {
+    template <class T> void Set(const std::string name, const T value, const bool refreshColors = true) {
         _prefs[name] = value;
-        PrefChanged(name);
+        PrefChanged(name, refreshColors);
     }
 
     bool Update(const std::string name, std::string &value);

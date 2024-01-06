@@ -12,6 +12,7 @@
 #include "CAvaraApp.h"
 
 #include "AssetManager.h"
+#include "ColorManager.h"
 #include "AvaraGL.h"
 #include "AvaraScoreInterface.h"
 #include "AvaraTCP.h"
@@ -269,6 +270,8 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
     itsGame->LevelReset(false);
     gCurrentGame = itsGame.get();
     itsGame->loadedSet = set;
+
+    ColorManager::refresh(this);
 
     std::string levelName;
     OSErr result = AssetManager::LoadLevel(set, levelTag, levelName);

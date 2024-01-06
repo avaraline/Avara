@@ -300,6 +300,13 @@ void ColorManager::setMissileLaunchedColor(ARGBColor color) {
     ColorManager::missileLaunchedColor = color;
 }
 
+void ColorManager::overrideTeamColor(uint8_t num, ARGBColor color) {
+    if (num <= kMaxTeamColors) {
+        ColorManager::teamColors[num] = color;
+        ColorManager::teamTextColors[num] = 0xff333333;
+    }
+}
+
 void ColorManager::refresh(CApplication *app) {
     ColorManager::setColorBlind(app->Get(kColorBlindMode));
     ColorManager::setHUDColor(ARGBColor::Parse(app->String(kHUDColor)).value_or(0xff03f5f5));

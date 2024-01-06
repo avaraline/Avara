@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9419E8472B49ECB1007C50D0 /* CTeamColorAdjuster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9419E8462B49ECB1007C50D0 /* CTeamColorAdjuster.cpp */; };
+		9419E8482B49ECB1007C50D0 /* CTeamColorAdjuster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9419E8462B49ECB1007C50D0 /* CTeamColorAdjuster.cpp */; };
 		944F2F702B323F1900856E53 /* LocalAssetRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 944F2F6F2B323F1900856E53 /* LocalAssetRepository.cpp */; };
 		944F2F712B323F1900856E53 /* LocalAssetRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 944F2F6F2B323F1900856E53 /* LocalAssetRepository.cpp */; };
 		9465BFD22B30C2A00050681C /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9465BFD12B30C2A00050681C /* AssetManager.cpp */; };
@@ -365,6 +367,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9419E8452B49EC89007C50D0 /* CTeamColorAdjuster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTeamColorAdjuster.h; sourceTree = "<group>"; };
+		9419E8462B49ECB1007C50D0 /* CTeamColorAdjuster.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CTeamColorAdjuster.cpp; sourceTree = "<group>"; };
 		944F2F6D2B32379C00856E53 /* AssetRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetRepository.h; sourceTree = "<group>"; };
 		944F2F6E2B323E2100856E53 /* LocalAssetRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalAssetRepository.h; sourceTree = "<group>"; };
 		944F2F6F2B323F1900856E53 /* LocalAssetRepository.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LocalAssetRepository.cpp; sourceTree = "<group>"; };
@@ -1308,6 +1312,8 @@
 				E5890C1C29895118007A875D /* CSphereActor.h */,
 				E5890BF529895118007A875D /* CSwitchActor.cpp */,
 				E5890BDB29895118007A875D /* CSwitchActor.h */,
+				9419E8462B49ECB1007C50D0 /* CTeamColorAdjuster.cpp */,
+				9419E8452B49EC89007C50D0 /* CTeamColorAdjuster.h */,
 				E5890C4629895118007A875D /* CTeleporter.cpp */,
 				E5890BE129895118007A875D /* CTeleporter.h */,
 				E5890C2B29895118007A875D /* CTextActor.cpp */,
@@ -2115,6 +2121,7 @@
 				94924EB02B3A894900197378 /* OggFile.cpp in Sources */,
 				E517F09D299713DB0036B206 /* CSwitchActor.cpp in Sources */,
 				E517F09E299713DB0036B206 /* CTeleporter.cpp in Sources */,
+				9419E8482B49ECB1007C50D0 /* CTeamColorAdjuster.cpp in Sources */,
 				E517F09F299713DB0036B206 /* CTextActor.cpp in Sources */,
 				E517F0A0299713DB0036B206 /* CTriPyramidActor.cpp in Sources */,
 				E517F0A1299713DB0036B206 /* CUfo.cpp in Sources */,
@@ -2281,6 +2288,7 @@
 				94924EAF2B3A894900197378 /* OggFile.cpp in Sources */,
 				E5890EFB29895124007A875D /* darwin.mm in Sources */,
 				E5890CBC29895118007A875D /* CAbstractMissile.cpp in Sources */,
+				9419E8472B49ECB1007C50D0 /* CTeamColorAdjuster.cpp in Sources */,
 				E5890CD229895118007A875D /* CBall.cpp in Sources */,
 				E5890CC929895118007A875D /* CPlayerMissile.cpp in Sources */,
 				E5890F0729895124007A875D /* desccombobox.cpp in Sources */,

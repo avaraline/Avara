@@ -38,6 +38,7 @@
 #include "CSoundActor.h"
 #include "CSphereActor.h"
 #include "CSwitchActor.h"
+#include "CTeamColorAdjuster.h"
 #include "CTeleporter.h"
 #include "CTextActor.h"
 #include "CTriPyramidActor.h"
@@ -94,6 +95,9 @@ enum {
 
     koYonBox,
     koYonSphere,
+
+    // New additions:
+    koTeamColor,
 
     koLastObject
 };
@@ -178,6 +182,10 @@ void *CreateObjectByIndex(short objectId) {
             return new CYonBox;
         case koYonSphere:
             return new CYonSphere;
+
+        // New additions:
+        case koTeamColor:
+            return new CTeamColorAdjuster;
 
         default:
             SDL_Log("UNKNOWN OBJECT TYPE in CreateObjectByIndex(%d)\n", objectId);
