@@ -271,7 +271,7 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
     gCurrentGame = itsGame.get();
     itsGame->loadedSet = set;
 
-    ColorManager::refresh(this);
+    ColorManager::resetOverrides();
 
     std::string levelName;
     OSErr result = AssetManager::LoadLevel(set, levelTag, levelName);

@@ -2,7 +2,9 @@
 
 #include "ARGBColor.h"
 #include "AvaraDefines.h"
+#include "CAvaraApp.h"
 #include "ColorManager.h"
+#include "Preferences.h"
 
 void CTeamColorAdjuster::BeginScript() {
     CAbstractActor::BeginScript();
@@ -13,17 +15,19 @@ void CTeamColorAdjuster::BeginScript() {
 CAbstractActor *CTeamColorAdjuster::EndScript() {
     CAbstractActor::EndScript();
 
-    colorMask = ReadLongVar(iMask);
+    if (!itsGame->itsApp->Boolean(kIgnoreLevelCustomColorsTag)) {
+        colorMask = ReadLongVar(iMask);
 
-    ARGBColor newColor = GetPixelColor();
+        ARGBColor newColor = GetPixelColor();
 
-    // Currently unused, but theoretically should be supported. We just don't do highlighting yet.
-    // auto newHighlightColor = GetOtherPixelColor();
+        // Currently unused, but theoretically should be supported. (We don't do highlighting yet.)
+        // auto newHighlightColor = GetOtherPixelColor();
 
-    for (uint8_t i = 1; i <= kMaxTeamColors; i++) {
-        uint16_t teamMask = 1 << i;
-        if (colorMask & teamMask) {
-            ColorManager::overrideTeamColor(i, newColor);
+        for (uint8_t i = 1; i <= kMaxTeamColors; i++) {
+            uint16_t teamMask = 1 << i;
+            if (colorMask & teamMask) {
+                ColorManager::overrideTeamColor(i, newColor);
+            }
         }
     }
 

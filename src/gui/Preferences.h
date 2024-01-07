@@ -69,6 +69,7 @@ using json = nlohmann::json;
 #define kHUDShowTime "hudShowTime"
 #define kHUDShowKillFeed "hudShowKillFeed"
 #define kShowNewHUD "showNewHUD"
+#define kIgnoreLevelCustomColorsTag "ignoreLevelCustomColors"
 
 // Network & Tracker
 #define kLastAddress "lastAddress"
@@ -184,6 +185,7 @@ static json defaultPrefs = {
     {kRecentLevels, {}},
     {kSoundVolume, 100},
     {kIgnoreCustomColorsTag, false},
+    {kIgnoreLevelCustomColorsTag, false},
     {kIgnoreCustomGoodySound, false},
     {kThrottle, 0},
     {kGoodGamePhrases, {}},

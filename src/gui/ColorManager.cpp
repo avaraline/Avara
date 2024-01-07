@@ -66,6 +66,9 @@ std::string ColorManager::teamColorNames[kMaxTeamColors + 1] = {
     "White"
 };
 
+std::optional<ARGBColor> ColorManager::teamColorOverrides[kMaxTeamColors + 1] = {};
+std::optional<ARGBColor> ColorManager::teamTextColorOverrides[kMaxTeamColors + 1] = {};
+
 ARGBColor ColorManager::messageColors[3] = {
     0xffffffff,
     0xff92ebe9,
@@ -302,8 +305,8 @@ void ColorManager::setMissileLaunchedColor(ARGBColor color) {
 
 void ColorManager::overrideTeamColor(uint8_t num, ARGBColor color) {
     if (num <= kMaxTeamColors) {
-        ColorManager::teamColors[num] = color;
-        ColorManager::teamTextColors[num] = 0xff333333;
+        ColorManager::teamColorOverrides[num] = color;
+        ColorManager::teamTextColorOverrides[num] = 0xff333333;
     }
 }
 
@@ -314,4 +317,11 @@ void ColorManager::refresh(CApplication *app) {
     ColorManager::setHUDWarningColor(ARGBColor::Parse(app->String(kHUDWarningColor)).value_or(0xffedd62d));
     ColorManager::setHUDCriticalColor(ARGBColor::Parse(app->String(kHUDCriticalColor)).value_or(0xfffa1313));
     ColorManager::setHUDAlpha(app->Get(kHUDAlpha));
+}
+
+void ColorManager::resetOverrides() {
+    for (uint8_t i = 0; i < kMaxTeamColors + 1; i++) {
+        ColorManager::teamColorOverrides[i] = {};
+        ColorManager::teamTextColorOverrides[i] = {};
+    }
 }

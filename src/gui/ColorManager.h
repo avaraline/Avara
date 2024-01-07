@@ -144,20 +144,24 @@ public:
 
     static inline std::optional<ARGBColor> getTeamColor(uint8_t num) {
         return (num <= kMaxTeamColors)
-            ? teamColors[num]
+            ? (teamColorOverrides[num])
+                ? teamColorOverrides[num]
+                : teamColors[num]
             : std::optional<ARGBColor>{};
     }
 
     static inline std::optional<ARGBColor> getTeamTextColor(uint8_t num) {
         return (num <= kMaxTeamColors)
-            ? teamTextColors[num]
+            ? (teamTextColorOverrides[num])
+                ? teamTextColorOverrides[num]
+                : teamTextColors[num]
             : std::optional<ARGBColor>{};
     }
 
     static inline std::optional<std::string> getTeamColorName(uint8_t num) {
         return (num <= kMaxTeamColors)
-            ? teamColorNames[num]
-            : std::optional<std::string>{};
+        ? teamColorNames[num]
+        : std::optional<std::string>{};
     }
 
     static inline ARGBColor getMessageColor(MsgCategory category) {
@@ -170,7 +174,7 @@ public:
     }
 
     static inline ARGBColor getPingColor(uint8_t num) {
-      return pingColors[num];
+        return pingColors[num];
     }
 
     static inline float getHUDAlpha() {
@@ -189,6 +193,7 @@ public:
     static void overrideTeamColor(uint8_t num, ARGBColor color);
 
     static void refresh(CApplication *app);
+    static void resetOverrides();
 private:
     ColorManager() {}
 
@@ -224,6 +229,8 @@ private:
     static ARGBColor teamColors[kMaxTeamColors + 1];
     static ARGBColor teamTextColors[kMaxTeamColors + 1];
     static std::string teamColorNames[kMaxTeamColors + 1];
+    static std::optional<ARGBColor> teamColorOverrides[kMaxTeamColors + 1];
+    static std::optional<ARGBColor> teamTextColorOverrides[kMaxTeamColors + 1];
     static ARGBColor messageColors[3];
     static ARGBColor pingColors[3];
 };
