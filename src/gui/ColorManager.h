@@ -160,8 +160,8 @@ public:
 
     static inline std::optional<std::string> getTeamColorName(uint8_t num) {
         return (num <= kMaxTeamColors)
-        ? teamColorNames[num]
-        : std::optional<std::string>{};
+            ? teamColorNames[num]
+            : std::optional<std::string>{};
     }
 
     static inline ARGBColor getMessageColor(MsgCategory category) {
