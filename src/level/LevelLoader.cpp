@@ -154,11 +154,12 @@ struct ALFWalker: pugi::xml_tree_walker {
     }
 
     void handle_element(pugi::xml_node& node, std::string& name) {
-        // eval ALL node attributes and put them into the symbol table
-        // unless it's a 'unique' and then it doesn't make any sense
-        if (name.compare("unique") != 0)
-        handle_set(node);
-        // Read any global state we can from the element.
+        // Eval ALL node attributes and put them into the symbol table
+        // unless it's a 'unique' and then it doesn't make any sense.
+        if (name.compare("unique") != 0) {
+            handle_set(node);
+        }
+
         read_context(node);
 
         if (name.compare("map") == 0) handle_map(node);

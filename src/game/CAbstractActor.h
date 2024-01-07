@@ -16,7 +16,6 @@
 #include "FastMat.h"
 #include "LevelLoader.h"
 #include "RayHit.h"
-#include "Resource.h"
 
 // define ENABLE_FPS_DEBUG in files where you want FPS_DEBUG output, BEFORE including this header
 #ifdef ENABLE_FPS_DEBUG

@@ -53,6 +53,7 @@ void CApplication::BroadcastCommand(int theCommand) {
 
 void CApplication::PrefChanged(std::string name) {
     ColorManager::refresh(this);
+    
     for (auto win : windowList) {
         win->PrefChanged(name);
     }

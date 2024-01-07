@@ -45,6 +45,7 @@ std::shared_ptr<AssetStorage> AssetManager::assetStorage = _localStorage;
 std::vector<std::shared_ptr<AssetRepository>> AssetManager::repositoryStack = {
     _localRepo
 };
+std::shared_ptr<nlohmann::json> AssetManager::objectTypes = nullptr;
 SimpleAssetCache<PackageManifest> AssetManager::manifestCache = {};
 SimpleAssetCache<std::string> AssetManager::avarascriptCache = {};
 AssetCache<nlohmann::json> AssetManager::bspCache = {};
@@ -62,6 +63,15 @@ std::vector<std::string> AssetManager::GetAvailablePackages()
 
     std::vector<std::string> pkgs(uniquePkgs.begin(), uniquePkgs.end());
     return pkgs;
+}
+
+std::shared_ptr<nlohmann::json> AssetManager::GetEnumeratedObjectTypes()
+{
+    if (objectTypes == nullptr) {
+        LoadEnumeratedObjectTypes();
+    }
+
+    return objectTypes;
 }
 
 std::optional<std::string> AssetManager::GetResolvedAlfPath(std::string relativePath)
@@ -170,6 +180,7 @@ void AssetManager::Init()
 {
     LoadManifest(NoPackage);
     LoadScript(NoPackage);
+    LoadEnumeratedObjectTypes();
 }
 
 OSErr AssetManager::LoadLevel(std::string packageName, std::string relativePath, std::string &levelName)
@@ -219,7 +230,7 @@ bool AssetManager::PackageInStorage(std::string packageName)
     return (bool)GetPackagePath(packageName);
 }
 
-std::string AssetManager::GetBasePackagePath(BasePackage basePackage) throw()
+std::string AssetManager::GetBasePackagePath(BasePackage basePackage)
 {
     std::stringstream path;
     path << baseStorage->GetRootPath();
@@ -296,6 +307,18 @@ std::string AssetManager::GetOggPath(MaybePackage package, int16_t id)
     std::stringstream relativePath;
     relativePath << "ogg" << PATHSEP << id << ".ogg";
     return GetFullPath(package, relativePath.str());
+}
+
+void AssetManager::LoadEnumeratedObjectTypes()
+{
+    std::stringstream path;
+    path << baseStorage->GetRootPath() << PATHSEP << "objects.json";
+    std::ifstream file(path.str());
+    if (file.fail()) {
+        throw std::runtime_error("Failed to load objects.json");
+    } else {
+        objectTypes = std::make_shared<nlohmann::json>(nlohmann::json::parse(file));
+    }
 }
 
 void AssetManager::LoadManifest(MaybePackage package)
