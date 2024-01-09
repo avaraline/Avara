@@ -97,6 +97,14 @@ public:
     static std::optional<std::string> GetResolvedAlfPath(std::string relativePath);
 
     /**
+     * Get the full filesystem path for a shader file, if it is available.
+     *
+     * @param relativePath The relative path to look for.
+     * @return the full path to the shader file
+     */
+    static std::optional<std::string> GetShaderPath(std::string relativePath);
+
+    /**
      * Get the manifest for the specified package.
      *
      * @param package The package we want the manifest for.

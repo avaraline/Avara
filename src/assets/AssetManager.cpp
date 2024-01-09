@@ -95,6 +95,19 @@ std::optional<std::string> AssetManager::GetResolvedAlfPath(std::string relative
     return std::optional<std::string>{};
 }
 
+std::optional<std::string> AssetManager::GetShaderPath(std::string relativePath)
+{
+    std::stringstream path;
+    path << baseStorage->GetRootPath() << PATHSEP << "shaders" << PATHSEP << relativePath;
+
+    std::ifstream file(path.str());
+    if (file.good()) {
+        return path.str();
+    }
+
+    return std::optional<std::string>{};
+}
+
 std::optional<std::shared_ptr<PackageManifest>> AssetManager::GetManifest(MaybePackage package)
 {
     if (manifestCache.count(package) > 0) {
