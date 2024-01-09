@@ -20,6 +20,9 @@
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 
+enum class Shader;
+#include "AvaraGL.h"
+
 #define MAXLIGHTS 4
 
 //	hither/yon cliplist maximum size:
@@ -184,11 +187,11 @@ public:
     virtual void ReplaceAllColors(ARGBColor newColor);
 
     virtual Boolean PrepareForRender(CViewParameters *vp);
-    virtual void DrawPolygons();
+    virtual void DrawPolygons(Shader shader);
 
     virtual void PreRender();
     void PostRender();
-    virtual void Render(CViewParameters *vp);
+    virtual void Render(CViewParameters *vp, Shader shader);
     virtual Boolean InViewPyramid();
     virtual void TransformLights();
 

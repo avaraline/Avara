@@ -1075,11 +1075,9 @@ void CAvaraGame::Render(NVGcontext *ctx) {
 
     //if (gameStatus == kPlayingStatus || gameStatus == kPauseStatus || gameStatus == kWinStatus || gameStatus == kLoseStatus) {
     ViewControl();
-    AvaraGLSwitchShader(Shader::World);
-    itsWorld->Render(itsView);
-    AvaraGLSwitchShader(Shader::HUD);
+    itsWorld->Render(itsView, Shader::World);
     AvaraGLSetDepthTest(false);
-    hudWorld->Render(itsView);
+    hudWorld->Render(itsView, Shader::HUD);
 
     if (showNewHUD) {
         hud->RenderNewHUD(itsView, ctx);

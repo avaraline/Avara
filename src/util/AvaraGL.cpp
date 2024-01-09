@@ -92,8 +92,6 @@ GLuint skyProgram;
 GLuint skyVertArray, skyBuffer;
 GLuint skyViewLoc, skyProjLoc, groundColorLoc, horizonColorLoc, skyColorLoc;
 
-Shader currentProgram;
-
 const char* glGetErrorString(GLenum error)
 {
     switch (error)
@@ -142,10 +140,6 @@ void AvaraGLSetView(glm::mat4 view) {
 void AvaraGLSetFOV(float fov) {
     current_fov = fov;
     AvaraGLUpdateProjectionMatrix();
-}
-
-void AvaraGLSwitchShader(Shader shader) {
-    currentProgram = shader;
 }
 
 void AvaraGLUpdateProjectionMatrix() {
@@ -318,11 +312,11 @@ void AvaraGLViewport(short width, short height) {
     AvaraGLUpdateProjectionMatrix();
 }
 
-void AvaraGLDrawPolygons(CBSPPart* part) {
+void AvaraGLDrawPolygons(CBSPPart* part, Shader shader) {
     glCheckErrors();
     if(!actuallyRender || !ready) return;
     // Bind the vertex array and buffer that we set up earlier
-    if (currentProgram == Shader::HUD) {
+    if (shader == Shader::HUD) {
         glUseProgram(hudProgram);
     } else {
         glUseProgram(gProgram);
@@ -357,12 +351,24 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
         glCheckErrors();
     }
 
+    if (shader == Shader::HUD) {
+        glUseProgram(hudProgram);
+    } else {
+        glUseProgram(gProgram);
+    }
+
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
     glFrontFace(GL_CCW);
 
     SetTransforms(part);
     glCheckErrors();
+
+    if (shader == Shader::HUD) {
+        glUseProgram(hudProgram);
+    } else {
+        glUseProgram(gProgram);
+    }
 
     glBindVertexArray(part->vertexArray);
     glDrawArrays(GL_TRIANGLES, 0, part->openGLPoints);
@@ -381,7 +387,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
         glCheckErrors();
     }
 
-    if (currentProgram == Shader::HUD) {
+    if (shader == Shader::HUD) {
         glUseProgram(hudProgram);
     } else {
         glUseProgram(gProgram);

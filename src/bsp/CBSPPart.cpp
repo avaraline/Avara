@@ -8,7 +8,6 @@
 */
 
 #include "AssetManager.h"
-#include "AvaraGL.h"
 #include "CBSPPart.h"
 
 #include "CViewParameters.h"
@@ -185,8 +184,8 @@ void CBSPPart::TransformLights() {
     localViewOrigin[2] = invFullTransform[3][2];
 }
 
-void CBSPPart::DrawPolygons() {
-    AvaraGLDrawPolygons(this);
+void CBSPPart::DrawPolygons(Shader shader) {
+    AvaraGLDrawPolygons(this, shader);
 }
 
 Boolean CBSPPart::InViewPyramid() {
@@ -312,11 +311,11 @@ Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
 **  CBSPWorld, since it really doesn't add any significant
 **  overhead.
 */
-void CBSPPart::Render(CViewParameters *vp) {
+void CBSPPart::Render(CViewParameters *vp, Shader shader) {
     vp->DoLighting();
 
     if (PrepareForRender(vp)) {
-        DrawPolygons();
+        DrawPolygons(shader);
         PostRender();
     }
 }

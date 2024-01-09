@@ -9,6 +9,7 @@
 
 #pragma once
 
+#include "AvaraGL.h"
 #include "CDirectObject.h"
 #include "Types.h"
 
@@ -19,7 +20,7 @@ class CBSPWorld : public CDirectObject {
 public:
     virtual void AddPart(CBSPPart *thePart) {};
     virtual void RemovePart(CBSPPart *thePart) {};
-    virtual void Render(CViewParameters *theView) {};
+    virtual void Render(CViewParameters *theView, Shader shader = Shader::World) {};
     virtual void Dispose() {};
     virtual void DisposeParts() {};
     virtual void OverheadPoint(Fixed *pt, Fixed *extent) {};
@@ -43,7 +44,7 @@ public:
     virtual void Dispose();
 
     virtual void RemovePart(CBSPPart *thePart);
-    virtual void Render(CViewParameters *theView);
+    virtual void Render(CViewParameters *theView, Shader shader = Shader::World);
 
     virtual void SortVisibleParts();
     virtual void SortByZ();
