@@ -200,11 +200,14 @@ void AvaraGLSetAmbient(float ambient, ARGBColor color) {
     glUniform3fv(ambColorLoc, 1, rgb);
 }
 
-void ActivateLights(float active) {
-    glUseProgram(gProgram);
-    glUniform1f(lights_activeLoc, active);
-    glUseProgram(hudProgram);
-    glUniform1f(hudLightsActiveLoc, active);
+void ActivateLights(float active, Shader shader) {
+    if (shader == Shader::HUD) {
+        glUseProgram(hudProgram);
+        glUniform1f(hudLightsActiveLoc, active);
+    } else {
+        glUseProgram(gProgram);
+        glUniform1f(lights_activeLoc, active);
+    }
 }
 
 void AvaraGLLightDefaults() {
@@ -217,7 +220,7 @@ void AvaraGLLightDefaults() {
     AvaraGLSetAmbient(0.4f, DEFAULT_LIGHT_COLOR);
 }
 
-void SetTransforms(CBSPPart *part) {
+void SetTransforms(CBSPPart *part, Shader shader) {
     glm::mat4 mv = ToFloatMat(&part->fullTransform);
     if (part->hasScale) {
         glm::vec3 sc = glm::vec3(
@@ -235,11 +238,14 @@ void SetTransforms(CBSPPart *part) {
         normal_mat[2][i] = ToFloat((part->itsTransform)[2][i]);
     }
 
-    glUseProgram(gProgram);
-    glUniformMatrix4fv(mvLoc, 1, GL_FALSE, glm::value_ptr(mv));
-    glUniformMatrix3fv(ntLoc, 1, GL_TRUE, glm::value_ptr(normal_mat));
-    glUseProgram(hudProgram);
-    glUniformMatrix4fv(hudMvLoc, 1, GL_FALSE, glm::value_ptr(mv));
+    if (shader == Shader::HUD) {
+        glUseProgram(hudProgram);
+        glUniformMatrix4fv(hudMvLoc, 1, GL_FALSE, glm::value_ptr(mv));
+    } else {
+        glUseProgram(gProgram);
+        glUniformMatrix4fv(mvLoc, 1, GL_FALSE, glm::value_ptr(mv));
+        glUniformMatrix3fv(ntLoc, 1, GL_TRUE, glm::value_ptr(normal_mat));
+    }
 }
 
 void AvaraGLSetDepthTest(bool doTest) {
@@ -315,12 +321,16 @@ void AvaraGLViewport(short width, short height) {
 void AvaraGLDrawPolygons(CBSPPart* part, Shader shader) {
     glCheckErrors();
     if(!actuallyRender || !ready) return;
+
+    GLuint currentProgram;
+
     // Bind the vertex array and buffer that we set up earlier
     if (shader == Shader::HUD) {
-        glUseProgram(hudProgram);
+        currentProgram = hudProgram;
     } else {
-        glUseProgram(gProgram);
+        currentProgram = gProgram;
     }
+    glUseProgram(currentProgram);
     glBindVertexArray(part->vertexArray);
     glBindBuffer(GL_ARRAY_BUFFER, part->vertexBuffer);
     glBufferData(GL_ARRAY_BUFFER, part->glDataSize, part->glData.get(), GL_STREAM_DRAW);
@@ -340,35 +350,25 @@ void AvaraGLDrawPolygons(CBSPPart* part, Shader shader) {
     float extra_amb = ToFloat(part->extraAmbient);
     float current_amb = ToFloat(part->currentView->ambientLight);
 
-    if (part->privateAmbient != -1) {
-        AvaraGLSetAmbient(ToFloat(part->privateAmbient), part->currentView->ambientLightColor);
-    }
-    if (extra_amb > 0) {
-        AvaraGLSetAmbient(current_amb + extra_amb, part->currentView->ambientLightColor);
+    if (shader == Shader::World) {
+        if (part->privateAmbient != -1) {
+            AvaraGLSetAmbient(ToFloat(part->privateAmbient), part->currentView->ambientLightColor);
+        }
+        if (extra_amb > 0) {
+            AvaraGLSetAmbient(current_amb + extra_amb, part->currentView->ambientLightColor);
+        }
     }
     if (part->ignoreDirectionalLights) {
-        ActivateLights(0);
+        ActivateLights(0, shader);
         glCheckErrors();
-    }
-
-    if (shader == Shader::HUD) {
-        glUseProgram(hudProgram);
-    } else {
-        glUseProgram(gProgram);
     }
 
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
     glFrontFace(GL_CCW);
 
-    SetTransforms(part);
+    SetTransforms(part, shader);
     glCheckErrors();
-
-    if (shader == Shader::HUD) {
-        glUseProgram(hudProgram);
-    } else {
-        glUseProgram(gProgram);
-    }
 
     glBindVertexArray(part->vertexArray);
     glDrawArrays(GL_TRIANGLES, 0, part->openGLPoints);
@@ -378,19 +378,15 @@ void AvaraGLDrawPolygons(CBSPPart* part, Shader shader) {
     glDisableVertexAttribArray(2);
 
     // restore previous lighting state
-    if (part->privateAmbient != -1 || extra_amb > 0) {
-        AvaraGLSetAmbient(current_amb, part->currentView->ambientLightColor);
-        glCheckErrors();
+    if (shader == Shader::World) {
+        if (part->privateAmbient != -1 || extra_amb > 0) {
+            AvaraGLSetAmbient(current_amb, part->currentView->ambientLightColor);
+            glCheckErrors();
+        }
     }
     if (part->ignoreDirectionalLights) {
-        ActivateLights(1);
+        ActivateLights(1, shader);
         glCheckErrors();
-    }
-
-    if (shader == Shader::HUD) {
-        glUseProgram(hudProgram);
-    } else {
-        glUseProgram(gProgram);
     }
 
     glBindVertexArray(0);
