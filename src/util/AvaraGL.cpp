@@ -1,6 +1,6 @@
 #include "AvaraGL.h"
+#include "AssetManager.h"
 #include "FastMat.h"
-#include "Resource.h"
 #include "CViewParameters.h"
 #include "ARGBColor.h"
 #include "CBSPPart.h"
@@ -8,17 +8,19 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
-#include <string>
 #include <vector>
 #include <math.h>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#define OBJ_VERT "rsrc/shaders/avara_vert.glsl"
-#define OBJ_FRAG "rsrc/shaders/avara_frag.glsl"
+#define OBJ_VERT "avara_vert.glsl"
+#define OBJ_FRAG "avara_frag.glsl"
 
-#define SKY_VERT "rsrc/shaders/sky_vert.glsl"
-#define SKY_FRAG "rsrc/shaders/sky_frag.glsl"
+#define HUD_VERT "hud_vert.glsl"
+#define HUD_FRAG "hud_frag.glsl"
+
+#define SKY_VERT "sky_vert.glsl"
+#define SKY_FRAG "sky_frag.glsl"
 
 bool actuallyRender = true;
 bool ready = false;
@@ -83,6 +85,9 @@ GLuint light1Loc, light1ColorLoc;
 GLuint light2Loc, light2ColorLoc;
 GLuint light3Loc, light3ColorLoc;
 
+GLuint hudProgram;
+GLuint hudViewLoc, hudProjLoc, hudMvLoc, hudLightsActiveLoc;
+
 GLuint skyProgram;
 GLuint skyVertArray, skyBuffer;
 GLuint skyViewLoc, skyProjLoc, groundColorLoc, horizonColorLoc, skyColorLoc;
@@ -126,6 +131,9 @@ void AvaraGLSetView(glm::mat4 view) {
     glUseProgram(gProgram);
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
     glCheckErrors();
+    glUseProgram(hudProgram);
+    glUniformMatrix4fv(hudViewLoc, 1, GL_FALSE, glm::value_ptr(view));
+    glCheckErrors();
 }
 
 
@@ -143,6 +151,9 @@ void AvaraGLUpdateProjectionMatrix() {
                      , glm::vec3(-1, 1, -1));
     glUseProgram(gProgram);
     glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
+    glCheckErrors();
+    glUseProgram(hudProgram);
+    glUniformMatrix4fv(hudProjLoc, 1, GL_FALSE, glm::value_ptr(proj));
     glCheckErrors();
 }
 
@@ -189,9 +200,14 @@ void AvaraGLSetAmbient(float ambient, ARGBColor color) {
     glUniform3fv(ambColorLoc, 1, rgb);
 }
 
-void ActivateLights(float active) {
-    glUseProgram(gProgram);
-    glUniform1f(lights_activeLoc, active);
+void ActivateLights(float active, Shader shader) {
+    if (shader == Shader::HUD) {
+        glUseProgram(hudProgram);
+        glUniform1f(hudLightsActiveLoc, active);
+    } else {
+        glUseProgram(gProgram);
+        glUniform1f(lights_activeLoc, active);
+    }
 }
 
 void AvaraGLLightDefaults() {
@@ -204,7 +220,7 @@ void AvaraGLLightDefaults() {
     AvaraGLSetAmbient(0.4f, DEFAULT_LIGHT_COLOR);
 }
 
-void SetTransforms(CBSPPart *part) {
+void SetTransforms(CBSPPart *part, Shader shader) {
     glm::mat4 mv = ToFloatMat(&part->fullTransform);
     if (part->hasScale) {
         glm::vec3 sc = glm::vec3(
@@ -214,16 +230,22 @@ void SetTransforms(CBSPPart *part) {
         );
         mv = glm::scale(mv, sc);
     }
-    glUniformMatrix4fv(mvLoc, 1, GL_FALSE, glm::value_ptr(mv));
-    glm::mat3 normal_mat = glm::mat3(1.0f);
 
+    glm::mat3 normal_mat = glm::mat3(1.0f);
     for (int i = 0; i < 3; i ++) {
         normal_mat[0][i] = ToFloat((part->itsTransform)[0][i]);
         normal_mat[1][i] = ToFloat((part->itsTransform)[1][i]);
         normal_mat[2][i] = ToFloat((part->itsTransform)[2][i]);
     }
 
-    glUniformMatrix3fv(ntLoc, 1, GL_TRUE, glm::value_ptr(normal_mat));
+    if (shader == Shader::HUD) {
+        glUseProgram(hudProgram);
+        glUniformMatrix4fv(hudMvLoc, 1, GL_FALSE, glm::value_ptr(mv));
+    } else {
+        glUseProgram(gProgram);
+        glUniformMatrix4fv(mvLoc, 1, GL_FALSE, glm::value_ptr(mv));
+        glUniformMatrix3fv(ntLoc, 1, GL_TRUE, glm::value_ptr(normal_mat));
+    }
 }
 
 void AvaraGLSetDepthTest(bool doTest) {
@@ -234,10 +256,8 @@ void AvaraGLSetDepthTest(bool doTest) {
 void AvaraGLInitContext() {
     //glEnable(GL_DEBUG_OUTPUT);
     if (!actuallyRender) return;
-    char vertPath[PATH_MAX];
-    char fragPath[PATH_MAX];
-    BundlePath(OBJ_VERT, vertPath);
-    BundlePath(OBJ_FRAG, fragPath);
+    std::optional<std::string> vertPath = AssetManager::GetShaderPath(OBJ_VERT);
+    std::optional<std::string> fragPath = AssetManager::GetShaderPath(OBJ_FRAG);
     gProgram = LoadShaders(vertPath, fragPath);
     glUseProgram(gProgram);
 
@@ -263,9 +283,20 @@ void AvaraGLInitContext() {
 
     AvaraGLLightDefaults();
     glCheckErrors();
-    char skyVertPath[PATH_MAX], skyFragPath[PATH_MAX];
-    BundlePath(SKY_VERT, skyVertPath);
-    BundlePath(SKY_FRAG, skyFragPath);
+
+    std::optional<std::string> hudVertPath = AssetManager::GetShaderPath(HUD_VERT);
+    std::optional<std::string> hudFragPath = AssetManager::GetShaderPath(HUD_FRAG);
+    hudProgram = LoadShaders(hudVertPath, hudFragPath);
+    glUseProgram(hudProgram);
+
+    hudViewLoc = glGetUniformLocation(hudProgram, "view");
+    hudProjLoc = glGetUniformLocation(hudProgram, "proj");
+    hudMvLoc = glGetUniformLocation(hudProgram, "modelview");
+    hudLightsActiveLoc = glGetUniformLocation(hudProgram, "lights_active");
+    glCheckErrors();
+
+    std::optional<std::string> skyVertPath = AssetManager::GetShaderPath(SKY_VERT);
+    std::optional<std::string> skyFragPath = AssetManager::GetShaderPath(SKY_FRAG);
     skyProgram = LoadShaders(skyVertPath, skyFragPath);
     glGenVertexArrays(1, &skyVertArray);
     glGenBuffers(1, &skyBuffer);
@@ -287,11 +318,19 @@ void AvaraGLViewport(short width, short height) {
     AvaraGLUpdateProjectionMatrix();
 }
 
-void AvaraGLDrawPolygons(CBSPPart* part) {
+void AvaraGLDrawPolygons(CBSPPart* part, Shader shader) {
     glCheckErrors();
     if(!actuallyRender || !ready) return;
+
+    GLuint currentProgram;
+
     // Bind the vertex array and buffer that we set up earlier
-    glUseProgram(gProgram);
+    if (shader == Shader::HUD) {
+        currentProgram = hudProgram;
+    } else {
+        currentProgram = gProgram;
+    }
+    glUseProgram(currentProgram);
     glBindVertexArray(part->vertexArray);
     glBindBuffer(GL_ARRAY_BUFFER, part->vertexBuffer);
     glBufferData(GL_ARRAY_BUFFER, part->glDataSize, part->glData.get(), GL_STREAM_DRAW);
@@ -311,14 +350,16 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     float extra_amb = ToFloat(part->extraAmbient);
     float current_amb = ToFloat(part->currentView->ambientLight);
 
-    if (part->privateAmbient != -1) {
-        AvaraGLSetAmbient(ToFloat(part->privateAmbient), part->currentView->ambientLightColor);
-    }
-    if (extra_amb > 0) {
-        AvaraGLSetAmbient(current_amb + extra_amb, part->currentView->ambientLightColor);
+    if (shader == Shader::World) {
+        if (part->privateAmbient != -1) {
+            AvaraGLSetAmbient(ToFloat(part->privateAmbient), part->currentView->ambientLightColor);
+        }
+        if (extra_amb > 0) {
+            AvaraGLSetAmbient(current_amb + extra_amb, part->currentView->ambientLightColor);
+        }
     }
     if (part->ignoreDirectionalLights) {
-        ActivateLights(0);
+        ActivateLights(0, shader);
         glCheckErrors();
     }
 
@@ -326,7 +367,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     glCullFace(GL_BACK);
     glFrontFace(GL_CCW);
 
-    SetTransforms(part);
+    SetTransforms(part, shader);
     glCheckErrors();
 
     glBindVertexArray(part->vertexArray);
@@ -337,12 +378,14 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     glDisableVertexAttribArray(2);
 
     // restore previous lighting state
-    if (part->privateAmbient != -1 || extra_amb > 0) {
-        AvaraGLSetAmbient(current_amb, part->currentView->ambientLightColor);
-        glCheckErrors();
+    if (shader == Shader::World) {
+        if (part->privateAmbient != -1 || extra_amb > 0) {
+            AvaraGLSetAmbient(current_amb, part->currentView->ambientLightColor);
+            glCheckErrors();
+        }
     }
     if (part->ignoreDirectionalLights) {
-        ActivateLights(1);
+        ActivateLights(1, shader);
         glCheckErrors();
     }
 
@@ -493,40 +536,44 @@ void AvaraGLShadeWorld(CWorldShader *theShader, CViewParameters *theView) {
     glEnable(GL_DEPTH_TEST);
 }
 
-GLuint LoadShaders(const char *vertex_file_path, const char *fragment_file_path) {
+GLuint LoadShaders(std::optional<std::string> vertex_file_path, std::optional<std::string> fragment_file_path) {
     // Create the shaders
     GLuint VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
     GLuint FragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
 
     // Read the Vertex Shader code from the file
     std::string VertexShaderCode;
-    std::ifstream VertexShaderStream(vertex_file_path, std::ios::in);
+    std::ifstream VertexShaderStream(*vertex_file_path, std::ios::in);
     if (VertexShaderStream.is_open()) {
         std::stringstream sstr;
         sstr << VertexShaderStream.rdbuf();
         VertexShaderCode = sstr.str();
         VertexShaderStream.close();
     } else {
-        printf("Impossible to open %s. Are you in the right directory? \n", vertex_file_path);
+        printf("Impossible to open %s. Are you in the right directory? \n", (*vertex_file_path).c_str());
         getchar();
         return 0;
     }
 
     // Read the Fragment Shader code from the file
     std::string FragmentShaderCode;
-    std::ifstream FragmentShaderStream(fragment_file_path, std::ios::in);
+    std::ifstream FragmentShaderStream(*fragment_file_path, std::ios::in);
     if (FragmentShaderStream.is_open()) {
         std::stringstream sstr;
         sstr << FragmentShaderStream.rdbuf();
         FragmentShaderCode = sstr.str();
         FragmentShaderStream.close();
+    } else {
+        printf("Impossible to open %s. Are you in the right directory? \n", (*fragment_file_path).c_str());
+        getchar();
+        return 0;
     }
 
     GLint Result = GL_FALSE;
     int InfoLogLength;
 
     // Compile Vertex Shader
-    fprintf(stderr, "Compiling shader : %s\n", vertex_file_path);
+    fprintf(stderr, "Compiling shader : %s\n", (*vertex_file_path).c_str());
     char const *VertexSourcePointer = VertexShaderCode.c_str();
     glShaderSource(VertexShaderID, 1, &VertexSourcePointer, NULL);
     glCompileShader(VertexShaderID);
@@ -541,7 +588,7 @@ GLuint LoadShaders(const char *vertex_file_path, const char *fragment_file_path)
     }
 
     // Compile Fragment Shader
-    fprintf(stderr, "Compiling shader : %s\n", fragment_file_path);
+    fprintf(stderr, "Compiling shader : %s\n", (*fragment_file_path).c_str());
     char const *FragmentSourcePointer = FragmentShaderCode.c_str();
     glShaderSource(FragmentShaderID, 1, &FragmentSourcePointer, NULL);
     glCompileShader(FragmentShaderID);

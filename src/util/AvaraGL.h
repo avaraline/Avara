@@ -9,6 +9,18 @@
 #include "FastMat.h"
 #include "Memory.h"
 
+#include <string>
+
+#ifdef __has_include
+#  if __has_include(<optional>)                // Check for a standard library
+#    include <optional>
+#  elif __has_include(<experimental/optional>) // Check for an experimental version
+#    include <experimental/optional>           // Check if __has_include is present
+#  else                                        // Not found at all
+#     error "Missing <optional>"
+#  endif
+#endif
+
 // Forward declaration of Avara fundamental drawing classes
 class CBSPPart;
 #include "CBSPPart.h"
@@ -19,8 +31,10 @@ class CWorldShader;
 
 #define GLAD_DEBUG
 
+enum struct Shader { World, HUD, Sky };
 
-GLuint LoadShaders(const char *vertex_file_path, const char *fragment_file_path);
+
+GLuint LoadShaders(std::optional<std::string> vertex_file_path, std::optional<std::string> fragment_file_path);
 void AvaraGLSetLight(int light, float intensity, float elevation, float azimuth, ARGBColor color);
 void AvaraGLSetDepthTest(bool doTest);
 void AvaraGLSetAmbient(float ambient, ARGBColor color);
@@ -30,7 +44,7 @@ void AvaraGLUpdateProjectionMatrix();
 void AvaraGLLightDefaults();
 void AvaraGLInitContext();
 void AvaraGLViewport(short width, short height);
-void AvaraGLDrawPolygons(CBSPPart* part);
+void AvaraGLDrawPolygons(CBSPPart* part, Shader shader = Shader::World);
 void AvaraGLShadeWorld(CWorldShader *theShader, CViewParameters *theView);
 void AvaraGLToggleRendering(int active);
 bool AvaraGLIsRendering();

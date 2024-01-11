@@ -23,6 +23,3 @@ void WriteResource(Handle theResource);
 void ChangedResource(Handle theResource);
 void ReleaseResource(Handle theResource);
 void DetachResource(Handle theResource);
-
-void BundlePath(const char *rel, char *dest);
-void BundlePath(std::stringstream &buffa, char *dest);

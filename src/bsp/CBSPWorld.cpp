@@ -265,7 +265,7 @@ void CBSPWorldImpl::SortVisibleParts() {
     }
 }
 
-void CBSPWorldImpl::Render(CViewParameters *theView) {
+void CBSPWorldImpl::Render(CViewParameters *theView, Shader shader) {
     int i;
     CBSPPart **sp, **sd;
 
@@ -294,7 +294,7 @@ void CBSPWorldImpl::Render(CViewParameters *theView) {
     {
         sd = visibleP;
         for (i = 0; i < visibleCount; i++) {
-            (*sd)->DrawPolygons();
+            (*sd)->DrawPolygons(shader);
             sd++;
         }
     }
