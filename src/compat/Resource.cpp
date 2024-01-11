@@ -168,25 +168,3 @@ void ReleaseResource(Handle theResource) {
 }
 
 void DetachResource(Handle theResource) {}
-
-void BundlePath(const char *rel, char *dest) {
-
-    if (sdlBasePath.length() < 1) {
-        sdlBasePath = SDL_GetBasePath();
-    }
-    //char *path = new char[256];
-    snprintf(dest, PATH_MAX, "%s%s", sdlBasePath.c_str(), rel);
-#ifdef _WIN32
-    char *c = dest;
-    while (*c != 0) {
-        if (*c == '/') {
-            *c = '\\';
-        }
-        c++;
-    }
-#endif
-}
-
-void BundlePath(std::stringstream &buffa, char *dest) {
-    return BundlePath(buffa.str().c_str(), dest);
-}
