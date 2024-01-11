@@ -612,7 +612,7 @@ void CAvaraGame::EndScript() {
     itsView->ambientLight = ReadFixedVar(iAmbient);
     itsView->ambientLightColor = ARGBColor::Parse(ReadStringVar(iAmbientColor))
         .value_or(DEFAULT_LIGHT_COLOR);
-    AvaraGLSetAmbient(ToFloat(itsView->ambientLight), itsView->ambientLightColor);
+    AvaraGLSetAmbient(ToFloat(itsView->ambientLight), itsView->ambientLightColor, Shader::World);
 
     for (i = 0; i < 4; i++) {
         intensity = ReadFixedVar(iLightsTable + 4 * i);

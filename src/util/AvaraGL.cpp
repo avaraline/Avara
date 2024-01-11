@@ -86,7 +86,7 @@ GLuint light2Loc, light2ColorLoc;
 GLuint light3Loc, light3ColorLoc;
 
 GLuint hudProgram;
-GLuint hudViewLoc, hudProjLoc, hudMvLoc, hudLightsActiveLoc;
+GLuint hudViewLoc, hudProjLoc, hudMvLoc, hudAmbientLoc, hudLightsActiveLoc;
 
 GLuint skyProgram;
 GLuint skyVertArray, skyBuffer;
@@ -189,15 +189,20 @@ void AvaraGLSetLight(int light_index, float intensity, float elevation, float az
     }
 }
 
-void AvaraGLSetAmbient(float ambient, ARGBColor color) {
+void AvaraGLSetAmbient(float ambient, ARGBColor color, Shader shader) {
     if (!actuallyRender) return;
 
     float rgb[3];
     color.ExportGLFloats(rgb, 3);
 
-    glUseProgram(gProgram);
-    glUniform1f(ambLoc, ambient);
-    glUniform3fv(ambColorLoc, 1, rgb);
+    if (shader == Shader::HUD) {
+        glUseProgram(hudProgram);
+        glUniform1f(hudAmbientLoc, ambient);
+    } else {
+        glUseProgram(gProgram);
+        glUniform1f(ambLoc, ambient);
+        glUniform3fv(ambColorLoc, 1, rgb);
+    }
 }
 
 void ActivateLights(float active, Shader shader) {
@@ -217,7 +222,8 @@ void AvaraGLLightDefaults() {
     AvaraGLSetLight(1, 0.3f, 20.0f, 200.0f, DEFAULT_LIGHT_COLOR);
     AvaraGLSetLight(2, 0, 0, 0, DEFAULT_LIGHT_COLOR);
     AvaraGLSetLight(3, 0, 0, 0, DEFAULT_LIGHT_COLOR);
-    AvaraGLSetAmbient(0.4f, DEFAULT_LIGHT_COLOR);
+    AvaraGLSetAmbient(0.4f, DEFAULT_LIGHT_COLOR, Shader::World);
+    AvaraGLSetAmbient(0.7f, DEFAULT_LIGHT_COLOR, Shader::HUD);
 }
 
 void SetTransforms(CBSPPart *part, Shader shader) {
@@ -292,6 +298,7 @@ void AvaraGLInitContext() {
     hudViewLoc = glGetUniformLocation(hudProgram, "view");
     hudProjLoc = glGetUniformLocation(hudProgram, "proj");
     hudMvLoc = glGetUniformLocation(hudProgram, "modelview");
+    hudAmbientLoc = glGetUniformLocation(hudProgram, "ambient");
     hudLightsActiveLoc = glGetUniformLocation(hudProgram, "lights_active");
     glCheckErrors();
 
@@ -350,13 +357,11 @@ void AvaraGLDrawPolygons(CBSPPart* part, Shader shader) {
     float extra_amb = ToFloat(part->extraAmbient);
     float current_amb = ToFloat(part->currentView->ambientLight);
 
-    if (shader == Shader::World) {
-        if (part->privateAmbient != -1) {
-            AvaraGLSetAmbient(ToFloat(part->privateAmbient), part->currentView->ambientLightColor);
-        }
-        if (extra_amb > 0) {
-            AvaraGLSetAmbient(current_amb + extra_amb, part->currentView->ambientLightColor);
-        }
+    if (part->privateAmbient != -1) {
+        AvaraGLSetAmbient(ToFloat(part->privateAmbient), part->currentView->ambientLightColor, shader);
+    }
+    if (extra_amb > 0) {
+        AvaraGLSetAmbient(current_amb + extra_amb, part->currentView->ambientLightColor, shader);
     }
     if (part->ignoreDirectionalLights) {
         ActivateLights(0, shader);
@@ -378,11 +383,9 @@ void AvaraGLDrawPolygons(CBSPPart* part, Shader shader) {
     glDisableVertexAttribArray(2);
 
     // restore previous lighting state
-    if (shader == Shader::World) {
-        if (part->privateAmbient != -1 || extra_amb > 0) {
-            AvaraGLSetAmbient(current_amb, part->currentView->ambientLightColor);
-            glCheckErrors();
-        }
+    if (part->privateAmbient != -1 || extra_amb > 0) {
+        AvaraGLSetAmbient(current_amb, part->currentView->ambientLightColor, shader);
+        glCheckErrors();
     }
     if (part->ignoreDirectionalLights) {
         ActivateLights(1, shader);
