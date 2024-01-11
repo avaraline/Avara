@@ -534,6 +534,8 @@ CScaledBSP* CAbstractPlayer::DashboardPart(uint16_t id, Fixed scale) {
     CScaledBSP* bsp = new CScaledBSP;
     bsp->IScaledBSP(scale, id, this, 0);
     bsp->ReplaceAllColors(ColorManager::getHUDColor());
+    bsp->privateAmbient = FIX1;
+    bsp->ignoreDirectionalLights = true;
     bsp->isTransparent = true;
     itsGame->hudWorld->AddPart(bsp);
     return bsp;

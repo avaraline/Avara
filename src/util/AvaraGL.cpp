@@ -223,7 +223,7 @@ void AvaraGLLightDefaults() {
     AvaraGLSetLight(2, 0, 0, 0, DEFAULT_LIGHT_COLOR);
     AvaraGLSetLight(3, 0, 0, 0, DEFAULT_LIGHT_COLOR);
     AvaraGLSetAmbient(0.4f, DEFAULT_LIGHT_COLOR, Shader::World);
-    AvaraGLSetAmbient(0.4f, DEFAULT_LIGHT_COLOR, Shader::HUD);
+    AvaraGLSetAmbient(0.7f, DEFAULT_LIGHT_COLOR, Shader::HUD);
 }
 
 void SetTransforms(CBSPPart *part, Shader shader) {
