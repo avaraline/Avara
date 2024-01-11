@@ -31,13 +31,13 @@ class CWorldShader;
 
 #define GLAD_DEBUG
 
-enum struct Shader { World, HUD, Sky };
+enum struct Shader { World, HUD };
 
 
 GLuint LoadShaders(std::optional<std::string> vertex_file_path, std::optional<std::string> fragment_file_path);
 void AvaraGLSetLight(int light, float intensity, float elevation, float azimuth, ARGBColor color);
 void AvaraGLSetDepthTest(bool doTest);
-void AvaraGLSetAmbient(float ambient, ARGBColor color);
+void AvaraGLSetAmbient(float ambient, ARGBColor color, Shader shader = Shader::World);
 void AvaraGLSetView(glm::mat4 view);
 void AvaraGLSetFOV(float fov);
 void AvaraGLUpdateProjectionMatrix();

@@ -3,11 +3,11 @@
 in vec4 fragmentColor;
 in vec3 fragmentNormal;
 
+uniform float ambient = 0.0;
 uniform float lights_active = 1.0;
 
 out vec4 color;
 
-float ambient = 0.7;
 vec3 light0 = vec3(-0.136808053, -0.282842726, 0.375877053);
 vec3 light1 = vec3(0.102606051, -0.102606043, -0.281907797);
 vec3 lightColor = vec3(1, 1, 1);
