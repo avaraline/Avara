@@ -4,6 +4,7 @@
 #include "CViewParameters.h"
 #include "ARGBColor.h"
 #include "CBSPPart.h"
+#include "ColorManager.h"
 
 #include <fstream>
 #include <iostream>
@@ -86,7 +87,7 @@ GLuint light2Loc, light2ColorLoc;
 GLuint light3Loc, light3ColorLoc;
 
 GLuint hudProgram;
-GLuint hudViewLoc, hudProjLoc, hudMvLoc, hudAmbientLoc, hudLightsActiveLoc;
+GLuint hudViewLoc, hudProjLoc, hudMvLoc, hudAmbientLoc, hudAlphaLoc, hudLightsActiveLoc;
 
 GLuint skyProgram;
 GLuint skyVertArray, skyBuffer;
@@ -299,7 +300,8 @@ void AvaraGLInitContext() {
     hudProjLoc = glGetUniformLocation(hudProgram, "proj");
     hudMvLoc = glGetUniformLocation(hudProgram, "modelview");
     hudAmbientLoc = glGetUniformLocation(hudProgram, "ambient");
-    hudLightsActiveLoc = glGetUniformLocation(hudProgram, "lights_active");
+    hudAlphaLoc = glGetUniformLocation(hudProgram, "hudAlpha");
+    hudLightsActiveLoc = glGetUniformLocation(hudProgram, "lightsActive");
     glCheckErrors();
 
     std::optional<std::string> skyVertPath = AssetManager::GetShaderPath(SKY_VERT);
@@ -329,15 +331,13 @@ void AvaraGLDrawPolygons(CBSPPart* part, Shader shader) {
     glCheckErrors();
     if(!actuallyRender || !ready) return;
 
-    GLuint currentProgram;
-
     // Bind the vertex array and buffer that we set up earlier
     if (shader == Shader::HUD) {
-        currentProgram = hudProgram;
+        glUseProgram(hudProgram);
+        glUniform1f(hudAlphaLoc, ColorManager::getHUDAlpha());
     } else {
-        currentProgram = gProgram;
+        glUseProgram(gProgram);
     }
-    glUseProgram(currentProgram);
     glBindVertexArray(part->vertexArray);
     glBindBuffer(GL_ARRAY_BUFFER, part->vertexBuffer);
     glBufferData(GL_ARRAY_BUFFER, part->glDataSize, part->glData.get(), GL_STREAM_DRAW);
