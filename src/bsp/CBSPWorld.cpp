@@ -16,7 +16,7 @@
 extern Vector **bspPointTemp;
 extern short *bspIndexStack;
 
-void CBSPWorldImpl::IBSPWorld(short initialObjectSpace) {
+CBSPWorldImpl::CBSPWorldImpl(short initialObjectSpace) {
     partSpace = initialObjectSpace;
     partCount = 0;
 

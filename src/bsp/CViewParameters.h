@@ -17,7 +17,7 @@ enum { kLightOff, kLightViewCoordinates, kLightGlobalCoordinates };
 
 class CBSPPart;
 
-class CViewParameters : public CDirectObject {
+class CViewParameters final : public CDirectObject {
 public:
     Vector fromPoint = {0, 0, 0};
     Vector atPoint = {0, 0, 0};
@@ -60,7 +60,7 @@ public:
     Boolean inverseDone = false;
     Boolean showTransparent = false;
 
-    virtual void IViewParameters();
+    CViewParameters();
     virtual void CalculateViewPyramidCorners();
     virtual void CalculateViewPyramidNormals();
     virtual void Dispose();

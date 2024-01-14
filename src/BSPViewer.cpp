@@ -65,12 +65,10 @@ public:
         AvaraGLSetFOV(50);
 
         current_id = id;
-        itsWorld = new CBSPWorldImpl;
-        itsWorld->IBSPWorld(1);
+        itsWorld = new CBSPWorldImpl(1);
         newPart(current_id);
 
         itsView = new CViewParameters;
-        itsView->IViewParameters();
 
         itsView->yonBound = FIX(100);
         itsView->dirtyLook = true;
