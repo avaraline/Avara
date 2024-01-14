@@ -10,14 +10,17 @@
 #pragma once
 #include "CSmartPart.h"
 
-class CScaledBSP : public CSmartPart {
+class CScaledBSP final : public CSmartPart {
 public:
     bool isMorphable;
 
-    virtual void IScaledBSP(Fixed scale, short resId, CAbstractActor *anActor, short aPartCode);
     virtual void Scale(Fixed scale);
     virtual void ScaleXYZ(Fixed scaleX, Fixed scaleY, Fixed scaleZ);
     virtual void Reset();
 
     virtual void Dispose();
+    CScaledBSP(Fixed scale, short resId, CAbstractActor *anActor, short aPartCode);
+
+private:
+    static void Create() {}; // disallow calling CSmartPart::Create to construct.
 };

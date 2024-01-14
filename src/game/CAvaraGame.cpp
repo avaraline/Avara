@@ -131,7 +131,6 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     itsDepot->IDepot(this);
 
     itsView = new CViewParameters;
-    itsView->IViewParameters();
     itsView->hitherBound = FIX3(600);
     itsView->yonBound = LONGYON;
     itsView->horizonBound = FIX(16000); //	16 km
@@ -177,8 +176,7 @@ CSoundHub* CAvaraGame::CreateSoundHub() {
 }
 
 CBSPWorld* CAvaraGame::CreateCBSPWorld(short initialObjectSpace) {
-    CBSPWorldImpl *w = new CBSPWorldImpl;
-    w->IBSPWorld(initialObjectSpace);
+    CBSPWorldImpl *w = new CBSPWorldImpl(initialObjectSpace);
     return w;
 }
 

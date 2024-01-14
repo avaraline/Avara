@@ -29,6 +29,13 @@ Vector **bspPointTemp = 0;
 
 ARGBColor ***bspColorLookupTable = 0;
 
+CBSPPart *CBSPPart::Create(short resId) {
+    CBSPPart *part = new CBSPPart;
+    part->IBSPPart(resId);
+    return part;
+}
+
+
 void CBSPPart::IBSPPart(short resId) {
     //SDL_Log("Loading BSP: %s\n", bspName);
     lightSeed = 0;

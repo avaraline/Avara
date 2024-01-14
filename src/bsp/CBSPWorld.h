@@ -26,7 +26,7 @@ public:
     virtual void OverheadPoint(Fixed *pt, Fixed *extent) {};
 };
 
-class CBSPWorldImpl : public CBSPWorld {
+class CBSPWorldImpl final : public CBSPWorld {
 private:
     short partCount;
     short partSpace;
@@ -39,7 +39,8 @@ private:
 public:
     virtual void AddPart(CBSPPart *thePart);
 
-    virtual void IBSPWorld(short initialObjectSpace);
+    CBSPWorldImpl(short initialObjectSpace);
+
     virtual void DisposeParts();
     virtual void Dispose();
 

@@ -108,7 +108,7 @@ void CViewParameters::Recalculate() {
     CalculateViewPyramidNormals();
 }
 
-void CViewParameters::IViewParameters() {
+CViewParameters::CViewParameters() {
     //Vector *vt;
     uint8_t i;
     // GrafPtr			curPort;

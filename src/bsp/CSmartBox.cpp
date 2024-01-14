@@ -112,12 +112,14 @@ void CSmartBox::StretchTemplate(Fixed *dimensions, Fixed baseSize) {
     FindEnclosure();
 }
 
-void CSmartBox::ISmartBox(short resId,
+CSmartBox::CSmartBox(
+    short resId,
     Fixed *dimensions,
     ARGBColor color,
     ARGBColor altColor,
     CAbstractActor *anActor,
-    short aPartCode) {
+    short aPartCode
+) {
     bspsResource **config;
     Fixed baseSize;
     Boolean stretchFlag;

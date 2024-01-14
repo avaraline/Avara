@@ -17,13 +17,10 @@
 
 void CAbstractActor::LoadPart(short ind, short resId) {
     if (partScale == FIX1) {
-        partList[ind] = new CSmartPart;
-        partList[ind]->ISmartPart(resId, this, ind);
+        partList[ind] = CSmartPart::Create(resId, this, ind);
     } else {
         CScaledBSP *part;
-
-        part = new CScaledBSP;
-        part->IScaledBSP(partScale, resId, this, ind);
+        part = new CScaledBSP(partScale, resId, this, ind);
         partList[ind] = part;
     }
 

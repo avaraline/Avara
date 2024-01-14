@@ -179,7 +179,7 @@ public:
     Boolean ignoreDirectionalLights = 0;
     short userFlags = 0; //	Can be used for various flags by user.
 
-    virtual void IBSPPart(short resId);
+    static CBSPPart *Create(short resId);
     virtual void BuildBoundingVolumes();
     virtual void Dispose();
 
@@ -229,4 +229,6 @@ public:
 protected:
     bool hasAlpha = false;
     virtual void CheckForAlpha();
+    CBSPPart() {}
+    virtual void IBSPPart(short resId);
 };

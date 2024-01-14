@@ -43,8 +43,7 @@ void CWalkerActor::LoadParts() {
     viewPortPart = partList[0];
 
 #ifdef MARKERCUBE
-    markerCube = new CBSPPart;
-    markerCube->IBSPPart(213);
+    markerCube = CBSPPart::Create(213);
     itsGame->itsWorld->AddPart(markerCube);
 #endif
 
