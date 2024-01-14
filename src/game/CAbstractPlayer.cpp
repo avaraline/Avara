@@ -528,7 +528,7 @@ void CAbstractPlayer::PlaceHUDParts() {
 }
 
 CScaledBSP* CAbstractPlayer::DashboardPart(uint16_t id, Fixed scale) {
-    CScaledBSP* bsp = CScaledBSP::Create(scale, id, this, 0);
+    CScaledBSP* bsp = new CScaledBSP(scale, id, this, 0);
     bsp->ReplaceAllColors(ColorManager::getHUDColor());
     bsp->privateAmbient = FIX1;
     bsp->ignoreDirectionalLights = true;

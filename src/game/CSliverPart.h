@@ -13,7 +13,7 @@
 
 // class CSliverPart;
 
-class CSliverPart : public CSmartPart {
+class CSliverPart final : public CSmartPart {
 public:
     CSliverPart *nextSliver;
     Vector speed;
@@ -22,7 +22,7 @@ public:
     ARGBColor *fakeMaster;
     Fixed friction, gravity;
     Fixed fpsScale, fpsFriction, fpsGravity;
-    static CSliverPart *Create(short partNum);
+    CSliverPart(short partNum);
     virtual void Activate(Fixed *origin,
         Fixed *direction,
         Fixed scale,
@@ -36,6 +36,5 @@ public:
 #endif
     virtual void Dispose();
 private:
-    CSliverPart() {}
-    virtual void ISliverPart(short partNum);
+    void Create() {}
 };

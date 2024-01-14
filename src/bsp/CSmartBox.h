@@ -15,10 +15,10 @@
 #define BSPTEMPLATETYPE 'BSPT'
 #define BSPSCALETYPE 'BSPS'
 
-class CSmartBox : public CSmartPart {
+class CSmartBox final : public CSmartPart {
 public:
     virtual void Dispose();
-    static CSmartBox* Create(short resId,
+    CSmartBox(short resId,
         Fixed *dimensions,
         ARGBColor color,
         ARGBColor altColor,
@@ -30,12 +30,5 @@ public:
 
     virtual void FindEnclosure();
 private:
-    CSmartBox() {}
-    virtual void ISmartBox(short resId,
-    Fixed *dimensions,
-    ARGBColor color,
-    ARGBColor altColor,
-    CAbstractActor *anActor,
-    short aPartCode);
-
+    static void Create() {}
 };

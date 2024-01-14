@@ -20,8 +20,7 @@ void CAbstractActor::LoadPart(short ind, short resId) {
         partList[ind] = CSmartPart::Create(resId, this, ind);
     } else {
         CScaledBSP *part;
-
-        part = CScaledBSP::Create(partScale, resId, this, ind);
+        part = new CScaledBSP(partScale, resId, this, ind);
         partList[ind] = part;
     }
 

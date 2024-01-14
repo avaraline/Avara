@@ -81,7 +81,7 @@ void CDepot::CreateSlivers() {
         for (i = 0; i < SLIVERCOUNT; i++) {
             CSliverPart *theSliver;
 
-            theSliver = CSliverPart::Create(500 + j);
+            theSliver = new CSliverPart(500 + j);
             theSliver->nextSliver = freeSlivers[j];
             freeSlivers[j] = theSliver;
         }
