@@ -14,10 +14,14 @@ class CScaledBSP : public CSmartPart {
 public:
     bool isMorphable;
 
-    virtual void IScaledBSP(Fixed scale, short resId, CAbstractActor *anActor, short aPartCode);
     virtual void Scale(Fixed scale);
     virtual void ScaleXYZ(Fixed scaleX, Fixed scaleY, Fixed scaleZ);
     virtual void Reset();
 
     virtual void Dispose();
+    static CScaledBSP *Create(Fixed scale, short resId, CAbstractActor *anActor, short aPartCode);
+private:
+    CScaledBSP() {};
+    virtual void IScaledBSP(Fixed scale, short resId, CAbstractActor *anActor, short aPartCode);
+
 };

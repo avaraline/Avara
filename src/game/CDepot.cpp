@@ -81,8 +81,7 @@ void CDepot::CreateSlivers() {
         for (i = 0; i < SLIVERCOUNT; i++) {
             CSliverPart *theSliver;
 
-            theSliver = new CSliverPart;
-            theSliver->ISliverPart(500 + j);
+            theSliver = CSliverPart::Create(500 + j);
             theSliver->nextSliver = freeSlivers[j];
             freeSlivers[j] = theSliver;
         }
@@ -250,27 +249,23 @@ void CDepot::ReloadParts() {
     if (grenadeSight) grenadeSight->Dispose();
     if (grenadeTop) grenadeTop->Dispose();
 
-    smartSight = new CBSPPart;
-    smartSight->IBSPPart(208);
+    smartSight = CBSPPart::Create(208);
     smartSight->ReplaceColor(0xfffffb00, ColorManager::getMissileSightPrimaryColor());
     smartSight->ReplaceColor(0xffff2600, ColorManager::getMissileSightSecondaryColor());
     smartSight->ignoreDirectionalLights = true;
     smartSight->privateAmbient = FIX1;
 
-    smartHairs = new CBSPPart;
-    smartHairs->IBSPPart(207);
+    smartHairs = CBSPPart::Create(207);
     smartHairs->ReplaceColor(0xffff2600, ColorManager::getMissileLockColor());
     smartHairs->ignoreDirectionalLights = true;
     smartHairs->privateAmbient = FIX1;
 
-    grenadeSight = new CBSPPart;
-    grenadeSight->IBSPPart(200);
+    grenadeSight = CBSPPart::Create(200);
     grenadeSight->ReplaceColor(0xfffffb00, ColorManager::getGrenadeSightPrimaryColor());
     grenadeSight->ignoreDirectionalLights = true;
     grenadeSight->privateAmbient = FIX1;
 
-    grenadeTop = new CBSPPart;
-    grenadeTop->IBSPPart(201);
+    grenadeTop = CBSPPart::Create(201);
     grenadeTop->ReplaceColor(0xffff2600, ColorManager::getGrenadeSightSecondaryColor());
     grenadeTop->ignoreDirectionalLights = true;
     grenadeTop->privateAmbient = FIX1;

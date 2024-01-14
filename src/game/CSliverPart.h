@@ -22,8 +22,7 @@ public:
     ARGBColor *fakeMaster;
     Fixed friction, gravity;
     Fixed fpsScale, fpsFriction, fpsGravity;
-
-    virtual void ISliverPart(short partNum);
+    static CSliverPart *Create(short partNum);
     virtual void Activate(Fixed *origin,
         Fixed *direction,
         Fixed scale,
@@ -36,4 +35,7 @@ public:
     virtual	void		GenerateColorLookupTable();
 #endif
     virtual void Dispose();
+private:
+    CSliverPart() {}
+    virtual void ISliverPart(short partNum);
 };

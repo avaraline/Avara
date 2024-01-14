@@ -124,8 +124,7 @@ public:
             if (itsWorld->GetPartCount() > 0) {
                 itsWorld->RemovePart(itsPart);
             }
-            itsPart = new CBSPPart;
-            itsPart->IBSPPart(id);
+            itsPart = CBSPPart::Create(id);
             if (itsPart->polyCount > 0) {
                 itsPart->ReplaceColor(
                     *ColorManager::getMarkerColor(0),

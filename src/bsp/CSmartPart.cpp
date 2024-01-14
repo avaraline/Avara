@@ -13,6 +13,12 @@
 
 #include "FastMat.h"
 
+CSmartPart *CSmartPart::Create(short resId, CAbstractActor *anActor, short aPartCode) {
+    CSmartPart * part = new CSmartPart;
+    part->ISmartPart(resId, anActor, aPartCode);
+    return part;
+}
+
 void CSmartPart::ISmartPart(short resId, CAbstractActor *anActor, short aPartCode) {
     CBSPPart::IBSPPart(resId);
     

@@ -60,8 +60,7 @@ void CAbstractPlayer::LoadHUDParts() {
     hudWorld = itsGame->hudWorld;
 
     for (i = 0; i < 2; i++) {
-        targetOns[i] = new CBSPPart;
-        targetOns[i]->IBSPPart(kTargetOk);
+        targetOns[i] = CBSPPart::Create(kTargetOk);
         targetOns[i]->ReplaceColor(0xffff2600, ColorManager::getPlasmaSightsOnColor());
         targetOns[i]->privateAmbient = SIGHTSAMBIENT;
         targetOns[i]->yon = LONGYON * 2;
@@ -70,8 +69,7 @@ void CAbstractPlayer::LoadHUDParts() {
         targetOns[i]->isTransparent = true;
         hudWorld->AddPart(targetOns[i]);
 
-        targetOffs[i] = new CBSPPart;
-        targetOffs[i]->IBSPPart(kTargetOff);
+        targetOffs[i] = CBSPPart::Create(kTargetOff);
         targetOffs[i]->ReplaceColor(0xff008f00, ColorManager::getPlasmaSightsOffColor());
         targetOffs[i]->privateAmbient = SIGHTSAMBIENT;
         targetOffs[i]->yon = LONGYON * 2;
@@ -82,8 +80,7 @@ void CAbstractPlayer::LoadHUDParts() {
     }
 
     dirArrowHeight = FIX3(750);
-    dirArrow = new CBSPPart;
-    dirArrow->IBSPPart(kDirIndBSP);
+    dirArrow = CBSPPart::Create(kDirIndBSP);
     dirArrow->ReplaceColor(0xff000000, ColorManager::getLookForwardColor());
     dirArrow->ignoreDirectionalLights = true;
     dirArrow->privateAmbient = FIX1;
@@ -531,8 +528,7 @@ void CAbstractPlayer::PlaceHUDParts() {
 }
 
 CScaledBSP* CAbstractPlayer::DashboardPart(uint16_t id, Fixed scale) {
-    CScaledBSP* bsp = new CScaledBSP;
-    bsp->IScaledBSP(scale, id, this, 0);
+    CScaledBSP* bsp = CScaledBSP::Create(scale, id, this, 0);
     bsp->ReplaceAllColors(ColorManager::getHUDColor());
     bsp->privateAmbient = FIX1;
     bsp->ignoreDirectionalLights = true;

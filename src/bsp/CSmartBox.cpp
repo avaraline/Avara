@@ -112,6 +112,17 @@ void CSmartBox::StretchTemplate(Fixed *dimensions, Fixed baseSize) {
     FindEnclosure();
 }
 
+CSmartBox *CSmartBox::Create(short resId,
+    Fixed *dimensions,
+    ARGBColor color,
+    ARGBColor altColor,
+    CAbstractActor *anActor,
+    short aPartCode) {
+    CSmartBox *box = new CSmartBox;
+    box->ISmartBox(resId, dimensions, color, altColor, anActor, aPartCode);
+    return box;
+}
+
 void CSmartBox::ISmartBox(short resId,
     Fixed *dimensions,
     ARGBColor color,

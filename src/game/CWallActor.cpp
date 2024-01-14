@@ -81,8 +81,7 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
     resId = ReadLongVar(dim[1] == 0 ? iFloorTemplateResource : iWallTemplateResource);
 
     partCount = 1;
-    box = new CSmartBox;
-    box->ISmartBox(resId, dim, GetPixelColor(), GetOtherPixelColor(), this, 0);
+    box = CSmartBox::Create(resId, dim, GetPixelColor(), GetOtherPixelColor(), this, 0);
     box->Reset();
     TranslatePart(box, centerX, addAlt + dim[1], centerZ);
     box->MoveDone();
