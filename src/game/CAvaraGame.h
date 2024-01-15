@@ -243,7 +243,7 @@ public:
     virtual void MessageCleanup(CAbstractActor *deadActor);
 
     virtual void StopGame();
-    virtual void Render(NVGcontext *ctx);
+    virtual void Render();
     virtual void ViewControl();
 
     virtual void InitMixer(Boolean silentFlag);

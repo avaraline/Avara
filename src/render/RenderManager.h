@@ -6,6 +6,8 @@
 #include "CWorldShader.h"
 #include "CViewParameters.h"
 
+#include <SDL2/SDL.h>
+
 #include <memory>
 
 class RenderManager {
@@ -13,7 +15,7 @@ public:
     static CViewParameters *viewParams;
     static CWorldShader *skyParams;
     
-    static void Init(NVGcontext *nvg);
+    static void Init(SDL_Window *window, NVGcontext *nvg);
     static void AddHUDPart(CBSPPart *part);
     static void AddPart(CBSPPart *part);
     static void LevelReset();
@@ -24,7 +26,8 @@ public:
     static void UpdateViewRect(int width, int height, float pixelRatio);
 private:
     static void ResetLights();
-    
+
+    static SDL_Window *window;
     static NVGcontext *nvg;
     static std::shared_ptr<CHUD> ui;
     static CBSPWorldImpl *staticWorld;

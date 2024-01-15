@@ -5,6 +5,7 @@
 #include "FastMat.h"
 
 // Create static variables.
+SDL_Window *RenderManager::window = nullptr;
 NVGcontext *RenderManager::nvg = nullptr;
 std::shared_ptr<CHUD> RenderManager::ui = nullptr;
 CWorldShader *RenderManager::skyParams = nullptr;
@@ -13,8 +14,9 @@ CBSPWorldImpl *RenderManager::staticWorld = nullptr;
 CBSPWorldImpl *RenderManager::dynamicWorld = nullptr;
 CBSPWorldImpl *RenderManager::hudWorld = nullptr;
 
-void RenderManager::Init(NVGcontext *nvg)
+void RenderManager::Init(SDL_Window *window, NVGcontext *nvg)
 {
+    RenderManager::window = window;
     RenderManager::nvg = nvg;
 
     ui = std::make_shared<CHUD>(gCurrentGame);
@@ -87,6 +89,8 @@ void RenderManager::RenderFrame()
     }
 
     AvaraGLSetDepthTest(true);
+
+    // SDL_GL_SwapWindow(window);
 }
 
 void RenderManager::UpdateViewRect(int width, int height, float pixelRatio)

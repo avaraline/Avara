@@ -1015,7 +1015,7 @@ void CAvaraGame::StopGame() {
     // SDL_ShowCursor(SDL_ENABLE);
 }
 
-void CAvaraGame::Render(NVGcontext *ctx) {
+void CAvaraGame::Render() {
     //if (gameStatus == kPlayingStatus || gameStatus == kPauseStatus || gameStatus == kWinStatus || gameStatus == kLoseStatus) {
     ViewControl();
     RenderManager::RenderFrame();
