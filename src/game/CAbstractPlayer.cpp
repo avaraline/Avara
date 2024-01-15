@@ -37,6 +37,7 @@
 #include "Parser.h"
 #include "Preferences.h"
 #include "FastMat.h"
+#include "RenderManager.h"
 
 #include "Debug.h"
 
@@ -55,9 +56,6 @@ void CAbstractPlayer::LoadParts() {}
 
 void CAbstractPlayer::LoadHUDParts() {
     short i;
-    CBSPWorld *hudWorld;
-
-    hudWorld = itsGame->hudWorld;
 
     for (i = 0; i < 2; i++) {
         targetOns[i] = CBSPPart::Create(kTargetOk);
@@ -67,7 +65,7 @@ void CAbstractPlayer::LoadHUDParts() {
         targetOns[i]->usesPrivateYon = true;
         targetOns[i]->ignoreDirectionalLights = true;
         targetOns[i]->isTransparent = true;
-        hudWorld->AddPart(targetOns[i]);
+        RenderManager::AddHUDPart(targetOns[i]);
 
         targetOffs[i] = CBSPPart::Create(kTargetOff);
         targetOffs[i]->ReplaceColor(0xff008f00, ColorManager::getPlasmaSightsOffColor());
@@ -76,7 +74,7 @@ void CAbstractPlayer::LoadHUDParts() {
         targetOffs[i]->usesPrivateYon = true;
         targetOffs[i]->ignoreDirectionalLights = true;
         targetOffs[i]->isTransparent = true;
-        hudWorld->AddPart(targetOffs[i]);
+        RenderManager::AddHUDPart(targetOffs[i]);
     }
 
     dirArrowHeight = FIX3(750);
@@ -85,7 +83,7 @@ void CAbstractPlayer::LoadHUDParts() {
     dirArrow->ignoreDirectionalLights = true;
     dirArrow->privateAmbient = FIX1;
     dirArrow->isTransparent = true;
-    hudWorld->AddPart(dirArrow);
+    RenderManager::AddHUDPart(dirArrow);
 
     LoadDashboardParts();
 }
@@ -299,7 +297,6 @@ void CAbstractPlayer::AdaptableSettings() {
 
 CAbstractPlayer::~CAbstractPlayer() {
     short i;
-    CBSPWorld *hudWorld;
 
     if (itsGame->nextPlayer == this) {
         itsGame->nextPlayer = nextPlayer;
@@ -319,15 +316,13 @@ CAbstractPlayer::~CAbstractPlayer() {
         scoutIdent = 0;
     }
 
-    hudWorld = itsGame->hudWorld;
-
-    hudWorld->RemovePart(dirArrow);
+    RenderManager::RemoveHUDPart(dirArrow);
     delete dirArrow;
 
     for (i = 0; i < 2; i++) {
-        hudWorld->RemovePart(targetOns[i]);
+        RenderManager::RemoveHUDPart(targetOns[i]);
         delete targetOns[i];
-        hudWorld->RemovePart(targetOffs[i]);
+        RenderManager::RemoveHUDPart(targetOffs[i]);
         delete targetOffs[i];
     }
     DisposeDashboard();
@@ -339,77 +334,74 @@ CAbstractPlayer::~CAbstractPlayer() {
 void CAbstractPlayer::DisposeDashboard() {
     if (!itsGame->showNewHUD) return;
 
-    CBSPWorld *hudWorld;
-    hudWorld = itsGame->hudWorld;
-
     if (itsGame->itsApp->Get(kHUDShowMissileLock)) {
-        hudWorld->RemovePart(lockLight);
+        RenderManager::RemoveHUDPart(lockLight);
         delete lockLight;
     }
 
-    hudWorld->RemovePart(groundDirArrow);
+    RenderManager::RemoveHUDPart(groundDirArrow);
     delete groundDirArrow;
 
-    hudWorld->RemovePart(groundDirArrowSlow);
+    RenderManager::RemoveHUDPart(groundDirArrowSlow);
     delete groundDirArrowSlow;
 
-    hudWorld->RemovePart(groundDirArrowFast);
+    RenderManager::RemoveHUDPart(groundDirArrowFast);
     delete groundDirArrowFast;
 
-    hudWorld->RemovePart(energyLabel);
+    RenderManager::RemoveHUDPart(energyLabel);
     delete energyLabel;
 
-    hudWorld->RemovePart(shieldLabel);
+    RenderManager::RemoveHUDPart(shieldLabel);
     delete shieldLabel;
 
-    hudWorld->RemovePart(grenadeLabel);
+    RenderManager::RemoveHUDPart(grenadeLabel);
     delete grenadeLabel;
 
-    hudWorld->RemovePart(missileLabel);
+    RenderManager::RemoveHUDPart(missileLabel);
     delete missileLabel;
 
-    hudWorld->RemovePart(boosterLabel);
+    RenderManager::RemoveHUDPart(boosterLabel);
     delete boosterLabel;
 
-    hudWorld->RemovePart(livesLabel);
+    RenderManager::RemoveHUDPart(livesLabel);
     delete livesLabel;
 
-    hudWorld->RemovePart(shieldGauge);
+    RenderManager::RemoveHUDPart(shieldGauge);
     delete shieldGauge;
 
-    hudWorld->RemovePart(shieldGaugeBackLight);
+    RenderManager::RemoveHUDPart(shieldGaugeBackLight);
     delete shieldGaugeBackLight;
 
-    hudWorld->RemovePart(energyGauge);
+    RenderManager::RemoveHUDPart(energyGauge);
     delete energyGauge;
 
-    hudWorld->RemovePart(energyGaugeBackLight);
+    RenderManager::RemoveHUDPart(energyGaugeBackLight);
     delete energyGaugeBackLight;
 
 
     for (int i = 0; i < 4; i++) {
-        hudWorld->RemovePart(grenadeMeter[i]);
+        RenderManager::RemoveHUDPart(grenadeMeter[i]);
         delete grenadeMeter[i];
 
-        hudWorld->RemovePart(grenadeBox[i]);
+        RenderManager::RemoveHUDPart(grenadeBox[i]);
         delete grenadeBox[i];
 
-        hudWorld->RemovePart(missileMeter[i]);
+        RenderManager::RemoveHUDPart(missileMeter[i]);
         delete missileMeter[i];
 
-        hudWorld->RemovePart(missileBox[i]);
+        RenderManager::RemoveHUDPart(missileBox[i]);
         delete missileBox[i];
 
-        hudWorld->RemovePart(boosterMeter[i]);
+        RenderManager::RemoveHUDPart(boosterMeter[i]);
         delete boosterMeter[i];
 
-        hudWorld->RemovePart(boosterBox[i]);
+        RenderManager::RemoveHUDPart(boosterBox[i]);
         delete boosterBox[i];
 
-        hudWorld->RemovePart(livesMeter[i]);
+        RenderManager::RemoveHUDPart(livesMeter[i]);
         delete livesMeter[i];
 
-        hudWorld->RemovePart(livesBox[i]);
+        RenderManager::RemoveHUDPart(livesBox[i]);
         delete livesBox[i];
     }
 }
@@ -530,7 +522,7 @@ CScaledBSP* CAbstractPlayer::DashboardPart(uint16_t id, Fixed scale) {
     CScaledBSP* bsp = new CScaledBSP(scale, id, this, 0);
     bsp->ReplaceAllColors(ColorManager::getHUDColor());
     bsp->isTransparent = true;
-    itsGame->hudWorld->AddPart(bsp);
+    RenderManager::AddHUDPart(bsp);
     return bsp;
 }
 
@@ -983,9 +975,7 @@ void CAbstractPlayer::ControlSoundPoint() {
 }
 
 void CAbstractPlayer::ControlViewPoint() {
-    CViewParameters *theView;
-
-    theView = itsGame->itsView;
+    auto vp = RenderManager::viewParams;
 
     if (!isInLimbo)
         PlaceHUDParts();
@@ -1000,17 +990,17 @@ void CAbstractPlayer::ControlViewPoint() {
                 itsScout->ControlViewPoint();
         }
     } else {
-        MATRIXCOPY(&theView->viewMatrix, viewPortPart->GetInverseTransform());
-        MTranslate(viewOffset[0], viewOffset[1], viewOffset[2], &theView->viewMatrix);
+        MATRIXCOPY(&vp->viewMatrix, viewPortPart->GetInverseTransform());
+        MTranslate(viewOffset[0], viewOffset[1], viewOffset[2], &vp->viewMatrix);
 
         if (lookDirection) {
             Fixed a;
 
             a = FMul(lookDirection, 43690);
-            MRotateY(FOneSin(a), FOneCos(a), &theView->viewMatrix);
+            MRotateY(FOneSin(a), FOneCos(a), &vp->viewMatrix);
         }
 
-        theView->inverseDone = false;
+        vp->inverseDone = false;
     }
 
     RecalculateViewDistance();
@@ -1020,27 +1010,26 @@ void CAbstractPlayer::ControlViewPoint() {
 }
 
 void CAbstractPlayer::RecalculateViewDistance() {
-    CViewParameters *theView;
     Fixed viewDist;
     Fixed frameYon;
 
-    theView = itsGame->itsView;
+    auto vp = RenderManager::viewParams;
 
-    viewDist = FMulDivNZ(theView->viewWidth, FDegCos(fieldOfView), 2 * FDegSin(fieldOfView));
+    viewDist = FMulDivNZ(vp->viewWidth, FDegCos(fieldOfView), 2 * FDegSin(fieldOfView));
 
     if (itsGame->yonList) {
-        frameYon = itsGame->yonList->AdjustYon((*theView->GetInverseMatrix())[3], yonBound);
+        frameYon = itsGame->yonList->AdjustYon((*vp->GetInverseMatrix())[3], yonBound);
     } else {
         frameYon = yonBound;
     }
 
-    if (viewDist != theView->viewDistance || frameYon != theView->yonBound) {
-        if (frameYon != theView->yonBound) {
-            theView->yonBound = frameYon;
+    if (viewDist != vp->viewDistance || frameYon != vp->yonBound) {
+        if (frameYon != vp->yonBound) {
+            vp->yonBound = frameYon;
         }
-        theView->viewDistance = viewDist;
-        theView->Recalculate();
-        theView->CalculateViewPyramidCorners();
+        vp->viewDistance = viewDist;
+        vp->Recalculate();
+        vp->CalculateViewPyramidCorners();
     }
 }
 
@@ -2111,9 +2100,7 @@ void CAbstractPlayer::ReceiveConfig(PlayerConfigRecord *config) {
 
         // Reload the livesLabel to reflect the hull shape.
         if (!itsGame->showNewHUD) return;
-        CBSPWorld *hudWorld;
-        hudWorld = itsGame->hudWorld;
-        hudWorld->RemovePart(livesLabel);
+        RenderManager::RemoveHUDPart(livesLabel);
         delete livesLabel;
         livesLabel = DashboardPart(hullConfig.hullBSP, FIX3(140*layoutScale));
     }

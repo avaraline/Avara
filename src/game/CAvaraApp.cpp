@@ -37,6 +37,7 @@
 #include <json.hpp>
 #include "Tags.h"
 #include "Debug.h"
+#include "RenderManager.h"
 
 // included while we fake things out
 #include "CPlayerManager.h"
@@ -70,11 +71,13 @@ void TrackerPinger(CAvaraAppImpl *app) {
 
 CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     AssetManager::Init();
+    
     itsGame = std::make_unique<CAvaraGame>(Get<FrameTime>(kFrameTimeTag));
     gCurrentGame = itsGame.get();
     itsGame->IAvaraGame(this);
-    itsGame->UpdateViewRect(mSize.x, mSize.y, mPixelRatio);
-    itsGame->LoadImages(mNVGContext);
+
+    RenderManager::Init(mNVGContext);
+    RenderManager::UpdateViewRect(mSize.x, mSize.y, mPixelRatio);
 
     AvaraGLSetFOV(Number(kFOV));
 
@@ -153,13 +156,14 @@ void CAvaraAppImpl::idle() {
 }
 
 void CAvaraAppImpl::drawContents() {
-    if(animatePreview) {
+    if (animatePreview) {
+        auto vp = RenderManager::viewParams;
         Fixed x = overhead[0] + FMul(previewRadius, FOneCos(previewAngle));
         Fixed y = overhead[1] + FMul(FMul(extent[3], FIX(2)), FOneSin(previewAngle) + FIX1);
         Fixed z = overhead[2] + FMul(previewRadius, FOneSin(previewAngle));
-        itsGame->itsView->LookFrom(x, y, z);
-        itsGame->itsView->LookAt(overhead[0], overhead[1], overhead[2]);
-        itsGame->itsView->PointCamera();
+        vp->LookFrom(x, y, z);
+        vp->LookAt(overhead[0], overhead[1], overhead[2]);
+        vp->PointCamera();
         previewAngle += FIX3(1);
     }
     itsGame->Render(mNVGContext);
@@ -174,7 +178,7 @@ void CAvaraAppImpl::RenderContents() {
 }
 
 void CAvaraAppImpl::WindowResized(int width, int height) {
-    itsGame->UpdateViewRect(width, height, mPixelRatio);
+    RenderManager::UpdateViewRect(width, height, mPixelRatio);
     //performLayout();
 }
 
@@ -206,8 +210,9 @@ void CAvaraAppImpl::drawAll() {
 }
 
 void CAvaraAppImpl::GameStarted(std::string set, std::string level) {
+    auto vp = RenderManager::viewParams;
     animatePreview = false;
-    itsGame->itsView->showTransparent = false;
+    vp->showTransparent = false;
     itsGame->IncrementGameCounter();
     MessageLine(kmStarted, MsgAlignment::Center);
     levelWindow->AddRecent(set, level);
@@ -297,9 +302,11 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
 
         levelWindow->SelectLevel(set, itsGame->loadedLevel);
 
-        itsGame->itsWorld->OverheadPoint(overhead, extent);
-        itsGame->itsView->yonBound = FIX(10000);
-        itsGame->itsView->showTransparent = true;
+        RenderManager::OverheadPoint(overhead, extent);
+
+        auto vp = RenderManager::viewParams;
+        vp->yonBound = FIX(10000);
+        vp->showTransparent = true;
 
         previewAngle = 0;
         previewRadius = std::max(extent[1] - extent[0], extent[5] - extent[4]);

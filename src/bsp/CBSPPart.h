@@ -117,8 +117,6 @@ public:
     FixedPoint maxBounds = {0, 0, 0, 0}; //  Bounding box maximums for x, y, z
     enum { frontVisible = 1, backVisible, bothVisible };
 
-    CViewParameters *currentView = 0;
-
     std::unique_ptr<GLData[]> glData = 0;
     GLuint vertexArray, vertexBuffer = 0;
     GLsizeiptr glDataSize = 0;
@@ -186,12 +184,12 @@ public:
     virtual void ReplaceColor(ARGBColor origColor, ARGBColor newColor);
     virtual void ReplaceAllColors(ARGBColor newColor);
 
-    virtual Boolean PrepareForRender(CViewParameters *vp);
+    virtual Boolean PrepareForRender();
     virtual void DrawPolygons(Shader shader);
 
     virtual void PreRender();
     void PostRender();
-    virtual void Render(CViewParameters *vp, Shader shader);
+    virtual void Render(Shader shader);
     virtual Boolean InViewPyramid();
     virtual void TransformLights();
 

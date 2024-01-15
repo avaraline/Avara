@@ -119,13 +119,14 @@ CViewParameters::CViewParameters() {
 
     for (i = 0; i < MAXLIGHTS; i++) {
         lightMode[i] = kLightOff;
+        dirLightSettings[i] = LightSettings();
     }
 
     OneMatrix(&viewMatrix);
 
     ambientLight = 32768L;
 
-    SetLight(0, 0, FIX(45), FIX3(900) - ambientLight, kLightGlobalCoordinates);
+    SetLight(0, 0, FIX(45), FIX3(900) - ambientLight, DEFAULT_LIGHT_COLOR, kLightGlobalCoordinates);
 
     hitherBound = FIX3(1000); //	0.5 m
     yonBound = FIX(500); //	500 m
@@ -242,10 +243,15 @@ void CViewParameters::SetLightValues(short n, Fixed dx, Fixed dy, Fixed dz, shor
     }
 }
 
-void CViewParameters::SetLight(short n, Fixed angle1, Fixed angle2, Fixed intensity, short mode) {
+void CViewParameters::SetLight(short n, Fixed angle1, Fixed angle2, Fixed intensity, ARGBColor color, short mode) {
     Fixed x, y, z;
 
     if (n >= 0 && n < MAXLIGHTS) {
+        dirLightSettings[n].intensity = intensity;
+        dirLightSettings[n].angle1 = angle1;
+        dirLightSettings[n].angle2 = angle2;
+        dirLightSettings[n].color = color;
+
         x = FMul(FDegCos(angle1), intensity);
         y = FMul(FDegSin(-angle1), intensity);
         z = FMul(FDegCos(angle2), x);

@@ -15,6 +15,8 @@
 		9465BFD32B30C2A00050681C /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9465BFD12B30C2A00050681C /* AssetManager.cpp */; };
 		9465BFD72B30EF680050681C /* PackageManifest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9465BFD52B30EF680050681C /* PackageManifest.cpp */; };
 		9465BFD82B30EF680050681C /* PackageManifest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9465BFD52B30EF680050681C /* PackageManifest.cpp */; };
+		948128B02B53A1C7002A3459 /* RenderManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948128AF2B53A1C7002A3459 /* RenderManager.cpp */; };
+		948128B12B53A1C7002A3459 /* RenderManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948128AF2B53A1C7002A3459 /* RenderManager.cpp */; };
 		948CBF142B335A1400147E80 /* BaseAssetStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */; };
 		948CBF152B335A1400147E80 /* BaseAssetStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */; };
 		94924EAF2B3A894900197378 /* OggFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94924EAE2B3A894900197378 /* OggFile.cpp */; };
@@ -376,6 +378,8 @@
 		9465BFD12B30C2A00050681C /* AssetManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetManager.cpp; sourceTree = "<group>"; };
 		9465BFD52B30EF680050681C /* PackageManifest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PackageManifest.cpp; sourceTree = "<group>"; };
 		9465BFD92B30EFB40050681C /* PackageManifest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PackageManifest.h; sourceTree = "<group>"; };
+		948128AE2B539B6C002A3459 /* RenderManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RenderManager.h; sourceTree = "<group>"; };
+		948128AF2B53A1C7002A3459 /* RenderManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RenderManager.cpp; sourceTree = "<group>"; };
 		948CBF112B33581D00147E80 /* AssetStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetStorage.h; sourceTree = "<group>"; };
 		948CBF122B3359D700147E80 /* BaseAssetStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseAssetStorage.h; sourceTree = "<group>"; };
 		948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BaseAssetStorage.cpp; sourceTree = "<group>"; };
@@ -1048,6 +1052,15 @@
 			path = assets;
 			sourceTree = "<group>";
 		};
+		948128AD2B539B44002A3459 /* render */ = {
+			isa = PBXGroup;
+			children = (
+				948128AF2B53A1C7002A3459 /* RenderManager.cpp */,
+				948128AE2B539B6C002A3459 /* RenderManager.h */,
+			);
+			path = render;
+			sourceTree = "<group>";
+		};
 		E5890B1B29894DB3007A875D = {
 			isa = PBXGroup;
 			children = (
@@ -1096,6 +1109,7 @@
 				E5890C7B29895118007A875D /* gui */,
 				E5890C9029895118007A875D /* level */,
 				E5890B9A29895118007A875D /* net */,
+				948128AD2B539B44002A3459 /* render */,
 				E5890BC729895118007A875D /* tui */,
 				E5890BA829895118007A875D /* util */,
 			);
@@ -2063,6 +2077,7 @@
 				E517F064299713DB0036B206 /* Resource.cpp in Sources */,
 				E517F065299713DB0036B206 /* System.cpp in Sources */,
 				E517F066299713DB0036B206 /* KeyFuncs.cpp in Sources */,
+				948128B12B53A1C7002A3459 /* RenderManager.cpp in Sources */,
 				E517F067299713DB0036B206 /* CAbstractActor.cpp in Sources */,
 				E517F068299713DB0036B206 /* CAbstractMissile.cpp in Sources */,
 				E517F069299713DB0036B206 /* CAbstractMovers.cpp in Sources */,
@@ -2230,6 +2245,7 @@
 				E5890D1529895118007A875D /* CDirectObject.cpp in Sources */,
 				E5890CAC29895118007A875D /* CHandlePipe.cpp in Sources */,
 				E5890CC729895118007A875D /* LinkLoose.cpp in Sources */,
+				948128B02B53A1C7002A3459 /* RenderManager.cpp in Sources */,
 				E5890F0329895124007A875D /* textbox.cpp in Sources */,
 				E5253ED92996DD2200F8C1E8 /* PascalStrings.cpp in Sources */,
 				E5890CE129895118007A875D /* CAbstractMovers.cpp in Sources */,

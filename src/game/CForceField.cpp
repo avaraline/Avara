@@ -12,6 +12,7 @@
 #include "CBSPWorld.h"
 #include "CSmartPart.h"
 #include "CWallActor.h"
+#include "RenderManager.h"
 
 extern CWallActor *lastWallActor;
 
@@ -64,7 +65,7 @@ CAbstractActor *CForceField::EndScript() {
 
             //TranslatePartY(thePart, ReadLongVar(iHeight));
             VECTORCOPY(location, thePart->itsTransform[3]);
-            itsGame->itsWorld->RemovePart(thePart);
+            RenderManager::RemovePart(thePart);
 
             heading = 0;
             lastWallActor->partList[0] = NULL;

@@ -5,6 +5,7 @@
 #include "ARGBColor.h"
 #include "CBSPPart.h"
 #include "ColorManager.h"
+#include "RenderManager.h"
 
 #include <fstream>
 #include <iostream>
@@ -354,14 +355,15 @@ void AvaraGLDrawPolygons(CBSPPart* part, Shader shader) {
     glEnableVertexAttribArray(2);
 
     // custom per-object lighting
+    auto vp = RenderManager::viewParams;
     float extra_amb = ToFloat(part->extraAmbient);
-    float current_amb = ToFloat(part->currentView->ambientLight);
+    float current_amb = ToFloat(vp->ambientLight);
 
     if (part->privateAmbient != -1) {
-        AvaraGLSetAmbient(ToFloat(part->privateAmbient), part->currentView->ambientLightColor, shader);
+        AvaraGLSetAmbient(ToFloat(part->privateAmbient), vp->ambientLightColor, shader);
     }
     if (extra_amb > 0) {
-        AvaraGLSetAmbient(current_amb + extra_amb, part->currentView->ambientLightColor, shader);
+        AvaraGLSetAmbient(current_amb + extra_amb, vp->ambientLightColor, shader);
     }
     if (part->ignoreDirectionalLights) {
         ActivateLights(0, shader);
@@ -384,7 +386,7 @@ void AvaraGLDrawPolygons(CBSPPart* part, Shader shader) {
 
     // restore previous lighting state
     if (part->privateAmbient != -1 || extra_amb > 0) {
-        AvaraGLSetAmbient(current_amb, part->currentView->ambientLightColor, shader);
+        AvaraGLSetAmbient(current_amb, vp->ambientLightColor, shader);
         glCheckErrors();
     }
     if (part->ignoreDirectionalLights) {

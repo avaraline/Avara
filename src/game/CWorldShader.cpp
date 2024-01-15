@@ -15,12 +15,7 @@
 #include "CBSPPart.h"
 #include "AvaraGL.h"
 
-void CWorldShader::IWorldShader(CAvaraGame *theGame) {
-    itsGame = theGame;
-    Reset();
-}
-
-void CWorldShader::IWorldShader() {
+CWorldShader::CWorldShader() {
     Reset();
 }
 
@@ -64,7 +59,7 @@ void CWorldShader::Apply() {
             break;
     }
 
-    SetPolyWorld(&itsGame->itsPolyWorld);
+    SetPolyWorld(&gCurrentGame->itsPolyWorld);
     if(numShades == 0)
     {	SetPolyWorldBackground(FindPolyColor(groundColor));
     }

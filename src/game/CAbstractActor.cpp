@@ -270,7 +270,7 @@ CAbstractActor::~CAbstractActor() {
 
     UnlinkLocation();
 
-    if (isInGame)
+    if (itsGame && isInGame)
         itsGame->RemoveActor(this);
 
     for (i = 0; i < partCount; i++) {

@@ -7,12 +7,13 @@
     Modified: Monday, September 9, 1996, 00:15
 */
 
-#include "AssetManager.h"
 #include "CBSPPart.h"
 
+#include "AssetManager.h"
+#include "AvaraDefines.h"
 #include "CViewParameters.h"
 #include "Memory.h"
-#include "AvaraDefines.h"
+#include "RenderManager.h"
 
 #include <fstream>
 #include <iostream>
@@ -174,10 +175,7 @@ void CBSPPart::IBSPPart(short resId) {
 void CBSPPart::PostRender() {}
 
 void CBSPPart::TransformLights() {
-    CViewParameters *vp;
-    //Matrix *invFull;
-
-    vp = currentView;
+    auto vp = RenderManager::viewParams;
     if (!ignoreDirectionalLights) {
         if (lightSeed != vp->lightSeed) {
             lightSeed = vp->lightSeed;
@@ -196,17 +194,12 @@ void CBSPPart::DrawPolygons(Shader shader) {
 }
 
 Boolean CBSPPart::InViewPyramid() {
-    CViewParameters *vp;
-    //short i;
-    //Vector *norms;
     Fixed radius;
     Fixed distance;
     Fixed x, y;
     Fixed z;
 
-    //return true;
-
-    vp = currentView;
+    auto vp = RenderManager::viewParams;
 
     if (hither >= yon)
         return false;
@@ -270,11 +263,11 @@ void CBSPPart::PrintMatrix(Matrix *m) {
 **  See if the part is in the viewing pyramid and do calculations
 **  in preparation to shading.
 */
-Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
+Boolean CBSPPart::PrepareForRender() {
+    auto vp = RenderManager::viewParams;
     Boolean inPyramid = vp->showTransparent || !isTransparent;
 
     if (inPyramid) {
-        currentView = vp;
 
         if (!usesPrivateHither)
             hither = vp->hitherBound;
@@ -318,10 +311,10 @@ Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
 **  CBSPWorld, since it really doesn't add any significant
 **  overhead.
 */
-void CBSPPart::Render(CViewParameters *vp, Shader shader) {
-    vp->DoLighting();
+void CBSPPart::Render(Shader shader) {
+    RenderManager::viewParams->DoLighting();
 
-    if (PrepareForRender(vp)) {
+    if (PrepareForRender()) {
         DrawPolygons(shader);
         PostRender();
     }

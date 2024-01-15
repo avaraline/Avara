@@ -10,6 +10,7 @@
 #include "CSkyColorAdjuster.h"
 
 #include "CWorldShader.h"
+#include "RenderManager.h"
 
 void CSkyColorAdjuster::BeginScript() {
     ProgramLongVar(iCount, 8);
@@ -21,11 +22,9 @@ CAbstractActor *CSkyColorAdjuster::EndScript() {
     long shadeCount;
     Fixed lowAlt, highAlt;
 
-    CWorldShader *theShader;
-
     CAbstractActor::EndScript();
 
-    theShader = gCurrentGame->worldShader;
+    auto theShader = RenderManager::skyParams;
     theShader->lowSkyColor = GetPixelColor();
     theShader->highSkyColor = GetOtherPixelColor();
 

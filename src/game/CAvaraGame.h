@@ -64,11 +64,8 @@ class CAvaraApp;
 
 class CSoundHub;
 class CIncarnator;
-class CWorldShader;
 class CScoreKeeper;
 class CAbstractYon;
-
-class CHUD;
 
 class CAvaraGame : public CDirectObject {
 public:
@@ -123,9 +120,6 @@ public:
     CAvaraApp *itsApp;
     // WindowPtr		itsWindow;
     // PolyWorld		itsPolyWorld;
-    CBSPWorld *itsWorld;
-    CBSPWorld *hudWorld;
-    CViewParameters *itsView;
     CAbstractYon *yonList;
 
     // UI
@@ -150,9 +144,7 @@ public:
     CDepot *itsDepot; //	Storage maintenance for ammo
     CSoundHub *soundHub; //	Sound playback and control hub
     std::unique_ptr<CNetManager> itsNet; //	Networking management
-    CWorldShader *worldShader; //	Manages ground and sky colors.
     CScoreKeeper *scoreKeeper;
-    CHUD *hud;
 
     //	Sound related variables:
     int soundTime;
@@ -199,10 +191,8 @@ public:
     CAvaraGame(FrameTime frameTime = 64);
     //	Methods:
     virtual void IAvaraGame(CAvaraApp *theApp);
-    virtual CBSPWorld* CreateCBSPWorld(short initialObjectSpace);
     virtual CSoundHub* CreateSoundHub();
     virtual std::unique_ptr<CNetManager> CreateNetManager();
-    virtual void LoadImages(NVGcontext *ctx);
 
     virtual void InitLocatorTable();
     virtual void IncrementGameCounter();
@@ -245,9 +235,6 @@ public:
     virtual void SpectateNext();
     virtual void SpectatePrevious();
     virtual bool canBeSpectated(CAbstractPlayer *player);
-
-
-    virtual void UpdateViewRect(int width, int height, float pixelRatio);
 
     virtual void RegisterReceiver(MessageRecord *theMsg, MsgType messageNum);
     virtual void RemoveReceiver(MessageRecord *theMsg);

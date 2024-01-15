@@ -6,13 +6,6 @@
 #include <sstream>
 #include <string>
 
-// path separator
-#if defined(_WIN32)
-#define PATHSEP "\\"
-#else
-#define PATHSEP "/"
-#endif
-
 void UseResFile(std::string filename);
 std::string OSTypeString(OSType t);
 OSType StringOSType(std::string s);

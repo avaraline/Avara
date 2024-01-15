@@ -20,7 +20,7 @@ class CBSPWorld {
 public:
     virtual void AddPart(CBSPPart *thePart) {};
     virtual void RemovePart(CBSPPart *thePart) {};
-    virtual void Render(CViewParameters *theView, Shader shader = Shader::World) {};
+    virtual void Render(Shader shader = Shader::World) {};
     virtual ~CBSPWorld() {};
     virtual void DisposeParts() {};
     virtual void OverheadPoint(Fixed *pt, Fixed *extent) {};
@@ -34,8 +34,6 @@ private:
     CBSPPart ***partList;
     CBSPPart ***visibleList;
     CBSPPart **visibleP; //	Used while rendering when visibleList is locked down.
-
-    CViewParameters *currentView;
 public:
     virtual void AddPart(CBSPPart *thePart);
 
@@ -45,7 +43,7 @@ public:
     virtual ~CBSPWorldImpl();
 
     virtual void RemovePart(CBSPPart *thePart);
-    virtual void Render(CViewParameters *theView, Shader shader = Shader::World);
+    virtual void Render(Shader shader = Shader::World);
 
     virtual void SortVisibleParts();
     virtual void SortByZ();

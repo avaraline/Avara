@@ -12,6 +12,7 @@
 #include "CBSPPart.h"
 #include "CViewParameters.h"
 #include "Memory.h"
+#include "RenderManager.h"
 
 extern Vector **bspPointTemp;
 extern short *bspIndexStack;
@@ -234,7 +235,7 @@ void CBSPWorldImpl::SortVisibleParts() {
 
     endPart = visibleP + visibleCount;
     thisPart = visibleP;
-    minZ = maxZ = currentView->yonBound;
+    minZ = maxZ = RenderManager::viewParams->yonBound;
 
     while (thisPart < endPart) {
         Fixed z;
@@ -263,12 +264,11 @@ void CBSPWorldImpl::SortVisibleParts() {
     }
 }
 
-void CBSPWorldImpl::Render(CViewParameters *theView, Shader shader) {
+void CBSPWorldImpl::Render(Shader shader) {
     int i;
     CBSPPart **sp, **sd;
 
-    currentView = theView;
-    theView->DoLighting();
+    RenderManager::viewParams->DoLighting();
 
     HLock((Handle)partList);
     HLock((Handle)visibleList);
@@ -279,7 +279,7 @@ void CBSPWorldImpl::Render(CViewParameters *theView, Shader shader) {
     visibleCount = 0;
 
     for (i = 0; i < partCount; i++) {
-        if ((*sp)->PrepareForRender(theView)) {
+        if ((*sp)->PrepareForRender()) {
             *sd++ = *sp;
             visibleCount++;
         }
