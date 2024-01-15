@@ -162,20 +162,6 @@ CSmartBox::CSmartBox(
     AvaraGLUpdateData(this);
 }
 
-void CSmartBox::Dispose() {
-    /*
-    Handle				handCopy;
-    BSPResourceHeader	*bp;
-
-    handCopy = itsBSPResource;
-    bp = (BSPResourceHeader *)*handCopy;
-    bp->refCount = 99;	//	Prevent ReleaseResource call!
-    */
-    CSmartPart::Dispose();
-
-    // DisposeHandle(handCopy);
-}
-
 void CSmartBox::FindEnclosure() {
     //	Uses algorithm from Graphics Gems I
     long i;

@@ -275,7 +275,7 @@ void CAbstractActor::Dispose() {
         itsGame->RemoveActor(this);
 
     for (i = 0; i < partCount; i++) {
-        partList[i]->Dispose();
+        delete partList[i];
     }
 
     if (itsSoundLink) {

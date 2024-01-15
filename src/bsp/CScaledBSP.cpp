@@ -72,6 +72,3 @@ void CScaledBSP::Reset() {
     }
 }
 
-void CScaledBSP::Dispose() {
-    CSmartPart::Dispose();
-}

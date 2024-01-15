@@ -28,7 +28,7 @@ void CBSPWorldImpl::DisposeParts() {
     short i;
 
     for (i = 0; i < partCount; i++) {
-        (*partList)[i]->Dispose();
+        delete (*partList)[i];
     }
 
     partCount = 0;

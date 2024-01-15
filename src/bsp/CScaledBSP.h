@@ -18,7 +18,6 @@ public:
     virtual void ScaleXYZ(Fixed scaleX, Fixed scaleY, Fixed scaleZ);
     virtual void Reset();
 
-    virtual void Dispose();
     CScaledBSP(Fixed scale, short resId, CAbstractActor *anActor, short aPartCode);
 
 private:

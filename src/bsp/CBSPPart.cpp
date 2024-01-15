@@ -460,9 +460,8 @@ void CBSPPart::BuildBoundingVolumes() {
         tolerance = MINIMUM_TOLERANCE;
 }
 
-void CBSPPart::Dispose() {
+CBSPPart::~CBSPPart() {
     if(polyCount < 1) {
-        CDirectObject::Dispose();
         return;
     }
     if (AvaraGLIsRendering()) {
@@ -470,7 +469,6 @@ void CBSPPart::Dispose() {
         glDeleteVertexArrays(1, &vertexArray);
         glDeleteBuffers(1, &vertexBuffer);
     }
-    CDirectObject::Dispose();
 }
 
 void CBSPPart::CheckForAlpha() {

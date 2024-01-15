@@ -322,13 +322,13 @@ void CAbstractPlayer::Dispose() {
     hudWorld = itsGame->hudWorld;
 
     hudWorld->RemovePart(dirArrow);
-    dirArrow->Dispose();
+    delete dirArrow;
 
     for (i = 0; i < 2; i++) {
         hudWorld->RemovePart(targetOns[i]);
-        targetOns[i]->Dispose();
+        delete targetOns[i];
         hudWorld->RemovePart(targetOffs[i]);
-        targetOffs[i]->Dispose();
+        delete targetOffs[i];
     }
     DisposeDashboard();
 
@@ -345,73 +345,73 @@ void CAbstractPlayer::DisposeDashboard() {
 
     if (itsGame->itsApp->Get(kHUDShowMissileLock)) {
         hudWorld->RemovePart(lockLight);
-        lockLight->Dispose();
+        delete lockLight;
     }
 
     hudWorld->RemovePart(groundDirArrow);
-    groundDirArrow->Dispose();
+    delete groundDirArrow;
 
     hudWorld->RemovePart(groundDirArrowSlow);
-    groundDirArrowSlow->Dispose();
+    delete groundDirArrowSlow;
 
     hudWorld->RemovePart(groundDirArrowFast);
-    groundDirArrowFast->Dispose();
+    delete groundDirArrowFast;
 
     hudWorld->RemovePart(energyLabel);
-    energyLabel->Dispose();
+    delete energyLabel;
 
     hudWorld->RemovePart(shieldLabel);
-    shieldLabel->Dispose();
+    delete shieldLabel;
 
     hudWorld->RemovePart(grenadeLabel);
-    grenadeLabel->Dispose();
+    delete grenadeLabel;
 
     hudWorld->RemovePart(missileLabel);
-    missileLabel->Dispose();
+    delete missileLabel;
 
     hudWorld->RemovePart(boosterLabel);
-    boosterLabel->Dispose();
+    delete boosterLabel;
 
     hudWorld->RemovePart(livesLabel);
-    livesLabel->Dispose();
+    delete livesLabel;
 
     hudWorld->RemovePart(shieldGauge);
-    shieldGauge->Dispose();
+    delete shieldGauge;
 
     hudWorld->RemovePart(shieldGaugeBackLight);
-    shieldGaugeBackLight->Dispose();
+    delete shieldGaugeBackLight;
 
     hudWorld->RemovePart(energyGauge);
-    energyGauge->Dispose();
+    delete energyGauge;
 
     hudWorld->RemovePart(energyGaugeBackLight);
-    energyGaugeBackLight->Dispose();
+    delete energyGaugeBackLight;
 
 
     for (int i = 0; i < 4; i++) {
         hudWorld->RemovePart(grenadeMeter[i]);
-        grenadeMeter[i]->Dispose();
+        delete grenadeMeter[i];
 
         hudWorld->RemovePart(grenadeBox[i]);
-        grenadeBox[i]->Dispose();
+        delete grenadeBox[i];
 
         hudWorld->RemovePart(missileMeter[i]);
-        missileMeter[i]->Dispose();
+        delete missileMeter[i];
 
         hudWorld->RemovePart(missileBox[i]);
-        missileBox[i]->Dispose();
+        delete missileBox[i];
 
         hudWorld->RemovePart(boosterMeter[i]);
-        boosterMeter[i]->Dispose();
+        delete boosterMeter[i];
 
         hudWorld->RemovePart(boosterBox[i]);
-        boosterBox[i]->Dispose();
+        delete boosterBox[i];
 
         hudWorld->RemovePart(livesMeter[i]);
-        livesMeter[i]->Dispose();
+        delete livesMeter[i];
 
         hudWorld->RemovePart(livesBox[i]);
-        livesBox[i]->Dispose();
+        delete livesBox[i];
     }
 }
 
@@ -2117,7 +2117,7 @@ void CAbstractPlayer::ReceiveConfig(PlayerConfigRecord *config) {
         CBSPWorld *hudWorld;
         hudWorld = itsGame->hudWorld;
         hudWorld->RemovePart(livesLabel);
-        livesLabel->Dispose();
+        delete livesLabel;
         livesLabel = DashboardPart(hullConfig.hullBSP, FIX3(140*layoutScale));
     }
 }

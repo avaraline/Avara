@@ -125,9 +125,3 @@ Boolean CSliverPart::SliverAction() {
 
     return lifeCount == 0;
 }
-
-void CSliverPart::Dispose() {
-    // colorReplacements = NULL;	//	Destroy fake handle.
-
-    CSmartPart::Dispose();
-}

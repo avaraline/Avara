@@ -774,7 +774,7 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
 
         hullRes = hullConfig.hullBSP;
         itsGame->itsWorld->RemovePart(viewPortPart);
-        viewPortPart->Dispose();
+        delete viewPortPart;
         LoadPart(0, hullRes);
 
         viewPortPart = partList[0];
