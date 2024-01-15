@@ -17,7 +17,6 @@
 
 class CSmartBox final : public CSmartPart {
 public:
-    virtual void Dispose();
     CSmartBox(short resId,
         Fixed *dimensions,
         ARGBColor color,

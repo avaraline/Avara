@@ -45,15 +45,15 @@ void CDepot::Dispose() {
         slivers = freeSlivers[i];
         while (slivers) {
             nextSliver = slivers->nextSliver;
-            slivers->Dispose();
+            delete slivers;
             slivers = nextSliver;
         }
     }
 
-    smartHairs->Dispose();
-    smartSight->Dispose();
-    grenadeSight->Dispose();
-    grenadeTop->Dispose();
+    delete smartHairs;
+    delete smartSight;
+    delete grenadeSight;
+    delete grenadeTop;
 
     CDirectObject::Dispose();
 }
@@ -208,7 +208,7 @@ void CDepot::DisposeMissiles() {
         mList = missileList[j];
         while (mList) {
             nextMissile = mList->nextMissile;
-            mList->Dispose();
+            delete mList;
             mList = nextMissile;
         }
     }
@@ -244,10 +244,10 @@ CAbstractMissile *CDepot::LaunchMissile(short kind,
 }
 
 void CDepot::ReloadParts() {
-    if (smartHairs) smartHairs->Dispose();
-    if (smartSight) smartSight->Dispose();
-    if (grenadeSight) grenadeSight->Dispose();
-    if (grenadeTop) grenadeTop->Dispose();
+    if (smartHairs) delete smartHairs;
+    if (smartSight) delete smartSight;
+    if (grenadeSight) delete grenadeSight;
+    if (grenadeTop) delete grenadeTop;
 
     smartSight = CBSPPart::Create(208);
     smartSight->ReplaceColor(0xfffffb00, ColorManager::getMissileSightPrimaryColor());
@@ -353,7 +353,7 @@ void CDepot::DisposeWeapons() {
         wList = weaponList[j];
         while (wList) {
             nextWeapon = wList->nextWeapon;
-            wList->Dispose();
+            delete wList;
             wList = nextWeapon;
         }
     }

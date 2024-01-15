@@ -195,22 +195,22 @@ void CAvaraGame::Dispose() {
 
     while (actorList) {
         nextActor = actorList->nextActor;
-        actorList->Dispose();
+        delete actorList;
         actorList = nextActor;
     }
 
     while (freshPlayerList) {
         nextActor = freshPlayerList->nextActor;
-        freshPlayerList->Dispose();
+        delete freshPlayerList;
         freshPlayerList = (CAbstractPlayer *)nextActor;
     }
 
     if (itsWorld)
-        itsWorld->Dispose();
+        delete itsWorld;
     if (hudWorld)
-        hudWorld->Dispose();
+        delete hudWorld;
     if (itsView)
-        itsView->Dispose();
+        delete itsView;
     if (soundHub)
         soundHub->Dispose();
 //    if (itsNet)
@@ -570,7 +570,7 @@ void CAvaraGame::LevelReset(Boolean clearReset) {
 
     while (freshPlayerList) {
         nextActor = freshPlayerList->nextActor;
-        freshPlayerList->Dispose();
+        delete freshPlayerList;
         freshPlayerList = (CAbstractPlayer *)nextActor;
     }
 

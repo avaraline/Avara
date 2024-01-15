@@ -144,6 +144,6 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
         }
         */
     } else {
-        Dispose();
+        delete this;
     }
 }

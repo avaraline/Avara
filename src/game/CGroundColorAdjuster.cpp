@@ -19,6 +19,6 @@ CAbstractActor *CGroundColorAdjuster::EndScript() {
     theShader = gCurrentGame->worldShader;
     theShader->groundColor = GetPixelColor();
 
-    Dispose();
+    delete this;
     return NULL;
 }

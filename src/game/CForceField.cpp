@@ -69,10 +69,10 @@ CAbstractActor *CForceField::EndScript() {
             heading = 0;
             lastWallActor->partList[0] = NULL;
             lastWallActor->partCount = 0;
-            lastWallActor->Dispose();
+            delete lastWallActor;
             lastWallActor = NULL;
         } else {
-            Dispose();
+            delete this;
             return NULL;
         }
 

@@ -17,7 +17,7 @@ enum { kLightOff, kLightViewCoordinates, kLightGlobalCoordinates };
 
 class CBSPPart;
 
-class CViewParameters final : public CDirectObject {
+class CViewParameters final {
 public:
     Vector fromPoint = {0, 0, 0};
     Vector atPoint = {0, 0, 0};
@@ -63,7 +63,7 @@ public:
     CViewParameters();
     virtual void CalculateViewPyramidCorners();
     virtual void CalculateViewPyramidNormals();
-    virtual void Dispose();
+    virtual ~CViewParameters() {}
 
     virtual void SetLightValues(short n, Fixed dx, Fixed dy, Fixed dz, short mode);
     virtual void SetLight(short n, Fixed angle1, Fixed angle2, Fixed intensity, short mode);

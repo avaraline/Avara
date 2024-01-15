@@ -28,19 +28,17 @@ void CBSPWorldImpl::DisposeParts() {
     short i;
 
     for (i = 0; i < partCount; i++) {
-        (*partList)[i]->Dispose();
+        delete (*partList)[i];
     }
 
     partCount = 0;
 }
 
-void CBSPWorldImpl::Dispose() {
+CBSPWorldImpl::~CBSPWorldImpl() {
     DisposeParts();
 
     DisposeHandle((Handle)partList);
     DisposeHandle((Handle)visibleList);
-
-    CDirectObject::Dispose();
 }
 
 void CBSPWorldImpl::AddPart(CBSPPart *thePart) {

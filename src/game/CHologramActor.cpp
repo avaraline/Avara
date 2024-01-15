@@ -49,6 +49,6 @@ CAbstractActor *CHologramActor::EndScript() {
         theWorld->AddPart(thePart);
     }
 
-    Dispose();
+    delete this;
     return NULL;
 }

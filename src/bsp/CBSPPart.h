@@ -103,7 +103,7 @@ namespace CBSPUserFlags {
     NegateTransformRow(part, 0); \
     NegateTransformRow(part, 1);
 
-class CBSPPart : public CDirectObject {
+class CBSPPart {
 public:
     /*
     Handle				itsBSPResource;
@@ -181,7 +181,7 @@ public:
 
     static CBSPPart *Create(short resId);
     virtual void BuildBoundingVolumes();
-    virtual void Dispose();
+    virtual ~CBSPPart();
 
     virtual void ReplaceColor(ARGBColor origColor, ARGBColor newColor);
     virtual void ReplaceAllColors(ARGBColor newColor);

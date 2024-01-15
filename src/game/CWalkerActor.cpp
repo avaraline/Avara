@@ -98,12 +98,11 @@ void CWalkerActor::StartSystems() {
     viewPortHeight = FIX3(350);
 }
 
-void CWalkerActor::Dispose() {
+CWalkerActor::~CWalkerActor() {
 #ifdef MARKERCUBE
     itsGame->itsWorld->RemovePart(markerCube);
-    markerCube->Dispose();
+    delete markerCube;
 #endif
-    CAbstractPlayer::Dispose();
 }
 
 void CWalkerActor::PlaceParts() {
@@ -774,7 +773,7 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
 
         hullRes = hullConfig.hullBSP;
         itsGame->itsWorld->RemovePart(viewPortPart);
-        viewPortPart->Dispose();
+        delete viewPortPart;
         LoadPart(0, hullRes);
 
         viewPortPart = partList[0];

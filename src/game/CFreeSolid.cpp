@@ -78,10 +78,10 @@ CAbstractActor *CFreeSolid::EndScript() {
             heading = 0;
             lastWallActor->partList[0] = NULL;
             lastWallActor->partCount = 0;
-            lastWallActor->Dispose(); //	Destroy wall actor (now without shape).
+            delete lastWallActor; //	Destroy wall actor (now without shape).
             lastWallActor = NULL;
         } else {
-            Dispose();
+            delete this;
             return NULL;
         }
 

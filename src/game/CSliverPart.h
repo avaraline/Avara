@@ -34,7 +34,6 @@ public:
 #if 0
     virtual	void		GenerateColorLookupTable();
 #endif
-    virtual void Dispose();
 private:
     void Create() {}
 };
