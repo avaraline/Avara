@@ -16,12 +16,12 @@
 class CBSPPart;
 class CViewParameters;
 
-class CBSPWorld : public CDirectObject {
+class CBSPWorld {
 public:
     virtual void AddPart(CBSPPart *thePart) {};
     virtual void RemovePart(CBSPPart *thePart) {};
     virtual void Render(CViewParameters *theView, Shader shader = Shader::World) {};
-    virtual void Dispose() {};
+    virtual ~CBSPWorld() {};
     virtual void DisposeParts() {};
     virtual void OverheadPoint(Fixed *pt, Fixed *extent) {};
 };
@@ -42,7 +42,7 @@ public:
     CBSPWorldImpl(short initialObjectSpace);
 
     virtual void DisposeParts();
-    virtual void Dispose();
+    virtual ~CBSPWorldImpl();
 
     virtual void RemovePart(CBSPPart *thePart);
     virtual void Render(CViewParameters *theView, Shader shader = Shader::World);

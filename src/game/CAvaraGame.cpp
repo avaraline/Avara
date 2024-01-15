@@ -206,11 +206,11 @@ void CAvaraGame::Dispose() {
     }
 
     if (itsWorld)
-        itsWorld->Dispose();
+        delete itsWorld;
     if (hudWorld)
-        hudWorld->Dispose();
+        delete hudWorld;
     if (itsView)
-        itsView->Dispose();
+        delete itsView;
     if (soundHub)
         soundHub->Dispose();
 //    if (itsNet)

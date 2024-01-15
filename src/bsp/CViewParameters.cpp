@@ -146,10 +146,6 @@ CViewParameters::CViewParameters() {
     showTransparent = false;
 }
 
-void CViewParameters::Dispose() {
-    CDirectObject::Dispose();
-}
-
 void CViewParameters::LookFrom(Fixed x, Fixed y, Fixed z) {
     fromPoint[0] = x;
     fromPoint[1] = y;
