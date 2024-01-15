@@ -31,7 +31,7 @@ void CWallDoor::LoadPart(short ind, short resId) {
         heading = 0;
         lastWallActor->partList[0] = NULL;
         lastWallActor->partCount = 0;
-        lastWallActor->Dispose();
+        delete lastWallActor;
         lastWallActor = NULL;
     } else {
         CDoor2Actor::LoadPart(ind, resId);

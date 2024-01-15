@@ -297,7 +297,7 @@ void CAbstractPlayer::AdaptableSettings() {
                     &motorFriction, &motorAcceleration);
 }
 
-void CAbstractPlayer::Dispose() {
+CAbstractPlayer::~CAbstractPlayer() {
     short i;
     CBSPWorld *hudWorld;
 
@@ -315,7 +315,7 @@ void CAbstractPlayer::Dispose() {
     }
 
     if (itsScout) {
-        itsScout->Dispose();
+        delete itsScout;
         scoutIdent = 0;
     }
 
@@ -334,7 +334,6 @@ void CAbstractPlayer::Dispose() {
 
     gHub->ReleaseLink(teleportSoundLink);
 
-    CRealMovers::Dispose();
 }
 
 void CAbstractPlayer::DisposeDashboard() {

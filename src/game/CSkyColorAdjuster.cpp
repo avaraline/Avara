@@ -42,6 +42,6 @@ CAbstractActor *CSkyColorAdjuster::EndScript() {
     theShader->highSkyAltitude = highAlt;
     theShader->skyShadeCount = shadeCount;
 
-    Dispose();
+    delete this;
     return NULL;
 }

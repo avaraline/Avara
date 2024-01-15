@@ -34,5 +34,5 @@ void CSphereActor::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
     //	itsGame->Score(theHit->team, theHit->playerId, 100, true, teamColor, -1);
 
     Blast();
-    Dispose();
+    delete this;
 }

@@ -66,7 +66,7 @@ void CreateTheObject() {
     Str255 nameBuf;
 
     if (currentActor) {
-        currentActor->Dispose();
+        delete currentActor;
     }
 
     symTable->GetIndEntry(parserVar.lookahead.value.token, nameBuf);
@@ -82,7 +82,7 @@ void CreateTheAdjuster() {
     Str255 nameBuf;
 
     if (currentActor) {
-        currentActor->Dispose();
+        delete currentActor;
     }
 
     symTable->GetIndEntry(parserVar.lookahead.value.token, nameBuf);
@@ -1077,7 +1077,7 @@ void DeallocParser() {
     programBase = NULL;
 
     if (currentActor) {
-        currentActor->Dispose();
+        delete currentActor;
         currentActor = NULL;
     }
 }

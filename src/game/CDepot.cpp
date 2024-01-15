@@ -208,7 +208,7 @@ void CDepot::DisposeMissiles() {
         mList = missileList[j];
         while (mList) {
             nextMissile = mList->nextMissile;
-            mList->Dispose();
+            delete mList;
             mList = nextMissile;
         }
     }
@@ -353,7 +353,7 @@ void CDepot::DisposeWeapons() {
         wList = weaponList[j];
         while (wList) {
             nextWeapon = wList->nextWeapon;
-            wList->Dispose();
+            delete wList;
             wList = nextWeapon;
         }
     }

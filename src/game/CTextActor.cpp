@@ -68,10 +68,8 @@ CAbstractActor *CTextActor::EndScript() {
     }
 }
 
-void CTextActor::Dispose() {
+CTextActor::~CTextActor() {
     itsGame->RemoveReceiver(&in);
-
-    CAbstractActor::Dispose();
 }
 
 void CTextActor::FrameAction() {

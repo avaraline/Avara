@@ -226,11 +226,9 @@ void CDoorActor::AdaptableSettings() {
     FPS_DEBUG("openSpeed = " << openSpeed << ", closeSpeed = " << closeSpeed << "\n");
 }
 
-void CDoorActor::Dispose() {
+CDoorActor::~CDoorActor() {
     itsGame->RemoveReceiver(&openActivator);
     itsGame->RemoveReceiver(&closeActivator);
-
-    CGlowActors::Dispose();
 }
 
 void CDoorActor::DoorSound() {

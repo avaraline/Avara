@@ -249,7 +249,7 @@ public:
     virtual void StartSystems();
     virtual void LevelReset();
 
-    virtual void Dispose();
+    virtual ~CAbstractPlayer();
     virtual void DisposeDashboard();
 
     virtual void ReturnWeapon(short theKind);

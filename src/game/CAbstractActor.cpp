@@ -252,8 +252,7 @@ CAbstractActor::CAbstractActor() {
     traction = kDefaultTraction;
     friction = kDefaultFriction;
 }
-
-void CAbstractActor::Dispose() {
+CAbstractActor::~CAbstractActor() {
     short i;
     ActorAttachment *nextA;
 
@@ -281,8 +280,6 @@ void CAbstractActor::Dispose() {
     if (itsSoundLink) {
         gHub->ReleaseLinkAndKillSounds(itsSoundLink);
     }
-
-    CDirectObject::Dispose();
 }
 
 void CAbstractActor::Shatter(short firstSliverType,
@@ -719,7 +716,7 @@ void CAbstractActor::PostMortemBlast(short scoreTeam, short scoreId, Boolean doD
     }
 
     if (doDispose)
-        Dispose();
+        delete this;
 }
 
 bool CAbstractActor::SecondaryDamage(short scoreTeam, short scoreColor, ScoreInterfaceReasons damageSource) {
@@ -1041,7 +1038,7 @@ void CAbstractActor::PauseLevel() {
 **	This method is called before the level is reset.
 */
 void CAbstractActor::LevelReset() {
-    Dispose();
+    delete this;
 }
 
 void CAbstractActor::RegisterReceiver(MessageRecord *theMsg, MsgType messageNum) {

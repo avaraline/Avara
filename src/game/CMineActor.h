@@ -39,7 +39,7 @@ public:
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
     virtual void Activate();
-    virtual void Dispose();
+    virtual ~CMineActor();
     virtual void FrameAction();
     virtual void WasHit(RayHitRecord *theHit, Fixed hitEnergy);
 };

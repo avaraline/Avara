@@ -67,7 +67,7 @@ void CLogic::Trigger() {
     }
 }
 
-void CLogic::Dispose() {
+CLogic::~CLogic() {
     short i;
 
     itsGame->RemoveReceiver(&startMsg);
@@ -76,8 +76,6 @@ void CLogic::Dispose() {
     for (i = 0; i < LOGIC_IN; i++) {
         itsGame->RemoveReceiver(&in[i]);
     }
-
-    CAbstractActor::Dispose();
 }
 
 void CLogic::FrameAction() {
