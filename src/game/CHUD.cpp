@@ -31,7 +31,7 @@ void CHUD::LoadImages(NVGcontext *ctx) {
 }
 
 void CHUD::DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, NVGcontext *ctx) {
-    auto view = RenderManager::viewParams;
+    auto view = gRenderer->viewParams;
     CAbstractPlayer *player = itsGame->GetLocalPlayer();
     CPlayerManager *playerManager = itsGame->FindPlayerManager(player);
 
@@ -204,7 +204,7 @@ void CHUD::DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, N
 }
 
 void CHUD::DrawLevelName(NVGcontext *ctx) {
-    auto view = RenderManager::viewParams;
+    auto view = gRenderer->viewParams;
     std::string level = itsGame->loadedLevel;
     if(itsGame->gameStatus != kPlayingStatus && level.length() > 0) {
         int bufferWidth = view->viewPixelDimensions.h;
@@ -228,7 +228,7 @@ void CHUD::DrawLevelName(NVGcontext *ctx) {
 }
 
 void CHUD::DrawPaused(NVGcontext *ctx) {
-    auto view = RenderManager::viewParams;
+    auto view = gRenderer->viewParams;
     if (itsGame->gameStatus == kPauseStatus) {
         int bufferWidth = view->viewPixelDimensions.h;
         int bufferHeight = view->viewPixelDimensions.v;
@@ -276,7 +276,7 @@ void CHUD::DrawImage(NVGcontext* ctx, int image, float alpha,
 }
 
 void CHUD::Render(NVGcontext *ctx) {
-    auto view = RenderManager::viewParams;
+    auto view = gRenderer->viewParams;
     CAbstractPlayer *player = itsGame->GetLocalPlayer();
     CAbstractPlayer *spectatePlayer = itsGame->GetSpectatePlayer();
     CNetManager *net = itsGame->itsApp->GetNet();
@@ -920,7 +920,7 @@ void CHUD::DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, floa
 }
 
 void CHUD::RenderNewHUD(NVGcontext *ctx) {
-    auto view = RenderManager::viewParams;
+    auto view = gRenderer->viewParams;
     CAbstractPlayer *player = itsGame->GetLocalPlayer();
     CAbstractPlayer *spectatePlayer = itsGame->GetSpectatePlayer();
     CNetManager *net = itsGame->itsApp->GetNet();

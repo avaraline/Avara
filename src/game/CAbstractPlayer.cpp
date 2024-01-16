@@ -65,7 +65,7 @@ void CAbstractPlayer::LoadHUDParts() {
         targetOns[i]->usesPrivateYon = true;
         targetOns[i]->ignoreDirectionalLights = true;
         targetOns[i]->isTransparent = true;
-        RenderManager::AddHUDPart(targetOns[i]);
+        gRenderer->AddHUDPart(targetOns[i]);
 
         targetOffs[i] = CBSPPart::Create(kTargetOff);
         targetOffs[i]->ReplaceColor(0xff008f00, ColorManager::getPlasmaSightsOffColor());
@@ -74,7 +74,7 @@ void CAbstractPlayer::LoadHUDParts() {
         targetOffs[i]->usesPrivateYon = true;
         targetOffs[i]->ignoreDirectionalLights = true;
         targetOffs[i]->isTransparent = true;
-        RenderManager::AddHUDPart(targetOffs[i]);
+        gRenderer->AddHUDPart(targetOffs[i]);
     }
 
     dirArrowHeight = FIX3(750);
@@ -83,7 +83,7 @@ void CAbstractPlayer::LoadHUDParts() {
     dirArrow->ignoreDirectionalLights = true;
     dirArrow->privateAmbient = FIX1;
     dirArrow->isTransparent = true;
-    RenderManager::AddHUDPart(dirArrow);
+    gRenderer->AddHUDPart(dirArrow);
 
     LoadDashboardParts();
 }
@@ -316,13 +316,13 @@ CAbstractPlayer::~CAbstractPlayer() {
         scoutIdent = 0;
     }
 
-    RenderManager::RemoveHUDPart(dirArrow);
+    gRenderer->RemoveHUDPart(dirArrow);
     delete dirArrow;
 
     for (i = 0; i < 2; i++) {
-        RenderManager::RemoveHUDPart(targetOns[i]);
+        gRenderer->RemoveHUDPart(targetOns[i]);
         delete targetOns[i];
-        RenderManager::RemoveHUDPart(targetOffs[i]);
+        gRenderer->RemoveHUDPart(targetOffs[i]);
         delete targetOffs[i];
     }
     DisposeDashboard();
@@ -335,73 +335,73 @@ void CAbstractPlayer::DisposeDashboard() {
     if (!itsGame->showNewHUD) return;
 
     if (itsGame->itsApp->Get(kHUDShowMissileLock)) {
-        RenderManager::RemoveHUDPart(lockLight);
+        gRenderer->RemoveHUDPart(lockLight);
         delete lockLight;
     }
 
-    RenderManager::RemoveHUDPart(groundDirArrow);
+    gRenderer->RemoveHUDPart(groundDirArrow);
     delete groundDirArrow;
 
-    RenderManager::RemoveHUDPart(groundDirArrowSlow);
+    gRenderer->RemoveHUDPart(groundDirArrowSlow);
     delete groundDirArrowSlow;
 
-    RenderManager::RemoveHUDPart(groundDirArrowFast);
+    gRenderer->RemoveHUDPart(groundDirArrowFast);
     delete groundDirArrowFast;
 
-    RenderManager::RemoveHUDPart(energyLabel);
+    gRenderer->RemoveHUDPart(energyLabel);
     delete energyLabel;
 
-    RenderManager::RemoveHUDPart(shieldLabel);
+    gRenderer->RemoveHUDPart(shieldLabel);
     delete shieldLabel;
 
-    RenderManager::RemoveHUDPart(grenadeLabel);
+    gRenderer->RemoveHUDPart(grenadeLabel);
     delete grenadeLabel;
 
-    RenderManager::RemoveHUDPart(missileLabel);
+    gRenderer->RemoveHUDPart(missileLabel);
     delete missileLabel;
 
-    RenderManager::RemoveHUDPart(boosterLabel);
+    gRenderer->RemoveHUDPart(boosterLabel);
     delete boosterLabel;
 
-    RenderManager::RemoveHUDPart(livesLabel);
+    gRenderer->RemoveHUDPart(livesLabel);
     delete livesLabel;
 
-    RenderManager::RemoveHUDPart(shieldGauge);
+    gRenderer->RemoveHUDPart(shieldGauge);
     delete shieldGauge;
 
-    RenderManager::RemoveHUDPart(shieldGaugeBackLight);
+    gRenderer->RemoveHUDPart(shieldGaugeBackLight);
     delete shieldGaugeBackLight;
 
-    RenderManager::RemoveHUDPart(energyGauge);
+    gRenderer->RemoveHUDPart(energyGauge);
     delete energyGauge;
 
-    RenderManager::RemoveHUDPart(energyGaugeBackLight);
+    gRenderer->RemoveHUDPart(energyGaugeBackLight);
     delete energyGaugeBackLight;
 
 
     for (int i = 0; i < 4; i++) {
-        RenderManager::RemoveHUDPart(grenadeMeter[i]);
+        gRenderer->RemoveHUDPart(grenadeMeter[i]);
         delete grenadeMeter[i];
 
-        RenderManager::RemoveHUDPart(grenadeBox[i]);
+        gRenderer->RemoveHUDPart(grenadeBox[i]);
         delete grenadeBox[i];
 
-        RenderManager::RemoveHUDPart(missileMeter[i]);
+        gRenderer->RemoveHUDPart(missileMeter[i]);
         delete missileMeter[i];
 
-        RenderManager::RemoveHUDPart(missileBox[i]);
+        gRenderer->RemoveHUDPart(missileBox[i]);
         delete missileBox[i];
 
-        RenderManager::RemoveHUDPart(boosterMeter[i]);
+        gRenderer->RemoveHUDPart(boosterMeter[i]);
         delete boosterMeter[i];
 
-        RenderManager::RemoveHUDPart(boosterBox[i]);
+        gRenderer->RemoveHUDPart(boosterBox[i]);
         delete boosterBox[i];
 
-        RenderManager::RemoveHUDPart(livesMeter[i]);
+        gRenderer->RemoveHUDPart(livesMeter[i]);
         delete livesMeter[i];
 
-        RenderManager::RemoveHUDPart(livesBox[i]);
+        gRenderer->RemoveHUDPart(livesBox[i]);
         delete livesBox[i];
     }
 }
@@ -522,7 +522,7 @@ CScaledBSP* CAbstractPlayer::DashboardPart(uint16_t id, Fixed scale) {
     CScaledBSP* bsp = new CScaledBSP(scale, id, this, 0);
     bsp->ReplaceAllColors(ColorManager::getHUDColor());
     bsp->isTransparent = true;
-    RenderManager::AddHUDPart(bsp);
+    gRenderer->AddHUDPart(bsp);
     return bsp;
 }
 
@@ -975,7 +975,7 @@ void CAbstractPlayer::ControlSoundPoint() {
 }
 
 void CAbstractPlayer::ControlViewPoint() {
-    auto vp = RenderManager::viewParams;
+    auto vp = gRenderer->viewParams;
 
     if (!isInLimbo)
         PlaceHUDParts();
@@ -1013,7 +1013,7 @@ void CAbstractPlayer::RecalculateViewDistance() {
     Fixed viewDist;
     Fixed frameYon;
 
-    auto vp = RenderManager::viewParams;
+    auto vp = gRenderer->viewParams;
 
     viewDist = FMulDivNZ(vp->viewWidth, FDegCos(fieldOfView), 2 * FDegSin(fieldOfView));
 
@@ -2100,7 +2100,7 @@ void CAbstractPlayer::ReceiveConfig(PlayerConfigRecord *config) {
 
         // Reload the livesLabel to reflect the hull shape.
         if (!itsGame->showNewHUD) return;
-        RenderManager::RemoveHUDPart(livesLabel);
+        gRenderer->RemoveHUDPart(livesLabel);
         delete livesLabel;
         livesLabel = DashboardPart(hullConfig.hullBSP, FIX3(140*layoutScale));
     }

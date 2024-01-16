@@ -74,7 +74,7 @@ CAbstractActor *CFreeSolid::EndScript() {
 
             //TranslatePartY(thePart, ReadLongVar(iHeight));
             VECTORCOPY(location, thePart->itsTransform[3]);
-            RenderManager::RemovePart(thePart);
+            gRenderer->RemovePart(thePart);
 
             heading = 0;
             lastWallActor->partList[0] = NULL;

@@ -12,25 +12,27 @@
 
 class RenderManager {
 public:
-    static CViewParameters *viewParams;
-    static CWorldShader *skyParams;
+    CViewParameters *viewParams;
+    CWorldShader *skyParams;
     
-    static void Init(SDL_Window *window, NVGcontext *nvg);
-    static void AddHUDPart(CBSPPart *part);
-    static void AddPart(CBSPPart *part);
-    static void LevelReset();
-    static void OverheadPoint(Fixed *pt, Fixed *extent);
-    static void RemoveHUDPart(CBSPPart *part);
-    static void RemovePart(CBSPPart *part);
-    static void RenderFrame();
-    static void UpdateViewRect(int width, int height, float pixelRatio);
+    RenderManager(SDL_Window *window, NVGcontext *nvg);
+    void AddHUDPart(CBSPPart *part);
+    void AddPart(CBSPPart *part);
+    void LevelReset();
+    void OverheadPoint(Fixed *pt, Fixed *extent);
+    void RemoveHUDPart(CBSPPart *part);
+    void RemovePart(CBSPPart *part);
+    void RenderFrame();
+    void UpdateViewRect(int width, int height, float pixelRatio);
 private:
-    static void ResetLights();
+    void ResetLights();
 
-    static SDL_Window *window;
-    static NVGcontext *nvg;
-    static std::shared_ptr<CHUD> ui;
-    static CBSPWorldImpl *staticWorld;
-    static CBSPWorldImpl *dynamicWorld;
-    static CBSPWorldImpl *hudWorld;
+    SDL_Window *window;
+    NVGcontext *nvg;
+    std::shared_ptr<CHUD> ui;
+    CBSPWorldImpl *staticWorld;
+    CBSPWorldImpl *dynamicWorld;
+    CBSPWorldImpl *hudWorld;
 };
+
+extern RenderManager *gRenderer;

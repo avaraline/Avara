@@ -24,7 +24,7 @@ CAbstractActor *CSkyColorAdjuster::EndScript() {
 
     CAbstractActor::EndScript();
 
-    auto theShader = RenderManager::skyParams;
+    auto theShader = gRenderer->skyParams;
     theShader->lowSkyColor = GetPixelColor();
     theShader->highSkyColor = GetOtherPixelColor();
 

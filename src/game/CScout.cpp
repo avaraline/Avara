@@ -243,7 +243,7 @@ void CScout::ToggleState(short command) {
 }
 
 void CScout::ControlViewPoint() {
-    auto vp = RenderManager::viewParams;
+    auto vp = gRenderer->viewParams;
     vp->LookFrom(location[0] + FIX3(100), location[1] + FIX3(100), location[2]);
     vp->LookAtPart(itsPlayer->viewPortPart);
     vp->PointCamera();

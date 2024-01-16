@@ -76,8 +76,8 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     gCurrentGame = itsGame.get();
     itsGame->IAvaraGame(this);
 
-    RenderManager::Init(mSDLWindow, mNVGContext);
-    RenderManager::UpdateViewRect(mSize.x, mSize.y, mPixelRatio);
+    gRenderer = new RenderManager(mSDLWindow, mNVGContext);
+    gRenderer->UpdateViewRect(mSize.x, mSize.y, mPixelRatio);
 
     AvaraGLSetFOV(Number(kFOV));
 
@@ -157,7 +157,7 @@ void CAvaraAppImpl::idle() {
 
 void CAvaraAppImpl::drawContents() {
     if (animatePreview) {
-        auto vp = RenderManager::viewParams;
+        auto vp = gRenderer->viewParams;
         Fixed x = overhead[0] + FMul(previewRadius, FOneCos(previewAngle));
         Fixed y = overhead[1] + FMul(FMul(extent[3], FIX(2)), FOneSin(previewAngle) + FIX1);
         Fixed z = overhead[2] + FMul(previewRadius, FOneSin(previewAngle));
@@ -176,7 +176,7 @@ void CAvaraAppImpl::RenderContents() {
 }
 
 void CAvaraAppImpl::WindowResized(int width, int height) {
-    RenderManager::UpdateViewRect(width, height, mPixelRatio);
+    gRenderer->UpdateViewRect(width, height, mPixelRatio);
     //performLayout();
 }
 
@@ -208,7 +208,7 @@ void CAvaraAppImpl::drawAll() {
 }
 
 void CAvaraAppImpl::GameStarted(std::string set, std::string level) {
-    auto vp = RenderManager::viewParams;
+    auto vp = gRenderer->viewParams;
     animatePreview = false;
     vp->showTransparent = false;
     itsGame->IncrementGameCounter();
@@ -300,9 +300,9 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
 
         levelWindow->SelectLevel(set, itsGame->loadedLevel);
 
-        RenderManager::OverheadPoint(overhead, extent);
+        gRenderer->OverheadPoint(overhead, extent);
 
-        auto vp = RenderManager::viewParams;
+        auto vp = gRenderer->viewParams;
         vp->yonBound = FIX(10000);
         vp->showTransparent = true;
 

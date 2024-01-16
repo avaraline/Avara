@@ -175,7 +175,7 @@ void CBSPPart::IBSPPart(short resId) {
 void CBSPPart::PostRender() {}
 
 void CBSPPart::TransformLights() {
-    auto vp = RenderManager::viewParams;
+    auto vp = gRenderer->viewParams;
     if (!ignoreDirectionalLights) {
         if (lightSeed != vp->lightSeed) {
             lightSeed = vp->lightSeed;
@@ -199,7 +199,7 @@ Boolean CBSPPart::InViewPyramid() {
     Fixed x, y;
     Fixed z;
 
-    auto vp = RenderManager::viewParams;
+    auto vp = gRenderer->viewParams;
 
     if (hither >= yon)
         return false;
@@ -264,7 +264,7 @@ void CBSPPart::PrintMatrix(Matrix *m) {
 **  in preparation to shading.
 */
 Boolean CBSPPart::PrepareForRender() {
-    auto vp = RenderManager::viewParams;
+    auto vp = gRenderer->viewParams;
     Boolean inPyramid = vp->showTransparent || !isTransparent;
 
     if (inPyramid) {
@@ -312,7 +312,7 @@ Boolean CBSPPart::PrepareForRender() {
 **  overhead.
 */
 void CBSPPart::Render(Shader shader) {
-    RenderManager::viewParams->DoLighting();
+    gRenderer->viewParams->DoLighting();
 
     if (PrepareForRender()) {
         DrawPolygons(shader);

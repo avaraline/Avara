@@ -773,7 +773,7 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
         hullConfig = **AssetManager::GetHull(hullRes);
 
         hullRes = hullConfig.hullBSP;
-        RenderManager::RemovePart(viewPortPart);
+        gRenderer->RemovePart(viewPortPart);
         delete viewPortPart;
         LoadPart(0, hullRes);
 
@@ -796,7 +796,7 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
 
         proximityRadius = viewPortPart->enclosureRadius << 2;
 
-        RenderManager::AddPart(viewPortPart);
+        gRenderer->AddPart(viewPortPart);
 
         viewPortHeight = hullConfig.rideHeight;
 

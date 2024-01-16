@@ -4,20 +4,11 @@
 #include "CAvaraGame.h"
 #include "FastMat.h"
 
-// Create static variables.
-SDL_Window *RenderManager::window = nullptr;
-NVGcontext *RenderManager::nvg = nullptr;
-std::shared_ptr<CHUD> RenderManager::ui = nullptr;
-CWorldShader *RenderManager::skyParams = nullptr;
-CViewParameters *RenderManager::viewParams = nullptr;
-CBSPWorldImpl *RenderManager::staticWorld = nullptr;
-CBSPWorldImpl *RenderManager::dynamicWorld = nullptr;
-CBSPWorldImpl *RenderManager::hudWorld = nullptr;
 
-void RenderManager::Init(SDL_Window *window, NVGcontext *nvg)
+RenderManager::RenderManager(SDL_Window *window, NVGcontext *nvg)
 {
-    RenderManager::window = window;
-    RenderManager::nvg = nvg;
+    this->window = window;
+    this->nvg = nvg;
 
     ui = std::make_shared<CHUD>(gCurrentGame);
     ui->LoadImages(nvg);
@@ -109,3 +100,5 @@ void RenderManager::ResetLights()
     viewParams->SetLight(2, 0, 0, 0, DEFAULT_LIGHT_COLOR, kLightOff);
     viewParams->SetLight(3, 0, 0, 0, DEFAULT_LIGHT_COLOR, kLightOff);
 }
+
+RenderManager *gRenderer;

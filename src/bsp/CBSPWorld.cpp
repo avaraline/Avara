@@ -235,7 +235,7 @@ void CBSPWorldImpl::SortVisibleParts() {
 
     endPart = visibleP + visibleCount;
     thisPart = visibleP;
-    minZ = maxZ = RenderManager::viewParams->yonBound;
+    minZ = maxZ = gRenderer->viewParams->yonBound;
 
     while (thisPart < endPart) {
         Fixed z;
@@ -268,7 +268,7 @@ void CBSPWorldImpl::Render(Shader shader) {
     int i;
     CBSPPart **sp, **sd;
 
-    RenderManager::viewParams->DoLighting();
+    gRenderer->viewParams->DoLighting();
 
     HLock((Handle)partList);
     HLock((Handle)visibleList);

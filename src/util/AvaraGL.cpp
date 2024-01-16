@@ -355,7 +355,7 @@ void AvaraGLDrawPolygons(CBSPPart* part, Shader shader) {
     glEnableVertexAttribArray(2);
 
     // custom per-object lighting
-    auto vp = RenderManager::viewParams;
+    auto vp = gRenderer->viewParams;
     float extra_amb = ToFloat(part->extraAmbient);
     float current_amb = ToFloat(vp->ambientLight);
 

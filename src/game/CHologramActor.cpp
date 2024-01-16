@@ -44,7 +44,7 @@ CAbstractActor *CHologramActor::EndScript() {
         thePart->MoveDone();
         partList[0] = NULL;
 
-        RenderManager::AddPart(thePart);
+        gRenderer->AddPart(thePart);
     }
 
     delete this;

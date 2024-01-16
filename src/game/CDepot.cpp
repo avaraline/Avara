@@ -99,7 +99,7 @@ void CDepot::RunSliverActions() {
 
         while (aSliver) {
             if (aSliver->SliverAction()) {
-                RenderManager::RemovePart(aSliver);
+                gRenderer->RemovePart(aSliver);
 
                 *prevNext = aSliver->nextSliver;
                 aSliver->nextSliver = freeSlivers[i];
@@ -129,7 +129,7 @@ void CDepot::FireSlivers(short n,
     }
 
     if (n > 2) {
-        auto vp = RenderManager::viewParams;
+        auto vp = gRenderer->viewParams;
         VectorMatrixProduct(1, (Vector *)origin, (Vector *)loc, &vp->viewMatrix);
 
         if (loc[2] < FIX(-10) || loc[2] > vp->yonBound) {
@@ -155,7 +155,7 @@ void CDepot::FireSlivers(short n,
         activeSlivers[sizeGroup] = theSliver;
 
         theSliver->Activate(origin, direction, scale, speedFactor, spread, age, fromObject);
-        RenderManager::AddPart(theSliver);
+        gRenderer->AddPart(theSliver);
     }
 }
 
@@ -275,7 +275,7 @@ void CDepot::LevelReset() {
     for (i = 0; i < SLIVERSIZES; i++) {
         aSliver = activeSlivers[i];
         while (aSliver) {
-            RenderManager::RemovePart(aSliver);
+            gRenderer->RemovePart(aSliver);
             nextSliver = aSliver->nextSliver;
             aSliver->nextSliver = freeSlivers[i];
             freeSlivers[i] = aSliver;
@@ -289,10 +289,10 @@ void CDepot::LevelReset() {
     if (bspInGame) {
         bspInGame = false;
 
-        RenderManager::RemovePart(grenadeTop);
-        RenderManager::RemoveHUDPart(smartHairs);
-        RenderManager::RemoveHUDPart(smartSight);
-        RenderManager::RemoveHUDPart(grenadeSight);
+        gRenderer->RemovePart(grenadeTop);
+        gRenderer->RemoveHUDPart(smartHairs);
+        gRenderer->RemoveHUDPart(smartSight);
+        gRenderer->RemoveHUDPart(grenadeSight);
     }
 
     for (i = 0; i < MISSILEKINDS; i++) {
@@ -374,10 +374,10 @@ CWeapon *CDepot::AquireWeapon(short weaponKind) {
 
 void CDepot::FrameAction() {
     if (!bspInGame) {
-        RenderManager::AddHUDPart(smartHairs);
-        RenderManager::AddHUDPart(smartSight);
-        RenderManager::AddHUDPart(grenadeSight);
-        RenderManager::AddPart(grenadeTop);
+        gRenderer->AddHUDPart(smartHairs);
+        gRenderer->AddHUDPart(smartSight);
+        gRenderer->AddHUDPart(grenadeSight);
+        gRenderer->AddPart(grenadeTop);
         bspInGame = true;
     }
     smartHairs->isTransparent = true;
