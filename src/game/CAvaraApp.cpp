@@ -172,7 +172,7 @@ void CAvaraAppImpl::drawContents() {
 // display only the game screen, not the widgets
 void CAvaraAppImpl::RenderContents() {
     drawContents();
-    SDL_GL_SwapWindow(mSDLWindow);
+    gRenderer->RefreshWindow();
 }
 
 void CAvaraAppImpl::WindowResized(int width, int height) {

@@ -3,7 +3,7 @@
 #include "AvaraDefines.h"
 #include "CAvaraGame.h"
 #include "FastMat.h"
-
+#include "Preferences.h"
 
 RenderManager::RenderManager(SDL_Window *window, NVGcontext *nvg)
 {
@@ -51,6 +51,11 @@ void RenderManager::OverheadPoint(Fixed *pt, Fixed *extent)
     dynamicWorld->OverheadPoint(pt, extent);
 }
 
+void RenderManager::RefreshWindow()
+{
+    SDL_GL_SwapWindow(window);
+}
+
 void RenderManager::RemoveHUDPart(CBSPPart *part)
 {
     hudWorld->RemovePart(part);
@@ -73,15 +78,18 @@ void RenderManager::RenderFrame()
     AvaraGLSetDepthTest(false);
     hudWorld->Render(Shader::HUD);
 
-    if (true /* TODO: lookup/store showNewHud setting */) {
+    if (gApplication ? gApplication->Get<bool>(kShowNewHUD) : true) {
         ui->RenderNewHUD(nvg);
     } else {
         ui->Render(nvg);
     }
 
     AvaraGLSetDepthTest(true);
+}
 
-    // SDL_GL_SwapWindow(window);
+void RenderManager::SetFOV(float fov)
+{
+    this->fov = fov;
 }
 
 void RenderManager::UpdateViewRect(int width, int height, float pixelRatio)
