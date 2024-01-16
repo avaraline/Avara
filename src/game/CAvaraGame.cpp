@@ -264,7 +264,7 @@ void CAvaraGame::AddActor(CAbstractActor *theActor) {
     actorList = theActor;
 
     for (i = 0; i < theActor->partCount; i++) {
-gRenderer->AddPart(theActor->partList[i]);
+        gRenderer->AddPart(theActor->partList[i]);
     }
 
     GetIdent(theActor);
@@ -290,7 +290,7 @@ void CAvaraGame::RemoveActor(CAbstractActor *theActor) {
                 anActor->nextActor = NULL;
 
                 for (i = 0; i < anActor->partCount; i++) {
-gRenderer->RemovePart(anActor->partList[i]);
+                    gRenderer->RemovePart(anActor->partList[i]);
                 }
                 anActor = NULL;
             } else {
@@ -533,7 +533,7 @@ void CAvaraGame::LevelReset(Boolean clearReset) {
         freshPlayerList = (CAbstractPlayer *)nextActor;
     }
 
-gRenderer->LevelReset();
+    gRenderer->LevelReset();
 
     curIdent = 0;
     for (i = 0; i < IDENTTABLESIZE; i++) {
@@ -559,7 +559,6 @@ void CAvaraGame::EndScript() {
     short i;
     ARGBColor color = 0;
     Fixed intensity, angle1, angle2;
-    Fixed x, y, z;
     auto vp = gRenderer->viewParams;
 
     gameStatus = kReadyStatus;
@@ -1018,7 +1017,7 @@ void CAvaraGame::StopGame() {
 void CAvaraGame::Render() {
     //if (gameStatus == kPlayingStatus || gameStatus == kPauseStatus || gameStatus == kWinStatus || gameStatus == kLoseStatus) {
     ViewControl();
-gRenderer->RenderFrame();
+    gRenderer->RenderFrame();
 }
 
 CPlayerManager *CAvaraGame::GetPlayerManager(CAbstractPlayer *thePlayer) {
