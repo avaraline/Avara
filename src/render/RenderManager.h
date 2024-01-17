@@ -5,17 +5,35 @@
 #include "CHUD.h"
 #include "CWorldShader.h"
 #include "CViewParameters.h"
+#include "ModernOpenGLRenderer.h"
+#include "NullRenderer.h"
 
 #include <SDL2/SDL.h>
 
 #include <memory>
 
-class RenderManager {
+#ifdef __has_include
+#  if __has_include(<optional>)                // Check for a standard library
+#    include <optional>
+#  elif __has_include(<experimental/optional>) // Check for an experimental version
+#    include <experimental/optional>           // Check if __has_include is present
+#  else                                        // Not found at all
+#     error "Missing <optional>"
+#  endif
+#endif
+
+enum struct RenderMode { Headless, GL3 };
+
+class RenderManager final {
 public:
+    friend class ModernOpenGLRenderer;
+    friend class NullRenderer;
+
     CViewParameters *viewParams;
     CWorldShader *skyParams;
     
-    RenderManager(SDL_Window *window, NVGcontext *nvg);
+    RenderManager(SDL_Window *window, std::optional<NVGcontext*> nvg, RenderMode mode);
+    ~RenderManager();
 
     /**
      * Add polygonal data for use in rendering the HUD.
@@ -91,9 +109,10 @@ private:
     void ResetLights();
 
     SDL_Window *window;
+    std::unique_ptr<Renderer> renderer;
     NVGcontext *nvg;
     float fov = 50.0f;
-    std::shared_ptr<CHUD> ui;
+    std::unique_ptr<CHUD> ui;
     CBSPWorldImpl *staticWorld;
     CBSPWorldImpl *dynamicWorld;
     CBSPWorldImpl *hudWorld;

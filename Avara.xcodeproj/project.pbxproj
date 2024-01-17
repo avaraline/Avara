@@ -15,6 +15,8 @@
 		9465BFD32B30C2A00050681C /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9465BFD12B30C2A00050681C /* AssetManager.cpp */; };
 		9465BFD72B30EF680050681C /* PackageManifest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9465BFD52B30EF680050681C /* PackageManifest.cpp */; };
 		9465BFD82B30EF680050681C /* PackageManifest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9465BFD52B30EF680050681C /* PackageManifest.cpp */; };
+		947F5C652B576B9F00F41689 /* ModernOpenGLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 947F5C642B576B9F00F41689 /* ModernOpenGLRenderer.cpp */; };
+		947F5C662B576B9F00F41689 /* ModernOpenGLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 947F5C642B576B9F00F41689 /* ModernOpenGLRenderer.cpp */; };
 		948128B02B53A1C7002A3459 /* RenderManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948128AF2B53A1C7002A3459 /* RenderManager.cpp */; };
 		948128B12B53A1C7002A3459 /* RenderManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948128AF2B53A1C7002A3459 /* RenderManager.cpp */; };
 		948CBF142B335A1400147E80 /* BaseAssetStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */; };
@@ -378,6 +380,10 @@
 		9465BFD12B30C2A00050681C /* AssetManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetManager.cpp; sourceTree = "<group>"; };
 		9465BFD52B30EF680050681C /* PackageManifest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PackageManifest.cpp; sourceTree = "<group>"; };
 		9465BFD92B30EFB40050681C /* PackageManifest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PackageManifest.h; sourceTree = "<group>"; };
+		947F5C622B57693300F41689 /* Renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
+		947F5C632B576ACD00F41689 /* ModernOpenGLRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModernOpenGLRenderer.h; sourceTree = "<group>"; };
+		947F5C642B576B9F00F41689 /* ModernOpenGLRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ModernOpenGLRenderer.cpp; sourceTree = "<group>"; };
+		947F5C672B57A30100F41689 /* NullRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NullRenderer.h; sourceTree = "<group>"; };
 		948128AE2B539B6C002A3459 /* RenderManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RenderManager.h; sourceTree = "<group>"; };
 		948128AF2B53A1C7002A3459 /* RenderManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RenderManager.cpp; sourceTree = "<group>"; };
 		948CBF112B33581D00147E80 /* AssetStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetStorage.h; sourceTree = "<group>"; };
@@ -1055,6 +1061,10 @@
 		948128AD2B539B44002A3459 /* render */ = {
 			isa = PBXGroup;
 			children = (
+				947F5C642B576B9F00F41689 /* ModernOpenGLRenderer.cpp */,
+				947F5C632B576ACD00F41689 /* ModernOpenGLRenderer.h */,
+				947F5C672B57A30100F41689 /* NullRenderer.h */,
+				947F5C622B57693300F41689 /* Renderer.h */,
 				948128AF2B53A1C7002A3459 /* RenderManager.cpp */,
 				948128AE2B539B6C002A3459 /* RenderManager.h */,
 			);
@@ -2119,6 +2129,7 @@
 				E517F08C299713DB0036B206 /* CPlacedActors.cpp in Sources */,
 				E517F08D299713DB0036B206 /* CPlayerActor.cpp in Sources */,
 				E517F08E299713DB0036B206 /* CPlayerManager.cpp in Sources */,
+				947F5C662B576B9F00F41689 /* ModernOpenGLRenderer.cpp in Sources */,
 				E517F08F299713DB0036B206 /* CPlayerMissile.cpp in Sources */,
 				E517F090299713DB0036B206 /* CRamp.cpp in Sources */,
 				E517F091299713DB0036B206 /* CRandomIncarnator.cpp in Sources */,
@@ -2287,6 +2298,7 @@
 				E5890CA229895118007A875D /* CCommManager.cpp in Sources */,
 				E5890CE629895118007A875D /* CZombieActor.cpp in Sources */,
 				E5890CB729895118007A875D /* CForceField.cpp in Sources */,
+				947F5C652B576B9F00F41689 /* ModernOpenGLRenderer.cpp in Sources */,
 				E5890CF929895118007A875D /* CBSPWorld.cpp in Sources */,
 				E5890CAE29895118007A875D /* Debug.cpp in Sources */,
 				E5890F3829895124007A875D /* glm.cpp in Sources */,

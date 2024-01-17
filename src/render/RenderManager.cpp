@@ -5,14 +5,24 @@
 #include "FastMat.h"
 #include "Preferences.h"
 
-RenderManager::RenderManager(SDL_Window *window, NVGcontext *nvg)
+RenderManager::RenderManager(SDL_Window *window, std::optional<NVGcontext*> nvg, RenderMode mode)
 {
     this->window = window;
-    this->nvg = nvg;
+    if (nvg) {
+        this->nvg = *nvg;
+        if (this->nvg) {
+            ui = std::make_unique<CHUD>(gCurrentGame);
+            ui->LoadImages(this->nvg);
+        }
+    }
 
-    if (this->nvg) {
-        ui = std::make_shared<CHUD>(gCurrentGame);
-        ui->LoadImages(nvg);
+    switch (mode) {
+        case RenderMode::GL3:
+            renderer = std::make_unique<ModernOpenGLRenderer>(this);
+            break;
+        case RenderMode::Headless:
+            renderer = std::make_unique<NullRenderer>(this);
+            break;
     }
 
     skyParams = new CWorldShader();
@@ -27,6 +37,15 @@ RenderManager::RenderManager(SDL_Window *window, NVGcontext *nvg)
     staticWorld = new CBSPWorldImpl(100);
     dynamicWorld = new CBSPWorldImpl(100);
     hudWorld = new CBSPWorldImpl(30);
+}
+
+RenderManager::~RenderManager()
+{
+    delete skyParams;
+    delete viewParams;
+    delete staticWorld;
+    delete dynamicWorld;
+    delete hudWorld;
 }
 
 void RenderManager::AddHUDPart(CBSPPart *part)
@@ -55,7 +74,7 @@ void RenderManager::OverheadPoint(Fixed *pt, Fixed *extent)
 
 void RenderManager::RefreshWindow()
 {
-    SDL_GL_SwapWindow(window);
+    renderer->RefreshWindow();
 }
 
 void RenderManager::RemoveHUDPart(CBSPPart *part)
