@@ -32,7 +32,7 @@ public:
     CViewParameters *viewParams;
     CWorldShader *skyParams;
     
-    RenderManager(SDL_Window *window, std::optional<NVGcontext*> nvg, RenderMode mode);
+    RenderManager(RenderMode mode, SDL_Window *window, std::optional<NVGcontext*> nvg = {});
     ~RenderManager();
 
     /**

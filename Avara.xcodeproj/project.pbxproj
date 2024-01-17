@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		940541ED2B5875B200E32241 /* OpenGLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940541EC2B5875B200E32241 /* OpenGLShader.cpp */; };
+		940541EE2B5875B200E32241 /* OpenGLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940541EC2B5875B200E32241 /* OpenGLShader.cpp */; };
 		9419E8472B49ECB1007C50D0 /* CTeamColorAdjuster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9419E8462B49ECB1007C50D0 /* CTeamColorAdjuster.cpp */; };
 		9419E8482B49ECB1007C50D0 /* CTeamColorAdjuster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9419E8462B49ECB1007C50D0 /* CTeamColorAdjuster.cpp */; };
 		944F2F702B323F1900856E53 /* LocalAssetRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 944F2F6F2B323F1900856E53 /* LocalAssetRepository.cpp */; };
@@ -371,6 +373,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		940541EB2B58744500E32241 /* OpenGLShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLShader.h; sourceTree = "<group>"; };
+		940541EC2B5875B200E32241 /* OpenGLShader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLShader.cpp; sourceTree = "<group>"; };
 		9419E8452B49EC89007C50D0 /* CTeamColorAdjuster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTeamColorAdjuster.h; sourceTree = "<group>"; };
 		9419E8462B49ECB1007C50D0 /* CTeamColorAdjuster.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CTeamColorAdjuster.cpp; sourceTree = "<group>"; };
 		944F2F6D2B32379C00856E53 /* AssetRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetRepository.h; sourceTree = "<group>"; };
@@ -1064,6 +1068,8 @@
 				947F5C642B576B9F00F41689 /* ModernOpenGLRenderer.cpp */,
 				947F5C632B576ACD00F41689 /* ModernOpenGLRenderer.h */,
 				947F5C672B57A30100F41689 /* NullRenderer.h */,
+				940541EC2B5875B200E32241 /* OpenGLShader.cpp */,
+				940541EB2B58744500E32241 /* OpenGLShader.h */,
 				947F5C622B57693300F41689 /* Renderer.h */,
 				948128AF2B53A1C7002A3459 /* RenderManager.cpp */,
 				948128AE2B539B6C002A3459 /* RenderManager.h */,
@@ -2123,6 +2129,7 @@
 				E517F086299713DB0036B206 /* CMarkerActor.cpp in Sources */,
 				E517F087299713DB0036B206 /* CMineActor.cpp in Sources */,
 				E517F088299713DB0036B206 /* CMissile.cpp in Sources */,
+				940541EE2B5875B200E32241 /* OpenGLShader.cpp in Sources */,
 				E517F089299713DB0036B206 /* CNetManager.cpp in Sources */,
 				E517F08A299713DB0036B206 /* CParasite.cpp in Sources */,
 				E517F08B299713DB0036B206 /* CPill.cpp in Sources */,
@@ -2292,6 +2299,7 @@
 				E5890D1029895118007A875D /* CApplication.cpp in Sources */,
 				E5890EEB29895124007A875D /* csscolorparser.cpp in Sources */,
 				E5890CF329895118007A875D /* CSoundActor.cpp in Sources */,
+				940541ED2B5875B200E32241 /* OpenGLShader.cpp in Sources */,
 				E5890CF729895118007A875D /* CRealShooters.cpp in Sources */,
 				E5890CC829895118007A875D /* CLogicBase.cpp in Sources */,
 				E5890CA329895118007A875D /* CUDPComm.cpp in Sources */,

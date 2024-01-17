@@ -199,7 +199,7 @@ public:
         app.itsGame = std::make_unique<TestGame>(frameTime);
         game = (TestGame*)app.itsGame.get();
         gCurrentGame = game;
-        gRenderer = new RenderManager(nullptr, {}, RenderMode::Headless);
+        gRenderer = new RenderManager(RenderMode::Headless, nullptr);
 
         InitParser();
         game->IAvaraGame(&app);

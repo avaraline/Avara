@@ -39,8 +39,6 @@
 #include "Debug.h"
 #include "RenderManager.h"
 
-#include <memory>
-
 // included while we fake things out
 #include "CPlayerManager.h"
 
@@ -78,7 +76,7 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     gCurrentGame = itsGame.get();
     itsGame->IAvaraGame(this);
 
-    gRenderer = new RenderManager(mSDLWindow, mNVGContext, RenderMode::GL3);
+    gRenderer = new RenderManager(RenderMode::GL3, mSDLWindow, mNVGContext);
     gRenderer->UpdateViewRect(mSize.x, mSize.y, mPixelRatio);
 
     AvaraGLSetFOV(Number(kFOV));

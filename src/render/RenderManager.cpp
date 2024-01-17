@@ -5,7 +5,7 @@
 #include "FastMat.h"
 #include "Preferences.h"
 
-RenderManager::RenderManager(SDL_Window *window, std::optional<NVGcontext*> nvg, RenderMode mode)
+RenderManager::RenderManager(RenderMode mode, SDL_Window *window, std::optional<NVGcontext*> nvg)
 {
     this->window = window;
     if (nvg) {
