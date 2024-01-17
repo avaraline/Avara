@@ -136,7 +136,6 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
 }
 
 CAvaraAppImpl::~CAvaraAppImpl() {
-    itsGame->Dispose();
     DeallocParser();
 }
 
