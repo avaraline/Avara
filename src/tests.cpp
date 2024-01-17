@@ -18,6 +18,7 @@
 #include "AvaraGL.h"
 #include "Messages.h"
 #include "Preferences.h"
+#include "RenderManager.h"
 #include "System.h"
 #include "CUDPConnection.h"
 
@@ -198,6 +199,8 @@ public:
         app.itsGame = std::make_unique<TestGame>(frameTime);
         game = (TestGame*)app.itsGame.get();
         gCurrentGame = game;
+        gRenderer = new RenderManager(nullptr, nullptr);
+
         InitParser();
         game->IAvaraGame(&app);
         game->EndScript();

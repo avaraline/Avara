@@ -10,8 +10,10 @@ RenderManager::RenderManager(SDL_Window *window, NVGcontext *nvg)
     this->window = window;
     this->nvg = nvg;
 
-    ui = std::make_shared<CHUD>(gCurrentGame);
-    ui->LoadImages(nvg);
+    if (this->nvg) {
+        ui = std::make_shared<CHUD>(gCurrentGame);
+        ui->LoadImages(nvg);
+    }
 
     skyParams = new CWorldShader();
     skyParams->skyShadeCount = 12;
@@ -78,10 +80,12 @@ void RenderManager::RenderFrame()
     AvaraGLSetDepthTest(false);
     hudWorld->Render(Shader::HUD);
 
-    if (gApplication ? gApplication->Get<bool>(kShowNewHUD) : true) {
-        ui->RenderNewHUD(nvg);
-    } else {
-        ui->Render(nvg);
+    if (ui) {
+        if (gApplication ? gApplication->Get<bool>(kShowNewHUD) : true) {
+            ui->RenderNewHUD(nvg);
+        } else {
+            ui->Render(nvg);
+        }
     }
 
     AvaraGLSetDepthTest(true);
