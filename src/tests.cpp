@@ -188,6 +188,12 @@ public:
     }
 };
 
+class TestWalkerActor : public CWalkerActor {
+    void ResetCamera() {
+
+    }
+};
+
 class HectorTestScenario {
 public:
     TestApp app;
@@ -203,7 +209,7 @@ public:
         game->EndScript();
         app.GetNet()->ChangeNet(kNullNet, "");
         game->LevelReset(false);
-        hector = new CWalkerActor();
+        hector = new TestWalkerActor();
         hector->BeginScript();
         hector->EndScript();
         game->itsNet->playerTable[0]->SetPlayer(hector);
@@ -213,6 +219,7 @@ public:
         hector->location[2] = hectorZ;
         hector->location[3] = FIX1;
         game->AddActor(hector);
+        game->freshPlayerList = 0;
         game->GameStart();
     }
 };

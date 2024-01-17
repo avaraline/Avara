@@ -70,7 +70,7 @@ class CAbstractYon;
 
 class CHUD;
 
-class CAvaraGame : public CDirectObject {
+class CAvaraGame {
 public:
     std::string loadedFilename = "";
     std::string loadedLevel = "";
@@ -240,7 +240,7 @@ public:
     virtual void GameStart();
     virtual bool GameTick();
     virtual void GameStop();
-    virtual void Dispose();
+    virtual ~CAvaraGame();
 
     virtual void SpectateNext();
     virtual void SpectatePrevious();
