@@ -18,7 +18,6 @@
 */
 
 #include "AssetManager.h"
-#include "AvaraGL.h"
 #include "CAvaraGame.h"
 #include "CAvaraApp.h"
 //#include "CGameWind.h"
@@ -567,7 +566,6 @@ void CAvaraGame::EndScript() {
     vp->ambientLight = ReadFixedVar(iAmbient);
     vp->ambientLightColor = ARGBColor::Parse(ReadStringVar(iAmbientColor))
         .value_or(DEFAULT_LIGHT_COLOR);
-    AvaraGLSetAmbient(ToFloat(vp->ambientLight), vp->ambientLightColor, Shader::World);
 
     for (i = 0; i < 4; i++) {
         intensity = ReadFixedVar(iLightsTable + 4 * i);
@@ -583,12 +581,11 @@ void CAvaraGame::EndScript() {
             //        i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), color);
 
             //The b angle is the compass reading and the a angle is the angle from the horizon.
-            AvaraGLSetLight(i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), color);
         } else {
             vp->SetLight(i, 0, 0, 0, DEFAULT_LIGHT_COLOR, kLightOff);
-            AvaraGLSetLight(i, 0, 0, 0, DEFAULT_LIGHT_COLOR);
         }
     }
+    gRenderer->UpdateLights();
 
     color = *ARGBColor::Parse(ReadStringVar(iMissileArmedColor));
     ColorManager::setMissileArmedColor(color);

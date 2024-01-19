@@ -16,6 +16,18 @@ RenderManager::RenderManager(RenderMode mode, SDL_Window *window, std::optional<
         }
     }
 
+    skyParams = new CWorldShader();
+    skyParams->skyShadeCount = 12;
+
+    viewParams = new CViewParameters();
+    viewParams->hitherBound = FIX3(600);
+    viewParams->yonBound = LONGYON;
+    viewParams->horizonBound = FIX(16000); // 16 km
+
+    staticWorld = new CBSPWorldImpl(100);
+    dynamicWorld = new CBSPWorldImpl(100);
+    hudWorld = new CBSPWorldImpl(30);
+
     switch (mode) {
         case RenderMode::GL3:
             renderer = std::make_unique<ModernOpenGLRenderer>(this);
@@ -25,18 +37,7 @@ RenderManager::RenderManager(RenderMode mode, SDL_Window *window, std::optional<
             break;
     }
 
-    skyParams = new CWorldShader();
-    skyParams->skyShadeCount = 12;
-
-    viewParams = new CViewParameters();
-    viewParams->hitherBound = FIX3(600);
-    viewParams->yonBound = LONGYON;
-    viewParams->horizonBound = FIX(16000); // 16 km
     ResetLights();
-
-    staticWorld = new CBSPWorldImpl(100);
-    dynamicWorld = new CBSPWorldImpl(100);
-    hudWorld = new CBSPWorldImpl(30);
 }
 
 RenderManager::~RenderManager()
@@ -58,6 +59,11 @@ void RenderManager::AddPart(CBSPPart *part)
     dynamicWorld->AddPart(part);
 }
 
+void RenderManager::GetWindowSize(int &w, int &h)
+{
+    SDL_GetWindowSize(window, &w, &h);
+}
+
 void RenderManager::LevelReset()
 {
     skyParams->Reset();
@@ -65,6 +71,11 @@ void RenderManager::LevelReset()
     dynamicWorld->DisposeParts();
     hudWorld->DisposeParts();
     ResetLights();
+}
+
+std::unique_ptr<VertexData> RenderManager::NewVertexDataInstance()
+{
+    return renderer->NewVertexDataInstance();
 }
 
 void RenderManager::OverheadPoint(Fixed *pt, Fixed *extent)
@@ -89,37 +100,14 @@ void RenderManager::RemovePart(CBSPPart *part)
 
 void RenderManager::RenderFrame()
 {
-    glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-
-    AvaraGLShadeWorld(skyParams, viewParams);
-    
-    staticWorld->Render(Shader::World);
-    dynamicWorld->Render(Shader::World);
-    AvaraGLSetDepthTest(false);
-    hudWorld->Render(Shader::HUD);
-
-    if (ui) {
-        if (gApplication ? gApplication->Get<bool>(kShowNewHUD) : true) {
-            ui->RenderNewHUD(nvg);
-        } else {
-            ui->Render(nvg);
-        }
+    renderer->Clear();
+    renderer->ApplyView();
+    renderer->RenderSky();
+    if (renderer->UsesStaticWorld()) {
+        renderer->RenderStaticWorld();
     }
-
-    AvaraGLSetDepthTest(true);
-}
-
-void RenderManager::SetFOV(float fov)
-{
-    this->fov = fov;
-}
-
-void RenderManager::UpdateViewRect(int width, int height, float pixelRatio)
-{
-    viewParams->SetViewRect(width, height, width / 2, height / 2);
-    viewParams->viewPixelRatio = pixelRatio;
-    viewParams->CalculateViewPyramidCorners();
+    renderer->RenderDynamicWorld();
+    renderer->RenderHUD();
 }
 
 void RenderManager::ResetLights()
@@ -130,6 +118,34 @@ void RenderManager::ResetLights()
     viewParams->SetLight(1, 0.3f, 20.0f, 200.0f, DEFAULT_LIGHT_COLOR, kLightGlobalCoordinates);
     viewParams->SetLight(2, 0, 0, 0, DEFAULT_LIGHT_COLOR, kLightOff);
     viewParams->SetLight(3, 0, 0, 0, DEFAULT_LIGHT_COLOR, kLightOff);
+    UpdateLights();
+}
+
+void RenderManager::SetFOV(float fov)
+{
+    this->fov = fov;
+    UpdateProjection();
+}
+
+void RenderManager::UpdateLights()
+{
+    renderer->ApplyLights();
+}
+
+void RenderManager::UpdateProjection()
+{
+    renderer->ApplyProjection();
+}
+
+void RenderManager::UpdateViewRect(float pixelRatio)
+{
+    int w, h;
+    GetWindowSize(w, h);
+    
+    viewParams->SetViewRect(w, h, w / 2, h / 2);
+    viewParams->viewPixelRatio = pixelRatio;
+    viewParams->CalculateViewPyramidCorners();
+    UpdateProjection();
 }
 
 RenderManager *gRenderer;

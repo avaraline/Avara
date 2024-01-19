@@ -6,6 +6,8 @@
 #include <sstream>
 #include <vector>
 
+#include <glm/gtc/type_ptr.hpp>
+
 OpenGLShader::OpenGLShader(const std::string vertPath, const std::string fragPath)
 {
     std::string VertexShaderCode;
@@ -75,6 +77,9 @@ OpenGLShader::OpenGLShader(const std::string vertPath, const std::string fragPat
         exit(1);
     }
 
+    glDetachShader(id, vertex);
+    glDetachShader(id, fragment);
+
     glDeleteShader(vertex);
     glDeleteShader(fragment);
 }
@@ -97,4 +102,29 @@ void OpenGLShader::SetInt(const std::string &uniform, int value) const
 void OpenGLShader::SetFloat(const std::string &uniform, float value) const
 {
     glUniform1f(glGetUniformLocation(id, uniform.c_str()), value);
+}
+
+void OpenGLShader::SetFloat3(const std::string &uniform, const float value[3]) const
+{
+    glUniform3fv(glGetUniformLocation(id, uniform.c_str()), 1, value);
+}
+
+void OpenGLShader::SetMat3(const std::string &uniform, const glm::mat3 &value, bool transpose) const
+{
+    glUniformMatrix3fv(
+        glGetUniformLocation(id, uniform.c_str()),
+        1,
+        (transpose) ? GL_TRUE : GL_FALSE, 
+        glm::value_ptr(value)
+    );
+}
+
+void OpenGLShader::SetMat4(const std::string &uniform, const glm::mat4 &value, bool transpose) const
+{
+    glUniformMatrix4fv(
+        glGetUniformLocation(id, uniform.c_str()),
+        1,
+        (transpose) ? GL_TRUE : GL_FALSE,
+        glm::value_ptr(value)
+    );
 }

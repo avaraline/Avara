@@ -7,6 +7,7 @@
 #include "CViewParameters.h"
 #include "ModernOpenGLRenderer.h"
 #include "NullRenderer.h"
+#include "VertexData.h"
 
 #include <SDL2/SDL.h>
 
@@ -50,9 +51,24 @@ public:
     void AddPart(CBSPPart *part);
 
     /**
+     * Populate the provided two integers with the width and height coordinates of the window.
+     *
+     * @param w The int variable to hold the width.
+     * @param h The int variable to hold the height.
+     */
+    void GetWindowSize(int &w, int &h);
+
+    /**
      * Reset the render manager's state back to its defaults.
      */
     void LevelReset();
+
+    /**
+     * Creates and returns a new VertexData instance for use with the current renderer.
+     *
+     * @return a new, empty VertexData instance
+     */
+    std::unique_ptr<VertexData> NewVertexDataInstance();
 
     /**
      * Populate the provided Fixed arrays with 1) the center point of the level and 2) how far the
@@ -88,6 +104,11 @@ public:
     void RenderFrame();
 
     /**
+     * Reset light values back to their defaults.
+     */
+    void ResetLights();
+
+    /**
      * Update the camera's field of view.
      *
      * @param fov The field of view we want to use.
@@ -95,19 +116,22 @@ public:
     void SetFOV(float fov);
 
     /**
+     * Update lights in the scene with the current configuration.
+     */
+    void UpdateLights();
+
+    /**
+     * Update the projection matrix for the currently configured resolution and FOV.
+     */
+    void UpdateProjection();
+
+    /**
      * Update view parameters based on window resolution.
      *
-     * @param width The width.
-     * @param height The height.
      * @param pixelRatio The pixel ratio.
      */
-    void UpdateViewRect(int width, int height, float pixelRatio);
+    void UpdateViewRect(float pixelRatio);
 private:
-    /**
-     * Reset light values back to their defaults.
-     */
-    void ResetLights();
-
     SDL_Window *window;
     std::unique_ptr<Renderer> renderer;
     NVGcontext *nvg;

@@ -13,7 +13,6 @@
 #include "CAvaraGame.h"
 #include "CViewParameters.h"
 #include "CBSPPart.h"
-#include "AvaraGL.h"
 
 CWorldShader::CWorldShader() {
     Reset();
@@ -103,13 +102,5 @@ void CWorldShader::Apply() {
             *colors++ = FindPolyColor(RGBToLongColor(&interColor));
         }
     }
-    */
-}
-
-void CWorldShader::ShadeWorld(CViewParameters *theView) {
-    AvaraGLShadeWorld(this, theView);
-    /*
-    if(numShades)
-        theView->RenderPlanes(numShades, shadeColors, altitudes);
     */
 }

@@ -25,16 +25,6 @@ CBSPWorldImpl::CBSPWorldImpl(short initialObjectSpace) {
     visibleList = (CBSPPart ***)NewHandle(sizeof(CBSPPart *) * (long)partSpace);
 }
 
-void CBSPWorldImpl::DisposeParts() {
-    short i;
-
-    for (i = 0; i < partCount; i++) {
-        delete (*partList)[i];
-    }
-
-    partCount = 0;
-}
-
 CBSPWorldImpl::~CBSPWorldImpl() {
     DisposeParts();
 
@@ -52,6 +42,83 @@ void CBSPWorldImpl::AddPart(CBSPPart *thePart) {
 
     thePart->worldIndex = partCount;
     (*partList)[partCount++] = thePart;
+}
+
+void CBSPWorldImpl::DisposeParts() {
+    short i;
+
+    for (i = 0; i < partCount; i++) {
+        delete (*partList)[i];
+    }
+
+    partCount = 0;
+}
+
+CBSPPart *CBSPWorldImpl::GetIndPart(uint16_t ind) {
+    if (ind >= 0 && ind < partCount)
+        return (*partList)[ind];
+    else
+        return NULL;
+}
+
+uint16_t CBSPWorldImpl::GetPartCount() {
+    return partCount;
+}
+
+uint16_t CBSPWorldImpl::GetVisiblePartCount() {
+    return visibleCount;
+}
+
+CBSPPart **CBSPWorldImpl::GetVisiblePartListPointer() {
+    return visibleP;
+}
+
+void CBSPWorldImpl::OverheadPoint(Fixed *c, Fixed *e) {
+    Fixed minX = FIX(9999),
+          maxX = FIX(-9999),
+          minZ = FIX(9999),
+          maxZ = FIX(-9999),
+          maxY = 0;
+    for (int i = 0; i < partCount; i++) {
+        Fixed *t = (*partList)[i]->itsTransform[3];
+        minX = t[0] < minX ? t[0] : minX;
+        maxX = t[0] > maxX ? t[0] : maxX;
+        minZ = t[2] < minZ ? t[2] : minZ;
+        maxZ = t[2] > maxZ ? t[2] : maxZ;
+        maxY = t[1] > maxY ? t[1] : maxY;
+    }
+    c[0] = FDiv(minX + maxX, FIX(2));
+    c[1] = maxY;
+    c[2] = FDiv(minZ + maxZ, FIX(2));
+    e[0] = minX;
+    e[1] = maxX;
+    e[2] = 0;
+    e[3] = maxY;
+    e[4] = minZ;
+    e[5] = maxZ;
+}
+
+void CBSPWorldImpl::PrepareForRender() {
+    int i;
+    CBSPPart **sp, **sd;
+
+    gRenderer->viewParams->DoLighting();
+
+    visibleP = *visibleList;
+    sd = visibleP;
+    sp = *partList;
+    visibleCount = 0;
+
+    for (i = 0; i < partCount; i++) {
+        if ((*sp)->PrepareForRender()) {
+            *sd++ = *sp;
+            visibleCount++;
+        }
+
+        sp++;
+    }
+
+    SortVisibleParts();
 }
 
 void CBSPWorldImpl::RemovePart(CBSPPart *thePart) {
@@ -73,6 +140,43 @@ void CBSPWorldImpl::RemovePart(CBSPPart *thePart) {
             } else
                 p++;
         }
+    }
+}
+
+/*
+**	This is the old version. It doesn't work correctly in all cases.
+*/
+void CBSPWorldImpl::ScoreAndSort(CBSPPart **firstPart, short overlapCount) {
+    CBSPPart *compPart;
+    CBSPPart **endPart, **jPart, **iPart;
+
+    endPart = firstPart + overlapCount;
+
+    iPart = firstPart;
+
+    while (iPart < endPart) {
+        (*iPart++)->worldFlag = false;
+    }
+
+    for (iPart = firstPart; iPart < endPart; iPart++) {
+        compPart = *iPart;
+
+        if (!compPart->worldFlag)
+            for (jPart = iPart + 1; jPart < endPart; jPart++) {
+                if (compPart->Obscures(*jPart)) {
+                    CBSPPart **kPart;
+
+                    compPart = *jPart;
+                    kPart = jPart;
+                    while (kPart > iPart) {
+                        kPart[0] = kPart[-1];
+                        kPart--;
+                    }
+
+                    *iPart = compPart;
+                    compPart->worldFlag = true;
+                }
+            }
     }
 }
 
@@ -113,66 +217,42 @@ void CBSPWorldImpl::SortByZ() {
     } while (h != 1);
 }
 
-/*
-**	This is the old version. It doesn't work correctly in all cases.
-*/
-void CBSPWorldImpl::ScoreAndSort(CBSPPart **firstPart, short overlapCount) {
-    CBSPPart *compPart;
-    CBSPPart **endPart, **jPart, **iPart;
+void CBSPWorldImpl::SortVisibleParts() {
+    CBSPPart **thisPart, **endPart;
+    Fixed minZ, maxZ;
+    short overlapCount = 0;
 
-    endPart = firstPart + overlapCount;
+    SortByZ();
 
-    iPart = firstPart;
+    endPart = visibleP + visibleCount;
+    thisPart = visibleP;
+    minZ = maxZ = gRenderer->viewParams->yonBound;
 
-    while (iPart < endPart) {
-        (*iPart++)->worldFlag = false;
-    }
+    while (thisPart < endPart) {
+        Fixed z;
 
-    for (iPart = firstPart; iPart < endPart; iPart++) {
-        compPart = *iPart;
+        z = (*thisPart)->maxZ;
 
-        if (!compPart->worldFlag)
-            for (jPart = iPart + 1; jPart < endPart; jPart++) {
-                if (compPart->Obscures(*jPart)) {
-                    CBSPPart **kPart;
-
-                    compPart = *jPart;
-                    kPart = jPart;
-                    while (kPart > iPart) {
-                        kPart[0] = kPart[-1];
-                        kPart--;
-                    }
-
-                    *iPart = compPart;
-                    compPart->worldFlag = true;
-                }
+        if (z > minZ) {
+            overlapCount++;
+            z = (*thisPart)->minZ;
+            if (z < minZ)
+                minZ = z;
+        } else {
+            if (overlapCount > 1) {
+                VisibilitySort(thisPart - overlapCount, overlapCount);
             }
-    }
-}
+            maxZ = z;
+            minZ = (*thisPart)->minZ;
+            overlapCount = 1;
+        }
 
-void CBSPWorldImpl::OverheadPoint(Fixed *c, Fixed *e) {
-    Fixed minX = FIX(9999),
-          maxX = FIX(-9999),
-          minZ = FIX(9999),
-          maxZ = FIX(-9999),
-          maxY = 0;
-    for (int i = 0; i < partCount; i++) {
-        Fixed *t = (*partList)[i]->itsTransform[3];
-        minX = t[0] < minX ? t[0] : minX;
-        maxX = t[0] > maxX ? t[0] : maxX;
-        minZ = t[2] < minZ ? t[2] : minZ;
-        maxZ = t[2] > maxZ ? t[2] : maxZ;
-        maxY = t[1] > maxY ? t[1] : maxY;
+        thisPart++;
     }
-    c[0] = FDiv(minX + maxX, FIX(2));
-    c[1] = maxY;
-    c[2] = FDiv(minZ + maxZ, FIX(2));
-    e[0] = minX;
-    e[1] = maxX;
-    e[2] = 0;
-    e[3] = maxY;
-    e[4] = minZ;
-    e[5] = maxZ;
+
+    if (overlapCount > 1) {
+        VisibilitySort(thisPart - overlapCount, overlapCount);
+    }
 }
 
 /*
@@ -224,96 +304,4 @@ void CBSPWorldImpl::VisibilitySort(CBSPPart **parts, short overlapCount) {
         *--parts = listStart;
         listStart = listStart->nextTemp;
     } while (listStart);
-}
-
-void CBSPWorldImpl::SortVisibleParts() {
-    CBSPPart **thisPart, **endPart;
-    Fixed minZ, maxZ;
-    short overlapCount = 0;
-
-    SortByZ();
-
-    endPart = visibleP + visibleCount;
-    thisPart = visibleP;
-    minZ = maxZ = gRenderer->viewParams->yonBound;
-
-    while (thisPart < endPart) {
-        Fixed z;
-
-        z = (*thisPart)->maxZ;
-
-        if (z > minZ) {
-            overlapCount++;
-            z = (*thisPart)->minZ;
-            if (z < minZ)
-                minZ = z;
-        } else {
-            if (overlapCount > 1) {
-                VisibilitySort(thisPart - overlapCount, overlapCount);
-            }
-            maxZ = z;
-            minZ = (*thisPart)->minZ;
-            overlapCount = 1;
-        }
-
-        thisPart++;
-    }
-
-    if (overlapCount > 1) {
-        VisibilitySort(thisPart - overlapCount, overlapCount);
-    }
-}
-
-void CBSPWorldImpl::Render(Shader shader) {
-    int i;
-    CBSPPart **sp, **sd;
-
-    gRenderer->viewParams->DoLighting();
-
-    HLock((Handle)partList);
-    HLock((Handle)visibleList);
-
-    visibleP = *visibleList;
-    sd = visibleP;
-    sp = *partList;
-    visibleCount = 0;
-
-    for (i = 0; i < partCount; i++) {
-        if ((*sp)->PrepareForRender()) {
-            *sd++ = *sp;
-            visibleCount++;
-        }
-
-        sp++;
-    }
-
-    SortVisibleParts();
-
-    {
-        sd = visibleP;
-        for (i = 0; i < visibleCount; i++) {
-            (*sd)->DrawPolygons(shader);
-            sd++;
-        }
-    }
-
-    sd = visibleP;
-    for (i = 0; i < visibleCount; i++) {
-        (*sd)->PostRender();
-        sd++;
-    }
-
-    HUnlock((Handle)partList);
-    HUnlock((Handle)visibleList);
-}
-
-CBSPPart *CBSPWorldImpl::GetIndPart(short ind) {
-    if (ind >= 0 && ind < partCount)
-        return (*partList)[ind];
-    else
-        return NULL;
-}
-
-short CBSPWorldImpl::GetPartCount() {
-    return partCount;
 }

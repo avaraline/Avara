@@ -11,7 +11,6 @@
 
 #include "CBSPPart.h"
 #include "FastMat.h"
-#include "AvaraGL.h"
 
 #define PYRAMIDSCALE >> 2
 
@@ -90,8 +89,6 @@ void CViewParameters::SetViewRect(short width, short height, short centerX, shor
         viewPixelDimensions.h = width;
         viewPixelDimensions.v = height;
         viewWidth = FMulDivNZ(FIX3(220), viewPixelDimensions.h, 640);
-
-        AvaraGLViewport(width, height);
         Recalculate();
     }
 }
@@ -221,8 +218,6 @@ void CViewParameters::PointCamera() {
         mb[2][1] = -mb[1][2];
 
         CombineTransforms(&mc, &viewMatrix, &mb);
-
-        AvaraGLSetView(ToFloatMat(&viewMatrix));
     }
 }
 

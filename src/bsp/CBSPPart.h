@@ -12,16 +12,13 @@
 #include "CDirectObject.h"
 #include "ColorManager.h"
 #include "FastMat.h"
-#include "Types.h"
+#include "VertexData.h"
 
 #include <memory>
 
 #include <SDL2/SDL.h>
 #include <glad/glad.h>
 #include <glm/glm.hpp>
-
-enum class Shader;
-#include "AvaraGL.h"
 
 #define MAXLIGHTS 4
 
@@ -117,10 +114,6 @@ public:
     FixedPoint maxBounds = {0, 0, 0, 0}; //  Bounding box maximums for x, y, z
     enum { frontVisible = 1, backVisible, bothVisible };
 
-    std::unique_ptr<GLData[]> glData = 0;
-    GLuint vertexArray, vertexBuffer = 0;
-    GLsizeiptr glDataSize = 0;
-
     // Handle				colorReplacements;	//	Table of colors that replace defaults.
 
     Matrix itsTransform = {{0}}; //	Transforms to world coordinates. (model)
@@ -155,11 +148,11 @@ public:
     uint32_t pointCount = 0;
     uint32_t polyCount = 0;
     int totalPoints = 0;
-    int openGLPoints = 0;
     std::unique_ptr<ARGBColor[]> origColorTable;
     std::unique_ptr<ARGBColor[]> currColorTable;
     std::unique_ptr<Vector[]> pointTable;
     std::unique_ptr<PolyRecord[]> polyTable;
+    std::unique_ptr<VertexData> vData;
 
     //	Lighting vectors in object space
     long lightSeed = 0; //	Seed value to detect lights change
@@ -185,11 +178,9 @@ public:
     virtual void ReplaceAllColors(ARGBColor newColor);
 
     virtual Boolean PrepareForRender();
-    virtual void DrawPolygons(Shader shader);
 
     virtual void PreRender();
     void PostRender();
-    virtual void Render(Shader shader);
     virtual Boolean InViewPyramid();
     virtual void TransformLights();
 
@@ -212,7 +203,7 @@ public:
     virtual void PrependMatrix(Matrix *m); //	itsTransform = m * itsTransform
     virtual Matrix *GetInverseTransform();
 
-    virtual bool HasAlpha();
+    virtual bool HasAlpha() const;
     virtual void SetScale(Fixed x, Fixed y, Fixed z);
     virtual void ResetScale();
     Vector scale = {FIX1, FIX1, FIX1, FIX1};

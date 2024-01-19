@@ -9,7 +9,6 @@
 
 #pragma once
 #include "AvaraDefines.h"
-#include "AvaraGL.h"
 #include "AvaraScoreInterface.h"
 #include "AvaraTypes.h"
 #include "CDirectObject.h"

@@ -13,7 +13,6 @@
 
 #include "AssetManager.h"
 #include "ColorManager.h"
-#include "AvaraGL.h"
 #include "AvaraScoreInterface.h"
 #include "AvaraTCP.h"
 #include "CAvaraGame.h"
@@ -74,12 +73,12 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     
     itsGame = std::make_unique<CAvaraGame>(Get<FrameTime>(kFrameTimeTag));
     gCurrentGame = itsGame.get();
-    itsGame->IAvaraGame(this);
 
     gRenderer = new RenderManager(RenderMode::GL3, mSDLWindow, mNVGContext);
-    gRenderer->UpdateViewRect(mSize.x, mSize.y, mPixelRatio);
+    gRenderer->UpdateViewRect(mPixelRatio);
+    gRenderer->SetFOV(Number(kFOV));
 
-    AvaraGLSetFOV(Number(kFOV));
+    itsGame->IAvaraGame(this);
 
     gameNet->ChangeNet(kNullNet, "");
 
@@ -175,8 +174,8 @@ void CAvaraAppImpl::RenderContents() {
     gRenderer->RefreshWindow();
 }
 
-void CAvaraAppImpl::WindowResized(int width, int height) {
-    gRenderer->UpdateViewRect(width, height, mPixelRatio);
+void CAvaraAppImpl::WindowResized() {
+    gRenderer->UpdateViewRect(mPixelRatio);
     //performLayout();
 }
 

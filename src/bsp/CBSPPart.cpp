@@ -169,7 +169,9 @@ void CBSPPart::IBSPPart(short resId) {
 
     BuildBoundingVolumes();
     Reset();
-    AvaraGLUpdateData(this);
+
+    vData = gRenderer->NewVertexDataInstance();
+    if (vData) vData->Replace(*this);
 }
 
 void CBSPPart::PostRender() {}
@@ -187,10 +189,6 @@ void CBSPPart::TransformLights() {
     localViewOrigin[0] = invFullTransform[3][0];
     localViewOrigin[1] = invFullTransform[3][1];
     localViewOrigin[2] = invFullTransform[3][2];
-}
-
-void CBSPPart::DrawPolygons(Shader shader) {
-    AvaraGLDrawPolygons(this, shader);
 }
 
 Boolean CBSPPart::InViewPyramid() {
@@ -304,23 +302,6 @@ Boolean CBSPPart::PrepareForRender() {
 }
 
 /*
-**  Normally you would create a CBSPWorld and attach the
-**  part to that world. However, if you only have a single
-**  CBSPPart, you can call Render and you don't need a
-**  CBSPWorld. Even then it is recommended that you use a
-**  CBSPWorld, since it really doesn't add any significant
-**  overhead.
-*/
-void CBSPPart::Render(Shader shader) {
-    gRenderer->viewParams->DoLighting();
-
-    if (PrepareForRender()) {
-        DrawPolygons(shader);
-        PostRender();
-    }
-}
-
-/*
 **  Reset the part to the origin and to its natural
 **  orientation.
 */
@@ -424,7 +405,7 @@ void CBSPPart::ReplaceColor(ARGBColor origColor, ARGBColor newColor) {
         }
     }
     CheckForAlpha();
-    AvaraGLUpdateData(this);
+    if (vData) vData->Replace(*this);
 }
 
 void CBSPPart::ReplaceAllColors(ARGBColor newColor) {
@@ -432,7 +413,7 @@ void CBSPPart::ReplaceAllColors(ARGBColor newColor) {
         currColorTable[i] = newColor;
     }
     hasAlpha = (newColor.GetA() != 0xff);
-    AvaraGLUpdateData(this);
+    if (vData) vData->Replace(*this);
 }
 
 void CBSPPart::BuildBoundingVolumes() {
@@ -453,16 +434,7 @@ void CBSPPart::BuildBoundingVolumes() {
         tolerance = MINIMUM_TOLERANCE;
 }
 
-CBSPPart::~CBSPPart() {
-    if(polyCount < 1) {
-        return;
-    }
-    if (AvaraGLIsRendering()) {
-        glDataSize = 0;
-        glDeleteVertexArrays(1, &vertexArray);
-        glDeleteBuffers(1, &vertexBuffer);
-    }
-}
+CBSPPart::~CBSPPart() {}
 
 void CBSPPart::CheckForAlpha() {
     hasAlpha = false;
@@ -474,7 +446,7 @@ void CBSPPart::CheckForAlpha() {
     }
 }
 
-bool CBSPPart::HasAlpha() {
+bool CBSPPart::HasAlpha() const {
     return hasAlpha;
 }
 

@@ -7,7 +7,6 @@
     Modified: Monday, September 2, 1996, 17:39
 */
 
-#include "AvaraGL.h"
 #include "AvaraTCP.h"
 #include "CAvaraApp.h"
 #include "CAvaraGame.h"

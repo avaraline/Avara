@@ -1035,7 +1035,7 @@ void CAbstractPlayer::RecalculateViewDistance() {
 
 void CAbstractPlayer::ResetCamera() {
     fieldOfView = maxFOV;
-    AvaraGLSetFOV(ToFloat(fieldOfView));
+    gRenderer->SetFOV(ToFloat(fieldOfView));
     RecalculateViewDistance();
 }
 
@@ -1373,7 +1373,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
 
         if (itsManager->IsLocalPlayer() &&
             (TESTFUNC(kfuZoomOut, ft->held) || TESTFUNC(kfuZoomIn, ft->held)))
-            AvaraGLSetFOV(ToFloat(fieldOfView));
+            gRenderer->SetFOV(ToFloat(fieldOfView));
 
         if (fireGun)
             mouseShootTime = FpsFramesPerClassic(MOUSESHOOTDELAY);

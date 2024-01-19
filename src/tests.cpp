@@ -15,7 +15,6 @@
 #include "CGrenade.h"
 #include "CSmart.h"
 #include "CScout.h"
-#include "AvaraGL.h"
 #include "Messages.h"
 #include "Preferences.h"
 #include "RenderManager.h"
@@ -1177,7 +1176,6 @@ TEST(QUEUES, Clean) {
 }
 
 int main(int argc, char **argv) {
-    AvaraGLToggleRendering(0);
     nanogui::init();
     InitMatrix();
     ::testing::InitGoogleTest(&argc, argv);

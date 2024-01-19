@@ -9,7 +9,6 @@
 
 #pragma once
 #include "ARGBColor.h"
-#include "AvaraGL.h"
 #include "CDirectObject.h"
 #include "Types.h"
 
@@ -47,5 +46,4 @@ public:
     CWorldShader();
     virtual void Reset();
     virtual void Apply();
-    virtual void ShadeWorld(CViewParameters *theView);
 };
