@@ -19,7 +19,18 @@ struct GLData {
     float nz = 0.0f;
 
     GLData() {};
-    GLData(GLData &&other) = default;
+    GLData(GLData &&other) noexcept :
+        x(std::exchange(other.x, 0)),
+        y(std::exchange(other.y, 0)),
+        z(std::exchange(other.z, 0)),
+        r(std::exchange(other.r, 0)),
+        g(std::exchange(other.g, 0)),
+        b(std::exchange(other.b, 0)),
+        a(std::exchange(other.a, 0)),
+        nx(std::exchange(other.nx, 0)),
+        ny(std::exchange(other.ny, 0)),
+        nz(std::exchange(other.nz, 0))
+    {};
 };
 
 class OpenGLVertices: public VertexData {

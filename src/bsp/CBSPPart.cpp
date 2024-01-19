@@ -399,21 +399,27 @@ Matrix *CBSPPart::GetInverseTransform() {
 }
 
 void CBSPPart::ReplaceColor(ARGBColor origColor, ARGBColor newColor) {
+    bool colorReplaced = false;
     for (int i = 0; i < colorCount; i++) {
         if (origColorTable[i] == origColor) {
             currColorTable[i] = newColor;
+            colorReplaced = true;
         }
     }
     CheckForAlpha();
-    if (vData) vData->Replace(*this);
+    if (colorReplaced && vData) vData->Replace(*this);
 }
 
 void CBSPPart::ReplaceAllColors(ARGBColor newColor) {
+    bool colorReplaced = false;
     for (int i = 0; i < colorCount; i++) {
+        if (currColorTable[i] != newColor) {
+            colorReplaced = true;
+        }
         currColorTable[i] = newColor;
     }
     hasAlpha = (newColor.GetA() != 0xff);
-    if (vData) vData->Replace(*this);
+    if (colorReplaced && vData) vData->Replace(*this);
 }
 
 void CBSPPart::BuildBoundingVolumes() {

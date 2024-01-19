@@ -50,7 +50,7 @@ void OpenGLVertices::Append(const CBSPPart &part)
     }
 
     glDataSize = pointCount * sizeof(GLData);
-    glData.reserve(pointCount);
+    glData.reserve(glData.size() + pointCount);
 
     // Count all the points we output so that we can make sure it matches what we just calculated.
     int p = 0;

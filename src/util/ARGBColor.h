@@ -22,6 +22,7 @@ class ARGBColor final {
 public:
     void* operator new(std::size_t) = delete;
     bool operator==(const ARGBColor& other) { return color == other.color; }
+    bool operator!=(const ARGBColor& other) { return color != other.color; }
     constexpr ARGBColor(uint32_t value = 0x00000000): color(value) {}
     ARGBColor(const HSLAColor& hsla);
     static std::optional<ARGBColor> Parse(const std::string& str);
@@ -57,6 +58,12 @@ public:
                saturation == other.saturation &&
                lightness == other.lightness &&
                alpha == other.alpha;
+    }
+    bool operator!=(const HSLAColor& other) {
+        return hue != other.hue ||
+               saturation != other.saturation ||
+               lightness != other.lightness ||
+               alpha != other.alpha;
     }
     HSLAColor(float h, float s, float l, float a);
     HSLAColor(const ARGBColor& argb);
