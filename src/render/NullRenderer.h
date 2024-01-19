@@ -11,7 +11,7 @@ class RenderManager;
 
 class NullRenderer final: public Renderer {
 public:
-    NullRenderer(RenderManager *manager): manager(manager) {};
+    NullRenderer(RenderManager *manager) {};
     ~NullRenderer() {};
 
     virtual void ApplyLights() {};
@@ -25,6 +25,4 @@ public:
     virtual void RenderDynamicWorld() {};
     virtual void RenderHUD() {};
     virtual bool UsesStaticWorld() { return false; };
-private:
-    RenderManager *manager;
 };
