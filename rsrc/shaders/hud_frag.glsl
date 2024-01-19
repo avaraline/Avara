@@ -1,6 +1,6 @@
 #version 330 core
 
-in vec4 gl_FragCoord;
+// in vec4 gl_FragCoord;
 in vec4 fragmentColor;
 in vec3 fragmentNormal;
 
@@ -34,9 +34,6 @@ vec4 light_color() {
 
 void main() {
     color = light_color();
-    color[0] = color[0] * hudAlpha * ((int(gl_FragCoord.y) % 4) / 2);
-    color[1] = color[1] * hudAlpha * ((int(gl_FragCoord.y) % 4) / 2);
-    color[2] = color[2] * hudAlpha * ((int(gl_FragCoord.y) % 4) / 2);
-    color[3] = color[3] * hudAlpha * ((int(gl_FragCoord.y) % 4) / 2);
+    color[3] *= hudAlpha;
 }
 
