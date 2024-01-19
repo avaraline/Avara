@@ -459,7 +459,7 @@ void ModernOpenGLRenderer::SetTransforms(const CBSPPart &part) {
 
     worldShader->Use();
     worldShader->SetMat4("modelview", mv);
-    worldShader->SetMat3("normalTransform", normalMat);
+    worldShader->SetMat3("normalTransform", normalMat, true);
 
     hudShader->Use();
     hudShader->SetMat4("modelview", mv);
