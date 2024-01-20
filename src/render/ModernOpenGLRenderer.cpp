@@ -19,6 +19,9 @@
 #define HUD_VERT "hud_vert.glsl"
 #define HUD_FRAG "hud_frag.glsl"
 
+#define HUD_POST_VERT "hudPost_vert.glsl"
+#define HUD_POST_FRAG "hudPost_frag.glsl"
+
 const float skyboxVertices[] = {
     -5.0f,  5.0f, -5.0f,
     -5.0f, -5.0f, -5.0f,
@@ -61,6 +64,17 @@ const float skyboxVertices[] = {
      5.0f, -5.0f, -5.0f,
     -5.0f, -5.0f,  5.0f,
      5.0f, -5.0f,  5.0f
+};
+
+const float screenQuadVertices[] = {
+    // positions   // texCoords
+    -1.0f,  1.0f,  0.0f, 1.0f,
+    -1.0f, -1.0f,  0.0f, 0.0f,
+     1.0f, -1.0f,  1.0f, 0.0f,
+
+    -1.0f,  1.0f,  0.0f, 1.0f,
+     1.0f, -1.0f,  1.0f, 0.0f,
+     1.0f,  1.0f,  1.0f, 1.0f
 };
 
 const char *glGetErrorString(GLenum error)
@@ -113,10 +127,14 @@ ModernOpenGLRenderer::ModernOpenGLRenderer(RenderManager *manager)
 {
     this->manager = manager;
 
+    GLsizei w, h;
+    SDL_GL_GetDrawableSize(this->manager->window, &w, &h);
+
     // Initialize shaders.
     skyShader = LoadShader(SKY_VERT, SKY_FRAG);
     worldShader = LoadShader(OBJ_VERT, OBJ_FRAG);
     hudShader = LoadShader(HUD_VERT, HUD_FRAG);
+    hudPostShader = LoadShader(HUD_POST_VERT, HUD_POST_FRAG);
     ApplyLights();
     ApplyProjection();
 
@@ -126,6 +144,48 @@ ModernOpenGLRenderer::ModernOpenGLRenderer(RenderManager *manager)
     glBindVertexArray(skyVertArray);
     glBindBuffer(GL_ARRAY_BUFFER, skyBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), skyboxVertices, GL_STATIC_DRAW);
+
+    // Rebind to default VBO/VAO.
+    glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    // Create a framebuffer, texture, and renderbuffer for the HUD.
+    glGenFramebuffers(1, &hudFBO);
+    glBindFramebuffer(GL_FRAMEBUFFER, hudFBO);
+    glGenTextures(1, &hudTexture);
+    glBindTexture(GL_TEXTURE_2D, hudTexture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, hudTexture, 0);
+    glGenRenderbuffers(1, &hudRBO);
+    glBindRenderbuffer(GL_RENDERBUFFER, hudRBO);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, w, h);
+
+    // Rebind to the default renderbuffer.
+    glBindRenderbuffer(GL_RENDERBUFFER, 0);
+
+    // Attach renderbuffer to framebuffer and check if the framebuffer was "completed" successfully.
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, hudRBO);
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+        SDL_Log("Failed to create HUD framebuffer");
+        exit(1);
+    }
+
+    // Rebind to the default framebuffer.
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    // Create a separate VBO/VAO for a fullscreen quad, and upload its geometry to the GPU.
+    glGenVertexArrays(1, &screenQuadVertArray);
+    glGenBuffers(1, &screenQuadBuffer);
+    glBindVertexArray(screenQuadVertArray);
+    glBindBuffer(GL_ARRAY_BUFFER, screenQuadBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(screenQuadVertices), screenQuadVertices, GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, (4 * sizeof(float)), (void*)0);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, (4 * sizeof(float)), (void*)(2 * sizeof(float)));
 
     // Rebind to default VBO/VAO.
     glBindVertexArray(0);
@@ -325,11 +385,12 @@ void ModernOpenGLRenderer::RenderHUD()
     glCullFace(GL_BACK);
     glFrontFace(GL_CCW);
     glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_ALWAYS);
+
+    glBindFramebuffer(GL_FRAMEBUFFER, hudFBO);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     hudShader->Use();
-    hudShader->SetFloat("hudAlpha", ColorManager::getHUDAlpha());
-
     manager->hudWorld->PrepareForRender();
     auto partList = manager->hudWorld->GetVisiblePartListPointer();
     auto partCount = manager->hudWorld->GetVisiblePartCount();
@@ -338,6 +399,16 @@ void ModernOpenGLRenderer::RenderHUD()
         partList++;
     }
 
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    hudPostShader->Use();
+    hudPostShader->SetFloat("hudAlpha", ColorManager::getHUDAlpha());
+    glBindVertexArray(screenQuadVertArray);
+    glDisable(GL_DEPTH_TEST);
+    glBindTexture(GL_TEXTURE_2D, hudTexture);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+
+    glEnable(GL_DEPTH_TEST);
+
     if (manager->ui) {
         if (gApplication ? gApplication->Get<bool>(kShowNewHUD) : true) {
             manager->ui->RenderNewHUD(manager->nvg);
@@ -345,8 +416,6 @@ void ModernOpenGLRenderer::RenderHUD()
             manager->ui->Render(manager->nvg);
         }
     }
-
-    glDepthFunc(GL_LEQUAL);
 }
 
 void ModernOpenGLRenderer::AdjustAmbient(OpenGLShader &shader, float intensity)
@@ -377,7 +446,7 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part)
     glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(7 * sizeof(float)));
     glEnableVertexAttribArray(2);
 
-    // Custom, per-object lighting!
+    // Custom, per-object lighting and depth testing!
     float extra_amb = ToFloat(part.extraAmbient);
     float current_amb = ToFloat(manager->viewParams->ambientLight);
     if (part.privateAmbient != -1) {
@@ -385,6 +454,9 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part)
     }
     if (extra_amb > 0) {
         AdjustAmbient(shader, current_amb + extra_amb);
+    }
+    if (part.ignoreDepthTesting) {
+        glDisable(GL_DEPTH_TEST);
     }
     if (part.ignoreDirectionalLights) {
         IgnoreDirectionalLights(shader, true);
@@ -401,10 +473,13 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part)
     glDisableVertexAttribArray(1);
     glDisableVertexAttribArray(2);
 
-    // Restore previous lighting state.
+    // Restore previous lighting and depth testing state.
     if (part.privateAmbient != -1 || extra_amb > 0) {
         AdjustAmbient(shader, current_amb);
         glCheckErrors();
+    }
+    if (part.ignoreDepthTesting) {
+        glEnable(GL_DEPTH_TEST);
     }
     if (part.ignoreDirectionalLights) {
         IgnoreDirectionalLights(shader, false);

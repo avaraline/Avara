@@ -32,9 +32,15 @@ private:
     std::unique_ptr<OpenGLShader> skyShader;
     std::unique_ptr<OpenGLShader> worldShader;
     std::unique_ptr<OpenGLShader> hudShader;
+    std::unique_ptr<OpenGLShader> hudPostShader;
 
     GLuint skyBuffer;
     GLuint skyVertArray;
+    GLuint hudFBO;
+    GLuint hudRBO;
+    GLuint hudTexture;
+    GLuint screenQuadBuffer;
+    GLuint screenQuadVertArray;
 
     void AdjustAmbient(OpenGLShader &shader, float intensity);
     void Draw(OpenGLShader &shader, const CBSPPart &part);

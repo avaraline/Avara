@@ -63,6 +63,7 @@ void CAbstractPlayer::LoadHUDParts() {
         targetOns[i]->privateAmbient = SIGHTSAMBIENT;
         targetOns[i]->yon = LONGYON * 2;
         targetOns[i]->usesPrivateYon = true;
+        targetOns[i]->ignoreDepthTesting = true;
         targetOns[i]->ignoreDirectionalLights = true;
         targetOns[i]->isTransparent = true;
         gRenderer->AddHUDPart(targetOns[i]);
@@ -72,6 +73,7 @@ void CAbstractPlayer::LoadHUDParts() {
         targetOffs[i]->privateAmbient = SIGHTSAMBIENT;
         targetOffs[i]->yon = LONGYON * 2;
         targetOffs[i]->usesPrivateYon = true;
+        targetOffs[i]->ignoreDepthTesting = true;
         targetOffs[i]->ignoreDirectionalLights = true;
         targetOffs[i]->isTransparent = true;
         gRenderer->AddHUDPart(targetOffs[i]);
@@ -80,6 +82,7 @@ void CAbstractPlayer::LoadHUDParts() {
     dirArrowHeight = FIX3(750);
     dirArrow = CBSPPart::Create(kDirIndBSP);
     dirArrow->ReplaceColor(0xff000000, ColorManager::getLookForwardColor());
+    dirArrow->ignoreDepthTesting = true;
     dirArrow->ignoreDirectionalLights = true;
     dirArrow->privateAmbient = FIX1;
     dirArrow->isTransparent = true;
@@ -521,8 +524,6 @@ void CAbstractPlayer::PlaceHUDParts() {
 CScaledBSP* CAbstractPlayer::DashboardPart(uint16_t id, Fixed scale) {
     CScaledBSP* bsp = new CScaledBSP(scale, id, this, 0);
     bsp->ReplaceAllColors(ColorManager::getHUDColor());
-    bsp->privateAmbient = FIX1;
-    bsp->ignoreDirectionalLights = true;
     bsp->isTransparent = true;
     gRenderer->AddHUDPart(bsp);
     return bsp;
@@ -605,15 +606,20 @@ void CAbstractPlayer::LoadDashboardParts() {
 
     if (itsGame->itsApp->Get(kHUDShowMissileLock)) {
         lockLight = DashboardPart(kLockLight, FIX3(600));
+        lockLight->ignoreDepthTesting = true;
     }
 
     groundDirArrow = DashboardPart(kGroundDirArrow, FIX3(1000 * arrowScale));
+    groundDirArrow->ignoreDepthTesting = true;
     groundDirArrowSlow = DashboardPart(kGroundDirArrowSlow, FIX3(1000 * arrowScale));
+    groundDirArrowSlow->ignoreDepthTesting = true;
     groundDirArrowFast = DashboardPart(kGroundDirArrowFast, FIX3(1000 * arrowScale));
+    groundDirArrowFast->ignoreDepthTesting = true;
 
     // Shields
     shieldLabel = DashboardPart(kShieldBSP, FIX3(70*layoutScale));
     shieldGauge = DashboardPart(gaugeBSP);
+    shieldGauge->ignoreDepthTesting = true;
     shieldGauge->isMorphable = true;
 
     shieldGaugeBackLight = DashboardPart(gaugeBSP, ToFixed(layoutScale));
@@ -622,6 +628,7 @@ void CAbstractPlayer::LoadDashboardParts() {
     // Energy
     energyLabel = DashboardPart(kEnergyBSP, FIX3(170*layoutScale));
     energyGauge = DashboardPart(gaugeBSP);
+    energyGauge->ignoreDepthTesting = true;
     energyGauge->isMorphable = true;
 
     energyGaugeBackLight = DashboardPart(gaugeBSP, ToFixed(layoutScale));
