@@ -13,14 +13,20 @@
 #define SKY_VERT "sky_vert.glsl"
 #define SKY_FRAG "sky_frag.glsl"
 
-#define OBJ_VERT "avara_vert.glsl"
-#define OBJ_FRAG "avara_frag.glsl"
+#define OBJ_VERT "world_vert.glsl"
+#define OBJ_FRAG "world_frag.glsl"
+
+#define OBJ_POST_VERT "worldPost_vert.glsl"
+#define OBJ_POST_FRAG "worldPost_frag.glsl"
 
 #define HUD_VERT "hud_vert.glsl"
 #define HUD_FRAG "hud_frag.glsl"
 
 #define HUD_POST_VERT "hudPost_vert.glsl"
 #define HUD_POST_FRAG "hudPost_frag.glsl"
+
+#define FINAL_VERT "final_vert.glsl"
+#define FINAL_FRAG "final_frag.glsl"
 
 const float skyboxVertices[] = {
     -5.0f,  5.0f, -5.0f,
@@ -133,8 +139,10 @@ ModernOpenGLRenderer::ModernOpenGLRenderer(RenderManager *manager)
     // Initialize shaders.
     skyShader = LoadShader(SKY_VERT, SKY_FRAG);
     worldShader = LoadShader(OBJ_VERT, OBJ_FRAG);
+    worldPostShader = LoadShader(OBJ_POST_VERT, OBJ_POST_FRAG);
     hudShader = LoadShader(HUD_VERT, HUD_FRAG);
     hudPostShader = LoadShader(HUD_POST_VERT, HUD_POST_FRAG);
+    finalShader = LoadShader(FINAL_VERT, FINAL_FRAG);
     ApplyLights();
     ApplyProjection();
 
@@ -148,33 +156,6 @@ ModernOpenGLRenderer::ModernOpenGLRenderer(RenderManager *manager)
     // Rebind to default VBO/VAO.
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    // Create a framebuffer, texture, and renderbuffer for the HUD.
-    glGenFramebuffers(1, &hudFBO);
-    glBindFramebuffer(GL_FRAMEBUFFER, hudFBO);
-    glGenTextures(1, &hudTexture);
-    glBindTexture(GL_TEXTURE_2D, hudTexture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glBindTexture(GL_TEXTURE_2D, 0);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, hudTexture, 0);
-    glGenRenderbuffers(1, &hudRBO);
-    glBindRenderbuffer(GL_RENDERBUFFER, hudRBO);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, w, h);
-
-    // Rebind to the default renderbuffer.
-    glBindRenderbuffer(GL_RENDERBUFFER, 0);
-
-    // Attach renderbuffer to framebuffer and check if the framebuffer was "completed" successfully.
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, hudRBO);
-    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-        SDL_Log("Failed to create HUD framebuffer");
-        exit(1);
-    }
-
-    // Rebind to the default framebuffer.
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     // Create a separate VBO/VAO for a fullscreen quad, and upload its geometry to the GPU.
     glGenVertexArrays(1, &screenQuadVertArray);
@@ -190,6 +171,9 @@ ModernOpenGLRenderer::ModernOpenGLRenderer(RenderManager *manager)
     // Rebind to default VBO/VAO.
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    MakeFramebuffer(0, w, h);
+    MakeFramebuffer(1, w, h);
 
     // Configure alpha blending.
     glEnable(GL_BLEND);
@@ -288,7 +272,7 @@ void ModernOpenGLRenderer::ApplyView()
 
 void ModernOpenGLRenderer::Clear()
 {
-    glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 
@@ -316,6 +300,11 @@ void ModernOpenGLRenderer::RenderSky()
     manager->skyParams->groundColor.ExportGLFloats(groundColorRGB, 3);
     manager->skyParams->lowSkyColor.ExportGLFloats(lowSkyColorRGB, 3);
     manager->skyParams->highSkyColor.ExportGLFloats(highSkyColorRGB, 3);
+
+    // Switch to first offscreen FBO.
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo[0]);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_CULL_FACE);
@@ -345,20 +334,7 @@ void ModernOpenGLRenderer::RenderSky()
 
 void ModernOpenGLRenderer::RenderStaticWorld()
 {
-    glEnable(GL_CULL_FACE);
-    glCullFace(GL_BACK);
-    glFrontFace(GL_CCW);
-    glEnable(GL_DEPTH_TEST);
-
-    worldShader->Use();
-
-    manager->staticWorld->PrepareForRender();
-    auto partList = manager->staticWorld->GetVisiblePartListPointer();
-    auto partCount = manager->staticWorld->GetVisiblePartCount();
-    for (uint16_t i = 0; i < partCount; i++) {
-        Draw(*worldShader, **partList);
-        partList++;
-    }
+    // Unused for now.
 }
 
 void ModernOpenGLRenderer::RenderDynamicWorld()
@@ -377,6 +353,18 @@ void ModernOpenGLRenderer::RenderDynamicWorld()
         Draw(*worldShader, **partList);
         partList++;
     }
+
+    // First pass of sky and world rendering complete, post-process into second offscreen FBO.
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo[1]);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    worldPostShader->Use();
+    glBindVertexArray(screenQuadVertArray);
+    glDisable(GL_DEPTH_TEST);
+    glBindTexture(GL_TEXTURE_2D, texture[0]);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+
+    glEnable(GL_DEPTH_TEST);
 }
 
 void ModernOpenGLRenderer::RenderHUD()
@@ -386,7 +374,8 @@ void ModernOpenGLRenderer::RenderHUD()
     glFrontFace(GL_CCW);
     glEnable(GL_DEPTH_TEST);
 
-    glBindFramebuffer(GL_FRAMEBUFFER, hudFBO);
+    // Switch to first offscreen FBO.
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo[0]);
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -399,12 +388,15 @@ void ModernOpenGLRenderer::RenderHUD()
         partList++;
     }
 
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    // First pass of HUD rendering complete, post-process into second offscreen FBO.
+    // Don't clear the buffer this time, as the sky/world texture is already waiting there waiting
+    // for the HUD texture to be overlaid on it.
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo[1]);
     hudPostShader->Use();
     hudPostShader->SetFloat("hudAlpha", ColorManager::getHUDAlpha());
     glBindVertexArray(screenQuadVertArray);
     glDisable(GL_DEPTH_TEST);
-    glBindTexture(GL_TEXTURE_2D, hudTexture);
+    glBindTexture(GL_TEXTURE_2D, texture[0]);
     glDrawArrays(GL_TRIANGLES, 0, 6);
 
     glEnable(GL_DEPTH_TEST);
@@ -416,6 +408,14 @@ void ModernOpenGLRenderer::RenderHUD()
             manager->ui->Render(manager->nvg);
         }
     }
+
+    // Final post-processing and send to default framebuffer.
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    hudPostShader->Use();
+    glBindVertexArray(screenQuadVertArray);
+    glDisable(GL_DEPTH_TEST);
+    glBindTexture(GL_TEXTURE_2D, texture[1]);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
 void ModernOpenGLRenderer::AdjustAmbient(OpenGLShader &shader, float intensity)
@@ -512,6 +512,36 @@ std::unique_ptr<OpenGLShader> ModernOpenGLRenderer::LoadShader(const std::string
     }
 
     return std::make_unique<OpenGLShader>(*vertPath, *fragPath);
+}
+
+void ModernOpenGLRenderer::MakeFramebuffer(short index, GLsizei width, GLsizei height)
+{
+    // Create a framebuffer, texture, and renderbuffer for the HUD.
+    glGenFramebuffers(1, &fbo[index]);
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo[index]);
+    glGenTextures(1, &texture[index]);
+    glBindTexture(GL_TEXTURE_2D, texture[index]);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture[index], 0);
+    glGenRenderbuffers(1, &rbo[index]);
+    glBindRenderbuffer(GL_RENDERBUFFER, rbo[index]);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
+
+    // Rebind to the default renderbuffer.
+    glBindRenderbuffer(GL_RENDERBUFFER, 0);
+
+    // Attach renderbuffer to framebuffer and check if the framebuffer was "completed" successfully.
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo[index]);
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+        SDL_Log("Failed to create framebuffer %d", index);
+        exit(1);
+    }
+
+    // Rebind to the default framebuffer.
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 void ModernOpenGLRenderer::SetTransforms(const CBSPPart &part) {
