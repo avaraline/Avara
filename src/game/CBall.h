@@ -82,7 +82,7 @@ public:
     CBall();
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
-    virtual void Dispose();
+    virtual ~CBall();
     virtual void AdaptableSettings(); // Read settings that can change with frame rate
 
     virtual void ChangeOwnership(short ownerId, short ownerTeamColor);

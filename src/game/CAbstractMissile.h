@@ -22,7 +22,6 @@ public:
     CAbstractMissile *nextMissile;
     long ownerIdent;
     CDepot *itsDepot;
-
     short frameCount;
     short maxFrameCount;
 

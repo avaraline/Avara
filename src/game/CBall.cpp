@@ -198,11 +198,9 @@ CAbstractActor *CBall::EndScript() {
         return NULL;
     }
 }
-void CBall::Dispose() {
+CBall::~CBall() {
     BuzzControl(false);
     ReleaseAttachment();
-
-    CRealShooters::Dispose();
 }
 
 void CBall::AdaptableSettings() {

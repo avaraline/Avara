@@ -17,13 +17,10 @@
 
 void CAbstractActor::LoadPart(short ind, short resId) {
     if (partScale == FIX1) {
-        partList[ind] = new CSmartPart;
-        partList[ind]->ISmartPart(resId, this, ind);
+        partList[ind] = CSmartPart::Create(resId, this, ind);
     } else {
         CScaledBSP *part;
-
-        part = new CScaledBSP;
-        part->IScaledBSP(partScale, resId, this, ind);
+        part = new CScaledBSP(partScale, resId, this, ind);
         partList[ind] = part;
     }
 
@@ -255,8 +252,7 @@ CAbstractActor::CAbstractActor() {
     traction = kDefaultTraction;
     friction = kDefaultFriction;
 }
-
-void CAbstractActor::Dispose() {
+CAbstractActor::~CAbstractActor() {
     short i;
     ActorAttachment *nextA;
 
@@ -274,18 +270,16 @@ void CAbstractActor::Dispose() {
 
     UnlinkLocation();
 
-    if (isInGame)
+    if (itsGame && isInGame)
         itsGame->RemoveActor(this);
 
     for (i = 0; i < partCount; i++) {
-        partList[i]->Dispose();
+        delete partList[i];
     }
 
     if (itsSoundLink) {
         gHub->ReleaseLinkAndKillSounds(itsSoundLink);
     }
-
-    CDirectObject::Dispose();
 }
 
 void CAbstractActor::Shatter(short firstSliverType,
@@ -722,7 +716,7 @@ void CAbstractActor::PostMortemBlast(short scoreTeam, short scoreId, Boolean doD
     }
 
     if (doDispose)
-        Dispose();
+        delete this;
 }
 
 bool CAbstractActor::SecondaryDamage(short scoreTeam, short scoreColor, ScoreInterfaceReasons damageSource) {
@@ -1044,7 +1038,7 @@ void CAbstractActor::PauseLevel() {
 **	This method is called before the level is reset.
 */
 void CAbstractActor::LevelReset() {
-    Dispose();
+    delete this;
 }
 
 void CAbstractActor::RegisterReceiver(MessageRecord *theMsg, MsgType messageNum) {

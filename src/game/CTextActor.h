@@ -36,5 +36,5 @@ public:
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
     virtual void FrameAction();
-    virtual void Dispose();
+    virtual ~CTextActor();
 };

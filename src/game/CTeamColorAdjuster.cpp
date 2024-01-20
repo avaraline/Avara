@@ -31,6 +31,6 @@ CAbstractActor *CTeamColorAdjuster::EndScript() {
         }
     }
 
-    Dispose();
+    delete this;
     return NULL;
 }

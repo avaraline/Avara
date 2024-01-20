@@ -10,13 +10,13 @@
 #include "LevelLoader.h"
 
 #include "AssetManager.h"
-#include "AvaraGL.h"
 #include "CAvaraGame.h"
 #include "CWallActor.h"
 #include "FastMat.h"
 #include "Memory.h"
 #include "Parser.h"
 #include "pugixml.hpp"
+#include "RenderManager.h"
 
 #include <SDL2/SDL.h>
 
@@ -370,7 +370,7 @@ private:
 };
 
 bool LoadALF(std::string levelPath) {
-    AvaraGLLightDefaults();
+    gRenderer->ResetLights();
     InitParser();
 
     pugi::xml_document doc;

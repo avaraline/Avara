@@ -54,8 +54,8 @@ public:
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
     virtual void AdaptableSettings();
-    virtual void Dispose();
-
+    virtual ~CDoorActor();
+    
     virtual CSmartPart *CollisionTest();
     virtual void TouchDamage();
     virtual void PlaceParts();

@@ -91,10 +91,8 @@ void CParasite::ReleaseAttachment() {
         }
     }
 }
-void CParasite::Dispose() {
+CParasite::~CParasite() {
     ReleaseAttachment();
-
-    CRealMovers::Dispose();
 }
 
 void CParasite::PlaceParts() {

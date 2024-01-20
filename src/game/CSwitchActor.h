@@ -35,5 +35,5 @@ public:
     virtual void FrameAction();
     virtual void WasHit(RayHitRecord *theHit, Fixed hitEnergy);
     virtual void BlastHit(BlastHitRecord *theHit);
-    virtual void Dispose();
+    virtual ~CSwitchActor();
 };

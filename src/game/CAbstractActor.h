@@ -82,9 +82,10 @@ typedef union {
     CAbstractActor *a;
 } ActorOrPartLink;
 
-class CAbstractActor : public CDirectObject {
+class CAbstractActor {
 public:
     CAbstractActor();
+    virtual ~CAbstractActor();
     CAvaraGame *itsGame;
 
     unsigned long searchCount;
@@ -154,7 +155,6 @@ public:
     virtual void LevelReset();
     virtual void ResumeLevel();
     virtual void PauseLevel();
-    virtual void Dispose(); //	Simply go away
 
     virtual void Shatter(short firstSliverType, short sizesCount, short *sCounts, short *sLives, Fixed speedFactor);
 

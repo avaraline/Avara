@@ -6,6 +6,7 @@
 #include "AvaraDefines.h"
 #include "CScoreKeeper.h"
 #include "ARGBColor.h"
+#include "RenderManager.h"
 
 #include <stdint.h>
 
@@ -29,7 +30,8 @@ void CHUD::LoadImages(NVGcontext *ctx) {
     images = nvgCreateImage(ctx, "rsrc/img/atlas.png", 0);
 }
 
-void CHUD::DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, CViewParameters *view, NVGcontext *ctx) {
+void CHUD::DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, NVGcontext *ctx) {
+    auto view = gRenderer->viewParams;
     CAbstractPlayer *player = itsGame->GetLocalPlayer();
     CPlayerManager *playerManager = itsGame->FindPlayerManager(player);
 
@@ -201,7 +203,8 @@ void CHUD::DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, C
     }
 }
 
-void CHUD::DrawLevelName(CViewParameters *view, NVGcontext *ctx) {
+void CHUD::DrawLevelName(NVGcontext *ctx) {
+    auto view = gRenderer->viewParams;
     std::string level = itsGame->loadedLevel;
     if(itsGame->gameStatus != kPlayingStatus && level.length() > 0) {
         int bufferWidth = view->viewPixelDimensions.h;
@@ -224,8 +227,9 @@ void CHUD::DrawLevelName(CViewParameters *view, NVGcontext *ctx) {
     }
 }
 
-void CHUD::DrawPaused(CViewParameters *view, NVGcontext *ctx) {
-    if(itsGame->gameStatus == kPauseStatus) {
+void CHUD::DrawPaused(NVGcontext *ctx) {
+    auto view = gRenderer->viewParams;
+    if (itsGame->gameStatus == kPauseStatus) {
         int bufferWidth = view->viewPixelDimensions.h;
         int bufferHeight = view->viewPixelDimensions.v;
         int centerX = bufferWidth / 2;
@@ -271,13 +275,14 @@ void CHUD::DrawImage(NVGcontext* ctx, int image, float alpha,
 	nvgFill(ctx);
 }
 
-void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
+void CHUD::Render(NVGcontext *ctx) {
+    auto view = gRenderer->viewParams;
     CAbstractPlayer *player = itsGame->GetLocalPlayer();
     CAbstractPlayer *spectatePlayer = itsGame->GetSpectatePlayer();
     CNetManager *net = itsGame->itsApp->GetNet();
 
-    DrawLevelName(view, ctx);
-    DrawPaused(view, ctx);
+    DrawLevelName(ctx);
+    DrawPaused(ctx);
 
     std::vector<CPlayerManager*> thePlayers = net->ActivePlayers(); // only players actively playing
 
@@ -289,7 +294,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     int bufferWidth = view->viewPixelDimensions.h, bufferHeight = view->viewPixelDimensions.v;
     int chudHeight = 13 * lastPlayerSlot;
 
-    DrawScore(thePlayers, chudHeight, view, ctx);
+    DrawScore(thePlayers, chudHeight, ctx);
 
     nvgBeginFrame(ctx, bufferWidth, bufferHeight, view->viewPixelRatio);
 
@@ -914,13 +919,14 @@ void CHUD::DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, floa
     }
 }
 
-void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
+void CHUD::RenderNewHUD(NVGcontext *ctx) {
+    auto view = gRenderer->viewParams;
     CAbstractPlayer *player = itsGame->GetLocalPlayer();
     CAbstractPlayer *spectatePlayer = itsGame->GetSpectatePlayer();
     CNetManager *net = itsGame->itsApp->GetNet();
 
-    DrawLevelName(view, ctx);
-    DrawPaused(view, ctx);
+    DrawLevelName(ctx);
+    DrawPaused(ctx);
 
     std::vector<CPlayerManager*> thePlayers = net->ActivePlayers(); // only players actively playing
 
@@ -935,7 +941,7 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
     int bufferWidth = view->viewPixelDimensions.h, bufferHeight = view->viewPixelDimensions.v;
     int chudHeight = 13 * playerCount;
 
-    DrawScore(thePlayers, chudHeight, view, ctx);
+    DrawScore(thePlayers, chudHeight, ctx);
 
     nvgBeginFrame(ctx, bufferWidth, bufferHeight, view->viewPixelRatio);
 

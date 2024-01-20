@@ -32,7 +32,7 @@ CAbstractActor *CLogicDelay::EndScript() {
             return this;
     }
 
-    Dispose();
+    delete this;
     return NULL;
 }
 
@@ -51,7 +51,7 @@ void CLogicDelay::FrameAction() {
             sleepTimer = 0;
             Trigger();
             if (!restart) {
-                Dispose();
+                delete this;
                 return;
             }
         }

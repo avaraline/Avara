@@ -9,7 +9,6 @@
 
 #pragma once
 #include "ARGBColor.h"
-#include "AvaraGL.h"
 #include "CDirectObject.h"
 #include "Types.h"
 
@@ -32,8 +31,6 @@ class CViewParameters;
 
 class CWorldShader : public CDirectObject {
 public:
-    CAvaraGame *itsGame;
-
     ARGBColor lowSkyColor = DEFAULT_LOW_SKY_COLOR;
     ARGBColor highSkyColor = DEFAULT_HIGH_SKY_COLOR;
     ARGBColor groundColor = DEFAULT_GROUND_COLOR;
@@ -46,9 +43,7 @@ public:
     Fixed altitudes[MAXTOTALSHADES];
 
 
-    virtual void IWorldShader(CAvaraGame *theGame);
-    virtual void IWorldShader();
+    CWorldShader();
     virtual void Reset();
     virtual void Apply();
-    virtual void ShadeWorld(CViewParameters *theView);
 };

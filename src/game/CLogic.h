@@ -25,6 +25,6 @@ public:
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
     virtual void Trigger();
-    virtual void Dispose();
+    virtual ~CLogic();
     virtual void FrameAction();
 };

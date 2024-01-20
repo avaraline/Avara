@@ -149,15 +149,13 @@ void CMineActor::Activate() {
     }
 }
 
-void CMineActor::Dispose() {
+CMineActor::~CMineActor() {
     itsGame->RemoveReceiver(&activator);
 
     if (itsSoundLink) {
         gHub->ReleaseLinkAndKillSounds(itsSoundLink);
         itsSoundLink = NULL;
     }
-
-    CGlowActors::Dispose();
 }
 
 void CMineActor::FrameAction() {

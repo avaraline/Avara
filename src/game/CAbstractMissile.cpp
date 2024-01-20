@@ -95,6 +95,7 @@ void CAbstractMissile::FrameAction() {
     }
 }
 
+
 void CAbstractMissile::MoveForward() {
     partList[0]->isTransparent = false;
     partList[0]->extraAmbient = energy;

@@ -22,7 +22,7 @@ CAbstractActor *CLogicTimer::EndScript() {
             return this;
     }
 
-    Dispose();
+    delete this;
     return NULL;
 }
 
@@ -57,7 +57,7 @@ void CLogicTimer::FrameAction() {
         Trigger();
 
         if (!restart) {
-            Dispose();
+            delete this;
             return;
         }
     }

@@ -7,11 +7,12 @@
     Modified: Friday, March 29, 1996, 10:44
 */
 
-#include "AssetManager.h"
 #include "CHologramActor.h"
 
+#include "AssetManager.h"
 #include "CBSPPart.h"
 #include "CBSPWorld.h"
+#include "RenderManager.h"
 
 void CHologramActor::BeginScript() {
     CPlacedActors::BeginScript();
@@ -30,10 +31,7 @@ CAbstractActor *CHologramActor::EndScript() {
 
     auto bsp = AssetManager::GetBsp(resId);
     if (bsp) {
-        CBSPWorld *theWorld;
         CBSPPart *thePart;
-
-        theWorld = gCurrentGame->itsWorld;
 
         LoadPartWithColors(0, resId);
         thePart = (CBSPPart *)partList[0];
@@ -46,9 +44,9 @@ CAbstractActor *CHologramActor::EndScript() {
         thePart->MoveDone();
         partList[0] = NULL;
 
-        theWorld->AddPart(thePart);
+        gRenderer->AddPart(thePart);
     }
 
-    Dispose();
+    delete this;
     return NULL;
 }

@@ -53,7 +53,7 @@ void CLogicBase::FrameAction() {
             }
 
             if (!restart) {
-                Dispose();
+                delete this;
                 return;
             }
         }

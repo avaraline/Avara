@@ -4,7 +4,7 @@ in vec4 fragmentColor;
 in vec3 fragmentNormal;
 
 uniform float ambient = 0.0;
-uniform float lights_active = 1.0;
+uniform float lightsActive = 1.0;
 
 out vec4 color;
 
@@ -26,7 +26,7 @@ vec4 light_color() {
     return mix(
         ambient * vec4(lightColor, 1.0) * fragmentColor,
         vec4((ambient * lightColor) + diffuse(), 1.0) * fragmentColor,
-        lights_active
+        lightsActive
     );
 }
 

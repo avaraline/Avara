@@ -82,10 +82,6 @@ enum { kQDGrafVerbFrame = 0, kQDGrafVerbPaint = 1, kQDGrafVerbErase = 2, kQDGraf
 
 typedef uint8_t GrafVerb;
 
-typedef struct GLData {
-    float x, y, z, r, g, b, a, nx, ny, nz;
-} GLData;
-
 #ifdef _WIN32
 #include <winsock2.h>
 #include <Windows.h>

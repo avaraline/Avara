@@ -25,12 +25,10 @@ void	CSliverPart::GenerateColorLookupTable()
 Fixed FSysRandom() {
     return rand() & 0x0000FFFF;
 }
-
-void CSliverPart::ISliverPart(short partNum) {
+CSliverPart::CSliverPart(short partNum) {
     ISmartPart(partNum, NULL, 0);
     ignoreDirectionalLights = true;
-    nextSliver = NULL;
-}
+    nextSliver = NULL;}
 
 void CSliverPart::Activate(Fixed *origin,
     Fixed *direction,
@@ -126,10 +124,4 @@ Boolean CSliverPart::SliverAction() {
     }
 
     return lifeCount == 0;
-}
-
-void CSliverPart::Dispose() {
-    // colorReplacements = NULL;	//	Destroy fake handle.
-
-    CSmartPart::Dispose();
 }

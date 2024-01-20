@@ -198,9 +198,7 @@ void CSwitchActor::BlastHit(BlastHitRecord *theHit) {
     togglePower = savedToggle;
 }
 
-void CSwitchActor::Dispose() {
+CSwitchActor::~CSwitchActor() {
     itsGame->RemoveReceiver(&onActivator);
     itsGame->RemoveReceiver(&offActivator);
-
-    CGlowActors::Dispose();
 }

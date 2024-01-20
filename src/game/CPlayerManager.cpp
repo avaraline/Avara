@@ -894,7 +894,7 @@ void CPlayerManagerImpl::NetDisconnect() {
         if (theNetManager->isPlaying) {
             itsPlayer->netDestruct = true;
         } else {
-            itsPlayer->Dispose();
+            delete itsPlayer;
         }
     }
 
@@ -1044,7 +1044,7 @@ CAbstractPlayer *CPlayerManagerImpl::ChooseActor(CAbstractPlayer *actorList, sho
         itsPlayer->Reincarnate();
 
         if (itsPlayer->isInLimbo) {
-            itsPlayer->Dispose();
+            delete itsPlayer;
             itsPlayer = NULL;
         } else {
             itsPlayer->AddToGame();
@@ -1069,7 +1069,7 @@ Boolean CPlayerManagerImpl::IncarnateInAnyColor() {
         itsPlayer->Reincarnate();
 
         if (itsPlayer->isInLimbo) {
-            itsPlayer->Dispose();
+            delete itsPlayer;
             itsPlayer = NULL;
         } else {
             itsPlayer->AddToGame();
