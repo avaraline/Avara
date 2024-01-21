@@ -36,6 +36,7 @@ private:
     std::unique_ptr<OpenGLShader> hudPostShader;
     std::unique_ptr<OpenGLShader> finalShader;
 
+    GLsizei resolution[2];
     GLuint skyBuffer;
     GLuint skyVertArray;
     GLuint screenQuadBuffer;

@@ -233,6 +233,7 @@ void ModernOpenGLRenderer::ApplyProjection()
 {
     int w, h;
     manager->GetWindowSize(w, h);
+    SDL_GL_GetDrawableSize(this->manager->window, &resolution[0], &resolution[1]);
 
     glm::mat4 proj = glm::scale(
         glm::perspective(
@@ -401,6 +402,21 @@ void ModernOpenGLRenderer::RenderHUD()
 
     glEnable(GL_DEPTH_TEST);
 
+    // Final post-processing and send to default framebuffer.
+    float res[2] = {1.0f / (float)resolution[0], 1.0f / (float)resolution[1]};
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    finalShader->Use();
+    finalShader->SetBool("fxaa", gApplication ? gApplication->Get<bool>(kFXAA) : true);
+    finalShader->SetFloat2("texelStep", res);
+    finalShader->SetFloat("lumaThreshold", 0.0625f);
+    finalShader->SetFloat("mulReduce", 1.0f / 8.0f);
+    finalShader->SetFloat("minReduce", 1.0f / 32.0f);
+    finalShader->SetFloat("maxSpan", 8);
+    glBindVertexArray(screenQuadVertArray);
+    glDisable(GL_DEPTH_TEST);
+    glBindTexture(GL_TEXTURE_2D, texture[1]);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+
     if (manager->ui) {
         if (gApplication ? gApplication->Get<bool>(kShowNewHUD) : true) {
             manager->ui->RenderNewHUD(manager->nvg);
@@ -408,14 +424,6 @@ void ModernOpenGLRenderer::RenderHUD()
             manager->ui->Render(manager->nvg);
         }
     }
-
-    // Final post-processing and send to default framebuffer.
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    hudPostShader->Use();
-    glBindVertexArray(screenQuadVertArray);
-    glDisable(GL_DEPTH_TEST);
-    glBindTexture(GL_TEXTURE_2D, texture[1]);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
 void ModernOpenGLRenderer::AdjustAmbient(OpenGLShader &shader, float intensity)

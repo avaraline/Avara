@@ -38,9 +38,9 @@ using json = nlohmann::json;
 // GL stuff
 #define kWindowWidth "windowWidth"
 #define kWindowHeight "windowHeight"
-#define kMultiSamplesTag "multiSamples"
 #define kFullScreenTag "fullscreen"
 #define kFOV "fov"
+#define kFXAA "fxaa"
 
 // Other graphics settings
 #define kColorBlindMode "colorBlindMode"
@@ -139,11 +139,11 @@ static json defaultPrefs = {
     {kPlayerHullTrimColorTag, "#2b2b2b"},
     {kPlayerCockpitColorTag, "#0333ff"},
     {kPlayerGunColorTag, "#929292"},
-    {kMultiSamplesTag, 0},
     {kWindowWidth, 1024},
     {kWindowHeight, 768},
     {kFullScreenTag, false},
     {kFOV, 50.0},
+    {kFXAA, true},
     {kColorBlindMode, 0},
     {kHUDColor, "#03f5f5"},
     {kHUDPositiveColor, "#51e87e"},
