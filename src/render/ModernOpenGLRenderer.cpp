@@ -287,8 +287,10 @@ void ModernOpenGLRenderer::RefreshWindow()
     SDL_GL_SwapWindow(manager->window);
 }
 
-void ModernOpenGLRenderer::RenderSky()
+void ModernOpenGLRenderer::RenderFrame()
 {
+    // RENDER SKYBOX ///////////////////////////////////////////////////////////////////////////////
+
     Matrix *trans = &(manager->viewParams->viewMatrix);
 
     // Get rid of the view translation.
@@ -326,20 +328,8 @@ void ModernOpenGLRenderer::RenderSky()
     glDrawArrays(GL_TRIANGLE_STRIP, 0, sizeof(skyboxVertices));
     glDisableVertexAttribArray(0);
 
-    glBindVertexArray(0);
-    glCheckErrors();
+    // RENDER DYNAMIC WORLD ////////////////////////////////////////////////////////////////////////
 
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glCheckErrors();
-}
-
-void ModernOpenGLRenderer::RenderStaticWorld()
-{
-    // Unused for now.
-}
-
-void ModernOpenGLRenderer::RenderDynamicWorld()
-{
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
     glFrontFace(GL_CCW);
@@ -365,15 +355,7 @@ void ModernOpenGLRenderer::RenderDynamicWorld()
     glBindTexture(GL_TEXTURE_2D, texture[0]);
     glDrawArrays(GL_TRIANGLES, 0, 6);
 
-    glEnable(GL_DEPTH_TEST);
-}
-
-void ModernOpenGLRenderer::RenderHUD()
-{
-    glEnable(GL_CULL_FACE);
-    glCullFace(GL_BACK);
-    glFrontFace(GL_CCW);
-    glEnable(GL_DEPTH_TEST);
+    // RENDER HUD //////////////////////////////////////////////////////////////////////////////////
 
     // Switch to first offscreen FBO.
     glBindFramebuffer(GL_FRAMEBUFFER, fbo[0]);
@@ -382,8 +364,8 @@ void ModernOpenGLRenderer::RenderHUD()
 
     hudShader->Use();
     manager->hudWorld->PrepareForRender();
-    auto partList = manager->hudWorld->GetVisiblePartListPointer();
-    auto partCount = manager->hudWorld->GetVisiblePartCount();
+    partList = manager->hudWorld->GetVisiblePartListPointer();
+    partCount = manager->hudWorld->GetVisiblePartCount();
     for (uint16_t i = 0; i < partCount; i++) {
         Draw(*hudShader, **partList);
         partList++;
@@ -402,7 +384,8 @@ void ModernOpenGLRenderer::RenderHUD()
 
     glEnable(GL_DEPTH_TEST);
 
-    // Final post-processing and send to default framebuffer.
+    // FINAL POST-PROCESSING, SEND TO DEFAULT FRAMEBUFFER //////////////////////////////////////////
+
     float res[2] = {1.0f / (float)resolution[0], 1.0f / (float)resolution[1]};
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     finalShader->Use();
@@ -417,6 +400,8 @@ void ModernOpenGLRenderer::RenderHUD()
     glBindTexture(GL_TEXTURE_2D, texture[1]);
     glDrawArrays(GL_TRIANGLES, 0, 6);
 
+    // RENDER NVG HUD //////////////////////////////////////////////////////////////////////////////
+    
     if (manager->ui) {
         if (gApplication ? gApplication->Get<bool>(kShowNewHUD) : true) {
             manager->ui->RenderNewHUD(manager->nvg);

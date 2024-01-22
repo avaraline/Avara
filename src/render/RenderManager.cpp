@@ -102,12 +102,7 @@ void RenderManager::RenderFrame()
 {
     renderer->Clear();
     renderer->ApplyView();
-    renderer->RenderSky();
-    if (renderer->UsesStaticWorld()) {
-        renderer->RenderStaticWorld();
-    }
-    renderer->RenderDynamicWorld();
-    renderer->RenderHUD();
+    renderer->RenderFrame();
 }
 
 void RenderManager::ResetLights()

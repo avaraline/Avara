@@ -21,10 +21,7 @@ public:
     virtual void Clear();
     virtual std::unique_ptr<VertexData> NewVertexDataInstance();
     virtual void RefreshWindow();
-    virtual void RenderSky();
-    virtual void RenderStaticWorld();
-    virtual void RenderDynamicWorld();
-    virtual void RenderHUD();
+    virtual void RenderFrame();
     virtual bool UsesStaticWorld() { return false; };
 private:
     RenderManager *manager;
