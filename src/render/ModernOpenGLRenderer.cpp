@@ -242,8 +242,10 @@ void ModernOpenGLRenderer::RefreshWindow()
     SDL_GL_SwapWindow(manager->window);
 }
 
-void ModernOpenGLRenderer::RenderSky()
+void ModernOpenGLRenderer::RenderFrame()
 {
+    // RENDER SKYBOX ///////////////////////////////////////////////////////////////////////////////
+
     Matrix *trans = &(manager->viewParams->viewMatrix);
 
     // Get rid of the view translation.
@@ -276,33 +278,8 @@ void ModernOpenGLRenderer::RenderSky()
     glDrawArrays(GL_TRIANGLE_STRIP, 0, sizeof(skyboxVertices));
     glDisableVertexAttribArray(0);
 
-    glBindVertexArray(0);
-    glCheckErrors();
+    // RENDER DYNAMIC WORLD ////////////////////////////////////////////////////////////////////////
 
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glCheckErrors();
-}
-
-void ModernOpenGLRenderer::RenderStaticWorld()
-{
-    glEnable(GL_CULL_FACE);
-    glCullFace(GL_BACK);
-    glFrontFace(GL_CCW);
-    glEnable(GL_DEPTH_TEST);
-
-    worldShader->Use();
-
-    manager->staticWorld->PrepareForRender();
-    auto partList = manager->staticWorld->GetVisiblePartListPointer();
-    auto partCount = manager->staticWorld->GetVisiblePartCount();
-    for (uint16_t i = 0; i < partCount; i++) {
-        Draw(*worldShader, **partList);
-        partList++;
-    }
-}
-
-void ModernOpenGLRenderer::RenderDynamicWorld()
-{
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
     glFrontFace(GL_CCW);
@@ -317,22 +294,17 @@ void ModernOpenGLRenderer::RenderDynamicWorld()
         Draw(*worldShader, **partList);
         partList++;
     }
-}
 
-void ModernOpenGLRenderer::RenderHUD()
-{
-    glEnable(GL_CULL_FACE);
-    glCullFace(GL_BACK);
-    glFrontFace(GL_CCW);
-    glEnable(GL_DEPTH_TEST);
+    // RENDER HUD //////////////////////////////////////////////////////////////////////////////////
+
     glDepthFunc(GL_ALWAYS);
 
     hudShader->Use();
     hudShader->SetFloat("hudAlpha", ColorManager::getHUDAlpha());
 
     manager->hudWorld->PrepareForRender();
-    auto partList = manager->hudWorld->GetVisiblePartListPointer();
-    auto partCount = manager->hudWorld->GetVisiblePartCount();
+    partList = manager->hudWorld->GetVisiblePartListPointer();
+    partCount = manager->hudWorld->GetVisiblePartCount();
     for (uint16_t i = 0; i < partCount; i++) {
         Draw(*hudShader, **partList);
         partList++;

@@ -41,24 +41,9 @@ public:
     virtual void RefreshWindow() = 0;
 
     /**
-     * Render the skybox.
+     * Execute all rendering instructions for the current frame.
      */
-    virtual void RenderSky() = 0;
-
-    /**
-     * Render the static world elements.
-     */
-    virtual void RenderStaticWorld() = 0;
-
-    /**
-     * Render the dynamic world elements.
-     */
-    virtual void RenderDynamicWorld() = 0;
-
-    /**
-     * Render the HUD.
-     */
-    virtual void RenderHUD() = 0;
+    virtual void RenderFrame() = 0;
     
     /**
      * Check to see if this renderer supports static world objects.
