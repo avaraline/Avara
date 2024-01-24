@@ -25,9 +25,14 @@
     #include <windows.h>
 #endif
 
+#if defined(NANOGUI_METAL)
+#include "nanovg_mtl.h"
+extern "C" { void setupMetalView(SDL_MetalView); }
+#else
 /* Allow enforcing the GL2 implementation of NanoVG */
 #define NANOVG_GL3_IMPLEMENTATION
 #include <nanovg_gl.h>
+#endif
 
 NAMESPACE_BEGIN(nanogui)
 
@@ -36,6 +41,14 @@ std::vector<Screen *> __nanogui_screens;
 #if defined(NANOGUI_GLAD)
 static bool gladInitialized = false;
 #endif
+
+static void GetDrawableSize(SDL_Window *window, int *w, int *h) {
+#if defined(NANOGUI_METAL)
+    SDL_Metal_GetDrawableSize(window, w, h);
+#else
+    SDL_GL_GetDrawableSize(window, w, h);
+#endif
+}
 
 /* Calculate pixel ratio for hi-dpi devices. */
 static float get_pixel_ratio(SDL_Window *window) {
@@ -107,7 +120,7 @@ static float get_pixel_ratio(SDL_Window *window) {
 
 #else
     Vector2i fbSize, size;
-    SDL_GL_GetDrawableSize(window, &fbSize[0], &fbSize[1]);
+    GetDrawableSize(window, &fbSize[0], &fbSize[1]);
     SDL_GetWindowSize(window, &size[0], &size[1]);
     return (float)fbSize[0] / (float)size[0];
 #endif
@@ -127,6 +140,19 @@ Screen::Screen(const Vector2i &size, const std::string &caption, bool resizable,
       mCursor(Cursor::Arrow), mBackground(0.3f, 0.3f, 0.32f, 1.f), mCaption(caption),
       mShutdownSDLOnDestruct(false), mFullscreen(fullscreen) {
 
+    int flags = SDL_WINDOW_ALLOW_HIGHDPI;
+    if (resizable) {
+        flags |= SDL_WINDOW_RESIZABLE;
+    }
+    if (fullscreen) {
+        flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
+    }
+
+#if defined(NANOGUI_METAL)
+    flags |= SDL_WINDOW_METAL;
+#else
+    flags |= SDL_WINDOW_OPENGL;
+    
     /* Request a forward compatible OpenGL glMajor.glMinor core profile context.
        Default value is an OpenGL 3.3 core profile context. */
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, glMajor);
@@ -147,17 +173,18 @@ Screen::Screen(const Vector2i &size, const std::string &caption, bool resizable,
         SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
         SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, nSamples);
     }
+#endif
 
-    int flags = SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI;
-    if (resizable) {
-        flags |= SDL_WINDOW_RESIZABLE;
-    }
-    if (fullscreen) {
-        flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
-    }
 
     mSDLWindow = SDL_CreateWindow(caption.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size.x, size.y, flags);
     mWindowID = SDL_GetWindowID(mSDLWindow);
+
+#if defined(NANOGUI_METAL)
+          mMetalView = SDL_Metal_CreateView(mSDLWindow);
+          if (!mSDLWindow || !mMetalView)
+              throw std::runtime_error("Could not create a Metal view!");
+          setupMetalView(mMetalView);
+#else
     mGLContext = SDL_GL_CreateContext(mSDLWindow);
 
     if (!mSDLWindow || !mGLContext)
@@ -166,6 +193,7 @@ Screen::Screen(const Vector2i &size, const std::string &caption, bool resizable,
                                  std::to_string(glMinor) + " context!");
 
     SDL_GL_MakeCurrent(mSDLWindow, mGLContext);
+#endif
 
 #if defined(NANOGUI_GLAD)
     if (!gladInitialized) {
@@ -176,12 +204,16 @@ Screen::Screen(const Vector2i &size, const std::string &caption, bool resizable,
     }
 #endif
 
-    SDL_GL_GetDrawableSize(mSDLWindow, &mFBSize[0], &mFBSize[1]);
+      GetDrawableSize(mSDLWindow, &mFBSize[0], &mFBSize[1]);
+
+#if defined(NANOGUI_METAL)
+#else
     glViewport(0, 0, mFBSize[0], mFBSize[1]);
     glClearColor(mBackground[0], mBackground[1], mBackground[2], mBackground[3]);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     SDL_GL_SetSwapInterval(0);
     SDL_GL_SwapWindow(mSDLWindow);
+#endif
 
 #if defined(__APPLE__)
     /* Poll for events once before starting a potentially
@@ -202,7 +234,7 @@ void Screen::initialize(SDL_Window *window, bool shutdownSDLOnDestruct) {
     mWindowID = SDL_GetWindowID(mSDLWindow);
     mShutdownSDLOnDestruct = shutdownSDLOnDestruct;
     SDL_GetWindowSize(mSDLWindow, &mSize[0], &mSize[1]);
-    SDL_GL_GetDrawableSize(mSDLWindow, &mFBSize[0], &mFBSize[1]);
+    GetDrawableSize(mSDLWindow, &mFBSize[0], &mFBSize[1]);
 
     mPixelRatio = get_pixel_ratio(window);
 
@@ -220,6 +252,11 @@ void Screen::initialize(SDL_Window *window, bool shutdownSDLOnDestruct) {
     }
 #endif
 
+#if defined(NANOGUI_METAL)
+    int flags = NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DOUBLE_BUFFER | NVG_DEBUG;
+    mNVGContext = nvgCreateMTL(SDL_Metal_GetLayer(mMetalView), flags);
+    SDL_SetWindowData(mSDLWindow, "metalView", mMetalView);
+#else
     /* Detect framebuffer properties and set up compatible NanoVG context */
     GLint nStencilBits = 0, nSamples = 0;
     glGetFramebufferAttachmentParameteriv(GL_DRAW_FRAMEBUFFER,
@@ -236,6 +273,8 @@ void Screen::initialize(SDL_Window *window, bool shutdownSDLOnDestruct) {
 #endif
 
     mNVGContext = nvgCreateGL3(flags);
+#endif
+
     if (mNVGContext == nullptr)
         throw std::runtime_error("Could not initialize NanoVG!");
 
@@ -274,7 +313,11 @@ Screen::~Screen() {
         SDL_FreeCursor(it->second);
     }
     if (mNVGContext)
+#if defined(NANOGUI_METAL)
+        nvgDeleteMTL(mNVGContext);
+#else
         nvgDeleteGL3(mNVGContext);
+#endif
     if (mSDLWindow && mShutdownSDLOnDestruct)
         SDL_DestroyWindow(mSDLWindow);
 }
@@ -312,25 +355,8 @@ void Screen::drawAll() {
     if(now - mLastDrawTime < mFrameTime)
         return;
 
-    glClearColor(mBackground[0], mBackground[1], mBackground[2], mBackground[3]);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-
-    drawContents();
-    drawWidgets();
-
-    SDL_GL_SwapWindow(mSDLWindow);
-
-    mLastDrawTime = now;
-}
-
-void Screen::drawWidgets() {
-    if (!mVisible)
-        return;
-
-    SDL_GL_MakeCurrent(mSDLWindow, mGLContext);
-    SDL_GL_GetDrawableSize(mSDLWindow, &mFBSize[0], &mFBSize[1]);
+    GetDrawableSize(mSDLWindow, &mFBSize[0], &mFBSize[1]);
     SDL_GetWindowSize(mSDLWindow, &mSize[0], &mSize[1]);
-
 #if defined(_WIN32) || defined(__linux__)
     mSize = ((Vector2f)mSize / mPixelRatio);
     mFBSize = ((Vector2f)mSize * mPixelRatio);
@@ -340,9 +366,39 @@ void Screen::drawWidgets() {
         mPixelRatio = (float) mFBSize[0] / (float) mSize[0];
 #endif
 
+    nvgBeginFrame(mNVGContext, mSize[0], mSize[1], mPixelRatio);
+
+#if defined(NANOGUI_METAL)
+    //mnvgClearWithColor(mNVGContext, nvgRGB(0, 0, 0));
+#else
+    SDL_GL_MakeCurrent(mSDLWindow, mGLContext);
+    glClearColor(mBackground[0], mBackground[1], mBackground[2], mBackground[3]);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+#endif
+
+    drawContents();
+
+#if defined(NANOGUI_METAL)
+#else
     glViewport(0, 0, mFBSize[0], mFBSize[1]);
     glBindSampler(0, 0);
-    nvgBeginFrame(mNVGContext, mSize[0], mSize[1], mPixelRatio);
+#endif
+
+    drawWidgets();
+
+    nvgEndFrame(mNVGContext);
+
+#if defined(NANOGUI_METAL)
+#else
+    SDL_GL_SwapWindow(mSDLWindow);
+#endif
+
+    mLastDrawTime = now;
+}
+
+void Screen::drawWidgets() {
+    if (!mVisible)
+        return;
 
     draw(mNVGContext);
 
@@ -393,8 +449,6 @@ void Screen::drawWidgets() {
                        widget->tooltip().c_str(), nullptr);
         }
     }
-
-    nvgEndFrame(mNVGContext);
 }
 
 bool Screen::keyboardEvent(int key, int scancode, int action, int modifiers) {
@@ -559,7 +613,7 @@ bool Screen::scrollCallbackEvent(double x, double y) {
 
 bool Screen::resizeCallbackEvent(int, int) {
     Vector2i fbSize, size;
-    SDL_GL_GetDrawableSize(mSDLWindow, &fbSize[0], &fbSize[1]);
+    GetDrawableSize(mSDLWindow, &fbSize[0], &fbSize[1]);
     SDL_GetWindowSize(mSDLWindow, &size[0], &size[1]);
 
 #if defined(_WIN32) || defined(__linux__)

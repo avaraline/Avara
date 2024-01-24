@@ -10,6 +10,10 @@
 
 #include <stdint.h>
 
+#if defined(NANOGUI_METAL)
+#include "nanovg_mtl.h"
+#endif
+
 CHUD::CHUD(CAvaraGame *game) {
     itsGame = game;
 }
@@ -296,7 +300,7 @@ void CHUD::Render(NVGcontext *ctx) {
 
     DrawScore(thePlayers, chudHeight, ctx);
 
-    nvgBeginFrame(ctx, bufferWidth, bufferHeight, view->viewPixelRatio);
+    //nvgBeginFrame(ctx, bufferWidth, bufferHeight, view->viewPixelRatio);
 
     nvgBeginPath(ctx);
     nvgRect(ctx, 0, bufferHeight - chudHeight, bufferWidth, chudHeight);
@@ -700,7 +704,7 @@ void CHUD::Render(NVGcontext *ctx) {
     nvgTextAlign(ctx, NVG_ALIGN_CENTER | NVG_ALIGN_MIDDLE);
     nvgText(ctx, g2X1 + 7.5, gY + full + 10.0, timeText, NULL);
 
-    nvgEndFrame(ctx);
+    //nvgEndFrame(ctx);
 }
 
 void CHUD::DrawShadowBox(NVGcontext *ctx, int x, int y, int width, int height) {
@@ -943,7 +947,7 @@ void CHUD::RenderNewHUD(NVGcontext *ctx) {
 
     DrawScore(thePlayers, chudHeight, ctx);
 
-    nvgBeginFrame(ctx, bufferWidth, bufferHeight, view->viewPixelRatio);
+    //nvgBeginFrame(ctx, bufferWidth, bufferHeight, view->viewPixelRatio);
 
     float fontsz_l = 25.0, fontsz_m = 17.0, fontsz_s = 12.0;
     nvgFontFace(ctx, "mono");
@@ -1269,9 +1273,11 @@ void CHUD::RenderNewHUD(NVGcontext *ctx) {
         }
     }
 
-    if (!player)
+    if (!player) {
+        //nvgEndFrame(ctx);
         return;
-
+    }
+    
     if(spectatePlayer != NULL)
         player = spectatePlayer;
 
@@ -1321,5 +1327,5 @@ void CHUD::RenderNewHUD(NVGcontext *ctx) {
         nvgText(ctx, timePosition[0] + 5.0f, timePosition[1] + 14.0f, timeText, NULL);
     }
 
-    nvgEndFrame(ctx);
+    //nvgEndFrame(ctx);
 }

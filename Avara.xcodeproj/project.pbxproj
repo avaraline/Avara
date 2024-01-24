@@ -159,8 +159,6 @@
 		E517F0D0299713DB0036B206 /* combobox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7B29895123007A875D /* combobox.cpp */; };
 		E517F0D1299713DB0036B206 /* common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D4929895123007A875D /* common.cpp */; };
 		E517F0D2299713DB0036B206 /* desccombobox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D8429895123007A875D /* desccombobox.cpp */; };
-		E517F0D3299713DB0036B206 /* glcanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7729895123007A875D /* glcanvas.cpp */; };
-		E517F0D4299713DB0036B206 /* glutil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7F29895123007A875D /* glutil.cpp */; };
 		E517F0D5299713DB0036B206 /* label.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7D29895123007A875D /* label.cpp */; };
 		E517F0D6299713DB0036B206 /* layout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7429895123007A875D /* layout.cpp */; };
 		E517F0D7299713DB0036B206 /* messagedialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7E29895123007A875D /* messagedialog.cpp */; };
@@ -190,6 +188,8 @@
 		E517F0F3299726F30036B206 /* levels in CopyFiles */ = {isa = PBXBuildFile; fileRef = E5890FA2298958C7007A875D /* levels */; };
 		E517F0F4299726F30036B206 /* rsrc in CopyFiles */ = {isa = PBXBuildFile; fileRef = E5890FA1298958BC007A875D /* rsrc */; };
 		E5253ED92996DD2200F8C1E8 /* PascalStrings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5253ED82996DD2200F8C1E8 /* PascalStrings.cpp */; };
+		E540D0082B60396B00BD402C /* avara.metal in Sources */ = {isa = PBXBuildFile; fileRef = E540D0072B60396B00BD402C /* avara.metal */; };
+		E540D0092B60396B00BD402C /* avara.metal in Sources */ = {isa = PBXBuildFile; fileRef = E540D0072B60396B00BD402C /* avara.metal */; };
 		E5890B8D29895078007A875D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5890B8A29895078007A875D /* Assets.xcassets */; };
 		E5890C9E29895118007A875D /* Memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9129895118007A875D /* Memory.cpp */; };
 		E5890C9F29895118007A875D /* Resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9229895118007A875D /* Resource.cpp */; };
@@ -321,7 +321,6 @@
 		E5890EF729895124007A875D /* popup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7329895123007A875D /* popup.cpp */; };
 		E5890EF829895124007A875D /* layout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7429895123007A875D /* layout.cpp */; };
 		E5890EF929895124007A875D /* nanogui_resources.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7529895123007A875D /* nanogui_resources.cpp */; };
-		E5890EFA29895124007A875D /* glcanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7729895123007A875D /* glcanvas.cpp */; };
 		E5890EFB29895124007A875D /* darwin.mm in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7829895123007A875D /* darwin.mm */; };
 		E5890EFC29895124007A875D /* tabwidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7929895123007A875D /* tabwidget.cpp */; };
 		E5890EFD29895124007A875D /* progressbar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7A29895123007A875D /* progressbar.cpp */; };
@@ -329,7 +328,6 @@
 		E5890EFF29895124007A875D /* theme.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7C29895123007A875D /* theme.cpp */; };
 		E5890F0029895124007A875D /* label.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7D29895123007A875D /* label.cpp */; };
 		E5890F0129895124007A875D /* messagedialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7E29895123007A875D /* messagedialog.cpp */; };
-		E5890F0229895124007A875D /* glutil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7F29895123007A875D /* glutil.cpp */; };
 		E5890F0329895124007A875D /* textbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D8029895123007A875D /* textbox.cpp */; };
 		E5890F0529895124007A875D /* slider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D8229895123007A875D /* slider.cpp */; };
 		E5890F0629895124007A875D /* popupbutton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D8329895123007A875D /* popupbutton.cpp */; };
@@ -343,6 +341,18 @@
 		E5890F9C298952A1007A875D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5890F9B298952A1007A875D /* OpenGL.framework */; };
 		E5890FA3298958D2007A875D /* levels in Resources */ = {isa = PBXBuildFile; fileRef = E5890FA2298958C7007A875D /* levels */; };
 		E5890FA4298958D2007A875D /* rsrc in Resources */ = {isa = PBXBuildFile; fileRef = E5890FA1298958BC007A875D /* rsrc */; };
+		E5BF9E922B5EEE16007FC72B /* nanovg_mtl.m in Sources */ = {isa = PBXBuildFile; fileRef = E5BF9E8B2B5EEE04007FC72B /* nanovg_mtl.m */; };
+		E5BF9E932B5EEE16007FC72B /* nanovg_mtl.m in Sources */ = {isa = PBXBuildFile; fileRef = E5BF9E8B2B5EEE04007FC72B /* nanovg_mtl.m */; };
+		E5BF9E952B5EF956007FC72B /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5BF9E942B5EF956007FC72B /* Metal.framework */; };
+		E5BF9E972B5EF95C007FC72B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5BF9E962B5EF95C007FC72B /* QuartzCore.framework */; };
+		E5BF9E9A2B5EFED6007FC72B /* MetalRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5BF9E992B5EFED6007FC72B /* MetalRenderer.cpp */; };
+		E5BF9E9B2B5EFED6007FC72B /* MetalRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5BF9E992B5EFED6007FC72B /* MetalRenderer.cpp */; };
+		E5BF9E9E2B5F01F6007FC72B /* MetalVertices.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5BF9E9C2B5F01F6007FC72B /* MetalVertices.cpp */; };
+		E5BF9E9F2B5F01F6007FC72B /* MetalVertices.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5BF9E9C2B5F01F6007FC72B /* MetalVertices.cpp */; };
+		E5BF9EA12B5F05E8007FC72B /* metalhelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E5BF9EA02B5F05E8007FC72B /* metalhelper.m */; };
+		E5BF9EA22B5F05E8007FC72B /* metalhelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E5BF9EA02B5F05E8007FC72B /* metalhelper.m */; };
+		E5BF9EA42B5F0DC3007FC72B /* MetalRendererImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = E5BF9EA32B5F0DC3007FC72B /* MetalRendererImpl.mm */; };
+		E5BF9EA52B5F0DC3007FC72B /* MetalRendererImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = E5BF9EA32B5F0DC3007FC72B /* MetalRendererImpl.mm */; };
 		E5E510F8298960F300EA1AEB /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5890F9729895294007A875D /* SDL2.framework */; };
 		E5E510F9298960F300EA1AEB /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5890F9729895294007A875D /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -410,6 +420,10 @@
 		E2D76F732A1680FD000D24B3 /* JSONify.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONify.h; sourceTree = "<group>"; };
 		E517F04C299713990036B206 /* AvaraTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AvaraTests; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5253ED82996DD2200F8C1E8 /* PascalStrings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PascalStrings.cpp; sourceTree = "<group>"; };
+		E540D0072B60396B00BD402C /* avara.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = avara.metal; sourceTree = "<group>"; };
+		E540D00A2B603A3A00BD402C /* MetalShaderTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MetalShaderTypes.h; sourceTree = "<group>"; };
+		E540D00B2B603CE600BD402C /* Skybox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Skybox.h; sourceTree = "<group>"; };
+		E540D00C2B6045F500BD402C /* MetalRenderInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MetalRenderInterface.h; sourceTree = "<group>"; };
 		E5890B2429894DB3007A875D /* Avara.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Avara.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5890B8A29895078007A875D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E5890B9129895118007A875D /* Memory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Memory.cpp; sourceTree = "<group>"; };
@@ -682,7 +696,6 @@
 		E5890D4E29895123007A875D /* stackedwidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stackedwidget.cpp; sourceTree = "<group>"; };
 		E5890D4F29895123007A875D /* tabheader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tabheader.cpp; sourceTree = "<group>"; };
 		E5890D5029895123007A875D /* window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = window.cpp; sourceTree = "<group>"; };
-		E5890D5229895123007A875D /* glcanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glcanvas.h; sourceTree = "<group>"; };
 		E5890D5329895123007A875D /* theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = theme.h; sourceTree = "<group>"; };
 		E5890D5429895123007A875D /* progressbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = progressbar.h; sourceTree = "<group>"; };
 		E5890D5529895123007A875D /* textbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = textbox.h; sourceTree = "<group>"; };
@@ -691,7 +704,6 @@
 		E5890D5829895123007A875D /* popup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = popup.h; sourceTree = "<group>"; };
 		E5890D5929895123007A875D /* text.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = text.h; sourceTree = "<group>"; };
 		E5890D5A29895123007A875D /* opengl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opengl.h; sourceTree = "<group>"; };
-		E5890D5B29895123007A875D /* glutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glutil.h; sourceTree = "<group>"; };
 		E5890D5C29895123007A875D /* desccombobox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = desccombobox.h; sourceTree = "<group>"; };
 		E5890D5D29895123007A875D /* widget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = widget.h; sourceTree = "<group>"; };
 		E5890D5E29895123007A875D /* nanogui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nanogui.h; sourceTree = "<group>"; };
@@ -719,7 +731,6 @@
 		E5890D7429895123007A875D /* layout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = layout.cpp; sourceTree = "<group>"; };
 		E5890D7529895123007A875D /* nanogui_resources.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nanogui_resources.cpp; sourceTree = "<group>"; };
 		E5890D7629895123007A875D /* nanogui_resources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nanogui_resources.h; sourceTree = "<group>"; };
-		E5890D7729895123007A875D /* glcanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glcanvas.cpp; sourceTree = "<group>"; };
 		E5890D7829895123007A875D /* darwin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = darwin.mm; sourceTree = "<group>"; };
 		E5890D7929895123007A875D /* tabwidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tabwidget.cpp; sourceTree = "<group>"; };
 		E5890D7A29895123007A875D /* progressbar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = progressbar.cpp; sourceTree = "<group>"; };
@@ -727,7 +738,6 @@
 		E5890D7C29895123007A875D /* theme.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = theme.cpp; sourceTree = "<group>"; };
 		E5890D7D29895123007A875D /* label.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = label.cpp; sourceTree = "<group>"; };
 		E5890D7E29895123007A875D /* messagedialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = messagedialog.cpp; sourceTree = "<group>"; };
-		E5890D7F29895123007A875D /* glutil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glutil.cpp; sourceTree = "<group>"; };
 		E5890D8029895123007A875D /* textbox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = textbox.cpp; sourceTree = "<group>"; };
 		E5890D8229895123007A875D /* slider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = slider.cpp; sourceTree = "<group>"; };
 		E5890D8329895123007A875D /* popupbutton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = popupbutton.cpp; sourceTree = "<group>"; };
@@ -1018,6 +1028,22 @@
 		E5890F9B298952A1007A875D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		E5890FA1298958BC007A875D /* rsrc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = rsrc; sourceTree = "<group>"; };
 		E5890FA2298958C7007A875D /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; path = levels; sourceTree = "<group>"; };
+		E5BF9E8A2B5EEE04007FC72B /* nanovg_mtl_shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = nanovg_mtl_shaders.metal; sourceTree = "<group>"; };
+		E5BF9E8B2B5EEE04007FC72B /* nanovg_mtl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = nanovg_mtl.m; sourceTree = "<group>"; };
+		E5BF9E8D2B5EEE04007FC72B /* ios.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ios.h; sourceTree = "<group>"; };
+		E5BF9E8E2B5EEE04007FC72B /* tvos.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tvos.h; sourceTree = "<group>"; };
+		E5BF9E8F2B5EEE04007FC72B /* macos.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = macos.h; sourceTree = "<group>"; };
+		E5BF9E902B5EEE04007FC72B /* simulator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = simulator.h; sourceTree = "<group>"; };
+		E5BF9E912B5EEE04007FC72B /* nanovg_mtl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = nanovg_mtl.h; sourceTree = "<group>"; };
+		E5BF9E942B5EF956007FC72B /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		E5BF9E962B5EF95C007FC72B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		E5BF9E982B5EFED6007FC72B /* MetalRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetalRenderer.h; sourceTree = "<group>"; };
+		E5BF9E992B5EFED6007FC72B /* MetalRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MetalRenderer.cpp; sourceTree = "<group>"; };
+		E5BF9E9C2B5F01F6007FC72B /* MetalVertices.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MetalVertices.cpp; sourceTree = "<group>"; };
+		E5BF9E9D2B5F01F6007FC72B /* MetalVertices.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MetalVertices.h; sourceTree = "<group>"; };
+		E5BF9EA02B5F05E8007FC72B /* metalhelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = metalhelper.m; sourceTree = "<group>"; };
+		E5BF9EA32B5F0DC3007FC72B /* MetalRendererImpl.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MetalRendererImpl.mm; sourceTree = "<group>"; };
+		E5BF9EA62B5F1383007FC72B /* MetalRendererImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MetalRendererImpl.h; sourceTree = "<group>"; };
 		E5E510F429895E9F00EA1AEB /* Avara.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Avara.entitlements; sourceTree = "<group>"; };
 		E5E510F62989602200EA1AEB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1037,8 +1063,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5BF9E972B5EF95C007FC72B /* QuartzCore.framework in Frameworks */,
 				E5890F9A2989529B007A875D /* AppKit.framework in Frameworks */,
 				E5890F9C298952A1007A875D /* OpenGL.framework in Frameworks */,
+				E5BF9E952B5EF956007FC72B /* Metal.framework in Frameworks */,
 				E5E510F8298960F300EA1AEB /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1066,17 +1094,25 @@
 		948128AD2B539B44002A3459 /* render */ = {
 			isa = PBXGroup;
 			children = (
-				947F5C642B576B9F00F41689 /* ModernOpenGLRenderer.cpp */,
 				947F5C632B576ACD00F41689 /* ModernOpenGLRenderer.h */,
+				947F5C642B576B9F00F41689 /* ModernOpenGLRenderer.cpp */,
+				E5BF9E982B5EFED6007FC72B /* MetalRenderer.h */,
+				E5BF9E992B5EFED6007FC72B /* MetalRenderer.cpp */,
+				E5BF9EA62B5F1383007FC72B /* MetalRendererImpl.h */,
+				E5BF9EA32B5F0DC3007FC72B /* MetalRendererImpl.mm */,
 				947F5C672B57A30100F41689 /* NullRenderer.h */,
-				940541EC2B5875B200E32241 /* OpenGLShader.cpp */,
 				940541EB2B58744500E32241 /* OpenGLShader.h */,
-				941D878E2B5A213200E5577C /* OpenGLVertices.cpp */,
+				940541EC2B5875B200E32241 /* OpenGLShader.cpp */,
 				941D878D2B5A206A00E5577C /* OpenGLVertices.h */,
+				941D878E2B5A213200E5577C /* OpenGLVertices.cpp */,
+				E5BF9E9D2B5F01F6007FC72B /* MetalVertices.h */,
+				E5BF9E9C2B5F01F6007FC72B /* MetalVertices.cpp */,
 				947F5C622B57693300F41689 /* Renderer.h */,
-				948128AF2B53A1C7002A3459 /* RenderManager.cpp */,
 				948128AE2B539B6C002A3459 /* RenderManager.h */,
+				948128AF2B53A1C7002A3459 /* RenderManager.cpp */,
 				941D878C2B5A1EEC00E5577C /* VertexData.h */,
+				E540D00B2B603CE600BD402C /* Skybox.h */,
+				E540D00C2B6045F500BD402C /* MetalRenderInterface.h */,
 			);
 			path = render;
 			sourceTree = "<group>";
@@ -1110,6 +1146,8 @@
 				E5890B8A29895078007A875D /* Assets.xcassets */,
 				E5E510F429895E9F00EA1AEB /* Avara.entitlements */,
 				E5E510F62989602200EA1AEB /* Info.plist */,
+				E540D00A2B603A3A00BD402C /* MetalShaderTypes.h */,
+				E540D0072B60396B00BD402C /* avara.metal */,
 			);
 			name = macos;
 			path = platform/macos;
@@ -1490,6 +1528,7 @@
 				E5890D1929895123007A875D /* json.hpp */,
 				E5890D4629895123007A875D /* nanogui */,
 				E5890ECF29895124007A875D /* nanovg */,
+				E5BF9E892B5EEE04007FC72B /* nanovg-metal */,
 				E5890DBC29895123007A875D /* pugixml */,
 				E5890D8629895123007A875D /* stb_vorbis.c */,
 				E5890ED929895124007A875D /* stb_vorbis.h */,
@@ -1521,8 +1560,6 @@
 				E5890D4929895123007A875D /* common.cpp */,
 				E5890D7829895123007A875D /* darwin.mm */,
 				E5890D8429895123007A875D /* desccombobox.cpp */,
-				E5890D7729895123007A875D /* glcanvas.cpp */,
-				E5890D7F29895123007A875D /* glutil.cpp */,
 				E5890D7D29895123007A875D /* label.cpp */,
 				E5890D7429895123007A875D /* layout.cpp */,
 				E5890D7E29895123007A875D /* messagedialog.cpp */,
@@ -1543,6 +1580,7 @@
 				E5890D4B29895123007A875D /* vscrollpanel.cpp */,
 				E5890D4729895123007A875D /* widget.cpp */,
 				E5890D5029895123007A875D /* window.cpp */,
+				E5BF9EA02B5F05E8007FC72B /* metalhelper.m */,
 			);
 			path = nanogui;
 			sourceTree = "<group>";
@@ -1559,8 +1597,6 @@
 				E5890D5C29895123007A875D /* desccombobox.h */,
 				E5890D6929895123007A875D /* entypo.h */,
 				E5890D7029895123007A875D /* formhelper.h */,
-				E5890D5229895123007A875D /* glcanvas.h */,
-				E5890D5B29895123007A875D /* glutil.h */,
 				E5890D5629895123007A875D /* label.h */,
 				E5890D6529895123007A875D /* layout.h */,
 				E5890D6D29895123007A875D /* messagedialog.h */,
@@ -1949,11 +1985,35 @@
 		E5890F9629895294007A875D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E5BF9E962B5EF95C007FC72B /* QuartzCore.framework */,
+				E5BF9E942B5EF956007FC72B /* Metal.framework */,
 				E5890F9B298952A1007A875D /* OpenGL.framework */,
 				E5890F992989529B007A875D /* AppKit.framework */,
 				E5890F9729895294007A875D /* SDL2.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E5BF9E892B5EEE04007FC72B /* nanovg-metal */ = {
+			isa = PBXGroup;
+			children = (
+				E5BF9E8A2B5EEE04007FC72B /* nanovg_mtl_shaders.metal */,
+				E5BF9E8B2B5EEE04007FC72B /* nanovg_mtl.m */,
+				E5BF9E8C2B5EEE04007FC72B /* mnvg_bitcode */,
+				E5BF9E912B5EEE04007FC72B /* nanovg_mtl.h */,
+			);
+			path = "nanovg-metal";
+			sourceTree = "<group>";
+		};
+		E5BF9E8C2B5EEE04007FC72B /* mnvg_bitcode */ = {
+			isa = PBXGroup;
+			children = (
+				E5BF9E8D2B5EEE04007FC72B /* ios.h */,
+				E5BF9E8E2B5EEE04007FC72B /* tvos.h */,
+				E5BF9E8F2B5EEE04007FC72B /* macos.h */,
+				E5BF9E902B5EEE04007FC72B /* simulator.h */,
+			);
+			path = mnvg_bitcode;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2084,6 +2144,7 @@
 				E517F059299713DB0036B206 /* CBaseObject.cpp in Sources */,
 				948CBF152B335A1400147E80 /* BaseAssetStorage.cpp in Sources */,
 				E517F05A299713DB0036B206 /* CDirectObject.cpp in Sources */,
+				E5BF9E9B2B5EFED6007FC72B /* MetalRenderer.cpp in Sources */,
 				E517F05B299713DB0036B206 /* CTagBase.cpp in Sources */,
 				E517F05C299713DB0036B206 /* CBSPPart.cpp in Sources */,
 				E517F05D299713DB0036B206 /* CBSPWorld.cpp in Sources */,
@@ -2096,6 +2157,7 @@
 				E517F065299713DB0036B206 /* System.cpp in Sources */,
 				E517F066299713DB0036B206 /* KeyFuncs.cpp in Sources */,
 				948128B12B53A1C7002A3459 /* RenderManager.cpp in Sources */,
+				E5BF9EA22B5F05E8007FC72B /* metalhelper.m in Sources */,
 				E517F067299713DB0036B206 /* CAbstractActor.cpp in Sources */,
 				E517F068299713DB0036B206 /* CAbstractMissile.cpp in Sources */,
 				E517F069299713DB0036B206 /* CAbstractMovers.cpp in Sources */,
@@ -2161,8 +2223,11 @@
 				E517F09F299713DB0036B206 /* CTextActor.cpp in Sources */,
 				E517F0A0299713DB0036B206 /* CTriPyramidActor.cpp in Sources */,
 				E517F0A1299713DB0036B206 /* CUfo.cpp in Sources */,
+				E5BF9EA52B5F0DC3007FC72B /* MetalRendererImpl.mm in Sources */,
 				E517F0A2299713DB0036B206 /* CWalkerActor.cpp in Sources */,
 				E517F0A3299713DB0036B206 /* CWallActor.cpp in Sources */,
+				E540D0092B60396B00BD402C /* avara.metal in Sources */,
+				E5BF9E932B5EEE16007FC72B /* nanovg_mtl.m in Sources */,
 				E517F0A4299713DB0036B206 /* CWallDoor.cpp in Sources */,
 				E517F0A5299713DB0036B206 /* CWallSolid.cpp in Sources */,
 				9465BFD82B30EF680050681C /* PackageManifest.cpp in Sources */,
@@ -2195,6 +2260,7 @@
 				E517F0BE299713DB0036B206 /* ARGBColor.cpp in Sources */,
 				E517F0C0299713DB0036B206 /* Beeper.cpp in Sources */,
 				E517F0C1299713DB0036B206 /* CRC.cpp in Sources */,
+				E5BF9E9F2B5F01F6007FC72B /* MetalVertices.cpp in Sources */,
 				E517F0C2299713DB0036B206 /* CStringDictionary.cpp in Sources */,
 				E517F0C3299713DB0036B206 /* Debug.cpp in Sources */,
 				E517F0C4299713DB0036B206 /* FastMat.cpp in Sources */,
@@ -2213,8 +2279,6 @@
 				E517F0D1299713DB0036B206 /* common.cpp in Sources */,
 				E517F0D2299713DB0036B206 /* desccombobox.cpp in Sources */,
 				E247DE252A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp in Sources */,
-				E517F0D3299713DB0036B206 /* glcanvas.cpp in Sources */,
-				E517F0D4299713DB0036B206 /* glutil.cpp in Sources */,
 				E517F0D5299713DB0036B206 /* label.cpp in Sources */,
 				E517F0D6299713DB0036B206 /* layout.cpp in Sources */,
 				E517F0D7299713DB0036B206 /* messagedialog.cpp in Sources */,
@@ -2254,6 +2318,7 @@
 				E5890D0A29895118007A875D /* ColorManager.cpp in Sources */,
 				948CBF142B335A1400147E80 /* BaseAssetStorage.cpp in Sources */,
 				E5890CDD29895118007A875D /* CLogicAnd.cpp in Sources */,
+				E5BF9E9A2B5EFED6007FC72B /* MetalRenderer.cpp in Sources */,
 				E5890CFC29895118007A875D /* CScaledBSP.cpp in Sources */,
 				E5890CD429895118007A875D /* CSmart.cpp in Sources */,
 				E5890EF229895124007A875D /* text.cpp in Sources */,
@@ -2266,6 +2331,7 @@
 				E5890CAC29895118007A875D /* CHandlePipe.cpp in Sources */,
 				E5890CC729895118007A875D /* LinkLoose.cpp in Sources */,
 				948128B02B53A1C7002A3459 /* RenderManager.cpp in Sources */,
+				E5BF9EA12B5F05E8007FC72B /* metalhelper.m in Sources */,
 				E5890F0329895124007A875D /* textbox.cpp in Sources */,
 				E5253ED92996DD2200F8C1E8 /* PascalStrings.cpp in Sources */,
 				E5890CE129895118007A875D /* CAbstractMovers.cpp in Sources */,
@@ -2274,7 +2340,6 @@
 				E5890CF629895118007A875D /* CGroundColorAdjuster.cpp in Sources */,
 				E5890CEA29895118007A875D /* CDepot.cpp in Sources */,
 				E5890EFF29895124007A875D /* theme.cpp in Sources */,
-				E5890F0229895124007A875D /* glutil.cpp in Sources */,
 				E5890F0529895124007A875D /* slider.cpp in Sources */,
 				E5890CEC29895118007A875D /* CTeleporter.cpp in Sources */,
 				E5890CD129895118007A875D /* CHologramActor.cpp in Sources */,
@@ -2332,7 +2397,10 @@
 				E5890F0729895124007A875D /* desccombobox.cpp in Sources */,
 				E5890CDF29895118007A875D /* CLogicDistributor.cpp in Sources */,
 				E5890CC029895118007A875D /* CGoal.cpp in Sources */,
+				E5BF9EA42B5F0DC3007FC72B /* MetalRendererImpl.mm in Sources */,
 				E5890CA929895118007A875D /* CHuffProcessor.cpp in Sources */,
+				E5BF9E922B5EEE16007FC72B /* nanovg_mtl.m in Sources */,
+				E540D0082B60396B00BD402C /* avara.metal in Sources */,
 				E5890EF729895124007A875D /* popup.cpp in Sources */,
 				9465BFD72B30EF680050681C /* PackageManifest.cpp in Sources */,
 				E5890CBA29895118007A875D /* CWeapon.cpp in Sources */,
@@ -2341,7 +2409,6 @@
 				944F2F702B323F1900856E53 /* LocalAssetRepository.cpp in Sources */,
 				E5890D0929895118007A875D /* CNetworkWindow.cpp in Sources */,
 				9465BFD22B30C2A00050681C /* AssetManager.cpp in Sources */,
-				E5890EFA29895124007A875D /* glcanvas.cpp in Sources */,
 				E5890CB029895118007A875D /* RamFiles.cpp in Sources */,
 				E5890CD929895118007A875D /* CRandomIncarnator.cpp in Sources */,
 				E5890CAF29895118007A875D /* CStringDictionary.cpp in Sources */,
@@ -2367,6 +2434,7 @@
 				E5890CAB29895118007A875D /* CAbstractHuffPipe.cpp in Sources */,
 				E5890CAD29895118007A875D /* FastMat.cpp in Sources */,
 				E5890EFC29895124007A875D /* tabwidget.cpp in Sources */,
+				E5BF9E9E2B5F01F6007FC72B /* MetalVertices.cpp in Sources */,
 				E5890CD829895118007A875D /* CWallDoor.cpp in Sources */,
 				E5890CBF29895118007A875D /* CAbstractActor.cpp in Sources */,
 				E5890CAA29895118007A875D /* CAbstractPipe.cpp in Sources */,
@@ -2584,7 +2652,13 @@
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
-				HEADER_SEARCH_PATHS = "vendor/**";
+				HEADER_SEARCH_PATHS = (
+					vendor,
+					vendor/nanogui,
+					vendor/glad,
+					vendor/nanovg,
+					vendor/pugixml,
+				);
 				INFOPLIST_FILE = platform/macos/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.action-games";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -2597,7 +2671,7 @@
 				MARKETING_VERSION = 1.0;
 				OTHER_CFLAGS = (
 					"$(inherited)",
-					"-DNANOGUI_GLAD",
+					"-DNANOGUI_METAL",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.avaraline.Avara;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2624,7 +2698,13 @@
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
-				HEADER_SEARCH_PATHS = "vendor/**";
+				HEADER_SEARCH_PATHS = (
+					vendor,
+					vendor/nanogui,
+					vendor/glad,
+					vendor/nanovg,
+					vendor/pugixml,
+				);
 				INFOPLIST_FILE = platform/macos/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.action-games";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -2637,7 +2717,7 @@
 				MARKETING_VERSION = 1.0;
 				OTHER_CFLAGS = (
 					"$(inherited)",
-					"-DNANOGUI_GLAD",
+					"-DNANOGUI_METAL",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.avaraline.Avara;
 				PRODUCT_NAME = "$(TARGET_NAME)";

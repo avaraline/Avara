@@ -1014,6 +1014,7 @@ void CAvaraGame::StopGame() {
 void CAvaraGame::Render() {
     //if (gameStatus == kPlayingStatus || gameStatus == kPauseStatus || gameStatus == kWinStatus || gameStatus == kLoseStatus) {
     ViewControl();
+    
     gRenderer->RenderFrame();
 }
 

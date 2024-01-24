@@ -98,6 +98,7 @@ public:
     virtual std::deque<MsgLine>& MessageLines() override;
     virtual void idle() override;
     virtual void drawContents() override;
+    void drawWidgets();
     virtual void RenderContents() override;
 
     virtual bool DoCommand(int theCommand) override;
@@ -107,6 +108,7 @@ public:
 
     virtual bool handleSDLEvent(SDL_Event &event) override;
     virtual void drawAll() override;
+    virtual void draw(NVGcontext *ctx) override;
     OSErr LoadLevel(std::string set, std::string levelTag, CPlayerManager *sendingPlayer) override;
     virtual void NotifyUser() override;
 

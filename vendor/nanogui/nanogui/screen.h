@@ -191,7 +191,11 @@ public:
 protected:
     SDL_Window *mSDLWindow;
     uint32_t mWindowID;
+#if defined(NANOGUI_METAL)
+    SDL_MetalView mMetalView;
+#else
     SDL_GLContext mGLContext;
+#endif
     NVGcontext *mNVGContext;
     std::map<Cursor, SDL_Cursor *> mCursors;
     //SDL_Cursor *mCursors[(int) Cursor::CursorCount];

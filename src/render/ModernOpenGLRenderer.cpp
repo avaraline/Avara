@@ -5,6 +5,7 @@
 #include "FastMat.h"
 #include "OpenGLVertices.h"
 #include "RenderManager.h"
+#include "Skybox.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -27,50 +28,6 @@
 
 #define FINAL_VERT "final_vert.glsl"
 #define FINAL_FRAG "final_frag.glsl"
-
-const float skyboxVertices[] = {
-    -5.0f,  5.0f, -5.0f,
-    -5.0f, -5.0f, -5.0f,
-     5.0f, -5.0f, -5.0f,
-     5.0f, -5.0f, -5.0f,
-     5.0f,  5.0f, -5.0f,
-    -5.0f,  5.0f, -5.0f,
-
-    -5.0f, -5.0f,  5.0f,
-    -5.0f, -5.0f, -5.0f,
-    -5.0f,  5.0f, -5.0f,
-    -5.0f,  5.0f, -5.0f,
-    -5.0f,  5.0f,  5.0f,
-    -5.0f, -5.0f,  5.0f,
-
-     5.0f, -5.0f, -5.0f,
-     5.0f, -5.0f,  5.0f,
-     5.0f,  5.0f,  5.0f,
-     5.0f,  5.0f,  5.0f,
-     5.0f,  5.0f, -5.0f,
-     5.0f, -5.0f, -5.0f,
-
-    -5.0f, -5.0f,  5.0f,
-    -5.0f,  5.0f,  5.0f,
-     5.0f,  5.0f,  5.0f,
-     5.0f,  5.0f,  5.0f,
-     5.0f, -5.0f,  5.0f,
-    -5.0f, -5.0f,  5.0f,
-
-    -5.0f,  5.0f, -5.0f,
-     5.0f,  5.0f, -5.0f,
-     5.0f,  5.0f,  5.0f,
-     5.0f,  5.0f,  5.0f,
-    -5.0f,  5.0f,  5.0f,
-    -5.0f,  5.0f, -5.0f,
-
-    -5.0f, -5.0f, -5.0f,
-    -5.0f, -5.0f,  5.0f,
-     5.0f, -5.0f, -5.0f,
-     5.0f, -5.0f, -5.0f,
-    -5.0f, -5.0f,  5.0f,
-     5.0f, -5.0f,  5.0f
-};
 
 const float screenQuadVertices[] = {
     // positions   // texCoords
@@ -399,16 +356,6 @@ void ModernOpenGLRenderer::RenderFrame()
     glDisable(GL_DEPTH_TEST);
     glBindTexture(GL_TEXTURE_2D, texture[1]);
     glDrawArrays(GL_TRIANGLES, 0, 6);
-
-    // RENDER NVG HUD //////////////////////////////////////////////////////////////////////////////
-    
-    if (manager->ui) {
-        if (gApplication ? gApplication->Get<bool>(kShowNewHUD) : true) {
-            manager->ui->RenderNewHUD(manager->nvg);
-        } else {
-            manager->ui->Render(manager->nvg);
-        }
-    }
 }
 
 void ModernOpenGLRenderer::AdjustAmbient(OpenGLShader &shader, float intensity)

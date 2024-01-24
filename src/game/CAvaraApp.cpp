@@ -74,7 +74,11 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     itsGame = std::make_unique<CAvaraGame>(Get<FrameTime>(kFrameTimeTag));
     gCurrentGame = itsGame.get();
 
+#if defined(NANOGUI_METAL)
+    gRenderer = new RenderManager(RenderMode::Metal, mSDLWindow, mNVGContext);
+#else
     gRenderer = new RenderManager(RenderMode::GL3, mSDLWindow, mNVGContext);
+#endif
     gRenderer->UpdateViewRect(mPixelRatio);
     gRenderer->SetFOV(Number(kFOV));
 
@@ -149,9 +153,15 @@ void CAvaraAppImpl::Done() {
 void CAvaraAppImpl::idle() {
     CheckSockets();
     TrackerUpdate();
+    itsGame->GameTick();
+    if(!itsGame->IsPlaying()) {
+        rosterWindow->UpdateRoster();
+    }
+    /*
     if (itsGame->GameTick()) {
         RenderContents();
     }
+    */
 }
 
 void CAvaraAppImpl::drawContents() {
@@ -168,10 +178,15 @@ void CAvaraAppImpl::drawContents() {
     itsGame->Render();
 }
 
+void CAvaraAppImpl::drawWidgets() {
+    if(itsGame->IsPlaying()) return;
+    CApplication::drawWidgets();
+}
+
 // display only the game screen, not the widgets
 void CAvaraAppImpl::RenderContents() {
     drawContents();
-    gRenderer->RefreshWindow();
+    //gRenderer->RefreshWindow();
 }
 
 void CAvaraAppImpl::WindowResized() {
@@ -201,9 +216,20 @@ bool CAvaraAppImpl::handleSDLEvent(SDL_Event &event) {
 
 void CAvaraAppImpl::drawAll() {
     if (!itsGame->IsPlaying()) {
-        rosterWindow->UpdateRoster();
+        
         CApplication::drawAll();
     }
+}
+
+void CAvaraAppImpl::draw(NVGcontext *ctx) {
+    if (gRenderer->ui) {
+        if (gApplication ? gApplication->Get<bool>(kShowNewHUD) : true) {
+            gRenderer->ui->RenderNewHUD(ctx);
+        } else {
+            gRenderer->ui->Render(ctx);
+        }
+    }
+    CApplication::draw(ctx);
 }
 
 void CAvaraAppImpl::GameStarted(std::string set, std::string level) {

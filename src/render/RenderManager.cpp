@@ -32,6 +32,9 @@ RenderManager::RenderManager(RenderMode mode, SDL_Window *window, std::optional<
         case RenderMode::GL3:
             renderer = std::make_unique<ModernOpenGLRenderer>(this);
             break;
+        case RenderMode::Metal:
+            renderer = std::make_unique<MetalRenderer>(this);
+            break;
         case RenderMode::Headless:
             renderer = std::make_unique<NullRenderer>(this);
             break;

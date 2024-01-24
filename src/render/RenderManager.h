@@ -6,6 +6,7 @@
 #include "CWorldShader.h"
 #include "CViewParameters.h"
 #include "ModernOpenGLRenderer.h"
+#include "MetalRenderer.h"
 #include "NullRenderer.h"
 #include "VertexData.h"
 
@@ -23,11 +24,13 @@
 #  endif
 #endif
 
-enum struct RenderMode { Headless, GL3 };
+enum struct RenderMode { Headless, GL3, Metal };
 
 class RenderManager final {
 public:
+    friend class CAvaraAppImpl;
     friend class ModernOpenGLRenderer;
+    friend class MetalRenderer;
     friend class NullRenderer;
 
     CViewParameters *viewParams;

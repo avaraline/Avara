@@ -34,4 +34,3 @@
 #include <nanogui/stackedwidget.h>
 #include <nanogui/tabheader.h>
 #include <nanogui/tabwidget.h>
-#include <nanogui/glcanvas.h>
