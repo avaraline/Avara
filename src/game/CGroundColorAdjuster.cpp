@@ -11,12 +11,12 @@
 
 #include "CWorldShader.h"
 
-CAbstractActor *CGroundColorAdjuster::EndScript() {
-    CWorldShader *theShader;
+#include "RenderManager.h"
 
+CAbstractActor *CGroundColorAdjuster::EndScript() {
     CAbstractActor::EndScript();
 
-    theShader = gCurrentGame->worldShader;
+    auto theShader = gRenderer->skyParams;
     theShader->groundColor = GetPixelColor();
 
     delete this;

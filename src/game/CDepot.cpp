@@ -21,6 +21,7 @@
 #include "CSmart.h"
 #include "CSmartPart.h"
 #include "CViewParameters.h"
+#include "RenderManager.h"
 
 void CDepot::IDepot(CAvaraGame *theGame) {
     itsGame = theGame;
@@ -91,7 +92,6 @@ void CDepot::CreateSlivers() {
 void CDepot::RunSliverActions() {
     short i;
     CSliverPart *aSliver, **prevNext;
-    CBSPWorld *theWorld = itsGame->itsWorld;
 
     for (i = 0; i < SLIVERSIZES; i++) {
         prevNext = &(activeSlivers[i]);
@@ -99,7 +99,7 @@ void CDepot::RunSliverActions() {
 
         while (aSliver) {
             if (aSliver->SliverAction()) {
-                theWorld->RemovePart(aSliver);
+                gRenderer->RemovePart(aSliver);
 
                 *prevNext = aSliver->nextSliver;
                 aSliver->nextSliver = freeSlivers[i];
@@ -122,7 +122,6 @@ void CDepot::FireSlivers(short n,
     short age,
     short sizeGroup,
     CBSPPart *fromObject) {
-    CBSPWorld *theWorld = itsGame->itsWorld;
     Vector loc;
 
     if (itsGame->simpleExplosions) {
@@ -130,9 +129,7 @@ void CDepot::FireSlivers(short n,
     }
 
     if (n > 2) {
-        CViewParameters *vp;
-
-        vp = itsGame->itsView;
+        auto vp = gRenderer->viewParams;
         VectorMatrixProduct(1, (Vector *)origin, (Vector *)loc, &vp->viewMatrix);
 
         if (loc[2] < FIX(-10) || loc[2] > vp->yonBound) {
@@ -158,7 +155,7 @@ void CDepot::FireSlivers(short n,
         activeSlivers[sizeGroup] = theSliver;
 
         theSliver->Activate(origin, direction, scale, speedFactor, spread, age, fromObject);
-        theWorld->AddPart(theSliver);
+        gRenderer->AddPart(theSliver);
     }
 }
 
@@ -274,12 +271,11 @@ void CDepot::ReloadParts() {
 void CDepot::LevelReset() {
     short i;
     CSliverPart *nextSliver, *aSliver;
-    CBSPWorld *theWorld = itsGame->itsWorld;
 
     for (i = 0; i < SLIVERSIZES; i++) {
         aSliver = activeSlivers[i];
         while (aSliver) {
-            theWorld->RemovePart(aSliver);
+            gRenderer->RemovePart(aSliver);
             nextSliver = aSliver->nextSliver;
             aSliver->nextSliver = freeSlivers[i];
             freeSlivers[i] = aSliver;
@@ -293,12 +289,10 @@ void CDepot::LevelReset() {
     if (bspInGame) {
         bspInGame = false;
 
-        theWorld->RemovePart(grenadeTop);
-
-        theWorld = itsGame->hudWorld;
-        theWorld->RemovePart(smartHairs);
-        theWorld->RemovePart(smartSight);
-        theWorld->RemovePart(grenadeSight);
+        gRenderer->RemovePart(grenadeTop);
+        gRenderer->RemoveHUDPart(smartHairs);
+        gRenderer->RemoveHUDPart(smartSight);
+        gRenderer->RemoveHUDPart(grenadeSight);
     }
 
     for (i = 0; i < MISSILEKINDS; i++) {
@@ -380,15 +374,10 @@ CWeapon *CDepot::AquireWeapon(short weaponKind) {
 
 void CDepot::FrameAction() {
     if (!bspInGame) {
-        CBSPWorld *theWorld;
-
-        theWorld = itsGame->hudWorld;
-        theWorld->AddPart(smartHairs);
-        theWorld->AddPart(smartSight);
-        theWorld->AddPart(grenadeSight);
-
-        theWorld = itsGame->itsWorld;
-        theWorld->AddPart(grenadeTop);
+        gRenderer->AddHUDPart(smartHairs);
+        gRenderer->AddHUDPart(smartSight);
+        gRenderer->AddHUDPart(grenadeSight);
+        gRenderer->AddPart(grenadeTop);
         bspInGame = true;
     }
     smartHairs->isTransparent = true;

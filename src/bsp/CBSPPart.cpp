@@ -7,12 +7,13 @@
     Modified: Monday, September 9, 1996, 00:15
 */
 
-#include "AssetManager.h"
 #include "CBSPPart.h"
 
+#include "AssetManager.h"
+#include "AvaraDefines.h"
 #include "CViewParameters.h"
 #include "Memory.h"
-#include "AvaraDefines.h"
+#include "RenderManager.h"
 
 #include <fstream>
 #include <iostream>
@@ -168,16 +169,15 @@ void CBSPPart::IBSPPart(short resId) {
 
     BuildBoundingVolumes();
     Reset();
-    AvaraGLUpdateData(this);
+
+    vData = gRenderer->NewVertexDataInstance();
+    if (vData) vData->Replace(*this);
 }
 
 void CBSPPart::PostRender() {}
 
 void CBSPPart::TransformLights() {
-    CViewParameters *vp;
-    //Matrix *invFull;
-
-    vp = currentView;
+    auto vp = gRenderer->viewParams;
     if (!ignoreDirectionalLights) {
         if (lightSeed != vp->lightSeed) {
             lightSeed = vp->lightSeed;
@@ -191,22 +191,13 @@ void CBSPPart::TransformLights() {
     localViewOrigin[2] = invFullTransform[3][2];
 }
 
-void CBSPPart::DrawPolygons(Shader shader) {
-    AvaraGLDrawPolygons(this, shader);
-}
-
 Boolean CBSPPart::InViewPyramid() {
-    CViewParameters *vp;
-    //short i;
-    //Vector *norms;
     Fixed radius;
     Fixed distance;
     Fixed x, y;
     Fixed z;
 
-    //return true;
-
-    vp = currentView;
+    auto vp = gRenderer->viewParams;
 
     if (hither >= yon)
         return false;
@@ -270,11 +261,11 @@ void CBSPPart::PrintMatrix(Matrix *m) {
 **  See if the part is in the viewing pyramid and do calculations
 **  in preparation to shading.
 */
-Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
+Boolean CBSPPart::PrepareForRender() {
+    auto vp = gRenderer->viewParams;
     Boolean inPyramid = vp->showTransparent || !isTransparent;
 
     if (inPyramid) {
-        currentView = vp;
 
         if (!usesPrivateHither)
             hither = vp->hitherBound;
@@ -308,23 +299,6 @@ Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
     }
 
     return inPyramid;
-}
-
-/*
-**  Normally you would create a CBSPWorld and attach the
-**  part to that world. However, if you only have a single
-**  CBSPPart, you can call Render and you don't need a
-**  CBSPWorld. Even then it is recommended that you use a
-**  CBSPWorld, since it really doesn't add any significant
-**  overhead.
-*/
-void CBSPPart::Render(CViewParameters *vp, Shader shader) {
-    vp->DoLighting();
-
-    if (PrepareForRender(vp)) {
-        DrawPolygons(shader);
-        PostRender();
-    }
 }
 
 /*
@@ -425,21 +399,27 @@ Matrix *CBSPPart::GetInverseTransform() {
 }
 
 void CBSPPart::ReplaceColor(ARGBColor origColor, ARGBColor newColor) {
+    bool colorReplaced = false;
     for (int i = 0; i < colorCount; i++) {
         if (origColorTable[i] == origColor) {
             currColorTable[i] = newColor;
+            colorReplaced = true;
         }
     }
     CheckForAlpha();
-    AvaraGLUpdateData(this);
+    if (colorReplaced && vData) vData->Replace(*this);
 }
 
 void CBSPPart::ReplaceAllColors(ARGBColor newColor) {
+    bool colorReplaced = false;
     for (int i = 0; i < colorCount; i++) {
+        if (currColorTable[i] != newColor) {
+            colorReplaced = true;
+        }
         currColorTable[i] = newColor;
     }
     hasAlpha = (newColor.GetA() != 0xff);
-    AvaraGLUpdateData(this);
+    if (colorReplaced && vData) vData->Replace(*this);
 }
 
 void CBSPPart::BuildBoundingVolumes() {
@@ -460,16 +440,7 @@ void CBSPPart::BuildBoundingVolumes() {
         tolerance = MINIMUM_TOLERANCE;
 }
 
-CBSPPart::~CBSPPart() {
-    if(polyCount < 1) {
-        return;
-    }
-    if (AvaraGLIsRendering()) {
-        glDataSize = 0;
-        glDeleteVertexArrays(1, &vertexArray);
-        glDeleteBuffers(1, &vertexBuffer);
-    }
-}
+CBSPPart::~CBSPPart() {}
 
 void CBSPPart::CheckForAlpha() {
     hasAlpha = false;
@@ -481,7 +452,7 @@ void CBSPPart::CheckForAlpha() {
     }
 }
 
-bool CBSPPart::HasAlpha() {
+bool CBSPPart::HasAlpha() const {
     return hasAlpha;
 }
 

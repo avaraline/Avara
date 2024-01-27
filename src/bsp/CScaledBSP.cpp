@@ -10,7 +10,6 @@
 #include "CScaledBSP.h"
 
 #include "Memory.h"
-#include "AvaraGL.h"
 
 CScaledBSP::CScaledBSP(Fixed scale, short resId, CAbstractActor *anActor, short aPartCode) {
     isMorphable = false;

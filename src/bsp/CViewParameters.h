@@ -13,7 +13,17 @@
 #include "CBSPPart.h"
 #include "CDirectObject.h"
 
+#define DEFAULT_LIGHT_COLOR 0xffffffff
+
 enum { kLightOff, kLightViewCoordinates, kLightGlobalCoordinates };
+
+struct LightSettings {
+public:
+    Fixed intensity = FIX(0);
+    Fixed angle1 = FIX(0);
+    Fixed angle2 = FIX(0);
+    ARGBColor color = DEFAULT_LIGHT_COLOR;
+};
 
 class CBSPPart;
 
@@ -49,6 +59,7 @@ public:
 
     Fixed ambientLight = 0; //	Intensity of ambient (nondirectional) light
     ARGBColor ambientLightColor = 0xffffffff; // Color of ambient (nondirectional) light.
+    LightSettings dirLightSettings[MAXLIGHTS] = {};
 
     Fixed yonBound = 0;
     Fixed hitherBound = 0;
@@ -65,8 +76,7 @@ public:
     virtual void CalculateViewPyramidNormals();
     virtual ~CViewParameters() {}
 
-    virtual void SetLightValues(short n, Fixed dx, Fixed dy, Fixed dz, short mode);
-    virtual void SetLight(short n, Fixed angle1, Fixed angle2, Fixed intensity, short mode);
+    virtual void SetLight(short n, Fixed angle1, Fixed angle2, Fixed intensity, ARGBColor color, short mode);
     virtual void DoLighting();
 
     virtual void SetViewRect(short width, short height, short centerX, short centerY);
@@ -80,4 +90,6 @@ public:
 
     virtual void SetMatrix(Matrix *aViewMatrix);
     virtual Matrix *GetInverseMatrix();
+private:
+    virtual void SetLightValues(short n, Fixed dx, Fixed dy, Fixed dz, short mode);
 };

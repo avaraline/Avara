@@ -20,6 +20,7 @@
 #include "CViewParameters.h"
 #include "KeyFuncs.h"
 #include "Preferences.h"
+#include "RenderManager.h"
 
 #define SCOUTPLATFORM FIX3(1500)
 #define MAXHEADHEIGHT FIX3(1750)
@@ -772,7 +773,7 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
         hullConfig = **AssetManager::GetHull(hullRes);
 
         hullRes = hullConfig.hullBSP;
-        itsGame->itsWorld->RemovePart(viewPortPart);
+        gRenderer->RemovePart(viewPortPart);
         delete viewPortPart;
         LoadPart(0, hullRes);
 
@@ -795,7 +796,7 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
 
         proximityRadius = viewPortPart->enclosureRadius << 2;
 
-        itsGame->itsWorld->AddPart(viewPortPart);
+        gRenderer->AddPart(viewPortPart);
 
         viewPortHeight = hullConfig.rideHeight;
 
