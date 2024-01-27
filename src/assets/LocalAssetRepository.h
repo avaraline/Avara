@@ -3,6 +3,8 @@
 #include "AssetRepository.h"
 #include "AssetStorage.h"
 
+#include <string>
+
 class LocalAssetRepository final: public AssetRepository, public AssetStorage {
 public:
     static std::shared_ptr<LocalAssetRepository> GetInstance();
@@ -27,8 +29,9 @@ public:
     void Refresh();
 private:
     bool populatedList = false;
+    std::string basePath;
     std::shared_ptr<std::vector<std::string>> packageList = std::make_shared<std::vector<std::string>>();
 
-    LocalAssetRepository() {};
+    LocalAssetRepository();
     void BuildPackageList();
 };

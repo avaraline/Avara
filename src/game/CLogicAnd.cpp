@@ -55,7 +55,7 @@ void CLogicAnd::FrameAction() {
                     Trigger();
 
                     if (!restart) {
-                        Dispose();
+                        delete this;
                         return;
                     }
                 }

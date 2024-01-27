@@ -7,7 +7,7 @@ layout(location = 2) in vec3 vertexNormal;
 uniform mat4 view;
 uniform mat4 proj;
 uniform mat4 modelview;
-uniform mat3 normal_transform;
+uniform mat3 normalTransform;
 
 out vec4 fragmentColor;
 out vec3 fragmentNormal;
@@ -16,5 +16,5 @@ void main() {
     vec4 pos = vec4(vertexPosition_modelspace, 1.0);
     gl_Position = proj * (modelview * pos);
     fragmentColor = vertexColor;
-    fragmentNormal = vertexNormal * normal_transform;
+    fragmentNormal = vertexNormal * normalTransform;
 }

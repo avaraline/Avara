@@ -31,7 +31,7 @@ public:
 
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
-    virtual void Dispose();
+    virtual ~CGuardActor();
 
     virtual void PlaceParts();
     virtual CSmartPart *FindClosestTarget();

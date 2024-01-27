@@ -41,7 +41,7 @@ public:
     virtual void ResumeLevel();
     virtual void PauseLevel();
     virtual void FrameAction();
-    virtual void Dispose();
+    virtual ~CSoundActor();
 
     virtual Boolean ShouldPlay();
 };

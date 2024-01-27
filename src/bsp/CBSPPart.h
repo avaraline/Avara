@@ -12,16 +12,13 @@
 #include "CDirectObject.h"
 #include "ColorManager.h"
 #include "FastMat.h"
-#include "Types.h"
+#include "VertexData.h"
 
 #include <memory>
 
 #include <SDL2/SDL.h>
 #include <glad/glad.h>
 #include <glm/glm.hpp>
-
-enum class Shader;
-#include "AvaraGL.h"
 
 #define MAXLIGHTS 4
 
@@ -103,7 +100,7 @@ namespace CBSPUserFlags {
     NegateTransformRow(part, 0); \
     NegateTransformRow(part, 1);
 
-class CBSPPart : public CDirectObject {
+class CBSPPart {
 public:
     /*
     Handle				itsBSPResource;
@@ -116,12 +113,6 @@ public:
     FixedPoint minBounds = {0, 0, 0, 0}; //  Bounding box minimums for x, y, z
     FixedPoint maxBounds = {0, 0, 0, 0}; //  Bounding box maximums for x, y, z
     enum { frontVisible = 1, backVisible, bothVisible };
-
-    CViewParameters *currentView = 0;
-
-    std::unique_ptr<GLData[]> glData = 0;
-    GLuint vertexArray, vertexBuffer = 0;
-    GLsizeiptr glDataSize = 0;
 
     // Handle				colorReplacements;	//	Table of colors that replace defaults.
 
@@ -157,11 +148,11 @@ public:
     uint32_t pointCount = 0;
     uint32_t polyCount = 0;
     int totalPoints = 0;
-    int openGLPoints = 0;
     std::unique_ptr<ARGBColor[]> origColorTable;
     std::unique_ptr<ARGBColor[]> currColorTable;
     std::unique_ptr<Vector[]> pointTable;
     std::unique_ptr<PolyRecord[]> polyTable;
+    std::unique_ptr<VertexData> vData;
 
     //	Lighting vectors in object space
     long lightSeed = 0; //	Seed value to detect lights change
@@ -179,19 +170,17 @@ public:
     Boolean ignoreDirectionalLights = 0;
     short userFlags = 0; //	Can be used for various flags by user.
 
-    virtual void IBSPPart(short resId);
+    static CBSPPart *Create(short resId);
     virtual void BuildBoundingVolumes();
-    virtual void Dispose();
+    virtual ~CBSPPart();
 
     virtual void ReplaceColor(ARGBColor origColor, ARGBColor newColor);
     virtual void ReplaceAllColors(ARGBColor newColor);
 
-    virtual Boolean PrepareForRender(CViewParameters *vp);
-    virtual void DrawPolygons(Shader shader);
+    virtual Boolean PrepareForRender();
 
     virtual void PreRender();
     void PostRender();
-    virtual void Render(CViewParameters *vp, Shader shader);
     virtual Boolean InViewPyramid();
     virtual void TransformLights();
 
@@ -214,7 +203,7 @@ public:
     virtual void PrependMatrix(Matrix *m); //	itsTransform = m * itsTransform
     virtual Matrix *GetInverseTransform();
 
-    virtual bool HasAlpha();
+    virtual bool HasAlpha() const;
     virtual void SetScale(Fixed x, Fixed y, Fixed z);
     virtual void ResetScale();
     Vector scale = {FIX1, FIX1, FIX1, FIX1};
@@ -229,4 +218,6 @@ public:
 protected:
     bool hasAlpha = false;
     virtual void CheckForAlpha();
+    CBSPPart() {}
+    virtual void IBSPPart(short resId);
 };

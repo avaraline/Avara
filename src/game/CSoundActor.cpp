@@ -164,13 +164,11 @@ void CSoundActor::FrameAction() {
     }
 }
 
-void CSoundActor::Dispose() {
+CSoundActor::~CSoundActor() {
     if (controlLink) {
         gHub->ReleaseLink(controlLink);
         controlLink = NULL;
     }
-
-    CPlacedActors::Dispose();
 }
 
 Boolean CSoundActor::ShouldPlay() {

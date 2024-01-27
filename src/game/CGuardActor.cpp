@@ -70,12 +70,10 @@ CAbstractActor *CGuardActor::EndScript() {
     return this;
 }
 
-void CGuardActor::Dispose() {
+CGuardActor::~CGuardActor() {
     itsGame->RemoveReceiver(&fireActivator);
     itsGame->RemoveReceiver(&trackingActivator);
     itsGame->RemoveReceiver(&trackingDeactivator);
-
-    CGlowActors::Dispose();
 }
 
 void CGuardActor::PlaceParts() {

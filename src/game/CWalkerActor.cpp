@@ -20,6 +20,7 @@
 #include "CViewParameters.h"
 #include "KeyFuncs.h"
 #include "Preferences.h"
+#include "RenderManager.h"
 
 #define SCOUTPLATFORM FIX3(1500)
 #define MAXHEADHEIGHT FIX3(1750)
@@ -43,8 +44,7 @@ void CWalkerActor::LoadParts() {
     viewPortPart = partList[0];
 
 #ifdef MARKERCUBE
-    markerCube = new CBSPPart;
-    markerCube->IBSPPart(213);
+    markerCube = CBSPPart::Create(213);
     itsGame->itsWorld->AddPart(markerCube);
 #endif
 
@@ -99,12 +99,11 @@ void CWalkerActor::StartSystems() {
     viewPortHeight = FIX3(350);
 }
 
-void CWalkerActor::Dispose() {
+CWalkerActor::~CWalkerActor() {
 #ifdef MARKERCUBE
     itsGame->itsWorld->RemovePart(markerCube);
-    markerCube->Dispose();
+    delete markerCube;
 #endif
-    CAbstractPlayer::Dispose();
 }
 
 void CWalkerActor::PlaceParts() {
@@ -774,8 +773,8 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
         hullConfig = **AssetManager::GetHull(hullRes);
 
         hullRes = hullConfig.hullBSP;
-        itsGame->itsWorld->RemovePart(viewPortPart);
-        viewPortPart->Dispose();
+        gRenderer->RemovePart(viewPortPart);
+        delete viewPortPart;
         LoadPart(0, hullRes);
 
         viewPortPart = partList[0];
@@ -797,7 +796,7 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
 
         proximityRadius = viewPortPart->enclosureRadius << 2;
 
-        itsGame->itsWorld->AddPart(viewPortPart);
+        gRenderer->AddPart(viewPortPart);
 
         viewPortHeight = hullConfig.rideHeight;
 

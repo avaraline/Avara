@@ -18,7 +18,6 @@
 */
 
 #include "AssetManager.h"
-#include "AvaraGL.h"
 #include "CAvaraGame.h"
 #include "CAvaraApp.h"
 //#include "CGameWind.h"
@@ -42,17 +41,14 @@
 #include "KeyFuncs.h"
 #include "Parser.h"
 //#include "LowMem.h"
-#include "CWorldShader.h"
 //#include "Power.h"
 #include "CScoreKeeper.h"
 //#include "CRosterWindow.h"
 //#include "Sound.h"
-#include "CHUD.h"
 #include "Preferences.h"
 #include "ARGBColor.h"
 #include "Debug.h"
-
-#define kHighShadeCount 12
+#include "RenderManager.h"
 
 void CAvaraGame::InitMixer(Boolean silentFlag) {
     CSoundMixer *aMixer;
@@ -115,10 +111,6 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     // CalcGameRect();
 
-    itsWorld = CreateCBSPWorld(100);
-
-    hudWorld = CreateCBSPWorld(16);
-
     soundHub = CreateSoundHub();
     gHub = soundHub;
 
@@ -130,22 +122,9 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     itsDepot = new CDepot;
     itsDepot->IDepot(this);
 
-    itsView = new CViewParameters;
-    itsView->IViewParameters();
-    itsView->hitherBound = FIX3(600);
-    itsView->yonBound = LONGYON;
-    itsView->horizonBound = FIX(16000); //	16 km
-
     // mapRes = GetResource(FUNMAPTYPE, FUNMAPID);
 
     // IGameTimer(frameTime/TIMING_GRAIN);
-
-    worldShader = new CWorldShader;
-    worldShader->IWorldShader(this);
-    worldShader->skyShadeCount = kHighShadeCount;
-    worldShader->Apply();
-
-    hud = new CHUD(this);
 
     allowBackgroundProcessing = false;
 
@@ -176,16 +155,6 @@ CSoundHub* CAvaraGame::CreateSoundHub() {
     return soundHub;
 }
 
-CBSPWorld* CAvaraGame::CreateCBSPWorld(short initialObjectSpace) {
-    CBSPWorldImpl *w = new CBSPWorldImpl;
-    w->IBSPWorld(initialObjectSpace);
-    return w;
-}
-
-void CAvaraGame::LoadImages(NVGcontext *ctx) {
-    hud->LoadImages(ctx);
-}
-
 void CAvaraGame::Dispose() {
     CAbstractActor *nextActor;
 
@@ -197,28 +166,20 @@ void CAvaraGame::Dispose() {
 
     while (actorList) {
         nextActor = actorList->nextActor;
-        actorList->Dispose();
+        delete actorList;
         actorList = nextActor;
     }
 
     while (freshPlayerList) {
         nextActor = freshPlayerList->nextActor;
-        freshPlayerList->Dispose();
+        delete freshPlayerList;
         freshPlayerList = (CAbstractPlayer *)nextActor;
     }
 
-    if (itsWorld)
-        itsWorld->Dispose();
-    if (hudWorld)
-        hudWorld->Dispose();
-    if (itsView)
-        itsView->Dispose();
     if (soundHub)
         soundHub->Dispose();
 //    if (itsNet)
 //        itsNet->Dispose();
-    if (worldShader)
-        worldShader->Dispose();
     // ReleaseResource(mapRes);
 
     // DisposePolyWorld(&itsPolyWorld);
@@ -302,7 +263,7 @@ void CAvaraGame::AddActor(CAbstractActor *theActor) {
     actorList = theActor;
 
     for (i = 0; i < theActor->partCount; i++) {
-        itsWorld->AddPart(theActor->partList[i]);
+        gRenderer->AddPart(theActor->partList[i]);
     }
 
     GetIdent(theActor);
@@ -328,7 +289,7 @@ void CAvaraGame::RemoveActor(CAbstractActor *theActor) {
                 anActor->nextActor = NULL;
 
                 for (i = 0; i < anActor->partCount; i++) {
-                    itsWorld->RemovePart(anActor->partList[i]);
+                    gRenderer->RemovePart(anActor->partList[i]);
                 }
                 anActor = NULL;
             } else {
@@ -539,11 +500,6 @@ void CAvaraGame::LevelReset(Boolean clearReset) {
     loadedTimeLimit = 600;
     timeInSeconds = 0;
 
-    worldShader->Reset();
-    if (clearReset)
-        worldShader->skyShadeCount = kHighShadeCount;
-    worldShader->Apply();
-
     // freeBytes = MaxMem(&growBytes);
 
     // SetPort(itsWindow);
@@ -572,12 +528,11 @@ void CAvaraGame::LevelReset(Boolean clearReset) {
 
     while (freshPlayerList) {
         nextActor = freshPlayerList->nextActor;
-        freshPlayerList->Dispose();
+        delete freshPlayerList;
         freshPlayerList = (CAbstractPlayer *)nextActor;
     }
 
-    hudWorld->DisposeParts();
-    itsWorld->DisposeParts();
+    gRenderer->LevelReset();
 
     curIdent = 0;
     for (i = 0; i < IDENTTABLESIZE; i++) {
@@ -603,16 +558,14 @@ void CAvaraGame::EndScript() {
     short i;
     ARGBColor color = 0;
     Fixed intensity, angle1, angle2;
-    Fixed x, y, z;
+    auto vp = gRenderer->viewParams;
 
     gameStatus = kReadyStatus;
     // SetPolyWorld(&itsPolyWorld);
-    worldShader->Apply();
 
-    itsView->ambientLight = ReadFixedVar(iAmbient);
-    itsView->ambientLightColor = ARGBColor::Parse(ReadStringVar(iAmbientColor))
+    vp->ambientLight = ReadFixedVar(iAmbient);
+    vp->ambientLightColor = ARGBColor::Parse(ReadStringVar(iAmbientColor))
         .value_or(DEFAULT_LIGHT_COLOR);
-    AvaraGLSetAmbient(ToFloat(itsView->ambientLight), itsView->ambientLightColor, Shader::World);
 
     for (i = 0; i < 4; i++) {
         intensity = ReadFixedVar(iLightsTable + 4 * i);
@@ -620,25 +573,19 @@ void CAvaraGame::EndScript() {
         if (intensity >= 2048) {
             angle1 = ReadFixedVar(iLightsTable + 1 + 4 * i);
             angle2 = ReadFixedVar(iLightsTable + 2 + 4 * i);
-
-            x = FMul(FDegCos(angle1), intensity);
-            y = FMul(FDegSin(-angle1), intensity);
-            z = FMul(FDegCos(angle2), x);
-            x = FMul(FDegSin(-angle2), x);
             color = ARGBColor::Parse(ReadStringVar(iLightsTable + 3 + 4 * i))
                 .value_or(DEFAULT_LIGHT_COLOR);
 
-            itsView->SetLightValues(i, x, y, z, kLightGlobalCoordinates);
+            vp->SetLight(i, angle1, angle2, intensity, color, kLightGlobalCoordinates);
             // SDL_Log("Light from light table - idx: %d i: %f a: %f b: %f c: %x",
             //        i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), color);
 
             //The b angle is the compass reading and the a angle is the angle from the horizon.
-            AvaraGLSetLight(i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), color);
         } else {
-            itsView->SetLightValues(i, 0, 0, 0, kLightOff);
-            AvaraGLSetLight(i, 0, 0, 0, DEFAULT_LIGHT_COLOR);
+            vp->SetLight(i, 0, 0, 0, DEFAULT_LIGHT_COLOR, kLightOff);
         }
     }
+    gRenderer->UpdateLights();
 
     color = *ARGBColor::Parse(ReadStringVar(iMissileArmedColor));
     ColorManager::setMissileArmedColor(color);
@@ -1064,28 +1011,10 @@ void CAvaraGame::StopGame() {
     // SDL_ShowCursor(SDL_ENABLE);
 }
 
-void CAvaraGame::UpdateViewRect(int width, int height, float pixelRatio) {
-    itsView->SetViewRect(width, height, width / 2, height / 2);
-    itsView->viewPixelRatio = pixelRatio;
-    itsView->CalculateViewPyramidCorners();
-}
-
-void CAvaraGame::Render(NVGcontext *ctx) {
-    worldShader->ShadeWorld(itsView);
-
+void CAvaraGame::Render() {
     //if (gameStatus == kPlayingStatus || gameStatus == kPauseStatus || gameStatus == kWinStatus || gameStatus == kLoseStatus) {
     ViewControl();
-    itsWorld->Render(itsView, Shader::World);
-    AvaraGLSetDepthTest(false);
-    hudWorld->Render(itsView, Shader::HUD);
-
-    if (showNewHUD) {
-        hud->RenderNewHUD(itsView, ctx);
-    } else {
-        hud->Render(itsView, ctx);
-    }
-
-    AvaraGLSetDepthTest(true);
+    gRenderer->RenderFrame();
 }
 
 CPlayerManager *CAvaraGame::GetPlayerManager(CAbstractPlayer *thePlayer) {

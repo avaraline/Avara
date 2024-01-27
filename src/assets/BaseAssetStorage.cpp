@@ -4,6 +4,13 @@
 #include <SDL2/SDL.h>
 #include <sstream>
 
+BaseAssetStorage::BaseAssetStorage()
+{
+    char *sdlPathTmp = SDL_GetBasePath();
+    basePath = std::string(sdlPathTmp);
+    SDL_free(sdlPathTmp);
+}
+
 std::shared_ptr<BaseAssetStorage> BaseAssetStorage::GetInstance() {
     static auto instance = std::make_shared<BaseAssetStorage>(BaseAssetStorage());
     return instance;
@@ -12,6 +19,6 @@ std::shared_ptr<BaseAssetStorage> BaseAssetStorage::GetInstance() {
 std::string BaseAssetStorage::GetRootPath()
 {
     std::stringstream path;
-    path << SDL_GetBasePath() << "rsrc";
+    path << basePath << "rsrc";
     return path.str();
 }

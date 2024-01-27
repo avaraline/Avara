@@ -15,9 +15,9 @@
 #include "CGrenade.h"
 #include "CSmart.h"
 #include "CScout.h"
-#include "AvaraGL.h"
 #include "Messages.h"
 #include "Preferences.h"
+#include "RenderManager.h"
 #include "System.h"
 #include "CUDPConnection.h"
 
@@ -198,6 +198,8 @@ public:
         app.itsGame = std::make_unique<TestGame>(frameTime);
         game = (TestGame*)app.itsGame.get();
         gCurrentGame = game;
+        gRenderer = new RenderManager(RenderMode::Headless, nullptr);
+
         InitParser();
         game->IAvaraGame(&app);
         game->EndScript();
@@ -1174,7 +1176,6 @@ TEST(QUEUES, Clean) {
 }
 
 int main(int argc, char **argv) {
-    AvaraGLToggleRendering(0);
     nanogui::init();
     InitMatrix();
     ::testing::InitGoogleTest(&argc, argv);

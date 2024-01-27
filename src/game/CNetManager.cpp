@@ -1251,7 +1251,7 @@ void CNetManager::AttachPlayers(CAbstractPlayer *playerActorList) {
     //	Throw away the rest.
     while (playerActorList) {
         nextPlayer = (CAbstractPlayer *)playerActorList->nextActor;
-        playerActorList->Dispose();
+        delete playerActorList;
         playerActorList = nextPlayer;
     }
 }

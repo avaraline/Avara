@@ -32,7 +32,7 @@ public:
     // Called when preference values change.
     virtual void PrefChanged(std::string name);
 
-    virtual void WindowResized(int width, int height) {}
+    virtual void WindowResized() {}
 
     // Screen overrides.
     virtual bool handleSDLEvent(SDL_Event &event);

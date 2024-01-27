@@ -16,5 +16,7 @@ public:
      */
     std::string GetRootPath();
 private:
-    BaseAssetStorage() {};
+    std::string basePath;
+    
+    BaseAssetStorage();
 };

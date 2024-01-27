@@ -12,7 +12,7 @@
 
 class CAbstractPlayer;
 
-class CParasite : public CRealMovers {
+class CParasite final : public CRealMovers {
 public:
     Fixed maxPower;
     Fixed energyDrain;
@@ -40,7 +40,7 @@ public:
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
     virtual void ReleaseAttachment();
-    virtual void Dispose();
+    virtual ~CParasite();
     virtual void CourseCheck();
     virtual void FrameAction();
     virtual void ClampOn(CSmartPart *clampTo);
