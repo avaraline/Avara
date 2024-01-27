@@ -9,7 +9,15 @@
 #include <fstream>
 #include <sstream>
 
-std::shared_ptr<LocalAssetRepository> LocalAssetRepository::GetInstance() {
+LocalAssetRepository::LocalAssetRepository()
+{
+    char *sdlPathTmp = SDL_GetBasePath();
+    basePath = std::string(sdlPathTmp);
+    SDL_free(sdlPathTmp);
+}
+
+std::shared_ptr<LocalAssetRepository> LocalAssetRepository::GetInstance()
+{
     static auto instance = std::make_shared<LocalAssetRepository>(LocalAssetRepository());
     return instance;
 };
@@ -25,7 +33,7 @@ std::shared_ptr<std::vector<std::string>> LocalAssetRepository::GetPackageList()
 std::string LocalAssetRepository::GetRootPath()
 {
     std::stringstream path;
-    path << SDL_GetBasePath() << "levels";
+    path << basePath << "levels";
     return path.str();
 }
 
