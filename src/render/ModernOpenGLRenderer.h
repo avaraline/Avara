@@ -43,7 +43,7 @@ private:
     GLuint texture[2];
 
     void AdjustAmbient(OpenGLShader &shader, float intensity);
-    void Draw(OpenGLShader &shader, const CBSPPart &part);
+    void Draw(OpenGLShader &shader, const CBSPPart &part, bool useAlphaBuffer = false);
     void IgnoreDirectionalLights(OpenGLShader &shader, bool yn);
     std::unique_ptr<OpenGLShader> LoadShader(const std::string &vertFile, const std::string &fragFile);
     void MakeFramebuffer(short index, GLsizei width, GLsizei height);

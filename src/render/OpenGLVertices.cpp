@@ -2,17 +2,68 @@
 
 #include <glad/glad.h>
 
+#include <algorithm>
+#include <math.h>
+
+struct Tri {
+    GLData v1;
+    GLData v2;
+    GLData v3;
+    float d;
+};
+
+void GLVertexCollection::SortFromCamera(float pos[3])
+{
+    std::vector<Tri> newTris = {};
+    newTris.reserve(glData.size() / 3);
+
+    for (int i = 0; i < glData.size(); i += 3) {
+        // Calculate the distance for the midpoint of this triangle from the camera.
+        float mX = (glData[i].x + glData[i + 1].x + glData[i + 2].x) / 3.0f;
+        float mY = (glData[i].y + glData[i + 1].y + glData[i + 2].y) / 3.0f;
+        float mZ = (glData[i].z + glData[i + 1].z + glData[i + 2].z) / 3.0f;
+        float delta = sqrt(pow(mX - pos[0], 2) + pow(mY - pos[1], 2) + pow(mZ - pos[2], 2) * 1.0f);
+
+        // Copy data to triangle.
+        Tri t = Tri();
+        t.v1 = glData[i];
+        t.v2 = glData[i + 1];
+        t.v3 = glData[i + 2];
+        t.d = delta;
+        newTris.push_back(t);
+    }
+
+    std::sort(newTris.begin(), newTris.end(), [](const Tri &a, const Tri &b) {
+        return a.d > b.d;
+    });
+
+    glData.clear();
+    for (auto &t : newTris) {
+        glData.push_back(t.v1);
+        glData.push_back(t.v2);
+        glData.push_back(t.v3);
+    }
+}
+
 OpenGLVertices::OpenGLVertices()
 {
-    glGenBuffers(1, &vertexBuffer);
-    glGenVertexArrays(1, &vertexArray);
+    opaque = GLVertexCollection();
+    alpha = GLVertexCollection();
+    glGenBuffers(1, &opaque.vertexBuffer);
+    glGenVertexArrays(1, &opaque.vertexArray);
+    glGenBuffers(1, &alpha.vertexBuffer);
+    glGenVertexArrays(1, &alpha.vertexArray);
 }
 
 OpenGLVertices::~OpenGLVertices()
 {
-    if (glDataSize > 0) {
-        glDeleteBuffers(1, &vertexBuffer);
-        glDeleteVertexArrays(1, &vertexArray);
+    if (opaque.glDataSize > 0) {
+        glDeleteBuffers(1, &opaque.vertexBuffer);
+        glDeleteVertexArrays(1, &opaque.vertexArray);
+    }
+    if (alpha.glDataSize > 0) {
+        glDeleteBuffers(1, &alpha.vertexBuffer);
+        glDeleteVertexArrays(1, &alpha.vertexArray);
     }
 }
 
@@ -20,7 +71,6 @@ void OpenGLVertices::Append(const CBSPPart &part)
 {
     PolyRecord *poly;
     ARGBColor *color;
-    pointCount = 0;
     uint8_t vis;
     int tris, points;
 
@@ -28,6 +78,8 @@ void OpenGLVertices::Append(const CBSPPart &part)
     // for faces that should be visible on both sides, double
     // the faces, triangles, and points to be reversed for the
     // back side
+    int tmpOpaquePointCount = 0;
+    int tmpAlphaPointCount = 0;
     for (size_t i = 0; i < part.polyCount; i++)
     {
         poly = &part.polyTable[i];
@@ -46,14 +98,23 @@ void OpenGLVertices::Append(const CBSPPart &part)
                 break;
         }
         points = tris * 3;
-        pointCount += points;
+        if (color->HasAlpha()) {
+            alpha.pointCount += points;
+            tmpAlphaPointCount += points;
+        } else {
+            opaque.pointCount += points;
+            tmpOpaquePointCount += points;
+        }
     }
 
-    glDataSize = pointCount * sizeof(GLData);
-    glData.reserve(glData.size() + pointCount);
+    opaque.glDataSize = opaque.glDataSize + (tmpOpaquePointCount * sizeof(GLData));
+    opaque.glData.reserve(opaque.glData.size() + tmpOpaquePointCount);
+    alpha.glDataSize = alpha.glDataSize + (tmpAlphaPointCount * sizeof(GLData));
+    alpha.glData.reserve(alpha.glData.size() + tmpAlphaPointCount);
 
     // Count all the points we output so that we can make sure it matches what we just calculated.
-    int p = 0;
+    int pOpaque = 0;
+    int pAlpha = 0;
     for (int i = 0; i < part.polyCount; i++) {
         poly = &part.polyTable[i];
         color = &part.currColorTable[poly->colorIdx];
@@ -75,8 +136,13 @@ void OpenGLVertices::Append(const CBSPPart &part)
                 vertex.nx = poly->normal[0];
                 vertex.ny = poly->normal[1];
                 vertex.nz = poly->normal[2];
-                glData.push_back(std::move(vertex));
-                p++;
+                if (color->HasAlpha()) {
+                    alpha.glData.push_back(vertex);
+                    pAlpha++;
+                } else {
+                    opaque.glData.push_back(vertex);
+                    pOpaque++;
+                }
             }
         }
 
@@ -92,26 +158,43 @@ void OpenGLVertices::Append(const CBSPPart &part)
                 vertex.nx = -poly->normal[0];
                 vertex.ny = -poly->normal[1];
                 vertex.nz = -poly->normal[2];
-                glData.push_back(std::move(vertex));
-                p++;
+                if (color->HasAlpha()) {
+                    alpha.glData.push_back(vertex);
+                    pAlpha++;
+                } else {
+                    opaque.glData.push_back(vertex);
+                    pOpaque++;
+                }
             }
         }
     }
 
-    // Make sure we filled in the array correctly.
-    assert(p == pointCount);
+    // Make sure we filled in the arrays correctly.
+    assert(pOpaque == tmpOpaquePointCount);
+    assert(pAlpha == tmpAlphaPointCount);
 }
 
 void OpenGLVertices::Replace(const CBSPPart &part)
 {
-    if (glDataSize > 0) {
-        glDeleteBuffers(1, &vertexBuffer);
-        glDeleteVertexArrays(1, &vertexArray);
+    if (opaque.glDataSize > 0) {
+        glDeleteBuffers(1, &opaque.vertexBuffer);
+        glDeleteVertexArrays(1, &opaque.vertexArray);
     }
-    glDataSize = 0;
-    glData.clear();
+    opaque.glDataSize = 0;
+    opaque.glData.clear();
+    opaque.pointCount = 0;
 
-    glGenBuffers(1, &vertexBuffer);
-    glGenVertexArrays(1, &vertexArray);
+    if (alpha.glDataSize > 0) {
+        glDeleteBuffers(1, &alpha.vertexBuffer);
+        glDeleteVertexArrays(1, &alpha.vertexArray);
+    }
+    alpha.glDataSize = 0;
+    alpha.glData.clear();
+    alpha.pointCount = 0;
+
+    glGenBuffers(1, &opaque.vertexBuffer);
+    glGenVertexArrays(1, &opaque.vertexArray);
+    glGenBuffers(1, &alpha.vertexBuffer);
+    glGenVertexArrays(1, &alpha.vertexArray);
     Append(part);
 }

@@ -338,10 +338,22 @@ void ModernOpenGLRenderer::RenderFrame()
     worldShader->Use();
 
     manager->dynamicWorld->PrepareForRender();
+
+    // Draw opaque geometry.
     auto partList = manager->dynamicWorld->GetVisiblePartListPointer();
     auto partCount = manager->dynamicWorld->GetVisiblePartCount();
     for (uint16_t i = 0; i < partCount; i++) {
-        Draw(*worldShader, **partList);
+        Draw(*worldShader, **partList, false);
+        partList++;
+    }
+
+    // Draw translucent geometry in a separate pass.
+    partList = manager->dynamicWorld->GetVisiblePartListPointer();
+    partCount = manager->dynamicWorld->GetVisiblePartCount();
+    for (uint16_t i = 0; i < partCount; i++) {
+        if ((**partList).HasAlpha()) {
+            Draw(*worldShader, **partList, true);
+        }
         partList++;
     }
 
@@ -416,15 +428,27 @@ void ModernOpenGLRenderer::AdjustAmbient(OpenGLShader &shader, float intensity)
     shader.SetFloat("ambient", intensity);
 }
 
-void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part)
+void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, bool useAlphaBuffer)
 {
     OpenGLVertices *glData = dynamic_cast<OpenGLVertices*>(part.vData.get());
 
     if (glData == nullptr) return;
 
-    glBindVertexArray(glData->vertexArray);
-    glBindBuffer(GL_ARRAY_BUFFER, glData->vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, glData->glDataSize, glData->glData.data(), GL_STREAM_DRAW);
+    if (!useAlphaBuffer) {
+        glBindVertexArray(glData->opaque.vertexArray);
+        glBindBuffer(GL_ARRAY_BUFFER, glData->opaque.vertexBuffer);
+        glBufferData(GL_ARRAY_BUFFER, glData->opaque.glDataSize, glData->opaque.glData.data(), GL_STREAM_DRAW);
+    } else {
+        float transform[3] = {
+            ToFloat(part.invFullTransform[3][0]),
+            ToFloat(part.invFullTransform[3][1]),
+            ToFloat(part.invFullTransform[3][2])
+        };
+        glData->alpha.SortFromCamera(transform);
+        glBindVertexArray(glData->alpha.vertexArray);
+        glBindBuffer(GL_ARRAY_BUFFER, glData->alpha.vertexBuffer);
+        glBufferData(GL_ARRAY_BUFFER, glData->alpha.glDataSize, glData->alpha.glData.data(), GL_STREAM_DRAW);
+    }
     glCheckErrors();
 
     // Position!
@@ -460,7 +484,11 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part)
     shader.Use();
     glCheckErrors();
 
-    glDrawArrays(GL_TRIANGLES, 0, glData->pointCount);
+    if (!useAlphaBuffer) {
+        glDrawArrays(GL_TRIANGLES, 0, glData->opaque.pointCount);
+    } else {
+        glDrawArrays(GL_TRIANGLES, 0, glData->alpha.pointCount);
+    }
 
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
