@@ -29,7 +29,7 @@ public:
     std::vector<GLData> glData = {};
     GLsizeiptr glDataSize = 0;
 
-    void SortFromCamera(float pos[3]);
+    void SortFromCamera(float x, float y, float z);
 };
 
 class OpenGLVertices: public VertexData {

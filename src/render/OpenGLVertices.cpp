@@ -12,7 +12,7 @@ struct Tri {
     float d;
 };
 
-void GLVertexCollection::SortFromCamera(float pos[3])
+void GLVertexCollection::SortFromCamera(float x, float y, float z)
 {
     std::vector<Tri> newTris = {};
     newTris.reserve(glData.size() / 3);
@@ -22,7 +22,7 @@ void GLVertexCollection::SortFromCamera(float pos[3])
         float mX = (glData[i].x + glData[i + 1].x + glData[i + 2].x) / 3.0f;
         float mY = (glData[i].y + glData[i + 1].y + glData[i + 2].y) / 3.0f;
         float mZ = (glData[i].z + glData[i + 1].z + glData[i + 2].z) / 3.0f;
-        float delta = sqrt(pow(mX - pos[0], 2) + pow(mY - pos[1], 2) + pow(mZ - pos[2], 2) * 1.0f);
+        float delta = sqrt(pow(mX - x, 2) + pow(mY - y, 2) + pow(mZ - z, 2) * 1.0f);
 
         // Copy data to triangle.
         Tri t = Tri();

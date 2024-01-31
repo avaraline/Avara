@@ -439,12 +439,11 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, bool
         glBindBuffer(GL_ARRAY_BUFFER, glData->opaque.vertexBuffer);
         glBufferData(GL_ARRAY_BUFFER, glData->opaque.glDataSize, glData->opaque.glData.data(), GL_STREAM_DRAW);
     } else {
-        float transform[3] = {
+        glData->alpha.SortFromCamera(
             ToFloat(part.invFullTransform[3][0]),
             ToFloat(part.invFullTransform[3][1]),
             ToFloat(part.invFullTransform[3][2])
-        };
-        glData->alpha.SortFromCamera(transform);
+        );
         glBindVertexArray(glData->alpha.vertexArray);
         glBindBuffer(GL_ARRAY_BUFFER, glData->alpha.vertexBuffer);
         glBufferData(GL_ARRAY_BUFFER, glData->alpha.glDataSize, glData->alpha.glData.data(), GL_STREAM_DRAW);
