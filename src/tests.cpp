@@ -17,9 +17,9 @@
 #include "CScout.h"
 #include "Messages.h"
 #include "Preferences.h"
-#include "RenderManager.h"
 #include "System.h"
 #include "CUDPConnection.h"
+#include "NullRenderer.h"
 
 #include <iostream>
 using namespace std;
@@ -198,7 +198,7 @@ public:
         app.itsGame = std::make_unique<TestGame>(frameTime);
         game = (TestGame*)app.itsGame.get();
         gCurrentGame = game;
-        gRenderer = new RenderManager(RenderMode::Headless, nullptr);
+        gRenderer = new NullRenderer();
 
         InitParser();
         game->IAvaraGame(&app);

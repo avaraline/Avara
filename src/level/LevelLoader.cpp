@@ -9,6 +9,7 @@
 
 #include "LevelLoader.h"
 
+#include "AbstractRenderer.h"
 #include "AssetManager.h"
 #include "CAvaraGame.h"
 #include "CWallActor.h"
@@ -16,7 +17,6 @@
 #include "Memory.h"
 #include "Parser.h"
 #include "pugixml.hpp"
-#include "RenderManager.h"
 
 #include <SDL2/SDL.h>
 

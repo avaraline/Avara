@@ -11,6 +11,7 @@
 
 #include "CWalkerActor.h"
 
+#include "AbstractRenderer.h"
 #include "AssetManager.h"
 #include "AvaraDefines.h"
 #include "CBSPWorld.h"
@@ -20,7 +21,6 @@
 #include "CViewParameters.h"
 #include "KeyFuncs.h"
 #include "Preferences.h"
-#include "RenderManager.h"
 
 #define SCOUTPLATFORM FIX3(1500)
 #define MAXHEADHEIGHT FIX3(1750)

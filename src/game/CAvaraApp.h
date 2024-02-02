@@ -11,6 +11,7 @@
 
 #include "CApplication.h"
 //#include "PolyColor.h"
+#include "CHUD.h"
 #include "CLevelWindow.h"
 #include "CNetworkWindow.h"
 #include "CServerWindow.h"
@@ -71,6 +72,7 @@ private:
     std::unique_ptr<CAvaraGame> itsGame;
     CNetManager *gameNet;
     CommandManager *itsTui;
+    std::unique_ptr<CHUD> ui;
 
 public:
     CPlayerWindow *playerWindow;
@@ -98,6 +100,7 @@ public:
     virtual std::deque<MsgLine>& MessageLines() override;
     virtual void idle() override;
     virtual void drawContents() override;
+    void drawWidgets();
     virtual void RenderContents() override;
 
     virtual bool DoCommand(int theCommand) override;
@@ -107,6 +110,7 @@ public:
 
     virtual bool handleSDLEvent(SDL_Event &event) override;
     virtual void drawAll() override;
+    virtual void draw(NVGcontext *ctx) override;
     OSErr LoadLevel(std::string set, std::string levelTag, CPlayerManager *sendingPlayer) override;
     virtual void NotifyUser() override;
 

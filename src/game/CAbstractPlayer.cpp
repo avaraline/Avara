@@ -11,6 +11,7 @@
 
 #include "CAbstractPlayer.h"
 
+#include "AbstractRenderer.h"
 #include "AvaraDefines.h"
 #include "CBSPWorld.h"
 #include "CScaledBSP.h"
@@ -37,7 +38,6 @@
 #include "Parser.h"
 #include "Preferences.h"
 #include "FastMat.h"
-#include "RenderManager.h"
 
 #include "Debug.h"
 

@@ -10,10 +10,10 @@
 
 #include "CScout.h"
 
+#include "AbstractRenderer.h"
 #include "CAbstractPlayer.h"
 #include "CSmartPart.h"
 #include "CViewParameters.h"
-#include "RenderManager.h"
 //#include "Mat2D.h"
 
 #define kScoutBSP 220

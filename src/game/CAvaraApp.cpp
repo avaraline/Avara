@@ -36,7 +36,7 @@
 #include <json.hpp>
 #include "Tags.h"
 #include "Debug.h"
-#include "RenderManager.h"
+#include "ModernOpenGLRenderer.h"
 
 // included while we fake things out
 #include "CPlayerManager.h"
@@ -74,7 +74,12 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     itsGame = std::make_unique<CAvaraGame>(Get<FrameTime>(kFrameTimeTag));
     gCurrentGame = itsGame.get();
 
-    gRenderer = new RenderManager(RenderMode::GL3, mSDLWindow, mNVGContext);
+    if (mNVGContext) {
+        ui = std::make_unique<CHUD>(gCurrentGame);
+        ui->LoadImages(mNVGContext);
+    }
+
+    gRenderer = new ModernOpenGLRenderer(mSDLWindow);
     gRenderer->UpdateViewRect(mPixelRatio);
     gRenderer->SetFOV(Number(kFOV));
 
@@ -148,10 +153,16 @@ void CAvaraAppImpl::Done() {
 
 void CAvaraAppImpl::idle() {
     CheckSockets();
-    TrackerUpdate();
-    if (itsGame->GameTick()) {
-        RenderContents();
-    }
+        TrackerUpdate();
+        itsGame->GameTick();
+        if(!itsGame->IsPlaying()) {
+            rosterWindow->UpdateRoster();
+        }
+        /*
+        if (itsGame->GameTick()) {
+            RenderContents();
+        }
+        */
 }
 
 void CAvaraAppImpl::drawContents() {
@@ -168,10 +179,15 @@ void CAvaraAppImpl::drawContents() {
     itsGame->Render();
 }
 
+void CAvaraAppImpl::drawWidgets() {
+    if(itsGame->IsPlaying()) return;
+    CApplication::drawWidgets();
+}
+
 // display only the game screen, not the widgets
 void CAvaraAppImpl::RenderContents() {
     drawContents();
-    gRenderer->RefreshWindow();
+    // gRenderer->RefreshWindow();
 }
 
 void CAvaraAppImpl::WindowResized() {
@@ -201,9 +217,19 @@ bool CAvaraAppImpl::handleSDLEvent(SDL_Event &event) {
 
 void CAvaraAppImpl::drawAll() {
     if (!itsGame->IsPlaying()) {
-        rosterWindow->UpdateRoster();
         CApplication::drawAll();
     }
+}
+
+void CAvaraAppImpl::draw(NVGcontext *ctx) {
+    if (this->ui) {
+        if (gApplication ? gApplication->Get<bool>(kShowNewHUD) : true) {
+            this->ui->RenderNewHUD(ctx);
+        } else {
+            this->ui->Render(ctx);
+        }
+    }
+    CApplication::draw(ctx);
 }
 
 void CAvaraAppImpl::GameStarted(std::string set, std::string level) {

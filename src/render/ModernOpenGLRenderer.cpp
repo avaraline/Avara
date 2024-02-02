@@ -4,7 +4,6 @@
 #include "ColorManager.h"
 #include "FastMat.h"
 #include "OpenGLVertices.h"
-#include "RenderManager.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -109,11 +108,13 @@ inline glm::mat4 ToFloatMat(const Matrix &m)
     return mat;
 }
 
-ModernOpenGLRenderer::ModernOpenGLRenderer(RenderManager *manager)
+ModernOpenGLRenderer::ModernOpenGLRenderer(SDL_Window *window) : AbstractRenderer()
 {
-    this->manager = manager;
+    this->window = window;
 
-    // Initialize shaders.
+    dynamicWorld = new CBSPWorldImpl(100);
+    hudWorld = new CBSPWorldImpl(30);
+
     skyShader = LoadShader(SKY_VERT, SKY_FRAG);
     worldShader = LoadShader(OBJ_VERT, OBJ_FRAG);
     hudShader = LoadShader(HUD_VERT, HUD_FRAG);
@@ -136,13 +137,27 @@ ModernOpenGLRenderer::ModernOpenGLRenderer(RenderManager *manager)
     glBlendFuncSeparate(GL_SRC_ALPHA, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE);
 }
 
-ModernOpenGLRenderer::~ModernOpenGLRenderer() {}
+ModernOpenGLRenderer::~ModernOpenGLRenderer() {
+    delete dynamicWorld;
+    delete hudWorld;
+    AbstractRenderer::~AbstractRenderer();
+}
+
+void ModernOpenGLRenderer::AddHUDPart(CBSPPart *part)
+{
+    hudWorld->AddPart(part);
+}
+
+void ModernOpenGLRenderer::AddPart(CBSPPart *part)
+{
+    dynamicWorld->AddPart(part);
+}
 
 void ModernOpenGLRenderer::ApplyLights()
 {
-    float ambientIntensity = ToFloat(manager->viewParams->ambientLight);
+    float ambientIntensity = ToFloat(viewParams->ambientLight);
     float ambientRGB[3];
-    manager->viewParams->ambientLightColor.ExportGLFloats(ambientRGB, 3);
+    viewParams->ambientLightColor.ExportGLFloats(ambientRGB, 3);
 
     hudShader->Use();
     AdjustAmbient(*hudShader, 0.7f); // Default HUD ambient.
@@ -152,11 +167,11 @@ void ModernOpenGLRenderer::ApplyLights()
     worldShader->SetFloat3("ambientColor", ambientRGB);
 
     for (int i = 0; i < 4; i++) {
-        float intensity = ToFloat(manager->viewParams->dirLightSettings[i].intensity);
-        float elevation = ToFloat(manager->viewParams->dirLightSettings[i].angle1);
-        float azimuth = ToFloat(manager->viewParams->dirLightSettings[i].angle2);
+        float intensity = ToFloat(viewParams->dirLightSettings[i].intensity);
+        float elevation = ToFloat(viewParams->dirLightSettings[i].angle1);
+        float azimuth = ToFloat(viewParams->dirLightSettings[i].angle2);
         float rgb[3];
-        manager->viewParams->dirLightSettings[i].color.ExportGLFloats(rgb, 3);
+        viewParams->dirLightSettings[i].color.ExportGLFloats(rgb, 3);
 
         float xyz[3] = {
             sin(Deg2Rad(-azimuth)) * intensity,
@@ -188,11 +203,11 @@ void ModernOpenGLRenderer::ApplyLights()
 void ModernOpenGLRenderer::ApplyProjection()
 {
     int w, h;
-    manager->GetWindowSize(w, h);
+    GetWindowSize(w, h);
 
     glm::mat4 proj = glm::scale(
         glm::perspective(
-            glm::radians(manager->fov),
+            glm::radians(fov),
             (float)w / (float)h,
             0.099f,
             1000.0f
@@ -213,23 +228,16 @@ void ModernOpenGLRenderer::ApplyProjection()
     glCheckErrors();
 }
 
-void ModernOpenGLRenderer::ApplyView()
+void ModernOpenGLRenderer::GetWindowSize(int &w, int &h)
 {
-    glm::mat4 glMatrix = ToFloatMat(manager->viewParams->viewMatrix);
-
-    worldShader->Use();
-    worldShader->SetMat4("view", glMatrix);
-    glCheckErrors();
-
-    hudShader->Use();
-    hudShader->SetMat4("view", glMatrix);
-    glCheckErrors();
+    SDL_GetWindowSize(window, &w, &h);
 }
 
-void ModernOpenGLRenderer::Clear()
+void ModernOpenGLRenderer::LevelReset()
 {
-    glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    dynamicWorld->DisposeParts();
+    hudWorld->DisposeParts();
+    AbstractRenderer::LevelReset();
 }
 
 std::unique_ptr<VertexData> ModernOpenGLRenderer::NewVertexDataInstance()
@@ -237,16 +245,34 @@ std::unique_ptr<VertexData> ModernOpenGLRenderer::NewVertexDataInstance()
     return std::make_unique<OpenGLVertices>();
 }
 
+void ModernOpenGLRenderer::OverheadPoint(Fixed *pt, Fixed *extent)
+{
+    dynamicWorld->OverheadPoint(pt, extent);
+}
+
 void ModernOpenGLRenderer::RefreshWindow()
 {
-    SDL_GL_SwapWindow(manager->window);
+    SDL_GL_SwapWindow(window);
+}
+
+void ModernOpenGLRenderer::RemoveHUDPart(CBSPPart *part)
+{
+    hudWorld->RemovePart(part);
+}
+
+void ModernOpenGLRenderer::RemovePart(CBSPPart *part)
+{
+    dynamicWorld->RemovePart(part);
 }
 
 void ModernOpenGLRenderer::RenderFrame()
 {
+    Clear();
+    ApplyView();
+    
     // RENDER SKYBOX ///////////////////////////////////////////////////////////////////////////////
 
-    Matrix *trans = &(manager->viewParams->viewMatrix);
+    Matrix *trans = &(viewParams->viewMatrix);
 
     // Get rid of the view translation.
     glm::mat4 glMatrix = ToFloatMat(*trans);
@@ -255,9 +281,9 @@ void ModernOpenGLRenderer::RenderFrame()
     float groundColorRGB[3];
     float lowSkyColorRGB[3];
     float highSkyColorRGB[3];
-    manager->skyParams->groundColor.ExportGLFloats(groundColorRGB, 3);
-    manager->skyParams->lowSkyColor.ExportGLFloats(lowSkyColorRGB, 3);
-    manager->skyParams->highSkyColor.ExportGLFloats(highSkyColorRGB, 3);
+    skyParams->groundColor.ExportGLFloats(groundColorRGB, 3);
+    skyParams->lowSkyColor.ExportGLFloats(lowSkyColorRGB, 3);
+    skyParams->highSkyColor.ExportGLFloats(highSkyColorRGB, 3);
 
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_CULL_FACE);
@@ -287,9 +313,9 @@ void ModernOpenGLRenderer::RenderFrame()
 
     worldShader->Use();
 
-    manager->dynamicWorld->PrepareForRender();
-    auto partList = manager->dynamicWorld->GetVisiblePartListPointer();
-    auto partCount = manager->dynamicWorld->GetVisiblePartCount();
+    dynamicWorld->PrepareForRender();
+    auto partList = dynamicWorld->GetVisiblePartListPointer();
+    auto partCount = dynamicWorld->GetVisiblePartCount();
     for (uint16_t i = 0; i < partCount; i++) {
         Draw(*worldShader, **partList);
         partList++;
@@ -302,20 +328,12 @@ void ModernOpenGLRenderer::RenderFrame()
     hudShader->Use();
     hudShader->SetFloat("hudAlpha", ColorManager::getHUDAlpha());
 
-    manager->hudWorld->PrepareForRender();
-    partList = manager->hudWorld->GetVisiblePartListPointer();
-    partCount = manager->hudWorld->GetVisiblePartCount();
+    hudWorld->PrepareForRender();
+    partList = hudWorld->GetVisiblePartListPointer();
+    partCount = hudWorld->GetVisiblePartCount();
     for (uint16_t i = 0; i < partCount; i++) {
         Draw(*hudShader, **partList);
         partList++;
-    }
-
-    if (manager->ui) {
-        if (gApplication ? gApplication->Get<bool>(kShowNewHUD) : true) {
-            manager->ui->RenderNewHUD(manager->nvg);
-        } else {
-            manager->ui->Render(manager->nvg);
-        }
     }
 
     glDepthFunc(GL_LEQUAL);
@@ -324,6 +342,25 @@ void ModernOpenGLRenderer::RenderFrame()
 void ModernOpenGLRenderer::AdjustAmbient(OpenGLShader &shader, float intensity)
 {
     shader.SetFloat("ambient", intensity);
+}
+
+void ModernOpenGLRenderer::ApplyView()
+{
+    glm::mat4 glMatrix = ToFloatMat(viewParams->viewMatrix);
+
+    worldShader->Use();
+    worldShader->SetMat4("view", glMatrix);
+    glCheckErrors();
+
+    hudShader->Use();
+    hudShader->SetMat4("view", glMatrix);
+    glCheckErrors();
+}
+
+void ModernOpenGLRenderer::Clear()
+{
+    glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 
 void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part)
@@ -351,7 +388,7 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part)
 
     // Custom, per-object lighting!
     float extra_amb = ToFloat(part.extraAmbient);
-    float current_amb = ToFloat(manager->viewParams->ambientLight);
+    float current_amb = ToFloat(viewParams->ambientLight);
     if (part.privateAmbient != -1) {
         AdjustAmbient(shader, ToFloat(part.privateAmbient));
     }
