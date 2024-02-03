@@ -32,12 +32,12 @@ public:
     /**
      * Update lights in the scene with the currently configured lighting.
      */
-    virtual void ApplyLights() {};
+    virtual void ApplyLights() = 0;
 
     /**
      * Update the camera with the currently configured resolution and FOV.
      */
-    virtual void ApplyProjection() {};
+    virtual void ApplyProjection() = 0;
 
     /**
      * Populate the provided two integers with the width and height coordinates of the window.

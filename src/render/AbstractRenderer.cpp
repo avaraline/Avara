@@ -9,8 +9,6 @@ AbstractRenderer::AbstractRenderer()
     viewParams->hitherBound = FIX3(600);
     viewParams->yonBound = LONGYON;
     viewParams->horizonBound = FIX(16000); // 16 km
-
-    ResetLights();
 }
 
 AbstractRenderer::~AbstractRenderer()
