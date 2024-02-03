@@ -172,11 +172,11 @@ void CAvaraAppImpl::drawContents() {
         previewAngle += FIX3(1);
     }
     itsGame->Render();
-    if (this->ui) {
-        if (this->Get<bool>(kShowNewHUD)) {
-            this->ui->RenderNewHUD(mNVGContext);
+    if (ui) {
+        if (Get<bool>(kShowNewHUD)) {
+            ui->RenderNewHUD(mNVGContext);
         } else {
-            this->ui->Render(mNVGContext);
+            ui->Render(mNVGContext);
         }
     }
 }
