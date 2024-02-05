@@ -9,9 +9,8 @@
 
 #include "CGroundColorAdjuster.h"
 
+#include "AbstractRenderer.h"
 #include "CWorldShader.h"
-
-#include "RenderManager.h"
 
 CAbstractActor *CGroundColorAdjuster::EndScript() {
     CAbstractActor::EndScript();

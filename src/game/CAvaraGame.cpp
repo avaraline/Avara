@@ -48,7 +48,7 @@
 #include "Preferences.h"
 #include "ARGBColor.h"
 #include "Debug.h"
-#include "RenderManager.h"
+#include "AbstractRenderer.h"
 
 void CAvaraGame::InitMixer(Boolean silentFlag) {
     CSoundMixer *aMixer;
@@ -583,7 +583,7 @@ void CAvaraGame::EndScript() {
             vp->SetLight(i, 0, 0, 0, DEFAULT_LIGHT_COLOR, kLightOff);
         }
     }
-    gRenderer->UpdateLights();
+    gRenderer->ApplyLights();
 
     color = *ARGBColor::Parse(ReadStringVar(iMissileArmedColor));
     ColorManager::setMissileArmedColor(color);

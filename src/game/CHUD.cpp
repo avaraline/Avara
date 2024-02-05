@@ -1,4 +1,5 @@
 #include "CHUD.h"
+#include "AbstractRenderer.h"
 #include "CAbstractPlayer.h"
 #include "CAvaraGame.h"
 #include "ColorManager.h"
@@ -6,7 +7,6 @@
 #include "AvaraDefines.h"
 #include "CScoreKeeper.h"
 #include "ARGBColor.h"
-#include "RenderManager.h"
 
 #include <stdint.h>
 
@@ -1269,8 +1269,9 @@ void CHUD::RenderNewHUD(NVGcontext *ctx) {
         }
     }
 
-    if (!player)
+    if (!player) {
         return;
+    }
 
     if(spectatePlayer != NULL)
         player = spectatePlayer;

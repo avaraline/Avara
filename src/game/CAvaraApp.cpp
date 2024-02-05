@@ -36,7 +36,7 @@
 #include <json.hpp>
 #include "Tags.h"
 #include "Debug.h"
-#include "RenderManager.h"
+#include "ModernOpenGLRenderer.h"
 
 // included while we fake things out
 #include "CPlayerManager.h"
@@ -74,9 +74,15 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     itsGame = std::make_unique<CAvaraGame>(Get<FrameTime>(kFrameTimeTag));
     gCurrentGame = itsGame.get();
 
-    gRenderer = new RenderManager(RenderMode::GL3, mSDLWindow, mNVGContext);
-    gRenderer->UpdateViewRect(mPixelRatio);
+    if (mNVGContext) {
+        ui = std::make_unique<CHUD>(gCurrentGame);
+        ui->LoadImages(mNVGContext);
+    }
+
+    gRenderer = new ModernOpenGLRenderer(mSDLWindow);
+    gRenderer->UpdateViewRect(mSize.x, mSize.y, mPixelRatio);
     gRenderer->SetFOV(Number(kFOV));
+    gRenderer->ResetLights();
 
     itsGame->IAvaraGame(this);
 
@@ -165,6 +171,13 @@ void CAvaraAppImpl::drawContents() {
         previewAngle += FIX3(1);
     }
     itsGame->Render();
+    if (ui) {
+        if (Get<bool>(kShowNewHUD)) {
+            ui->RenderNewHUD(mNVGContext);
+        } else {
+            ui->Render(mNVGContext);
+        }
+    }
 }
 
 // display only the game screen, not the widgets
@@ -173,8 +186,8 @@ void CAvaraAppImpl::RenderContents() {
     gRenderer->RefreshWindow();
 }
 
-void CAvaraAppImpl::WindowResized() {
-    gRenderer->UpdateViewRect(mPixelRatio);
+void CAvaraAppImpl::WindowResized(int width, int height) {
+    gRenderer->UpdateViewRect(width, height, mPixelRatio);
     //performLayout();
 }
 

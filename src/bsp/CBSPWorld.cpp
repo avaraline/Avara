@@ -9,10 +9,10 @@
 
 #include "CBSPWorld.h"
 
+#include "AbstractRenderer.h"
 #include "CBSPPart.h"
 #include "CViewParameters.h"
 #include "Memory.h"
-#include "RenderManager.h"
 
 extern Vector **bspPointTemp;
 extern short *bspIndexStack;

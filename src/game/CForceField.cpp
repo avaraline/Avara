@@ -9,10 +9,10 @@
 
 #include "CForceField.h"
 
+#include "AbstractRenderer.h"
 #include "CBSPWorld.h"
 #include "CSmartPart.h"
 #include "CWallActor.h"
-#include "RenderManager.h"
 
 extern CWallActor *lastWallActor;
 
