@@ -19,10 +19,10 @@
 		9465BFD32B30C2A00050681C /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9465BFD12B30C2A00050681C /* AssetManager.cpp */; };
 		9465BFD72B30EF680050681C /* PackageManifest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9465BFD52B30EF680050681C /* PackageManifest.cpp */; };
 		9465BFD82B30EF680050681C /* PackageManifest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9465BFD52B30EF680050681C /* PackageManifest.cpp */; };
+		946EF8D22B6D9CB2000EF17E /* AbstractRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 946EF8D12B6D9CB2000EF17E /* AbstractRenderer.cpp */; };
+		946EF8D32B6D9CB2000EF17E /* AbstractRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 946EF8D12B6D9CB2000EF17E /* AbstractRenderer.cpp */; };
 		947F5C652B576B9F00F41689 /* ModernOpenGLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 947F5C642B576B9F00F41689 /* ModernOpenGLRenderer.cpp */; };
 		947F5C662B576B9F00F41689 /* ModernOpenGLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 947F5C642B576B9F00F41689 /* ModernOpenGLRenderer.cpp */; };
-		948128B02B53A1C7002A3459 /* RenderManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948128AF2B53A1C7002A3459 /* RenderManager.cpp */; };
-		948128B12B53A1C7002A3459 /* RenderManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948128AF2B53A1C7002A3459 /* RenderManager.cpp */; };
 		948CBF142B335A1400147E80 /* BaseAssetStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */; };
 		948CBF152B335A1400147E80 /* BaseAssetStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */; };
 		94924EAF2B3A894900197378 /* OggFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94924EAE2B3A894900197378 /* OggFile.cpp */; };
@@ -387,12 +387,11 @@
 		9465BFD12B30C2A00050681C /* AssetManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetManager.cpp; sourceTree = "<group>"; };
 		9465BFD52B30EF680050681C /* PackageManifest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PackageManifest.cpp; sourceTree = "<group>"; };
 		9465BFD92B30EFB40050681C /* PackageManifest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PackageManifest.h; sourceTree = "<group>"; };
-		947F5C622B57693300F41689 /* Renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
+		946EF8D12B6D9CB2000EF17E /* AbstractRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AbstractRenderer.cpp; sourceTree = "<group>"; };
+		947F5C622B57693300F41689 /* AbstractRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AbstractRenderer.h; sourceTree = "<group>"; };
 		947F5C632B576ACD00F41689 /* ModernOpenGLRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModernOpenGLRenderer.h; sourceTree = "<group>"; };
 		947F5C642B576B9F00F41689 /* ModernOpenGLRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ModernOpenGLRenderer.cpp; sourceTree = "<group>"; };
 		947F5C672B57A30100F41689 /* NullRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NullRenderer.h; sourceTree = "<group>"; };
-		948128AE2B539B6C002A3459 /* RenderManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RenderManager.h; sourceTree = "<group>"; };
-		948128AF2B53A1C7002A3459 /* RenderManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RenderManager.cpp; sourceTree = "<group>"; };
 		948CBF112B33581D00147E80 /* AssetStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetStorage.h; sourceTree = "<group>"; };
 		948CBF122B3359D700147E80 /* BaseAssetStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseAssetStorage.h; sourceTree = "<group>"; };
 		948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BaseAssetStorage.cpp; sourceTree = "<group>"; };
@@ -1073,9 +1072,8 @@
 				940541EB2B58744500E32241 /* OpenGLShader.h */,
 				941D878E2B5A213200E5577C /* OpenGLVertices.cpp */,
 				941D878D2B5A206A00E5577C /* OpenGLVertices.h */,
-				947F5C622B57693300F41689 /* Renderer.h */,
-				948128AF2B53A1C7002A3459 /* RenderManager.cpp */,
-				948128AE2B539B6C002A3459 /* RenderManager.h */,
+				946EF8D12B6D9CB2000EF17E /* AbstractRenderer.cpp */,
+				947F5C622B57693300F41689 /* AbstractRenderer.h */,
 				941D878C2B5A1EEC00E5577C /* VertexData.h */,
 			);
 			path = render;
@@ -2095,7 +2093,6 @@
 				E517F064299713DB0036B206 /* Resource.cpp in Sources */,
 				E517F065299713DB0036B206 /* System.cpp in Sources */,
 				E517F066299713DB0036B206 /* KeyFuncs.cpp in Sources */,
-				948128B12B53A1C7002A3459 /* RenderManager.cpp in Sources */,
 				E517F067299713DB0036B206 /* CAbstractActor.cpp in Sources */,
 				E517F068299713DB0036B206 /* CAbstractMissile.cpp in Sources */,
 				E517F069299713DB0036B206 /* CAbstractMovers.cpp in Sources */,
@@ -2123,6 +2120,7 @@
 				E517F07F299713DB0036B206 /* CLogic.cpp in Sources */,
 				E517F080299713DB0036B206 /* CLogicAnd.cpp in Sources */,
 				E517F081299713DB0036B206 /* CLogicBase.cpp in Sources */,
+				946EF8D32B6D9CB2000EF17E /* AbstractRenderer.cpp in Sources */,
 				E517F082299713DB0036B206 /* CLogicCounter.cpp in Sources */,
 				E517F083299713DB0036B206 /* CLogicDelay.cpp in Sources */,
 				E517F084299713DB0036B206 /* CLogicDistributor.cpp in Sources */,
@@ -2265,7 +2263,6 @@
 				E5890D1529895118007A875D /* CDirectObject.cpp in Sources */,
 				E5890CAC29895118007A875D /* CHandlePipe.cpp in Sources */,
 				E5890CC729895118007A875D /* LinkLoose.cpp in Sources */,
-				948128B02B53A1C7002A3459 /* RenderManager.cpp in Sources */,
 				E5890F0329895124007A875D /* textbox.cpp in Sources */,
 				E5253ED92996DD2200F8C1E8 /* PascalStrings.cpp in Sources */,
 				E5890CE129895118007A875D /* CAbstractMovers.cpp in Sources */,
@@ -2293,6 +2290,7 @@
 				E5890CF429895118007A875D /* CSolidActor.cpp in Sources */,
 				E5890EFE29895124007A875D /* combobox.cpp in Sources */,
 				E5890D0B29895118007A875D /* CWindow.cpp in Sources */,
+				946EF8D22B6D9CB2000EF17E /* AbstractRenderer.cpp in Sources */,
 				E5890CA829895118007A875D /* Beeper.cpp in Sources */,
 				E5890CDE29895118007A875D /* CYonBox.cpp in Sources */,
 				E5890EF429895124007A875D /* tabheader.cpp in Sources */,

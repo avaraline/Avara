@@ -9,8 +9,8 @@
 
 #include "CSkyColorAdjuster.h"
 
+#include "AbstractRenderer.h"
 #include "CWorldShader.h"
-#include "RenderManager.h"
 
 void CSkyColorAdjuster::BeginScript() {
     ProgramLongVar(iCount, 8);

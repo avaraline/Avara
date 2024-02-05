@@ -11,6 +11,7 @@
 
 #include "CApplication.h"
 //#include "PolyColor.h"
+#include "CHUD.h"
 #include "CLevelWindow.h"
 #include "CNetworkWindow.h"
 #include "CServerWindow.h"
@@ -71,6 +72,7 @@ private:
     std::unique_ptr<CAvaraGame> itsGame;
     CNetManager *gameNet;
     CommandManager *itsTui;
+    std::unique_ptr<CHUD> ui;
 
 public:
     CPlayerWindow *playerWindow;
@@ -101,7 +103,7 @@ public:
     virtual void RenderContents() override;
 
     virtual bool DoCommand(int theCommand) override;
-    virtual void WindowResized() override;
+    virtual void WindowResized(int width, int height) override;
 
     virtual void Done() override;
 

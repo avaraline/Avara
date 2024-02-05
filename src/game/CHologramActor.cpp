@@ -9,10 +9,10 @@
 
 #include "CHologramActor.h"
 
+#include "AbstractRenderer.h"
 #include "AssetManager.h"
 #include "CBSPPart.h"
 #include "CBSPWorld.h"
-#include "RenderManager.h"
 
 void CHologramActor::BeginScript() {
     CPlacedActors::BeginScript();

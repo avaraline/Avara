@@ -16,7 +16,9 @@ json CApplication::_defaultPrefs = ReadDefaultPrefs();
 CApplication::CApplication(std::string title) :
 nanogui::Screen(nanogui::Vector2i(_prefs[kWindowWidth], _prefs[kWindowHeight]), title, true, _prefs[kFullScreenTag], 8, 8, 24, 8, 0) {
     gApplication = this;
-    setResizeCallback([this](nanogui::Vector2i newSize) { this->WindowResized(); });
+    setResizeCallback([this](nanogui::Vector2i newSize) {
+        this->WindowResized(newSize.x, newSize.y);
+    });
 
     ColorManager::refresh(this); // Init ColorManager from prefs.
 }

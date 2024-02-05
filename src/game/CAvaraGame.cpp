@@ -48,7 +48,7 @@
 #include "Preferences.h"
 #include "ARGBColor.h"
 #include "Debug.h"
-#include "RenderManager.h"
+#include "AbstractRenderer.h"
 
 void CAvaraGame::InitMixer(Boolean silentFlag) {
     CSoundMixer *aMixer;
@@ -155,7 +155,7 @@ CSoundHub* CAvaraGame::CreateSoundHub() {
     return soundHub;
 }
 
-void CAvaraGame::Dispose() {
+CAvaraGame::~CAvaraGame() {
     CAbstractActor *nextActor;
 
     spectatePlayer = NULL;
@@ -184,8 +184,6 @@ void CAvaraGame::Dispose() {
 
     // DisposePolyWorld(&itsPolyWorld);
     DisposePtr((Ptr)locatorTable);
-
-    CDirectObject::Dispose();
 }
 
 CAbstractActor *CAvaraGame::FindIdent(long ident) {
@@ -585,7 +583,7 @@ void CAvaraGame::EndScript() {
             vp->SetLight(i, 0, 0, 0, DEFAULT_LIGHT_COLOR, kLightOff);
         }
     }
-    gRenderer->UpdateLights();
+    gRenderer->ApplyLights();
 
     color = *ARGBColor::Parse(ReadStringVar(iMissileArmedColor));
     ColorManager::setMissileArmedColor(color);

@@ -17,9 +17,9 @@
 #include "CScout.h"
 #include "Messages.h"
 #include "Preferences.h"
-#include "RenderManager.h"
 #include "System.h"
 #include "CUDPConnection.h"
+#include "NullRenderer.h"
 
 #include <iostream>
 using namespace std;
@@ -188,6 +188,12 @@ public:
     }
 };
 
+class TestWalkerActor : public CWalkerActor {
+    void ResetCamera() {
+
+    }
+};
+
 class HectorTestScenario {
 public:
     TestApp app;
@@ -198,14 +204,14 @@ public:
         app.itsGame = std::make_unique<TestGame>(frameTime);
         game = (TestGame*)app.itsGame.get();
         gCurrentGame = game;
-        gRenderer = new RenderManager(RenderMode::Headless, nullptr);
+        gRenderer = new NullRenderer();
 
         InitParser();
         game->IAvaraGame(&app);
         game->EndScript();
         app.GetNet()->ChangeNet(kNullNet, "");
         game->LevelReset(false);
-        hector = new CWalkerActor();
+        hector = new TestWalkerActor();
         hector->BeginScript();
         hector->EndScript();
         game->itsNet->playerTable[0]->SetPlayer(hector);
@@ -215,6 +221,7 @@ public:
         hector->location[2] = hectorZ;
         hector->location[3] = FIX1;
         game->AddActor(hector);
+        game->freshPlayerList = 0;
         game->GameStart();
     }
 };

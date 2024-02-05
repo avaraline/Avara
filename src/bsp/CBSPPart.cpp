@@ -9,11 +9,11 @@
 
 #include "CBSPPart.h"
 
+#include "AbstractRenderer.h"
 #include "AssetManager.h"
 #include "AvaraDefines.h"
 #include "CViewParameters.h"
 #include "Memory.h"
-#include "RenderManager.h"
 
 #include <fstream>
 #include <iostream>

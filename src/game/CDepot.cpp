@@ -9,6 +9,7 @@
 
 #include "CDepot.h"
 
+#include "AbstractRenderer.h"
 #include "CAbstractMissile.h"
 #include "CAvaraGame.h"
 #include "CBSPWorld.h"
@@ -21,7 +22,6 @@
 #include "CSmart.h"
 #include "CSmartPart.h"
 #include "CViewParameters.h"
-#include "RenderManager.h"
 
 void CDepot::IDepot(CAvaraGame *theGame) {
     itsGame = theGame;
