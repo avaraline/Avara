@@ -112,6 +112,11 @@ ModernOpenGLRenderer::ModernOpenGLRenderer(SDL_Window *window) : AbstractRendere
 {
     this->window = window;
 
+    int w, h;
+    SDL_GetWindowSizeInPixels(window, &w, &h);
+    viewParams->viewPixelDimensions.h = w;
+    viewParams->viewPixelDimensions.v = h;
+
     dynamicWorld = new CBSPWorldImpl(100);
     hudWorld = new CBSPWorldImpl(30);
 
@@ -202,13 +207,10 @@ void ModernOpenGLRenderer::ApplyLights()
 
 void ModernOpenGLRenderer::ApplyProjection()
 {
-    int w, h;
-    GetWindowSize(w, h);
-
     glm::mat4 proj = glm::scale(
         glm::perspective(
             glm::radians(fov),
-            (float)w / (float)h,
+            (float)viewParams->viewPixelDimensions.h / (float)viewParams->viewPixelDimensions.v,
             0.099f,
             1000.0f
         ),
@@ -226,11 +228,6 @@ void ModernOpenGLRenderer::ApplyProjection()
     hudShader->Use();
     hudShader->SetMat4("proj", proj);
     glCheckErrors();
-}
-
-void ModernOpenGLRenderer::GetWindowSize(int &w, int &h)
-{
-    SDL_GetWindowSize(window, &w, &h);
 }
 
 void ModernOpenGLRenderer::LevelReset()

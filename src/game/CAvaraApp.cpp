@@ -80,7 +80,7 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     }
 
     gRenderer = new ModernOpenGLRenderer(mSDLWindow);
-    gRenderer->UpdateViewRect(mPixelRatio);
+    gRenderer->UpdateViewRect(mSize.x, mSize.y, mPixelRatio);
     gRenderer->SetFOV(Number(kFOV));
     gRenderer->ResetLights();
 
@@ -187,8 +187,8 @@ void CAvaraAppImpl::RenderContents() {
     gRenderer->RefreshWindow();
 }
 
-void CAvaraAppImpl::WindowResized() {
-    gRenderer->UpdateViewRect(mPixelRatio);
+void CAvaraAppImpl::WindowResized(int width, int height) {
+    gRenderer->UpdateViewRect(width, height, mPixelRatio);
     //performLayout();
 }
 

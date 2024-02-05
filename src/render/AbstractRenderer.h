@@ -40,14 +40,6 @@ public:
     virtual void ApplyProjection() = 0;
 
     /**
-     * Populate the provided two integers with the width and height coordinates of the window.
-     *
-     * @param w The int variable to hold the width.
-     * @param h The int variable to hold the height.
-     */
-    virtual void GetWindowSize(int &w, int &h) = 0;
-
-    /**
      * Reset the renderer's state back to its defaults.
      */
     virtual void LevelReset();
@@ -107,9 +99,11 @@ public:
     /**
      * Update the camera with the currently configured view parameters.
      *
+     * @param width The width in pixels.
+     * @param height The height in pixels.
      * @param pixelRatio The pixel ratio.
      */
-    void UpdateViewRect(float pixelRatio);
+    void UpdateViewRect(int width, int height, float pixelRatio);
 protected:
     float fov = 50.0f;
 };

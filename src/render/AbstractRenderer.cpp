@@ -44,12 +44,9 @@ void AbstractRenderer::SetFOV(float fov)
     ApplyProjection();
 }
 
-void AbstractRenderer::UpdateViewRect(float pixelRatio)
+void AbstractRenderer::UpdateViewRect(int width, int height, float pixelRatio)
 {
-    int w, h;
-    GetWindowSize(w, h);
-
-    viewParams->SetViewRect(w, h, w / 2, h / 2);
+    viewParams->SetViewRect(width, height, width / 2, height / 2);
     viewParams->viewPixelRatio = pixelRatio;
     viewParams->CalculateViewPyramidCorners();
     ApplyProjection();

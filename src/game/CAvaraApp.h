@@ -103,7 +103,7 @@ public:
     virtual void RenderContents() override;
 
     virtual bool DoCommand(int theCommand) override;
-    virtual void WindowResized() override;
+    virtual void WindowResized(int width, int height) override;
 
     virtual void Done() override;
 

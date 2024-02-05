@@ -14,11 +14,6 @@ public:
     virtual void AddPart(CBSPPart *part) override {};
     virtual void ApplyLights() override {};
     virtual void ApplyProjection() override {};
-    virtual void GetWindowSize(int &w, int &h) override {
-        w = 0;
-        h = 0;
-
-    };
     virtual std::unique_ptr<VertexData> NewVertexDataInstance() override {
         return nullptr;
     };
@@ -32,7 +27,6 @@ public:
         extent[3] = 0;
         extent[4] = 0;
         extent[5] = 0;
-        
     };
     virtual void RefreshWindow() override {};
     virtual void RemoveHUDPart(CBSPPart *part) override {};
