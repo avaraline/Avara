@@ -155,7 +155,7 @@ CSoundHub* CAvaraGame::CreateSoundHub() {
     return soundHub;
 }
 
-void CAvaraGame::Dispose() {
+CAvaraGame::~CAvaraGame() {
     CAbstractActor *nextActor;
 
     spectatePlayer = NULL;
@@ -184,8 +184,6 @@ void CAvaraGame::Dispose() {
 
     // DisposePolyWorld(&itsPolyWorld);
     DisposePtr((Ptr)locatorTable);
-
-    CDirectObject::Dispose();
 }
 
 CAbstractActor *CAvaraGame::FindIdent(long ident) {
