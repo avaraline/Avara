@@ -113,7 +113,7 @@ ModernOpenGLRenderer::ModernOpenGLRenderer(SDL_Window *window) : AbstractRendere
     this->window = window;
 
     int w, h;
-    SDL_GetWindowSizeInPixels(window, &w, &h);
+    SDL_GetWindowSize(window, &w, &h);
     viewParams->viewPixelDimensions.h = w;
     viewParams->viewPixelDimensions.v = h;
 
