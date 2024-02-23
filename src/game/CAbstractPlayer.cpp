@@ -888,11 +888,11 @@ void CAbstractPlayer::DashboardPosition(CScaledBSP *part, bool autoRot, float x,
 
     if (autoRot) {
         if (x < 0.0) {
-            yAng = -60*x + 15;
+            yAng = -35*x + 15;
         }
 
         if (x > 0.0) {
-            yAng = -60*x - 15;
+            yAng = -35*x - 15;
         }
     }
 
@@ -1830,11 +1830,11 @@ bool CAbstractPlayer::ReincarnateComplete(CIncarnator* newSpot) {
         if (reEnergize) {
             boostEndFrame = itsGame->FramesFromNow(MINIBOOSTTIME);
             reEnergize = false;
-            if (shields < (maxShields >> 1))
-                shields = maxShields >> 1;
+            if (shields < maxShields)
+                shields = maxShields;
 
-            if (energy < (maxEnergy >> 1))
-                energy = maxEnergy >> 1;
+            if (energy < maxEnergy)
+                energy = maxEnergy;
         }
 
         doIncarnateSound = true;
