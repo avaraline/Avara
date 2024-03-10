@@ -1220,25 +1220,32 @@ void CHUD::RenderNewHUD(NVGcontext *ctx) {
                 float fontsz_m = 24.0;
                 float fontsz_s = 18.0;
                 float bounds[4], nextBounds[4], prevBounds[4];
+                std::string on("On");
+                std::string off("Off");
+
                 std::string specMessage("Spectating " + playerName);
                 std::string nextMessage("Spectate Next: ]");
                 std::string prevMessage("Spectate Previous: [");
+                std::string toggleCamMessage("Toggle Free Cam: Space Bar");
+                std::string camStatusMessage("Free Cam: " + (player->freeView ? on : off));
 
-                nvgBeginPath(ctx);
-                nvgFontFace(ctx, "mono");
-                nvgTextAlign(ctx, NVG_ALIGN_MIDDLE | NVG_ALIGN_BOTTOM);
-                nvgFontSize(ctx, fontsz_m);
-                nvgTextBounds(ctx, spectatePlayerPosition[0], spectatePlayerPosition[1], specMessage.c_str(), NULL, bounds);
+                if (!player->freeView) {
+                    nvgBeginPath(ctx);
+                    nvgFontFace(ctx, "mono");
+                    nvgTextAlign(ctx, NVG_ALIGN_MIDDLE | NVG_ALIGN_BOTTOM);
+                    nvgFontSize(ctx, fontsz_m);
+                    nvgTextBounds(ctx, spectatePlayerPosition[0], spectatePlayerPosition[1], specMessage.c_str(), NULL, bounds);
 
-                //draw box for text
-                nvgBeginPath(ctx);
-                nvgRoundedRect(ctx, spectatePlayerPosition[0] - 100, spectatePlayerPosition[1], (bounds[2]-bounds[0])+10, 28.0, 3.0);
-                nvgFillColor(ctx, BACKGROUND_COLOR);
-                nvgFill(ctx);
+                    //draw box for text
+                    nvgBeginPath(ctx);
+                    nvgRoundedRect(ctx, spectatePlayerPosition[0] - 100, spectatePlayerPosition[1], (bounds[2]-bounds[0])+10, 28.0, 3.0);
+                    nvgFillColor(ctx, BACKGROUND_COLOR);
+                    nvgFill(ctx);
 
-                //draw text
-                nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
-                nvgText(ctx, spectatePlayerPosition[0] - 100 + 5, spectatePlayerPosition[1] + 14, specMessage.c_str(), NULL);
+                    //draw text
+                    nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+                    nvgText(ctx, spectatePlayerPosition[0] - 100 + 5, spectatePlayerPosition[1] + 14, specMessage.c_str(), NULL);
+                }
 
                 nvgBeginPath(ctx);
                 nvgFontFace(ctx, "mono");
@@ -1265,6 +1272,42 @@ void CHUD::RenderNewHUD(NVGcontext *ctx) {
 
                 nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
                 nvgText(ctx, spectatePlayerPosition[0] - 220 + 5, spectatePlayerPosition[1] + 44, prevMessage.c_str(), NULL);
+
+                // Toggle Free Cam Message
+                nvgBeginPath(ctx);
+                nvgRoundedRect(ctx, spectatePlayerPosition[0] - 220, spectatePlayerPosition[1] + 60, (prevBounds[2]-prevBounds[0])+10, 28.0, 3.0);
+                nvgFillColor(ctx, BACKGROUND_COLOR);
+                nvgFill(ctx);
+
+                nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+                nvgText(ctx, spectatePlayerPosition[0] - 220 + 5, spectatePlayerPosition[1] + 74, toggleCamMessage.c_str(), NULL);
+
+                // Free Cam Status Message
+                nvgBeginPath(ctx);
+                nvgFontSize(ctx, fontsz_s);
+                nvgRoundedRect(ctx, spectatePlayerPosition[0] + 25, spectatePlayerPosition[1] + 60, (nextBounds[2]-nextBounds[0])+10, 28.0, 3.0);
+                if (player->freeView) {
+                    nvgFillColor(ctx, nvgRGBA(0, 50, 0, 180));
+                } else {
+                    nvgFillColor(ctx, nvgRGBA(50, 0, 0, 180));
+                }
+                nvgFill(ctx);
+
+                nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+                nvgText(ctx, spectatePlayerPosition[0] + 25 + 5, spectatePlayerPosition[1] + 74, camStatusMessage.c_str(), NULL);
+
+                // Draw Debug text
+                if (player->freeCamDBG && player->freeCamDBG[9] != 0) {
+                    nvgBeginPath(ctx);
+                    nvgRect(ctx, 0, 0, 150, 400);
+                    nvgFillColor(ctx, nvgRGBA(20, 20, 20, 100));
+                    nvgFill(ctx);
+
+                    nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+                    for( i = 0; i < 18; i++) {
+                        nvgText(ctx, 5, i * 20 + 15, std::to_string(player->freeCamDBG[i]).c_str(), NULL);
+                    }
+                }
             }
         }
     }

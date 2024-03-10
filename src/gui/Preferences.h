@@ -125,6 +125,7 @@ static json defaultPrefs = {
         {"lookRight", "3"},
         {"zoomIn", "="},
         {"zoomOut", "-"},
+        {"toggleFreeCam", "Space"},
         {"scoutView", "Tab"},
         {"scoutControl", {"2", "Up", "Down", "Left", "Right"}},
         {"spectateNext", "]"},

@@ -73,6 +73,7 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
         {"scoutControl", 1 << kfuScoutControl},
         {"spectateNext", 1 << kfuSpectateNext},
         {"spectatePrevious", 1 << kfuSpectatePrevious},
+        {"toggleFreeCam", 1 << kfuToggleFreeCam},
         {"scoreboard", 1 << kfuScoreboard},
         {"chatMode", 1 << kfuTypeText},
         {"debug1", 1 << kfuDebug1},

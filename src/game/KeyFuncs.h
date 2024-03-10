@@ -76,6 +76,8 @@ enum {
     kfuSpectateNext,
     kfuSpectatePrevious,
 
+    kfuToggleFreeCam,
+
     kfuScoreboard,
 
     kfuPauseGame,

@@ -19,6 +19,7 @@
 class CBSPPart;
 class CScaledBSP;
 class CScout;
+class CFreeCam;
 class CPlayerManager;
 class CIncarnator;
 class CAbstractPlayer;
@@ -122,6 +123,7 @@ public:
     CSmartPart *viewPortPart = 0; //	We look out from this one.
     CScout *itsScout = 0; //
     short scoutCommand = 0;
+    CFreeCam *itsFreeCam = 0;
 
     //	Control module (and view) orientation:
     Fixed viewYaw = 0;
@@ -173,12 +175,15 @@ public:
 
     long scoutIdent = 0; //	true, if scout is out.
     Boolean scoutView = 0; //	true = scout view, false = normal view
+    Boolean freeView = 0;
     Boolean isInLimbo = 0;
     Boolean debugView = 0;
     Boolean netDestruct = 0;
 
     Fixed supportTraction = 0;
     Fixed supportFriction = 0;
+
+    double freeCamDBG[18] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
     //	Hud parts:
     CBSPPart *dirArrow = 0;
@@ -246,6 +251,8 @@ public:
     virtual void SetSpecialColor(ARGBColor specialColor);
     virtual void LoadParts();
     virtual void LoadScout();
+    virtual void LoadFreeCam();
+    virtual void WriteDBG(int index, float val);
     virtual void StartSystems();
     virtual void LevelReset();
 
@@ -286,6 +293,7 @@ public:
     virtual void ResetDashboard();
     //
 
+    virtual void ToggleFreeCam();
     virtual void ControlSoundPoint();
     virtual void ControlViewPoint();
     virtual void RecalculateViewDistance();

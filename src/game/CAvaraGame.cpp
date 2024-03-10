@@ -106,6 +106,7 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     freshPlayerList = NULL;
     playerList = NULL;
     spectatePlayer = NULL;
+    freeCamState = 0;
 
     soundSwitches = 0xFF;
 
@@ -915,9 +916,17 @@ bool CAvaraGame::GameTick() {
     return true;
 }
 
+void CAvaraGame::ToggleFreeCam(Boolean state) {
+    freeCamState = state;
+}
+
 void CAvaraGame::ViewControl() {
     if(spectatePlayer != NULL && FindPlayerManager(spectatePlayer) != NULL) {
-        FindPlayerManager(spectatePlayer)->ViewControl();
+        if (freeCamState) {
+            FindPlayerManager(GetLocalPlayer())->ViewControl();
+        } else {
+            FindPlayerManager(spectatePlayer)->ViewControl();
+        }
     }
     else {
         itsNet->ViewControl();
@@ -940,6 +949,8 @@ bool CAvaraGame::canBeSpectated(CAbstractPlayer *player) {
 }
 
 void CAvaraGame::SpectateNext() {
+    if (freeCamState) return;
+
     if(spectatePlayer == NULL)
         spectatePlayer = GetLocalPlayer();
 
@@ -968,6 +979,8 @@ void CAvaraGame::SpectateNext() {
 }
 
 void CAvaraGame::SpectatePrevious() {
+    if (freeCamState) return;
+    
     if(spectatePlayer == NULL)
         spectatePlayer = GetLocalPlayer();
 

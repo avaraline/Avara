@@ -19,6 +19,7 @@
 #include "CPlayerManager.h"
 #include "CPlayerMissile.h"
 #include "CScout.h"
+#include "CFreeCam.h"
 #include "CSmartPart.h"
 #include "CViewParameters.h"
 //#include "CInfoPanel.h"
@@ -190,6 +191,18 @@ void CAbstractPlayer::LoadScout() {
     itsScout->EndScript();
 }
 
+void CAbstractPlayer::LoadFreeCam() {
+    
+    itsFreeCam = new CFreeCam(this);
+    itsFreeCam->BeginScript();
+    FreshCalc();
+    itsFreeCam->EndScript();
+}
+
+void CAbstractPlayer::WriteDBG(int index, float val) {
+    freeCamDBG[index] = val;
+}
+
 void CAbstractPlayer::ReplacePartColors() {
     teamMask = 1 << teamColor;
     longTeamColor = GetTeamColorOr(ColorManager::getDefaultTeamColor());
@@ -276,6 +289,7 @@ CAbstractActor *CAbstractPlayer::EndScript() {
     ReplacePartColors();
     LoadHUDParts();
     LoadScout();
+    LoadFreeCam();
     PlaceParts();
     LinkPartSpheres();
 
@@ -314,6 +328,10 @@ CAbstractPlayer::~CAbstractPlayer() {
     if (itsScout) {
         delete itsScout;
         scoutIdent = 0;
+    }
+
+    if (freeView) {
+        delete itsFreeCam;
     }
 
     gRenderer->RemoveHUDPart(dirArrow);
@@ -963,6 +981,19 @@ void CAbstractPlayer::ResetDashboard() {
     }
 }
 
+void CAbstractPlayer::ToggleFreeCam() {
+    freeView = !freeView;
+
+    itsGame->ToggleFreeCam(freeView);
+    itsFreeCam->ToggleState(freeView);
+    
+    if (freeView) {
+        SDL_Log("Free cam toggled on!");
+    }
+    else
+        SDL_Log("Free cam toggled off!");
+}
+
 void CAbstractPlayer::ControlSoundPoint() {
     Fixed theRight[] = {FIX(-1), 0, 0};
     Matrix *m;
@@ -991,6 +1022,14 @@ void CAbstractPlayer::ControlViewPoint() {
             if (itsScout)
                 itsScout->ControlViewPoint();
         }
+    } else if (freeView) {
+        dirArrow->isTransparent = true;
+
+        //if (freeCamIdent && !debugView) {
+            //itsScout = (CScout *)itsGame->FindIdent(scoutIdent);
+            //if (itsScout)
+            itsFreeCam->ControlViewPoint();
+        //}
     } else {
         MATRIXCOPY(&vp->viewMatrix, viewPortPart->GetInverseTransform());
         MTranslate(viewOffset[0], viewOffset[1], viewOffset[2], &vp->viewMatrix);
@@ -1258,9 +1297,23 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
         else if(lives == 0) {
             if (itsManager->IsLocalPlayer() && TESTFUNC(kfuSpectateNext, ft->down)) {
                 itsGame->SpectateNext();
+                if (freeView) {
+                    SDL_Log("spectator swapped");
+                    itsFreeCam->SetAttached(true);
+                }
             }
             if (itsManager->IsLocalPlayer() && TESTFUNC(kfuSpectatePrevious, ft->down)) {
                 itsGame->SpectatePrevious();
+                if (freeView) {
+                    SDL_Log("spectator swapped");
+                    itsFreeCam->SetAttached(true);
+                }
+            }
+            if (itsManager->IsLocalPlayer() && TESTFUNC(kfuToggleFreeCam, ft->down)) {
+                ToggleFreeCam();
+            }
+            if (freeView) {
+                itsFreeCam->ViewControl(ft);
             }
         }
 
