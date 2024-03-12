@@ -1219,7 +1219,7 @@ void CHUD::RenderNewHUD(NVGcontext *ctx) {
             if(spectatePlayer != NULL && thisPlayer->GetPlayer() == spectatePlayer) {
                 float fontsz_m = 24.0;
                 float fontsz_s = 18.0;
-                float bounds[4], nextBounds[4], prevBounds[4];
+                float bounds[4], nextBounds[4], prevBounds[4], toggleBounds[4];
                 std::string on("On");
                 std::string off("Off");
 
@@ -1253,6 +1253,7 @@ void CHUD::RenderNewHUD(NVGcontext *ctx) {
                 nvgFontSize(ctx, fontsz_s);
                 nvgTextBounds(ctx, spectatePlayerPosition[0], spectatePlayerPosition[1], nextMessage.c_str(), NULL, nextBounds);
                 nvgTextBounds(ctx, spectatePlayerPosition[0], spectatePlayerPosition[1], prevMessage.c_str(), NULL, prevBounds);
+                nvgTextBounds(ctx, spectatePlayerPosition[0], spectatePlayerPosition[1], toggleCamMessage.c_str(), NULL, toggleBounds);
 
                 //Spectate Next
                 nvgBeginPath(ctx);
@@ -1275,12 +1276,12 @@ void CHUD::RenderNewHUD(NVGcontext *ctx) {
 
                 // Toggle Free Cam Message
                 nvgBeginPath(ctx);
-                nvgRoundedRect(ctx, spectatePlayerPosition[0] - 220, spectatePlayerPosition[1] + 60, (prevBounds[2]-prevBounds[0])+10, 28.0, 3.0);
+                nvgRoundedRect(ctx, spectatePlayerPosition[0] - 270, spectatePlayerPosition[1] + 60, (toggleBounds[2]-toggleBounds[0])+10, 28.0, 3.0);
                 nvgFillColor(ctx, BACKGROUND_COLOR);
                 nvgFill(ctx);
 
                 nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
-                nvgText(ctx, spectatePlayerPosition[0] - 220 + 5, spectatePlayerPosition[1] + 74, toggleCamMessage.c_str(), NULL);
+                nvgText(ctx, spectatePlayerPosition[0] - 270 + 5, spectatePlayerPosition[1] + 74, toggleCamMessage.c_str(), NULL);
 
                 // Free Cam Status Message
                 nvgBeginPath(ctx);

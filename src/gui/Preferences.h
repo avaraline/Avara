@@ -132,6 +132,12 @@ static json defaultPrefs = {
         {"spectatePrevious", "["},
         {"scoreboard", "/"},
         {"chatMode", "Return"},
+        {"freeCamUp", "Q"},
+        {"freeCamDown", "E"},
+        {"freeCamForward", "W"},
+        {"freeCamLeft", "A"},
+        {"freeCamRight", "D"},
+        {"freeCamBackward", "S"},
         {"debug1", "5"},
         {"debug2", "6"}}
     },

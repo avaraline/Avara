@@ -89,28 +89,28 @@ void CFreeCam::ViewControl(FunctionTable *ft) {
     vp->fromPoint[2] = vp->atPoint[2] - FMul(direction[2], radius);
 
     // Orthogonal camera movement
-    if (TESTFUNC(kfuForward, ft->held)) {
+    if (TESTFUNC(kfuFreeCamForward, ft->held)) {
         isAttached = false;
         vp->fromPoint[0] += finalXSpeed;
         vp->fromPoint[2] += finalZSpeed;
         vp->atPoint[0] += finalXSpeed;
         vp->atPoint[2] += finalZSpeed;
     }
-    if (TESTFUNC(kfuReverse, ft->held)) {
+    if (TESTFUNC(kfuFreeCamBackward, ft->held)) {
         isAttached = false;
         vp->fromPoint[0] -= finalXSpeed;
         vp->fromPoint[2] -= finalZSpeed;
         vp->atPoint[0] -= finalXSpeed;
         vp->atPoint[2] -= finalZSpeed;
     }
-    if (TESTFUNC(kfuLeft, ft->held)) {
+    if (TESTFUNC(kfuFreeCamLeft, ft->held)) {
         isAttached = false;
         vp->fromPoint[0] += finalZSpeed;
         vp->fromPoint[2] -= finalXSpeed;
         vp->atPoint[0] += finalZSpeed;
         vp->atPoint[2] -= finalXSpeed;
     }
-    if (TESTFUNC(kfuRight, ft->held)) {
+    if (TESTFUNC(kfuFreeCamRight, ft->held)) {
         isAttached = false;
         vp->fromPoint[0] -= finalZSpeed;
         vp->fromPoint[2] += finalXSpeed;
@@ -120,7 +120,7 @@ void CFreeCam::ViewControl(FunctionTable *ft) {
 
     // Handle y-axis movement differently depending on if the camera is attached to a player or not
     // Up
-    if (TESTFUNC(kfuLoadMissile, ft->held)) {
+    if (TESTFUNC(kfuFreeCamUp, ft->held)) {
         if (isAttached) {
             // Cam is attached so don't move focal point
             vp->fromPoint[1] += finalYSpeed;
@@ -133,7 +133,7 @@ void CFreeCam::ViewControl(FunctionTable *ft) {
         }
     }
     // Down
-    if (TESTFUNC(kfuFireWeapon, ft->held)) {
+    if (TESTFUNC(kfuFreeCamDown, ft->held)) {
         if (isAttached) {
             // Cam is attached so don't move focal point
             // Cam can't go below focal point
@@ -161,7 +161,6 @@ void CFreeCam::ViewControl(FunctionTable *ft) {
 }
 
 void CFreeCam::FrameAction() {
-
 }
 
 void CFreeCam::ControlViewPoint() {

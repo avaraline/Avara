@@ -1305,14 +1305,12 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             if (itsManager->IsLocalPlayer() && TESTFUNC(kfuSpectateNext, ft->down)) {
                 itsGame->SpectateNext();
                 if (freeView) {
-                    SDL_Log("spectator swapped");
                     itsFreeCam->SetAttached(true);
                 }
             }
             if (itsManager->IsLocalPlayer() && TESTFUNC(kfuSpectatePrevious, ft->down)) {
                 itsGame->SpectatePrevious();
                 if (freeView) {
-                    SDL_Log("spectator swapped");
                     itsFreeCam->SetAttached(true);
                 }
             }
