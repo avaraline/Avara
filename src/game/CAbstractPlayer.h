@@ -175,6 +175,7 @@ public:
 
     long scoutIdent = 0; //	true, if scout is out.
     Boolean scoutView = 0; //	true = scout view, false = normal view
+    long freeCamIdent = 0;
     Boolean freeView = 0;
     Boolean isInLimbo = 0;
     Boolean debugView = 0;
@@ -294,6 +295,7 @@ public:
     //
 
     virtual void ToggleFreeCam();
+    virtual Boolean IsFreeCamAttached();
     virtual void ControlSoundPoint();
     virtual void ControlViewPoint();
     virtual void RecalculateViewDistance();

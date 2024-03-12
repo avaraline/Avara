@@ -157,6 +157,7 @@ void CAbstractPlayer::StartSystems() {
     scoutView = false;
     scoutIdent = 0;
     scoutBaseHeight = FIX3(2000);
+    freeCamIdent = 0;
 
     sliverCounts[kSmallSliver] = 12;
     sliverCounts[kMediumSliver] = 18;
@@ -330,8 +331,13 @@ CAbstractPlayer::~CAbstractPlayer() {
         scoutIdent = 0;
     }
 
+    if (freeCamIdent) {
+        itsFreeCam = (CFreeCam *)gCurrentGame->FindIdent(freeCamIdent);
+    }
+
     if (freeView) {
         delete itsFreeCam;
+        freeCamIdent = 0;
     }
 
     gRenderer->RemoveHUDPart(dirArrow);
@@ -994,6 +1000,10 @@ void CAbstractPlayer::ToggleFreeCam() {
         SDL_Log("Free cam toggled off!");
 }
 
+Boolean CAbstractPlayer::IsFreeCamAttached() {
+    return itsFreeCam->IsAttached();
+}
+
 void CAbstractPlayer::ControlSoundPoint() {
     Fixed theRight[] = {FIX(-1), 0, 0};
     Matrix *m;
@@ -1022,14 +1032,11 @@ void CAbstractPlayer::ControlViewPoint() {
             if (itsScout)
                 itsScout->ControlViewPoint();
         }
-    } else if (freeView) {
-        dirArrow->isTransparent = true;
-
-        //if (freeCamIdent && !debugView) {
-            //itsScout = (CScout *)itsGame->FindIdent(scoutIdent);
-            //if (itsScout)
+    } else if (freeView && freeCamIdent && itsManager->IsLocalPlayer()) {
+        itsFreeCam = (CFreeCam *)itsGame->FindIdent(freeCamIdent);
+        if (itsFreeCam) {
             itsFreeCam->ControlViewPoint();
-        //}
+        }
     } else {
         MATRIXCOPY(&vp->viewMatrix, viewPortPart->GetInverseTransform());
         MTranslate(viewOffset[0], viewOffset[1], viewOffset[2], &vp->viewMatrix);

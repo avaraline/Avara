@@ -923,7 +923,8 @@ void CAvaraGame::ToggleFreeCam(Boolean state) {
 void CAvaraGame::ViewControl() {
     if(spectatePlayer != NULL && FindPlayerManager(spectatePlayer) != NULL) {
         if (freeCamState) {
-            FindPlayerManager(GetLocalPlayer())->ViewControl();
+            // The player has control of the camera when in free cam mode while spectating
+            itsNet->ViewControl();
         } else {
             FindPlayerManager(spectatePlayer)->ViewControl();
         }
@@ -949,8 +950,6 @@ bool CAvaraGame::canBeSpectated(CAbstractPlayer *player) {
 }
 
 void CAvaraGame::SpectateNext() {
-    if (freeCamState) return;
-
     if(spectatePlayer == NULL)
         spectatePlayer = GetLocalPlayer();
 
@@ -979,8 +978,6 @@ void CAvaraGame::SpectateNext() {
 }
 
 void CAvaraGame::SpectatePrevious() {
-    if (freeCamState) return;
-    
     if(spectatePlayer == NULL)
         spectatePlayer = GetLocalPlayer();
 

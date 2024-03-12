@@ -1229,7 +1229,7 @@ void CHUD::RenderNewHUD(NVGcontext *ctx) {
                 std::string toggleCamMessage("Toggle Free Cam: Space Bar");
                 std::string camStatusMessage("Free Cam: " + (player->freeView ? on : off));
 
-                if (!player->freeView) {
+                if (!player->freeView || (player->freeView && player->IsFreeCamAttached())) {
                     nvgBeginPath(ctx);
                     nvgFontFace(ctx, "mono");
                     nvgTextAlign(ctx, NVG_ALIGN_MIDDLE | NVG_ALIGN_BOTTOM);
@@ -1295,19 +1295,6 @@ void CHUD::RenderNewHUD(NVGcontext *ctx) {
 
                 nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
                 nvgText(ctx, spectatePlayerPosition[0] + 25 + 5, spectatePlayerPosition[1] + 74, camStatusMessage.c_str(), NULL);
-
-                // Draw Debug text
-                if (player->freeCamDBG && player->freeCamDBG[9] != 0) {
-                    nvgBeginPath(ctx);
-                    nvgRect(ctx, 0, 0, 150, 400);
-                    nvgFillColor(ctx, nvgRGBA(20, 20, 20, 100));
-                    nvgFill(ctx);
-
-                    nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
-                    for( i = 0; i < 18; i++) {
-                        nvgText(ctx, 5, i * 20 + 15, std::to_string(player->freeCamDBG[i]).c_str(), NULL);
-                    }
-                }
             }
         }
     }

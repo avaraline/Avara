@@ -9,14 +9,26 @@
 
 CFreeCam::CFreeCam(CAbstractPlayer *thePlayer) {
     itsPlayer = thePlayer;
+    itsGame = thePlayer->itsGame;
+
     camSpeed = 350;
     radius = FIX3(25000);
+
+    action = camInactive;
+    isActive = kIsActive;
+    partCount = 0;
+    glow = 0;
 }
 
 void CFreeCam::ToggleState(Boolean state) {
-    CAbstractPlayer *spectatePlayer = itsPlayer->itsGame->GetSpectatePlayer();
+    CAbstractPlayer *spectatePlayer = itsGame->GetSpectatePlayer();
 
     if (state && spectatePlayer != NULL) {
+        if (action == camInactive) {
+            itsGame->AddActor(this);
+            itsPlayer->freeCamIdent = ident;
+            action = camAnimating;
+        }
         isAttached = true;
     }
 }
@@ -26,13 +38,13 @@ void CFreeCam::SetAttached(Boolean attach) {
 }
 
 Boolean CFreeCam::IsAttached() {
-    return isAttached && itsPlayer->itsGame->GetSpectatePlayer() != NULL;
+    return isAttached && itsGame->GetSpectatePlayer() != NULL;
 }
 
 void CFreeCam::ViewControl(FunctionTable *ft) {    
     auto vp = gRenderer->viewParams;
     Vector direction;
-    CAbstractPlayer *spectatePlayer = itsPlayer->itsGame->GetSpectatePlayer();
+    CAbstractPlayer *spectatePlayer = itsGame->GetSpectatePlayer();
 
     if (isAttached && spectatePlayer != NULL) {
         vp->LookAtPart(spectatePlayer->viewPortPart);
@@ -66,30 +78,6 @@ void CFreeCam::ViewControl(FunctionTable *ft) {
     zRot = FOneSin(heading);
     direction[0] = xRot;
     direction[2] = zRot;
-
-    itsPlayer->WriteDBG(0, ToFloat(vp->atPoint[0])); // Cam target X
-    itsPlayer->WriteDBG(1, ToFloat(vp->atPoint[1])); // Cam target Y
-    itsPlayer->WriteDBG(2, ToFloat(vp->atPoint[2])); // Cam target Z
-    itsPlayer->WriteDBG(3, ToFloat(vp->fromPoint[0])); // Cam position X
-    itsPlayer->WriteDBG(4, ToFloat(vp->fromPoint[1])); // Cam position Y
-    itsPlayer->WriteDBG(5, ToFloat(vp->fromPoint[2])); // Cam position Z
-    itsPlayer->WriteDBG(6, ToFloat(direction[0])); // Cam facing X (Normalized)
-    itsPlayer->WriteDBG(7, ToFloat(direction[1])); // Cam facing Y (Normalized)
-    itsPlayer->WriteDBG(8, ToFloat(direction[2])); // Cam facing Z (Normalized)
-    itsPlayer->WriteDBG(9, ToFloat(len)); // Dist between Cam and target
-    itsPlayer->WriteDBG(10, ToFloat(heading)); // Direction in radians?
-    itsPlayer->WriteDBG(11, ToFloat(pitch)); // Vertical angle in radians?
-    itsPlayer->WriteDBG(12, (float)ft->mouseDelta.h); // Horizontal Mouse direction integer mouseRight: positive, mouseLeft: negative
-    itsPlayer->WriteDBG(13, (float)ft->mouseDelta.v); // Vertical Mouse direction integer   mouseUp: negative,    mouseDown: positive
-    itsPlayer->WriteDBG(14, ToFloat(xRot)); // horizontal camera angle
-    itsPlayer->WriteDBG(15, ToFloat(zRot)); // vertical camera angle
-    itsPlayer->WriteDBG(16, isAttached); // is the camera attached to a hector
-    if (spectatePlayer != NULL) {
-        itsPlayer->WriteDBG(17, spectatePlayer->GetPlayerPosition()); // which hector are we looking at
-    } else {
-        itsPlayer->WriteDBG(17, 0); // which hector are we looking at
-    }
-
 
     // Calc movement distance for each axis
     Fixed finalXSpeed = FMulDivNZ(direction[0], ToFixed(camSpeed), ToFixed(1000));
@@ -129,16 +117,47 @@ void CFreeCam::ViewControl(FunctionTable *ft) {
         vp->atPoint[0] -= finalZSpeed;
         vp->atPoint[2] += finalXSpeed;
     }
-    if (TESTFUNC(kfuLoadMissile, ft->held)) {
-        vp->fromPoint[1] += finalYSpeed;
-        vp->atPoint[1] += finalYSpeed;
-    }
-    if (TESTFUNC(kfuFireWeapon, ft->held)) {
-        vp->fromPoint[1] -= finalYSpeed;
-        vp->atPoint[1] -= finalYSpeed;
-    }
 
-    ControlViewPoint();
+    // Handle y-axis movement differently depending on if the camera is attached to a player or not
+    // Up
+    if (TESTFUNC(kfuLoadMissile, ft->held)) {
+        if (isAttached) {
+            // Cam is attached so don't move focal point
+            vp->fromPoint[1] += finalYSpeed;
+        } else {
+            vp->fromPoint[1] += finalYSpeed;
+            // Don't move focal point until threshold is passed
+            if (vp->fromPoint[1] > yFromThreshold) {
+                vp->atPoint[1] += finalYSpeed;
+            }
+        }
+    }
+    // Down
+    if (TESTFUNC(kfuFireWeapon, ft->held)) {
+        if (isAttached) {
+            // Cam is attached so don't move focal point
+            // Cam can't go below focal point
+            vp->fromPoint[1] -= finalYSpeed;
+            if (vp->fromPoint[1] < vp->atPoint[1]) {
+                vp->fromPoint[1] = vp->atPoint[1];
+            }
+        } else {
+            // Don't let camera or focal point go below y=0
+            // When zero is reached, save the height of the camera
+            // The focal point will not move on the y-axis until the camera is at least as far away (on y-axis) as the saved threshold
+            if (vp->atPoint[1] != 0)
+                vp->atPoint[1] -= finalYSpeed;
+
+            if (vp->atPoint[1] < 0) {
+                yFromThreshold = vp->fromPoint[1];
+                vp->atPoint[1] = 0;
+            }
+            vp->fromPoint[1] -= finalYSpeed;
+            if (vp->fromPoint[1] < 0) {
+                vp->fromPoint[1] = 0;
+            }
+        }
+    }
 }
 
 void CFreeCam::FrameAction() {
