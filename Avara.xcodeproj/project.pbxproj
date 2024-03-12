@@ -27,6 +27,8 @@
 		948CBF152B335A1400147E80 /* BaseAssetStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */; };
 		94924EAF2B3A894900197378 /* OggFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94924EAE2B3A894900197378 /* OggFile.cpp */; };
 		94924EB02B3A894900197378 /* OggFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94924EAE2B3A894900197378 /* OggFile.cpp */; };
+		94EE531F2BA0AFCF00EE9056 /* CFreeCam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94EE531D2BA0AFCF00EE9056 /* CFreeCam.cpp */; };
+		94EE53202BA0AFCF00EE9056 /* CFreeCam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94EE531D2BA0AFCF00EE9056 /* CFreeCam.cpp */; };
 		94F17DDD29920D90001F5950 /* ARGBColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94F17DDC29920D90001F5950 /* ARGBColor.cpp */; };
 		E20752EF2A003EC600DCC210 /* Tags.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20752EE2A003EC600DCC210 /* Tags.cpp */; };
 		E20A3C562991CC72005741F7 /* KeyFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20A3C552991CC72005741F7 /* KeyFuncs.cpp */; };
@@ -397,6 +399,8 @@
 		948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BaseAssetStorage.cpp; sourceTree = "<group>"; };
 		94924EAD2B3A893900197378 /* OggFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OggFile.h; sourceTree = "<group>"; };
 		94924EAE2B3A894900197378 /* OggFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OggFile.cpp; sourceTree = "<group>"; };
+		94EE531D2BA0AFCF00EE9056 /* CFreeCam.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CFreeCam.cpp; sourceTree = "<group>"; };
+		94EE531E2BA0AFCF00EE9056 /* CFreeCam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFreeCam.h; sourceTree = "<group>"; };
 		94F17DDB2991FACE001F5950 /* ARGBColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARGBColor.h; sourceTree = "<group>"; };
 		94F17DDC29920D90001F5950 /* ARGBColor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ARGBColor.cpp; sourceTree = "<group>"; };
 		E20752ED29FF1EC500DCC210 /* Tags.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tags.h; sourceTree = "<group>"; };
@@ -1259,6 +1263,8 @@
 				E5890C2929895118007A875D /* CDoorActor.h */,
 				E5890BD829895118007A875D /* CForceField.cpp */,
 				E5890BDC29895118007A875D /* CForceField.h */,
+				94EE531D2BA0AFCF00EE9056 /* CFreeCam.cpp */,
+				94EE531E2BA0AFCF00EE9056 /* CFreeCam.h */,
 				E5890BD029895118007A875D /* CFreeSolid.cpp */,
 				E5890C4929895118007A875D /* CFreeSolid.h */,
 				E5890C2429895118007A875D /* CGlowActors.cpp */,
@@ -2100,6 +2106,7 @@
 				E517F06B299713DB0036B206 /* CAbstractYon.cpp in Sources */,
 				E517F06C299713DB0036B206 /* CAreaActor.cpp in Sources */,
 				E517F06D299713DB0036B206 /* CAvaraApp.cpp in Sources */,
+				94EE53202BA0AFCF00EE9056 /* CFreeCam.cpp in Sources */,
 				E517F06E299713DB0036B206 /* CAvaraGame.cpp in Sources */,
 				E517F06F299713DB0036B206 /* CBall.cpp in Sources */,
 				E517F070299713DB0036B206 /* CDepot.cpp in Sources */,
@@ -2270,6 +2277,7 @@
 				E5890CB229895118007A875D /* CommandManager.cpp in Sources */,
 				E5890CF629895118007A875D /* CGroundColorAdjuster.cpp in Sources */,
 				E5890CEA29895118007A875D /* CDepot.cpp in Sources */,
+				94EE531F2BA0AFCF00EE9056 /* CFreeCam.cpp in Sources */,
 				E5890EFF29895124007A875D /* theme.cpp in Sources */,
 				E5890F0229895124007A875D /* glutil.cpp in Sources */,
 				E5890F0529895124007A875D /* slider.cpp in Sources */,
