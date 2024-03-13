@@ -19,6 +19,7 @@
 #include "CPlayerManager.h"
 #include "CPlayerMissile.h"
 #include "CScout.h"
+#include "CFreeCam.h"
 #include "CSmartPart.h"
 #include "CViewParameters.h"
 //#include "CInfoPanel.h"
@@ -156,6 +157,7 @@ void CAbstractPlayer::StartSystems() {
     scoutView = false;
     scoutIdent = 0;
     scoutBaseHeight = FIX3(2000);
+    freeCamIdent = 0;
 
     sliverCounts[kSmallSliver] = 12;
     sliverCounts[kMediumSliver] = 18;
@@ -188,6 +190,18 @@ void CAbstractPlayer::LoadScout() {
     itsScout->BeginScript();
     FreshCalc();
     itsScout->EndScript();
+}
+
+void CAbstractPlayer::LoadFreeCam() {
+    
+    itsFreeCam = new CFreeCam(this);
+    itsFreeCam->BeginScript();
+    FreshCalc();
+    itsFreeCam->EndScript();
+}
+
+void CAbstractPlayer::WriteDBG(int index, float val) {
+    freeCamDBG[index] = val;
 }
 
 void CAbstractPlayer::ReplacePartColors() {
@@ -276,6 +290,7 @@ CAbstractActor *CAbstractPlayer::EndScript() {
     ReplacePartColors();
     LoadHUDParts();
     LoadScout();
+    LoadFreeCam();
     PlaceParts();
     LinkPartSpheres();
 
@@ -314,6 +329,15 @@ CAbstractPlayer::~CAbstractPlayer() {
     if (itsScout) {
         delete itsScout;
         scoutIdent = 0;
+    }
+
+    if (freeCamIdent) {
+        itsFreeCam = (CFreeCam *)gCurrentGame->FindIdent(freeCamIdent);
+    }
+
+    if (freeView) {
+        delete itsFreeCam;
+        freeCamIdent = 0;
     }
 
     gRenderer->RemoveHUDPart(dirArrow);
@@ -963,6 +987,23 @@ void CAbstractPlayer::ResetDashboard() {
     }
 }
 
+void CAbstractPlayer::ToggleFreeCam() {
+    freeView = !freeView;
+
+    itsGame->ToggleFreeCam(freeView);
+    itsFreeCam->ToggleState(freeView);
+    
+    if (freeView) {
+        SDL_Log("Free cam toggled on!");
+    }
+    else
+        SDL_Log("Free cam toggled off!");
+}
+
+Boolean CAbstractPlayer::IsFreeCamAttached() {
+    return itsFreeCam->IsAttached();
+}
+
 void CAbstractPlayer::ControlSoundPoint() {
     Fixed theRight[] = {FIX(-1), 0, 0};
     Matrix *m;
@@ -990,6 +1031,11 @@ void CAbstractPlayer::ControlViewPoint() {
             itsScout = (CScout *)itsGame->FindIdent(scoutIdent);
             if (itsScout)
                 itsScout->ControlViewPoint();
+        }
+    } else if (freeView && freeCamIdent && itsManager->IsLocalPlayer()) {
+        itsFreeCam = (CFreeCam *)itsGame->FindIdent(freeCamIdent);
+        if (itsFreeCam) {
+            itsFreeCam->ControlViewPoint();
         }
     } else {
         MATRIXCOPY(&vp->viewMatrix, viewPortPart->GetInverseTransform());
@@ -1258,9 +1304,21 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
         else if(lives == 0) {
             if (itsManager->IsLocalPlayer() && TESTFUNC(kfuSpectateNext, ft->down)) {
                 itsGame->SpectateNext();
+                if (freeView) {
+                    itsFreeCam->SetAttached(true);
+                }
             }
             if (itsManager->IsLocalPlayer() && TESTFUNC(kfuSpectatePrevious, ft->down)) {
                 itsGame->SpectatePrevious();
+                if (freeView) {
+                    itsFreeCam->SetAttached(true);
+                }
+            }
+            if (itsManager->IsLocalPlayer() && TESTFUNC(kfuToggleFreeCam, ft->down)) {
+                ToggleFreeCam();
+            }
+            if (freeView) {
+                itsFreeCam->ViewControl(ft);
             }
         }
 

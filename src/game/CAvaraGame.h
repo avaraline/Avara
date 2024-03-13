@@ -101,6 +101,8 @@ public:
     short teamsStandingMask;
     short teamsStanding;
 
+    Boolean freeCamState;
+
     CIncarnator *incarnatorList;
     CAbstractPlayer *freshPlayerList;
 
@@ -244,6 +246,7 @@ public:
     virtual void StopGame();
     virtual void Render();
     virtual void ViewControl();
+    virtual void ToggleFreeCam(Boolean state);
 
     virtual void InitMixer(Boolean silentFlag);
 
