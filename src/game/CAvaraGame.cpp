@@ -106,6 +106,7 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     freshPlayerList = NULL;
     playerList = NULL;
     spectatePlayer = NULL;
+    freeCamState = 0;
 
     soundSwitches = 0xFF;
 
@@ -915,9 +916,18 @@ bool CAvaraGame::GameTick() {
     return true;
 }
 
+void CAvaraGame::ToggleFreeCam(Boolean state) {
+    freeCamState = state;
+}
+
 void CAvaraGame::ViewControl() {
     if(spectatePlayer != NULL && FindPlayerManager(spectatePlayer) != NULL) {
-        FindPlayerManager(spectatePlayer)->ViewControl();
+        if (freeCamState) {
+            // The player has control of the camera when in free cam mode while spectating
+            itsNet->ViewControl();
+        } else {
+            FindPlayerManager(spectatePlayer)->ViewControl();
+        }
     }
     else {
         itsNet->ViewControl();
