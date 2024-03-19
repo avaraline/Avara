@@ -295,6 +295,7 @@ public:
     //
 
     virtual void ToggleFreeCam();
+    virtual void SetFreeCamState(Boolean state);
     virtual Boolean IsFreeCamAttached();
     virtual void ControlSoundPoint();
     virtual void ControlViewPoint();

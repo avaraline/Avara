@@ -323,7 +323,7 @@ std::string CRosterWindow::GetStringStatus(CPlayerManager *player) {
         strStatus = "away";
     }
     if (presence == kzSpectating) {
-        if (player->LoadingStatusIsIn(kLConnected, kLActive, kLLoaded, kLPaused)) {
+        if (player->LoadingStatusIsIn(kLConnected, kLActive, kLReady, kLLoaded, kLPaused)) {
             strStatus = "spectator";
         } else if (strStatus.length() > 0) {
             strStatus += "*";   // make this into an eyeball char?

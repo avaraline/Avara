@@ -110,12 +110,20 @@ bool CApplication::Update(const std::string name, std::string &value) {
     }
     try {
         json updatePref = json::parse("{ \"" + name + "\": " + value + "}");
-        _prefs.update(updatePref);
-        WritePrefs(_prefs);
+        
+        // If the type of the new value is different than the old one
+        // this will easily cause a crash when reading the json
+        if (_prefs[name].type_name() == updatePref[name].type_name()) {
+            _prefs.update(updatePref);
+            WritePrefs(_prefs);
+        } else {
+            SDL_Log("Type mismatch. User added type '%s' did not match existing type '%s'. Prefs were not updated.", _prefs[name].type_name(), updatePref[name].type_name());
+            return false;
+        }
     }
     catch (json::parse_error &ex) {
         // User typed in the command to change a pref. The value type did not match for the given pref
-        SDL_Log("User input value '%s' did not parse to the correct type.", name.c_str());
+        SDL_Log("User input value for '%s' did not parse to the correct type.", name.c_str());
         return false;  // Did not update pref
     }
     return true;  // Successfully updated pref
