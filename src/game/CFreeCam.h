@@ -16,8 +16,7 @@ public:
     CViewParameters *freeParams;
 
     short action;
-    Fixed radius;
-    Fixed yFromThreshold;
+    Fixed radius, heading, pitch;
     short camSpeed;
     Boolean isAttached;
 

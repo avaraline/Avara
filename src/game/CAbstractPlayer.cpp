@@ -193,11 +193,11 @@ void CAbstractPlayer::LoadScout() {
 }
 
 void CAbstractPlayer::LoadFreeCam() {
-    
     itsFreeCam = new CFreeCam(this);
     itsFreeCam->BeginScript();
     FreshCalc();
     itsFreeCam->EndScript();
+    SetFreeCamState(false);
 }
 
 void CAbstractPlayer::WriteDBG(int index, float val) {
@@ -988,7 +988,11 @@ void CAbstractPlayer::ResetDashboard() {
 }
 
 void CAbstractPlayer::ToggleFreeCam() {
-    freeView = !freeView;
+    SetFreeCamState(!freeView);
+}
+
+void CAbstractPlayer::SetFreeCamState(Boolean state) {
+    freeView = state;
 
     itsGame->ToggleFreeCam(freeView);
     itsFreeCam->ToggleState(freeView);

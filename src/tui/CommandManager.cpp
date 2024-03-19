@@ -510,6 +510,11 @@ bool CommandManager::GetSetPreference(VectorOfArgs vargs) {
                 //write prefs
                 itsApp->AddMessageLine(prefName + " changed from " + oldValue + " to " + newValue);
                 itsApp->CApplication::PrefChanged(prefName);
+            } else {
+                itsApp->AddMessageLine("Error: Pref not updated",
+                                        MsgAlignment::Left,
+                                        MsgCategory::Error
+                                    );
             }
         }
     }
