@@ -89,11 +89,12 @@ Handle FindResource(SDL_RWops *file, OSType theType, short theID, std::string na
                 // Only read the resource name if we're looking up by name.
                 uint32_t rsrcNameOffset = mapOffset + nameListOffset + nameOffset;
                 SDL_RWseek(file, rsrcNameOffset, 0);
-                uint8_t nameLen = SDL_ReadU8(file);
-                char cName[nameLen];
+                const uint8_t nameLen = SDL_ReadU8(file);
+                char* cName = new char[nameLen];
                 SDL_RWread(file, cName, nameLen, 1);
                 std::string rsrcName(cName, nameLen);
                 nameMatch = IsEquals(rsrcName, name);
+                delete[] cName;
             }
 
             if (rsrcType == theType && ((rsrcId == theID) || nameMatch)) {

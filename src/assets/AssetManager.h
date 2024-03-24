@@ -331,13 +331,13 @@ private:
 
     /** @copydoc */
     template <>
-    void ReviewPriorities(AssetCache<nlohmann::json> &cache);
+    static void ReviewPriorities(AssetCache<nlohmann::json> &cache);
 
     /** @copydoc */
     template <>
-    void ReviewPriorities(AssetCache<OggFile> &cache);
+    static void ReviewPriorities(AssetCache<OggFile> &cache);
 
     /** @copydoc */
     template <>
-    void ReviewPriorities(AssetCache<HullConfigRecord> &cache);
+    static void ReviewPriorities(AssetCache<HullConfigRecord> &cache);
 };
