@@ -547,7 +547,7 @@ void AssetManager::BuildDependencyList(std::string currentPackage, std::vector<s
 }
 
 template <>
-static void AssetManager::ReviewPriorities(AssetCache<nlohmann::json> &cache)
+void AssetManager::ReviewPriorities(AssetCache<nlohmann::json> &cache)
 {
     std::vector<int16_t> needsRemoval = {};
     for (auto const &[id, asset] : cache) {
@@ -577,7 +577,7 @@ static void AssetManager::ReviewPriorities(AssetCache<nlohmann::json> &cache)
 };
 
 template <>
-static void AssetManager::ReviewPriorities(AssetCache<OggFile> &cache)
+void AssetManager::ReviewPriorities(AssetCache<OggFile> &cache)
 {
     std::vector<int16_t> needsRemoval = {};
     for (auto const &[id, asset] : cache) {
@@ -618,7 +618,7 @@ static void AssetManager::ReviewPriorities(AssetCache<OggFile> &cache)
 }
 
 template <>
-static void AssetManager::ReviewPriorities(AssetCache<HullConfigRecord> &cache)
+void AssetManager::ReviewPriorities(AssetCache<HullConfigRecord> &cache)
 {
     std::vector<int16_t> needsRemoval = {};
     for (auto const &[id, asset] : cache) {
