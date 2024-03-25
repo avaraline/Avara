@@ -34,6 +34,7 @@ jobs:
         uses: lukka/run-vcpkg@v11
       - name: Build
         run: |
+          vcpkg integrate install
           .\bin\git_version.ps1
           msbuild /m /p:Platform=x64 /p:Configuration=Release .\Avara.msvc\Avara.sln
         shell: pwsh
