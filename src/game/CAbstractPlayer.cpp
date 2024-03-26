@@ -463,9 +463,9 @@ void CAbstractPlayer::PlaceHUDParts() {
     } else {
         mt = &viewPortPart->itsTransform;
 
-        theHit.direction[0] = FMul((*mt)[2][0], PLAYERMISSILESPEED);
-        theHit.direction[1] = FMul((*mt)[2][1], PLAYERMISSILESPEED);
-        theHit.direction[2] = FMul((*mt)[2][2], PLAYERMISSILESPEED);
+        theHit.direction[0] = FMul((*mt)[2][0], PLAYERMISSILESPEED) + speed[0];
+        theHit.direction[1] = FMul((*mt)[2][1], PLAYERMISSILESPEED) + speed[1];
+        theHit.direction[2] = FMul((*mt)[2][2], PLAYERMISSILESPEED) + speed[2];
 
         theHit.direction[3] = 0;
         NormalizeVector(3, theHit.direction);
@@ -1690,9 +1690,9 @@ void CAbstractPlayer::GunActions() {
                 CombineTransforms(&m1, &m2, &viewPortPart->itsTransform);
                 MTranslate(speed[0], speed[1], speed[2], &m2);
 
-                theHit.direction[0] = FMul(m2[2][0], PLAYERMISSILESPEED);
-                theHit.direction[1] = FMul(m2[2][1], PLAYERMISSILESPEED);
-                theHit.direction[2] = FMul(m2[2][2], PLAYERMISSILESPEED);
+                theHit.direction[0] = FMul(m2[2][0], PLAYERMISSILESPEED) + speed[0];
+                theHit.direction[1] = FMul(m2[2][1], PLAYERMISSILESPEED) + speed[1];
+                theHit.direction[2] = FMul(m2[2][2], PLAYERMISSILESPEED) + speed[2];
 
                 missileSpeed[0] = theHit.direction[0];
                 missileSpeed[1] = theHit.direction[1];
