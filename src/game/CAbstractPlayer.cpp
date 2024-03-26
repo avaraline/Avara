@@ -463,15 +463,9 @@ void CAbstractPlayer::PlaceHUDParts() {
     } else {
         mt = &viewPortPart->itsTransform;
 
-//        if (debug2Flag) {
-//            theHit.direction[0] = FMul((*mt)[2][0], PLAYERMISSILESPEED) + speed[0];
-//            theHit.direction[1] = FMul((*mt)[2][1], PLAYERMISSILESPEED) + speed[1];
-//            theHit.direction[2] = FMul((*mt)[2][2], PLAYERMISSILESPEED) + speed[2];
-//        } else {
-            theHit.direction[0] = FMul((*mt)[2][0], PLAYERMISSILESPEED);
-            theHit.direction[1] = FMul((*mt)[2][1], PLAYERMISSILESPEED);
-            theHit.direction[2] = FMul((*mt)[2][2], PLAYERMISSILESPEED);
-//        }
+        theHit.direction[0] = FMul((*mt)[2][0], PLAYERMISSILESPEED);
+        theHit.direction[1] = FMul((*mt)[2][1], PLAYERMISSILESPEED);
+        theHit.direction[2] = FMul((*mt)[2][2], PLAYERMISSILESPEED);
 
         theHit.direction[3] = 0;
         NormalizeVector(3, theHit.direction);
@@ -1688,10 +1682,6 @@ void CAbstractPlayer::GunActions() {
             weaponIdent = 0;
         } else {
             i = gunEnergy[0] < gunEnergy[1];
-            if (itsManager->Slot() == 0) {
-                SDL_Log("gun = %d, energy = %d, gunOffset = %s\n", i, gunEnergy[i],
-                        FormatVector(gunOffset, 3).c_str());
-            }
             if (gunEnergy[i] >= activeGunEnergy) {
                 Vector missileSpeed;
 
@@ -1699,28 +1689,10 @@ void CAbstractPlayer::GunActions() {
                 MTranslate(i ? gunOffset[0] : -gunOffset[0], gunOffset[1], gunOffset[2], &m1);
                 CombineTransforms(&m1, &m2, &viewPortPart->itsTransform);
                 MTranslate(speed[0], speed[1], speed[2], &m2);
-                if (itsManager->Slot() == 0) {
-//                    SDL_Log("\nxform[0] = %s\nxform[1] = %s\nxform[2] = %s\n   speed = %s\n",
-//                            FormatVector(viewPortPart->itsTransform[0], 4).c_str(),
-//                            FormatVector(viewPortPart->itsTransform[1], 4).c_str(),
-//                            FormatVector(viewPortPart->itsTransform[2], 4).c_str(),
-//                            FormatVector(speed, 3).c_str());
-                    SDL_Log("\nm2[0] = %s\nm2[1] = %s\nm2[2] = %s\n   speed = %s, debug2Flag = %d\n",
-                            FormatVector(m2[0], 4).c_str(),
-                            FormatVector(m2[1], 4).c_str(),
-                            FormatVector(m2[2], 4).c_str(),
-                            FormatVector(speed, 3).c_str(), debug2Flag);
-                }
 
-//                if (debug2Flag) {
-//                    theHit.direction[0] = FMul(m2[2][0], PLAYERMISSILESPEED) + speed[0];
-//                    theHit.direction[1] = FMul(m2[2][1], PLAYERMISSILESPEED) + speed[1];
-//                    theHit.direction[2] = FMul(m2[2][2], PLAYERMISSILESPEED) + speed[2];
-//                } else {
-                    theHit.direction[0] = FMul(m2[2][0], PLAYERMISSILESPEED);
-                    theHit.direction[1] = FMul(m2[2][1], PLAYERMISSILESPEED);
-                    theHit.direction[2] = FMul(m2[2][2], PLAYERMISSILESPEED);
-//                }
+                theHit.direction[0] = FMul(m2[2][0], PLAYERMISSILESPEED);
+                theHit.direction[1] = FMul(m2[2][1], PLAYERMISSILESPEED);
+                theHit.direction[2] = FMul(m2[2][2], PLAYERMISSILESPEED);
 
                 missileSpeed[0] = theHit.direction[0];
                 missileSpeed[1] = theHit.direction[1];
