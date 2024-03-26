@@ -59,6 +59,7 @@ void CRealMovers::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
 
     CGlowActors::WasHit(theHit, hitEnergy);
 
+    SDL_Log("HIT direction = %s, energy = %d, shields = %d, totalMass = %d\n", FormatVector(theHit->direction, 3).c_str(), hitEnergy, shields, GetTotalMass());
     if (shields) {
         impulsePower = hitEnergy >> 1;
         impulseMotion[0] = FMul(impulsePower, theHit->direction[0]);

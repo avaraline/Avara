@@ -80,6 +80,7 @@ void CAbstractMissile::FrameAction() {
             }
             anActor = hitRec.closestHit->theOwner;
             anActor->WasHit(&hitRec, energy);
+            SDL_Log("hit energy = %d\n", energy);
             SecondaryDamage(hitRec.team, hitRec.playerId, ksiMissileHit);
         }
 
@@ -160,6 +161,7 @@ void CAbstractMissile::Launch(Matrix *startMatrix,
         deltaMove[1] = FMul(speed, target->direction[1]);
         deltaMove[2] = FMul(speed, target->direction[2]);
     }
+    SDL_Log("plasma delta = %s\n", FormatVector(deltaMove, 3).c_str());
 
     partList[0]->isTransparent = true;
     energy = theEnergy;
