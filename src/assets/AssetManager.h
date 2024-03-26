@@ -329,15 +329,15 @@ private:
     template <typename T>
     static void ReviewPriorities(AssetCache<T> &cache);
 
-    /** @copydoc */
+    /** @copydoc AssetManager::ReviewPriorities */
     template <>
     void ReviewPriorities(AssetCache<nlohmann::json> &cache);
 
-    /** @copydoc */
+    /** @copydoc AssetManager::ReviewPriorities */
     template <>
     void ReviewPriorities(AssetCache<OggFile> &cache);
 
-    /** @copydoc */
+    /** @copydoc AssetManager::ReviewPriorities */
     template <>
     void ReviewPriorities(AssetCache<HullConfigRecord> &cache);
 };
