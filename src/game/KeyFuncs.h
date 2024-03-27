@@ -91,10 +91,6 @@ enum {
     kfuLookRight,
     kfuAimForward,
 
-    kfuFreeCamForward,
-    kfuFreeCamBackward,
-    kfuFreeCamLeft,
-    kfuFreeCamRight,
     kfuFreeCamUp,
     kfuFreeCamDown,
 

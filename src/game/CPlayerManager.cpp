@@ -78,10 +78,6 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
         {"chatMode", 1 << kfuTypeText},
         {"freeCamUp", 1 << kfuFreeCamUp},
         {"freeCamDown", 1 << kfuFreeCamDown},
-        {"freeCamForward", 1 << kfuFreeCamForward},
-        {"freeCamLeft", 1 << kfuFreeCamLeft},
-        {"freeCamRight", 1 << kfuFreeCamRight},
-        {"freeCamBackward", 1 << kfuFreeCamBackward},
         {"debug1", 1 << kfuDebug1},
         {"debug2", 1 << kfuDebug2}};
 

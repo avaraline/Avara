@@ -13,7 +13,10 @@ CFreeCam::CFreeCam(CAbstractPlayer *thePlayer) {
 
     camSpeed = 350;
     radius = FIX3(25000);
+    pitch = FIX3(125); // 45 degrees
+    heading = 0;
 
+    isAttached = false;
     action = camInactive;
     isActive = kIsActive;
     partCount = 0;
@@ -23,13 +26,15 @@ CFreeCam::CFreeCam(CAbstractPlayer *thePlayer) {
 void CFreeCam::ToggleState(Boolean state) {
     CAbstractPlayer *spectatePlayer = itsGame->GetSpectatePlayer();
 
-    if (state && spectatePlayer != NULL) {
+    if (state) {
         if (action == camInactive) {
             itsGame->AddActor(this);
             itsPlayer->freeCamIdent = ident;
             action = camAnimating;
         }
-        isAttached = true;
+        if (spectatePlayer != NULL) {
+            isAttached = true;
+        }
     }
 }
 
@@ -46,71 +51,75 @@ void CFreeCam::ViewControl(FunctionTable *ft) {
     Vector direction;
     CAbstractPlayer *spectatePlayer = itsGame->GetSpectatePlayer();
 
+    // This sets up the ability for the camera to follow a player
     if (isAttached && spectatePlayer != NULL) {
         vp->LookAtPart(spectatePlayer->viewPortPart);
     }
 
-    // Find direction vector for the camera
-    direction[0] = vp->atPoint[0] - vp->fromPoint[0];
-    direction[1] = vp->atPoint[1] - vp->fromPoint[1];
-    direction[2] = vp->atPoint[2] - vp->fromPoint[2];
+    // Mouse movements adjust polar coordinates
+    heading += FIX3(ft->mouseDelta.h * .2);
+    pitch -= FIX3(ft->mouseDelta.v * .2);
+    if (pitch > FIX3(250)) pitch = FIX3(250);
+    if (pitch < FIX3(10)) pitch = FIX3(10);
 
-    // Find length of direction vector
-    Fixed len = FSqrt(FMul(direction[0], direction[0]) + FMul(direction[2], direction[2]));
-
-    // Normalize Direction vector
-    direction[0] = FDivNZ(direction[0], len);
-    //direction[1] = FDivNZ(direction[1], len);
-    direction[2] = FDivNZ(direction[2], len);
-    
-    // Calc the horizontal viewing angle from the direction vector
-    Fixed heading, pitch;
-    heading = FOneArcTan2(direction[0], direction[2]);
-    
-    // Find new direction vector if mouse moved
-    Fixed xRot=0, zRot=0;
-    if (ft->mouseDelta.h > 0) {
-        heading -= FIX3(5);
-    } else if (ft->mouseDelta.h < 0) {
-        heading += FIX3(5);
-    }
-    xRot = FOneCos(heading);
-    zRot = FOneSin(heading);
+    // Convert from polar to cartesian
+    // Find normalized camera position
+    Fixed xRot=0, yRot=0, zRot=0;
+    xRot = FMul(FOneCos(heading), FOneSin(pitch));
+    yRot = FOneCos(pitch);
+    zRot = FMul(FOneSin(heading), FOneSin(pitch));
     direction[0] = xRot;
+    direction[1] = yRot;
     direction[2] = zRot;
 
-    // Calc movement distance for each axis
+    // Calc potential velocity for each axis
     Fixed finalXSpeed = FMulDivNZ(direction[0], ToFixed(camSpeed), ToFixed(1000));
     Fixed finalYSpeed = FIX3(camSpeed);
     Fixed finalZSpeed = FMulDivNZ(direction[2], ToFixed(camSpeed), ToFixed(1000));
 
-    // Camera rotation
+    // Set actual camera position
     vp->fromPoint[0] = vp->atPoint[0] - FMul(direction[0], radius);
+    vp->fromPoint[1] = vp->atPoint[1] + FMul(direction[1], radius);
     vp->fromPoint[2] = vp->atPoint[2] - FMul(direction[2], radius);
 
+    // Zoom out
+    if (TESTFUNC(kfuZoomOut, ft->held)) {
+        radius += FIX3(camSpeed);
+        if (radius > FIX3(50000)) {
+            radius = FIX3(50000);
+        }
+    }
+    // Zoom In
+    if (TESTFUNC(kfuZoomIn, ft->held)) {
+        radius -= FIX3(camSpeed);
+        if (radius < FIX3(10000)) {
+            radius = FIX3(10000);
+        }
+    }
+
     // Orthogonal camera movement
-    if (TESTFUNC(kfuFreeCamForward, ft->held)) {
+    if (TESTFUNC(kfuForward, ft->held)) {
         isAttached = false;
         vp->fromPoint[0] += finalXSpeed;
         vp->fromPoint[2] += finalZSpeed;
         vp->atPoint[0] += finalXSpeed;
         vp->atPoint[2] += finalZSpeed;
     }
-    if (TESTFUNC(kfuFreeCamBackward, ft->held)) {
+    if (TESTFUNC(kfuReverse, ft->held)) {
         isAttached = false;
         vp->fromPoint[0] -= finalXSpeed;
         vp->fromPoint[2] -= finalZSpeed;
         vp->atPoint[0] -= finalXSpeed;
         vp->atPoint[2] -= finalZSpeed;
     }
-    if (TESTFUNC(kfuFreeCamLeft, ft->held)) {
+    if (TESTFUNC(kfuLeft, ft->held)) {
         isAttached = false;
         vp->fromPoint[0] += finalZSpeed;
         vp->fromPoint[2] -= finalXSpeed;
         vp->atPoint[0] += finalZSpeed;
         vp->atPoint[2] -= finalXSpeed;
     }
-    if (TESTFUNC(kfuFreeCamRight, ft->held)) {
+    if (TESTFUNC(kfuRight, ft->held)) {
         isAttached = false;
         vp->fromPoint[0] -= finalZSpeed;
         vp->fromPoint[2] += finalXSpeed;
@@ -118,43 +127,25 @@ void CFreeCam::ViewControl(FunctionTable *ft) {
         vp->atPoint[2] += finalXSpeed;
     }
 
-    // Handle y-axis movement differently depending on if the camera is attached to a player or not
     // Up
     if (TESTFUNC(kfuFreeCamUp, ft->held)) {
-        if (isAttached) {
-            // Cam is attached so don't move focal point
-            vp->fromPoint[1] += finalYSpeed;
-        } else {
-            vp->fromPoint[1] += finalYSpeed;
-            // Don't move focal point until threshold is passed
-            if (vp->fromPoint[1] > yFromThreshold) {
-                vp->atPoint[1] += finalYSpeed;
-            }
-        }
+        isAttached = false;
+        vp->atPoint[1] += finalYSpeed;
+        vp->fromPoint[1] += finalYSpeed;
     }
     // Down
     if (TESTFUNC(kfuFreeCamDown, ft->held)) {
-        if (isAttached) {
-            // Cam is attached so don't move focal point
-            // Cam can't go below focal point
-            vp->fromPoint[1] -= finalYSpeed;
-            if (vp->fromPoint[1] < vp->atPoint[1]) {
-                vp->fromPoint[1] = vp->atPoint[1];
-            }
-        } else {
-            // Don't let camera or focal point go below y=0
-            // When zero is reached, save the height of the camera
-            // The focal point will not move on the y-axis until the camera is at least as far away (on y-axis) as the saved threshold
-            if (vp->atPoint[1] != 0)
-                vp->atPoint[1] -= finalYSpeed;
-
-            if (vp->atPoint[1] < 0) {
-                yFromThreshold = vp->fromPoint[1];
+        // Leave camera attached if already at y=0
+        if (vp->atPoint[1] > 0) {
+            isAttached = false;
+            // Focal point should not go below 0
+            // If focal point does go below zero, move camera by the same amount to keep it at a fixed distance
+            if (vp->atPoint[1] - finalYSpeed < 0) {
+                vp->fromPoint[1] -= vp->atPoint[1];
                 vp->atPoint[1] = 0;
-            }
-            vp->fromPoint[1] -= finalYSpeed;
-            if (vp->fromPoint[1] < 0) {
-                vp->fromPoint[1] = 0;
+            } else {
+                vp->atPoint[1] -= finalYSpeed;
+                vp->fromPoint[1] -= finalYSpeed;
             }
         }
     }

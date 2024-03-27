@@ -196,11 +196,11 @@ void CAbstractPlayer::LoadScout() {
 }
 
 void CAbstractPlayer::LoadFreeCam() {
-    
     itsFreeCam = new CFreeCam(this);
     itsFreeCam->BeginScript();
     FreshCalc();
     itsFreeCam->EndScript();
+    SetFreeCamState(false);
 }
 
 void CAbstractPlayer::WriteDBG(int index, float val) {
@@ -466,15 +466,9 @@ void CAbstractPlayer::PlaceHUDParts() {
     } else {
         mt = &viewPortPart->itsTransform;
 
-        if (debug2Flag) {
-            theHit.direction[0] = FMul((*mt)[2][0], PLAYERMISSILESPEED) + speed[0];
-            theHit.direction[1] = FMul((*mt)[2][1], PLAYERMISSILESPEED) + speed[1];
-            theHit.direction[2] = FMul((*mt)[2][2], PLAYERMISSILESPEED) + speed[2];
-        } else {
-            theHit.direction[0] = FMul((*mt)[2][0], PLAYERMISSILESPEED);
-            theHit.direction[1] = FMul((*mt)[2][1], PLAYERMISSILESPEED);
-            theHit.direction[2] = FMul((*mt)[2][2], PLAYERMISSILESPEED);
-        }
+        theHit.direction[0] = FMul((*mt)[2][0], PLAYERMISSILESPEED);
+        theHit.direction[1] = FMul((*mt)[2][1], PLAYERMISSILESPEED);
+        theHit.direction[2] = FMul((*mt)[2][2], PLAYERMISSILESPEED);
 
         theHit.direction[3] = 0;
         NormalizeVector(3, theHit.direction);
@@ -995,7 +989,11 @@ void CAbstractPlayer::ResetDashboard() {
 }
 
 void CAbstractPlayer::ToggleFreeCam() {
-    freeView = !freeView;
+    SetFreeCamState(!freeView);
+}
+
+void CAbstractPlayer::SetFreeCamState(Boolean state) {
+    freeView = state;
 
     itsGame->ToggleFreeCam(freeView);
     itsFreeCam->ToggleState(freeView);
@@ -1699,15 +1697,9 @@ void CAbstractPlayer::GunActions() {
                 CombineTransforms(&m1, &m2, &viewPortPart->itsTransform);
                 MTranslate(speed[0], speed[1], speed[2], &m2);
 
-                if (debug2Flag) {
-                    theHit.direction[0] = FMul(m2[2][0], PLAYERMISSILESPEED) + speed[0];
-                    theHit.direction[1] = FMul(m2[2][1], PLAYERMISSILESPEED) + speed[1];
-                    theHit.direction[2] = FMul(m2[2][2], PLAYERMISSILESPEED) + speed[2];
-                } else {
-                    theHit.direction[0] = FMul(m2[2][0], PLAYERMISSILESPEED);
-                    theHit.direction[1] = FMul(m2[2][1], PLAYERMISSILESPEED);
-                    theHit.direction[2] = FMul(m2[2][2], PLAYERMISSILESPEED);
-                }
+                theHit.direction[0] = FMul(m2[2][0], PLAYERMISSILESPEED);
+                theHit.direction[1] = FMul(m2[2][1], PLAYERMISSILESPEED);
+                theHit.direction[2] = FMul(m2[2][2], PLAYERMISSILESPEED);
 
                 missileSpeed[0] = theHit.direction[0];
                 missileSpeed[1] = theHit.direction[1];
