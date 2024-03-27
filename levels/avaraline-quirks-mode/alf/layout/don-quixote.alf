@@ -157,73 +157,73 @@
 <Teleporter y="20" shape="0" group="@recenter" mask="0" spin="false" color="#fff4e4" color.1="#000000" cx="37.5" cz="0" angle="270" />
 <Teleporter y="20" shape="0" group="@recenter" mask="0" spin="false" color="#fff4e4" color.1="#000000" cx="-37.5" cz="0" angle="90" />
 
-<unique vars="rShow rTaken" />
-<And in="@start" out="rShow" />
-<Timer in="rTaken" out="rShow" wait="300" />
-<Goody y="1 + mGoodyOffset" shape="bspAvaraA" speed="-2" grenades="mXLgGrenade" missiles="mXXLgMissile" start="rShow" out="rTaken" color="#fd6051" color.1="#000000" cx="0" cz="0" angle="225" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="300" />
+<Goody y="1 + mGoodyOffset" shape="bspAvaraA" speed="-2" grenades="mXLgGrenade" missiles="mXXLgMissile" start="mShow" out="mTaken" color="#fd6051" color.1="#000000" cx="0" cz="0" angle="225" />
 <Hologram y="1.05" shape="bspFloorFrame" scale=".2" color="#fff4e4" color.1="#000000" cx="0" cz="0" angle="225" />
 <Teleporter y="1.05" shape="bspLotus" scale=".05" speed="1" mask="0" color="#fff4e4" color.1="#000000" cx="0" cz="0" angle="225" />
 <Teleporter y="1" shape="0" group="@floor" destGroup="@hill" spin="false" color="#fff4e4" color.1="#000000" cx="0" cz="0" angle="225" />
 
-<unique vars="rShow rTaken" />
-<And in="@start" out="rShow" />
-<Timer in="rTaken" out="rShow" wait="100" />
-<Goody y="6 + mGoodyOffset" shape="bspMissile" speed="-2" missiles="mLgMissile" start="rShow" out="rTaken" color="#fff4e4" color.1="#000000" cx="40" cz="40" angle="225" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="100" />
+<Goody y="6 + mGoodyOffset" shape="bspMissile" speed="-2" missiles="mLgMissile" start="mShow" out="mTaken" color="#fff4e4" color.1="#000000" cx="40" cz="40" angle="225" />
 
-<unique vars="rShow rTaken" />
-<And in="@start" out="rShow" />
-<Timer in="rTaken" out="rShow" wait="100" />
-<Goody y="6 + mGoodyOffset" shape="bspMissile" speed="-2" missiles="mLgMissile" start="rShow" out="rTaken" color="#fff4e4" color.1="#000000" cx="40" cz="-40" angle="225" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="100" />
+<Goody y="6 + mGoodyOffset" shape="bspMissile" speed="-2" missiles="mLgMissile" start="mShow" out="mTaken" color="#fff4e4" color.1="#000000" cx="40" cz="-40" angle="225" />
 
-<unique vars="rShow rTaken" />
-<And in="@start" out="rShow" />
-<Timer in="rTaken" out="rShow" wait="100" />
-<Goody y="6 + mGoodyOffset" shape="bspMissile" speed="-2" missiles="mLgMissile" start="rShow" out="rTaken" color="#fff4e4" color.1="#000000" cx="-40" cz="-40" angle="225" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="100" />
+<Goody y="6 + mGoodyOffset" shape="bspMissile" speed="-2" missiles="mLgMissile" start="mShow" out="mTaken" color="#fff4e4" color.1="#000000" cx="-40" cz="-40" angle="225" />
 
-<unique vars="rShow rTaken" />
-<And in="@start" out="rShow" />
-<Timer in="rTaken" out="rShow" wait="100" />
-<Goody y="6 + mGoodyOffset" shape="bspMissile" speed="-2" missiles="mLgMissile" start="rShow" out="rTaken" color="#fff4e4" color.1="#000000" cx="-40" cz="40" angle="225" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="100" />
+<Goody y="6 + mGoodyOffset" shape="bspMissile" speed="-2" missiles="mLgMissile" start="mShow" out="mTaken" color="#fff4e4" color.1="#000000" cx="-40" cz="40" angle="225" />
 
-<unique vars="rShow rTaken" />
-<And in="@start" out="rShow" />
-<Timer in="rTaken" out="rShow" wait="200" />
-<Goody y="2 + mGoodyOffset" shape="bspGrenade" speed="-2" grenades="mLgGrenade" start="rShow" out="rTaken" color="#fff4e4" color.1="#000000" cx="31.875" cz="31.875" angle="225" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="200" />
+<Goody y="2 + mGoodyOffset" shape="bspGrenade" speed="-2" grenades="mLgGrenade" start="mShow" out="mTaken" color="#fff4e4" color.1="#000000" cx="31.875" cz="31.875" angle="225" />
 
-<unique vars="rShow rTaken" />
-<And in="@start" out="rShow" />
-<Timer in="rTaken" out="rShow" wait="200" />
-<Goody y="2 + mGoodyOffset" shape="bspGrenade" speed="-2" grenades="mLgGrenade" start="rShow" out="rTaken" color="#fff4e4" color.1="#000000" cx="31.875" cz="-31.875" angle="225" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="200" />
+<Goody y="2 + mGoodyOffset" shape="bspGrenade" speed="-2" grenades="mLgGrenade" start="mShow" out="mTaken" color="#fff4e4" color.1="#000000" cx="31.875" cz="-31.875" angle="225" />
 
-<unique vars="rShow rTaken" />
-<And in="@start" out="rShow" />
-<Timer in="rTaken" out="rShow" wait="200" />
-<Goody y="2 + mGoodyOffset" shape="bspGrenade" speed="-2" grenades="mLgGrenade" start="rShow" out="rTaken" color="#fff4e4" color.1="#000000" cx="-31.875" cz="-31.875" angle="225" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="200" />
+<Goody y="2 + mGoodyOffset" shape="bspGrenade" speed="-2" grenades="mLgGrenade" start="mShow" out="mTaken" color="#fff4e4" color.1="#000000" cx="-31.875" cz="-31.875" angle="225" />
 
-<unique vars="rShow rTaken" />
-<And in="@start" out="rShow" />
-<Timer in="rTaken" out="rShow" wait="200" />
-<Goody y="2 + mGoodyOffset" shape="bspGrenade" speed="-2" grenades="mLgGrenade" start="rShow" out="rTaken" color="#fff4e4" color.1="#000000" cx="-31.875" cz="31.875" angle="225" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="200" />
+<Goody y="2 + mGoodyOffset" shape="bspGrenade" speed="-2" grenades="mLgGrenade" start="mShow" out="mTaken" color="#fff4e4" color.1="#000000" cx="-31.875" cz="31.875" angle="225" />
 
-<unique vars="rShow rTaken" />
-<And in="@start" out="rShow" />
-<Timer in="rTaken" out="rShow" wait="150" />
-<Goody y="mGoodyOffset" shape="bspGrenade" speed="-2" grenades="mMdGrenade" start="rShow" out="rTaken" color="#fff4e4" color.1="#000000" cx="0" cz="32.5" angle="225" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="150" />
+<Goody y="mGoodyOffset" shape="bspGrenade" speed="-2" grenades="mMdGrenade" start="mShow" out="mTaken" color="#fff4e4" color.1="#000000" cx="0" cz="32.5" angle="225" />
 
-<unique vars="rShow rTaken" />
-<And in="@start" out="rShow" />
-<Timer in="rTaken" out="rShow" wait="150" />
-<Goody y="mGoodyOffset" shape="bspGrenade" speed="-2" grenades="mMdGrenade" start="rShow" out="rTaken" color="#fff4e4" color.1="#000000" cx="32.5" cz="0" angle="225" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="150" />
+<Goody y="mGoodyOffset" shape="bspGrenade" speed="-2" grenades="mMdGrenade" start="mShow" out="mTaken" color="#fff4e4" color.1="#000000" cx="32.5" cz="0" angle="225" />
 
-<unique vars="rShow rTaken" />
-<And in="@start" out="rShow" />
-<Timer in="rTaken" out="rShow" wait="150" />
-<Goody y="mGoodyOffset" shape="bspGrenade" speed="-2" grenades="mMdGrenade" start="rShow" out="rTaken" color="#fff4e4" color.1="#000000" cx="0" cz="-32.5" angle="225" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="150" />
+<Goody y="mGoodyOffset" shape="bspGrenade" speed="-2" grenades="mMdGrenade" start="mShow" out="mTaken" color="#fff4e4" color.1="#000000" cx="0" cz="-32.5" angle="225" />
 
-<unique vars="rShow rTaken" />
-<And in="@start" out="rShow" />
-<Timer in="rTaken" out="rShow" wait="150" />
-<Goody y="mGoodyOffset" shape="bspGrenade" speed="-2" grenades="mMdGrenade" start="rShow" out="rTaken" color="#fff4e4" color.1="#000000" cx="-32.5" cz="0" angle="225" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="150" />
+<Goody y="mGoodyOffset" shape="bspGrenade" speed="-2" grenades="mMdGrenade" start="mShow" out="mTaken" color="#fff4e4" color.1="#000000" cx="-32.5" cz="0" angle="225" />
 
 <Incarnator y="20" cx="30" cz="55" angle="0" />
 <Incarnator y="20" cx="-30" cz="-55" angle="180" />
