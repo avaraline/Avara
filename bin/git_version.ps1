@@ -1,0 +1,1 @@
+'#define GIT_VERSION "{0}"' -f (git describe --always --dirty) | Out-File -FilePath .\src\util\GitVersion.h

@@ -13,6 +13,8 @@
 
 #if defined(_WIN32)
 #  include <windows.h>
+#  include <commdlg.h>
+#  include <prsht.h>
 #endif
 
 #include <nanogui/opengl.h>

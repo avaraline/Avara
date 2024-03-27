@@ -16,6 +16,9 @@
 
 #include <memory>
 
+#ifdef _WIN32
+#include <Windows.h>
+#endif
 #include <SDL2/SDL.h>
 #include <glad/glad.h>
 #include <glm/glm.hpp>

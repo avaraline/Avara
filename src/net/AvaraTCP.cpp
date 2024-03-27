@@ -30,8 +30,10 @@ typedef signed long long int ssize_t;
 
 #include <SDL2/SDL.h>
 
+#ifndef _WIN32
 #include <unistd.h>
 #include <sys/time.h>
+#endif
 
 #define PUNCHTIME 5000
 
