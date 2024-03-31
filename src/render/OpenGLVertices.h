@@ -19,6 +19,7 @@ struct GLData {
     float nz = 0.0f;
 
     GLData() {};
+    GLData(float x0, float y0, float z0) { x = x0; y = y0; z = z0; };
 };
 
 struct GLVertexCollection {

@@ -12,17 +12,46 @@ struct Tri {
     float d;
 };
 
+inline float distSq(const GLData &g1, const GLData &g2) {
+  return
+    pow(g1.x - g2.x, 2) +
+    pow(g1.y - g2.y, 2) +
+    pow(g1.z - g2.z, 2);
+}
+
 void GLVertexCollection::SortFromCamera(float x, float y, float z)
 {
     std::vector<Tri> newTris = {};
     newTris.reserve(glData.size() / 3);
 
+    GLData camera = GLData(x, y, z);
+
     for (int i = 0; i < glData.size(); i += 3) {
-        // Calculate the distance for the midpoint of this triangle from the camera.
-        float mX = (glData[i].x + glData[i + 1].x + glData[i + 2].x) / 3.0f;
-        float mY = (glData[i].y + glData[i + 1].y + glData[i + 2].y) / 3.0f;
-        float mZ = (glData[i].z + glData[i + 1].z + glData[i + 2].z) / 3.0f;
-        float delta = sqrt(pow(mX - x, 2) + pow(mY - y, 2) + pow(mZ - z, 2) * 1.0f);
+        // put the center halfway up the longest edge of the triangle to emulate
+        // calculating the circumcenter of a triangle.  For a right triangle this WILL be
+        // the circumcenter, for other triangles, it's not quite but it seems good for sorting
+
+        GLData longestEdge;
+        float longestDist = -1;
+
+        // tests whether an edge is the longest and, if so, keeps its midpoint
+        auto testLongestEdge = [&](const GLData &endPoint1, const GLData &endPoint2) {
+            float testDist = distSq(endPoint1, endPoint2);
+            if (testDist > longestDist) {
+                // save the center of the longest edge
+                longestEdge.x = (endPoint1.x + endPoint2.x) / 2.0;
+                longestEdge.y = (endPoint1.y + endPoint2.y) / 2.0;
+                longestEdge.z = (endPoint1.z + endPoint2.z) / 2.0;
+                longestDist = testDist;
+            }
+        };
+
+        testLongestEdge(glData[i], glData[i+2]);    // often the longest
+        testLongestEdge(glData[i+2], glData[i+1]);
+        testLongestEdge(glData[i+1], glData[i]);
+
+        // now compute distance from camera to the longest edge of the triangle
+        float delta = distSq(longestEdge, camera);
 
         // Copy data to triangle.
         Tri t = Tri();
