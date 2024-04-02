@@ -546,7 +546,6 @@ void AssetManager::BuildDependencyList(std::string currentPackage, std::vector<s
     }
 }
 
-template <>
 void AssetManager::ReviewPriorities(AssetCache<nlohmann::json> &cache)
 {
     std::vector<int16_t> needsRemoval = {};
@@ -576,7 +575,6 @@ void AssetManager::ReviewPriorities(AssetCache<nlohmann::json> &cache)
     }
 };
 
-template <>
 void AssetManager::ReviewPriorities(AssetCache<OggFile> &cache)
 {
     std::vector<int16_t> needsRemoval = {};
@@ -617,7 +615,6 @@ void AssetManager::ReviewPriorities(AssetCache<OggFile> &cache)
     }
 }
 
-template <>
 void AssetManager::ReviewPriorities(AssetCache<HullConfigRecord> &cache)
 {
     std::vector<int16_t> needsRemoval = {};
