@@ -249,16 +249,19 @@ void CDepot::ReloadParts() {
     smartSight = CBSPPart::Create(208);
     smartSight->ReplaceColor(0xfffffb00, ColorManager::getMissileSightPrimaryColor());
     smartSight->ReplaceColor(0xffff2600, ColorManager::getMissileSightSecondaryColor());
+    smartSight->ignoreDepthTesting = true;
     smartSight->ignoreDirectionalLights = true;
     smartSight->privateAmbient = FIX1;
 
     smartHairs = CBSPPart::Create(207);
     smartHairs->ReplaceColor(0xffff2600, ColorManager::getMissileLockColor());
+    smartHairs->ignoreDepthTesting = true;
     smartHairs->ignoreDirectionalLights = true;
     smartHairs->privateAmbient = FIX1;
 
     grenadeSight = CBSPPart::Create(200);
     grenadeSight->ReplaceColor(0xfffffb00, ColorManager::getGrenadeSightPrimaryColor());
+    grenadeSight->ignoreDepthTesting = true;
     grenadeSight->ignoreDirectionalLights = true;
     grenadeSight->privateAmbient = FIX1;
 

@@ -104,6 +104,11 @@ void OpenGLShader::SetFloat(const std::string &uniform, float value) const
     glUniform1f(glGetUniformLocation(id, uniform.c_str()), value);
 }
 
+void OpenGLShader::SetFloat2(const std::string &uniform, const float value[2]) const
+{
+    glUniform2fv(glGetUniformLocation(id, uniform.c_str()), 1, value);
+}
+
 void OpenGLShader::SetFloat3(const std::string &uniform, const float value[3]) const
 {
     glUniform3fv(glGetUniformLocation(id, uniform.c_str()), 1, value);
