@@ -1,11 +1,9 @@
 #version 330 core
 
-// in vec4 gl_FragCoord;
 in vec4 fragmentColor;
 in vec3 fragmentNormal;
 
 uniform float ambient = 0.0;
-uniform float hudAlpha = 1.0;
 uniform float lightsActive = 1.0;
 
 out vec4 color;
@@ -34,6 +32,5 @@ vec4 light_color() {
 
 void main() {
     color = light_color();
-    color[3] *= hudAlpha;
 }
 

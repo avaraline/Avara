@@ -1,0 +1,15 @@
+<map>
+  <include alf="layout/don-quixote.alf" />
+
+  <set
+    pReqPointMultiplier="1"
+    pHillX="0"
+    pHillY="8.25"
+    pHillZ="0"
+    pHillW="15"
+    pHillD="15"
+    pHillH="4"
+  />
+  <include alf="logic/koth.alf" />
+</map>
+

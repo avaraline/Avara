@@ -170,6 +170,7 @@ public:
     Boolean usesPrivateHither = 0;
     Boolean usesPrivateYon = 0;
     Boolean isTransparent = 0;
+    Boolean ignoreDepthTesting = false;
     Boolean ignoreDirectionalLights = 0;
     short userFlags = 0; //	Can be used for various flags by user.
 

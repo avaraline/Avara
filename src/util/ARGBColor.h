@@ -31,6 +31,7 @@ public:
     inline uint8_t GetR() const { return (color >> 16) & 0xFF; }
     inline uint8_t GetG() const { return (color >> 8) & 0xFF; }
     inline uint8_t GetB() const { return color & 0xFF; }
+    inline bool HasAlpha() const { return (GetA() != 0xFF); }
     inline ARGBColor WithA(uint8_t a) const {
         return ARGBColor((color & 0x00ffffff) | (static_cast<uint32_t>(a) << 24));
     }

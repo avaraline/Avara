@@ -12,11 +12,20 @@
 #define SKY_VERT "sky_vert.glsl"
 #define SKY_FRAG "sky_frag.glsl"
 
-#define OBJ_VERT "avara_vert.glsl"
-#define OBJ_FRAG "avara_frag.glsl"
+#define OBJ_VERT "world_vert.glsl"
+#define OBJ_FRAG "world_frag.glsl"
+
+#define OBJ_POST_VERT "worldPost_vert.glsl"
+#define OBJ_POST_FRAG "worldPost_frag.glsl"
 
 #define HUD_VERT "hud_vert.glsl"
 #define HUD_FRAG "hud_frag.glsl"
+
+#define HUD_POST_VERT "hudPost_vert.glsl"
+#define HUD_POST_FRAG "hudPost_frag.glsl"
+
+#define FINAL_VERT "final_vert.glsl"
+#define FINAL_FRAG "final_frag.glsl"
 
 const float skyboxVertices[] = {
     -5.0f,  5.0f, -5.0f,
@@ -60,6 +69,17 @@ const float skyboxVertices[] = {
      5.0f, -5.0f, -5.0f,
     -5.0f, -5.0f,  5.0f,
      5.0f, -5.0f,  5.0f
+};
+
+const float screenQuadVertices[] = {
+    // positions   // texCoords
+    -1.0f,  1.0f,  0.0f, 1.0f,
+    -1.0f, -1.0f,  0.0f, 0.0f,
+     1.0f, -1.0f,  1.0f, 0.0f,
+
+    -1.0f,  1.0f,  0.0f, 1.0f,
+     1.0f, -1.0f,  1.0f, 0.0f,
+     1.0f,  1.0f,  1.0f, 1.0f
 };
 
 const char *glGetErrorString(GLenum error)
@@ -112,17 +132,21 @@ ModernOpenGLRenderer::ModernOpenGLRenderer(SDL_Window *window) : AbstractRendere
 {
     this->window = window;
 
-    int w, h;
-    SDL_GetWindowSize(window, &w, &h);
+    GLsizei w, h;
+    SDL_GL_GetDrawableSize(window, &w, &h);
     viewParams->viewPixelDimensions.h = w;
     viewParams->viewPixelDimensions.v = h;
 
     dynamicWorld = new CBSPWorldImpl(100);
     hudWorld = new CBSPWorldImpl(30);
 
+    // Initialize shaders.
     skyShader = LoadShader(SKY_VERT, SKY_FRAG);
     worldShader = LoadShader(OBJ_VERT, OBJ_FRAG);
+    worldPostShader = LoadShader(OBJ_POST_VERT, OBJ_POST_FRAG);
     hudShader = LoadShader(HUD_VERT, HUD_FRAG);
+    hudPostShader = LoadShader(HUD_POST_VERT, HUD_POST_FRAG);
+    finalShader = LoadShader(FINAL_VERT, FINAL_FRAG);
     ApplyLights();
     ApplyProjection();
 
@@ -136,6 +160,24 @@ ModernOpenGLRenderer::ModernOpenGLRenderer(SDL_Window *window) : AbstractRendere
     // Rebind to default VBO/VAO.
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    // Create a separate VBO/VAO for a fullscreen quad, and upload its geometry to the GPU.
+    glGenVertexArrays(1, &screenQuadVertArray);
+    glGenBuffers(1, &screenQuadBuffer);
+    glBindVertexArray(screenQuadVertArray);
+    glBindBuffer(GL_ARRAY_BUFFER, screenQuadBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(screenQuadVertices), screenQuadVertices, GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, (4 * sizeof(float)), (void*)0);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, (4 * sizeof(float)), (void*)(2 * sizeof(float)));
+
+    // Rebind to default VBO/VAO.
+    glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    MakeFramebuffer(0, w, h);
+    MakeFramebuffer(1, w, h);
 
     // Configure alpha blending.
     glEnable(GL_BLEND);
@@ -207,6 +249,8 @@ void ModernOpenGLRenderer::ApplyLights()
 
 void ModernOpenGLRenderer::ApplyProjection()
 {
+    SDL_GL_GetDrawableSize(this->window, &resolution[0], &resolution[1]);
+
     glm::mat4 proj = glm::scale(
         glm::perspective(
             glm::radians(fov),
@@ -282,6 +326,11 @@ void ModernOpenGLRenderer::RenderFrame()
     skyParams->lowSkyColor.ExportGLFloats(lowSkyColorRGB, 3);
     skyParams->highSkyColor.ExportGLFloats(highSkyColorRGB, 3);
 
+    // Switch to first offscreen FBO.
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo[0]);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_CULL_FACE);
 
@@ -311,20 +360,43 @@ void ModernOpenGLRenderer::RenderFrame()
     worldShader->Use();
 
     dynamicWorld->PrepareForRender();
+
+    // Draw opaque geometry.
     auto partList = dynamicWorld->GetVisiblePartListPointer();
     auto partCount = dynamicWorld->GetVisiblePartCount();
     for (uint16_t i = 0; i < partCount; i++) {
-        Draw(*worldShader, **partList);
+        Draw(*worldShader, **partList, false);
         partList++;
     }
 
+    // Draw translucent geometry in a separate pass.
+    partList = dynamicWorld->GetVisiblePartListPointer();
+    partCount = dynamicWorld->GetVisiblePartCount();
+    for (uint16_t i = 0; i < partCount; i++) {
+        if ((**partList).HasAlpha()) {
+            Draw(*worldShader, **partList, true);
+        }
+        partList++;
+    }
+
+    // First pass of sky and world rendering complete, post-process into second offscreen FBO.
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo[1]);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    worldPostShader->Use();
+    glBindVertexArray(screenQuadVertArray);
+    glDisable(GL_DEPTH_TEST);
+    glBindTexture(GL_TEXTURE_2D, texture[0]);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+
     // RENDER HUD //////////////////////////////////////////////////////////////////////////////////
 
-    glDepthFunc(GL_ALWAYS);
+    // Switch to first offscreen FBO.
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo[0]);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     hudShader->Use();
-    hudShader->SetFloat("hudAlpha", ColorManager::getHUDAlpha());
-
     hudWorld->PrepareForRender();
     partList = hudWorld->GetVisiblePartListPointer();
     partCount = hudWorld->GetVisiblePartCount();
@@ -333,7 +405,34 @@ void ModernOpenGLRenderer::RenderFrame()
         partList++;
     }
 
-    glDepthFunc(GL_LEQUAL);
+    // First pass of HUD rendering complete, post-process into second offscreen FBO.
+    // Don't clear the buffer this time, as the sky/world texture is already waiting there waiting
+    // for the HUD texture to be overlaid on it.
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo[1]);
+    hudPostShader->Use();
+    hudPostShader->SetFloat("hudAlpha", ColorManager::getHUDAlpha());
+    glBindVertexArray(screenQuadVertArray);
+
+    glDisable(GL_DEPTH_TEST);
+    glBindTexture(GL_TEXTURE_2D, texture[0]);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+    glEnable(GL_DEPTH_TEST);
+
+    // FINAL POST-PROCESSING, SEND TO DEFAULT FRAMEBUFFER //////////////////////////////////////////
+
+    float res[2] = {1.0f / (float)resolution[0], 1.0f / (float)resolution[1]};
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    finalShader->Use();
+    finalShader->SetBool("fxaa", gApplication ? gApplication->Get<bool>(kFXAA) : true);
+    finalShader->SetFloat2("texelStep", res);
+    finalShader->SetFloat("lumaThreshold", 0.0625f);
+    finalShader->SetFloat("mulReduce", 1.0f / 8.0f);
+    finalShader->SetFloat("minReduce", 1.0f / 32.0f);
+    finalShader->SetFloat("maxSpan", 8);
+    glBindVertexArray(screenQuadVertArray);
+    glDisable(GL_DEPTH_TEST);
+    glBindTexture(GL_TEXTURE_2D, texture[1]);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
 void ModernOpenGLRenderer::AdjustAmbient(OpenGLShader &shader, float intensity)
@@ -360,15 +459,26 @@ void ModernOpenGLRenderer::Clear()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 
-void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part)
+void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, bool useAlphaBuffer)
 {
     OpenGLVertices *glData = dynamic_cast<OpenGLVertices*>(part.vData.get());
 
     if (glData == nullptr) return;
 
-    glBindVertexArray(glData->vertexArray);
-    glBindBuffer(GL_ARRAY_BUFFER, glData->vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, glData->glDataSize, glData->glData.data(), GL_STREAM_DRAW);
+    if (!useAlphaBuffer) {
+        glBindVertexArray(glData->opaque.vertexArray);
+        glBindBuffer(GL_ARRAY_BUFFER, glData->opaque.vertexBuffer);
+        glBufferData(GL_ARRAY_BUFFER, glData->opaque.glDataSize, glData->opaque.glData.data(), GL_STREAM_DRAW);
+    } else {
+        glData->alpha.SortFromCamera(
+            ToFloat(part.invFullTransform[3][0]),
+            ToFloat(part.invFullTransform[3][1]),
+            ToFloat(part.invFullTransform[3][2])
+        );
+        glBindVertexArray(glData->alpha.vertexArray);
+        glBindBuffer(GL_ARRAY_BUFFER, glData->alpha.vertexBuffer);
+        glBufferData(GL_ARRAY_BUFFER, glData->alpha.glDataSize, glData->alpha.glData.data(), GL_STREAM_DRAW);
+    }
     glCheckErrors();
 
     // Position!
@@ -383,7 +493,7 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part)
     glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(7 * sizeof(float)));
     glEnableVertexAttribArray(2);
 
-    // Custom, per-object lighting!
+    // Custom, per-object lighting and depth testing!
     float extra_amb = ToFloat(part.extraAmbient);
     float current_amb = ToFloat(viewParams->ambientLight);
     if (part.privateAmbient != -1) {
@@ -391,6 +501,9 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part)
     }
     if (extra_amb > 0) {
         AdjustAmbient(shader, current_amb + extra_amb);
+    }
+    if (part.ignoreDepthTesting) {
+        glDisable(GL_DEPTH_TEST);
     }
     if (part.ignoreDirectionalLights) {
         IgnoreDirectionalLights(shader, true);
@@ -401,16 +514,23 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part)
     shader.Use();
     glCheckErrors();
 
-    glDrawArrays(GL_TRIANGLES, 0, glData->pointCount);
+    if (!useAlphaBuffer) {
+        glDrawArrays(GL_TRIANGLES, 0, glData->opaque.pointCount);
+    } else {
+        glDrawArrays(GL_TRIANGLES, 0, glData->alpha.pointCount);
+    }
 
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
     glDisableVertexAttribArray(2);
 
-    // Restore previous lighting state.
+    // Restore previous lighting and depth testing state.
     if (part.privateAmbient != -1 || extra_amb > 0) {
         AdjustAmbient(shader, current_amb);
         glCheckErrors();
+    }
+    if (part.ignoreDepthTesting) {
+        glEnable(GL_DEPTH_TEST);
     }
     if (part.ignoreDirectionalLights) {
         IgnoreDirectionalLights(shader, false);
@@ -443,6 +563,36 @@ std::unique_ptr<OpenGLShader> ModernOpenGLRenderer::LoadShader(const std::string
     }
 
     return std::make_unique<OpenGLShader>(*vertPath, *fragPath);
+}
+
+void ModernOpenGLRenderer::MakeFramebuffer(short index, GLsizei width, GLsizei height)
+{
+    // Create a framebuffer, texture, and renderbuffer for the HUD.
+    glGenFramebuffers(1, &fbo[index]);
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo[index]);
+    glGenTextures(1, &texture[index]);
+    glBindTexture(GL_TEXTURE_2D, texture[index]);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture[index], 0);
+    glGenRenderbuffers(1, &rbo[index]);
+    glBindRenderbuffer(GL_RENDERBUFFER, rbo[index]);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
+
+    // Rebind to the default renderbuffer.
+    glBindRenderbuffer(GL_RENDERBUFFER, 0);
+
+    // Attach renderbuffer to framebuffer and check if the framebuffer was "completed" successfully.
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo[index]);
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+        SDL_Log("Failed to create framebuffer %d", index);
+        exit(1);
+    }
+
+    // Rebind to the default framebuffer.
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 void ModernOpenGLRenderer::SetTransforms(const CBSPPart &part) {
