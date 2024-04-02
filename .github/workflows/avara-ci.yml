@@ -65,6 +65,7 @@ jobs:
           wget -q "https://github.com/libsdl-org/SDL/releases/download/release-2.26.2/SDL2-2.26.2.dmg"
           hdiutil attach SDL2-2.26.2.dmg
           sudo cp -R /Volumes/SDL2/SDL2.framework /Library/Frameworks/
+          brew install googletest
       - uses: actions/checkout@v4
       - name: make
         run: make clean tests macdist
