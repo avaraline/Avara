@@ -15,14 +15,9 @@
 #include "FastMat.h"
 #include "Preferences.h"
 
-#include <SDL2/SDL.h>
-#include <nanogui/nanogui.h>
-#include <string.h>
-
-using namespace nanogui;
-
 #ifdef _WIN32
-
+#include <Windows.h>
+#include <ShellAPI.h>
 typedef enum PROCESS_DPI_AWARENESS {
     PROCESS_DPI_UNAWARE = 0,
     PROCESS_SYSTEM_DPI_AWARE = 1,
@@ -40,6 +35,12 @@ void SetHiDPI() {
     SetProcessDpiAwareness(PROCESS_PER_MONITOR_DPI_AWARE);
 #endif
 }
+
+#include <SDL2/SDL.h>
+#include <nanogui/nanogui.h>
+#include <string.h>
+
+using namespace nanogui;
 
 void NullLogger(void *userdata, int category, SDL_LogPriority priority, const char *message) {}
 
