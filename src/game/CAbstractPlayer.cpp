@@ -1785,8 +1785,6 @@ void CAbstractPlayer::IncarnateSound() {
 }
 
 void CAbstractPlayer::Incarnate() {
-    itsGame->itsApp->AddMessageLine("INCARNATE", MsgAlignment::Center, MsgCategory::Error);
-
     CIncarnator *placeList;
     long bestCount = LONG_MAX;
 
@@ -1831,7 +1829,7 @@ void CAbstractPlayer::Reincarnate() {
     SDL_Log("dist min= %.4f", ToFloat(furthest));
 
     for (incarnator = itsGame->incarnatorList; incarnator != nullptr; incarnator = incarnator->nextIncarnator) {
-        if (incarnator->enabled && (incarnator->colorMask & teamMask)) { //} && incarnator->useCount == 0) {
+        if (incarnator->enabled && incarnator->isActive && (incarnator->colorMask & teamMask)) { //} && incarnator->useCount == 0) {
             bestCount = incarnator->useCount;
 
             SDL_Log("\n");
