@@ -1819,19 +1819,15 @@ void CAbstractPlayer::Incarnate() {
 }
 
 void CAbstractPlayer::Reincarnate() {
-    CIncarnator *incarnator;
-    CIncarnator *safeIncarn = NULL;
-    long bestCount = LONG_MAX;
+    std::list<CIncarnator *> sortedIncarnators;
     Fixed furthest = MINFIXED;
     
     itsGame->itsApp->AddMessageLine("REINCARNATE", MsgAlignment::Left, MsgCategory::Error);
     SDL_Log("ReincarnateFurthest SLOT= %d", itsManager->Slot());
     SDL_Log("dist min= %.4f", ToFloat(furthest));
 
-    for (incarnator = itsGame->incarnatorList; incarnator != nullptr; incarnator = incarnator->nextIncarnator) {
+    for (CIncarnator *incarnator = itsGame->incarnatorList; incarnator != nullptr; incarnator = incarnator->nextIncarnator) {
         if (incarnator->enabled && (incarnator->colorMask & teamMask)) { //} && incarnator->useCount == 0) {
-            bestCount = incarnator->useCount;
-
             SDL_Log("\n");
             SDL_Log("INCARN LOC= %s", FormatVectorFloat(incarnator->location, 3).c_str());
             SDL_Log("    THIS Player LOC= %s", FormatVectorFloat(itsGame->itsNet->playerTable[itsManager->Slot()]->GetPlayer()->location, 3).c_str());
@@ -1866,44 +1862,39 @@ void CAbstractPlayer::Reincarnate() {
             }
 
             static double alpha = 0.6;
-            Fixed sortBy = minDist * (alpha + 2*(1-alpha)*FRandom()/FIX1);
-            SDL_Log("         minDist = %.4f sortBy%.4f", ToFloat(minDist), ToFloat(sortBy));
-            if(sortBy > furthest) {
-                furthest = sortBy;
-                safeIncarn = incarnator;
-                SDL_Log("         BEST SO FAR... sortBy= %.4f", ToFloat(sortBy));
+            incarnator->sortBy = minDist * (alpha + 2*(1-alpha)*FRandom()/FIX1);
+            // to be sorted below
+            sortedIncarnators.push_back(incarnator);
+
+            SDL_Log("         minDist = %.4f sortBy%.4f", ToFloat(minDist), ToFloat(incarnator->sortBy));
+            if(incarnator->sortBy > furthest) {
+                furthest = incarnator->sortBy;
+                SDL_Log("         BEST SO FAR... sortBy= %.4f", ToFloat(incarnator->sortBy));
             }
         }
     }
+
+    sortedIncarnators.sort([](const CIncarnator *a, const CIncarnator *b) {
+        // put highest values (distance) first
+        return (a->sortBy) > (b->sortBy);
+    });
+
+    // try sorted Incarnators until one works
+    for (auto incarnator : sortedIncarnators) {
+        SDL_Log("TRYING INCARNATOR AT LOC= %s", FormatVector(incarnator->location, 3).c_str());
+        if (ReincarnateComplete(incarnator)) {
+            SDL_Log("USING INCARNATOR AT LOC= %s", FormatVector(incarnator->location, 3).c_str());
+            return;
+        }
+    }
+
     // if couldn't find an available Incarnator above, try creating a random one
-    if (safeIncarn == nullptr) {
-        // why 3 tries?  it's somewhat arbitrary but if there's a (high) 10% chance of not working,
-        // then 3 tries will get that down to 0.1%.  In most levels, the not-working chance is probably
-        // closer to 1% so 3 tries = 0.0001%
-        for (int tries = 3; isInLimbo && tries > 0; tries--) {
-            CRandomIncarnator waldo(itsGame->actorList);
-            if (ReincarnateComplete(&waldo)) {
-                break;
-            }
+    for (int tries = 3; isInLimbo && tries > 0; tries--) {
+        CRandomIncarnator waldo(itsGame->actorList);
+        if (ReincarnateComplete(&waldo)) {
+            break;
         }
     }
-    else {
-        SDL_Log("SAFE LOC= %s", FormatVector(safeIncarn->location, 3).c_str());
-        ReincarnateComplete(safeIncarn);
-    }
-    
-     
-     
-    /*
-    // try the least-visited Incarnators until one works
-    for (placeList = itsGame->incarnatorList; placeList != nullptr; placeList = placeList->nextIncarnator) {
-        if (placeList->enabled && (placeList->colorMask & teamMask) && (placeList->useCount == bestCount)) {
-            if (ReincarnateComplete(placeList)) {
-                break;
-            }
-        }
-    }
-    */
 }
 
 

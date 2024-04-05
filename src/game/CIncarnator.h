@@ -20,6 +20,7 @@ public:
     MessageRecord startMsg;
     MessageRecord stopMsg;
     Boolean enabled;
+    Fixed sortBy;
 
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
