@@ -1836,6 +1836,8 @@ void CAbstractPlayer::Reincarnate() {
             SDL_Log("INCARN LOC= %s", FormatVectorFloat(incarnator->location, 3).c_str());
             SDL_Log("    THIS Player LOC= %s", FormatVectorFloat(itsGame->itsNet->playerTable[itsManager->Slot()]->GetPlayer()->location, 3).c_str());
 
+            Fixed minDist = MAXFIXED;
+
             for (int i = 0; i < kMaxAvaraPlayers; i++) {
                 if(i != itsManager->Slot()) {
                     CAbstractPlayer* player = itsGame->itsNet->playerTable[i]->GetPlayer();
@@ -1849,30 +1851,27 @@ void CAbstractPlayer::Reincarnate() {
                             Fixed d = FDistanceEstimate(player->location[0] - incarnator->location[0],
                                                         player->location[1] - incarnator->location[1],
                                                         player->location[2] - incarnator->location[2]);
-                            double alpha = 0.6;
-                            Fixed sortBy = d * (alpha + 2*(1-alpha)*FRandom()/FIX1);
 
                             SDL_Log("         checking..");
                             SDL_Log("         p0= %.4f p2= %.4f i0= %.4f i2= %.4f", ToFloat(player->location[0]),
                                     ToFloat(player->location[2]), ToFloat(incarnator->location[0]), ToFloat(incarnator->location[2]));
-                            SDL_Log("         dist= %.4f, sort= %.4f", ToFloat(d), ToFloat(sortBy));
-
-                            if(sortBy > furthest) {
-                                furthest = sortBy;
-                                safeIncarn = incarnator;
-                                SDL_Log("         FOUND FURTHEST");
-                            }
-                            else if(sortBy == furthest) {
-                                SDL_Log("         sortBy == greatest!!!!!!!!!");
-
-                                if(safeIncarn != NULL && incarnator->useCount < safeIncarn->useCount) {
-                                    bestCount = incarnator->useCount;
-                                    safeIncarn = incarnator;
-                                }
+                            SDL_Log("         dist= %.4f", ToFloat(d));
+                            if (d < minDist) {
+                                minDist = d;
+                                SDL_Log("         CLOSEST OPPONENT, dist= %.4f", ToFloat(d));
                             }
                         }
                     }
                 }
+            }
+
+            static double alpha = 0.6;
+            Fixed sortBy = minDist * (alpha + 2*(1-alpha)*FRandom()/FIX1);
+            SDL_Log("         minDist = %.4f sortBy%.4f", ToFloat(minDist), ToFloat(sortBy));
+            if(sortBy > furthest) {
+                furthest = sortBy;
+                safeIncarn = incarnator;
+                SDL_Log("         BEST SO FAR... sortBy= %.4f", ToFloat(sortBy));
             }
         }
     }
