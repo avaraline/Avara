@@ -9,12 +9,12 @@
 
 #include "CSoundHub.h"
 
+#include "AssetManager.h"
 #include "CBasicSound.h"
 #include "CHuffProcessor.h"
 #include "CRateSound.h"
 #include "CSoundMixer.h"
 #include "Memory.h"
-#include "Resource.h"
 
 #include <SDL2/SDL.h>
 
@@ -41,22 +41,13 @@ void CSoundHubImpl::CreateSound(short kind) {
 }
 
 void CSoundHubImpl::Restock(CBasicSound *aSound) {
-    SampleHeaderHandle aSample;
-
     aSound->nextSound = soundList[aSound->hubId];
     soundList[aSound->hubId] = aSound;
 
-    if (aSound->itsSamples) {
-        aSample = aSound->itsSamples;
-        if (--(*aSample)->refCount == 0) {
-            HUnlock((Handle)aSample);
-        }
-
-        aSound->itsSamples = NULL;
-    }
+    aSound->itsSamples = nullptr;
 }
 
-CBasicSound *CSoundHubImpl::Aquire(short kind) {
+CBasicSound *CSoundHubImpl::Acquire(short kind) {
     CBasicSound *aSound;
 
     if (soundList[kind] == NULL)
@@ -85,7 +76,6 @@ void CSoundHubImpl::ISoundHub(short numOfEachKind, short initialLinks) {
     }
 
     muteFlag = false;
-    sampleList = NULL;
 
     itsCompressor = new CHuffProcessor;
     itsCompressor->Open();
@@ -102,207 +92,8 @@ void CSoundHubImpl::AttachMixer(CSoundMixer *aMixer) {
     muteFlag = itsMixer->maxChannels == 0;
 }
 
-SampleHeaderHandle CSoundHubImpl::LoadSample(short resId) {
-    SampleHeaderHandle aSample;
-    SampleHeaderPtr sampP;
-
-    aSample = sampleList;
-
-    while (aSample) {
-        sampP = *aSample;
-        if (sampP->resId == resId) {
-            sampP->flags = 0;
-            break;
-        }
-        aSample = sampP->nextSample;
-    }
-
-    if (!aSample) {
-        FreeOldSamples();
-        //FreeUnusedSamples();
-        aSample = LoadSampleHeaderFromSetJSON(resId, sampleList);
-        if (aSample) sampleList = aSample;
-    }
-
-    return aSample;
-}
-
-SampleHeaderHandle CSoundHubImpl::LoadSampleLegacy(short resId) {
-
-    SampleHeaderHandle aSample;
-    SampleHeaderPtr sampP;
-
-    aSample = sampleList;
-
-    while (aSample) {
-        sampP = *aSample;
-        if (sampP->resId == resId) {
-            sampP->flags = 0;
-            break;
-        }
-        aSample = sampP->nextSample;
-    }
-
-    if (!aSample) {
-        Handle compressedData;
-
-        compressedData = GetResource(HSOUNDRESTYPE, resId);
-        if (compressedData) {
-            int len;
-            //short tryCount;
-            Ptr soundData;
-            //float base;
-            HSNDRecord *ir;
-
-            // MoveHHi(compressedData);
-            HLock(compressedData);
-
-            ir = (HSNDRecord *)*compressedData;
-
-            ir->versNum = ntohl(ir->versNum);
-            ir->loopStart = ntohl(ir->loopStart);
-            ir->loopEnd = ntohl(ir->loopEnd);
-            ir->loopCount = ntohl(ir->loopCount);
-            ir->dataOffset = ntohl(ir->dataOffset);
-            if (ir->versNum >= 2) {
-                ir->baseRate = ntohl(ir->baseRate);
-                //base = ir->baseRate / 65536.0;
-            } 
-            //else {
-            //    base = 1.0;
-            //}
-
-            soundData = ir->dataOffset + *compressedData;
-            len = itsCompressor->GetUncompressedLen(soundData);
-
-            //SDL_Log("HSNDRecord versNum=%d, loopStart=%d, loopEnd=%d, loopCount=%d, dataOffset=%d, baseRate=%f, len=%i\n",
-            //ir->versNum, ir->loopStart, ir->loopEnd, ir->loopCount, ir->dataOffset, base, len);
-
-            aSample = (SampleHeaderHandle)NewHandle(sizeof(SampleHeader) + len);
-            if (!aSample) {
-                FreeOldSamples();
-                aSample = (SampleHeaderHandle)NewHandle(sizeof(SampleHeader) + len);
-
-                if (!aSample) {
-                    FreeUnusedSamples();
-                    aSample = (SampleHeaderHandle)NewHandle(sizeof(SampleHeader) + len);
-                }
-            }
-
-            if (aSample) {
-                uint8_t value;
-                uint8_t *p;
-                size_t i;
-
-                sampP = *aSample;
-                sampP->resId = resId;
-                sampP->refCount = 0;
-                sampP->flags = 0;
-                sampP->len = len;
-                sampP->loopStart = ir->loopStart;
-                sampP->loopEnd = ir->loopEnd;
-                sampP->loopCount = ir->loopCount;
-                sampP->nextSample = sampleList;
-
-                if (ir->versNum < 2) {
-                    sampP->baseRate = FIX1;
-                } else {
-                    sampP->baseRate = ir->baseRate;
-                }
-
-                sampleList = aSample;
-
-                HLock((Handle)aSample);
-                p = sizeof(SampleHeader) + (unsigned char *)sampP;
-                itsCompressor->Uncompress(soundData, (Ptr)p);
-                HUnlock((Handle)aSample);
-
-                value = 128 >> (8 - BITSPERSAMPLE);
-                for (i = 0; i < len; i++) {
-                    value += *p;
-                    *p++ = value & (0xFF >> (8 - BITSPERSAMPLE));
-                }
-            }
-
-            ReleaseResource(compressedData);
-        }
-    }
-
-    return aSample;
-}
-
-SampleHeaderHandle CSoundHubImpl::PreLoadSample(short resId) {
-    if (muteFlag)
-        return NULL;
-    else
-        return LoadSample(resId);
-}
-
-SampleHeaderHandle CSoundHubImpl::RequestSample(short resId) {
-    SampleHeaderHandle aSample;
-    SampleHeaderPtr p;
-
-    aSample = LoadSample(resId);
-    if (aSample) {
-        p = *aSample;
-        if (p->refCount++ == 0) {
-            HLock((Handle)aSample);
-        }
-    }
-
-    return aSample;
-}
-
-void CSoundHubImpl::FreeUnusedSamples() {
-    SampleHeaderHandle aSample, nextSample, *prevP;
-
-    prevP = &sampleList;
-
-    aSample = sampleList;
-    while (aSample) {
-        nextSample = (*aSample)->nextSample;
-        if ((*aSample)->refCount == 0) {
-            GetHandleSize((Handle)aSample);
-            DisposeHandle((Handle)aSample);
-            *prevP = nextSample;
-        } else {
-            prevP = &(*aSample)->nextSample;
-        }
-        aSample = nextSample;
-    }
-}
-
-void CSoundHubImpl::FreeOldSamples() {
-    SampleHeaderHandle aSample, nextSample, *prevP;
-
-    prevP = &sampleList;
-
-    aSample = sampleList;
-    while (aSample) {
-        nextSample = (*aSample)->nextSample;
-        if ((*aSample)->refCount == 0 && ((*aSample)->flags & kOldSampleFlag)) {
-            GetHandleSize((Handle)aSample);
-            DisposeHandle((Handle)aSample);
-            *prevP = nextSample;
-        } else {
-            prevP = &(*aSample)->nextSample;
-        }
-        aSample = nextSample;
-    }
-}
-void CSoundHubImpl::FlagOldSamples() {
-    SampleHeaderHandle aSample;
-
-    aSample = sampleList;
-    while (aSample) {
-        (*aSample)->flags |= kOldSampleFlag;
-        aSample = (*aSample)->nextSample;
-    }
-}
-
 void CSoundHubImpl::Dispose() {
     CBasicSound *aSound, *nextSound;
-    SampleHeaderHandle aSample, nextSample;
     short i;
 
     if (itsMixer) {
@@ -318,13 +109,6 @@ void CSoundHubImpl::Dispose() {
         }
     }
 
-    aSample = sampleList;
-    while (aSample) {
-        nextSample = (*aSample)->nextSample;
-        DisposeHandle((Handle)aSample);
-        aSample = nextSample;
-    }
-
     itsCompressor->Dispose();
     DisposeSoundLinks();
     CDirectObject::Dispose();
@@ -332,16 +116,20 @@ void CSoundHubImpl::Dispose() {
 
 CBasicSound *CSoundHubImpl::GetSoundSampler(short kind, short resId) {
     CBasicSound *aSound;
-    SampleHeaderHandle theSamples;
+    std::shared_ptr<OggFile> theSamples;
 
-    aSound = Aquire(kind);
+    aSound = Acquire(kind);
     if (aSound) {
         aSound->itsMixer = itsMixer;
 
-        if (muteFlag)
-            theSamples = NULL;
-        else
-            theSamples = RequestSample(resId);
+        if (muteFlag) {
+            theSamples = nullptr;
+        } else {
+            auto maybeOgg = AssetManager::GetOgg(resId);
+            theSamples = (maybeOgg)
+                ? *maybeOgg
+                : nullptr;
+        }
         aSound->UseSamples(theSamples);
         aSound->SetRate(FIX1);
     }

@@ -12,16 +12,9 @@
 #include "CAvaraApp.h"
 #include "CAvaraGame.h"
 #include "CViewParameters.h"
-#include "Resource.h"
 #include "CBSPPart.h"
-#include "AvaraGL.h"
 
-void CWorldShader::IWorldShader(CAvaraGame *theGame) {
-    itsGame = theGame;
-    Reset();
-}
-
-void CWorldShader::IWorldShader() {
+CWorldShader::CWorldShader() {
     Reset();
 }
 
@@ -65,7 +58,7 @@ void CWorldShader::Apply() {
             break;
     }
 
-    SetPolyWorld(&itsGame->itsPolyWorld);
+    SetPolyWorld(&gCurrentGame->itsPolyWorld);
     if(numShades == 0)
     {	SetPolyWorldBackground(FindPolyColor(groundColor));
     }
@@ -109,13 +102,5 @@ void CWorldShader::Apply() {
             *colors++ = FindPolyColor(RGBToLongColor(&interColor));
         }
     }
-    */
-}
-
-void CWorldShader::ShadeWorld(CViewParameters *theView) {
-    AvaraGLShadeWorld(this, theView);
-    /*
-    if(numShades)
-        theView->RenderPlanes(numShades, shadeColors, altitudes);
     */
 }

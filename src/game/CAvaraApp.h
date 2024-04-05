@@ -11,6 +11,7 @@
 
 #include "CApplication.h"
 //#include "PolyColor.h"
+#include "CHUD.h"
 #include "CLevelWindow.h"
 #include "CNetworkWindow.h"
 #include "CServerWindow.h"
@@ -71,6 +72,7 @@ private:
     std::unique_ptr<CAvaraGame> itsGame;
     CNetManager *gameNet;
     CommandManager *itsTui;
+    std::unique_ptr<CHUD> ui;
 
 public:
     CPlayerWindow *playerWindow;

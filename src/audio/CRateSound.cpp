@@ -19,8 +19,8 @@ void CRateSound::Reset() {
     masterRate = FIX1;
 }
 
-void CRateSound::UseSamplePtr(Sample *samples, int numSamples) {
-    CBasicSound::UseSamplePtr(samples, numSamples);
+void CRateSound::UseSamples(std::shared_ptr<OggFile> theSample) {
+    CBasicSound::UseSamples(theSample);
     SetRate(FIX1);
 }
 
@@ -29,10 +29,11 @@ void CRateSound::UseSamplePtr(Sample *samples, int numSamples) {
 void CRateSound::SetRate(Fixed aRate) {
     Fixed adjustedRate;
 
-    if (itsSamples)
-        adjustedRate = FMul((*itsSamples)->baseRate, aRate);
-    else
+    if (itsSamples != nullptr) {
+        adjustedRate = FMul(itsSamples->hsnd.baseRate, aRate);
+    } else {
         adjustedRate = aRate;
+    }
 
     adjustedRate = FMul(adjustedRate, itsMixer->standardRate);
 
@@ -169,7 +170,7 @@ void CRateSound::WriteFrame(int16_t theChannel, int16_t volumeAllowed) {
 
     while (thisCount > 0) {
         if (loopCopy) {
-            didCount = RateMixer(sampleData, d, converter, thisCount, loopEnd, &ind, rateCopy);
+            didCount = RateMixer(itsSamples, d, converter, thisCount, loopEnd, &ind, rateCopy);
             d += didCount;
             thisCount -= didCount;
 
@@ -179,7 +180,7 @@ void CRateSound::WriteFrame(int16_t theChannel, int16_t volumeAllowed) {
                 ind.i += loopStart - loopEnd;
             }
         } else {
-            RateMixer(sampleData, d, converter, thisCount, sampleLen, &ind, rateCopy);
+            RateMixer(itsSamples, d, converter, thisCount, sampleLen, &ind, rateCopy);
             thisCount = 0;
         }
     }

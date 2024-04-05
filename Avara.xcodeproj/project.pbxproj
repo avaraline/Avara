@@ -7,12 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		940541ED2B5875B200E32241 /* OpenGLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940541EC2B5875B200E32241 /* OpenGLShader.cpp */; };
+		940541EE2B5875B200E32241 /* OpenGLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940541EC2B5875B200E32241 /* OpenGLShader.cpp */; };
+		9419E8472B49ECB1007C50D0 /* CTeamColorAdjuster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9419E8462B49ECB1007C50D0 /* CTeamColorAdjuster.cpp */; };
+		9419E8482B49ECB1007C50D0 /* CTeamColorAdjuster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9419E8462B49ECB1007C50D0 /* CTeamColorAdjuster.cpp */; };
+		941D878F2B5A213200E5577C /* OpenGLVertices.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 941D878E2B5A213200E5577C /* OpenGLVertices.cpp */; };
+		941D87902B5A213200E5577C /* OpenGLVertices.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 941D878E2B5A213200E5577C /* OpenGLVertices.cpp */; };
+		944F2F702B323F1900856E53 /* LocalAssetRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 944F2F6F2B323F1900856E53 /* LocalAssetRepository.cpp */; };
+		944F2F712B323F1900856E53 /* LocalAssetRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 944F2F6F2B323F1900856E53 /* LocalAssetRepository.cpp */; };
+		9465BFD22B30C2A00050681C /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9465BFD12B30C2A00050681C /* AssetManager.cpp */; };
+		9465BFD32B30C2A00050681C /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9465BFD12B30C2A00050681C /* AssetManager.cpp */; };
+		9465BFD72B30EF680050681C /* PackageManifest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9465BFD52B30EF680050681C /* PackageManifest.cpp */; };
+		9465BFD82B30EF680050681C /* PackageManifest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9465BFD52B30EF680050681C /* PackageManifest.cpp */; };
+		946EF8D22B6D9CB2000EF17E /* AbstractRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 946EF8D12B6D9CB2000EF17E /* AbstractRenderer.cpp */; };
+		946EF8D32B6D9CB2000EF17E /* AbstractRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 946EF8D12B6D9CB2000EF17E /* AbstractRenderer.cpp */; };
+		947F5C652B576B9F00F41689 /* ModernOpenGLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 947F5C642B576B9F00F41689 /* ModernOpenGLRenderer.cpp */; };
+		947F5C662B576B9F00F41689 /* ModernOpenGLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 947F5C642B576B9F00F41689 /* ModernOpenGLRenderer.cpp */; };
+		948CBF142B335A1400147E80 /* BaseAssetStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */; };
+		948CBF152B335A1400147E80 /* BaseAssetStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */; };
+		94924EAF2B3A894900197378 /* OggFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94924EAE2B3A894900197378 /* OggFile.cpp */; };
+		94924EB02B3A894900197378 /* OggFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94924EAE2B3A894900197378 /* OggFile.cpp */; };
+		94EE531F2BA0AFCF00EE9056 /* CFreeCam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94EE531D2BA0AFCF00EE9056 /* CFreeCam.cpp */; };
+		94EE53202BA0AFCF00EE9056 /* CFreeCam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94EE531D2BA0AFCF00EE9056 /* CFreeCam.cpp */; };
 		94F17DDD29920D90001F5950 /* ARGBColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94F17DDC29920D90001F5950 /* ARGBColor.cpp */; };
 		E20752EF2A003EC600DCC210 /* Tags.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20752EE2A003EC600DCC210 /* Tags.cpp */; };
 		E20A3C562991CC72005741F7 /* KeyFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20A3C552991CC72005741F7 /* KeyFuncs.cpp */; };
+		E2210CC12A1C9D9C000712AA /* Tags.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20752EE2A003EC600DCC210 /* Tags.cpp */; };
 		E247DE242A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E247DE222A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp */; };
 		E247DE252A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E247DE222A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp */; };
-		E2210CC12A1C9D9C000712AA /* Tags.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20752EE2A003EC600DCC210 /* Tags.cpp */; };
 		E517F053299713DB0036B206 /* tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2B62D7D2997052B00600401 /* tests.cpp */; };
 		E517F054299713DB0036B206 /* CBasicSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7529895118007A875D /* CBasicSound.cpp */; };
 		E517F055299713DB0036B206 /* CRateSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7029895118007A875D /* CRateSound.cpp */; };
@@ -120,7 +142,6 @@
 		E517F0BC299713DB0036B206 /* CommandManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BC929895118007A875D /* CommandManager.cpp */; };
 		E517F0BD299713DB0036B206 /* TextCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BCA29895118007A875D /* TextCommand.cpp */; };
 		E517F0BE299713DB0036B206 /* ARGBColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94F17DDC29920D90001F5950 /* ARGBColor.cpp */; };
-		E517F0BF299713DB0036B206 /* AvaraGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BC429895118007A875D /* AvaraGL.cpp */; };
 		E517F0C0299713DB0036B206 /* Beeper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BB329895118007A875D /* Beeper.cpp */; };
 		E517F0C1299713DB0036B206 /* CRC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BAA29895118007A875D /* CRC.cpp */; };
 		E517F0C2299713DB0036B206 /* CStringDictionary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BC029895118007A875D /* CStringDictionary.cpp */; };
@@ -190,7 +211,6 @@
 		E5890CAE29895118007A875D /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BBF29895118007A875D /* Debug.cpp */; };
 		E5890CAF29895118007A875D /* CStringDictionary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BC029895118007A875D /* CStringDictionary.cpp */; };
 		E5890CB029895118007A875D /* RamFiles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BC129895118007A875D /* RamFiles.cpp */; };
-		E5890CB129895118007A875D /* AvaraGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BC429895118007A875D /* AvaraGL.cpp */; };
 		E5890CB229895118007A875D /* CommandManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BC929895118007A875D /* CommandManager.cpp */; };
 		E5890CB329895118007A875D /* TextCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BCA29895118007A875D /* TextCommand.cpp */; };
 		E5890CB429895118007A875D /* CLogic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BCF29895118007A875D /* CLogic.cpp */; };
@@ -355,6 +375,32 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		940541EB2B58744500E32241 /* OpenGLShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLShader.h; sourceTree = "<group>"; };
+		940541EC2B5875B200E32241 /* OpenGLShader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLShader.cpp; sourceTree = "<group>"; };
+		9419E8452B49EC89007C50D0 /* CTeamColorAdjuster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTeamColorAdjuster.h; sourceTree = "<group>"; };
+		9419E8462B49ECB1007C50D0 /* CTeamColorAdjuster.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CTeamColorAdjuster.cpp; sourceTree = "<group>"; };
+		941D878C2B5A1EEC00E5577C /* VertexData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VertexData.h; sourceTree = "<group>"; };
+		941D878D2B5A206A00E5577C /* OpenGLVertices.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLVertices.h; sourceTree = "<group>"; };
+		941D878E2B5A213200E5577C /* OpenGLVertices.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLVertices.cpp; sourceTree = "<group>"; };
+		944F2F6D2B32379C00856E53 /* AssetRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetRepository.h; sourceTree = "<group>"; };
+		944F2F6E2B323E2100856E53 /* LocalAssetRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalAssetRepository.h; sourceTree = "<group>"; };
+		944F2F6F2B323F1900856E53 /* LocalAssetRepository.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LocalAssetRepository.cpp; sourceTree = "<group>"; };
+		9465BFD02B30C2790050681C /* AssetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetManager.h; sourceTree = "<group>"; };
+		9465BFD12B30C2A00050681C /* AssetManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetManager.cpp; sourceTree = "<group>"; };
+		9465BFD52B30EF680050681C /* PackageManifest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PackageManifest.cpp; sourceTree = "<group>"; };
+		9465BFD92B30EFB40050681C /* PackageManifest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PackageManifest.h; sourceTree = "<group>"; };
+		946EF8D12B6D9CB2000EF17E /* AbstractRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AbstractRenderer.cpp; sourceTree = "<group>"; };
+		947F5C622B57693300F41689 /* AbstractRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AbstractRenderer.h; sourceTree = "<group>"; };
+		947F5C632B576ACD00F41689 /* ModernOpenGLRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModernOpenGLRenderer.h; sourceTree = "<group>"; };
+		947F5C642B576B9F00F41689 /* ModernOpenGLRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ModernOpenGLRenderer.cpp; sourceTree = "<group>"; };
+		947F5C672B57A30100F41689 /* NullRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NullRenderer.h; sourceTree = "<group>"; };
+		948CBF112B33581D00147E80 /* AssetStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetStorage.h; sourceTree = "<group>"; };
+		948CBF122B3359D700147E80 /* BaseAssetStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseAssetStorage.h; sourceTree = "<group>"; };
+		948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BaseAssetStorage.cpp; sourceTree = "<group>"; };
+		94924EAD2B3A893900197378 /* OggFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OggFile.h; sourceTree = "<group>"; };
+		94924EAE2B3A894900197378 /* OggFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OggFile.cpp; sourceTree = "<group>"; };
+		94EE531D2BA0AFCF00EE9056 /* CFreeCam.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CFreeCam.cpp; sourceTree = "<group>"; };
+		94EE531E2BA0AFCF00EE9056 /* CFreeCam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFreeCam.h; sourceTree = "<group>"; };
 		94F17DDB2991FACE001F5950 /* ARGBColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARGBColor.h; sourceTree = "<group>"; };
 		94F17DDC29920D90001F5950 /* ARGBColor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ARGBColor.cpp; sourceTree = "<group>"; };
 		E20752ED29FF1EC500DCC210 /* Tags.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tags.h; sourceTree = "<group>"; };
@@ -408,13 +454,11 @@
 		E5890BBB29895118007A875D /* CHandlePipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHandlePipe.h; sourceTree = "<group>"; };
 		E5890BBC29895118007A875D /* CAbstractHuffPipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAbstractHuffPipe.h; sourceTree = "<group>"; };
 		E5890BBD29895118007A875D /* FastMat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FastMat.cpp; sourceTree = "<group>"; };
-		E5890BBE29895118007A875D /* AvaraGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvaraGL.h; sourceTree = "<group>"; };
 		E5890BBF29895118007A875D /* Debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Debug.cpp; sourceTree = "<group>"; };
 		E5890BC029895118007A875D /* CStringDictionary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CStringDictionary.cpp; sourceTree = "<group>"; };
 		E5890BC129895118007A875D /* RamFiles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RamFiles.cpp; sourceTree = "<group>"; };
 		E5890BC229895118007A875D /* RayHit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RayHit.h; sourceTree = "<group>"; };
 		E5890BC329895118007A875D /* CharWordLongPointer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharWordLongPointer.h; sourceTree = "<group>"; };
-		E5890BC429895118007A875D /* AvaraGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AvaraGL.cpp; sourceTree = "<group>"; };
 		E5890BC529895118007A875D /* PascalStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PascalStrings.h; sourceTree = "<group>"; };
 		E5890BC629895118007A875D /* Beeper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Beeper.h; sourceTree = "<group>"; };
 		E5890BC829895118007A875D /* TextCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextCommand.h; sourceTree = "<group>"; };
@@ -1005,6 +1049,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9465BFCF2B30C2130050681C /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				9465BFD12B30C2A00050681C /* AssetManager.cpp */,
+				9465BFD02B30C2790050681C /* AssetManager.h */,
+				9465BFD52B30EF680050681C /* PackageManifest.cpp */,
+				9465BFD92B30EFB40050681C /* PackageManifest.h */,
+				944F2F6D2B32379C00856E53 /* AssetRepository.h */,
+				948CBF112B33581D00147E80 /* AssetStorage.h */,
+				944F2F6F2B323F1900856E53 /* LocalAssetRepository.cpp */,
+				944F2F6E2B323E2100856E53 /* LocalAssetRepository.h */,
+				948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */,
+				948CBF122B3359D700147E80 /* BaseAssetStorage.h */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		948128AD2B539B44002A3459 /* render */ = {
+			isa = PBXGroup;
+			children = (
+				947F5C642B576B9F00F41689 /* ModernOpenGLRenderer.cpp */,
+				947F5C632B576ACD00F41689 /* ModernOpenGLRenderer.h */,
+				947F5C672B57A30100F41689 /* NullRenderer.h */,
+				940541EC2B5875B200E32241 /* OpenGLShader.cpp */,
+				940541EB2B58744500E32241 /* OpenGLShader.h */,
+				941D878E2B5A213200E5577C /* OpenGLVertices.cpp */,
+				941D878D2B5A206A00E5577C /* OpenGLVertices.h */,
+				946EF8D12B6D9CB2000EF17E /* AbstractRenderer.cpp */,
+				947F5C622B57693300F41689 /* AbstractRenderer.h */,
+				941D878C2B5A1EEC00E5577C /* VertexData.h */,
+			);
+			path = render;
+			sourceTree = "<group>";
+		};
 		E5890B1B29894DB3007A875D = {
 			isa = PBXGroup;
 			children = (
@@ -1044,6 +1122,7 @@
 			children = (
 				E5890C7929895118007A875D /* Avara.cpp */,
 				E2B62D7D2997052B00600401 /* tests.cpp */,
+				9465BFCF2B30C2130050681C /* assets */,
 				E5890C6E29895118007A875D /* audio */,
 				E5890C9729895118007A875D /* base */,
 				E5890C5F29895118007A875D /* bsp */,
@@ -1052,6 +1131,7 @@
 				E5890C7B29895118007A875D /* gui */,
 				E5890C9029895118007A875D /* level */,
 				E5890B9A29895118007A875D /* net */,
+				948128AD2B539B44002A3459 /* render */,
 				E5890BC729895118007A875D /* tui */,
 				E5890BA829895118007A875D /* util */,
 			);
@@ -1097,8 +1177,6 @@
 			children = (
 				94F17DDC29920D90001F5950 /* ARGBColor.cpp */,
 				94F17DDB2991FACE001F5950 /* ARGBColor.h */,
-				E5890BC429895118007A875D /* AvaraGL.cpp */,
-				E5890BBE29895118007A875D /* AvaraGL.h */,
 				E5890BB329895118007A875D /* Beeper.cpp */,
 				E5890BC629895118007A875D /* Beeper.h */,
 				E5890BC329895118007A875D /* CharWordLongPointer.h */,
@@ -1185,6 +1263,8 @@
 				E5890C2929895118007A875D /* CDoorActor.h */,
 				E5890BD829895118007A875D /* CForceField.cpp */,
 				E5890BDC29895118007A875D /* CForceField.h */,
+				94EE531D2BA0AFCF00EE9056 /* CFreeCam.cpp */,
+				94EE531E2BA0AFCF00EE9056 /* CFreeCam.h */,
 				E5890BD029895118007A875D /* CFreeSolid.cpp */,
 				E5890C4929895118007A875D /* CFreeSolid.h */,
 				E5890C2429895118007A875D /* CGlowActors.cpp */,
@@ -1268,6 +1348,8 @@
 				E5890C1C29895118007A875D /* CSphereActor.h */,
 				E5890BF529895118007A875D /* CSwitchActor.cpp */,
 				E5890BDB29895118007A875D /* CSwitchActor.h */,
+				9419E8462B49ECB1007C50D0 /* CTeamColorAdjuster.cpp */,
+				9419E8452B49EC89007C50D0 /* CTeamColorAdjuster.h */,
 				E5890C4629895118007A875D /* CTeleporter.cpp */,
 				E5890BE129895118007A875D /* CTeleporter.h */,
 				E5890C2B29895118007A875D /* CTextActor.cpp */,
@@ -1297,7 +1379,6 @@
 				E5890C2129895118007A875D /* GoodyRecord.h */,
 				E5890C1029895118007A875D /* InfoMessages.h */,
 				E5890C4129895118007A875D /* KeyFuncs.h */,
-				E5890C0229895118007A875D /* LinkLoose.cpp */,
 				E5890BDD29895118007A875D /* Messages.h */,
 				E5890BE429895118007A875D /* PlayerConfig.h */,
 				E247DE222A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp */,
@@ -1337,6 +1418,8 @@
 				E5890C7729895118007A875D /* CSoundMixer.cpp */,
 				E5890C7229895118007A875D /* CSoundMixer.h */,
 				E5890C7429895118007A875D /* DopplerPlug.cpp */,
+				94924EAE2B3A894900197378 /* OggFile.cpp */,
+				94924EAD2B3A893900197378 /* OggFile.h */,
 				E5890C7629895118007A875D /* SoundSystemDefines.h */,
 			);
 			path = audio;
@@ -1377,6 +1460,7 @@
 				E5890C9129895118007A875D /* InternalVars.h */,
 				E5890C9329895118007A875D /* LevelLoader.cpp */,
 				E5890C9529895118007A875D /* LevelLoader.h */,
+				E5890C0229895118007A875D /* LinkLoose.cpp */,
 				E5890C9229895118007A875D /* LinkLoose.h */,
 				E5890C9629895118007A875D /* Parser.cpp */,
 				E5890C9429895118007A875D /* Parser.h */,
@@ -2002,6 +2086,7 @@
 				E517F057299713DB0036B206 /* CSoundMixer.cpp in Sources */,
 				E517F058299713DB0036B206 /* DopplerPlug.cpp in Sources */,
 				E517F059299713DB0036B206 /* CBaseObject.cpp in Sources */,
+				948CBF152B335A1400147E80 /* BaseAssetStorage.cpp in Sources */,
 				E517F05A299713DB0036B206 /* CDirectObject.cpp in Sources */,
 				E517F05B299713DB0036B206 /* CTagBase.cpp in Sources */,
 				E517F05C299713DB0036B206 /* CBSPPart.cpp in Sources */,
@@ -2021,6 +2106,7 @@
 				E517F06B299713DB0036B206 /* CAbstractYon.cpp in Sources */,
 				E517F06C299713DB0036B206 /* CAreaActor.cpp in Sources */,
 				E517F06D299713DB0036B206 /* CAvaraApp.cpp in Sources */,
+				94EE53202BA0AFCF00EE9056 /* CFreeCam.cpp in Sources */,
 				E517F06E299713DB0036B206 /* CAvaraGame.cpp in Sources */,
 				E517F06F299713DB0036B206 /* CBall.cpp in Sources */,
 				E517F070299713DB0036B206 /* CDepot.cpp in Sources */,
@@ -2041,6 +2127,7 @@
 				E517F07F299713DB0036B206 /* CLogic.cpp in Sources */,
 				E517F080299713DB0036B206 /* CLogicAnd.cpp in Sources */,
 				E517F081299713DB0036B206 /* CLogicBase.cpp in Sources */,
+				946EF8D32B6D9CB2000EF17E /* AbstractRenderer.cpp in Sources */,
 				E517F082299713DB0036B206 /* CLogicCounter.cpp in Sources */,
 				E517F083299713DB0036B206 /* CLogicDelay.cpp in Sources */,
 				E517F084299713DB0036B206 /* CLogicDistributor.cpp in Sources */,
@@ -2049,12 +2136,15 @@
 				E517F086299713DB0036B206 /* CMarkerActor.cpp in Sources */,
 				E517F087299713DB0036B206 /* CMineActor.cpp in Sources */,
 				E517F088299713DB0036B206 /* CMissile.cpp in Sources */,
+				940541EE2B5875B200E32241 /* OpenGLShader.cpp in Sources */,
+				941D87902B5A213200E5577C /* OpenGLVertices.cpp in Sources */,
 				E517F089299713DB0036B206 /* CNetManager.cpp in Sources */,
 				E517F08A299713DB0036B206 /* CParasite.cpp in Sources */,
 				E517F08B299713DB0036B206 /* CPill.cpp in Sources */,
 				E517F08C299713DB0036B206 /* CPlacedActors.cpp in Sources */,
 				E517F08D299713DB0036B206 /* CPlayerActor.cpp in Sources */,
 				E517F08E299713DB0036B206 /* CPlayerManager.cpp in Sources */,
+				947F5C662B576B9F00F41689 /* ModernOpenGLRenderer.cpp in Sources */,
 				E517F08F299713DB0036B206 /* CPlayerMissile.cpp in Sources */,
 				E517F090299713DB0036B206 /* CRamp.cpp in Sources */,
 				E517F091299713DB0036B206 /* CRandomIncarnator.cpp in Sources */,
@@ -2069,8 +2159,10 @@
 				E517F09A299713DB0036B206 /* CSolidActor.cpp in Sources */,
 				E517F09B299713DB0036B206 /* CSoundActor.cpp in Sources */,
 				E517F09C299713DB0036B206 /* CSphereActor.cpp in Sources */,
+				94924EB02B3A894900197378 /* OggFile.cpp in Sources */,
 				E517F09D299713DB0036B206 /* CSwitchActor.cpp in Sources */,
 				E517F09E299713DB0036B206 /* CTeleporter.cpp in Sources */,
+				9419E8482B49ECB1007C50D0 /* CTeamColorAdjuster.cpp in Sources */,
 				E517F09F299713DB0036B206 /* CTextActor.cpp in Sources */,
 				E517F0A0299713DB0036B206 /* CTriPyramidActor.cpp in Sources */,
 				E517F0A1299713DB0036B206 /* CUfo.cpp in Sources */,
@@ -2078,10 +2170,13 @@
 				E517F0A3299713DB0036B206 /* CWallActor.cpp in Sources */,
 				E517F0A4299713DB0036B206 /* CWallDoor.cpp in Sources */,
 				E517F0A5299713DB0036B206 /* CWallSolid.cpp in Sources */,
+				9465BFD82B30EF680050681C /* PackageManifest.cpp in Sources */,
 				E517F0A6299713DB0036B206 /* CWeapon.cpp in Sources */,
 				E517F0A7299713DB0036B206 /* CWorldShader.cpp in Sources */,
 				E517F0A8299713DB0036B206 /* CYonBox.cpp in Sources */,
+				944F2F712B323F1900856E53 /* LocalAssetRepository.cpp in Sources */,
 				E517F0A9299713DB0036B206 /* CYonSphere.cpp in Sources */,
+				9465BFD32B30C2A00050681C /* AssetManager.cpp in Sources */,
 				E517F0AA299713DB0036B206 /* CZombieActor.cpp in Sources */,
 				E517F0AB299713DB0036B206 /* LinkLoose.cpp in Sources */,
 				E517F0AC299713DB0036B206 /* CApplication.cpp in Sources */,
@@ -2103,7 +2198,6 @@
 				E517F0BC299713DB0036B206 /* CommandManager.cpp in Sources */,
 				E517F0BD299713DB0036B206 /* TextCommand.cpp in Sources */,
 				E517F0BE299713DB0036B206 /* ARGBColor.cpp in Sources */,
-				E517F0BF299713DB0036B206 /* AvaraGL.cpp in Sources */,
 				E517F0C0299713DB0036B206 /* Beeper.cpp in Sources */,
 				E517F0C1299713DB0036B206 /* CRC.cpp in Sources */,
 				E517F0C2299713DB0036B206 /* CStringDictionary.cpp in Sources */,
@@ -2163,6 +2257,7 @@
 				E5890CF129895118007A875D /* CSliverPart.cpp in Sources */,
 				E5890CD329895118007A875D /* CUfo.cpp in Sources */,
 				E5890D0A29895118007A875D /* ColorManager.cpp in Sources */,
+				948CBF142B335A1400147E80 /* BaseAssetStorage.cpp in Sources */,
 				E5890CDD29895118007A875D /* CLogicAnd.cpp in Sources */,
 				E5890CFC29895118007A875D /* CScaledBSP.cpp in Sources */,
 				E5890CD429895118007A875D /* CSmart.cpp in Sources */,
@@ -2182,6 +2277,7 @@
 				E5890CB229895118007A875D /* CommandManager.cpp in Sources */,
 				E5890CF629895118007A875D /* CGroundColorAdjuster.cpp in Sources */,
 				E5890CEA29895118007A875D /* CDepot.cpp in Sources */,
+				94EE531F2BA0AFCF00EE9056 /* CFreeCam.cpp in Sources */,
 				E5890EFF29895124007A875D /* theme.cpp in Sources */,
 				E5890F0229895124007A875D /* glutil.cpp in Sources */,
 				E5890F0529895124007A875D /* slider.cpp in Sources */,
@@ -2195,7 +2291,6 @@
 				E5890CA129895118007A875D /* System.cpp in Sources */,
 				E5890CFB29895118007A875D /* CViewParameters.cpp in Sources */,
 				E5890CCA29895118007A875D /* CWorldShader.cpp in Sources */,
-				E5890CB129895118007A875D /* AvaraGL.cpp in Sources */,
 				E5890CA629895118007A875D /* CProtoControl.cpp in Sources */,
 				E5890D1329895118007A875D /* CBaseObject.cpp in Sources */,
 				E5890F0129895124007A875D /* messagedialog.cpp in Sources */,
@@ -2203,6 +2298,7 @@
 				E5890CF429895118007A875D /* CSolidActor.cpp in Sources */,
 				E5890EFE29895124007A875D /* combobox.cpp in Sources */,
 				E5890D0B29895118007A875D /* CWindow.cpp in Sources */,
+				946EF8D22B6D9CB2000EF17E /* AbstractRenderer.cpp in Sources */,
 				E5890CA829895118007A875D /* Beeper.cpp in Sources */,
 				E5890CDE29895118007A875D /* CYonBox.cpp in Sources */,
 				E5890EF429895124007A875D /* tabheader.cpp in Sources */,
@@ -2210,12 +2306,15 @@
 				E5890D1029895118007A875D /* CApplication.cpp in Sources */,
 				E5890EEB29895124007A875D /* csscolorparser.cpp in Sources */,
 				E5890CF329895118007A875D /* CSoundActor.cpp in Sources */,
+				940541ED2B5875B200E32241 /* OpenGLShader.cpp in Sources */,
+				941D878F2B5A213200E5577C /* OpenGLVertices.cpp in Sources */,
 				E5890CF729895118007A875D /* CRealShooters.cpp in Sources */,
 				E5890CC829895118007A875D /* CLogicBase.cpp in Sources */,
 				E5890CA329895118007A875D /* CUDPComm.cpp in Sources */,
 				E5890CA229895118007A875D /* CCommManager.cpp in Sources */,
 				E5890CE629895118007A875D /* CZombieActor.cpp in Sources */,
 				E5890CB729895118007A875D /* CForceField.cpp in Sources */,
+				947F5C652B576B9F00F41689 /* ModernOpenGLRenderer.cpp in Sources */,
 				E5890CF929895118007A875D /* CBSPWorld.cpp in Sources */,
 				E5890CAE29895118007A875D /* Debug.cpp in Sources */,
 				E5890F3829895124007A875D /* glm.cpp in Sources */,
@@ -2230,8 +2329,10 @@
 				E5890EF929895124007A875D /* nanogui_resources.cpp in Sources */,
 				E5890CBD29895118007A875D /* CScout.cpp in Sources */,
 				E5890CA429895118007A875D /* AvaraTCP.cpp in Sources */,
+				94924EAF2B3A894900197378 /* OggFile.cpp in Sources */,
 				E5890EFB29895124007A875D /* darwin.mm in Sources */,
 				E5890CBC29895118007A875D /* CAbstractMissile.cpp in Sources */,
+				9419E8472B49ECB1007C50D0 /* CTeamColorAdjuster.cpp in Sources */,
 				E5890CD229895118007A875D /* CBall.cpp in Sources */,
 				E5890CC929895118007A875D /* CPlayerMissile.cpp in Sources */,
 				E5890F0729895124007A875D /* desccombobox.cpp in Sources */,
@@ -2239,10 +2340,13 @@
 				E5890CC029895118007A875D /* CGoal.cpp in Sources */,
 				E5890CA929895118007A875D /* CHuffProcessor.cpp in Sources */,
 				E5890EF729895124007A875D /* popup.cpp in Sources */,
+				9465BFD72B30EF680050681C /* PackageManifest.cpp in Sources */,
 				E5890CBA29895118007A875D /* CWeapon.cpp in Sources */,
 				E247DE242A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp in Sources */,
 				E5890CE429895118007A875D /* CAreaActor.cpp in Sources */,
+				944F2F702B323F1900856E53 /* LocalAssetRepository.cpp in Sources */,
 				E5890D0929895118007A875D /* CNetworkWindow.cpp in Sources */,
+				9465BFD22B30C2A00050681C /* AssetManager.cpp in Sources */,
 				E5890EFA29895124007A875D /* glcanvas.cpp in Sources */,
 				E5890CB029895118007A875D /* RamFiles.cpp in Sources */,
 				E5890CD929895118007A875D /* CRandomIncarnator.cpp in Sources */,

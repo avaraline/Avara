@@ -17,7 +17,6 @@ CGlowActors::CGlowActors() {
     canGlow = true;
     glow = 0;
 }
-
 void CGlowActors::BeginScript() {
     CPlacedActors::BeginScript();
 

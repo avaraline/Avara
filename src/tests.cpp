@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include <SDL2/SDL_log.h>
+#include "AssetManager.h"
 #include "CAvaraApp.h"
 #include "CBSPPart.h"
 #include "CPlayerManager.h"
@@ -14,11 +15,11 @@
 #include "CGrenade.h"
 #include "CSmart.h"
 #include "CScout.h"
-#include "AvaraGL.h"
 #include "Messages.h"
 #include "Preferences.h"
 #include "System.h"
 #include "CUDPConnection.h"
+#include "NullRenderer.h"
 
 #include <iostream>
 using namespace std;
@@ -131,6 +132,8 @@ public:
 class TestApp : public CAvaraApp {
 public:
     TestApp() {
+        AssetManager::Init();
+        
         // Silence SDL logging with a no-op callback.
         SDL_LogSetOutputFunction([](void *d, int c, SDL_LogPriority p, const char *m){}, nullptr);
     }
@@ -185,6 +188,12 @@ public:
     }
 };
 
+class TestWalkerActor : public CWalkerActor {
+    void ResetCamera() {
+
+    }
+};
+
 class HectorTestScenario {
 public:
     TestApp app;
@@ -195,12 +204,14 @@ public:
         app.itsGame = std::make_unique<TestGame>(frameTime);
         game = (TestGame*)app.itsGame.get();
         gCurrentGame = game;
+        gRenderer = new NullRenderer();
+
         InitParser();
         game->IAvaraGame(&app);
         game->EndScript();
         app.GetNet()->ChangeNet(kNullNet, "");
         game->LevelReset(false);
-        hector = new CWalkerActor();
+        hector = new TestWalkerActor();
         hector->BeginScript();
         hector->EndScript();
         game->itsNet->playerTable[0]->SetPlayer(hector);
@@ -210,6 +221,7 @@ public:
         hector->location[2] = hectorZ;
         hector->location[3] = FIX1;
         game->AddActor(hector);
+        game->freshPlayerList = 0;
         game->GameStart();
     }
 };
@@ -1171,7 +1183,6 @@ TEST(QUEUES, Clean) {
 }
 
 int main(int argc, char **argv) {
-    AvaraGLToggleRendering(0);
     nanogui::init();
     InitMatrix();
     ::testing::InitGoogleTest(&argc, argv);

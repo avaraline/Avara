@@ -73,8 +73,11 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
         {"scoutControl", 1 << kfuScoutControl},
         {"spectateNext", 1 << kfuSpectateNext},
         {"spectatePrevious", 1 << kfuSpectatePrevious},
+        {"toggleFreeCam", 1 << kfuToggleFreeCam},
         {"scoreboard", 1 << kfuScoreboard},
         {"chatMode", 1 << kfuTypeText},
+        {"freeCamUp", 1 << kfuFreeCamUp},
+        {"freeCamDown", 1 << kfuFreeCamDown},
         {"debug1", 1 << kfuDebug1},
         {"debug2", 1 << kfuDebug2}};
 
@@ -894,7 +897,7 @@ void CPlayerManagerImpl::NetDisconnect() {
         if (theNetManager->isPlaying) {
             itsPlayer->netDestruct = true;
         } else {
-            itsPlayer->Dispose();
+            delete itsPlayer;
         }
     }
 
@@ -1044,7 +1047,7 @@ CAbstractPlayer *CPlayerManagerImpl::ChooseActor(CAbstractPlayer *actorList, sho
         itsPlayer->Incarnate();
 
         if (itsPlayer->isInLimbo) {
-            itsPlayer->Dispose();
+            delete itsPlayer;
             itsPlayer = NULL;
         } else {
             itsPlayer->AddToGame();
@@ -1069,7 +1072,7 @@ Boolean CPlayerManagerImpl::IncarnateInAnyColor() {
         itsPlayer->Reincarnate();
 
         if (itsPlayer->isInLimbo) {
-            itsPlayer->Dispose();
+            delete itsPlayer;
             itsPlayer = NULL;
         } else {
             itsPlayer->AddToGame();

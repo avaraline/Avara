@@ -11,6 +11,7 @@
 
 #include "CAbstractPlayer.h"
 
+#include "AbstractRenderer.h"
 #include "AvaraDefines.h"
 #include "CBSPWorld.h"
 #include "CScaledBSP.h"
@@ -18,6 +19,7 @@
 #include "CPlayerManager.h"
 #include "CPlayerMissile.h"
 #include "CScout.h"
+#include "CFreeCam.h"
 #include "CSmartPart.h"
 #include "CViewParameters.h"
 //#include "CInfoPanel.h"
@@ -55,40 +57,37 @@ void CAbstractPlayer::LoadParts() {}
 
 void CAbstractPlayer::LoadHUDParts() {
     short i;
-    CBSPWorld *hudWorld;
-
-    hudWorld = itsGame->hudWorld;
 
     for (i = 0; i < 2; i++) {
-        targetOns[i] = new CBSPPart;
-        targetOns[i]->IBSPPart(kTargetOk);
+        targetOns[i] = CBSPPart::Create(kTargetOk);
         targetOns[i]->ReplaceColor(0xffff2600, ColorManager::getPlasmaSightsOnColor());
         targetOns[i]->privateAmbient = SIGHTSAMBIENT;
         targetOns[i]->yon = LONGYON * 2;
         targetOns[i]->usesPrivateYon = true;
+        targetOns[i]->ignoreDepthTesting = true;
         targetOns[i]->ignoreDirectionalLights = true;
         targetOns[i]->isTransparent = true;
-        hudWorld->AddPart(targetOns[i]);
+        gRenderer->AddHUDPart(targetOns[i]);
 
-        targetOffs[i] = new CBSPPart;
-        targetOffs[i]->IBSPPart(kTargetOff);
+        targetOffs[i] = CBSPPart::Create(kTargetOff);
         targetOffs[i]->ReplaceColor(0xff008f00, ColorManager::getPlasmaSightsOffColor());
         targetOffs[i]->privateAmbient = SIGHTSAMBIENT;
         targetOffs[i]->yon = LONGYON * 2;
         targetOffs[i]->usesPrivateYon = true;
+        targetOffs[i]->ignoreDepthTesting = true;
         targetOffs[i]->ignoreDirectionalLights = true;
         targetOffs[i]->isTransparent = true;
-        hudWorld->AddPart(targetOffs[i]);
+        gRenderer->AddHUDPart(targetOffs[i]);
     }
 
     dirArrowHeight = FIX3(750);
-    dirArrow = new CBSPPart;
-    dirArrow->IBSPPart(kDirIndBSP);
+    dirArrow = CBSPPart::Create(kDirIndBSP);
     dirArrow->ReplaceColor(0xff000000, ColorManager::getLookForwardColor());
+    dirArrow->ignoreDepthTesting = true;
     dirArrow->ignoreDirectionalLights = true;
     dirArrow->privateAmbient = FIX1;
     dirArrow->isTransparent = true;
-    hudWorld->AddPart(dirArrow);
+    gRenderer->AddHUDPart(dirArrow);
 
     LoadDashboardParts();
 }
@@ -161,6 +160,7 @@ void CAbstractPlayer::StartSystems() {
     scoutView = false;
     scoutIdent = 0;
     scoutBaseHeight = FIX3(2000);
+    freeCamIdent = 0;
 
     sliverCounts[kSmallSliver] = 12;
     sliverCounts[kMediumSliver] = 18;
@@ -193,6 +193,18 @@ void CAbstractPlayer::LoadScout() {
     itsScout->BeginScript();
     FreshCalc();
     itsScout->EndScript();
+}
+
+void CAbstractPlayer::LoadFreeCam() {
+    itsFreeCam = new CFreeCam(this);
+    itsFreeCam->BeginScript();
+    FreshCalc();
+    itsFreeCam->EndScript();
+    SetFreeCamState(false);
+}
+
+void CAbstractPlayer::WriteDBG(int index, float val) {
+    freeCamDBG[index] = val;
 }
 
 void CAbstractPlayer::ReplacePartColors() {
@@ -252,9 +264,10 @@ CAbstractActor *CAbstractPlayer::EndScript() {
     loseSound = ReadLongVar(iLoseSound);
     loseVolume = ReadFixedVar(iLoseVolume);
 
-    gHub->PreLoadSample(incarnateSound);
-    gHub->PreLoadSample(winSound);
-    gHub->PreLoadSample(loseSound);
+    // Preload sounds.
+    auto _ = AssetManager::GetOgg(incarnateSound);
+    _ = AssetManager::GetOgg(winSound);
+    _ = AssetManager::GetOgg(loseSound);
 
     lives = ReadLongVar(iLives);
 
@@ -280,6 +293,7 @@ CAbstractActor *CAbstractPlayer::EndScript() {
     ReplacePartColors();
     LoadHUDParts();
     LoadScout();
+    LoadFreeCam();
     PlaceParts();
     LinkPartSpheres();
 
@@ -299,9 +313,8 @@ void CAbstractPlayer::AdaptableSettings() {
                     &motorFriction, &motorAcceleration);
 }
 
-void CAbstractPlayer::Dispose() {
+CAbstractPlayer::~CAbstractPlayer() {
     short i;
-    CBSPWorld *hudWorld;
 
     if (itsGame->nextPlayer == this) {
         itsGame->nextPlayer = nextPlayer;
@@ -317,103 +330,106 @@ void CAbstractPlayer::Dispose() {
     }
 
     if (itsScout) {
-        itsScout->Dispose();
+        delete itsScout;
         scoutIdent = 0;
     }
 
-    hudWorld = itsGame->hudWorld;
+    if (freeCamIdent) {
+        itsFreeCam = (CFreeCam *)gCurrentGame->FindIdent(freeCamIdent);
+    }
 
-    hudWorld->RemovePart(dirArrow);
-    dirArrow->Dispose();
+    if (freeView) {
+        delete itsFreeCam;
+        freeCamIdent = 0;
+    }
+
+    gRenderer->RemoveHUDPart(dirArrow);
+    delete dirArrow;
 
     for (i = 0; i < 2; i++) {
-        hudWorld->RemovePart(targetOns[i]);
-        targetOns[i]->Dispose();
-        hudWorld->RemovePart(targetOffs[i]);
-        targetOffs[i]->Dispose();
+        gRenderer->RemoveHUDPart(targetOns[i]);
+        delete targetOns[i];
+        gRenderer->RemoveHUDPart(targetOffs[i]);
+        delete targetOffs[i];
     }
     DisposeDashboard();
 
     gHub->ReleaseLink(teleportSoundLink);
 
-    CRealMovers::Dispose();
 }
 
 void CAbstractPlayer::DisposeDashboard() {
     if (!itsGame->showNewHUD) return;
 
-    CBSPWorld *hudWorld;
-    hudWorld = itsGame->hudWorld;
-
     if (itsGame->itsApp->Get(kHUDShowMissileLock)) {
-        hudWorld->RemovePart(lockLight);
-        lockLight->Dispose();
+        gRenderer->RemoveHUDPart(lockLight);
+        delete lockLight;
     }
 
-    hudWorld->RemovePart(groundDirArrow);
-    groundDirArrow->Dispose();
+    gRenderer->RemoveHUDPart(groundDirArrow);
+    delete groundDirArrow;
 
-    hudWorld->RemovePart(groundDirArrowSlow);
-    groundDirArrowSlow->Dispose();
+    gRenderer->RemoveHUDPart(groundDirArrowSlow);
+    delete groundDirArrowSlow;
 
-    hudWorld->RemovePart(groundDirArrowFast);
-    groundDirArrowFast->Dispose();
+    gRenderer->RemoveHUDPart(groundDirArrowFast);
+    delete groundDirArrowFast;
 
-    hudWorld->RemovePart(energyLabel);
-    energyLabel->Dispose();
+    gRenderer->RemoveHUDPart(energyLabel);
+    delete energyLabel;
 
-    hudWorld->RemovePart(shieldLabel);
-    shieldLabel->Dispose();
+    gRenderer->RemoveHUDPart(shieldLabel);
+    delete shieldLabel;
 
-    hudWorld->RemovePart(grenadeLabel);
-    grenadeLabel->Dispose();
+    gRenderer->RemoveHUDPart(grenadeLabel);
+    delete grenadeLabel;
 
-    hudWorld->RemovePart(missileLabel);
-    missileLabel->Dispose();
+    gRenderer->RemoveHUDPart(missileLabel);
+    delete missileLabel;
 
-    hudWorld->RemovePart(boosterLabel);
-    boosterLabel->Dispose();
+    gRenderer->RemoveHUDPart(boosterLabel);
+    delete boosterLabel;
 
-    hudWorld->RemovePart(livesLabel);
-    livesLabel->Dispose();
+    gRenderer->RemoveHUDPart(livesLabel);
+    delete livesLabel;
 
-    hudWorld->RemovePart(shieldGauge);
-    shieldGauge->Dispose();
+    gRenderer->RemoveHUDPart(shieldGauge);
+    delete shieldGauge;
 
-    hudWorld->RemovePart(shieldGaugeBackLight);
-    shieldGaugeBackLight->Dispose();
+    gRenderer->RemoveHUDPart(shieldGaugeBackLight);
+    delete shieldGaugeBackLight;
 
-    hudWorld->RemovePart(energyGauge);
-    energyGauge->Dispose();
+    gRenderer->RemoveHUDPart(energyGauge);
+    delete energyGauge;
 
-    hudWorld->RemovePart(energyGaugeBackLight);
-    energyGaugeBackLight->Dispose();
+    gRenderer->RemoveHUDPart(energyGaugeBackLight);
+    delete energyGaugeBackLight;
 
 
     for (int i = 0; i < 4; i++) {
-        hudWorld->RemovePart(grenadeMeter[i]);
-        grenadeMeter[i]->Dispose();
+        gRenderer->RemoveHUDPart(grenadeMeter[i]);
+        delete grenadeMeter[i];
 
-        hudWorld->RemovePart(grenadeBox[i]);
-        grenadeBox[i]->Dispose();
+        gRenderer->RemoveHUDPart(grenadeBox[i]);
+        delete grenadeBox[i];
 
-        hudWorld->RemovePart(missileMeter[i]);
-        missileMeter[i]->Dispose();
+        gRenderer->RemoveHUDPart(missileMeter[i]);
+        delete missileMeter[i];
 
-        hudWorld->RemovePart(missileBox[i]);
-        missileBox[i]->Dispose();
+        gRenderer->RemoveHUDPart(missileBox[i]);
+        delete missileBox[i];
 
-        hudWorld->RemovePart(boosterMeter[i]);
-        boosterMeter[i]->Dispose();
+        gRenderer->RemoveHUDPart(boosterMeter[i]);
+        delete boosterMeter[i];
 
-        hudWorld->RemovePart(boosterBox[i]);
-        boosterBox[i]->Dispose();
+        gRenderer->RemoveHUDPart(boosterBox[i]);
+        delete boosterBox[i];
 
-        hudWorld->RemovePart(livesMeter[i]);
-        livesMeter[i]->Dispose();
+        gRenderer->RemoveHUDPart(livesMeter[i]);
+        delete livesMeter[i];
 
-        hudWorld->RemovePart(livesBox[i]);
-        livesBox[i]->Dispose();
+        gRenderer->RemoveHUDPart(livesBox[i]);
+        delete livesBox[i];
     }
 }
 
@@ -450,15 +466,9 @@ void CAbstractPlayer::PlaceHUDParts() {
     } else {
         mt = &viewPortPart->itsTransform;
 
-        if (debug2Flag) {
-            theHit.direction[0] = FMul((*mt)[2][0], PLAYERMISSILESPEED) + speed[0];
-            theHit.direction[1] = FMul((*mt)[2][1], PLAYERMISSILESPEED) + speed[1];
-            theHit.direction[2] = FMul((*mt)[2][2], PLAYERMISSILESPEED) + speed[2];
-        } else {
-            theHit.direction[0] = FMul((*mt)[2][0], PLAYERMISSILESPEED);
-            theHit.direction[1] = FMul((*mt)[2][1], PLAYERMISSILESPEED);
-            theHit.direction[2] = FMul((*mt)[2][2], PLAYERMISSILESPEED);
-        }
+        theHit.direction[0] = FMul((*mt)[2][0], PLAYERMISSILESPEED);
+        theHit.direction[1] = FMul((*mt)[2][1], PLAYERMISSILESPEED);
+        theHit.direction[2] = FMul((*mt)[2][2], PLAYERMISSILESPEED);
 
         theHit.direction[3] = 0;
         NormalizeVector(3, theHit.direction);
@@ -530,13 +540,10 @@ void CAbstractPlayer::PlaceHUDParts() {
 }
 
 CScaledBSP* CAbstractPlayer::DashboardPart(uint16_t id, Fixed scale) {
-    CScaledBSP* bsp = new CScaledBSP;
-    bsp->IScaledBSP(scale, id, this, 0);
+    CScaledBSP* bsp = new CScaledBSP(scale, id, this, 0);
     bsp->ReplaceAllColors(ColorManager::getHUDColor());
-    bsp->privateAmbient = FIX1;
-    bsp->ignoreDirectionalLights = true;
     bsp->isTransparent = true;
-    itsGame->hudWorld->AddPart(bsp);
+    gRenderer->AddHUDPart(bsp);
     return bsp;
 }
 
@@ -617,15 +624,20 @@ void CAbstractPlayer::LoadDashboardParts() {
 
     if (itsGame->itsApp->Get(kHUDShowMissileLock)) {
         lockLight = DashboardPart(kLockLight, FIX3(600));
+        lockLight->ignoreDepthTesting = true;
     }
 
     groundDirArrow = DashboardPart(kGroundDirArrow, FIX3(1000 * arrowScale));
+    groundDirArrow->ignoreDepthTesting = true;
     groundDirArrowSlow = DashboardPart(kGroundDirArrowSlow, FIX3(1000 * arrowScale));
+    groundDirArrowSlow->ignoreDepthTesting = true;
     groundDirArrowFast = DashboardPart(kGroundDirArrowFast, FIX3(1000 * arrowScale));
+    groundDirArrowFast->ignoreDepthTesting = true;
 
     // Shields
     shieldLabel = DashboardPart(kShieldBSP, FIX3(70*layoutScale));
     shieldGauge = DashboardPart(gaugeBSP);
+    shieldGauge->ignoreDepthTesting = true;
     shieldGauge->isMorphable = true;
 
     shieldGaugeBackLight = DashboardPart(gaugeBSP, ToFixed(layoutScale));
@@ -634,6 +646,7 @@ void CAbstractPlayer::LoadDashboardParts() {
     // Energy
     energyLabel = DashboardPart(kEnergyBSP, FIX3(170*layoutScale));
     energyGauge = DashboardPart(gaugeBSP);
+    energyGauge->ignoreDepthTesting = true;
     energyGauge->isMorphable = true;
 
     energyGaugeBackLight = DashboardPart(gaugeBSP, ToFixed(layoutScale));
@@ -900,11 +913,11 @@ void CAbstractPlayer::DashboardPosition(CScaledBSP *part, bool autoRot, float x,
 
     if (autoRot) {
         if (x < 0.0) {
-            yAng = -60*x + 15;
+            yAng = -35*x + 15;
         }
 
         if (x > 0.0) {
-            yAng = -60*x - 15;
+            yAng = -35*x - 15;
         }
     }
 
@@ -975,6 +988,27 @@ void CAbstractPlayer::ResetDashboard() {
     }
 }
 
+void CAbstractPlayer::ToggleFreeCam() {
+    SetFreeCamState(!freeView);
+}
+
+void CAbstractPlayer::SetFreeCamState(Boolean state) {
+    freeView = state;
+
+    itsGame->ToggleFreeCam(freeView);
+    itsFreeCam->ToggleState(freeView);
+    
+    if (freeView) {
+        SDL_Log("Free cam toggled on!");
+    }
+    else
+        SDL_Log("Free cam toggled off!");
+}
+
+Boolean CAbstractPlayer::IsFreeCamAttached() {
+    return itsFreeCam->IsAttached();
+}
+
 void CAbstractPlayer::ControlSoundPoint() {
     Fixed theRight[] = {FIX(-1), 0, 0};
     Matrix *m;
@@ -989,9 +1023,7 @@ void CAbstractPlayer::ControlSoundPoint() {
 }
 
 void CAbstractPlayer::ControlViewPoint() {
-    CViewParameters *theView;
-
-    theView = itsGame->itsView;
+    auto vp = gRenderer->viewParams;
 
     if (!isInLimbo)
         PlaceHUDParts();
@@ -1005,18 +1037,23 @@ void CAbstractPlayer::ControlViewPoint() {
             if (itsScout)
                 itsScout->ControlViewPoint();
         }
+    } else if (freeView && freeCamIdent && itsManager->IsLocalPlayer()) {
+        itsFreeCam = (CFreeCam *)itsGame->FindIdent(freeCamIdent);
+        if (itsFreeCam) {
+            itsFreeCam->ControlViewPoint();
+        }
     } else {
-        MATRIXCOPY(&theView->viewMatrix, viewPortPart->GetInverseTransform());
-        MTranslate(viewOffset[0], viewOffset[1], viewOffset[2], &theView->viewMatrix);
+        MATRIXCOPY(&vp->viewMatrix, viewPortPart->GetInverseTransform());
+        MTranslate(viewOffset[0], viewOffset[1], viewOffset[2], &vp->viewMatrix);
 
         if (lookDirection) {
             Fixed a;
 
             a = FMul(lookDirection, 43690);
-            MRotateY(FOneSin(a), FOneCos(a), &theView->viewMatrix);
+            MRotateY(FOneSin(a), FOneCos(a), &vp->viewMatrix);
         }
 
-        theView->inverseDone = false;
+        vp->inverseDone = false;
     }
 
     RecalculateViewDistance();
@@ -1026,33 +1063,32 @@ void CAbstractPlayer::ControlViewPoint() {
 }
 
 void CAbstractPlayer::RecalculateViewDistance() {
-    CViewParameters *theView;
     Fixed viewDist;
     Fixed frameYon;
 
-    theView = itsGame->itsView;
+    auto vp = gRenderer->viewParams;
 
-    viewDist = FMulDivNZ(theView->viewWidth, FDegCos(fieldOfView), 2 * FDegSin(fieldOfView));
+    viewDist = FMulDivNZ(vp->viewWidth, FDegCos(fieldOfView), 2 * FDegSin(fieldOfView));
 
     if (itsGame->yonList) {
-        frameYon = itsGame->yonList->AdjustYon((*theView->GetInverseMatrix())[3], yonBound);
+        frameYon = itsGame->yonList->AdjustYon((*vp->GetInverseMatrix())[3], yonBound);
     } else {
         frameYon = yonBound;
     }
 
-    if (viewDist != theView->viewDistance || frameYon != theView->yonBound) {
-        if (frameYon != theView->yonBound) {
-            theView->yonBound = frameYon;
+    if (viewDist != vp->viewDistance || frameYon != vp->yonBound) {
+        if (frameYon != vp->yonBound) {
+            vp->yonBound = frameYon;
         }
-        theView->viewDistance = viewDist;
-        theView->Recalculate();
-        theView->CalculateViewPyramidCorners();
+        vp->viewDistance = viewDist;
+        vp->Recalculate();
+        vp->CalculateViewPyramidCorners();
     }
 }
 
 void CAbstractPlayer::ResetCamera() {
     fieldOfView = maxFOV;
-    AvaraGLSetFOV(ToFloat(fieldOfView));
+    gRenderer->SetFOV(ToFloat(fieldOfView));
     RecalculateViewDistance();
 }
 
@@ -1273,9 +1309,21 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
         else if(lives == 0) {
             if (itsManager->IsLocalPlayer() && TESTFUNC(kfuSpectateNext, ft->down)) {
                 itsGame->SpectateNext();
+                if (freeView) {
+                    itsFreeCam->SetAttached(true);
+                }
             }
             if (itsManager->IsLocalPlayer() && TESTFUNC(kfuSpectatePrevious, ft->down)) {
                 itsGame->SpectatePrevious();
+                if (freeView) {
+                    itsFreeCam->SetAttached(true);
+                }
+            }
+            if (itsManager->IsLocalPlayer() && TESTFUNC(kfuToggleFreeCam, ft->down)) {
+                ToggleFreeCam();
+            }
+            if (freeView) {
+                itsFreeCam->ViewControl(ft);
             }
         }
 
@@ -1390,7 +1438,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
 
         if (itsManager->IsLocalPlayer() &&
             (TESTFUNC(kfuZoomOut, ft->held) || TESTFUNC(kfuZoomIn, ft->held)))
-            AvaraGLSetFOV(ToFloat(fieldOfView));
+            gRenderer->SetFOV(ToFloat(fieldOfView));
 
         if (fireGun)
             mouseShootTime = FpsFramesPerClassic(MOUSESHOOTDELAY);
@@ -1649,15 +1697,9 @@ void CAbstractPlayer::GunActions() {
                 CombineTransforms(&m1, &m2, &viewPortPart->itsTransform);
                 MTranslate(speed[0], speed[1], speed[2], &m2);
 
-                if (debug2Flag) {
-                    theHit.direction[0] = FMul(m2[2][0], PLAYERMISSILESPEED) + speed[0];
-                    theHit.direction[1] = FMul(m2[2][1], PLAYERMISSILESPEED) + speed[1];
-                    theHit.direction[2] = FMul(m2[2][2], PLAYERMISSILESPEED) + speed[2];
-                } else {
-                    theHit.direction[0] = FMul(m2[2][0], PLAYERMISSILESPEED);
-                    theHit.direction[1] = FMul(m2[2][1], PLAYERMISSILESPEED);
-                    theHit.direction[2] = FMul(m2[2][2], PLAYERMISSILESPEED);
-                }
+                theHit.direction[0] = FMul(m2[2][0], PLAYERMISSILESPEED);
+                theHit.direction[1] = FMul(m2[2][1], PLAYERMISSILESPEED);
+                theHit.direction[2] = FMul(m2[2][2], PLAYERMISSILESPEED);
 
                 missileSpeed[0] = theHit.direction[0];
                 missileSpeed[1] = theHit.direction[1];
@@ -1925,11 +1967,11 @@ bool CAbstractPlayer::ReincarnateComplete(CIncarnator* newSpot) {
         if (reEnergize) {
             boostEndFrame = itsGame->FramesFromNow(MINIBOOSTTIME);
             reEnergize = false;
-            if (shields < (maxShields >> 1))
-                shields = maxShields >> 1;
+            if (shields < maxShields)
+                shields = maxShields;
 
-            if (energy < (maxEnergy >> 1))
-                energy = maxEnergy >> 1;
+            if (energy < maxEnergy)
+                energy = maxEnergy;
         }
 
         doIncarnateSound = true;
@@ -2197,10 +2239,8 @@ void CAbstractPlayer::ReceiveConfig(PlayerConfigRecord *config) {
 
         // Reload the livesLabel to reflect the hull shape.
         if (!itsGame->showNewHUD) return;
-        CBSPWorld *hudWorld;
-        hudWorld = itsGame->hudWorld;
-        hudWorld->RemovePart(livesLabel);
-        livesLabel->Dispose();
+        gRenderer->RemoveHUDPart(livesLabel);
+        delete livesLabel;
         livesLabel = DashboardPart(hullConfig.hullBSP, FIX3(140*layoutScale));
     }
 }

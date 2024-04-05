@@ -66,6 +66,9 @@ std::string ColorManager::teamColorNames[kMaxTeamColors + 1] = {
     "White"
 };
 
+std::optional<ARGBColor> ColorManager::teamColorOverrides[kMaxTeamColors + 1] = {};
+std::optional<ARGBColor> ColorManager::teamTextColorOverrides[kMaxTeamColors + 1] = {};
+
 ARGBColor ColorManager::messageColors[3] = {
     0xffffffff,
     0xff92ebe9,
@@ -248,9 +251,6 @@ void ColorManager::setColorBlind(ColorBlindMode mode) {
             ColorManager::messageColors[2] = 0xffff8185;
             break;
     }
-    if (ColorManager::hudAlpha != 1.f) {
-        ColorManager::setHUDAlpha(ColorManager::hudAlpha);
-    }
     ColorManager::colorBlindMode = mode;
 }
 
@@ -272,24 +272,7 @@ void ColorManager::setHUDCriticalColor(ARGBColor color) {
 }
 
 void ColorManager::setHUDAlpha(float alpha) {
-    alpha = std::clamp(alpha, 0.f, 1.f);
-    uint8_t a = static_cast<uint8_t>((alpha * 255) + 0.5);
-
-    ColorManager::grenadeSightPrimaryColor = ColorManager::grenadeSightPrimaryColor.WithA(a);
-    ColorManager::grenadeSightSecondaryColor = ColorManager::grenadeSightSecondaryColor.WithA(a);
-    ColorManager::lookForwardColor = ColorManager::lookForwardColor.WithA(a);
-    ColorManager::missileLockColor = ColorManager::missileLockColor.WithA(a);
-    ColorManager::missileSightPrimaryColor = ColorManager::missileSightPrimaryColor.WithA(a);
-    ColorManager::missileSightSecondaryColor = ColorManager::missileSightSecondaryColor.WithA(a);
-    ColorManager::plasmaSightsOffColor = ColorManager::plasmaSightsOffColor.WithA(a);
-    ColorManager::plasmaSightsOnColor = ColorManager::plasmaSightsOnColor.WithA(a);
-    ColorManager::hudColor = ColorManager::hudColor.WithA(a);
-    ColorManager::hudPositiveColor = ColorManager::hudPositiveColor.WithA(a);
-    ColorManager::hudWarningColor = ColorManager::hudWarningColor.WithA(a);
-    ColorManager::hudCriticalColor = ColorManager::hudCriticalColor.WithA(a);
-    ColorManager::hudAltColor = ColorManager::hudAltColor.WithA(a);
-
-    ColorManager::hudAlpha = alpha;
+    ColorManager::hudAlpha = std::clamp(alpha, 0.f, 1.f);
 }
 
 void ColorManager::setMissileArmedColor(ARGBColor color) {
@@ -300,6 +283,13 @@ void ColorManager::setMissileLaunchedColor(ARGBColor color) {
     ColorManager::missileLaunchedColor = color;
 }
 
+void ColorManager::overrideTeamColor(uint8_t num, ARGBColor color) {
+    if (num <= kMaxTeamColors) {
+        ColorManager::teamColorOverrides[num] = color;
+        ColorManager::teamTextColorOverrides[num] = 0xff333333;
+    }
+}
+
 void ColorManager::refresh(CApplication *app) {
     ColorManager::setColorBlind(app->Get(kColorBlindMode));
     ColorManager::setHUDColor(ARGBColor::Parse(app->String(kHUDColor)).value_or(0xff03f5f5));
@@ -307,4 +297,11 @@ void ColorManager::refresh(CApplication *app) {
     ColorManager::setHUDWarningColor(ARGBColor::Parse(app->String(kHUDWarningColor)).value_or(0xffedd62d));
     ColorManager::setHUDCriticalColor(ARGBColor::Parse(app->String(kHUDCriticalColor)).value_or(0xfffa1313));
     ColorManager::setHUDAlpha(app->Get(kHUDAlpha));
+}
+
+void ColorManager::resetOverrides() {
+    for (uint8_t i = 0; i < kMaxTeamColors + 1; i++) {
+        ColorManager::teamColorOverrides[i] = {};
+        ColorManager::teamTextColorOverrides[i] = {};
+    }
 }

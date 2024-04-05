@@ -14,7 +14,7 @@
 #define PLAYERMISSILELIFE 25
 #define PLAYERMISSILERANGE (PLAYERMISSILELIFE * PLAYERMISSILESPEED)
 
-class CPlayerMissile : public CAbstractMissile {
+class CPlayerMissile final : public CAbstractMissile {
 public:
     Fixed rotation;
     Fixed spin;

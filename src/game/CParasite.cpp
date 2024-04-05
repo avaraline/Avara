@@ -47,7 +47,9 @@ void CParasite::BeginScript() {
 
 CAbstractActor *CParasite::EndScript() {
     if (CRealMovers::EndScript()) {
-        gHub->PreLoadSample(clampSound = ReadLongVar(iSound));
+        // Preload sounds.
+        auto _ = AssetManager::GetOgg(clampSound = ReadLongVar(iSound));
+        
         clampVolume = ReadFixedVar(iVolume);
         maxPower = ReadFixedVar(iMaxPower);
         energyDrain = ReadFixedVar(iDrain);
@@ -89,10 +91,8 @@ void CParasite::ReleaseAttachment() {
         }
     }
 }
-void CParasite::Dispose() {
+CParasite::~CParasite() {
     ReleaseAttachment();
-
-    CRealMovers::Dispose();
 }
 
 void CParasite::PlaceParts() {

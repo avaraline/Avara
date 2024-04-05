@@ -8,6 +8,7 @@
 */
 // #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
 
+#include "AssetManager.h"
 #include "CDoorActor.h"
 
 #include "CSmartPart.h"
@@ -150,7 +151,8 @@ CAbstractActor *CDoorActor::EndScript() {
 
     resId = ReadLongVar(iShape);
 
-    if (HasBSP(resId)) {
+    auto bsp = AssetManager::GetBsp(resId);
+    if (bsp) {
         //CBSPWorld *theWorld;
 
         RegisterReceiver(&openActivator, ReadLongVar(iOpenMsg));
@@ -164,9 +166,10 @@ CAbstractActor *CDoorActor::EndScript() {
         closeSoundId = ReadLongVar(iCloseSound);
         stopSoundId = ReadLongVar(iStopSound);
 
-        gHub->PreLoadSample(openSoundId);
-        gHub->PreLoadSample(closeSoundId);
-        gHub->PreLoadSample(stopSoundId);
+        // Preload sounds.
+        auto _ = AssetManager::GetOgg(openSoundId);
+        _ = AssetManager::GetOgg(closeSoundId);
+        _ = AssetManager::GetOgg(stopSoundId);
 
         openCounter = 0;
         closeCounter = 0;
@@ -223,11 +226,9 @@ void CDoorActor::AdaptableSettings() {
     FPS_DEBUG("openSpeed = " << openSpeed << ", closeSpeed = " << closeSpeed << "\n");
 }
 
-void CDoorActor::Dispose() {
+CDoorActor::~CDoorActor() {
     itsGame->RemoveReceiver(&openActivator);
     itsGame->RemoveReceiver(&closeActivator);
-
-    CGlowActors::Dispose();
 }
 
 void CDoorActor::DoorSound() {

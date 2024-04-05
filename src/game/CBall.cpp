@@ -147,19 +147,21 @@ CAbstractActor *CBall::EndScript() {
 
         buzzSound = ReadLongVar(iSound);
         buzzVolume = ReadFixedVar(iVolume);
-        gHub->PreLoadSample(buzzSound);
 
         ejectSound = ReadLongVar(iEjectSound);
         ejectVolume = ReadFixedVar(iEjectVolume);
-        gHub->PreLoadSample(ejectSound);
 
         reprogramSound = ReadLongVar(iChangeOwnerSound);
         reprogramVolume = ReadFixedVar(iChangeOwnerVolume);
-        gHub->PreLoadSample(reprogramSound);
 
         snapSound = ReadLongVar(iSnapSound);
         snapVolume = ReadFixedVar(iSnapVolume);
-        gHub->PreLoadSample(snapSound);
+
+        // Preload sounds.
+        auto _ = AssetManager::GetOgg(buzzSound);
+        _ = AssetManager::GetOgg(ejectSound);
+        _ = AssetManager::GetOgg(reprogramSound);
+        _ = AssetManager::GetOgg(snapSound);
 
         pitchZ = FMul(ejectPower, FDegCos(ejectPitch));
         pitchY = FMul(ejectPower, FDegSin(ejectPitch));
@@ -196,11 +198,9 @@ CAbstractActor *CBall::EndScript() {
         return NULL;
     }
 }
-void CBall::Dispose() {
+CBall::~CBall() {
     BuzzControl(false);
     ReleaseAttachment();
-
-    CRealShooters::Dispose();
 }
 
 void CBall::AdaptableSettings() {

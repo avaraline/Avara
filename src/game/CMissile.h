@@ -12,7 +12,7 @@
 
 #define kMissileBSP 801
 
-class CMissile : public CAbstractMissile {
+class CMissile final : public CAbstractMissile {
 public:
     CMissile(CDepot *theDepot);
     virtual bool HandlesFastFPS() { return true; }

@@ -11,7 +11,6 @@
 
 #include "Memory.h"
 #include "Resource.h"
-#include "AvaraGL.h"
 
 #define DIMEPSILON 16
 
@@ -112,12 +111,14 @@ void CSmartBox::StretchTemplate(Fixed *dimensions, Fixed baseSize) {
     FindEnclosure();
 }
 
-void CSmartBox::ISmartBox(short resId,
+CSmartBox::CSmartBox(
+    short resId,
     Fixed *dimensions,
     ARGBColor color,
     ARGBColor altColor,
     CAbstractActor *anActor,
-    short aPartCode) {
+    short aPartCode
+) {
     bspsResource **config;
     Fixed baseSize;
     Boolean stretchFlag;
@@ -157,21 +158,7 @@ void CSmartBox::ISmartBox(short resId,
     rSquare[0] = 0;
     rSquare[1] = 0;
     FSquareAccumulate(enclosureRadius, rSquare);
-    AvaraGLUpdateData(this);
-}
-
-void CSmartBox::Dispose() {
-    /*
-    Handle				handCopy;
-    BSPResourceHeader	*bp;
-
-    handCopy = itsBSPResource;
-    bp = (BSPResourceHeader *)*handCopy;
-    bp->refCount = 99;	//	Prevent ReleaseResource call!
-    */
-    CSmartPart::Dispose();
-
-    // DisposeHandle(handCopy);
+    if (vData) vData->Replace(*this);
 }
 
 void CSmartBox::FindEnclosure() {

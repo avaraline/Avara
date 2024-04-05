@@ -19,7 +19,7 @@ public:
     short partCode = 0;
     int rSquare[2] = {0, 0};
 
-    virtual void ISmartPart(short resId, CAbstractActor *anActor, short aPartCode);
+    static CSmartPart *Create(short resId, CAbstractActor *anActor, short aPartCode);
     virtual Boolean CollisionTest(CSmartPart *other); //	Test for overlap.
     virtual Boolean HitTestBoxes(CSmartPart *other);
 
@@ -30,4 +30,7 @@ public:
     virtual void MinMaxGlobalSphere(Fixed *minPoint, Fixed *maxPoint);
 
     virtual void OffsetPart(Fixed *offset);
+protected:
+    CSmartPart() {}
+    virtual void ISmartPart(short resId, CAbstractActor *anActor, short aPartCode);
 };

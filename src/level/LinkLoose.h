@@ -12,4 +12,3 @@
 
 void *CreateObjectByIndex(short objectId);
 void *CreateNamedObject(StringPtr theName);
-void InitLinkLoose();

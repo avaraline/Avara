@@ -11,7 +11,8 @@
 
 #include "CAvaraApp.h"
 
-#include "AvaraGL.h"
+#include "AssetManager.h"
+#include "ColorManager.h"
 #include "AvaraScoreInterface.h"
 #include "AvaraTCP.h"
 #include "CAvaraGame.h"
@@ -26,7 +27,6 @@
 #include "LevelLoader.h"
 #include "Parser.h"
 #include "Preferences.h"
-#include "Resource.h"
 #include "System.h"
 #include "InfoMessages.h"
 #include "Messages.h"
@@ -36,6 +36,7 @@
 #include <json.hpp>
 #include "Tags.h"
 #include "Debug.h"
+#include "ModernOpenGLRenderer.h"
 
 // included while we fake things out
 #include "CPlayerManager.h"
@@ -68,13 +69,22 @@ void TrackerPinger(CAvaraAppImpl *app) {
 }
 
 CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
+    AssetManager::Init();
+    
     itsGame = std::make_unique<CAvaraGame>(Get<FrameTime>(kFrameTimeTag));
     gCurrentGame = itsGame.get();
-    itsGame->IAvaraGame(this);
-    itsGame->UpdateViewRect(mSize.x, mSize.y, mPixelRatio);
-    itsGame->LoadImages(mNVGContext);
 
-    AvaraGLSetFOV(Number(kFOV));
+    if (mNVGContext) {
+        ui = std::make_unique<CHUD>(gCurrentGame);
+        ui->LoadImages(mNVGContext);
+    }
+
+    gRenderer = new ModernOpenGLRenderer(mSDLWindow);
+    gRenderer->UpdateViewRect(mSize.x, mSize.y, mPixelRatio);
+    gRenderer->SetFOV(Number(kFOV));
+    gRenderer->ResetLights();
+
+    itsGame->IAvaraGame(this);
 
     gameNet->ChangeNet(kNullNet, "");
 
@@ -112,8 +122,6 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     trackerThread = new std::thread(TrackerPinger, this);
     trackerThread->detach();
 
-    LoadDefaultOggFiles();
-
     // register and handle text commands
     itsTui = new CommandManager(this);
 
@@ -134,7 +142,6 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
 }
 
 CAvaraAppImpl::~CAvaraAppImpl() {
-    itsGame->Dispose();
     DeallocParser();
 }
 
@@ -147,34 +154,40 @@ void CAvaraAppImpl::Done() {
 void CAvaraAppImpl::idle() {
     CheckSockets();
     TrackerUpdate();
-    if(itsGame->GameTick()) {
+    if (itsGame->GameTick()) {
         RenderContents();
     }
 }
 
 void CAvaraAppImpl::drawContents() {
-    if(animatePreview) {
+    if (animatePreview) {
+        auto vp = gRenderer->viewParams;
         Fixed x = overhead[0] + FMul(previewRadius, FOneCos(previewAngle));
         Fixed y = overhead[1] + FMul(FMul(extent[3], FIX(2)), FOneSin(previewAngle) + FIX1);
         Fixed z = overhead[2] + FMul(previewRadius, FOneSin(previewAngle));
-        itsGame->itsView->LookFrom(x, y, z);
-        itsGame->itsView->LookAt(overhead[0], overhead[1], overhead[2]);
-        itsGame->itsView->PointCamera();
+        vp->LookFrom(x, y, z);
+        vp->LookAt(overhead[0], overhead[1], overhead[2]);
+        vp->PointCamera();
         previewAngle += FIX3(1);
     }
-    itsGame->Render(mNVGContext);
+    itsGame->Render();
+    if (ui) {
+        if (Get<bool>(kShowNewHUD)) {
+            ui->RenderNewHUD(mNVGContext);
+        } else {
+            ui->Render(mNVGContext);
+        }
+    }
 }
 
 // display only the game screen, not the widgets
 void CAvaraAppImpl::RenderContents() {
-    glClearColor(mBackground[0], mBackground[1], mBackground[2], mBackground[3]);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     drawContents();
-    SDL_GL_SwapWindow(mSDLWindow);
+    gRenderer->RefreshWindow();
 }
 
 void CAvaraAppImpl::WindowResized(int width, int height) {
-    itsGame->UpdateViewRect(width, height, mPixelRatio);
+    gRenderer->UpdateViewRect(width, height, mPixelRatio);
     //performLayout();
 }
 
@@ -206,8 +219,9 @@ void CAvaraAppImpl::drawAll() {
 }
 
 void CAvaraAppImpl::GameStarted(std::string set, std::string level) {
+    auto vp = gRenderer->viewParams;
     animatePreview = false;
-    itsGame->itsView->showTransparent = false;
+    vp->showTransparent = false;
     itsGame->IncrementGameCounter();
     MessageLine(kmStarted, MsgAlignment::Center);
     levelWindow->AddRecent(set, level);
@@ -270,50 +284,15 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
     itsGame->LevelReset(false);
     gCurrentGame = itsGame.get();
     itsGame->loadedSet = set;
-    UseLevelFolder(set);
 
-    OSErr result = fnfErr;
-    json setManifest = GetManifestJSON(set);
-    if (setManifest == -1) return result;
-    if (setManifest.find("LEDI") == setManifest.end()) return result;
+    ColorManager::resetOverrides();
 
-    if (setManifest.find("REQD") == setManifest.end()) {
-        ClearExternalPackages();
-    } else {
-        for (auto &ext : setManifest["REQD"].items()) {
-            json pkg = ext.value();
-            std::string pkgPath = pkg.value("Package", "");
-            // TODO: Support version constraints?
-            if (!pkgPath.empty() &&
-                pkgPath.rfind(".", 0) != 0 &&
-                pkgPath.find("..") == std::string::npos &&
-                pkgPath.find("/") == std::string::npos &&
-                pkgPath.find("\\") == std::string::npos) {
-                AddExternalPackage(pkgPath);
-            }
-        }
-    }
-
-    json ledi = NULL;
-    for (auto &ld : setManifest["LEDI"].items()) {
-        if (ld.value()["Alf"] == levelTag)
-            ledi = ld.value();
-    }
-    if (ledi == NULL) return result;
-
-    if (ledi.contains("Aftershock") && ledi["Aftershock"] == true) {
-        UseBaseFolder("rsrc/aftershock");
-    } else {
-        UseBaseFolder("rsrc");
-    }
-
-    LoadLevelOggFiles(set);
-
-    if(LoadALF(GetALFPath(levelTag))) result = noErr;
+    std::string levelName;
+    OSErr result = AssetManager::LoadLevel(set, levelTag, levelName);
 
     if (result == noErr) {
         playerWindow->RepopulateHullOptions();
-        itsGame->loadedLevel = ledi["Name"];
+        itsGame->loadedLevel = levelName;
         itsGame->loadedFilename  = levelTag;
         itsGame->loadedTags = Tags::GetTagsForLevel(Tags::LevelURL(itsGame->loadedSet, itsGame->loadedLevel));
         std::string msgStr = "Loaded";
@@ -332,9 +311,11 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
 
         levelWindow->SelectLevel(set, itsGame->loadedLevel);
 
-        itsGame->itsWorld->OverheadPoint(overhead, extent);
-        itsGame->itsView->yonBound = FIX(10000);
-        itsGame->itsView->showTransparent = true;
+        gRenderer->OverheadPoint(overhead, extent);
+
+        auto vp = gRenderer->viewParams;
+        vp->yonBound = FIX(10000);
+        vp->showTransparent = true;
 
         previewAngle = 0;
         previewRadius = std::max(extent[1] - extent[0], extent[5] - extent[4]);

@@ -21,7 +21,9 @@
     #if defined(NANOGUI_SHARED) && !defined(GLAD_GLAPI_EXPORT)
         #define GLAD_GLAPI_EXPORT
     #endif
-
+    #ifdef _WIN32
+    #include <Windows.h>
+    #endif
     #include <glad/glad.h>
 #endif
 #endif // DOXYGEN_SHOULD_SKIP_THIS

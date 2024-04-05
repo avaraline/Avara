@@ -21,7 +21,7 @@ CAbstractActor *CLogicDistributor::EndScript() {
         }
     }
 
-    Dispose();
+    delete this;
     return NULL;
 }
 
@@ -50,7 +50,7 @@ void CLogicDistributor::FrameAction() {
                 if (sendNext == LOGIC_OUT) {
                     sendNext = 0;
                     if (!restart) {
-                        Dispose();
+                        delete this;
                         return;
                     }
                 }

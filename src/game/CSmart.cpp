@@ -419,7 +419,7 @@ if (IsClassicInterval()) {
 void CSmart::PreLoadSounds() {
     CWeapon::PreLoadSounds();
 
-    gHub->PreLoadSample(201);
+    auto _ = AssetManager::GetOgg(201);
 }
 
 bool CSmart::IsClassicInterval() {

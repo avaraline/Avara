@@ -9,6 +9,7 @@
 
 #include "CDepot.h"
 
+#include "AbstractRenderer.h"
 #include "CAbstractMissile.h"
 #include "CAvaraGame.h"
 #include "CBSPWorld.h"
@@ -45,15 +46,15 @@ void CDepot::Dispose() {
         slivers = freeSlivers[i];
         while (slivers) {
             nextSliver = slivers->nextSliver;
-            slivers->Dispose();
+            delete slivers;
             slivers = nextSliver;
         }
     }
 
-    smartHairs->Dispose();
-    smartSight->Dispose();
-    grenadeSight->Dispose();
-    grenadeTop->Dispose();
+    delete smartHairs;
+    delete smartSight;
+    delete grenadeSight;
+    delete grenadeTop;
 
     CDirectObject::Dispose();
 }
@@ -81,8 +82,7 @@ void CDepot::CreateSlivers() {
         for (i = 0; i < SLIVERCOUNT; i++) {
             CSliverPart *theSliver;
 
-            theSliver = new CSliverPart;
-            theSliver->ISliverPart(500 + j);
+            theSliver = new CSliverPart(500 + j);
             theSliver->nextSliver = freeSlivers[j];
             freeSlivers[j] = theSliver;
         }
@@ -92,7 +92,6 @@ void CDepot::CreateSlivers() {
 void CDepot::RunSliverActions() {
     short i;
     CSliverPart *aSliver, **prevNext;
-    CBSPWorld *theWorld = itsGame->itsWorld;
 
     for (i = 0; i < SLIVERSIZES; i++) {
         prevNext = &(activeSlivers[i]);
@@ -100,7 +99,7 @@ void CDepot::RunSliverActions() {
 
         while (aSliver) {
             if (aSliver->SliverAction()) {
-                theWorld->RemovePart(aSliver);
+                gRenderer->RemovePart(aSliver);
 
                 *prevNext = aSliver->nextSliver;
                 aSliver->nextSliver = freeSlivers[i];
@@ -123,7 +122,6 @@ void CDepot::FireSlivers(short n,
     short age,
     short sizeGroup,
     CBSPPart *fromObject) {
-    CBSPWorld *theWorld = itsGame->itsWorld;
     Vector loc;
 
     if (itsGame->simpleExplosions) {
@@ -131,9 +129,7 @@ void CDepot::FireSlivers(short n,
     }
 
     if (n > 2) {
-        CViewParameters *vp;
-
-        vp = itsGame->itsView;
+        auto vp = gRenderer->viewParams;
         VectorMatrixProduct(1, (Vector *)origin, (Vector *)loc, &vp->viewMatrix);
 
         if (loc[2] < FIX(-10) || loc[2] > vp->yonBound) {
@@ -159,7 +155,7 @@ void CDepot::FireSlivers(short n,
         activeSlivers[sizeGroup] = theSliver;
 
         theSliver->Activate(origin, direction, scale, speedFactor, spread, age, fromObject);
-        theWorld->AddPart(theSliver);
+        gRenderer->AddPart(theSliver);
     }
 }
 
@@ -209,7 +205,7 @@ void CDepot::DisposeMissiles() {
         mList = missileList[j];
         while (mList) {
             nextMissile = mList->nextMissile;
-            mList->Dispose();
+            delete mList;
             mList = nextMissile;
         }
     }
@@ -245,32 +241,31 @@ CAbstractMissile *CDepot::LaunchMissile(short kind,
 }
 
 void CDepot::ReloadParts() {
-    if (smartHairs) smartHairs->Dispose();
-    if (smartSight) smartSight->Dispose();
-    if (grenadeSight) grenadeSight->Dispose();
-    if (grenadeTop) grenadeTop->Dispose();
+    if (smartHairs) delete smartHairs;
+    if (smartSight) delete smartSight;
+    if (grenadeSight) delete grenadeSight;
+    if (grenadeTop) delete grenadeTop;
 
-    smartSight = new CBSPPart;
-    smartSight->IBSPPart(208);
+    smartSight = CBSPPart::Create(208);
     smartSight->ReplaceColor(0xfffffb00, ColorManager::getMissileSightPrimaryColor());
     smartSight->ReplaceColor(0xffff2600, ColorManager::getMissileSightSecondaryColor());
+    smartSight->ignoreDepthTesting = true;
     smartSight->ignoreDirectionalLights = true;
     smartSight->privateAmbient = FIX1;
 
-    smartHairs = new CBSPPart;
-    smartHairs->IBSPPart(207);
+    smartHairs = CBSPPart::Create(207);
     smartHairs->ReplaceColor(0xffff2600, ColorManager::getMissileLockColor());
+    smartHairs->ignoreDepthTesting = true;
     smartHairs->ignoreDirectionalLights = true;
     smartHairs->privateAmbient = FIX1;
 
-    grenadeSight = new CBSPPart;
-    grenadeSight->IBSPPart(200);
+    grenadeSight = CBSPPart::Create(200);
     grenadeSight->ReplaceColor(0xfffffb00, ColorManager::getGrenadeSightPrimaryColor());
+    grenadeSight->ignoreDepthTesting = true;
     grenadeSight->ignoreDirectionalLights = true;
     grenadeSight->privateAmbient = FIX1;
 
-    grenadeTop = new CBSPPart;
-    grenadeTop->IBSPPart(201);
+    grenadeTop = CBSPPart::Create(201);
     grenadeTop->ReplaceColor(0xffff2600, ColorManager::getGrenadeSightSecondaryColor());
     grenadeTop->ignoreDirectionalLights = true;
     grenadeTop->privateAmbient = FIX1;
@@ -279,12 +274,11 @@ void CDepot::ReloadParts() {
 void CDepot::LevelReset() {
     short i;
     CSliverPart *nextSliver, *aSliver;
-    CBSPWorld *theWorld = itsGame->itsWorld;
 
     for (i = 0; i < SLIVERSIZES; i++) {
         aSliver = activeSlivers[i];
         while (aSliver) {
-            theWorld->RemovePart(aSliver);
+            gRenderer->RemovePart(aSliver);
             nextSliver = aSliver->nextSliver;
             aSliver->nextSliver = freeSlivers[i];
             freeSlivers[i] = aSliver;
@@ -298,12 +292,10 @@ void CDepot::LevelReset() {
     if (bspInGame) {
         bspInGame = false;
 
-        theWorld->RemovePart(grenadeTop);
-
-        theWorld = itsGame->hudWorld;
-        theWorld->RemovePart(smartHairs);
-        theWorld->RemovePart(smartSight);
-        theWorld->RemovePart(grenadeSight);
+        gRenderer->RemovePart(grenadeTop);
+        gRenderer->RemoveHUDPart(smartHairs);
+        gRenderer->RemoveHUDPart(smartSight);
+        gRenderer->RemoveHUDPart(grenadeSight);
     }
 
     for (i = 0; i < MISSILEKINDS; i++) {
@@ -328,6 +320,7 @@ CWeapon *CDepot::MakeWeapon(short kind) {
         default:
             return newWeapon;
     }
+
     newWeapon->weaponKind = kind;
 
     return newWeapon;
@@ -357,7 +350,7 @@ void CDepot::DisposeWeapons() {
         wList = weaponList[j];
         while (wList) {
             nextWeapon = wList->nextWeapon;
-            wList->Dispose();
+            delete wList;
             wList = nextWeapon;
         }
     }
@@ -384,15 +377,10 @@ CWeapon *CDepot::AquireWeapon(short weaponKind) {
 
 void CDepot::FrameAction() {
     if (!bspInGame) {
-        CBSPWorld *theWorld;
-
-        theWorld = itsGame->hudWorld;
-        theWorld->AddPart(smartHairs);
-        theWorld->AddPart(smartSight);
-        theWorld->AddPart(grenadeSight);
-
-        theWorld = itsGame->itsWorld;
-        theWorld->AddPart(grenadeTop);
+        gRenderer->AddHUDPart(smartHairs);
+        gRenderer->AddHUDPart(smartSight);
+        gRenderer->AddHUDPart(grenadeSight);
+        gRenderer->AddPart(grenadeTop);
         bspInGame = true;
     }
     smartHairs->isTransparent = true;

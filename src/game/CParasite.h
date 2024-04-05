@@ -12,17 +12,8 @@
 
 class CAbstractPlayer;
 
-class CParasite : public CRealMovers {
+class CParasite final : public CRealMovers {
 public:
-    virtual void PlaceParts();
-    virtual void BeginScript();
-    virtual CAbstractActor *EndScript();
-    virtual void ReleaseAttachment();
-    virtual void Dispose();
-    virtual void CourseCheck();
-    virtual void FrameAction();
-    virtual void ClampOn(CSmartPart *clampTo);
-private:
     Fixed maxPower;
     Fixed energyDrain;
     Fixed range;
@@ -45,4 +36,12 @@ private:
 
     Boolean isTracking;
 
+    virtual void PlaceParts();
+    virtual void BeginScript();
+    virtual CAbstractActor *EndScript();
+    virtual void ReleaseAttachment();
+    virtual ~CParasite();
+    virtual void CourseCheck();
+    virtual void FrameAction();
+    virtual void ClampOn(CSmartPart *clampTo);
 };

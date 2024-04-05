@@ -1,6 +1,7 @@
 
 #include "CommandManager.h"
 
+#include "AssetManager.h"
 #include "CAvaraApp.h"
 #include "CAvaraGame.h"
 #include "CPlayerManager.h"
@@ -8,7 +9,6 @@
 #include "CScoreKeeper.h"
 
 #include "CommDefs.h"       // kdEveryone
-#include "Resource.h"       // LevelDirNameListing
 #include "Debug.h"          // Debug::methods
 #include <random>           // std::random_device
 #include "Tags.h"
@@ -371,17 +371,17 @@ bool CommandManager::LoadNamedLevel(VectorOfArgs vargs) {
     }
 
     static int loadNumber = 0;
-    std::vector<std::string> levelSets = LevelDirNameListing();
+    std::vector<std::string> levelSets = AssetManager::GetAvailablePackages();
     std::string levelSubstr = join_with(vargs, " ");
     std::transform(levelSubstr.begin(), levelSubstr.end(),levelSubstr.begin(), ::toupper);
 
     std::vector<std::pair<std::string, std::string>> bestLevels = {};
     for(std::string set : levelSets) {
-        nlohmann::json ledis = LoadLevelListFromJSON(set);
-        for (auto &ld : ledis.items()) {
-            std::string level = ld.value()["Name"].get<std::string>();
-            std::string levelUpper = ld.value()["Name"].get<std::string>();
-            std::transform(levelUpper.begin(), levelUpper.end(),levelUpper.begin(), ::toupper);
+        auto manifest = *AssetManager::GetManifest(set);
+        for (auto &ledi : manifest->levelDirectory) {
+            std::string level = ledi.levelName;
+            std::string levelUpper = ledi.levelName;
+            std::transform(levelUpper.begin(), levelUpper.end(), levelUpper.begin(), ::toupper);
 
             // find levelSubstr anywhere within the level name
             if(levelUpper.find(levelSubstr) != std::string::npos) {
@@ -435,14 +435,14 @@ bool CommandManager::LoadRandomLevel(VectorOfArgs matchArgs) {
                 }
             }
         } else {
-            for (auto setName : LevelDirNameListing()) {
+            for (auto setName : AssetManager::GetAvailablePackages()) {
                 if (setName.find(matchStr, 0) != std::string::npos) {
-                    nlohmann::json levels = LoadLevelListFromJSON(setName);
-                    for (auto level : levels) {
+                    auto manifest = *AssetManager::GetManifest(setName);
+                    for (auto level : manifest->levelDirectory) {
                         if (addLevels) {
-                            allLevels.insert(Tags::LevelURL(setName, level.at("Name")));
+                            allLevels.insert(Tags::LevelURL(setName, level.levelName));
                         } else {
-                            allLevels.erase(Tags::LevelURL(setName, level.at("Name")));
+                            allLevels.erase(Tags::LevelURL(setName, level.levelName));
                         }
                     }
                 }
@@ -510,6 +510,11 @@ bool CommandManager::GetSetPreference(VectorOfArgs vargs) {
                 //write prefs
                 itsApp->AddMessageLine(prefName + " changed from " + oldValue + " to " + newValue);
                 itsApp->CApplication::PrefChanged(prefName);
+            } else {
+                itsApp->AddMessageLine("Error: Pref not updated",
+                                        MsgAlignment::Left,
+                                        MsgCategory::Error
+                                    );
             }
         }
     }

@@ -126,9 +126,8 @@ void CBasicSound::SetControlLink(SoundLink *linkPtr) {
 void CBasicSound::Reset() {
     motionLink = NULL;
     controlLink = NULL;
-    itsSamples = NULL;
+    itsSamples = nullptr;
     sampleLen = 0;
-    sampleData = NULL;
     loopStart = 0;
     loopEnd = 0;
     loopCount[0] = loopCount[1] = 0;
@@ -137,30 +136,26 @@ void CBasicSound::Reset() {
     distanceDelay = true;
 }
 
-void CBasicSound::UseSamplePtr(Sample *samples, int numSamples) {
+void CBasicSound::UseSamples(std::shared_ptr<OggFile> theSample) {
+    if (theSample != nullptr) {
+        itsSamples = theSample;
+        sampleLen = static_cast<int32_t>(itsSamples->samples.size());
+        loopStart = itsSamples->hsnd.loopStart;
+        loopEnd = itsSamples->hsnd.loopEnd;
+        loopCount[0] = loopCount[1] = itsSamples->hsnd.loopCount;
+    } else {
+        itsSamples = nullptr;
+        sampleLen = 0;
+        loopStart = 0;
+        loopEnd = 0;
+        loopCount[0] = loopCount[1] = 0; // Don't loop.
+    }
+
     currentCount[0].i = 0;
     currentCount[0].f = 0;
 
     currentCount[1].i = 0;
     currentCount[1].f = 0;
-
-    sampleLen = numSamples;
-    sampleData = samples;
-    loopStart = 0;
-    loopEnd = 0;
-    loopCount[0] = loopCount[1] = 0; //	Don't loop.
-}
-
-void CBasicSound::UseSamples(SampleHeaderHandle theSample) {
-    if (theSample) {
-        itsSamples = theSample;
-        UseSamplePtr(sizeof(SampleHeader) + (Sample *)*theSample, (*theSample)->len);
-        loopStart = (*itsSamples)->loopStart;
-        loopEnd = (*itsSamples)->loopEnd;
-        loopCount[0] = loopCount[1] = (*itsSamples)->loopCount;
-    } else {
-        UseSamplePtr(NULL, 0);
-    }
 }
 
 void CBasicSound::CalculatePosition(int32_t t) {
@@ -302,6 +297,7 @@ int16_t CBasicSound::CalcVolume(int16_t theChannel) {
 
 void CBasicSound::WriteFrame(int16_t theChannel, int16_t volumeAllowed) {
     //Sample *s;
+    //Sample *sampleData = *itsSamples->samples;
     //WordSample *d;
     //SampleConvert *converter;
     int thisCount;

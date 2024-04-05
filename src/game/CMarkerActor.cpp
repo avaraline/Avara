@@ -12,7 +12,6 @@
 #include "CSmartPart.h"
 
 CMarkerActor::CMarkerActor() {
-
     isActive = kIsActive;
     maskBits = kTargetBit; // + kMarkerBit; // TODO: what is this??
 }

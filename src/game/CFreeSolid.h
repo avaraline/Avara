@@ -12,13 +12,6 @@
 
 class CFreeSolid : public CRealMovers {
 public:
-    virtual void BeginScript(); //	Write default param values
-    virtual CAbstractActor *EndScript(); //	Read back values changed by user script
-    virtual void AdaptableSettings(); // Read settings that can change with frame rate
-    virtual void PlaceParts(); //	Move our single BSP part into place/orientation
-    virtual void FrameAction(); //	Action for each frame of simulation
-    virtual bool HandlesFastFPS() { return true; }
-private:
     Fixed hitPower; //	Collisions cause damage relative to shotPower
     Fixed classicGravity, customGravity; //	Private gravity/frame
     Fixed classicAcceleration, acceleration; //	Private slowdown/frame while moving
@@ -26,4 +19,11 @@ private:
     MessageRecord startMsg; //	Message to enable object (otherwise motionless)
     MessageRecord stopMsg; //	Message to disable object (to stop it)
     short status; //	Status is either active or stopped
+
+    virtual void BeginScript(); //	Write default param values
+    virtual CAbstractActor *EndScript(); //	Read back values changed by user script
+    virtual void AdaptableSettings(); // Read settings that can change with frame rate
+    virtual void PlaceParts(); //	Move our single BSP part into place/orientation
+    virtual void FrameAction(); //	Action for each frame of simulation
+    virtual bool HandlesFastFPS() { return true; }
 };

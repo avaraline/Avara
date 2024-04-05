@@ -11,6 +11,8 @@
 
 #include "CWalkerActor.h"
 
+#include "AbstractRenderer.h"
+#include "AssetManager.h"
 #include "AvaraDefines.h"
 #include "CBSPWorld.h"
 #include "CDepot.h"
@@ -42,8 +44,7 @@ void CWalkerActor::LoadParts() {
     viewPortPart = partList[0];
 
 #ifdef MARKERCUBE
-    markerCube = new CBSPPart;
-    markerCube->IBSPPart(213);
+    markerCube = CBSPPart::Create(213);
     itsGame->itsWorld->AddPart(markerCube);
 #endif
 
@@ -98,12 +99,11 @@ void CWalkerActor::StartSystems() {
     viewPortHeight = FIX3(350);
 }
 
-void CWalkerActor::Dispose() {
+CWalkerActor::~CWalkerActor() {
 #ifdef MARKERCUBE
     itsGame->itsWorld->RemovePart(markerCube);
-    markerCube->Dispose();
+    delete markerCube;
 #endif
-    CAbstractPlayer::Dispose();
 }
 
 void CWalkerActor::PlaceParts() {
@@ -770,11 +770,11 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
 
         hullRes = ReadLongVar(iHull01 + hullRes);
 
-        LoadHullFromSetJSON(&hullConfig, hullRes);
+        hullConfig = **AssetManager::GetHull(hullRes);
 
         hullRes = hullConfig.hullBSP;
-        itsGame->itsWorld->RemovePart(viewPortPart);
-        viewPortPart->Dispose();
+        gRenderer->RemovePart(viewPortPart);
+        delete viewPortPart;
         LoadPart(0, hullRes);
 
         viewPortPart = partList[0];
@@ -796,7 +796,7 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
 
         proximityRadius = viewPortPart->enclosureRadius << 2;
 
-        itsGame->itsWorld->AddPart(viewPortPart);
+        gRenderer->AddPart(viewPortPart);
 
         viewPortHeight = hullConfig.rideHeight;
 

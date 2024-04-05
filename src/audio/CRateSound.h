@@ -9,6 +9,7 @@
 
 #pragma once
 #include "CBasicSound.h"
+#include "OggFile.h"
 
 class CRateSound : public CBasicSound {
 public:
@@ -19,7 +20,7 @@ public:
     Boolean chanDoneFlags[2];
 
     virtual void Reset();
-    virtual void UseSamplePtr(Sample *samples, int numSamples);
+    virtual void UseSamples(std::shared_ptr<OggFile> theSample);
     virtual void FirstFrame();
     virtual void WriteFrame(int16_t theChannel, int16_t volumeAllowed);
     virtual int16_t CalcVolume(int16_t theChannel); //	Return volume
