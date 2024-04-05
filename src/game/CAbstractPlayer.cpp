@@ -1871,8 +1871,8 @@ void CAbstractPlayer::Reincarnate() {
     for (CIncarnator *incarnator = itsGame->incarnatorList; incarnator != nullptr; incarnator = incarnator->nextIncarnator) {
         if (incarnator->enabled && (incarnator->colorMask & teamMask)) { //} && incarnator->useCount == 0) {
             SDL_Log("\n");
-            SDL_Log("INCARN LOC= %s", FormatVectorFloat(incarnator->location, 3).c_str());
-            SDL_Log("    THIS Player LOC= %s", FormatVectorFloat(itsGame->itsNet->playerTable[itsManager->Slot()]->GetPlayer()->location, 3).c_str());
+            SDL_Log("INCARN LOC= %s", FormatVectorFloat(incarnator->location).c_str());
+            SDL_Log("    THIS Player LOC= %s", FormatVectorFloat(itsGame->itsNet->playerTable[itsManager->Slot()]->GetPlayer()->location).c_str());
 
             Fixed minDist = MAXFIXED;
 
@@ -1882,17 +1882,13 @@ void CAbstractPlayer::Reincarnate() {
                     if (player != NULL && !player->isOut && teamMask != player->teamMask) {
                         SDL_Log("FOUND OPPOSING PLAYER!");
                         SDL_Log("    PLAYER= %d", i);
-                        SDL_Log("    Player LOC= %s", FormatVectorFloat(player->location, 3).c_str());
+                        SDL_Log("    Player LOC= %s", FormatVectorFloat(player->location).c_str());
 
                         if(i != itsManager->Slot()) {
-                            //Fixed d = DistanceEstimate(player->location[0], incarnator->location[0], player->location[2], incarnator->location[2]);
-                            Fixed d = FDistanceEstimate(player->location[0] - incarnator->location[0],
-                                                        player->location[1] - incarnator->location[1],
-                                                        player->location[2] - incarnator->location[2]);
+                            Fixed d = FDistanceEstimate(player->location, incarnator->location);
 
                             SDL_Log("         checking..");
-                            SDL_Log("         p0= %.4f p2= %.4f i0= %.4f i2= %.4f", ToFloat(player->location[0]),
-                                    ToFloat(player->location[2]), ToFloat(incarnator->location[0]), ToFloat(incarnator->location[2]));
+                            SDL_Log("         Incarn LOC = %s", FormatVectorFloat(incarnator->location).c_str());
                             SDL_Log("         dist= %.4f", ToFloat(d));
                             if (d < minDist) {
                                 minDist = d;
@@ -1908,7 +1904,7 @@ void CAbstractPlayer::Reincarnate() {
             // to be sorted below
             sortedIncarnators.push_back(incarnator);
 
-            SDL_Log("         minDist = %.4f sortBy%.4f", ToFloat(minDist), ToFloat(incarnator->sortBy));
+            SDL_Log("         minDist= %.4f sortBy= %.4f, useCount=%ld", ToFloat(minDist), ToFloat(incarnator->sortBy), incarnator->useCount);
             if(incarnator->sortBy > furthest) {
                 furthest = incarnator->sortBy;
                 SDL_Log("         BEST SO FAR... sortBy= %.4f", ToFloat(incarnator->sortBy));
@@ -1917,15 +1913,16 @@ void CAbstractPlayer::Reincarnate() {
     }
 
     sortedIncarnators.sort([](const CIncarnator *a, const CIncarnator *b) {
-        // put highest values (distance) first
-        return (a->sortBy) > (b->sortBy);
+        // put highest values (distance) first, while accounting for useCount
+        // like comparing a->sortBy/a->useCount to b->sortBy/b->useCount but avoiding divide-by-zero
+        return (a->sortBy * b->useCount) > (b->sortBy * a->useCount);
     });
 
     // try sorted Incarnators until one works
     for (auto incarnator : sortedIncarnators) {
-        SDL_Log("TRYING INCARNATOR AT LOC= %s", FormatVector(incarnator->location, 3).c_str());
+        SDL_Log("TRYING INCARNATOR AT LOC= %s", FormatVectorFloat(incarnator->location).c_str());
         if (ReincarnateComplete(incarnator)) {
-            SDL_Log("USING INCARNATOR AT LOC= %s", FormatVector(incarnator->location, 3).c_str());
+            SDL_Log("<------USING INCARNATOR------>");
             return;
         }
     }
