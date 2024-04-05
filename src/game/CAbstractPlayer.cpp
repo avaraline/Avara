@@ -1820,7 +1820,7 @@ void CAbstractPlayer::Incarnate() {
 
 void CAbstractPlayer::Reincarnate() {
     CIncarnator *incarnator;
-    CIncarnator *safeIncarn;
+    CIncarnator *safeIncarn = NULL;
     long bestCount = LONG_MAX;
     Fixed furthest = MINFIXED;
     
@@ -1829,7 +1829,7 @@ void CAbstractPlayer::Reincarnate() {
     SDL_Log("dist min= %.4f", ToFloat(furthest));
 
     for (incarnator = itsGame->incarnatorList; incarnator != nullptr; incarnator = incarnator->nextIncarnator) {
-        if (incarnator->enabled && incarnator->isActive && (incarnator->colorMask & teamMask)) { //} && incarnator->useCount == 0) {
+        if (incarnator->enabled && (incarnator->colorMask & teamMask)) { //} && incarnator->useCount == 0) {
             bestCount = incarnator->useCount;
 
             SDL_Log("\n");
@@ -1839,8 +1839,8 @@ void CAbstractPlayer::Reincarnate() {
             for (int i = 0; i < kMaxAvaraPlayers; i++) {
                 if(i != itsManager->Slot()) {
                     CAbstractPlayer* player = itsGame->itsNet->playerTable[i]->GetPlayer();
-                    if (player != NULL && !player->isOut) {
-                        SDL_Log("FOUND PLAYER!");
+                    if (player != NULL && !player->isOut && teamMask != player->teamMask) {
+                        SDL_Log("FOUND OPPOSING PLAYER!");
                         SDL_Log("    PLAYER= %d", i);
                         SDL_Log("    Player LOC= %s", FormatVectorFloat(player->location, 3).c_str());
 
@@ -1849,19 +1849,21 @@ void CAbstractPlayer::Reincarnate() {
                             Fixed d = FDistanceEstimate(player->location[0] - incarnator->location[0],
                                                         player->location[1] - incarnator->location[1],
                                                         player->location[2] - incarnator->location[2]);
+                            double alpha = 0.6;
+                            Fixed sortBy = d * (alpha + 2*(1-alpha)*FRandom()/FIX1);
 
                             SDL_Log("         checking..");
                             SDL_Log("         p0= %.4f p2= %.4f i0= %.4f i2= %.4f", ToFloat(player->location[0]),
                                     ToFloat(player->location[2]), ToFloat(incarnator->location[0]), ToFloat(incarnator->location[2]));
-                            SDL_Log("         dist= %.4f", ToFloat(d));
-                            
-                            if(d > furthest) {
-                                furthest = d;
+                            SDL_Log("         dist= %.4f, sort= %.4f", ToFloat(d), ToFloat(sortBy));
+
+                            if(sortBy > furthest) {
+                                furthest = sortBy;
                                 safeIncarn = incarnator;
                                 SDL_Log("         FOUND FURTHEST");
                             }
-                            else if(d == furthest) {
-                                SDL_Log("         d == furthest!!!!!!!!!");
+                            else if(sortBy == furthest) {
+                                SDL_Log("         sortBy == greatest!!!!!!!!!");
 
                                 if(safeIncarn != NULL && incarnator->useCount < safeIncarn->useCount) {
                                     bestCount = incarnator->useCount;
