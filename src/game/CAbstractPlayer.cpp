@@ -1860,62 +1860,76 @@ void CAbstractPlayer::Incarnate() {
     }
 }
 
+Fixed CAbstractPlayer::ClosestOpponentDistance(Vector &location) {
+    Fixed minDist = MAXFIXED;
+    SDL_Log("    Finding closest to LOC = %s", FormatVectorFloat(location).c_str());
+
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        if(i != itsManager->Slot()) {
+            CAbstractPlayer* player = itsGame->itsNet->playerTable[i]->GetPlayer();
+            if (player != NULL && !player->isOut && teamMask != player->teamMask) {
+                SDL_Log("    Player[%d] LOC= %s", i, FormatVectorFloat(player->location).c_str());
+
+                if(i != itsManager->Slot()) {
+                    Fixed d = FDistanceEstimate(player->location, location);
+                    SDL_Log("         dist= %.4f", ToFloat(d));
+                    if (d < minDist) {
+                        minDist = d;
+                        SDL_Log("         CLOSEST OPPONENT, dist= %.4f", ToFloat(d));
+                    }
+                }
+            }
+        }
+    }
+    return minDist;
+}
+
 void CAbstractPlayer::Reincarnate() {
     std::list<CIncarnator *> sortedIncarnators;
     Fixed furthest = MINFIXED;
     
     itsGame->itsApp->AddMessageLine("REINCARNATE", MsgAlignment::Left, MsgCategory::Error);
-    SDL_Log("ReincarnateFurthest SLOT= %d", itsManager->Slot());
-    SDL_Log("dist min= %.4f", ToFloat(furthest));
+    SDL_Log("Reincarnate() SLOT= %d, ORDER = %d", itsManager->Slot(), CIncarnator::order);
 
     for (CIncarnator *incarnator = itsGame->incarnatorList; incarnator != nullptr; incarnator = incarnator->nextIncarnator) {
         if (incarnator->enabled && (incarnator->colorMask & teamMask)) { //} && incarnator->useCount == 0) {
             SDL_Log("\n");
             SDL_Log("INCARN LOC= %s", FormatVectorFloat(incarnator->location).c_str());
-            SDL_Log("    THIS Player LOC= %s", FormatVectorFloat(itsGame->itsNet->playerTable[itsManager->Slot()]->GetPlayer()->location).c_str());
+            SDL_Log("    Current Player LOC= %s", FormatVectorFloat(itsGame->itsNet->playerTable[itsManager->Slot()]->GetPlayer()->location).c_str());
 
-            Fixed minDist = MAXFIXED;
+            if (CIncarnator::order == kiDistance || CIncarnator::order == kiHybrid) {
+                Fixed minDist = ClosestOpponentDistance(incarnator->location);
 
-            for (int i = 0; i < kMaxAvaraPlayers; i++) {
-                if(i != itsManager->Slot()) {
-                    CAbstractPlayer* player = itsGame->itsNet->playerTable[i]->GetPlayer();
-                    if (player != NULL && !player->isOut && teamMask != player->teamMask) {
-                        SDL_Log("FOUND OPPOSING PLAYER!");
-                        SDL_Log("    PLAYER= %d", i);
-                        SDL_Log("    Player LOC= %s", FormatVectorFloat(player->location).c_str());
+                static double alpha = 0.6;
+                incarnator->distance = minDist * (alpha + 2*(1-alpha)*FRandom()/FIX1);
 
-                        if(i != itsManager->Slot()) {
-                            Fixed d = FDistanceEstimate(player->location, incarnator->location);
-
-                            SDL_Log("         checking..");
-                            SDL_Log("         Incarn LOC = %s", FormatVectorFloat(incarnator->location).c_str());
-                            SDL_Log("         dist= %.4f", ToFloat(d));
-                            if (d < minDist) {
-                                minDist = d;
-                                SDL_Log("         CLOSEST OPPONENT, dist= %.4f", ToFloat(d));
-                            }
-                        }
-                    }
+                SDL_Log("         minDist= %.4f dist= %.4f", ToFloat(minDist), ToFloat(incarnator->distance));
+                if(incarnator->distance > furthest) {
+                    furthest = incarnator->distance;
+                    SDL_Log("         BIGGEST SO FAR");
                 }
+
+            } else if (CIncarnator::order == kiRandom) {
+                incarnator->distance = FRandom();
+            } else {
+                incarnator->distance = FIX1;
             }
 
-            static double alpha = 0.6;
-            incarnator->sortBy = minDist * (alpha + 2*(1-alpha)*FRandom()/FIX1);
+            if (CIncarnator::order == kiDistance || CIncarnator::order == kiRandom) {
+                // ignore usage for these order types
+                incarnator->useCount = 1;
+            }
+
             // to be sorted below
             sortedIncarnators.push_back(incarnator);
 
-            SDL_Log("         minDist= %.4f sortBy= %.4f, useCount=%ld", ToFloat(minDist), ToFloat(incarnator->sortBy), incarnator->useCount);
-            if(incarnator->sortBy > furthest) {
-                furthest = incarnator->sortBy;
-                SDL_Log("         BEST SO FAR... sortBy= %.4f", ToFloat(incarnator->sortBy));
-            }
+            SDL_Log("    dist= %.4f, useCount=%ld", ToFloat(incarnator->distance), incarnator->useCount);
         }
     }
 
     sortedIncarnators.sort([](const CIncarnator *a, const CIncarnator *b) {
-        // put highest values (distance) first, while accounting for useCount
-        // like comparing a->sortBy/a->useCount to b->sortBy/b->useCount but avoiding divide-by-zero
-        return (a->sortBy * b->useCount) > (b->sortBy * a->useCount);
+        // like comparing a->distance/a->useCount to b->distance/b->useCount but avoiding divide-by-zero
+        return (a->distance * b->useCount) > (b->distance * a->useCount);
     });
 
     // try sorted Incarnators until one works

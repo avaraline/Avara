@@ -15,6 +15,7 @@ using json = nlohmann::json;
 #define kHullTypeTag "hull"
 #define kFrameTimeTag "frameTime"
 #define kThrottle "throttle"
+#define kIncarnatorOrder "incarnatorOrder"
 
 // TODO: split this into separate prefs
 #define kServerOptionsTag "_serverOptions"
@@ -103,7 +104,7 @@ static json defaultPrefs = {
     {kMouseSensitivityTag, 0},
     {kLatencyToleranceTag, 1.0},
     {kHullTypeTag, 0}, // 0 = light, 1 = medium, 2 = heavy
-    {kServerOptionsTag, 129}, // 1 = allow load, 128 = auto latency
+    {kServerOptionsTag, 641}, // 1 = allow load, 128 = auto latency, 512 = kIncarnatorUseDistanceBit
     {kDefaultUDPPort, 19567},
     {kUDPResendPrefTag, 2},
     {kUDPConnectionSpeedTag, 3},
@@ -171,6 +172,7 @@ static json defaultPrefs = {
     {kHUDShowScore, true},
     {kHUDShowTime, true},
     {kHUDShowKillFeed, true},
+    {kIncarnatorOrder, 3},
     {kShowNewHUD, true},
     {kFrameTimeTag, 16},
     {kLastAddress, ""},

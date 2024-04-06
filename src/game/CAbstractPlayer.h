@@ -307,6 +307,7 @@ public:
 
     virtual void GoLimbo(FrameNumber limboDelay);
     virtual void Incarnate();
+    virtual Fixed ClosestOpponentDistance(Vector &location);
     virtual void Reincarnate();
     virtual bool ReincarnateComplete(CIncarnator *newSpot);
     virtual void IncarnateSound();
