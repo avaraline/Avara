@@ -47,6 +47,13 @@
 
 enum GameStatus { kPlayingStatus, kAbortStatus, kReadyStatus, kPauseStatus, kNoVehicleStatus, kWinStatus, kLoseStatus };
 
+enum SpawnOrder {
+    ksRandom,   // picks at random which Incarnator to choose
+    ksUsage,    // this is the "Classic" setting, uses hit count to choose
+    ksDistance, // uses slightly-randomized distance
+    ksHybrid    // uses count & distance
+};
+
 class CAbstractActor;
 class CAbstractPlayer;
 class CPlayerManager;
@@ -86,6 +93,8 @@ public:
 
     FrameTime frameTime; //	In milliseconds.
     double fpsScale;  // 0.25 => CLASSICFRAMETIME / 4
+
+    SpawnOrder spawnOrder;
 
     GameStatus gameStatus;
     GameStatus statusRequest;
@@ -260,6 +269,7 @@ public:
     virtual void SetFrameTime(int32_t ft);
     virtual void IncrementFrame(bool firstFrame = false);
     virtual FrameNumber FramesFromNow(FrameNumber classicFrames);
+    virtual void SetSpawnOrder(SpawnOrder order);
 
     void SetKeysFromStdin() { keysFromStdin = true; };
     void SetKeysToStdout() { keysToStdout = true; };

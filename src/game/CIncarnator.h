@@ -12,18 +12,8 @@
 
 class CIncarnator;
 
-enum IncarnatorOrder {
-    kiRandom,   // picks at random which Incarnator to choose
-    kiUsage,    // this is the "Classic" setting, uses hit count to choose
-    kiDistance, // uses slightly-randomized distance
-    kiHybrid    // uses count & distance
-};
-
 class CIncarnator : public CPlacedActors {
 public:
-    static IncarnatorOrder order;
-    static void SetOrder(IncarnatorOrder newValue);
-
     CIncarnator *nextIncarnator;
     long colorMask;
     long useCount;

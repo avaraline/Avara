@@ -9,12 +9,6 @@
 
 #include "CIncarnator.h"
 
-IncarnatorOrder CIncarnator::order = (IncarnatorOrder)gApplication->Number(kIncarnatorOrder, kiHybrid);
-
-void CIncarnator::SetOrder(IncarnatorOrder newValue) {
-    // to be called after server sends possible new value
-}
-
 void CIncarnator::BeginScript() {
     CPlacedActors::BeginScript();
 

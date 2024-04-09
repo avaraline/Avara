@@ -1868,7 +1868,7 @@ Fixed CAbstractPlayer::ClosestOpponentDistance(Vector &location) {
         if(i != itsManager->Slot()) {
             CAbstractPlayer* player = itsGame->itsNet->playerTable[i]->GetPlayer();
             if (player != NULL && !player->isOut && teamMask != player->teamMask) {
-                SDL_Log("    Player[%d] LOC= %s", i, FormatVectorFloat(player->location).c_str());
+                SDL_Log("    OPPONENT[%d] LOC= %s", i, FormatVectorFloat(player->location).c_str());
 
                 if(i != itsManager->Slot()) {
                     Fixed d = FDistanceEstimate(player->location, location);
@@ -1887,35 +1887,40 @@ Fixed CAbstractPlayer::ClosestOpponentDistance(Vector &location) {
 void CAbstractPlayer::Reincarnate() {
     std::list<CIncarnator *> sortedIncarnators;
     Fixed furthest = MINFIXED;
-    
+
+    if (itsGame->frameNumber == 0) {
+        // for the first-frame, use the simple "usage" ordering
+        // note: this value is updated with the server's setting after the initial call (see CNetManager::DoConfig())
+        itsGame->spawnOrder = ksUsage;
+    }
+
     itsGame->itsApp->AddMessageLine("REINCARNATE", MsgAlignment::Left, MsgCategory::Error);
-    SDL_Log("Reincarnate() SLOT= %d, ORDER = %d", itsManager->Slot(), CIncarnator::order);
+    SDL_Log("Reincarnate() SLOT= %d, ORDER = %d", itsManager->Slot(), itsGame->spawnOrder);
 
     for (CIncarnator *incarnator = itsGame->incarnatorList; incarnator != nullptr; incarnator = incarnator->nextIncarnator) {
         if (incarnator->enabled && (incarnator->colorMask & teamMask)) { //} && incarnator->useCount == 0) {
             SDL_Log("\n");
-            SDL_Log("INCARN LOC= %s", FormatVectorFloat(incarnator->location).c_str());
-            SDL_Log("    Current Player LOC= %s", FormatVectorFloat(itsGame->itsNet->playerTable[itsManager->Slot()]->GetPlayer()->location).c_str());
+            SDL_Log("\nINCARN LOC= %s", FormatVectorFloat(incarnator->location).c_str());
 
-            if (CIncarnator::order == kiDistance || CIncarnator::order == kiHybrid) {
+            if (itsGame->spawnOrder == ksDistance || itsGame->spawnOrder == ksHybrid) {
                 Fixed minDist = ClosestOpponentDistance(incarnator->location);
 
-                static double alpha = 0.6;
-                incarnator->distance = minDist * (alpha + 2*(1-alpha)*FRandom()/FIX1);
+                static double alpha = 0.7;  // 0.0-1.0   higher == more randomness
+                incarnator->distance = minDist * ((1.0-alpha) + 2.0*alpha*FRandom()/FIX1);
 
-                SDL_Log("         minDist= %.4f dist= %.4f", ToFloat(minDist), ToFloat(incarnator->distance));
+                SDL_Log("         minDist= %.4f ~dist= %.4f", ToFloat(minDist), ToFloat(incarnator->distance));
                 if(incarnator->distance > furthest) {
                     furthest = incarnator->distance;
                     SDL_Log("         BIGGEST SO FAR");
                 }
 
-            } else if (CIncarnator::order == kiRandom) {
+            } else if (itsGame->spawnOrder == ksRandom) {
                 incarnator->distance = FRandom();
-            } else {
+            } else {  // ksUsage
                 incarnator->distance = FIX1;
             }
 
-            if (CIncarnator::order == kiDistance || CIncarnator::order == kiRandom) {
+            if (itsGame->spawnOrder == ksDistance || itsGame->spawnOrder == ksRandom) {
                 // ignore usage for these order types
                 incarnator->useCount = 1;
             }

@@ -45,9 +45,7 @@ enum {
     kAllowOwnColorBit,
     kFreeColorBit,
     kAllowKickBit,
-    kUseAutoLatencyBit,
-    kIncarnatorUseCountBit,
-    kIncarnatorUseDistanceBit
+    kUseAutoLatencyBit
 };
 void ServerOptionsDialog();
 
