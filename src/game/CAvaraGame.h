@@ -51,7 +51,8 @@ enum SpawnOrder {
     ksRandom,   // picks at random which Incarnator to choose
     ksUsage,    // this is the "Classic" setting, uses hit count to choose
     ksDistance, // uses slightly-randomized distance
-    ksHybrid    // uses count & distance
+    ksHybrid,   // uses count & distance
+    ksNumSpawnOrders
 };
 
 class CAbstractActor;
