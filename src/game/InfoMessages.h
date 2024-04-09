@@ -28,6 +28,7 @@ enum {
     kmNewLatency2,
     kmWaitingForPlayer,
     kmAKilledBPlayer,
+    kmKilledByCollision,
     kmFragmentAlert,
     kmUnavailableNote,
     kmStartFailure,

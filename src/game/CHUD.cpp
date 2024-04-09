@@ -1,4 +1,5 @@
 #include "CHUD.h"
+#include "AssetManager.h"
 #include "AbstractRenderer.h"
 #include "CAbstractPlayer.h"
 #include "CAvaraGame.h"
@@ -27,7 +28,8 @@ bool sortByScore(std::pair<PlayerScoreRecord, int> i, std::pair<PlayerScoreRecor
 }
 
 void CHUD::LoadImages(NVGcontext *ctx) {
-    images = nvgCreateImage(ctx, "rsrc/img/atlas.png", 0);
+    std::string imgPath = AssetManager::GetImagePath(NoPackage, "atlas.png");
+    images = nvgCreateImage(ctx, imgPath.c_str(), 0);
 }
 
 void CHUD::DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, NVGcontext *ctx) {
@@ -735,10 +737,15 @@ void CHUD::DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, floa
                     // Event player names
                     std::string killerName = " " + event.player;
                     std::string killedName = " " + event.playerTarget;
-                    float teamColorRGB[3], teamTargetColorRGB[3];
+                    float teamColorRGB[3], teamTargetColorRGB[3], iconLeftMargin = 23.0f;
 
                     // Get how wide the event rect needs to be
                     std::string eventText = killerName + "     " + killedName;
+                    if (event.weaponUsed == ksiObjectCollision) {
+                        eventText = "    " + killedName;
+                        killerName = "";
+                        iconLeftMargin = 11.0f;
+                    }
                     nvgBeginPath(ctx);
                     nvgTextAlign(ctx, NVG_ALIGN_RIGHT);
                     nvgFontSize(ctx, fontSize);
@@ -749,7 +756,7 @@ void CHUD::DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, floa
                     // Get Measurements based on text size for the total size of the event box
                     killEventSize[0] = killEventBounds[2] - killEventBounds[0] + 20.0f;
                     killEventSize[1] = killEventBounds[3] - killEventBounds[1] + 10.0f;
-                    killEventIconXPosition = killEventKillerNameBounds[2] - killEventKillerNameBounds[0] + 23.0f;   // Position the icon in the empty space
+                    killEventIconXPosition = killEventKillerNameBounds[2] - killEventKillerNameBounds[0] + iconLeftMargin;   // Position the icon in the empty space
                     eventPositionY = killEventPosition[1] + ((float)eventCount * (killEventSize[1] + 10.0f));
 
                     // Background box
@@ -781,10 +788,10 @@ void CHUD::DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, floa
                             iHeight = 51.0;
                             break;
                         case ksiObjectCollision:
-                            ix = 0.0;
+                            ix = 173.0;
                             iy = 0.0;
-                            iWidth = 0.0;
-                            iHeight = 0.0;
+                            iWidth = 58.0;
+                            iHeight = 51.0;
                             break;
                         default:
                             ix = 0.0;
@@ -799,19 +806,25 @@ void CHUD::DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, floa
                     longTeamTargetColor.ExportGLFloats(teamTargetColorRGB, 3);
                     float teamTargetColorPosition = killEventPosition[0] - killEventSize[0] + killEventIconXPosition + imgWidth + 15.0f;
 
-                    nvgBeginPath(ctx);
-                    nvgRect(ctx, killEventPosition[0] - killEventSize[0] + 10.0f, eventPositionY + 10.0f, 9.0, killEventSize[1] - 20.0f);
-                    nvgFillColor(ctx, nvgRGBAf(teamColorRGB[0], teamColorRGB[1], teamColorRGB[2], 1.0));
-                    nvgFill(ctx);
+                    // Team color of killer
+                    if (event.weaponUsed != ksiObjectCollision) {
+                        nvgBeginPath(ctx);
+                        nvgRect(ctx, killEventPosition[0] - killEventSize[0] + 10.0f, eventPositionY + 10.0f, 9.0, killEventSize[1] - 20.0f);
+                        nvgFillColor(ctx, nvgRGBAf(teamColorRGB[0], teamColorRGB[1], teamColorRGB[2], 1.0));
+                        nvgFill(ctx);
+                    }
                     
+                    // Team color of killed
                     nvgBeginPath(ctx);
                     nvgRect(ctx, teamTargetColorPosition, eventPositionY + 10.0f, 9.0, killEventSize[1] - 20.0f);
                     nvgFillColor(ctx, nvgRGBAf(teamTargetColorRGB[0], teamTargetColorRGB[1], teamTargetColorRGB[2], 1.0));
                     nvgFill(ctx);
 
+                    // Draw icon for death reason
                     DrawImage(ctx, images, 1.0, ix, iy, iWidth, iHeight, 
                         killEventPosition[0] - killEventSize[0] + killEventIconXPosition, eventPositionY + 5.0f, imgWidth, killEventSize[1] - 10.0f);
 
+                    // Draw display text for event
                     nvgBeginPath(ctx);
                     nvgTextAlign(ctx, NVG_ALIGN_LEFT);
                     nvgFontSize(ctx, fontSize);
@@ -822,13 +835,21 @@ void CHUD::DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, floa
                     break;
                 }
 
-                case ksiScoreGoal: {
+                case ksiScoreGoal:
+                case ksiGrabBall: {
                     // Event player names
                     std::string playerName = " " + event.player;
                     float teamColorRGB[3];
 
+                    std::string eventText;
+                    if (event.scoreType == ksiScoreGoal) {
+                        eventText = playerName + " scored!";
+                    } else if (event.scoreType == ksiGrabBall) {
+                        eventText = playerName + " has the ball!";
+                    } else {
+                        eventText = "";
+                    }
                     // Get how wide the event rect needs to be
-                    std::string eventText = playerName + " scored!";
                     nvgBeginPath(ctx);
                     nvgTextAlign(ctx, NVG_ALIGN_RIGHT);
                     nvgFontSize(ctx, fontSize);
@@ -850,55 +871,13 @@ void CHUD::DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, floa
                     ARGBColor longTeamColor = *ColorManager::getTeamColor(event.team);
                     longTeamColor.ExportGLFloats(teamColorRGB, 3);
 
+                    // Draw player's team color
                     nvgBeginPath(ctx);
                     nvgRect(ctx, killEventPosition[0] - killEventSize[0] + 10.0f, eventPositionY + 10.0f, 9.0, killEventSize[1] - 20.0f);
                     nvgFillColor(ctx, nvgRGBAf(teamColorRGB[0], teamColorRGB[1], teamColorRGB[2], 1.0));
                     nvgFill(ctx);
 
-                    nvgBeginPath(ctx);
-                    nvgTextAlign(ctx, NVG_ALIGN_LEFT);
-                    nvgFontSize(ctx, fontSize);
-                    nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
-                    nvgText(ctx, killEventPosition[0] - killEventSize[0] + 10.0f, eventPositionY + 25.0f, eventText.c_str(), NULL);
-
-                    eventCount++;
-                    break;
-                }
-
-                case ksiGrabBall:
-                {
-                    // Event player names
-                    std::string playerName = " " + event.player;
-                    float teamColorRGB[3];
-
-                    // Get how wide the event rect needs to be
-                    std::string eventText = playerName + " has the ball!";
-                    nvgBeginPath(ctx);
-                    nvgTextAlign(ctx, NVG_ALIGN_RIGHT);
-                    nvgFontSize(ctx, fontSize);
-                    nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
-                    nvgTextBounds(ctx, 0, 0, eventText.c_str(), NULL, killEventBounds);             // Size of the entire rendered text
-
-                    // Get Measurements based on text size for the total size of the event box
-                    killEventSize[0] = killEventBounds[2] - killEventBounds[0] + 20.0f;
-                    killEventSize[1] = killEventBounds[3] - killEventBounds[1] + 10.0f;
-                    eventPositionY = killEventPosition[1] + ((float)eventCount * (killEventSize[1] + 10.0f));
-
-                    // Background box
-                    DrawShadowBox(ctx, killEventPosition[0] - killEventSize[0], eventPositionY, killEventSize[0], killEventSize[1]);
-                    nvgBeginPath(ctx);
-                    nvgRoundedRect(ctx, killEventPosition[0] - killEventSize[0], eventPositionY, killEventSize[0], killEventSize[1], 4.0);
-                    nvgFillColor(ctx, BACKGROUND_COLOR);
-                    nvgFill(ctx);
-
-                    ARGBColor longTeamColor = *ColorManager::getTeamColor(event.team);
-                    longTeamColor.ExportGLFloats(teamColorRGB, 3);
-
-                    nvgBeginPath(ctx);
-                    nvgRect(ctx, killEventPosition[0] - killEventSize[0] + 10.0f, eventPositionY + 10.0f, 9.0, killEventSize[1] - 20.0f);
-                    nvgFillColor(ctx, nvgRGBAf(teamColorRGB[0], teamColorRGB[1], teamColorRGB[2], 1.0));
-                    nvgFill(ctx);
-
+                    // Draw event text
                     nvgBeginPath(ctx);
                     nvgTextAlign(ctx, NVG_ALIGN_LEFT);
                     nvgFontSize(ctx, fontSize);

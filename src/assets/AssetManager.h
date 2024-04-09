@@ -143,6 +143,14 @@ public:
     static std::optional<std::shared_ptr<HullConfigRecord>> GetHull(int16_t id);
 
     /**
+     * Get the image with the provided fileName, if available.
+     *
+     * @param fileName The name of the file.
+     * @return the full file path of the image
+     */
+    static std::string GetImagePath(MaybePackage package, std::string fileName);
+
+    /**
      * Run important operations at application start.
      */
     static void Init();

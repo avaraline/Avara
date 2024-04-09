@@ -222,27 +222,45 @@ void CScoreKeeper::Score(ScoreInterfaceReasons reason,
     event.teamTarget = hitTeam;
     event.damage = points;
 
+    SDL_Log("CAvaraGame::Obj Collision: player:%lu, team:%lu, hit:%lu, hitTeam:%lu, weapon: %d, reason:%lu\n", iface.playerID, iface.playerTeam, hitPlayer, iface.scoreTeam, itsGame->killReason, iface.scoreReason);
+
     if (player >= 0 && player <= kMaxAvaraPlayers) {
         iface.playerName = itsGame->itsNet->playerTable[player]->PlayerName();
-        if (reason == ksiKillBonus && hitPlayer >= 0 && hitPlayer <= kMaxAvaraPlayers) {
-            Str255 destStr;
+        Str255 destStr;
 
+        if (reason == ksiKillBonus && hitPlayer >= 0 && hitPlayer <= kMaxAvaraPlayers) {
+            // Player killed a player
             localScores.player[hitPlayer].lives--;
             if (hitTeam != team) {
                 localScores.player[player].kills++;
             }
             if (!itsGame->itsApp->Get(kHUDShowKillFeed)) {
+                iface.consoleLine = destStr;
+                iface.consoleJustify = static_cast<long>(MsgAlignment::Center);
                 itsGame->itsApp->ComposeParamLine(
                     destStr, kmAKilledBPlayer, iface.playerName, itsGame->itsNet->playerTable[hitPlayer]->PlayerName());
+            }
+            SDL_Log("CAvaraGame::Kill Event: player:%lu, team:%lu, hit:%lu, hitTeam:%lu, weapon: %d, reason:%lu\n", iface.playerID, iface.playerTeam, iface.scoreID, iface.scoreTeam, event.weaponUsed, iface.scoreReason);
+
+            event.scoreType = ksiKillBonus;
+            event.weaponUsed = itsGame->killReason;
+            itsGame->AddScoreNotify(event);
+
+        } else if (reason == ksiKillBonus && itsGame->killReason == ksiObjectCollision) {
+            // Something other than a player did the killing blow
+            event.playerTarget = event.player;
+            event.teamTarget = event.team;
+
+            if (!itsGame->itsApp->Get(kHUDShowKillFeed)) {
+                iface.consoleLine = destStr;
+                iface.consoleJustify = static_cast<long>(MsgAlignment::Center);
+                itsGame->itsApp->ComposeParamLine(
+                    destStr, kmKilledByCollision, itsGame->itsNet->playerTable[hitPlayer]->PlayerName(), NULL);
             }
 
             event.scoreType = ksiKillBonus;
             event.weaponUsed = itsGame->killReason;
             itsGame->AddScoreNotify(event);
-            SDL_Log("CAvaraGame::Kill Event: player:%lu, team:%lu, hit:%lu, hitTeam:%lu, weapon: %d, reason:%lu\n", iface.playerID, iface.playerTeam, iface.scoreID, iface.scoreTeam, event.weaponUsed, iface.scoreReason);
-
-            iface.consoleLine = destStr;
-            iface.consoleJustify = static_cast<long>(MsgAlignment::Center);
         }
     } else {
         iface.playerName = NULL;
