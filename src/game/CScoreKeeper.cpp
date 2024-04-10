@@ -255,7 +255,7 @@ void CScoreKeeper::Score(ScoreInterfaceReasons reason,
                 iface.consoleLine = destStr;
                 iface.consoleJustify = static_cast<long>(MsgAlignment::Center);
                 itsGame->itsApp->ComposeParamLine(
-                    destStr, kmKilledByCollision, itsGame->itsNet->playerTable[hitPlayer]->PlayerName(), NULL);
+                    destStr, kmKilledByCollision, itsGame->itsNet->playerTable[player]->PlayerName(), NULL);
             }
 
             event.scoreType = ksiKillBonus;
