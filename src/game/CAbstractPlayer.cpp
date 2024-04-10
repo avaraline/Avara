@@ -1835,20 +1835,20 @@ void CAbstractPlayer::Incarnate() {
 
 Fixed CAbstractPlayer::ClosestOpponentDistance(Vector &location) {
     Fixed minDist = MAXFIXED;
-    SDL_Log("    Finding closest OPPONENT to INCARN");
+    DBG_Log("spawn", "    Finding closest OPPONENT to INCARN");
 
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
         if(i != itsManager->Slot()) {
             CAbstractPlayer* player = itsGame->itsNet->playerTable[i]->GetPlayer();
             if (player != NULL && !player->isOut && teamMask != player->teamMask) {
-                SDL_Log("      OPPONENT[%d] LOC= %s", i, FormatVectorFloat(player->location).c_str());
+                DBG_Log("spawn", "      OPPONENT[%d] LOC= %s", i, FormatVectorFloat(player->location).c_str());
 
                 if(i != itsManager->Slot()) {
                     Fixed d = FDistanceEstimate(player->location, location);
-                    SDL_Log("         dist= %.4f", ToFloat(d));
+                    DBG_Log("spawn", "         dist= %.4f", ToFloat(d));
                     if (d < minDist) {
                         minDist = d;
-                        SDL_Log("         CLOSEST OPPONENT, dist= %.4f", ToFloat(d));
+                        DBG_Log("spawn", "         CLOSEST OPPONENT, dist= %.4f", ToFloat(d));
                     }
                 }
             }
@@ -1861,12 +1861,12 @@ void CAbstractPlayer::Reincarnate() {
     std::list<CIncarnator *> sortedIncarnators;
     Fixed furthest = MINFIXED;
 
-    SDL_Log("Reincarnate() SLOT= %d, ORDER = %d", itsManager->Slot(), itsGame->spawnOrder);
+    DBG_Log("spawn", "Reincarnate() SLOT= %d, ORDER = %d", itsManager->Slot(), itsGame->spawnOrder);
 
     for (CIncarnator *incarnator = itsGame->incarnatorList; incarnator != nullptr; incarnator = incarnator->nextIncarnator) {
         if (incarnator->enabled && (incarnator->colorMask & teamMask)) { //} && incarnator->useCount == 0) {
-            SDL_Log("\n");
-            SDL_Log("INCARN LOC= %s", FormatVectorFloat(incarnator->location).c_str());
+            DBG_Log("spawn", "\n");
+            DBG_Log("spawn", "INCARN LOC= %s", FormatVectorFloat(incarnator->location).c_str());
 
             if (itsGame->spawnOrder == ksDistance || itsGame->spawnOrder == ksHybrid) {
                 Fixed minDist = ClosestOpponentDistance(incarnator->location);
@@ -1874,10 +1874,10 @@ void CAbstractPlayer::Reincarnate() {
                 static double alpha = 0.6;  // 0.0-1.0   higher == more randomness
                 incarnator->distance = minDist * ((1.0-alpha) + 2.0*alpha*FRandom()/FIX1);
 
-                SDL_Log("         minDist= %.4f ~dist= %.4f", ToFloat(minDist), ToFloat(incarnator->distance));
+                DBG_Log("spawn", "         dist= %.4f ~dist= %.4f", ToFloat(minDist), ToFloat(incarnator->distance));
                 if(incarnator->distance > furthest) {
                     furthest = incarnator->distance;
-                    SDL_Log("         BIGGEST SO FAR");
+                    DBG_Log("spawn", "         FURTHEST SO FAR");
                 }
 
             } else if (itsGame->spawnOrder == ksRandom) {
@@ -1894,7 +1894,7 @@ void CAbstractPlayer::Reincarnate() {
             // to be sorted below
             sortedIncarnators.push_back(incarnator);
 
-            SDL_Log("    dist= %.4f, useCount=%ld", ToFloat(incarnator->distance), incarnator->useCount);
+            DBG_Log("spawn", "    ~dist= %.4f, useCount=%ld", ToFloat(incarnator->distance), incarnator->useCount);
         }
     }
 
@@ -1904,16 +1904,16 @@ void CAbstractPlayer::Reincarnate() {
     });
 
     // try sorted Incarnators until one works
-    SDL_Log("\n");
+    DBG_Log("spawn", "\n");
     for (auto incarnator : sortedIncarnators) {
-        SDL_Log("TRYING INCARNATOR AT LOC= %s", FormatVectorFloat(incarnator->location).c_str());
+        DBG_Log("spawn", "TRYING INCARNATOR AT LOC= %s", FormatVectorFloat(incarnator->location).c_str());
         if (ReincarnateComplete(incarnator)) {
-            SDL_Log("<------USING THIS INCARNATOR------>");
+            DBG_Log("spawn", "<------USING THIS INCARNATOR------>");
             return;
         }
     }
 
-    SDL_Log("NO incarnators found, trying RANDOM");
+    DBG_Log("spawn", "NO incarnators found, trying RANDOM");
     // if couldn't find an available Incarnator above, try creating a random one
     for (int tries = 3; isInLimbo && tries > 0; tries--) {
         CRandomIncarnator waldo(itsGame->actorList);
