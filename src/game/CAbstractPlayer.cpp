@@ -997,12 +997,6 @@ void CAbstractPlayer::SetFreeCamState(Boolean state) {
 
     itsGame->ToggleFreeCam(freeView);
     itsFreeCam->ToggleState(freeView);
-    
-    if (freeView) {
-        SDL_Log("Free cam toggled on!");
-    }
-    else
-        SDL_Log("Free cam toggled off!");
 }
 
 Boolean CAbstractPlayer::IsFreeCamAttached() {

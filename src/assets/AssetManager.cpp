@@ -322,6 +322,12 @@ std::string AssetManager::GetOggPath(MaybePackage package, int16_t id)
     return GetFullPath(package, relativePath.str());
 }
 
+std::string AssetManager::GetImagePath(MaybePackage package, std::string fileName) {
+    std::stringstream relativePath;
+    relativePath << "img" << PATHSEP << fileName;
+    return GetFullPath(package, relativePath.str());
+}
+
 void AssetManager::LoadEnumeratedObjectTypes()
 {
     std::stringstream path;

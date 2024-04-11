@@ -440,6 +440,9 @@ void CAvaraAppImpl::ParamLine(short index, MsgAlignment align, StringPtr param1,
         case kmAKilledBPlayer:
             buffa << a << " killed " << b << ".";
             break;
+        case kmKilledByCollision:
+            buffa << a << " was killed by the world.";
+            break;
         case kmUnavailableNote:
             buffa << a << " is busy.";
             category = MsgCategory::Error;
