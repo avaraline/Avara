@@ -51,7 +51,7 @@ private:
     void AdjustAmbient(OpenGLShader &shader, float intensity);
     void ApplyView();
     void Clear();
-    void Draw(OpenGLShader &shader, const CBSPPart &part, bool useAlphaBuffer = false);
+    void Draw(OpenGLShader &shader, const CBSPPart &part, float defaultAmbient, bool useAlphaBuffer = false);
     void IgnoreDirectionalLights(OpenGLShader &shader, bool yn);
     std::unique_ptr<OpenGLShader> LoadShader(const std::string &vertFile, const std::string &fragFile);
     void MakeFramebuffer(short index, GLsizei width, GLsizei height);
