@@ -20,6 +20,7 @@
 
 #define HUD_VERT "hud_vert.glsl"
 #define HUD_FRAG "hud_frag.glsl"
+#define HUD_AMBIENT 0.7f
 
 #define HUD_POST_VERT "hudPost_vert.glsl"
 #define HUD_POST_FRAG "hudPost_frag.glsl"
@@ -207,7 +208,7 @@ void ModernOpenGLRenderer::ApplyLights()
     viewParams->ambientLightColor.ExportGLFloats(ambientRGB, 3);
 
     hudShader->Use();
-    AdjustAmbient(*hudShader, 0.7f); // Default HUD ambient.
+    AdjustAmbient(*hudShader, HUD_AMBIENT);
 
     worldShader->Use();
     AdjustAmbient(*worldShader, ambientIntensity);
@@ -361,11 +362,13 @@ void ModernOpenGLRenderer::RenderFrame()
 
     dynamicWorld->PrepareForRender();
 
+    float defaultAmbient = ToFloat(viewParams->ambientLight);
+
     // Draw opaque geometry.
     auto partList = dynamicWorld->GetVisiblePartListPointer();
     auto partCount = dynamicWorld->GetVisiblePartCount();
     for (uint16_t i = 0; i < partCount; i++) {
-        Draw(*worldShader, **partList, false);
+        Draw(*worldShader, **partList, defaultAmbient, false);
         partList++;
     }
 
@@ -374,7 +377,7 @@ void ModernOpenGLRenderer::RenderFrame()
     partCount = dynamicWorld->GetVisiblePartCount();
     for (uint16_t i = 0; i < partCount; i++) {
         if ((**partList).HasAlpha()) {
-            Draw(*worldShader, **partList, true);
+            Draw(*worldShader, **partList, defaultAmbient, true);
         }
         partList++;
     }
@@ -401,7 +404,7 @@ void ModernOpenGLRenderer::RenderFrame()
     partList = hudWorld->GetVisiblePartListPointer();
     partCount = hudWorld->GetVisiblePartCount();
     for (uint16_t i = 0; i < partCount; i++) {
-        Draw(*hudShader, **partList);
+        Draw(*hudShader, **partList, HUD_AMBIENT);
         partList++;
     }
 
@@ -459,7 +462,7 @@ void ModernOpenGLRenderer::Clear()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 
-void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, bool useAlphaBuffer)
+void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, float defaultAmbient, bool useAlphaBuffer)
 {
     OpenGLVertices *glData = dynamic_cast<OpenGLVertices*>(part.vData.get());
 
@@ -494,13 +497,12 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, bool
     glEnableVertexAttribArray(2);
 
     // Custom, per-object lighting and depth testing!
-    float extra_amb = ToFloat(part.extraAmbient);
-    float current_amb = ToFloat(viewParams->ambientLight);
+    float extraAmbient = ToFloat(part.extraAmbient);
     if (part.privateAmbient != -1) {
         AdjustAmbient(shader, ToFloat(part.privateAmbient));
     }
-    if (extra_amb > 0) {
-        AdjustAmbient(shader, current_amb + extra_amb);
+    if (extraAmbient > 0) {
+        AdjustAmbient(shader, defaultAmbient + extraAmbient);
     }
     if (part.ignoreDepthTesting) {
         glDisable(GL_DEPTH_TEST);
@@ -525,8 +527,8 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, bool
     glDisableVertexAttribArray(2);
 
     // Restore previous lighting and depth testing state.
-    if (part.privateAmbient != -1 || extra_amb > 0) {
-        AdjustAmbient(shader, current_amb);
+    if (part.privateAmbient != -1 || extraAmbient > 0) {
+        AdjustAmbient(shader, defaultAmbient);
         glCheckErrors();
     }
     if (part.ignoreDepthTesting) {
