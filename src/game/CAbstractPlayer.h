@@ -306,6 +306,8 @@ public:
     virtual void PostMortemBlast(short scoreTeam, short scoreId, Boolean doDispose);
 
     virtual void GoLimbo(FrameNumber limboDelay);
+    virtual void Incarnate();
+    virtual Fixed ClosestOpponentDistance(Vector &location);
     virtual void Reincarnate();
     virtual bool ReincarnateComplete(CIncarnator *newSpot);
     virtual void IncarnateSound();

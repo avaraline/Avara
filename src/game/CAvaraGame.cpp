@@ -1137,3 +1137,14 @@ void CAvaraGame::IncrementFrame(bool firstFrame) {
 FrameNumber CAvaraGame::FramesFromNow(FrameNumber classicFrameCount) {
     return frameNumber + classicFrameCount / fpsScale;
 }
+
+void CAvaraGame::SetSpawnOrder(SpawnOrder order) {
+    std::string types[] = {"Random", "Usage", "Distance", "Hybrid"};
+    spawnOrder = SpawnOrder(order % ksNumSpawnOrders); // guard bad inputs
+    std::ostringstream oss;
+    oss << kSpawnOrder << " = " << spawnOrder << " [" << types[spawnOrder] << "]";
+    itsApp->AddMessageLine(oss.str(), MsgAlignment::Left, MsgCategory::Level);
+    if (gApplication) {
+        gApplication->Set(kSpawnOrder, spawnOrder);
+    }
+}

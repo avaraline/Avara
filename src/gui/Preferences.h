@@ -15,6 +15,7 @@ using json = nlohmann::json;
 #define kHullTypeTag "hull"
 #define kFrameTimeTag "frameTime"
 #define kThrottle "throttle"
+#define kSpawnOrder "spawnOrder"
 
 // TODO: split this into separate prefs
 #define kServerOptionsTag "_serverOptions"
@@ -171,6 +172,7 @@ static json defaultPrefs = {
     {kHUDShowScore, true},
     {kHUDShowTime, true},
     {kHUDShowKillFeed, true},
+    {kSpawnOrder, 3},
     {kShowNewHUD, true},
     {kFrameTimeTag, 16},
     {kLastAddress, ""},

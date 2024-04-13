@@ -138,12 +138,15 @@ Fixed NormalizeVector(long n, Fixed *v); //	Returns length
 Fixed FRandom();
 Fixed FDistanceEstimate(Fixed dx, Fixed dy, Fixed dz);
 static inline Fixed FDistanceEstimate(Fixed* v) { return FDistanceEstimate(v[0], v[1], v[2]); };
+static inline Fixed FDistanceEstimate(Fixed *v, Fixed *w) {
+    return FDistanceEstimate(v[0]-w[0], v[1]-w[1], v[2]-w[2]);
+};
 Fixed FDistanceOverEstimate(Fixed dx, Fixed dy, Fixed dz);
 void InverseTransform(Matrix *trans, Matrix *inv);
 
 Fixed DistanceEstimate(Fixed x1, Fixed y1, Fixed x2, Fixed y2);
-std::string FormatVector(Fixed *v, int size);
-std::string FormatVectorFloat(Fixed *v, int size);
+std::string FormatVector(Fixed *v, int size = 3);
+std::string FormatVectorFloat(Fixed *v, int size = 3);
 
 typedef struct {
     float P;

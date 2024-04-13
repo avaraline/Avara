@@ -20,6 +20,7 @@ public:
     MessageRecord startMsg;
     MessageRecord stopMsg;
     Boolean enabled;
+    Fixed distance;  // randomized distance to nearest opponent
 
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();

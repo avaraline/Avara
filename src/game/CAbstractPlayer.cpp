@@ -1820,39 +1820,103 @@ void CAbstractPlayer::IncarnateSound() {
     gHub->ReleaseLink(aLink);
 }
 
+void CAbstractPlayer::Incarnate() {
+    // for the initial spawn use the simple "usage" ordering
+    // note: this value is updated with the server's setting after the initial call (see CNetManager::DoConfig())
+    itsGame->spawnOrder = ksUsage;
+    Reincarnate();
+}
+
+Fixed CAbstractPlayer::ClosestOpponentDistance(Vector &location) {
+    Fixed minDist = MAXFIXED;
+    DBG_Log("spawn", "    Finding closest OPPONENT to INCARN");
+
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        if(i != itsManager->Slot()) {
+            CAbstractPlayer* player = itsGame->itsNet->playerTable[i]->GetPlayer();
+            if (player != NULL && !player->isOut && teamMask != player->teamMask) {
+                DBG_Log("spawn", "      OPPONENT[%d] LOC= %s", i, FormatVectorFloat(player->location).c_str());
+
+                if(i != itsManager->Slot()) {
+                    Fixed d = FDistanceEstimate(player->location, location);
+                    DBG_Log("spawn", "         dist= %.4f", ToFloat(d));
+                    if (d < minDist) {
+                        minDist = d;
+                        DBG_Log("spawn", "         CLOSEST OPPONENT, dist= %.4f", ToFloat(d));
+                    }
+                }
+            }
+        }
+    }
+    return minDist;
+}
+
 void CAbstractPlayer::Reincarnate() {
-    CIncarnator *placeList;
-    long bestCount = LONG_MAX;
+    std::list<CIncarnator *> sortedIncarnators;
+    Fixed furthest = MINFIXED;
 
-    // first, determine the count for the least-visited Incarnator
-    for (placeList = itsGame->incarnatorList; placeList != nullptr; placeList = placeList->nextIncarnator) {
-        if (placeList->enabled && (placeList->colorMask & teamMask) && (placeList->useCount < bestCount)) {
-            bestCount = placeList->useCount;
-        }
-    }
+    DBG_Log("spawn", "Reincarnate() SLOT= %d, ORDER = %d", itsManager->Slot(), itsGame->spawnOrder);
 
-    // try the least-visited Incarnators until one works
-    for (placeList = itsGame->incarnatorList; placeList != nullptr; placeList = placeList->nextIncarnator) {
-        if (placeList->enabled && (placeList->colorMask & teamMask) && (placeList->useCount == bestCount)) {
-            if (itsManager->Presence() != kzSpectating && ReincarnateComplete(placeList)) {
-                break;
+    for (CIncarnator *incarnator = itsGame->incarnatorList; incarnator != nullptr; incarnator = incarnator->nextIncarnator) {
+        if (incarnator->enabled && (incarnator->colorMask & teamMask)) { //} && incarnator->useCount == 0) {
+            DBG_Log("spawn", "\n");
+            DBG_Log("spawn", "INCARN LOC= %s", FormatVectorFloat(incarnator->location).c_str());
+
+            if (itsGame->spawnOrder == ksDistance || itsGame->spawnOrder == ksHybrid) {
+                Fixed minDist = ClosestOpponentDistance(incarnator->location);
+
+                static double alpha = 0.6;  // 0.0-1.0   higher == more randomness
+                incarnator->distance = minDist * ((1.0-alpha) + 2.0*alpha*FRandom()/FIX1);
+
+                DBG_Log("spawn", "         dist= %.4f ~dist= %.4f", ToFloat(minDist), ToFloat(incarnator->distance));
+                if(incarnator->distance > furthest) {
+                    furthest = incarnator->distance;
+                    DBG_Log("spawn", "         FURTHEST SO FAR");
+                }
+
+            } else if (itsGame->spawnOrder == ksRandom) {
+                incarnator->distance = FRandom();
+            } else {  // ksUsage
+                incarnator->distance = FIX1;
             }
+
+            if (itsGame->spawnOrder == ksDistance || itsGame->spawnOrder == ksRandom) {
+                // ignore usage for these order types
+                incarnator->useCount = 1;
+            }
+
+            // to be sorted below
+            sortedIncarnators.push_back(incarnator);
+
+            DBG_Log("spawn", "    ~dist= %.4f, useCount=%ld", ToFloat(incarnator->distance), incarnator->useCount);
         }
     }
 
+    sortedIncarnators.sort([](const CIncarnator *a, const CIncarnator *b) {
+        // like comparing a->distance/a->useCount to b->distance/b->useCount but avoiding divide-by-zero
+        return (a->distance * b->useCount) > (b->distance * a->useCount);
+    });
+
+    // try sorted Incarnators until one works
+    DBG_Log("spawn", "\n");
+    for (auto incarnator : sortedIncarnators) {
+        DBG_Log("spawn", "TRYING INCARNATOR AT LOC= %s", FormatVectorFloat(incarnator->location).c_str());
+        if (ReincarnateComplete(incarnator)) {
+            DBG_Log("spawn", "<------USING THIS INCARNATOR------>");
+            return;
+        }
+    }
+
+    DBG_Log("spawn", "NO incarnators found, trying RANDOM");
     // if couldn't find an available Incarnator above, try creating a random one
-    if (placeList == nullptr) {
-        // why 3 tries?  it's somewhat arbitrary but if there's a (high) 10% chance of not working,
-        // then 3 tries will get that down to 0.1%.  In most levels, the not-working chance is probably
-        // closer to 1% so 3 tries = 0.0001%
-        for (int tries = 3; isInLimbo && tries > 0; tries--) {
-            CRandomIncarnator waldo(itsGame->actorList);
-            if (ReincarnateComplete(&waldo)) {
-                break;
-            }
+    for (int tries = 3; isInLimbo && tries > 0; tries--) {
+        CRandomIncarnator waldo(itsGame->actorList);
+        if (ReincarnateComplete(&waldo)) {
+            break;
         }
     }
 }
+
 
 bool CAbstractPlayer::ReincarnateComplete(CIncarnator* newSpot) {
     // increment useCount regardless of success, so the next player doesn't try to use this spot
