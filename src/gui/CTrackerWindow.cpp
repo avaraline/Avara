@@ -67,8 +67,8 @@ public:
         layout->appendRow(1, 1);
         layout->appendRow(1, 1);
         layout->appendRow(1, 1);
-        layout->appendCol(1, 0.60);
-        layout->appendCol(1, 0.40);
+        layout->appendCol(1, 0.60f);
+        layout->appendCol(1, 0.40f);
             
         nanogui::Label *addressLabel = new nanogui::Label(this, line1, "sans", 14);
         nanogui::Label *playersLabel = new nanogui::Label(this, line2, "sans-bold");

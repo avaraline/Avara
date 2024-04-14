@@ -45,13 +45,13 @@ public:
     CTagBase() {}
     virtual ~CTagBase() {}
 
-    long hashTable[TAGBASEHASHSIZE];
+    long hashTable[TAGBASEHASHSIZE] = {0};
 
     long masterCount = 0; //	Amount of allocated master blocks.
     long realMasterSize = 0; //	Real memory allocated to master blocks.
     long logicalMasterSize = 0; //	Used memory for master blocks.
-    Handle masterBlocksHandle;
-    TagMasterBlock **masterBlocks; //	Handle to master blocks.
+    Handle masterBlocksHandle = 0;
+    TagMasterBlock **masterBlocks = {0}; //	Handle to master blocks.
 
     long firstFreeMaster = 0; //	Index of first free master block or -1 if none.
 

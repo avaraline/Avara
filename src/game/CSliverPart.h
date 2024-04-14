@@ -15,13 +15,13 @@
 
 class CSliverPart final : public CSmartPart {
 public:
-    CSliverPart *nextSliver;
-    Vector speed;
-    short lifeCount;
+    CSliverPart *nextSliver = 0;
+    Vector speed = {0};
+    short lifeCount = 0;
     ARGBColor borrowedColors = 0;
-    ARGBColor *fakeMaster;
-    Fixed friction, gravity;
-    Fixed fpsScale, fpsFriction, fpsGravity;
+    ARGBColor *fakeMaster = 0;
+    Fixed friction = 0, gravity = 0;
+    Fixed fpsScale = 0, fpsFriction = 0, fpsGravity = 0;
     CSliverPart(short partNum);
     virtual void Activate(Fixed *origin,
         Fixed *direction,

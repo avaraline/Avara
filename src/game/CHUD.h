@@ -11,7 +11,7 @@ class CAvaraGame;
 class CHUD : CDirectObject {
 public:
     CAvaraGame *itsGame;
-    int images;
+    int images = 0;
 
     CHUD(CAvaraGame *game);
     virtual ~CHUD() {}
@@ -20,7 +20,7 @@ public:
     void RenderNewHUD(NVGcontext *ctx);
     void DrawLevelName(NVGcontext *ctx);
     void DrawPaused(NVGcontext *ctx);
-    void DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, NVGcontext *ctx);
+    void DrawScore(std::vector<CPlayerManager*>& thePlayers, float chudHeight, NVGcontext *ctx);
     void DrawShadowBox(NVGcontext *ctx, float x, float y, float height, float width);
     void DrawKillFeed(NVGcontext *ctx, CNetManager *net, float bufferWidth, float fontSize);
     void LoadImages(NVGcontext *ctx);

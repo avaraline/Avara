@@ -886,11 +886,11 @@ Boolean CUDPComm::AsyncWrite() {
 
                 if (conn->busyQLen > longestBusyQ) {
                     theConnection = conn;
-                    highestRoundTrip = conn->meanRoundTripTime;
+                    highestRoundTrip = (long)conn->meanRoundTripTime;
                     longestBusyQ = conn->busyQLen;
                 } else if (conn->busyQLen == longestBusyQ && conn->meanRoundTripTime > highestRoundTrip) {
                     theConnection = conn;
-                    highestRoundTrip = conn->meanRoundTripTime;
+                    highestRoundTrip = (long)conn->meanRoundTripTime;
                 }
             }
         }
@@ -1927,7 +1927,7 @@ long CUDPComm::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
     // convert from GetClock() ticks to msec
     maxTrip = maxTrip*MSEC_PER_GET_CLOCK;
 
-    return maxTrip;
+    return (long)maxTrip;
 }
 
 float CUDPComm::GetMaxMeanSendCount(short distribution) {

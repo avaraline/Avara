@@ -130,7 +130,7 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
 
     //placeholder lines for now
     for (int i = 0; i < 20; i++) {
-        chatLayout->appendRow(1, 0.1);
+        chatLayout->appendRow(1, 0.1f);
         chatLayout->appendCol(1, 1);
 
         auto chatLine = chatPanel->add<Label>("");
@@ -366,7 +366,7 @@ void CRosterWindow::NewChatLine(Str255 playerName, std::string message) {
     std::string chatLine = ChatPromptFor(name) + message;
 
     AdvancedGridLayout *gridLayout = (AdvancedGridLayout*) chatPanel->layout();
-    gridLayout->appendRow(1, 0.1);
+    gridLayout->appendRow(1, 0.1f);
     gridLayout->appendCol(1, 1);
 
     auto chatLabel = chatPanel->add<Label>(chatLine);

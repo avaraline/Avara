@@ -1258,7 +1258,7 @@ Fixed CAbstractActor::FpsOffset(Fixed classicCoeff2) {
     // whereas the classic case adds 8.  To compensate, add an initial offset of
     // 1.5*2=3 to the speed in the first frame so that the location is incremented
     // by (5+7+9+11)*0.25=8, same as the classic case.
-    return 0.5 * (1/itsGame->fpsScale - 1) * FpsCoefficient2(classicCoeff2);
+    return (Fixed)(0.5 * (1/itsGame->fpsScale - 1) * FpsCoefficient2(classicCoeff2));
 }
 
 // the most accurate version of coefficient1 is computed using doubles
@@ -1269,7 +1269,7 @@ double CAbstractActor::FpsCoefficient1(double fpsCoeff1, double fpsScale) {
 FrameNumber CAbstractActor::FpsFramesPerClassic(FrameNumber classicFrames)
 {
     if (HandlesFastFPS()) {
-        return (classicFrames / itsGame->fpsScale);
+        return (FrameNumber)(classicFrames / itsGame->fpsScale);
     } else {
         return 1;
     }

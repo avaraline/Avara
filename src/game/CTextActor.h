@@ -12,7 +12,7 @@
 
 class CTextActor : public CAbstractActor {
 public:
-    std::string theMessage = 0;
+    std::string theMessage = "";
     MessageRecord in = {0};
     MessageRecord startMsg = {0};
     MessageRecord stopMsg = {0};

@@ -59,58 +59,58 @@ enum { kReceiveQ, kTransmitQ, kBusyQ, kQueueCount };
 
 class CUDPConnection : public CDirectObject {
 public:
-    class CUDPConnection *next;
-    class CUDPComm *itsOwner;
+    class CUDPConnection *next = 0;
+    class CUDPComm *itsOwner = 0;
 
-    QHdr queues[kQueueCount];
+    QHdr queues[kQueueCount] = {0};
 
-    int32_t seed;
+    int32_t seed = 0;
 
-    ip_addr ipAddr;
-    port_num port;
+    ip_addr ipAddr = 0;
+    port_num port = 0;
 
-    short myId;
+    short myId = 0;
 
-    SerialNumber serialNumber;
-    SerialNumber receiveSerial;
-    SerialNumber maxValid;
+    SerialNumber serialNumber = 0;
+    SerialNumber receiveSerial = 0;
+    SerialNumber maxValid = 0;
 
-    Boolean haveToSendAck;
-    ClockTick nextAckTime;
-    ClockTick nextWriteTime;
+    Boolean haveToSendAck = 0;
+    ClockTick nextAckTime = 0;
+    ClockTick nextWriteTime = 0;
 
-    ClockTick validTime;
+    ClockTick validTime = 0;
 
-    float meanRoundTripTime;
-    float varRoundTripTime;
-    float meanSendCount;
-    float meanReceiveCount;
-    SlidingHistogram<float>* latencyHistogram;
+    float meanRoundTripTime = 0;
+    float varRoundTripTime = 0;
+    float meanSendCount = 0;
+    float meanReceiveCount = 0;
+    SlidingHistogram<float> *latencyHistogram = {0};
 
-    ClockTick retransmitTime;
-    ClockTick urgentRetransmitTime;
+    ClockTick retransmitTime = 0;
+    ClockTick urgentRetransmitTime = 0;
 
-    long quota;
-    short cramData;
-    short busyQLen;
+    long quota = 0;
+    short cramData = 0;
+    short busyQLen = 0;
 
-    short routingMask;
+    short routingMask = 0;
 
 #if PACKET_DEBUG
     short dp;
     OSType d[kDebugBufferSize];
 #endif
 
-    long totalSent;
-    long totalResent;
-    long numResendsWithoutReceive;
-    double recentResendRate;
+    long totalSent = 0;
+    long totalResent = 0;
+    long numResendsWithoutReceive = 0;
+    double recentResendRate = 0;
 
-    volatile short *offsetBufferBusy;
-    int32_t ackBitmap;
-    SerialNumber ackBase;
+    volatile short *offsetBufferBusy = 0;
+    int32_t ackBitmap = 0;
+    SerialNumber ackBase = 0;
 
-    Boolean killed;
+    Boolean killed = 0;
 
     virtual void IUDPConnection(CUDPComm *theMaster);
     virtual void SendQueuePacket(UDPPacketInfo *thePacket, short theDistribution);

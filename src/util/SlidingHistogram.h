@@ -75,7 +75,7 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const SlidingHistogram<T>& sh)
     {
         int sum = 0;
-        float markers[] = {0.5, 0.90, 0.95, 0.99};  // smallest to biggest
+        float markers[] = {0.5f, 0.90f, 0.95f, 0.99f};  // smallest to biggest
         int nextMarker = 0;
         int prec = -1 * (int)log2(sh.stepSize);  // approx how many digits to show
 

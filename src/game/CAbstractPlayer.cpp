@@ -566,13 +566,13 @@ void CAbstractPlayer::LoadDashboardParts() {
     // These scalars affect how quickly the two values converge
     pidReset(&pMotionY);
     pidReset(&pMotionX);
-    pMotionX.P = -.1;
-    pMotionX.I = -0.005;
-    pMotionX.D = -.0004;
+    pMotionX.P = -.1f;
+    pMotionX.I = -0.005f;
+    pMotionX.D = -.0004f;
     pMotionX.angular = false;
-    pMotionY.P = -.1;
-    pMotionY.I = -0.09;
-    pMotionY.D = -0.0014;
+    pMotionY.P = -.1f;
+    pMotionY.I = -0.09f;
+    pMotionY.D = -0.0014f;
     pMotionY.angular = false;
     hudRestingX = 0;
     hudRestingY = 0;
@@ -753,7 +753,7 @@ void CAbstractPlayer::RenderDashboard() {
 
     if (itsGame->itsApp->Get(kHUDShowMissileLock)) {
         if (weapon && weapon->isTargetLocked) {
-            DashboardPosition(lockLight, 0.0, -0.1);
+            DashboardPosition(lockLight, 0.0f, -0.1f);
             lockLight->Scale(FIX(.6));
         }
     }
@@ -903,8 +903,8 @@ void CAbstractPlayer::DashboardPosition(CScaledBSP *part, bool autoRot, float x,
     // TODO: Adjust these until it looks good, then go multiply 
     // all the DashboardPosition parameters by these numbers, and
     // then delete these
-    float scale_x = 11.12;
-    float scale_y = 8.23;
+    float scale_x = 11.12f;
+    float scale_y = 8.23f;
     Fixed hud_dist = (FIX3(6000) * 25)/8;
 
     // Turn elements toward the center of the screen for a better 3d look

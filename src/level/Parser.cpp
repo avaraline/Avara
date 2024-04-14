@@ -824,7 +824,7 @@ void ParseStatement(LexSymbol *statement) {
         case kLexUnique:
             LexMatch(parserVar.lookahead.kind);
             if (parserVar.lookahead.kind == kLexConstant) {
-                uniqueBase = parserVar.lookahead.value.floating;
+                uniqueBase = (short)parserVar.lookahead.value.floating;
                 LexMatch(parserVar.lookahead.kind);
             }
 
@@ -1108,7 +1108,7 @@ Fixed ReadFixedVar(const char *s) {
 }
 
 long ReadLongVar(short index) {
-    return EvalVariable(index + firstVariable, false);
+    return (long)EvalVariable(index + firstVariable, false);
 }
 long ReadLongVar(const char *s) {
     return ReadLongVar(IndexForEntry(s));
@@ -1135,7 +1135,7 @@ const std::optional<ARGBColor> ReadColorVar(const char *s) {
 }
 
 std::string ReadStringVar(short index) {
-    index = EvalVariable(index + firstVariable, false);
+    index = (short)EvalVariable(index + firstVariable, false);
     if (index) {
         return symTable->GetIndEntry(index);
     } else {

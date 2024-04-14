@@ -32,7 +32,7 @@ void CHUD::LoadImages(NVGcontext *ctx) {
     images = nvgCreateImage(ctx, imgPath.c_str(), 0);
 }
 
-void CHUD::DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, NVGcontext *ctx) {
+void CHUD::DrawScore(std::vector<CPlayerManager*>& thePlayers, float chudHeight, NVGcontext *ctx) {
     auto view = gRenderer->viewParams;
     CAbstractPlayer *player = itsGame->GetLocalPlayer();
     CPlayerManager *playerManager = itsGame->FindPlayerManager(player);
@@ -149,7 +149,7 @@ void CHUD::DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, N
 
                 //show winnner
                 if(thisPlayer->WinFrame() > 0) {
-                    std::string checkMark("\u221A");
+                    std::string checkMark = "\u221A";
                     nvgFillColor(ctx, aliveColor);
                     nvgText(ctx, x + rankWidth + 33, y, checkMark.c_str(), NULL);
                 }
@@ -221,7 +221,7 @@ void CHUD::DrawLevelName(NVGcontext *ctx) {
         nvgTextBounds(ctx, x,y, level.c_str(), NULL, bounds);
         x = (bufferWidth / 2) - (bounds[2]-bounds[0]) / 2;
         nvgFillColor(ctx, BACKGROUND_COLOR);
-        nvgRect(ctx, x-5,y, (int)(bounds[2]-bounds[0])+10, (int)(bounds[3]-bounds[1])+4);
+        nvgRect(ctx, x-5,y, (bounds[2]-bounds[0])+10, (bounds[3]-bounds[1])+4);
         nvgFill(ctx);
 
         nvgFillColor(ctx, nvgRGBA(255,255,255,220));
@@ -232,10 +232,10 @@ void CHUD::DrawLevelName(NVGcontext *ctx) {
 void CHUD::DrawPaused(NVGcontext *ctx) {
     auto view = gRenderer->viewParams;
     if (itsGame->gameStatus == kPauseStatus) {
-        int bufferWidth = view->viewPixelDimensions.h;
-        int bufferHeight = view->viewPixelDimensions.v;
-        int centerX = bufferWidth / 2;
-        int centerY = bufferHeight / 2;
+        float bufferWidth = view->viewPixelDimensions.h;
+        float bufferHeight = view->viewPixelDimensions.v;
+        float centerX = bufferWidth / 2;
+        float centerY = bufferHeight / 2;
         float barWidth = 25.0;
         float barHeight = 100.0;
 
@@ -294,7 +294,7 @@ void CHUD::Render(NVGcontext *ctx) {
     }
 
     float bufferWidth = view->viewPixelDimensions.h, bufferHeight = view->viewPixelDimensions.v;
-    float chudHeight = 13 * lastPlayerSlot;
+    float chudHeight = 13.0f * lastPlayerSlot;
 
     DrawScore(thePlayers, chudHeight, ctx);
 
@@ -417,7 +417,7 @@ void CHUD::Render(NVGcontext *ctx) {
                 pingBarHeight = 10;
               }
               nvgBeginPath(ctx);
-              nvgRect(ctx, (int)bufferWidth - 147, pY + (10 - pingBarHeight), 3, pingBarHeight);
+              nvgRect(ctx, bufferWidth - 147, pY + (10 - pingBarHeight), 3, pingBarHeight);
               nvgFillColor(ctx, pingColor);
               nvgFill(ctx);
             }
@@ -519,7 +519,7 @@ void CHUD::Render(NVGcontext *ctx) {
         }
     }
 
-    DrawKillFeed(ctx, net, (int)bufferWidth, fontsz_l);
+    DrawKillFeed(ctx, net, bufferWidth, fontsz_l);
 
     if (!player)
         return;
@@ -917,8 +917,8 @@ void CHUD::RenderNewHUD(NVGcontext *ctx) {
         highestUsedSlot = std::max(highestUsedSlot, (int)(thisPlayer->Slot() + 1));
     }
 
-    int bufferWidth = view->viewPixelDimensions.h, bufferHeight = view->viewPixelDimensions.v;
-    int chudHeight = 13 * playerCount;
+    float bufferWidth = view->viewPixelDimensions.h, bufferHeight = view->viewPixelDimensions.v;
+    float chudHeight = 13.0f * playerCount;
 
     DrawScore(thePlayers, chudHeight, ctx);
 
@@ -934,19 +934,19 @@ void CHUD::RenderNewHUD(NVGcontext *ctx) {
     int levelMessageSpacing = 16;
     int levelMessageMaxLines = 5;
 
-    float systemMessagePosition[2] = {50.0f, (float)bufferHeight - 140.0f};
+    float systemMessagePosition[2] = {50.0f, bufferHeight - 140.0f};
     float systemMessageSize[2] = {520.0f, 90.0f};
     int systemMessageSpacing = 16;
     int systemMessageMaxLines = 5;
 
     int playerLineHeight = 17;
-    float playerListPosition[2] = {(float)bufferWidth - 570.0f, (float)bufferHeight - 60.0f - (highestUsedSlot * playerLineHeight)};
+    float playerListPosition[2] = {bufferWidth - 570.0f, bufferHeight - 60.0f - (highestUsedSlot * playerLineHeight)};
     float playerListSize[2] = {520.0f, (highestUsedSlot * playerLineHeight) + 10.0f};
-    float timePosition[2] = {(float)bufferWidth - 350.0f, playerListPosition[1] - 37.0f};
+    float timePosition[2] = {bufferWidth - 350.0f, playerListPosition[1] - 37.0f};
     float timeSize[2] = {75.0f, 27.0f};
-    float scorePosition[2] = {(float)bufferWidth - 500.0f, playerListPosition[1] - 37.0f};
+    float scorePosition[2] = {bufferWidth - 500.0f, playerListPosition[1] - 37.0f};
     float scoreSize[2] = {75.0f, 27.0f};
-    float spectatePlayerPosition[2] = {(float)bufferWidth / 2.0f, 50.0f};
+    float spectatePlayerPosition[2] = {bufferWidth / 2.0f, 50.0f};
 
     // System Message Backdrop
     if (itsGame->itsApp->Get(kHUDShowSystemMessages)) {

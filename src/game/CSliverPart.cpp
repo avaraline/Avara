@@ -99,7 +99,7 @@ void CSliverPart::Activate(Fixed *origin,
     // Use the first player (which should be running at High FPS) as a proxy to get at the Fps methods.
     fpsScale = gCurrentGame->playerList->FpsCoefficient2(FIX1);
     gCurrentGame->playerList->FpsCoefficients(friction, gravity, &fpsFriction, &fpsGravity);
-    lifeCount = age / std::ceil<int>(ToFloat(fpsScale));
+    lifeCount = age / (short)std::ceil(ToFloat(fpsScale));
 }
 
 Boolean CSliverPart::SliverAction() {

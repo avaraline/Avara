@@ -7,13 +7,13 @@
 
 ARGBColor::ARGBColor(const HSLAColor& hsla)
 {
-    uint8_t a = round(hsla.GetA() * 255);
+    uint8_t a = static_cast<uint8_t>(round(hsla.GetA() * 255));
     uint8_t r = 0;
     uint8_t g = 0;
     uint8_t b = 0;
 
     if (hsla.GetS() == 0.0) {
-        uint8_t val = round(hsla.GetL() * 255);
+        uint8_t val = static_cast<uint8_t>(round(hsla.GetL() * 255));
         r = val;
         g = val;
         b = val;
@@ -50,9 +50,9 @@ ARGBColor::ARGBColor(const HSLAColor& hsla)
                 tmpChannels[i] = tmp2;
             }
         }
-        r = round<uint8_t>(tmpChannels[0] * 255);
-        g = round<uint8_t>(tmpChannels[1] * 255);
-        b = round<uint8_t>(tmpChannels[2] * 255);
+        r = static_cast<uint8_t>(round(tmpChannels[0] * 255));
+        g = static_cast<uint8_t>(round(tmpChannels[1] * 255));
+        b = static_cast<uint8_t>(round(tmpChannels[2] * 255));
     }
 
     color =
@@ -121,15 +121,15 @@ void ARGBColor::ExportGLFloats(float *out, int n) const
 ARGBColor ARGBColor::GetContrastingShade() const
 {
     HSLAColor hsla = HSLAColor(*this);
-    if (hsla.GetL() > 0.4) {
-        hsla = hsla.WithL(0.1);
+    if (hsla.GetL() > 0.4f) {
+        hsla = hsla.WithL(0.1f);
     } else {
-        hsla = hsla.WithL(0.7);
+        hsla = hsla.WithL(0.7f);
     }
-    if (hsla.GetS() > 0.5) {
-        hsla = hsla.WithS(0.2);
+    if (hsla.GetS() > 0.5f) {
+        hsla = hsla.WithS(0.2f);
     } else {
-        hsla = hsla.WithS(0.8);
+        hsla = hsla.WithS(0.8f);
     }
     return ARGBColor(hsla);
 }

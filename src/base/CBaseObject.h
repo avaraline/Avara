@@ -13,7 +13,7 @@
 
 class CBaseObject {
 protected:
-    short lockCounter;
+    short lockCounter = 0;
 
 public:
     CBaseObject() {}
