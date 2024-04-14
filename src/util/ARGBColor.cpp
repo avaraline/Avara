@@ -50,9 +50,9 @@ ARGBColor::ARGBColor(const HSLAColor& hsla)
                 tmpChannels[i] = tmp2;
             }
         }
-        r = round(tmpChannels[0] * 255);
-        g = round(tmpChannels[1] * 255);
-        b = round(tmpChannels[2] * 255);
+        r = round<uint8_t>(tmpChannels[0] * 255);
+        g = round<uint8_t>(tmpChannels[1] * 255);
+        b = round<uint8_t>(tmpChannels[2] * 255);
     }
 
     color =

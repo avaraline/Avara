@@ -14,27 +14,27 @@ class CAbstractPlayer;
 
 class CParasite final : public CRealMovers {
 public:
-    Fixed maxPower;
-    Fixed energyDrain;
-    Fixed range;
-    short pitch;
-    long clock;
+    Fixed maxPower = 0;
+    Fixed energyDrain = 0;
+    Fixed range = 0;
+    short pitch = 0;
+    long clock = 0;
 
-    Vector course;
-    Fixed acceleration;
-    Fixed goodHeading;
-    Fixed goodPitch;
-    short moveClock;
+    Vector course = {0};
+    Fixed acceleration = 0;
+    Fixed goodHeading = 0;
+    Fixed goodPitch = 0;
+    short moveClock = 0;
 
-    ActorAttachment clamp;
-    long hostIdent;
-    CSmartPart *hostPart;
-    Matrix relation;
+    ActorAttachment clamp = {0};
+    long hostIdent = 0;
+    CSmartPart *hostPart = 0;
+    Matrix relation = {0};
 
-    short clampSound;
-    Fixed clampVolume;
+    short clampSound = 0;
+    Fixed clampVolume = 0;
 
-    Boolean isTracking;
+    Boolean isTracking = 0;
 
     virtual void PlaceParts();
     virtual void BeginScript();

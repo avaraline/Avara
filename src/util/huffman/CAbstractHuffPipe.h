@@ -15,9 +15,9 @@ typedef struct {
 
 class CAbstractHuffPipe : public CAbstractPipe {
 public:
-    int dataCount;
-    int symbCounters[NUMSYMBOLS];
-    HuffTreeNode nodes[NUMSYMBOLS * 2 - 1];
+    int dataCount = 0;
+    int symbCounters[NUMSYMBOLS] = {0};
+    HuffTreeNode nodes[NUMSYMBOLS * 2 - 1] = {0};
 
     CAbstractHuffPipe() {}
     virtual ~CAbstractHuffPipe() {}

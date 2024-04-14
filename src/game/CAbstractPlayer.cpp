@@ -1866,7 +1866,7 @@ void CAbstractPlayer::Reincarnate() {
                 Fixed minDist = ClosestOpponentDistance(incarnator->location);
 
                 static double alpha = 0.6;  // 0.0-1.0   higher == more randomness
-                incarnator->distance = minDist * ((1.0-alpha) + 2.0*alpha*FRandom()/FIX1);
+                incarnator->distance = minDist * (Fixed)((1.0-alpha) + 2.0*alpha*FRandom()/FIX1);
 
                 DBG_Log("spawn", "         dist= %.4f ~dist= %.4f", ToFloat(minDist), ToFloat(incarnator->distance));
                 if(incarnator->distance > furthest) {

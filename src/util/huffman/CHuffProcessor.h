@@ -11,14 +11,14 @@ typedef struct {
 
 class CHuffProcessor : public CAbstractHuffPipe {
 public:
-    Ptr outPointer;
-    int outCount;
+    Ptr outPointer = 0;
+    int outCount = 0;
 
-    HuffTreeNode **lookupBuf;
-    Boolean singleSymbolData;
-    unsigned char theSingleSymbol;
-    int codeStrings[NUMSYMBOLS];
-    short codeLengths[NUMSYMBOLS];
+    HuffTreeNode **lookupBuf = 0;
+    Boolean singleSymbolData = 0;
+    unsigned char theSingleSymbol = 0;
+    int codeStrings[NUMSYMBOLS] = {0};
+    short codeLengths[NUMSYMBOLS] = {0};
 
     CHuffProcessor() {}
     virtual ~CHuffProcessor() {}

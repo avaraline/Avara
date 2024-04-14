@@ -15,16 +15,16 @@ class CDepot;
 
 class CSmart final : public CWeapon {
 public:
-    Fixed goodYaw;
-    Fixed goodPitch;
+    Fixed goodYaw = 0;
+    Fixed goodPitch = 0;
 
-    CSmartPart *targetPart;
-    long targetIdent;
-    Fixed sightDistance;
-    Fixed thrust;
-    Fixed angleStep;
-    short inSight;
-    FrameNumber fireFrame;
+    CSmartPart *targetPart = 0;
+    long targetIdent = 0;
+    Fixed sightDistance = 0;
+    Fixed thrust = 0;
+    Fixed angleStep = 0;
+    short inSight = 0;
+    FrameNumber fireFrame = 0;
 
     CSmart(CDepot *theDepot);
     virtual void ResetWeapon();

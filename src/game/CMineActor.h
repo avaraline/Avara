@@ -11,30 +11,30 @@
 
 class CMineActor : public CGlowActors {
 public:
-    MaskType watchBits;
-    MessageRecord activator;
+    MaskType watchBits = 0;
+    MessageRecord activator = {0};
 
-    long phase;
-    long fuseTime;
+    long phase = 0;
+    long fuseTime = 0;
 
-    long lookTime;
-    long lookNextTime;
-    long shapeNextTime;
-    long shapeTimes[2][2];
+    long lookTime = 0;
+    long lookNextTime = 0;
+    long shapeNextTime = 0;
+    long shapeTimes[2][2] = {0};
 
-    Fixed shieldEnergy;
-    Fixed radius;
-    Fixed activateEnergy;
+    Fixed shieldEnergy = 0;
+    Fixed radius = 0;
+    Fixed activateEnergy = 0;
 
-    short activateSound;
-    Fixed activateVolume;
+    short activateSound = 0;
+    Fixed activateVolume = 0;
 
-    short curShape;
+    short curShape = 0;
 
-    MessageRecord startMsg;
-    MessageRecord stopMsg;
-    Boolean enabled;
-    Boolean activated;
+    MessageRecord startMsg = {0};
+    MessageRecord stopMsg = {0};
+    Boolean enabled = 0;
+    Boolean activated = 0;
 
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();

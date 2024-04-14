@@ -93,10 +93,10 @@ CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
     std::vector<std::string> frameTimeOptionsShort = { "64 ms", "32 ms", "16 ms", "8 ms" };
     frameTimeBox = new nanogui::ComboBox(this, frameTimeOptions, frameTimeOptionsShort);
     frameTimeBox->setCallback([this](int selectedIdx) {
-        gCurrentGame->SetFrameTime(pow(2, 6-selectedIdx));
+        gCurrentGame->SetFrameTime((int32_t)pow(2, 6 - selectedIdx));
         latencyBox->callback()(latencyBox->value()); // forces LT to be re-evaluated
     });
-    frameTimeBox->setSelectedIndex(6-log2(gCurrentGame->frameTime));
+    frameTimeBox->setSelectedIndex(6 - (int)log2(gCurrentGame->frameTime));
     frameTimeBox->popup()->setSize(nanogui::Vector2i(200, 160));
 }
 
@@ -133,7 +133,7 @@ bool CServerWindow::DoCommand(int theCommand) {
 }
 
 void CServerWindow::PrefChanged(std::string name) {
-    frameTimeBox->setSelectedIndex(6-log2(gCurrentGame->frameTime));
+    frameTimeBox->setSelectedIndex(6 - (int)log2(gCurrentGame->frameTime));
     latencyBox->setValue(std::to_string(mApplication->Get<float>(kLatencyToleranceTag)).substr(0, 5));
     registerBox->setChecked(mApplication->Get<int>(kTrackerRegister) != 0);
 }

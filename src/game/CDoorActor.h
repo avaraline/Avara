@@ -20,36 +20,36 @@ enum { kDoorStopped, kDoorOpening, kDoorClosing };
 
 class CDoorActor : public CGlowActors {
 public:
-    Fixed doorStatus;
-    Fixed classicOpenSpeed, openSpeed;
-    Fixed classicCloseSpeed, closeSpeed;
+    Fixed doorStatus = 0;
+    Fixed classicOpenSpeed = 0, openSpeed = 0;
+    Fixed classicCloseSpeed = 0, closeSpeed = 0;
 
-    Fixed deltas[3];
-    Fixed twists[3];
+    Fixed deltas[3] = {0};
+    Fixed twists[3] = {0};
 
-    MessageRecord openActivator;
-    MessageRecord closeActivator;
+    MessageRecord openActivator = {0};
+    MessageRecord closeActivator = {0};
 
-    MsgType didOpen;
-    MsgType didClose;
+    MsgType didOpen = 0;
+    MsgType didClose = 0;
 
-    long closeCounter;
-    long openCounter;
+    long closeCounter = 0;
+    long openCounter = 0;
 
-    FrameNumber classicOpenDelay, openDelay;
-    FrameNumber classicCloseDelay, closeDelay;
-    FrameNumber classicGuardDelay, collisionGuardTime;
+    FrameNumber classicOpenDelay = 0, openDelay = 0;
+    FrameNumber classicCloseDelay = 0, closeDelay = 0;
+    FrameNumber classicGuardDelay = 0, collisionGuardTime = 0;
 
-    short action;
+    short action = 0;
 
-    short openSoundId;
-    short closeSoundId;
-    short stopSoundId;
-    Fixed doorSoundVolume;
+    short openSoundId = 0;
+    short closeSoundId = 0;
+    short stopSoundId = 0;
+    Fixed doorSoundVolume = 0;
 
-    Fixed hitPower;
+    Fixed hitPower = 0;
 
-    Fixed lastMovement[3];
+    Fixed lastMovement[3] = {0};
 
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();

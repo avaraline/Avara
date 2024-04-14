@@ -12,38 +12,38 @@
 
 class CBall : public CRealShooters {
 public:
-    Vector origLocation;
-    ActorAttachment clamp;
-    long hostIdent;
-    long oldHost;
-    long looseFrame;
-    CSmartPart *hostPart;
-    Vector localSnap;
+    Vector origLocation = {0};
+    ActorAttachment clamp = {0};
+    long hostIdent = 0;
+    long oldHost = 0;
+    long looseFrame = 0;
+    CSmartPart *hostPart = 0;
+    Vector localSnap = {0};
 
-    MessageRecord startMsg;
-    MessageRecord stopMsg;
-    MsgType goalMsg;
-    MsgType captureMsg;
+    MessageRecord startMsg = {0};
+    MessageRecord stopMsg = {0};
+    MsgType goalMsg = 0;
+    MsgType captureMsg = 0;
 
-    long carryScore;
-    long goalScore;
+    long carryScore = 0;
+    long goalScore = 0;
 
-    Fixed pitchZ;
-    Fixed pitchY;
+    Fixed pitchZ = 0;
+    Fixed pitchY = 0;
 
     Fixed classicGravity, customGravity;
     Fixed classicAcceleration, acceleration;
 
-    Fixed changeHolderPower;
-    short holderScoreId;
-    short holderTeam;
-    Fixed holdShieldLimit;
+    Fixed changeHolderPower = 0;
+    short holderScoreId = 0;
+    short holderTeam = 0;
+    Fixed holdShieldLimit = 0;
 
-    Fixed releaseHoldAccumulator;
+    Fixed releaseHoldAccumulator = 0;
 
-    short status;
-    long group;
-    short actionCommand;
+    short status = 0;
+    long group = 0;
+    short actionCommand = 0;
 
     Fixed carryScoreAccumulator;
 

@@ -12,9 +12,9 @@
 
 class CDoor2Actor : public CDoorActor {
 public:
-    Fixed midState;
-    Vector midDeltas;
-    Vector midTwists;
+    Fixed midState = 0;
+    Vector midDeltas = {0};
+    Vector midTwists = {0};
 
     virtual void PlaceParts();
     virtual void ProgramDoorVariables();

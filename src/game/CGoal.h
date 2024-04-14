@@ -12,16 +12,16 @@
 
 class CGoal : public CGlowActors {
 public:
-    Fixed motionRange;
-    Fixed activeRange;
-    Fixed deltas[3];
-    long goalAction;
-    long group;
-    long goalScore;
-    MsgType goalMsg;
+    Fixed motionRange = 0;
+    Fixed activeRange = 0;
+    Fixed deltas[3] = {0};
+    long goalAction = 0;
+    long group = 0;
+    long goalScore = 0;
+    MsgType goalMsg = 0;
 
-    short goalSound;
-    Fixed goalVolume;
+    short goalSound = 0;
+    Fixed goalVolume = 0;
 
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();

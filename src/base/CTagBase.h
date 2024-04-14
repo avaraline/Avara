@@ -11,6 +11,7 @@
 
 #include "CBaseObject.h"
 
+#pragma warning(disable : 4200)
 typedef struct {
     long tag;
     long dataLen;
@@ -27,6 +28,7 @@ typedef struct {
     } lf;
 } TagMasterBlock;
 
+#pragma warning(disable : 4200)
 typedef struct {
     long masterIndex; //	Index to owner master block. Negative, if block has been released.
     long dataLen; //	Length of data
@@ -45,19 +47,19 @@ public:
 
     long hashTable[TAGBASEHASHSIZE];
 
-    long masterCount; //	Amount of allocated master blocks.
-    long realMasterSize; //	Real memory allocated to master blocks.
-    long logicalMasterSize; //	Used memory for master blocks.
+    long masterCount = 0; //	Amount of allocated master blocks.
+    long realMasterSize = 0; //	Real memory allocated to master blocks.
+    long logicalMasterSize = 0; //	Used memory for master blocks.
     Handle masterBlocksHandle;
     TagMasterBlock **masterBlocks; //	Handle to master blocks.
 
-    long firstFreeMaster; //	Index of first free master block or -1 if none.
+    long firstFreeMaster = 0; //	Index of first free master block or -1 if none.
 
-    long realTagBaseSize; //	Real memory allocated for TagBase blocks.
-    long logicalTagBaseSize; //	Used memory for TagBase blocks (with garbage blocks).
+    long realTagBaseSize = 0; //	Real memory allocated for TagBase blocks.
+    long logicalTagBaseSize = 0; //	Used memory for TagBase blocks (with garbage blocks).
     Handle tagBaseBlocks; //	Handle to string blocks.
 
-    long wastedSpace; //	Amount of garbage bytes in logicalStringSize.
+    long wastedSpace = 0; //	Amount of garbage bytes in logicalStringSize.
 
     virtual void ITagBase(); //	Initialize to empty - always call after new
     virtual void Dispose(); //	To release all memory

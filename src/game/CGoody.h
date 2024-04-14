@@ -12,27 +12,27 @@
 
 class CGoody : public CPlacedActors {
 public:
-    MessageRecord startMsg;
-    MessageRecord stopMsg;
-    MsgType outMsg;
+    MessageRecord startMsg = {0};
+    MessageRecord stopMsg = {0};
+    MsgType outMsg = 0;
 
-    Fixed classicRotation, rotationSpeed;
-    Fixed partRoll;
+    Fixed classicRotation = 0, rotationSpeed = 0;
+    Fixed partRoll = 0;
 
-    short grenades;
-    short missiles;
-    short boosters;
-    short lives;
-    short boostTime;
+    short grenades = 0;
+    short missiles = 0;
+    short boosters = 0;
+    short lives = 0;
+    short boostTime = 0;
 
-    short soundId;
-    short openSoundId;
-    short closeSoundId;
-    short frequency;
-    Fixed volume;
+    short soundId = 0;
+    short openSoundId = 0;
+    short closeSoundId = 0;
+    short frequency = 0;
+    Fixed volume = 0;
 
-    Boolean showText;
-    Boolean enabled;
+    Boolean showText = 0;
+    Boolean enabled = 0;
 
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();

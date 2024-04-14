@@ -17,31 +17,31 @@ class CAbstractPlayer;
 
 class CTeleporter : public CPlacedActors {
 public:
-    unsigned long useCount;
-    short goTimer;
-    short options;
+    unsigned long useCount = 0;
+    short goTimer = 0;
+    short options = 0;
 
-    short noPullTimer;
-    short pullCounter;
+    short noPullTimer = 0;
+    short pullCounter = 0;
 
-    long transportGroup;
-    long destGroup;
-    short soundId;
-    short watchTeams;
-    Fixed volume;
-    Fixed rotationSpeed;
-    Fixed activeRange;
-    Fixed deadRange;
-    long winScore;
+    long transportGroup = 0;
+    long destGroup = 0;
+    short soundId = 0;
+    short watchTeams = 0;
+    Fixed volume = 0;
+    Fixed rotationSpeed = 0;
+    Fixed activeRange = 0;
+    Fixed deadRange = 0;
+    long winScore = 0;
 
-    MsgType didSendMsg;
-    MsgType didReceiveMsg;
+    MsgType didSendMsg = 0;
+    MsgType didReceiveMsg = 0;
 
-    MessageRecord startMsg;
-    MessageRecord stopMsg;
-    Boolean enabled;
+    MessageRecord startMsg = {0};
+    MessageRecord stopMsg = {0};
+    Boolean enabled = 0;
 
-    Vector attraction;
+    Vector attraction = {0};
 
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();

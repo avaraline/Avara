@@ -12,21 +12,21 @@
 
 class CSwitchActor : public CGlowActors {
 public:
-    MessageRecord onActivator;
-    MessageRecord offActivator;
+    MessageRecord onActivator = {0};
+    MessageRecord offActivator = {0};
 
-    MsgType onMessage;
-    MsgType offMessage;
+    MsgType onMessage = 0;
+    MsgType offMessage = 0;
 
-    Fixed togglePower;
-    Fixed blastToggle;
-    long toggleCount;
+    Fixed togglePower = 0;
+    Fixed blastToggle = 0;
+    long toggleCount = 0;
 
-    Boolean theState;
-    Boolean shownState;
-    Boolean msgToggle;
-    Boolean restart;
-    Boolean enabled;
+    Boolean theState = 0;
+    Boolean shownState = 0;
+    Boolean msgToggle = 0;
+    Boolean restart = 0;
+    Boolean enabled = 0;
 
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();

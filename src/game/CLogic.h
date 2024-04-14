@@ -15,12 +15,12 @@
 
 class CLogic : public CAbstractActor {
 public:
-    MessageRecord startMsg;
-    MessageRecord stopMsg;
-    MessageRecord in[LOGIC_IN];
-    MsgType out[LOGIC_OUT];
-    Boolean restart;
-    Boolean enabled;
+    MessageRecord startMsg = {0};
+    MessageRecord stopMsg = {0};
+    MessageRecord in[LOGIC_IN] = {0};
+    MsgType out[LOGIC_OUT] = {0};
+    Boolean restart = 0;
+    Boolean enabled = 0;
 
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();

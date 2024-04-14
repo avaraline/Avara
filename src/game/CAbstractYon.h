@@ -12,14 +12,14 @@
 
 class CAbstractYon : public CAbstractActor {
 public:
-    Vector minBounds;
-    Vector maxBounds;
-    Vector sphere;
-    class CAbstractYon *nextYon;
+    Vector minBounds = {0};
+    Vector maxBounds = {0};
+    Vector sphere = {0};
+    class CAbstractYon *nextYon = 0;
 
-    MessageRecord startMsg;
-    MessageRecord stopMsg;
-    short status;
+    MessageRecord startMsg = {0};
+    MessageRecord stopMsg = {0};
+    short status = 0;
 
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();

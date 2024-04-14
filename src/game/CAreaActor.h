@@ -13,16 +13,16 @@
 
 class CAreaActor : public CAbstractActor {
 public:
-    Vector location;
-    Fixed radius;
-    MsgType enterMsg;
-    MsgType exitMsg;
+    Vector location = {0};
+    Fixed radius = 0;
+    MsgType enterMsg = 0;
+    MsgType exitMsg = 0;
 
-    short frequency;
-    short freqCount;
-    Boolean areaFlag;
-    MaskType watchBits;
-    short watchTeams;
+    short frequency = 0;
+    short freqCount = 0;
+    Boolean areaFlag = 0;
+    MaskType watchBits = 0;
+    short watchTeams = 0;
 
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();

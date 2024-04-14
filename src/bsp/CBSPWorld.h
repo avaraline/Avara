@@ -28,12 +28,12 @@ public:
 
 class CBSPWorldImpl final : public CBSPWorld {
 private:
-    uint16_t partSpace;
-    uint16_t partCount;
-    uint16_t visibleCount;
-    CBSPPart ***partList;
-    CBSPPart ***visibleList;
-    CBSPPart **visibleP; //	Used while rendering when visibleList is locked down.
+    uint16_t partSpace = 0;
+    uint16_t partCount = 0;
+    uint16_t visibleCount = 0;
+    CBSPPart ***partList = 0;
+    CBSPPart ***visibleList = 0;
+    CBSPPart **visibleP = 0; //	Used while rendering when visibleList is locked down.
 public:
     CBSPWorldImpl(short initialObjectSpace);
     virtual ~CBSPWorldImpl();

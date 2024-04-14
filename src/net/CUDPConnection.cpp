@@ -383,8 +383,8 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, int32_t when) {
         if (uint16_t(maxValid) <= 10) {
             // use best RTT of early message(s) to prime initial values of RTT mean/var
             if (roundTrip < meanRoundTripTime) {
-                meanRoundTripTime = roundTrip;
-                varRoundTripTime = std::min(roundTrip*roundTrip, kInitialRoundTripVar);
+                meanRoundTripTime = (float)roundTrip;
+                varRoundTripTime = std::min<float>(roundTrip*roundTrip, kInitialRoundTripVar);
             }
             #if PACKET_DEBUG || LATENCY_DEBUG
                 SDL_Log("INITIALIZING RTT...            cn=%d cmd=%d roundTrip=%ld mean=%.1f std = %.1f, maxValid=%hd\n",
@@ -635,7 +635,7 @@ size_t CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
                 }
                 // give up and forget about receiving sn=receiveSerial after awhile,
                 // players will request a frame resend and it could be coming in a later packet so skip this one
-                int PACKET_CLEANUP = 4.0/gCurrentGame->fpsScale;   // bigger is NOT better, don't go above 5-ish
+                int PACKET_CLEANUP = std::floor<int>(4.0/gCurrentGame->fpsScale);   // bigger is NOT better, don't go above 5-ish
                 if (qsize >= PACKET_CLEANUP) {  // LT of 8 would be 32 frame packets, plus a little for other packets
                     // call self recursively to skip receiveSerial
                     return ReceivedPacket(nullptr);
@@ -926,5 +926,5 @@ long CUDPConnection::LatencyEstimate() {
         }
     }
 
-    return maxRTT/2;
+    return (long)(maxRTT / 2);
 }

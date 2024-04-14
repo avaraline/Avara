@@ -13,10 +13,10 @@
 
 class CProtoControl : public CDirectObject {
 public:
-    CCommManager *itsManager;
-    class CAvaraGame *theGame;
-    ReceiverRecord immedReceiverRecord;
-    ReceiverRecord delayedReceiverRecord;
+    CCommManager *itsManager = 0;
+    class CAvaraGame *theGame = 0;
+    ReceiverRecord immedReceiverRecord = {0};
+    ReceiverRecord delayedReceiverRecord = {0};
 
     virtual void IProtoControl(CCommManager *aManager, CAvaraGame *aGame);
     virtual Boolean PacketHandler(PacketInfo *thePacket);

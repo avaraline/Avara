@@ -575,7 +575,7 @@ Boolean CNetManager::GatherPlayers(Boolean isFreshMission) {
     uint64_t currentTime = TickCount();
     int loopCount = 0;
     uint64_t resendTime = currentTime;
-    static int READY_SYNC_PERIOD = MSEC_TO_TICK_COUNT(4.0*CLASSICFRAMETIME);  // rounds to 250ms
+    static int READY_SYNC_PERIOD = (int)MSEC_TO_TICK_COUNT(4.0*CLASSICFRAMETIME);  // rounds to 250ms
     uint64_t timeLimit = currentTime + READY_SYNC_PERIOD*24;  // ~6sec
     // wait to hear from everyone, within time limit
     while (activePlayersDistribution != readyPlayersConsensus &&
@@ -1295,7 +1295,7 @@ void CNetManager::UpdateLocalConfig() {
     CPlayerManager *thePlayerManager = playerTable[itsCommManager->myId].get();
 
     config.frameLatency = gApplication
-        ? gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale
+        ? (short)(gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale)
         : 0;
     config.frameTime = itsGame->frameTime;
     config.spawnOrder = gApplication->Get<short>(kSpawnOrder);

@@ -15,12 +15,12 @@ class CIncarnator;
 class CIncarnator : public CPlacedActors {
 public:
     CIncarnator *nextIncarnator;
-    long colorMask;
-    long useCount;
-    MessageRecord startMsg;
-    MessageRecord stopMsg;
-    Boolean enabled;
-    Fixed distance;  // randomized distance to nearest opponent
+    long colorMask = 0;
+    long useCount = 0;
+    MessageRecord startMsg = {0};
+    MessageRecord stopMsg = {0};
+    Boolean enabled = 0;
+    Fixed distance = 0;  // randomized distance to nearest opponent
 
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();

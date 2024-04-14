@@ -231,8 +231,8 @@ void CWalkerActor::AvoidBumping() {
                 case undoTurn:
                     // FPS_DEBUG("AvoidBumping: undoTurn\n");
                     if (heading != headChange) {  // seems like it should check (headChange != 0)
-                        Vector offsetSpeed, offsetLocation;
-                        Vector push;
+                        Vector offsetSpeed = {0}, offsetLocation = {0};
+                        Vector push = {0};
 
                         heading -= headChange;
 
@@ -322,7 +322,7 @@ void CWalkerActor::DoStandingTouches() {
             if (!touchActor->HandlesFastFPS()) {
                 // if touchActor still runs slow, increase the traction on that object so that Walker doesn't slide off
                 // delete this code after all actors are FPS
-                tracAcc = tracAcc / itsGame->fpsScale;
+                tracAcc = tracAcc / ToFixed(itsGame->fpsScale);
             }
             tractCount = 1;
         }
@@ -369,10 +369,10 @@ void CWalkerActor::DoStandingTouches() {
 }
 
 void CWalkerActor::DoLegTouches() {
-    CAbstractActor *touchActor[2];
+    CAbstractActor *touchActor[2] = {0};
     short i;
-    Fixed power[2];
-    short soundId[2];
+    Fixed power[2] = {0};
+    short soundId[2] = {0};
 
     if (legs[0].touchIdent) {
         touchActor[0] = itsGame->FindIdent(legs[0].touchIdent);
@@ -418,7 +418,7 @@ void CWalkerActor::DoLegTouches() {
                 soundId[i] = itsGame->groundStepSound;
             }
 
-            power[i] *= (2 / itsGame->fpsScale);
+            power[i] *= (2 / ToFixed(itsGame->fpsScale));
 
             // if falling at a high speed
             if (speed[1] < -FIX1 && power[i] < FIX3(500)) {
@@ -428,7 +428,7 @@ void CWalkerActor::DoLegTouches() {
         }
 
         if (soundId[0] == soundId[1]) {
-            Vector spot;
+            Vector spot = {0};
 
             power[0] += power[1];
             for (i = 0; i < 3; i++) {
@@ -450,10 +450,10 @@ void CWalkerActor::DoLegTouches() {
 
 void CWalkerActor::ExtendLeg(LegInfo *theLeg) {
     Fixed extendLength;
-    Fixed extendDelta[2];
+    Fixed extendDelta[2] = {0};
     Fixed highPart, lowPart;
     Fixed normalPart;
-    int acc[2];
+    int acc[2] = {0};
 
     extendDelta[0] = -theLeg->x;
     extendDelta[1] = headHeight - theLeg->y;
@@ -483,7 +483,7 @@ void CWalkerActor::MoveLegs() {
     Fixed phaseChange;
     short i;
     LegInfo *theLeg;
-    RayHitRecord legSensor;
+    RayHitRecord legSensor = {0};
     Fixed tempSin, tempCos;
 
     // FPS_DEBUG("CWalkerActor::MoveLegs frameNumber = " << itsGame->frameNumber << "\n");
@@ -558,7 +558,7 @@ void CWalkerActor::MoveLegs() {
 
         if (legSensor.distance < -speedLimit) {
             // don't fpsScale the comparison... this helps with bounce but doesn't hurt gravity
-            speedLimit = -legSensor.distance * itsGame->fpsScale;
+            speedLimit = -legSensor.distance * ToFixed(itsGame->fpsScale);
         }
 
         tempZ = legSensor.origin[1] - legSensor.distance;

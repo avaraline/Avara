@@ -12,17 +12,17 @@
 
 class CForceField : public CPlacedActors {
 public:
-    MessageRecord startMsg;
-    MessageRecord stopMsg;
+    MessageRecord startMsg = {0};
+    MessageRecord stopMsg = {0};
 
-    MsgType enterMsg;
-    MsgType exitMsg;
+    MsgType enterMsg = 0;
+    MsgType exitMsg = 0;
 
-    MaskType watchBits;
-    short watchTeams;
-    Fixed spinSpeed;
-    Fixed force[3];
-    Boolean isWorking;
+    MaskType watchBits = 0;
+    short watchTeams = 0;
+    Fixed spinSpeed = 0;
+    Fixed force[3] = {0};
+    Boolean isWorking = 0;
 
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();

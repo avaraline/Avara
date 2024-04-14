@@ -32,11 +32,11 @@ enum { udpCramInfo }; //	Selectors for kpPacketProtocolControl packer p1 params.
 
 class CUDPComm : public CCommManager {
 public:
-    int32_t seed;
-    short softwareVersion;
-    short maxClients;
-    short clientLimit;
-    Str255 password;
+    int32_t seed = 0;
+    short softwareVersion = 0;
+    short maxClients = 0;
+    short clientLimit = 0;
+    Str255 password = {0};
 
     /*
     UDPiopb				sendPB;
@@ -52,49 +52,49 @@ public:
     UDPIOCompletionUPP	bufferReturnComplete;
     */
 
-    ReceiverRecord receiverRecord;
+    ReceiverRecord receiverRecord = {0};
 
     // OSErr				writeErr;
     // OSErr				readErr;
 
     // class CTagBase *prefs;
-    class CUDPConnection *connections;
-    class CUDPConnection *nextSender;
+    class CUDPConnection *connections = 0;
+    class CUDPConnection *nextSender = 0;
     /*
     class	CTracker			*tracker;
     */
 
-    long retransmitToRoundTripRatio; //	In fixed point 24.8 format
+    long retransmitToRoundTripRatio = 0; //	In fixed point 24.8 format
 
-    ClockTick nextWriteTime;
-    long latencyConvert;
-    ClockTick urgentResendTime;
-    ClockTick lastClock;
-    ClockTick lastQuotaTime;
+    ClockTick nextWriteTime = 0;
+    long latencyConvert = 0;
+    ClockTick urgentResendTime = 0;
+    ClockTick lastClock = 0;
+    ClockTick lastQuotaTime = 0;
 
-    ip_addr localIP; //	Just a guess, but that's all we need for the tracker.
-    port_num localPort;
-    int stream;
+    ip_addr localIP = 0; //	Just a guess, but that's all we need for the tracker.
+    port_num localPort = 0;
+    int stream = 0;
     // char				streamBuffer[UDPSTREAMBUFFERSIZE];
     // char				sendBuffer[UDPSENDBUFFERSIZE];
 
-    short cramData;
+    short cramData = 0;
 
-    volatile OSErr rejectReason;
-    volatile Boolean clientReady;
-    Boolean isConnected;
-    Boolean isServing;
-    Boolean isClosed;
-    Boolean isClosing;
-    Boolean turboMode;
-    long turboCount;
+    volatile OSErr rejectReason = 0;
+    volatile Boolean clientReady = 0;
+    Boolean isConnected = 0;
+    Boolean isServing = 0;
+    Boolean isClosed = 0;
+    Boolean isClosing = 0;
+    Boolean turboMode = 0;
+    long turboCount = 0;
 
     // Boolean				readIsComplete;
     // Boolean				writeIsComplete;
     // Boolean				blockReadComplete;
     // Boolean				blockWriteComplete;
-    Boolean specialWakeup;
-    Str255 inviteString;
+    Boolean specialWakeup = 0;
+    Str255 inviteString = {0};
 
     virtual void IUDPComm(short clientCount, short bufferCount, short version, ClockTick urgentTimePeriod);
 

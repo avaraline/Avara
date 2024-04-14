@@ -81,7 +81,7 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
 
     gRenderer = new ModernOpenGLRenderer(mSDLWindow);
     gRenderer->UpdateViewRect(mSize.x, mSize.y, mPixelRatio);
-    gRenderer->SetFOV(Number(kFOV));
+    gRenderer->SetFOV((float)Number(kFOV));
     gRenderer->ResetLights();
 
     itsGame->IAvaraGame(this);
@@ -229,7 +229,7 @@ void CAvaraAppImpl::GameStarted(std::string set, std::string level) {
 
 bool CAvaraAppImpl::DoCommand(int theCommand) {
     std::string name = String(kPlayerNameTag);
-    Str255 userName;
+    Str255 userName = {0};
     userName[0] = name.length();
     BlockMoveData(name.c_str(), userName + 1, userName[0]);
     // SDL_Log("DoCommand %d\n", theCommand);
@@ -302,7 +302,7 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
         msgStr += " \"" + itsGame->loadedLevel + "\" from \"" + set + "\".";
         if (!itsGame->loadedTags.empty()) {
             msgStr += " (tags:";
-            for (auto tag: itsGame->loadedTags) {
+            for (auto &tag: itsGame->loadedTags) {
                 msgStr += " " + tag;
             }
             msgStr += ")";

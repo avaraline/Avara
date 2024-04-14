@@ -13,11 +13,11 @@
 
 class CRateSound : public CBasicSound {
 public:
-    Fixed masterRate;
-    Fixed midRate;
-    Fixed chanRate[2];
-    Fixed phaseBalance;
-    Boolean chanDoneFlags[2];
+    Fixed masterRate = 0;
+    Fixed midRate = 0;
+    Fixed chanRate[2] = {0};
+    Fixed phaseBalance = 0;
+    Boolean chanDoneFlags[2] = {0};
 
     virtual void Reset();
     virtual void UseSamples(std::shared_ptr<OggFile> theSample);

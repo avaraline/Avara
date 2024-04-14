@@ -142,8 +142,11 @@ uint32_t CPlayerManagerImpl::DoMouseControl(Point *deltaMouse, Boolean doCenter)
     uint32_t state = SDL_GetMouseState(&x, &y);
     deltaMouse->h = x - mouseCenterPosition.h;
     deltaMouse->v = y - mouseCenterPosition.v;
-    deltaMouse->h *= itsGame->sensitivity;
-    deltaMouse->v *= itsGame->sensitivity;
+    int16_t s = (int16_t)itsGame->sensitivity;
+    if (s != 0) {
+        deltaMouse->h *= s;
+        deltaMouse->v *= s;
+    }
     if (itsGame->moJoOptions & kFlipAxis) {
         deltaMouse->v = -deltaMouse->v;
 	}
@@ -282,8 +285,11 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
             break;
         case SDL_MOUSEMOTION:
             int xrel = event.motion.xrel, yrel = event.motion.yrel;
-            xrel *= itsGame->sensitivity;
-            yrel *= itsGame->sensitivity;
+            int s = (int)itsGame->sensitivity;
+            if (s != 0) {
+                xrel *= s;
+                yrel *= s;
+            }
             if (itsGame->moJoOptions & kFlipAxis) {
                 yrel = -yrel;
             }

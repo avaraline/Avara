@@ -15,9 +15,9 @@ class CDepot;
 
 class CGrenade final : public CWeapon {
 public:
-    Fixed gravity, classicGravity;
-    Fixed friction, classicFriction;
-    Fixed speedOffset;
+    Fixed gravity = 0, classicGravity = 0;
+    Fixed friction = 0, classicFriction = 0;
+    Fixed speedOffset = 0;
 
     CGrenade(CDepot *theDepot);
     virtual void PlaceParts();

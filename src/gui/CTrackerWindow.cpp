@@ -106,8 +106,8 @@ public:
 
         if (mDrawLine) {
             nvgBeginPath(ctx);
-            nvgMoveTo(ctx, mPos.x, mPos.y);
-            nvgLineTo(ctx, mPos.x + mSize.x, mPos.y);
+            nvgMoveTo(ctx, (float)mPos.x, (float)mPos.y);
+            nvgLineTo(ctx, (float)(mPos.x + mSize.x), (float)mPos.y);
             nvgStrokeColor(ctx, nvgRGBA(100, 100, 100, 150));
             nvgStroke(ctx);
         }
@@ -122,8 +122,8 @@ public:
 
     void draw(NVGcontext* ctx) {
         nvgBeginPath(ctx);
-        nvgMoveTo(ctx, mPos.x, mPos.y);
-        nvgLineTo(ctx, mPos.x + mSize.x, mPos.y);
+        nvgMoveTo(ctx, (float)mPos.x, (float)mPos.y);
+        nvgLineTo(ctx, (float)(mPos.x + mSize.x), (float)mPos.y);
         nvgStrokeColor(ctx, nvgRGBA(100, 100, 100, 150));
         nvgStroke(ctx);
     }

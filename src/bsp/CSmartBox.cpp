@@ -31,8 +31,8 @@ void CSmartBox::ScaleTemplate(Fixed *dimensions, Fixed baseSize) {
     Vector *p;
     short i;
     Fixed x, y, z;
-    Vector normalAdjust;
-    Vector newNormal;
+    Vector normalAdjust = {0};
+    Vector newNormal = {0};
 
     x = dimensions[0];
     y = dimensions[1];
@@ -56,9 +56,9 @@ void CSmartBox::ScaleTemplate(Fixed *dimensions, Fixed baseSize) {
         NormalizeVector(3, normalAdjust);
 
         for (i = 0; i < polyCount; i++) {
-            x = polyTable[i].normal[0];
-            y = polyTable[i].normal[1];
-            z = polyTable[i].normal[2];
+            x = ToFixed(polyTable[i].normal[0]);
+            y = ToFixed(polyTable[i].normal[1]);
+            z = ToFixed(polyTable[i].normal[2]);
 
             if ((x && (y || z)) || (y && z)) {
                 newNormal[0] = FMul(x, normalAdjust[0]);
@@ -169,9 +169,9 @@ void CSmartBox::FindEnclosure() {
     Fixed maxspan;
     Fixed rad;
 
-    FixedPoint xmin, xmax, ymin, ymax, zmin, zmax;
-    FixedPoint dia1, dia2, cen;
-    FixedPoint dx, dy, dz;
+    FixedPoint xmin = {0}, xmax = {0}, ymin = {0}, ymax = {0}, zmin = {0}, zmax = {0};
+    FixedPoint dia1 = {0}, dia2 = {0}, cen = {0};
+    FixedPoint dx = {0}, dy = {0}, dz = {0};
     FixedPoint *p;
 
     xmin.x = ymin.y = zmin.z = 0x7fFFffFF;

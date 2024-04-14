@@ -293,8 +293,8 @@ void CHUD::Render(NVGcontext *ctx) {
         lastPlayerSlot = std::max(lastPlayerSlot, int(player->Slot() + 1));
     }
 
-    int bufferWidth = view->viewPixelDimensions.h, bufferHeight = view->viewPixelDimensions.v;
-    int chudHeight = 13 * lastPlayerSlot;
+    float bufferWidth = view->viewPixelDimensions.h, bufferHeight = view->viewPixelDimensions.v;
+    float chudHeight = 13 * lastPlayerSlot;
 
     DrawScore(thePlayers, chudHeight, ctx);
 
@@ -417,7 +417,7 @@ void CHUD::Render(NVGcontext *ctx) {
                 pingBarHeight = 10;
               }
               nvgBeginPath(ctx);
-              nvgRect(ctx, bufferWidth - 147, pY + (10 - pingBarHeight), 3, pingBarHeight);
+              nvgRect(ctx, (int)bufferWidth - 147, pY + (10 - pingBarHeight), 3, pingBarHeight);
               nvgFillColor(ctx, pingColor);
               nvgFill(ctx);
             }
@@ -466,8 +466,8 @@ void CHUD::Render(NVGcontext *ctx) {
 
         //spectating onscreen name
         if(spectatePlayer != NULL && thisPlayer->GetPlayer() == spectatePlayer) {
-            int x = (int)(bufferWidth / 2.0);
-            int y = 50;
+            float x = bufferWidth / 2.0;
+            float y = 50;
             float fontsz_m = 24.0;
             float fontsz_s = 18.0;
             float bounds[4], nextBounds[4], prevBounds[4];
@@ -506,7 +506,7 @@ void CHUD::Render(NVGcontext *ctx) {
             nvgFill(ctx);
 
             nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
-            nvgText(ctx, x + 25 + 5, y + 44, nextMessage.c_str(), NULL);
+            nvgText(ctx, x + 30, y + 44, nextMessage.c_str(), NULL);
             
             //Spectate Previous
             nvgBeginPath(ctx);
@@ -515,11 +515,11 @@ void CHUD::Render(NVGcontext *ctx) {
             nvgFill(ctx);
 
             nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
-            nvgText(ctx, x - 220 + 5, y + 44, prevMessage.c_str(), NULL);
+            nvgText(ctx, x - 215, y + 44, prevMessage.c_str(), NULL);
         }
     }
 
-    DrawKillFeed(ctx, net, bufferWidth, fontsz_l);
+    DrawKillFeed(ctx, net, (int)bufferWidth, fontsz_l);
 
     if (!player)
         return;
@@ -705,7 +705,7 @@ void CHUD::Render(NVGcontext *ctx) {
     nvgEndFrame(ctx);
 }
 
-void CHUD::DrawShadowBox(NVGcontext *ctx, int x, int y, int width, int height) {
+void CHUD::DrawShadowBox(NVGcontext *ctx, float x, float y, float width, float height) {
     NVGpaint shadowPaint = nvgBoxGradient(ctx, x, y+2, width, height, 8, 10, BACKGROUND_COLOR, nvgRGBA(0,0,0,0));
     nvgBeginPath(ctx);
     nvgRect(ctx, x-10,y-10, width+20, height+30);
@@ -715,7 +715,7 @@ void CHUD::DrawShadowBox(NVGcontext *ctx, int x, int y, int width, int height) {
     nvgFill(ctx);
 }
 
-void CHUD::DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, float fontSize) {
+void CHUD::DrawKillFeed(NVGcontext *ctx, CNetManager *net, float bufferWidth, float fontSize) {
     // Kill Events
     if (itsGame->itsApp->Get(kHUDShowKillFeed) && !itsGame->scoreEventList.empty()) {
         float killEventPosition[2] = {(float)bufferWidth - 50.0f, 200.0f};

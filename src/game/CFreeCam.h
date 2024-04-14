@@ -12,13 +12,13 @@ enum {
 class CFreeCam final : public CRealMovers {
 //class CFreeCam final {
 public:
-    CAbstractPlayer *itsPlayer;
-    CViewParameters *freeParams;
+    CAbstractPlayer *itsPlayer = 0;
+    CViewParameters *freeParams = 0;
 
-    short action;
-    Fixed radius, heading, pitch;
-    short camSpeed;
-    Boolean isAttached;
+    short action = 0;
+    Fixed radius = 0, heading = 0, pitch = 0;
+    short camSpeed = 0;
+    Boolean isAttached = 0;
 
     CFreeCam(CAbstractPlayer *thePlayer);
     virtual void FrameAction();

@@ -15,43 +15,43 @@ public:
     //	These variables determine the "mood" of the ufo.
     //	The current bias determine how likely it is to go
     //	into a attacking position.
-    Fixed happiness;
-    Fixed attack;
-    Fixed defense;
-    Fixed currentBias;
-    Fixed visionScore;
-    Fixed hideScore;
+    Fixed happiness = 0;
+    Fixed attack = 0;
+    Fixed defense = 0;
+    Fixed currentBias = 0;
+    Fixed visionScore = 0;
+    Fixed hideScore = 0;
 
-    Fixed homeSick;
-    Fixed homeRange;
+    Fixed homeSick = 0;
+    Fixed homeRange = 0;
 
     //	These variables control the range of motion.
-    Fixed motionRange;
-    Fixed pitchRange;
-    Fixed verticalMin;
-    Fixed verticalMax;
+    Fixed motionRange = 0;
+    Fixed pitchRange = 0;
+    Fixed verticalMin = 0;
+    Fixed verticalMax = 0;
 
     //	These variables control the actual motion
-    Vector homeBase;
-    Vector destination;
+    Vector homeBase = {0};
+    Vector destination = {0};
 
-    Vector course;
-    Fixed acceleration;
+    Vector course = {0};
+    Fixed acceleration = 0;
 
-    Fixed turnRate;
-    Fixed goodHeading;
-    Fixed goodPitch;
-    Fixed roll;
-    short pitch;
+    Fixed turnRate = 0;
+    Fixed goodHeading = 0;
+    Fixed goodPitch = 0;
+    Fixed roll = 0;
+    short pitch = 0;
 
-    long moveClock; //	Look for new position when this reaches 0
-    long checkPeriod; //	Period of moveClock
+    long moveClock = 0; //	Look for new position when this reaches 0
+    long checkPeriod = 0; //	Period of moveClock
 
-    MessageRecord startMsg;
-    MessageRecord stopMsg;
-    MessageRecord homeMsg;
-    Boolean status;
-    Boolean isMoving;
+    MessageRecord startMsg = {0};
+    MessageRecord stopMsg = {0};
+    MessageRecord homeMsg = {0};
+    Boolean status = 0;
+    Boolean isMoving = 0;
 
     virtual void PlaceParts();
     virtual void BeginScript();

@@ -33,7 +33,7 @@ private:
         } else if (value > maxValue) {
             idx = cellCounts.size() - 1;
         } else {
-            idx = (value - minValue) / stepSize;
+            idx = (size_t)((value - minValue) / stepSize);
         }
         return idx;
     }
@@ -45,7 +45,7 @@ public:
         minValue = minRange;
         maxValue = maxRange;
         stepSize = rangeStep;
-        std::size_t numCells = (maxRange - minRange) / rangeStep;
+        std::size_t numCells = (std::size_t)((maxRange - minRange) / rangeStep);
         cellCounts.resize(numCells, 0);
     }
 
@@ -77,7 +77,7 @@ public:
         int sum = 0;
         float markers[] = {0.5, 0.90, 0.95, 0.99};  // smallest to biggest
         int nextMarker = 0;
-        int prec = -log2(sh.stepSize);  // approx how many digits to show
+        int prec = -1 * (int)log2(sh.stepSize);  // approx how many digits to show
 
         if (sh.displayTitle.size() > 0) {
             os << std::setfill(' ') << std::setw(prec+5) << " " << sh.displayTitle << std::endl;

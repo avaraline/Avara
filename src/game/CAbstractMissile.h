@@ -19,20 +19,20 @@ class CDepot;
 
 class CAbstractMissile : public CAbstractActor {
 public:
-    CAbstractMissile *nextMissile;
-    long ownerIdent;
-    CDepot *itsDepot;
-    short frameCount;
-    short maxFrameCount;
+    CAbstractMissile *nextMissile = 0;
+    long ownerIdent = 0;
+    CDepot *itsDepot = 0;
+    short frameCount = 0;
+    short maxFrameCount = 0;
 
-    Fixed speed;
-    Fixed energy;
-    RayHitRecord hitRec;
-    Vector deltaMove;
-    Matrix itsMatrix;
+    Fixed speed = 0;
+    Fixed energy = 0;
+    RayHitRecord hitRec = {0};
+    Vector deltaMove = {0};
+    Matrix itsMatrix = {0};
 
-    short missileKind;
-    short soundResId;
+    short missileKind = 0;
+    short soundResId = 0;
 
     CAbstractMissile(CDepot *theDepot);
     virtual void Deactivate();

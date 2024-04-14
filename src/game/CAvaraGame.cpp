@@ -508,7 +508,7 @@ void CAvaraGame::LevelReset(Boolean clearReset) {
 
     incarnatorList = NULL;
     IncrementFrame(true);
-    topSentFrame = -1 / fpsScale;
+    topSentFrame = (FrameNumber)(-1 / fpsScale);
 
     // ResetView();
 
@@ -771,7 +771,7 @@ void CAvaraGame::GameStart() {
     // The difference between the last frame's time and frameTime
     frameAdjust = 0;
 
-    while (FramesFromNow(latencyTolerance) > topSentFrame) {
+    while (FramesFromNow((FrameNumber)latencyTolerance) > topSentFrame) {
         itsNet->FrameAction();
     }
 
@@ -892,7 +892,7 @@ bool CAvaraGame::GameTick() {
     timeInSeconds = frameNumber * frameTime / 1000;
 
     if (latencyTolerance)
-        while (FramesFromNow(latencyTolerance) > topSentFrame)
+        while (FramesFromNow((FrameNumber)latencyTolerance) > topSentFrame)
             itsNet->FrameAction();
 
     canPreSend = true;
@@ -1041,7 +1041,7 @@ CPlayerManager *CAvaraGame::GetPlayerManager(CAbstractPlayer *thePlayer) {
 // at the current frame rate.
 long CAvaraGame::RoundTripToFrameLatency(long roundTrip) {
     // half of the roundTripTime in units of frameTime, rounded up (ceil)
-    return std::ceil(roundTrip/2.0/frameTime);
+    return (long)std::ceil(roundTrip / 2.0 / frameTime);
 }
 
 // "frameLatency" is the integer number of frames to delay;
@@ -1109,7 +1109,7 @@ FrameNumber CAvaraGame::NextFrameForPeriod(long period, long referenceFrame) {
     // and we're moving to 60 frames/period, and we're on frame 48, we want to
     // move forward to frame 120 and NOT frame 60.
     FrameNumber periodFrames = TimeToFrameCount(period);
-    return periodFrames * ceil(double(referenceFrame + periodFrames) / periodFrames);
+    return periodFrames * (FrameNumber)ceil(double(referenceFrame + periodFrames) / periodFrames);
 }
 
 void CAvaraGame::SetFrameTime(int32_t ft) {
@@ -1135,7 +1135,7 @@ void CAvaraGame::IncrementFrame(bool firstFrame) {
 }
 
 FrameNumber CAvaraGame::FramesFromNow(FrameNumber classicFrameCount) {
-    return frameNumber + classicFrameCount / fpsScale;
+    return frameNumber + (FrameNumber)(classicFrameCount / fpsScale);
 }
 
 void CAvaraGame::SetSpawnOrder(SpawnOrder order) {

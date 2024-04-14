@@ -21,8 +21,8 @@ public:
     void DrawLevelName(NVGcontext *ctx);
     void DrawPaused(NVGcontext *ctx);
     void DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, NVGcontext *ctx);
-    void DrawShadowBox(NVGcontext *ctx, int x, int y, int height, int width);
-    void DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, float fontSize);
+    void DrawShadowBox(NVGcontext *ctx, float x, float y, float height, float width);
+    void DrawKillFeed(NVGcontext *ctx, CNetManager *net, float bufferWidth, float fontSize);
     void LoadImages(NVGcontext *ctx);
     void DrawImage(NVGcontext* ctx, int image, float alpha, float sx, float sy, float sw, float sh, float x, float y, float w, float h);
 

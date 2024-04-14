@@ -44,22 +44,22 @@ struct FinishRecord {
 
 class CScoreKeeper : public CDirectObject {
 public:
-    CAvaraGame *itsGame;
-    ScoreInterfaceRecord iface;
+    CAvaraGame *itsGame = 0;
+    ScoreInterfaceRecord iface = {0};
 
-    AvaraScoreRecord localScores;
-    AvaraScoreRecord netScores;
-    std::string playerNames[kMaxAvaraPlayers];    // maybe put this in PlayerScoreRecord?
-    short exitCount;
+    AvaraScoreRecord localScores = {0};
+    AvaraScoreRecord netScores = {0};
+    std::string playerNames[kMaxAvaraPlayers] = {{0}}; // maybe put this in PlayerScoreRecord?
+    short exitCount = 0;
 
-    short resRefNum;
-    short appResRefNum;
-    ScoreInterfaceCallType *entryPoint;
+    short resRefNum = 0;
+    short appResRefNum = 0;
+    ScoreInterfaceCallType *entryPoint = 0;
 
-    int32_t scorePayload[NET_SCORES_LEN / 4];
+    int32_t scorePayload[NET_SCORES_LEN / 4] = {0};
 
     // player ratings stuff
-    std::unique_ptr<PlayerRatingsSimpleElo> playerRatings;
+    std::unique_ptr<PlayerRatingsSimpleElo> playerRatings = 0;
 
     virtual void IScoreKeeper(CAvaraGame *theGame);
     virtual void Dispose();
