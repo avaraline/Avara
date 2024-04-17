@@ -1143,7 +1143,7 @@ void CAvaraGame::SetSpawnOrder(SpawnOrder order) {
     spawnOrder = SpawnOrder(order % ksNumSpawnOrders); // guard bad inputs
     std::ostringstream oss;
     oss << kSpawnOrder << " = " << spawnOrder << " [" << types[spawnOrder] << "]";
-    itsApp->AddMessageLine(oss.str(), MsgAlignment::Left, MsgCategory::Level);
+    itsApp->AddMessageLine(oss.str(), MsgAlignment::Left, MsgCategory::System);
     if (gApplication) {
         gApplication->Set(kSpawnOrder, spawnOrder);
     }

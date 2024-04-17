@@ -1880,9 +1880,18 @@ void CAbstractPlayer::Reincarnate() {
                 incarnator->distance = FIX1;
             }
 
-            if (itsGame->spawnOrder == ksDistance || itsGame->spawnOrder == ksRandom) {
-                // ignore usage for these order types
-                incarnator->useCount = 1;
+            switch (itsGame->spawnOrder) {
+                case ksDistance:
+                case ksRandom:
+                    // ignore usage for these order types
+                    incarnator->useCount = 1;
+                    break;
+                case ksHybrid:
+                    // start useCount = 1 so that distance is respected from the beginning
+                    incarnator->useCount = std::max(incarnator->useCount, 1L);
+                    break;
+                default:
+                    break;
             }
 
             // to be sorted below
