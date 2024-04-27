@@ -286,9 +286,9 @@ public:
     virtual CScaledBSP* DashboardPart(uint16_t id);
     virtual CScaledBSP* DashboardPart(uint16_t id, Fixed scale);
     virtual void RenderDashboard();
-    virtual void DashboardPosition(CScaledBSP *part, float x, float y);
-    virtual void DashboardPosition(CScaledBSP *part, bool autoRot, float x, float y);
-    virtual void DashboardPosition(CScaledBSP *part, bool autoRot, float x, float y, Fixed x_rot, Fixed y_rot, Fixed z_rot);
+    virtual void DashboardPosition(CScaledBSP *part, float x, float y, bool useZOffset);
+    virtual void DashboardPosition(CScaledBSP *part, bool autoRot, float x, float y, bool useZOffset);
+    virtual void DashboardPosition(CScaledBSP *part, bool autoRot, float x, float y, bool useZOffset, Fixed x_rot, Fixed y_rot, Fixed z_rot);
     virtual void DashboardFixedPosition(CScaledBSP *part, float dist, Fixed angle);
     virtual void DashboardFixedPosition(CScaledBSP *part, float dist, Fixed angle, float height, Fixed x_rot, Fixed y_rot, Fixed z_rot);
     virtual void ResetDashboard();
