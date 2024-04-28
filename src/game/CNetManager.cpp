@@ -1298,7 +1298,7 @@ void CNetManager::UpdateLocalConfig() {
         ? gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale
         : 0;
     config.frameTime = itsGame->frameTime;
-    config.spawnOrder = gApplication->Get<short>(kSpawnOrder);
+    config.spawnOrder = gApplication ? gApplication->Get<short>(kSpawnOrder) : ksHybrid;
     config.hullType = gApplication ? gApplication->Number(kHullTypeTag) : 0;
     config.hullColor = gApplication
         ? ARGBColor::Parse(gApplication->String(kPlayerHullColorTag))
