@@ -185,6 +185,7 @@ public:
         // force tick to happen by resetting nextScheduledFrame
         nextScheduledFrame = 0;
         itsNet->activePlayersDistribution = 1;
+        nextPingTime = std::numeric_limits<uint32_t>::max(); // prevent pings
         return CAvaraGame::GameTick();
     }
 };
