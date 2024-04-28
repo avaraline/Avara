@@ -67,8 +67,10 @@ jobs:
           sudo cp -R /Volumes/SDL2/SDL2.framework /Library/Frameworks/
           brew install googletest
       - uses: actions/checkout@v4
-      - name: make
-        run: make clean tests macdist
+      - name: Run headless tests
+        run: make -j2 clean tests
+      - name: make macdist
+        run: make -j2 clean macdist
       - name: deploy main nightly
         if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'main')
         uses: WebFreak001/deploy-nightly@v1.0.1
