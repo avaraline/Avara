@@ -68,7 +68,7 @@ jobs:
           brew install googletest
       - uses: actions/checkout@v4
       - name: Run headless tests
-        run: make -j3 tests
+        run: SDL_VIDEODRIVER=dummy make -j3 tests
       - name: make macdist
         run: make -j3 clean macdist
       - name: deploy main nightly
