@@ -43,6 +43,7 @@ public:
         FunctionTable &ft = *(this->ft);
         ft.down = ft.up = ft.held = ft.mouseDelta.h = ft.mouseDelta.v = ft.buttonStatus = ft.msgChar = 0;
     }
+    ~TestPlayerManager() {}
     virtual CAbstractPlayer* GetPlayer() { return playa; }
     virtual void SetPlayer(CAbstractPlayer* p) { playa = p; }
     virtual short Slot() { return 0; }
@@ -184,6 +185,7 @@ public:
         // force tick to happen by resetting nextScheduledFrame
         nextScheduledFrame = 0;
         itsNet->activePlayersDistribution = 1;
+        nextPingTime = std::numeric_limits<uint32_t>::max(); // prevent pings
         return CAvaraGame::GameTick();
     }
 };

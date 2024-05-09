@@ -143,7 +143,7 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     nextPingTime = 0;
 
-    showNewHUD = gApplication->Get<bool>(kShowNewHUD);
+    showNewHUD = gApplication ? gApplication->Get<bool>(kShowNewHUD) : false;
     // CalcGameRect();
 
     // vg = AvaraVGContext();
