@@ -717,7 +717,7 @@ void CHUD::DrawShadowBox(NVGcontext *ctx, int x, int y, int width, int height) {
 
 void CHUD::DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, float fontSize) {
     // Kill Events
-    if (itsGame->itsApp->Get(kHUDShowKillFeed) && !itsGame->scoreEventList.empty()) {
+    if (itsGame->itsApp->Get(kHUDShowKillFeed) && net->isPlaying && !itsGame->scoreEventList.empty()) {
         float killEventPosition[2] = {(float)bufferWidth - 50.0f, 200.0f};
         float killEventSize[2] = {0, 0};
 
