@@ -10,6 +10,7 @@
 CFreeCam::CFreeCam(CAbstractPlayer *thePlayer) {
     itsPlayer = thePlayer;
     itsGame = thePlayer->itsGame;
+    itsSoundLink = gHub->GetSoundLink();
 
     camSpeed = 350;
     radius = FIX3(25000);
@@ -154,10 +155,26 @@ void CFreeCam::ViewControl(FunctionTable *ft) {
 void CFreeCam::FrameAction() {
 }
 
+void CFreeCam::ControlSoundPoint(CViewParameters *vp) {
+    Fixed theRight[] = {FIX(-1), 0, 0};
+
+    // This hard-coded data matches the vector data used for ControlSoundPoint() in AbstractPlayer.cpp
+    // The matrix data from viewParams differs from the hard-coded data in a way that makes the sound not play in the correct channels
+    theRight[0] = FIX3(707);
+    theRight[1] = 0;
+    theRight[2] = FIX3(707);
+
+    gHub->SetMixerLink(itsSoundLink);
+    gHub->UpdateRightVector(theRight);
+}
+
 void CFreeCam::ControlViewPoint() {
     auto vp = gRenderer->viewParams;
 
     vp->LookFrom(vp->fromPoint[0], vp->fromPoint[1], vp->fromPoint[2]);
     vp->LookAt(vp->atPoint[0], vp->atPoint[1], vp->atPoint[2]);
     vp->PointCamera();
+
+    UpdateSoundLink(itsSoundLink, vp->fromPoint, speed, itsGame->soundTime);
+    ControlSoundPoint(vp);
 }

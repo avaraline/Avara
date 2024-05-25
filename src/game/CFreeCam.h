@@ -27,4 +27,5 @@ public:
     virtual Boolean IsAttached();
     virtual void SetAttached(Boolean attach);
     virtual void ControlViewPoint();
+    virtual void ControlSoundPoint(CViewParameters* vp);
 };

@@ -89,6 +89,8 @@ void CAbstractPlayer::LoadHUDParts() {
     dirArrow->isTransparent = true;
     gRenderer->AddHUDPart(dirArrow);
 
+    showHud = itsGame->showNewHUD;
+    hudPreset = itsGame->itsApp->Get(kHUDPreset);
     LoadDashboardParts();
 }
 
@@ -359,7 +361,7 @@ CAbstractPlayer::~CAbstractPlayer() {
 }
 
 void CAbstractPlayer::DisposeDashboard() {
-    if (!itsGame->showNewHUD) return;
+    if (!showHud) return;
 
     if (itsGame->itsApp->Get(kHUDShowMissileLock)) {
         gRenderer->RemoveHUDPart(lockLight);
@@ -450,7 +452,8 @@ void CAbstractPlayer::PlaceHUDParts() {
     RayHitRecord theHit;
     CWeapon *weapon = NULL;
 
-    if (itsGame->itsApp->Get(kHUDArrowStyle) == 1) {
+    // Make sure we always default to the old style arrow if other arrow styles are turned off
+    if ((itsGame->itsApp->Get(kHUDArrowStyle) == 1) || !itsGame->showNewHUD) {
         dirArrow->Reset();
         InitialRotatePartY(dirArrow, heading);
         TranslatePart(dirArrow, location[0], location[1] + dirArrowHeight, location[2]);
@@ -672,8 +675,30 @@ void CAbstractPlayer::LoadDashboardParts() {
     }
 }
 
+// Check if the user changed the 'showNewHud' pref
+// Load or Unload the dashboard based on the new setting
+void CAbstractPlayer::DashboardReloadCheck() {
+    // User toggled the entire HUD on/off
+    if (showHud != itsGame->showNewHUD) {
+        if (itsGame->showNewHUD) {
+            LoadDashboardParts();
+        } else {
+            DisposeDashboard();
+        }
+        showHud = itsGame->showNewHUD;
+    }
+
+    // User changed the hud layout
+    if (hudPreset != itsGame->itsApp->Get(kHUDPreset)) {
+        DisposeDashboard();
+        LoadDashboardParts();
+        hudPreset = itsGame->itsApp->Get(kHUDPreset);
+    }
+}
+
 // Place parts on screen
 void CAbstractPlayer::RenderDashboard() {
+    DashboardReloadCheck();
     if (!itsGame->showNewHUD) return;
     if (scoutView) {
         ResetDashboard();
@@ -955,7 +980,8 @@ void CAbstractPlayer::DashboardFixedPosition(CScaledBSP *part, float dist, Fixed
 }
 
 void CAbstractPlayer::ResetDashboard() {
-    if (!itsGame->showNewHUD) return;
+    DashboardReloadCheck();
+    if (!showHud) return;
 
     if (itsGame->itsApp->Get(kHUDShowMissileLock)) {
         lockLight->isTransparent = true;
@@ -1054,7 +1080,9 @@ void CAbstractPlayer::ControlViewPoint() {
     RecalculateViewDistance();
 
     // SetPort(itsGame->itsWindow);
-    ControlSoundPoint();
+    if (!freeView) {
+        ControlSoundPoint();
+    }
 }
 
 void CAbstractPlayer::RecalculateViewDistance() {
@@ -1355,7 +1383,8 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             }
         }
 
-        if (winFrame < 0) {
+        // Disable scout controls while spectating
+        if (winFrame < 0 && !freeView && itsGame->GetSpectatePlayer() == NULL) {
             Boolean doRelease = false;
 
             if (TESTFUNC(kfuScoutView, ft->down)) {

@@ -243,6 +243,8 @@ public:
     float boosterSpacing;
     float livesSpacing;
     float weaponSpacing;
+    Boolean showHud; // Store pref to detect if the user changes it during a game
+    int hudPreset; // Store pref to detect if the user changes it during a game
 
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
@@ -282,6 +284,7 @@ public:
     virtual void PlaceHUDParts();
     
     //
+    virtual void DashboardReloadCheck();
     virtual void LoadDashboardParts();
     virtual CScaledBSP* DashboardPart(uint16_t id);
     virtual CScaledBSP* DashboardPart(uint16_t id, Fixed scale);

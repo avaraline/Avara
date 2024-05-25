@@ -1021,6 +1021,7 @@ void CAvaraGame::StopGame() {
 
 void CAvaraGame::Render() {
     //if (gameStatus == kPlayingStatus || gameStatus == kPauseStatus || gameStatus == kWinStatus || gameStatus == kLoseStatus) {
+    showNewHUD = gApplication ? gApplication->Get<bool>(kShowNewHUD) : false;
     ViewControl();
     gRenderer->RenderFrame();
 }
