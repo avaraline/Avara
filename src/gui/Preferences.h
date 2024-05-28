@@ -95,6 +95,7 @@ using json = nlohmann::json;
 
 // other
 #define kGoodGamePhrases "ggs"
+#define kShowElo "showElo"
 
 // Key names are from https://wiki.libsdl.org/SDL_Scancode
 static json defaultPrefs = {
@@ -194,6 +195,7 @@ static json defaultPrefs = {
     {kIgnoreCustomGoodySound, false},
     {kThrottle, 0},
     {kGoodGamePhrases, {}},
+    {kShowElo, false},
 };
 
 
