@@ -205,8 +205,8 @@ void CAbstractPlayer::LoadFreeCam() {
     SetFreeCamState(false);
 }
 
-void CAbstractPlayer::WriteDBG(int index, float val) {
-    freeCamDBG[index] = val;
+void CAbstractPlayer::WriteDBG(float val) {
+    freeCamDBG.push_back(val);
 }
 
 void CAbstractPlayer::ReplacePartColors() {
@@ -1329,7 +1329,8 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             if (TESTFUNC(kfuLoadMissile, ft->down))
                 ArmSmartMissile();
         }
-        else if(lives == 0) {
+        else if(lives == 0 && limboCount < 0) {
+            // These controls only function after the limbo pause
             if (itsManager->IsLocalPlayer() && TESTFUNC(kfuSpectateNext, ft->down)) {
                 itsGame->SpectateNext();
                 if (freeView) {
@@ -1429,9 +1430,9 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
         if (TESTFUNC(kfuDebug2, ft->down))
             debug2Flag = !debug2Flag;
 
-        if (TESTFUNC(kfuZoomIn, ft->held))
+        if (TESTFUNC(kfuZoomIn, ft->held) && !freeView)
             fieldOfView -= FOVSTEP;
-        if (TESTFUNC(kfuZoomOut, ft->held))
+        if (TESTFUNC(kfuZoomOut, ft->held) && !freeView)
             fieldOfView += FOVSTEP;
 
 #define LOOKSTEP FpsCoefficient2(0x1000L)
@@ -1623,6 +1624,7 @@ void CAbstractPlayer::PlayerAction() {
                         }
                         Reincarnate();
                     } else {
+                        limboCount = -1; // No need for limboCount to continue counting down at this point
                         itsManager->DeadOrDone();
 
                         // Auto spectate another player if:
