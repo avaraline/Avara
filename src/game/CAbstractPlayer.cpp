@@ -1629,9 +1629,9 @@ void CAbstractPlayer::PlayerAction() {
 
                         // Auto spectate another player if:
                         //   - The player runs out of lives
-                        //   - The player being spectated runs out of lives
+                        //   - The player being spectated runs out of lives (check that players limbo timer to prevent fast transition)
                         if ((itsGame->GetSpectatePlayer() == NULL && itsManager->IsLocalPlayer()) ||
-                            (itsGame->GetSpectatePlayer() != NULL && itsGame->GetSpectatePlayer()->lives == 0)) {
+                            (itsGame->GetSpectatePlayer() != NULL && itsGame->GetSpectatePlayer()->lives == 0 && itsGame->GetSpectatePlayer()->limboCount <= 0)) {
                             itsGame->SpectateNext();
                         }
                     }
