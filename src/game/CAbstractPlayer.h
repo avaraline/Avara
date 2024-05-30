@@ -184,7 +184,7 @@ public:
     Fixed supportTraction = 0;
     Fixed supportFriction = 0;
 
-    std::deque<int> freeCamDBG;
+    std::deque<float> freeCamDBG;
 
     //	Hud parts:
     CBSPPart *dirArrow = 0;

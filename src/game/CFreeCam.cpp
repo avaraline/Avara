@@ -158,12 +158,14 @@ void CFreeCam::FrameAction() {
 void CFreeCam::ControlSoundPoint(CViewParameters *vp) {
     Fixed theRight[] = {FIX(-1), 0, 0};
 
-    // This hard-coded data matches the vector data used for ControlSoundPoint() in AbstractPlayer.cpp
-    // The matrix data from viewParams differs from the hard-coded data in a way that makes the sound not play in the correct channels
+    // For whatever reason, the viewParams matrix data didn't
+    // provide the correct vector to make the sound play in the correct channels
+    // so I copied the values used for the RightVector in ControlSoundPoint() in AbstractPlayer.cpp
     theRight[0] = FIX3(707);
     theRight[1] = 0;
     theRight[2] = FIX3(707);
-
+    
+    UpdateSoundLink(itsSoundLink, vp->fromPoint, speed, itsGame->soundTime);
     gHub->SetMixerLink(itsSoundLink);
     gHub->UpdateRightVector(theRight);
 }
@@ -175,6 +177,5 @@ void CFreeCam::ControlViewPoint() {
     vp->LookAt(vp->atPoint[0], vp->atPoint[1], vp->atPoint[2]);
     vp->PointCamera();
 
-    UpdateSoundLink(itsSoundLink, vp->fromPoint, speed, itsGame->soundTime);
     ControlSoundPoint(vp);
 }
