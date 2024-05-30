@@ -184,7 +184,7 @@ public:
     Fixed supportTraction = 0;
     Fixed supportFriction = 0;
 
-    double freeCamDBG[18] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    std::deque<float> freeCamDBG;
 
     //	Hud parts:
     CBSPPart *dirArrow = 0;
@@ -243,6 +243,8 @@ public:
     float boosterSpacing;
     float livesSpacing;
     float weaponSpacing;
+    Boolean showHud; // Store pref to detect if the user changes it during a game
+    int hudPreset; // Store pref to detect if the user changes it during a game
 
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
@@ -253,7 +255,7 @@ public:
     virtual void LoadParts();
     virtual void LoadScout();
     virtual void LoadFreeCam();
-    virtual void WriteDBG(int index, float val);
+    virtual void WriteDBG(float val);
     virtual void StartSystems();
     virtual void LevelReset();
 
@@ -282,6 +284,7 @@ public:
     virtual void PlaceHUDParts();
     
     //
+    virtual void DashboardReloadCheck();
     virtual void LoadDashboardParts();
     virtual CScaledBSP* DashboardPart(uint16_t id);
     virtual CScaledBSP* DashboardPart(uint16_t id, Fixed scale);

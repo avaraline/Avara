@@ -89,6 +89,8 @@ void CAbstractPlayer::LoadHUDParts() {
     dirArrow->isTransparent = true;
     gRenderer->AddHUDPart(dirArrow);
 
+    showHud = itsGame->showNewHUD;
+    hudPreset = itsGame->itsApp->Get(kHUDPreset);
     LoadDashboardParts();
 }
 
@@ -203,8 +205,8 @@ void CAbstractPlayer::LoadFreeCam() {
     SetFreeCamState(false);
 }
 
-void CAbstractPlayer::WriteDBG(int index, float val) {
-    freeCamDBG[index] = val;
+void CAbstractPlayer::WriteDBG(float val) {
+    freeCamDBG.push_back(val);
 }
 
 void CAbstractPlayer::ReplacePartColors() {
@@ -359,7 +361,7 @@ CAbstractPlayer::~CAbstractPlayer() {
 }
 
 void CAbstractPlayer::DisposeDashboard() {
-    if (!itsGame->showNewHUD) return;
+    if (!showHud) return;
 
     if (itsGame->itsApp->Get(kHUDShowMissileLock)) {
         gRenderer->RemoveHUDPart(lockLight);
@@ -450,7 +452,8 @@ void CAbstractPlayer::PlaceHUDParts() {
     RayHitRecord theHit;
     CWeapon *weapon = NULL;
 
-    if (itsGame->itsApp->Get(kHUDArrowStyle) == 1) {
+    // Make sure we always default to the old style arrow if other arrow styles are turned off
+    if ((itsGame->itsApp->Get(kHUDArrowStyle) == 1) || !itsGame->showNewHUD) {
         dirArrow->Reset();
         InitialRotatePartY(dirArrow, heading);
         TranslatePart(dirArrow, location[0], location[1] + dirArrowHeight, location[2]);
@@ -672,8 +675,30 @@ void CAbstractPlayer::LoadDashboardParts() {
     }
 }
 
+// Check if the user changed the 'showNewHud' pref
+// Load or Unload the dashboard based on the new setting
+void CAbstractPlayer::DashboardReloadCheck() {
+    // User toggled the entire HUD on/off
+    if (showHud != itsGame->showNewHUD) {
+        if (itsGame->showNewHUD) {
+            LoadDashboardParts();
+        } else {
+            DisposeDashboard();
+        }
+        showHud = itsGame->showNewHUD;
+    }
+
+    // User changed the hud layout
+    if (hudPreset != itsGame->itsApp->Get(kHUDPreset)) {
+        DisposeDashboard();
+        LoadDashboardParts();
+        hudPreset = itsGame->itsApp->Get(kHUDPreset);
+    }
+}
+
 // Place parts on screen
 void CAbstractPlayer::RenderDashboard() {
+    DashboardReloadCheck();
     if (!itsGame->showNewHUD) return;
     if (scoutView) {
         ResetDashboard();
@@ -955,7 +980,8 @@ void CAbstractPlayer::DashboardFixedPosition(CScaledBSP *part, float dist, Fixed
 }
 
 void CAbstractPlayer::ResetDashboard() {
-    if (!itsGame->showNewHUD) return;
+    DashboardReloadCheck();
+    if (!showHud) return;
 
     if (itsGame->itsApp->Get(kHUDShowMissileLock)) {
         lockLight->isTransparent = true;
@@ -1054,7 +1080,9 @@ void CAbstractPlayer::ControlViewPoint() {
     RecalculateViewDistance();
 
     // SetPort(itsGame->itsWindow);
-    ControlSoundPoint();
+    if (!freeView) {
+        ControlSoundPoint();
+    }
 }
 
 void CAbstractPlayer::RecalculateViewDistance() {
@@ -1301,7 +1329,8 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             if (TESTFUNC(kfuLoadMissile, ft->down))
                 ArmSmartMissile();
         }
-        else if(lives == 0) {
+        else if(lives == 0 && limboCount < 0) {
+            // These controls only function after the limbo pause
             if (itsManager->IsLocalPlayer() && TESTFUNC(kfuSpectateNext, ft->down)) {
                 itsGame->SpectateNext();
                 if (freeView) {
@@ -1355,7 +1384,8 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             }
         }
 
-        if (winFrame < 0) {
+        // Disable scout controls while spectating
+        if (winFrame < 0 && !freeView && itsGame->GetSpectatePlayer() == NULL) {
             Boolean doRelease = false;
 
             if (TESTFUNC(kfuScoutView, ft->down)) {
@@ -1400,9 +1430,9 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
         if (TESTFUNC(kfuDebug2, ft->down))
             debug2Flag = !debug2Flag;
 
-        if (TESTFUNC(kfuZoomIn, ft->held))
+        if (TESTFUNC(kfuZoomIn, ft->held) && !freeView)
             fieldOfView -= FOVSTEP;
-        if (TESTFUNC(kfuZoomOut, ft->held))
+        if (TESTFUNC(kfuZoomOut, ft->held) && !freeView)
             fieldOfView += FOVSTEP;
 
 #define LOOKSTEP FpsCoefficient2(0x1000L)
@@ -1594,13 +1624,14 @@ void CAbstractPlayer::PlayerAction() {
                         }
                         Reincarnate();
                     } else {
+                        limboCount = -1; // No need for limboCount to continue counting down at this point
                         itsManager->DeadOrDone();
 
                         // Auto spectate another player if:
                         //   - The player runs out of lives
-                        //   - The player being spectated runs out of lives
+                        //   - The player being spectated runs out of lives (check that players limbo timer to prevent fast transition)
                         if ((itsGame->GetSpectatePlayer() == NULL && itsManager->IsLocalPlayer()) ||
-                            (itsGame->GetSpectatePlayer() != NULL && itsGame->GetSpectatePlayer()->lives == 0)) {
+                            (itsGame->GetSpectatePlayer() != NULL && itsGame->GetSpectatePlayer()->lives == 0 && itsGame->GetSpectatePlayer()->limboCount <= 0)) {
                             itsGame->SpectateNext();
                         }
                     }
