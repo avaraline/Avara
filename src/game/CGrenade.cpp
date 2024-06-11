@@ -128,7 +128,6 @@ void CGrenade::FrameAction() {
 
     if (flyCount) {
         RayHitRecord rayHit;
-        Fixed realSpeed;
 
         speed[0] = FMul(speed[0], friction);
         speed[1] = FMul(speed[1], friction) - gravity;
@@ -140,25 +139,30 @@ void CGrenade::FrameAction() {
         VECTORCOPY(rayHit.direction, speed);
         VECTORCOPY(rayHit.origin, location);
         rayHit.closestHit = NULL;
-        realSpeed = NormalizeVector(3, rayHit.direction);
-        rayHit.distance = realSpeed;
-
+        // add the sqrt(2)*radius of the grenade so that wall-kissing grenade explodes in similar spot as a mid-frame ray test
+        // (doesn't fall back to collision test)
+        // |  /
+        // | /
+        // |G  <- approaching wall at 45° needs sqrt(2)*radius to intersect wall... lower angles might pass collision instead
+        static Fixed addRad = sqrt(2)*partList[0]->enclosureRadius;
+        Fixed classicRayLength = NormalizeVector(3, rayHit.direction) + addRad;
+        rayHit.distance = classicRayLength;
         RayTestWithGround(&rayHit, kSolidBit);
 
-        // if the location adjustment will collide with something
-        if (FpsCoefficient2(realSpeed) > rayHit.distance) {
-            realSpeed = FpsCoefficient2(rayHit.distance);
-            speed[0] = FMul(rayHit.direction[0], realSpeed);
-            speed[1] = FMul(rayHit.direction[1], realSpeed);
-            speed[2] = FMul(rayHit.direction[2], realSpeed);
+        // if the grenade path (ray test) intersects with an object during this frame
+        Fixed classicRayDistance = ClassicCoefficient2(rayHit.distance);
+        if (classicRayLength > classicRayDistance) {
+            speed[0] = FMul(rayHit.direction[0], classicRayDistance);
+            speed[1] = FMul(rayHit.direction[1], classicRayDistance);
+            speed[2] = FMul(rayHit.direction[2], classicRayDistance);
             doExplode = true;
-            FPS_DEBUG("GRENADE explode speed = " << FormatVector(speed, 3) << "\n");
+            FPS_DEBUG("GRENADE ray-intersect speed = " << FormatVector(speed, 3) << "\n");
         }
 
         location[0] += FpsCoefficient2(speed[0]);
         location[1] += FpsCoefficient2(speed[1]);
         location[2] += FpsCoefficient2(speed[2]);
-        FPS_DEBUG("GRENADE location = " << FormatVector(location, 3) << "\n");
+        FPS_DEBUG("GRENADE moving to location = " << FormatVector(location, 3) << "\n");
 
         UpdateSoundLink(itsSoundLink, location, speed, itsGame->soundTime);
 
@@ -183,12 +187,11 @@ void CGrenade::FrameAction() {
 
         BuildPartProximityList(location, partList[0]->bigRadius, kSolidBit);
 
-        if (location[1] <= 0 || DoCollisionTest(&proximityList.p)) {
+        if (location[1] <= 0 || doExplode || DoCollisionTest(&proximityList.p)) {
             location[0] -= FpsCoefficient2(speed[0]);
             location[1] -= FpsCoefficient2(speed[1]);
             location[2] -= FpsCoefficient2(speed[2]);
             doExplode = true;
-            FPS_DEBUG("GRENADE collision location = " << FormatVector(location, 3) << "\n");
         }
 
         flyCount++;
