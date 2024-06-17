@@ -1169,7 +1169,7 @@ short CNetManager::SelfDistribution() {
 }
 
 short CNetManager::AlivePlayersDistribution() {
-    return activePlayersDistribution & ~deadOrDonePlayers;
+    return startPlayersDistribution & ~deadOrDonePlayers;
 }
 
 bool CNetManager::IAmAlive() {
