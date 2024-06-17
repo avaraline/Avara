@@ -527,7 +527,8 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
     static int ASK_INTERVAL = MSEC_TO_TICK_COUNT(500);
     static int WAITING_MESSAGE_COUNT = 4;
 
-    if (frameFuncs[i].validFrame != itsGame->frameNumber) {
+    // don't wait for for players who are completely done (after limbo and spectating)
+    if (frameFuncs[i].validFrame != itsGame->frameNumber && theNetManager->IAmAlive()) {
         long firstTime = askAgainTime = TickCount();
         long quickTick = firstTime;
         long giveUpTime = firstTime + MSEC_TO_TICK_COUNT(15000);
