@@ -527,8 +527,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
     static int ASK_INTERVAL = MSEC_TO_TICK_COUNT(500);
     static int WAITING_MESSAGE_COUNT = 4;
 
-    // if player is finished don't wait for their frames to sync up
-    if (frameFuncs[i].validFrame != itsGame->frameNumber && itsPlayer->lives > 0) {
+    if (frameFuncs[i].validFrame != itsGame->frameNumber) {
         long firstTime = askAgainTime = TickCount();
         long quickTick = firstTime;
         long giveUpTime = firstTime + MSEC_TO_TICK_COUNT(15000);

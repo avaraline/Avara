@@ -453,7 +453,7 @@ void CAvaraGame::RunFrameActions() {
     }
 
     thePlayer = playerList;
-    while (thePlayer && statusRequest != kAbortStatus) { // itsNet->ProcessQueue();
+    while (thePlayer) {
         nextPlayer = thePlayer->nextPlayer;
         thePlayer->PlayerAction();
         thePlayer = nextPlayer;
