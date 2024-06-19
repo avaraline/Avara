@@ -527,8 +527,8 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
     static int ASK_INTERVAL = MSEC_TO_TICK_COUNT(500);
     static int WAITING_MESSAGE_COUNT = 4;
 
-    // don't wait for for players who are completely done (after limbo and spectating)
-    if (frameFuncs[i].validFrame != itsGame->frameNumber && theNetManager->IAmAlive()) {
+    // don't wait for for players who are completely done (after last life and after limbo)
+    if (frameFuncs[i].validFrame != itsGame->frameNumber && !IsDeadOrDone()) {
         long firstTime = askAgainTime = TickCount();
         long quickTick = firstTime;
         long giveUpTime = firstTime + MSEC_TO_TICK_COUNT(15000);
@@ -1139,6 +1139,10 @@ void CPlayerManagerImpl::RemoveFromGame() {
 
 void CPlayerManagerImpl::DeadOrDone() {
     theNetManager->deadOrDonePlayers |= 1 << slot;
+}
+
+bool CPlayerManagerImpl::IsDeadOrDone() {
+    return (theNetManager->deadOrDonePlayers & (1 << slot));
 }
 
 short CPlayerManagerImpl::GetStatusChar() {
