@@ -55,6 +55,7 @@ public:
     virtual void GameKeyPress(char c) {}
     virtual FunctionTable *GetFunctions() { return ft; }
     virtual void DeadOrDone() {}
+    virtual bool IsDeadOrDone() { return false; }
     virtual short Position() { return 0; }
     virtual Str255& PlayerName() { return str; }
     virtual std::string GetPlayerName() { return std::string((char *)str + 1, str[0]); }
