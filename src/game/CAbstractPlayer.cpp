@@ -1384,10 +1384,12 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             }
         }
 
-        // Disable scout controls while spectating
-        if (winFrame < 0 && !freeView && itsGame->GetSpectatePlayer() == NULL) {
+        // Disable local scout controls while spectating (players in the game still control their scouts)
+        if (winFrame < 0 && !itsManager->IsDeadOrDone()) {
             Boolean doRelease = false;
 
+//            SDL_Log("keys> fn=%d: down=%08x, held=%08x, up=%08x\n",
+//                    itsGame->frameNumber, ft->down, ft->held, ft->up);
             if (TESTFUNC(kfuScoutView, ft->down)) {
                 if (!scoutView && !scoutIdent) {
                     doRelease = true;
