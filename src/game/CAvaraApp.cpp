@@ -152,10 +152,23 @@ void CAvaraAppImpl::Done() {
 }
 
 void CAvaraAppImpl::idle() {
+    static double avg = 0;
+    FrameNumber curFrame = itsGame->frameNumber;
+    uint32_t procTime = SDL_GetTicks();
+
     CheckSockets();
     TrackerUpdate();
     if (itsGame->GameTick()) {
         RenderContents();
+    }
+
+    // output a coarse estimate of cpu time & percent every second when enabled
+    if (curFrame > 0 && curFrame != itsGame->frameNumber && Debug::IsEnabled("cpu")) {
+        procTime = SDL_GetTicks() - procTime;
+        avg = 0.99*avg + 0.01*procTime;
+        if (curFrame % (1000/itsGame->frameTime) == 0) {
+            DBG_Log("cpu", "%.1fms (%.0f%%)\n", avg, 100.0*avg/itsGame->frameTime);
+        }
     }
 }
 
