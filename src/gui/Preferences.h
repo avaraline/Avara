@@ -42,6 +42,7 @@ using json = nlohmann::json;
 #define kFullScreenTag "fullscreen"
 #define kFOV "fov"
 #define kFXAA "fxaa"
+#define kUseLegacyRenderer "useLegacyRenderer"
 
 // Other graphics settings
 #define kColorBlindMode "colorBlindMode"
@@ -196,6 +197,7 @@ static json defaultPrefs = {
     {kThrottle, 0},
     {kGoodGamePhrases, {}},
     {kShowElo, false},
+    {kUseLegacyRenderer, false}
 };
 
 

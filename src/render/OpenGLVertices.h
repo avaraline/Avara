@@ -36,6 +36,7 @@ public:
 class OpenGLVertices: public VertexData {
 public:
     friend class ModernOpenGLRenderer;
+    friend class LegacyOpenGLRenderer;
 
     OpenGLVertices();
     virtual ~OpenGLVertices();
