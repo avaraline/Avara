@@ -1134,7 +1134,9 @@ void CPlayerManagerImpl::AbortRequest() {
 
 void CPlayerManagerImpl::RemoveFromGame() {
     theNetManager->activePlayersDistribution &= ~(1 << slot);
-    theNetManager->itsCommManager->SendUrgentPacket(kdEveryone, kpRemoveMeFromGame, 0, 0, 0, 0, 0);
+    // let inactive players know (not sure if this is even necessary)
+    uint16_t dist = kdEveryone & ~theNetManager->activePlayersDistribution;
+    theNetManager->itsCommManager->SendPacket(dist, kpRemoveMeFromGame, 0, 0, 0, 0, 0);
 }
 
 void CPlayerManagerImpl::DeadOrDone() {
