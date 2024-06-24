@@ -71,7 +71,7 @@ void CGlowActors::FrameAction() {
     if (maskBits & kSolidBit) {
         // only add "solid" objects to the checksum because the location of
         // non-solid objects (invisible/limbo/dead) isn't relevant and could cause frags
-        uint32_t locsum = location[0] + location[1] + location[2];
+        locsum = location[0] + location[1] + location[2];
         UpdateFRandSeed(locsum);
     }
 //    SDL_Log("fn = %u, FRandSeed = %10d, locsum = %8d, Actor = %s", gCurrentGame->frameNumber, (Fixed)FRandSeed, locsum, typeid(*this).name());
