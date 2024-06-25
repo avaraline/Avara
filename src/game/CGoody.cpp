@@ -202,6 +202,6 @@ void CGoody::FrameAction() {
     // the goody heading can make a difference in determing a collision with a Hector
     // FRandSeed += heading;
     UpdateFRandSeed((uint32_t)heading);
-    // SDL_Log("fn = %d, goody=%ld: heading = %8d, FRandSeed = %10d\n",
-    //         itsGame->frameNumber, ident, heading, (Fixed)FRandSeed);
+    // SDL_Log("fn = %d, goody=%ld: heading = %8d, FRandSeed = %10d, grenades=%d, missiles=%d\n",
+    //         itsGame->frameNumber, ident, heading, (Fixed)FRandSeed, grenades, missiles);
 }
