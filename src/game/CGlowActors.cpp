@@ -10,6 +10,7 @@
 #include "CGlowActors.h"
 
 #include "CSmartPart.h"
+#include "Debug.h"
 
 extern Fixed FRandSeed;
 
@@ -74,5 +75,6 @@ void CGlowActors::FrameAction() {
         locsum = location[0] + location[1] + location[2];
         UpdateFRandSeed(locsum);
     }
-//    SDL_Log("fn = %u, FRandSeed = %10d, locsum = %8d, Actor = %s", gCurrentGame->frameNumber, (Fixed)FRandSeed, locsum, typeid(*this).name());
+    DBG_Log("frag", "fn=%u, FRandSeed=%11d, locsum=%8d, Actor=%s",
+            gCurrentGame->frameNumber, (Fixed)FRandSeed, locsum, typeid(*this).name());
 }
