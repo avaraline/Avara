@@ -36,7 +36,7 @@
 #include "Debug.h"
 #include <string.h>
 
-#define AUTOLATENCYPERIOD 3840  // msec (divisible by 64)
+#define AUTOLATENCYPERIOD (3840/2)  // msec (divisible by 64)
 #define AUTOLATENCYDELAY  448   // msec (divisible by 64)
 #define LOWERLATENCYCOUNT   2
 #define HIGHERLATENCYCOUNT  (0.25 * AUTOLATENCYPERIOD / itsGame->frameTime)       // 25% of frames
