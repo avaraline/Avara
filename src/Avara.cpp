@@ -101,6 +101,9 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    textCommands.push_back("/dbg frag");
+    textCommands.push_back("/load heir");
+
     auto p = CPlayerManagerImpl::LocalPlayer();
     auto *tui = ((CAvaraAppImpl *)app)->GetTui();
     auto defaultCmd = "/rand avara aa emo ex #fav -#bad -#koth";

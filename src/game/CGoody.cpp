@@ -203,7 +203,7 @@ void CGoody::FrameAction() {
     // the goody heading can make a difference in determing a collision with a Hector
     // FRandSeed += heading;
     UpdateFRandSeed((uint32_t)heading);
-    DBG_Log("frag", "fn=%d, FRandSeed=%11d, heading=%7d, goody=%ld, grenades=%d, missiles=%d\n",
+    DBG_Log("frag+", "fn=%d, FRandSeed=%11d, heading=%7d, goody=%ld, grenades=%d, missiles=%d\n",
 
             itsGame->frameNumber, (Fixed)FRandSeed, heading, ident, grenades, missiles);
 }

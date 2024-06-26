@@ -75,6 +75,6 @@ void CGlowActors::FrameAction() {
         locsum = location[0] + location[1] + location[2];
         UpdateFRandSeed(locsum);
     }
-    DBG_Log("frag", "fn=%u, FRandSeed=%11d, locsum=%8d, Actor=%s",
-            gCurrentGame->frameNumber, (Fixed)FRandSeed, locsum, typeid(*this).name());
+    DBG_Log("frag", "fn=%u, FRandSeed=%11d, loc=%s, Actor=%s",
+            gCurrentGame->frameNumber, (Fixed)FRandSeed, FormatVector(location, 3).c_str(), typeid(*this).name());
 }
