@@ -14,6 +14,7 @@
 #include "AvaraDefines.h"
 #include "CViewParameters.h"
 #include "Memory.h"
+#include "Debug.h"
 
 #include <fstream>
 #include <iostream>
@@ -38,7 +39,7 @@ CBSPPart *CBSPPart::Create(short resId) {
 
 
 void CBSPPart::IBSPPart(short resId) {
-    //SDL_Log("Loading BSP: %s\n", bspName);
+    DBG_Log("bsp", "Loading BSP: %d\n", resId);
     lightSeed = 0;
     nextTemp = NULL;
     // colorReplacements = NULL;    //  Use default colors.
@@ -101,6 +102,10 @@ void CBSPPart::IBSPPart(short resId) {
     maxBounds.z = ToFixed(mxZ);
     maxBounds.w = FIX1;
 
+    DBG_Log("bsp", "  bounds.x = [%d, %d]\n", minBounds.x, maxBounds.x);
+    DBG_Log("bsp", "  bounds.y = [%d, %d]\n", minBounds.y, maxBounds.y);
+    DBG_Log("bsp", "  bounds.z = [%d, %d]\n", minBounds.z, maxBounds.z);
+
     origColorTable = std::make_unique<ARGBColor[]>(colorCount);
     currColorTable = std::make_unique<ARGBColor[]>(colorCount);
     pointTable = std::make_unique<Vector[]>(pointCount);
@@ -123,12 +128,16 @@ void CBSPPart::IBSPPart(short resId) {
     
     CheckForAlpha();
 
+    // if command is "/dbg bsp 666" then show points for resId 666
+    bool showPoints = (Debug::GetValue("bsp") == resId);
+    if (showPoints) { DBG_Log("bsp", "  points:\n"); }
     for (uint32_t i = 0; i < pointCount; i++) {
         nlohmann::json pt = doc["points"][i];
         pointTable[i][0] = ToFixed(pt[0]);
         pointTable[i][1] = ToFixed(pt[1]);
         pointTable[i][2] = ToFixed(pt[2]);
         pointTable[i][3] = FIX1;
+        if (showPoints) { DBG_Log("bsp", "    %s\n", FormatVector(pointTable[i]).c_str()); }
     }
 
     totalPoints = 0;
