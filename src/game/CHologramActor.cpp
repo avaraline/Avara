@@ -19,6 +19,7 @@ void CHologramActor::BeginScript() {
 
     ProgramLongVar(iShape, 600);
     ProgramVariable(iRoll, 0);
+    ProgramVariable(iPitch, 0);
     ProgramLongVar(iIsAmbient, false);
 }
 
@@ -39,6 +40,7 @@ CAbstractActor *CHologramActor::EndScript() {
             thePart->userFlags |= CBSPUserFlags::kIsAmbient;
         thePart->Reset();
         thePart->RotateZ(ReadFixedVar(iRoll));
+        thePart->RotateX(ReadFixedVar(iPitch));
         thePart->RotateOneY(heading);
         TranslatePart(thePart, location[0], location[1], location[2]);
         thePart->MoveDone();
