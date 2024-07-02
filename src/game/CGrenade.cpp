@@ -145,13 +145,15 @@ void CGrenade::FrameAction() {
         // | /
         // |G  <- approaching wall at 45° needs sqrt(2)*radius to intersect wall... lower angles might pass collision instead
         static Fixed addRad = sqrt(2)*partList[0]->enclosureRadius;
-        Fixed classicRayLength = NormalizeVector(3, rayHit.direction) + addRad;
-        rayHit.distance = classicRayLength;
+        // use the smaller FPS-scaled rayLength to search a much smaller volume
+        Fixed rayLength = FpsCoefficient2(NormalizeVector(3, rayHit.direction)) + addRad;
+        rayHit.distance = rayLength;
         RayTestWithGround(&rayHit, kSolidBit);
 
         // if the grenade path (ray test) intersects with an object during this frame
-        Fixed classicRayDistance = ClassicCoefficient2(rayHit.distance);
-        if (classicRayLength > classicRayDistance) {
+        if (rayLength > rayHit.distance) {
+            // scale distance up to Classic so it's backed out properly when adding to location
+            Fixed classicRayDistance = ClassicCoefficient2(rayHit.distance);
             speed[0] = FMul(rayHit.direction[0], classicRayDistance);
             speed[1] = FMul(rayHit.direction[1], classicRayDistance);
             speed[2] = FMul(rayHit.direction[2], classicRayDistance);
