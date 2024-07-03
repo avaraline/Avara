@@ -891,7 +891,7 @@ void CAbstractPlayer::RenderDashboard() {
         Fixed energyPercent = 0;
         if (maxEnergy > 0) energyPercent = FDiv(energy, maxEnergy);
 
-        if (boostEndFrame > itsGame->frameNumber) {
+        if (boostEndFrame >= itsGame->frameNumber) {
             energyGauge->ReplaceAllColors(ColorManager::getHUDPositiveColor());
         }
         else if (energyPercent <= FIX(.25)) {
@@ -1144,12 +1144,12 @@ void CAbstractPlayer::ArmSmartMissile() {
     }
 
     if (!didDetach && oldKind != kweSmart && missileCount) {
-        if (nextMissileLoad < itsGame->frameNumber) {
+        if (nextMissileLoad <= itsGame->frameNumber) {
             theWeapon = itsGame->itsDepot->AquireWeapon(kweSmart);
             weaponIdent = theWeapon->Arm(viewPortPart);
             if (weaponIdent) {
                 missileCount--;
-                nextMissileLoad = itsGame->FramesFromNow(3);
+                nextMissileLoad = itsGame->FramesFromNow(4);
             }
         } else
             fireGun = false;
@@ -1177,12 +1177,12 @@ void CAbstractPlayer::ArmGrenade() {
     }
 
     if (!didDetach && oldKind != kweGrenade && grenadeCount) {
-        if (nextGrenadeLoad < itsGame->frameNumber) {
+        if (nextGrenadeLoad <= itsGame->frameNumber) {
             theWeapon = itsGame->itsDepot->AquireWeapon(kweGrenade);
             weaponIdent = theWeapon->Arm(viewPortPart);
             if (weaponIdent) {
                 grenadeCount--;
-                nextGrenadeLoad = itsGame->FramesFromNow(2);
+                nextGrenadeLoad = itsGame->FramesFromNow(3);
             }
         } else
             fireGun = false;
@@ -1294,11 +1294,11 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
 
             FPS_DEBUG("   motors after keyb  = " << FormatVector(motors, 2) << std::endl);
 
-            if (TESTFUNC(kfuBoostEnergy, ft->down) && boostsRemaining && (boostEndFrame < itsGame->frameNumber)) {
+            if (TESTFUNC(kfuBoostEnergy, ft->down) && boostsRemaining && (boostEndFrame <= itsGame->frameNumber)) {
                 CBasicSound *theSound;
 
                 boostsRemaining--;
-                boostEndFrame = itsGame->FramesFromNow(BOOSTLENGTH);
+                boostEndFrame = itsGame->FramesFromNow(BOOSTLENGTH+1);
 
                 if (!boostControlLink)
                     boostControlLink = gHub->GetSoundLink();
@@ -1669,7 +1669,7 @@ void CAbstractPlayer::PlayerAction() {
 
                 regenRate = FMulDivNZ(shieldRegen, energy, maxEnergy);
 
-                if (boostEndFrame > itsGame->frameNumber)
+                if (boostEndFrame >= itsGame->frameNumber)
                     shields += shieldRegen;
 
                 shields += regenRate >> 3;
@@ -1683,7 +1683,7 @@ void CAbstractPlayer::PlayerAction() {
             if (itsGame->timeInSeconds < itsGame->loadedTimeLimit)
                 energy += generatorPower;
 
-            if (boostEndFrame > itsGame->frameNumber) {
+            if (boostEndFrame >= itsGame->frameNumber) {
                 energy += 4 * generatorPower;
             }
 
@@ -1986,7 +1986,7 @@ bool CAbstractPlayer::ReincarnateComplete(CIncarnator* newSpot) {
         LinkPartSpheres();
 
         if (reEnergize) {
-            boostEndFrame = itsGame->FramesFromNow(MINIBOOSTTIME);
+            boostEndFrame = itsGame->FramesFromNow(MINIBOOSTTIME+1);
             reEnergize = false;
             if (shields < maxShields)
                 shields = maxShields;
@@ -2299,10 +2299,10 @@ void CAbstractPlayer::TakeGoody(GoodyRecord *gr) {
     if (energy > maxEnergy)
         energy = maxEnergy;
 
-    if (gr->boostTime > 0 && (boostEndFrame < itsGame->frameNumber)) {
+    if (gr->boostTime > 0 && (boostEndFrame <= itsGame->frameNumber)) {
         CBasicSound *theSound;
 
-        boostEndFrame = itsGame->FramesFromNow(gr->boostTime);
+        boostEndFrame = itsGame->FramesFromNow(gr->boostTime+1);
 
         if (!boostControlLink)
             boostControlLink = gHub->GetSoundLink();
