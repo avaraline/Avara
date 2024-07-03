@@ -1135,7 +1135,7 @@ void CAvaraGame::IncrementFrame(bool firstFrame) {
     isClassicFrame = (frameNumber % (CLASSICFRAMETIME / frameTime) == 0);
 }
 
-FrameNumber CAvaraGame::FramesFromNow(FrameNumber classicFrameCount) {
+FrameNumber CAvaraGame::FramesFromNow(double classicFrameCount) {
     return frameNumber + classicFrameCount / fpsScale;
 }
 
