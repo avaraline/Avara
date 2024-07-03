@@ -321,7 +321,6 @@ if (IsClassicInterval()) { // indented like this because hope to remove it in th
 
         rayHit.distance = NormalizeVector(3, rayHit.direction);
         realSpeed = rayHit.distance;
-        rayHit.distance = FpsCoefficient2(rayHit.distance);
 
         RayTestWithGround(&rayHit, kSolidBit);
 
@@ -336,7 +335,7 @@ if (IsClassicInterval()) { // indented like this because hope to remove it in th
             }
 
             if (rayHit.closestHit) {
-                realSpeed = ClassicCoefficient2(rayHit.distance);
+                realSpeed = rayHit.distance;
                 speed[0] = FMul(rayHit.direction[0], realSpeed);
                 speed[1] = FMul(rayHit.direction[1], realSpeed);
                 speed[2] = FMul(rayHit.direction[2], realSpeed);
