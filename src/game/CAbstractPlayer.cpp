@@ -891,7 +891,7 @@ void CAbstractPlayer::RenderDashboard() {
         Fixed energyPercent = 0;
         if (maxEnergy > 0) energyPercent = FDiv(energy, maxEnergy);
 
-        if (boostEndFrame >= itsGame->frameNumber) {
+        if (boostEndFrame > itsGame->frameNumber) {
             energyGauge->ReplaceAllColors(ColorManager::getHUDPositiveColor());
         }
         else if (energyPercent <= FIX(.25)) {
@@ -1669,7 +1669,7 @@ void CAbstractPlayer::PlayerAction() {
 
                 regenRate = FMulDivNZ(shieldRegen, energy, maxEnergy);
 
-                if (boostEndFrame >= itsGame->frameNumber)
+                if (boostEndFrame > itsGame->frameNumber)
                     shields += shieldRegen;
 
                 shields += regenRate >> 3;
@@ -1683,7 +1683,7 @@ void CAbstractPlayer::PlayerAction() {
             if (itsGame->timeInSeconds < itsGame->loadedTimeLimit)
                 energy += generatorPower;
 
-            if (boostEndFrame >= itsGame->frameNumber) {
+            if (boostEndFrame > itsGame->frameNumber) {
                 energy += 4 * generatorPower;
             }
 
