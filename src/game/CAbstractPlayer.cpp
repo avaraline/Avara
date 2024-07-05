@@ -175,6 +175,7 @@ void CAbstractPlayer::StartSystems() {
 
     nextGrenadeLoad = 0;
     nextMissileLoad = 0;
+    nextPlasmaShot = 0;
 
     // variables in AdaptableSettings need to have "classic" counterparts in case they are changed in CWalkerActor::ReceiveConfig()
     classicGeneratorPower = FIX3(30);
@@ -1715,7 +1716,8 @@ void CAbstractPlayer::GunActions() {
         if (weapon) {
             weapon->Fire();
             weaponIdent = 0;
-        } else {
+        } else if (nextPlasmaShot <= itsGame->frameNumber) {
+            nextPlasmaShot = itsGame->FramesFromNow(1);
             i = gunEnergy[0] < gunEnergy[1];
             if (gunEnergy[i] >= activeGunEnergy) {
                 Vector missileSpeed;
