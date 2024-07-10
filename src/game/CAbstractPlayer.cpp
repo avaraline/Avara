@@ -175,6 +175,7 @@ void CAbstractPlayer::StartSystems() {
 
     nextGrenadeLoad = 0;
     nextMissileLoad = 0;
+    nextPlasmaShot = 0;
 
     // variables in AdaptableSettings need to have "classic" counterparts in case they are changed in CWalkerActor::ReceiveConfig()
     classicGeneratorPower = FIX3(30);
@@ -1144,12 +1145,12 @@ void CAbstractPlayer::ArmSmartMissile() {
     }
 
     if (!didDetach && oldKind != kweSmart && missileCount) {
-        if (nextMissileLoad < itsGame->frameNumber) {
+        if (nextMissileLoad <= itsGame->frameNumber) {
             theWeapon = itsGame->itsDepot->AquireWeapon(kweSmart);
             weaponIdent = theWeapon->Arm(viewPortPart);
             if (weaponIdent) {
                 missileCount--;
-                nextMissileLoad = itsGame->FramesFromNow(3);
+                nextMissileLoad = itsGame->FramesFromNow(4);
             }
         } else
             fireGun = false;
@@ -1177,12 +1178,12 @@ void CAbstractPlayer::ArmGrenade() {
     }
 
     if (!didDetach && oldKind != kweGrenade && grenadeCount) {
-        if (nextGrenadeLoad < itsGame->frameNumber) {
+        if (nextGrenadeLoad <= itsGame->frameNumber) {
             theWeapon = itsGame->itsDepot->AquireWeapon(kweGrenade);
             weaponIdent = theWeapon->Arm(viewPortPart);
             if (weaponIdent) {
                 grenadeCount--;
-                nextGrenadeLoad = itsGame->FramesFromNow(2);
+                nextGrenadeLoad = itsGame->FramesFromNow(3);
             }
         } else
             fireGun = false;
@@ -1294,11 +1295,11 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
 
             FPS_DEBUG("   motors after keyb  = " << FormatVector(motors, 2) << std::endl);
 
-            if (TESTFUNC(kfuBoostEnergy, ft->down) && boostsRemaining && (boostEndFrame < itsGame->frameNumber)) {
+            if (TESTFUNC(kfuBoostEnergy, ft->down) && boostsRemaining && (boostEndFrame <= itsGame->frameNumber)) {
                 CBasicSound *theSound;
 
                 boostsRemaining--;
-                boostEndFrame = itsGame->FramesFromNow(BOOSTLENGTH);
+                boostEndFrame = itsGame->FramesFromNow(BOOSTLENGTH+1);
 
                 if (!boostControlLink)
                     boostControlLink = gHub->GetSoundLink();
@@ -1715,7 +1716,8 @@ void CAbstractPlayer::GunActions() {
         if (weapon) {
             weapon->Fire();
             weaponIdent = 0;
-        } else {
+        } else if (nextPlasmaShot <= itsGame->frameNumber) {
+            nextPlasmaShot = itsGame->FramesFromNow(1);
             i = gunEnergy[0] < gunEnergy[1];
             if (gunEnergy[i] >= activeGunEnergy) {
                 Vector missileSpeed;
@@ -1986,7 +1988,7 @@ bool CAbstractPlayer::ReincarnateComplete(CIncarnator* newSpot) {
         LinkPartSpheres();
 
         if (reEnergize) {
-            boostEndFrame = itsGame->FramesFromNow(MINIBOOSTTIME);
+            boostEndFrame = itsGame->FramesFromNow(MINIBOOSTTIME+1);
             reEnergize = false;
             if (shields < maxShields)
                 shields = maxShields;
@@ -2299,10 +2301,10 @@ void CAbstractPlayer::TakeGoody(GoodyRecord *gr) {
     if (energy > maxEnergy)
         energy = maxEnergy;
 
-    if (gr->boostTime > 0 && (boostEndFrame < itsGame->frameNumber)) {
+    if (gr->boostTime > 0 && (boostEndFrame <= itsGame->frameNumber)) {
         CBasicSound *theSound;
 
-        boostEndFrame = itsGame->FramesFromNow(gr->boostTime);
+        boostEndFrame = itsGame->FramesFromNow(gr->boostTime+1);
 
         if (!boostControlLink)
             boostControlLink = gHub->GetSoundLink();
