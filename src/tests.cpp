@@ -468,11 +468,11 @@ vector<HectorEnergyReadings> HectorEnergyRegen(int steps, bool useBoost, int fra
     int ticksPerStep = GetTicksPerStep(frameTime);
 
     scenario.hector->energy = scenario.hector->maxEnergy * 0.5;
-    if (useBoost) {
-        scenario.hector->itsManager->GetFunctions()->down = (1 << kfuBoostEnergy);
-    }
 
     for (int i = 0; i < steps; i++) {
+        if (i == 1 && useBoost) {
+            scenario.hector->itsManager->GetFunctions()->down = (1 << kfuBoostEnergy);
+        }
         HectorEnergyReadings current(scenario.hector);
         energyValues.push_back(current);
         for (int k = 0; k < ticksPerStep; k++) {
@@ -490,11 +490,11 @@ vector<HectorEnergyReadings> HectorPlasmaRegen(int steps, bool useBoost, int fra
 
     scenario.hector->gunEnergy[0] = 0;
     scenario.hector->gunEnergy[1] = 0;
-    if (useBoost) {
-        scenario.hector->itsManager->GetFunctions()->down = (1 << kfuBoostEnergy);
-    }
 
     for (int i = 0; i < steps; i++) {
+        if (i == 1 && useBoost) {
+            scenario.hector->itsManager->GetFunctions()->down = (1 << kfuBoostEnergy);
+        }
         HectorEnergyReadings current(scenario.hector);
         energyValues.push_back(current);
         for (int k = 0; k < ticksPerStep; k++) {
@@ -511,11 +511,11 @@ vector<HectorEnergyReadings> HectorShieldRegen(int steps, bool useBoost, int fra
     int ticksPerStep = GetTicksPerStep(frameTime);
 
     scenario.hector->shields = scenario.hector->maxShields * 0.5;
-    if (useBoost) {
-        scenario.hector->itsManager->GetFunctions()->down = (1 << kfuBoostEnergy);
-    }
 
     for (int i = 0; i < steps; i++) {
+        if (i == 1 && useBoost) {
+            scenario.hector->itsManager->GetFunctions()->down = (1 << kfuBoostEnergy);
+        }
         HectorEnergyReadings current(scenario.hector);
         energyValues.push_back(current);
         for (int k = 0; k < ticksPerStep; k++) {

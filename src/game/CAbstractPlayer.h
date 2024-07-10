@@ -83,6 +83,7 @@ public:
     short grenadeCount = 0;
     FrameNumber nextGrenadeLoad = 0;
     FrameNumber nextMissileLoad = 0;
+    FrameNumber nextPlasmaShot = 0;
 
     short missileLimit = 0;
     short grenadeLimit = 0;
