@@ -179,6 +179,7 @@ public:
 
     uint32_t nextScheduledFrame;
     uint32_t nextPingTime;
+    uint32_t nextLoadTime;
     long lastFrameTime;
     Boolean canPreSend;
 

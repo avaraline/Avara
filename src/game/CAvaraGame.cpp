@@ -142,6 +142,7 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     statusRequest = kNoVehicleStatus;
 
     nextPingTime = 0;
+    nextLoadTime = 0;
 
     showNewHUD = gApplication ? gApplication->Get<bool>(kShowNewHUD) : false;
     // CalcGameRect();
@@ -841,6 +842,16 @@ bool CAvaraGame::GameTick() {
         static uint32_t pingInterval = 1000; // msec
         itsNet->SendPingCommand(3);
         nextPingTime = startTime + pingInterval;
+    }
+
+    int randLoadPeriod = Debug::GetValue("rload"); // randomly load a level every `rload` seconds
+    if (randLoadPeriod > 0) {
+        if (startTime > nextLoadTime) {
+            auto p = CPlayerManagerImpl::LocalPlayer();
+            auto *tui = itsApp->GetTui();
+            tui->ExecuteMatchingCommand("/rand", p);
+            nextLoadTime = startTime + 1000*randLoadPeriod;
+        }
     }
 
     // Not playing? Nothing to do!
