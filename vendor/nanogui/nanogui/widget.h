@@ -63,10 +63,16 @@ public:
     /// Set the position relative to the parent widget
     void setPosition(const Vector2i &pos) { mPos = pos; }
 
+    /// return position of parent or zeros if no parent
+    Vector2i parentPosition() const {
+        static Vector2i zeroPos = {};
+        return mParent ?
+            (mParent->absolutePosition()) : zeroPos;
+    }
+
     /// Return the absolute position on screen
     Vector2i absolutePosition() const {
-        return mParent ?
-            (parent()->absolutePosition() + mPos) : mPos;
+        return parentPosition() + mPos;
     }
 
     /// Return the size of the widget
@@ -147,6 +153,9 @@ public:
 
     /// Remove a child widget by value
     void removeChild(const Widget *widget);
+
+    /// notify other widgets/parents
+    virtual void removeNotifyParent(const Widget *w);
 
     /// Retrieves the child at the specific position
     const Widget* childAt(int index) const { return mChildren[index]; }
