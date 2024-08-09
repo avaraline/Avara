@@ -188,6 +188,8 @@ public:
     void moveWindowToFront(Window *window);
     void drawWidgets();
 
+    virtual void removeNotifyParent(const Widget *w) override;
+
 protected:
     SDL_Window *mSDLWindow;
     uint32_t mWindowID;
