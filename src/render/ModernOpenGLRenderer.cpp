@@ -252,9 +252,6 @@ void ModernOpenGLRenderer::ApplyProjection()
 {
     SDL_GL_GetDrawableSize(this->window, &resolution[0], &resolution[1]);
 
-    //viewParams->viewPixelDimensions.h = resolution[0];
-    //viewParams->viewPixelDimensions.v = resolution[1];
-
     glm::mat4 proj = glm::scale(
         glm::perspective(
             glm::radians(fov),
