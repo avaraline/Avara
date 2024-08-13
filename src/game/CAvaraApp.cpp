@@ -37,6 +37,7 @@
 #include "Tags.h"
 #include "Debug.h"
 #include "ModernOpenGLRenderer.h"
+#include "LegacyOpenGLRenderer.h"
 
 // included while we fake things out
 #include "CPlayerManager.h"
@@ -79,7 +80,13 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
         ui->LoadImages(mNVGContext);
     }
 
-    gRenderer = new ModernOpenGLRenderer(mSDLWindow);
+    if (Get(kUseLegacyRenderer)) {
+        gRenderer = new LegacyOpenGLRenderer(mSDLWindow);
+    }
+    else {
+        gRenderer = new ModernOpenGLRenderer(mSDLWindow);
+    }
+
     gRenderer->UpdateViewRect(mSize.x, mSize.y, mPixelRatio);
     gRenderer->SetFOV(Number(kFOV));
     gRenderer->ResetLights();
