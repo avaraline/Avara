@@ -227,6 +227,12 @@ void LegacyOpenGLRenderer::ApplyProjection()
     //glCheckErrors();
 }
 
+void LegacyOpenGLRenderer::UpdateViewRect(int width, int height, float pixelRatio)
+{
+    AbstractRenderer::UpdateViewRect(width, height, pixelRatio);
+    ApplyProjection();
+}
+
 void LegacyOpenGLRenderer::LevelReset()
 {
     dynamicWorld->DisposeParts();

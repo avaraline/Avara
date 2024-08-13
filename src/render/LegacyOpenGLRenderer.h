@@ -31,6 +31,7 @@ public:
     virtual void RemoveHUDPart(CBSPPart *part) override { RemovePart(part); };
     virtual void RemovePart(CBSPPart *part) override;
     virtual void RenderFrame() override;
+    void UpdateViewRect(int width, int height, float pixelRatio) override;
 private:
     SDL_Window *window;
     
