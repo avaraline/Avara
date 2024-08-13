@@ -40,6 +40,11 @@ public:
     virtual void ApplyProjection() = 0;
 
     /**
+     * Update the frame buffer with the currently configured resolution and FOV.
+     */
+    virtual void ApplyFrameBuffer() = 0;
+
+    /**
      * Reset the renderer's state back to its defaults.
      */
     virtual void LevelReset();

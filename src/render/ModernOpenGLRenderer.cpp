@@ -252,6 +252,9 @@ void ModernOpenGLRenderer::ApplyProjection()
 {
     SDL_GL_GetDrawableSize(this->window, &resolution[0], &resolution[1]);
 
+    //viewParams->viewPixelDimensions.h = resolution[0];
+    //viewParams->viewPixelDimensions.v = resolution[1];
+
     glm::mat4 proj = glm::scale(
         glm::perspective(
             glm::radians(fov),
@@ -273,6 +276,14 @@ void ModernOpenGLRenderer::ApplyProjection()
     hudShader->Use();
     hudShader->SetMat4("proj", proj);
     glCheckErrors();
+}
+
+void ModernOpenGLRenderer::ApplyFrameBuffer()
+{
+    GLsizei w, h;
+    SDL_GL_GetDrawableSize(window, &w, &h);
+    MakeFramebuffer(0, w, h);
+    MakeFramebuffer(1, w, h);
 }
 
 void ModernOpenGLRenderer::LevelReset()
