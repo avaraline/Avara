@@ -285,6 +285,7 @@
     <ClInclude Include="..\src\net\TrackerTags.h" />
     <ClInclude Include="..\src\net\UDPTags.h" />
     <ClInclude Include="..\src\render\AbstractRenderer.h" />
+    <ClInclude Include="..\src\render\LegacyOpenGLRenderer.h" />
     <ClInclude Include="..\src\render\ModernOpenGLRenderer.h" />
     <ClInclude Include="..\src\render\NullRenderer.h" />
     <ClInclude Include="..\src\render\OpenGLShader.h" />
@@ -476,6 +477,7 @@
     <ClCompile Include="..\src\net\CUDPComm.cpp" />
     <ClCompile Include="..\src\net\CUDPConnection.cpp" />
     <ClCompile Include="..\src\render\AbstractRenderer.cpp" />
+    <ClCompile Include="..\src\render\LegacyOpenGLRenderer.cpp" />
     <ClCompile Include="..\src\render\ModernOpenGLRenderer.cpp" />
     <ClCompile Include="..\src\render\OpenGLShader.cpp" />
     <ClCompile Include="..\src\render\OpenGLVertices.cpp" />
