@@ -177,9 +177,6 @@ ModernOpenGLRenderer::ModernOpenGLRenderer(SDL_Window *window) : AbstractRendere
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    MakeFramebuffer(0, w, h);
-    MakeFramebuffer(1, w, h);
-
     // Configure alpha blending.
     glEnable(GL_BLEND);
     glBlendFuncSeparate(GL_SRC_ALPHA, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE);
@@ -273,6 +270,17 @@ void ModernOpenGLRenderer::ApplyProjection()
     hudShader->Use();
     hudShader->SetMat4("proj", proj);
     glCheckErrors();
+}
+
+void ModernOpenGLRenderer::UpdateViewRect(int width, int height, float pixelRatio)
+{
+    AbstractRenderer::UpdateViewRect(width, height, pixelRatio);
+
+    GLsizei w, h;
+    SDL_GL_GetDrawableSize(window, &w, &h);
+
+    AdjustFramebuffer(0, w, h);
+    AdjustFramebuffer(1, w, h);
 }
 
 void ModernOpenGLRenderer::LevelReset()
@@ -567,8 +575,13 @@ std::unique_ptr<OpenGLShader> ModernOpenGLRenderer::LoadShader(const std::string
     return std::make_unique<OpenGLShader>(*vertPath, *fragPath);
 }
 
-void ModernOpenGLRenderer::MakeFramebuffer(short index, GLsizei width, GLsizei height)
+void ModernOpenGLRenderer::AdjustFramebuffer(short index, GLsizei width, GLsizei height)
 {
+    // Remove previous bound objects
+    glDeleteTextures(1, &texture[index]);
+    glDeleteFramebuffers(1, &fbo[index]);
+    glDeleteRenderbuffers(1, &rbo[index]);
+
     // Create a framebuffer, texture, and renderbuffer for the HUD.
     glGenFramebuffers(1, &fbo[index]);
     glBindFramebuffer(GL_FRAMEBUFFER, fbo[index]);

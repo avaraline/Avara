@@ -103,7 +103,7 @@ public:
      * @param height The height in pixels.
      * @param pixelRatio The pixel ratio.
      */
-    void UpdateViewRect(int width, int height, float pixelRatio);
+    virtual void UpdateViewRect(int width, int height, float pixelRatio) = 0;
 protected:
     float fov = 50.0f;
 };

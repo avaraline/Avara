@@ -200,7 +200,9 @@ void CAvaraAppImpl::RenderContents() {
 }
 
 void CAvaraAppImpl::WindowResized(int width, int height) {
-    gRenderer->UpdateViewRect(width, height, mPixelRatio);
+    // Only update if the resolution is actually changing
+    if (gRenderer->viewParams->viewPixelDimensions.h != width || gRenderer->viewParams->viewPixelDimensions.v != height)
+        gRenderer->UpdateViewRect(width, height, mPixelRatio);
     //performLayout();
 }
 

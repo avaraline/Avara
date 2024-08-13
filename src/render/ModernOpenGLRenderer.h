@@ -26,6 +26,7 @@ public:
     virtual void RemoveHUDPart(CBSPPart *part) override;
     virtual void RemovePart(CBSPPart *part) override;
     virtual void RenderFrame() override;
+    virtual void UpdateViewRect(int width, int height, float pixelRatio) override;
 private:
     SDL_Window *window;
     
@@ -54,6 +55,6 @@ private:
     void Draw(OpenGLShader &shader, const CBSPPart &part, float defaultAmbient, bool useAlphaBuffer = false);
     void IgnoreDirectionalLights(OpenGLShader &shader, bool yn);
     std::unique_ptr<OpenGLShader> LoadShader(const std::string &vertFile, const std::string &fragFile);
-    void MakeFramebuffer(short index, GLsizei width, GLsizei height);
+    void AdjustFramebuffer(short index, GLsizei width, GLsizei height);
     void SetTransforms(const CBSPPart &part);
 };
