@@ -562,7 +562,7 @@ void CAbstractPlayer::LoadDashboardParts() {
     dashboardSpinSpeed = ToFixed(100);
     dashboardSpinHeading = 0;
 
-    int layout = itsGame->itsApp->Get(kHUDPreset);
+    layout = itsGame->itsApp->Get(kHUDPreset);
     //float alpha = itsGame->itsApp->Get(kHUDAlpha);
     //Fixed hudAlpha = FIX1 * alpha;
 
@@ -718,21 +718,22 @@ void CAbstractPlayer::RenderDashboard() {
         // Lastly set relativeImpulse based on the impact location of the hit to bump the HUD
         Fixed hitAngle = FOneArcTan2(dSpeed[2], dSpeed[0]);
         Fixed angleDiff = hitAngle - viewYaw;
+        float magnitude = ToFloat(VectorLength(3, dSpeed));
         
         if (angleDiff > 0) {
             // Hit from the right side
-            relativeImpulse[0] = FIX(1.0);
+            relativeImpulse[0] = FIX(1.0*magnitude);
         } else if (angleDiff < 0) {
             // Hit from the left side
-            relativeImpulse[0] = FIX(-1.0);
+            relativeImpulse[0] = FIX(-1.0*magnitude);
         }
 
         if (dSpeed[1] > FIX(.5)) {
             // Hit from the top
-            relativeImpulse[1] = FIX(1.0);
+            relativeImpulse[1] = FIX(1.0*magnitude);
         } else if (dSpeed[1] < FIX(-.5)) {
             // Hit from the bottom
-            relativeImpulse[1] = FIX(-1.0);
+            relativeImpulse[1] = FIX(-1.0*magnitude);
         }
 
         pidReset(&pMotionX);
@@ -924,11 +925,7 @@ void CAbstractPlayer::DashboardPosition(CScaledBSP *part, bool autoRot, float x,
     // X/Y Coordinates on the screen are roughly described as a percentage of the screen away from the bottom and the left
     // (-1.0, -1.0) is the bottom left of the screen
     // (1.0, 1.0) is the top right of the screen
-
-
-    // TODO: Adjust these until it looks good, then go multiply 
-    // all the DashboardPosition parameters by these numbers, and
-    // then delete these
+    
     float scale_x = 11.12;
     float scale_y = 8.23;
     Fixed hud_dist = (FIX3(6000) * 25)/8;

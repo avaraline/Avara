@@ -40,11 +40,6 @@ public:
     virtual void ApplyProjection() = 0;
 
     /**
-     * Update the frame buffer with the currently configured resolution and FOV.
-     */
-    virtual void ApplyFrameBuffer() = 0;
-
-    /**
      * Reset the renderer's state back to its defaults.
      */
     virtual void LevelReset();
@@ -108,7 +103,7 @@ public:
      * @param height The height in pixels.
      * @param pixelRatio The pixel ratio.
      */
-    void UpdateViewRect(int width, int height, float pixelRatio);
+    virtual void UpdateViewRect(int width, int height, float pixelRatio) = 0;
 protected:
     float fov = 50.0f;
 };
