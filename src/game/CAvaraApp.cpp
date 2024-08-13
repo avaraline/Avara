@@ -201,6 +201,7 @@ void CAvaraAppImpl::RenderContents() {
 
 void CAvaraAppImpl::WindowResized(int width, int height) {
     gRenderer->UpdateViewRect(width, height, mPixelRatio);
+    gRenderer->ApplyFrameBuffer();
     //performLayout();
 }
 

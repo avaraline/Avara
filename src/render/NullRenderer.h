@@ -14,6 +14,7 @@ public:
     virtual void AddPart(CBSPPart *part) override {};
     virtual void ApplyLights() override {};
     virtual void ApplyProjection() override {};
+    virtual void ApplyFrameBuffer() override {};
     virtual std::unique_ptr<VertexData> NewVertexDataInstance() override {
         return nullptr;
     };
