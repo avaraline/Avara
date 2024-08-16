@@ -12,6 +12,7 @@
 #include "Debug.h"          // Debug::methods
 #include <random>           // std::random_device
 #include "Tags.h"
+#include "GitVersion.h"
 
 CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
 
@@ -105,6 +106,17 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
     cmd = new TextCommand("/dbg flag     <- toggles named debugging flag on/off\n"
                           "/dbg flag val <- sets debug flag to integer value",
                           METHOD_TO_LAMBDA_VARGS(SetDebugFlag));
+    TextCommand::Register(cmd);
+    
+    cmd = new TextCommand("/info           <- show build info",
+                          [this](VectorOfArgs vargs) -> bool {
+        std::string infoString(GetOsName());
+        infoString += " ";
+        itsApp->rosterWindow->SendRosterMessage(infoString);
+        itsApp->rosterWindow->SendRosterMessage(GIT_VERSION);
+
+        return false;
+    });
     TextCommand::Register(cmd);
 }
 
@@ -644,4 +656,20 @@ bool CommandManager::SetDebugFlag(VectorOfArgs vargs) {
     }
     itsApp->AddMessageLine(os.str());
     return true;
+}
+
+std::string CommandManager::GetOsName() {
+    #ifdef _WIN32
+    return "Windows 32-bit";
+    #elif _WIN64
+    return "Windows 64-bit";
+    #elif __APPLE__ || __MACH__
+    return "Mac OSX";
+    #elif __linux__
+    return "Linux";
+    #elif __unix || __unix__
+    return "Unix";
+    #else
+    return "Unknown OS";
+    #endif
 }
