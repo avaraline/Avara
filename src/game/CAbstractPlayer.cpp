@@ -1569,6 +1569,7 @@ void CAbstractPlayer::FrameAction() {
 
         if (doIncarnateSound) {
             IncarnateSound();
+            if (itsScout->action == kScoutInactive) itsScout->ToggleState(kScoutUp);
         }
 
         // if a frag frame is specified with /dbg, force a frag on that frame by messing with FRandSeed
