@@ -1,0 +1,16 @@
+.{
+    .name = "avara",
+    .version = "0.0.1",
+    .dependencies = .{
+        .sdl = .{
+            .url = "https://github.com/allyourcodebase/SDL/archive/refs/heads/main.zip",
+            .hash = "122092989e6ddcdb5c876cb3b7518474e638dede0e557006e8f39d51bcb1833bc848",
+        },
+    },
+    .paths = .{
+        "src",
+        "rsrc",
+        "platform",
+        "vendor"
+    }
+}
