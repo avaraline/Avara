@@ -33,7 +33,7 @@ void CBasicSound::SetRate(Fixed theRate) {
     //	Not applicable
 }
 
-Fixed CBasicSound::GetSampleRate() {
+UnsignedFixed CBasicSound::GetSampleRate() {
     return itsMixer->samplingRate;
 }
 
@@ -126,9 +126,8 @@ void CBasicSound::SetControlLink(SoundLink *linkPtr) {
 void CBasicSound::Reset() {
     motionLink = NULL;
     controlLink = NULL;
-    itsSamples = NULL;
+    itsSamples = nullptr;
     sampleLen = 0;
-    sampleData = NULL;
     loopStart = 0;
     loopEnd = 0;
     loopCount[0] = loopCount[1] = 0;
@@ -137,33 +136,29 @@ void CBasicSound::Reset() {
     distanceDelay = true;
 }
 
-void CBasicSound::UseSamplePtr(Sample *samples, int numSamples) {
+void CBasicSound::UseSamples(std::shared_ptr<OggFile> theSample) {
+    if (theSample != nullptr) {
+        itsSamples = theSample;
+        sampleLen = static_cast<int32_t>(itsSamples->samples.size());
+        loopStart = itsSamples->hsnd.loopStart;
+        loopEnd = itsSamples->hsnd.loopEnd;
+        loopCount[0] = loopCount[1] = itsSamples->hsnd.loopCount;
+    } else {
+        itsSamples = nullptr;
+        sampleLen = 0;
+        loopStart = 0;
+        loopEnd = 0;
+        loopCount[0] = loopCount[1] = 0; // Don't loop.
+    }
+
     currentCount[0].i = 0;
     currentCount[0].f = 0;
 
     currentCount[1].i = 0;
     currentCount[1].f = 0;
-
-    sampleLen = numSamples;
-    sampleData = samples;
-    loopStart = 0;
-    loopEnd = 0;
-    loopCount[0] = loopCount[1] = 0; //	Don't loop.
 }
 
-void CBasicSound::UseSamples(SampleHeaderHandle theSample) {
-    if (theSample) {
-        itsSamples = theSample;
-        UseSamplePtr(sizeof(SampleHeader) + (Sample *)*theSample, (*theSample)->len);
-        loopStart = (*itsSamples)->loopStart;
-        loopEnd = (*itsSamples)->loopEnd;
-        loopCount[0] = loopCount[1] = (*itsSamples)->loopCount;
-    } else {
-        UseSamplePtr(NULL, 0);
-    }
-}
-
-void CBasicSound::CalculatePosition(int t) {
+void CBasicSound::CalculatePosition(int32_t t) {
     CSoundMixer *m;
     SoundLink *s;
     short i;
@@ -239,8 +234,8 @@ void CBasicSound::CalculateMotionVolume() {
             //	Sound position	LEFT		MIDDLE		RIGHT
             //	Left channel	1.0			0.5			0.0
             //	Right channel	0.0			0.5			1.0
-            volumes[0] = FMul(FIX(1) - rightDot, adjustedVolume) >> (18 - VOLUMEBITS);
-            volumes[1] = FMul(FIX(1) + rightDot, adjustedVolume) >> (18 - VOLUMEBITS);
+            volumes[0] = FMul(FIX1 - rightDot, adjustedVolume) >> (18 - VOLUMEBITS);
+            volumes[1] = FMul(FIX1 + rightDot, adjustedVolume) >> (18 - VOLUMEBITS);
         } else { //	"Soft" stereo effect for headphones users.
             //	Sound position	LEFT		MIDDLE		RIGHT
             //	Left channel	1.0			0.66		0.33
@@ -276,7 +271,7 @@ void CBasicSound::CalculateMotionVolume() {
         volumes[1] = volumeMax;
 }
 
-short CBasicSound::CalcVolume(short theChannel) {
+int16_t CBasicSound::CalcVolume(int16_t theChannel) {
     if (controlLink) {
         if (controlLink->meta == metaSuspend)
             return 0;
@@ -300,28 +295,29 @@ short CBasicSound::CalcVolume(short theChannel) {
     return volumes[theChannel];
 }
 
-void CBasicSound::WriteFrame(short theChannel, short volumeAllowed) {
-    Sample *s;
-    WordSample *d;
-    SampleConvert *converter;
+void CBasicSound::WriteFrame(int16_t theChannel, int16_t volumeAllowed) {
+    //Sample *s;
+    //Sample *sampleData = *itsSamples->samples;
+    //WordSample *d;
+    //SampleConvert *converter;
     int thisCount;
     int remaining;
     int baseCount = currentCount[0].i;
     int loopCopy = loopCount[0];
 
-    converter = &itsMixer->volumeLookup[volumeAllowed - 1];
-    d = itsMixer->mixTo[theChannel];
+    //converter = &itsMixer->volumeLookup[volumeAllowed - 1];
+    //d = itsMixer->mixTo[theChannel];
 
     if (baseCount >= 0) {
         thisCount = itsMixer->soundBufferSize;
     } else {
-        d -= baseCount;
+        //d -= baseCount;
         thisCount = itsMixer->soundBufferSize + baseCount;
         baseCount = 0;
     }
 
     do {
-        s = sampleData + baseCount;
+        //s = sampleData + baseCount;
 
         remaining = baseCount + thisCount - loopEnd;
         if (loopCopy && remaining > 0) {

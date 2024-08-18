@@ -14,16 +14,14 @@
 #define kPillGravity FIX3(120)
 #define kFriction FIX3(800)
 
-void CPill::IAbstractActor() {
-    CBall::IAbstractActor();
-
+CPill::CPill() {
     mass = kStandardPillMass;
 
     shieldsCharge = FIX3(5);
     maxShields = FIX(17);
     shootShields = FIX(15);
     shields = maxShields;
-    dropDamage = FIX(1);
+    dropDamage = FIX1;
 
     holdShieldLimit = shootShields;
 

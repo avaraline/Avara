@@ -1,73 +1,71 @@
 <map>
-  <GroundColor fill="#000055" />
-  <SkyColor fill="#ff66ff" frame="#ccccff" />
-  <Wall fill="#3366ff" frame="#000000" x="44.93055555555556" z="8.958333333333334" w="82.5" d="1.25" h="17.5" />
-  <Wall fill="#3366ff" frame="#000000" x="4.305555555555555" z="32.083333333333336" w="1.25" d="45" h="25" />
-  <Wall fill="#3366ff" frame="#000000" x="44.93055555555556" z="55.208333333333336" w="82.5" d="1.25" h="17.5" />
-  <Wall fill="#3366ff" frame="#000000" x="85.55555555555556" z="32.083333333333336" w="1.25" d="45" h="25" />
-  <Wall fill="#0000dd" frame="#000000" x="7.430555555555555" z="32.083333333333336" w="5" d="45" h="17.5" />
-  <Wall fill="#0000dd" frame="#000000" x="82.43055555555556" z="32.083333333333336" w="5" d="45" h="17.5" />
-  <Ramp deltaY="2.5" fill="#000077" frame="#000000" x="31.180555555555557" z="42.083333333333336" w="10" d="25" h="0" angle="270" />
-  <Incarnator y="20" cx="24.930555555555557" cz="14.583333333333336" angle="315" />
-  <Ramp deltaY="2.5" fill="#000077" frame="#000000" x="31.180555555555557" z="19.583333333333336" w="10" d="20" h="0" angle="270" />
-  <Ramp y="2.5" deltaY="5" fill="#0000aa" frame="#000000" x="21.805555555555557" z="20.833333333333336" w="8.75" d="22.5" h="0" angle="270" />
-  <Ramp y="2.5" deltaY="5" fill="#0000aa" frame="#000000" x="21.805555555555557" z="43.333333333333336" w="8.75" d="22.5" h="0" angle="270" />
-  <Ramp y="7.5" deltaY="10" fill="#0000dd" frame="#000000" x="13.680555555555557" z="22.083333333333336" w="7.5" d="25" h="0" angle="270" />
-  <Ramp y="7.5" deltaY="10" fill="#0000dd" frame="#000000" x="13.680555555555557" z="44.583333333333336" w="7.5" d="20" h="0" angle="270" />
-  <Ramp deltaY="2.5" fill="#000077" frame="#000000" x="58.68055555555556" z="42.083333333333336" w="10" d="25" h="0" angle="90" />
-  <Ramp deltaY="2.5" fill="#000077" frame="#000000" x="58.68055555555556" z="19.583333333333336" w="10" d="20" h="0" angle="90" />
-  <Ramp y="2.5" deltaY="5" fill="#0000aa" frame="#000000" x="68.05555555555556" z="20.833333333333336" w="8.75" d="22.5" h="0" angle="90" />
-  <Ramp y="2.5" deltaY="5" fill="#0000aa" frame="#000000" x="68.05555555555556" z="43.333333333333336" w="8.75" d="22.5" h="0" angle="90" />
-  <Ramp y="7.5" deltaY="10" fill="#0000dd" frame="#000000" x="76.18055555555556" z="22.083333333333336" w="7.5" d="25" h="0" angle="90" />
-  <Ramp y="7.5" deltaY="10" fill="#0000dd" frame="#000000" x="76.18055555555556" z="44.583333333333336" w="7.5" d="20" h="0" angle="90" />
-  <Field deltaY=".05" fill="#ffffff" frame="#000000" x="73.05555555555556" z="20.833333333333336" w="8.75" d="22.5" h="14.25" cx="76.80555555555556" cz="42.56944444444444" angle="90" />
-  <Field deltaY=".05" fill="#ffffff" frame="#000000" x="73.05555555555556" z="43.333333333333336" w="8.75" d="22.5" h="14.25" cx="76.80555555555556" cz="42.56944444444444" angle="90" />
-  <Field deltaY="1" fill="#ffffff" frame="#000000" x="78.68055555555556" z="20.833333333333336" w="2.5" d="22.5" h="17.5" cx="76.80555555555556" cz="42.56944444444444" angle="90" />
-  <Field deltaY="1" fill="#ffffff" frame="#000000" x="78.68055555555556" z="43.333333333333336" w="2.5" d="22.5" h="17.5" cx="76.80555555555556" cz="42.56944444444444" angle="90" />
-  <Field deltaY="1" fill="#ffffff" frame="#000000" x="11.180555555555555" z="20.833333333333336" w="2.5" d="22.5" h="17.5" cx="76.80555555555556" cz="42.56944444444444" angle="90" />
-  <Field deltaY="1" fill="#ffffff" frame="#000000" x="11.180555555555555" z="43.333333333333336" w="2.5" d="22.5" h="17.5" cx="76.80555555555556" cz="42.56944444444444" angle="90" />
-  <Field deltaY=".05" fill="#ffffff" frame="#000000" x="16.805555555555557" z="20.833333333333336" w="8.75" d="22.5" h="14.25" cx="76.80555555555556" cz="42.56944444444444" angle="90" />
-  <Field deltaY=".05" fill="#ffffff" frame="#000000" x="16.805555555555557" z="43.333333333333336" w="8.75" d="22.5" h="14.25" cx="76.80555555555556" cz="42.56944444444444" angle="90" />
+  <GroundColor color="#010e68" />
+  <SkyColor color="#ff85ff" color.1="#d6d7ff" />
+  <Wall color="#4180ff" color.1="#000000" x="44.93055555555556" z="8.958333333333334" w="82.5" d="1.25" h="17.5" />
+  <Wall color="#4180ff" color.1="#000000" x="4.305555555555555" z="32.083333333333336" w="1.25" d="45" h="25" />
+  <Wall color="#4180ff" color.1="#000000" x="44.93055555555556" z="55.208333333333336" w="82.5" d="1.25" h="17.5" />
+  <Wall color="#4180ff" color.1="#000000" x="85.55555555555556" z="32.083333333333336" w="1.25" d="45" h="25" />
+  <Wall color="#012ce4" color.1="#000000" x="7.430555555555555" z="32.083333333333336" w="5" d="45" h="17.5" />
+  <Wall color="#012ce4" color.1="#000000" x="82.43055555555556" z="32.083333333333336" w="5" d="45" h="17.5" />
+  <Ramp deltaY="2.5" color="#01168a" color.1="#000000" x="31.180555555555557" z="42.083333333333336" w="10" d="25" h="0" angle="90" />
+  <Incarnator y="20" cx="24.930555555555557" cz="14.583333333333336" angle="135" />
+  <Ramp deltaY="2.5" color="#01168a" color.1="#000000" x="31.180555555555557" z="19.583333333333336" w="10" d="20" h="0" angle="90" />
+  <Ramp y="2.5" deltaY="5" color="#0122b9" color.1="#000000" x="21.805555555555557" z="20.833333333333336" w="8.75" d="22.5" h="0" angle="90" />
+  <Ramp y="2.5" deltaY="5" color="#0122b9" color.1="#000000" x="21.805555555555557" z="43.333333333333336" w="8.75" d="22.5" h="0" angle="90" />
+  <Ramp y="7.5" deltaY="10" color="#012ce4" color.1="#000000" x="13.680555555555557" z="22.083333333333336" w="7.5" d="25" h="0" angle="90" />
+  <Ramp y="7.5" deltaY="10" color="#012ce4" color.1="#000000" x="13.680555555555557" z="44.583333333333336" w="7.5" d="20" h="0" angle="90" />
+  <Ramp deltaY="2.5" color="#01168a" color.1="#000000" x="58.68055555555556" z="42.083333333333336" w="10" d="25" h="0" angle="270" />
+  <Ramp deltaY="2.5" color="#01168a" color.1="#000000" x="58.68055555555556" z="19.583333333333336" w="10" d="20" h="0" angle="270" />
+  <Ramp y="2.5" deltaY="5" color="#0122b9" color.1="#000000" x="68.05555555555556" z="20.833333333333336" w="8.75" d="22.5" h="0" angle="270" />
+  <Ramp y="2.5" deltaY="5" color="#0122b9" color.1="#000000" x="68.05555555555556" z="43.333333333333336" w="8.75" d="22.5" h="0" angle="270" />
+  <Ramp y="7.5" deltaY="10" color="#012ce4" color.1="#000000" x="76.18055555555556" z="22.083333333333336" w="7.5" d="25" h="0" angle="270" />
+  <Ramp y="7.5" deltaY="10" color="#012ce4" color.1="#000000" x="76.18055555555556" z="44.583333333333336" w="7.5" d="20" h="0" angle="270" />
+  <Field deltaY=".05" color="#ffffff" color.1="#000000" x="73.05555555555556" z="20.833333333333336" w="8.75" d="22.5" h="14.25" cx="76.80555555555556" cz="42.56944444444444" angle="270" />
+  <Field deltaY=".05" color="#ffffff" color.1="#000000" x="73.05555555555556" z="43.333333333333336" w="8.75" d="22.5" h="14.25" cx="76.80555555555556" cz="42.56944444444444" angle="270" />
+  <Field deltaY="1" color="#ffffff" color.1="#000000" x="78.68055555555556" z="20.833333333333336" w="2.5" d="22.5" h="17.5" cx="76.80555555555556" cz="42.56944444444444" angle="270" />
+  <Field deltaY="1" color="#ffffff" color.1="#000000" x="78.68055555555556" z="43.333333333333336" w="2.5" d="22.5" h="17.5" cx="76.80555555555556" cz="42.56944444444444" angle="270" />
+  <Field deltaY="1" color="#ffffff" color.1="#000000" x="11.180555555555555" z="20.833333333333336" w="2.5" d="22.5" h="17.5" cx="76.80555555555556" cz="42.56944444444444" angle="270" />
+  <Field deltaY="1" color="#ffffff" color.1="#000000" x="11.180555555555555" z="43.333333333333336" w="2.5" d="22.5" h="17.5" cx="76.80555555555556" cz="42.56944444444444" angle="270" />
+  <Field deltaY=".05" color="#ffffff" color.1="#000000" x="16.805555555555557" z="20.833333333333336" w="8.75" d="22.5" h="14.25" cx="76.80555555555556" cz="42.56944444444444" angle="270" />
+  <Field deltaY=".05" color="#ffffff" color.1="#000000" x="16.805555555555557" z="43.333333333333336" w="8.75" d="22.5" h="14.25" cx="76.80555555555556" cz="42.56944444444444" angle="270" />
   <set wallYon=".001" wallHeight="100" />
-  <Wall fill="#ffffff" frame="#000000" x="4.305555555555555" z="32.083333333333336" w="1.25" d="45" h="0" y="25" />
-  <Wall fill="#ffffff" frame="#000000" x="44.93055555555556" z="8.958333333333334" w="82.5" d="1.25" h="0" y="17.5" />
-  <Wall fill="#ffffff" frame="#000000" x="85.55555555555556" z="32.083333333333336" w="1.25" d="45" h="0" y="25" />
-  <Wall fill="#ffffff" frame="#000000" x="44.93055555555556" z="55.208333333333336" w="82.5" d="1.25" h="0" y="17.5" />
-  <Field deltaX=".05" fill="#ffffff" frame="#000000" x="5.243055555555555" z="20.208333333333336" w="0.625" d="21.25" h="0" cx="76.80555555555556" cz="42.56944444444444" angle="90" y="25" />
-  <Field deltaX="-.05" fill="#ffffff" frame="#000000" x="84.61805555555556" z="20.833333333333336" w="0.625" d="22.5" h="0" cx="76.80555555555556" cz="42.56944444444444" angle="90" y="25" />
-  <Incarnator y="20" cx="64.93055555555556" cz="15.208333333333336" angle="45" />
-  <Incarnator y="20" cx="24.930555555555557" cz="49.583333333333336" angle="225" />
-  <Incarnator y="20" cx="64.93055555555556" cz="49.583333333333336" angle="135" />
+  <Wall color="#ffffff" color.1="#000000" x="4.305555555555555" z="32.083333333333336" w="1.25" d="45" h="0" y="25" />
+  <Wall color="#ffffff" color.1="#000000" x="44.93055555555556" z="8.958333333333334" w="82.5" d="1.25" h="0" y="17.5" />
+  <Wall color="#ffffff" color.1="#000000" x="85.55555555555556" z="32.083333333333336" w="1.25" d="45" h="0" y="25" />
+  <Wall color="#ffffff" color.1="#000000" x="44.93055555555556" z="55.208333333333336" w="82.5" d="1.25" h="0" y="17.5" />
+  <Field deltaX=".05" color="#ffffff" color.1="#000000" x="5.243055555555555" z="20.208333333333336" w="0.625" d="21.25" h="0" cx="76.80555555555556" cz="42.56944444444444" angle="270" y="25" />
+  <Field deltaX="-.05" color="#ffffff" color.1="#000000" x="84.61805555555556" z="20.833333333333336" w="0.625" d="22.5" h="0" cx="76.80555555555556" cz="42.56944444444444" angle="270" y="25" />
+  <Incarnator y="20" cx="64.93055555555556" cz="15.208333333333336" angle="225" />
+  <Incarnator y="20" cx="24.930555555555557" cz="49.583333333333336" angle="45" />
+  <Incarnator y="20" cx="64.93055555555556" cz="49.583333333333336" angle="315" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="50" />
-  <Goody shape="bspGrenade" speed="2" yon="100" y="2" grenades="6" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="44.93055555555556" cz="32.083333333333336" angle="225" />
+  <Goody shape="bspGrenade" speed="2" yon="100" y="2" grenades="6" start="gShow" out="gTaken" color="#ffffff" color.1="#000000" cx="44.93055555555556" cz="32.083333333333336" angle="45" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="100" />
-  <Goody shape="bspGrenade" speed="2" yon="100" y="19.5" grenades="6" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="82.43055555555556" cz="32.083333333333336" angle="225" />
+  <Goody shape="bspGrenade" speed="2" yon="100" y="19.5" grenades="6" start="gShow" out="gTaken" color="#ffffff" color.1="#000000" cx="82.43055555555556" cz="32.083333333333336" angle="45" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="100" />
-  <Goody shape="bspGrenade" speed="2" yon="100" y="19.5" grenades="6" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="7.430555555555555" cz="32.083333333333336" angle="225" />
+  <Goody shape="bspGrenade" speed="2" yon="100" y="19.5" grenades="6" start="gShow" out="gTaken" color="#ffffff" color.1="#000000" cx="7.430555555555555" cz="32.083333333333336" angle="45" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="100" />
-  <Goody shape="bspMissile" speed="2" yon="100" y="19.5" missiles="4" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="7.430555555555555" cz="47.083333333333336" angle="225" />
+  <Goody shape="bspMissile" speed="2" yon="100" y="19.5" missiles="4" start="gShow" out="gTaken" color="#ffffff" color.1="#000000" cx="7.430555555555555" cz="47.083333333333336" angle="45" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="100" />
-  <Goody shape="bspMissile" speed="2" yon="100" y="19.5" missiles="4" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="82.43055555555556" cz="17.083333333333336" angle="225" />
-  <Incarnator y="25" cx="8.055555555555555" cz="39.583333333333336" angle="270" />
-  <Incarnator y="25" cx="82.43055555555556" cz="24.583333333333336" angle="90" />
-  <Teleporter group="1" spin="flase" y="17.5" fill="#330066" frame="#000000" cx="7.430555555555555" cz="12.083333333333334" angle="45" />
-  <Teleporter group="2" shape="0" y="10" spin="false" activeRange="0" fill="#330066" frame="#000000" cx="44.93055555555556" cz="12.083333333333334" angle="0" />
-  <Teleporter group="2" spin="flase" y="17.5" fill="#330066" frame="#000000" cx="82.43055555555556" cz="52.083333333333336" angle="225" />
-  <Teleporter group="1" shape="0" spin="false" y="10" activeRange="0" fill="#330066" frame="#000000" cx="44.93055555555556" cz="52.083333333333336" angle="180" />
-  <Field deltaX=".05" fill="#ffffff" frame="#000000" x="5.243055555555555" z="42.708333333333336" w="0.625" d="23.75" h="0" cx="44.93055555555556" cz="52.083333333333336" angle="180" y="25" />
-  <Field deltaX="-.05" fill="#ffffff" frame="#000000" x="84.61805555555556" z="43.333333333333336" w="0.625" d="22.5" h="0" cx="44.93055555555556" cz="52.083333333333336" angle="180" y="25" />
-  <set designer="Dave &quot;&quot;Trotsky&quot;&quot; McGee &lt;mcgeed@gladstone.uoregon.edu&gt;" information="A simulation of a skating halfpipe in avaraland.  
-This level can be used for tricks or for a simple carnage 
-game.  Each player only gets 3 lives in this one." />
-  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#ffffff" frame="#000000" cx="43.68055555555556" cz="27.708333333333336" angle="45" />
+  <Goody shape="bspMissile" speed="2" yon="100" y="19.5" missiles="4" start="gShow" out="gTaken" color="#ffffff" color.1="#000000" cx="82.43055555555556" cz="17.083333333333336" angle="45" />
+  <Incarnator y="25" cx="8.055555555555555" cz="39.583333333333336" angle="90" />
+  <Incarnator y="25" cx="82.43055555555556" cz="24.583333333333336" angle="270" />
+  <Teleporter group="1" spin="flase" y="17.5" color="#431579" color.1="#000000" cx="7.430555555555555" cz="12.083333333333334" angle="225" />
+  <Teleporter group="2" shape="0" y="10" spin="false" activeRange="0" color="#431579" color.1="#000000" cx="44.93055555555556" cz="12.083333333333334" angle="180" />
+  <Teleporter group="2" spin="flase" y="17.5" color="#431579" color.1="#000000" cx="82.43055555555556" cz="52.083333333333336" angle="45" />
+  <Teleporter group="1" shape="0" spin="false" y="10" activeRange="0" color="#431579" color.1="#000000" cx="44.93055555555556" cz="52.083333333333336" angle="0" />
+  <Field deltaX=".05" color="#ffffff" color.1="#000000" x="5.243055555555555" z="42.708333333333336" w="0.625" d="23.75" h="0" cx="44.93055555555556" cz="52.083333333333336" angle="0" y="25" />
+  <Field deltaX="-.05" color="#ffffff" color.1="#000000" x="84.61805555555556" z="43.333333333333336" w="0.625" d="22.5" h="0" cx="44.93055555555556" cz="52.083333333333336" angle="0" y="25" />
+  <set designer="Dave &quot;&quot;Trotsky&quot;&quot; McGee &lt;mcgeed@gladstone.uoregon.edu&gt;" information="A simulation of a skating halfpipe in avaraland.  &#10;This level can be used for tricks or for a simple carnage &#10;game.  Each player only gets 3 lives in this one." />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#ffffff" color.1="#000000" cx="43.68055555555556" cz="27.708333333333336" angle="225" />
 </map>

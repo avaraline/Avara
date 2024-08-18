@@ -1,0 +1,131 @@
+<map>
+  <set designer="Apollo &lt;apollo@avara.org&gt;" information="Tribal magicians often protect the &#10;placenta of a new child, believing it to be an &#10;undeveloped but magical twin." />
+  <SkyColor color="#407979" color.1="#00a8aa" />
+  <GroundColor color="#004242" />
+  <set wallHeight="2" />
+  <WallDoor isTarget="false" canGlow="true" shield="4" color="#565656" color.1="#000000" x="30.625" z="54.51388888888889" w="15" d="5" h="0" />
+  <WallDoor isTarget="false" canGlow="true" shield="4" color="#565656" color.1="#000000" x="30.625" z="69.51388888888889" w="15" d="5" h="0" />
+  <WallDoor isTarget="false" canGlow="true" shield="4" color="#565656" color.1="#000000" x="25.625" z="62.013888888888886" w="5" d="10" h="0" />
+  <WallDoor isTarget="false" canGlow="true" shield="4" color="#565656" color.1="#000000" x="40.625" z="62.013888888888886" w="5" d="20" h="0" />
+  <WallDoor isTarget="false" canGlow="true" shield="4" color="#565656" color.1="#000000" x="38.125" z="113.8888888888889" w="15" d="5" h="0" />
+  <WallDoor isTarget="false" canGlow="true" shield="4" color="#565656" color.1="#000000" x="48.125" z="121.38888888888889" w="5" d="20" h="0" />
+  <WallDoor isTarget="false" color="#565656" color.1="#000000" x="71.25" z="91.38888888888889" w="20" d="20" h="0" />
+  <WallDoor isTarget="false" canGlow="true" shield="4" color="#565656" color.1="#000000" x="45" z="94.5138888888889" w="5" d="5" h="0" />
+  <WallDoor isTarget="false" canGlow="true" shield="4" color="#565656" color.1="#000000" x="68.125" z="114.5138888888889" w="5" d="5" h="0" />
+  <WallDoor isTarget="false" canGlow="true" shield="4" color="#565656" color.1="#000000" x="104.375" z="68.81944444444444" w="15" d="5" h="0" />
+  <WallDoor isTarget="false" canGlow="true" shield="4" color="#565656" color.1="#000000" x="94.375" z="61.388888888888886" w="5" d="20" h="0" />
+  <WallDoor isTarget="false" canGlow="true" shield="4" color="#565656" color.1="#000000" x="106.875" z="113.2638888888889" w="15" d="5" h="0" />
+  <WallDoor isTarget="false" canGlow="true" shield="4" color="#565656" color.1="#000000" x="106.875" z="128.26388888888889" w="15" d="5" h="0" />
+  <WallDoor isTarget="false" canGlow="true" shield="4" color="#565656" color.1="#000000" x="101.875" z="120.7638888888889" w="5" d="10" h="0" />
+  <WallDoor isTarget="false" canGlow="true" shield="4" color="#565656" color.1="#000000" x="116.875" z="120.76388888888889" w="5" d="20" h="0" />
+  <WallDoor isTarget="false" canGlow="true" shield="4" color="#565656" color.1="#000000" x="74.375" z="68.26388888888889" w="5" d="5" h="0" />
+  <WallDoor isTarget="false" canGlow="true" shield="4" color="#565656" color.1="#000000" x="97.5" z="88.26388888888889" w="5" d="5" h="0" />
+  <set wallHeight="4" />
+  <Wall color="#565656" color.1="#000000" x="80.625" z="38.26388888888889" w="5" d="30" h="0" />
+  <Wall color="#565656" color.1="#000000" x="65.625" z="50.76388888888889" w="25" d="5" h="0" />
+  <Wall color="#565656" color.1="#000000" x="73.75" z="43.88888888888889" w="8.75" d="8.75" h="0" />
+  <Wall color="#565656" color.1="#000000" x="61.875" z="144.51388888888889" w="5" d="30" h="0" />
+  <Wall color="#565656" color.1="#000000" x="76.875" z="132.01388888888889" w="25" d="5" h="0" />
+  <Wall color="#565656" color.1="#000000" x="68.75" z="138.88888888888889" w="8.75" d="8.75" h="0" />
+  <Ramp deltaY="4" thickness="0.25" canGlow="true" isTarget="false" shield="4" color="#011a9a" color.1="#000000" x="81.25" z="138.88888888888889" w="16.25" d="8.75" h="0" angle="90" />
+  <Ramp deltaY="4" thickness="0.25" canGlow="true" isTarget="false" shield="4" color="#011a9a" color.1="#000000" x="68.75" z="151.38888888888889" w="8.75" d="16.25" h="0" angle="180" />
+  <Ramp deltaY="4" isTarget="false" thickness="0.25" canGlow="true" shield="4" color="#011a9a" color.1="#000000" x="73.75" z="31.388888888888893" w="8.75" d="16.25" h="0" angle="0" />
+  <Ramp deltaY="4" isTarget="false" thickness="0.25" canGlow="true" shield="4" color="#011a9a" color.1="#000000" x="61.25" z="43.88888888888889" w="16.25" d="8.75" h="0" angle="270" />
+  <Incarnator y="30" cx="25.069444444444443" cz="54.51388888888889" angle="135" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="29" power="1000" shield="1000" volume="0" yon=".001" start="rShow" out="rTaken" color="#009600" color.1="#000000" cx="25.069444444444443" cz="54.51388888888889" angle="135" />
+  <Incarnator y="30" cx="116.875" cz="128.26388888888889" angle="315" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="29" power="1000" shield="1000" volume="0" yon=".001" start="rShow" out="rTaken" color="#009600" color.1="#000000" cx="116.875" cz="128.26388888888889" angle="315" />
+  <Incarnator y="30" cx="33.19444444444444" cz="128.19444444444446" angle="45" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="29" power="1000" shield="1000" volume="0" yon=".001" start="rShow" out="rTaken" color="#009600" color.1="#000000" cx="33.19444444444444" cz="128.19444444444446" angle="45" />
+  <Incarnator y="30" cx="108.125" cz="55.208333333333336" angle="225" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="29" power="1000" shield="1000" volume="0" yon=".001" start="rShow" out="rTaken" color="#009600" color.1="#000000" cx="108.125" cz="55.208333333333336" angle="225" />
+  <Incarnator y="30" cx="75.625" cz="146.38888888888889" angle="315" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="29" power="1000" shield="1000" volume="0" yon=".001" start="rShow" out="rTaken" color="#009600" color.1="#000000" cx="75.625" cz="146.38888888888889" angle="315" />
+  <Incarnator y="30" cx="63.81944444444444" cz="34.51388888888889" angle="135" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="29" power="1000" shield="1000" volume="0" yon=".001" start="rShow" out="rTaken" color="#009600" color.1="#000000" cx="63.81944444444444" cz="34.51388888888889" angle="135" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Goody speed="5" shape="bspGrenade" grenades="5" y="2" start="mShow" out="mTaken" color="#ff7c00" color.1="#fffed5" cx="41.94444444444444" cz="120.69444444444446" angle="225" />
+  <Timer in="mTaken" out="mShow" wait="250" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Goody speed="5" shape="bspGrenade" grenades="5" y="2" start="mShow" out="mTaken" color="#ff7c00" color.1="#fffed5" cx="100.06944444444446" cz="63.19444444444444" angle="225" />
+  <Timer in="mTaken" out="mShow" wait="250" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Goody speed="5" shape="bspGrenade" grenades="5" y="2" start="mShow" out="mTaken" color="#ff7c00" color.1="#fffed5" cx="109.44444444444446" cz="120.69444444444446" angle="225" />
+  <Timer in="mTaken" out="mShow" wait="250" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Goody speed="5" shape="bspGrenade" grenades="5" y="2" start="mShow" out="mTaken" color="#ff7c00" color.1="#fffed5" cx="33.19444444444444" cz="61.94444444444444" angle="225" />
+  <Timer in="mTaken" out="mShow" wait="250" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Goody speed="5" shape="bspMissile" missiles="5" y="6" start="mShow" out="mTaken" color="#ff7c00" color.1="#fffed5" cx="73.81944444444444" cz="43.81944444444444" angle="225" />
+  <Timer in="mTaken" out="mShow" wait="250" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Goody speed="5" shape="bspMissile" missiles="5" y="6" start="mShow" out="mTaken" color="#ff7c00" color.1="#fffed5" cx="68.81944444444444" cz="139.44444444444446" angle="225" />
+  <Timer in="mTaken" out="mShow" wait="250" />
+  <set wallHeight="2" />
+  <FreeSolid isTarget="false" canGlow="true" shield="10" mass="200" color="#565656" color.1="#000000" x="71.25" z="92.01388888888889" w="11.25" d="11.25" h="0" cx="68.81944444444444" cz="139.44444444444446" angle="225" y="2" />
+  <script pixelToThickness="0.125" designer="Apollo &lt;apollo@avara.org&gt;" information="Tribal magicians often protect the &#10;placenta of a new child, believing it to be an &#10;undeveloped but magical twin." color="#e4e4e4" cx="71.66666666666667" cz="91.31944444444446" r="1.31944444444445" angle="315" color.1="#f42300" wallHeight="2" x="61.25" z="43.88888888888889" w="16.25" d="8.75" h="0">
+object Teleporter
+group = @centery = 2*startY
+activeRange = 2000
+deadRange = 80
+destGroup = @recenter
+y = 30
+shape = 0
+end
+object Teleporter
+y = 18
+group = @recenter
+destGroup = @nullo
+shape = 0
+speed = 0
+end
+unique mShow mTaken end
+object And in = @start out = mShow end
+object Goody
+speed = 5
+shape = bspKit
+shield = 1000
+y = 6
+start = mShow
+out = mTaken
+end
+object Timer
+in = mTaken
+out = mShow
+wait = 300
+end</script>
+  <Field speed="5" shape="bspGroundStar" deltaY="0" visible="true" y="0" color="#32fdff" color.1="#000000" x="61.25" z="43.88888888888889" w="16.25" d="8.75" h="0" cx="71.25" cz="91.3888888888889" angle="45" />
+  <Teleporter y="200" shape="0" win="1200" start="@winTeam" activeRange="2000" color="#565656" color.1="#d6a800" cx="34.61805555555556" cz="0.27777777777777773" angle="45" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Goody speed="5" shape="bspClip" sound="snReload" power="1000" y="2" start="mShow" out="mTaken" color="#2d2d2d" color.1="#fffed5" cx="28.194444444444443" cz="95.06944444444446" angle="225" />
+  <Timer in="mTaken" out="mShow" wait="250" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Goody speed="5" shape="bspClip" sound="snReload" power="1000" y="2" start="mShow" out="mTaken" color="#2d2d2d" color.1="#fffed5" cx="113.19444444444446" cz="88.81944444444444" angle="225" />
+  <Timer in="mTaken" out="mShow" wait="250" />
+</map>

@@ -8,16 +8,22 @@
 */
 
 #pragma once
+#include "AssetManager.h"
 #include "CAvaraGame.h"
 #include "CDirectObject.h"
+#include "ColorManager.h"
 #include "CSoundHub.h"
 #include "FastMat.h"
 #include "LevelLoader.h"
 #include "RayHit.h"
-#include "Resource.h"
 
-#define kMarkerColor 0x00fefefe
-#define kOtherMarkerColor 0x00fe0000
+// define ENABLE_FPS_DEBUG in files where you want FPS_DEBUG output, BEFORE including this header
+#ifdef ENABLE_FPS_DEBUG
+#include <iostream>
+#define FPS_DEBUG(stuff) std::cout << stuff
+#else
+#define FPS_DEBUG(stuff) // noop
+#endif
 
 #define MAXPARTS 6
 #define DEFAULTHITVOLUME 25
@@ -43,7 +49,7 @@
 
 #define kAllKindsBits -1
 
-enum { kNeutralTeam, kGreenTeam, kYellowTeam, kRedTeam, kPinkTeam, kPurpleTeam, kBlueTeam, kOrangeTeam, kLimeTeam };
+enum { kNeutralTeam, kGreenTeam, kYellowTeam, kRedTeam, kPinkTeam, kPurpleTeam, kBlueTeam, kBlackTeam, kWhiteTeam };
 
 enum { kIsInactive = 0, kIsActive = 1, kIsGlowing = 2, kHasImpulse = 4, kHasMessage = 8 };
 
@@ -76,8 +82,10 @@ typedef union {
     CAbstractActor *a;
 } ActorOrPartLink;
 
-class CAbstractActor : public CDirectObject {
+class CAbstractActor {
 public:
+    CAbstractActor();
+    virtual ~CAbstractActor();
     CAvaraGame *itsGame;
 
     unsigned long searchCount;
@@ -95,7 +103,7 @@ public:
     CAbstractActor *nextActor;
     CAbstractActor *identLink;
     long ident;
-    long sleepTimer;
+    FrameNumber sleepTimer;
 
     CAbstractActor *postMortemLink;
     Fixed blastPower;
@@ -137,16 +145,16 @@ public:
 
     virtual void LoadPart(short ind, short resId);
     virtual void LoadPartWithColors(short ind, short resId);
-    virtual void IAbstractActor();
+
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
+    virtual void AdaptableSettings();
     virtual void AddToGame();
     virtual void FrameAction();
 
     virtual void LevelReset();
     virtual void ResumeLevel();
     virtual void PauseLevel();
-    virtual void Dispose(); //	Simply go away
 
     virtual void Shatter(short firstSliverType, short sizesCount, short *sCounts, short *sLives, Fixed speedFactor);
 
@@ -168,7 +176,7 @@ public:
 
     virtual void RadiateDamage(BlastHitRecord *blastRecord);
     virtual void PostMortemBlast(short scoreTeam, short scoreId, Boolean doDispose);
-    virtual void SecondaryDamage(short scoreTeam, short scoreColor);
+    virtual bool SecondaryDamage(short scoreTeam, short scoreColor, ScoreInterfaceReasons damageSource);
 
     virtual CSmartPart *DoCollisionTest(CSmartPart **hitList);
     virtual void BuildPartProximityList(Fixed *origin, Fixed range, MaskType filterMask);
@@ -196,7 +204,7 @@ public:
     virtual void GetFrictionTraction(Fixed *tract, Fixed *frict);
 
     //	Location link entry handling.
-    virtual void InitLocationLinks();
+    void InitLocationLinks();
     void LinkSphere(Fixed *origin, Fixed range);
     void LinkBox(Fixed minX, Fixed minZ, Fixed maxX, Fixed maxZ);
     void LinkPartBoxes();
@@ -207,11 +215,23 @@ public:
     virtual void RayTestWithGround(RayHitRecord *hitRec, MaskType testMask);
     virtual short GetPlayerPosition();
 
-    uint32_t GetTeamColorOr(uint32_t defaultColor);
+    ARGBColor GetTeamColorOr(ARGBColor defaultColor);
 
     virtual short GetBallSnapPoint(long theGroup,
         Fixed *ballLocation,
         Fixed *snapDest,
         Fixed *delta,
         CSmartPart **hostPart);
+
+    // subclasses override if they can handle all the frames when running faster than CLASSICFRAMETIME
+    virtual bool HandlesFastFPS() { return false; }
+    void FpsCoefficients(Fixed classicCoeff1, Fixed classicCoeff2,
+                         Fixed* fpsCoeff1, Fixed* fpsCoeff2, Fixed* fpsOffset = NULL);
+    Fixed FpsCoefficient1(Fixed classicMultiplier1);
+    Fixed FpsCoefficient2(Fixed classicMultiplier2);
+    Fixed FpsOffset(Fixed classicCoeff2);
+    FrameNumber FpsFramesPerClassic(FrameNumber classicFrames = 1);
+    Fixed ClassicCoefficient2(Fixed fpsValue);
+private:
+    virtual double FpsCoefficient1(double classicCoeef1, double fpsScale);
 };

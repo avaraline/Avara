@@ -7,6 +7,7 @@
     Modified: Wednesday, September 4, 1996, 00:06
 */
 
+#include "AssetManager.h"
 #include "CGoal.h"
 
 #include "CBall.h"
@@ -52,11 +53,14 @@ CAbstractActor *CGoal::EndScript() {
 
     goalSound = ReadLongVar(iSound);
     goalVolume = ReadFixedVar(iVolume);
-    gHub->PreLoadSample(goalSound);
+
+    // Preload sounds.
+    auto _ = AssetManager::GetOgg(goalSound);
 
     resId = ReadLongVar(iShape);
 
-    if (GetResource('BSPT', resId)) {
+    auto bsp = AssetManager::GetBsp(resId);
+    if (bsp) {
         LoadPartWithColors(0, resId);
         partList[0]->Reset();
         partList[0]->RotateZ(ReadFixedVar(iRoll));
@@ -113,7 +117,7 @@ long CGoal::ReceiveSignal(long theSignal, void *miscData) {
     if (theSignal == kBallAttached) {
         theBall = (CBall *)miscData;
 
-        DoSound(goalSound, location, goalVolume, FIX(1));
+        DoSound(goalSound, location, goalVolume, FIX1);
         itsGame->FlagMessage(goalMsg);
 
         itsGame->scoreReason = ksiScoreGoal;

@@ -22,11 +22,8 @@ CWallActor *lastWallActor = 0;
 
 void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWalls, Boolean isOrigWall) {
     Boolean tooBig;
-    Boolean rotated;
     Fixed centerX, centerZ;
     Vector dim;
-    short deltaX, deltaY;
-    short resIndex;
     Fixed addAlt;
     CSmartBox *box;
     short resId;
@@ -65,7 +62,6 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
             }
 
             otherWall = new CWallActor;
-            otherWall->IAbstractActor();
             otherWall->MakeWallFromRect(&smallRect, height, newDecim, false);
         }
     } while (tooBig);
@@ -85,8 +81,7 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
     resId = ReadLongVar(dim[1] == 0 ? iFloorTemplateResource : iWallTemplateResource);
 
     partCount = 1;
-    box = new CSmartBox;
-    box->ISmartBox(resId, dim, GetPixelColor(), GetOtherPixelColor(), this, 0);
+    box = new CSmartBox(resId, dim, GetPixelColor(), GetOtherPixelColor(), this, 0);
     box->Reset();
     TranslatePart(box, centerX, addAlt + dim[1], centerZ);
     box->MoveDone();
@@ -117,7 +112,9 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
         itsGame->AddActor(this);
 
         stepSound = ReadLongVar(iStepSound);
-        gHub->LoadSample(stepSound);
+
+        // Preload sounds.
+        auto _ = AssetManager::GetOgg(stepSound);
 
         lastWallActor = this;
 
@@ -147,6 +144,6 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
         }
         */
     } else {
-        Dispose();
+        delete this;
     }
 }

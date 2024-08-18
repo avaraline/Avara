@@ -16,3 +16,10 @@ src/util/GitVersion.h
 levels/*/log.txt
 zig-*/
 .zig-*/
+vcpkg-configuration.json
+vcpkg_installed
+.vs
+Avara.msvc/x64/
+Avara.msvc/Avara*/
+Avara.msvc/Tests/
+*.vcxproj.user

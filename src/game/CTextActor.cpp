@@ -12,6 +12,7 @@
 #include "CSmartPart.h"
 //#include "CInfoPanel.h"
 #include "CAbstractPlayer.h"
+#include "Messages.h"
 
 void CTextActor::BeginScript() {
     CAbstractActor::BeginScript();
@@ -28,7 +29,7 @@ void CTextActor::BeginScript() {
     ProgramLongVar(iFrequency, 5);
     ProgramLongVar(iTimer, 0);
 
-    ProgramLongVar(iAlignment, centerAlign);
+    ProgramLongVar(iAlignment, static_cast<short>(MsgAlignment::Center));
 
     ProgramLongVar(iSound, 150);
     ProgramFixedVar(iVolume, FIX3(250));
@@ -36,8 +37,6 @@ void CTextActor::BeginScript() {
 
 CAbstractActor *CTextActor::EndScript() {
     if (CAbstractActor::EndScript()) {
-        MsgType inMsg;
-
         radius = GetLastOval(location);
         location[1] = ReadFixedVar(iHeight) + ReadFixedVar(iBaseHeight);
 
@@ -52,14 +51,16 @@ CAbstractActor *CTextActor::EndScript() {
 
         nextShowTime = 0;
         restartDelay = ReadLongVar(iRestartFlag);
-        frequency = ReadLongVar(iFrequency);
+        frequency = FrameNumber(ReadLongVar(iFrequency));
 
-        textTimer = ReadLongVar(iTimer);
+        textTimer = FrameNumber(ReadLongVar(iTimer));
         showTime = -1;
 
         soundId = ReadLongVar(iSound);
         soundVol = ReadFixedVar(iVolume);
-        gHub->PreLoadSample(soundId);
+
+        // Preload sounds.
+        auto _ = AssetManager::GetOgg(soundId);
 
         return this;
     } else {
@@ -67,10 +68,8 @@ CAbstractActor *CTextActor::EndScript() {
     }
 }
 
-void CTextActor::Dispose() {
+CTextActor::~CTextActor() {
     itsGame->RemoveReceiver(&in);
-
-    CAbstractActor::Dispose();
 }
 
 void CTextActor::FrameAction() {
@@ -142,7 +141,7 @@ void CTextActor::FrameAction() {
             areaFlag = newFlag;
             if (newFlag) {
                 isActive |= kIsActive;
-                showTime = itsGame->frameNumber + textTimer;
+                showTime = itsGame->FramesFromNow(textTimer);
             }
         }
     }
@@ -154,7 +153,7 @@ void CTextActor::FrameAction() {
         dullSound->SetVolume(soundVol);
         dullSound->Start();
 
-        itsGame->itsApp->StringLine(theMessage, alignment);
+        itsGame->itsApp->StringLine(theMessage, static_cast<MsgAlignment>(alignment));
         isActive &= ~kIsActive;
     }
 }

@@ -9,7 +9,10 @@
 
 #define DOPPLERPLUG
 
+#include "OggFile.h"
 #include "SoundSystemDefines.h"
+
+#include <memory>
 
 /*
     The RateMixer function is used by sound channels that have a playing
@@ -18,25 +21,25 @@
     we reach endOffset. The record pointed to by 'current' is updated at
     the end and the number of samples not yet written is returned.
 */
-short RateMixer(Sample *source,
+int16_t RateMixer(std::shared_ptr<OggFile> source,
     WordSample *dest,
     WordSample *converter,
-    short outCount,
-    int endOffset,
+    int16_t outCount,
+    int32_t endOffset,
     SampleIndex *current,
-    Fixed theRate) {
-    int offset;
-    int fracOffset;
-    int rate;
-    int fracRate;
-    int i;
+    UnsignedFixed theRate) {
+    int32_t offset;
+    int32_t fracOffset;
+    int32_t rate;
+    int32_t fracRate;
+    int32_t i;
 
     if (outCount > 0) {
         i = outCount;
         offset = current->i - endOffset;
         fracOffset = current->f;
 
-        source += endOffset;
+        //source += endOffset;
 
         if (offset < 0) {
             rate = theRate;
@@ -44,7 +47,8 @@ short RateMixer(Sample *source,
             rate >>= 16;
 
             do {
-                *(dest++) += converter[source[offset]];
+                //*(dest++) += converter[source[offset]];
+                *(dest++) += converter[source->samples[endOffset + offset]];
                 fracOffset = fracRate + (unsigned short)fracOffset;
                 offset += (fracOffset >> 16) + rate;
             } while (--i && offset < 0);
@@ -59,8 +63,8 @@ short RateMixer(Sample *source,
     return outCount;
 }
 
-void InterleaveStereoChannels(WordSample *leftCh, WordSample *rightCh, WordSample *blendTo, short bufferSize) {
-    short i = bufferSize;
+void InterleaveStereoChannels(WordSample *leftCh, WordSample *rightCh, WordSample *blendTo, size_t bufferSize) {
+    size_t i = bufferSize;
 
     do {
         *blendTo++ = *leftCh++;

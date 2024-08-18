@@ -9,6 +9,8 @@
 
 #include "CHologramActor.h"
 
+#include "AbstractRenderer.h"
+#include "AssetManager.h"
 #include "CBSPPart.h"
 #include "CBSPWorld.h"
 
@@ -17,6 +19,7 @@ void CHologramActor::BeginScript() {
 
     ProgramLongVar(iShape, 600);
     ProgramVariable(iRoll, 0);
+    ProgramVariable(iPitch, 0);
     ProgramLongVar(iIsAmbient, false);
 }
 
@@ -27,27 +30,25 @@ CAbstractActor *CHologramActor::EndScript() {
 
     resId = ReadLongVar(iShape);
 
-    if (GetResource('BSPT', resId)) {
-        CBSPWorld *theWorld;
+    auto bsp = AssetManager::GetBsp(resId);
+    if (bsp) {
         CBSPPart *thePart;
-
-        theWorld = gCurrentGame->itsWorld;
 
         LoadPartWithColors(0, resId);
         thePart = (CBSPPart *)partList[0];
         if (ReadLongVar(iIsAmbient) > 0)
             thePart->userFlags |= CBSPUserFlags::kIsAmbient;
-        thePart->userFlags |= CBSPUserFlags::kCullBackfaces;
         thePart->Reset();
         thePart->RotateZ(ReadFixedVar(iRoll));
+        thePart->RotateX(ReadFixedVar(iPitch));
         thePart->RotateOneY(heading);
         TranslatePart(thePart, location[0], location[1], location[2]);
         thePart->MoveDone();
         partList[0] = NULL;
 
-        theWorld->AddPart(thePart);
+        gRenderer->AddPart(thePart);
     }
 
-    Dispose();
+    delete this;
     return NULL;
 }

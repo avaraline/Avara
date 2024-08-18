@@ -11,7 +11,7 @@
 
 #include "Types.h"
 
-typedef struct {
+struct FunctionTable {
     uint32_t down;
     uint32_t up;
     uint32_t held;
@@ -23,11 +23,13 @@ typedef struct {
     Point mouseDelta;
     uint8_t buttonStatus;
     char msgChar;
-} FunctionTable;
+
+    void merge(const FunctionTable& ft);
+};
 
 typedef struct {
     FunctionTable ft;
-    uint32_t validFrame;
+    FrameNumber validFrame;
 } FrameFunction;
 
 //	Flags for "p1" of packet.
@@ -70,10 +72,12 @@ enum {
 
     kfuScoutView,
     kfuScoutControl,
-    
+
     kfuSpectateNext,
     kfuSpectatePrevious,
-    
+
+    kfuToggleFreeCam,
+
     kfuScoreboard,
 
     kfuPauseGame,
@@ -87,6 +91,9 @@ enum {
     kfuLookRight,
     kfuAimForward,
 
+    kfuFreeCamUp,
+    kfuFreeCamDown,
+
     kKeyFuncCount
 };
 
@@ -99,3 +106,7 @@ extern	Byte			CrsrNew;
 extern	Byte			CrsrCouple;
 extern	Byte			CrsrScale;
 */
+
+// serialize & deserialize FunctionTable
+std::ostream& operator<< (std::ostream& os, const FunctionTable& ft);
+std::istream& operator>> (std::istream& is, FunctionTable& ft);

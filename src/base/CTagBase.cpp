@@ -8,8 +8,6 @@
 */
 
 #include "CTagBase.h"
-
-#include "Files.h"
 #include "Memory.h"
 #include "RamFiles.h"
 
@@ -32,7 +30,8 @@ void CTagBase::ITagBase() {
     masterCount = 0;
     realMasterSize = 0;
     logicalMasterSize = 0;
-    masterBlocks = (TagMasterBlock **)NewHandle(0);
+    masterBlocksHandle = NewHandle(0);
+    masterBlocks = (TagMasterBlock **)masterBlocksHandle;
 
     firstFreeMaster = -1; //	No free masters.
 
@@ -454,7 +453,7 @@ short CTagBase::SetFlags(long index, short flags) {
 
 void CTagBase::ReleaseFlagged(short flagMask, short flagValue) {
     TagMasterBlock *masterP;
-    short theFlags;
+    //short theFlags;
     long i;
 
     i = masterCount;
@@ -471,83 +470,11 @@ void CTagBase::ReleaseFlagged(short flagMask, short flagValue) {
 }
 
 void CTagBase::Dispose() {
-    DisposHandle(tagBaseBlocks);
-    DisposHandle((Handle)masterBlocks);
+    DisposeHandle(tagBaseBlocks);
+    masterBlocks = 0;
+    DisposeHandle(masterBlocksHandle);
 
     CBaseObject::Dispose();
-}
-
-/*
-**	TagBase objects usually have to be saved to files.
-**	To facilitate this, the whole contents of the database
-**	can be dumped into a single handle. The following methods
-**	dump the contents to a handle and allow you to read it
-**	back from a handle of the same format.
-*/
-Handle CTagBase::ConvertToHandle() {
-    Handle theHandle;
-    long neededSize;
-    TagMasterBlock *masterP;
-    TagDataBlock *dataP;
-    StoredTagDataBaseElement *element;
-    long i;
-
-    i = masterCount;
-    neededSize = 0; //	First time around, find out how much RAM is needed.
-
-    while (i--) {
-        masterP = i + *masterBlocks;
-
-        if (masterP->offset >= 0) {
-            dataP = (TagDataBlock *)(masterP->offset + *tagBaseBlocks);
-            neededSize += sizeof(StoredTagDataBaseElement) + dataP->dataLen;
-            neededSize += neededSize & 1; //	Keep it even.
-        }
-    }
-    theHandle = NewHandle(neededSize);
-
-    i = masterCount;
-    neededSize = 0; //	Use as an offset from now on.
-    while (i--) {
-        masterP = i + *masterBlocks;
-
-        if (masterP->offset >= 0) {
-            element = (StoredTagDataBaseElement *)(*theHandle + neededSize);
-            element->tag = masterP->tag;
-            dataP = (TagDataBlock *)(masterP->offset + *tagBaseBlocks);
-            element->dataLen = dataP->dataLen;
-            BlockMoveData(dataP->data, element->data, dataP->dataLen);
-
-            neededSize += sizeof(StoredTagDataBaseElement) + dataP->dataLen;
-            neededSize += neededSize & 1; //	Keep it even.
-        }
-    }
-
-    return theHandle;
-}
-
-void CTagBase::ConvertFromHandle(Handle theHandle) {
-    SignedByte state;
-    long offset;
-    long totalSize;
-    StoredTagDataBaseElement *element;
-
-    if (theHandle) {
-        state = HGetState(theHandle);
-        HLock(theHandle);
-
-        offset = 0;
-        totalSize = GetHandleSize(theHandle);
-
-        while (offset < totalSize) {
-            element = (StoredTagDataBaseElement *)(offset + *theHandle);
-            offset += element->dataLen + sizeof(StoredTagDataBaseElement);
-            offset += offset & 1;
-            WriteEntry(element->tag, element->dataLen, element->data);
-        }
-
-        HSetState(theHandle, state);
-    }
 }
 
 void CTagBase::WriteString(long tag, StringPtr theString) {
@@ -611,7 +538,7 @@ Handle CTagBase::ReadHandle(long tag) {
     long totalSize;
     Handle returnHandle = 0;
     long foundIndex;
-    TagMasterBlock *masterP;
+    //TagMasterBlock *masterP;
     TagDataBlock *dataP;
 
     totalSize = 0;
@@ -635,9 +562,9 @@ Handle CTagBase::ReadHandle(long tag) {
 OSErr CTagBase::ReadOldHandle(long tag, Handle oldHandle) {
     long totalSize;
     long foundIndex;
-    TagMasterBlock *masterP;
+    //TagMasterBlock *masterP;
     TagDataBlock *dataP;
-    OSErr iErr;
+    OSErr iErr = 0;
 
     totalSize = 0;
 
@@ -673,52 +600,4 @@ void CTagBase::Unlock() {
         HUnlock(tagBaseBlocks);
     }
     CBaseObject::Unlock();
-}
-
-OSErr CTagBase::WriteToFile(short refNum) {
-    Handle theData;
-    long len;
-    long four;
-    OSErr theErr;
-
-    theData = ConvertToHandle();
-    len = GetHandleSize(theData);
-    HLock(theData);
-
-    four = sizeof(long);
-    theErr = FSWrite(refNum, &four, (Ptr)&len);
-
-    if (!theErr)
-        theErr = FSWrite(refNum, &len, *theData);
-
-    DisposeHandle(theData);
-
-    return theErr;
-}
-
-OSErr CTagBase::ReadFromFile(short refNum) {
-    Handle theData;
-    long len;
-    long four;
-    OSErr theErr;
-
-    four = sizeof(long);
-    theErr = FSRead(refNum, &four, (Ptr)&len);
-
-    if (!theErr) {
-        theData = NewHandle(len);
-
-        theErr = MemError();
-        if (!theErr) {
-            HLock(theData);
-            theErr = FSRead(refNum, &len, *theData);
-
-            if (!theErr)
-                ConvertFromHandle(theData);
-
-            DisposeHandle(theData);
-        }
-    }
-
-    return theErr;
 }

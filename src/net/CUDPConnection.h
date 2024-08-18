@@ -12,6 +12,7 @@
 #include "CDirectObject.h"
 #include "CommDefs.h"
 #include "RolloverCounter.h"
+#include "SlidingHistogram.h"
 
 #define kSerialNumberStepSize 2
 #define kNumReceivedOffsets 128
@@ -28,7 +29,8 @@ typedef struct {
     // int32_t lastSendTime;
     int32_t nextSendTime;
     SerialNumber serialNumber;
-    int16_t sendCount;
+    uint8_t sendCount;
+    uint8_t _spares[5]; // for 8-byte alignment in queues
 
 } UDPPacketInfo;
 #pragma pack()
@@ -62,7 +64,7 @@ public:
 
     QHdr queues[kQueueCount];
 
-    long seed;
+    int32_t seed;
 
     ip_addr ipAddr;
     port_num port;
@@ -74,15 +76,19 @@ public:
     SerialNumber maxValid;
 
     Boolean haveToSendAck;
-    long nextAckTime;
-    long nextWriteTime;
+    ClockTick nextAckTime;
+    ClockTick nextWriteTime;
 
-    long validTime;
+    ClockTick validTime;
 
     float meanRoundTripTime;
     float varRoundTripTime;
-    long retransmitTime;
-    long urgentRetransmitTime;
+    float meanSendCount;
+    float meanReceiveCount;
+    SlidingHistogram<float>* latencyHistogram;
+
+    ClockTick retransmitTime;
+    ClockTick urgentRetransmitTime;
 
     long quota;
     short cramData;
@@ -94,10 +100,11 @@ public:
     short dp;
     OSType d[kDebugBufferSize];
 #endif
-    
+
     long totalSent;
     long totalResent;
     long numResendsWithoutReceive;
+    double recentResendRate;
 
     volatile short *offsetBufferBusy;
     int32_t ackBitmap;
@@ -108,21 +115,25 @@ public:
     virtual void IUDPConnection(CUDPComm *theMaster);
     virtual void SendQueuePacket(UDPPacketInfo *thePacket, short theDistribution);
     virtual void RoutePacket(UDPPacketInfo *thePacket);
-    virtual UDPPacketInfo *GetOutPacket(long curTime, long cramTime, long urgencyAdjust);
-    virtual UDPPacketInfo *FindBestPacket(long curTime, long cramTime, long urgencyAdjust);
-    virtual void ProcessBusyQueue(long curTime);
+    virtual UDPPacketInfo *GetOutPacket(int32_t curTime, int32_t cramTime, int32_t urgencyAdjust);
+    virtual UDPPacketInfo *FindBestPacket(int32_t curTime, int32_t cramTime, int32_t urgencyAdjust);
+    virtual void ProcessBusyQueue(int32_t curTime);
 
     virtual char *WriteAcks(char *dest);
     virtual void RunValidate();
 
-    virtual void ValidatePacket(UDPPacketInfo *thePacket, long when);
-    virtual char *ValidateReceivedPackets(char *validateInfo, long curTime);
-    virtual void ReceivedPacket(UDPPacketInfo *thePacket);
+    virtual void ValidatePacket(UDPPacketInfo *thePacket, int32_t when);
+    virtual void ValidateReceivedPacket(UDPPacketInfo *thePacket);
+    virtual char *ValidatePackets(char *validateInfo, int32_t curTime);
+
+    virtual size_t ReceivedPacket(UDPPacketInfo *thePacket);
+    virtual bool ReceiveQueuedPackets();
 
     virtual void FlushQueues();
     virtual void Dispose();
 
     virtual void MarkOpenConnections(CompleteAddress *table);
+    virtual void RewriteConnections(CompleteAddress *table, const CompleteAddress &myAddressInTOC);
     virtual void OpenNewConnections(CompleteAddress *table);
 
     virtual Boolean AreYouDone();
@@ -138,7 +149,7 @@ public:
     virtual void ReceiveControlPacket(PacketInfo *thePacket);
 
     virtual void GetConnectionStatus(short slot, UDPConnectionStatus *parms);
-    
+
 private:
     long LatencyEstimate();
 };

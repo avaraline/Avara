@@ -1,0 +1,197 @@
+<map>
+  <set wallShield="20" />
+  <Incarnator y="2" cx="37.5" cz="54.93055555555556" angle="135" />
+  <Sound isPlaced="false" isMusic="true" sound="snBirds" volume="5" loopCount="30000" cx="37.5" cz="54.93055555555556" angle="135" />
+  <Timer in="@got" out="@good" />
+  <Timer in="@start" out="@good" />
+  <GroundColor color="#009600" />
+  <SkyColor color="#d4feff" color.1="#00acff" />
+  <set ambient.i=".6" designer="Lord Anon III -- cc96@cornell.edu" information="a field of flowers that you can save or kill,&#10;and a whole bunch of platforms to jump on" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#e62100" color.1="#000000" cx="15" cz="32.43055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#e62100" color.1="#000000" cx="52.5" cz="44.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#e62100" color.1="#000000" cx="15" cz="57.43055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#e62100" color.1="#000000" cx="37.5" cz="72.43055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#e62100" color.1="#000000" cx="15" cz="82.43055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#e62100" color.1="#000000" cx="62.5" cz="94.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#e62100" color.1="#000000" cx="5" cz="74.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#e62100" color.1="#000000" cx="67.5" cz="59.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#e62100" color.1="#000000" cx="5" cz="34.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#e62100" color.1="#000000" cx="52.5" cz="14.930555555555557" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#e62100" color.1="#000000" cx="72.5" cz="34.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#e62100" color.1="#000000" cx="72.5" cz="82.43055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#e62100" color.1="#000000" cx="62.5" cz="69.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#e62100" color.1="#000000" cx="7.5" cz="62.43055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#e62100" color.1="#000000" cx="62.5" cz="54.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#e62100" color.1="#000000" cx="7.5" cz="47.43055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#e62100" color.1="#000000" cx="62.5" cz="39.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#e62100" color.1="#000000" cx="7.5" cz="24.930555555555557" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#e62100" color.1="#000000" cx="62.5" cz="9.930555555555555" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#e62100" color.1="#000000" cx="40" cz="27.430555555555557" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#e62100" color.1="#000000" cx="32.5" cz="39.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#e62100" color.1="#000000" cx="47.5" cz="94.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#e62100" color.1="#000000" cx="27.5" cz="89.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ff7c00" color.1="#000000" cx="30" cz="59.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ff7c00" color.1="#000000" cx="12.5" cz="39.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ff7c00" color.1="#000000" cx="2.5" cz="42.43055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ff7c00" color.1="#000000" cx="42.5" cz="39.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ff7c00" color.1="#000000" cx="57.5" cz="64.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ff7c00" color.1="#000000" cx="72.5" cz="89.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ff7c00" color.1="#000000" cx="27.5" cz="99.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ff7c00" color.1="#000000" cx="7.5" cz="84.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ff7c00" color.1="#000000" cx="27.5" cz="69.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ff7c00" color.1="#000000" cx="40" cz="64.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ff7c00" color.1="#000000" cx="67.5" cz="39.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ff7c00" color.1="#000000" cx="47.5" cz="24.930555555555557" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ff7c00" color.1="#000000" cx="27.5" cz="9.930555555555555" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#fffc41" color.1="#000000" cx="62.5" cz="102.43055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#fffc41" color.1="#000000" cx="70" cz="67.43055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#fffc41" color.1="#000000" cx="50" cz="64.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#fffc41" color.1="#000000" cx="30" cz="62.43055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#fffc41" color.1="#000000" cx="10" cz="59.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#fffc41" color.1="#000000" cx="25" cz="42.43055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#fffc41" color.1="#000000" cx="27.5" cz="22.430555555555557" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#fffc41" color.1="#000000" cx="30" cz="2.4305555555555554" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#fffc41" color.1="#000000" cx="57.5" cz="32.43055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#fffc41" color.1="#000000" cx="30" cz="62.43055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#fffc41" color.1="#000000" cx="2.5" cz="92.43055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#fffc41" color.1="#000000" cx="50" cz="84.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#fffc41" color.1="#000000" cx="2.5" cz="77.43055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#fffc41" color.1="#000000" cx="67.5" cz="27.430555555555557" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#fffc41" color.1="#000000" cx="70" cz="7.430555555555555" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#fffc41" color.1="#000000" cx="42.5" cz="102.43055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#00d5ff" color.1="#000000" cx="10" cz="99.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#00d5ff" color.1="#000000" cx="37.5" cz="82.43055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#00d5ff" color.1="#000000" cx="65" cz="64.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#00d5ff" color.1="#000000" cx="37.5" cz="47.43055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#00d5ff" color.1="#000000" cx="10" cz="29.930555555555557" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#00d5ff" color.1="#000000" cx="37.5" cz="12.430555555555555" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#00d5ff" color.1="#000000" cx="65" cz="29.930555555555557" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#00d5ff" color.1="#000000" cx="5" cz="54.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#00d5ff" color.1="#000000" cx="65" cz="79.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#00d5ff" color.1="#000000" cx="30" cz="104.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ab56ff" color.1="#000000" cx="47.5" cz="74.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ab56ff" color.1="#000000" cx="70" cz="49.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ab56ff" color.1="#000000" cx="47.5" cz="24.930555555555557" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ab56ff" color.1="#000000" cx="25" cz="49.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ab56ff" color.1="#000000" cx="2.5" cz="69.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ab56ff" color.1="#000000" cx="17.5" cz="74.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ab56ff" color.1="#000000" cx="32.5" cz="79.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ab56ff" color.1="#000000" cx="35" cz="94.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ab56ff" color.1="#000000" cx="37.5" cz="79.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ab56ff" color.1="#000000" cx="55" cz="59.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ab56ff" color.1="#000000" cx="15" cz="17.430555555555557" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ab56ff" color.1="#000000" cx="25" cz="29.930555555555557" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ff32a9" color.1="#000000" cx="35" cz="42.43055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ff32a9" color.1="#000000" cx="37.5" cz="22.430555555555557" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ff32a9" color.1="#000000" cx="40" cz="2.4305555555555554" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ff32a9" color.1="#000000" cx="42.5" cz="22.430555555555557" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ff32a9" color.1="#000000" cx="45" cz="42.43055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ff32a9" color.1="#000000" cx="47.5" cz="62.43055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ff32a9" color.1="#000000" cx="17.5" cz="67.43055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ff32a9" color.1="#000000" cx="47.5" cz="72.43055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ff32a9" color.1="#000000" cx="17.5" cz="92.43055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ff32a9" color.1="#000000" cx="15" cz="104.93055555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ff32a9" color.1="#000000" cx="70" cz="19.930555555555557" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ff32a9" color.1="#000000" cx="55" cz="4.930555555555556" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ff32a9" color.1="#000000" cx="5" cz="17.430555555555557" angle="315" />
+  <Solid shape="bspFlower" shield="1" yon="80" color="#ab56ff" color.1="#000000" cx="60" cz="19.930555555555557" angle="315" />
+  <Goody shape="bspFlower" yon="80" missiles="20" grenades="20" start="@good" out="@got" color="#000000" color.1="#000000" cx="45" cz="7.430555555555555" angle="315" />
+  <Goody shape="bspFlower" yon="80" missiles="20" grenades="20" start="@good" out="@got" color="#000000" color.1="#000000" cx="50" cz="32.43055555555556" angle="315" />
+  <Goody shape="bspFlower" yon="80" missiles="20" grenades="20" start="@good" out="@got" color="#000000" color.1="#000000" cx="22.5" cz="37.43055555555556" angle="315" />
+  <Goody shape="bspFlower" yon="80" missiles="20" grenades="20" start="@good" out="@got" color="#000000" color.1="#000000" cx="52.5" cz="57.43055555555556" angle="315" />
+  <Goody shape="bspFlower" yon="80" missiles="20" grenades="20" start="@good" out="@got" color="#000000" color.1="#000000" cx="22.5" cz="77.43055555555556" angle="315" />
+  <Goody shape="bspFlower" yon="80" missiles="20" grenades="20" start="@good" out="@got" color="#000000" color.1="#000000" cx="52.5" cz="97.43055555555556" angle="315" />
+  <Goody shape="bspFlower" yon="80" missiles="20" grenades="20" start="@good" out="@got" color="#000000" color.1="#000000" cx="0" cz="59.93055555555556" angle="315" />
+  <set baseHeight="22" wallHeight="0.1" />
+  <Wall color="#e4e4e4" color.1="#000000" x="17.5" z="19.930555555555557" w="10" d="10" h="0" />
+  <Wall color="#e4e4e4" color.1="#000000" x="42.5" z="24.930555555555557" w="10" d="10" h="0" />
+  <Wall color="#e4e4e4" color.1="#000000" x="67.5" z="29.930555555555557" w="10" d="10" h="0" />
+  <Wall color="#e4e4e4" color.1="#000000" x="20" z="42.43055555555556" w="10" d="10" h="0" />
+  <Wall color="#e4e4e4" color.1="#000000" x="62.5" z="47.43055555555556" w="10" d="10" h="0" />
+  <Wall color="#e4e4e4" color.1="#000000" x="10" z="59.93055555555556" w="10" d="10" h="0" />
+  <Wall color="#e4e4e4" color.1="#000000" x="67.5" z="79.93055555555556" w="10" d="10" h="0" />
+  <Wall color="#e4e4e4" color.1="#000000" x="25" z="82.43055555555556" w="10" d="10" h="0" />
+  <Wall color="#e4e4e4" color.1="#000000" x="42.5" z="47.43055555555556" w="10" d="10" h="0" />
+  <Wall color="#e4e4e4" color.1="#000000" x="47.5" z="97.43055555555556" w="10" d="10" h="0" />
+  <Wall color="#e4e4e4" color.1="#000000" x="60" z="12.430555555555557" w="10" d="10" h="0" />
+  <Wall color="#e4e4e4" color.1="#000000" x="45" z="72.43055555555556" w="10" d="10" h="0" />
+  <set baseHeight="24" />
+  <Wall color="#8a8a8a" color.1="#000000" x="30" z="12.430555555555557" w="10" d="10" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="52.5" z="19.930555555555557" w="10" d="10" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="75" z="27.430555555555557" w="10" d="10" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="52.5" z="34.93055555555556" w="10" d="10" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="30" z="42.43055555555556" w="10" d="10" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="7.5" z="49.93055555555556" w="10" d="10" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="30" z="57.43055555555556" w="10" d="10" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="52.5" z="64.93055555555556" w="10" d="10" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="75" z="72.43055555555556" w="10" d="10" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="52.5" z="79.93055555555556" w="10" d="10" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="30" z="87.43055555555556" w="10" d="10" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="7.5" z="94.93055555555556" w="10" d="10" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="30" z="102.43055555555556" w="10" d="10" h="0" />
+  <set baseHeight="26" />
+  <Wall color="#565656" color.1="#000000" x="72.5" z="14.930555555555557" w="10" d="10" h="0" />
+  <Wall color="#565656" color.1="#000000" x="47.5" z="24.930555555555557" w="10" d="10" h="0" />
+  <Wall color="#565656" color.1="#000000" x="22.5" z="34.93055555555556" w="10" d="10" h="0" />
+  <Wall color="#565656" color.1="#000000" x="47.5" z="44.93055555555556" w="10" d="10" h="0" />
+  <Wall color="#565656" color.1="#000000" x="72.5" z="54.93055555555556" w="10" d="10" h="0" />
+  <Wall color="#565656" color.1="#000000" x="47.5" z="64.93055555555556" w="10" d="10" h="0" />
+  <Wall color="#565656" color.1="#000000" x="22.5" z="74.93055555555556" w="10" d="10" h="0" />
+  <Wall color="#565656" color.1="#000000" x="47.5" z="84.93055555555556" w="10" d="10" h="0" />
+  <Wall color="#565656" color.1="#000000" x="72.5" z="94.93055555555556" w="10" d="10" h="0" />
+  <Wall color="#565656" color.1="#000000" x="5" z="54.93055555555556" w="10" d="10" h="0" />
+  <Wall color="#565656" color.1="#000000" x="5" z="94.93055555555556" w="10" d="10" h="0" />
+  <set baseHeight="28" />
+  <Wall color="#000000" color.1="#000000" x="10" z="12.430555555555555" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="25" z="17.430555555555557" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="40" z="22.430555555555557" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="55" z="27.430555555555557" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="70" z="32.43055555555556" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="55" z="37.43055555555556" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="40" z="42.43055555555556" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="25" z="47.43055555555556" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="10" z="52.43055555555556" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="25" z="57.43055555555556" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="40" z="62.43055555555556" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="55" z="67.43055555555556" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="70" z="72.43055555555556" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="55" z="77.43055555555556" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="40" z="82.43055555555556" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="25" z="87.43055555555556" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="10" z="92.43055555555556" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="25" z="97.43055555555556" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="40" z="102.43055555555556" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="65" z="44.93055555555556" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="75" z="52.43055555555556" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="65" z="59.93055555555556" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="15" z="24.930555555555557" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="5" z="37.43055555555556" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="15" z="39.93055555555556" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="20" z="64.93055555555556" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="15" z="72.43055555555556" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="10" z="79.93055555555556" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="65" z="87.43055555555556" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="75" z="97.43055555555556" w="5" d="5" h="0" />
+  <Wall color="#000000" color.1="#000000" x="60" z="104.93055555555556" w="5" d="5" h="0" />
+  <set baseHeight="0" />
+  <Teleporter shape="bspFlower" speed="0" destGroup="@high" color="#00ec00" color.1="#000000" cx="17.5" cz="17.430555555555557" angle="315" />
+  <Teleporter y="40" shape="0" group="@high" destGroup="@non" color="#00ec00" color.1="#000000" cx="17.5" cz="17.430555555555557" angle="315" />
+  <Teleporter shape="bspFlower" speed="0" destGroup="@high" color="#00ec00" color.1="#000000" cx="65" cz="27.430555555555557" angle="315" />
+  <Teleporter y="40" shape="0" group="@high" destGroup="@non" color="#00ec00" color.1="#000000" cx="65" cz="27.430555555555557" angle="315" />
+  <Teleporter shape="bspFlower" speed="0" destGroup="@high" color="#00ec00" color.1="#000000" cx="12.5" cz="59.93055555555556" angle="315" />
+  <Teleporter y="40" shape="0" group="@high" destGroup="@non" color="#00ec00" color.1="#000000" cx="12.5" cz="59.93055555555556" angle="315" />
+  <Teleporter shape="bspFlower" speed="0" destGroup="@high" color="#00ec00" color.1="#000000" cx="67.5" cz="79.93055555555556" angle="315" />
+  <Teleporter y="40" shape="0" group="@high" destGroup="@non" color="#00ec00" color.1="#000000" cx="67.5" cz="79.93055555555556" angle="315" />
+  <Teleporter shape="bspFlower" speed="0" destGroup="@high" color="#00ec00" color.1="#000000" cx="47.5" cz="97.43055555555556" angle="315" />
+  <Teleporter y="40" shape="0" group="@high" destGroup="@non" color="#00ec00" color.1="#000000" cx="47.5" cz="97.43055555555556" angle="315" />
+  <Teleporter shape="bspFlower" speed="0" destGroup="@high" color="#00ec00" color.1="#000000" cx="60" cz="47.43055555555556" angle="315" />
+  <Teleporter y="40" shape="0" group="@high" destGroup="@non" color="#00ec00" color.1="#000000" cx="60" cz="47.43055555555556" angle="315" />
+  <Teleporter shape="bspFlower" speed="0" destGroup="@high" color="#00ec00" color.1="#000000" cx="42.5" cz="74.93055555555556" angle="315" />
+  <Teleporter y="40" shape="0" group="@high" destGroup="@non" color="#00ec00" color.1="#000000" cx="42.5" cz="74.93055555555556" angle="315" />
+  <Teleporter shape="bspFlower" speed="0" destGroup="@high" color="#00ec00" color.1="#000000" cx="60" cz="12.430555555555555" angle="315" />
+  <Teleporter y="40" shape="0" group="@high" destGroup="@non" color="#00ec00" color.1="#000000" cx="60" cz="12.430555555555555" angle="315" />
+  <Teleporter shape="bspFlower" speed="0" destGroup="@high" color="#00ec00" color.1="#000000" cx="40" cz="47.43055555555556" angle="315" />
+  <Teleporter y="40" shape="0" group="@high" destGroup="@non" color="#00ec00" color.1="#000000" cx="40" cz="47.43055555555556" angle="315" />
+  <Teleporter shape="bspFlower" speed="0" destGroup="@high" color="#00ec00" color.1="#000000" cx="20" cz="42.43055555555556" angle="315" />
+  <Teleporter y="40" shape="0" group="@high" destGroup="@non" color="#00ec00" color.1="#000000" cx="20" cz="42.43055555555556" angle="315" />
+</map>

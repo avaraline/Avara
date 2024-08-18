@@ -23,9 +23,9 @@ Widget::Widget(Widget *parent)
     : mParent(nullptr), mTheme(nullptr), mLayout(nullptr),
       mPos(Vector2i()), mSize(Vector2i()),
       mFixedSize(Vector2i()), mVisible(true), mEnabled(true),
-      mFocused(false), mMouseFocus(false), mTooltip(""), mFontSize(-1.0f),
-      mIconExtraScale(1.0f), mCursor(Cursor::Arrow), mLayoutDirty(false),
-      mFont("sans") {
+      mFocused(false), mMouseFocus(false), mTooltip(""),
+      mFont("sans"), mFontSize(-1.0f), mIconExtraScale(1.0f),
+      mCursor(Cursor::Arrow), mLayoutDirty(false) {
     if (parent)
         parent->addChild(this);
 }
@@ -160,8 +160,19 @@ void Widget::removeChild(const Widget *widget) {
 
 void Widget::removeChild(int index) {
     Widget *widget = mChildren[index];
+    removeNotifyParent(widget);
     mChildren.erase(mChildren.begin() + index);
     widget->decRef();
+}
+
+// climb the tree and let everyone (Screen) know this object is being removed.
+// ideally we would change everything to use shared_ptr<Widget> and maybe some weak_ptr references...
+// but, i'm lazy and this code should all get replaced soon (right?)
+void Widget::removeNotifyParent(const Widget *w) {
+    if (mParent) {
+        mParent->removeNotifyParent(w);
+    }
+    return;
 }
 
 int Widget::childIndex(Widget *widget) const {

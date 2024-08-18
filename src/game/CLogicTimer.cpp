@@ -16,18 +16,23 @@ void CLogicTimer::BeginScript() {
 
 CAbstractActor *CLogicTimer::EndScript() {
     if (CLogic::EndScript()) {
-        theDelay = ReadLongVar(iTimer);
-        if (theDelay < 0) {
-            theDelay = -theDelay;
-            sleepTimer = theDelay + 1;
-        }
+        theDelay = FrameNumber(ReadLongVar(iTimer));
 
         if (theDelay)
             return this;
     }
 
-    Dispose();
+    delete this;
     return NULL;
+}
+
+void CLogicTimer::AdaptableSettings() {
+    if (itsGame->frameNumber == 0) {
+        if (theDelay < 0) {
+            theDelay = -theDelay;
+            sleepTimer = FpsFramesPerClassic(theDelay + 1);
+        }
+    }
 }
 
 void CLogicTimer::FrameAction() {
@@ -42,7 +47,7 @@ void CLogicTimer::FrameAction() {
             if (in[i].triggerCount) {
                 if (enabled) {
                     sleepTimer = theDelay;
-                    whenFrame = itsGame->frameNumber + sleepTimer;
+                    whenFrame = itsGame->FramesFromNow(sleepTimer);
                 }
                 in[i].triggerCount = 0;
             }
@@ -52,7 +57,7 @@ void CLogicTimer::FrameAction() {
         Trigger();
 
         if (!restart) {
-            Dispose();
+            delete this;
             return;
         }
     }

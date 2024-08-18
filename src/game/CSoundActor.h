@@ -12,28 +12,28 @@
 
 class CSoundActor : public CPlacedActors {
 public:
-    class CRateSound *theSampler;
-    SoundLink *controlLink;
-    MessageRecord startMsg;
-    MessageRecord stopMsg;
-    MessageRecord killMsg;
+    class CRateSound *theSampler = 0;
+    SoundLink *controlLink = 0;
+    MessageRecord startMsg = {0};
+    MessageRecord stopMsg = {0};
+    MessageRecord killMsg = {0};
 
-    short soundId;
+    short soundId = 0;
 
-    Fixed volumes[2];
-    Fixed rate;
-    long loopCount;
-    long phase;
+    Fixed volumes[2] = {0};
+    Fixed rate = 0;
+    long loopCount = 0;
+    long phase = 0;
 
-    SampleIndex savedPosition[2];
-    long savedLoopCount[2];
-    Fixed savedBalance;
-    Boolean needsResume;
+    SampleIndex savedPosition[2] = {{0}};
+    int32_t savedLoopCount[2] = {0};
+    Fixed savedBalance = 0;
+    Boolean needsResume = false;
 
-    Boolean isMusic;
-    Boolean isAmbient;
-    Boolean isPlaced;
-    Boolean restart;
+    Boolean isMusic = false;
+    Boolean isAmbient = false;
+    Boolean isPlaced = false;
+    Boolean restart = false;
 
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
@@ -41,7 +41,7 @@ public:
     virtual void ResumeLevel();
     virtual void PauseLevel();
     virtual void FrameAction();
-    virtual void Dispose();
+    virtual ~CSoundActor();
 
     virtual Boolean ShouldPlay();
 };

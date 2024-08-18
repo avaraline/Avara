@@ -1,0 +1,92 @@
+{
+  "LEDI": [
+    {
+      "Alf": "carbon.alf",
+      "Name": "Carbon",
+      "Message": "6 protons, 6 neutrons, 6 electrons..."
+    },
+    {
+      "Alf": "carbon-koth.alf",
+      "Name": "Carbon KOTH",
+      "Message": "Stand in the nucleus for 1 minute."
+    },
+    {
+      "Alf": "migraine.alf",
+      "Name": "Migraine",
+      "Message": "Please...get me my pills..."
+    },
+    {
+      "Alf": "toxic.alf",
+      "Name": "Toxic",
+      "Message": "Do not drink..."
+    },
+    {
+      "Alf": "toxic-koth.alf",
+      "Name": "Toxic KOTH",
+      "Message": "I've been poisoned...darn."
+    },
+    {
+      "Alf": "burnt.alf",
+      "Name": "Burnt",
+      "Message": "Ouch...my fingers!"
+    },
+    {
+      "Alf": "supasonic.alf",
+      "Name": "Supasonic",
+      "Message": "Dedicated to Bennett Gross..."
+    }
+  ],
+  "HULL": {
+    "131": {
+      "Hull Res ID": 215,
+      "Max Missiles": 3,
+      "Max Grenades": 6,
+      "Max boosters": 3,
+      "Mass": 140.0,
+      "Max Energy": 0.9000076295109484,
+      "Energy Charge": 1.0500038147554742,
+      "Max Shields": 0.9000076295109484,
+      "Shield Charge": 1.0500038147554742,
+      "Min Shot": 1.0,
+      "Max Shot": 0.9000076295109484,
+      "Shot Charge": 1.0500038147554742,
+      "Riding Height": 0.2500038147554742,
+      "Acceleration": 1.2,
+      "Jump Power": 1.0
+    },
+    "133": {
+      "Hull Res ID": 217,
+      "Max Missiles": 8,
+      "Max Grenades": 12,
+      "Max boosters": 5,
+      "Mass": 170.0,
+      "Max Energy": 1.1000076295109484,
+      "Energy Charge": 1.0500038147554742,
+      "Max Shields": 1.1000076295109484,
+      "Shield Charge": 1.0,
+      "Min Shot": 1.1000076295109484,
+      "Max Shot": 1.0,
+      "Shot Charge": 1.0500038147554742,
+      "Riding Height": 0.3500114442664225,
+      "Acceleration": 1.2,
+      "Jump Power": 1.1000076295109484
+    },
+    "132": {
+      "Hull Res ID": 216,
+      "Max Missiles": 4,
+      "Max Grenades": 8,
+      "Max boosters": 4,
+      "Mass": 155.0,
+      "Max Energy": 1.1000076295109484,
+      "Energy Charge": 1.0249942778667887,
+      "Max Shields": 1.0,
+      "Shield Charge": 1.0,
+      "Min Shot": 1.0,
+      "Max Shot": 1.0,
+      "Shot Charge": 1.0,
+      "Riding Height": 0.3500114442664225,
+      "Acceleration": 1.3200122072175173,
+      "Jump Power": 1.0
+    }
+  }
+}

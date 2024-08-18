@@ -31,7 +31,6 @@ void CSmartBox::ScaleTemplate(Fixed *dimensions, Fixed baseSize) {
     Vector *p;
     short i;
     Fixed x, y, z;
-    ColorRecord *oldColors;
     Vector normalAdjust;
     Vector newNormal;
 
@@ -42,7 +41,7 @@ void CSmartBox::ScaleTemplate(Fixed *dimensions, Fixed baseSize) {
     if (y == 0)
         y = baseSize;
 
-    p = pointTable;
+    p = pointTable.get();
     for (i = 0; i < pointCount; i++) {
         (*p)[0] = FMulDiv((*p)[0], x, baseSize);
         (*p)[1] = FMulDiv((*p)[1], y, baseSize);
@@ -51,9 +50,9 @@ void CSmartBox::ScaleTemplate(Fixed *dimensions, Fixed baseSize) {
     }
 
     if (dimensions[0] > DIMEPSILON && dimensions[1] > DIMEPSILON && dimensions[2] > DIMEPSILON) {
-        normalAdjust[0] = FDiv(FIX(1), x);
-        normalAdjust[1] = FDiv(FIX(1), y);
-        normalAdjust[2] = FDiv(FIX(1), z);
+        normalAdjust[0] = FDiv(FIX1, x);
+        normalAdjust[1] = FDiv(FIX1, y);
+        normalAdjust[2] = FDiv(FIX1, z);
         NormalizeVector(3, normalAdjust);
 
         for (i = 0; i < polyCount; i++) {
@@ -76,11 +75,8 @@ void CSmartBox::ScaleTemplate(Fixed *dimensions, Fixed baseSize) {
 }
 
 void CSmartBox::StretchTemplate(Fixed *dimensions, Fixed baseSize) {
-    Vector *p;
     short i;
     Fixed x, y, z;
-    ColorRecord *oldColors;
-    Vector normalAdjust;
     Fixed dx, dy, dz;
     Fixed stretchBound;
 
@@ -115,18 +111,14 @@ void CSmartBox::StretchTemplate(Fixed *dimensions, Fixed baseSize) {
     FindEnclosure();
 }
 
-#define kMarkerColor 0x00fefefe
-#define kOtherMarkerColor 0x00fe0000
-
-void CSmartBox::ISmartBox(short resId,
+CSmartBox::CSmartBox(
+    short resId,
     Fixed *dimensions,
-    long color,
-    long altColor,
+    ARGBColor color,
+    ARGBColor altColor,
     CAbstractActor *anActor,
-    short aPartCode) {
-    OSErr iErr;
-    Vector *p;
-    short i;
+    short aPartCode
+) {
     bspsResource **config;
     Fixed baseSize;
     Boolean stretchFlag;
@@ -140,15 +132,16 @@ void CSmartBox::ISmartBox(short resId,
 
     CSmartPart::ISmartPart(resId, anActor, aPartCode);
 
-    config = (bspsResource **)GetResource(BSPSCALETYPE, resId);
+    auto scalingRes = GetResource(BSPSCALETYPE, resId);
+    config = (bspsResource **)scalingRes;
     if (config) {
         stretchFlag = ntohs((*config)->scaleStyle);
         baseSize = ntohl((*config)->baseSize);
-        ReleaseResource((Handle)config);
     } else {
         stretchFlag = false;
-        baseSize = FIX(1);
+        baseSize = FIX1;
     }
+    ReleaseResource(scalingRes);
 
     if (stretchFlag) {
         ScaleTemplate(dimensions, baseSize);
@@ -158,30 +151,14 @@ void CSmartBox::ISmartBox(short resId,
 
     // Just replace every color, because these shapes
     // always only have one. They're wall templates!
-    for (int i = 0; i < polyCount; i++) {
-        polyTable[i].color = color;
-    }
+    ReplaceAllColors(color);
 
     MoveDone();
 
     rSquare[0] = 0;
     rSquare[1] = 0;
     FSquareAccumulate(enclosureRadius, rSquare);
-    UpdateOpenGLData();
-}
-
-void CSmartBox::Dispose() {
-    /*
-    Handle				handCopy;
-    BSPResourceHeader	*bp;
-
-    handCopy = itsBSPResource;
-    bp = (BSPResourceHeader *)*handCopy;
-    bp->refCount = 99;	//	Prevent ReleaseResource call!
-    */
-    CSmartPart::Dispose();
-
-    // DisposeHandle(handCopy);
+    if (vData) vData->Replace(*this);
 }
 
 void CSmartBox::FindEnclosure() {
@@ -190,7 +167,7 @@ void CSmartBox::FindEnclosure() {
 
     Fixed xspan, yspan, zspan;
     Fixed maxspan;
-    Fixed rad, radsq;
+    Fixed rad;
 
     FixedPoint xmin, xmax, ymin, ymax, zmin, zmax;
     FixedPoint dia1, dia2, cen;
@@ -200,7 +177,7 @@ void CSmartBox::FindEnclosure() {
     xmin.x = ymin.y = zmin.z = 0x7fFFffFF;
     xmax.x = ymax.y = zmax.z = -0x7fFFffFF;
 
-    p = (FixedPoint *)pointTable;
+    p = (FixedPoint *)pointTable.get();
     for (i = 0; i < pointCount; i++) {
         if (p->x < xmin.x)
             xmin = *p;
@@ -262,7 +239,7 @@ void CSmartBox::FindEnclosure() {
 
     rad = maxspan / 2;
 
-    p = (FixedPoint *)pointTable;
+    p = (FixedPoint *)pointTable.get();
     for (i = 0; i < pointCount; i++) {
         Fixed newrad;
 
@@ -289,7 +266,7 @@ void CSmartBox::FindEnclosure() {
 
     enclosurePoint = cen;
 
-    p = (FixedPoint *)pointTable;
+    p = (FixedPoint *)pointTable.get();
     xspan = 0;
     for (i = 0; i < pointCount; i++) {
         if (FDistanceOverEstimate(p->x, p->y, p->z) > xspan) {

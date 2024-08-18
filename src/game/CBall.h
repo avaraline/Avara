@@ -31,8 +31,8 @@ public:
     Fixed pitchZ;
     Fixed pitchY;
 
-    Fixed customGravity;
-    Fixed acceleration;
+    Fixed classicGravity, customGravity;
+    Fixed classicAcceleration, acceleration;
 
     Fixed changeHolderPower;
     short holderScoreId;
@@ -50,7 +50,8 @@ public:
     long ownerChangeCount;
     long ownerChangeTime;
     short ownerScoringId;
-    long origLongColor;
+    short lastOwner;
+    ARGBColor origLongColor = 0;
 
     short origTeam;
     short origWatchTeams;
@@ -78,10 +79,11 @@ public:
 
     Boolean playerAttach;
 
-    virtual void IAbstractActor();
+    CBall();
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
-    virtual void Dispose();
+    virtual ~CBall();
+    virtual void AdaptableSettings(); // Read settings that can change with frame rate
 
     virtual void ChangeOwnership(short ownerId, short ownerTeamColor);
 
@@ -95,4 +97,5 @@ public:
     virtual void WasHit(RayHitRecord *theHit, Fixed hitEnergy);
     virtual void ReleaseDamage(Fixed hitEnergy);
     virtual short GetShooterId();
+    virtual bool HandlesFastFPS() { return true; }
 };

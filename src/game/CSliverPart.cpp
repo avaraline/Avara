@@ -10,8 +10,9 @@
 #include "CSliverPart.h"
 
 #include "CAvaraGame.h"
+#include "CAbstractPlayer.h"
 
-extern ColorRecord ***bspColorLookupTable;
+extern ARGBColor ***bspColorLookupTable;
 Fixed sliverGravity = -FIX3(20);
 
 #if 0
@@ -24,12 +25,10 @@ void	CSliverPart::GenerateColorLookupTable()
 Fixed FSysRandom() {
     return rand() & 0x0000FFFF;
 }
-
-void CSliverPart::ISliverPart(short partNum) {
+CSliverPart::CSliverPart(short partNum) {
     ISmartPart(partNum, NULL, 0);
     ignoreDirectionalLights = true;
-    nextSliver = NULL;
-}
+    nextSliver = NULL;}
 
 void CSliverPart::Activate(Fixed *origin,
     Fixed *direction,
@@ -42,24 +41,23 @@ void CSliverPart::Activate(Fixed *origin,
     int offset = FSysRandom() % (fromObject->polyCount);
     borrowPoly = &fromObject->polyTable[offset];
 
-    ColorRecord c = borrowPoly->color;
+    ARGBColor c = fromObject->currColorTable[borrowPoly->colorIdx];
 
-    ReplaceColor(0x00fefefe, c); // marker color
+    ReplaceColor(*ColorManager::getMarkerColor(0), c);
 
-    Matrix tm;
     Fixed vLen;
     Fixed smallVector[2];
 
     // TODO: update for new BSP code
     /*
-    ColorRecord	*colorP;
+    ARGBColor	*colorP;
     NormalRecord	*borrowNorms;
     short		borrowPoly, borrowColor;
 
     if(fromObject->colorReplacements)
-        colorP = (ColorRecord *) *fromObject->colorReplacements;
+        colorP = (ARGBColor *) *fromObject->colorReplacements;
     else
-        colorP = (ColorRecord *) (fromObject->header.colorOffset + *fromObject->itsBSPResource);
+        colorP = (ARGBColor *) (fromObject->header.colorOffset + *fromObject->itsBSPResource);
 
     borrowPoly = (FRandomBeta() * fromObject->header.normalCount)>>16;
     borrowNorms = (NormalRecord *)(fromObject->header.normalOffset + *fromObject->itsBSPResource);
@@ -93,30 +91,37 @@ void CSliverPart::Activate(Fixed *origin,
     MoveDone();
     extraAmbient = 0;
 
+    friction = FIX3(980);
     gravity = FMul(sliverGravity, gCurrentGame->gravityRatio);
+
+    // This is a bit of a hack because of the fact that CSliverPart is the only "Actor" that doesn't inherit
+    // from CAbstractActor.  With that said...
+    // Use the first player (which should be running at High FPS) as a proxy to get at the Fps methods.
+    fpsScale = gCurrentGame->playerList->FpsCoefficient2(FIX1);
+    gCurrentGame->playerList->FpsCoefficients(friction, gravity, &fpsFriction, &fpsGravity);
+    lifeCount = age / ToFloat(fpsScale);
 }
 
 Boolean CSliverPart::SliverAction() {
+    // if (gCurrentGame->isClassicFrame && --lifeCount) {
     if (--lifeCount) {
-        OffsetPart(speed);
+        Vector locOffset;
+        locOffset[0] = FMul(speed[0], fpsScale);
+        locOffset[1] = FMul(speed[1], fpsScale);
+        locOffset[2] = FMul(speed[2], fpsScale);
+        OffsetPart(locOffset);
 
         if (itsTransform[3][1] < 0) {
             itsTransform[3][1] = -itsTransform[3][1];
             speed[1] = FMul(speed[1], FIX3(-600));
         }
-        speed[1] += gravity;
-        speed[0] = FMul(speed[0], FIX3(980));
-        speed[1] = FMul(speed[1], FIX3(980));
-        speed[2] = FMul(speed[2], FIX3(980));
 
-        extraAmbient = FIX3(500) - (FIX3(2000) >> lifeCount);
+        speed[0] = FMul(speed[0], fpsFriction);
+        speed[1] = FMul(speed[1], fpsFriction) + fpsGravity;
+        speed[2] = FMul(speed[2], fpsFriction);
+
+        extraAmbient = FIX3(500) - (FIX3(2000) >> int(lifeCount*ToFloat(fpsScale)));
     }
 
     return lifeCount == 0;
-}
-
-void CSliverPart::Dispose() {
-    // colorReplacements = NULL;	//	Destroy fake handle.
-
-    CSmartPart::Dispose();
 }

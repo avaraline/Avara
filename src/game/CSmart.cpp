@@ -6,6 +6,7 @@
     Created: Wednesday, February 14, 1996, 01:39
     Modified: Tuesday, September 17, 1996, 07:36
 */
+// #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
 
 #include "CSmart.h"
 
@@ -17,15 +18,13 @@
 #define kSmartAccel itsDepot->missileAcceleration
 #define kSmartFriction FIX3(50)
 
-void CSmart::IWeapon(CDepot *theDepot) {
-    CWeapon::IWeapon(theDepot);
-
+CSmart::CSmart(CDepot *theDepot) : CWeapon(theDepot) {
     partCount = 1;
     LoadPart(0, 802);
     partList[0]->usesPrivateHither = true;
     partList[0]->hither = FIX3(100);
 
-    mass = FIX(1);
+    mass = FIX1;
 }
 
 void CSmart::ResetWeapon() {
@@ -60,7 +59,7 @@ long CSmart::Arm(CSmartPart *aPart) {
     blastPower = itsDepot->missilePower;
     shields = FIX3(100);
 
-    partList[0]->ReplaceColor(kOtherMarkerColor, 0x400000);
+    partList[0]->ReplaceColor(*ColorManager::getMarkerColor(1), ColorManager::getMissileArmedColor());
     targetIdent = 0;
     targetPart = NULL;
 
@@ -105,6 +104,7 @@ void CSmart::ShowTarget() {
     Fixed *v, *u;
 
     dist = sightDistance - FIX3(250);
+    isTargetLocked = false;
 
     itsGame->itsApp->BrightBox(itsGame->frameNumber, inSight);
 
@@ -136,6 +136,8 @@ void CSmart::ShowTarget() {
 
             rayHit.distance = FIX(5) + NormalizeVector(3, rayHit.direction);
             rayHit.closestHit = NULL;
+
+            isTargetLocked = true;
 
             if (rayHit.distance < FIX(160)) {
                 RayTestWithGround(&rayHit, kSolidBit);
@@ -191,7 +193,7 @@ void CSmart::Locate() {
     goodYaw = yaw;
     goodPitch = pitch;
 
-    partList[0]->ReplaceColor(kOtherMarkerColor, kOtherMarkerColor);
+    partList[0]->ReplaceColor(*ColorManager::getMarkerColor(1), ColorManager::getMissileLaunchedColor());
 }
 void CSmart::Fire() {
     CBasicSound *theSound;
@@ -202,12 +204,13 @@ void CSmart::Fire() {
     UpdateSoundLink(itsSoundLink, location, speed, itsGame->soundTime);
 
     theSound = gHub->GetSoundSampler(hubRate, 201);
-    theSound->SetRate(FIX(1));
+    theSound->SetRate(FIX1);
     theSound->SetVolume(FIX(3));
     theSound->SetSoundLink(itsSoundLink);
     theSound->SetLoopCount(-1);
     theSound->Start();
 
+    fireFrame = itsGame->frameNumber+1;
     flyCount = 1;
 }
 
@@ -250,8 +253,10 @@ void CSmart::TurnTowardsTarget() {
 
                     FindSpaceAngle(toTarget, &goodYaw, &goodPitch);
 
-                    if (rayHit.distance < FIX(2))
+                    if (rayHit.distance < FIX(2)) {
                         doExplode = true;
+                        FPS_DEBUG("Missile TTT EXPLODE location = " << FormatVector(location, 3) << "\n");
+                    }
 #define MOD_THRUST
 #ifdef MOD_THRUST
                     if (rayHit.distance < FIX(8)) {
@@ -298,6 +303,9 @@ void CSmart::FrameAction() {
         Fixed friction;
         RayHitRecord rayHit;
 
+        FPS_DEBUG("Missile frameNumber = " << itsGame->frameNumber << "\n");
+
+if (IsClassicInterval()) { // indented like this because hope to remove it in the future
         TurnTowardsTarget();
 
         pitchCos = FOneCos(pitch);
@@ -312,7 +320,6 @@ void CSmart::FrameAction() {
         rayHit.closestHit = NULL;
 
         rayHit.distance = NormalizeVector(3, rayHit.direction);
-
         realSpeed = rayHit.distance;
 
         RayTestWithGround(&rayHit, kSolidBit);
@@ -332,6 +339,7 @@ void CSmart::FrameAction() {
                 speed[0] = FMul(rayHit.direction[0], realSpeed);
                 speed[1] = FMul(rayHit.direction[1], realSpeed);
                 speed[2] = FMul(rayHit.direction[2], realSpeed);
+                FPS_DEBUG("Missile FA1 EXPLODE location = " << FormatVector(location, 3) << "\n");
                 doExplode = true;
             }
         }
@@ -341,25 +349,36 @@ void CSmart::FrameAction() {
             if (speedDotAccel < 0)
                 speedDotAccel = -speedDotAccel;
         } else {
-            speedDotAccel = FIX(1);
+            speedDotAccel = FIX1;
         }
 
-        friction = kSmartFriction + ((FIX(1) - speedDotAccel) >> 3);
+        friction = kSmartFriction + ((FIX1 - speedDotAccel) >> 3);
 
         speed[0] += FMul(thrust, accel[0]) - FMul(speed[0], friction);
         speed[1] += FMul(thrust, accel[1]) - FMul(speed[1], friction);
         speed[2] += FMul(thrust, accel[2]) - FMul(speed[2], friction);
+        FPS_DEBUG("Missile speed = " << FormatVector(speed, 3) << "\n");
+} // IsClassicInterval()
 
-        location[0] += speed[0];
-        location[1] += speed[1];
-        location[2] += speed[2];
+        if (doExplode) {
+            // because explosions currently detected on classic interval, move location forward the full
+            // classic frame on explosions so it's in the right spot for the explosion calculations
+            location[0] += speed[0];
+            location[1] += speed[1];
+            location[2] += speed[2];
+        } else {
+            location[0] += FpsCoefficient2(speed[0]);
+            location[1] += FpsCoefficient2(speed[1]);
+            location[2] += FpsCoefficient2(speed[2]);
+        }
+        FPS_DEBUG("Missile location = " << FormatVector(location, 3) << "\n");
 
         UpdateSoundLink(itsSoundLink, location, speed, itsGame->soundTime);
 
         PlaceParts();
 
         if (hostIdent) {
-            if (flyCount > 5) {
+            if (FpsCoefficient2(flyCount) > 5) {
                 ReleaseAttachment();
             } else {
                 CAbstractActor *oldHost;
@@ -371,18 +390,21 @@ void CSmart::FrameAction() {
             }
         }
 
-        if (flyCount > 100) {
+        if (FpsCoefficient2(flyCount) > 100) {
             doExplode = true;
         }
 
+if (IsClassicInterval()) {
         BuildPartProximityList(location, partList[0]->bigRadius, kSolidBit);
 
         if (location[1] <= 0 || DoCollisionTest(&proximityList.p)) {
-            location[0] -= speed[0];
-            location[1] -= speed[1];
-            location[2] -= speed[2];
+            location[0] -= FpsCoefficient2(speed[0]);
+            location[1] -= FpsCoefficient2(speed[1]);
+            location[2] -= FpsCoefficient2(speed[2]);
             doExplode = true;
+            FPS_DEBUG("Missile FA2 EXPLODE location = " << FormatVector(location, 3) << "\n");
         }
+} // IsClassicInterval()
 
         flyCount++;
     }
@@ -396,5 +418,9 @@ void CSmart::FrameAction() {
 void CSmart::PreLoadSounds() {
     CWeapon::PreLoadSounds();
 
-    gHub->PreLoadSample(201);
+    auto _ = AssetManager::GetOgg(201);
+}
+
+bool CSmart::IsClassicInterval() {
+    return (itsGame->frameNumber-fireFrame) % int(1/itsGame->fpsScale) == 0;
 }

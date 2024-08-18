@@ -22,6 +22,7 @@
 //#include "CInfoPanel.h"
 #include "InfoMessages.h"
 //#include "Palettes.h"
+#include "Debug.h"
 
 #define kScoringStringsList 135
 
@@ -43,8 +44,6 @@ enum { //	For personal pages:
 
     kTeamNames
 };
-
-static short ExitPointsTable[kMaxAvaraPlayers] = {10, 6, 3, 2, 1, 0};
 
 void CScoreKeeper::IScoreKeeper(CAvaraGame *theGame) {
     itsGame = theGame;
@@ -70,7 +69,7 @@ void CScoreKeeper::IScoreKeeper(CAvaraGame *theGame) {
     iface.levelName = itsGame->loadedLevel;
     iface.levelName = itsGame->loadedDesigner;
     iface.levelName = itsGame->loadedInfo;
-    iface.directory = itsGame->loadedTag;
+    iface.directory = itsGame->loadedFilename;
     iface.playerID = 0;
     iface.playerTeam = 0;
     iface.playerLives = 0;
@@ -84,13 +83,15 @@ void CScoreKeeper::IScoreKeeper(CAvaraGame *theGame) {
     iface.scoreID = 0;
 
     iface.consoleLine = NULL;
-    iface.consoleJustify = centerAlign;
+    iface.consoleJustify = static_cast<long>(MsgAlignment::Center);
 
     entryPoint = NULL;
 
     ResetScores();
 
     netScores = localScores;
+
+    playerRatings = std::make_unique<PlayerRatingsSimpleElo>();
 }
 
 void CScoreKeeper::Dispose() {
@@ -104,6 +105,10 @@ void CScoreKeeper::EndScript() {
     iface.command = ksiLevelLoaded;
     iface.levelName = itsGame->loadedLevel;
     iface.directory = itsGame->loadedSet;
+    // this method called on level-load regardless if local player is playing or not, clear out the names here
+    for (auto &name: playerNames) {
+        name.clear();
+    }
 }
 
 void CScoreKeeper::StartResume(Boolean didStart) {
@@ -133,11 +138,11 @@ void CScoreKeeper::PlayerJoined() {
 
 void CScoreKeeper::PlayerIntros() {
     short i;
-    CNetManager *theNet = itsGame->itsNet;
+    CNetManager *theNet = itsGame->itsNet.get();
     CPlayerManager *thePlayer;
 
     for (i = 0; i < kMaxAvaraPlayers; i++) {
-        thePlayer = theNet->playerTable[i];
+        thePlayer = theNet->playerTable[i].get();
         if (thePlayer->GetPlayer()) {
             localScores.player[i].lives = thePlayer->GetPlayer()->lives;
             localScores.player[i].team = thePlayer->GetPlayer()->teamColor;
@@ -159,15 +164,19 @@ void CScoreKeeper::StopPause(Boolean didPause) {
 }
 
 void CScoreKeeper::NetResultsUpdate() {
-    CNetManager *theNet = itsGame->itsNet;
+    CNetManager *theNet = itsGame->itsNet.get();
     short i, offset;
     CPlayerManager *thePlayer;
 
     for (i = 0; i < kMaxAvaraPlayers; i++) {
-        thePlayer = theNet->playerTable[i];
+        thePlayer = theNet->playerTable[i].get();
         offset = i * PLAYER_SCORE_FIELD_COUNT;
         if (thePlayer->GetPlayer()) {
-            localScores.player[i].lives = thePlayer->GetPlayer()->lives;
+            if (thePlayer->Presence() == kzSpectating) {
+                localScores.player[i].lives = -2;
+            } else {
+                localScores.player[i].lives = thePlayer->GetPlayer()->lives;
+            }
 
             scorePayload[offset] = htonl(localScores.player[i].points);
             scorePayload[offset + 1] = htonl(localScores.player[i].team);
@@ -205,20 +214,53 @@ void CScoreKeeper::Score(ScoreInterfaceReasons reason,
     iface.scoreReason = reason;
     iface.playerID = player;
     iface.playerTeam = team;
+
+    ScoreInterfaceEvent event;
+    event.player = itsGame->GetPlayerName(player);
+    event.team = team;
+    event.playerTarget = itsGame->GetPlayerName(hitPlayer);
+    event.teamTarget = hitTeam;
+    event.damage = points;
+
+    DBG_Log("score", "CAvaraGame::Obj Collision: player:%lu, team:%lu, hit:%hd, hitTeam:%lu, weapon: %d, reason:%lu\n", iface.playerID, iface.playerTeam, hitPlayer, iface.scoreTeam, itsGame->killReason, iface.scoreReason);
+
     if (player >= 0 && player <= kMaxAvaraPlayers) {
         iface.playerName = itsGame->itsNet->playerTable[player]->PlayerName();
-        if (reason == ksiKillBonus && hitPlayer >= 0 && hitPlayer <= kMaxAvaraPlayers) {
-            Str255 destStr;
+        Str255 destStr;
 
+        if (reason == ksiKillBonus && hitPlayer >= 0 && hitPlayer <= kMaxAvaraPlayers) {
+            // Player killed a player
             localScores.player[hitPlayer].lives--;
             if (hitTeam != team) {
                 localScores.player[player].kills++;
             }
-            itsGame->itsApp->ComposeParamLine(
-                destStr, kmAKilledBPlayer, iface.playerName, itsGame->itsNet->playerTable[hitPlayer]->PlayerName());
+            if (!itsGame->itsApp->Get(kHUDShowKillFeed)) {
+                iface.consoleLine = destStr;
+                iface.consoleJustify = static_cast<long>(MsgAlignment::Center);
+                itsGame->itsApp->ComposeParamLine(
+                    destStr, kmAKilledBPlayer, iface.playerName, itsGame->itsNet->playerTable[hitPlayer]->PlayerName());
+            }
+            DBG_Log("score", "CAvaraGame::Kill Event: player:%lu, team:%lu, hit:%lu, hitTeam:%lu, weapon: %d, reason:%lu\n", iface.playerID, iface.playerTeam, iface.scoreID, iface.scoreTeam, event.weaponUsed, iface.scoreReason);
 
-            iface.consoleLine = destStr;
-            iface.consoleJustify = centerAlign;
+            event.scoreType = ksiKillBonus;
+            event.weaponUsed = itsGame->killReason;
+            itsGame->AddScoreNotify(event);
+
+        } else if (reason == ksiKillBonus && itsGame->killReason == ksiObjectCollision) {
+            // Something other than a player did the killing blow
+            event.playerTarget = event.player;
+            event.teamTarget = event.team;
+
+            if (!itsGame->itsApp->Get(kHUDShowKillFeed)) {
+                iface.consoleLine = destStr;
+                iface.consoleJustify = static_cast<long>(MsgAlignment::Center);
+                itsGame->itsApp->ComposeParamLine(
+                    destStr, kmKilledByCollision, itsGame->itsNet->playerTable[player]->PlayerName(), NULL);
+            }
+
+            event.scoreType = ksiKillBonus;
+            event.weaponUsed = itsGame->killReason;
+            itsGame->AddScoreNotify(event);
         }
     } else {
         iface.playerName = NULL;
@@ -226,6 +268,23 @@ void CScoreKeeper::Score(ScoreInterfaceReasons reason,
 
     if (reason == ksiExitBonus) {
         iface.winFrame = itsGame->frameNumber;
+    }
+
+    if(iface.scoreReason == ksiGrabBall) {
+        event.scoreType = ksiGrabBall;
+        itsGame->AddScoreNotify(event);
+        DBG_Log("score", "CAvaraGame::Grab Ball Event: player:%lu, team:%lu, hit:%lu, hitTeam:%lu, reason:%lu\n", iface.playerID, iface.playerTeam, iface.scoreID, iface.scoreTeam, iface.scoreReason);
+    }
+
+    if(iface.scoreReason == ksiHoldBall) {
+        event.scoreType = ksiHoldBall;
+        //itsGame->AddScoreNotify(event);
+    }
+
+    if(iface.scoreReason == ksiScoreGoal) {
+        event.scoreType = ksiScoreGoal;
+        itsGame->AddScoreNotify(event);
+        DBG_Log("score", "CAvaraGame::Score Goal Event: player:%lu, team:%lu, hit:%lu, hitTeam:%lu, reason:%lu\n", iface.playerID, iface.playerTeam, iface.scoreID, iface.scoreTeam, iface.scoreReason);
     }
 
     iface.scorePoints = points;
@@ -236,7 +295,7 @@ void CScoreKeeper::Score(ScoreInterfaceReasons reason,
     if (player >= 0 && player < kMaxAvaraPlayers) {
         localScores.player[player].points += points;
         if (reason == ksiExitBonus) {
-            localScores.player[player].exitRank = ExitPointsTable[exitCount];
+            localScores.player[player].exitRank = 1;
             localScores.player[player].serverWins++;
             exitCount++;
         }
@@ -245,6 +304,7 @@ void CScoreKeeper::Score(ScoreInterfaceReasons reason,
     if (team >= 0 && team <= kMaxTeamColors) {
         localScores.teamPoints[team] += points;
     }
+
 }
 
 void CScoreKeeper::ResetScores() {
@@ -259,7 +319,7 @@ void CScoreKeeper::ResetScores() {
         localScores.player[i].exitRank = 0;
         localScores.player[i].kills = 0;
 
-        thePlayer = itsGame->itsNet->playerTable[i];
+        thePlayer = itsGame->itsNet->playerTable[i].get();
         if (thePlayer->GetPlayer() == NULL) {
             localScores.player[i].serverWins = 0;
         }
@@ -277,9 +337,16 @@ void CScoreKeeper::ResetScores() {
 
 void CScoreKeeper::ReceiveResults(int32_t *newResults) {
     short i, offset;
+    bool gameIsFinal = false;
+    int sumPoints = 0;
+    static int sumPointsCheck = 0;
 
     for (i = 0; i < kMaxAvaraPlayers; i++) {
         offset = i * PLAYER_SCORE_FIELD_COUNT;
+        if (playerNames[i].empty()) {
+            // get the name as soon as available (and keep around in case they leave before game end)
+            playerNames[i] = itsGame->itsNet->playerTable[i]->GetPlayerName();
+        }
         netScores.player[i].points = ntohl(newResults[offset]);
         netScores.player[i].team = (char) ntohl(newResults[offset + 1]);
         netScores.player[i].exitRank = (char) ntohl(newResults[offset + 2]);
@@ -287,12 +354,69 @@ void CScoreKeeper::ReceiveResults(int32_t *newResults) {
         netScores.player[i].kills = (int16_t) ntohl(newResults[offset + 4]);
         netScores.player[i].serverWins = (int16_t) ntohl(newResults[offset + 5]);
 
+        // if any exitRank is set, the game is over
+        gameIsFinal = gameIsFinal || (netScores.player[i].exitRank > 0);
+        sumPoints += netScores.player[i].points;
+
         //copy serverWins to localScores
         localScores.player[i].serverWins = (int16_t) ntohl(newResults[offset + 5]);
+
+        DBG_Log("score", "player=%s, points=%6d, team=%d, exitRank=%d, lives=%d, kills=%d, wins=%d\n",
+                playerNames[i].c_str(),
+                netScores.player[i].points,
+                netScores.player[i].team,
+                netScores.player[i].exitRank,
+                netScores.player[i].lives,
+                netScores.player[i].kills,
+                netScores.player[i].serverWins);
     }
 
     offset = PLAYER_SCORE_FIELD_COUNT * kMaxAvaraPlayers;
     for (i = 0; i <= kMaxTeamColors; i++) {
         netScores.teamPoints[i] = ntohl(newResults[offset + i]);
     }
+
+    // the sumPointsCheck helps to ensure we only execute this code block once (maybe better if we added a gameId?)
+    if (gameIsFinal && sumPoints != sumPointsCheck) {
+        sumPointsCheck = sumPoints;
+        std::vector<FinishRecord> rankings = DetermineFinishOrder();
+        UpdatePlayerRatings(rankings);
+    }
+}
+
+std::vector<FinishRecord> CScoreKeeper::DetermineFinishOrder() {
+    std::vector<FinishRecord> finishOrder = {};
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        // deduce whether player is playing
+        if (netScores.player[i].lives >= 0) {
+            finishOrder.push_back({
+                i,
+                playerNames[i],
+                netScores.player[i].team,
+                netScores.player[i].lives,
+                netScores.player[i].points});
+        }
+    }
+
+    // sort results according to remaining lives and score... worst to first
+    std::sort(finishOrder.begin(), finishOrder.end(), [](FinishRecord const &lhs, FinishRecord const &rhs) {
+        // if only 1 person has lives > 0, they are the winner      (last man standing)
+        // if multiple people have lives > 0, compare their scores  (e.g. timed levels with 99 lives)
+        // all people with lives==0 compares scores
+        return
+            ((lhs.lives == 0 && (rhs.lives > 0 || lhs.score < rhs.score)) ||
+             (lhs.lives > 0 && rhs.lives > 0 && lhs.score < rhs.score));
+    });
+
+    return finishOrder;
+}
+
+void CScoreKeeper::UpdatePlayerRatings(std::vector<FinishRecord> finishOrder) {
+    // send the final results to playerRatings
+    std::vector<PlayerResult> playerResults = {};
+    for (auto finRec: finishOrder) {
+        playerResults.push_back({finRec.playerName, finRec.teamColor});
+    }
+    // must pass in the results ordered last to first
+    playerRatings->UpdateRatings(playerResults);
 }

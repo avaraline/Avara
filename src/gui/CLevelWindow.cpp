@@ -1,24 +1,31 @@
 #include "CLevelWindow.h"
 
+#include "AssetManager.h"
 #include "CAvaraApp.h"
 #include "CAvaraGame.h"
 #include "CNetManager.h"
 #include "Preferences.h"
-#include "Resource.h"
 
 CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     // Searches "levels/" directory alongside application.
     // will eventually use level search API
-    levelSets = LevelDirNameListing();
+    levelSets = AssetManager::GetAvailablePackages();
 
     json sets = app->Get(kRecentSets);
-    for (json::iterator it = sets.begin(); it != sets.end(); ++it) {
-        recentSets.push_back(it.value());
-    }
     json levels = app->Get(kRecentLevels);
-    for (json::iterator itLev = levels.begin(); itLev != levels.end(); ++itLev) {
-        recentLevels.push_back(itLev.value());
+    if (sets.size() == levels.size()) {
+        for (unsigned i = 0; i < sets.size(); ++i) {
+            std::string set = sets.at(i);
+            auto exists = AssetManager::PackageInStorage(set);
+            if (exists) {
+                recentSets.push_back(set);
+                recentLevels.push_back(levels.at(i));
+            }
+        }
     }
+
+    app->Set(kRecentSets, recentSets);
+    app->Set(kRecentLevels, recentLevels);
 
     setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 10, 10));
 
@@ -32,7 +39,7 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     });
 
     setBox = new nanogui::ComboBox(this, levelSets);
-    setBox->setCallback([this, app](int selectedIdx) {
+    setBox->setCallback([this](int selectedIdx) {
         this->SelectSet(selectedIdx);
         levelBox->setSelectedIndex(0);
     });
@@ -48,12 +55,8 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     startBtn = new nanogui::Button(this, "Start Game");
     startBtn->setCallback([app] { ((CAvaraAppImpl *)app)->GetGame()->SendStartCommand(); });
 
-    if (recentSets.size() > 0) {
-        SelectLevel(recentSets[0], recentLevels[0]);
-    } else {
-        SelectSet(0);
-        levelBox->setSelectedIndex(0);
-    }
+    SelectSet(0);
+    levelBox->setSelectedIndex(0);
 }
 
 CLevelWindow::~CLevelWindow() {}
@@ -76,7 +79,7 @@ void CLevelWindow::AddRecent(std::string set, std::string levelName) {
         recentSets.insert(recentSets.begin(), set);
         recentLevels.insert(recentLevels.begin(), levelName);
 
-        if (recentSets.size() > 10) {
+        if (recentSets.size() > 64) {
             recentSets.pop_back();
             recentLevels.pop_back();
         }
@@ -98,7 +101,7 @@ void CLevelWindow::SelectLevel(std::string set, std::string levelName) {
     int levelIndex = 0;
     auto levelIt = std::find(levelNames.begin(), levelNames.end(), levelName);
     if (levelIt != levelNames.end()) {
-        levelIndex = std::distance(levelNames.begin(), levelIt);
+        levelIndex = static_cast<int>(std::distance(levelNames.begin(), levelIt));
     }
 
     levelBox->setSelectedIndex(levelIndex);
@@ -114,18 +117,18 @@ void CLevelWindow::SelectSet(std::string set) {
     std::vector<std::string>::iterator itr = std::find(levelSets.begin(), levelSets.end(), set);
     int level_idx = 0;
     if (itr != levelSets.end()) {
-        level_idx = std::distance(levelSets.begin(), itr);
+        level_idx = static_cast<int>(std::distance(levelSets.begin(), itr));
         setBox->setSelectedIndex(level_idx);
     }
     levelNames.clear();
     levelIntros.clear();
     levelTags.clear();
 
-    nlohmann::json ledis = LoadLevelListFromJSON(set);
-    for (auto &ld : ledis.items()) {
-        levelNames.push_back(ld.value()["Name"]);
-        levelIntros.push_back(ld.value()["Message"]);
-        levelTags.push_back(ld.value()["Alf"]);
+    auto manifest = *AssetManager::GetManifest(set);
+    for (auto const &ledi : manifest->levelDirectory) {
+        levelNames.push_back(ledi.levelName);
+        levelIntros.push_back(ledi.levelInfo);
+        levelTags.push_back(ledi.alfPath);
     }
     levelBox->setItems(levelNames, levelIntros);
     levelBox->setEnabled(true);

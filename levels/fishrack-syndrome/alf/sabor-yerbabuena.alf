@@ -1,111 +1,106 @@
 <map>
-  <set designer="Plastic Chicken" information="snipe...snipe...snipe.snipe.snipe.BOOM!!!
-
-a sniper HECTOR:
-2 super power sniping cannons
-4 straight-shot missiles and 1 AWESOME nade
-1 panic canister" FMM="1.2" />
+  <set designer="Plastic Chicken" information="snipe...snipe...snipe.snipe.snipe.BOOM!!!&#10;&#10;&#10;&#10;a sniper HECTOR:&#10;&#10;2 super power sniping cannons&#10;&#10;4 straight-shot missiles and 1 AWESOME nade&#10;&#10;1 panic canister" FMM="1.2" />
   <set missilePower="2 * FMM" missileAcceleration="1.4 * FMM" grenadePower="50 * FMM" hull.0="1003" hull.1="hull[0]" hull.2="hull[0]" gravity="1 / FMM" defaultLives="5" />
-  <SkyColor fill="#669900" frame="#33ff33" />
-  <GroundColor fill="#009933" />
-  <Teleporter win="2500" start="@winTeam" activeRange="2000" shape="false" fill="#cc0066" frame="#cc0066" cx="2.5694444444444446" cz="6.597222222222222" angle="225" />
-  <Teleporter win="2500" start="@win" activeRange="2000" shape="false" fill="#cc0066" frame="#cc0066" cx="2.5694444444444446" cz="6.597222222222222" angle="225" />
+  <SkyColor color="#78a600" color.1="#30f942" />
+  <GroundColor color="#00a642" />
+  <Teleporter win="2500" start="@winTeam" activeRange="2000" shape="false" color="#d82679" color.1="#d82679" cx="2.5694444444444446" cz="6.597222222222222" angle="45" />
+  <Teleporter win="2500" start="@win" activeRange="2000" shape="false" color="#d82679" color.1="#d82679" cx="2.5694444444444446" cz="6.597222222222222" angle="45" />
   <set wallHeight="25 * FMM" />
-  <Wall fill="#009966" frame="#000000" x="69.6875" z="26.5625" w="93.125" d="3.125" h="0" />
-  <Wall fill="#009966" frame="#000000" x="21.5625" z="71.5625" w="3.125" d="93.125" h="0" />
-  <Wall fill="#009966" frame="#000000" x="114.6875" z="74.6875" w="3.125" d="93.125" h="0" />
-  <Wall fill="#009966" frame="#000000" x="66.5625" z="119.6875" w="93.125" d="3.125" h="0" />
+  <Wall color="#00a779" color.1="#000000" x="69.6875" z="26.5625" w="93.125" d="3.125" h="0" />
+  <Wall color="#00a779" color.1="#000000" x="21.5625" z="71.5625" w="3.125" d="93.125" h="0" />
+  <Wall color="#00a779" color.1="#000000" x="114.6875" z="74.6875" w="3.125" d="93.125" h="0" />
+  <Wall color="#00a779" color.1="#000000" x="66.5625" z="119.6875" w="93.125" d="3.125" h="0" />
   <set wallHeight="10" />
-  <Wall fill="#00bb00" frame="#000000" x="70.3125" z="30.3125" w="85.625" d="4.375" h="0" />
-  <Wall fill="#00bb00" frame="#000000" x="25.3125" z="70.9375" w="4.375" d="85.625" h="0" />
-  <Wall fill="#00bb00" frame="#000000" x="110.9375" z="75.3125" w="4.375" d="85.625" h="0" />
-  <Wall fill="#00bb00" frame="#000000" x="65.9375" z="115.9375" w="85.625" d="4.375" h="0" />
-  <Incarnator y="20" cx="25" cz="30" angle="315" />
-  <Ramp deltaY="10" fill="#339933" frame="#000000" x="37.8125" z="35" w="20.625" d="5" h="0" angle="270" />
-  <Ramp deltaY="10" fill="#339933" frame="#000000" x="98.4375" z="111.25" w="20.625" d="5" h="0" angle="90" />
-  <Ramp deltaY="10" fill="#339933" frame="#000000" x="30" z="103.4375" w="5" d="20.625" h="0" angle="180" />
-  <Ramp deltaY="10" fill="#339933" frame="#000000" x="106.25" z="42.8125" w="5" d="20.625" h="0" angle="0" />
+  <Wall color="#00c200" color.1="#000000" x="70.3125" z="30.3125" w="85.625" d="4.375" h="0" />
+  <Wall color="#00c200" color.1="#000000" x="25.3125" z="70.9375" w="4.375" d="85.625" h="0" />
+  <Wall color="#00c200" color.1="#000000" x="110.9375" z="75.3125" w="4.375" d="85.625" h="0" />
+  <Wall color="#00c200" color.1="#000000" x="65.9375" z="115.9375" w="85.625" d="4.375" h="0" />
+  <Incarnator y="20" cx="25" cz="30" angle="135" />
+  <Ramp deltaY="10" color="#3da642" color.1="#000000" x="37.8125" z="35" w="20.625" d="5" h="0" angle="90" />
+  <Ramp deltaY="10" color="#3da642" color.1="#000000" x="98.4375" z="111.25" w="20.625" d="5" h="0" angle="270" />
+  <Ramp deltaY="10" color="#3da642" color.1="#000000" x="30" z="103.4375" w="5" d="20.625" h="0" angle="0" />
+  <Ramp deltaY="10" color="#3da642" color.1="#000000" x="106.25" z="42.8125" w="5" d="20.625" h="0" angle="180" />
   <set wallHeight="4" />
-  <Wall fill="#006600" frame="#000000" x="89.375" z="44.375" w="1.25" d="1.25" h="0" />
-  <Wall fill="#006600" frame="#000000" x="98.125" z="62.5" w="1.25" d="1.25" h="0" />
-  <Wall fill="#006600" frame="#000000" x="85" z="73.75" w="1.25" d="1.25" h="0" />
-  <Wall fill="#006600" frame="#000000" x="63.75" z="70.625" w="1.25" d="1.25" h="0" />
-  <Wall fill="#006600" frame="#000000" x="68.75" z="90" w="1.25" d="1.25" h="0" />
-  <Wall fill="#006600" frame="#000000" x="41.25" z="54.375" w="1.25" d="1.25" h="0" />
-  <Wall fill="#006600" frame="#000000" x="47.5" z="99.375" w="1.25" d="1.25" h="0" />
-  <Wall fill="#006600" frame="#000000" x="97.5" z="93.125" w="1.25" d="1.25" h="0" />
-  <Wall fill="#006600" frame="#000000" x="68.125" z="48.125" w="1.25" d="1.25" h="0" />
+  <Wall color="#007600" color.1="#000000" x="89.375" z="44.375" w="1.25" d="1.25" h="0" />
+  <Wall color="#007600" color.1="#000000" x="98.125" z="62.5" w="1.25" d="1.25" h="0" />
+  <Wall color="#007600" color.1="#000000" x="85" z="73.75" w="1.25" d="1.25" h="0" />
+  <Wall color="#007600" color.1="#000000" x="63.75" z="70.625" w="1.25" d="1.25" h="0" />
+  <Wall color="#007600" color.1="#000000" x="68.75" z="90" w="1.25" d="1.25" h="0" />
+  <Wall color="#007600" color.1="#000000" x="41.25" z="54.375" w="1.25" d="1.25" h="0" />
+  <Wall color="#007600" color.1="#000000" x="47.5" z="99.375" w="1.25" d="1.25" h="0" />
+  <Wall color="#007600" color.1="#000000" x="97.5" z="93.125" w="1.25" d="1.25" h="0" />
+  <Wall color="#007600" color.1="#000000" x="68.125" z="48.125" w="1.25" d="1.25" h="0" />
   <set baseHeight="4" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="89.375" z="41.875" w="1.25" d="3.75" h="0" angle="0" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="91.875" z="44.375" w="3.75" d="1.25" h="0" angle="90" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="86.875" z="44.375" w="3.75" d="1.25" h="0" angle="270" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="89.375" z="46.875" w="1.25" d="3.75" h="0" angle="180" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="98.125" z="60" w="1.25" d="3.75" h="0" angle="0" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="100.625" z="62.5" w="3.75" d="1.25" h="0" angle="90" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="95.625" z="62.5" w="3.75" d="1.25" h="0" angle="270" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="98.125" z="65" w="1.25" d="3.75" h="0" angle="180" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="85" z="71.25" w="1.25" d="3.75" h="0" angle="0" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="87.5" z="73.75" w="3.75" d="1.25" h="0" angle="90" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="82.5" z="73.75" w="3.75" d="1.25" h="0" angle="270" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="85" z="76.25" w="1.25" d="3.75" h="0" angle="180" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="68.125" z="45.625" w="1.25" d="3.75" h="0" angle="0" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="70.625" z="48.125" w="3.75" d="1.25" h="0" angle="90" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="65.625" z="48.125" w="3.75" d="1.25" h="0" angle="270" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="68.125" z="50.625" w="1.25" d="3.75" h="0" angle="180" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="63.75" z="68.125" w="1.25" d="3.75" h="0" angle="0" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="66.25" z="70.625" w="3.75" d="1.25" h="0" angle="90" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="61.25" z="70.625" w="3.75" d="1.25" h="0" angle="270" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="63.75" z="73.125" w="1.25" d="3.75" h="0" angle="180" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="68.75" z="87.5" w="1.25" d="3.75" h="0" angle="0" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="71.25" z="90" w="3.75" d="1.25" h="0" angle="90" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="66.25" z="90" w="3.75" d="1.25" h="0" angle="270" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="68.75" z="92.5" w="1.25" d="3.75" h="0" angle="180" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="47.5" z="96.875" w="1.25" d="3.75" h="0" angle="0" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="50" z="99.375" w="3.75" d="1.25" h="0" angle="90" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="45" z="99.375" w="3.75" d="1.25" h="0" angle="270" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="47.5" z="101.875" w="1.25" d="3.75" h="0" angle="180" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="97.5" z="90.625" w="1.25" d="3.75" h="0" angle="0" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="100" z="93.125" w="3.75" d="1.25" h="0" angle="90" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="95" z="93.125" w="3.75" d="1.25" h="0" angle="270" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="97.5" z="95.625" w="1.25" d="3.75" h="0" angle="180" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="41.25" z="51.875" w="1.25" d="3.75" h="0" angle="0" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="43.75" z="54.375" w="3.75" d="1.25" h="0" angle="90" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="38.75" z="54.375" w="3.75" d="1.25" h="0" angle="270" />
-  <Ramp thickness="0" deltaY="-.6" fill="#006600" frame="#000000" x="41.25" z="56.875" w="1.25" d="3.75" h="0" angle="180" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="89.375" z="41.875" w="1.25" d="3.75" h="0" angle="180" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="91.875" z="44.375" w="3.75" d="1.25" h="0" angle="270" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="86.875" z="44.375" w="3.75" d="1.25" h="0" angle="90" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="89.375" z="46.875" w="1.25" d="3.75" h="0" angle="0" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="98.125" z="60" w="1.25" d="3.75" h="0" angle="180" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="100.625" z="62.5" w="3.75" d="1.25" h="0" angle="270" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="95.625" z="62.5" w="3.75" d="1.25" h="0" angle="90" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="98.125" z="65" w="1.25" d="3.75" h="0" angle="0" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="85" z="71.25" w="1.25" d="3.75" h="0" angle="180" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="87.5" z="73.75" w="3.75" d="1.25" h="0" angle="270" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="82.5" z="73.75" w="3.75" d="1.25" h="0" angle="90" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="85" z="76.25" w="1.25" d="3.75" h="0" angle="0" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="68.125" z="45.625" w="1.25" d="3.75" h="0" angle="180" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="70.625" z="48.125" w="3.75" d="1.25" h="0" angle="270" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="65.625" z="48.125" w="3.75" d="1.25" h="0" angle="90" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="68.125" z="50.625" w="1.25" d="3.75" h="0" angle="0" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="63.75" z="68.125" w="1.25" d="3.75" h="0" angle="180" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="66.25" z="70.625" w="3.75" d="1.25" h="0" angle="270" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="61.25" z="70.625" w="3.75" d="1.25" h="0" angle="90" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="63.75" z="73.125" w="1.25" d="3.75" h="0" angle="0" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="68.75" z="87.5" w="1.25" d="3.75" h="0" angle="180" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="71.25" z="90" w="3.75" d="1.25" h="0" angle="270" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="66.25" z="90" w="3.75" d="1.25" h="0" angle="90" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="68.75" z="92.5" w="1.25" d="3.75" h="0" angle="0" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="47.5" z="96.875" w="1.25" d="3.75" h="0" angle="180" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="50" z="99.375" w="3.75" d="1.25" h="0" angle="270" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="45" z="99.375" w="3.75" d="1.25" h="0" angle="90" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="47.5" z="101.875" w="1.25" d="3.75" h="0" angle="0" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="97.5" z="90.625" w="1.25" d="3.75" h="0" angle="180" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="100" z="93.125" w="3.75" d="1.25" h="0" angle="270" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="95" z="93.125" w="3.75" d="1.25" h="0" angle="90" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="97.5" z="95.625" w="1.25" d="3.75" h="0" angle="0" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="41.25" z="51.875" w="1.25" d="3.75" h="0" angle="180" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="43.75" z="54.375" w="3.75" d="1.25" h="0" angle="270" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="38.75" z="54.375" w="3.75" d="1.25" h="0" angle="90" />
+  <Ramp thickness="0" deltaY="-.6" color="#007600" color.1="#000000" x="41.25" z="56.875" w="1.25" d="3.75" h="0" angle="0" />
   <unique vars="mHi mDie" />
   <set baseHeight="2" />
-  <Goody shape="bspCompass" missiles="4" grenades="1" boosters="1" start="mHi" out="mDie" speed="5" fill="#66ff33" frame="#000000" cx="106.875" cz="34.375" angle="45" />
+  <Goody shape="bspCompass" missiles="4" grenades="1" boosters="1" start="mHi" out="mDie" speed="5" color="#73fa41" color.1="#000000" cx="106.875" cz="34.375" angle="225" />
   <Timer in="mDie" wait="250" out="mHi" />
   <And in="@start" out="mHi" />
   <unique vars="mHi mDie" />
-  <Goody shape="bspCompass" missiles="4" grenades="1" boosters="1" start="mHi" out="mDie" speed="5" fill="#66ff33" frame="#000000" cx="106.875" cz="111.875" angle="135" />
+  <Goody shape="bspCompass" missiles="4" grenades="1" boosters="1" start="mHi" out="mDie" speed="5" color="#73fa41" color.1="#000000" cx="106.875" cz="111.875" angle="315" />
   <Timer in="mDie" wait="250" out="mHi" />
   <And in="@start" out="mHi" />
   <unique vars="mHi mDie" />
-  <Goody shape="bspCompass" missiles="4" grenades="1" boosters="1" start="mHi" out="mDie" speed="5" fill="#66ff33" frame="#000000" cx="29.375" cz="111.875" angle="225" />
+  <Goody shape="bspCompass" missiles="4" grenades="1" boosters="1" start="mHi" out="mDie" speed="5" color="#73fa41" color.1="#000000" cx="29.375" cz="111.875" angle="45" />
   <Timer in="mDie" wait="250" out="mHi" />
   <And in="@start" out="mHi" />
   <unique vars="mHi mDie" />
-  <Goody shape="bspCompass" missiles="4" grenades="1" boosters="1" start="mHi" out="mDie" speed="5" fill="#66ff33" frame="#000000" cx="29.375" cz="34.375" angle="315" />
+  <Goody shape="bspCompass" missiles="4" grenades="1" boosters="1" start="mHi" out="mDie" speed="5" color="#73fa41" color.1="#000000" cx="29.375" cz="34.375" angle="135" />
   <Timer in="mDie" wait="250" out="mHi" />
   <And in="@start" out="mHi" />
   <set baseHeight="0" />
-  <TeamColor mask="T1" fill="#666633" frame="#666633" cx="51.04166666666667" cz="3.1944444444444446" r="1.9444444444444464" angle="315" />
-  <TeamColor mask="T2" fill="#006600" frame="#006600" cx="51.04166666666667" cz="6.319444444444445" r="1.9444444444444464" angle="315" />
-  <TeamColor mask="T3" fill="#663300" frame="#663300" cx="51.04166666666667" cz="9.444444444444445" r="1.9444444444444464" angle="315" />
-  <TeamColor mask="T4" fill="#00cc00" frame="#00cc00" cx="51.04166666666667" cz="12.569444444444445" r="1.9444444444444464" angle="315" />
-  <TeamColor mask="T5" fill="#339966" frame="#339966" cx="51.04166666666667" cz="15.694444444444445" r="1.9444444444444464" angle="315" />
-  <TeamColor mask="T6" fill="#006633" frame="#006633" cx="51.04166666666667" cz="18.819444444444443" r="1.9444444444444464" angle="315" />
+  <TeamColor mask="T1" color="#797842" color.1="#797842" cx="51.04166666666667" cz="3.1944444444444446" r="1.9444444444444464" angle="135" />
+  <TeamColor mask="T2" color="#007600" color.1="#007600" cx="51.04166666666667" cz="6.319444444444445" r="1.9444444444444464" angle="135" />
+  <TeamColor mask="T3" color="#7a4300" color.1="#7a4300" cx="51.04166666666667" cz="9.444444444444445" r="1.9444444444444464" angle="135" />
+  <TeamColor mask="T4" color="#00d100" color.1="#00d100" cx="51.04166666666667" cz="12.569444444444445" r="1.9444444444444464" angle="135" />
+  <TeamColor mask="T5" color="#3da779" color.1="#3da779" cx="51.04166666666667" cz="15.694444444444445" r="1.9444444444444464" angle="135" />
+  <TeamColor mask="T6" color="#007742" color.1="#007742" cx="51.04166666666667" cz="18.819444444444443" r="1.9444444444444464" angle="135" />
   <set baseHeight="0" />
-  <Hologram y="2" shape="1110" fill="#ffffff" frame="#000000" cx="27.569444444444446" cz="74.16666666666667" angle="270" />
-  <Hologram y="2" shape="1111" fill="#ffff33" frame="#000000" cx="27.569444444444446" cz="74.16666666666667" angle="270" />
-  <Hologram y="2" shape="1112" fill="#ff0000" frame="#000000" cx="27.569444444444446" cz="74.16666666666667" angle="270" />
+  <Hologram y="2" shape="1110" color="#ffffff" color.1="#000000" cx="27.569444444444446" cz="74.16666666666667" angle="90" />
+  <Hologram y="2" shape="1111" color="#fffc41" color.1="#000000" cx="27.569444444444446" cz="74.16666666666667" angle="90" />
+  <Hologram y="2" shape="1112" color="#ff2600" color.1="#000000" cx="27.569444444444446" cz="74.16666666666667" angle="90" />
   <set baseHeight="0" />
-  <Incarnator cx="31.875" cz="36.875" angle="315" />
-  <Incarnator y="20" cx="111.25" cz="30" angle="45" />
-  <Incarnator y="20" cx="111.25" cz="116.25" angle="135" />
-  <Incarnator y="20" cx="25" cz="116.25" angle="225" />
-  <Incarnator cx="31.875" cz="109.375" angle="225" />
-  <Incarnator cx="104.375" cz="109.375" angle="135" />
-  <Incarnator cx="104.375" cz="36.875" angle="45" />
+  <Incarnator cx="31.875" cz="36.875" angle="135" />
+  <Incarnator y="20" cx="111.25" cz="30" angle="225" />
+  <Incarnator y="20" cx="111.25" cz="116.25" angle="315" />
+  <Incarnator y="20" cx="25" cz="116.25" angle="45" />
+  <Incarnator cx="31.875" cz="109.375" angle="45" />
+  <Incarnator cx="104.375" cz="109.375" angle="315" />
+  <Incarnator cx="104.375" cz="36.875" angle="225" />
 </map>

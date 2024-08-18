@@ -13,7 +13,7 @@
 
 class CDepot;
 
-class CSmart : public CWeapon {
+class CSmart final : public CWeapon {
 public:
     Fixed goodYaw;
     Fixed goodPitch;
@@ -24,8 +24,9 @@ public:
     Fixed thrust;
     Fixed angleStep;
     short inSight;
+    FrameNumber fireFrame;
 
-    virtual void IWeapon(CDepot *theDepot);
+    CSmart(CDepot *theDepot);
     virtual void ResetWeapon();
 
     virtual void PlaceParts();
@@ -40,4 +41,6 @@ public:
     virtual void TurnTowardsTarget();
     virtual void FrameAction();
     virtual void PreLoadSounds();
+    virtual bool HandlesFastFPS() { return true; }
+    virtual bool IsClassicInterval();
 };

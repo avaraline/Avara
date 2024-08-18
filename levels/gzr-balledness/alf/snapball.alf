@@ -9,31 +9,31 @@
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" />
-  <Wall fill="#aa0000" frame="#000000" x="82.5" z="83.78472222222223" w="11.25" d="11.180555555555557" h="2.5" />
-  <Wall fill="#aa0000" frame="#000000" x="95.625" z="79.13194444444444" w="5" d="1.875" h="1.75" />
-  <Wall fill="#aa0000" frame="#000000" x="90.625" z="79.13194444444444" w="5" d="1.875" h="3.5" />
-  <Wall fill="#aa0000" frame="#000000" x="95.625" z="88.50694444444444" w="5" d="1.875" h="1.75" />
-  <Wall fill="#aa0000" frame="#000000" x="90.625" z="88.50694444444444" w="5" d="1.875" h="3.5" />
-  <Wall fill="#aa0000" frame="#000000" x="74.375" z="88.50694444444444" w="5" d="1.875" h="3.5" />
-  <Wall fill="#aa0000" frame="#000000" x="69.375" z="88.50694444444444" w="5" d="1.875" h="1.75" />
-  <Wall fill="#aa0000" frame="#000000" x="69.375" z="79.13194444444444" w="5" d="1.875" h="1.75" />
-  <Wall fill="#aa0000" frame="#000000" x="74.375" z="79.13194444444444" w="5" d="1.875" h="3.5" />
-  <Wall fill="#aa0000" frame="#000000" x="87.1875" z="75.69444444444444" w="1.875" d="5" h="3.5" />
-  <Wall fill="#aa0000" frame="#000000" x="87.1875" z="70.69444444444444" w="1.875" d="5" h="1.75" />
-  <Wall fill="#aa0000" frame="#000000" x="77.8125" z="70.69444444444444" w="1.875" d="5" h="1.75" />
-  <Wall fill="#aa0000" frame="#000000" x="77.8125" z="75.69444444444444" w="1.875" d="5" h="3.5" />
-  <Wall fill="#aa0000" frame="#000000" x="87.1875" z="91.94444444444444" w="1.875" d="5" h="3.5" />
-  <Wall fill="#aa0000" frame="#000000" x="87.1875" z="96.94444444444444" w="1.875" d="5" h="1.75" />
-  <Wall fill="#aa0000" frame="#000000" x="77.8125" z="91.94444444444444" w="1.875" d="5" h="3.5" />
-  <Wall fill="#aa0000" frame="#000000" x="77.8125" z="96.94444444444444" w="1.875" d="5" h="1.75" />
-  <Wall fill="#aa0000" frame="#000000" x="77.8125" z="79.13194444444444" w="1.875" d="1.875" h="2.25" y="2.5" />
-  <Wall fill="#aa0000" frame="#000000" x="87.1875" z="79.13194444444444" w="1.875" d="1.875" h="2.25" y="2.5" />
-  <Wall fill="#aa0000" frame="#000000" x="87.1875" z="88.50694444444444" w="1.875" d="1.875" h="2.25" y="2.5" />
-  <Wall fill="#aa0000" frame="#000000" x="77.8125" z="88.50694444444444" w="1.875" d="1.875" h="2.25" y="2.5" />
-  <Ramp y="0" thickness="rThick" deltaY="2.5" fill="#009999" frame="#ff0000" x="82.5" z="73.26388888888889" w="7.5" d="10" h="0" angle="180" />
-  <Ramp y="0" thickness="rThick" deltaY="2.5" fill="#009999" frame="#ff0000" x="82.5" z="94.375" w="7.5" d="10" h="0" angle="0" />
-  <Ramp y="0" thickness="rThick" deltaY="2.5" fill="#009999" frame="#ff0000" x="71.94444444444444" z="83.81944444444444" w="10" d="7.5" h="0" angle="90" />
-  <Ramp y="0" thickness="rThick" deltaY="2.5" fill="#009999" frame="#ff0000" x="93.125" z="83.81944444444444" w="10" d="7.5" h="0" angle="270" />
+  <Wall color="#bb1800" color.1="#000000" x="82.5" z="83.78472222222223" w="11.25" d="11.180555555555557" h="2.5" />
+  <Wall color="#bb1800" color.1="#000000" x="95.625" z="79.13194444444444" w="5" d="1.875" h="1.75" />
+  <Wall color="#bb1800" color.1="#000000" x="90.625" z="79.13194444444444" w="5" d="1.875" h="3.5" />
+  <Wall color="#bb1800" color.1="#000000" x="95.625" z="88.50694444444444" w="5" d="1.875" h="1.75" />
+  <Wall color="#bb1800" color.1="#000000" x="90.625" z="88.50694444444444" w="5" d="1.875" h="3.5" />
+  <Wall color="#bb1800" color.1="#000000" x="74.375" z="88.50694444444444" w="5" d="1.875" h="3.5" />
+  <Wall color="#bb1800" color.1="#000000" x="69.375" z="88.50694444444444" w="5" d="1.875" h="1.75" />
+  <Wall color="#bb1800" color.1="#000000" x="69.375" z="79.13194444444444" w="5" d="1.875" h="1.75" />
+  <Wall color="#bb1800" color.1="#000000" x="74.375" z="79.13194444444444" w="5" d="1.875" h="3.5" />
+  <Wall color="#bb1800" color.1="#000000" x="87.1875" z="75.69444444444444" w="1.875" d="5" h="3.5" />
+  <Wall color="#bb1800" color.1="#000000" x="87.1875" z="70.69444444444444" w="1.875" d="5" h="1.75" />
+  <Wall color="#bb1800" color.1="#000000" x="77.8125" z="70.69444444444444" w="1.875" d="5" h="1.75" />
+  <Wall color="#bb1800" color.1="#000000" x="77.8125" z="75.69444444444444" w="1.875" d="5" h="3.5" />
+  <Wall color="#bb1800" color.1="#000000" x="87.1875" z="91.94444444444444" w="1.875" d="5" h="3.5" />
+  <Wall color="#bb1800" color.1="#000000" x="87.1875" z="96.94444444444444" w="1.875" d="5" h="1.75" />
+  <Wall color="#bb1800" color.1="#000000" x="77.8125" z="91.94444444444444" w="1.875" d="5" h="3.5" />
+  <Wall color="#bb1800" color.1="#000000" x="77.8125" z="96.94444444444444" w="1.875" d="5" h="1.75" />
+  <Wall color="#bb1800" color.1="#000000" x="77.8125" z="79.13194444444444" w="1.875" d="1.875" h="2.25" y="2.5" />
+  <Wall color="#bb1800" color.1="#000000" x="87.1875" z="79.13194444444444" w="1.875" d="1.875" h="2.25" y="2.5" />
+  <Wall color="#bb1800" color.1="#000000" x="87.1875" z="88.50694444444444" w="1.875" d="1.875" h="2.25" y="2.5" />
+  <Wall color="#bb1800" color.1="#000000" x="77.8125" z="88.50694444444444" w="1.875" d="1.875" h="2.25" y="2.5" />
+  <Ramp y="0" thickness="rThick" deltaY="2.5" color="#00a8aa" color.1="#ff2600" x="82.5" z="73.26388888888889" w="7.5" d="10" h="0" angle="0" />
+  <Ramp y="0" thickness="rThick" deltaY="2.5" color="#00a8aa" color.1="#ff2600" x="82.5" z="94.375" w="7.5" d="10" h="0" angle="180" />
+  <Ramp y="0" thickness="rThick" deltaY="2.5" color="#00a8aa" color.1="#ff2600" x="71.94444444444444" z="83.81944444444444" w="10" d="7.5" h="0" angle="270" />
+  <Ramp y="0" thickness="rThick" deltaY="2.5" color="#00a8aa" color.1="#ff2600" x="93.125" z="83.81944444444444" w="10" d="7.5" h="0" angle="90" />
   <And in="@start" out="@time" />
   <Counter in.0="@zero" in.1="@one" in.2="@two" in.3="@three" in.4="@four" in.5="@five" in.6="@six" in.7="@seven" out="@time" />
   <Timer in="@time" out="@whoop" wait="1" />
@@ -42,73 +42,73 @@
   <Counter in.0="@zero" in.1="@one" out="@time" />
   <Timer in="@time" out="@whoop" wait="30" />
   <Distributor in="@whoop" out.0="@zero" out.1="@one" />
-  <Incarnator y="10" start="@seven" stop="@eight" cx="70.13888888888889" cz="113.19444444444444" angle="225" />
-  <Incarnator y="10" start="@zero" stop="@one" cx="109.96527777777779" cz="98.19444444444444" angle="135" />
-  <Incarnator y="10" start="@three" stop="@four" cx="96.84027777777779" cz="56.18055555555556" angle="45" />
-  <Incarnator y="10" start="@two" stop="@three" cx="109.96527777777779" cz="69.30555555555556" angle="45" />
-  <Incarnator y="10" start="@five" stop="@six" cx="55.173611111111114" cz="69.30555555555556" angle="315" />
-  <Incarnator y="10" start="@one" stop="@two" cx="94.96527777777779" cz="113.19444444444444" angle="135" />
+  <Incarnator y="10" start="@seven" stop="@eight" cx="70.13888888888889" cz="113.19444444444444" angle="45" />
+  <Incarnator y="10" start="@zero" stop="@one" cx="109.96527777777779" cz="98.19444444444444" angle="315" />
+  <Incarnator y="10" start="@three" stop="@four" cx="96.84027777777779" cz="56.18055555555556" angle="225" />
+  <Incarnator y="10" start="@two" stop="@three" cx="109.96527777777779" cz="69.30555555555556" angle="225" />
+  <Incarnator y="10" start="@five" stop="@six" cx="55.173611111111114" cz="69.30555555555556" angle="135" />
+  <Incarnator y="10" start="@one" stop="@two" cx="94.96527777777779" cz="113.19444444444444" angle="315" />
   <set wallHeight="14" />
-  <Incarnator y="10" start="@six" stop="@seven" cx="55.13888888888889" cz="98.19444444444444" angle="225" />
-  <Incarnator y="10" start="@four" stop="@five" cx="68.29861111111111" cz="56.18055555555556" angle="315" />
-  <WallDoor midYaw="135" fill="#000077" frame="#000000" x="55.76388888888889" z="110.55555555555556" w="28.194444444444443" d="5" h="0" />
-  <WallDoor midYaw="45" fill="#000077" frame="#000000" x="55.76388888888889" z="57.083333333333336" w="28.194444444444443" d="5" h="0" />
-  <WallDoor midYaw="135" fill="#000077" frame="#000000" x="109.23611111111111" z="57.083333333333336" w="28.194444444444443" d="5" h="0" />
-  <WallDoor midYaw="45" fill="#000077" frame="#000000" x="109.23611111111111" z="110.55555555555556" w="28.194444444444443" d="5" h="0" />
-  <SkyColor fill="#0000dd" frame="#00ccff" />
-  <GroundColor fill="#009999" />
+  <Incarnator y="10" start="@six" stop="@seven" cx="55.13888888888889" cz="98.19444444444444" angle="45" />
+  <Incarnator y="10" start="@four" stop="@five" cx="68.29861111111111" cz="56.18055555555556" angle="135" />
+  <WallDoor midYaw="135" color="#01168a" color.1="#000000" x="55.76388888888889" z="110.55555555555556" w="28.194444444444443" d="5" h="0" />
+  <WallDoor midYaw="45" color="#01168a" color.1="#000000" x="55.76388888888889" z="57.083333333333336" w="28.194444444444443" d="5" h="0" />
+  <WallDoor midYaw="135" color="#01168a" color.1="#000000" x="109.23611111111111" z="57.083333333333336" w="28.194444444444443" d="5" h="0" />
+  <WallDoor midYaw="45" color="#01168a" color.1="#000000" x="109.23611111111111" z="110.55555555555556" w="28.194444444444443" d="5" h="0" />
+  <SkyColor color="#012ce4" color.1="#00d5ff" />
+  <GroundColor color="#00a8aa" />
   <Text sound="kSnText" volume="kTextVolume" in="@add1Score" showEveryone="true" text="A Score!" cx="154.93055555555557" cz="2.4305555555555554" r="3.75" />
-  <Wall fill="#000077" frame="#000000" x="72.5" z="43.81944444444444" w="10" d="10" h="0" />
-  <Wall fill="#000077" frame="#000000" x="92.5" z="43.81944444444444" w="10" d="10" h="0" />
-  <Wall fill="#000077" frame="#000000" x="72.5" z="123.81944444444446" w="10" d="10" h="0" />
-  <Wall fill="#000077" frame="#000000" x="92.5" z="123.81944444444446" w="10" d="10" h="0" />
-  <Goal goalScore="10000" y="6" motionRange="1.5" activeRange="0.3" roll="0" pitch="40" goalMsg="@add1Score" fill="#0000dd" frame="#dd0000" cx="82.60416666666666" cz="128.15972222222223" angle="180" />
+  <Wall color="#01168a" color.1="#000000" x="72.5" z="43.81944444444444" w="10" d="10" h="0" />
+  <Wall color="#01168a" color.1="#000000" x="92.5" z="43.81944444444444" w="10" d="10" h="0" />
+  <Wall color="#01168a" color.1="#000000" x="72.5" z="123.81944444444446" w="10" d="10" h="0" />
+  <Wall color="#01168a" color.1="#000000" x="92.5" z="123.81944444444446" w="10" d="10" h="0" />
+  <Goal goalScore="10000" y="6" motionRange="1.5" activeRange="0.3" roll="0" pitch="40" goalMsg="@add1Score" color="#012ce4" color.1="#e62100" cx="82.60416666666666" cz="128.15972222222223" angle="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenW" />
-  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="numGren" start="mShow" out="mTaken" fill="#0000dd" frame="#dd0000" cx="82.60416666666666" cz="128.15972222222223" angle="180" />
-  <Goal goalScore="10000" y="6" motionRange="1.5" activeRange="0.3" roll="0" pitch="40" goalMsg="@add1Score" fill="#0000dd" frame="#aa0000" cx="82.60416666666666" cz="39.548611111111114" angle="0" />
+  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="numGren" start="mShow" out="mTaken" color="#012ce4" color.1="#e62100" cx="82.60416666666666" cz="128.15972222222223" angle="0" />
+  <Goal goalScore="10000" y="6" motionRange="1.5" activeRange="0.3" roll="0" pitch="40" goalMsg="@add1Score" color="#012ce4" color.1="#bb1800" cx="82.60416666666666" cz="39.548611111111114" angle="180" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenW" />
-  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="numGren" start="mShow" out="mTaken" fill="#0000dd" frame="#aa0000" cx="82.60416666666666" cz="39.548611111111114" angle="0" />
-  <Wall fill="#000077" frame="#000000" x="122.5" z="93.81944444444444" w="10" d="10" h="0" />
-  <Wall fill="#000077" frame="#000000" x="122.5" z="73.81944444444444" w="10" d="10" h="0" />
-  <Goal goalScore="10000" y="6" motionRange="1.5" activeRange="0.3" roll="0" pitch="40" goalMsg="@add1Score" fill="#0000dd" frame="#aa0000" cx="126.97916666666667" cz="83.85416666666666" angle="90" />
+  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="numGren" start="mShow" out="mTaken" color="#012ce4" color.1="#bb1800" cx="82.60416666666666" cz="39.548611111111114" angle="180" />
+  <Wall color="#01168a" color.1="#000000" x="122.5" z="93.81944444444444" w="10" d="10" h="0" />
+  <Wall color="#01168a" color.1="#000000" x="122.5" z="73.81944444444444" w="10" d="10" h="0" />
+  <Goal goalScore="10000" y="6" motionRange="1.5" activeRange="0.3" roll="0" pitch="40" goalMsg="@add1Score" color="#012ce4" color.1="#bb1800" cx="126.97916666666667" cz="83.85416666666666" angle="270" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenW" />
-  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="numGren" start="mShow" out="mTaken" fill="#0000dd" frame="#aa0000" cx="126.97916666666667" cz="83.85416666666666" angle="90" />
-  <Wall fill="#000077" frame="#000000" x="42.5" z="93.81944444444444" w="10" d="10" h="0" />
-  <Wall fill="#000077" frame="#000000" x="42.5" z="73.81944444444444" w="10" d="10" h="0" />
-  <Goal goalScore="10000" y="6" motionRange="1.5" activeRange="0.3" roll="0" pitch="40" goalMsg="@add1Score" fill="#0000dd" frame="#aa0000" cx="38.22916666666667" cz="83.85416666666666" angle="270" />
+  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="numGren" start="mShow" out="mTaken" color="#012ce4" color.1="#bb1800" cx="126.97916666666667" cz="83.85416666666666" angle="270" />
+  <Wall color="#01168a" color.1="#000000" x="42.5" z="93.81944444444444" w="10" d="10" h="0" />
+  <Wall color="#01168a" color.1="#000000" x="42.5" z="73.81944444444444" w="10" d="10" h="0" />
+  <Goal goalScore="10000" y="6" motionRange="1.5" activeRange="0.3" roll="0" pitch="40" goalMsg="@add1Score" color="#012ce4" color.1="#bb1800" cx="38.22916666666667" cz="83.85416666666666" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenW" />
-  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="numGren" start="mShow" out="mTaken" fill="#0000dd" frame="#aa0000" cx="38.22916666666667" cz="83.85416666666666" angle="270" />
+  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="numGren" start="mShow" out="mTaken" color="#012ce4" color.1="#bb1800" cx="38.22916666666667" cz="83.85416666666666" angle="90" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody shape="bspMissile" y="grenH" speed="2" missiles="numMiss" start="mShow" out="mTaken" fill="#0000dd" frame="#aa0000" cx="90.38194444444446" cz="91.63194444444446" angle="90" />
+  <Goody shape="bspMissile" y="grenH" speed="2" missiles="numMiss" start="mShow" out="mTaken" color="#012ce4" color.1="#bb1800" cx="90.38194444444446" cz="91.63194444444446" angle="270" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody shape="bspMissile" y="grenH" speed="2" missiles="numMiss" start="mShow" out="mTaken" fill="#0000dd" frame="#aa0000" cx="74.75694444444446" cz="76.00694444444446" angle="90" />
+  <Goody shape="bspMissile" y="grenH" speed="2" missiles="numMiss" start="mShow" out="mTaken" color="#012ce4" color.1="#bb1800" cx="74.75694444444446" cz="76.00694444444446" angle="270" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody shape="bspMissile" y="grenH" speed="2" missiles="numMiss" start="mShow" out="mTaken" fill="#0000dd" frame="#aa0000" cx="74.75694444444446" cz="91.63194444444446" angle="90" />
+  <Goody shape="bspMissile" y="grenH" speed="2" missiles="numMiss" start="mShow" out="mTaken" color="#012ce4" color.1="#bb1800" cx="74.75694444444446" cz="91.63194444444446" angle="270" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody shape="bspMissile" y="grenH" speed="2" missiles="numMiss" start="mShow" out="mTaken" fill="#0000dd" frame="#aa0000" cx="90.38194444444446" cz="76.07638888888889" angle="90" />
+  <Goody shape="bspMissile" y="grenH" speed="2" missiles="numMiss" start="mShow" out="mTaken" color="#012ce4" color.1="#bb1800" cx="90.38194444444446" cz="76.07638888888889" angle="270" />
   <set door1="1" door2="2" door3="3" door4="4" workNum="11" />
-  <WallDoor open="door1" close="@newRand" deltaY="0" deltaZ="-10" deltaX="0" yaw="0" openSpeed="openRate" closeSpeed="closeRate" guardDelay="25" volume="2" status="isClosed" shotPower="100" fill="#000077" frame="#000000" x="82.5" z="46.31944444444444" w="10" d="5" h="0" />
-  <WallDoor open="door2" close="@newRand" deltaY="0" deltaZ="0" deltaX="10" yaw="0" openSpeed="openRate" closeSpeed="closeRate" guardDelay="25" volume="2" status="isClosed" shotPower="100" fill="#000077" frame="#000000" x="120" z="83.81944444444444" w="5" d="10" h="0" />
-  <WallDoor open="door4" close="@newRand" deltaY="0" deltaZ="0" deltaX="-10" yaw="0" openSpeed="openRate" closeSpeed="closeRate" guardDelay="25" volume="2" status="isClosed" shotPower="100" fill="#000077" frame="#000000" x="45" z="83.81944444444444" w="5" d="10" h="0" />
-  <WallDoor open="door3" close="@newRand" deltaY="0" deltaZ="10" deltaX="0" yaw="0" openSpeed="openRate" closeSpeed="closeRate" guardDelay="25" volume="2" status="isClosed" shotPower="100" fill="#000077" frame="#000000" x="82.5" z="121.31944444444444" w="10" d="5" h="0" />
+  <WallDoor open="door1" close="@newRand" deltaY="0" deltaZ="-10" deltaX="0" yaw="0" openSpeed="openRate" closeSpeed="closeRate" guardDelay="25" volume="2" status="isClosed" shotPower="100" color="#01168a" color.1="#000000" x="82.5" z="46.31944444444444" w="10" d="5" h="0" />
+  <WallDoor open="door2" close="@newRand" deltaY="0" deltaZ="0" deltaX="10" yaw="0" openSpeed="openRate" closeSpeed="closeRate" guardDelay="25" volume="2" status="isClosed" shotPower="100" color="#01168a" color.1="#000000" x="120" z="83.81944444444444" w="5" d="10" h="0" />
+  <WallDoor open="door4" close="@newRand" deltaY="0" deltaZ="0" deltaX="-10" yaw="0" openSpeed="openRate" closeSpeed="closeRate" guardDelay="25" volume="2" status="isClosed" shotPower="100" color="#01168a" color.1="#000000" x="45" z="83.81944444444444" w="5" d="10" h="0" />
+  <WallDoor open="door3" close="@newRand" deltaY="0" deltaZ="10" deltaX="0" yaw="0" openSpeed="openRate" closeSpeed="closeRate" guardDelay="25" volume="2" status="isClosed" shotPower="100" color="#01168a" color.1="#000000" x="82.5" z="121.31944444444444" w="10" d="5" h="0" />
   <Timer in="door1" wait="425" out="@newRand" />
   <Timer in="door2" wait="425" out="@newRand" />
   <Timer in="door3" wait="425" out="@newRand" />
   <Timer in="door4" wait="425" out="@newRand" />
-  <Solid y="10" scale=".25" friction="0" traction="1" shape="bspPlatform" fill="#003399" frame="#000000" cx="82.5" cz="83.88888888888889" angle="90" />
+  <Solid y="10" scale=".25" friction="0" traction="1" shape="bspPlatform" color="#0048aa" color.1="#000000" cx="82.5" cz="83.88888888888889" angle="270" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody shape="bspGoody" y="5.75" speed="2" missiles="4" grenades="4" start="mShow" out="mTaken" fill="#003399" frame="#000000" cx="82.5" cz="83.88888888888889" angle="90" />
-  <Ball y="11.5" holdShieldLimit="30" shieldChargeRate="100" mass="ballMass" ejectPower="ejPower" carryScore="0" dropEnergy="2" shape="5555" fill="#ffff00" frame="#66ff66" cx="82.5" cz="83.88888888888889" angle="90" />
+  <Goody shape="bspGoody" y="5.75" speed="2" missiles="4" grenades="4" start="mShow" out="mTaken" color="#0048aa" color.1="#000000" cx="82.5" cz="83.88888888888889" angle="270" />
+  <Ball y="11.5" holdShieldLimit="30" shieldChargeRate="100" mass="ballMass" ejectPower="ejPower" carryScore="0" dropEnergy="2" shape="5555" color="#fffb00" color.1="#73fa79" cx="82.5" cz="83.88888888888889" angle="270" />
   <set randStart="int ( 1 + ( random * 4 ) )" />
   <Timer in="@start" wait="150" out="@newRand" />
   <Counter in="@newRand" n="1" rand1="int ( 1 + ( random * 4 ) )" out="rand1" restart="false" />
@@ -125,51 +125,51 @@
   <Counter in="@newRand" n="12" rand12="int ( 1 + ( random * 4 ) )" out="rand12" restart="false" />
   <Counter in="@newRand" n="13" rand13="int ( 1 + ( random * 4 ) )" out="rand13" restart="false" />
   <set wallYon=".001" wallHeight="2" />
-  <Wall fill="#0000aa" frame="#ffff00" x="47.5" z="83.81944444444444" w="20" d="50" h="0" y="14" />
+  <Wall color="#0122b9" color.1="#fffb00" x="47.5" z="83.81944444444444" w="20" d="50" h="0" y="14" />
   <set wallYon=".001" wallHeight="2" />
-  <Wall fill="#0000aa" frame="#ffff00" x="82.5" z="48.81944444444444" w="90" d="20" h="0" y="14" />
+  <Wall color="#0122b9" color.1="#fffb00" x="82.5" z="48.81944444444444" w="90" d="20" h="0" y="14" />
   <set wallYon=".001" wallHeight="2" />
-  <Wall fill="#0000aa" frame="#ffff00" x="82.5" z="118.81944444444446" w="90" d="20" h="0" y="14" />
+  <Wall color="#0122b9" color.1="#fffb00" x="82.5" z="118.81944444444446" w="90" d="20" h="0" y="14" />
   <set wallYon=".001" wallHeight="2" />
-  <Wall fill="#0000aa" frame="#ffff00" x="117.5" z="83.81944444444444" w="20" d="50" h="0" y="14" />
-  <Guard isTarget="false" yon=".001" y="12.5" speed="10000" shotPower="25" freq="-1" watch="scoutMask" shield="-1" fill="#0000dd" frame="#66ff66" cx="97.5" cz="68.88888888888889" angle="90" />
-  <Guard isTarget="false" yon=".001" y="12.5" speed="10000" shotPower="25" freq="-1" watch="scoutMask" shield="-1" fill="#0000dd" frame="#66ff66" cx="67.5" cz="98.8888888888889" angle="90" />
+  <Wall color="#0122b9" color.1="#fffb00" x="117.5" z="83.81944444444444" w="20" d="50" h="0" y="14" />
+  <Guard isTarget="false" yon=".001" y="12.5" speed="10000" shotPower="25" freq="-1" watch="scoutMask" shield="-1" color="#012ce4" color.1="#73fa79" cx="97.5" cz="68.88888888888889" angle="270" />
+  <Guard isTarget="false" yon=".001" y="12.5" speed="10000" shotPower="25" freq="-1" watch="scoutMask" shield="-1" color="#012ce4" color.1="#73fa79" cx="67.5" cz="98.8888888888889" angle="270" />
   <unique vars="mShow mTaken" />
   <And in="@warning" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenW" />
-  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="numGren" start="mShow" out="mTaken" fill="#eeeeee" frame="#aa0000" cx="105.10416666666667" cz="93.85416666666667" angle="270" />
-  <Ball yon="70" start="@ballDrop" y="80" holdShieldLimit="30" shieldChargeRate="100" mass="ballMass" ejectPower="ejPower" carryScore="0" dropEnergy="2" shape="5555" fill="#eeeeee" frame="#aa0000" cx="105.10416666666667" cz="93.85416666666667" angle="270" />
+  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="numGren" start="mShow" out="mTaken" color="#f1f1f1" color.1="#bb1800" cx="105.10416666666667" cz="93.85416666666667" angle="90" />
+  <Ball yon="70" start="@ballDrop" y="80" holdShieldLimit="30" shieldChargeRate="100" mass="ballMass" ejectPower="ejPower" carryScore="0" dropEnergy="2" shape="5555" color="#f1f1f1" color.1="#bb1800" cx="105.10416666666667" cz="93.85416666666667" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@warning" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenW" />
-  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="numGren" start="mShow" out="mTaken" fill="#eeeeee" frame="#aa0000" cx="105.10416666666667" cz="73.85416666666666" angle="270" />
-  <Ball yon="70" start="@ballDrop" y="80" holdShieldLimit="30" shieldChargeRate="100" mass="ballMass" ejectPower="ejPower" carryScore="0" dropEnergy="2" shape="5555" fill="#eeeeee" frame="#aa0000" cx="105.10416666666667" cz="73.85416666666666" angle="270" />
+  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="numGren" start="mShow" out="mTaken" color="#f1f1f1" color.1="#bb1800" cx="105.10416666666667" cz="73.85416666666666" angle="90" />
+  <Ball yon="70" start="@ballDrop" y="80" holdShieldLimit="30" shieldChargeRate="100" mass="ballMass" ejectPower="ejPower" carryScore="0" dropEnergy="2" shape="5555" color="#f1f1f1" color.1="#bb1800" cx="105.10416666666667" cz="73.85416666666666" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@warning" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenW" />
-  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="numGren" start="mShow" out="mTaken" fill="#eeeeee" frame="#aa0000" cx="92.60416666666667" cz="106.35416666666667" angle="270" />
-  <Ball yon="70" start="@ballDrop" y="80" holdShieldLimit="30" shieldChargeRate="100" mass="ballMass" ejectPower="ejPower" carryScore="0" dropEnergy="2" shape="5555" fill="#eeeeee" frame="#aa0000" cx="92.60416666666667" cz="106.35416666666667" angle="270" />
+  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="numGren" start="mShow" out="mTaken" color="#f1f1f1" color.1="#bb1800" cx="92.60416666666667" cz="106.35416666666667" angle="90" />
+  <Ball yon="70" start="@ballDrop" y="80" holdShieldLimit="30" shieldChargeRate="100" mass="ballMass" ejectPower="ejPower" carryScore="0" dropEnergy="2" shape="5555" color="#f1f1f1" color.1="#bb1800" cx="92.60416666666667" cz="106.35416666666667" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@warning" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenW" />
-  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="numGren" start="mShow" out="mTaken" fill="#eeeeee" frame="#aa0000" cx="72.60416666666666" cz="106.35416666666667" angle="270" />
-  <Ball yon="70" start="@ballDrop" y="80" holdShieldLimit="30" shieldChargeRate="100" mass="ballMass" ejectPower="ejPower" carryScore="0" dropEnergy="2" shape="5555" fill="#eeeeee" frame="#aa0000" cx="72.60416666666666" cz="106.35416666666667" angle="270" />
+  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="numGren" start="mShow" out="mTaken" color="#f1f1f1" color.1="#bb1800" cx="72.60416666666666" cz="106.35416666666667" angle="90" />
+  <Ball yon="70" start="@ballDrop" y="80" holdShieldLimit="30" shieldChargeRate="100" mass="ballMass" ejectPower="ejPower" carryScore="0" dropEnergy="2" shape="5555" color="#f1f1f1" color.1="#bb1800" cx="72.60416666666666" cz="106.35416666666667" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@warning" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenW" />
-  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="numGren" start="mShow" out="mTaken" fill="#eeeeee" frame="#aa0000" cx="60.10416666666667" cz="93.85416666666667" angle="270" />
-  <Ball yon="70" start="@ballDrop" y="80" holdShieldLimit="30" shieldChargeRate="100" mass="ballMass" ejectPower="ejPower" carryScore="0" dropEnergy="2" shape="5555" fill="#eeeeee" frame="#aa0000" cx="60.10416666666667" cz="93.85416666666667" angle="270" />
+  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="numGren" start="mShow" out="mTaken" color="#f1f1f1" color.1="#bb1800" cx="60.10416666666667" cz="93.85416666666667" angle="90" />
+  <Ball yon="70" start="@ballDrop" y="80" holdShieldLimit="30" shieldChargeRate="100" mass="ballMass" ejectPower="ejPower" carryScore="0" dropEnergy="2" shape="5555" color="#f1f1f1" color.1="#bb1800" cx="60.10416666666667" cz="93.85416666666667" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@warning" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenW" />
-  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="numGren" start="mShow" out="mTaken" fill="#eeeeee" frame="#aa0000" cx="60.10416666666667" cz="73.85416666666666" angle="270" />
-  <Ball yon="70" start="@ballDrop" y="80" holdShieldLimit="30" shieldChargeRate="100" mass="ballMass" ejectPower="ejPower" carryScore="0" dropEnergy="2" shape="5555" fill="#eeeeee" frame="#aa0000" cx="60.10416666666667" cz="73.85416666666666" angle="270" />
+  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="numGren" start="mShow" out="mTaken" color="#f1f1f1" color.1="#bb1800" cx="60.10416666666667" cz="73.85416666666666" angle="90" />
+  <Ball yon="70" start="@ballDrop" y="80" holdShieldLimit="30" shieldChargeRate="100" mass="ballMass" ejectPower="ejPower" carryScore="0" dropEnergy="2" shape="5555" color="#f1f1f1" color.1="#bb1800" cx="60.10416666666667" cz="73.85416666666666" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@warning" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenW" />
-  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="numGren" start="mShow" out="mTaken" fill="#eeeeee" frame="#aa0000" cx="72.60416666666666" cz="61.35416666666667" angle="270" />
-  <Ball yon="70" start="@ballDrop" y="80" holdShieldLimit="30" shieldChargeRate="100" mass="ballMass" ejectPower="ejPower" carryScore="0" dropEnergy="2" shape="5555" fill="#eeeeee" frame="#aa0000" cx="72.60416666666666" cz="61.35416666666667" angle="270" />
-  <script>
+  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="numGren" start="mShow" out="mTaken" color="#f1f1f1" color.1="#bb1800" cx="72.60416666666666" cz="61.35416666666667" angle="90" />
+  <Ball yon="70" start="@ballDrop" y="80" holdShieldLimit="30" shieldChargeRate="100" mass="ballMass" ejectPower="ejPower" carryScore="0" dropEnergy="2" shape="5555" color="#f1f1f1" color.1="#bb1800" cx="72.60416666666666" cz="61.35416666666667" angle="90" />
+  <script pixelToThickness="0.125" designer="Cowboy - jmcald@usa.net" information="Beware the closing door. Door order/available basket is random. Sudden Death is random - in some games it will happen and others not (always the last minute of play). 10,000 for a basket. Game is 5 minutes. Thanks to Taz! and Kniq for help and ideas!" defaultLives="300" missilePower="1.3" missileAcceleration="0.3" startY="9" grenDelay="125" numGren="12" missDelay="200" numMiss="8" fieldVis="false" zPower=".5" xPower=".5" yPower=".05" grenH="2" grenW="50" ballMass="15" ejPower=".9" openRate="5" closeRate="5" fieldX=".3" fieldY="-.1" fieldZ=".3" rThick=".1" timeLimit="300" kSnText="1503" kTextVolume="0.7" gameLength="4685" color="#f1f1f1" color.1="#bb1800" x="93.125" z="83.81944444444444" w="10" d="7.5" h="0" cx="92.60416666666667" cz="61.35416666666667" r="2.5347222222222285" angle="90" wallHeight="2" door1="1" door2="2" door3="3" door4="4" workNum="11" randStart="int ( 1 + ( random * 4 ) )" wallYon=".001">
 unique mShow mTaken end
 object And 
 in = @warning 
@@ -206,15 +206,15 @@ restart
 wallHeight = 2
 
 wa = 75</script>
-  <WallDoor open="@ballStop" close="@suddenClose" deltaY="0" deltaZ="0" deltaX="-25" yaw="0" openSpeed="15 * openRate" closeSpeed="10 * closeRate" guardDelay="5" volume="0" status="isClosed" shotPower="25" fill="#0000aa" frame="#ffff00" x="70" z="71.31944444444444" w="25" d="25" h="0" />
-  <WallDoor open="@ballStop" close="@suddenClose" deltaY="0" deltaZ="0" deltaX="25" yaw="0" openSpeed="15 * openRate" closeSpeed="10 * closeRate" guardDelay="5" volume="0" status="isClosed" shotPower="25" fill="#0000aa" frame="#ffff00" x="95" z="71.31944444444444" w="25" d="25" h="0" y="75" />
-  <WallDoor open="@ballStop" close="@suddenClose" deltaY="0" deltaZ="0" deltaX="-25" yaw="0" openSpeed="15 * openRate" closeSpeed="10 * closeRate" guardDelay="5" volume="0" status="isClosed" shotPower="25" fill="#0000aa" frame="#ffff00" x="70" z="96.31944444444444" w="25" d="25" h="0" y="75" />
-  <WallDoor open="@ballStop" close="@suddenClose" deltaY="0" deltaZ="0" deltaX="25" yaw="0" openSpeed="15 * openRate" closeSpeed="10 * closeRate" guardDelay="5" volume="0" status="isClosed" shotPower="25" fill="#0000aa" frame="#ffff00" x="95" z="96.31944444444444" w="25" d="25" h="0" y="75" />
+  <WallDoor open="@ballStop" close="@suddenClose" deltaY="0" deltaZ="0" deltaX="-25" yaw="0" openSpeed="15 * openRate" closeSpeed="10 * closeRate" guardDelay="5" volume="0" status="isClosed" shotPower="25" color="#0122b9" color.1="#fffb00" x="70" z="71.31944444444444" w="25" d="25" h="0" />
+  <WallDoor open="@ballStop" close="@suddenClose" deltaY="0" deltaZ="0" deltaX="25" yaw="0" openSpeed="15 * openRate" closeSpeed="10 * closeRate" guardDelay="5" volume="0" status="isClosed" shotPower="25" color="#0122b9" color.1="#fffb00" x="95" z="71.31944444444444" w="25" d="25" h="0" y="75" />
+  <WallDoor open="@ballStop" close="@suddenClose" deltaY="0" deltaZ="0" deltaX="-25" yaw="0" openSpeed="15 * openRate" closeSpeed="10 * closeRate" guardDelay="5" volume="0" status="isClosed" shotPower="25" color="#0122b9" color.1="#fffb00" x="70" z="96.31944444444444" w="25" d="25" h="0" y="75" />
+  <WallDoor open="@ballStop" close="@suddenClose" deltaY="0" deltaZ="0" deltaX="25" yaw="0" openSpeed="15 * openRate" closeSpeed="10 * closeRate" guardDelay="5" volume="0" status="isClosed" shotPower="25" color="#0122b9" color.1="#fffb00" x="95" z="96.31944444444444" w="25" d="25" h="0" y="75" />
   <set wallHeight="2" />
-  <WallDoor open="@warning" close="@suddenClose" deltaY="0" deltaZ="0" deltaX="-25" yaw="0" openSpeed="15 * openRate" closeSpeed="10 * closeRate" guardDelay="5" volume="2" status="isClosed" shotPower="25" fill="#0000aa" frame="#ffff00" x="70" z="71.31944444444444" w="25" d="25" h="0" y="14" />
-  <WallDoor open="@warning" close="@suddenClose" deltaY="0" deltaZ="0" deltaX="25" yaw="0" openSpeed="15 * openRate" closeSpeed="10 * closeRate" guardDelay="5" volume="2" status="isClosed" shotPower="25" fill="#0000aa" frame="#ffff00" x="95" z="71.31944444444444" w="25" d="25" h="0" y="14" />
-  <WallDoor open="@warning" close="@suddenClose" deltaY="0" deltaZ="0" deltaX="-25" yaw="0" openSpeed="15 * openRate" closeSpeed="10 * closeRate" guardDelay="5" volume="2" status="isClosed" shotPower="25" fill="#0000aa" frame="#ffff00" x="70" z="96.31944444444444" w="25" d="25" h="0" y="14" />
-  <WallDoor open="@warning" close="@suddenClose" deltaY="0" deltaZ="0" deltaX="25" yaw="0" openSpeed="15 * openRate" closeSpeed="10 * closeRate" guardDelay="5" volume="2" status="isClosed" shotPower="25" fill="#0000aa" frame="#ffff00" x="95" z="96.31944444444444" w="25" d="25" h="0" y="14" />
+  <WallDoor open="@warning" close="@suddenClose" deltaY="0" deltaZ="0" deltaX="-25" yaw="0" openSpeed="15 * openRate" closeSpeed="10 * closeRate" guardDelay="5" volume="2" status="isClosed" shotPower="25" color="#0122b9" color.1="#fffb00" x="70" z="71.31944444444444" w="25" d="25" h="0" y="14" />
+  <WallDoor open="@warning" close="@suddenClose" deltaY="0" deltaZ="0" deltaX="25" yaw="0" openSpeed="15 * openRate" closeSpeed="10 * closeRate" guardDelay="5" volume="2" status="isClosed" shotPower="25" color="#0122b9" color.1="#fffb00" x="95" z="71.31944444444444" w="25" d="25" h="0" y="14" />
+  <WallDoor open="@warning" close="@suddenClose" deltaY="0" deltaZ="0" deltaX="-25" yaw="0" openSpeed="15 * openRate" closeSpeed="10 * closeRate" guardDelay="5" volume="2" status="isClosed" shotPower="25" color="#0122b9" color.1="#fffb00" x="70" z="96.31944444444444" w="25" d="25" h="0" y="14" />
+  <WallDoor open="@warning" close="@suddenClose" deltaY="0" deltaZ="0" deltaX="25" yaw="0" openSpeed="15 * openRate" closeSpeed="10 * closeRate" guardDelay="5" volume="2" status="isClosed" shotPower="25" color="#0122b9" color.1="#fffb00" x="95" z="96.31944444444444" w="25" d="25" h="0" y="14" />
   <set wallHeight="14" />
   <Timer in="@start" wait="3555" out="@randSudden" />
   <Base in="@start" out="@ballStop" cx="184.375" cz="30.625" />
@@ -225,18 +225,18 @@ wa = 75</script>
   <set sudRand1="10 + int ( 1 + ( random * 2 ) )" />
   <Base in="@randSudden" out="sudRand1" cx="184.375" cz="30.625" />
   <set wallHeight="12.5" />
-  <WallDoor open="door4" close="@newRand" deltaY="15" deltaZ="0" deltaX="0" yaw="0" openSpeed="10 * openRate" closeSpeed="10 * closeRate" guardDelay="5" volume="0" status="isClosed" shotPower="25" fill="#000077" frame="#000000" x="42.5" z="83.81944444444444" w="10" d="10" h="0" y="1.5" />
-  <WallDoor open="door2" close="@newRand" deltaY="15" deltaZ="0" deltaX="0" yaw="0" openSpeed="10 * openRate" closeSpeed="10 * closeRate" guardDelay="5" volume="0" status="isClosed" shotPower="25" fill="#000077" frame="#000000" x="122.5" z="83.81944444444444" w="10" d="10" h="0" y="1.5" />
-  <WallDoor open="door1" close="@newRand" deltaY="15" deltaZ="0" deltaX="0" yaw="0" openSpeed="10 * openRate" closeSpeed="10 * closeRate" guardDelay="5" volume="0" status="isClosed" shotPower="25" fill="#000077" frame="#000000" x="82.5" z="43.81944444444444" w="10" d="10" h="0" y="1.5" />
-  <WallDoor open="door3" close="@newRand" deltaY="15" deltaZ="0" deltaX="0" yaw="0" openSpeed="10 * openRate" closeSpeed="10 * closeRate" guardDelay="5" volume="0" status="isClosed" shotPower="25" fill="#000077" frame="#000000" x="82.5" z="123.81944444444446" w="10" d="10" h="0" y="1.5" />
+  <WallDoor open="door4" close="@newRand" deltaY="15" deltaZ="0" deltaX="0" yaw="0" openSpeed="10 * openRate" closeSpeed="10 * closeRate" guardDelay="5" volume="0" status="isClosed" shotPower="25" color="#01168a" color.1="#000000" x="42.5" z="83.81944444444444" w="10" d="10" h="0" y="1.5" />
+  <WallDoor open="door2" close="@newRand" deltaY="15" deltaZ="0" deltaX="0" yaw="0" openSpeed="10 * openRate" closeSpeed="10 * closeRate" guardDelay="5" volume="0" status="isClosed" shotPower="25" color="#01168a" color.1="#000000" x="122.5" z="83.81944444444444" w="10" d="10" h="0" y="1.5" />
+  <WallDoor open="door1" close="@newRand" deltaY="15" deltaZ="0" deltaX="0" yaw="0" openSpeed="10 * openRate" closeSpeed="10 * closeRate" guardDelay="5" volume="0" status="isClosed" shotPower="25" color="#01168a" color.1="#000000" x="82.5" z="43.81944444444444" w="10" d="10" h="0" y="1.5" />
+  <WallDoor open="door3" close="@newRand" deltaY="15" deltaZ="0" deltaX="0" yaw="0" openSpeed="10 * openRate" closeSpeed="10 * closeRate" guardDelay="5" volume="0" status="isClosed" shotPower="25" color="#01168a" color.1="#000000" x="82.5" z="123.81944444444446" w="10" d="10" h="0" y="1.5" />
   <set wallHeight="10" />
-  <Field start="@newRand" stop="door1" deltaY="0 * fieldY" deltaX="0 * fieldX" deltaZ="fieldZ" visible="fieldVis" fill="#0000aa" frame="#ffff00" x="82.5" z="39.75694444444444" w="10" d="1.875" h="0" cx="184.375" cz="30.625" angle="90" y="4" />
+  <Field start="@newRand" stop="door1" deltaY="0 * fieldY" deltaX="0 * fieldX" deltaZ="fieldZ" visible="fieldVis" color="#0122b9" color.1="#fffb00" x="82.5" z="39.75694444444444" w="10" d="1.875" h="0" cx="184.375" cz="30.625" angle="270" y="4" />
   <set wallHeight="10" />
-  <Field start="@newRand" stop="door3" deltaY="0 * fieldY" deltaX="0 * fieldX" deltaZ="-1 * fieldZ" visible="fieldVis" fill="#0000aa" frame="#ffff00" x="82.5" z="127.88194444444446" w="10" d="1.875" h="0" cx="184.375" cz="30.625" angle="90" y="4" />
+  <Field start="@newRand" stop="door3" deltaY="0 * fieldY" deltaX="0 * fieldX" deltaZ="-1 * fieldZ" visible="fieldVis" color="#0122b9" color.1="#fffb00" x="82.5" z="127.88194444444446" w="10" d="1.875" h="0" cx="184.375" cz="30.625" angle="270" y="4" />
   <set wallHeight="10" />
-  <Field start="@newRand" stop="door2" deltaY="0 * fieldY" deltaX="-1 * fieldX" deltaZ="0 * fieldZ" visible="fieldVis" fill="#0000aa" frame="#ffff00" x="126.5625" z="83.81944444444444" w="1.875" d="10" h="0" cx="184.375" cz="30.625" angle="90" y="4" />
+  <Field start="@newRand" stop="door2" deltaY="0 * fieldY" deltaX="-1 * fieldX" deltaZ="0 * fieldZ" visible="fieldVis" color="#0122b9" color.1="#fffb00" x="126.5625" z="83.81944444444444" w="1.875" d="10" h="0" cx="184.375" cz="30.625" angle="270" y="4" />
   <set wallHeight="10" />
-  <Field start="@newRand" stop="door4" deltaY="0 * fieldY" deltaX="fieldX" deltaZ="0 * fieldZ" visible="fieldVis" fill="#0000aa" frame="#ffff00" x="38.4375" z="83.81944444444444" w="1.875" d="10" h="0" cx="184.375" cz="30.625" angle="90" y="4" />
+  <Field start="@newRand" stop="door4" deltaY="0 * fieldY" deltaX="fieldX" deltaZ="0 * fieldZ" visible="fieldVis" color="#0122b9" color.1="#fffb00" x="38.4375" z="83.81944444444444" w="1.875" d="10" h="0" cx="184.375" cz="30.625" angle="270" y="4" />
   <Timer in="@start" wait="4216" out="@thirtyLeft" />
   <Text in="@thirtyLeft" sound="snTextBlip" volume="5" showEveryone="true" text="Thirty Seconds Left!" cx="168.68055555555557" cz="16.458333333333336" r="3.75" />
   <Timer in="@thirtyLeft" wait="312" out="@ten10" />

@@ -1,148 +1,146 @@
 <map>
-  <set information="This level was designed BEFORE Aftershock.
-Shields and energy don’t recharge automatically; grab mushrooms and shots to charge them.
-Missile ammo is present but hidden." />
-  <SkyColor fill="#663300" frame="#440000" />
-  <GroundColor fill="#444444" />
+  <set information="This level was designed BEFORE Aftershock.&#10;Shields and energy don’t recharge automatically; grab mushrooms and shots to charge them.&#10;Missile ammo is present but hidden." />
+  <SkyColor color="#7a4300" color.1="#570500" />
+  <GroundColor color="#565656" />
   <set pitCeilingY="3" floor1Y="6" floor1CeilingY="floor1Y + 5" floor2Y="floor1CeilingY + 1" floor2CeilingY="floor2Y + 5" groundStepSound="snStepObject" missileAcceleration="0.05" missileTurnRate="100" missilePower="10" grenadePower="1" defaultLives="6" hull.0="hullRoom" hull.1="hullRoom" hull.2="hullRoom" gEnergy="35" gGrenades="15" gMissiles="1" MM=".35" yonPlat="50" yonDecor="25" wallHeight="5" baseHeight="floor2CeilingY" />
-  <Wall fill="#444444" frame="#000000" x="66.80555555555556" z="57.08333333333334" w="61.25" d="61.25" h="0" />
+  <Wall color="#565656" color.1="#000000" x="66.80555555555556" z="57.08333333333334" w="61.25" d="61.25" h="0" />
   <set stepSound="snStepGround" hxitSoundDefault="snHit1" baseHeight="floor1Y" wallHeight="0" />
-  <Wall fill="#777777" frame="#000000" x="66.80555555555556" z="47.083333333333336" w="35" d="15" h="0" />
-  <Wall fill="#777777" frame="#000000" x="66.80555555555556" z="67.08333333333334" w="35" d="15" h="0" />
-  <Wall fill="#777777" frame="#000000" x="51.80555555555556" z="57.083333333333336" w="5" d="5" h="0" />
-  <Wall fill="#777777" frame="#000000" x="71.80555555555556" z="57.083333333333336" w="25" d="5" h="0" />
-  <Incarnator cx="51.80555555555556" cz="72.08333333333334" angle="225" />
-  <Incarnator cx="51.80555555555556" cz="42.083333333333336" angle="315" />
-  <Incarnator cx="81.80555555555556" cz="42.083333333333336" angle="45" />
-  <Incarnator cx="81.80555555555556" cz="72.08333333333334" angle="135" />
+  <Wall color="#8a8a8a" color.1="#000000" x="66.80555555555556" z="47.083333333333336" w="35" d="15" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="66.80555555555556" z="67.08333333333334" w="35" d="15" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="51.80555555555556" z="57.083333333333336" w="5" d="5" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="71.80555555555556" z="57.083333333333336" w="25" d="5" h="0" />
+  <Incarnator cx="51.80555555555556" cz="72.08333333333334" angle="45" />
+  <Incarnator cx="51.80555555555556" cz="42.083333333333336" angle="135" />
+  <Incarnator cx="81.80555555555556" cz="42.083333333333336" angle="225" />
+  <Incarnator cx="81.80555555555556" cz="72.08333333333334" angle="315" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspShot" power="gEnergy" shield=".05" y="gAmmoY" speed="gAmmoSpd" start="mShow" out="mTaken" fill="#ff0000" frame="#000000" cx="50.55555555555556" cz="40.833333333333336" angle="315" />
+  <Goody shape="bspShot" power="gEnergy" shield=".05" y="gAmmoY" speed="gAmmoSpd" start="mShow" out="mTaken" color="#ff2600" color.1="#000000" cx="50.55555555555556" cz="40.833333333333336" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="gTimeLong" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspGrenade" grenades="gGrenades" y="gAmmoY" speed="gAmmoSpd" start="mShow" out="mTaken" fill="#ffff33" frame="#ff0000" cx="83.05555555555556" cz="73.33333333333334" angle="315" />
+  <Goody shape="bspGrenade" grenades="gGrenades" y="gAmmoY" speed="gAmmoSpd" start="mShow" out="mTaken" color="#fffc41" color.1="#ff2600" cx="83.05555555555556" cz="73.33333333333334" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="gTimeLong" />
-  <Wall fill="#777777" frame="#000000" x="41.80555555555556" z="54.58333333333334" w="5" d="50" h="0" />
-  <Wall fill="#777777" frame="#000000" x="91.80555555555556" z="59.58333333333334" w="5" d="50" h="0" />
-  <Wall fill="#777777" frame="#000000" x="69.30555555555556" z="32.083333333333336" w="50" d="5" h="0" />
-  <Wall fill="#777777" frame="#000000" x="64.30555555555556" z="82.08333333333334" w="50" d="5" h="0" />
-  <Wall fill="#777777" frame="#000000" x="39.30555555555556" z="29.583333333333336" w="5" d="5" h="0" />
-  <Wall fill="#777777" frame="#000000" x="94.30555555555556" z="29.583333333333336" w="5" d="5" h="0" />
-  <Wall fill="#777777" frame="#000000" x="94.30555555555556" z="84.58333333333334" w="5" d="5" h="0" />
-  <Wall fill="#777777" frame="#000000" x="39.30555555555556" z="84.58333333333334" w="5" d="5" h="0" />
-  <Wall fill="#777777" frame="#000000" x="46.80555555555556" z="57.083333333333336" w="5" d="5" h="0" />
-  <Wall fill="#777777" frame="#000000" x="66.80555555555556" z="37.083333333333336" w="5" d="5" h="0" />
-  <Wall fill="#777777" frame="#000000" x="86.80555555555556" z="57.083333333333336" w="5" d="5" h="0" />
-  <Wall fill="#777777" frame="#000000" x="66.80555555555556" z="77.08333333333334" w="5" d="5" h="0" />
-  <WallDoor open="@PitPanelOpen" close="@PitPanelClose" openSound="0" closeSound="0" volume="5" deltaY="0" deltaX="5" stepOnMsg="@PitPanelStep" openSpeed="20" closeSpeed="openSpeed" fill="#777777" frame="#000000" x="56.80555555555556" z="57.083333333333336" w="5.138888888888886" d="5" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="41.80555555555556" z="54.58333333333334" w="5" d="50" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="91.80555555555556" z="59.58333333333334" w="5" d="50" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="69.30555555555556" z="32.083333333333336" w="50" d="5" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="64.30555555555556" z="82.08333333333334" w="50" d="5" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="39.30555555555556" z="29.583333333333336" w="5" d="5" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="94.30555555555556" z="29.583333333333336" w="5" d="5" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="94.30555555555556" z="84.58333333333334" w="5" d="5" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="39.30555555555556" z="84.58333333333334" w="5" d="5" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="46.80555555555556" z="57.083333333333336" w="5" d="5" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="66.80555555555556" z="37.083333333333336" w="5" d="5" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="86.80555555555556" z="57.083333333333336" w="5" d="5" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="66.80555555555556" z="77.08333333333334" w="5" d="5" h="0" />
+  <WallDoor open="@PitPanelOpen" close="@PitPanelClose" openSound="0" closeSound="0" volume="5" deltaY="0" deltaX="5" stepOnMsg="@PitPanelStep" openSpeed="20" closeSpeed="openSpeed" color="#8a8a8a" color.1="#000000" x="56.80555555555556" z="57.083333333333336" w="5.138888888888886" d="5" h="0" />
   <set stepSound="snStepObject" hitSoundDefault="snHit0" wallHeight="floor1Y" baseHeight="0" />
-  <Wall fill="#777777" frame="#000000" x="61.80555555555556" z="54.583333333333336" w="15" d="0" h="0" />
-  <Wall fill="#777777" frame="#000000" x="61.80555555555556" z="59.583333333333336" w="15" d="0" h="0" />
-  <Wall fill="#777777" frame="#000000" x="69.30555555555556" z="57.083333333333336" w="0" d="5" h="0" />
-  <Ramp thickness="0" deltaY="floor1Y" fill="#777777" frame="#000000" x="59.30555555555556" z="57.083333333333336" w="10" d="5" h="0" angle="270" />
-  <Ramp thickness="0" deltaY="floor1Y -pitCeilingY" y="pitCeilingY" fill="#777777" frame="#000000" x="64.30555555555556" z="57.083333333333336" w="10" d="5" h="0" angle="270" />
-  <Switch in.0="@PitPanelClose" in.1="@PitPanelOpen" out.0="in[0]" out.1="in[1]" fill="#00ee00" frame="#ff0000" cx="69.30555555555556" cz="57.15277777777778" angle="270" />
+  <Wall color="#8a8a8a" color.1="#000000" x="61.80555555555556" z="54.583333333333336" w="15" d="0" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="61.80555555555556" z="59.583333333333336" w="15" d="0" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="69.30555555555556" z="57.083333333333336" w="0" d="5" h="0" />
+  <Ramp thickness="0" deltaY="floor1Y" color="#8a8a8a" color.1="#000000" x="59.30555555555556" z="57.083333333333336" w="10" d="5" h="0" angle="90" />
+  <Ramp thickness="0" deltaY="floor1Y -pitCeilingY" y="pitCeilingY" color="#8a8a8a" color.1="#000000" x="64.30555555555556" z="57.083333333333336" w="10" d="5" h="0" angle="90" />
+  <Switch in.0="@PitPanelClose" in.1="@PitPanelOpen" out.0="in[0]" out.1="in[1]" color="#00ec00" color.1="#ff2600" cx="69.30555555555556" cz="57.15277777777778" angle="90" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspMissile" missiles="gMissiles" y="gAmmoY" speed="gAmmoSpd" start="mShow" out="mTaken" fill="#0000dd" frame="#440000" cx="66.80555555555556" cz="57.083333333333336" angle="315" />
+  <Goody shape="bspMissile" missiles="gMissiles" y="gAmmoY" speed="gAmmoSpd" start="mShow" out="mTaken" color="#012ce4" color.1="#570500" cx="66.80555555555556" cz="57.083333333333336" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="gTimeLong" />
   <Timer in.0="@start" in.1="@PanelTimerB" in.2="@PitPanelStep" wait="2 * 15" out="@PanelTimerB" />
   <Timer in="@PanelTimerB" wait="4 * 15" out="@PitPanelOpen" />
   <Timer in="@PitPanelOpen" wait="4 * 15" out="@PitPanelClose" />
   <set baseHeight="floor1Y" wallHeight="floor2CeilingY -baseHeight" />
-  <Wall fill="#555555" frame="#000000" x="54.30555555555556" z="37.083333333333336" w="20" d="5" h="0" />
-  <Wall fill="#555555" frame="#000000" x="46.80555555555556" z="47.083333333333336" w="5" d="15" h="0" />
-  <Wall fill="#555555" frame="#000000" x="86.80555555555556" z="44.583333333333336" w="5" d="20" h="0" />
-  <Wall fill="#555555" frame="#000000" x="76.80555555555556" z="37.083333333333336" w="15" d="5" h="0" />
-  <Wall fill="#555555" frame="#000000" x="79.30555555555556" z="77.08333333333334" w="20" d="5" h="0" />
-  <Wall fill="#555555" frame="#000000" x="86.80555555555556" z="67.08333333333334" w="5" d="15" h="0" />
-  <Wall fill="#555555" frame="#000000" x="46.80555555555556" z="69.58333333333334" w="5" d="20" h="0" />
-  <Wall fill="#555555" frame="#000000" x="56.80555555555556" z="77.08333333333334" w="15" d="5" h="0" />
-  <Wall fill="#555555" frame="#000000" x="66.80555555555556" z="28.333333333333336" w="50" d="2.5" h="0" />
-  <Wall fill="#555555" frame="#000000" x="95.55555555555556" z="57.08333333333334" w="2.5" d="50" h="0" />
-  <Wall fill="#555555" frame="#000000" x="66.80555555555556" z="85.83333333333334" w="50" d="2.5" h="0" />
-  <Wall fill="#555555" frame="#000000" x="38.05555555555556" z="57.08333333333334" w="2.5" d="50" h="0" />
-  <Wall fill="#555555" frame="#000000" x="36.49305555555556" z="84.58333333333334" w="0.625" d="6.25" h="0" />
-  <Wall fill="#555555" frame="#000000" x="39.61805555555556" z="87.39583333333334" w="5.625" d="0.625" h="0" />
-  <Wall fill="#555555" frame="#000000" x="39.30555555555556" z="26.770833333333336" w="6.25" d="0.625" h="0" />
-  <Wall fill="#555555" frame="#000000" x="36.49305555555556" z="29.895833333333336" w="0.625" d="5.625" h="0" />
-  <Wall fill="#555555" frame="#000000" x="94.30555555555556" z="87.39583333333334" w="6.25" d="0.625" h="0" />
-  <Wall fill="#555555" frame="#000000" x="97.11805555555556" z="84.27083333333334" w="0.625" d="5.625" h="0" />
-  <Wall fill="#555555" frame="#000000" x="97.11805555555556" z="29.583333333333336" w="0.625" d="6.25" h="0" />
-  <Wall fill="#555555" frame="#000000" x="93.99305555555556" z="26.770833333333336" w="5.625" d="0.625" h="0" />
+  <Wall color="#686868" color.1="#000000" x="54.30555555555556" z="37.083333333333336" w="20" d="5" h="0" />
+  <Wall color="#686868" color.1="#000000" x="46.80555555555556" z="47.083333333333336" w="5" d="15" h="0" />
+  <Wall color="#686868" color.1="#000000" x="86.80555555555556" z="44.583333333333336" w="5" d="20" h="0" />
+  <Wall color="#686868" color.1="#000000" x="76.80555555555556" z="37.083333333333336" w="15" d="5" h="0" />
+  <Wall color="#686868" color.1="#000000" x="79.30555555555556" z="77.08333333333334" w="20" d="5" h="0" />
+  <Wall color="#686868" color.1="#000000" x="86.80555555555556" z="67.08333333333334" w="5" d="15" h="0" />
+  <Wall color="#686868" color.1="#000000" x="46.80555555555556" z="69.58333333333334" w="5" d="20" h="0" />
+  <Wall color="#686868" color.1="#000000" x="56.80555555555556" z="77.08333333333334" w="15" d="5" h="0" />
+  <Wall color="#686868" color.1="#000000" x="66.80555555555556" z="28.333333333333336" w="50" d="2.5" h="0" />
+  <Wall color="#686868" color.1="#000000" x="95.55555555555556" z="57.08333333333334" w="2.5" d="50" h="0" />
+  <Wall color="#686868" color.1="#000000" x="66.80555555555556" z="85.83333333333334" w="50" d="2.5" h="0" />
+  <Wall color="#686868" color.1="#000000" x="38.05555555555556" z="57.08333333333334" w="2.5" d="50" h="0" />
+  <Wall color="#686868" color.1="#000000" x="36.49305555555556" z="84.58333333333334" w="0.625" d="6.25" h="0" />
+  <Wall color="#686868" color.1="#000000" x="39.61805555555556" z="87.39583333333334" w="5.625" d="0.625" h="0" />
+  <Wall color="#686868" color.1="#000000" x="39.30555555555556" z="26.770833333333336" w="6.25" d="0.625" h="0" />
+  <Wall color="#686868" color.1="#000000" x="36.49305555555556" z="29.895833333333336" w="0.625" d="5.625" h="0" />
+  <Wall color="#686868" color.1="#000000" x="94.30555555555556" z="87.39583333333334" w="6.25" d="0.625" h="0" />
+  <Wall color="#686868" color.1="#000000" x="97.11805555555556" z="84.27083333333334" w="0.625" d="5.625" h="0" />
+  <Wall color="#686868" color.1="#000000" x="97.11805555555556" z="29.583333333333336" w="0.625" d="6.25" h="0" />
+  <Wall color="#686868" color.1="#000000" x="93.99305555555556" z="26.770833333333336" w="5.625" d="0.625" h="0" />
   <set baseHeight="floor1CeilingY" wallHeight="floor2Y -floor1CeilingY" />
-  <Wall fill="#bbbbbb" frame="#000000" x="86.80555555555556" z="57.083333333333336" w="5" d="5" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="66.80555555555556" z="77.08333333333334" w="5" d="5" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="41.80555555555556" z="55.83333333333334" w="5" d="47.5" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="91.80555555555556" z="58.33333333333334" w="5" d="47.5" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="68.05555555555556" z="32.083333333333336" w="47.5" d="5" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="65.55555555555556" z="82.08333333333334" w="47.5" d="5" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="46.80555555555556" z="57.083333333333336" w="5" d="5" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="66.80555555555556" z="37.083333333333336" w="5" d="5" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="66.80555555555556" z="57.08333333333334" w="35" d="35" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="43.05555555555556" z="30.833333333333336" w="2.5" d="2.5" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="93.05555555555556" z="33.333333333333336" w="2.5" d="2.5" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="40.55555555555556" z="80.83333333333334" w="2.5" d="2.5" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="90.55555555555556" z="83.33333333333334" w="2.5" d="2.5" h="0" />
-  <Incarnator y="wallHeight" cx="51.80555555555556" cz="72.08333333333334" angle="225" />
-  <Incarnator y="wallHeight" cx="51.80555555555556" cz="42.083333333333336" angle="315" />
-  <Incarnator y="wallHeight" cx="81.80555555555556" cz="42.083333333333336" angle="45" />
-  <Incarnator y="wallHeight" cx="81.80555555555556" cz="72.08333333333334" angle="135" />
+  <Wall color="#c7c7c7" color.1="#000000" x="86.80555555555556" z="57.083333333333336" w="5" d="5" h="0" />
+  <Wall color="#c7c7c7" color.1="#000000" x="66.80555555555556" z="77.08333333333334" w="5" d="5" h="0" />
+  <Wall color="#c7c7c7" color.1="#000000" x="41.80555555555556" z="55.83333333333334" w="5" d="47.5" h="0" />
+  <Wall color="#c7c7c7" color.1="#000000" x="91.80555555555556" z="58.33333333333334" w="5" d="47.5" h="0" />
+  <Wall color="#c7c7c7" color.1="#000000" x="68.05555555555556" z="32.083333333333336" w="47.5" d="5" h="0" />
+  <Wall color="#c7c7c7" color.1="#000000" x="65.55555555555556" z="82.08333333333334" w="47.5" d="5" h="0" />
+  <Wall color="#c7c7c7" color.1="#000000" x="46.80555555555556" z="57.083333333333336" w="5" d="5" h="0" />
+  <Wall color="#c7c7c7" color.1="#000000" x="66.80555555555556" z="37.083333333333336" w="5" d="5" h="0" />
+  <Wall color="#c7c7c7" color.1="#000000" x="66.80555555555556" z="57.08333333333334" w="35" d="35" h="0" />
+  <Wall color="#c7c7c7" color.1="#000000" x="43.05555555555556" z="30.833333333333336" w="2.5" d="2.5" h="0" />
+  <Wall color="#c7c7c7" color.1="#000000" x="93.05555555555556" z="33.333333333333336" w="2.5" d="2.5" h="0" />
+  <Wall color="#c7c7c7" color.1="#000000" x="40.55555555555556" z="80.83333333333334" w="2.5" d="2.5" h="0" />
+  <Wall color="#c7c7c7" color.1="#000000" x="90.55555555555556" z="83.33333333333334" w="2.5" d="2.5" h="0" />
+  <Incarnator y="wallHeight" cx="51.80555555555556" cz="72.08333333333334" angle="45" />
+  <Incarnator y="wallHeight" cx="51.80555555555556" cz="42.083333333333336" angle="135" />
+  <Incarnator y="wallHeight" cx="81.80555555555556" cz="42.083333333333336" angle="225" />
+  <Incarnator y="wallHeight" cx="81.80555555555556" cz="72.08333333333334" angle="315" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspMushroom" scale=".7" shield="5" y="gAmmoY + wallHeight -MM" speed="gAmmoSpd" start="mShow" out="mTaken" fill="#0000dd" frame="#dd0000" cx="66.80555555555556" cz="57.083333333333336" angle="315" />
+  <Goody shape="bspMushroom" scale=".7" shield="5" y="gAmmoY + wallHeight -MM" speed="gAmmoSpd" start="mShow" out="mTaken" color="#012ce4" color.1="#e62100" cx="66.80555555555556" cz="57.083333333333336" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="gTimeShort" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspShot" power="gEnergy" shield=".05" y="gAmmoY + wallHeight" speed="gAmmoSpd" start="mShow" out="mTaken" fill="#ff0000" frame="#000000" cx="50.55555555555556" cz="73.33333333333334" angle="315" />
+  <Goody shape="bspShot" power="gEnergy" shield=".05" y="gAmmoY + wallHeight" speed="gAmmoSpd" start="mShow" out="mTaken" color="#ff2600" color.1="#000000" cx="50.55555555555556" cz="73.33333333333334" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="gTimeLong" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspGrenade" grenades="gGrenades" y="gAmmoY + wallHeight" speed="gAmmoSpd" start="mShow" out="mTaken" fill="#ffff33" frame="#ff0000" cx="83.05555555555556" cz="40.833333333333336" angle="315" />
+  <Goody shape="bspGrenade" grenades="gGrenades" y="gAmmoY + wallHeight" speed="gAmmoSpd" start="mShow" out="mTaken" color="#fffc41" color.1="#ff2600" cx="83.05555555555556" cz="40.833333333333336" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="gTimeLong" />
   <set baseHeight="floor1Y + .1" wallHeight=".25" wallYon="yonPlat" PlatUpSpd="2" PlatDownSpd="3" PlatDelta="floor2Y -baseHeight -wallHeight" field2wa="-baseHeight + floor2Y" stepSound="snStepMetal" />
   <unique vars="mOpen mClose mStep" />
-  <WallDoor open="mOpen" close="mClose" deltaY="PlatDelta" openSpeed="PlatUpSpd" closeSpeed="PlatDownSpd" stepOnMsg="mStep" fill="#440000" frame="#000000" x="39.30555555555556" z="29.583333333333336" w="5" d="5" h="0" />
+  <WallDoor open="mOpen" close="mClose" deltaY="PlatDelta" openSpeed="PlatUpSpd" closeSpeed="PlatDownSpd" stepOnMsg="mStep" color="#570500" color.1="#000000" x="39.30555555555556" z="29.583333333333336" w="5" d="5" h="0" />
   <And in="mStep" out.0="mOpen" out.1="mClose" />
-  <Field enter="mClose" deltaY="0" fill="#440000" frame="#000000" x="40.55555555555556" z="30.833333333333336" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="315" />
+  <Field enter="mClose" deltaY="0" color="#570500" color.1="#000000" x="40.55555555555556" z="30.833333333333336" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="135" />
   <set wa="field2wa" />
-  <Field enter="mOpen" deltaY="0" fill="#440000" frame="#000000" x="40.55555555555556" z="30.833333333333336" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="315" />
+  <Field enter="mOpen" deltaY="0" color="#570500" color.1="#000000" x="40.55555555555556" z="30.833333333333336" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="135" />
   <unique vars="mOpen mClose mStep" />
-  <WallDoor open="mOpen" close="mClose" deltaY="PlatDelta" openSpeed="PlatUpSpd" closeSpeed="PlatDownSpd" stepOnMsg="mStep" fill="#440000" frame="#000000" x="94.30555555555556" z="29.583333333333336" w="5" d="5" h="0" />
+  <WallDoor open="mOpen" close="mClose" deltaY="PlatDelta" openSpeed="PlatUpSpd" closeSpeed="PlatDownSpd" stepOnMsg="mStep" color="#570500" color.1="#000000" x="94.30555555555556" z="29.583333333333336" w="5" d="5" h="0" />
   <And in="mStep" out.0="mOpen" out.1="mClose" />
-  <Field enter="mClose" deltaY="0" fill="#440000" frame="#000000" x="93.05555555555556" z="30.833333333333336" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="315" />
+  <Field enter="mClose" deltaY="0" color="#570500" color.1="#000000" x="93.05555555555556" z="30.833333333333336" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="135" />
   <set wa="field2wa" />
-  <Field enter="mOpen" deltaY="0" fill="#440000" frame="#000000" x="93.05555555555556" z="30.833333333333336" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="315" />
+  <Field enter="mOpen" deltaY="0" color="#570500" color.1="#000000" x="93.05555555555556" z="30.833333333333336" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="135" />
   <unique vars="mOpen mClose mStep" />
-  <WallDoor open="mOpen" close="mClose" deltaY="PlatDelta" openSpeed="PlatUpSpd" closeSpeed="PlatDownSpd" stepOnMsg="mStep" fill="#440000" frame="#000000" x="39.30555555555556" z="84.58333333333334" w="5" d="5" h="0" />
+  <WallDoor open="mOpen" close="mClose" deltaY="PlatDelta" openSpeed="PlatUpSpd" closeSpeed="PlatDownSpd" stepOnMsg="mStep" color="#570500" color.1="#000000" x="39.30555555555556" z="84.58333333333334" w="5" d="5" h="0" />
   <And in="mStep" out.0="mOpen" out.1="mClose" />
-  <Field enter="mClose" deltaY="0" fill="#440000" frame="#000000" x="40.55555555555556" z="83.33333333333334" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="315" />
+  <Field enter="mClose" deltaY="0" color="#570500" color.1="#000000" x="40.55555555555556" z="83.33333333333334" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="135" />
   <set wa="field2wa" />
-  <Field enter="mOpen" deltaY="0" fill="#440000" frame="#000000" x="40.55555555555556" z="83.33333333333334" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="315" />
+  <Field enter="mOpen" deltaY="0" color="#570500" color.1="#000000" x="40.55555555555556" z="83.33333333333334" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="135" />
   <unique vars="mOpen mClose mStep" />
-  <WallDoor open="mOpen" close="mClose" deltaY="PlatDelta" openSpeed="PlatUpSpd" closeSpeed="PlatDownSpd" stepOnMsg="mStep" fill="#440000" frame="#000000" x="94.30555555555556" z="84.58333333333334" w="5" d="5" h="0" />
+  <WallDoor open="mOpen" close="mClose" deltaY="PlatDelta" openSpeed="PlatUpSpd" closeSpeed="PlatDownSpd" stepOnMsg="mStep" color="#570500" color.1="#000000" x="94.30555555555556" z="84.58333333333334" w="5" d="5" h="0" />
   <And in="mStep" out.0="mOpen" out.1="mClose" />
-  <Field enter="mClose" deltaY="0" fill="#440000" frame="#000000" x="93.05555555555556" z="83.33333333333334" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="315" />
+  <Field enter="mClose" deltaY="0" color="#570500" color.1="#000000" x="93.05555555555556" z="83.33333333333334" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="135" />
   <set wa="field2wa" />
-  <Field enter="mOpen" deltaY="0" fill="#440000" frame="#000000" x="93.05555555555556" z="83.33333333333334" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="315" />
+  <Field enter="mOpen" deltaY="0" color="#570500" color.1="#000000" x="93.05555555555556" z="83.33333333333334" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="135" />
   <set fThick="floor2Y -floor1CeilingY" wallHeight=".25" wallYon="yonDecor" baseHeight="floor1CeilingY + ( fThick -wallHeight ) / 2" />
-  <Wall fill="#3366ff" frame="#000000" x="36.80555555555556" z="29.583333333333336" w="0" d="5" h="0" />
-  <Wall fill="#3366ff" frame="#000000" x="39.30555555555556" z="27.083333333333336" w="5" d="0" h="0" />
-  <Wall fill="#3366ff" frame="#000000" x="39.30555555555556" z="32.083333333333336" w="5" d="0" h="0" />
-  <Wall fill="#3366ff" frame="#000000" x="41.80555555555556" z="29.583333333333336" w="0" d="5" h="0" />
-  <Wall fill="#3366ff" frame="#000000" x="91.80555555555556" z="29.583333333333336" w="0" d="5" h="0" />
-  <Wall fill="#3366ff" frame="#000000" x="94.30555555555556" z="27.083333333333336" w="5" d="0" h="0" />
-  <Wall fill="#3366ff" frame="#000000" x="94.30555555555556" z="32.083333333333336" w="5" d="0" h="0" />
-  <Wall fill="#3366ff" frame="#000000" x="96.80555555555556" z="29.583333333333336" w="0" d="5" h="0" />
-  <Wall fill="#3366ff" frame="#000000" x="91.80555555555556" z="84.58333333333334" w="0" d="5" h="0" />
-  <Wall fill="#3366ff" frame="#000000" x="94.30555555555556" z="82.08333333333334" w="5" d="0" h="0" />
-  <Wall fill="#3366ff" frame="#000000" x="94.30555555555556" z="87.08333333333334" w="5" d="0" h="0" />
-  <Wall fill="#3366ff" frame="#000000" x="96.80555555555556" z="84.58333333333334" w="0" d="5" h="0" />
-  <Wall fill="#3366ff" frame="#000000" x="36.80555555555556" z="84.58333333333334" w="0" d="5" h="0" />
-  <Wall fill="#3366ff" frame="#000000" x="39.30555555555556" z="82.08333333333334" w="5" d="0" h="0" />
-  <Wall fill="#3366ff" frame="#000000" x="39.30555555555556" z="87.08333333333334" w="5" d="0" h="0" />
-  <Wall fill="#3366ff" frame="#000000" x="41.80555555555556" z="84.58333333333334" w="0" d="5" h="0" />
-  <Teleporter yon="0.01" y="-6" win="5000" start="@winTeam" activeRange="2000" group="-1" fill="#00ee00" frame="#000000" cx="39.861111111111114" cz="8.402777777777779" angle="45" />
+  <Wall color="#4180ff" color.1="#000000" x="36.80555555555556" z="29.583333333333336" w="0" d="5" h="0" />
+  <Wall color="#4180ff" color.1="#000000" x="39.30555555555556" z="27.083333333333336" w="5" d="0" h="0" />
+  <Wall color="#4180ff" color.1="#000000" x="39.30555555555556" z="32.083333333333336" w="5" d="0" h="0" />
+  <Wall color="#4180ff" color.1="#000000" x="41.80555555555556" z="29.583333333333336" w="0" d="5" h="0" />
+  <Wall color="#4180ff" color.1="#000000" x="91.80555555555556" z="29.583333333333336" w="0" d="5" h="0" />
+  <Wall color="#4180ff" color.1="#000000" x="94.30555555555556" z="27.083333333333336" w="5" d="0" h="0" />
+  <Wall color="#4180ff" color.1="#000000" x="94.30555555555556" z="32.083333333333336" w="5" d="0" h="0" />
+  <Wall color="#4180ff" color.1="#000000" x="96.80555555555556" z="29.583333333333336" w="0" d="5" h="0" />
+  <Wall color="#4180ff" color.1="#000000" x="91.80555555555556" z="84.58333333333334" w="0" d="5" h="0" />
+  <Wall color="#4180ff" color.1="#000000" x="94.30555555555556" z="82.08333333333334" w="5" d="0" h="0" />
+  <Wall color="#4180ff" color.1="#000000" x="94.30555555555556" z="87.08333333333334" w="5" d="0" h="0" />
+  <Wall color="#4180ff" color.1="#000000" x="96.80555555555556" z="84.58333333333334" w="0" d="5" h="0" />
+  <Wall color="#4180ff" color.1="#000000" x="36.80555555555556" z="84.58333333333334" w="0" d="5" h="0" />
+  <Wall color="#4180ff" color.1="#000000" x="39.30555555555556" z="82.08333333333334" w="5" d="0" h="0" />
+  <Wall color="#4180ff" color.1="#000000" x="39.30555555555556" z="87.08333333333334" w="5" d="0" h="0" />
+  <Wall color="#4180ff" color.1="#000000" x="41.80555555555556" z="84.58333333333334" w="0" d="5" h="0" />
+  <Teleporter yon="0.01" y="-6" win="5000" start="@winTeam" activeRange="2000" group="-1" color="#00ec00" color.1="#000000" cx="39.861111111111114" cz="8.402777777777779" angle="225" />
   <set stepSound="snStepObject" />
 </map>

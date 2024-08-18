@@ -21,9 +21,7 @@
 #define kStandardBallMass FIX(30);
 #define kBallBaseMass FIX(50);
 
-void CBall::IAbstractActor() {
-    CRealShooters::IAbstractActor();
-
+CBall::CBall() {
     mass = kStandardBallMass;
     baseMass = kStandardBallMass;
 
@@ -32,7 +30,7 @@ void CBall::IAbstractActor() {
     shieldsCharge = 0;
     maxShields = -1;
     shootShields = FIX(10000);
-    dropDamage = FIX(1);
+    dropDamage = FIX1;
 
     holderScoreId = -1;
     holderTeam = 0;
@@ -59,19 +57,19 @@ void CBall::IAbstractActor() {
     goalScore = 0;
 
     ejectPitch = FIX(20);
-    ejectPower = FIX(1);
+    ejectPower = FIX1;
 
     buzzSound = 430;
     buzzVolume = FIX3(500);
 
     snapSound = 431;
-    snapVolume = FIX(1);
+    snapVolume = FIX1;
 
     ejectSound = 432;
-    ejectVolume = FIX(1);
+    ejectVolume = FIX1;
 
     reprogramSound = 0;
-    reprogramVolume = FIX(1);
+    reprogramVolume = FIX1;
 }
 
 void CBall::BeginScript() {
@@ -120,8 +118,8 @@ void CBall::BeginScript() {
 
 CAbstractActor *CBall::EndScript() {
     if (CRealShooters::EndScript()) {
-        customGravity = ReadFixedVar(iCustomGravity);
-        acceleration = ReadFixedVar(iAccelerate);
+        classicGravity = ReadFixedVar(iCustomGravity);
+        classicAcceleration = ReadFixedVar(iAccelerate);
 
         ejectPitch = ReadFixedVar(iEjectPitch);
         ejectPower = ReadFixedVar(iEjectPower);
@@ -149,19 +147,21 @@ CAbstractActor *CBall::EndScript() {
 
         buzzSound = ReadLongVar(iSound);
         buzzVolume = ReadFixedVar(iVolume);
-        gHub->PreLoadSample(buzzSound);
 
         ejectSound = ReadLongVar(iEjectSound);
         ejectVolume = ReadFixedVar(iEjectVolume);
-        gHub->PreLoadSample(ejectSound);
 
         reprogramSound = ReadLongVar(iChangeOwnerSound);
         reprogramVolume = ReadFixedVar(iChangeOwnerVolume);
-        gHub->PreLoadSample(reprogramSound);
 
         snapSound = ReadLongVar(iSnapSound);
         snapVolume = ReadFixedVar(iSnapVolume);
-        gHub->PreLoadSample(snapSound);
+
+        // Preload sounds.
+        auto _ = AssetManager::GetOgg(buzzSound);
+        _ = AssetManager::GetOgg(ejectSound);
+        _ = AssetManager::GetOgg(reprogramSound);
+        _ = AssetManager::GetOgg(snapSound);
 
         pitchZ = FMul(ejectPower, FDegCos(ejectPitch));
         pitchY = FMul(ejectPower, FDegSin(ejectPitch));
@@ -198,11 +198,13 @@ CAbstractActor *CBall::EndScript() {
         return NULL;
     }
 }
-void CBall::Dispose() {
+CBall::~CBall() {
     BuzzControl(false);
     ReleaseAttachment();
+}
 
-    CRealShooters::Dispose();
+void CBall::AdaptableSettings() {
+    FpsCoefficients(classicAcceleration, classicGravity, &acceleration, &customGravity);
 }
 
 void CBall::ChangeOwnership(short ownerId, short ownerTeamColor) {
@@ -210,10 +212,12 @@ void CBall::ChangeOwnership(short ownerId, short ownerTeamColor) {
     teamMask = 1 << teamColor;
     ownerScoringId = ownerId;
 
-    uint32_t longTeamColor = GetTeamColorOr(origLongColor);
+    ARGBColor longTeamColor = (teamColor != 0)
+        ? GetTeamColorOr(origLongColor)
+        : origLongColor;
 
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
-        (*thePart)->ReplaceColor(kMarkerColor, longTeamColor);
+        (*thePart)->ReplaceColor(*ColorManager::getMarkerColor(0), longTeamColor);
     }
 }
 
@@ -284,7 +288,7 @@ void CBall::BuzzControl(Boolean doBuzz) {
 
 void CBall::MagnetAction() {
     CAbstractActor *theActor;
-    long thisFrame = itsGame->frameNumber;
+    FrameNumber thisFrame = itsGame->frameNumber;
     Boolean didAttract = false;
 
     BuildActorProximityList(location, partList[0]->bigRadius, kBallSnapBit);
@@ -294,7 +298,7 @@ void CBall::MagnetAction() {
         Vector snapTo;
         CSmartPart *newHost;
 
-        if ((theActor->ident != oldHost || looseFrame < thisFrame) &&
+        if ((theActor->ident != oldHost || looseFrame <= thisFrame) &&
             !(theActor->maskBits & kPlayerBit && holdShieldLimit < shields && theActor->teamColor != teamColor)) {
             snapCode = theActor->GetBallSnapPoint(group, location, snapTo, localSnap, &newHost);
 
@@ -326,19 +330,19 @@ void CBall::MagnetAction() {
                     releaseHoldAccumulator = 0;
                     carryScoreAccumulator = 0;
 
-                    DoSound(snapSound, snapTo, snapVolume, FIX(1));
+                    DoSound(snapSound, snapTo, snapVolume, FIX1);
                     break;
                 }
             }
 
             if (snapCode == kSnapAttract) {
                 Vector delta;
-                Fixed len;
+                //Fixed len;
 
                 delta[0] = snapTo[0] - location[0];
                 delta[1] = snapTo[1] - location[1];
                 delta[2] = snapTo[2] - location[2];
-                len = NormalizeVector(3, delta);
+                //len = NormalizeVector(3, delta);
                 speed[0] += (delta[0] - speed[0]) >> 2;
                 speed[1] += (delta[1] - speed[1]) >> 2;
                 speed[2] += (delta[2] - speed[2]) >> 2;
@@ -377,7 +381,7 @@ void CBall::FrameAction() {
         CAbstractActor *theOwner;
 
         carryScoreAccumulator += carryScore;
-        if (carryScoreAccumulator > FIX(1)) {
+        if (carryScoreAccumulator > FIX1) {
             theOwner = itsGame->FindIdent(hostIdent);
             if (theOwner && theOwner->maskBits & kPlayerBit) {
                 itsGame->scoreReason = ksiHoldBall;
@@ -395,10 +399,19 @@ void CBall::FrameAction() {
                 ChangeOwnership(theOwner->GetActorScoringId(), theOwner->teamColor);
                 watchTeams = ~(1 << teamColor);
 
-                DoSound(reprogramSound, partList[0]->sphereGlobCenter, reprogramVolume, FIX(1));
+                if (lastOwner != theOwner->GetActorScoringId()) {
+                    itsGame->scoreReason = ksiGrabBall;
+                    itsGame->Score(
+                        theOwner->teamColor, theOwner->GetActorScoringId(), 0, 0, 0, -1);
+                    lastOwner = theOwner->GetActorScoringId();  // Only need to display the score message once
+                }
+
+                DoSound(reprogramSound, partList[0]->sphereGlobCenter, reprogramVolume, FIX1);
             }
 
             ownerChangeCount = -32767;
+        } else {
+            lastOwner = -1;
         }
     }
 
@@ -420,27 +433,34 @@ void CBall::FrameAction() {
         speed[1] = FMul(speed[1], acceleration);
         speed[2] = FMul(speed[2], acceleration);
 
-        if (speed[1] < 0 && speed[1] + location[1] < -partList[0]->minBounds.y) {
-            speed[1] = -partList[0]->minBounds.y - location[1];
+        // Check for ground collision (not done by regular collision checks later)
+        Fixed craterSpeed = ClassicCoefficient2(-partList[0]->minBounds.y - location[1]);
+        if (speed[1] < craterSpeed) {
+            speed[1] = craterSpeed;
         }
 
         if (speed[0] > MINSPEED || speed[0] < -MINSPEED || speed[1] > MINSPEED || speed[1] < -MINSPEED ||
             speed[2] > MINSPEED || speed[2] < -MINSPEED) {
             VECTORCOPY(oldLocation, location);
-            location[0] += speed[0];
-            location[1] += speed[1];
-            location[2] += speed[2];
-            OffsetParts(speed);
+            Vector locOffset;
+            locOffset[0] = FpsCoefficient2(speed[0]);
+            locOffset[1] = FpsCoefficient2(speed[1]);
+            locOffset[2] = FpsCoefficient2(speed[2]);
+            location[0] += locOffset[0];
+            location[1] += locOffset[1];
+            location[2] += locOffset[2];
+            OffsetParts(locOffset);
+
             BuildPartProximityList(
-                location, partList[0]->bigRadius + FDistanceOverEstimate(speed[0], speed[1], speed[2]), kSolidBit);
+                location, partList[0]->bigRadius + FDistanceOverEstimate(locOffset[0], locOffset[1], locOffset[2]), kSolidBit);
 
             hitPart = DoCollisionTest(&proximityList.p);
             if (hitPart) {
                 Vector negSpeed;
 
-                negSpeed[0] = -speed[0];
-                negSpeed[1] = -speed[1];
-                negSpeed[2] = -speed[2];
+                negSpeed[0] = FpsCoefficient2(-speed[0]);
+                negSpeed[1] = FpsCoefficient2(-speed[1]);
+                negSpeed[2] = FpsCoefficient2(-speed[2]);
                 VECTORCOPY(location, oldLocation);
                 OffsetParts(negSpeed);
                 FindBestMovement(hitPart);
@@ -455,14 +475,14 @@ void CBall::FrameAction() {
             didShoot = Shoot();
             if (didShoot) {
                 if (burstCount == burstLength) {
-                    burstStartFrame = itsGame->frameNumber + burstCharge;
+                    burstStartFrame = itsGame->FramesFromNow(burstCharge);
                 }
 
                 if (--burstCount == 0) {
                     burstCount = burstLength;
                     nextShotFrame = burstStartFrame;
                 } else {
-                    nextShotFrame = itsGame->frameNumber + burstSpeed;
+                    nextShotFrame = itsGame->FramesFromNow(burstSpeed);
                 }
             }
         }
@@ -472,10 +492,10 @@ void CBall::FrameAction() {
         switch (actionCommand) {
             case kDoSelfDestruct:
                 WasDestroyed();
-                SecondaryDamage(teamColor, -1);
+                SecondaryDamage(teamColor, -1, ksiObjectCollision);
                 return; //	*** return after dispose! ***
             case kDoRelease:
-                looseFrame = itsGame->frameNumber + 100;
+                looseFrame = itsGame->FramesFromNow(101);
                 oldHost = hostIdent;
             case kDoReset: {
                 CSmartPart *savedHost;
@@ -512,14 +532,14 @@ long CBall::ReceiveSignal(long theSignal, void *miscData) {
         case kBallReleaseSignal: {
             CSmartPart *theBall = partList[0];
 
-            looseFrame = itsGame->frameNumber + 32;
+            looseFrame = itsGame->FramesFromNow(33);
             oldHost = hostIdent;
             ReleaseAttachment();
             speed[0] += FMul(pitchZ, theBall->itsTransform[2][0]) + FMul(pitchY, theBall->itsTransform[1][0]);
             speed[1] += FMul(pitchZ, theBall->itsTransform[2][1]) + FMul(pitchY, theBall->itsTransform[1][1]);
             speed[2] += FMul(pitchZ, theBall->itsTransform[2][2]) + FMul(pitchY, theBall->itsTransform[1][2]);
 
-            DoSound(ejectSound, partList[0]->sphereGlobCenter, ejectVolume, FIX(1));
+            DoSound(ejectSound, partList[0]->sphereGlobCenter, ejectVolume, FIX1);
             return true;
         }
 
@@ -543,7 +563,7 @@ void CBall::ReleaseDamage(Fixed hitEnergy) {
     if (hostPart && playerAttach) {
         releaseHoldAccumulator += hitEnergy;
         if (releaseHoldAccumulator > dropDamage) {
-            looseFrame = itsGame->frameNumber + 10;
+            looseFrame = itsGame->FramesFromNow(11);
             oldHost = hostIdent;
             ReleaseAttachment();
         }

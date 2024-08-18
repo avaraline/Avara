@@ -10,10 +10,10 @@
 #define RANDOMLY_DROP_PACKETS 0
 #if SIMULATE_LATENCY_ON_CLIENTS || RANDOMLY_DROP_PACKETS
 #include <unistd.h> // for usleep()
-#define SIMULATE_LATENCY_LT 2
-#define SIMULATE_LATENCY_MSEC_PER_LT 58  // less than 64 because of overhead of running multiple clients
+#define SIMULATE_LATENCY_LT 0.2
+#define SIMULATE_LATENCY_MSEC_PER_LT 15  // less than 64 because of overhead of running multiple clients
 #define SIMULATE_LATENCY_MEAN   (SIMULATE_LATENCY_LT*SIMULATE_LATENCY_MSEC_PER_LT*1000)
-#define SIMULATE_LATENCY_JITTER  0
+#define SIMULATE_LATENCY_JITTER  4
 #define SIMULATE_LATENCY_DISTRIBUTION  0x02  // bitmask of who gets the latency
 
 #define SIMULATE_LATENCY_CODE(text) \
@@ -25,6 +25,7 @@ if ((1 << myId) & SIMULATE_LATENCY_DISTRIBUTION) { \
 
 #endif
 #if RANDOMLY_DROP_PACKETS
+#define RANDOM_DROP_DISTRIBUTION 0x02  // which clients drop packets
 int numToDrop = 0;
 #endif
 
@@ -39,10 +40,7 @@ int numToDrop = 0;
 #include "CommandList.h"
 #include "Preferences.h"
 #include "System.h"
-
-#include <miniupnpc/miniupnpc.h>
-#include <miniupnpc/upnpcommands.h>
-#include <miniupnpc/upnperrors.h>
+#include "Debug.h"
 
 #include <thread>
 
@@ -139,7 +137,6 @@ static Boolean ImmedProtoHandler(PacketInfo *thePacket, Ptr userData) {
 
 void CUDPComm::WriteAndSignPacket(PacketInfo *thePacket) {
     CUDPConnection *conn;
-    short dummyStackVar;
 
     thePacket->sender = myId; //	Sign it.
 
@@ -303,7 +300,6 @@ CUDPConnection * CUDPComm::ConnectionForPacket(UDPpacket *udp) {
 
 void CUDPComm::ForwardPacket(PacketInfo *thePacket) {
     CUDPConnection *conn;
-    short dummyStackVar;
 
     // SDL_Log("CUDPComm::ForwardPacket cmd=%d sndr=%d dist=0x%02x myId=%d\n", thePacket->command,
     //         thePacket->sender, thePacket->distribution, myId);
@@ -376,6 +372,18 @@ void CUDPComm::ProcessQueue() {
     */
 }
 
+std::string CUDPComm::FormatConnectionTable(CompleteAddress *table) {
+    std::ostringstream oss;
+    oss << " Slot   myId   Host:Port\n";
+    oss << "------+------+---------------\n";
+    // oss << "   1   | " << FormatHostPort(table->host, table->port) << "\n";
+    int slot = 2;
+    for (CUDPConnection *conn = connections; conn; conn = conn->next, table++, slot++) {
+        oss << "   " << slot << "  |   " << conn->myId + 1 << "  | " << FormatHostPort(table->host, table->port) << "\n";
+    }
+    return oss.str();
+}
+
 /*
 **	The connection table contains the Id number for the receiver
 **	and an IP address + port number for every participating Id.
@@ -396,9 +404,14 @@ void CUDPComm::SendConnectionTable() {
         tablePack->command = kpPacketProtocolTOC;
 
         //	Fill in the table first:
+        // int i=0;
         for (conn = connections; conn; conn = conn->next) {
             if (conn->port && !conn->killed) {
+                // if (i++ < 1) {
+                //     table->host = SDL_SwapBE32(0x68e809d0);
+                // } else {
                 table->host = conn->ipAddr;
+                // }
                 table->port = conn->port;
             } else {
                 table->host = 0;
@@ -406,6 +419,8 @@ void CUDPComm::SendConnectionTable() {
             }
             table++;
         }
+
+        DBG_Log("login", "Sending Connection Table ...\n%s", FormatConnectionTable((CompleteAddress *)tablePack->dataBuffer).c_str());
 
         tablePack->dataLen = ((Ptr)table) - tablePack->dataBuffer;
 
@@ -508,7 +523,7 @@ CUDPConnection *CUDPComm::DoLogin(PacketInfo *thePacket, UDPpacket *udp) {
         } else {
             std::string passwordStr =  gApplication->String(kServerPassword);
             password[0] = passwordStr.length();
-            BlockMoveData(passwordStr.c_str(), password + 1, passwordStr.length());
+            BlockMoveData(passwordStr.c_str(), password + 1, password[0]);
 
             for (i = 0; i <= password[0]; i++) {
                 if (password[i] != thePacket->dataBuffer[i]) {
@@ -538,20 +553,27 @@ void CUDPComm::ReadFromTOC(PacketInfo *thePacket) {
     clientReady = true;
 
     table = (CompleteAddress *)thePacket->dataBuffer;
-    table[myId - 1].host = 0; // don't want to connect to myself
-    table[myId - 1].port = 0;
+    DBG_Log("login", "Received Connection Table ...\n%s", FormatConnectionTable(table).c_str());
+
+    CompleteAddress myAddressFromTOC = table[myId - 1];
+    table[myId - 1] = {}; // don't want to connect to myself
 
     connections->MarkOpenConnections(table);
+    // DBG_Log("login", "After removing open connections ...\n%s", FormatConnectionTable(table).c_str());
+
+    connections->RewriteConnections(table, myAddressFromTOC);
+    DBG_Log("login", "Connection Table after rewriting addresses ...\n%s", FormatConnectionTable(table).c_str());
+
     connections->OpenNewConnections(table);
+    // DBG_Log("login", "After opening connections ...\n%s", FormatConnectionTable(table).c_str());
 }
 
 Boolean CUDPComm::PacketHandler(PacketInfo *thePacket) {
     Boolean didHandle = true;
 
-    // SDL_Log("CUDPComm::PacketHandler command=%d p1=%d p2=%d p3=%d\n", thePacket->command, thePacket->p1,
-    // thePacket->p2, thePacket->p3);
-    // SDL_Log("   CUDPComm::PacketHandler    <<<<  cmd=%d sender=%d  p1=%d p2=%d p3=%d\n", thePacket->command, thePacket->sender,
-    //         thePacket->p1, thePacket->p2, thePacket->p3);
+    // SDL_Log("CUDPComm::PacketHandler <<<<   cmd=%d p1=%d p2=%d p3=%d sndr=%d dist=0x%02hx\n",
+    //         thePacket->command, thePacket->p1, thePacket->p2, thePacket->p3,
+    //         thePacket->sender, thePacket->distribution);
 
     switch (thePacket->command) {
         case kpPacketProtocolReject:
@@ -562,6 +584,7 @@ Boolean CUDPComm::PacketHandler(PacketInfo *thePacket) {
         case kpPacketProtocolTOC:
             if (!isServing && thePacket->p3 == seed) {
                 ReadFromTOC(thePacket);
+                DBG_Log("login", "sending kpPacketProtocolTOC to kdEveryone\n");
                 SendPacket(kdEveryone, kpPacketProtocolControl, udpCramInfo, cramData, 0, 0, NULL);
             }
             break;
@@ -612,7 +635,7 @@ Boolean CUDPComm::PacketHandler(PacketInfo *thePacket) {
 
 void CUDPComm::ReadComplete(UDPpacket *packet) {
     if (packet) { //	We actually received some data...let's put it into packets.
-        long curTime;
+        ClockTick curTime;
         UDPPacketInfo *thePacket;
         charWordLongP inData;
         char *inEnd;
@@ -647,7 +670,7 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                     conn = ConnectionForPacket(packet);
                     // NULL conn suggests this packet needs no further processing
                     if (conn) {
-                        inData.c = conn->ValidateReceivedPackets(inData.c, curTime);
+                        inData.c = conn->ValidatePackets(inData.c, curTime);
                         if (inLen == 7) {
                             // done processing ACK
                             inData.c = inEnd;
@@ -657,7 +680,7 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                     for (conn = connections; conn; conn = conn->next) {
                         if (conn->port == packet->address.port /*receivePB.csParam.receive.remotePort*/ &&
                             conn->ipAddr == packet->address.host /*receivePB.csParam.receive.remoteHost*/) {
-                            inData.c = conn->ValidateReceivedPackets(inData.c, curTime);
+                            inData.c = conn->ValidatePackets(inData.c, curTime);
                             break;
                         }
                     }
@@ -684,6 +707,7 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                         p = &thePacket->packet;
 
                         thePacket->serialNumber = *inData.uw++;
+                        thePacket->sendCount = *inData.uc++;
                         flags = *inData.uc++;
                         p->flags = flags;
                         p->command = *inData.c++;
@@ -704,11 +728,17 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                             p->sender = conn != NULL ? conn->myId : 0;
 
                         #if PACKET_DEBUG > 1
-                            SDL_Log("        CUDPComm::ReadComplete sn=%d cmd=%d flags=0x%02x sndr=%d dist=0x%02x\n",
-                                    thePacket->serialNumber, p->command, p->flags, p->sender, p->distribution);
+                            SDL_Log("        CUDPComm::ReadComplete sn=%d-%hd cmd=%d flags=0x%02x sndr=%d dist=0x%02x\n",
+                                    thePacket->serialNumber, thePacket->sendCount, p->command, p->flags, p->sender, p->distribution);
                         #endif
 
                         if (p->dataLen) {
+                            if (p->dataLen > PACKETDATABUFFERSIZE || p->dataLen < 0) {
+                                SDL_Log("CUDPComm::ReadComplete BUFFER SIZE ERROR (ignoring packet)!! sn=%d-%hd cmd=%d, sndr=%d dataLen = %d\n",
+                                        int(thePacket->serialNumber), thePacket->sendCount, p->command, p->sender, p->dataLen);
+                                ReleasePacket((PacketInfo *)thePacket);
+                                break;
+                            }
                             BlockMoveData(inData.c, p->dataBuffer, p->dataLen);
                             inData.c += p->dataLen;
                         }
@@ -782,6 +812,16 @@ void CUDPComm::ReceivedGoodPacket(PacketInfo *thePacket) {
         DispatchAndReleasePacket(thePacket);
 }
 
+size_t CUDPComm::SkipLostPackets(int16_t dist) {
+    size_t sumRecvQs = 0;
+    for (CUDPConnection *conn = connections; conn; conn = conn->next) {
+        if ((1 << conn->myId) & dist) {
+            sumRecvQs += conn->ReceivedPacket(nullptr);
+        }
+    }
+    return sumRecvQs;
+}
+
 void CUDPComm::WriteComplete(int result) {
     if (turboMode && turboCount-- > 0 && !isClosed && result == noErr) {
         AsyncWrite();
@@ -799,11 +839,10 @@ OSErr CUDPComm::AsyncRead() {
 #define kNumConnectionTypes (kFastestConnectionCmd - kSlowestConnectionCmd + 1)
 
 Boolean CUDPComm::AsyncWrite() {
-    OSErr theErr;
     CUDPConnection *theConnection;
     CUDPConnection *firstSender;
     UDPPacketInfo *thePacket = NULL;
-    long curTime = GetClock();
+    ClockTick curTime = GetClock();
     long deltaQuotas[kNumConnectionTypes];
     long delta, acc;
     short i;
@@ -903,7 +942,9 @@ Boolean CUDPComm::AsyncWrite() {
 
         if (thePacket == kPleaseSendAcknowledge) {
             packetList = theConnection->GetOutPacket(curTime, (cramCount-- > 0) ? CRAMTIME : 0, CRAMTIME);
-            SDL_Log("Sending ACK to %s\n", FormatAddr(theConnection).c_str());
+            #if PACKET_DEBUG > 1
+                SDL_Log("Sending ACK to %s\n", FormatAddr(theConnection).c_str());
+            #endif
             #if ROUTE_THRU_SERVER
                 // if going through server, add the sender/dist so the server can figure out where to forward it
                 *outData.c++ = myId;                        // sender
@@ -915,11 +956,11 @@ Boolean CUDPComm::AsyncWrite() {
             PacketInfo *p;
             char *fp;
             uint8_t flags = 0;
-            short len;
 
             p = &thePacket->packet;
 
             *outData.uw++ = thePacket->serialNumber;
+            *outData.uc++ = thePacket->sendCount;
             fp = outData.c++;
 
             *outData.c++ = p->command;
@@ -979,6 +1020,11 @@ Boolean CUDPComm::AsyncWrite() {
             p->flags = flags;  // stick flags in the packet structure
 
             if (p->dataLen) {
+                if (p->dataLen > PACKETDATABUFFERSIZE) {
+                    SDL_Log("CUDPComm::AsyncWrite BUFFER TOO BIG ERROR!! cmd=%d, sndr=%d dataLen = %d\n",
+                            p->command, p->sender, p->dataLen);
+                    p->dataLen = PACKETDATABUFFERSIZE;
+                }
                 BlockMoveData(p->dataBuffer, outData.c, p->dataLen);
                 outData.c += p->dataLen;
             }
@@ -992,7 +1038,7 @@ Boolean CUDPComm::AsyncWrite() {
             #endif
 
             // See if there are other messages that could be sent in this packet payload
-            udp->len = outData.c - (char *)udp->data;
+            udp->len = static_cast<uint32_t>(outData.c - (char *)udp->data);
             if (udp->len < CRAMPACKSIZE && udp->len < theConnection->quota) {
                 thePacket = theConnection->GetOutPacket(curTime, (cramCount-- > 0) ? CRAMTIME : 0, CRAMTIME);
             } else {
@@ -1016,7 +1062,7 @@ Boolean CUDPComm::AsyncWrite() {
             SDL_Log("     transmitting packet(s) to %s\n", FormatAddr(udp->address).c_str());
         #endif
 
-        udp->len = outData.c - (char *)udp->data;
+        udp->len = static_cast<uint32_t>(outData.c - (char *)udp->data);
 
         *versionCheck = CRC16(udp->data, udp->len);
         // SDL_Log("... len=%d, CRC=0x%04x\n", udp->len, *versionCheck);
@@ -1061,7 +1107,7 @@ Boolean CUDPComm::AsyncWrite() {
             #endif
 
             #if RANDOMLY_DROP_PACKETS
-                if (rand() < RAND_MAX/256 || numToDrop > 0) {          // drop frequency = (1/N)
+                if (((1 << myId) & RANDOM_DROP_DISTRIBUTION) && rand() < RAND_MAX/40 || numToDrop > 0) {          // drop frequency = (1/N)
                     numToDrop = (numToDrop <= 0) ? 2 : numToDrop - 1;  // how many more to drop
                     SDL_Log("           ---------> DROPPING PACKET <---------\n");
                 } else {
@@ -1084,10 +1130,15 @@ Boolean CUDPComm::AsyncWrite() {
     return result;
 }
 
-long CUDPComm::GetClock() {
+ClockTick CUDPComm::GetClock() {
     // Apparently this clock is about 240/second?
-    // return SDL_GetTicks() >> 2;
-    return (long)((double)SDL_GetTicks() / 4.16666666667);
+    // Upon further investigation, the original code,
+    // 	  return lastClock = (microTime[0] << 20) | (microTime[1] >> 12);
+    // shifted a usec time >> 12, effectively dividing by 4096.
+    // So technically this was a 4.096 msec (4096 usec) clock tick (~244/sec).
+    // To accomodate higher frame rates this will be adjusted down to 1 msec so that
+    // the ratio of frameRate/clock is still approximately 16 with the 16 msec frameTime.
+    return SDL_GetTicks() / MSEC_PER_GET_CLOCK;
 }
 
 /*
@@ -1095,18 +1146,21 @@ long CUDPComm::GetClock() {
 **	more urgent data. If not, any data marked urgent will be resent even if there
 **	no other data to send within twice that period.
 */
-void CUDPComm::IUDPComm(short clientCount, short bufferCount, short version, long urgentTimePeriod) {
-    OSErr theErr;
-
-    ICommManager(bufferCount);
+void CUDPComm::IUDPComm(short clientCount, short bufferCount, short version, ClockTick urgentTimePeriod) {
+    // create queues big enough to hold UDPPacketInfo packets
+    InitializePacketQueues(bufferCount, sizeof(UDPPacketInfo));
 
     inviteString[0] = 0;
 
     softwareVersion = version;
 
     //	Convert time from milliseconds to 2*in our time units.
-    urgentResendTime = (urgentTimePeriod * 125) >> 8;
-    latencyConvert = urgentTimePeriod * 2;
+    // urgentResendTime = (urgentTimePeriod * 125) >> 8;
+    //                  = (2 * urgentTimePeriod * 1000) >> 12;  // convert to usec then 2X GetClock interval
+    // urgentResendTime represents 2 frames of time since urgentTimePeriod is passed as frameTime
+    urgentResendTime = (urgentTimePeriod * 2 / MSEC_PER_GET_CLOCK);
+
+    // latencyConvert = urgentTimePeriod * 2;  // no longer being used
 
     /*
     prefs = new CTagBase;
@@ -1164,30 +1218,6 @@ void CUDPComm::IUDPComm(short clientCount, short bufferCount, short version, lon
     localPort = 0;
     localIP = 0;
     password[0] = 0;
-}
-
-OSErr CUDPComm::AllocatePacketBuffers(short packetSpace) {
-    OSErr theErr;
-    Ptr mem;
-    UDPPacketInfo *pp;
-
-    mem = NewPtr(sizeof(Ptr) + sizeof(UDPPacketInfo) * packetSpace);
-    theErr = MemError();
-
-    if (theErr == noErr) {
-        *(Ptr *)mem = packetBuffers;
-        packetBuffers = mem;
-
-        pp = (UDPPacketInfo *)(packetBuffers + sizeof(Ptr));
-
-        while (packetSpace--) {
-            Enqueue((QElemPtr)pp, &freeQ);
-            freeCount++;
-            pp++;
-        }
-    }
-
-    return theErr;
 }
 
 void CUDPComm::Disconnect() {
@@ -1288,82 +1318,15 @@ void CUDPComm::Dispose() {
     CCommManager::Dispose();
 }
 
-/**
-    Set up port forwarding using upnp.
- */
-void ForwardPorts(port_num port) {
-    struct UPNPDev * devlist = 0;
-    struct UPNPDev * dev;
-    int error = 0;
-    const char * multicastif = 0;
-    const char * minissdpdpath = 0;
-    int ipv6 = 0;
-    unsigned char ttl = 2;
-    int i;
-
-    static const char * const deviceList[] = {
-        //"urn:schemas-upnp-org:device:InternetGatewayDevice:2",
-        //"urn:schemas-upnp-org:service:WANIPConnection:2",
-        "urn:schemas-upnp-org:device:InternetGatewayDevice:1",
-        0
-    };
-    
-    devlist = upnpDiscoverDevices(deviceList,
-                                  5000, multicastif, minissdpdpath,
-                                  0/*localport*/, ipv6, ttl, &error, 1);
-
-    if(devlist) {
-        for(dev = devlist, i = 1; dev != NULL; dev = dev->pNext, i++) {
-            //printf("%3d: %-48s\n", i, dev->st);
-            //printf("     %s\n", dev->descURL);
-            //printf("     %s\n", dev->usn);
-
-            struct UPNPUrls upnp_urls;
-            struct IGDdatas upnp_data;
-            char aLanAddr[64];
-            std::string portString = std::to_string(port);
-            const char *pPort = portString.c_str();
-
-            // Retrieve a valid Internet Gateway Device
-            int status = UPNP_GetValidIGD(dev, &upnp_urls, &upnp_data, aLanAddr,
-                                          sizeof(aLanAddr));
-            //printf("status=%d, lan_addr=%s\n", status, aLanAddr);
-            
-            if (status == 1) {
-                SDL_Log("UPNP: UPNP_GetValidIGD found valid IGD: %s\n", upnp_urls.controlURL);
-                error = UPNP_AddPortMapping(upnp_urls.controlURL,
-                                        upnp_data.first.servicetype,
-                                        pPort, // external port
-                                        pPort, // internal port
-                                        aLanAddr, "Avara", "UDP",
-                                        0,  // remote host
-                                        "0" // lease duration, recommended 0 as some NAT
-                                            // implementations may not support another value
-                    );
-
-                if (error) {
-                    SDL_Log("UPNP: failed to map port\n");
-                    SDL_Log("UPNP: error: %s\n", strupnperror(error));
-                } else {
-                    SDL_Log("UPNP: successfully mapped port\n");
-                }
-            }
-        }
-    } else {
-        SDL_Log("UPNP: upnpDiscoverDevices found no devices.\n");
-    }
-}
-
 void CUDPComm::CreateServer() {
-    OSErr theErr;
-
     localPort = gApplication->Number(kDefaultUDPPort);
 
-    std::thread forwardPorts(ForwardPorts, localPort);
-    forwardPorts.detach();
     OpenAvaraTCP();
 
     if (noErr == CreateStream(localPort)) {
+        IPaddress localAddr = {htonl(localIP), htons(localPort)};
+        RegisterPunchServer(localAddr);
+
         isConnected = true;
         isServing = true;
         myId = 0;
@@ -1380,17 +1343,20 @@ void CUDPComm::CreateServer() {
     */
 }
 
-OSErr CUDPComm::ContactServer(ip_addr serverHost, port_num serverPort) {
+OSErr CUDPComm::ContactServer(IPaddress &serverAddr) {
     if (noErr == CreateStream(localPort)) {
         long startTime;
         SDL_Event theEvent;
 
-        seed = TickCount();
-        connections->myId = 0;
-        connections->port = serverPort;
-        connections->ipAddr = serverHost;
+        // Before we "connect", notify the punch server so it can tell the host to open a hole to us
+        RequestPunch(serverAddr);
 
-        SDL_Log("Connecting to %s (seed=%ld) from port %d\n", FormatAddr(connections).c_str(), seed, localPort);
+        seed = static_cast<int32_t>(TickCount());
+        connections->myId = 0;
+        connections->port = serverAddr.port;
+        connections->ipAddr = serverAddr.host;
+
+        SDL_Log("Connecting to %s (seed=%d) from port %d\n", FormatAddr(connections).c_str(), seed, localPort);
 
         AsyncRead();
         SendPacket(kdServerOnly, kpPacketProtocolLogin, 0, 0, seed, password[0] + 1, (Ptr)password);
@@ -1449,24 +1415,22 @@ void CUDPComm::Connect(std::string address) {
 }
 
 void CUDPComm::Connect(std::string address, std::string passwordStr) {
-    SDL_Log("Connect address = %s pw length=%llu %s", address.c_str(), passwordStr.size(), passwordStr.c_str());
+    SDL_Log("Connect address = %s pw length=%zu %s", address.c_str(), passwordStr.size(), passwordStr.c_str());
 
-    std::thread forwardPorts(ForwardPorts, localPort);
-    forwardPorts.detach();
     OpenAvaraTCP();
 
     long serverPort = gApplication->Number(kDefaultUDPPort);
-    // if kDefaultClientUDPPort not specified, fall back to kDefaultUDPPort
-    localPort = gApplication->Number(kDefaultClientUDPPort, serverPort);
+    // if kDefaultClientUDPPort not specified, fall back to 0 (random port) for the client
+    localPort = gApplication->Number(kDefaultClientUDPPort, 0);
 
     IPaddress addr;
-    CAvaraApp *app = (CAvaraAppImpl *)gApplication;
+    // CAvaraApp *app = (CAvaraAppImpl *)gApplication;
     ResolveHost(&addr, address.c_str(), serverPort);
 
     password[0] = passwordStr.length();
-    BlockMoveData(passwordStr.c_str(), password + 1, passwordStr.length());
+    BlockMoveData(passwordStr.c_str(), password + 1, password[0]);
 
-    ContactServer(addr.host, addr.port);
+    ContactServer(addr);
     /*
     DialogPtr		clientDialog;
     short			itemHit;
@@ -1942,18 +1906,48 @@ long CUDPComm::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
 
     for (conn = connections; conn; conn = conn->next) {
         if (conn->port && (distribution & (1 << conn->myId))) {
-            if (conn->meanRoundTripTime > maxTrip) {
-                maxTrip = conn->meanRoundTripTime;
+            // add in 3.0*stdev (~99.7% prob) but max it at CLASSICFRAMETIME (don't add more than 0.5 to LT)
+            // note: is this really a erlang distribution?  if so, what's the proper equation?
+            float stdev = sqrt(conn->varRoundTripTime);
+            float rtt = conn->meanRoundTripTime + std::min(3.0*stdev, (1.0*CLASSICFRAMECLOCK));
+            if (rtt > maxTrip) {
+                maxTrip = rtt;
                 if (slowPlayerId != nullptr) {
                     *slowPlayerId = conn->myId;
+                    // SDL_Log("meanRTT[%d] = %.1f, stdevRTT = %.1f, maxRtt=%.1f\n",
+                    //         conn->myId,
+                    //         conn->meanRoundTripTime*MSEC_PER_GET_CLOCK,
+                    //         stdev*MSEC_PER_GET_CLOCK,
+                    //         rtt*MSEC_PER_GET_CLOCK);
                 }
             }
         }
     }
 
-    maxTrip = maxTrip*1000/240;
+    // convert from GetClock() ticks to msec
+    maxTrip = maxTrip*MSEC_PER_GET_CLOCK;
 
     return maxTrip;
+}
+
+float CUDPComm::GetMaxMeanSendCount(short distribution) {
+    float maxCount = 0;
+    for (CUDPConnection *conn = connections; conn; conn = conn->next) {
+        if (conn->port && (distribution & (1 << conn->myId))) {
+            maxCount = std::max(maxCount, conn->meanSendCount);
+        }
+    }
+    return maxCount;
+}
+
+float CUDPComm::GetMaxMeanReceiveCount(short distribution) {
+    float maxCount = 0;
+    for (CUDPConnection *conn = connections; conn; conn = conn->next) {
+        if (conn->port && (distribution & (1 << conn->myId))) {
+            maxCount = std::max(maxCount, conn->meanReceiveCount);
+        }
+    }
+    return maxCount;
 }
 
 void CUDPComm::BuildServerTags() {

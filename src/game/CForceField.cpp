@@ -9,6 +9,7 @@
 
 #include "CForceField.h"
 
+#include "AbstractRenderer.h"
 #include "CBSPWorld.h"
 #include "CSmartPart.h"
 #include "CWallActor.h"
@@ -64,19 +65,24 @@ CAbstractActor *CForceField::EndScript() {
 
             //TranslatePartY(thePart, ReadLongVar(iHeight));
             VECTORCOPY(location, thePart->itsTransform[3]);
-            itsGame->itsWorld->RemovePart(thePart);
+            gRenderer->RemovePart(thePart);
 
             heading = 0;
             lastWallActor->partList[0] = NULL;
             lastWallActor->partCount = 0;
-            lastWallActor->Dispose();
+            delete lastWallActor;
             lastWallActor = NULL;
         } else {
-            Dispose();
+            delete this;
             return NULL;
         }
 
         partList[0]->isTransparent = !ReadLongVar(iVisible);
+        if (!ReadLongVar(iVisible)) {
+            // Force yon when visible is false, to hide from level previews.
+            partList[0]->yon = FIX(0.001);
+            partList[0]->usesPrivateYon = true;
+        }
 
         exitMsg = ReadLongVar(iExit);
         enterMsg = ReadLongVar(iEnter);

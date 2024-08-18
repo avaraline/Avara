@@ -9,7 +9,10 @@
 
 #pragma once
 #include "CDirectObject.h"
+#include "OggFile.h"
 #include "SoundSystemDefines.h"
+
+#include <memory>
 
 class CSoundMixer;
 class CSoundHub;
@@ -17,27 +20,26 @@ class CSoundHub;
 class CBasicSound : public CDirectObject {
 public:
     Fixed masterVolume;
-    unsigned short volumes[2];
-    short volumeMax;
+    int16_t volumes[2];
+    int16_t volumeMax;
 
-    short hubId;
+    int16_t hubId;
     CSoundHub *itsHub;
-    SampleHeaderHandle itsSamples;
+    std::shared_ptr<OggFile> itsSamples;
     CBasicSound *nextSound;
 
     CSoundMixer *itsMixer;
-    int sampleLen;
+    int32_t sampleLen;
     SampleIndex currentCount[2];
-    int loopStart;
-    int loopEnd;
-    int loopCount[2];
-    Sample *sampleData;
+    int32_t loopStart;
+    int32_t loopEnd;
+    int32_t loopCount[2];
 
-    int squareAcc[2]; //	Distance squared
-    Fixed dSquare; //	Distance squared as a Fixed.
-    Fixed distance; //	Distance (square root of squareAcc).
-    Fixed relPos[3]; //	Distance as a vector
-    Fixed balance;
+    int32_t squareAcc[2] = {0, 0};//	Distance squared
+    Fixed dSquare = 0; //	Distance squared as a Fixed.
+    Fixed distance = 0; //	Distance (square root of squareAcc).
+    Fixed relPos[3] = {0, 0, 0}; //	Distance as a vector
+    Fixed balance = 0;
 
     SoundLink *motionLink; //	Location information.
     SoundLink *controlLink; //	For control, when motionLink is not good enough.
@@ -45,8 +47,8 @@ public:
     Boolean distanceDelay; //	Delay sound depending on position.
 
     //	The following four functions will usually be overridden:
-    virtual short CalcVolume(short theChannel); //	Return volume
-    virtual void WriteFrame(short theChannel, short volumeAllowed);
+    virtual int16_t CalcVolume(int16_t theChannel); //	Return volume
+    virtual void WriteFrame(int16_t theChannel, int16_t volumeAllowed);
     virtual Boolean EndFrame(); //	Return true after last frame.
     virtual void SanityCheck(); //	Check parameters for sanity.
     virtual void FirstFrame(); //	Perform interrupt time inits.
@@ -58,8 +60,7 @@ public:
     virtual void Start();
 
     virtual void Reset();
-    virtual void UseSamplePtr(Sample *samples, int numSamples);
-    virtual void UseSamples(SampleHeaderHandle theSample);
+    virtual void UseSamples(std::shared_ptr<OggFile> theSample);
 
     virtual void Release();
     virtual void SetVolume(Fixed vol);
@@ -69,7 +70,7 @@ public:
     virtual void SetLoopCount(short count);
 
     virtual void SetRate(Fixed theRate);
-    virtual Fixed GetSampleRate(); //	Returns samples/second as a fixed!
+    virtual UnsignedFixed GetSampleRate(); //	Returns samples/second as a fixed!
     virtual void SetSoundLength(Fixed seconds);
 
     void SetSoundLink(SoundLink *linkPtr);

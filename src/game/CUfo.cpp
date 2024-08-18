@@ -160,10 +160,6 @@ void CUfo::Navigate() {
         moveClock -= moveClock >> 2;
         happiness -= (happiness >> 4) + 2;
     } else {
-        Fixed speedEstimate;
-        Fixed framesEstimate;
-        Fixed revisedDistance;
-
         FindSpaceAngle(delta, &goodHeading, &goodPitch);
 
         delta[0] -= speed[0] * kUfoCourseCorrector;
@@ -209,7 +205,6 @@ void CUfo::Navigate() {
 Fixed CUfo::EvaluatePosition(Fixed *position, Boolean doAttack) {
     RayHitRecord rayHit;
     Fixed placeScore = 0;
-    short dir;
     CAbstractActor *theTarget;
     Fixed nearVision = visionRange >> 3;
 
@@ -291,7 +286,6 @@ void CUfo::ReTarget() {
     Fixed newScore, currentScore;
     short dir;
     Fixed randRange;
-    short i;
     Boolean doAttack;
 
     if (motionRange) {
@@ -398,14 +392,14 @@ void CUfo::FrameAction() {
             didShoot = Shoot();
             if (didShoot) {
                 if (burstCount == burstLength) {
-                    burstStartFrame = itsGame->frameNumber + burstCharge;
+                    burstStartFrame = itsGame->FramesFromNow(burstCharge);
                 }
 
                 if (--burstCount == 0) {
                     burstCount = burstLength;
                     nextShotFrame = burstStartFrame;
                 } else {
-                    nextShotFrame = itsGame->frameNumber + burstSpeed;
+                    nextShotFrame = itsGame->FramesFromNow(burstSpeed);
                 }
             }
         }

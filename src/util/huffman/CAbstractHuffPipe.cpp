@@ -93,7 +93,7 @@ HuffTreeNode *CAbstractHuffPipe::BuildTree() {
     for (; i < NUMSYMBOLS; i++) {
         HuffTreeNode *aNode, *bNode;
         HuffTreeNode **sorter;
-        long count;
+        int count;
 
         // Combine the two subtrees with the lowest counts:
         aNode = treeList[0];

@@ -10,12 +10,10 @@
 #include "CShuriken.h"
 
 #define kShurikenBSP 809
-#define SHURIKENSPIN 2621
-#define SHURIKENLIFE 100
+#define SHURIKENSPIN FpsCoefficient2(2621)
+#define SHURIKENLIFE FpsFramesPerClassic(100)
 
-void CShuriken::IAbstractMissile(CDepot *theDepot) {
-    CAbstractMissile::IAbstractMissile(theDepot);
-
+CShuriken::CShuriken(CDepot *theDepot) : CAbstractMissile(theDepot) {
     speed = SHURIKENSPEED;
     maxFrameCount = SHURIKENLIFE;
 
@@ -32,9 +30,9 @@ void CShuriken::MoveForward() {
     TranslatePart(partList[0], itsMatrix[3][0], itsMatrix[3][1], itsMatrix[3][2]);
     partList[0]->MoveDone();
 
-    itsMatrix[3][0] += deltaMove[0];
-    itsMatrix[3][1] += deltaMove[1];
-    itsMatrix[3][2] += deltaMove[2];
+    itsMatrix[3][0] += FpsCoefficient2(deltaMove[0]);
+    itsMatrix[3][1] += FpsCoefficient2(deltaMove[1]);
+    itsMatrix[3][2] += FpsCoefficient2(deltaMove[2]);
 
     rotation += SHURIKENSPIN;
 }

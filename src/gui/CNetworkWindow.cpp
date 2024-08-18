@@ -56,3 +56,7 @@ bool CNetworkWindow::DoCommand(int theCommand) {
     }
     return false;
 }
+
+void CNetworkWindow::PrefChanged(std::string name) {
+    addressBox->setValue(mApplication->String(kLastAddress));
+}

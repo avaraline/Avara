@@ -1,172 +1,171 @@
 <map>
-  <Teleporter group="@Egroup" destGroup="@Fgroup" fill="#ffff00" frame="#000000" cx="44.93055555555556" cz="28.75" angle="225" />
-  <Wall fill="#ffffff" frame="#000000" x="21.805555555555557" z="49.375" w="5" d="5" h="4" />
-  <Incarnator y="20" cx="44.93055555555556" cz="28.75" angle="225" />
-  <Wall fill="#ffffff" frame="#000000" x="22.118055555555557" z="49.375" w="5.625" d="5" h="1" y="4" />
-  <Wall fill="#ffffff" frame="#000000" x="22.743055555555557" z="49.375" w="6.875" d="5" h="1" y="5" />
-  <Wall fill="#ffffff" frame="#000000" x="23.680555555555557" z="49.375" w="8.75" d="5" h="1" y="6" />
-  <Wall fill="#ffffff" frame="#000000" x="36.80555555555556" z="49.375" w="5" d="5" h="4" />
-  <Wall fill="#ffffff" frame="#000000" x="36.80555555555556" z="49.375" w="6.25" d="5" h="1" y="4" />
-  <Wall fill="#ffffff" frame="#000000" x="36.80555555555556" z="49.375" w="8.75" d="5" h="1" y="5" />
-  <Wall fill="#ffffff" frame="#000000" x="36.80555555555556" z="49.375" w="12.5" d="5" h="1" y="6" />
-  <Wall fill="#ffffff" frame="#000000" x="51.80555555555556" z="49.375" w="5" d="5" h="4" />
-  <Wall fill="#ffffff" frame="#000000" x="51.80555555555556" z="49.375" w="6.25" d="5" h="1" y="4" />
-  <Wall fill="#ffffff" frame="#000000" x="51.80555555555556" z="49.375" w="8.75" d="5" h="1" y="5" />
-  <Wall fill="#ffffff" frame="#000000" x="51.80555555555556" z="49.375" w="12.5" d="5" h="1" y="6" />
-  <Wall fill="#ffffff" frame="#000000" x="66.80555555555556" z="49.375" w="5" d="5" h="4" />
-  <Wall fill="#ffffff" frame="#000000" x="66.49305555555556" z="49.375" w="5.625" d="5" h="1" y="4" />
-  <Wall fill="#ffffff" frame="#000000" x="65.86805555555556" z="49.375" w="6.875" d="5" h="1" y="5" />
-  <Wall fill="#ffffff" frame="#000000" x="64.93055555555556" z="49.375" w="8.75" d="5" h="1" y="6" />
-  <Teleporter group="@Agroup" destGroup="@Bgroup" fill="#ffff00" frame="#000000" cx="44.93055555555556" cz="53.75" angle="225" />
-  <Teleporter group="@Dgroup" destGroup="@Egroup" y="8" fill="#ffff00" frame="#000000" cx="43.68055555555556" cz="30.625" angle="45" />
-  <Wall fill="#ffffff" frame="#000000" x="44.30555555555556" z="49.375" w="50" d="5" h="1" y="7" />
-  <Wall fill="#ffffff" frame="#000000" x="21.805555555555557" z="49.375" w="5" d="5" h="4" y="8" />
-  <Wall fill="#ffffff" frame="#000000" x="36.80555555555556" z="49.375" w="5" d="5" h="4" y="8" />
-  <Wall fill="#ffffff" frame="#000000" x="51.80555555555556" z="49.375" w="5" d="5" h="4" y="8" />
-  <Wall fill="#ffffff" frame="#000000" x="66.80555555555556" z="49.375" w="5" d="5" h="4" y="8" />
-  <Wall fill="#ffffff" frame="#000000" x="22.118055555555557" z="49.375" w="5.625" d="5" h="1" y="12" />
-  <Wall fill="#ffffff" frame="#000000" x="36.80555555555556" z="49.375" w="6.25" d="5" h="1" y="12" />
-  <Wall fill="#ffffff" frame="#000000" x="51.80555555555556" z="49.375" w="6.25" d="5" h="1" y="12" />
-  <Wall fill="#ffffff" frame="#000000" x="66.49305555555556" z="49.375" w="5.625" d="5" h="1" y="12" />
-  <Wall fill="#ffffff" frame="#000000" x="44.30555555555556" z="54.375" w="50" d="5" h="1" y="7" />
-  <Wall fill="#ffffff" frame="#000000" x="65.86805555555556" z="49.375" w="6.875" d="5" h="1" y="13" />
-  <Wall fill="#ffffff" frame="#000000" x="22.743055555555557" z="49.375" w="6.875" d="5" h="1" y="13" />
-  <Wall fill="#ffffff" frame="#000000" x="51.49305555555556" z="49.375" w="8.125" d="5" h="1" y="13" />
-  <Wall fill="#ffffff" frame="#000000" x="36.49305555555556" z="49.375" w="8.125" d="5" h="1" y="13" />
-  <Wall fill="#ffffff" frame="#000000" x="23.680555555555557" z="49.375" w="8.75" d="5" h="1" y="14" />
-  <Wall fill="#ffffff" frame="#000000" x="36.49305555555556" z="49.375" w="11.875" d="5" h="1" y="14" />
-  <Wall fill="#ffffff" frame="#000000" x="51.49305555555556" z="49.375" w="11.875" d="5" h="1" y="14" />
-  <Wall fill="#ffffff" frame="#000000" x="64.93055555555556" z="49.375" w="8.75" d="5" h="1" y="14" />
-  <Teleporter group="@Bgroup" destGroup="@Cgroup" y="8" fill="#ffff00" frame="#000000" cx="44.30555555555556" cz="55" angle="45" />
-  <Wall fill="#ffffff" frame="#000000" x="21.805555555555557" z="59.375" w="5" d="5" h="4" />
-  <Wall fill="#ffffff" frame="#000000" x="22.118055555555557" z="59.375" w="5.625" d="5" h="1" y="4" />
-  <Wall fill="#ffffff" frame="#000000" x="22.743055555555557" z="59.375" w="6.875" d="5" h="1" y="5" />
-  <Wall fill="#ffffff" frame="#000000" x="23.680555555555557" z="59.375" w="8.75" d="5" h="1" y="6" />
-  <Wall fill="#ffffff" frame="#000000" x="36.80555555555556" z="59.375" w="5" d="5" h="4" />
-  <Wall fill="#ffffff" frame="#000000" x="36.80555555555556" z="59.375" w="6.25" d="5" h="1" y="4" />
-  <Wall fill="#ffffff" frame="#000000" x="36.80555555555556" z="59.375" w="8.75" d="5" h="1" y="5" />
-  <Wall fill="#ffffff" frame="#000000" x="36.80555555555556" z="59.375" w="12.5" d="5" h="1" y="6" />
-  <Wall fill="#ffffff" frame="#000000" x="51.80555555555556" z="59.375" w="5" d="5" h="4" />
-  <Wall fill="#ffffff" frame="#000000" x="51.80555555555556" z="59.375" w="6.25" d="5" h="1" y="4" />
-  <Wall fill="#ffffff" frame="#000000" x="51.80555555555556" z="59.375" w="8.75" d="5" h="1" y="5" />
-  <Wall fill="#ffffff" frame="#000000" x="51.80555555555556" z="59.375" w="12.5" d="5" h="1" y="6" />
-  <Wall fill="#ffffff" frame="#000000" x="66.80555555555556" z="59.375" w="5" d="5" h="4" />
-  <Wall fill="#ffffff" frame="#000000" x="66.49305555555556" z="59.375" w="5.625" d="5" h="1" y="4" />
-  <Wall fill="#ffffff" frame="#000000" x="65.86805555555556" z="59.375" w="6.875" d="5" h="1" y="5" />
-  <Wall fill="#ffffff" frame="#000000" x="64.93055555555556" z="59.375" w="8.75" d="5" h="1" y="6" />
-  <Wall fill="#ffffff" frame="#000000" x="44.30555555555556" z="59.375" w="50" d="5" h="1" y="7" />
-  <Wall fill="#ffffff" frame="#000000" x="21.805555555555557" z="59.375" w="5" d="5" h="4" y="8" />
-  <Wall fill="#ffffff" frame="#000000" x="36.80555555555556" z="59.375" w="5" d="5" h="4" y="8" />
-  <Wall fill="#ffffff" frame="#000000" x="51.80555555555556" z="59.375" w="5" d="5" h="4" y="8" />
-  <Wall fill="#ffffff" frame="#000000" x="66.80555555555556" z="59.375" w="5" d="5" h="4" y="8" />
-  <Wall fill="#ffffff" frame="#000000" x="22.118055555555557" z="59.375" w="5.625" d="5" h="1" y="12" />
-  <Wall fill="#ffffff" frame="#000000" x="36.80555555555556" z="59.375" w="6.25" d="5" h="1" y="12" />
-  <Wall fill="#ffffff" frame="#000000" x="51.80555555555556" z="59.375" w="6.25" d="5" h="1" y="12" />
-  <Wall fill="#ffffff" frame="#000000" x="66.49305555555556" z="59.375" w="5.625" d="5" h="1" y="12" />
-  <Wall fill="#ffffff" frame="#000000" x="65.86805555555556" z="59.375" w="6.875" d="5" h="1" y="13" />
-  <Wall fill="#ffffff" frame="#000000" x="22.743055555555557" z="59.375" w="6.875" d="5" h="1" y="13" />
-  <Wall fill="#ffffff" frame="#000000" x="51.49305555555556" z="59.375" w="8.125" d="5" h="1" y="13" />
-  <Wall fill="#ffffff" frame="#000000" x="36.49305555555556" z="59.375" w="8.125" d="5" h="1" y="13" />
-  <Wall fill="#ffffff" frame="#000000" x="23.680555555555557" z="59.375" w="8.75" d="5" h="1" y="14" />
-  <Wall fill="#ffffff" frame="#000000" x="36.49305555555556" z="59.375" w="11.875" d="5" h="1" y="14" />
-  <Wall fill="#ffffff" frame="#000000" x="51.49305555555556" z="59.375" w="11.875" d="5" h="1" y="14" />
-  <Wall fill="#ffffff" frame="#000000" x="64.93055555555556" z="59.375" w="8.75" d="5" h="1" y="14" />
-  <Wall fill="#ffffff" frame="#000000" x="44.30555555555556" z="54.375" w="50" d="15" h="1" y="15" />
-  <Teleporter group="@Cgroup" destGroup="@Dgroup" y="16" fill="#ffff00" frame="#000000" cx="44.93055555555556" cz="53.75" angle="225" />
-  <Wall fill="#ffffff" frame="#000000" x="21.805555555555557" z="24.375" w="5" d="5" h="4" />
-  <Wall fill="#ffffff" frame="#000000" x="22.118055555555557" z="24.375" w="5.625" d="5" h="1" y="4" />
-  <Wall fill="#ffffff" frame="#000000" x="22.743055555555557" z="24.375" w="6.875" d="5" h="1" y="5" />
-  <Wall fill="#ffffff" frame="#000000" x="23.680555555555557" z="24.375" w="8.75" d="5" h="1" y="6" />
-  <Wall fill="#ffffff" frame="#000000" x="36.80555555555556" z="24.375" w="5" d="5" h="4" />
-  <Wall fill="#ffffff" frame="#000000" x="36.80555555555556" z="24.375" w="6.25" d="5" h="1" y="4" />
-  <Wall fill="#ffffff" frame="#000000" x="36.80555555555556" z="24.375" w="8.75" d="5" h="1" y="5" />
-  <Wall fill="#ffffff" frame="#000000" x="36.80555555555556" z="24.375" w="12.5" d="5" h="1" y="6" />
-  <Wall fill="#ffffff" frame="#000000" x="51.80555555555556" z="24.375" w="5" d="5" h="4" />
-  <Wall fill="#ffffff" frame="#000000" x="51.80555555555556" z="24.375" w="6.25" d="5" h="1" y="4" />
-  <Wall fill="#ffffff" frame="#000000" x="51.80555555555556" z="24.375" w="8.75" d="5" h="1" y="5" />
-  <Wall fill="#ffffff" frame="#000000" x="51.80555555555556" z="24.375" w="12.5" d="5" h="1" y="6" />
-  <Wall fill="#ffffff" frame="#000000" x="66.80555555555556" z="24.375" w="5" d="5" h="4" />
-  <Wall fill="#ffffff" frame="#000000" x="66.49305555555556" z="24.375" w="5.625" d="5" h="1" y="4" />
-  <Wall fill="#ffffff" frame="#000000" x="65.86805555555556" z="24.375" w="6.875" d="5" h="1" y="5" />
-  <Wall fill="#ffffff" frame="#000000" x="64.93055555555556" z="24.375" w="8.75" d="5" h="1" y="6" />
-  <Wall fill="#ffffff" frame="#000000" x="44.30555555555556" z="24.375" w="50" d="5" h="1" y="7" />
-  <Wall fill="#ffffff" frame="#000000" x="21.805555555555557" z="24.375" w="5" d="5" h="4" y="8" />
-  <Wall fill="#ffffff" frame="#000000" x="36.80555555555556" z="24.375" w="5" d="5" h="4" y="8" />
-  <Wall fill="#ffffff" frame="#000000" x="51.80555555555556" z="24.375" w="5" d="5" h="4" y="8" />
-  <Wall fill="#ffffff" frame="#000000" x="66.80555555555556" z="24.375" w="5" d="5" h="4" y="8" />
-  <Wall fill="#ffffff" frame="#000000" x="22.118055555555557" z="24.375" w="5.625" d="5" h="1" y="12" />
-  <Wall fill="#ffffff" frame="#000000" x="36.80555555555556" z="24.375" w="6.25" d="5" h="1" y="12" />
-  <Wall fill="#ffffff" frame="#000000" x="51.80555555555556" z="24.375" w="6.25" d="5" h="1" y="12" />
-  <Wall fill="#ffffff" frame="#000000" x="66.49305555555556" z="24.375" w="5.625" d="5" h="1" y="12" />
-  <Wall fill="#ffffff" frame="#000000" x="44.30555555555556" z="29.375" w="50" d="5" h="1" y="7" />
-  <Wall fill="#ffffff" frame="#000000" x="65.86805555555556" z="24.375" w="6.875" d="5" h="1" y="13" />
-  <Wall fill="#ffffff" frame="#000000" x="22.743055555555557" z="24.375" w="6.875" d="5" h="1" y="13" />
-  <Wall fill="#ffffff" frame="#000000" x="51.49305555555556" z="24.375" w="8.125" d="5" h="1" y="13" />
-  <Wall fill="#ffffff" frame="#000000" x="36.49305555555556" z="24.375" w="8.125" d="5" h="1" y="13" />
-  <Wall fill="#ffffff" frame="#000000" x="23.680555555555557" z="24.375" w="8.75" d="5" h="1" y="14" />
-  <Wall fill="#ffffff" frame="#000000" x="36.49305555555556" z="24.375" w="11.875" d="5" h="1" y="14" />
-  <Wall fill="#ffffff" frame="#000000" x="51.49305555555556" z="24.375" w="11.875" d="5" h="1" y="14" />
-  <Wall fill="#ffffff" frame="#000000" x="64.93055555555556" z="24.375" w="8.75" d="5" h="1" y="14" />
-  <Wall fill="#ffffff" frame="#000000" x="21.805555555555557" z="34.375" w="5" d="5" h="4" />
-  <Wall fill="#ffffff" frame="#000000" x="22.118055555555557" z="34.375" w="5.625" d="5" h="1" y="4" />
-  <Wall fill="#ffffff" frame="#000000" x="22.743055555555557" z="34.375" w="6.875" d="5" h="1" y="5" />
-  <Wall fill="#ffffff" frame="#000000" x="23.680555555555557" z="34.375" w="8.75" d="5" h="1" y="6" />
-  <Wall fill="#ffffff" frame="#000000" x="36.80555555555556" z="34.375" w="5" d="5" h="4" />
-  <Wall fill="#ffffff" frame="#000000" x="36.80555555555556" z="34.375" w="6.25" d="5" h="1" y="4" />
-  <Wall fill="#ffffff" frame="#000000" x="36.80555555555556" z="34.375" w="8.75" d="5" h="1" y="5" />
-  <Wall fill="#ffffff" frame="#000000" x="36.80555555555556" z="34.375" w="12.5" d="5" h="1" y="6" />
-  <Wall fill="#ffffff" frame="#000000" x="51.80555555555556" z="34.375" w="5" d="5" h="4" />
-  <Wall fill="#ffffff" frame="#000000" x="51.80555555555556" z="34.375" w="6.25" d="5" h="1" y="4" />
-  <Wall fill="#ffffff" frame="#000000" x="51.80555555555556" z="34.375" w="8.75" d="5" h="1" y="5" />
-  <Wall fill="#ffffff" frame="#000000" x="51.80555555555556" z="34.375" w="12.5" d="5" h="1" y="6" />
-  <Wall fill="#ffffff" frame="#000000" x="66.80555555555556" z="34.375" w="5" d="5" h="4" />
-  <Wall fill="#ffffff" frame="#000000" x="66.49305555555556" z="34.375" w="5.625" d="5" h="1" y="4" />
-  <Wall fill="#ffffff" frame="#000000" x="65.86805555555556" z="34.375" w="6.875" d="5" h="1" y="5" />
-  <Wall fill="#ffffff" frame="#000000" x="64.93055555555556" z="34.375" w="8.75" d="5" h="1" y="6" />
-  <Wall fill="#ffffff" frame="#000000" x="44.30555555555556" z="34.375" w="50" d="5" h="1" y="7" />
-  <Wall fill="#ffffff" frame="#000000" x="21.805555555555557" z="34.375" w="5" d="5" h="4" y="8" />
-  <Wall fill="#ffffff" frame="#000000" x="36.80555555555556" z="34.375" w="5" d="5" h="4" y="8" />
-  <Wall fill="#ffffff" frame="#000000" x="51.80555555555556" z="34.375" w="5" d="5" h="4" y="8" />
-  <Wall fill="#ffffff" frame="#000000" x="66.80555555555556" z="34.375" w="5" d="5" h="4" y="8" />
-  <Wall fill="#ffffff" frame="#000000" x="22.118055555555557" z="34.375" w="5.625" d="5" h="1" y="12" />
-  <Wall fill="#ffffff" frame="#000000" x="36.80555555555556" z="34.375" w="6.25" d="5" h="1" y="12" />
-  <Wall fill="#ffffff" frame="#000000" x="51.80555555555556" z="34.375" w="6.25" d="5" h="1" y="12" />
-  <Wall fill="#ffffff" frame="#000000" x="66.49305555555556" z="34.375" w="5.625" d="5" h="1" y="12" />
-  <Wall fill="#ffffff" frame="#000000" x="65.86805555555556" z="34.375" w="6.875" d="5" h="1" y="13" />
-  <Wall fill="#ffffff" frame="#000000" x="22.743055555555557" z="34.375" w="6.875" d="5" h="1" y="13" />
-  <Wall fill="#ffffff" frame="#000000" x="51.49305555555556" z="34.375" w="8.125" d="5" h="1" y="13" />
-  <Wall fill="#ffffff" frame="#000000" x="36.49305555555556" z="34.375" w="8.125" d="5" h="1" y="13" />
-  <Wall fill="#ffffff" frame="#000000" x="23.680555555555557" z="34.375" w="8.75" d="5" h="1" y="14" />
-  <Wall fill="#ffffff" frame="#000000" x="36.49305555555556" z="34.375" w="11.875" d="5" h="1" y="14" />
-  <Wall fill="#ffffff" frame="#000000" x="51.49305555555556" z="34.375" w="11.875" d="5" h="1" y="14" />
-  <Wall fill="#ffffff" frame="#000000" x="64.93055555555556" z="34.375" w="8.75" d="5" h="1" y="14" />
-  <Wall fill="#ffffff" frame="#000000" x="44.30555555555556" z="29.375" w="50" d="15" h="1" y="15" />
-  <Teleporter group="@Fgroup" destGroup="@Agroup" y="16" fill="#ffff00" frame="#000000" cx="43.68055555555556" cz="30" angle="45" />
-  <Incarnator y="20" cx="43.68055555555556" cz="30" angle="45" />
-  <Incarnator y="20" cx="43.68055555555556" cz="30" angle="45" />
-  <Incarnator y="20" cx="43.68055555555556" cz="30" angle="45" />
-  <Incarnator y="20" cx="43.68055555555556" cz="30" angle="45" />
-  <Incarnator y="20" cx="43.68055555555556" cz="30" angle="45" />
+  <Teleporter group="@Egroup" destGroup="@Fgroup" color="#fffb00" color.1="#000000" cx="44.93055555555556" cz="28.75" angle="45" />
+  <Wall color="#ffffff" color.1="#000000" x="21.805555555555557" z="49.375" w="5" d="5" h="4" />
+  <Incarnator y="20" cx="44.93055555555556" cz="28.75" angle="45" />
+  <Wall color="#ffffff" color.1="#000000" x="22.118055555555557" z="49.375" w="5.625" d="5" h="1" y="4" />
+  <Wall color="#ffffff" color.1="#000000" x="22.743055555555557" z="49.375" w="6.875" d="5" h="1" y="5" />
+  <Wall color="#ffffff" color.1="#000000" x="23.680555555555557" z="49.375" w="8.75" d="5" h="1" y="6" />
+  <Wall color="#ffffff" color.1="#000000" x="36.80555555555556" z="49.375" w="5" d="5" h="4" />
+  <Wall color="#ffffff" color.1="#000000" x="36.80555555555556" z="49.375" w="6.25" d="5" h="1" y="4" />
+  <Wall color="#ffffff" color.1="#000000" x="36.80555555555556" z="49.375" w="8.75" d="5" h="1" y="5" />
+  <Wall color="#ffffff" color.1="#000000" x="36.80555555555556" z="49.375" w="12.5" d="5" h="1" y="6" />
+  <Wall color="#ffffff" color.1="#000000" x="51.80555555555556" z="49.375" w="5" d="5" h="4" />
+  <Wall color="#ffffff" color.1="#000000" x="51.80555555555556" z="49.375" w="6.25" d="5" h="1" y="4" />
+  <Wall color="#ffffff" color.1="#000000" x="51.80555555555556" z="49.375" w="8.75" d="5" h="1" y="5" />
+  <Wall color="#ffffff" color.1="#000000" x="51.80555555555556" z="49.375" w="12.5" d="5" h="1" y="6" />
+  <Wall color="#ffffff" color.1="#000000" x="66.80555555555556" z="49.375" w="5" d="5" h="4" />
+  <Wall color="#ffffff" color.1="#000000" x="66.49305555555556" z="49.375" w="5.625" d="5" h="1" y="4" />
+  <Wall color="#ffffff" color.1="#000000" x="65.86805555555556" z="49.375" w="6.875" d="5" h="1" y="5" />
+  <Wall color="#ffffff" color.1="#000000" x="64.93055555555556" z="49.375" w="8.75" d="5" h="1" y="6" />
+  <Teleporter group="@Agroup" destGroup="@Bgroup" color="#fffb00" color.1="#000000" cx="44.93055555555556" cz="53.75" angle="45" />
+  <Teleporter group="@Dgroup" destGroup="@Egroup" y="8" color="#fffb00" color.1="#000000" cx="43.68055555555556" cz="30.625" angle="225" />
+  <Wall color="#ffffff" color.1="#000000" x="44.30555555555556" z="49.375" w="50" d="5" h="1" y="7" />
+  <Wall color="#ffffff" color.1="#000000" x="21.805555555555557" z="49.375" w="5" d="5" h="4" y="8" />
+  <Wall color="#ffffff" color.1="#000000" x="36.80555555555556" z="49.375" w="5" d="5" h="4" y="8" />
+  <Wall color="#ffffff" color.1="#000000" x="51.80555555555556" z="49.375" w="5" d="5" h="4" y="8" />
+  <Wall color="#ffffff" color.1="#000000" x="66.80555555555556" z="49.375" w="5" d="5" h="4" y="8" />
+  <Wall color="#ffffff" color.1="#000000" x="22.118055555555557" z="49.375" w="5.625" d="5" h="1" y="12" />
+  <Wall color="#ffffff" color.1="#000000" x="36.80555555555556" z="49.375" w="6.25" d="5" h="1" y="12" />
+  <Wall color="#ffffff" color.1="#000000" x="51.80555555555556" z="49.375" w="6.25" d="5" h="1" y="12" />
+  <Wall color="#ffffff" color.1="#000000" x="66.49305555555556" z="49.375" w="5.625" d="5" h="1" y="12" />
+  <Wall color="#ffffff" color.1="#000000" x="44.30555555555556" z="54.375" w="50" d="5" h="1" y="7" />
+  <Wall color="#ffffff" color.1="#000000" x="65.86805555555556" z="49.375" w="6.875" d="5" h="1" y="13" />
+  <Wall color="#ffffff" color.1="#000000" x="22.743055555555557" z="49.375" w="6.875" d="5" h="1" y="13" />
+  <Wall color="#ffffff" color.1="#000000" x="51.49305555555556" z="49.375" w="8.125" d="5" h="1" y="13" />
+  <Wall color="#ffffff" color.1="#000000" x="36.49305555555556" z="49.375" w="8.125" d="5" h="1" y="13" />
+  <Wall color="#ffffff" color.1="#000000" x="23.680555555555557" z="49.375" w="8.75" d="5" h="1" y="14" />
+  <Wall color="#ffffff" color.1="#000000" x="36.49305555555556" z="49.375" w="11.875" d="5" h="1" y="14" />
+  <Wall color="#ffffff" color.1="#000000" x="51.49305555555556" z="49.375" w="11.875" d="5" h="1" y="14" />
+  <Wall color="#ffffff" color.1="#000000" x="64.93055555555556" z="49.375" w="8.75" d="5" h="1" y="14" />
+  <Teleporter group="@Bgroup" destGroup="@Cgroup" y="8" color="#fffb00" color.1="#000000" cx="44.30555555555556" cz="55" angle="225" />
+  <Wall color="#ffffff" color.1="#000000" x="21.805555555555557" z="59.375" w="5" d="5" h="4" />
+  <Wall color="#ffffff" color.1="#000000" x="22.118055555555557" z="59.375" w="5.625" d="5" h="1" y="4" />
+  <Wall color="#ffffff" color.1="#000000" x="22.743055555555557" z="59.375" w="6.875" d="5" h="1" y="5" />
+  <Wall color="#ffffff" color.1="#000000" x="23.680555555555557" z="59.375" w="8.75" d="5" h="1" y="6" />
+  <Wall color="#ffffff" color.1="#000000" x="36.80555555555556" z="59.375" w="5" d="5" h="4" />
+  <Wall color="#ffffff" color.1="#000000" x="36.80555555555556" z="59.375" w="6.25" d="5" h="1" y="4" />
+  <Wall color="#ffffff" color.1="#000000" x="36.80555555555556" z="59.375" w="8.75" d="5" h="1" y="5" />
+  <Wall color="#ffffff" color.1="#000000" x="36.80555555555556" z="59.375" w="12.5" d="5" h="1" y="6" />
+  <Wall color="#ffffff" color.1="#000000" x="51.80555555555556" z="59.375" w="5" d="5" h="4" />
+  <Wall color="#ffffff" color.1="#000000" x="51.80555555555556" z="59.375" w="6.25" d="5" h="1" y="4" />
+  <Wall color="#ffffff" color.1="#000000" x="51.80555555555556" z="59.375" w="8.75" d="5" h="1" y="5" />
+  <Wall color="#ffffff" color.1="#000000" x="51.80555555555556" z="59.375" w="12.5" d="5" h="1" y="6" />
+  <Wall color="#ffffff" color.1="#000000" x="66.80555555555556" z="59.375" w="5" d="5" h="4" />
+  <Wall color="#ffffff" color.1="#000000" x="66.49305555555556" z="59.375" w="5.625" d="5" h="1" y="4" />
+  <Wall color="#ffffff" color.1="#000000" x="65.86805555555556" z="59.375" w="6.875" d="5" h="1" y="5" />
+  <Wall color="#ffffff" color.1="#000000" x="64.93055555555556" z="59.375" w="8.75" d="5" h="1" y="6" />
+  <Wall color="#ffffff" color.1="#000000" x="44.30555555555556" z="59.375" w="50" d="5" h="1" y="7" />
+  <Wall color="#ffffff" color.1="#000000" x="21.805555555555557" z="59.375" w="5" d="5" h="4" y="8" />
+  <Wall color="#ffffff" color.1="#000000" x="36.80555555555556" z="59.375" w="5" d="5" h="4" y="8" />
+  <Wall color="#ffffff" color.1="#000000" x="51.80555555555556" z="59.375" w="5" d="5" h="4" y="8" />
+  <Wall color="#ffffff" color.1="#000000" x="66.80555555555556" z="59.375" w="5" d="5" h="4" y="8" />
+  <Wall color="#ffffff" color.1="#000000" x="22.118055555555557" z="59.375" w="5.625" d="5" h="1" y="12" />
+  <Wall color="#ffffff" color.1="#000000" x="36.80555555555556" z="59.375" w="6.25" d="5" h="1" y="12" />
+  <Wall color="#ffffff" color.1="#000000" x="51.80555555555556" z="59.375" w="6.25" d="5" h="1" y="12" />
+  <Wall color="#ffffff" color.1="#000000" x="66.49305555555556" z="59.375" w="5.625" d="5" h="1" y="12" />
+  <Wall color="#ffffff" color.1="#000000" x="65.86805555555556" z="59.375" w="6.875" d="5" h="1" y="13" />
+  <Wall color="#ffffff" color.1="#000000" x="22.743055555555557" z="59.375" w="6.875" d="5" h="1" y="13" />
+  <Wall color="#ffffff" color.1="#000000" x="51.49305555555556" z="59.375" w="8.125" d="5" h="1" y="13" />
+  <Wall color="#ffffff" color.1="#000000" x="36.49305555555556" z="59.375" w="8.125" d="5" h="1" y="13" />
+  <Wall color="#ffffff" color.1="#000000" x="23.680555555555557" z="59.375" w="8.75" d="5" h="1" y="14" />
+  <Wall color="#ffffff" color.1="#000000" x="36.49305555555556" z="59.375" w="11.875" d="5" h="1" y="14" />
+  <Wall color="#ffffff" color.1="#000000" x="51.49305555555556" z="59.375" w="11.875" d="5" h="1" y="14" />
+  <Wall color="#ffffff" color.1="#000000" x="64.93055555555556" z="59.375" w="8.75" d="5" h="1" y="14" />
+  <Wall color="#ffffff" color.1="#000000" x="44.30555555555556" z="54.375" w="50" d="15" h="1" y="15" />
+  <Teleporter group="@Cgroup" destGroup="@Dgroup" y="16" color="#fffb00" color.1="#000000" cx="44.93055555555556" cz="53.75" angle="45" />
+  <Wall color="#ffffff" color.1="#000000" x="21.805555555555557" z="24.375" w="5" d="5" h="4" />
+  <Wall color="#ffffff" color.1="#000000" x="22.118055555555557" z="24.375" w="5.625" d="5" h="1" y="4" />
+  <Wall color="#ffffff" color.1="#000000" x="22.743055555555557" z="24.375" w="6.875" d="5" h="1" y="5" />
+  <Wall color="#ffffff" color.1="#000000" x="23.680555555555557" z="24.375" w="8.75" d="5" h="1" y="6" />
+  <Wall color="#ffffff" color.1="#000000" x="36.80555555555556" z="24.375" w="5" d="5" h="4" />
+  <Wall color="#ffffff" color.1="#000000" x="36.80555555555556" z="24.375" w="6.25" d="5" h="1" y="4" />
+  <Wall color="#ffffff" color.1="#000000" x="36.80555555555556" z="24.375" w="8.75" d="5" h="1" y="5" />
+  <Wall color="#ffffff" color.1="#000000" x="36.80555555555556" z="24.375" w="12.5" d="5" h="1" y="6" />
+  <Wall color="#ffffff" color.1="#000000" x="51.80555555555556" z="24.375" w="5" d="5" h="4" />
+  <Wall color="#ffffff" color.1="#000000" x="51.80555555555556" z="24.375" w="6.25" d="5" h="1" y="4" />
+  <Wall color="#ffffff" color.1="#000000" x="51.80555555555556" z="24.375" w="8.75" d="5" h="1" y="5" />
+  <Wall color="#ffffff" color.1="#000000" x="51.80555555555556" z="24.375" w="12.5" d="5" h="1" y="6" />
+  <Wall color="#ffffff" color.1="#000000" x="66.80555555555556" z="24.375" w="5" d="5" h="4" />
+  <Wall color="#ffffff" color.1="#000000" x="66.49305555555556" z="24.375" w="5.625" d="5" h="1" y="4" />
+  <Wall color="#ffffff" color.1="#000000" x="65.86805555555556" z="24.375" w="6.875" d="5" h="1" y="5" />
+  <Wall color="#ffffff" color.1="#000000" x="64.93055555555556" z="24.375" w="8.75" d="5" h="1" y="6" />
+  <Wall color="#ffffff" color.1="#000000" x="44.30555555555556" z="24.375" w="50" d="5" h="1" y="7" />
+  <Wall color="#ffffff" color.1="#000000" x="21.805555555555557" z="24.375" w="5" d="5" h="4" y="8" />
+  <Wall color="#ffffff" color.1="#000000" x="36.80555555555556" z="24.375" w="5" d="5" h="4" y="8" />
+  <Wall color="#ffffff" color.1="#000000" x="51.80555555555556" z="24.375" w="5" d="5" h="4" y="8" />
+  <Wall color="#ffffff" color.1="#000000" x="66.80555555555556" z="24.375" w="5" d="5" h="4" y="8" />
+  <Wall color="#ffffff" color.1="#000000" x="22.118055555555557" z="24.375" w="5.625" d="5" h="1" y="12" />
+  <Wall color="#ffffff" color.1="#000000" x="36.80555555555556" z="24.375" w="6.25" d="5" h="1" y="12" />
+  <Wall color="#ffffff" color.1="#000000" x="51.80555555555556" z="24.375" w="6.25" d="5" h="1" y="12" />
+  <Wall color="#ffffff" color.1="#000000" x="66.49305555555556" z="24.375" w="5.625" d="5" h="1" y="12" />
+  <Wall color="#ffffff" color.1="#000000" x="44.30555555555556" z="29.375" w="50" d="5" h="1" y="7" />
+  <Wall color="#ffffff" color.1="#000000" x="65.86805555555556" z="24.375" w="6.875" d="5" h="1" y="13" />
+  <Wall color="#ffffff" color.1="#000000" x="22.743055555555557" z="24.375" w="6.875" d="5" h="1" y="13" />
+  <Wall color="#ffffff" color.1="#000000" x="51.49305555555556" z="24.375" w="8.125" d="5" h="1" y="13" />
+  <Wall color="#ffffff" color.1="#000000" x="36.49305555555556" z="24.375" w="8.125" d="5" h="1" y="13" />
+  <Wall color="#ffffff" color.1="#000000" x="23.680555555555557" z="24.375" w="8.75" d="5" h="1" y="14" />
+  <Wall color="#ffffff" color.1="#000000" x="36.49305555555556" z="24.375" w="11.875" d="5" h="1" y="14" />
+  <Wall color="#ffffff" color.1="#000000" x="51.49305555555556" z="24.375" w="11.875" d="5" h="1" y="14" />
+  <Wall color="#ffffff" color.1="#000000" x="64.93055555555556" z="24.375" w="8.75" d="5" h="1" y="14" />
+  <Wall color="#ffffff" color.1="#000000" x="21.805555555555557" z="34.375" w="5" d="5" h="4" />
+  <Wall color="#ffffff" color.1="#000000" x="22.118055555555557" z="34.375" w="5.625" d="5" h="1" y="4" />
+  <Wall color="#ffffff" color.1="#000000" x="22.743055555555557" z="34.375" w="6.875" d="5" h="1" y="5" />
+  <Wall color="#ffffff" color.1="#000000" x="23.680555555555557" z="34.375" w="8.75" d="5" h="1" y="6" />
+  <Wall color="#ffffff" color.1="#000000" x="36.80555555555556" z="34.375" w="5" d="5" h="4" />
+  <Wall color="#ffffff" color.1="#000000" x="36.80555555555556" z="34.375" w="6.25" d="5" h="1" y="4" />
+  <Wall color="#ffffff" color.1="#000000" x="36.80555555555556" z="34.375" w="8.75" d="5" h="1" y="5" />
+  <Wall color="#ffffff" color.1="#000000" x="36.80555555555556" z="34.375" w="12.5" d="5" h="1" y="6" />
+  <Wall color="#ffffff" color.1="#000000" x="51.80555555555556" z="34.375" w="5" d="5" h="4" />
+  <Wall color="#ffffff" color.1="#000000" x="51.80555555555556" z="34.375" w="6.25" d="5" h="1" y="4" />
+  <Wall color="#ffffff" color.1="#000000" x="51.80555555555556" z="34.375" w="8.75" d="5" h="1" y="5" />
+  <Wall color="#ffffff" color.1="#000000" x="51.80555555555556" z="34.375" w="12.5" d="5" h="1" y="6" />
+  <Wall color="#ffffff" color.1="#000000" x="66.80555555555556" z="34.375" w="5" d="5" h="4" />
+  <Wall color="#ffffff" color.1="#000000" x="66.49305555555556" z="34.375" w="5.625" d="5" h="1" y="4" />
+  <Wall color="#ffffff" color.1="#000000" x="65.86805555555556" z="34.375" w="6.875" d="5" h="1" y="5" />
+  <Wall color="#ffffff" color.1="#000000" x="64.93055555555556" z="34.375" w="8.75" d="5" h="1" y="6" />
+  <Wall color="#ffffff" color.1="#000000" x="44.30555555555556" z="34.375" w="50" d="5" h="1" y="7" />
+  <Wall color="#ffffff" color.1="#000000" x="21.805555555555557" z="34.375" w="5" d="5" h="4" y="8" />
+  <Wall color="#ffffff" color.1="#000000" x="36.80555555555556" z="34.375" w="5" d="5" h="4" y="8" />
+  <Wall color="#ffffff" color.1="#000000" x="51.80555555555556" z="34.375" w="5" d="5" h="4" y="8" />
+  <Wall color="#ffffff" color.1="#000000" x="66.80555555555556" z="34.375" w="5" d="5" h="4" y="8" />
+  <Wall color="#ffffff" color.1="#000000" x="22.118055555555557" z="34.375" w="5.625" d="5" h="1" y="12" />
+  <Wall color="#ffffff" color.1="#000000" x="36.80555555555556" z="34.375" w="6.25" d="5" h="1" y="12" />
+  <Wall color="#ffffff" color.1="#000000" x="51.80555555555556" z="34.375" w="6.25" d="5" h="1" y="12" />
+  <Wall color="#ffffff" color.1="#000000" x="66.49305555555556" z="34.375" w="5.625" d="5" h="1" y="12" />
+  <Wall color="#ffffff" color.1="#000000" x="65.86805555555556" z="34.375" w="6.875" d="5" h="1" y="13" />
+  <Wall color="#ffffff" color.1="#000000" x="22.743055555555557" z="34.375" w="6.875" d="5" h="1" y="13" />
+  <Wall color="#ffffff" color.1="#000000" x="51.49305555555556" z="34.375" w="8.125" d="5" h="1" y="13" />
+  <Wall color="#ffffff" color.1="#000000" x="36.49305555555556" z="34.375" w="8.125" d="5" h="1" y="13" />
+  <Wall color="#ffffff" color.1="#000000" x="23.680555555555557" z="34.375" w="8.75" d="5" h="1" y="14" />
+  <Wall color="#ffffff" color.1="#000000" x="36.49305555555556" z="34.375" w="11.875" d="5" h="1" y="14" />
+  <Wall color="#ffffff" color.1="#000000" x="51.49305555555556" z="34.375" w="11.875" d="5" h="1" y="14" />
+  <Wall color="#ffffff" color.1="#000000" x="64.93055555555556" z="34.375" w="8.75" d="5" h="1" y="14" />
+  <Wall color="#ffffff" color.1="#000000" x="44.30555555555556" z="29.375" w="50" d="15" h="1" y="15" />
+  <Teleporter group="@Fgroup" destGroup="@Agroup" y="16" color="#fffb00" color.1="#000000" cx="43.68055555555556" cz="30" angle="225" />
+  <Incarnator y="20" cx="43.68055555555556" cz="30" angle="225" />
+  <Incarnator y="20" cx="43.68055555555556" cz="30" angle="225" />
+  <Incarnator y="20" cx="43.68055555555556" cz="30" angle="225" />
+  <Incarnator y="20" cx="43.68055555555556" cz="30" angle="225" />
+  <Incarnator y="20" cx="43.68055555555556" cz="30" angle="225" />
   <set baseHeight=".5" />
   <unique vars="g1Show g1Taken" />
   <And in="@start" out="g1Show" />
   <Timer in="g1Taken" out="g1Show" wait="1" />
-  <Goody shape="bspAvaraA" yon="30" y="1.5" grenades="6" missiles="3" start="g1Show" out="g1Taken" fill="#ffff00" frame="#000000" cx="44.72222222222222" cz="41.25" angle="225" />
-  <set designer="Ben Chin  -  ÑØÑÅ|\/|∑" information="But you can fight here if 
-you want to." />
-  <Teleporter group="-1" y="-30" activeRange="35 * 5" deadRange="28 * 5" destGroup="@recenter" shape="0" fill="#ffff00" frame="#000000" cx="33.125" cz="23.333333333333336" angle="225" />
-  <Teleporter y="30" shape="0" group="@recenter" fill="#ffff00" frame="#000000" cx="33.125" cz="23.333333333333336" angle="225" />
-  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#ffff00" frame="#000000" cx="33.125" cz="23.333333333333336" angle="225" />
+  <Goody shape="bspAvaraA" yon="30" y="1.5" grenades="6" missiles="3" start="g1Show" out="g1Taken" color="#fffb00" color.1="#000000" cx="44.72222222222222" cz="41.25" angle="45" />
+  <set designer="Ben Chin  -  ÑØÑÅ|\/|∑" information="But you can fight here if &#10;you want to." />
+  <Teleporter group="-1" y="-30" activeRange="35 * 5" deadRange="28 * 5" destGroup="@recenter" shape="0" color="#fffb00" color.1="#000000" cx="33.125" cz="23.333333333333336" angle="45" />
+  <Teleporter y="30" shape="0" group="@recenter" color="#fffb00" color.1="#000000" cx="33.125" cz="23.333333333333336" angle="45" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#fffb00" color.1="#000000" cx="33.125" cz="23.333333333333336" angle="45" />
   <set baseHeight=".5" />
   <unique vars="g1Show g1Taken" />
   <And in="@start" out="g1Show" />
   <Timer in="g1Taken" out="g1Show" wait="1" />
-  <Goody shape="bspAvaraA" yon="30" y="1.5" grenades="6" missiles="3" start="g1Show" out="g1Taken" fill="#ffff00" frame="#000000" cx="29.722222222222225" cz="41.25" angle="225" />
+  <Goody shape="bspAvaraA" yon="30" y="1.5" grenades="6" missiles="3" start="g1Show" out="g1Taken" color="#fffb00" color.1="#000000" cx="29.722222222222225" cz="41.25" angle="45" />
   <set baseHeight=".5" />
   <unique vars="g1Show g1Taken" />
   <And in="@start" out="g1Show" />
   <Timer in="g1Taken" out="g1Show" wait="1" />
-  <Goody shape="bspAvaraA" yon="30" y="1.5" grenades="6" missiles="3" start="g1Show" out="g1Taken" fill="#ffff00" frame="#000000" cx="59.72222222222222" cz="41.25" angle="225" />
-  <GroundColor fill="#0000dd" />
-  <SkyColor fill="#0000dd" frame="#99ffff" />
+  <Goody shape="bspAvaraA" yon="30" y="1.5" grenades="6" missiles="3" start="g1Show" out="g1Taken" color="#fffb00" color.1="#000000" cx="59.72222222222222" cz="41.25" angle="45" />
+  <GroundColor color="#012ce4" />
+  <SkyColor color="#012ce4" color.1="#a6feff" />
 </map>

@@ -7,14 +7,14 @@
     Modified: Monday, September 9, 1996, 00:15
 */
 
-#include "AvaraGL.h"
 #include "CBSPPart.h"
 
+#include "AbstractRenderer.h"
+#include "AssetManager.h"
+#include "AvaraDefines.h"
 #include "CViewParameters.h"
 #include "Memory.h"
-#include "Resource.h"
-#include "AvaraDefines.h"
-#include "RGBAColor.h"
+#include "Debug.h"
 
 #include <fstream>
 #include <iostream>
@@ -25,22 +25,21 @@
  */
 short *bspIndexStack = 0;
 
-static long tempLockCount = 0;
-
-static short colorLookupSize = 0;
-
 Vector **bspPointTemp = 0;
-static long pointTempMem = 0;
 
 #define MINIMUM_TOLERANCE FIX3(10)
 
-ColorRecord ***bspColorLookupTable = 0;
+ARGBColor ***bspColorLookupTable = 0;
 
-using json = nlohmann::json;
+CBSPPart *CBSPPart::Create(short resId) {
+    CBSPPart *part = new CBSPPart;
+    part->IBSPPart(resId);
+    return part;
+}
+
 
 void CBSPPart::IBSPPart(short resId) {
-    char *bspName = GetBSPPath(resId);
-    //SDL_Log("Loading BSP: %s\n", bspName);
+    DBG_Log("bsp", "Loading BSP: %d\n", resId);
     lightSeed = 0;
     nextTemp = NULL;
     // colorReplacements = NULL;    //  Use default colors.
@@ -57,15 +56,25 @@ void CBSPPart::IBSPPart(short resId) {
     yon = FIX(500); //  500 m   sets the flags above and forgets to set the values.
     userFlags = 0;
 
-    std::ifstream infile(bspName);
-    if (infile.fail()) {
-        SDL_Log("*** Failed to load BSP %d\n", resId);
+    auto json = AssetManager::GetBsp(resId);
+    if (!json) {
+        colorCount = 0;
+        polyCount = 0;
+        pointCount = 0;
         return;
     }
 
-    json doc = json::parse(infile);
-    polyCount = doc["polys"].size();
-    pointCount = doc["points"].size();
+    // Fill in some default values in case values are missing.
+    auto doc = **json;
+    doc.emplace("radius1", 0.0);
+    doc.emplace("radius2", 0.0);
+    doc.emplace("center", json::array({0.0, 0.0, 0.0}));
+    doc["bounds"].emplace("min", json::array({0.0, 0.0, 0.0}));
+    doc["bounds"].emplace("max", json::array({0.0, 0.0, 0.0}));
+
+    colorCount = static_cast<uint16_t>(doc["colors"].size());
+    polyCount = static_cast<uint32_t>(doc["polys"].size());
+    pointCount = static_cast<uint32_t>(doc["points"].size());
 
     enclosureRadius = ToFixed(doc["radius1"]);
     bigRadius = ToFixed(doc["radius2"]);
@@ -75,101 +84,109 @@ void CBSPPart::IBSPPart(short resId) {
     enclosurePoint.z = ToFixed(doc["center"][2]);
     enclosurePoint.w = FIX1;
 
-    float minX = doc["bounds"]["min"][0];
-    float minY = doc["bounds"]["min"][1];
-    float minZ = doc["bounds"]["min"][2];
+    float mnX = doc["bounds"]["min"][0];
+    float mnY = doc["bounds"]["min"][1];
+    float mnZ = doc["bounds"]["min"][2];
 
-    minBounds.x = ToFixed(minX);
-    minBounds.y = ToFixed(minY);
-    minBounds.z = ToFixed(minZ);
+    minBounds.x = ToFixed(mnX);
+    minBounds.y = ToFixed(mnY);
+    minBounds.z = ToFixed(mnZ);
     minBounds.w = FIX1;
 
-    float maxX = doc["bounds"]["max"][0];
-    float maxY = doc["bounds"]["max"][1];
-    float maxZ = doc["bounds"]["max"][2];
+    float mxX = doc["bounds"]["max"][0];
+    float mxY = doc["bounds"]["max"][1];
+    float mxZ = doc["bounds"]["max"][2];
 
-    maxBounds.x = ToFixed(maxX);
-    maxBounds.y = ToFixed(doc["bounds"]["max"][1]);
-    maxBounds.z = ToFixed(doc["bounds"]["max"][2]);
+    maxBounds.x = ToFixed(mxX);
+    maxBounds.y = ToFixed(mxY);
+    maxBounds.z = ToFixed(mxZ);
     maxBounds.w = FIX1;
 
-    pointTable = (Vector *)NewPtr(pointCount * sizeof(Vector));
-    polyTable = (PolyRecord *)NewPtr(polyCount * sizeof(PolyRecord));
+    DBG_Log("bsp", "  bounds.x = [%d, %d]\n", minBounds.x, maxBounds.x);
+    DBG_Log("bsp", "  bounds.y = [%d, %d]\n", minBounds.y, maxBounds.y);
+    DBG_Log("bsp", "  bounds.z = [%d, %d]\n", minBounds.z, maxBounds.z);
 
-    for (int i = 0; i < pointCount; i++) {
-        json pt = doc["points"][i];
+    origColorTable = std::make_unique<ARGBColor[]>(colorCount);
+    currColorTable = std::make_unique<ARGBColor[]>(colorCount);
+    pointTable = std::make_unique<Vector[]>(pointCount);
+    polyTable = std::make_unique<PolyRecord[]>(polyCount);
+
+    for (uint16_t i = 0; i < colorCount; i++) {
+        nlohmann::json value = doc["colors"][i];
+        ARGBColor color = ARGBColor::Parse(value)
+            .value_or(ARGBColor(0x00ffffff)); // Fallback to invisible "white."
+        origColorTable[i] = color;
+        if (color == *ColorManager::getMarkerColor(0) ||
+            color == *ColorManager::getMarkerColor(1) ||
+            color == *ColorManager::getMarkerColor(2) ||
+            color == *ColorManager::getMarkerColor(3)) {
+            currColorTable[i] = color.WithA(0xff);
+        } else {
+            currColorTable[i] = color;
+        }
+    }
+    
+    CheckForAlpha();
+
+    // if command is "/dbg bsp 666" then show points for resId 666
+    bool showPoints = (Debug::GetValue("bsp") == resId);
+    if (showPoints) { DBG_Log("bsp", "  points:\n"); }
+    for (uint32_t i = 0; i < pointCount; i++) {
+        nlohmann::json pt = doc["points"][i];
         pointTable[i][0] = ToFixed(pt[0]);
         pointTable[i][1] = ToFixed(pt[1]);
         pointTable[i][2] = ToFixed(pt[2]);
         pointTable[i][3] = FIX1;
+        if (showPoints) { DBG_Log("bsp", "    %s\n", FormatVector(pointTable[i]).c_str()); }
     }
 
     totalPoints = 0;
 
-    for (int i = 0; i < polyCount; i++) {
-        json poly = doc["polys"][i];
+    for (uint32_t i = 0; i < polyCount; i++) {
+        nlohmann::json poly = doc["polys"][i];
+        nlohmann::json pt;
         // Color
-        polyTable[i].color = poly["color"];
-        polyTable[i].origColor = poly["color"];
+        polyTable[i].colorIdx = static_cast<uint16_t>(poly["color"]);
         // Normal
-        polyTable[i].normal[0] = poly["normal"][0];
-        polyTable[i].normal[1] = poly["normal"][1];
-        polyTable[i].normal[2] = poly["normal"][2];
+        nlohmann::json norms = doc["normals"];
+        int idx = poly["normal"];
+        nlohmann::json norm = norms[idx];
+        polyTable[i].normal[0] = norm[0];
+        polyTable[i].normal[1] = norm[1];
+        polyTable[i].normal[2] = norm[2];
         // Triangle points
-        polyTable[i].triCount = poly["tris"].size();
-        polyTable[i].triPoints = (uint16_t *)NewPtr(polyTable[i].triCount * 3 * sizeof(uint16_t));
-        for (int j = 0; j < polyTable[i].triCount; j++) {
-            json tri = poly["tris"][j];
-            for (int k = 0; k < 3; k++) {
-                polyTable[i].triPoints[(j * 3) + k] = (uint16_t)tri[k];
+        polyTable[i].vis = static_cast<uint8_t>(poly["vis"]);
+        polyTable[i].triCount = poly["tris"].size() / 3;
+        polyTable[i].triPoints = std::make_unique<uint16_t[]>(poly["tris"].size());
+        for (size_t j = 0; j < poly["tris"].size(); j += 3) {
+            for (size_t k = 0; k < 3; k++) {
+                pt = poly["tris"][j + k];
+                polyTable[i].triPoints[j + k] = (uint16_t)pt;
                 totalPoints += 1;
             }
         }
+        if (poly.contains("front")) {
+            polyTable[i].front = poly["front"];
+        }
+        else polyTable[i].front = uint16_t(-1);
+
+        if (poly.contains("back")) {
+            polyTable[i].back = poly["back"];
+        }
+        else polyTable[i].back = uint16_t(-1);
     }
 
     BuildBoundingVolumes();
     Reset();
-    UpdateOpenGLData();
+
+    vData = gRenderer->NewVertexDataInstance();
+    if (vData) vData->Replace(*this);
 }
 
 void CBSPPart::PostRender() {}
 
-void CBSPPart::UpdateOpenGLData() {
-    if (!AvaraGLIsRendering()) return;
-    glDataSize = totalPoints * sizeof(GLData);
-    glData = (GLData *)NewPtr(glDataSize);
-
-    glGenVertexArrays(1, &vertexArray);
-    glGenBuffers(1, &vertexBuffer);
-
-    PolyRecord *poly;
-    float scale = 1.0; // ToFloat(currentView->screenScale);
-    int p = 0;
-    for (int i = 0; i < polyCount; i++) {
-        poly = &polyTable[i];
-        for (int v = 0; v < poly->triCount * 3; v++) {
-            Vector *pt = &pointTable[poly->triPoints[v]];
-            glData[p].x = ToFloat((*pt)[0]);
-            glData[p].y = ToFloat((*pt)[1]);
-            glData[p].z = ToFloat((*pt)[2]);
-            LongToRGBA(poly->color, &glData[p].r, 3);
-
-            glData[p].nx = poly->normal[0];
-            glData[p].ny = poly->normal[1];
-            glData[p].nz = poly->normal[2];
-
-            // SDL_Log("v(%f,%f,%f) c(%f,%f,%f) n(%f,%f,%f)\n", glData[p].x, glData[p].y, glData[p].z, glData[p].r,
-            // glData[p].g, glData[p].b, glData[p].nx, glData[p].ny, glData[p].nz);
-            p++;
-        }
-    }
-}
-
 void CBSPPart::TransformLights() {
-    CViewParameters *vp;
-    Matrix *invFull;
-
-    vp = currentView;
+    auto vp = gRenderer->viewParams;
     if (!ignoreDirectionalLights) {
         if (lightSeed != vp->lightSeed) {
             lightSeed = vp->lightSeed;
@@ -183,22 +200,13 @@ void CBSPPart::TransformLights() {
     localViewOrigin[2] = invFullTransform[3][2];
 }
 
-void CBSPPart::DrawPolygons() {
-    AvaraGLDrawPolygons(this);
-}
-
 Boolean CBSPPart::InViewPyramid() {
-    CViewParameters *vp;
-    short i;
-    Vector *norms;
     Fixed radius;
     Fixed distance;
     Fixed x, y;
     Fixed z;
 
-    //return true;
-
-    vp = currentView;
+    auto vp = gRenderer->viewParams;
 
     if (hither >= yon)
         return false;
@@ -262,11 +270,11 @@ void CBSPPart::PrintMatrix(Matrix *m) {
 **  See if the part is in the viewing pyramid and do calculations
 **  in preparation to shading.
 */
-Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
+Boolean CBSPPart::PrepareForRender() {
+    auto vp = gRenderer->viewParams;
     Boolean inPyramid = vp->showTransparent || !isTransparent;
 
     if (inPyramid) {
-        currentView = vp;
 
         if (!usesPrivateHither)
             hither = vp->hitherBound;
@@ -300,23 +308,6 @@ Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
     }
 
     return inPyramid;
-}
-
-/*
-**  Normally you would create a CBSPWorld and attach the
-**  part to that world. However, if you only have a single
-**  CBSPPart, you can call Render and you don't need a
-**  CBSPWorld. Even then it is recommended that you use a
-**  CBSPWorld, since it really doesn't add any significant
-**  overhead.
-*/
-void CBSPPart::Render(CViewParameters *vp) {
-    vp->DoLighting();
-
-    if (PrepareForRender(vp)) {
-        DrawPolygons();
-        PostRender();
-    }
 }
 
 /*
@@ -416,13 +407,28 @@ Matrix *CBSPPart::GetInverseTransform() {
     return &invGlobTransform;
 }
 
-void CBSPPart::ReplaceColor(int origColor, int newColor) {
-    for (int i = 0; i < polyCount; i++) {
-        if (polyTable[i].origColor == origColor) {
-            polyTable[i].color = newColor;
+void CBSPPart::ReplaceColor(ARGBColor origColor, ARGBColor newColor) {
+    bool colorReplaced = false;
+    for (int i = 0; i < colorCount; i++) {
+        if (origColorTable[i] == origColor) {
+            currColorTable[i] = newColor;
+            colorReplaced = true;
         }
     }
-    UpdateOpenGLData();
+    CheckForAlpha();
+    if (colorReplaced && vData) vData->Replace(*this);
+}
+
+void CBSPPart::ReplaceAllColors(ARGBColor newColor) {
+    bool colorReplaced = false;
+    for (int i = 0; i < colorCount; i++) {
+        if (currColorTable[i] != newColor) {
+            colorReplaced = true;
+        }
+        currColorTable[i] = newColor;
+    }
+    hasAlpha = (newColor.GetA() != 0xff);
+    if (colorReplaced && vData) vData->Replace(*this);
 }
 
 void CBSPPart::BuildBoundingVolumes() {
@@ -443,19 +449,35 @@ void CBSPPart::BuildBoundingVolumes() {
         tolerance = MINIMUM_TOLERANCE;
 }
 
-void CBSPPart::Dispose() {
-    for (int i = 0; i < polyCount; i++) {
-        DisposePtr((Ptr)polyTable[i].triPoints);
-    }
+CBSPPart::~CBSPPart() {}
 
-    DisposePtr((Ptr)pointTable);
-    DisposePtr((Ptr)polyTable);
-    if (AvaraGLIsRendering()) {
-        DisposePtr((Ptr)glData);
-        glDeleteVertexArrays(1, &vertexArray);
-        glDeleteBuffers(1, &vertexBuffer);
+void CBSPPart::CheckForAlpha() {
+    hasAlpha = false;
+    for (uint16_t i = 0; i < colorCount; i++) {
+        if (currColorTable[i].GetA() != 0xff) {
+            hasAlpha = true;
+            return;
+        }
     }
-    CDirectObject::Dispose();
+}
+
+bool CBSPPart::HasAlpha() const {
+    return hasAlpha;
+}
+
+void CBSPPart::SetScale(Fixed x, Fixed y, Fixed z) {
+    hasScale = true;
+    scale[0] = x;
+    scale[1] = y;
+    scale[2] = z;
+}
+
+void CBSPPart::ResetScale() {
+    hasScale = false;
+    scale[0] = FIX1;
+    scale[1] = FIX1;
+    scale[2] = FIX1;
+    scale[3] = FIX1;
 }
 
 #define TESTBOUND(b, c) \
@@ -560,10 +582,10 @@ static long totalCases = 0;
 #endif
 
 Boolean CBSPPart::Obscures(CBSPPart *other) {
-    Fixed *v;
-    Fixed delta;
-    Fixed sum;
-    Vector deltaV;
+    //Fixed *v;
+    //Fixed delta;
+    //Fixed sum;
+    //Vector deltaV;
     Vector center;
     Vector otherCorners[8];
     Vector myCorners[8];
@@ -576,6 +598,11 @@ Boolean CBSPPart::Obscures(CBSPPart *other) {
     PROFILING_CODE(short theCase = 0;)
 
     PROFILING_CODE(totalCases++;)
+
+    // Never treat as obscuring if this shape has any translucency anywhere.
+    if (HasAlpha()) {
+        return false;
+    }
 
     VectorMatrixProduct(1, &other->sphereGlobCenter, &center, &invGlobTransform);
     r = other->enclosureRadius - tolerance;

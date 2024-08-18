@@ -16,19 +16,19 @@ public:
     Fixed visionRange;
     Fixed shotPower;
 
-    long burstStartFrame;
-    long nextShotFrame;
+    FrameNumber burstStartFrame;
+    FrameNumber nextShotFrame;
     short burstCount;
 
     long burstLength;
-    long burstSpeed;
-    long burstCharge;
+    FrameNumber burstSpeed;
+    FrameNumber burstCharge;
 
     //	Who to fire at.
     MaskType watchMask;
     short watchTeams;
 
-    virtual void IAbstractActor();
+    CRealShooters();
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
 

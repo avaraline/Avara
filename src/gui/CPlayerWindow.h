@@ -14,8 +14,11 @@ public:
     virtual void PrefChanged(std::string name) override;
     
     virtual bool editing() override;
+
+    virtual void RepopulateHullOptions();
     
 protected:
     nanogui::TextBox *nameBox;
     nanogui::ComboBox *hullBox;
+    std::vector<uint8_t> hullValues;
 };

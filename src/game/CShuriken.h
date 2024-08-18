@@ -12,10 +12,11 @@
 
 #define SHURIKENSPEED FIX3(1500)
 
-class CShuriken : public CAbstractMissile {
+class CShuriken final : public CAbstractMissile {
 public:
     Fixed rotation;
 
-    virtual void IAbstractMissile(CDepot *theDepot);
+    CShuriken(CDepot *theDepot);
     virtual void MoveForward();
+    virtual bool HandlesFastFPS() { return true; }
 };

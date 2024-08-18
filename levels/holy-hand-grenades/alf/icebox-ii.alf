@@ -1,74 +1,74 @@
 <map>
   <set designer="mantis  -  derek@leapnet.com" information="icebox - Modified by Malkavian" grenadePower="110" missilePower="2.25" missileTurnRate="0.15" missileAcceleration="0.15" maxStartGrenades="2" maxStartMissiles="2" maxStartBoosts="5" />
-  <SkyColor fill="#0066ff" frame="#003399" />
-  <GroundColor fill="#000055" />
-  <Incarnator y="30" cx="79.65277777777777" cz="79.58333333333334" angle="135" />
-  <Incarnator y="30" cx="39.72222222222222" cz="79.58333333333334" angle="225" />
-  <Incarnator y="30" cx="39.72222222222222" cz="39.583333333333336" angle="325" />
-  <Incarnator y="30" cx="79.44444444444446" cz="39.44444444444444" angle="45" />
-  <Teleporter group="-1" y="-30" activeRange="35 * 5" deadRange="28 * 5" destGroup="@recenter" shape="0" fill="#008800" frame="#000000" cx="60.69444444444445" cz="59.583333333333336" angle="225" />
-  <Teleporter y="30" shape="0" group="@recenter" fill="#008800" frame="#000000" cx="60.69444444444445" cz="59.583333333333336" angle="225" />
-  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#008800" frame="#000000" cx="60.69444444444445" cz="59.583333333333336" angle="225" />
-  <Wall fill="#3366ff" frame="#3366ff" x="20.694444444444446" z="20.625" w="7.5" d="7.5" h="3" />
-  <Wall fill="#3399ff" frame="#3366ff" x="59.51388888888889" z="105.625" w="85" d="7.5" h="12" />
-  <Wall fill="#3399ff" frame="#3366ff" x="59.44444444444444" z="13.125" w="85" d="7.5" h="12" />
-  <Wall fill="#3399ff" frame="#3366ff" x="105.69444444444444" z="59.375" w="7.5" d="85" h="12" />
-  <Wall fill="#3399ff" frame="#3366ff" x="13.194444444444446" z="59.375" w="7.5" d="85" h="12" />
-  <Wall fill="#3366ff" frame="#3366ff" x="98.19444444444444" z="20.625" w="7.5" d="7.5" h="3" />
-  <Wall fill="#3366ff" frame="#3366ff" x="98.19444444444444" z="98.125" w="7.5" d="7.5" h="3" />
-  <Wall fill="#3366ff" frame="#3366ff" x="20.694444444444446" z="98.125" w="7.5" d="7.5" h="3" />
-  <Wall fill="#3366ff" frame="#3366ff" x="13.194444444444446" z="13.125" w="7.5" d="7.5" h="25" />
-  <Wall fill="#3366ff" frame="#3366ff" x="105.69444444444444" z="13.125" w="7.5" d="7.5" h="25" />
-  <Wall fill="#3366ff" frame="#3366ff" x="105.69444444444444" z="105.625" w="7.5" d="7.5" h="25" />
-  <Wall fill="#3366ff" frame="#3366ff" x="13.194444444444446" z="105.625" w="7.5" d="7.5" h="25" />
+  <SkyColor color="#0080ff" color.1="#0048aa" />
+  <GroundColor color="#010e68" />
+  <Incarnator y="30" cx="79.65277777777777" cz="79.58333333333334" angle="315" />
+  <Incarnator y="30" cx="39.72222222222222" cz="79.58333333333334" angle="45" />
+  <Incarnator y="30" cx="39.72222222222222" cz="39.583333333333336" angle="145" />
+  <Incarnator y="30" cx="79.44444444444446" cz="39.44444444444444" angle="225" />
+  <Teleporter group="-1" y="-30" activeRange="35 * 5" deadRange="28 * 5" destGroup="@recenter" shape="0" color="#009600" color.1="#000000" cx="60.69444444444445" cz="59.583333333333336" angle="45" />
+  <Teleporter y="30" shape="0" group="@recenter" color="#009600" color.1="#000000" cx="60.69444444444445" cz="59.583333333333336" angle="45" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#009600" color.1="#000000" cx="60.69444444444445" cz="59.583333333333336" angle="45" />
+  <Wall color="#4180ff" color.1="#4180ff" x="20.694444444444446" z="20.625" w="7.5" d="7.5" h="3" />
+  <Wall color="#3dacff" color.1="#4180ff" x="59.51388888888889" z="105.625" w="85" d="7.5" h="12" />
+  <Wall color="#3dacff" color.1="#4180ff" x="59.44444444444444" z="13.125" w="85" d="7.5" h="12" />
+  <Wall color="#3dacff" color.1="#4180ff" x="105.69444444444444" z="59.375" w="7.5" d="85" h="12" />
+  <Wall color="#3dacff" color.1="#4180ff" x="13.194444444444446" z="59.375" w="7.5" d="85" h="12" />
+  <Wall color="#4180ff" color.1="#4180ff" x="98.19444444444444" z="20.625" w="7.5" d="7.5" h="3" />
+  <Wall color="#4180ff" color.1="#4180ff" x="98.19444444444444" z="98.125" w="7.5" d="7.5" h="3" />
+  <Wall color="#4180ff" color.1="#4180ff" x="20.694444444444446" z="98.125" w="7.5" d="7.5" h="3" />
+  <Wall color="#4180ff" color.1="#4180ff" x="13.194444444444446" z="13.125" w="7.5" d="7.5" h="25" />
+  <Wall color="#4180ff" color.1="#4180ff" x="105.69444444444444" z="13.125" w="7.5" d="7.5" h="25" />
+  <Wall color="#4180ff" color.1="#4180ff" x="105.69444444444444" z="105.625" w="7.5" d="7.5" h="25" />
+  <Wall color="#4180ff" color.1="#4180ff" x="13.194444444444446" z="105.625" w="7.5" d="7.5" h="25" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
-  <Goody shape="bspMissile" y="5" speed="2" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="20.90277777777778" cz="19.791666666666668" angle="225" />
+  <Goody shape="bspMissile" y="5" speed="2" missiles="3" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="20.90277777777778" cz="19.791666666666668" angle="45" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="150" />
-  <Goody shape="bspGrenade" y="5" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="98.95833333333334" cz="20.208333333333336" angle="225" />
+  <Goody shape="bspGrenade" y="5" speed="2" grenades="4" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="98.95833333333334" cz="20.208333333333336" angle="45" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
-  <Goody shape="bspMissile" y="5" speed="2" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="99.02777777777779" cz="97.91666666666667" angle="225" />
+  <Goody shape="bspMissile" y="5" speed="2" missiles="3" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="99.02777777777779" cz="97.91666666666667" angle="45" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="150" />
-  <Goody shape="bspGrenade" y="5" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="20.833333333333336" cz="97.70833333333334" angle="225" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="29.444444444444446" cz="29.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="29.444444444444446" cz="39.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="29.444444444444446" cz="49.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="39.44444444444444" cz="29.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="39.44444444444444" cz="49.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="49.44444444444445" cz="29.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="49.44444444444445" cz="39.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="49.44444444444445" cz="49.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="29.444444444444446" cz="69.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="29.444444444444446" cz="79.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="29.444444444444446" cz="89.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="39.44444444444444" cz="69.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="39.44444444444444" cz="89.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="49.44444444444445" cz="69.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="49.44444444444445" cz="79.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="49.44444444444445" cz="89.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="69.44444444444444" cz="29.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="69.44444444444444" cz="39.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="69.44444444444444" cz="49.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="79.44444444444444" cz="29.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="79.44444444444444" cz="49.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="89.44444444444444" cz="29.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="89.44444444444444" cz="39.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="89.44444444444444" cz="49.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="69.44444444444444" cz="69.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="69.44444444444444" cz="79.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="69.44444444444444" cz="89.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="79.44444444444444" cz="69.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="79.44444444444444" cz="89.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="89.44444444444444" cz="69.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="89.44444444444444" cz="79.375" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" cx="89.44444444444444" cz="89.375" angle="0" />
-  <Incarnator y="30" stop="@start" cx="59.09722222222223" cz="59.58333333333334" angle="325" />
-  <Incarnator y="33" stop="@start" cx="59.09722222222223" cz="59.58333333333334" angle="325" />
+  <Goody shape="bspGrenade" y="5" speed="2" grenades="4" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="20.833333333333336" cz="97.70833333333334" angle="45" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="29.444444444444446" cz="29.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="29.444444444444446" cz="39.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="29.444444444444446" cz="49.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="39.44444444444444" cz="29.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="39.44444444444444" cz="49.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="49.44444444444445" cz="29.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="49.44444444444445" cz="39.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="49.44444444444445" cz="49.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="29.444444444444446" cz="69.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="29.444444444444446" cz="79.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="29.444444444444446" cz="89.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="39.44444444444444" cz="69.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="39.44444444444444" cz="89.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="49.44444444444445" cz="69.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="49.44444444444445" cz="79.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="49.44444444444445" cz="89.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="69.44444444444444" cz="29.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="69.44444444444444" cz="39.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="69.44444444444444" cz="49.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="79.44444444444444" cz="29.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="79.44444444444444" cz="49.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="89.44444444444444" cz="29.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="89.44444444444444" cz="39.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="89.44444444444444" cz="49.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="69.44444444444444" cz="69.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="69.44444444444444" cz="79.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="69.44444444444444" cz="89.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="79.44444444444444" cz="69.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="79.44444444444444" cz="89.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="89.44444444444444" cz="69.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="89.44444444444444" cz="79.375" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" color="#a8d6ff" color.1="#000000" cx="89.44444444444444" cz="89.375" angle="180" />
+  <Incarnator y="30" stop="@start" cx="59.09722222222223" cz="59.58333333333334" angle="145" />
+  <Incarnator y="33" stop="@start" cx="59.09722222222223" cz="59.58333333333334" angle="145" />
 </map>

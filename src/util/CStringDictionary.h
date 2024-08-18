@@ -60,7 +60,6 @@ public:
     virtual tokentype FindEntry(const unsigned char *entry, short len);
     virtual tokentype SearchForEntry(const unsigned char *entry, short len);
     virtual tokentype SearchForEntry(const char *entry, short len);
-    virtual void ReadFromStringList(short strListID);
 
     virtual short GetDictionarySize();
     virtual std::string GetIndEntry(short index);

@@ -18,11 +18,13 @@ public:
 
 protected:
 
+    nanogui::CheckBox *registerBox;
     nanogui::TextBox *trackerBox;
     nanogui::TextBox *descriptionBox;
     nanogui::TextBox *passwordBox;
     nanogui::Button *startBtn;
     nanogui::TextBox *latencyBox;
     nanogui::CheckBox *autoLatencyBox;
+    nanogui::ComboBox *frameTimeBox;
 
 };

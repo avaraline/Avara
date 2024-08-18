@@ -4,6 +4,7 @@
 #include "CNetManager.h"
 #include "Preferences.h"
 #include "CommandList.h"
+#include "CAvaraGame.h"  // gCurrentGame
 
 CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
     setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 10, 10));
@@ -37,14 +38,14 @@ CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
             avara->GetNet()->ChangeNet(kServerNet, "");
     });
 
-    nanogui::CheckBox *registerBox = new nanogui::CheckBox(this, "Register With Tracker:", [this, app](bool checked) {
+    registerBox = new nanogui::CheckBox(this, "Register With Tracker:", [this, app](bool checked) {
         this->trackerBox->setEditable(checked);
         this->trackerBox->setEnabled(checked);
-        app->Set(kTrackerRegister, checked);
+        app->Set(kTrackerRegister, (int)checked);
     });
     bool shouldRegister = app->Number(kTrackerRegister) != 0;
     registerBox->setChecked(shouldRegister);
-    
+
     trackerBox = new nanogui::TextBox(this);
     trackerBox->setValue(app->String(kTrackerRegisterAddress));
     trackerBox->setEditable(true);
@@ -54,42 +55,49 @@ CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
     });
 
     latencyBox = new nanogui::TextBox(this);
-    latencyBox->setValue(std::to_string(app->Number(kLatencyToleranceTag)));
-    latencyBox->setEditable(false);
-    latencyBox->setEnabled(false);
-    latencyBox->setCallback([app](std::string value) -> bool {
-        char * pointer;
-        long newLT = strtol(value.c_str(), &pointer, 10);
+    latencyBox->setValue(std::to_string(app->Get<float>(kLatencyToleranceTag)).substr(0, 5));
+    latencyBox->setEditable(true);
+    latencyBox->setEnabled(true);
+    latencyBox->setCallback([this](std::string value) -> bool {
+        double newLT = std::stod(value);
+        // let SetFrameLatency() enforce limits on latencyTolerance AND set the pref
+        gCurrentGame->SetFrameLatency(std::ceil(newLT/gCurrentGame->fpsScale), -1);
 
-        // determining the min/max LT values from CAvaraGame::AdjustFrameTime()
-        long maxLT = 8;
-
-        // make sure the provided value is an integer
-        if (*pointer != 0)
-            return false;
-
-        if (newLT > maxLT)
-            newLT = maxLT;
-
-        if (newLT < 0)
-            newLT = 0;
-
-        app->Set(kLatencyToleranceTag, newLT);
+        // it might be modified on a bad input so retrieve the computed value
+        latencyBox->setValue(std::to_string(gCurrentGame->latencyTolerance).substr(0, 5));
         return true;
     });
 
-    autoLatencyBox = new nanogui::CheckBox(this, "Auto Latency", [app](bool checked) {
+    autoLatencyBox = new nanogui::CheckBox(this, "Auto Latency", [this, app](bool checked) {
         long options = app->Number(kServerOptionsTag);
-        if (checked)
+        if (checked) {
             options |= 1 << kUseAutoLatencyBit;
-        else
+            latencyBox->setEditable(false);
+            latencyBox->setEnabled(false);
+        }
+        else {
             options &= ~(long)(1 << kUseAutoLatencyBit);
+            latencyBox->setEditable(true);
+            latencyBox->setEnabled(true);
+        }
         app->Set(kServerOptionsTag, options);
         ((CAvaraAppImpl *)app)->GetNet()->ChangedServerOptions(options);
     });
     bool autoLatency = app->Number(kServerOptionsTag) & (1 << kUseAutoLatencyBit);
     autoLatencyBox->setChecked(autoLatency);
-    autoLatencyBox->setEnabled(false);
+    autoLatencyBox->setEnabled(true);
+
+    std::vector<std::string> frameTimeOptions = {
+        "64 ms (15.625 fps)", "32 ms (31.25 fps)", "16 ms (62.5 fps)", "8 ms (125 fps)"
+    };
+    std::vector<std::string> frameTimeOptionsShort = { "64 ms", "32 ms", "16 ms", "8 ms" };
+    frameTimeBox = new nanogui::ComboBox(this, frameTimeOptions, frameTimeOptionsShort);
+    frameTimeBox->setCallback([this](int selectedIdx) {
+        gCurrentGame->SetFrameTime(pow(2, 6-selectedIdx));
+        latencyBox->callback()(latencyBox->value()); // forces LT to be re-evaluated
+    });
+    frameTimeBox->setSelectedIndex(6-log2(gCurrentGame->frameTime));
+    frameTimeBox->popup()->setSize(nanogui::Vector2i(200, 160));
 }
 
 CServerWindow::~CServerWindow() {}
@@ -105,11 +113,13 @@ bool CServerWindow::DoCommand(int theCommand) {
             switch(app->GetNet()->netStatus) {
                 case kNullNet:
                     startBtn->setEnabled(true);
+                    frameTimeBox->setEnabled(true);
                     startBtn->setCaption("Start Hosting");
-                    this->EnableLatencyOptions(false);
+                    this->EnableLatencyOptions(true);
                     break;
                 case kClientNet:
                     startBtn->setEnabled(false);
+                    frameTimeBox->setEnabled(false);
                     this->EnableLatencyOptions(false);
                     break;
                 case kServerNet:
@@ -123,12 +133,15 @@ bool CServerWindow::DoCommand(int theCommand) {
 }
 
 void CServerWindow::PrefChanged(std::string name) {
-    latencyBox->setValue(std::to_string(mApplication->Number(kLatencyToleranceTag)));
+    frameTimeBox->setSelectedIndex(6-log2(gCurrentGame->frameTime));
+    latencyBox->setValue(std::to_string(mApplication->Get<float>(kLatencyToleranceTag)).substr(0, 5));
+    registerBox->setChecked(mApplication->Get<int>(kTrackerRegister) != 0);
 }
 
 void CServerWindow::EnableLatencyOptions(bool enable) {
-    this->latencyBox->setEditable(enable);
-    this->latencyBox->setEnabled(enable);
-    this->autoLatencyBox->setEnabled(enable);
+    latencyBox->setEditable(enable);
+    latencyBox->setEnabled(enable);
+    // force a callback which could change the LT depending on frame rate
+    if (enable) latencyBox->callback()(latencyBox->value());
+    autoLatencyBox->setEnabled(enable);
 }
-

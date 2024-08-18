@@ -1,4 +1,5 @@
 #include "System.h"
+#include "Debug.h"
 
 #include <SDL2/SDL.h>
 #include <deque>
@@ -10,7 +11,7 @@ uint64_t TickCount() {
     // see https://stackoverflow.com/a/35962360 ?
     // Approximate ms -> tick (1/60th of a second in old mac parlance)
     // return SDL_GetTicks() >> 4;
-    return (uint64_t)((double)SDL_GetTicks() / 16.6666666667);
+    return MSEC_TO_TICK_COUNT(SDL_GetTicks());
 }
 
 static std::map<QHdrPtr, std::deque<QElemPtr>> gQueues;
@@ -31,7 +32,8 @@ void Enqueue(QElemPtr qElement, QHdrPtr qHeader) {
         std::deque<QElemPtr> newQueue = {qElement};
         gQueues.insert(std::make_pair(qHeader, newQueue));
         qHeader->qHead = qHeader->qTail = qElement;
-        // SDL_Log("  - inserting\n");
+        // SDL_Log("  - inserting into gQueues with key %lx\n", qHeader);
+        DBG_Log("q", "Enqueue: gQueues has %zu elements\n", gQueues.size());
     }
     // New element has no next link
     qElement->qLink = NULL;
@@ -45,7 +47,7 @@ OSErr Dequeue(QElemPtr qElement, QHdrPtr qHeader) {
         if (q.empty()) {
             return qErr;
         }
-        for (int i = 0; i < q.size(); i++) {
+        for (size_t i = 0; i < q.size(); i++) {
             QElemPtr curElement = q.at(i);
             if (curElement == qElement) {
                 if (lastElement) {
@@ -63,4 +65,17 @@ OSErr Dequeue(QElemPtr qElement, QHdrPtr qHeader) {
         }
     }
     return qErr;
+}
+
+void DisposeQueue(QHdrPtr qHeader) {
+    gQueues.erase(qHeader);
+    DBG_Log("q", "DisposeQueues: gQueues now has %zu elements\n", gQueues.size());
+}
+
+size_t QueueCount() {
+    return gQueues.size();
+}
+
+size_t QueueSize(QHdrPtr qHeader) {
+    return gQueues.count(qHeader) ? gQueues.at(qHeader).size() : 0;
 }

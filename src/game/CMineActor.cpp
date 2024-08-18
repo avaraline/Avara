@@ -22,7 +22,7 @@
 
 void CMineActor::BeginScript() {
     maskBits |= kTargetBit + kSolidBit;
-    shields = FIX(1);
+    shields = FIX1;
     hitScore = 5;
     destructScore = 20;
 
@@ -76,7 +76,10 @@ CAbstractActor *CMineActor::EndScript() {
 
     activateSound = ReadLongVar(iActivateSound);
     activateVolume = ReadFixedVar(iActivateVolume);
-    gHub->PreLoadSample(activateSound);
+
+    // Preload sounds.
+    auto _ = AssetManager::GetOgg(activateSound);
+    
     RegisterReceiver(&activator, ReadLongVar(iBoom));
 
     radius = ReadFixedVar(iRange);
@@ -146,20 +149,16 @@ void CMineActor::Activate() {
     }
 }
 
-void CMineActor::Dispose() {
+CMineActor::~CMineActor() {
     itsGame->RemoveReceiver(&activator);
 
     if (itsSoundLink) {
         gHub->ReleaseLinkAndKillSounds(itsSoundLink);
         itsSoundLink = NULL;
     }
-
-    CGlowActors::Dispose();
 }
 
 void CMineActor::FrameAction() {
-    long shapeTime;
-
     if (isActive & kHasMessage) {
         if (stopMsg.triggerCount > startMsg.triggerCount)
             enabled = false;
@@ -183,20 +182,20 @@ void CMineActor::FrameAction() {
         if (activated) {
             WasDestroyed();
             itsGame->scoreReason = ksiMineBlast;
-            SecondaryDamage(teamColor, -1);
+            SecondaryDamage(teamColor, -1, ksiMineBlast);
             return;
         } else {
             lookNextTime = phase + lookTime;
 
             if (lookTime) {
-                CAbstractActor *theActor;
+                //CAbstractActor *theActor;
                 CSmartPart *thePart;
 
                 BuildPartProximityList(location, radius, watchBits);
-                theActor = itsGame->actorList;
+                //theActor = itsGame->actorList;
 
                 for (thePart = proximityList.p; thePart; thePart = (CSmartPart *)thePart->nextTemp) {
-                    theActor = thePart->theOwner;
+                    //theActor = thePart->theOwner;
                     if (radius + thePart->enclosureRadius >
                         FDistanceEstimate(location[0] - thePart->sphereGlobCenter[0],
                             location[1] - thePart->sphereGlobCenter[1],

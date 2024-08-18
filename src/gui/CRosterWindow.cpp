@@ -3,12 +3,13 @@
 #include "AvaraDefines.h"
 #include "CAbstractPlayer.h"
 #include "CAvaraApp.h"
-#include "CColorManager.h"
+#include "ColorManager.h"
 #include "CNetManager.h"
 #include "CPlayerManager.h"
 #include "CScoreKeeper.h"
 #include "Preferences.h"
-#include "RGBAColor.h"
+#include "ARGBColor.h"
+#include "Debug.h"
 
 #include <nanogui/colorcombobox.h>
 #include <nanogui/layout.h>
@@ -59,28 +60,28 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     auto panel = playersLayer->add<Widget>();
     panel->setLayout(layout);
     theNet = ((CAvaraAppImpl *)gApplication)->GetNet();
-    std::vector<long> player_colors = {
-        (long) CColorManager::getTeamColor(1).value_or(CColorManager::getDefaultTeamColor()),
-        (long) CColorManager::getTeamColor(2).value_or(CColorManager::getDefaultTeamColor()),
-        (long) CColorManager::getTeamColor(3).value_or(CColorManager::getDefaultTeamColor()),
-        (long) CColorManager::getTeamColor(4).value_or(CColorManager::getDefaultTeamColor()),
-        (long) CColorManager::getTeamColor(5).value_or(CColorManager::getDefaultTeamColor()),
-        (long) CColorManager::getTeamColor(6).value_or(CColorManager::getDefaultTeamColor()),
-        (long) CColorManager::getTeamColor(7).value_or(CColorManager::getDefaultTeamColor()),
-        (long) CColorManager::getTeamColor(8).value_or(CColorManager::getDefaultTeamColor())
+    std::vector<long> colorOptions = {
+        static_cast<long>(ColorManager::getTeamColor(1).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(2).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(3).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(4).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(5).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(6).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(7).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(8).value_or(ColorManager::getDefaultTeamColor()).GetRaw())
     };
 
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
         layout->appendRow(1, 1);
         layout->appendCol(1, 1);
-        ColorComboBox *color = panel->add<ColorComboBox>(player_colors);
+        ColorComboBox *color = panel->add<ColorComboBox>(colorOptions);
         //color->setFixedHeight(23);
         color->setSelectedIndex(theNet->teamColors[i]);
-        color->setCallback([this, color, i](int selectedIdx) {
+        color->setCallback([this, i](int selectedIdx) {
             theNet->teamColors[i] = selectedIdx;
             theNet->SendColorChange();
         });
-        color->popup()->setSize(nanogui::Vector2i(50, 38 * player_colors.size()));
+        color->popup()->setSize(nanogui::Vector2i(50, 38 * colorOptions.size()));
         layout->setAnchor(color, AdvancedGridLayout::Anchor(0, i * 2));
         Text *status = panel->add<Text>("", false, ROSTER_FONT_SIZE + 2);
         layout->setAnchor(status, AdvancedGridLayout::Anchor(1, i * 2));
@@ -163,7 +164,7 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     };
 
     for(const auto &heading : headings) {
-        auto t = scoreLayer->add<Text>(heading, false, SCORE_FONT_SIZE);
+        scoreLayer->add<Text>(heading, false, SCORE_FONT_SIZE);
     }
 
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
@@ -180,7 +181,7 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     }
 
     tabWidget->setActiveTab(0);
-    currentLevel = ((CAvaraAppImpl *)gApplication)->GetGame()->loadedTag;
+    currentLevel = ((CAvaraAppImpl *)gApplication)->GetGame()->loadedFilename;
 
     UpdateRoster();
 
@@ -192,15 +193,24 @@ CRosterWindow::~CRosterWindow() {}
 void CRosterWindow::UpdateRoster() {
     CAvaraGame *theGame = ((CAvaraAppImpl *)gApplication)->GetGame();
     if (tabWidget->activeTab() == 0) {
+        long maxRtt = 0;
         for (int i = 0; i < kMaxAvaraPlayers; i++) {
-            CPlayerManager *thisPlayer = ((CAvaraAppImpl *)gApplication)->GetNet()->playerTable[i];
+            CPlayerManager *thisPlayer = ((CAvaraAppImpl *)gApplication)->GetNet()->playerTable[i].get();
 
             std::string theName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
             if (i != theNet->itsCommManager->myId && theName.length() > 0) {
-                theName += std::string(" (") + std::to_string(theNet->itsCommManager->GetMaxRoundTrip(1 << i)) + " ms)";
+                long rtt = theNet->itsCommManager->GetMaxRoundTrip(1 << i);
+                float loss = 100*theNet->itsCommManager->GetMaxMeanReceiveCount(1 << i);
+                std::ostringstream os;
+                os << theName << " (" << rtt << "ms";
+                if (Debug::IsEnabled("loss")) {
+                    os << "/" << std::setprecision(loss < 2 ? 1 : 0) << std::fixed << loss << "%";
+                }
+                os << ")";
+                theName = os.str();
+                maxRtt = std::max(maxRtt, rtt);
             }
-            short status = thisPlayer->LoadingStatus();
-            std::string theStatus = GetStringStatus(status, thisPlayer->WinFrame());
+            std::string theStatus = GetStringStatus(thisPlayer);
 
             std::string theChat = thisPlayer->GetChatString(CHAT_CHARS);
 
@@ -208,16 +218,22 @@ void CRosterWindow::UpdateRoster() {
             chats[i]->setValue(theChat.c_str());
             colors[i]->setSelectedIndex(theNet->teamColors[i]);
             colors[i]->setTextColor(nanogui::Color(
-                LongToR(*CColorManager::getTeamTextColor(theNet->teamColors[i] + 1)),
-                LongToG(*CColorManager::getTeamTextColor(theNet->teamColors[i] + 1)),
-                LongToB(*CColorManager::getTeamTextColor(theNet->teamColors[i] + 1)),
-                LongToA(*CColorManager::getTeamTextColor(theNet->teamColors[i] + 1))
+                (*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)).GetR(),
+                (*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)).GetG(),
+                (*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)).GetB(),
+                (*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)).GetA()
             ));
             colors[i]->setCaption(theName.c_str());
             colors[i]->popup()->setAnchorPos(nanogui::Vector2i(235, 68 + 60 * i));
         }
 
-        if (theGame->loadedTag.compare(currentLevel) != 0) {
+        if (maxRtt > 0 && theNet->IsAutoLatencyEnabled() && !theGame->IsPlaying()) {
+            // set initial frame latency from client ping/RTT times
+            maxRtt = std::min(maxRtt+CLASSICFRAMETIME, long(CLASSICFRAMETIME*2*4));  // max of 4 LT on the UI
+            theGame->SetFrameLatency(theGame->RoundTripToFrameLatency(maxRtt), -1);
+        }
+
+        if (theGame->loadedFilename.compare(currentLevel) != 0) {
             std::string theLevel = theGame->loadedLevel;
             std::string theDesigner = theGame->loadedDesigner;
 
@@ -228,17 +244,15 @@ void CRosterWindow::UpdateRoster() {
 
             if (theGame->loadedInfo.length() > 0) levelDescription->setCaption(theGame->loadedInfo);
             else levelDescription->setCaption("No additional information about this mission is available.");
-            currentLevel = theGame->loadedTag;
+            currentLevel = theGame->loadedFilename;
         }
     }
     else if (tabWidget->activeTab() == 2) {
         for (int i = 0; i < kMaxAvaraPlayers; i++) {
-            CPlayerManager *thisPlayer = theNet->playerTable[i];
-            const std::string theName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
             AvaraScoreRecord theScores = theGame->scoreKeeper->netScores;
-            if(theName.size() > 0) {
+            scoreNames[i]->setValue(theGame->scoreKeeper->playerNames[i]);
+            if(theScores.player[i].lives >= 0) {
                 scoreTeams[i]->setValue(std::to_string(theNet->teamColors[i]));
-                scoreNames[i]->setValue(theName.c_str());
                 scoreExitRanks[i]->setValue(std::to_string(theScores.player[i].exitRank));
                 scoreScores[i]->setValue(std::to_string(theScores.player[i].points));
                 scoreKills[i]->setValue(std::to_string(theScores.player[i].kills));
@@ -246,7 +260,6 @@ void CRosterWindow::UpdateRoster() {
             }
             else {
                 scoreTeams[i]->setValue("");
-                scoreNames[i]->setValue("");
                 scoreExitRanks[i]->setValue("");
                 scoreScores[i]->setValue("");
                 scoreKills[i]->setValue("");
@@ -260,10 +273,10 @@ bool CRosterWindow::DoCommand(int theCommand) {
     return false;
 }
 
-std::string CRosterWindow::GetStringStatus(short status, Fixed winFrame) {
+std::string CRosterWindow::GetStringStatus(CPlayerManager *player) {
     std::string strStatus;
-    if (winFrame >= 0) {
-        long timeTemp = FMulDiv(winFrame, ((CAvaraAppImpl *)gApplication)->GetGame()->frameTime, 10);
+    if (player->WinFrame() >= 0) {
+        long timeTemp = FMulDiv(player->WinFrame(), ((CAvaraAppImpl *)gApplication)->GetGame()->frameTime, 10);
         auto hundreds1 = timeTemp % 10;
         timeTemp /= 10;
         auto hundreds2 = timeTemp % 10;
@@ -280,42 +293,77 @@ std::string CRosterWindow::GetStringStatus(short status, Fixed winFrame) {
         return strStatus;
     }
 
-    if (status == kLConnected) {
-        strStatus = "connected";
-    } else if (status == kLLoaded) {
-        strStatus = "ready";
-    } else if (status == kLWaiting) {
-        strStatus = "waiting";
-    } else if (status == kLTrying) {
-        strStatus = "loading";
-    } else if (status == kLMismatch) {
-        strStatus = "version mismatch";
-    } else if (status == kLNotFound) {
-        strStatus = "level not found";
-    } else if (status == kLPaused) {
-        strStatus = "paused";
-    } else if (status == kLActive) {
-        strStatus = "active";
-    } else if (status == kLNoVehicle) {
-        strStatus = "HECTOR not available";
-    } else {
-        strStatus = "";
+    LoadingState status = player->LoadingStatus();
+    PresenceType presence = player->Presence();
+    if (presence != kzAway) {
+        if (status == kLConnected) {
+            strStatus = "connected";
+        } else if (status == kLLoaded) {
+            strStatus = "loaded";
+        } else if (status == kLReady) {
+            strStatus = "ready";
+        } else if (status == kLWaiting) {
+            strStatus = "waiting";
+        } else if (status == kLTrying) {
+            strStatus = "loading";
+        } else if (status == kLMismatch) {
+            strStatus = "version mismatch";
+        } else if (status == kLNotFound) {
+            strStatus = "level not found";
+        } else if (status == kLPaused) {
+            strStatus = "paused";
+        } else if (status == kLActive) {
+            strStatus = "active";
+        } else if (status == kLNoVehicle) {
+            strStatus = "HECTOR not available";
+        } else {
+            strStatus = "";
+        }
+    } else if (status != kLNotConnected) {
+        strStatus = "away";
+    }
+    if (presence == kzSpectating) {
+        if (player->LoadingStatusIsIn(kLConnected, kLActive, kLReady, kLLoaded, kLPaused)) {
+            strStatus = "spectator";
+        } else if (strStatus.length() > 0) {
+            strStatus += "*";   // make this into an eyeball char?
+        }
     }
     return strStatus;
 }
 
-void CRosterWindow::SendRosterMessage(int len, char *message) {
+void CRosterWindow::SendRosterMessage(std::string& message) {
+    SendRosterMessage(message.length(), (char*)message.c_str());
+}
+
+void CRosterWindow::SendRosterMessage(const char* message) {
+    // message assumed to be NULL terminated
+    SendRosterMessage(strlen(message), (char*)message);
+}
+
+void CRosterWindow::SendRosterMessage(size_t len, char *message) {
     ((CAvaraAppImpl *)gApplication)->GetNet()->SendRosterMessage(len, message);
-    chatInput->setCaption(chatInput->caption() + message);
+    std::string newCaption = chatInput->caption();
+    newCaption.append(message, len);  // message not always null-terminated, use len!
+    chatInput->setCaption(newCaption);
 }
 
 void CRosterWindow::ChatLineDelete() {
-    chatInput->setCaption(chatInput->caption().substr(0, chatInput->caption().size() - 1));
+    chatInput->setCaption(chatInput->caption().substr(0, chatInput->caption().size() - 2));
 }
 
+void CRosterWindow::ResetChatPrompt() {
+    std::string theName = ((CAvaraAppImpl *)gApplication)->String(kPlayerNameTag);
+    chatInput->setCaption(ChatPromptFor(theName));
+}
+std::string CRosterWindow::ChatPromptFor(std::string theName) {
+    int len = 9;
+    std::string paddedName = theName + "        ";
+    return paddedName.substr(0, len) + ": ";
+}
 void CRosterWindow::NewChatLine(Str255 playerName, std::string message) {
     std::string name = std::string((char *)playerName + 1, playerName[0]);
-    std::string chatLine = name + ": " +  message;
+    std::string chatLine = ChatPromptFor(name) + message;
 
     AdvancedGridLayout *gridLayout = (AdvancedGridLayout*) chatPanel->layout();
     gridLayout->appendRow(1, 0.1);
@@ -327,12 +375,11 @@ void CRosterWindow::NewChatLine(Str255 playerName, std::string message) {
     chatLabel->setFixedWidth(ROSTER_WINDOW_WIDTH - 20);
 
     gridLayout->setAnchor(chatLabel, AdvancedGridLayout::Anchor(0, gridLayout->rowCount() - 1));
+    ResetChatPrompt();
 
-    std::string theName = ((CAvaraAppImpl *)gApplication)->String(kPlayerNameTag);
     Screen* screen = chatLabel->screen();
     NVGcontext* context = screen->nvgContext();
     chatLabel->parent()->performLayout(context);
-    chatInput->setCaption(theName + ": ");
 
     VScrollPanel *scroll = (VScrollPanel*)chatPanel->parent();
     scroll->setScroll(1);
@@ -351,6 +398,18 @@ bool CRosterWindow::handleSDLEvent(SDL_Event &event) {
         //SDL_Log("CRosterWindow::handleSDLEvent SDL_KEYDOWN");
 
         switch (event.key.keysym.sym) {
+            case SDLK_UP:
+                SendRosterMessage(1, clearline);
+                ResetChatPrompt();
+                ((CAvaraAppImpl *)gApplication)->GetTui()->HistoryOlder();
+
+                return true;
+            case SDLK_DOWN:
+                SendRosterMessage(1, clearline);
+                ResetChatPrompt();
+                ((CAvaraAppImpl *)gApplication)->GetTui()->HistoryNewer();
+
+                return true;
             case SDLK_BACKSPACE:
                 SendRosterMessage(1, backspace);
                 ChatLineDelete();
@@ -363,6 +422,7 @@ bool CRosterWindow::handleSDLEvent(SDL_Event &event) {
             case SDLK_CLEAR:
             case SDLK_DELETE:
                 SendRosterMessage(1, clearline);
+                ResetChatPrompt();
                 //SDL_Log("CRosterWindow::handleSDLEvent CLEAR");
 
                 return true;
@@ -385,5 +445,24 @@ bool CRosterWindow::handleSDLEvent(SDL_Event &event) {
         }
     } else {
         return false;
+    }
+}
+
+void CRosterWindow::PrefChanged(std::string name) {
+    std::vector<long> colorOptions = {
+        static_cast<long>(ColorManager::getTeamColor(1).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(2).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(3).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(4).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(5).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(6).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(7).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(8).value_or(ColorManager::getDefaultTeamColor()).GetRaw())
+    };
+    for (int i = 0; i < colors.size(); i++) {
+        auto current = colors[i]->selectedIndex();
+        colors[i]->setItems(colorOptions);
+        colors[i]->setSelectedIndex(current);
+        colors[i]->setNeedsLayout();
     }
 }

@@ -1,0 +1,14 @@
+<map>
+  <set
+    designer="$mSilverheadtateboy"
+    gravity="0.25"
+    defaultLives="5"
+    grenadePower="3"
+    missilePower="2"
+    missileTurnRate="1"
+    missileAcceleration="0.5"
+  />
+
+  <include alf="layout/air-voss.alf" />
+  <include alf="layout/goodies/air-voss.alf" />
+</map>

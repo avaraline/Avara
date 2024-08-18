@@ -6,6 +6,7 @@
     Created: Monday, July 3, 1995, 01:19
     Modified: Sunday, September 1, 1996, 20:00
 */
+// #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
 
 #include "CTeleporter.h"
 
@@ -18,6 +19,8 @@
 #define FIELDSTRENGTH FIX3(100)
 #define TELEPORTERMIDDLE FIX3(1500)
 #define RETRANSMITFRAMES 60
+#define SPEEDLIMIT 2.25    // ratio of speed/activeRange ... a little more than the diameter of the teleport area
+
 
 void CTeleporter::BeginScript() {
     ProgramLongVar(iGroup, 0);
@@ -77,11 +80,13 @@ CAbstractActor *CTeleporter::EndScript() {
 
     transportGroup = ReadLongVar(iGroup);
     destGroup = ReadLongVar(iDestGroup);
-    rotationSpeed = FDegToOne(ReadFixedVar(iSpeed));
+    rotationSpeed = FpsCoefficient2(FDegToOne(ReadFixedVar(iSpeed)));
 
     soundId = ReadLongVar(iSound);
     volume = ReadFixedVar(iVolume);
-    gHub->PreLoadSample(soundId);
+
+    // Preload sounds.
+    auto _ = AssetManager::GetOgg(soundId);
 
     options = ReadLongVar(iSpinFlag) ? kSpinOption : 0;
     options |= ReadLongVar(iFragmentFlag) ? kFragmentOption : 0;
@@ -99,9 +104,6 @@ CAbstractActor *CTeleporter::EndScript() {
 }
 
 void CTeleporter::FrameAction() {
-    ActorLocator *loc;
-    short i;
-
     CPlacedActors::FrameAction();
 
     if (isActive & kHasMessage) {
@@ -131,15 +133,20 @@ void CTeleporter::FrameAction() {
                 if ((thePlayer->teamMask & watchTeams) && (thePlayer->searchCount != searchCount) &&
                     !thePlayer->isInLimbo && thePlayer->itsGame->scores[thePlayer->itsManager->Slot()] >= hitScore) {
                     Vector delta;
-                    Fixed distance;
+                    Fixed distance, speed;
 
                     delta[0] = thePlayer->location[0] - location[0];
                     delta[1] = thePlayer->location[1] - location[1];
                     delta[2] = thePlayer->location[2] - location[2];
 
-                    distance = FDistanceEstimate(delta[0], delta[1], delta[2]);
+                    distance = FDistanceEstimate(delta);
+                    speed = FDistanceEstimate(thePlayer->speed);
+                    if (distance < TELEPORTAREA) {
+                        FPS_DEBUG("\nframeNumber = " << itsGame->frameNumber << "\n");
+                        FPS_DEBUG("distance = " << distance << ", activeRange = " << activeRange << ", deadRange = " << deadRange << ", delta = " << FormatVector(delta, 3) << ", speed = " << speed << ", speed / activeRange = " << speed / double(activeRange) << "\n");
+                    }
 
-                    if (distance < activeRange && distance >= deadRange) {
+                    if (distance < activeRange && distance >= deadRange && speed < SPEEDLIMIT*activeRange) {
                         if (winScore < 0) {
                             TeleportPlayer(thePlayer);
                         } else {
@@ -147,15 +154,24 @@ void CTeleporter::FrameAction() {
                             thePlayer->Win(winScore, this);
                         }
                     } else if (noPullTimer == 0 && distance < TELEPORTAREA) {
-                        delta[0] = FMul(delta[0], -FIELDSTRENGTH);
-                        delta[1] = FMul(delta[1], -FIELDSTRENGTH);
-                        delta[2] = FMul(delta[2], -FIELDSTRENGTH);
+                        Fixed attraction = -FpsCoefficient2(FIELDSTRENGTH);
+                        if (pullCounter == 0) {
+                            FPS_DEBUG("attraction = " << attraction);
+                            attraction -= FpsOffset(FIELDSTRENGTH);
+                            FPS_DEBUG(", attraction with initial offset = " << attraction << "\n");
+                        }
+                        delta[0] = FMul(delta[0], attraction);
+                        delta[1] = FMul(delta[1], attraction);
+                        delta[2] = FMul(delta[2], attraction);
                         thePlayer->Accelerate(delta);
+                        FPS_DEBUG("pullCounter = " << pullCounter << ", attraction = " << FormatVector(delta, 3) << ", new player speed = " << FormatVector(thePlayer->speed, 3) << "\n");
                         pullCounter++;
-                        if (pullCounter >= 32) {
-                            noPullTimer = 16;
+                        if (pullCounter >= FpsFramesPerClassic(32)) {
+                            noPullTimer = FpsFramesPerClassic(16);
                             pullCounter = 0;
                         }
+                    } else if (distance > TELEPORTAREA) {
+                        pullCounter = noPullTimer = 0;
                     }
                 }
 
@@ -180,21 +196,22 @@ void CTeleporter::FrameAction() {
 }
 
 void CTeleporter::TeleportPlayer(CAbstractPlayer *thePlayer) {
-    CTeleporter *theActor;
+    CAbstractActor *theActor;
     CTeleporter *thePort;
     unsigned long maxUse = 0xffffFFFF;
 
-    theActor = (CTeleporter *)itsGame->actorList;
+    theActor = (CAbstractActor *)itsGame->actorList;
     thePort = NULL;
 
     while (theActor) {
         if (theActor->maskBits & kTeleportBit) {
-            if (theActor->transportGroup == destGroup && theActor->useCount < maxUse && theActor != this) {
-                maxUse = theActor->useCount;
-                thePort = theActor;
+            CTeleporter *teleActor = (CTeleporter *)theActor;
+            if (teleActor->transportGroup == destGroup && teleActor->useCount < maxUse && theActor != this) {
+                maxUse = teleActor->useCount;
+                thePort = teleActor;
             }
         }
-        theActor = (CTeleporter *)theActor->nextActor;
+        theActor = (CAbstractActor *)theActor->nextActor;
     }
 
     if (thePort) {
@@ -210,7 +227,7 @@ Boolean CTeleporter::ReceivePlayer(CAbstractPlayer *thePlayer) {
 
     didMove = thePlayer->TryTransport(location, soundId, volume, options);
     if (didMove) {
-        goTimer = RETRANSMITFRAMES;
+        goTimer = FpsFramesPerClassic(RETRANSMITFRAMES);
         itsGame->FlagMessage(didReceiveMsg);
     }
     useCount++;

@@ -6,23 +6,21 @@
     Created: Sunday, November 20, 1994, 19:17
     Modified: Monday, September 16, 1996, 18:50
 */
+// #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
 
 #include "CAbstractActor.h"
-#include "CColorManager.h"
+#include "ColorManager.h"
 
 #include "CDepot.h"
 #include "CScaledBSP.h"
 #include "CSoundMixer.h"
 
 void CAbstractActor::LoadPart(short ind, short resId) {
-    if (partScale == FIX(1)) {
-        partList[ind] = new CSmartPart;
-        partList[ind]->ISmartPart(resId, this, ind);
+    if (partScale == FIX1) {
+        partList[ind] = CSmartPart::Create(resId, this, ind);
     } else {
         CScaledBSP *part;
-
-        part = new CScaledBSP;
-        part->IScaledBSP(partScale, resId, this, ind);
+        part = new CScaledBSP(partScale, resId, this, ind);
         partList[ind] = part;
     }
 
@@ -34,8 +32,10 @@ void CAbstractActor::LoadPart(short ind, short resId) {
 
 void CAbstractActor::LoadPartWithColors(short ind, short resId) {
     LoadPart(ind, resId);
-    partList[ind]->ReplaceColor(kMarkerColor, GetPixelColor());
-    partList[ind]->ReplaceColor(kOtherMarkerColor, GetOtherPixelColor());
+    partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(0), GetPixelColor());
+    partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(1), GetOtherPixelColor());
+    partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(2), GetTertiaryColor());
+    partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(3), GetQuaternaryColor());
 }
 
 void CAbstractActor::InitLocationLinks() {
@@ -75,7 +75,7 @@ void CAbstractActor::LinkBox(Fixed minX, Fixed minZ, Fixed maxX, Fixed maxZ) {
     short *linkTable;
     ActorLocator *head;
     ActorLocator *loc;
-    long mask = LOCCOORDMASK;
+    uint32_t mask = LOCCOORDMASK;
 
     minX = (minX & mask) >> (LOCATORTABLESCALE - LOCATORTABLEBITS);
     maxX = (maxX & mask) >> (LOCATORTABLESCALE - LOCATORTABLEBITS);
@@ -198,7 +198,7 @@ void CAbstractActor::BuildPartSpheresProximityList(MaskType filterMask) {
     BuildPartProximityList(minPoint, FDistanceOverEstimate(maxPoint[0], maxPoint[1], maxPoint[2]), filterMask);
 }
 
-void CAbstractActor::IAbstractActor() {
+CAbstractActor::CAbstractActor() {
     short i;
 
     proximityList.p = NULL;
@@ -235,7 +235,7 @@ void CAbstractActor::IAbstractActor() {
         partList[i] = NULL;
     }
 
-    partScale = FIX(1);
+    partScale = FIX1;
     partYon = 0;
 
     for (i = 0; i < kSliverSizes; i++) {
@@ -252,8 +252,7 @@ void CAbstractActor::IAbstractActor() {
     traction = kDefaultTraction;
     friction = kDefaultFriction;
 }
-
-void CAbstractActor::Dispose() {
+CAbstractActor::~CAbstractActor() {
     short i;
     ActorAttachment *nextA;
 
@@ -271,18 +270,16 @@ void CAbstractActor::Dispose() {
 
     UnlinkLocation();
 
-    if (isInGame)
+    if (itsGame && isInGame)
         itsGame->RemoveActor(this);
 
     for (i = 0; i < partCount; i++) {
-        partList[i]->Dispose();
+        delete partList[i];
     }
 
     if (itsSoundLink) {
         gHub->ReleaseLinkAndKillSounds(itsSoundLink);
     }
-
-    CDirectObject::Dispose();
 }
 
 void CAbstractActor::Shatter(short firstSliverType,
@@ -293,7 +290,7 @@ void CAbstractActor::Shatter(short firstSliverType,
     short i;
     CSmartPart **partInd, *thePart;
     long totalPolys;
-    Vector noDirection = {0, FIX(1), 0, 0};
+    Vector noDirection = {0, FIX1, 0, 0};
 
     partInd = partList;
     totalPolys = 0;
@@ -349,8 +346,7 @@ void CAbstractActor::Shatter(short firstSliverType,
 void CAbstractActor::Blast() {
     if (isInGame) {
         short i;
-        CSmartPart *thePart, *maxPart;
-        SoundLink *blastLink;
+        CSmartPart *thePart, *maxPart = NULL;
         short maxCount = 0;
 
         Shatter(0, kSliverSizes, sliverCounts, sliverLives, FIX3(500));
@@ -363,8 +359,8 @@ void CAbstractActor::Blast() {
             }
         }
 
-        if (maxCount) {
-            DoSound(blastSound, maxPart->sphereGlobCenter, blastVolume, FIX(1));
+        if (maxCount && maxPart) {
+            DoSound(blastSound, maxPart->sphereGlobCenter, blastVolume, FIX1);
         }
     }
 }
@@ -434,9 +430,6 @@ CAbstractActor *CAbstractActor::EndScript() {
     teamColor = ReadLongVar(iTeam) % (kMaxTeamColors + 1);
     teamMask = 1 << teamColor;
 
-    gHub->PreLoadSample(blastSound);
-    gHub->PreLoadSample(hitSoundId);
-
     partScale = ReadFixedVar(iScale);
     partYon = ReadFixedVar(iYon);
 
@@ -444,9 +437,19 @@ CAbstractActor *CAbstractActor::EndScript() {
     friction = ReadFixedVar(iFriction);
 
     stepSound = ReadLongVar(iStepSound);
-    gHub->LoadSample(stepSound);
+
+    // Preload sounds.
+    auto _ = AssetManager::GetOgg(blastSound);
+    _ = AssetManager::GetOgg(hitSoundId);
+    _ = AssetManager::GetOgg(stepSound);
 
     return this;
+}
+
+void CAbstractActor::AdaptableSettings() {
+    // This method is generally overridden by Subclass to do any computations that could
+    // change after a game is started OR resumed.  For example, any constant affected by
+    // frame-rate should be set in the Subclass equivalent of this method.
 }
 
 void CAbstractActor::AddToGame() {
@@ -708,15 +711,17 @@ void CAbstractActor::PostMortemBlast(short scoreTeam, short scoreId, Boolean doD
         blastRecord.blastPower = blastPower;
         blastRecord.team = scoreTeam;
         blastRecord.playerId = scoreId;
+        FPS_DEBUG("CAbstractActor::PostMortemBlast: blastPower = " << blastPower << "\n");
         RadiateDamage(&blastRecord);
     }
 
     if (doDispose)
-        Dispose();
+        delete this;
 }
 
-void CAbstractActor::SecondaryDamage(short scoreTeam, short scoreColor) {
+bool CAbstractActor::SecondaryDamage(short scoreTeam, short scoreColor, ScoreInterfaceReasons damageSource) {
     CAbstractActor *blastToo;
+    bool imDead = false;
 
 #if DEBUG_AVARA
     proximityList.p = (CSmartPart *)-1;
@@ -725,12 +730,18 @@ void CAbstractActor::SecondaryDamage(short scoreTeam, short scoreColor) {
     while ((blastToo = gCurrentGame->postMortemList)) {
         gCurrentGame->postMortemList = blastToo->postMortemLink;
         if (blastToo != this) {
-            gCurrentGame->scoreReason = ksiSecondaryDamage;
+            gCurrentGame->scoreReason = damageSource;
+        }
+        if (blastToo == this) {
+            imDead = true;
         }
         blastToo->PostMortemBlast(scoreTeam, scoreColor, true);
     }
+    return imDead;
 }
 
+// perhaps we should rename this RayTestPlusGround because it does a RayTest on all actors and on the ground...
+// the name makes it sounds like it only tests the ground
 void CAbstractActor::RayTestWithGround(RayHitRecord *hitRec, MaskType testMask) {
     Fixed negOrigin1;
 
@@ -897,10 +908,11 @@ void CAbstractActor::WasDestroyed() {
 }
 
 void CAbstractActor::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
+    // SDL_Log("WasHit: player = %d, shields = %d, hitEnergy = %d\n", theHit->playerId, shields, hitEnergy);
     if (shields < 0 || shields > hitEnergy) {
         itsGame->Score(
-            theHit->team, theHit->playerId, FMul(hitScore, hitEnergy), hitEnergy, teamColor, GetActorScoringId());
-        DoSound(hitSoundId, theHit->origin, hitSoundVolume * hitEnergy, FIX(1));
+            theHit->team, theHit->playerId, LMul(hitScore, hitEnergy), hitEnergy, teamColor, GetActorScoringId());
+        DoSound(hitSoundId, theHit->origin, hitSoundVolume * hitEnergy, FIX1);
         itsGame->FlagMessage(hitMessage);
 
         if (shields >= 0)
@@ -910,12 +922,14 @@ void CAbstractActor::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
             ScoreInterfaceReasons savedReason;
 
             itsGame->Score(
-                theHit->team, theHit->playerId, FMul(hitScore, shields), shields, teamColor, GetActorScoringId());
+                theHit->team, theHit->playerId, LMul(hitScore, shields), shields, teamColor, GetActorScoringId());
 
             savedReason = itsGame->scoreReason;
             itsGame->scoreReason = ksiKillBonus;
+            itsGame->killReason = savedReason;
             itsGame->Score(theHit->team, theHit->playerId, destructScore, 0, teamColor, GetActorScoringId());
             itsGame->scoreReason = savedReason;
+            itsGame->killReason = ksiNoReason;
 
             itsGame->FlagMessage(hitMessage);
             itsGame->FlagMessage(destructMessage);
@@ -929,7 +943,6 @@ void CAbstractActor::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
 void CAbstractActor::GetBlastPoint(BlastHitRecord *theHit, RayHitRecord *rayHit) {
     Fixed theDistance;
     Fixed shortestDistance;
-    Vector *hitPoint;
     CSmartPart **pp, *thePart;
 
     shortestDistance = FIX(128);
@@ -960,13 +973,17 @@ void CAbstractActor::BlastHit(BlastHitRecord *theHit) {
 
     thePart = blastRay.closestHit;
     if (thePart) {
+        FPS_DEBUG("\nCAbstractActor::BlastHit: frameNumber = " << itsGame->frameNumber << " thePart = " << typeid(*thePart->theOwner).name() << "\n");
+
         blastRay.direction[0] = thePart->sphereGlobCenter[0] - theHit->blastPoint[0];
         blastRay.direction[1] = thePart->sphereGlobCenter[1] - theHit->blastPoint[1];
         blastRay.direction[2] = thePart->sphereGlobCenter[2] - theHit->blastPoint[2];
+        FPS_DEBUG("CAbstractActor::BlastHit: sphereGlobCenter = " << FormatVector(thePart->sphereGlobCenter, 3) << ", blastPoint = " << FormatVector(theHit->blastPoint, 3) << ", blastDirection = " << FormatVector(blastRay.direction, 3) << "\n");
 
         distance = NormalizeVector(3, blastRay.direction) - thePart->enclosureRadius;
-        if (distance < FIX(1)) {
-            distance = FIX(1);
+        FPS_DEBUG("CAbstractActor::BlastHit: len(blastRay.direction) = " << distance + thePart->enclosureRadius << ", enclosureRadius = " << thePart->enclosureRadius << ", distance = " << distance << "\n");
+        if (distance < FIX1) {
+            distance = FIX1;
             blastRay.origin[0] = theHit->blastPoint[0];
             blastRay.origin[1] = theHit->blastPoint[1];
             blastRay.origin[2] = theHit->blastPoint[2];
@@ -977,6 +994,7 @@ void CAbstractActor::BlastHit(BlastHitRecord *theHit) {
         }
 
         energy = FDiv(theHit->blastPower, FMul(distance, distance));
+        FPS_DEBUG("CAbstractActor::BlastHit: power = " << theHit->blastPower << ", distance = " << distance << ", energy = " << energy << "\n");
         if (energy > (65536 >> 6)) {
             blastRay.distance = distance;
             blastRay.team = theHit->team;
@@ -1006,7 +1024,10 @@ void CAbstractActor::GetSpeedEstimate(Fixed *theSpeed) {
 }
 
 void CAbstractActor::ResumeLevel() {
-    //	Subclass responsibility.
+    // ResumeLevel() is generally meant for actions that need to occur on resuming a game.
+    // If you just want to change an Actor's settings on a resume then use AdaptableSettings instead.
+    // This just calls AdaptableSettings() for the subclass by default, but may be overridden to do more (or less).
+    this->AdaptableSettings();
 }
 
 void CAbstractActor::PauseLevel() {
@@ -1017,7 +1038,7 @@ void CAbstractActor::PauseLevel() {
 **	This method is called before the level is reset.
 */
 void CAbstractActor::LevelReset() {
-    Dispose();
+    delete this;
 }
 
 void CAbstractActor::RegisterReceiver(MessageRecord *theMsg, MsgType messageNum) {
@@ -1156,8 +1177,8 @@ short CAbstractActor::GetPlayerPosition() {
     return -1; //	Not a player, as far as we know, so return -1 (invalid position)
 }
 
-uint32_t CAbstractActor::GetTeamColorOr(uint32_t defaultColor) {
-    return CColorManager::getTeamColor(teamColor).value_or(defaultColor);
+ARGBColor CAbstractActor::GetTeamColorOr(ARGBColor defaultColor) {
+    return ColorManager::getTeamColor(teamColor).value_or(defaultColor);
 }
 
 short CAbstractActor::GetBallSnapPoint(long theGroup,
@@ -1166,4 +1187,100 @@ short CAbstractActor::GetBallSnapPoint(long theGroup,
     Fixed *delta,
     CSmartPart **hostPart) {
     return kSnapNot;
+}
+
+// Computes the coefficients used for high-FPS computations.
+// The arguments are commonly used to represent "friction" and "gravity" in many of the
+// speed calculations. For example, the grenade calculation for vertical speed (speed[1])
+// looks like this:
+//    speed[Y] = speed[Y] * friction - gravity
+// But there are many cases that are a general linear equation where some variable
+// is updated from one frame to the next like this:
+//    x[i+1] = x[i] * a + b
+// This method converts the coefficients (a, b) from "classic" to "fps" equivalents so that
+// the computation after multiple FPS frames is the nearly same as it would have would been
+// over the span of a single "classic" frame.
+void CAbstractActor::FpsCoefficients(Fixed classicCoeff1, Fixed classicCoeff2,
+                                     Fixed* fpsCoeff1, Fixed* fpsCoeff2, Fixed *fpsOffset) {
+    if (HandlesFastFPS()) {
+        double fps1 = FpsCoefficient1(ToFloat(classicCoeff1), itsGame->fpsScale);
+        *fpsCoeff1 = ToFixedRound(fps1);
+        if (abs(FIX1 - classicCoeff1) > 66) {  // not within 0.001 of 1.0
+            *fpsCoeff2 = FRound(classicCoeff2 * (1.0-fps1) / (1.0-ToFloat(classicCoeff1)));
+        } else { // 0.999-1.001
+            // avoid divide by zero... mathematical limit(classicCoeff1 --> 1) = classicCoeff2*fpsScale
+            *fpsCoeff2 = FpsCoefficient2(classicCoeff2);
+        }
+        if (fpsOffset != NULL) {
+            // Dividing by classicCoeff1(A) seems to improve cases like this:
+            //   s=As+B
+            if (classicCoeff1) {
+                *fpsOffset = FDiv(FpsOffset(classicCoeff2), classicCoeff1);
+            } else {
+                *fpsOffset = 0;
+            }
+        }
+    } else {
+        *fpsCoeff1 = classicCoeff1;
+        *fpsCoeff2 = classicCoeff2;
+    }
+}
+
+// convenience function for equations of the form (returns fps-scaled version of a),
+//   x[i+1] = x[i] * a
+Fixed CAbstractActor::FpsCoefficient1(Fixed classicCoeff1) {
+    if (HandlesFastFPS()) {
+        return ToFixedRound(FpsCoefficient1(ToFloat(classicCoeff1), itsGame->fpsScale));
+    } else {
+        return classicCoeff1;
+    }
+}
+// convenience function for equations of the form (returns fps-scaled version of b),
+//   x[i+1] = x[i] + b
+Fixed CAbstractActor::FpsCoefficient2(Fixed classicCoeff2) {
+    if (HandlesFastFPS()) {
+        // lround rounds both positive and negative values away from zero (adding 0.5 doesn't)
+        return FRound(classicCoeff2 * itsGame->fpsScale);
+    } else {
+        return classicCoeff2;
+    }
+}
+
+// convenience function for offset assuming equations of the form
+//   x[i+1] = x[i] + b
+Fixed CAbstractActor::FpsOffset(Fixed classicCoeff2) {
+    // Here's an oversimplication... if you are calculating speed every
+    // classic frame (64ms) like this,
+    //   s=s+8     (classicCoeff1=1, classicCoeff2=8)
+    // then the high FPS (16ms) case might do this for 4 frames.
+    //   s=s+2     (fpsCoeff1=1, fpsCoeff2=2)
+    // but the FPS case will only add a total of (2+4+6+8)*0.25=5 to the location
+    // whereas the classic case adds 8.  To compensate, add an initial offset of
+    // 1.5*2=3 to the speed in the first frame so that the location is incremented
+    // by (5+7+9+11)*0.25=8, same as the classic case.
+    return 0.5 * (1/itsGame->fpsScale - 1) * FpsCoefficient2(classicCoeff2);
+}
+
+// the most accurate version of coefficient1 is computed using doubles
+double CAbstractActor::FpsCoefficient1(double fpsCoeff1, double fpsScale) {
+    return pow(fpsCoeff1, fpsScale);
+}
+
+FrameNumber CAbstractActor::FpsFramesPerClassic(FrameNumber classicFrames)
+{
+    if (HandlesFastFPS()) {
+        return (classicFrames / itsGame->fpsScale);
+    } else {
+        return 1;
+    }
+}
+
+// basically the inverse of FpsCoefficient2... convert FPS values to Classic units
+Fixed CAbstractActor::ClassicCoefficient2(Fixed fpsValue) {
+    if (HandlesFastFPS()) {
+        // lround rounds both positive and negative values away from zero (adding 0.5 doesn't)
+        return FRound(fpsValue / itsGame->fpsScale);
+    } else {
+        return fpsValue;
+    }
 }

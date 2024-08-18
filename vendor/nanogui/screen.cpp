@@ -444,7 +444,7 @@ bool Screen::cursorPosCallbackEvent(double x, double y) {
             }
         } else {
             ret = mDragWidget->mouseDragEvent(
-                p - mDragWidget->parent()->absolutePosition(), p - mMousePos,
+                p - mDragWidget->parentPosition(), p - mMousePos,
                 mMouseState, mModifiers);
         }
 
@@ -482,7 +482,7 @@ bool Screen::mouseButtonCallbackEvent(int button, int action, int modifiers) {
         if (mDragActive && action == SDL_RELEASED &&
             dropWidget != mDragWidget)
             mDragWidget->mouseButtonEvent(
-                mMousePos - mDragWidget->parent()->absolutePosition(), button,
+                mMousePos - mDragWidget->parentPosition(), button,
                 false, mModifiers);
 
         if (dropWidget != nullptr && dropWidget->cursor() != mCursor) {
@@ -692,6 +692,17 @@ bool Screen::handleSDLEvent(SDL_Event &event) {
             break;
     }
     return false;
+}
+
+
+void Screen::removeNotifyParent(const Widget *w) {
+    // remove widget from various places before deletion
+    if (w == mDragWidget) {
+        mDragWidget = nullptr;
+        mDragActive = false;
+    }
+    mFocusPath.erase(std::remove(mFocusPath.begin(), mFocusPath.end(), w), mFocusPath.end());
+    Widget::removeNotifyParent(w);
 }
 
 NAMESPACE_END(nanogui)

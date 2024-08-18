@@ -6,13 +6,15 @@
     Created: Saturday, March 11, 1995, 05:50
     Modified: Sunday, September 15, 1996, 20:51
 */
+// #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
 
 #include "CPlayerManager.h"
 
 #include "CAbstractPlayer.h"
-#include "CColorManager.h"
 #include "CCommManager.h"
+#include "CUDPComm.h"
 #include "CIncarnator.h"
+#include "CRandomIncarnator.h"
 #include "CNetManager.h"
 #include "CWalkerActor.h"
 #include "CommDefs.h"
@@ -26,9 +28,12 @@
 #include "Parser.h"
 #include "Preferences.h"
 #include "System.h"
+#include "Debug.h"
 
 #include <SDL2/SDL.h>
 #include <utf8.h>
+
+CPlayerManager* CPlayerManager::theLocalPlayer;
 
 void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManager *aNetManager) {
     // Rect	*mainScreenRect;
@@ -36,6 +41,7 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
     itsGame = theGame;
     itsPlayer = NULL;
     slot = id;
+    presence = kzAvailable;
 
     int width, height;
     SDL_GetWindowSize(itsGame->itsApp->sdlWindow(), &width, &height);
@@ -67,8 +73,11 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
         {"scoutControl", 1 << kfuScoutControl},
         {"spectateNext", 1 << kfuSpectateNext},
         {"spectatePrevious", 1 << kfuSpectatePrevious},
+        {"toggleFreeCam", 1 << kfuToggleFreeCam},
         {"scoreboard", 1 << kfuScoreboard},
         {"chatMode", 1 << kfuTypeText},
+        {"freeCamUp", 1 << kfuFreeCamUp},
+        {"freeCamDown", 1 << kfuFreeCamDown},
         {"debug1", 1 << kfuDebug1},
         {"debug2", 1 << kfuDebug2}};
 
@@ -119,7 +128,8 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
     mugState = 0;
 
     NetDisconnect();
-    isLocalPlayer = false;
+    SetLocal();
+
     prevKeyboardActive = keyboardActive;
 }
 
@@ -132,13 +142,8 @@ uint32_t CPlayerManagerImpl::DoMouseControl(Point *deltaMouse, Boolean doCenter)
     uint32_t state = SDL_GetMouseState(&x, &y);
     deltaMouse->h = x - mouseCenterPosition.h;
     deltaMouse->v = y - mouseCenterPosition.v;
-    if (itsGame->sensitivity > 0) {
-        deltaMouse->h <<= itsGame->sensitivity;
-        deltaMouse->v <<= itsGame->sensitivity;
-    } else if (itsGame->sensitivity < 0) {
-        deltaMouse->h >>= -itsGame->sensitivity;
-        deltaMouse->v >>= -itsGame->sensitivity;
-    }
+    deltaMouse->h *= itsGame->sensitivity;
+    deltaMouse->v *= itsGame->sensitivity;
     if (itsGame->moJoOptions & kFlipAxis) {
         deltaMouse->v = -deltaMouse->v;
 	}
@@ -146,41 +151,9 @@ uint32_t CPlayerManagerImpl::DoMouseControl(Point *deltaMouse, Boolean doCenter)
     return state;
 }
 
-Boolean CPlayerManagerImpl::TestHeldKey(short funcCode) {
-    /*
-    long			m0, m1;
-    KeyMap			keyMap;
-    char			*keyMapP;
-    long			*mapPtr, *keyFun;
-    short			i,j;
-    Handle			mapRes;
-
-    m0 = 0x80000000L >> funcCode;
-    m1 = 0x80000000L >> (funcCode - 32);
-
-    mapRes = itsGame->mapRes;
-    mapPtr = (long *)*mapRes;
-    keyMapP = (Ptr)keyMap;
-    GetKeys(keyMap);
-
-    for(i=0;i<128;i+=8)
-    {	char	bits;
-
-        bits = *keyMapP++;
-        if(bits)
-        {	j = 8;
-            while(j-- && bits)
-            {	if(bits < 0)
-                {	keyFun = &mapPtr[2*(i+j)];
-                    if((keyFun[0] & m0) || (keyFun[1] & m1))
-                        return true;
-                }
-                bits += bits;
-            }
-        }
-    }
-    */
-    return false;
+Boolean CPlayerManagerImpl::TestKeyPressed(short funcCode) {
+    CPlayerManagerImpl* localManager = ((CPlayerManagerImpl*)itsGame->GetLocalPlayer()->itsManager.get());
+    return TESTFUNC(funcCode, localManager->keysDown);
 }
 
 void FrameFunctionToPacket(FrameFunction *ff, PacketInfo *outPacket, short slot);
@@ -243,8 +216,10 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
 
     switch (event.type) {
         case SDL_KEYDOWN:
-            keysDown |= keyMap[event.key.keysym.scancode];
-            keysHeld |= keyMap[event.key.keysym.scancode];
+            // only add to keysDown if it's NOT from a keyboard repeat
+            if (event.key.repeat == 0) {
+                HandleKeyDown(keyMap[event.key.keysym.scancode]);
+            }
 
             if (TESTFUNC(kfuTypeText, keysDown)) {
                 keyboardActive = !keyboardActive;
@@ -276,18 +251,16 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
                     inputBuffer.push_back(*a_char);
                 }
             }
+            break;
         case SDL_KEYUP:
-            keysUp |= keyMap[event.key.keysym.scancode];
-            keysHeld &= ~keyMap[event.key.keysym.scancode];
+            HandleKeyUp(keyMap[event.key.keysym.scancode]);
             break;
         case SDL_MOUSEBUTTONDOWN:
             if(event.button.button == SDL_BUTTON_RIGHT) {
-                keysDown |= keyMap[SDL_SCANCODE_APP1];
-                keysHeld |= keyMap[SDL_SCANCODE_APP1];
+                HandleKeyDown(keyMap[SDL_SCANCODE_APP1]);
             }
             else if(event.button.button == SDL_BUTTON_MIDDLE) {
-                keysDown |= keyMap[SDL_SCANCODE_APP2];
-                keysHeld |= keyMap[SDL_SCANCODE_APP2];
+                HandleKeyDown(keyMap[SDL_SCANCODE_APP2]);
             }
             else {
                 buttonStatus |= kbuWentDown;
@@ -297,12 +270,10 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
             break;
         case SDL_MOUSEBUTTONUP:
             if(event.button.button == SDL_BUTTON_RIGHT) {
-                keysUp |= keyMap[SDL_SCANCODE_APP1];
-                keysHeld &= ~keyMap[SDL_SCANCODE_APP1];
+                HandleKeyUp(keyMap[SDL_SCANCODE_APP1]);
             }
             else if(event.button.button == SDL_BUTTON_MIDDLE) {
-                keysUp |= keyMap[SDL_SCANCODE_APP2];
-                keysHeld &= ~keyMap[SDL_SCANCODE_APP2];
+                HandleKeyUp(keyMap[SDL_SCANCODE_APP2]);
             }
             else {
                 buttonStatus |= kbuWentUp;
@@ -311,13 +282,8 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
             break;
         case SDL_MOUSEMOTION:
             int xrel = event.motion.xrel, yrel = event.motion.yrel;
-            if (itsGame->sensitivity > 0) {
-                xrel <<= itsGame->sensitivity;
-                yrel <<= itsGame->sensitivity;
-            } else if (itsGame->sensitivity < 0) {
-                xrel >>= -itsGame->sensitivity;
-                yrel >>= -itsGame->sensitivity;
-            }
+            xrel *= itsGame->sensitivity;
+            yrel *= itsGame->sensitivity;
             if (itsGame->moJoOptions & kFlipAxis) {
                 yrel = -yrel;
             }
@@ -327,11 +293,46 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
     }
 }
 
-void CPlayerManagerImpl::SendFrame() {
-    // Sends the next game frame.
-    itsGame->topSentFrame++;
+void CPlayerManagerImpl::HandleKeyDown(uint32_t keyFunc) {
+    keysDown |= keyFunc;
+    // only set the keyFunc bit in dupKeysHeld if the same bit in keysHeld is already set
+    dupKeysHeld |= (keysHeld & keyFunc);
+    keysHeld |= keyFunc;
+    FPS_DEBUG("*** HandleKeyDown fn=" << itsGame->frameNumber <<
+              std::hex << std::setfill('0') <<
+              ", keyDown = 0x" << std::setw(8) << keyFunc <<
+              ", keysHeld = 0x" << std::setw(8) << keysHeld <<
+              ", dupKeysHeld = 0x" << std::setw(8) << dupKeysHeld << "\n" << std::dec);
+}
 
-    FrameFunction *ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & itsGame->topSentFrame];
+void CPlayerManagerImpl::HandleKeyUp(uint32_t keyFunc) {
+    keysUp |= (keyFunc & keysHeld);
+    // if dupKeysHeld bit is already set, then keysHeld bit remains set until another key is released
+    // note: this logic was added to support a more repeatable "superjump" capability isn't necessarily limited to jumping
+    keysHeld &= ~(keyFunc & ~dupKeysHeld);
+    // regardless of how many keys might be held, mark all duplicate keys as unheld
+    // to avoid a bunch of KeyUp commands from causing strange behaviors (e.g. superDUPERjump)
+    dupKeysHeld &= ~keyFunc;
+    FPS_DEBUG("*** HandleKeyUp   fn=" << itsGame->frameNumber <<
+              std::hex << std::setfill('0') <<
+              ", keyUp   = 0x" << std::setw(8) << keyFunc <<
+              ", keysHeld = 0x" << std::setw(8) << keysHeld <<
+              ", dupKeysHeld = 0x" << std::setw(8) << dupKeysHeld << "\n" << std::dec);
+}
+
+void CPlayerManagerImpl::SendFrame() {
+    // guard against overwriting frames that aren't done yet
+    if (itsGame->topSentFrame >= itsGame->frameNumber + FUNCTIONBUFFERS - 1) {
+        // this shouldn't happen because the latency maxes at 8.0*8(max frame rate) = 64 < FUNCTIONBUFFERS
+        SDL_Log("frameFuncs BUFFER IS FULL, not sending new frames until we catch up! <-- tell Head you saw this.");
+        return;
+    }
+
+    // Sends the next game frame.
+    itsGame->topSentFrame += 1;
+
+    FrameNumber ffi = itsGame->topSentFrame;
+    FrameFunction *ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & ffi];
 
     ff->validFrame = itsGame->topSentFrame;
 
@@ -364,7 +365,10 @@ void CPlayerManagerImpl::SendFrame() {
     ff->ft.mouseDelta.v = mouseY;
     ff->ft.buttonStatus = buttonStatus;
 
-    CCommManager *theComm = theNetManager->itsCommManager;
+    // if in playback mode, update the FunctionTable right before sending the frame
+    PlaybackAndRecord(ff->ft);
+
+    CCommManager *theComm = theNetManager->itsCommManager.get();
 
     PacketInfo *outPacket = theComm->GetPacket();
     if (outPacket) { // long	*pd;
@@ -384,6 +388,22 @@ void CPlayerManagerImpl::SendFrame() {
 
         // theNetManager->FastTrackDeliver(outPacket);
         outPacket->flags |= kpUrgentFlag;
+        #define DONT_SEND_FRAME 0  // to help testing specific packet-loss cases, 444 ~= 7sec
+        #if DONT_SEND_FRAME > 0
+            if (theNetManager->itsCommManager->myId == 1) {
+                if (ffi >= DONT_SEND_FRAME) {
+                    if (ffi < DONT_SEND_FRAME+1) {
+                        outPacket->distribution &= ~1; // don't send packet from player 2 to player 1
+                        // fake incrementing the serialNumber on the connection we aren't sending to
+                        dynamic_cast<CUDPComm*>(theComm)->connections[0].serialNumber += kSerialNumberStepSize;
+                    }
+                    if (theNetManager->activePlayersDistribution & 1) {
+                        // this should stop logging after player 1 aborts
+                        SDL_Log("ffi = %u, distro = %hx\n", ffi, outPacket->distribution);
+                    }
+                }
+            }
+        #endif
         theComm->WriteAndSignPacket(outPacket);
     }
 
@@ -397,20 +417,27 @@ void CPlayerManagerImpl::SendFrame() {
     // next->ft.held = ff->ft.held;
 }
 
-void CPlayerManagerImpl::ResendFrame(long theFrame, short requesterId, short commandCode) {
+void CPlayerManagerImpl::ResendFrame(FrameNumber theFrame, short requesterId, short commandCode) {
     CCommManager *theComm;
     PacketInfo *outPacket;
     FrameFunction *ff;
 
-    theComm = theNetManager->itsCommManager;
+    theComm = theNetManager->itsCommManager.get();
 
-    ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & theFrame];
+    // short ffi = theFrame * itsGame->fpsScale;
+    short ffi = theFrame;
+    ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & ffi];
+    // ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & theFrame];
 
     if (ff->validFrame == theFrame) {
         outPacket = theComm->GetPacket();
         if (outPacket) {
-            long *pd;
-
+            // this method used by both requester and sender...
+            if (commandCode == kpKeyAndMouseRequest) {
+                DBG_Log("resend", "asking for frame %d from slot %hd\n", theFrame, requesterId);
+            } else {
+                DBG_Log("resend", "re-sending frame %d  to  slot %hd\n", theFrame, requesterId);
+            }
             outPacket->command = commandCode;
             outPacket->distribution = 1 << requesterId;
 
@@ -421,7 +448,7 @@ void CPlayerManagerImpl::ResendFrame(long theFrame, short requesterId, short com
         }
     } else //	Ask me later packet
     {
-        SDL_Log("CPlayerManagerImpl::ResendFrame - ask me later\n");
+        DBG_Log("resend", "frame %d not in FUNCTIONBUFFERS, value = %d\n", theFrame, ff->validFrame);
         theComm->SendUrgentPacket(1 << requesterId, kpAskLater, 0, 0, theFrame, 0, 0);
     }
 }
@@ -441,9 +468,9 @@ void CPlayerManagerImpl::ResumeGame() {
     oldHeld = 0;
     oldModifiers = 0;
     oldButton = 0;
-    isLocalPlayer = (theNetManager->itsCommManager->myId == slot);
+    SetLocal();
 
-    keysDown = keysUp = keysHeld = 0;
+    keysDown = keysUp = keysHeld = dupKeysHeld = 0;
     mouseX = mouseY = 0;
     buttonStatus = 0;
 }
@@ -452,14 +479,16 @@ void CPlayerManagerImpl::ProtocolHandler(struct PacketInfo *thePacket) {
     uint32_t *pd;
     uint16_t *spd;
     FrameFunction *ff;
-    uint32_t frameNumber;
+    FrameNumber frameNumber;
     char p1;
 
     p1 = thePacket->p1;
     frameNumber = thePacket->p3;
+    DBG_Log("q2", "inserting into FUNCTIONBUFFERS[%hd] << frame %d\n", slot, frameNumber);
 
     pd = (uint32_t *)thePacket->dataBuffer;
-    ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & frameNumber];
+    FrameNumber ffi = frameNumber;
+    ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & ffi];
     ff->validFrame = frameNumber;
 
     ff->ft.down = (p1 & kNoDownData) ? 0 : ntohl(*pd++);
@@ -485,28 +514,36 @@ void CPlayerManagerImpl::Dispose() {
 }
 
 void CPlayerManagerImpl::SendResendRequest(short askCount) {
-    if (/* theNetManager->fastTrack.addr.value || */ askCount > 0) {
+    if (/* theNetManager->fastTrack.addr.value || */ askCount >= 0) {
         theNetManager->playerTable[theNetManager->itsCommManager->myId]->ResendFrame(
             itsGame->frameNumber, slot, kpKeyAndMouseRequest);
     }
 }
 
 FunctionTable *CPlayerManagerImpl::GetFunctions() {
-    // SDL_Log("CPlayerManagerImpl::GetFunctions\n");
-    short i = (FUNCTIONBUFFERS - 1) & itsGame->frameNumber;
+    // SDL_Log("CPlayerManagerImpl::GetFunctions, %u, %hd\n", itsGame->frameNumber, slot);
+    FrameNumber ffi = (itsGame->frameNumber);
+    short i = (FUNCTIONBUFFERS - 1) & ffi;
+    static int ASK_INTERVAL = MSEC_TO_TICK_COUNT(500);
+    static int WAITING_MESSAGE_COUNT = 4;
 
-    if (frameFuncs[i].validFrame != itsGame->frameNumber) {
-        long quickTick;
+    // don't wait for for players who are completely done (after last life and after limbo)
+    if (frameFuncs[i].validFrame != itsGame->frameNumber && !IsDeadOrDone()) {
         long firstTime = askAgainTime = TickCount();
+        long quickTick = firstTime;
+        long giveUpTime = firstTime + MSEC_TO_TICK_COUNT(15000);
+
         short askCount = 0;
+        LoadingState oldStatus = loadingStatus;
 
         itsGame->didWait = true;
 
         if (frameFuncs[(FUNCTIONBUFFERS - 1) & (i + 1)].validFrame < itsGame->frameNumber) {
-            askAgainTime += 5 + (rand() & 3);
+            // if next frame hasn't arrived yet, don't ask for resend on this one RIGHT away
+            askAgainTime += 2 + (rand() & 3);  // 2-5 ticks = 33-83ms = 2.1-5.2 frames (16ms)
         }
 
-        do {
+        while (frameFuncs[i].validFrame < itsGame->frameNumber) {
             theNetManager->ProcessQueue();
 
             // While we're waiting for packets, process key/mouse events so they don't build up.
@@ -523,49 +560,51 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
             quickTick = TickCount();
 
             if (quickTick - askAgainTime >= 0) {
-                if (quickTick - firstTime > 120 && TestHeldKey(kfuAbortGame)) {
-                    itsGame->statusRequest = kAbortStatus;
-                    break;
+                SendResendRequest(askCount++);
+                // if we get the packet from the Resend above, it might be stuck on the end of the readQ waiting for
+                // a lost packet, so skip 1 lost packet every other time until it frees up the queue again
+                if (askCount % 2 == 1) {
+                    theNetManager->SkipLostPackets(1 << slot);
                 }
 
-                askAgainTime = quickTick + 300; //	Five seconds
-                SendResendRequest(askCount++);
-                if (askCount == 2) {
-                    itsGame->itsApp->ParamLine(kmWaitingForPlayer, centerAlign, playerName, NULL);
+                askAgainTime = quickTick + ASK_INTERVAL;
+
+                if (askCount == WAITING_MESSAGE_COUNT) {
+                    DBG_Log("resend", "Waiting for '%s' to resend frame #%u\n", GetPlayerName().c_str(), itsGame->frameNumber);
+                    loadingStatus = kLNetDelayed;
+                    itsGame->itsApp->ParamLine(kmWaitingForPlayer, MsgAlignment::Center, playerName);
+                    itsGame->itsApp->RenderContents();  // force render now so message shows up
                     // TODO: waiting for player dialog
                     // InitCursor();
                     // gApplication->SetCommandParams(STATUSSTRINGSLISTID, kmWaitingPlayers, true, 0);
                     // gApplication->BroadcastCommand(kBusyStartCmd);
                 }
 
-                //				itsGame->timer.currentStep += 2;
+                DBG_Log("resend", "frameNumber = %d, validFrame = %d, askCount = %d, askAgainTime = %ld ticks\n",
+                        itsGame->frameNumber, frameFuncs[i].validFrame, askCount, askAgainTime-quickTick);
             }
 
-            if (askCount > 4) {
-                /* TODO: waiting dialog
-                gApplication->BroadcastCommand(kBusyTimeCmd);
-                if(gApplication->commandResult)
-                {	itsGame->statusRequest = kAbortStatus;
-                    break;
-                }
-                */
-
-                #define KICK_WAITING_FOR_PLAYER 1
-                #if KICK_WAITING_FOR_PLAYER
-                    // kick the offending player from the server so everyone else can continue
-                    AbortRequest();  // clears the player from distribution so they can come back in to the server (not the game)
-                    if (theNetManager->itsCommManager->myId == 0) { // the server kicks the unresponsive player
-                        itsGame->itsApp->AddMessageLine("Kicking unresponsive player: " + std::string((char*)&playerName[1], (size_t)playerName[0]));
-                        theNetManager->itsCommManager->SendPacket(kdEveryone, kpKillConnection, slot, 0, 0, 0, NULL);
-                    }
-                    break;
-                #endif
+            // allow immediate abort after the kmWaitingForPlayer message displays
+            if ((askCount >= WAITING_MESSAGE_COUNT && TestKeyPressed(kfuAbortGame)) || quickTick > giveUpTime) {
+                itsGame->statusRequest = kAbortStatus;
+                break;
             }
+        }
 
-        } while (frameFuncs[i].validFrame != itsGame->frameNumber);
+        // give up after newer frames appear in the frameFuncs buffer because that
+        // indicates the frame buffer has wrapped around and this frame won't be arriving
+        // ... should probably only happen for spectators whose connections can't keep up
+        if (frameFuncs[i].validFrame > itsGame->frameNumber) {
+            itsGame->statusRequest = kAbortStatus;
+            itsGame->itsApp->AddMessageLine("Exiting game - frame buffer full",
+                                            MsgAlignment::Center, MsgCategory::Error);
+        }
 
-        if (askCount > 1) {
+
+        if (askCount >= WAITING_MESSAGE_COUNT && frameFuncs[i].validFrame == itsGame->frameNumber) {
             gApplication->BroadcastCommand(kBusyEndCmd);
+            itsGame->itsApp->AddMessageLine("...resuming game", MsgAlignment::Center);
+            loadingStatus = oldStatus;
             // HideCursor();
         }
 
@@ -730,51 +769,58 @@ void	CPlayerManagerImpl::FlushMessageText(
 }
 */
 
-void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
+bool EndsWithCheckmark(const char* c, size_t len) {
+    static size_t checkLen = strlen(checkMark_utf8);
+    return len >= checkLen &&
+        strncmp(&c[len-checkLen], checkMark_utf8, checkLen) == 0;
+}
+
+void CPlayerManagerImpl::RosterMessageText(short len, const char *c) {
+    // checkmark can come in as the utf8 3-byte string, look for it at the end of the message
+    bool endsWithCheckmark = EndsWithCheckmark(c, len);
     while (len--) {
         unsigned char theChar;
-        const char lThing_utf8[3] = {'\xC2', '\xAC', ' '}; // ¬
-        const char checkMark_utf8[3] = {'\xE2', '\x88', '\x9A'}; // ✓
-        const char triangle_utf8[3] = {'\xCE', '\x94'}; // Δ
+
         theChar = *c++;
+        std::string chatText = GetChatLine();
 
         switch (theChar) {
             case 6:
                 // ✓
-                //lineBuffer.push_back('\xE2');
-                //lineBuffer.push_back('\x88');
-                //lineBuffer.push_back('\x9A');
-                lineBuffer.insert(lineBuffer.end(), checkMark_utf8, checkMark_utf8 + 3);
+                lineBuffer.insert(lineBuffer.end(), checkMark_utf8, checkMark_utf8 + strlen(checkMark_utf8));
+                SetPlayerReady(true);
                 break;
             case 7:
                 // Δ
-                //lineBuffer.push_back('\xCE');
-                //lineBuffer.push_back('\x94');
-                lineBuffer.insert(lineBuffer.end(), triangle_utf8, triangle_utf8 + 2);
+                lineBuffer.insert(lineBuffer.end(), triangle_utf8, triangle_utf8 + strlen(triangle_utf8));
                 itsGame->itsApp->NotifyUser();
                 break;
             case 8:
                 if (lineBuffer.size()) {
                     auto i = lineBuffer.end();
                     try {
-                        utf8::previous(i, lineBuffer.begin());
+                        utf8::prior(i, lineBuffer.begin());
                     }
                     catch (const utf8::exception& utfcpp_ex) {
                         std::cerr << utfcpp_ex.what() << "\n";
                         lineBuffer.clear();
                     }
                     lineBuffer = std::deque<char>(lineBuffer.begin(), i);
+                    // not ready if player deletes char
+                    SetPlayerReady(false);
                 }
                 break;
             case 13:
                 // ¬
                 ((CAvaraAppImpl*)itsGame->itsApp)->rosterWindow->NewChatLine(playerName, GetChatLine());
 
-                lineBuffer.insert(lineBuffer.end(), lThing_utf8, lThing_utf8 + 3);
+                lineBuffer.insert(lineBuffer.end(), lThing_utf8, lThing_utf8 + strlen(lThing_utf8));
                 // FlushMessageText(true);
+                ((CAvaraAppImpl*)itsGame->itsApp)->GetTui()->ExecuteMatchingCommand(chatText, this);
                 break;
-            case 27:
+            case 27:  // clearChat_utf8
                 lineBuffer.clear();
+                SetPlayerReady(false);
                 break;
             default:
                 if (theChar >= 32) {
@@ -791,6 +837,7 @@ void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
                         }
                         lineBuffer = std::deque<char>(i, lineBuffer.end());
                     }
+                    SetPlayerReady(endsWithCheckmark);
                 }
                 break;
         }
@@ -837,6 +884,10 @@ std::string CPlayerManagerImpl::GetChatString(int maxChars) {
     return std::string(i, theChat.end());
 }
 
+bool CPlayerManagerImpl::CalculateIsLocalPlayer() {
+    return theNetManager->itsCommManager->myId == slot;
+}
+
 void CPlayerManagerImpl::GameKeyPress(char theChar) {
     theNetManager->ReceiveRosterMessage(slot, 1, &theChar);
 }
@@ -846,7 +897,7 @@ void CPlayerManagerImpl::NetDisconnect() {
         if (theNetManager->isPlaying) {
             itsPlayer->netDestruct = true;
         } else {
-            itsPlayer->Dispose();
+            delete itsPlayer;
         }
     }
 
@@ -873,7 +924,7 @@ void CPlayerManagerImpl::NetDisconnect() {
     // theRoster->InvalidateArea(kOnePlayerBox, position);
 }
 
-void CPlayerManagerImpl::ChangeNameAndLocation(StringPtr theName, Point location) {
+void CPlayerManagerImpl::ChangeName(StringPtr theName) {
     StringPtr lastChar;
 
     if (loadingStatus == kLNotConnected) {
@@ -881,10 +932,8 @@ void CPlayerManagerImpl::ChangeNameAndLocation(StringPtr theName, Point location
         // theRoster->InvalidateArea(kOnePlayerBox, position);
     }
 
-    if (location.h != globalLocation.h || location.v != globalLocation.v) {
-        globalLocation = location;
-        // theRoster->InvalidateArea(kFullMapBox, position);
-        // theRoster->InvalidateArea(kMapInfoBox, position);
+    if (strncmp((char*)&playerName[1], (char*)&theName[1], size_t(theName[0])) != 0) {
+        SDL_Log("player #%d name set to '%.*s'\n", slot+1, int(theName[0]), &theName[1]);
     }
 
     BlockMoveData(theName, playerName, theName[0] + 1);
@@ -910,7 +959,8 @@ void CPlayerManagerImpl::SetPosition(short pos) {
 void CPlayerManagerImpl::LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag) {
     short oldStatus;
 
-    if (loadingStatus != kLNotConnected && loadingStatus != kLActive) {
+    if (loadingStatus != kLNotConnected && loadingStatus != kLActive && presence != kzAway)
+    {
         oldStatus = loadingStatus;
 
         if (serverErr || levelErr) {
@@ -922,9 +972,7 @@ void CPlayerManagerImpl::LoadStatusChange(short serverCRC, OSErr serverErr, std:
                 loadingStatus = kLNotFound;
         } else {
             if (serverCRC == levelCRC && serverTag.compare(levelTag) == 0) {
-                short i;
-
-                SDL_Log("Setting loadingStatus = kLLoaded\n");
+                SDL_Log("Setting loadingStatus = kLLoaded for slot = %d\n", slot);
                 loadingStatus = kLLoaded;
 #if 0
                 oldHeld[0] = oldHeld[1] = 0;
@@ -968,7 +1016,8 @@ CAbstractPlayer *CPlayerManagerImpl::ChooseActor(CAbstractPlayer *actorList, sho
         if (actorList->teamColor == myTeamColor) { //	Good enough for me.
 
             itsPlayer = actorList;
-            itsPlayer->itsManager = this;
+            itsPlayer->itsManager = shared_from_this();
+            itsPlayer->didIncarnateMasked = true;
             itsPlayer->PlayerWasMoved();
             itsPlayer->BuildPartProximityList(itsPlayer->location, itsPlayer->proximityRadius, kSolidBit);
             itsPlayer->AddToGame();
@@ -985,31 +1034,20 @@ CAbstractPlayer *CPlayerManagerImpl::ChooseActor(CAbstractPlayer *actorList, sho
     actorList = newList;
 
     if (itsPlayer == NULL) {
-        CIncarnator *spotAvailable;
-
         itsPlayer = new CWalkerActor;
-        itsPlayer->IAbstractActor();
         itsPlayer->BeginScript();
         ProgramLongVar(iTeam, myTeamColor);
         FreshCalc(); //	Parser call.
         itsPlayer->EndScript();
         itsPlayer->isInLimbo = true;
         itsPlayer->limboCount = 0;
-        itsPlayer->itsManager = this;
+        itsPlayer->itsManager = shared_from_this();
 
-        spotAvailable = itsGame->incarnatorList;
-        while (spotAvailable) {
-            if (spotAvailable->enabled && spotAvailable->colorMask & myTeamMask) {
-                itsPlayer->Reincarnate(spotAvailable);
-                if (!itsPlayer->isInLimbo) {
-                    break;
-                }
-            }
-            spotAvailable = spotAvailable->nextIncarnator;
-        }
+        itsPlayer->teamMask = myTeamMask;
+        itsPlayer->Incarnate();
 
         if (itsPlayer->isInLimbo) {
-            itsPlayer->Dispose();
+            delete itsPlayer;
             itsPlayer = NULL;
         } else {
             itsPlayer->AddToGame();
@@ -1020,33 +1058,21 @@ CAbstractPlayer *CPlayerManagerImpl::ChooseActor(CAbstractPlayer *actorList, sho
 }
 
 Boolean CPlayerManagerImpl::IncarnateInAnyColor() {
-    short i;
-    CIncarnator *spotAvailable;
-
-    for (i = 1; i <= kMaxTeamColors; i++) {
+    for (short i = 1; i <= kMaxTeamColors; i++) {
         itsPlayer = new CWalkerActor;
-        itsPlayer->IAbstractActor();
         itsPlayer->BeginScript();
         ProgramLongVar(iTeam, i);
         FreshCalc(); //	Parser call.
         itsPlayer->EndScript();
         itsPlayer->isInLimbo = true;
         itsPlayer->limboCount = 0;
-        itsPlayer->itsManager = this;
+        itsPlayer->itsManager = shared_from_this();
 
-        spotAvailable = itsGame->incarnatorList;
-        while (spotAvailable) {
-            if (spotAvailable->enabled && spotAvailable->colorMask & (1 << i)) {
-                itsPlayer->Reincarnate(spotAvailable);
-                if (!itsPlayer->isInLimbo) {
-                    break;
-                }
-            }
-            spotAvailable = spotAvailable->nextIncarnator;
-        }
+        itsPlayer->teamMask = 1 << i;  // set in case Incarnators discriminate on color
+        itsPlayer->Incarnate();
 
         if (itsPlayer->isInLimbo) {
-            itsPlayer->Dispose();
+            delete itsPlayer;
             itsPlayer = NULL;
         } else {
             itsPlayer->AddToGame();
@@ -1066,21 +1092,36 @@ CAbstractPlayer *CPlayerManagerImpl::TakeAnyActor(CAbstractPlayer *actorList) {
     playerColor = actorList->teamColor;
 
     itsPlayer = actorList;
-    itsPlayer->itsManager = this;
+    itsPlayer->itsManager = shared_from_this();
     itsPlayer->AddToGame();
 
     return nextPlayer;
 }
-void CPlayerManagerImpl::SetPlayerStatus(short newStatus, long theWin) {
+void CPlayerManagerImpl::SetPlayerStatus(LoadingState newStatus, PresenceType newPresence, FrameNumber theWin) {
     winFrame = theWin;
 
-    if (newStatus != loadingStatus) {
-        if (loadingStatus == kLNotConnected) { // theRoster->InvalidateArea(kOnePlayerBox, position);
-        }
-
-        loadingStatus = newStatus;
-        // theRoster->InvalidateArea(kUserBoxTopLine, position);
+    loadingStatus = newStatus;
+    presence = newPresence;
+    
+    // Check if the game is ready to start if a player set themselves to away or spectator
+    // Only the server can start the game this way to prevent multiple game start commands
+    if ((newPresence == kzSpectating || newPresence == kzAway) && theNetManager->itsCommManager->myId == 0) {
+        SetPlayerReady(true);
     }
+}
+
+void CPlayerManagerImpl::SetPlayerReady(bool isReady) {
+    // toggle between kLLoaded and kLReady but not to/from other states
+    if (loadingStatus == kLLoaded && isReady) {
+        loadingStatus = kLReady;
+        itsGame->StartIfReady();
+    } else if (loadingStatus == kLReady && !isReady) {
+        loadingStatus = kLLoaded;
+    }
+}
+
+bool CPlayerManagerImpl::IsAway() {
+    return (presence == kzAway);
 }
 
 void CPlayerManagerImpl::AbortRequest() {
@@ -1088,10 +1129,22 @@ void CPlayerManagerImpl::AbortRequest() {
     if (isLocalPlayer) {
         itsGame->statusRequest = kAbortStatus;
     }
+    // will call RemoveFromGame after game loop exits
+}
+
+void CPlayerManagerImpl::RemoveFromGame() {
+    theNetManager->activePlayersDistribution &= ~(1 << slot);
+    // let inactive players know (not sure if this is even necessary)
+    uint16_t dist = kdEveryone & ~theNetManager->activePlayersDistribution;
+    theNetManager->itsCommManager->SendPacket(dist, kpRemoveMeFromGame, 0, 0, 0, 0, 0);
 }
 
 void CPlayerManagerImpl::DeadOrDone() {
     theNetManager->deadOrDonePlayers |= 1 << slot;
+}
+
+bool CPlayerManagerImpl::IsDeadOrDone() {
+    return (theNetManager->deadOrDonePlayers & (1 << slot));
 }
 
 short CPlayerManagerImpl::GetStatusChar() {
@@ -1199,25 +1252,18 @@ void	CPlayerManagerImpl::GetLoadingStatusString(
 
 void CPlayerManagerImpl::SpecialColorControl() {
     if (itsPlayer) {
-        long repColor = -1;
-
-        switch (spaceCount) {
-            case 2:
-                repColor = CColorManager::getSpecialBlackColor();
-                break;
-            case 3:
-                repColor = CColorManager::getSpecialWhiteColor();
-                break;
-        }
-
-        if (repColor >= 0) {
-            itsPlayer->SetSpecialColor(repColor);
-        }
+        itsPlayer->SetSpecialColor(theConfiguration.hullColor.WithA(0xff));
     }
 }
 
 short CPlayerManagerImpl::Slot() {
     return slot;
+}
+void CPlayerManagerImpl::SetLocal() {
+    isLocalPlayer = (theNetManager->itsCommManager->myId == slot);
+    if (isLocalPlayer) {
+        CPlayerManagerImpl::theLocalPlayer = this;
+    }
 }
 Boolean CPlayerManagerImpl::IsLocalPlayer() {
     return isLocalPlayer;
@@ -1246,8 +1292,14 @@ void CPlayerManagerImpl::IsRegistered(short reg) {
 Str255& CPlayerManagerImpl::PlayerRegName() {
     return playerRegName;
 }
-short CPlayerManagerImpl::LoadingStatus() {
+LoadingState CPlayerManagerImpl::LoadingStatus() {
     return loadingStatus;
+}
+PresenceType CPlayerManagerImpl::Presence() {
+    return presence;
+}
+void CPlayerManagerImpl::SetPresence(PresenceType newPresence) {
+    presence = newPresence;
 }
 short CPlayerManagerImpl::LevelCRC() {
     return levelCRC;
@@ -1297,7 +1349,7 @@ long CPlayerManagerImpl::MugSize() {
 long CPlayerManagerImpl::MugState() {
     return mugState;
 }
-long CPlayerManagerImpl::WinFrame() {
+FrameNumber CPlayerManagerImpl::WinFrame() {
     return winFrame;
 }
 void CPlayerManagerImpl::IncrementAskAgainTime(int amt) {
@@ -1308,4 +1360,28 @@ void CPlayerManagerImpl::SetShowScoreboard(bool b) {
 }
 bool CPlayerManagerImpl::GetShowScoreboard() {
     return showScoreboard;
+}
+
+void CPlayerManagerImpl::PlaybackAndRecord(FunctionTable &ft) {
+    if (isLocalPlayer && itsGame->keysFromStdin) {
+        FunctionTable replayFt;
+        // de-serialize the FunctionTable from stdin
+        std::cin >> replayFt;
+        // merge the playback FunctionTable in with the actual keyboard entry
+        ft.merge(replayFt);
+    }
+
+    if (isLocalPlayer && itsGame->keysToStdout) {
+        static bool headerWritten = false;
+        if (!headerWritten) {
+            std::cout << "# keysDn  keysUp  keysHeld ms.v ms.h btn\n";
+            headerWritten = true;
+        }
+        // comment out any record that initiates a game pause
+        if (TESTFUNC(kfuPauseGame, ft.down)) {
+            std::cout << "#pause>";
+        }
+        // serialize the FunctionTable to stdout
+        std::cout << ft;
+    }
 }

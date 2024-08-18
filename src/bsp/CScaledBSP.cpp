@@ -10,22 +10,11 @@
 #include "CScaledBSP.h"
 
 #include "Memory.h"
-#include "Resource.h"
 
-void CScaledBSP::IScaledBSP(Fixed scale, short resId, CAbstractActor *anActor, short aPartCode) {
-    OSErr iErr;
-    Vector *p;
-    short i;
+CScaledBSP::CScaledBSP(Fixed scale, short resId, CAbstractActor *anActor, short aPartCode) {
+    isMorphable = false;
 
     CSmartPart::ISmartPart(resId, anActor, aPartCode);
-
-    p = (Vector *)pointTable;
-    for (i = 0; i < pointCount; i++) {
-        (*p)[0] = FMul((*p)[0], scale);
-        (*p)[1] = FMul((*p)[1], scale);
-        (*p)[2] = FMul((*p)[2], scale);
-        p++;
-    }
 
     minBounds.x = FMul(minBounds.x, scale);
     minBounds.y = FMul(minBounds.y, scale);
@@ -43,19 +32,42 @@ void CScaledBSP::IScaledBSP(Fixed scale, short resId, CAbstractActor *anActor, s
     rSquare[0] = 0;
     rSquare[1] = 0;
     FSquareAccumulate(enclosureRadius, rSquare);
-    UpdateOpenGLData();
+    
+    SetScale(scale, scale, scale);
 }
 
-void CScaledBSP::Dispose() {
-    /*
-    Handle				handCopy;
-    BSPResourceHeader	*bp;
+void CScaledBSP::Scale(Fixed scale) {
+    if (!isMorphable) return;
 
-    handCopy = itsBSPResource;
-    bp = (BSPResourceHeader *)*handCopy;
-    bp->refCount = 99;	//	Prevent ReleaseResource call!
-    */
-    CSmartPart::Dispose();
+    
+    SetScale(scale, scale, scale);
+    minBounds.x = FMul(minBounds.x, scale);
+    minBounds.y = FMul(minBounds.y, scale);
+    minBounds.z = FMul(minBounds.z, scale);
 
-    // DisposeHandle(handCopy);
+    maxBounds.x = FMul(maxBounds.x, scale);
+    maxBounds.y = FMul(maxBounds.y, scale);
+    maxBounds.z = FMul(maxBounds.z, scale);
+
+    // Scale the bounding sphere
+    enclosureRadius = FMul(enclosureRadius, scale);
+    enclosurePoint.w = FIX1;
+
+    rSquare[0] = 0;
+    rSquare[1] = 0;
+    FSquareAccumulate(enclosureRadius, rSquare);
 }
+
+void CScaledBSP::ScaleXYZ(Fixed scaleX, Fixed scaleY, Fixed scaleZ) {
+    if (!isMorphable) return;
+   SetScale(scaleX, scaleY, scaleZ);
+}
+
+void CScaledBSP::Reset() {
+    CBSPPart::Reset();
+
+    if (isMorphable) {
+       ResetScale();
+    }
+}
+

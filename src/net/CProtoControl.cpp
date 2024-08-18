@@ -17,6 +17,9 @@
 #include "CommDefs.h"
 #include "CommandList.h"
 #include "Preferences.h"
+#include "Debug.h"
+
+#include <bitset>
 
 static Boolean ImmedProtoHandler(PacketInfo *thePacket, Ptr userData) {
     CProtoControl *theControl;
@@ -56,7 +59,7 @@ void CProtoControl::Attach(CCommManager *aManager) {
 }
 
 Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
-    CNetManager *theNet = theGame->itsNet;
+    CNetManager *theNet = theGame->itsNet.get();
     Boolean didHandle = true;
 
     switch (thePacket->command) {
@@ -79,8 +82,8 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             theNet->SendRealName(thePacket->p1);
             break;
         case kpNameChange:
-            theNet->RecordNameAndLocation(
-                thePacket->sender, (StringPtr)thePacket->dataBuffer, thePacket->p2, *(Point *)&thePacket->p3);
+            theNet->RecordNameAndState(
+                thePacket->sender, (StringPtr)thePacket->dataBuffer, (LoadingState)thePacket->p2, (PresenceType)thePacket->p3);
             break;
         case kpOrderChange:
             theNet->PositionsChanged(thePacket->dataBuffer);
@@ -92,7 +95,8 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             theNet->ReceiveColorChange(thePacket->dataBuffer);
             break;
         case kpLoadLevel:
-            theNet->ReceiveLoadLevel(thePacket->sender, thePacket->dataBuffer, thePacket->p3);
+            // p2 is proxy for which slot originally sent the kpLoadLevel command
+            theNet->ReceiveLoadLevel(thePacket->sender, thePacket->p2, thePacket->dataBuffer, thePacket->p3);
             break;
         case kpLevelLoaded:
             theNet->LevelLoadStatus(thePacket->sender, thePacket->p2, 0, std::string(thePacket->dataBuffer));
@@ -104,29 +108,26 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             theGame->itsApp->BroadcastCommand(kNetChangedCmd);
             break;
         case kpStartLevel:
-            theNet->ReceiveStartCommand(thePacket->p2, thePacket->sender);
+            theNet->ReceiveStartCommand(thePacket->p2, thePacket->sender, thePacket->p1);
             break;
         case kpResumeLevel:
-            theNet->ReceiveResumeCommand(thePacket->p2, thePacket->sender, thePacket->p3);
+            theNet->ReceiveResumeCommand(thePacket->p2, thePacket->sender, thePacket->p3, thePacket->p1);
             break;
         case kpReadySynch:
-            theNet->readyPlayers |= 1 << thePacket->sender;
-            break;
-        case kpUnavailableSynch:
-            theNet->ReceivedUnavailable(thePacket->sender, thePacket->p1);
-            break;
-        case kpUnavailableZero:
-            theNet->unavailablePlayers = 0;
+            theNet->ReceiveReady(thePacket->sender, thePacket->p2);
             break;
         case kpStartSynch:
             theNet->ConfigPlayer(thePacket->sender, thePacket->dataBuffer);
-            theNet->ReceivePlayerStatus(thePacket->sender, thePacket->p2, thePacket->p3, -1);
+            theNet->ReceivePlayerStatus(thePacket->sender, (LoadingState)thePacket->p2, kzUnknown, (PresenceType)thePacket->p3, -1);
             break;
         case kpPlayerStatusChange:
             theNet->ReceivePlayerStatus(
-                thePacket->sender, thePacket->p2, thePacket->p3, *(long *)thePacket->dataBuffer);
+                                        thePacket->p1, (LoadingState)thePacket->p2, (PresenceType)thePacket->p3, 0, *(FrameNumber *)thePacket->dataBuffer);
             break;
-
+        case kpJSON:
+            theNet->ReceiveJSON(
+                thePacket->p1, thePacket->p2, thePacket->p3, std::string(thePacket->dataBuffer));
+            break;
         case kpKeyAndMouseRequest: {
             theGame->itsNet->playerTable[itsManager->myId]->ResendFrame(
                 thePacket->p3, thePacket->sender, kpKeyAndMouse);
@@ -146,36 +147,19 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             theNet->serverOptions = thePacket->p2;
             break;
         case kpNewArrival:
-            theNet->NewArrival(thePacket->p1);
+            theNet->NewArrival(thePacket->p1, (PresenceType)thePacket->p2);
             break;
 
         case kpKickClient:
             theNet->HandleDisconnect(itsManager->myId, kpKickClient);
             break;
 
-        case kpLatencyVote: {
-            long p3 = thePacket->p3;
-
-            theNet->autoLatencyVoteCount++;
-            theNet->autoLatencyVote += thePacket->p1;
-
-            if (thePacket->p2 > theNet->maxRoundTripLatency)
-                theNet->maxRoundTripLatency = thePacket->p2;
-
-            theNet->playerTable[thePacket->sender]->RandomKey(p3);
-
-            if (theNet->autoLatencyVoteCount == 1) {
-                theNet->fragmentDetected = false;
-                theNet->fragmentCheck = p3;
-            } else {
-                if (theNet->fragmentCheck != p3) {
-                    SDL_Log("FRAGMENTATION %ld != %ld", theNet->fragmentCheck, p3);
-                    theNet->fragmentDetected = true;
-                }
-            }
-        } break;
+        case kpLatencyVote:
+            theNet->ReceiveLatencyVote(thePacket->sender, thePacket->p1, thePacket->p2, thePacket->p3);
+            break;
 
         case kpResultsReport:
+            DBG_Log("score", "Received score report from %d\n", thePacket->sender);
             theNet->ResultsReport(thePacket->dataBuffer);
             break;
 
@@ -193,24 +177,37 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
     return didHandle;
 }
 
+static std::string FormatDist(uint16_t distribution) {
+    std::bitset<kMaxAvaraPlayers> bits{distribution};
+    return bits.to_string();
+}
+
 Boolean CProtoControl::PacketHandler(PacketInfo *thePacket) {
     Boolean didHandle = true;
-    CNetManager *theNet = theGame->itsNet;
+    CNetManager *theNet = theGame->itsNet.get();
 
     // SDL_Log("CProtoControl::PacketHandler cmd=%d sender=%d\n", thePacket->command, thePacket->sender);
     switch (thePacket->command) {
         case kpLogin: //	Only servers see this
         {
             short senderDistr = 1 << thePacket->sender;
-
+            DBG_Log("login", "kpLogin received from = %d, presence=%d\n", thePacket->sender, thePacket->p2);
+            DBG_Log("login", "sending kpLoginAck to = %s\n", FormatDist(senderDistr).c_str());
             itsManager->SendPacket(senderDistr, kpLoginAck, thePacket->sender, 0, 0, 0, NULL);
+            DBG_Log("login", "sending kpNameQuery(%d) to = %s\n", thePacket->sender, FormatDist(kdEveryone).c_str());
             itsManager->SendPacket(kdEveryone, kpNameQuery, thePacket->sender, 0, 0, 0, NULL);
-            itsManager->SendPacket(~senderDistr, kpNewArrival, thePacket->sender, 0, 0, 0, NULL);
+            DBG_Log("login", "sending kpNewArrival(%d, %d) to = %s\n", thePacket->sender, thePacket->p2, FormatDist(~senderDistr).c_str());
+            itsManager->SendPacket(~senderDistr, kpNewArrival, thePacket->sender, thePacket->p2, 0, 0, NULL);
             didHandle = false;
         } break;
         case kpLoginAck:
             itsManager->myId = thePacket->p1;
+            DBG_Log("login", "kpLoginAck received with myId = %d\n", itsManager->myId);
             itsManager->SendPacket(kdEveryone - (1 << thePacket->p1), kpPing, 0, 0, 32, 0, NULL);
+            // kpLoginAck is called when anyone joins/exits, so good place to check where the "local" player is
+            for (int i = 0; i < kMaxAvaraPlayers; i++) {
+                theNet->playerTable[i]->SetLocal(); // reset which player is "local"
+            }
             break;
         case kpKeyAndMouseRequest:
 
@@ -234,12 +231,14 @@ Boolean CProtoControl::PacketHandler(PacketInfo *thePacket) {
             */
 
         case kpRemoveMeFromGame:
+            SDL_Log("kpRemoveMeFromGame: removing player %d\n", thePacket->sender);
             theNet->activePlayersDistribution &= ~(1 << thePacket->sender);
             break;
 
         case kpPing:
-            if (!theNet->isPlaying && thePacket->p3) {
-                itsManager->SendPacket(1 << thePacket->sender, kpPing, 0, 0, thePacket->p3 - 1, 0, NULL);
+            if (thePacket->p3) {
+                int counter = theNet->isPlaying ? 1 : thePacket->p3 - 1;
+                itsManager->SendPacket(1 << thePacket->sender, kpPing, 0, 0, counter, 0, NULL);
             }
             break;
 

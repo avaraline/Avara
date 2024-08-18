@@ -1,123 +1,119 @@
 <map>
   <set defaultLives="5" maxStartGrenades="10" maxStartMissiles="5" />
-  <Wall fill="#ffff33" frame="#000000" x="62.56944444444444" z="113.19444444444444" w="20" d="2.5" h="0" />
+  <Wall color="#fffc41" color.1="#000000" x="62.56944444444444" z="113.19444444444444" w="20" d="2.5" h="0" />
   <Text in="@blueWall" showEveryone="true" text="Blue reactor core wall breach." />
   <Text in="@yellowWin" showEveryone="true" text="Yellow team objectives fulfilled." />
   <Text in="@yellowWall" showEveryone="true" text="Yellow reactor core wall breach." />
   <Text in="@blueWin" showEveryone="true" text="Blue team objectives fulfilled." />
-  <SkyColor fill="#ffccff" frame="#ccffff" />
-  <GroundColor fill="#777777" />
-  <Teleporter shape="0" y="200" win="0" start="@blueWin" activeRange="2000" fill="#777777" frame="#000000" cx="6.944444444444445" cz="47.083333333333336" angle="225" />
-  <Teleporter shape="0" y="200" win="0" start="@yellowWin" activeRange="2000" fill="#777777" frame="#000000" cx="6.944444444444445" cz="56.52777777777778" angle="225" />
-  <Dome shield="50" team="6" canGlow="true" isTarget="true" killMsg="@yellowWin" hitScore="100" killScore="3000" fill="#00ccff" frame="#000000" cx="52.5" cz="18.125" r="1.875" angle="0" quarters="4" />
-  <Wall fill="#66ffff" frame="#000000" x="46.94444444444444" z="25.694444444444446" w="8.75" d="2.5" h="0" />
-  <Wall fill="#66ffff" frame="#000000" x="58.19444444444445" z="25.694444444444446" w="8.75" d="2.5" h="0" />
-  <Wall fill="#66ffff" frame="#000000" x="43.81944444444444" z="16.319444444444446" w="2.5" d="8.75" h="0" />
-  <Wall fill="#66ffff" frame="#000000" x="61.31944444444445" z="16.319444444444446" w="2.5" d="8.75" h="0" />
-  <Wall fill="#66ffff" frame="#000000" x="52.56944444444444" z="10.694444444444445" w="20" d="2.5" h="0" />
-  <Dome shield="50" team="2" canGlow="true" isTarget="true" killMsg="@blueWin" hitScore="100" killScore="3000" fill="#ffff00" frame="#000000" cx="62.56944444444444" cz="105.69444444444444" r="1.875" angle="0" quarters="4" />
-  <Wall fill="#ffff33" frame="#000000" x="56.94444444444445" z="98.19444444444444" w="8.75" d="2.5" h="0" />
-  <Wall fill="#ffff33" frame="#000000" x="68.19444444444444" z="98.19444444444444" w="8.75" d="2.5" h="0" />
-  <Wall fill="#ffff33" frame="#000000" x="53.81944444444445" z="107.56944444444444" w="2.5" d="8.75" h="0" />
-  <Wall fill="#ffff33" frame="#000000" x="71.31944444444444" z="107.56944444444444" w="2.5" d="8.75" h="0" />
-  <Wall fill="#ffff33" frame="#000000" x="62.5" z="105.69444444444444" w="10" d="7.5" h="0.25" y="4.2" />
-  <Wall fill="#66ffff" frame="#000000" x="52.56944444444445" z="18.194444444444446" w="10" d="7.5" h="0.25" y="4.2" />
-  <Walker team="2" y="10" cx="51.80555555555556" cz="90.41666666666667" angle="180" />
-  <Walker team="6" y="10" cx="63.263888888888886" cz="33.40277777777778" angle="0" />
-  <Walker team="6" y="10" cx="41.80555555555556" cz="33.40277777777778" angle="0" />
-  <Dome fill="#ffffff" frame="#000000" cx="57.56944444444445" cz="61.94444444444444" r="2.5" angle="0" quarters="4" />
+  <SkyColor color="#ffd8ff" color.1="#d4feff" />
+  <GroundColor color="#8a8a8a" />
+  <Teleporter shape="0" y="200" win="0" start="@blueWin" activeRange="2000" color="#8a8a8a" color.1="#000000" cx="6.944444444444445" cz="47.083333333333336" angle="45" />
+  <Teleporter shape="0" y="200" win="0" start="@yellowWin" activeRange="2000" color="#8a8a8a" color.1="#000000" cx="6.944444444444445" cz="56.52777777777778" angle="45" />
+  <Dome shield="50" team="6" canGlow="true" isTarget="true" killMsg="@yellowWin" hitScore="100" killScore="3000" color="#00d5ff" color.1="#000000" cx="52.5" cz="18.125" r="1.875" angle="0" quarters="4" />
+  <Wall color="#73fdff" color.1="#000000" x="46.94444444444444" z="25.694444444444446" w="8.75" d="2.5" h="0" />
+  <Wall color="#73fdff" color.1="#000000" x="58.19444444444445" z="25.694444444444446" w="8.75" d="2.5" h="0" />
+  <Wall color="#73fdff" color.1="#000000" x="43.81944444444444" z="16.319444444444446" w="2.5" d="8.75" h="0" />
+  <Wall color="#73fdff" color.1="#000000" x="61.31944444444445" z="16.319444444444446" w="2.5" d="8.75" h="0" />
+  <Wall color="#73fdff" color.1="#000000" x="52.56944444444444" z="10.694444444444445" w="20" d="2.5" h="0" />
+  <Dome shield="50" team="2" canGlow="true" isTarget="true" killMsg="@blueWin" hitScore="100" killScore="3000" color="#fffb00" color.1="#000000" cx="62.56944444444444" cz="105.69444444444444" r="1.875" angle="0" quarters="4" />
+  <Wall color="#fffc41" color.1="#000000" x="56.94444444444445" z="98.19444444444444" w="8.75" d="2.5" h="0" />
+  <Wall color="#fffc41" color.1="#000000" x="68.19444444444444" z="98.19444444444444" w="8.75" d="2.5" h="0" />
+  <Wall color="#fffc41" color.1="#000000" x="53.81944444444445" z="107.56944444444444" w="2.5" d="8.75" h="0" />
+  <Wall color="#fffc41" color.1="#000000" x="71.31944444444444" z="107.56944444444444" w="2.5" d="8.75" h="0" />
+  <Wall color="#fffc41" color.1="#000000" x="62.5" z="105.69444444444444" w="10" d="7.5" h="0.25" y="4.2" />
+  <Wall color="#73fdff" color.1="#000000" x="52.56944444444445" z="18.194444444444446" w="10" d="7.5" h="0.25" y="4.2" />
+  <Walker team="2" y="10" cx="51.80555555555556" cz="90.41666666666667" angle="0" />
+  <Walker team="6" y="10" cx="63.263888888888886" cz="33.40277777777778" angle="180" />
+  <Walker team="6" y="10" cx="41.80555555555556" cz="33.40277777777778" angle="180" />
+  <Dome color="#ffffff" color.1="#000000" cx="57.56944444444445" cz="61.94444444444444" r="2.5" angle="0" quarters="4" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="230" />
-  <Goody shape="bspGrenade" y="4" yon="25" speed="0" grenades="6" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="57.60416666666667" cz="61.94444444444445" angle="225" />
-  <Wall fill="#ff0099" frame="#000000" x="46.5625" z="61.94444444444444" w="2.986111111111107" d="20" h="2" />
-  <Wall fill="#ff0099" frame="#000000" x="68.54166666666666" z="61.94444444444444" w="3.055555555555557" d="20" h="2" />
-  <Dome fill="#ffffff" frame="#000000" cx="25.069444444444446" cz="24.444444444444446" r="2.5" angle="0" quarters="4" />
+  <Goody shape="bspGrenade" y="4" yon="25" speed="0" grenades="6" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="57.60416666666667" cz="61.94444444444445" angle="45" />
+  <Wall color="#ff32a9" color.1="#000000" x="46.5625" z="61.94444444444444" w="2.986111111111107" d="20" h="2" />
+  <Wall color="#ff32a9" color.1="#000000" x="68.54166666666666" z="61.94444444444444" w="3.055555555555557" d="20" h="2" />
+  <Dome color="#ffffff" color.1="#000000" cx="25.069444444444446" cz="24.444444444444446" r="2.5" angle="0" quarters="4" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="180" />
-  <Goody shape="bspGrenade" y="4" yon="25" speed="0" grenades="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="25.104166666666668" cz="24.444444444444446" angle="225" />
-  <Dome fill="#ffffff" frame="#000000" cx="80.06944444444444" cz="24.444444444444446" r="2.5" angle="0" quarters="4" />
+  <Goody shape="bspGrenade" y="4" yon="25" speed="0" grenades="4" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="25.104166666666668" cz="24.444444444444446" angle="45" />
+  <Dome color="#ffffff" color.1="#000000" cx="80.06944444444444" cz="24.444444444444446" r="2.5" angle="0" quarters="4" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="180" />
-  <Goody shape="bspGrenade" y="4" yon="25" speed="0" grenades="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="80.10416666666667" cz="24.444444444444446" angle="225" />
-  <Dome fill="#ffffff" frame="#000000" cx="35.06944444444444" cz="99.44444444444444" r="2.5" angle="0" quarters="4" />
+  <Goody shape="bspGrenade" y="4" yon="25" speed="0" grenades="4" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="80.10416666666667" cz="24.444444444444446" angle="45" />
+  <Dome color="#ffffff" color.1="#000000" cx="35.06944444444444" cz="99.44444444444444" r="2.5" angle="0" quarters="4" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="180" />
-  <Goody shape="bspGrenade" y="4" yon="25" speed="0" grenades="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="35.10416666666667" cz="99.44444444444444" angle="225" />
-  <Dome fill="#ffffff" frame="#000000" cx="90.06944444444444" cz="99.44444444444444" r="2.5" angle="0" quarters="4" />
+  <Goody shape="bspGrenade" y="4" yon="25" speed="0" grenades="4" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="35.10416666666667" cz="99.44444444444444" angle="45" />
+  <Dome color="#ffffff" color.1="#000000" cx="90.06944444444444" cz="99.44444444444444" r="2.5" angle="0" quarters="4" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="180" />
-  <Goody shape="bspGrenade" y="4" yon="25" speed="0" grenades="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="90.10416666666667" cz="99.44444444444444" angle="225" />
-  <Walker team="2" y="10" cx="73.26388888888889" cz="90.41666666666667" angle="180" />
-  <Walker team="2" y="10" cx="62.56944444444444" cz="90.41666666666667" angle="180" />
-  <Walker team="6" y="10" cx="52.56944444444445" cz="33.40277777777778" angle="0" />
-  <Wall fill="#990066" frame="#000000" x="28.819444444444446" z="50.625" w="2.5" d="2.5" h="0.25" />
-  <Teleporter shape="0" speed="0" y="0.25" group="@bluePort" fill="#ffffff" frame="#000000" cx="28.78472222222222" cz="50.65972222222223" angle="315" />
-  <Wall fill="#990066" frame="#000000" x="86.25" z="50.625" w="2.5" d="2.5" h="0.25" />
-  <Teleporter shape="0" speed="0" y="0.25" group="@bluePort" fill="#ffffff" frame="#000000" cx="86.28472222222223" cz="50.65972222222223" angle="315" />
-  <Wall fill="#ff66ff" frame="#000000" x="28.819444444444446" z="73.19444444444444" w="2.5" d="2.5" h="0.25" />
-  <Teleporter shape="0" speed="0" y="0.25" group="@yellowPort" fill="#ffffff" frame="#000000" cx="28.78472222222222" cz="73.15972222222223" angle="315" />
-  <Wall fill="#ff66ff" frame="#000000" x="86.31944444444444" z="73.19444444444444" w="2.5" d="2.5" h="0.25" />
-  <Teleporter shape="0" speed="0" y="0.25" group="@yellowPort" fill="#ffffff" frame="#000000" cx="86.28472222222223" cz="73.15972222222223" angle="315" />
+  <Goody shape="bspGrenade" y="4" yon="25" speed="0" grenades="4" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="90.10416666666667" cz="99.44444444444444" angle="45" />
+  <Walker team="2" y="10" cx="73.26388888888889" cz="90.41666666666667" angle="0" />
+  <Walker team="2" y="10" cx="62.56944444444444" cz="90.41666666666667" angle="0" />
+  <Walker team="6" y="10" cx="52.56944444444445" cz="33.40277777777778" angle="180" />
+  <Wall color="#ab1f79" color.1="#000000" x="28.819444444444446" z="50.625" w="2.5" d="2.5" h="0.25" />
+  <Teleporter shape="0" speed="0" y="0.25" group="@bluePort" color="#ffffff" color.1="#000000" cx="28.78472222222222" cz="50.65972222222223" angle="135" />
+  <Wall color="#ab1f79" color.1="#000000" x="86.25" z="50.625" w="2.5" d="2.5" h="0.25" />
+  <Teleporter shape="0" speed="0" y="0.25" group="@bluePort" color="#ffffff" color.1="#000000" cx="86.28472222222223" cz="50.65972222222223" angle="135" />
+  <Wall color="#ff85ff" color.1="#000000" x="28.819444444444446" z="73.19444444444444" w="2.5" d="2.5" h="0.25" />
+  <Teleporter shape="0" speed="0" y="0.25" group="@yellowPort" color="#ffffff" color.1="#000000" cx="28.78472222222222" cz="73.15972222222223" angle="135" />
+  <Wall color="#ff85ff" color.1="#000000" x="86.31944444444444" z="73.19444444444444" w="2.5" d="2.5" h="0.25" />
+  <Teleporter shape="0" speed="0" y="0.25" group="@yellowPort" color="#ffffff" color.1="#000000" cx="86.28472222222223" cz="73.15972222222223" angle="135" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="180" />
-  <Goody shape="bspMissile" y="3.5" yon="25" speed="0" missiles="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="46.21527777777778" cz="62.083333333333336" angle="225" />
+  <Goody shape="bspMissile" y="3.5" yon="25" speed="0" missiles="4" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="46.21527777777778" cz="62.083333333333336" angle="45" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="180" />
-  <Goody shape="bspMissile" y="4" yon="25" speed="0" missiles="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="68.36805555555556" cz="62.15277777777778" angle="225" />
-  <Incarnator mask="T2" y="6" cx="42.56944444444444" cz="106.94444444444444" angle="180" />
-  <Incarnator mask="T2" y="6" cx="82.56944444444444" cz="106.94444444444444" angle="180" />
-  <Incarnator y="6" mask="T6" cx="32.56944444444444" cz="16.944444444444446" angle="0" />
-  <Incarnator y="6" mask="T6" cx="72.56944444444444" cz="16.944444444444446" angle="0" />
-  <Guard y="3.8" yon="45" killMsg="@blueGun" start="@yellowIn" stop="@yellowOut" shield="15" shotPower="0.6" freq="15" speed="3" hitScore="40" killScore="1000" team="6" mask="T2" watch="playerMask" fill="#66ffff" frame="#000000" cx="52.56944444444445" cz="18.26388888888889" angle="0" />
+  <Goody shape="bspMissile" y="4" yon="25" speed="0" missiles="4" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="68.36805555555556" cz="62.15277777777778" angle="45" />
+  <Incarnator mask="T2" y="6" cx="42.56944444444444" cz="106.94444444444444" angle="0" />
+  <Incarnator mask="T2" y="6" cx="82.56944444444444" cz="106.94444444444444" angle="0" />
+  <Incarnator y="6" mask="T6" cx="32.56944444444444" cz="16.944444444444446" angle="180" />
+  <Incarnator y="6" mask="T6" cx="72.56944444444444" cz="16.944444444444446" angle="180" />
+  <Guard y="3.8" yon="45" killMsg="@blueGun" start="@yellowIn" stop="@yellowOut" shield="15" shotPower="0.6" freq="15" speed="3" hitScore="40" killScore="1000" team="6" mask="T2" watch="playerMask" color="#73fdff" color.1="#000000" cx="52.56944444444445" cz="18.26388888888889" angle="180" />
   <Text in="@yellowGun" showEveryone="true" text="Yellow defense cannon destroyed." cx="52.56944444444445" cz="18.26388888888889" r="2.5" />
   <Text in="@blueGun" showEveryone="true" text="Blue defense cannon destroyed." cx="52.56944444444445" cz="18.26388888888889" r="2.5" />
-  <Guard y="3.8" yon="45" killMsg="@yellowGun" start="@blueIn" stop="@blueOut" shield="15" shotPower="0.6" freq="15" speed="3" hitScore="40" killScore="1000" team="2" mask="T6" watch="playerMask" fill="#ffff66" frame="#000000" cx="62.638888888888886" cz="105.55555555555556" angle="180" />
-  <set information="Special thanks to Avenger and Trotsky for their help.
-Two teams, yellow and blue. Each player
-gets five lives. Best played 2x2 or 3x3.
-Objective: Destroy enemy reactor core.
-You cannot enter enemy reactor core area." />
-  <Teleporter shape="0" y="200" win="0" start="@winTeam" activeRange="2000" fill="#ffff66" frame="#000000" cx="6.944444444444445" cz="65.06944444444444" angle="225" />
-  <WallSolid canGlow="true" isTarget="true" shield="15" killMsg="@blueWall" fill="#0066ff" frame="#000000" x="52.56944444444445" z="25.694444444444446" w="2.5" d="2.5" h="0" />
-  <WallSolid canGlow="true" isTarget="true" shield="15" killMsg="@blueWall" fill="#0066ff" frame="#000000" x="43.81944444444444" z="22.569444444444446" w="2.5" d="3.75" h="0" />
-  <WallSolid canGlow="true" isTarget="true" shield="15" killMsg="@blueWall" fill="#0066ff" frame="#000000" x="61.31944444444445" z="22.569444444444446" w="2.5" d="3.75" h="0" />
-  <Field mask="T2" watch="playerMask" deltaX="-1.3" deltaY="0" deltaZ="0" fill="#0066ff" frame="#000000" cx="6.944444444444445" cz="65.06944444444444" angle="225" x="42.5" z="18.194444444444446" w="0.13888888888888573" d="17.5" h="6" />
-  <Field mask="T2" watch="playerMask" deltaX="1.3" deltaY="0" deltaZ="0" fill="#0066ff" frame="#000000" cx="6.944444444444445" cz="65.06944444444444" angle="225" x="62.63888888888889" z="18.194444444444446" w="0.13888888888888573" d="17.5" h="6" />
-  <Field mask="T2" watch="playerMask" deltaX="0" deltaY="0" deltaZ="1.3" fill="#0066ff" frame="#000000" cx="6.944444444444445" cz="65.06944444444444" angle="225" x="52.56944444444444" z="27.013888888888893" w="20" d="0.13888888888888928" h="6" />
+  <Guard y="3.8" yon="45" killMsg="@yellowGun" start="@blueIn" stop="@blueOut" shield="15" shotPower="0.6" freq="15" speed="3" hitScore="40" killScore="1000" team="2" mask="T6" watch="playerMask" color="#fffc79" color.1="#000000" cx="62.638888888888886" cz="105.55555555555556" angle="0" />
+  <set information="Special thanks to Avenger and Trotsky for their help.&#10;Two teams, yellow and blue. Each player&#10;gets five lives. Best played 2x2 or 3x3.&#10;Objective: Destroy enemy reactor core.&#10;You cannot enter enemy reactor core area." />
+  <Teleporter shape="0" y="200" win="0" start="@winTeam" activeRange="2000" color="#fffc79" color.1="#000000" cx="6.944444444444445" cz="65.06944444444444" angle="45" />
+  <WallSolid canGlow="true" isTarget="true" shield="15" killMsg="@blueWall" color="#0080ff" color.1="#000000" x="52.56944444444445" z="25.694444444444446" w="2.5" d="2.5" h="0" />
+  <WallSolid canGlow="true" isTarget="true" shield="15" killMsg="@blueWall" color="#0080ff" color.1="#000000" x="43.81944444444444" z="22.569444444444446" w="2.5" d="3.75" h="0" />
+  <WallSolid canGlow="true" isTarget="true" shield="15" killMsg="@blueWall" color="#0080ff" color.1="#000000" x="61.31944444444445" z="22.569444444444446" w="2.5" d="3.75" h="0" />
+  <Field mask="T2" watch="playerMask" deltaX="-1.3" deltaY="0" deltaZ="0" color="#0080ff" color.1="#000000" cx="6.944444444444445" cz="65.06944444444444" angle="45" x="42.5" z="18.194444444444446" w="0.13888888888888573" d="17.5" h="6" />
+  <Field mask="T2" watch="playerMask" deltaX="1.3" deltaY="0" deltaZ="0" color="#0080ff" color.1="#000000" cx="6.944444444444445" cz="65.06944444444444" angle="45" x="62.63888888888889" z="18.194444444444446" w="0.13888888888888573" d="17.5" h="6" />
+  <Field mask="T2" watch="playerMask" deltaX="0" deltaY="0" deltaZ="1.3" color="#0080ff" color.1="#000000" cx="6.944444444444445" cz="65.06944444444444" angle="45" x="52.56944444444444" z="27.013888888888893" w="20" d="0.13888888888888928" h="6" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody shape="bspGrenade" y="1.8" yon="15" speed="0" grenades="6" start="mShow" out="mTaken" fill="#0066ff" frame="#000000" cx="52.46527777777778" cz="22.569444444444446" angle="225" />
-  <WallSolid canGlow="true" isTarget="true" shield="15" killMsg="@yellowWall" fill="#cc9900" frame="#000000" x="71.31944444444444" z="101.31944444444444" w="2.5" d="3.75" h="0" />
-  <WallSolid canGlow="true" isTarget="true" shield="15" killMsg="@yellowWall" fill="#cc9900" frame="#000000" x="53.81944444444445" z="101.31944444444444" w="2.5" d="3.75" h="0" />
-  <WallSolid canGlow="true" isTarget="true" shield="15" killMsg="@yellowWall" fill="#cc9900" frame="#000000" x="62.56944444444445" z="98.19444444444444" w="2.5" d="2.5" h="0" />
+  <Goody shape="bspGrenade" y="1.8" yon="15" speed="0" grenades="6" start="mShow" out="mTaken" color="#0080ff" color.1="#000000" cx="52.46527777777778" cz="22.569444444444446" angle="45" />
+  <WallSolid canGlow="true" isTarget="true" shield="15" killMsg="@yellowWall" color="#d6a800" color.1="#000000" x="71.31944444444444" z="101.31944444444444" w="2.5" d="3.75" h="0" />
+  <WallSolid canGlow="true" isTarget="true" shield="15" killMsg="@yellowWall" color="#d6a800" color.1="#000000" x="53.81944444444445" z="101.31944444444444" w="2.5" d="3.75" h="0" />
+  <WallSolid canGlow="true" isTarget="true" shield="15" killMsg="@yellowWall" color="#d6a800" color.1="#000000" x="62.56944444444445" z="98.19444444444444" w="2.5" d="2.5" h="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody shape="bspGrenade" y="1.8" yon="15" speed="0" grenades="6" start="mShow" out="mTaken" fill="#cc9900" frame="#000000" cx="62.465277777777786" cz="101.25" angle="225" />
-  <Incarnator y="10" mask="T6" cx="52.56944444444445" cz="19.444444444444446" angle="0" />
-  <Incarnator mask="T2" y="10" cx="62.56944444444444" cz="104.44444444444444" angle="180" />
-  <Field mask="T2" watch="playerMask" deltaX="0" deltaY="0" deltaZ="-1.3" fill="#996633" frame="#000000" cx="62.56944444444444" cz="104.44444444444444" angle="180" x="52.56944444444444" z="9.375" w="20" d="0.13888888888888928" h="6" />
-  <Field mask="T6" watch="playerMask" deltaX="1.3" deltaY="0" deltaZ="0" fill="#996633" frame="#000000" cx="62.56944444444444" cz="104.44444444444444" angle="180" x="72.63888888888889" z="105.69444444444444" w="0.13888888888889994" d="17.5" h="6" />
-  <Field mask="T6" watch="playerMask" deltaX="-1.3" deltaY="0" deltaZ="0" fill="#996633" frame="#000000" cx="62.56944444444444" cz="104.44444444444444" angle="180" x="52.5" z="105.69444444444444" w="0.13888888888889284" d="17.5" h="6" />
-  <Field mask="T6" watch="playerMask" deltaX="0" deltaY="0" deltaZ="-1.3" fill="#996633" frame="#000000" cx="62.56944444444444" cz="104.44444444444444" angle="180" x="62.5" z="96.875" w="20" d="0.13888888888888573" h="6" />
-  <Field mask="T6" watch="playerMask" deltaX="0" deltaY="0" deltaZ="1.3" fill="#996633" frame="#000000" cx="62.56944444444444" cz="104.44444444444444" angle="180" x="62.56944444444444" z="114.51388888888889" w="20" d="0.13888888888889994" h="6" />
+  <Goody shape="bspGrenade" y="1.8" yon="15" speed="0" grenades="6" start="mShow" out="mTaken" color="#d6a800" color.1="#000000" cx="62.465277777777786" cz="101.25" angle="45" />
+  <Incarnator y="10" mask="T6" cx="52.56944444444445" cz="19.444444444444446" angle="180" />
+  <Incarnator mask="T2" y="10" cx="62.56944444444444" cz="104.44444444444444" angle="0" />
+  <Field mask="T2" watch="playerMask" deltaX="0" deltaY="0" deltaZ="-1.3" color="#aa7942" color.1="#000000" cx="62.56944444444444" cz="104.44444444444444" angle="0" x="52.56944444444444" z="9.375" w="20" d="0.13888888888888928" h="6" />
+  <Field mask="T6" watch="playerMask" deltaX="1.3" deltaY="0" deltaZ="0" color="#aa7942" color.1="#000000" cx="62.56944444444444" cz="104.44444444444444" angle="0" x="72.63888888888889" z="105.69444444444444" w="0.13888888888889994" d="17.5" h="6" />
+  <Field mask="T6" watch="playerMask" deltaX="-1.3" deltaY="0" deltaZ="0" color="#aa7942" color.1="#000000" cx="62.56944444444444" cz="104.44444444444444" angle="0" x="52.5" z="105.69444444444444" w="0.13888888888889284" d="17.5" h="6" />
+  <Field mask="T6" watch="playerMask" deltaX="0" deltaY="0" deltaZ="-1.3" color="#aa7942" color.1="#000000" cx="62.56944444444444" cz="104.44444444444444" angle="0" x="62.5" z="96.875" w="20" d="0.13888888888888573" h="6" />
+  <Field mask="T6" watch="playerMask" deltaX="0" deltaY="0" deltaZ="1.3" color="#aa7942" color.1="#000000" cx="62.56944444444444" cz="104.44444444444444" angle="0" x="62.56944444444444" z="114.51388888888889" w="20" d="0.13888888888889994" h="6" />
   <Area mask="T2" watch="playerMask" enter="@yellowIn" exit="@yellowOut" cx="52.56944444444444" cz="21.875" r="20" />
   <Area mask="T6" watch="playerMask" enter="@blueIn" exit="@blueOut" cx="62.56944444444444" cz="101.875" r="20" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="160" />
-  <Goody shape="bspGrenade" y="6.1" yon="15" speed="0" grenades="8" start="mShow" out="mTaken" fill="#996633" frame="#000000" cx="62.465277777777786" cz="104.44444444444444" angle="225" />
+  <Goody shape="bspGrenade" y="6.1" yon="15" speed="0" grenades="8" start="mShow" out="mTaken" color="#aa7942" color.1="#000000" cx="62.465277777777786" cz="104.44444444444444" angle="45" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="160" />
-  <Goody shape="bspGrenade" y="6.1" yon="15" speed="0" grenades="8" start="mShow" out="mTaken" fill="#996633" frame="#000000" cx="52.395833333333336" cz="19.444444444444446" angle="225" />
-  <Guard y="30" yon="0.01" shape="bspShot" isTarget="false" speed="10" shotPower="30" freq="10" watch="scoutMask" shield="-1" fill="#ff6633" frame="#000000" cx="51.840277777777786" cz="60.34722222222223" angle="45" />
+  <Goody shape="bspGrenade" y="6.1" yon="15" speed="0" grenades="8" start="mShow" out="mTaken" color="#aa7942" color.1="#000000" cx="52.395833333333336" cz="19.444444444444446" angle="45" />
+  <Guard y="30" yon="0.01" shape="bspShot" isTarget="false" speed="10" shotPower="30" freq="10" watch="scoutMask" shield="-1" color="#ff7d41" color.1="#000000" cx="51.840277777777786" cz="60.34722222222223" angle="225" />
 </map>

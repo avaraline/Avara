@@ -1,109 +1,109 @@
 <map>
   <set designer="Carlos Castillo-Garsow    cc96@cornell.edu" />
-  <Wall fill="#555555" frame="#000000" x="47.5" z="58.75" w="5" d="45" h="5" />
-  <Wall fill="#555555" frame="#000000" x="72.5" z="38.75" w="45" d="5" h="5" />
-  <Wall fill="#555555" frame="#000000" x="67.5" z="83.75" w="45" d="5" h="5" />
-  <Wall fill="#555555" frame="#000000" x="92.5" z="76.25" w="5" d="20" h="5" />
-  <Wall fill="#555555" frame="#000000" x="92.5" z="48.75" w="5" d="15" h="5" />
-  <WallDoor deltaY="3" shield="2" fill="#996633" frame="#000000" x="92.56944444444444" z="61.31944444444444" w="5" d="10" h="3" />
-  <Wall fill="#555555" frame="#000000" x="92.5" z="61.25" w="5" d="10" h="1" y="3" />
-  <Wall fill="#777777" frame="#000000" x="58.75" z="43.75" w="2.5" d="5" h="0.25" />
-  <Wall fill="#777777" frame="#000000" x="58.125" z="43.75" w="2.5" d="5" h="0.25" y=".25" />
-  <Wall fill="#777777" frame="#000000" x="57.5" z="43.75" w="2.5" d="5" h="0.25" y=".5" />
-  <Wall fill="#777777" frame="#000000" x="56.875" z="43.75" w="2.5" d="5" h="0.25" y=".75" />
-  <Wall fill="#777777" frame="#000000" x="56.25" z="43.75" w="2.5" d="5" h="0.25" y="1" />
-  <Wall fill="#777777" frame="#000000" x="55.625" z="43.75" w="2.5" d="5" h="0.25" y="1.25" />
-  <Wall fill="#777777" frame="#000000" x="55" z="43.75" w="2.5" d="5" h="0.25" y="1.5" />
-  <Wall fill="#777777" frame="#000000" x="54.375" z="43.75" w="2.5" d="5" h="0.25" y="1.75" />
-  <Wall fill="#777777" frame="#000000" x="53.75" z="43.75" w="2.5" d="5" h="0.25" y="2.25" />
-  <Wall fill="#777777" frame="#000000" x="53.125" z="43.75" w="2.5" d="5" h="0.25" />
-  <Wall fill="#777777" frame="#000000" x="52.5" z="43.75" w="2.5" d="5" h="0.25" y="2.5" />
-  <Wall fill="#777777" frame="#000000" x="51.875" z="43.75" w="2.5" d="5" h="0.25" y="2.75" />
-  <Wall fill="#777777" frame="#000000" x="51.25" z="43.75" w="2.5" d="5" h="0.25" y="3" />
-  <Wall fill="#555555" frame="#000000" x="70" z="63.75" w="40" d="35" h="0.25" y="3" />
-  <Wall fill="#555555" frame="#000000" x="75" z="43.75" w="30" d="5" h="0.25" y="3" />
-  <Goody shape="bspGrenade" grenades="3" y="5" fill="#ffff00" frame="#000000" cx="52.56944444444445" cz="78.81944444444444" angle="45" />
-  <Goody shape="bspGrenade" grenades="3" y="5" fill="#ffff00" frame="#000000" cx="87.56944444444444" cz="79.44444444444444" angle="45" />
-  <Goody shape="bspGrenade" grenades="3" y="5" fill="#ffff00" frame="#000000" cx="87.56944444444444" cz="43.81944444444444" angle="45" />
-  <Goody shape="bspGrenade" grenades="3" y="1" fill="#ffff00" frame="#000000" cx="50.06944444444445" cz="48.81944444444445" angle="45" />
-  <Goody shape="bspGrenade" grenades="3" y="1" fill="#ffff00" frame="#000000" cx="87.56944444444444" cz="43.81944444444444" angle="45" />
-  <Goody shape="bspGrenade" grenades="3" y="1" fill="#ffff00" frame="#000000" cx="52.56944444444445" cz="78.81944444444444" angle="45" />
-  <Goody shape="bspGrenade" grenades="3" y="1" fill="#ffff00" frame="#000000" cx="87.56944444444444" cz="79.44444444444444" angle="45" />
-  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" fill="#ffff00" frame="#000000" cx="16.25" cz="116.80555555555556" angle="45" />
-  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" fill="#ffff00" frame="#000000" cx="48.75" cz="119.93055555555556" angle="45" />
-  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" fill="#ffff00" frame="#000000" cx="81.25" cz="123.05555555555556" angle="45" />
-  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" fill="#ffff00" frame="#000000" cx="18.125" cz="139.30555555555557" angle="45" />
-  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" fill="#ffff00" frame="#000000" cx="103.75" cz="107.43055555555556" angle="45" />
-  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" fill="#ffff00" frame="#000000" cx="18.125" cz="75.55555555555556" angle="45" />
-  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" fill="#ffff00" frame="#000000" cx="103.75" cz="43.68055555555556" angle="45" />
-  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" fill="#ffff00" frame="#000000" cx="18.125" cz="11.805555555555555" angle="45" />
-  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" fill="#ffff00" frame="#000000" cx="91.25" cz="17.430555555555557" angle="45" />
-  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" fill="#ffff00" frame="#000000" cx="51.875" cz="16.180555555555557" angle="45" />
-  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" fill="#ffff00" frame="#000000" cx="12.5" cz="39.583333333333336" angle="45" />
-  <Goody shape="bspGrenade" grenades="1" y="1" fill="#ffff00" frame="#000000" cx="44.375" cz="104.58333333333334" angle="45" />
-  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" fill="#ffff00" frame="#000000" cx="93.75" cz="144.58333333333334" angle="45" />
-  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" fill="#ffff00" frame="#000000" cx="44.375" cz="104.58333333333334" angle="45" />
-  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" fill="#ffff00" frame="#000000" cx="54.375" cz="140.20833333333334" angle="45" />
-  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" fill="#ffff00" frame="#000000" cx="104.375" cz="80.20833333333334" angle="45" />
-  <Wall fill="#002200" frame="#000000" x="61.25" z="102.5" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="26.875" z="133.125" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="35" z="118.125" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="36.25" z="102.5" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="68.75" z="118.75" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="81.25" z="113.125" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="39.375" z="136.25" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="57.5" z="111.25" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="95" z="121.875" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="57.5" z="132.5" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="23.75" z="143.75" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="76.25" z="143.125" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="8.75" z="130" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="108.75" z="138.75" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="10.625" z="148.75" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="108.75" z="138.75" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="9.375" z="110.625" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="88.75" z="135" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="45.625" z="146.875" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="33.75" z="132.5" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="21.875" z="118.125" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="10" z="103.75" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="25.625" z="106.25" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="42.5" z="123.75" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="59.375" z="141.25" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="76.25" z="123.75" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="93.125" z="106.25" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="72.5" z="104.375" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="56.875" z="125" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="110.625" z="123.125" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="69.375" z="133.125" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="43.125" z="112.5" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="51.25" z="106.875" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="48.125" z="136.25" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="65" z="126.25" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="100.625" z="130.625" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="108.125" z="114.375" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="115.625" z="98.125" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="116.875" z="111.875" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="118.125" z="125.625" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="116.875" z="139.375" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="82.5" z="147.5" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="78.125" z="133.125" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="20.625" z="125.625" w="2.5" d="2.5" h="15" />
-  <Wall fill="#002200" frame="#000000" x="5" z="120" w="2.5" d="2.5" h="15" />
-  <Wall fill="#663300" frame="#000000" x="57.5" z="8.75" w="5" d="5" h="3" />
-  <Wall fill="#663300" frame="#000000" x="71.875" z="28.125" w="5" d="5" h="3" />
-  <Wall fill="#663300" frame="#000000" x="106.25" z="13.75" w="5" d="5" h="3" />
-  <Wall fill="#663300" frame="#000000" x="71.25" z="4.375" w="5" d="5" h="3" />
-  <Wall fill="#663300" frame="#000000" x="36.25" z="13.75" w="5" d="5" h="3" />
-  <Wall fill="#663300" frame="#000000" x="25.625" z="28.75" w="5" d="5" h="3" />
-  <Wall fill="#663300" frame="#000000" x="8.125" z="18.75" w="5" d="5" h="3" />
-  <Wall fill="#663300" frame="#000000" x="26.875" z="7.5" w="5" d="5" h="3" />
-  <Wall fill="#663300" frame="#000000" x="105" z="30" w="5" d="5" h="3" />
-  <Wall fill="#663300" frame="#000000" x="85" z="10" w="5" d="5" h="3" />
-  <Incarnator cx="10.069444444444445" cz="8.194444444444445" angle="225" />
-  <Incarnator cx="111.31944444444444" cz="143.81944444444446" angle="225" />
-  <Incarnator cx="114.44444444444444" cz="6.319444444444445" angle="225" />
-  <Incarnator cx="5.694444444444445" cz="141.31944444444446" angle="225" />
+  <Wall color="#686868" color.1="#000000" x="47.5" z="58.75" w="5" d="45" h="5" />
+  <Wall color="#686868" color.1="#000000" x="72.5" z="38.75" w="45" d="5" h="5" />
+  <Wall color="#686868" color.1="#000000" x="67.5" z="83.75" w="45" d="5" h="5" />
+  <Wall color="#686868" color.1="#000000" x="92.5" z="76.25" w="5" d="20" h="5" />
+  <Wall color="#686868" color.1="#000000" x="92.5" z="48.75" w="5" d="15" h="5" />
+  <WallDoor deltaY="3" shield="2" color="#aa7942" color.1="#000000" x="92.56944444444444" z="61.31944444444444" w="5" d="10" h="3" />
+  <Wall color="#686868" color.1="#000000" x="92.5" z="61.25" w="5" d="10" h="1" y="3" />
+  <Wall color="#8a8a8a" color.1="#000000" x="58.75" z="43.75" w="2.5" d="5" h="0.25" />
+  <Wall color="#8a8a8a" color.1="#000000" x="58.125" z="43.75" w="2.5" d="5" h="0.25" y=".25" />
+  <Wall color="#8a8a8a" color.1="#000000" x="57.5" z="43.75" w="2.5" d="5" h="0.25" y=".5" />
+  <Wall color="#8a8a8a" color.1="#000000" x="56.875" z="43.75" w="2.5" d="5" h="0.25" y=".75" />
+  <Wall color="#8a8a8a" color.1="#000000" x="56.25" z="43.75" w="2.5" d="5" h="0.25" y="1" />
+  <Wall color="#8a8a8a" color.1="#000000" x="55.625" z="43.75" w="2.5" d="5" h="0.25" y="1.25" />
+  <Wall color="#8a8a8a" color.1="#000000" x="55" z="43.75" w="2.5" d="5" h="0.25" y="1.5" />
+  <Wall color="#8a8a8a" color.1="#000000" x="54.375" z="43.75" w="2.5" d="5" h="0.25" y="1.75" />
+  <Wall color="#8a8a8a" color.1="#000000" x="53.75" z="43.75" w="2.5" d="5" h="0.25" y="2.25" />
+  <Wall color="#8a8a8a" color.1="#000000" x="53.125" z="43.75" w="2.5" d="5" h="0.25" />
+  <Wall color="#8a8a8a" color.1="#000000" x="52.5" z="43.75" w="2.5" d="5" h="0.25" y="2.5" />
+  <Wall color="#8a8a8a" color.1="#000000" x="51.875" z="43.75" w="2.5" d="5" h="0.25" y="2.75" />
+  <Wall color="#8a8a8a" color.1="#000000" x="51.25" z="43.75" w="2.5" d="5" h="0.25" y="3" />
+  <Wall color="#686868" color.1="#000000" x="70" z="63.75" w="40" d="35" h="0.25" y="3" />
+  <Wall color="#686868" color.1="#000000" x="75" z="43.75" w="30" d="5" h="0.25" y="3" />
+  <Goody shape="bspGrenade" grenades="3" y="5" color="#fffb00" color.1="#000000" cx="52.56944444444445" cz="78.81944444444444" angle="225" />
+  <Goody shape="bspGrenade" grenades="3" y="5" color="#fffb00" color.1="#000000" cx="87.56944444444444" cz="79.44444444444444" angle="225" />
+  <Goody shape="bspGrenade" grenades="3" y="5" color="#fffb00" color.1="#000000" cx="87.56944444444444" cz="43.81944444444444" angle="225" />
+  <Goody shape="bspGrenade" grenades="3" y="1" color="#fffb00" color.1="#000000" cx="50.06944444444445" cz="48.81944444444445" angle="225" />
+  <Goody shape="bspGrenade" grenades="3" y="1" color="#fffb00" color.1="#000000" cx="87.56944444444444" cz="43.81944444444444" angle="225" />
+  <Goody shape="bspGrenade" grenades="3" y="1" color="#fffb00" color.1="#000000" cx="52.56944444444445" cz="78.81944444444444" angle="225" />
+  <Goody shape="bspGrenade" grenades="3" y="1" color="#fffb00" color.1="#000000" cx="87.56944444444444" cz="79.44444444444444" angle="225" />
+  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" color="#fffb00" color.1="#000000" cx="16.25" cz="116.80555555555556" angle="225" />
+  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" color="#fffb00" color.1="#000000" cx="48.75" cz="119.93055555555556" angle="225" />
+  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" color="#fffb00" color.1="#000000" cx="81.25" cz="123.05555555555556" angle="225" />
+  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" color="#fffb00" color.1="#000000" cx="18.125" cz="139.30555555555557" angle="225" />
+  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" color="#fffb00" color.1="#000000" cx="103.75" cz="107.43055555555556" angle="225" />
+  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" color="#fffb00" color.1="#000000" cx="18.125" cz="75.55555555555556" angle="225" />
+  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" color="#fffb00" color.1="#000000" cx="103.75" cz="43.68055555555556" angle="225" />
+  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" color="#fffb00" color.1="#000000" cx="18.125" cz="11.805555555555555" angle="225" />
+  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" color="#fffb00" color.1="#000000" cx="91.25" cz="17.430555555555557" angle="225" />
+  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" color="#fffb00" color.1="#000000" cx="51.875" cz="16.180555555555557" angle="225" />
+  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" color="#fffb00" color.1="#000000" cx="12.5" cz="39.583333333333336" angle="225" />
+  <Goody shape="bspGrenade" grenades="1" y="1" color="#fffb00" color.1="#000000" cx="44.375" cz="104.58333333333334" angle="225" />
+  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" color="#fffb00" color.1="#000000" cx="93.75" cz="144.58333333333334" angle="225" />
+  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" color="#fffb00" color.1="#000000" cx="44.375" cz="104.58333333333334" angle="225" />
+  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" color="#fffb00" color.1="#000000" cx="54.375" cz="140.20833333333334" angle="225" />
+  <Goody shape="bspGrenade" grenades="1" hitMsg="@got" y="1" color="#fffb00" color.1="#000000" cx="104.375" cz="80.20833333333334" angle="225" />
+  <Wall color="#002c00" color.1="#000000" x="61.25" z="102.5" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="26.875" z="133.125" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="35" z="118.125" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="36.25" z="102.5" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="68.75" z="118.75" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="81.25" z="113.125" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="39.375" z="136.25" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="57.5" z="111.25" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="95" z="121.875" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="57.5" z="132.5" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="23.75" z="143.75" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="76.25" z="143.125" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="8.75" z="130" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="108.75" z="138.75" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="10.625" z="148.75" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="108.75" z="138.75" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="9.375" z="110.625" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="88.75" z="135" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="45.625" z="146.875" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="33.75" z="132.5" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="21.875" z="118.125" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="10" z="103.75" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="25.625" z="106.25" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="42.5" z="123.75" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="59.375" z="141.25" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="76.25" z="123.75" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="93.125" z="106.25" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="72.5" z="104.375" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="56.875" z="125" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="110.625" z="123.125" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="69.375" z="133.125" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="43.125" z="112.5" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="51.25" z="106.875" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="48.125" z="136.25" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="65" z="126.25" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="100.625" z="130.625" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="108.125" z="114.375" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="115.625" z="98.125" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="116.875" z="111.875" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="118.125" z="125.625" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="116.875" z="139.375" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="82.5" z="147.5" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="78.125" z="133.125" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="20.625" z="125.625" w="2.5" d="2.5" h="15" />
+  <Wall color="#002c00" color.1="#000000" x="5" z="120" w="2.5" d="2.5" h="15" />
+  <Wall color="#7a4300" color.1="#000000" x="57.5" z="8.75" w="5" d="5" h="3" />
+  <Wall color="#7a4300" color.1="#000000" x="71.875" z="28.125" w="5" d="5" h="3" />
+  <Wall color="#7a4300" color.1="#000000" x="106.25" z="13.75" w="5" d="5" h="3" />
+  <Wall color="#7a4300" color.1="#000000" x="71.25" z="4.375" w="5" d="5" h="3" />
+  <Wall color="#7a4300" color.1="#000000" x="36.25" z="13.75" w="5" d="5" h="3" />
+  <Wall color="#7a4300" color.1="#000000" x="25.625" z="28.75" w="5" d="5" h="3" />
+  <Wall color="#7a4300" color.1="#000000" x="8.125" z="18.75" w="5" d="5" h="3" />
+  <Wall color="#7a4300" color.1="#000000" x="26.875" z="7.5" w="5" d="5" h="3" />
+  <Wall color="#7a4300" color.1="#000000" x="105" z="30" w="5" d="5" h="3" />
+  <Wall color="#7a4300" color.1="#000000" x="85" z="10" w="5" d="5" h="3" />
+  <Incarnator cx="10.069444444444445" cz="8.194444444444445" angle="45" />
+  <Incarnator cx="111.31944444444444" cz="143.81944444444446" angle="45" />
+  <Incarnator cx="114.44444444444444" cz="6.319444444444445" angle="45" />
+  <Incarnator cx="5.694444444444445" cz="141.31944444444446" angle="45" />
   <Counter in="@got" n="12" out="@start" />
-  <GroundColor fill="#004400" />
+  <GroundColor color="#005400" />
 </map>

@@ -7,22 +7,17 @@
     Modified: Monday, September 2, 1996, 17:39
 */
 
-#include "AvaraGL.h"
 #include "AvaraTCP.h"
 #include "CAvaraApp.h"
 #include "CAvaraGame.h"
+#include "CPlayerManager.h"
 #include "CBSPPart.h"
 #include "FastMat.h"
 #include "Preferences.h"
 
-#include <SDL2/SDL.h>
-#include <nanogui/nanogui.h>
-#include <string.h>
-
-using namespace nanogui;
-
 #ifdef _WIN32
-
+#include <Windows.h>
+#include <ShellAPI.h>
 typedef enum PROCESS_DPI_AWARENESS {
     PROCESS_DPI_UNAWARE = 0,
     PROCESS_SYSTEM_DPI_AWARE = 1,
@@ -40,6 +35,12 @@ void SetHiDPI() {
     SetProcessDpiAwareness(PROCESS_PER_MONITOR_DPI_AWARE);
 #endif
 }
+
+#include <SDL2/SDL.h>
+#include <nanogui/nanogui.h>
+#include <string.h>
+
+using namespace nanogui;
 
 void NullLogger(void *userdata, int category, SDL_LogPriority priority, const char *message) {}
 
@@ -61,6 +62,7 @@ int main(int argc, char *argv[]) {
 
     // process command-line arguments
     std::string connectAddress;
+    std::vector<std::string> textCommands;
     bool host = false;
     for (int i = 1; i < argc; i++) {
         std::string arg = argv[i];
@@ -71,12 +73,43 @@ int main(int argc, char *argv[]) {
             app->Set(kPlayerNameTag, std::string(argv[++i]));
         } else if (arg == "-c" || arg == "--connect") {
             connectAddress = std::string(argv[++i]);
-        } else if (arg == "-h" || arg == "--host") {
+            app->Set(kLastAddress, connectAddress);
+        } else if (arg == "-s" || arg == "--serve" ||
+                   arg == "-S" || arg == "--Serve") {
             host = true;
+            app->Set(kTrackerRegister, arg[1] == 'S' || arg[2] == 'S');
+        } else if (arg == "-f" || arg == "--frametime") {
+            uint16_t frameTime = atol(argv[++i]);  // pre-inc to next arg
+            app->GetGame()->SetFrameTime(frameTime);
+        } else if (arg == "-i" || arg == "--keys-from-stdin") {
+            app->GetGame()->SetKeysFromStdin();
+        } else if (arg == "-if" || arg == "--keys-from-file") {
+            // redirect a playback file to stdin
+            freopen(argv[++i], "r", stdin);
+            app->GetGame()->SetKeysFromStdin();
+        } else if (arg == "-o" || arg == "--keys-to-stdout") {
+            app->GetGame()->SetKeysToStdout();
+        } else if (arg == "-/" || arg == "--command") {
+            std::string textCommand = argv[++i];
+            if (textCommand[0] != '/') {
+                textCommand.insert(0, "/");
+            }
+            textCommands.push_back(textCommand);
         } else {
             SDL_Log("Unknown command-line argument '%s'\n", argv[i]);
             exit(1);
         }
+    }
+
+    auto p = CPlayerManagerImpl::LocalPlayer();
+    auto *tui = ((CAvaraAppImpl *)app)->GetTui();
+    auto defaultCmd = "/rand avara aa emo ex #fav -#bad -#koth";
+    if (textCommands.size() > 0) {
+        for (auto cmd: textCommands) {
+            tui->ExecuteMatchingCommand(cmd, p);
+        }
+    } else {
+        tui->ExecuteMatchingCommand(defaultCmd, p);
     }
 
     if(host == true) {
@@ -85,7 +118,8 @@ int main(int argc, char *argv[]) {
         app->GetNet()->ChangeNet(kClientNet, connectAddress);
     }
 
-    mainloop(app->GetGame()->frameTime / 4);
+    // outside of the game, use INACTIVE_LOOP_REFRESH (no need to poll when not playing)
+    mainloop(INACTIVE_LOOP_REFRESH);
 
     app->Done();
 

@@ -1,32 +1,32 @@
 <map>
-  <Incarnator cx="44.375" cz="15" angle="135" />
-  <Sound y="0" isPlaced="false" isMusic="false" isAmbient="true" rate="1" loopCount="-1" sound="1001" volume="30" cx="37.986111111111114" cz="31.875" angle="45" />
-  <SkyColor fill="#3399cc" frame="#ffff00" />
-  <GroundColor fill="#3399cc" />
+  <Incarnator cx="44.375" cz="15" angle="315" />
+  <Sound y="0" isPlaced="false" isMusic="false" isAmbient="true" rate="1" loopCount="-1" sound="1001" volume="30" cx="37.986111111111114" cz="31.875" angle="225" />
+  <SkyColor color="#3daad6" color.1="#fffb00" />
+  <GroundColor color="#3daad6" />
   <set wallHeight="50" wallYon="0.1" />
-  <Wall fill="#3399cc" frame="#444444" x="39.6875" z="25.3125" w="0.625" d="30.625" h="0" y="0" />
+  <Wall color="#3daad6" color.1="#565656" x="39.6875" z="25.3125" w="0.625" d="30.625" h="0" y="0" />
   <set wallHeight="50" wallYon="0.1" />
-  <Wall fill="#3399cc" frame="#444444" x="55" z="10.3125" w="30" d="0.625" h="0" y="0" />
+  <Wall color="#3daad6" color.1="#565656" x="55" z="10.3125" w="30" d="0.625" h="0" y="0" />
   <set wallHeight="50" wallYon="0.1" />
-  <Wall fill="#3399cc" frame="#444444" x="70.3125" z="25.625" w="0.625" d="31.25" h="0" y="0" />
+  <Wall color="#3daad6" color.1="#565656" x="70.3125" z="25.625" w="0.625" d="31.25" h="0" y="0" />
   <set wallHeight="50" wallYon="0.1" />
-  <Wall fill="#3399cc" frame="#444444" x="54.6875" z="40.9375" w="30.625" d="0.625" h="0" y="0" />
+  <Wall color="#3daad6" color.1="#565656" x="54.6875" z="40.9375" w="30.625" d="0.625" h="0" y="0" />
   <set wallHeight="50" wallYon="0" />
-  <Wall fill="#000000" frame="#444444" x="39.6875" z="25.3125" w="0.625" d="0.625" h="0" y="0" />
+  <Wall color="#000000" color.1="#565656" x="39.6875" z="25.3125" w="0.625" d="0.625" h="0" y="0" />
   <set wallHeight="50" wallYon="0" />
-  <Wall fill="#000000" frame="#444444" x="54.6875" z="10.3125" w="0.625" d="0.625" h="0" y="0" />
+  <Wall color="#000000" color.1="#565656" x="54.6875" z="10.3125" w="0.625" d="0.625" h="0" y="0" />
   <set wallHeight="50" wallYon="0" />
-  <Wall fill="#000000" frame="#444444" x="54.6875" z="40.9375" w="0.625" d="0.625" h="0" y="0" />
+  <Wall color="#000000" color.1="#565656" x="54.6875" z="40.9375" w="0.625" d="0.625" h="0" y="0" />
   <set wallHeight="50" wallYon="0" />
-  <Wall fill="#000000" frame="#444444" x="70.3125" z="25.3125" w="0.625" d="0.625" h="0" y="0" />
+  <Wall color="#000000" color.1="#565656" x="70.3125" z="25.3125" w="0.625" d="0.625" h="0" y="0" />
   <set wallHeight="0" wallYon="0" />
-  <Wall fill="#000000" frame="#444444" x="55" z="25.625" w="31.25" d="31.25" h="0" y="0" />
-  <FreeSolid midYaw="45" shape="1003" shotPower="20" mass="80" scale="3" y="900" fill="#ff6666" frame="#444444" cx="53.75" cz="23.75" angle="315" />
+  <Wall color="#000000" color.1="#565656" x="55" z="25.625" w="31.25" d="31.25" h="0" y="0" />
+  <FreeSolid midYaw="45" shape="1003" shotPower="20" mass="80" scale="3" y="900" color="#ff7e79" color.1="#565656" cx="53.75" cz="23.75" angle="135" />
   <set defaultLives="1" />
-  <Incarnator cx="43.125" cz="28.75" angle="45" />
-  <Incarnator cx="47.77777777777778" cz="38.40277777777778" angle="45" />
-  <Incarnator cx="60.902777777777786" cz="37.15277777777778" angle="45" />
-  <Incarnator cx="63.402777777777786" cz="26.52777777777778" angle="45" />
-  <Incarnator cx="57.77777777777778" cz="18.40277777777778" angle="45" />
+  <Incarnator cx="43.125" cz="28.75" angle="225" />
+  <Incarnator cx="47.77777777777778" cz="38.40277777777778" angle="225" />
+  <Incarnator cx="60.902777777777786" cz="37.15277777777778" angle="225" />
+  <Incarnator cx="63.402777777777786" cz="26.52777777777778" angle="225" />
+  <Incarnator cx="57.77777777777778" cz="18.40277777777778" angle="225" />
   <set hull.0="2005" hull.1="2005" hull.2="2005" designer="Edgar Hons" information="SUUUUUUUUPERB!" />
 </map>

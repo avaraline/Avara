@@ -2,7 +2,7 @@ name: C/C++ CI
 
 on:
   push:
-    branches: [ main, fps-hybrid ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -15,10 +15,10 @@ jobs:
       run: |
         sudo add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu `lsb_release -sc` main universe restricted multiverse"
         sudo apt-get update -y -qq
-        sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libegl1-mesa-dev libgles2-mesa-dev libdirectfb-dev
-    - uses: actions/checkout@v2
+        sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libegl1-mesa-dev libgles2-mesa-dev libdirectfb-dev libgtest-dev
+    - uses: actions/checkout@v4
     - name: make
-      run: make -j
+      run: make -j2
     - name: Run headless test
       uses: GabrielBB/xvfb-action@v1.2
       with:
@@ -27,16 +27,23 @@ jobs:
     name: Windows
     runs-on: windows-latest
     steps:
-      - name: Setup MSYS2
-        uses: msys2/setup-msys2@v2
-        with:
-          install: rsync git zip mingw-w64-x86_64-SDL2 mingw-w64-x86_64-clang mingw-w64-x86_64-glbinding mingw-w64-x86_64-glew make mingw-w64-x86_64-miniupnpc
-      - uses: actions/checkout@v2
-      - name: make
-        shell: msys2 {0}
+      - uses: actions/checkout@v4
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v2
+      - name: Setup vcpkg
+        uses: lukka/run-vcpkg@v11
+      - name: Build
         run: |
-          make set-version
-          make -j winapp
+          vcpkg integrate install
+          .\bin\git_version.ps1
+          msbuild /m /p:Platform=x64 /p:Configuration=Release .\Avara.msvc\Avara.sln
+        shell: pwsh
+      - name: Run headless test
+        run: .\Avara.msvc\x64\Release\Tests.exe
+        shell: pwsh
+      - name: WinAvara archive
+        run: .\bin\winavarazip.ps1
+        shell: pwsh
       - name: deploy main nightly
         if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'main')
         uses: WebFreak001/deploy-nightly@v1.0.1
@@ -45,46 +52,25 @@ jobs:
         with:
           upload_url: https://uploads.github.com/repos/avaraline/Avara/releases/28954246/assets{?name,label}
           release_id: 28954246
-          asset_path: ./build-main/WinAvara.zip
+          asset_path: ./WinAvara.zip
           asset_name: Avara-Windows-Nightly-$$.zip
           asset_content_type: application/zip
           max_releases: 1
-      - name: deploy fps-hybrid nightly
-        if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'fps-hybrid')
-        uses: WebFreak001/deploy-nightly@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: https://uploads.github.com/repos/avaraline/Avara/releases/49395858/assets{?name,label}
-          release_id: 49395858
-          asset_path: ./build-main/WinAvara.zip
-          asset_name: Avara-FPS-Windows-Nightly-$$.zip
-          asset_content_type: application/zip
-          max_releases: 1
-
   macOS:
     name: macOS
-    runs-on: macOS-latest
+    runs-on: macos-13
     steps:
       - name: install dependencies
         run: |
-          wget -q "https://www.libsdl.org/release/SDL2-2.0.14.dmg"
-          hdiutil attach SDL2-2.0.14.dmg
+          wget -q "https://github.com/libsdl-org/SDL/releases/download/release-2.26.2/SDL2-2.26.2.dmg"
+          hdiutil attach SDL2-2.26.2.dmg
           sudo cp -R /Volumes/SDL2/SDL2.framework /Library/Frameworks/
-          wget -q "https://github.com/phracker/MacOSX-SDKs/releases/download/11.3/MacOSX10.9.sdk.tar.xz"
-          gunzip MacOSX10.9.sdk.tar.xz
-          ls -la
-          tar -xf MacOSX10.9.sdk.tar
-          ls -la
-          echo "`pwd`/MacOSX10.9.sdk/"
-          export SDKROOT="`pwd`/MacOSX10.9.sdk/"
-      - uses: actions/checkout@v2
-      - name: make
-        run: SDKROOT="`pwd`/MacOSX10.9.sdk/" make -j macapp SIGNING_ID=NONE
-      - name: make tests
-        run: make tests
-      - name: print env variables
-        run: echo $GITHUB_REPOSITORY && echo $GITHUB_REF
+          brew install googletest
+      - uses: actions/checkout@v4
+      - name: Run headless tests
+        run: make -j3 tests
+      - name: make macdist
+        run: make -j3 clean macdist
       - name: deploy main nightly
         if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'main')
         uses: WebFreak001/deploy-nightly@v1.0.1
@@ -95,17 +81,5 @@ jobs:
           release_id: 28954246
           asset_path: ./build/MacAvara.zip
           asset_name: Avara-macOS-Nightly-$$.zip
-          asset_content_type: application/zip
-          max_releases: 1
-      - name: deploy fps-hybrid nightly
-        if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'fps-hybrid')
-        uses: WebFreak001/deploy-nightly@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: https://uploads.github.com/repos/avaraline/Avara/releases/49395858/assets{?name,label}
-          release_id: 49395858
-          asset_path: ./build/MacAvara.zip
-          asset_name: Avara-FPS-macOS-Nightly-$$.zip
           asset_content_type: application/zip
           max_releases: 1

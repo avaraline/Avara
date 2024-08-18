@@ -1,66 +1,63 @@
 <map>
   <set designer="Carlos Castillo-Garsow    cc96@cornell.edu" />
-  <Wall fill="#9900cc" frame="#000000" x="47.56944444444444" z="4.444444444444445" w="95" d="5" h="15" />
-  <Wall fill="#9900cc" frame="#000000" x="97.56944444444444" z="49.44444444444444" w="5" d="95" h="15" />
-  <Wall fill="#9900cc" frame="#000000" x="2.5694444444444446" z="54.44444444444444" w="5" d="95" h="15" />
-  <Wall fill="#9900cc" frame="#000000" x="52.56944444444444" z="99.44444444444444" w="95" d="5" h="15" />
-  <Incarnator cx="80.13888888888889" cz="19.51388888888889" angle="45" />
-  <Incarnator cx="27.63888888888889" cz="30.763888888888893" angle="45" />
-  <Incarnator cx="57.01388888888889" cz="83.26388888888889" angle="45" />
-  <Incarnator cx="10.13888888888889" cz="74.51388888888889" angle="45" />
-  <Goal group="1" y="4" goalMsg="@open" goalScore="0" goalAction="goalNull" fill="#006600" frame="#000000" cx="50.13888888888889" cz="52.01388888888889" angle="225" />
-  <Ball group="1" fill="#006600" frame="#000000" cx="22.63888888888889" cz="78.88888888888889" angle="225" />
-  <Switch y="1" shape="bspSwitchOn" out="@transform" fill="#006600" frame="#000000" cx="50.13888888888889" cz="52.01388888888889" angle="225" />
-  <WallDoor open="@open" close="@transform" fill="#9900cc" frame="#000000" x="50.13888888888889" z="52.01388888888889" w="10" d="10" h="2" />
-  <WallDoor deltaY="1" open="@transform" fill="#008800" frame="#000000" x="37.63888888888889" z="39.51388888888889" w="5" d="5" h="0.25" />
-  <WallDoor deltaY="2" open="@transform" fill="#008800" frame="#000000" x="37.63888888888889" z="44.51388888888889" w="5" d="5" h="0.25" />
-  <WallDoor deltaY="3" open="@transform" fill="#008800" frame="#000000" x="37.63888888888889" z="49.51388888888889" w="5" d="5" h="0.25" />
-  <WallDoor deltaY="4" open="@transform" fill="#008800" frame="#000000" x="37.63888888888889" z="54.51388888888889" w="5" d="5" h="0.25" />
-  <WallDoor deltaY="5" open="@transform" fill="#008800" frame="#000000" x="37.63888888888889" z="59.51388888888889" w="5" d="5" h="0.25" />
-  <WallDoor deltaY="6" open="@transform" fill="#008800" frame="#000000" x="42.60416666666667" z="64.47916666666667" w="14.930555555555557" d="4.93055555555555" h="0.25" />
-  <WallDoor deltaY="1" open="@transform" fill="#008800" frame="#000000" x="62.638888888888886" z="64.51388888888889" w="5" d="5" h="0.25" />
-  <WallDoor deltaY="2" open="@transform" fill="#008800" frame="#000000" x="62.638888888888886" z="59.51388888888889" w="5" d="5" h="0.25" />
-  <WallDoor deltaY="3" open="@transform" fill="#008800" frame="#000000" x="62.638888888888886" z="54.51388888888889" w="5" d="5" h="0.25" />
-  <WallDoor deltaY="4" open="@transform" fill="#008800" frame="#000000" x="62.638888888888886" z="49.51388888888889" w="5" d="5" h="0.25" />
-  <WallDoor deltaY="5" open="@transform" fill="#008800" frame="#000000" x="62.638888888888886" z="44.51388888888889" w="5" d="5" h="0.25" />
-  <WallDoor deltaY="6" open="@transform" fill="#008800" frame="#000000" x="57.60416666666667" z="39.51388888888889" w="14.93055555555555" d="5" h="0.25" />
-  <WallDoor deltaY="1" open="@transform" fill="#008800" frame="#000000" x="37.63888888888889" z="64.51388888888889" w="5" d="5" h="0.25" />
-  <WallDoor deltaY="2" open="@transform" fill="#008800" frame="#000000" x="42.63888888888889" z="64.51388888888889" w="5" d="5" h="0.25" />
-  <WallDoor deltaY="3" open="@transform" fill="#008800" frame="#000000" x="47.63888888888889" z="64.51388888888889" w="5" d="5" h="0.25" />
-  <WallDoor deltaY="4" open="@transform" fill="#008800" frame="#000000" x="52.63888888888889" z="64.51388888888889" w="5" d="5" h="0.25" />
-  <WallDoor deltaY="5" open="@transform" fill="#008800" frame="#000000" x="57.63888888888889" z="64.51388888888889" w="5" d="5" h="0.25" />
-  <WallDoor deltaY="6" open="@transform" fill="#008800" frame="#000000" x="62.638888888888886" z="59.513888888888886" w="5" d="15" h="0.25" />
-  <WallDoor deltaY="1" open="@transform" fill="#008800" frame="#000000" x="62.638888888888886" z="39.51388888888889" w="5" d="5" h="0.25" />
-  <WallDoor deltaY="2" open="@transform" fill="#008800" frame="#000000" x="57.63888888888889" z="39.51388888888889" w="5" d="5" h="0.25" />
-  <WallDoor deltaY="3" open="@transform" fill="#008800" frame="#000000" x="52.63888888888889" z="39.51388888888889" w="5" d="5" h="0.25" />
-  <WallDoor deltaY="4" open="@transform" fill="#008800" frame="#000000" x="47.63888888888889" z="39.51388888888889" w="5" d="5" h="0.25" />
-  <WallDoor deltaY="5" open="@transform" fill="#008800" frame="#000000" x="42.63888888888889" z="39.51388888888889" w="5" d="5" h="0.25" />
-  <Goody shape="bspGrenade" y="8" start="@transform" out="@get" grenades="4" fill="#ffff00" frame="#000000" cx="62.638888888888886" cz="64.51388888888889" angle="225" />
-  <Goody shape="bspMissile" y="8" start="@transform" out="@get" missiles="3" fill="#ffff00" frame="#000000" cx="37.63888888888889" cz="64.51388888888889" angle="225" />
-  <Goody shape="bspGrenade" y="8" start="@transform" out="@get" grenades="4" fill="#ffff00" frame="#000000" cx="37.63888888888889" cz="39.51388888888889" angle="225" />
-  <Goody shape="bspMissile" y="8" start="@transform" out="@get" missiles="3" fill="#ffff00" frame="#000000" cx="62.638888888888886" cz="39.51388888888889" angle="225" />
-  <FreeSolid shield="5" shotPower="1" mass="10" accel=".99" fill="#9900cc" frame="#000000" cx="62.638888888888886" cz="39.51388888888889" angle="225" x="22.63888888888889" z="79.51388888888889" w="5" d="5" h="3" />
-  <FreeSolid shield="5" shotPower="1" mass="10" accel=".99" fill="#9900cc" frame="#000000" cx="62.638888888888886" cz="39.51388888888889" angle="225" x="16.38888888888889" z="42.01388888888889" w="5" d="5" h="3" />
-  <FreeSolid shield="5" shotPower="1" mass="10" accel=".99" fill="#9900cc" frame="#000000" cx="62.638888888888886" cz="39.51388888888889" angle="225" x="78.88888888888889" z="37.63888888888889" w="5" d="5" h="3" />
-  <FreeSolid shield="5" shotPower="1" mass="10" accel=".99" fill="#9900cc" frame="#000000" cx="62.638888888888886" cz="39.51388888888889" angle="225" x="45.13888888888889" z="17.01388888888889" w="5" d="5" h="3" />
-  <FreeSolid shield="5" shotPower="1" mass="10" accel=".99" fill="#9900cc" frame="#000000" cx="62.638888888888886" cz="39.51388888888889" angle="225" x="78.88888888888889" z="77.63888888888889" w="5" d="5" h="3" />
-  <FreeSolid shield="5" shotPower="1" mass="10" accel=".99" fill="#9900cc" frame="#000000" cx="62.638888888888886" cz="39.51388888888889" angle="225" x="18.88888888888889" z="23.26388888888889" w="5" d="5" h="5" />
-  <FreeSolid shield="5" shotPower="1" mass="10" accel=".99" fill="#9900cc" frame="#000000" cx="62.638888888888886" cz="39.51388888888889" angle="225" x="68.88888888888889" z="24.51388888888889" w="5" d="5" h="5" />
-  <FreeSolid shield="5" shotPower="1" mass="10" accel=".99" fill="#9900cc" frame="#000000" cx="62.638888888888886" cz="39.51388888888889" angle="225" x="17.01388888888889" z="63.263888888888886" w="5" d="5" h="5" />
-  <FreeSolid shield="5" shotPower="1" mass="10" accel=".99" fill="#9900cc" frame="#000000" cx="62.638888888888886" cz="39.51388888888889" angle="225" x="47.63888888888889" z="80.76388888888889" w="5" d="5" h="5" />
-  <FreeSolid shield="5" shotPower="1" mass="10" accel=".99" fill="#9900cc" frame="#000000" cx="62.638888888888886" cz="39.51388888888889" angle="225" x="80.76388888888889" z="57.63888888888889" w="5" d="5" h="5" />
-  <WallDoor shield="5" fill="#9900cc" frame="#000000" x="88.26388888888889" z="12.63888888888889" w="5" d="5" h="10" />
-  <WallDoor shield="5" fill="#9900cc" frame="#000000" x="87.63888888888889" z="87.63888888888889" w="5" d="5" h="10" />
-  <WallDoor shield="5" fill="#9900cc" frame="#000000" x="12.01388888888889" z="12.63888888888889" w="5" d="5" h="10" />
-  <WallDoor shield="5" fill="#9900cc" frame="#000000" x="10.13888888888889" z="90.13888888888889" w="5" d="5" h="10" />
-  <WallDoor shield="5" fill="#9900cc" frame="#000000" x="50.13888888888889" z="92.6388888888889" w="5" d="5" h="10" />
-  <WallDoor shield="5" fill="#9900cc" frame="#000000" x="88.26388888888889" z="52.01388888888889" w="5" d="5" h="10" />
-  <WallDoor shield="5" fill="#9900cc" frame="#000000" x="50.13888888888889" z="11.38888888888889" w="5" d="5" h="10" />
-  <WallDoor shield="5" fill="#9900cc" frame="#000000" x="8.88888888888889" z="49.51388888888889" w="5" d="5" h="10" />
+  <Wall color="#ab30d6" color.1="#000000" x="47.56944444444444" z="4.444444444444445" w="95" d="5" h="15" />
+  <Wall color="#ab30d6" color.1="#000000" x="97.56944444444444" z="49.44444444444444" w="5" d="95" h="15" />
+  <Wall color="#ab30d6" color.1="#000000" x="2.5694444444444446" z="54.44444444444444" w="5" d="95" h="15" />
+  <Wall color="#ab30d6" color.1="#000000" x="52.56944444444444" z="99.44444444444444" w="95" d="5" h="15" />
+  <Incarnator cx="80.13888888888889" cz="19.51388888888889" angle="225" />
+  <Incarnator cx="27.63888888888889" cz="30.763888888888893" angle="225" />
+  <Incarnator cx="57.01388888888889" cz="83.26388888888889" angle="225" />
+  <Incarnator cx="10.13888888888889" cz="74.51388888888889" angle="225" />
+  <Goal group="1" y="4" goalMsg="@open" goalScore="0" goalAction="goalNull" color="#007600" color.1="#000000" cx="50.13888888888889" cz="52.01388888888889" angle="45" />
+  <Ball group="1" color="#007600" color.1="#000000" cx="22.63888888888889" cz="78.88888888888889" angle="45" />
+  <Switch y="1" shape="bspSwitchOn" out="@transform" color="#007600" color.1="#000000" cx="50.13888888888889" cz="52.01388888888889" angle="45" />
+  <WallDoor open="@open" close="@transform" color="#ab30d6" color.1="#000000" x="50.13888888888889" z="52.01388888888889" w="10" d="10" h="2" />
+  <WallDoor deltaY="1" open="@transform" color="#009600" color.1="#000000" x="37.63888888888889" z="39.51388888888889" w="5" d="5" h="0.25" />
+  <WallDoor deltaY="2" open="@transform" color="#009600" color.1="#000000" x="37.63888888888889" z="44.51388888888889" w="5" d="5" h="0.25" />
+  <WallDoor deltaY="3" open="@transform" color="#009600" color.1="#000000" x="37.63888888888889" z="49.51388888888889" w="5" d="5" h="0.25" />
+  <WallDoor deltaY="4" open="@transform" color="#009600" color.1="#000000" x="37.63888888888889" z="54.51388888888889" w="5" d="5" h="0.25" />
+  <WallDoor deltaY="5" open="@transform" color="#009600" color.1="#000000" x="37.63888888888889" z="59.51388888888889" w="5" d="5" h="0.25" />
+  <WallDoor deltaY="6" open="@transform" color="#009600" color.1="#000000" x="42.60416666666667" z="64.47916666666667" w="14.930555555555557" d="4.93055555555555" h="0.25" />
+  <WallDoor deltaY="1" open="@transform" color="#009600" color.1="#000000" x="62.638888888888886" z="64.51388888888889" w="5" d="5" h="0.25" />
+  <WallDoor deltaY="2" open="@transform" color="#009600" color.1="#000000" x="62.638888888888886" z="59.51388888888889" w="5" d="5" h="0.25" />
+  <WallDoor deltaY="3" open="@transform" color="#009600" color.1="#000000" x="62.638888888888886" z="54.51388888888889" w="5" d="5" h="0.25" />
+  <WallDoor deltaY="4" open="@transform" color="#009600" color.1="#000000" x="62.638888888888886" z="49.51388888888889" w="5" d="5" h="0.25" />
+  <WallDoor deltaY="5" open="@transform" color="#009600" color.1="#000000" x="62.638888888888886" z="44.51388888888889" w="5" d="5" h="0.25" />
+  <WallDoor deltaY="6" open="@transform" color="#009600" color.1="#000000" x="57.60416666666667" z="39.51388888888889" w="14.93055555555555" d="5" h="0.25" />
+  <WallDoor deltaY="1" open="@transform" color="#009600" color.1="#000000" x="37.63888888888889" z="64.51388888888889" w="5" d="5" h="0.25" />
+  <WallDoor deltaY="2" open="@transform" color="#009600" color.1="#000000" x="42.63888888888889" z="64.51388888888889" w="5" d="5" h="0.25" />
+  <WallDoor deltaY="3" open="@transform" color="#009600" color.1="#000000" x="47.63888888888889" z="64.51388888888889" w="5" d="5" h="0.25" />
+  <WallDoor deltaY="4" open="@transform" color="#009600" color.1="#000000" x="52.63888888888889" z="64.51388888888889" w="5" d="5" h="0.25" />
+  <WallDoor deltaY="5" open="@transform" color="#009600" color.1="#000000" x="57.63888888888889" z="64.51388888888889" w="5" d="5" h="0.25" />
+  <WallDoor deltaY="6" open="@transform" color="#009600" color.1="#000000" x="62.638888888888886" z="59.513888888888886" w="5" d="15" h="0.25" />
+  <WallDoor deltaY="1" open="@transform" color="#009600" color.1="#000000" x="62.638888888888886" z="39.51388888888889" w="5" d="5" h="0.25" />
+  <WallDoor deltaY="2" open="@transform" color="#009600" color.1="#000000" x="57.63888888888889" z="39.51388888888889" w="5" d="5" h="0.25" />
+  <WallDoor deltaY="3" open="@transform" color="#009600" color.1="#000000" x="52.63888888888889" z="39.51388888888889" w="5" d="5" h="0.25" />
+  <WallDoor deltaY="4" open="@transform" color="#009600" color.1="#000000" x="47.63888888888889" z="39.51388888888889" w="5" d="5" h="0.25" />
+  <WallDoor deltaY="5" open="@transform" color="#009600" color.1="#000000" x="42.63888888888889" z="39.51388888888889" w="5" d="5" h="0.25" />
+  <Goody shape="bspGrenade" y="8" start="@transform" out="@get" grenades="4" color="#fffb00" color.1="#000000" cx="62.638888888888886" cz="64.51388888888889" angle="45" />
+  <Goody shape="bspMissile" y="8" start="@transform" out="@get" missiles="3" color="#fffb00" color.1="#000000" cx="37.63888888888889" cz="64.51388888888889" angle="45" />
+  <Goody shape="bspGrenade" y="8" start="@transform" out="@get" grenades="4" color="#fffb00" color.1="#000000" cx="37.63888888888889" cz="39.51388888888889" angle="45" />
+  <Goody shape="bspMissile" y="8" start="@transform" out="@get" missiles="3" color="#fffb00" color.1="#000000" cx="62.638888888888886" cz="39.51388888888889" angle="45" />
+  <FreeSolid shield="5" shotPower="1" mass="10" accel=".99" color="#ab30d6" color.1="#000000" cx="62.638888888888886" cz="39.51388888888889" angle="45" x="22.63888888888889" z="79.51388888888889" w="5" d="5" h="3" />
+  <FreeSolid shield="5" shotPower="1" mass="10" accel=".99" color="#ab30d6" color.1="#000000" cx="62.638888888888886" cz="39.51388888888889" angle="45" x="16.38888888888889" z="42.01388888888889" w="5" d="5" h="3" />
+  <FreeSolid shield="5" shotPower="1" mass="10" accel=".99" color="#ab30d6" color.1="#000000" cx="62.638888888888886" cz="39.51388888888889" angle="45" x="78.88888888888889" z="37.63888888888889" w="5" d="5" h="3" />
+  <FreeSolid shield="5" shotPower="1" mass="10" accel=".99" color="#ab30d6" color.1="#000000" cx="62.638888888888886" cz="39.51388888888889" angle="45" x="45.13888888888889" z="17.01388888888889" w="5" d="5" h="3" />
+  <FreeSolid shield="5" shotPower="1" mass="10" accel=".99" color="#ab30d6" color.1="#000000" cx="62.638888888888886" cz="39.51388888888889" angle="45" x="78.88888888888889" z="77.63888888888889" w="5" d="5" h="3" />
+  <FreeSolid shield="5" shotPower="1" mass="10" accel=".99" color="#ab30d6" color.1="#000000" cx="62.638888888888886" cz="39.51388888888889" angle="45" x="18.88888888888889" z="23.26388888888889" w="5" d="5" h="5" />
+  <FreeSolid shield="5" shotPower="1" mass="10" accel=".99" color="#ab30d6" color.1="#000000" cx="62.638888888888886" cz="39.51388888888889" angle="45" x="68.88888888888889" z="24.51388888888889" w="5" d="5" h="5" />
+  <FreeSolid shield="5" shotPower="1" mass="10" accel=".99" color="#ab30d6" color.1="#000000" cx="62.638888888888886" cz="39.51388888888889" angle="45" x="17.01388888888889" z="63.263888888888886" w="5" d="5" h="5" />
+  <FreeSolid shield="5" shotPower="1" mass="10" accel=".99" color="#ab30d6" color.1="#000000" cx="62.638888888888886" cz="39.51388888888889" angle="45" x="47.63888888888889" z="80.76388888888889" w="5" d="5" h="5" />
+  <FreeSolid shield="5" shotPower="1" mass="10" accel=".99" color="#ab30d6" color.1="#000000" cx="62.638888888888886" cz="39.51388888888889" angle="45" x="80.76388888888889" z="57.63888888888889" w="5" d="5" h="5" />
+  <WallDoor shield="5" color="#ab30d6" color.1="#000000" x="88.26388888888889" z="12.63888888888889" w="5" d="5" h="10" />
+  <WallDoor shield="5" color="#ab30d6" color.1="#000000" x="87.63888888888889" z="87.63888888888889" w="5" d="5" h="10" />
+  <WallDoor shield="5" color="#ab30d6" color.1="#000000" x="12.01388888888889" z="12.63888888888889" w="5" d="5" h="10" />
+  <WallDoor shield="5" color="#ab30d6" color.1="#000000" x="10.13888888888889" z="90.13888888888889" w="5" d="5" h="10" />
+  <WallDoor shield="5" color="#ab30d6" color.1="#000000" x="50.13888888888889" z="92.6388888888889" w="5" d="5" h="10" />
+  <WallDoor shield="5" color="#ab30d6" color.1="#000000" x="88.26388888888889" z="52.01388888888889" w="5" d="5" h="10" />
+  <WallDoor shield="5" color="#ab30d6" color.1="#000000" x="50.13888888888889" z="11.38888888888889" w="5" d="5" h="10" />
+  <WallDoor shield="5" color="#ab30d6" color.1="#000000" x="8.88888888888889" z="49.51388888888889" w="5" d="5" h="10" />
   <Timer in="@get" wait="300" out="@transform" />
-  <set designer="Lord Anon III" information="a ruined temple to an unknown 
-diety. There apears to be a lock-and-key 
-mechanism on top of the center altar, but the 
-key apears to be lost." />
-  <WallDoor deltaY="6" open="@transform" fill="#008800" frame="#000000" x="37.63888888888889" z="44.51388888888889" w="5" d="15" h="0.25" />
+  <set designer="Lord Anon III" information="a ruined temple to an unknown &#10;diety. There apears to be a lock-and-key &#10;mechanism on top of the center altar, but the &#10;key apears to be lost." />
+  <WallDoor deltaY="6" open="@transform" color="#009600" color.1="#000000" x="37.63888888888889" z="44.51388888888889" w="5" d="15" h="0.25" />
 </map>

@@ -1,0 +1,159 @@
+<!-- @param number pReqPointMultiplier scale the amount of *real* points required to win (it will always *report* 100 and increments of 10) -->
+<!-- @param int pPulse event for a hill "pulse" -->
+<!-- @param int pPulseEnd event for the end of a hill "pulse"  -->
+<!-- @param int pGreenEnters event for when green is on the hill -->
+<!-- @param int pYellowEnters event for when yellow is on the hill -->
+<!-- @param int pRedEnters event for when red is on the hill -->
+<!-- @param int pPinkEnters event for when pink is on the hill -->
+<!-- @param int pPurpleEnters event for when purple is on the hill -->
+<!-- @param int pBlueEnters event for when blue is on the hill -->
+<!-- @param int pBlackEnters event for when black is on the hill -->
+<!-- @param int pWhiteEnters event for when white is on the hill -->
+
+<set
+  defaultLives="999"
+  kScaledPoints="round(pReqPointMultiplier * 26)"
+  kSnText="snTextBlip"
+  kTextVolume="0.3"
+/>
+
+<unique vars="mGameEnds" />
+<unique vars="mGreenWins mYellowWins mRedWins mPinkWins mPurpleWins mBlueWins mBlackWins mWhiteWins" />
+<unique vars="mGreenClose mYellowClose mRedClose mPinkClose mPurpleClose mBlueClose mBlackClose mWhiteClose" />
+
+<Timer in.0="mGreenWins" in.1="mYellowWins" in.2="mRedWins" in.3="mPinkWins" in.4="mPurpleWins" in.5="mBlueWins" in.6="mBlackWins" in.7="mWhiteWins" wait="1" out="mGameEnds" />
+<Teleporter start="mGameEnds" y="-10" activeRange="10000" shape="0" win="0" cx="0" cz="0" />
+
+<Timer in.0="@start" in.1="pPulse" wait="5" out.0="pPulse" />
+<Timer in="pPulse" wait="1" out="pPulseEnd" />
+<Timer in="pPulse" wait="4" out.0="mGreenClose" out.1="mYellowClose" out.2="mRedClose" out.3="mPinkClose" out.4="mPurpleClose" out.5="mBlueClose" out.6="mBlackClose" out.7="mWhiteClose" />
+
+<unique vars="mIncrement mNotify mAt10 mAt20 mAt30 mAt40 mAt50 mAt60 mAt70 mAt80 mAt90" />
+<Door yon="0.001" shape="bspSliver0" deltaY="3" openSpeed="35" closeSpeed="100" open="pGreenEnters" didOpen="mIncrement" close="mGreenClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(1)" cx="-7" cz="0" y="-10" />
+<Counter in="mIncrement" out="mNotify" n="kScaledPoints" />
+<Distributor in="mNotify" out.0="mAt10" out.1="mAt20" out.2="mAt30" out.3="mAt40" out.4="mAt50" out.5="mAt60" out.6="mAt70" out.7="mAt80" out.8="mAt90" out.9="mGreenWins" restart="false" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt10" showEveryone="true" text="Green team has 10 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt20" showEveryone="true" text="Green team has 20 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt30" showEveryone="true" text="Green team has 30 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt40" showEveryone="true" text="Green team has 40 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt50" showEveryone="true" text="Green team has made it halfway!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt60" showEveryone="true" text="Green team has 60 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt70" showEveryone="true" text="Green team has 70 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt80" showEveryone="true" text="Green team has 80 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt90" showEveryone="true" text="Green team has only 10 points to go!" />
+<Text sound="kSnText" volume="kTextVolume" in="mGreenWins" showEveryone="true" text="Green team wins!" />
+
+<unique vars="mIncrement mNotify mAt10 mAt20 mAt30 mAt40 mAt50 mAt60 mAt70 mAt80 mAt90" />
+<Door yon="0.001" shape="bspSliver0" deltaY="3" openSpeed="35" closeSpeed="100" open="pYellowEnters" didOpen="mIncrement" close="mYellowClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(2)" cx="-5" cz="0" y="-10" />
+<Counter in="mIncrement" out="mNotify" n="kScaledPoints" />
+<Distributor in="mNotify" out.0="mAt10" out.1="mAt20" out.2="mAt30" out.3="mAt40" out.4="mAt50" out.5="mAt60" out.6="mAt70" out.7="mAt80" out.8="mAt90" out.9="mYellowWins" restart="false" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt10" showEveryone="true" text="Yellow team has 10 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt20" showEveryone="true" text="Yellow team has 20 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt30" showEveryone="true" text="Yellow team has 30 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt40" showEveryone="true" text="Yellow team has 40 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt50" showEveryone="true" text="Yellow team has made it halfway!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt60" showEveryone="true" text="Yellow team has 60 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt70" showEveryone="true" text="Yellow team has 70 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt80" showEveryone="true" text="Yellow team has 80 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt90" showEveryone="true" text="Yellow team has only 10 points to go!" />
+<Text sound="kSnText" volume="kTextVolume" in="mYellowWins" showEveryone="true" text="Yellow team wins!" />
+
+<unique vars="mIncrement mNotify mAt10 mAt20 mAt30 mAt40 mAt50 mAt60 mAt70 mAt80 mAt90" />
+<Door yon="0.001" shape="bspSliver0" deltaY="3" openSpeed="35" closeSpeed="100" open="pRedEnters" didOpen="mIncrement" close="mRedClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(3)" cx="-3" cz="0" y="-10" />
+<Counter in="mIncrement" out="mNotify" n="kScaledPoints" />
+<Distributor in="mNotify" out.0="mAt10" out.1="mAt20" out.2="mAt30" out.3="mAt40" out.4="mAt50" out.5="mAt60" out.6="mAt70" out.7="mAt80" out.8="mAt90" out.9="mRedWins" restart="false" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt10" showEveryone="true" text="Red team has 10 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt20" showEveryone="true" text="Red team has 20 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt30" showEveryone="true" text="Red team has 30 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt40" showEveryone="true" text="Red team has 40 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt50" showEveryone="true" text="Red team has made it halfway!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt60" showEveryone="true" text="Red team has 60 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt70" showEveryone="true" text="Red team has 70 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt80" showEveryone="true" text="Red team has 80 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt90" showEveryone="true" text="Red team has only 10 points to go!" />
+<Text sound="kSnText" volume="kTextVolume" in="mRedWins" showEveryone="true" text="Red team wins!" />
+
+<unique vars="mIncrement mNotify mAt10 mAt20 mAt30 mAt40 mAt50 mAt60 mAt70 mAt80 mAt90" />
+<Door yon="0.001" shape="bspSliver0" deltaY="3" openSpeed="35" closeSpeed="100" open="pPinkEnters" didOpen="mIncrement" close="mPinkClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(4)" cx="-1" cz="0" y="-10" />
+<Counter in="mIncrement" out="mNotify" n="kScaledPoints" />
+<Distributor in="mNotify" out.0="mAt10" out.1="mAt20" out.2="mAt30" out.3="mAt40" out.4="mAt50" out.5="mAt60" out.6="mAt70" out.7="mAt80" out.8="mAt90" out.9="mPinkWins" restart="false" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt10" showEveryone="true" text="Pink team has 10 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt20" showEveryone="true" text="Pink team has 20 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt30" showEveryone="true" text="Pink team has 30 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt40" showEveryone="true" text="Pink team has 40 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt50" showEveryone="true" text="Pink team has made it halfway!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt60" showEveryone="true" text="Pink team has 60 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt70" showEveryone="true" text="Pink team has 70 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt80" showEveryone="true" text="Pink team has 80 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt90" showEveryone="true" text="Pink team has only 10 points to go!" />
+<Text sound="kSnText" volume="kTextVolume" in="mPinkWins" showEveryone="true" text="Pink team wins!" />
+
+<unique vars="mIncrement mNotify mAt10 mAt20 mAt30 mAt40 mAt50 mAt60 mAt70 mAt80 mAt90" />
+<Door yon="0.001" shape="bspSliver0" deltaY="3" openSpeed="35" closeSpeed="100" open="pPurpleEnters" didOpen="mIncrement" close="mPurpleClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(5)" cx="1" cz="0" y="-10" />
+<Counter in="mIncrement" out="mNotify" n="kScaledPoints" />
+<Distributor in="mNotify" out.0="mAt10" out.1="mAt20" out.2="mAt30" out.3="mAt40" out.4="mAt50" out.5="mAt60" out.6="mAt70" out.7="mAt80" out.8="mAt90" out.9="mPurpleWins" restart="false" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt10" showEveryone="true" text="Purple team has 10 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt20" showEveryone="true" text="Purple team has 20 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt30" showEveryone="true" text="Purple team has 30 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt40" showEveryone="true" text="Purple team has 40 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt50" showEveryone="true" text="Purple team has made it halfway!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt60" showEveryone="true" text="Purple team has 60 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt70" showEveryone="true" text="Purple team has 70 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt80" showEveryone="true" text="Purple team has 80 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt90" showEveryone="true" text="Purple team has only 10 points to go!" />
+<Text sound="kSnText" volume="kTextVolume" in="mPurpleWins" showEveryone="true" text="Purple team wins!" />
+
+<unique vars="mIncrement mNotify mAt10 mAt20 mAt30 mAt40 mAt50 mAt60 mAt70 mAt80 mAt90" />
+<Door yon="0.001" shape="bspSliver0" deltaY="3" openSpeed="35" closeSpeed="100" open="pBlueEnters" didOpen="mIncrement" close="mBlueClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(6)" cx="3" cz="0" y="-10" />
+<Counter in="mIncrement" out="mNotify" n="kScaledPoints" />
+<Distributor in="mNotify" out.0="mAt10" out.1="mAt20" out.2="mAt30" out.3="mAt40" out.4="mAt50" out.5="mAt60" out.6="mAt70" out.7="mAt80" out.8="mAt90" out.9="mBlueWins" restart="false" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt10" showEveryone="true" text="Blue team has 10 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt20" showEveryone="true" text="Blue team has 20 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt30" showEveryone="true" text="Blue team has 30 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt40" showEveryone="true" text="Blue team has 40 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt50" showEveryone="true" text="Blue team has made it halfway!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt60" showEveryone="true" text="Blue team has 60 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt70" showEveryone="true" text="Blue team has 70 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt80" showEveryone="true" text="Blue team has 80 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt90" showEveryone="true" text="Blue team has only 10 points to go!" />
+<Text sound="kSnText" volume="kTextVolume" in="mBlueWins" showEveryone="true" text="Blue team wins!" />
+
+<unique vars="mIncrement mNotify mAt10 mAt20 mAt30 mAt40 mAt50 mAt60 mAt70 mAt80 mAt90" />
+<Door yon="0.001" shape="bspSliver0" deltaY="3" openSpeed="35" closeSpeed="100" open="pBlackEnters" didOpen="mIncrement" close="mBlackClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(7)" cx="5" cz="0" y="-10" />
+<Counter in="mIncrement" out="mNotify" n="kScaledPoints" />
+<Distributor in="mNotify" out.0="mAt10" out.1="mAt20" out.2="mAt30" out.3="mAt40" out.4="mAt50" out.5="mAt60" out.6="mAt70" out.7="mAt80" out.8="mAt90" out.9="mBlackWins" restart="false" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt10" showEveryone="true" text="Black team has 10 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt20" showEveryone="true" text="Black team has 20 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt30" showEveryone="true" text="Black team has 30 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt40" showEveryone="true" text="Black team has 40 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt50" showEveryone="true" text="Black team has made it halfway!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt60" showEveryone="true" text="Black team has 60 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt70" showEveryone="true" text="Black team has 70 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt80" showEveryone="true" text="Black team has 80 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt90" showEveryone="true" text="Black team has only 10 points to go!" />
+<Text sound="kSnText" volume="kTextVolume" in="mBlackWins" showEveryone="true" text="Black team wins!" />
+
+<unique vars="mIncrement mNotify mAt10 mAt20 mAt30 mAt40 mAt50 mAt60 mAt70 mAt80 mAt90" />
+<Door yon="0.001" shape="bspSliver0" deltaY="3" openSpeed="35" closeSpeed="100" open="pWhiteEnters" didOpen="mIncrement" close="mWhiteClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(8)" cx="7" cz="0" y="-10" />
+<Counter in="mIncrement" out="mNotify" n="kScaledPoints" />
+<Distributor in="mNotify" out.0="mAt10" out.1="mAt20" out.2="mAt30" out.3="mAt40" out.4="mAt50" out.5="mAt60" out.6="mAt70" out.7="mAt80" out.8="mAt90" out.9="mWhiteWins" restart="false" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt10" showEveryone="true" text="White team has 10 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt20" showEveryone="true" text="White team has 20 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt30" showEveryone="true" text="White team has 30 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt40" showEveryone="true" text="White team has 40 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt50" showEveryone="true" text="White team has made it halfway!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt60" showEveryone="true" text="White team has 60 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt70" showEveryone="true" text="White team has 70 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt80" showEveryone="true" text="White team has 80 points!" />
+<Text sound="kSnText" volume="kTextVolume" in="mAt90" showEveryone="true" text="White team has only 10 points to go!" />
+<Text sound="kSnText" volume="kTextVolume" in="mWhiteWins" showEveryone="true" text="White team wins!" />
+
+<!-- Hill ownership must be exclusive! -->
+<Timer in="pGreenEnters" wait="2" out.0="mYellowClose" out.1="mRedClose" out.2="mPinkClose" out.3="mPurpleClose" out.4="mBlueClose" out.5="mBlackClose" out.6="mWhiteClose" />
+<Timer in="pYellowEnters" wait="2" out.0="mGreenClose" out.1="mRedClose" out.2="mPinkClose" out.3="mPurpleClose" out.4="mBlueClose" out.5="mBlackClose" out.6="mWhiteClose" />
+<Timer in="pRedEnters" wait="2" out.0="mGreenClose" out.1="mYellowClose" out.2="mPinkClose" out.3="mPurpleClose" out.4="mBlueClose" out.5="mBlackClose" out.6="mWhiteClose" />
+<Timer in="pPinkEnters" wait="2" out.0="mGreenClose" out.1="mYellowClose" out.2="mRedClose" out.3="mPurpleClose" out.4="mBlueClose" out.5="mBlackClose" out.6="mWhiteClose" />
+<Timer in="pPurpleEnters" wait="2" out.0="mGreenClose" out.1="mYellowClose" out.2="mRedClose" out.3="mPinkClose" out.4="mBlueClose" out.5="mBlackClose" out.6="mWhiteClose" />
+<Timer in="pBlueEnters" wait="2" out.0="mGreenClose" out.1="mYellowClose" out.2="mRedClose" out.3="mPinkClose" out.4="mPurpleClose" out.5="mBlackClose" out.6="mWhiteClose" />
+<Timer in="pBlackEnters" wait="2" out.0="mGreenClose" out.1="mYellowClose" out.2="mRedClose" out.3="mPinkClose" out.4="mPurpleClose" out.5="mBlueClose" out.6="mWhiteClose" />
+<Timer in="pWhiteEnters" wait="2" out.0="mGreenClose" out.1="mYellowClose" out.2="mRedClose" out.3="mPinkClose" out.4="mPurpleClose" out.5="mBlueClose" out.6="mBlackClose" />

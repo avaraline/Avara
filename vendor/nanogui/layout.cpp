@@ -125,7 +125,7 @@ void BoxLayout::performLayout(NVGcontext *ctx, Widget *widget) const {
 }
 
 FlowLayout::FlowLayout(Orientation orientation, bool packed, int margin, int spacing)
-    : mOrientation(orientation), mPacked(packed), mMargin(margin), mSpacing(spacing) {
+    : mOrientation(orientation), mMargin(margin), mSpacing(spacing), mPacked(packed) {
 }
 
 Vector2i FlowLayout::preferredSize(NVGcontext *ctx, const Widget *widget) const {
@@ -179,7 +179,7 @@ void FlowLayout::performLayout(NVGcontext *ctx, Widget *widget) const {
 
     Vector2i pos(mMargin, yOffset + mMargin);
     int axis2max = 0, idx = 0, column = 0;
-    Span span[widget->childCount()];
+    Span *span = new Span[widget->childCount()];
 
     for (auto w : widget->children()) {
         if (!w->visible())
@@ -206,7 +206,7 @@ void FlowLayout::performLayout(NVGcontext *ctx, Widget *widget) const {
                 if (span[i].column == column - 1) {
                     // If this widget intersects the widget in the previous column on axis1, move it over.
                     if (pos[axis1] <= span[i].axis1max && (pos[axis1] + targetSize[axis1]) >= span[i].axis1min) {
-                        axis2pos = std::max(axis2pos, span[i].axis2max);
+                        axis2pos = std::max<int>(axis2pos, span[i].axis2max);
                     }
                 }
             }

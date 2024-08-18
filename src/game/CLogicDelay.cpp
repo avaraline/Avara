@@ -22,7 +22,7 @@ CAbstractActor *CLogicDelay::EndScript() {
     }
 
     if (CLogic::EndScript()) {
-        theDelay = ReadLongVar(iTimer);
+        theDelay = FrameNumber(ReadLongVar(iTimer));
         if (theDelay < 0) {
             theDelay = -theDelay;
             sleepTimer = theDelay + 1;
@@ -32,15 +32,15 @@ CAbstractActor *CLogicDelay::EndScript() {
             return this;
     }
 
-    Dispose();
+    delete this;
     return NULL;
 }
 
 void CLogicDelay::FrameAction() {
     short i;
     short theCount;
-    long thisFrame = itsGame->frameNumber;
-    long closestAlarm;
+    FrameNumber thisFrame = itsGame->frameNumber;
+    FrameNumber closestAlarm;
     Boolean foundAlarm;
 
     CLogic::FrameAction();
@@ -51,7 +51,7 @@ void CLogicDelay::FrameAction() {
             sleepTimer = 0;
             Trigger();
             if (!restart) {
-                Dispose();
+                delete this;
                 return;
             }
         }
@@ -73,7 +73,7 @@ void CLogicDelay::FrameAction() {
         while (theCount--) {
             for (i = 0; i < DELAY_PIPELINE; i++) {
                 if (scheduledFrame[i] == 0) {
-                    scheduledFrame[i] = itsGame->frameNumber + theDelay;
+                    scheduledFrame[i] = itsGame->FramesFromNow(theDelay);
                     break;
                 }
             }

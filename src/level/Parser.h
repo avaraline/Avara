@@ -8,7 +8,20 @@
 */
 
 #pragma once
+#include "ARGBColor.h"
 #include "Types.h"
+
+#include <string>
+
+#ifdef __has_include
+#  if __has_include(<optional>)                // Check for a standard library
+#    include <optional>
+#  elif __has_include(<experimental/optional>) // Check for an experimental version
+#    include <experimental/optional>           // Check if __has_include is present
+#  else                                        // Not found at all
+#     error "Missing <optional>"
+#  endif
+#endif
 
 enum {
     kLexPlus,
@@ -92,8 +105,33 @@ void LoadLevel(short whichLevel);
 double EvalVariable(long token, Boolean forceCalc);
 void WriteVariable(long token, double value);
 
-void RunThis(StringPtr theScript);
+void RunThis(std::string theScript);
 void AllocParser();
 void DeallocParser();
 void InitParser();
 void FreshCalc();
+
+// retrieve a variable by index as defined in LevelLoader.h or with the entry string
+// Example: ReadLongVariable(iGrenades) OR ReadLongVariable("grenades")
+short IndexForEntry(const char* entry);
+double ReadVariable(short index);
+double ReadVariable(const char *);
+double ReadDoubleVar(const char *);
+Fixed ReadFixedVar(short index);
+Fixed ReadFixedVar(const char *);
+long ReadLongVar(short index);
+long ReadLongVar(const char *);
+short ReadShortVar(short index);
+short ReadShortVar(const char *s);
+const std::optional<ARGBColor> ReadColorVar(short index);
+const std::optional<ARGBColor> ReadColorVar(const char *);
+std::string ReadStringVar(short index);
+std::string ReadStringVar(const char *);
+
+void ProgramVariable(short index, double value);
+void ProgramFixedVar(short index, Fixed value);
+void ProgramLongVar(short index, long value);
+void ProgramReference(short index, short ref);
+void ProgramOffsetAdd(short index, short ref, long addValue);
+void ProgramOffsetMultiply(short index, short ref, long addValue);
+void ProgramMessage(short index, long value);

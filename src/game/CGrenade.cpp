@@ -7,6 +7,8 @@
     Modified: Monday, August 26, 1996, 03:07
 */
 
+// #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
+
 #include "CGrenade.h"
 
 #include "CDepot.h"
@@ -17,15 +19,13 @@
 #define kGravity FIX3(120)
 #define kGrenadeFriction FIX3(10)
 
-void CGrenade::IWeapon(CDepot *theDepot) {
-    CWeapon::IWeapon(theDepot);
-
+CGrenade::CGrenade(CDepot *theDepot) : CWeapon(theDepot) {
     blastSound = 231;
 
     partCount = 1;
     LoadPart(0, 820);
 
-    mass = FIX(1);
+    mass = FIX1;
 }
 
 void CGrenade::PlaceParts() {
@@ -47,8 +47,15 @@ void CGrenade::PlaceParts() {
     CWeapon::PlaceParts();
 }
 
+void CGrenade::AdaptableSettings() {
+    // set variables that can change after a game pause
+    classicGravity = FMul(kGravity, itsGame->gravityRatio);
+    classicFriction = FIX1 - kGrenadeFriction;
+    FpsCoefficients(classicFriction, classicGravity, &friction, &gravity, &speedOffset);
+}
+
 long CGrenade::Arm(CSmartPart *aPart) {
-    gravity = FMul(kGravity, itsGame->gravityRatio);
+    AdaptableSettings();
 
     blastPower = itsDepot->grenadePower;
     shields = FIX3(100);
@@ -81,12 +88,15 @@ void CGrenade::Locate() {
     fullTransform[3][1] = 0;
     fullTransform[3][2] = 0;
 
+    speed[0] += (fullTransform[1][0] + 2 * fullTransform[2][0]);
+    speed[1] += (fullTransform[1][1] + 2 * fullTransform[2][1]);
+    speed[2] += (fullTransform[1][2] + 2 * fullTransform[2][2]);
 
-    double scaling = itsGame->FrameTimeScale();
+    // correct for high-FPS bias of grenades flying a little high initially (zero for classic FPS)
+    speed[1] -= speedOffset;
 
-    speed[0] += (fullTransform[1][0] + 2 * fullTransform[2][0]) * scaling;
-    speed[1] += (fullTransform[1][1] + 2 * fullTransform[2][1]) * scaling;
-    speed[2] += (fullTransform[1][2] + 2 * fullTransform[2][2]) * scaling;
+    FPS_DEBUG("GRENADE initial location = " << FormatVector(location, 3) << "\n");
+    FPS_DEBUG("GRENADE initial speed = " << FormatVector(speed, 3) << "\n");
 
     yaw = -FOneArcTan2(fullTransform[2][2], fullTransform[0][2]);
     MRotateY(FOneSin(-yaw), FOneCos(yaw), &fullTransform);
@@ -118,39 +128,50 @@ void CGrenade::FrameAction() {
 
     if (flyCount) {
         RayHitRecord rayHit;
-        Fixed realSpeed;
-        Fixed scaling = FIX((1 - pow(1-ToFloat(kGrenadeFriction), itsGame->FrameTimeScale())));
 
-        speed[0] -= FMul(speed[0], scaling);
-        speed[1] -= gravity + FMul(speed[1], scaling);
-        speed[2] -= FMul(speed[2], scaling);
+        speed[0] = FMul(speed[0], friction);
+        speed[1] = FMul(speed[1], friction) - gravity;
+        speed[2] = FMul(speed[2], friction);
+
+        FPS_DEBUG("\nframeNumber = " << itsGame->frameNumber << "\n");
+        FPS_DEBUG("GRENADE speed = " << FormatVector(speed, 3) << "\n");
 
         VECTORCOPY(rayHit.direction, speed);
         VECTORCOPY(rayHit.origin, location);
         rayHit.closestHit = NULL;
-        realSpeed = NormalizeVector(3, rayHit.direction);
-        rayHit.distance = realSpeed;
-
+        // add the sqrt(2)*radius of the grenade so that wall-kissing grenade explodes in similar spot as a mid-frame ray test
+        // (doesn't fall back to collision test)
+        // |  /
+        // | /
+        // |G  <- approaching wall at 45° needs sqrt(2)*radius to intersect wall... lower angles might pass collision instead
+        static Fixed addRad = sqrt(2)*partList[0]->enclosureRadius;
+        // use the smaller FPS-scaled rayLength to search a much smaller volume
+        Fixed rayLength = FpsCoefficient2(NormalizeVector(3, rayHit.direction)) + addRad;
+        rayHit.distance = rayLength;
         RayTestWithGround(&rayHit, kSolidBit);
 
-        if (realSpeed > rayHit.distance) {
-            realSpeed = rayHit.distance;
-            speed[0] = FMul(rayHit.direction[0], realSpeed);
-            speed[1] = FMul(rayHit.direction[1], realSpeed);
-            speed[2] = FMul(rayHit.direction[2], realSpeed);
+        // if the grenade path (ray test) intersects with an object during this frame
+        if (rayLength > rayHit.distance) {
+            // scale distance up to Classic so it's backed out properly when adding to location
+            Fixed classicRayDistance = ClassicCoefficient2(rayHit.distance);
+            speed[0] = FMul(rayHit.direction[0], classicRayDistance);
+            speed[1] = FMul(rayHit.direction[1], classicRayDistance);
+            speed[2] = FMul(rayHit.direction[2], classicRayDistance);
             doExplode = true;
+            FPS_DEBUG("GRENADE ray-intersect speed = " << FormatVector(speed, 3) << "\n");
         }
 
-        location[0] += speed[0];
-        location[1] += speed[1];
-        location[2] += speed[2];
+        location[0] += FpsCoefficient2(speed[0]);
+        location[1] += FpsCoefficient2(speed[1]);
+        location[2] += FpsCoefficient2(speed[2]);
+        FPS_DEBUG("GRENADE moving to location = " << FormatVector(location, 3) << "\n");
 
         UpdateSoundLink(itsSoundLink, location, speed, itsGame->soundTime);
 
         PlaceParts();
 
         if (hostIdent) {
-            if (flyCount > 5) {
+            if (flyCount > FpsFramesPerClassic(5)) {
                 ReleaseAttachment();
             } else {
                 CAbstractActor *oldHost;
@@ -162,16 +183,16 @@ void CGrenade::FrameAction() {
             }
         }
 
-        if (flyCount > 100) {
+        if (flyCount > FpsFramesPerClassic(100)) {
             doExplode = true;
         }
 
         BuildPartProximityList(location, partList[0]->bigRadius, kSolidBit);
 
-        if (location[1] <= 0 || DoCollisionTest(&proximityList.p)) {
-            location[0] -= speed[0];
-            location[1] -= speed[1];
-            location[2] -= speed[2];
+        if (location[1] <= 0 || doExplode || DoCollisionTest(&proximityList.p)) {
+            location[0] -= FpsCoefficient2(speed[0]);
+            location[1] -= FpsCoefficient2(speed[1]);
+            location[2] -= FpsCoefficient2(speed[2]);
             doExplode = true;
         }
 
@@ -215,16 +236,19 @@ void CGrenade::ShowTarget() {
             rayHit.origin[1] = tLoc[1];
             rayHit.origin[2] = tLoc[2];
 
+            // advance hypothetical location 5*64msec worth of classic frames
             for (i = 0; i < 5; i++) {
-                tSpeed[0] -= FMul(tSpeed[0], kGrenadeFriction);
-                tSpeed[1] -= gravity + FMul(tSpeed[1], kGrenadeFriction);
-                tSpeed[2] -= FMul(tSpeed[2], kGrenadeFriction);
+                // using classic timing & coefficients in the targeting calculation to keep it fast
+                tSpeed[0] = FMul(tSpeed[0], classicFriction);
+                tSpeed[1] = FMul(tSpeed[1], classicFriction) - classicGravity;
+                tSpeed[2] = FMul(tSpeed[2], classicFriction);
 
                 tLoc[0] += tSpeed[0];
                 tLoc[1] += tSpeed[1];
                 tLoc[2] += tSpeed[2];
             }
 
+            // draw directional vector over last 5 frames then test if it hits the ground
             rayHit.direction[0] = tLoc[0] - rayHit.origin[0];
             rayHit.direction[1] = tLoc[1] - rayHit.origin[1];
             rayHit.direction[2] = tLoc[2] - rayHit.origin[2];
@@ -266,5 +290,5 @@ void CGrenade::ShowTarget() {
 void CGrenade::PreLoadSounds() {
     CWeapon::PreLoadSounds();
 
-    gHub->PreLoadSample(201);
+    auto _ = AssetManager::GetOgg(201);
 }

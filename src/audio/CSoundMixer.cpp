@@ -99,10 +99,10 @@ void CSoundMixer::ISoundMixer(Fixed sampRate,
     Boolean stereoEnable,
     Boolean sample16Enable,
     Boolean interpolateEnable) {
-    OSErr iErr;
-    int globTemp;
+    //OSErr iErr;
+    //int globTemp;
     short i, j;
-    Vector rightVect = {FIX(1), 0, 0, 0};
+    Vector rightVect = {FIX1, 0, 0, 0};
 
     sample16flag = true;
 
@@ -110,7 +110,7 @@ void CSoundMixer::ISoundMixer(Fixed sampRate,
     samplingRate = sampRate ? sampRate : rate22khz;
 
     if (samplingRate == rate22khz) {
-        standardRate = FIX(1);
+        standardRate = FIX1;
     } else {
         standardRate = FDivNZ(rate22050hz, samplingRate >> 1) >> 1;
     }
@@ -128,7 +128,7 @@ void CSoundMixer::ISoundMixer(Fixed sampRate,
 
     frameTime = FMulDivNZ(soundBufferSize, FIX(500), samplingRate >> 1);
 
-    SetSoundEnvironment(FIX(343), FIX(1), 1);
+    SetSoundEnvironment(FIX(343), FIX1, 1);
 
     UpdateRightVector(rightVect);
     motion.loc[0] = motion.loc[1] = motion.loc[2] = 0;
@@ -192,8 +192,8 @@ void CSoundMixer::ISoundMixer(Fixed sampRate,
     StartTiming();
 
     size_t bufferRAM = sizeof(WordSample) * 2 * soundBufferSize;
-    doubleBuffers[0] = (WordSample *)malloc(bufferRAM);
-    doubleBuffers[1] = (WordSample *)malloc(bufferRAM);
+    doubleBuffers[0] = (WordSample *)NewPtr(bufferRAM);
+    doubleBuffers[1] = (WordSample *)NewPtr(bufferRAM);
 
     SilenceBuffers();
 
@@ -242,7 +242,7 @@ void CSoundMixer::PrepareScaleLookup() {
     }
 }
 
-void CSoundMixer::PrepareVolumeLookup() {
+void CSoundMixer::PrepareVolumeLookup(uint8_t mixerVolume /* 0-100 */) {
     WordSample *dest;
     short vol, samp;
 
@@ -251,17 +251,22 @@ void CSoundMixer::PrepareVolumeLookup() {
     if (sample16flag) {
         for (vol = 1; vol <= VOLUMERANGE; vol++) {
             for (samp = -SAMPLERANGE / 2; samp < SAMPLERANGE / 2; samp++) {
-                *dest++ = (samp * vol) << (16 - BITSPERSAMPLE - VOLUMEBITS);
+                *dest++ = (samp * vol * mixerVolume / 100) << (16 - BITSPERSAMPLE - VOLUMEBITS);
             }
         }
     } else {
         for (vol = 1; vol <= VOLUMERANGE; vol++) {
             for (samp = -SAMPLERANGE / 2; samp < SAMPLERANGE / 2; samp++) {
-                *dest++ = samp * vol;
+                *dest++ = (samp * vol * mixerVolume / 100);
             }
         }
     }
 }
+
+void CSoundMixer::SetVolume(uint8_t volume) {
+    PrepareVolumeLookup(std::min(volume, uint8_t(100)));
+}
+
 void CSoundMixer::SilenceBuffers() {
     for (int j = 0; j < 2; j++) {
         size_t numChannels = 2;
@@ -270,7 +275,7 @@ void CSoundMixer::SilenceBuffers() {
 }
 
 void CSoundMixer::Dispose() {
-    OSErr iErr;
+    //OSErr iErr;
     short i;
     MixerInfo *mix;
 

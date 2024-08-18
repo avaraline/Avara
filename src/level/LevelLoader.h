@@ -13,6 +13,10 @@
 #include <string>
 #include <vector>
 
+#include "ARGBColor.h"
+#include "ColorManager.h"
+#include "Parser.h"
+
 enum {
     iDesignerName,
     iLevelInformation,
@@ -261,22 +265,41 @@ enum {
     iAmbient,
     iAmbientColor,
     iLightsTable,
-    iLightsTableEnd = iLightsTable + 15, //	a 3 x 4 table
+    iLightsTableEnd = iLightsTable + 15, //	a 4 x 4 table
 
     // Advanced weapons
     iGrenadePower,
     iMissilePower,
     iMissileTurnRate,
     iMissileAcceleration,
+    iMissileArmedColor,
+    iMissileLaunchedColor,
 
     iMaxStartGrenades,
     iMaxStartMissiles,
     iMaxStartBoosts,
 
     //	Hulls
-    iFirstHull,
-    iSecondHull,
-    iThirdHull,
+    iHull01,
+    iHull02,
+    iHull03,
+    iHull04,
+    iHull05,
+    iHull06,
+    iHull07,
+    iHull08,
+    iHull09,
+    iHull10,
+    iHullName01,
+    iHullName02,
+    iHullName03,
+    iHullName04,
+    iHullName05,
+    iHullName06,
+    iHullName07,
+    iHullName08,
+    iHullName09,
+    iHullName10,
 
     //	Traction/friction control:
     iDefaultTraction,
@@ -294,20 +317,6 @@ enum {
     iVarInternalVariableCount
 };
 
-double ReadVariable(short index);
-Fixed ReadFixedVar(short index);
-long ReadLongVar(short index);
-long ReadColorVar(short index);
-std::string ReadStringVar(short index);
-
-void ProgramVariable(short index, double value);
-void ProgramFixedVar(short index, Fixed value);
-void ProgramLongVar(short index, long value);
-void ProgramReference(short index, short ref);
-void ProgramOffsetAdd(short index, short ref, long addValue);
-void ProgramOffsetMultiply(short index, short ref, long addValue);
-void ProgramMessage(short index, long value);
-
 enum {
     TextBegin = 150, //	6	TTxtPicRec	Begin text function
     TextEnd = 151, //	0	NIL	End text function
@@ -315,10 +324,12 @@ enum {
     StringEnd = 153 //	0	NIL	End string delimitation
 };
 
-bool LoadALF(std::string levelName);
+bool LoadALF(std::string levelPath);
 void GetLastArcLocation(Fixed *theLoc);
 Fixed GetLastArcDirection();
 Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle);
-uint32_t GetPixelColor();
-uint32_t GetOtherPixelColor();
+ARGBColor GetPixelColor();
+ARGBColor GetOtherPixelColor();
+ARGBColor GetTertiaryColor();
+ARGBColor GetQuaternaryColor();
 Fixed GetLastOval(Fixed *theLoc);

@@ -19,15 +19,15 @@ public:
     Boolean enabled;
     Boolean showEveryone;
 
-    long nextShowTime;
+    FrameNumber nextShowTime;
     long restartDelay;
     Vector location;
     Fixed radius;
-    long frequency;
+    FrameNumber frequency;
     Boolean areaFlag;
     short alignment;
 
-    long textTimer;
+    FrameNumber textTimer;
     long showTime;
 
     short soundId;
@@ -36,5 +36,5 @@ public:
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
     virtual void FrameAction();
-    virtual void Dispose();
+    virtual ~CTextActor();
 };

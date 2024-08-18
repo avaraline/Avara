@@ -10,11 +10,11 @@
 #include "CGlowActors.h"
 
 #include "CSmartPart.h"
+#include "Debug.h"
 
 extern Fixed FRandSeed;
 
-void CGlowActors::IAbstractActor() {
-    CPlacedActors::IAbstractActor();
+CGlowActors::CGlowActors() {
     canGlow = true;
     glow = 0;
 }
@@ -66,5 +66,15 @@ void CGlowActors::FrameAction() {
         }
     }
 
-    FRandSeed += location[0] + location[1] + location[2];
+    // all clients update their FRandSeed here, if they get out of sync
+    // then this number will be different and will be noticed in CNetManager::AutoLatencyControl
+    uint32_t locsum = 0;
+    if (maskBits & kSolidBit) {
+        // only add "solid" objects to the checksum because the location of
+        // non-solid objects (invisible/limbo/dead) isn't relevant and could cause frags
+        locsum = location[0] + location[1] + location[2];
+        UpdateFRandSeed(locsum);
+    }
+    DBG_Log("frag", "fn=%u, FRandSeed=%11d, locsum=%8d, Actor=%s",
+            gCurrentGame->frameNumber, (Fixed)FRandSeed, locsum, typeid(*this).name());
 }

@@ -19,5 +19,5 @@ public:
     virtual CAbstractActor *EndScript();
     virtual void FrameAction();
     virtual void WasHit(RayHitRecord *theHit, Fixed hitEnergy);
-    virtual void IAbstractActor();
+    CGlowActors();
 };

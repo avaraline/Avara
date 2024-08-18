@@ -47,7 +47,9 @@ void CParasite::BeginScript() {
 
 CAbstractActor *CParasite::EndScript() {
     if (CRealMovers::EndScript()) {
-        gHub->PreLoadSample(clampSound = ReadLongVar(iSound));
+        // Preload sounds.
+        auto _ = AssetManager::GetOgg(clampSound = ReadLongVar(iSound));
+        
         clampVolume = ReadFixedVar(iVolume);
         maxPower = ReadFixedVar(iMaxPower);
         energyDrain = ReadFixedVar(iDrain);
@@ -89,10 +91,8 @@ void CParasite::ReleaseAttachment() {
         }
     }
 }
-void CParasite::Dispose() {
+CParasite::~CParasite() {
     ReleaseAttachment();
-
-    CRealMovers::Dispose();
 }
 
 void CParasite::PlaceParts() {
@@ -121,14 +121,13 @@ void CParasite::ClampOn(CSmartPart *clampTo) {
     invHost = hostPart->GetInverseTransform();
 
     CombineTransforms(&partList[0]->itsTransform, &relation, invHost);
-    DoSound(clampSound, location, clampVolume, FIX(1));
+    DoSound(clampSound, location, clampVolume, FIX1);
 
     clamp.me = this;
     hostIdent = host->Attach(&clamp);
 }
 
 void CParasite::CourseCheck() {
-    CAbstractPlayer *closestTry;
     CAbstractPlayer *aPlayer;
     Fixed bestDistance;
     RayHitRecord ray;
@@ -209,7 +208,7 @@ void CParasite::FrameAction() {
 
         if (blastPower >= maxPower) {
             WasDestroyed();
-            SecondaryDamage(teamColor, -1);
+            SecondaryDamage(teamColor, -1, ksiParasiteBlast);
             return;
         }
     } else {

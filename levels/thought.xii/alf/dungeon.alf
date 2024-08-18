@@ -1,0 +1,186 @@
+<map>
+  <set wallYon="75" />
+  <Wall color="#565656" color.1="#000000" x="19.930555555555557" z="47.5" w="20" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="19.930555555555557" z="27.5" w="20" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="27.430555555555557" z="12.5" w="5" d="25" h="5" />
+  <Wall color="#565656" color.1="#000000" x="57.43055555555556" z="12.5" w="5" d="25" h="5" />
+  <Wall color="#565656" color.1="#000000" x="42.43055555555556" z="2.5" w="25" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="19.930555555555557" z="67.5" w="20" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="19.930555555555557" z="87.5" w="20" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="19.930555555555557" z="107.5" w="20" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="19.930555555555557" z="127.5" w="20" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="19.930555555555557" z="147.5" w="20" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="19.930555555555557" z="167.5" w="20" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="19.930555555555557" z="187.5" w="20" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="64.93055555555556" z="47.5" w="20" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="64.93055555555556" z="27.5" w="20" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="64.93055555555556" z="67.5" w="20" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="64.93055555555556" z="87.5" w="20" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="64.93055555555556" z="107.5" w="20" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="64.93055555555556" z="127.5" w="20" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="64.93055555555556" z="147.5" w="20" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="64.93055555555556" z="167.5" w="20" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="64.93055555555556" z="187.5" w="20" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="72.43055555555556" z="37.5" w="5" d="15" h="5" />
+  <Wall color="#565656" color.1="#000000" x="72.43055555555556" z="57.5" w="5" d="15" h="5" />
+  <Wall color="#565656" color.1="#000000" x="72.43055555555556" z="77.5" w="5" d="15" h="5" />
+  <Wall color="#565656" color.1="#000000" x="72.43055555555556" z="97.5" w="5" d="15" h="5" />
+  <Wall color="#565656" color.1="#000000" x="72.43055555555556" z="117.5" w="5" d="15" h="5" />
+  <Wall color="#565656" color.1="#000000" x="72.43055555555556" z="137.5" w="5" d="15" h="5" />
+  <Wall color="#565656" color.1="#000000" x="72.43055555555556" z="157.5" w="5" d="15" h="5" />
+  <Wall color="#565656" color.1="#000000" x="72.43055555555556" z="177.5" w="5" d="15" h="5" />
+  <Wall color="#565656" color.1="#000000" x="12.430555555555555" z="37.5" w="5" d="15" h="5" />
+  <Wall color="#565656" color.1="#000000" x="12.430555555555555" z="57.5" w="5" d="15" h="5" />
+  <Wall color="#565656" color.1="#000000" x="12.430555555555555" z="77.5" w="5" d="15" h="5" />
+  <Wall color="#565656" color.1="#000000" x="12.430555555555555" z="97.5" w="5" d="15" h="5" />
+  <Wall color="#565656" color.1="#000000" x="12.430555555555555" z="117.5" w="5" d="15" h="5" />
+  <Wall color="#565656" color.1="#000000" x="12.430555555555555" z="137.5" w="5" d="15" h="5" />
+  <Wall color="#565656" color.1="#000000" x="12.430555555555555" z="157.5" w="5" d="15" h="5" />
+  <Wall color="#565656" color.1="#000000" x="12.430555555555555" z="177.5" w="5" d="15" h="5" />
+  <Wall color="#565656" color.1="#000000" x="27.430555555555557" z="155" w="5" d="10" h="5" />
+  <unique vars="munlock mlock mchange" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mchange" deltaY="0" color="#7a4300" color.1="#000000" x="29.305555555555557" z="162.5" w="1.25" d="5" h="5" />
+  <Distributor in="mchange" out.0="munlock" out.1="mlock" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mlock" deltaY="0" color="#7a4300" color.1="#000000" x="28.055555555555557" z="162.5" w="1.25" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="42.43055555555556" z="187.5" w="25" d="5" h="5" />
+  <Incarnator cx="41.111111111111114" cz="172.43055555555557" angle="0" />
+  <set ambient.i="0" />
+  <Wall color="#565656" color.1="#000000" x="27.430555555555557" z="175" w="5" d="10" h="5" />
+  <unique vars="munlock mlock mchange" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mchange" deltaY="0" color="#7a4300" color.1="#000000" x="29.305555555555557" z="182.5" w="1.25" d="5" h="5" />
+  <Distributor in="mchange" out.0="munlock" out.1="mlock" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" yon="75" hitMsg="mlock" deltaY="0" color="#7a4300" color.1="#000000" x="28.055555555555557" z="182.5" w="1.25" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="27.430555555555557" z="135" w="5" d="10" h="5" />
+  <unique vars="munlock mlock mchange" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mchange" deltaY="0" color="#7a4300" color.1="#000000" x="29.305555555555557" z="142.5" w="1.25" d="5" h="5" />
+  <Distributor in="mchange" out.0="munlock" out.1="mlock" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mlock" deltaY="0" color="#7a4300" color.1="#000000" x="28.055555555555557" z="142.5" w="1.25" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="27.430555555555557" z="115" w="5" d="10" h="5" />
+  <unique vars="munlock mlock mchange" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mchange" deltaY="0" color="#7a4300" color.1="#000000" x="29.305555555555557" z="122.5" w="1.25" d="5" h="5" />
+  <Distributor in="mchange" out.0="munlock" out.1="mlock" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mlock" deltaY="0" color="#7a4300" color.1="#000000" x="28.055555555555557" z="122.5" w="1.25" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="27.430555555555557" z="95" w="5" d="10" h="5" />
+  <unique vars="munlock mlock mchange" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mchange" deltaY="0" color="#7a4300" color.1="#000000" x="29.305555555555557" z="102.5" w="1.25" d="5" h="5" />
+  <Distributor in="mchange" out.0="munlock" out.1="mlock" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mlock" deltaY="0" color="#7a4300" color.1="#000000" x="28.055555555555557" z="102.5" w="1.25" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="27.430555555555557" z="75" w="5" d="10" h="5" />
+  <unique vars="munlock mlock mchange" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mchange" deltaY="0" color="#7a4300" color.1="#000000" x="29.305555555555557" z="82.5" w="1.25" d="5" h="5" />
+  <Distributor in="mchange" out.0="munlock" out.1="mlock" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mlock" deltaY="0" color="#7a4300" color.1="#000000" x="28.055555555555557" z="82.5" w="1.25" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="27.430555555555557" z="55" w="5" d="10" h="5" />
+  <unique vars="munlock mlock mchange" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mchange" deltaY="0" color="#7a4300" color.1="#000000" x="29.305555555555557" z="62.5" w="1.25" d="5" h="5" />
+  <Distributor in="mchange" out.0="munlock" out.1="mlock" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mlock" deltaY="0" color="#7a4300" color.1="#000000" x="28.055555555555557" z="62.5" w="1.25" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="27.430555555555557" z="35" w="5" d="10" h="5" />
+  <unique vars="munlock mlock mchange" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mchange" deltaY="0" color="#7a4300" color.1="#000000" x="29.305555555555557" z="42.5" w="1.25" d="5" h="5" />
+  <Distributor in="mchange" out.0="munlock" out.1="mlock" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mlock" deltaY="0" color="#7a4300" color.1="#000000" x="28.055555555555557" z="42.5" w="1.25" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="57.43055555555556" z="35" w="5" d="10" h="5" />
+  <unique vars="munlock mlock mchange" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mchange" deltaY="0" color="#7a4300" color.1="#000000" x="55.55555555555556" z="42.5" w="1.25" d="5" h="5" />
+  <Distributor in="mchange" out.0="munlock" out.1="mlock" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mlock" deltaY="0" color="#7a4300" color.1="#000000" x="56.80555555555556" z="42.5" w="1.25" d="5" h="5" />
+  <WallDoor hitMsg="@release" open="@release" deltaY="15" didOpen="@rel2" color="#7a4300" color.1="#000000" x="42.43055555555556" z="28.75" w="25" d="2.5" h="5" />
+  <WallDoor open="@rel2" deltaY="15" color="#7a4300" color.1="#000000" x="42.43055555555556" z="26.25" w="25" d="2.5" h="5" />
+  <Ufo shield="-1" attack=".9" y="1" yon="75" start="@rel2" shotPower="1" shape="bspStarFighter" color="#000000" color.1="#012ce4" cx="39.93055555555556" cz="15" angle="180" />
+  <SkyColor color="#000000" color.1="#2d2d2d" />
+  <GroundColor color="#000000" />
+  <unique vars="mgo" />
+  <Ufo shield="10" attack=".9" y="1" start="mgo" hitMsg="mgo" shotPower="1" yon="75" color="#570500" color.1="#000000" cx="64.93055555555556" cz="57.56944444444445" angle="270" />
+  <unique vars="mgo" />
+  <Ufo shield="10" attack=".9" y="1" start="mgo" hitMsg="mgo" shotPower="1" yon="75" color="#570500" color.1="#000000" cx="64.93055555555556" cz="97.56944444444444" angle="270" />
+  <unique vars="mgo" />
+  <Ufo shield="10" attack=".9" y="1" start="mgo" hitMsg="mgo" shotPower="1" yon="75" color="#570500" color.1="#000000" cx="64.93055555555556" cz="137.56944444444446" angle="270" />
+  <unique vars="mgo" />
+  <Ufo shield="10" attack=".9" y="1" start="mgo" hitMsg="mgo" shotPower="1" color="#570500" color.1="#000000" cx="22.430555555555557" cz="177.56944444444446" angle="90" />
+  <unique vars="mgo" />
+  <Ufo shield="10" attack=".9" y="1" yon="75" start="mgo" hitMsg="mgo" shotPower="1" color="#570500" color.1="#000000" cx="19.930555555555557" cz="97.56944444444444" angle="90" />
+  <unique vars="mgo" />
+  <Parasite shield="-1" y="1" start="mgo" hitMsg="mgo" drain="0.01" scale=".05" shape="bspStarFighter" color="#000000" color.1="#e62100" cx="16.180555555555557" cz="54.09722222222223" angle="90" />
+  <unique vars="mgo" />
+  <Parasite shield="-1" y="1" start="mgo" hitMsg="mgo" drain="0.01" scale=".05" shape="bspStarFighter" color="#000000" color.1="#e62100" cx="19.305555555555557" cz="54.09722222222223" angle="90" />
+  <unique vars="mgo" />
+  <Parasite shield="-1" y="1" start="mgo" hitMsg="mgo" drain="0.01" scale=".05" shape="bspStarFighter" color="#000000" color.1="#e62100" cx="22.430555555555557" cz="54.09722222222223" angle="90" />
+  <unique vars="mgo" />
+  <Parasite shield="-1" y="1" start="mgo" hitMsg="mgo" drain="0.01" scale=".05" shape="bspStarFighter" color="#000000" color.1="#e62100" cx="16.180555555555557" cz="56.59722222222223" angle="90" />
+  <unique vars="mgo" />
+  <Parasite shield="-1" y="1" start="mgo" hitMsg="mgo" drain="0.01" scale=".05" shape="bspStarFighter" color="#000000" color.1="#e62100" cx="19.305555555555557" cz="56.59722222222223" angle="90" />
+  <unique vars="mgo" />
+  <Parasite shield="-1" y="1" start="mgo" hitMsg="mgo" drain="0.01" scale=".05" shape="bspStarFighter" color="#000000" color.1="#e62100" cx="22.430555555555557" cz="56.59722222222223" angle="90" />
+  <unique vars="mgo" />
+  <Parasite shield="-1" y="1" start="mgo" hitMsg="mgo" drain="0.01" scale=".05" shape="bspStarFighter" color="#000000" color.1="#e62100" cx="16.180555555555557" cz="59.09722222222223" angle="90" />
+  <unique vars="mgo" />
+  <Parasite shield="-1" y="1" start="mgo" hitMsg="mgo" drain="0.01" scale=".05" shape="bspStarFighter" color="#000000" color.1="#e62100" cx="19.305555555555557" cz="59.09722222222223" angle="90" />
+  <unique vars="mgo" />
+  <Parasite shield="-1" y="1" start="mgo" hitMsg="mgo" drain="0.01" scale=".05" shape="bspStarFighter" color="#000000" color.1="#e62100" cx="22.430555555555557" cz="59.09722222222223" angle="90" />
+  <unique vars="mgo" />
+  <Parasite shield="-1" y="1" start="mgo" hitMsg="mgo" drain="0.01" scale=".05" shape="bspStarFighter" color="#000000" color.1="#e62100" cx="16.180555555555557" cz="61.59722222222223" angle="90" />
+  <unique vars="mgo" />
+  <Parasite shield="-1" y="1" start="mgo" hitMsg="mgo" drain="0.01" scale=".05" shape="bspStarFighter" color="#000000" color.1="#e62100" cx="19.305555555555557" cz="61.59722222222223" angle="90" />
+  <unique vars="mgo" />
+  <Parasite shield="-1" y="1" start="mgo" hitMsg="mgo" drain="0.01" scale=".05" shape="bspStarFighter" color="#000000" color.1="#e62100" cx="22.430555555555557" cz="61.59722222222223" angle="90" />
+  <Wall color="#565656" color.1="#000000" x="57.43055555555556" z="55" w="5" d="10" h="5" />
+  <unique vars="munlock mlock mchange" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mchange" deltaY="0" color="#7a4300" color.1="#000000" x="55.55555555555556" z="62.5" w="1.25" d="5" h="5" />
+  <Distributor in="mchange" out.0="munlock" out.1="mlock" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mlock" deltaY="0" color="#7a4300" color.1="#000000" x="56.80555555555556" z="62.5" w="1.25" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="57.43055555555556" z="75" w="5" d="10" h="5" />
+  <unique vars="munlock mlock mchange" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mchange" deltaY="0" color="#7a4300" color.1="#000000" x="55.55555555555556" z="82.5" w="1.25" d="5" h="5" />
+  <Distributor in="mchange" out.0="munlock" out.1="mlock" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mlock" deltaY="0" color="#7a4300" color.1="#000000" x="56.80555555555556" z="82.5" w="1.25" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="57.43055555555556" z="95" w="5" d="10" h="5" />
+  <unique vars="munlock mlock mchange" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mchange" deltaY="0" color="#7a4300" color.1="#000000" x="55.55555555555556" z="102.5" w="1.25" d="5" h="5" />
+  <Distributor in="mchange" out.0="munlock" out.1="mlock" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mlock" deltaY="0" color="#7a4300" color.1="#000000" x="56.80555555555556" z="102.5" w="1.25" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="57.43055555555556" z="115" w="5" d="10" h="5" />
+  <unique vars="munlock mlock mchange" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mchange" deltaY="0" color="#7a4300" color.1="#000000" x="55.55555555555556" z="122.5" w="1.25" d="5" h="5" />
+  <Distributor in="mchange" out.0="munlock" out.1="mlock" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mlock" deltaY="0" color="#7a4300" color.1="#000000" x="56.80555555555556" z="122.5" w="1.25" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="57.43055555555556" z="135" w="5" d="10" h="5" />
+  <unique vars="munlock mlock mchange" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mchange" deltaY="0" color="#7a4300" color.1="#000000" x="55.55555555555556" z="142.5" w="1.25" d="5" h="5" />
+  <Distributor in="mchange" out.0="munlock" out.1="mlock" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mlock" deltaY="0" color="#7a4300" color.1="#000000" x="56.80555555555556" z="142.5" w="1.25" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="57.43055555555556" z="155" w="5" d="10" h="5" />
+  <unique vars="munlock mlock mchange" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mchange" deltaY="0" color="#7a4300" color.1="#000000" x="55.55555555555556" z="162.5" w="1.25" d="5" h="5" />
+  <Distributor in="mchange" out.0="munlock" out.1="mlock" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mlock" deltaY="0" color="#7a4300" color.1="#000000" x="56.80555555555556" z="162.5" w="1.25" d="5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="57.43055555555556" z="175" w="5" d="10" h="5" />
+  <unique vars="munlock mlock mchange" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mchange" deltaY="0" color="#7a4300" color.1="#000000" x="55.55555555555556" z="182.5" w="1.25" d="5" h="5" />
+  <Distributor in="mchange" out.0="munlock" out.1="mlock" />
+  <WallDoor open="munlock" close="mlock" deltaZ="-5" hitMsg="mlock" deltaY="0" color="#7a4300" color.1="#000000" x="56.80555555555556" z="182.5" w="1.25" d="5" h="5" />
+  <set baseHeight="5" />
+  <Wall color="#565656" color.1="#000000" x="42.43055555555556" z="17.5" w="25" d="25" h="5" />
+  <Wall color="#565656" color.1="#000000" x="42.43055555555556" z="45" w="25" d="30" h="5" />
+  <Wall color="#565656" color.1="#000000" x="42.43055555555556" z="75" w="25" d="30" h="5" />
+  <Wall color="#565656" color.1="#000000" x="42.43055555555556" z="105" w="25" d="30" h="5" />
+  <Wall color="#565656" color.1="#000000" x="42.43055555555556" z="135" w="25" d="30" h="5" />
+  <Wall color="#565656" color.1="#000000" x="42.43055555555556" z="165" w="25" d="30" h="5" />
+  <Wall color="#565656" color.1="#000000" x="42.43055555555556" z="185" w="25" d="10" h="5" />
+  <Wall color="#565656" color.1="#000000" x="19.930555555555557" z="36.25" w="20" d="22.5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="19.930555555555557" z="57.8125" w="20" d="20.625" h="5" />
+  <Wall color="#565656" color.1="#000000" x="19.930555555555557" z="78.4375" w="20" d="20.625" h="5" />
+  <Wall color="#565656" color.1="#000000" x="19.930555555555557" z="99.0625" w="20" d="20.625" h="5" />
+  <Wall color="#565656" color.1="#000000" x="19.930555555555557" z="119.6875" w="20" d="20.625" h="5" />
+  <Wall color="#565656" color.1="#000000" x="19.930555555555557" z="140.3125" w="20" d="20.625" h="5" />
+  <Wall color="#565656" color.1="#000000" x="19.930555555555557" z="160.9375" w="20" d="20.625" h="5" />
+  <Wall color="#565656" color.1="#000000" x="19.930555555555557" z="180.625" w="20" d="18.75" h="5" />
+  <Wall color="#565656" color.1="#000000" x="64.93055555555556" z="178.75" w="20" d="22.5" h="5" />
+  <Wall color="#565656" color.1="#000000" x="64.93055555555556" z="157.1875" w="20" d="20.625" h="5" />
+  <Wall color="#565656" color.1="#000000" x="64.93055555555556" z="136.5625" w="20" d="20.625" h="5" />
+  <Wall color="#565656" color.1="#000000" x="64.93055555555556" z="115.9375" w="20" d="20.625" h="5" />
+  <Wall color="#565656" color.1="#000000" x="64.93055555555556" z="95.3125" w="20" d="20.625" h="5" />
+  <Wall color="#565656" color.1="#000000" x="64.93055555555556" z="74.6875" w="20" d="20.625" h="5" />
+  <Wall color="#565656" color.1="#000000" x="64.93055555555556" z="54.0625" w="20" d="20.625" h="5" />
+  <Wall color="#565656" color.1="#000000" x="64.93055555555556" z="34.375" w="20" d="18.75" h="5" />
+</map>

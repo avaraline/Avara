@@ -1,0 +1,55 @@
+<map>
+  <GroundColor color="#009600" />
+  <SkyColor color="#73fdff" color.1="#d4feff" />
+  <set designer="Carlos Castillo-Garsow" information="Slide down the waterslide" />
+  <WallDoor deltaY="0" midRoll="-10" roll="10" openSpeed="4" closeSpeed="4" openSound="0" closeSound="0" stepOnMsg="@seesaw" open="@see" close="@saw" color="#73fdff" color.1="#d4feff" />
+  <Distributor in="@seesaw" out.0="@see" out.1="@saw" />
+  <set baseHeight="30" />
+  <Wall color="#686868" color.1="#000000" x="25.208333333333336" z="17.5" w="10" d="10" h="0.25" />
+  <Ramp deltaY="-10" friction="-.2" traction="0" thickness=".1" color="#73fdff" color.1="#000000" x="35.208333333333336" z="17.5" w="10" d="5" h="0" angle="270" />
+  <Ramp deltaY="-10" friction="-.2" traction="0" thickness="1" color="#d4feff" color.1="#000000" x="35.208333333333336" z="13.75" w="10" d="2.5" h="0" angle="270" />
+  <Ramp deltaY="-10" friction="-.2" traction="0" thickness="1" color="#d4feff" color.1="#000000" x="35.208333333333336" z="21.25" w="10" d="2.5" h="0" angle="270" />
+  <Field deltaX=".1" color="#d4feff" color.1="#000000" x="30.833333333333336" z="17.5" w="1.25" d="5" h="20" cx="33.958333333333336" cz="21.25" angle="270" y="-10" />
+  <Incarnator cx="22.708333333333336" cz="15" angle="135" />
+  <Incarnator cx="22.708333333333336" cz="20" angle="45" />
+  <set baseHeight="20" />
+  <Ramp deltaY="-3" friction="-.2" traction="0" thickness=".1" color="#73fdff" color.1="#000000" x="42.708333333333336" z="25.625" w="5" d="26.25" h="0" angle="270" />
+  <Ramp deltaY="-3" friction="-.2" traction="0" thickness=".1" color="#73fdff" color.1="#000000" x="47.708333333333336" z="25.625" w="5" d="26.25" h="0" angle="90" />
+  <Wall color="#d4feff" color.1="#000000" x="50.833333333333336" z="25.625" w="1.25" d="26.25" h="4.5" />
+  <Wall color="#d4feff" color.1="#000000" x="39.583333333333336" z="30.625" w="1.25" d="16.25" h="4.5" />
+  <set baseHeight="17" />
+  <Ramp deltaY="-5" friction="-.2" traction="0" thickness="1" color="#73fdff" color.1="#000000" x="45.208333333333336" z="45.625" w="5" d="13.75" h="0" angle="0" />
+  <Ramp deltaY="2.5" y="-5" friction="-.2" traction="0" thickness="1" color="#73fdff" color.1="#000000" x="45.208333333333336" z="55" w="5" d="5" h="0" angle="0" />
+  <set baseHeight="0" />
+  <Wall color="#d4feff" color.1="#000000" x="45.208333333333336" z="70.625" w="20" d="1.25" h="2" />
+  <Wall color="#d4feff" color.1="#000000" x="55.833333333333336" z="81.25" w="1.25" d="20" h="2" />
+  <Wall color="#d4feff" color.1="#000000" x="34.583333333333336" z="81.25" w="1.25" d="20" h="2" />
+  <Wall color="#d4feff" color.1="#000000" x="45.208333333333336" z="91.875" w="20" d="1.25" h="2" />
+  <Field visible="true" color="#73fdff" color.1="#000000" x="45.208333333333336" z="81.25" w="20" d="20" h="1.75" cx="45.76388888888889" cz="53.05555555555556" angle="0" />
+  <set baseHeight="17" />
+  <Field deltaZ=".1" deltaX=".1" color="#fffed5" color.1="#000000" x="45.13888888888889" z="14.305555555555557" w="10" d="3.75" h="4.5" cx="45.76388888888889" cz="53.05555555555556" angle="0" />
+  <Field deltaZ=".1" deltaX=".1" color="#fffed5" color.1="#000000" x="45.13888888888889" z="18.055555555555557" w="10" d="3.75" h="4.5" cx="45.76388888888889" cz="53.05555555555556" angle="0" />
+  <Field deltaX="-.1" deltaZ=".1" color="#ffd5a9" color.1="#000000" x="45.13888888888889" z="21.805555555555557" w="10" d="3.75" h="4.5" cx="45.76388888888889" cz="53.05555555555556" angle="0" />
+  <Field deltaX=".1" deltaZ=".1" color="#ffd6d5" color.1="#000000" x="45.13888888888889" z="25.555555555555557" w="10" d="3.75" h="4.5" cx="45.76388888888889" cz="53.05555555555556" angle="0" />
+  <Field deltaX="-.1" deltaZ=".1" color="#ffd5a9" color.1="#000000" x="45.13888888888889" z="29.305555555555557" w="10" d="3.75" h="4.5" cx="45.76388888888889" cz="53.05555555555556" angle="0" />
+  <Field deltaX=".1" deltaZ=".1" color="#ffd6d5" color.1="#000000" x="45.13888888888889" z="33.05555555555556" w="10" d="3.75" h="4.5" cx="45.76388888888889" cz="53.05555555555556" angle="0" />
+  <Field deltaX="-.1" deltaZ=".1" color="#ffd5a9" color.1="#000000" x="47.63888888888889" z="36.80555555555556" w="5" d="3.75" h="4.5" cx="45.76388888888889" cz="53.05555555555556" angle="0" />
+  <Field deltaX=".1" deltaZ=".1" color="#ffd6d5" color.1="#000000" x="42.708333333333336" z="36.80555555555556" w="5" d="3.75" h="4.5" cx="45.76388888888889" cz="53.05555555555556" angle="0" />
+  <set wallHeight="25" baseHeight="0" />
+  <Ramp deltaY="-6" y="8" friction="-.2" traction="0" thickness="1" color="#73fdff" color.1="#000000" x="45.208333333333336" z="64.375" w="5" d="13.75" h="0" angle="0" />
+  <Wall color="#d4feff" color.1="#000000" x="49.583333333333336" z="46.875" w="3.75" d="16.25" h="0" />
+  <Wall color="#d4feff" color.1="#000000" x="49.583333333333336" z="62.5" w="3.75" d="15" h="0" />
+  <Wall color="#d4feff" color.1="#000000" x="40.833333333333336" z="46.875" w="3.75" d="16.25" h="0" />
+  <Wall color="#d4feff" color.1="#000000" x="40.833333333333336" z="62.5" w="3.75" d="15" h="0" />
+  <set baseHeight="0" wallHeight="0.01" />
+  <WallDoor stepOnMsg="@open" open="@open" close="@close" deltaY="30" openSpeed=".6" closeSpeed="5" color="#8a8a8a" color.1="#000000" x="12.708333333333334" z="17.5" w="5" d="5" h="0" />
+  <WallDoor stepOnMsg="@close1" midY="30" color="#8a8a8a" color.1="#000000" x="17.708333333333336" z="17.5" w="5" d="5" h="0" />
+  <Timer in="@close1" out="@close" wait="25" />
+  <WallDoor stepOnMsg="@close1" color="#8a8a8a" color.1="#000000" x="7.708333333333334" z="17.5" w="5" d="5" h="0" />
+  <Timer in="@close1" out="@close" wait="25" />
+  <set baseHeight="17" />
+  <Field deltaZ=".1" color="#fffed5" color.1="#000000" x="45.13888888888889" z="41.80555555555556" w="5" d="6.25" h="4.5" cx="45.69444444444444" cz="63.05555555555556" angle="0" />
+  <set baseHeight="30" />
+  <Incarnator cx="27.708333333333336" cz="15" angle="135" />
+  <Incarnator cx="27.708333333333336" cz="20" angle="45" />
+</map>

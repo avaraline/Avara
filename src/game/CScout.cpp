@@ -6,9 +6,11 @@
     Created: Wednesday, March 15, 1995, 07:48
     Modified: Monday, September 16, 1996, 19:31
 */
+// #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
 
 #include "CScout.h"
 
+#include "AbstractRenderer.h"
 #include "CAbstractPlayer.h"
 #include "CSmartPart.h"
 #include "CViewParameters.h"
@@ -26,9 +28,7 @@
 
 #define FOLLOWRADIUS 10
 
-void CScout::IScout(CAbstractPlayer *thePlayer, short theTeam, uint32_t longTeamColor) {
-    IAbstractActor();
-
+CScout::CScout(CAbstractPlayer *thePlayer, short theTeam, ARGBColor longTeamColor) {
     mass = FIX(20);
     baseMass = FIX(40);
     teamColor = theTeam;
@@ -44,11 +44,12 @@ void CScout::IScout(CAbstractPlayer *thePlayer, short theTeam, uint32_t longTeam
 
     partCount = 1;
     LoadPart(0, kScoutBSP);
-    partList[0]->ReplaceColor(kMarkerColor, longTeamColor);
-    partList[0]->userFlags |= CBSPUserFlags::kCullBackfaces;
+    partList[0]->ReplaceColor(*ColorManager::getMarkerColor(0), longTeamColor);
 
     hitSoundId = 220;
-    gHub->PreLoadSample(hitSoundId);
+
+    // Preload sounds.
+    auto _ = AssetManager::GetOgg(hitSoundId);
 
     glow = 0;
 }
@@ -70,8 +71,10 @@ void CScout::PlaceParts() {
 Fixed CScout::MoveToTarget() {
     Vector delta;
     Vector course;
-    short alpha;
     Fixed dist;
+
+    FPS_DEBUG("CScout::MoveToTarget frameNumber = " << itsGame->frameNumber <<
+              ", speed = " << FDistanceEstimate(speed[0], speed[1], speed[2]) << "\n");
 
     delta[0] = targetPosition[0] - location[0];
     delta[1] = targetPosition[1] - location[1];
@@ -79,15 +82,11 @@ Fixed CScout::MoveToTarget() {
 
     dist = FDistanceEstimate(delta[0], delta[1], delta[2]);
 
-    if (dist < FIX3(100)) {
+    if (dist < FpsCoefficient2(FIX3(100))) {
         course[0] = -speed[0] >> 1;
         course[1] = -speed[1] >> 1;
         course[2] = -speed[2] >> 1;
     } else {
-        Fixed speedEstimate;
-        Fixed framesEstimate;
-        Fixed revisedDistance;
-
         delta[0] -= speed[0] * kScoutCourseCorrector;
         delta[1] -= speed[1] * kScoutCourseCorrector;
         delta[2] -= speed[2] * kScoutCourseCorrector;
@@ -100,20 +99,25 @@ Fixed CScout::MoveToTarget() {
         course[2] = FMul(delta[2], kScoutAcceleration);
     }
 
-    speed[0] = FMul(speed[0] + course[0], kScoutFriction);
-    speed[1] = FMul(speed[1] + course[1], kScoutFriction);
-    speed[2] = FMul(speed[2] + course[2], kScoutFriction);
+    Fixed fpsFriction, fpsCoeff2;
+    // both terms are multiplied by kScoutFriction
+    FpsCoefficients(kScoutFriction, kScoutFriction, &fpsFriction, &fpsCoeff2);
+    speed[0] = FMul(speed[0], fpsFriction) + FMul(course[0], fpsCoeff2);
+    speed[1] = FMul(speed[1], fpsFriction) + FMul(course[1], fpsCoeff2);
+    speed[2] = FMul(speed[2], fpsFriction) + FMul(course[2], fpsCoeff2);
 
-    location[0] += speed[0];
-    location[1] += speed[1];
-    location[2] += speed[2];
+    location[0] += FpsCoefficient2(speed[0]);
+    location[1] += FpsCoefficient2(speed[1]);
+    location[2] += FpsCoefficient2(speed[2]);
+
+    FPS_DEBUG("CScout::MoveToTarget location = " << FormatVector(location, 3) <<
+                                    ", speed = " << FormatVector(speed, 3) << "\n");
 
     return dist;
 }
 
 void CScout::FrameAction() {
     Vector oldLocation;
-    Fixed delta[2];
     Fixed distance;
     Fixed oldHeading;
     Fixed baseHeight = itsPlayer->scoutBaseHeight + itsPlayer->location[1];
@@ -124,7 +128,8 @@ void CScout::FrameAction() {
     VECTORCOPY(oldLocation, location);
 
     if (nextRotateFlag)
-        heading += TURNSPEED;
+        heading += FpsCoefficient2(TURNSPEED);
+    FPS_DEBUG("CScout::FrameAction heading = " << heading << "\n");
 
     switch (action) {
         case kScoutFollow:
@@ -238,10 +243,8 @@ void CScout::ToggleState(short command) {
 }
 
 void CScout::ControlViewPoint() {
-    CViewParameters *theView;
-
-    theView = itsGame->itsView;
-    theView->LookFrom(location[0] + FIX3(100), location[1] + FIX3(100), location[2]);
-    theView->LookAtPart(itsPlayer->viewPortPart);
-    theView->PointCamera();
+    auto vp = gRenderer->viewParams;
+    vp->LookFrom(location[0] + FIX3(100), location[1] + FIX3(100), location[2]);
+    vp->LookAtPart(itsPlayer->viewPortPart);
+    vp->PointCamera();
 }

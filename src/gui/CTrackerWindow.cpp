@@ -40,7 +40,7 @@ public:
                                                  nanogui::Alignment::Middle, 0, 15));
         
         nanogui::Button *cancelButton = new nanogui::Button(panel2, "Cancel");
-        cancelButton->setCallback([this, avara] {
+        cancelButton->setCallback([this] {
             this->dispose();
         });
         nanogui::Button *connectButton = new nanogui::Button(panel2, "Connect");
@@ -80,13 +80,13 @@ public:
         std::string btnStr(password ? "Connect..." : "Connect");
         nanogui::Button *btn = new nanogui::Button(this, btnStr);
         //btn->setFixedWidth(100);
-        btn->setCallback([this, line1, password] {
+        btn->setCallback([line1, password] {
             CAvaraAppImpl *avara = (CAvaraAppImpl *)gApplication;
             
             //connect if not hosting
             if(avara->GetNet()->netStatus != kServerNet) {
                 if(password == true)
-                    CWindow *passwordWindow = new PasswordConnect(avara, line1);
+                    new PasswordConnect(avara, line1);
                 else
                     avara->GetNet()->ChangeNet(kClientNet, line1);
             }
@@ -184,7 +184,7 @@ void CTrackerWindow::Query() {
         while (resultsBox->childCount() > 0) {
             resultsBox->removeChild(0);
         }
-        int serverCount = apiData["games"].size();
+        auto serverCount = apiData["games"].size();
         for (int i = 0; i < serverCount; i++) {
             auto game = apiData["games"][i];
             std::string players;

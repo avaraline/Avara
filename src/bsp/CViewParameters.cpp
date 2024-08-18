@@ -11,7 +11,6 @@
 
 #include "CBSPPart.h"
 #include "FastMat.h"
-#include "AvaraGL.h"
 
 #define PYRAMIDSCALE >> 2
 
@@ -19,11 +18,11 @@ void CViewParameters::CalculateViewPyramidCorners() {
     short i;
     Fixed fixedDimH, fixedDimV;
 
-    fixedDimH = ((long)viewPixelDimensions.h) << 16;
-    fixedDimV = ((long)viewPixelDimensions.v) << 16;
+    fixedDimH = FIX(viewPixelDimensions.h);
+    fixedDimV = FIX(viewPixelDimensions.v);
 
     for (i = 0; i < 8; i++)
-        corners[i][3] = FIX(1); //	W components for all corners.
+        corners[i][3] = FIX1; //	W components for all corners.
 
     for (i = 0; i < 4; i++) //	Z components at hither and yon.
     {
@@ -63,22 +62,22 @@ void CViewParameters::CalculateViewPyramidCorners() {
 void CViewParameters::CalculateViewPyramidNormals() {
     normal[0][0] = -screenScale;
     normal[0][1] = 0; //	No Y component
-    normal[0][2] = ((long)viewPixelCenter.h) << 16;
+    normal[0][2] = FIX(viewPixelCenter.h);
     NormalizeVector(3, normal[0]);
 
     normal[1][0] = screenScale;
     normal[1][1] = 0; //	No Y component
-    normal[1][2] = ((long)viewPixelDimensions.h - viewPixelCenter.h) << 16;
+    normal[1][2] = FIX(viewPixelDimensions.h - viewPixelCenter.h);
     NormalizeVector(3, normal[1]);
 
     normal[2][0] = 0; //	No X component
     normal[2][1] = -screenScale;
-    normal[2][2] = ((long)viewPixelCenter.v) << 16;
+    normal[2][2] = FIX(viewPixelCenter.v);
     NormalizeVector(3, normal[2]);
 
     normal[3][0] = 0; //	No X component
     normal[3][1] = screenScale;
-    normal[3][2] = ((long)viewPixelDimensions.v - viewPixelCenter.v) << 16;
+    normal[3][2] = FIX(viewPixelDimensions.v - viewPixelCenter.v);
     NormalizeVector(3, normal[3]);
 }
 
@@ -90,27 +89,25 @@ void CViewParameters::SetViewRect(short width, short height, short centerX, shor
         viewPixelDimensions.h = width;
         viewPixelDimensions.v = height;
         viewWidth = FMulDivNZ(FIX3(220), viewPixelDimensions.h, 640);
-
-        AvaraGLViewport(width, height);
         Recalculate();
     }
 }
 
 void CViewParameters::Recalculate() {
-    screenScale = FMulDivNZ(((long)viewPixelDimensions.h) << 16, viewDistance, viewWidth);
+    screenScale = FMulDivNZ(FIX(viewPixelDimensions.h), viewDistance, std::max(1, viewWidth));
 
-    xOffset = ((long)viewPixelCenter.h) << 16;
-    yOffset = ((long)viewPixelCenter.v) << 16;
+    xOffset = FIX(viewPixelCenter.h);
+    yOffset = FIX(viewPixelCenter.v);
 
-    fWidth = ((long)viewPixelDimensions.h) << 16;
-    fHeight = ((long)viewPixelDimensions.v) << 16;
+    fWidth = FIX(viewPixelDimensions.h);
+    fHeight = FIX(viewPixelDimensions.v);
 
     CalculateViewPyramidNormals();
 }
 
-void CViewParameters::IViewParameters() {
-    Vector *vt;
-    short i;
+CViewParameters::CViewParameters() {
+    //Vector *vt;
+    uint8_t i;
     // GrafPtr			curPort;
 
     lightSeed = 1;
@@ -119,13 +116,14 @@ void CViewParameters::IViewParameters() {
 
     for (i = 0; i < MAXLIGHTS; i++) {
         lightMode[i] = kLightOff;
+        dirLightSettings[i] = LightSettings();
     }
 
     OneMatrix(&viewMatrix);
 
     ambientLight = 32768L;
 
-    SetLight(0, 0, FIX(45), FIX3(900) - ambientLight, kLightGlobalCoordinates);
+    SetLight(0, 0, FIX(45), FIX3(900) - ambientLight, DEFAULT_LIGHT_COLOR, kLightGlobalCoordinates);
 
     hitherBound = FIX3(1000); //	0.5 m
     yonBound = FIX(500); //	500 m
@@ -144,10 +142,6 @@ void CViewParameters::IViewParameters() {
     dirtyLook = false;
     inverseDone = false;
     showTransparent = false;
-}
-
-void CViewParameters::Dispose() {
-    CDirectObject::Dispose();
 }
 
 void CViewParameters::LookFrom(Fixed x, Fixed y, Fixed z) {
@@ -204,6 +198,7 @@ void CViewParameters::PointCamera() {
         smallVector[1] = delta[2];
 
         length = VectorLength(2, smallVector);
+        if (length == 0) { return; }
         mb[0][0] = FDiv(smallVector[1], length);
         mb[2][2] = mb[0][0];
         mb[0][2] = FDiv(smallVector[0], length);
@@ -223,8 +218,6 @@ void CViewParameters::PointCamera() {
         mb[2][1] = -mb[1][2];
 
         CombineTransforms(&mc, &viewMatrix, &mb);
-
-        AvaraGLSetView(ToFloatMat(&viewMatrix));
     }
 }
 
@@ -245,10 +238,15 @@ void CViewParameters::SetLightValues(short n, Fixed dx, Fixed dy, Fixed dz, shor
     }
 }
 
-void CViewParameters::SetLight(short n, Fixed angle1, Fixed angle2, Fixed intensity, short mode) {
+void CViewParameters::SetLight(short n, Fixed angle1, Fixed angle2, Fixed intensity, ARGBColor color, short mode) {
     Fixed x, y, z;
 
     if (n >= 0 && n < MAXLIGHTS) {
+        dirLightSettings[n].intensity = intensity;
+        dirLightSettings[n].angle1 = angle1;
+        dirLightSettings[n].angle2 = angle2;
+        dirLightSettings[n].color = color;
+
         x = FMul(FDegCos(angle1), intensity);
         y = FMul(FDegSin(-angle1), intensity);
         z = FMul(FDegCos(angle2), x);

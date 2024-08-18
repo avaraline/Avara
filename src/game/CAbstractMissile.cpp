@@ -14,15 +14,13 @@
 #define GROUNDHITSOUNDID 211
 #define DEFAULTMISSILESOUND 200
 
-void CAbstractMissile::IAbstractMissile(CDepot *theDepot) {
-    IAbstractActor();
-
+CAbstractMissile::CAbstractMissile(CDepot *theDepot) {
     isActive = kIsActive;
     itsDepot = theDepot;
     itsGame = itsDepot->itsGame;
 
     speed = FIX3(2000);
-    maxFrameCount = 50;
+
     energy = 0;
 
     nextMissile = NULL;
@@ -31,8 +29,8 @@ void CAbstractMissile::IAbstractMissile(CDepot *theDepot) {
 }
 
 void CAbstractMissile::PreLoadSounds() {
-    gHub->PreLoadSample(GROUNDHITSOUNDID);
-    gHub->PreLoadSample(soundResId);
+    auto _ = AssetManager::GetOgg(GROUNDHITSOUNDID);
+    _ = AssetManager::GetOgg(soundResId);
 }
 
 void CAbstractMissile::Deactivate() {
@@ -49,7 +47,6 @@ void CAbstractMissile::LevelReset() {
 
 void CAbstractMissile::FrameAction() {
     CAbstractActor *anActor;
-    CSmartPart **thePart;
     CAbstractActor *theOwner;
     Fixed negOrigin1;
 
@@ -78,10 +75,12 @@ void CAbstractMissile::FrameAction() {
         FireSlivers();
 
         if (hitRec.closestHit) {
-            itsGame->scoreReason = ksiShotHit;
+            if (missileKind == kmiTurning) {
+                itsGame->scoreReason = ksiPlasmaHit;
+            }
             anActor = hitRec.closestHit->theOwner;
             anActor->WasHit(&hitRec, energy);
-            SecondaryDamage(hitRec.team, hitRec.playerId);
+            SecondaryDamage(hitRec.team, hitRec.playerId, ksiMissileHit);
         }
 
         Deactivate();
@@ -91,19 +90,20 @@ void CAbstractMissile::FrameAction() {
             Deactivate();
         }
 
-        if (frameCount < 2)
-            energy -= energy >> 3;
+        if (frameCount < FpsCoefficient2(2))
+            energy -= FpsCoefficient2(energy >> 3);
     }
 }
+
 
 void CAbstractMissile::MoveForward() {
     partList[0]->isTransparent = false;
     partList[0]->extraAmbient = energy;
     partList[0]->Reset();
     partList[0]->ApplyMatrix(&itsMatrix);
-    itsMatrix[3][0] += deltaMove[0];
-    itsMatrix[3][1] += deltaMove[1];
-    itsMatrix[3][2] += deltaMove[2];
+    itsMatrix[3][0] += FpsCoefficient2(deltaMove[0]);
+    itsMatrix[3][1] += FpsCoefficient2(deltaMove[1]);
+    itsMatrix[3][2] += FpsCoefficient2(deltaMove[2]);
     partList[0]->MoveDone();
 }
 void CAbstractMissile::FireSlivers() {
@@ -129,7 +129,7 @@ void CAbstractMissile::FireSlivers() {
         sliverDir[1] = -hitRec.direction[1];
         sliverDir[2] = hitRec.direction[2];
 
-        DoSound(GROUNDHITSOUNDID, hitRec.origin, 8 * energy, FIX(1));
+        DoSound(GROUNDHITSOUNDID, hitRec.origin, 8 * energy, FIX1);
     }
 
     itsDepot->FireSlivers(numSlivers, hitRec.origin, sliverDir, FIX3(200), FIX3(3000), spread, 15, 0, partList[0]);
@@ -168,7 +168,7 @@ void CAbstractMissile::Launch(Matrix *startMatrix,
     UpdateSoundLink(itsSoundLink, itsMatrix[3], deltaMove, itsGame->soundTime);
 
     theSound = gHub->GetSoundSampler(hubRate, soundResId);
-    //	theSound->SetRate(FIX(1)));
+    //	theSound->SetRate(FIX1));
     theSound->SetVolume(FMul(speed, FIX3(500)));
     theSound->SetSoundLink(itsSoundLink);
     if (itsGame->soundSwitches & kMissileLoopToggle)

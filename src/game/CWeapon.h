@@ -31,10 +31,11 @@ public:
     short ownerSlot;
     short weaponKind;
 
-    long flyCount;
+    FrameNumber flyCount;
     Boolean doExplode;
+    Boolean isTargetLocked;
 
-    virtual void IWeapon(CDepot *theDepot);
+    CWeapon(CDepot *theDepot);
     virtual void ResetWeapon();
 
     virtual void LevelReset();

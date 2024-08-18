@@ -8,10 +8,17 @@
 */
 
 #pragma once
+#include "ARGBColor.h"
 #include "CDirectObject.h"
+#include "ColorManager.h"
 #include "FastMat.h"
-#include "Types.h"
+#include "VertexData.h"
 
+#include <memory>
+
+#ifdef _WIN32
+#include <Windows.h>
+#endif
 #include <SDL2/SDL.h>
 #include <glad/glad.h>
 #include <glm/glm.hpp>
@@ -35,18 +42,17 @@ typedef struct {
 } FixedPoint;
 
 typedef struct {
-    uint32_t color;
-    uint32_t origColor;
     float normal[3];
     uint16_t triCount;
-    uint16_t *triPoints;
+    std::unique_ptr<uint16_t[]> triPoints;
+    uint16_t front;
+    uint16_t back;
+    uint16_t colorIdx;
+    uint8_t vis;
 } PolyRecord;
-
-typedef uint32_t ColorRecord;
 
 namespace CBSPUserFlags {
     constexpr short kIsAmbient = 1;
-    constexpr short kCullBackfaces = 2;
 }
 
 /*
@@ -97,7 +103,7 @@ namespace CBSPUserFlags {
     NegateTransformRow(part, 0); \
     NegateTransformRow(part, 1);
 
-class CBSPPart : public CDirectObject {
+class CBSPPart {
 public:
     /*
     Handle				itsBSPResource;
@@ -105,82 +111,80 @@ public:
     BSPResourceHeader	header;
     */
     // Moved here from BSPResourceHeader
-    FixedPoint enclosurePoint;
-    Fixed enclosureRadius;
-    FixedPoint minBounds; //  Bounding box minimums for x, y, z
-    FixedPoint maxBounds; //  Bounding box maximums for x, y, z
-
-    CViewParameters *currentView;
-
-    GLData *glData;
-    GLuint vertexArray, vertexBuffer;
-    GLsizeiptr glDataSize;
+    FixedPoint enclosurePoint = {0, 0, 0, 0};
+    Fixed enclosureRadius = 0;
+    FixedPoint minBounds = {0, 0, 0, 0}; //  Bounding box minimums for x, y, z
+    FixedPoint maxBounds = {0, 0, 0, 0}; //  Bounding box maximums for x, y, z
+    enum { frontVisible = 1, backVisible, bothVisible };
 
     // Handle				colorReplacements;	//	Table of colors that replace defaults.
 
-    Matrix itsTransform; //	Transforms to world coordinates. (model)
-    Matrix invGlobTransform; // (inverse model)
+    Matrix itsTransform = {{0}}; //	Transforms to world coordinates. (model)
+    Matrix invGlobTransform = {{0}}; // (inverse model)
 
-    Matrix fullTransform; // modelview
-    Matrix invFullTransform; // inverse modelview
+    Matrix fullTransform = {{0}}; // modelview
+    Matrix invFullTransform = {{0}}; // inverse modelview
 
-    Fixed hither;
-    Fixed yon;
-    Fixed extraAmbient;
-    Fixed privateAmbient;
+    Fixed hither = 0;
+    Fixed yon = 0;
+    Fixed extraAmbient = 0;
+    Fixed privateAmbient = 0;
 
     //	Bounding volumes:
-    Vector sphereCenter; //	In view coordinates.
-    Vector sphereGlobCenter; //	In global coordinates.
-    Vector localViewOrigin; //	View origin point in local coordinates
+    Vector sphereCenter = {0}; //	In view coordinates.
+    Vector sphereGlobCenter = {0}; //	In global coordinates.
+    Vector localViewOrigin = {0}; //	View origin point in local coordinates
 
-    Fixed bigRadius; //	Bounding sphere radius from origin of object coordinates
-    Fixed tolerance;
+    Fixed bigRadius = 0; //	Bounding sphere radius from origin of object coordinates
+    Fixed tolerance = 0;
 
-    Fixed minZ; //	In view coordinates
-    Fixed maxZ; //	In view coordinates
+    Fixed minZ = 0; //	In view coordinates
+    Fixed maxZ = 0; //	In view coordinates
 
-    Fixed minX; //	In screen coordinates.
-    Fixed maxX;
-    Fixed minY;
-    Fixed maxY;
+    Fixed minX = 0; //	In screen coordinates.
+    Fixed maxX = 0;
+    Fixed minY = 0;
+    Fixed maxY = 0;
 
     //	members used during rendering:
-    Vector *pointTable;
-    uint32_t pointCount;
-    PolyRecord *polyTable;
-    uint32_t polyCount;
-    int totalPoints;
+    uint16_t colorCount = 0;
+    uint32_t pointCount = 0;
+    uint32_t polyCount = 0;
+    int totalPoints = 0;
+    std::unique_ptr<ARGBColor[]> origColorTable;
+    std::unique_ptr<ARGBColor[]> currColorTable;
+    std::unique_ptr<Vector[]> pointTable;
+    std::unique_ptr<PolyRecord[]> polyTable;
+    std::unique_ptr<VertexData> vData;
 
     //	Lighting vectors in object space
-    long lightSeed; //	Seed value to detect lights change
+    long lightSeed = 0; //	Seed value to detect lights change
     Vector objLights[MAXLIGHTS]; //	Object space lights.
 
     //	Used by a CBSPWorld to score and sort objects:
-    short worldIndex;
-    Boolean worldFlag;
-    CBSPPart *nextTemp; //	Used temporarily for linked lists.
+    short worldIndex = 0;
+    Boolean worldFlag = 0;
+    CBSPPart *nextTemp = 0; //	Used temporarily for linked lists.
 
-    Boolean invGlobDone;
-    Boolean usesPrivateHither;
-    Boolean usesPrivateYon;
-    Boolean isTransparent;
-    Boolean ignoreDirectionalLights;
-    short userFlags; //	Can be used for various flags by user.
+    Boolean invGlobDone = 0;
+    Boolean usesPrivateHither = 0;
+    Boolean usesPrivateYon = 0;
+    Boolean isTransparent = 0;
+    Boolean ignoreDepthTesting = false;
+    Boolean ignoreDirectionalLights = 0;
+    short userFlags = 0; //	Can be used for various flags by user.
 
-    virtual void IBSPPart(short resId);
+    static CBSPPart *Create(short resId);
     virtual void BuildBoundingVolumes();
-    virtual void Dispose();
+    virtual ~CBSPPart();
 
-    virtual void ReplaceColor(int origColor, int newColor);
+    virtual void ReplaceColor(ARGBColor origColor, ARGBColor newColor);
+    virtual void ReplaceAllColors(ARGBColor newColor);
 
-    virtual Boolean PrepareForRender(CViewParameters *vp);
-    virtual void DrawPolygons();
-    virtual void UpdateOpenGLData();
+    virtual Boolean PrepareForRender();
 
     virtual void PreRender();
     void PostRender();
-    virtual void Render(CViewParameters *vp);
     virtual Boolean InViewPyramid();
     virtual void TransformLights();
 
@@ -203,10 +207,21 @@ public:
     virtual void PrependMatrix(Matrix *m); //	itsTransform = m * itsTransform
     virtual Matrix *GetInverseTransform();
 
+    virtual bool HasAlpha() const;
+    virtual void SetScale(Fixed x, Fixed y, Fixed z);
+    virtual void ResetScale();
+    Vector scale = {FIX1, FIX1, FIX1, FIX1};
+    bool hasScale = false;
+
     //	Compare with another part to see which one is in front:
     virtual Boolean Obscures(CBSPPart *other);
     virtual Boolean HopeNotObscure(CBSPPart *other, Vector *otherCorners);
     virtual Boolean HopeDoesObscure(CBSPPart *other, Vector *otherCorners);
 
     void PrintMatrix(Matrix *m);
+protected:
+    bool hasAlpha = false;
+    virtual void CheckForAlpha();
+    CBSPPart() {}
+    virtual void IBSPPart(short resId);
 };

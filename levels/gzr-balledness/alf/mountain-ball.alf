@@ -4,154 +4,154 @@
   <set missDelay="200" numMiss="4" fieldVis="false" zPower=".5" xPower=".5" yPower=".05" grenH="2" grenW="50" hWall="4.5" startHeight="30" />
   <set kTimeTele="10" kTimeWarning="5" teleY="3 * hWall -2" teleRange="8.75" dohVolume=".5" />
   <set baseHeight="4 * hWall + .85" wallHeight="hWall" />
-  <Field deltaY="0" mask="T1" start="@fifteen" stop="@sixteen" enter="@enterT1" exit="@exitT1" visible="fieldVis" fill="#ffff33" frame="#000000" x="53.19444444444445" z="71.31944444444444" w="15" d="15" h="0" />
-  <Field deltaY="0" mask="T5" start="@fifteen" stop="@sixteen" enter="@enterT5" exit="@exitT5" visible="fieldVis" fill="#ffff33" frame="#000000" x="53.19444444444445" z="71.31944444444444" w="15" d="15" h="0" />
-  <Field deltaY="0" mask="T6" start="@fifteen" stop="@sixteen" enter="@enterT6" exit="@exitT6" visible="fieldVis" fill="#ffff33" frame="#000000" x="53.19444444444445" z="71.31944444444444" w="15" d="15" h="0" />
-  <Field deltaY="0" mask="T4" start="@fifteen" stop="@sixteen" enter="@enterT4" exit="@exitT4" visible="fieldVis" fill="#ffff33" frame="#000000" x="53.19444444444445" z="71.31944444444444" w="15" d="15" h="0" />
-  <Field deltaY="0" mask="T3" start="@fifteen" stop="@sixteen" enter="@enterT3" exit="@exitT3" visible="fieldVis" fill="#ffff33" frame="#000000" x="53.19444444444445" z="71.31944444444444" w="15" d="15" h="0" />
-  <Field deltaY="0" mask="T2" start="@fifteen" stop="@sixteen" enter="@enterT2" exit="@exitT2" visible="fieldVis" fill="#ffff33" frame="#000000" x="53.19444444444445" z="71.31944444444444" w="15" d="15" h="0" />
+  <Field deltaY="0" mask="T1" start="@fifteen" stop="@sixteen" enter="@enterT1" exit="@exitT1" visible="fieldVis" color="#fffc41" color.1="#000000" x="53.19444444444445" z="71.31944444444444" w="15" d="15" h="0" />
+  <Field deltaY="0" mask="T5" start="@fifteen" stop="@sixteen" enter="@enterT5" exit="@exitT5" visible="fieldVis" color="#fffc41" color.1="#000000" x="53.19444444444445" z="71.31944444444444" w="15" d="15" h="0" />
+  <Field deltaY="0" mask="T6" start="@fifteen" stop="@sixteen" enter="@enterT6" exit="@exitT6" visible="fieldVis" color="#fffc41" color.1="#000000" x="53.19444444444445" z="71.31944444444444" w="15" d="15" h="0" />
+  <Field deltaY="0" mask="T4" start="@fifteen" stop="@sixteen" enter="@enterT4" exit="@exitT4" visible="fieldVis" color="#fffc41" color.1="#000000" x="53.19444444444445" z="71.31944444444444" w="15" d="15" h="0" />
+  <Field deltaY="0" mask="T3" start="@fifteen" stop="@sixteen" enter="@enterT3" exit="@exitT3" visible="fieldVis" color="#fffc41" color.1="#000000" x="53.19444444444445" z="71.31944444444444" w="15" d="15" h="0" />
+  <Field deltaY="0" mask="T2" start="@fifteen" stop="@sixteen" enter="@enterT2" exit="@exitT2" visible="fieldVis" color="#fffc41" color.1="#000000" x="53.19444444444445" z="71.31944444444444" w="15" d="15" h="0" />
   <set baseHeight="0" timeLimit="300" kSnText="1504" kTextVolume="0.1" gameLength="4685" />
   <Timer in="@start" out="@gameEnds" wait="gameLength" />
-  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#ffff33" frame="#000000" />
-  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#ffff33" frame="#000000" />
-  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#ffff33" frame="#000000" />
-  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#ffff33" frame="#000000" />
-  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#ffff33" frame="#000000" />
-  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#ffff33" frame="#000000" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" color="#fffc41" color.1="#000000" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" color="#fffc41" color.1="#000000" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" color="#fffc41" color.1="#000000" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" color="#fffc41" color.1="#000000" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" color="#fffc41" color.1="#000000" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" color="#fffc41" color.1="#000000" />
   <Text sound="kSnText" volume="kTextVolume" in="@basket" showEveryone="true" text="A Score!" cx="110.625" cz="28.88888888888889" r="3.75" />
   <Timer in="@start" out="@offOutside" wait="5" />
   <Timer in="@start" out="@mountainTeles" wait="5" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenW" />
-  <Goody shape="bspMissile" y="grenH" speed="2" missiles="8" start="mShow" out="mTaken" fill="#0000dd" frame="#aa0000" cx="78.22916666666666" cz="121.35416666666667" angle="90" />
+  <Goody shape="bspMissile" y="grenH" speed="2" missiles="8" start="mShow" out="mTaken" color="#012ce4" color.1="#bb1800" cx="78.22916666666666" cz="121.35416666666667" angle="270" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenW" />
-  <Goody shape="bspMissile" y="grenH" speed="2" missiles="8" start="mShow" out="mTaken" fill="#0000dd" frame="#aa0000" cx="103.22916666666667" cz="96.35416666666667" angle="90" />
+  <Goody shape="bspMissile" y="grenH" speed="2" missiles="8" start="mShow" out="mTaken" color="#012ce4" color.1="#bb1800" cx="103.22916666666667" cz="96.35416666666667" angle="270" />
   <set wallHeight="1" />
-  <WallDoor midYaw="45" fill="#000055" frame="#000000" x="103.19444444444444" z="121.31944444444446" w="12.5" d="12.5" h="1" />
+  <WallDoor midYaw="45" color="#010e68" color.1="#000000" x="103.19444444444444" z="121.31944444444446" w="12.5" d="12.5" h="1" />
   <set wallHeight="6" baseHeight="1" />
-  <Wall fill="#000055" frame="#000000" x="101.00694444444444" z="123.50694444444446" w="1.875" d="1.875" h="0" />
-  <Solid y="7.6" scale=".25" friction="0" traction="1" shape="bspPlatform" yon=".001" fill="#ffff00" frame="#66ff66" cx="100.97222222222223" cz="123.54166666666667" angle="90" />
-  <Ball y="30" holdShieldLimit="30" mass="15" ejectPower=".1" carryScore="0" dropEnergy="2" shape="5555" fill="#ffff00" frame="#66ff66" cx="100.97222222222223" cz="123.54166666666667" angle="90" />
-  <Wall fill="#000055" frame="#000000" x="105.38194444444444" z="119.13194444444444" w="1.875" d="1.875" h="0" />
-  <Solid y="7.6" scale=".25" friction="0" traction="1" shape="bspPlatform" yon=".001" fill="#ffff00" frame="#66ff66" cx="105.34722222222223" cz="119.09722222222223" angle="90" />
-  <Ball y="30" holdShieldLimit="30" mass="15" ejectPower=".1" carryScore="0" dropEnergy="2" shape="5555" fill="#ffff00" frame="#66ff66" cx="105.34722222222223" cz="119.09722222222223" angle="90" />
-  <Incarnator y="startHeight" status="true" start="@start" stop="@offOutside" cx="125.79861111111111" cz="83.81944444444444" angle="90" />
-  <Incarnator y="startHeight" status="true" start="@start" stop="@offOutside" cx="65.79861111111111" cz="143.81944444444446" angle="180" />
-  <Incarnator y="startHeight" status="true" start="@start" stop="@offOutside" cx="85.79861111111111" cz="143.81944444444446" angle="180" />
+  <Wall color="#010e68" color.1="#000000" x="101.00694444444444" z="123.50694444444446" w="1.875" d="1.875" h="0" />
+  <Solid y="7.6" scale=".25" friction="0" traction="1" shape="bspPlatform" yon=".001" color="#fffb00" color.1="#73fa79" cx="100.97222222222223" cz="123.54166666666667" angle="270" />
+  <Ball y="30" holdShieldLimit="30" mass="15" ejectPower=".1" carryScore="0" dropEnergy="2" shape="5555" color="#fffb00" color.1="#73fa79" cx="100.97222222222223" cz="123.54166666666667" angle="270" />
+  <Wall color="#010e68" color.1="#000000" x="105.38194444444444" z="119.13194444444444" w="1.875" d="1.875" h="0" />
+  <Solid y="7.6" scale=".25" friction="0" traction="1" shape="bspPlatform" yon=".001" color="#fffb00" color.1="#73fa79" cx="105.34722222222223" cz="119.09722222222223" angle="270" />
+  <Ball y="30" holdShieldLimit="30" mass="15" ejectPower=".1" carryScore="0" dropEnergy="2" shape="5555" color="#fffb00" color.1="#73fa79" cx="105.34722222222223" cz="119.09722222222223" angle="270" />
+  <Incarnator y="startHeight" status="true" start="@start" stop="@offOutside" cx="125.79861111111111" cz="83.81944444444444" angle="270" />
+  <Incarnator y="startHeight" status="true" start="@start" stop="@offOutside" cx="65.79861111111111" cz="143.81944444444446" angle="0" />
+  <Incarnator y="startHeight" status="true" start="@start" stop="@offOutside" cx="85.79861111111111" cz="143.81944444444446" angle="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenW + 50" />
-  <Goody shape="bspGoody" y="grenH + 1" speed="2" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#ff0000" frame="#000055" cx="103.19444444444444" cz="121.31944444444446" angle="90" />
-  <Incarnator y="startHeight" status="true" start="@start" stop="@offOutside" cx="105.79861111111111" cz="143.81944444444446" angle="135" />
-  <Incarnator y="startHeight" status="true" start="@start" stop="@offOutside" cx="125.79861111111111" cz="103.81944444444444" angle="90" />
-  <Incarnator y="startHeight" status="true" start="@start" stop="@offOutside" cx="125.79861111111111" cz="123.81944444444446" angle="135" />
-  <Teleporter shape="0" y="startHeight" spin="false" group="@new" fill="#ff0000" frame="#000000" cx="125.69444444444446" cz="113.81944444444444" angle="90" />
-  <Goody y="startHeight -1" yon=".001" speed="0" missiles="8" grenades="12" start="@onAmmo" stop="@offAmmo" fill="#ff0000" frame="#000000" cx="125.69444444444446" cz="113.81944444444444" angle="90" />
-  <Teleporter shape="0" y="startHeight" spin="false" group="@new" fill="#ff0000" frame="#000000" cx="125.69444444444446" cz="93.81944444444444" angle="90" />
-  <Goody y="startHeight -1" yon=".001" speed="0" missiles="8" grenades="12" start="@onAmmo" stop="@offAmmo" fill="#ff0000" frame="#000000" cx="125.69444444444446" cz="93.81944444444444" angle="90" />
-  <Teleporter shape="0" y="startHeight" spin="false" group="@new" fill="#ff0000" frame="#000000" cx="95.97222222222223" cz="143.81944444444446" angle="180" />
-  <Goody y="startHeight -1" yon=".001" speed="0" missiles="8" grenades="12" start="@onAmmo" stop="@offAmmo" fill="#ff0000" frame="#000000" cx="95.97222222222223" cz="143.81944444444446" angle="180" />
-  <Teleporter shape="0" y="startHeight" spin="false" group="@new" fill="#ff0000" frame="#000000" cx="55.97222222222222" cz="143.81944444444446" angle="180" />
-  <Goody y="startHeight -1" yon=".001" speed="0" missiles="8" grenades="12" start="@onAmmo" stop="@offAmmo" fill="#ff0000" frame="#000000" cx="55.97222222222222" cz="143.81944444444446" angle="180" />
-  <Teleporter shape="0" y="startHeight" spin="false" group="@new" fill="#ff0000" frame="#000000" cx="125.69444444444446" cz="73.81944444444444" angle="90" />
-  <Goody y="startHeight -1" yon=".001" speed="0" missiles="8" grenades="12" start="@onAmmo" stop="@offAmmo" fill="#ff0000" frame="#000000" cx="125.69444444444446" cz="73.81944444444444" angle="90" />
-  <Teleporter shape="0" y="startHeight" spin="false" group="@new" fill="#ff0000" frame="#000000" cx="75.97222222222223" cz="143.81944444444446" angle="180" />
-  <Goody y="startHeight -1" yon=".001" speed="0" missiles="8" grenades="12" start="@onAmmo" stop="@offAmmo" fill="#ff0000" frame="#000000" cx="75.97222222222223" cz="143.81944444444446" angle="180" />
-  <Teleporter shape="0" y="startHeight" spin="false" group="@new" fill="#ff0000" frame="#000000" cx="120.69444444444444" cz="138.81944444444446" angle="135" />
-  <Goody y="startHeight -1" yon=".001" speed="0" missiles="8" grenades="12" start="@onAmmo" stop="@offAmmo" fill="#ff0000" frame="#000000" cx="120.69444444444444" cz="138.81944444444446" angle="135" />
+  <Goody shape="bspGoody" y="grenH + 1" speed="2" missiles="8" grenades="12" start="mShow" out="mTaken" color="#ff2600" color.1="#010e68" cx="103.19444444444444" cz="121.31944444444446" angle="270" />
+  <Incarnator y="startHeight" status="true" start="@start" stop="@offOutside" cx="105.79861111111111" cz="143.81944444444446" angle="315" />
+  <Incarnator y="startHeight" status="true" start="@start" stop="@offOutside" cx="125.79861111111111" cz="103.81944444444444" angle="270" />
+  <Incarnator y="startHeight" status="true" start="@start" stop="@offOutside" cx="125.79861111111111" cz="123.81944444444446" angle="315" />
+  <Teleporter shape="0" y="startHeight" spin="false" group="@new" color="#ff2600" color.1="#000000" cx="125.69444444444446" cz="113.81944444444444" angle="270" />
+  <Goody y="startHeight -1" yon=".001" speed="0" missiles="8" grenades="12" start="@onAmmo" stop="@offAmmo" color="#ff2600" color.1="#000000" cx="125.69444444444446" cz="113.81944444444444" angle="270" />
+  <Teleporter shape="0" y="startHeight" spin="false" group="@new" color="#ff2600" color.1="#000000" cx="125.69444444444446" cz="93.81944444444444" angle="270" />
+  <Goody y="startHeight -1" yon=".001" speed="0" missiles="8" grenades="12" start="@onAmmo" stop="@offAmmo" color="#ff2600" color.1="#000000" cx="125.69444444444446" cz="93.81944444444444" angle="270" />
+  <Teleporter shape="0" y="startHeight" spin="false" group="@new" color="#ff2600" color.1="#000000" cx="95.97222222222223" cz="143.81944444444446" angle="0" />
+  <Goody y="startHeight -1" yon=".001" speed="0" missiles="8" grenades="12" start="@onAmmo" stop="@offAmmo" color="#ff2600" color.1="#000000" cx="95.97222222222223" cz="143.81944444444446" angle="0" />
+  <Teleporter shape="0" y="startHeight" spin="false" group="@new" color="#ff2600" color.1="#000000" cx="55.97222222222222" cz="143.81944444444446" angle="0" />
+  <Goody y="startHeight -1" yon=".001" speed="0" missiles="8" grenades="12" start="@onAmmo" stop="@offAmmo" color="#ff2600" color.1="#000000" cx="55.97222222222222" cz="143.81944444444446" angle="0" />
+  <Teleporter shape="0" y="startHeight" spin="false" group="@new" color="#ff2600" color.1="#000000" cx="125.69444444444446" cz="73.81944444444444" angle="270" />
+  <Goody y="startHeight -1" yon=".001" speed="0" missiles="8" grenades="12" start="@onAmmo" stop="@offAmmo" color="#ff2600" color.1="#000000" cx="125.69444444444446" cz="73.81944444444444" angle="270" />
+  <Teleporter shape="0" y="startHeight" spin="false" group="@new" color="#ff2600" color.1="#000000" cx="75.97222222222223" cz="143.81944444444446" angle="0" />
+  <Goody y="startHeight -1" yon=".001" speed="0" missiles="8" grenades="12" start="@onAmmo" stop="@offAmmo" color="#ff2600" color.1="#000000" cx="75.97222222222223" cz="143.81944444444446" angle="0" />
+  <Teleporter shape="0" y="startHeight" spin="false" group="@new" color="#ff2600" color.1="#000000" cx="120.69444444444444" cz="138.81944444444446" angle="315" />
+  <Goody y="startHeight -1" yon=".001" speed="0" missiles="8" grenades="12" start="@onAmmo" stop="@offAmmo" color="#ff2600" color.1="#000000" cx="120.69444444444444" cz="138.81944444444446" angle="315" />
   <set wallHeight="hWall" baseHeight="0 * hWall" />
-  <Wall fill="#0000aa" frame="#000000" x="68.19444444444444" z="86.31944444444444" w="45" d="45" h="0" />
-  <Wall fill="#000077" frame="#000000" x="93.19444444444444" z="96.31944444444444" w="5" d="5" h="0" />
-  <Wall fill="#000077" frame="#000000" x="78.19444444444444" z="111.31944444444444" w="5" d="5" h="0" />
-  <Wall fill="#000077" frame="#000000" x="93.19444444444444" z="66.31944444444444" w="5" d="5" h="0" />
-  <Ramp y="0" thickness="0" deltaY="hWall" fill="#000077" frame="#777777" x="93.19444444444444" z="73.81944444444444" w="5" d="10" h="0" angle="0" />
-  <Wall fill="#000077" frame="#000000" x="48.19444444444445" z="111.31944444444444" w="5" d="5" h="0" />
-  <Ramp y="0" thickness="0" deltaY="hWall" fill="#000077" frame="#777777" x="55.69444444444445" z="111.31944444444444" w="10" d="5" h="0" angle="270" />
-  <Ramp y="0" thickness="0" deltaY="hWall" fill="#000077" frame="#777777" x="93.19444444444444" z="103.81944444444444" w="5" d="10" h="0" angle="0" />
-  <Ramp y="0" thickness="0" deltaY="hWall" fill="#000077" frame="#777777" x="93.19444444444444" z="88.81944444444444" w="5" d="10" h="0" angle="180" />
-  <Ramp y="0" thickness="0" deltaY="hWall" fill="#000077" frame="#777777" x="70.69444444444444" z="111.31944444444444" w="10" d="5" h="0" angle="90" />
-  <Ramp y="0" thickness="0" deltaY="hWall" fill="#000077" frame="#777777" x="85.69444444444444" z="111.31944444444444" w="10" d="5" h="0" angle="270" />
+  <Wall color="#0122b9" color.1="#000000" x="68.19444444444444" z="86.31944444444444" w="45" d="45" h="0" />
+  <Wall color="#01168a" color.1="#000000" x="93.19444444444444" z="96.31944444444444" w="5" d="5" h="0" />
+  <Wall color="#01168a" color.1="#000000" x="78.19444444444444" z="111.31944444444444" w="5" d="5" h="0" />
+  <Wall color="#01168a" color.1="#000000" x="93.19444444444444" z="66.31944444444444" w="5" d="5" h="0" />
+  <Ramp y="0" thickness="0" deltaY="hWall" color="#01168a" color.1="#8a8a8a" x="93.19444444444444" z="73.81944444444444" w="5" d="10" h="0" angle="180" />
+  <Wall color="#01168a" color.1="#000000" x="48.19444444444445" z="111.31944444444444" w="5" d="5" h="0" />
+  <Ramp y="0" thickness="0" deltaY="hWall" color="#01168a" color.1="#8a8a8a" x="55.69444444444445" z="111.31944444444444" w="10" d="5" h="0" angle="90" />
+  <Ramp y="0" thickness="0" deltaY="hWall" color="#01168a" color.1="#8a8a8a" x="93.19444444444444" z="103.81944444444444" w="5" d="10" h="0" angle="180" />
+  <Ramp y="0" thickness="0" deltaY="hWall" color="#01168a" color.1="#8a8a8a" x="93.19444444444444" z="88.81944444444444" w="5" d="10" h="0" angle="0" />
+  <Ramp y="0" thickness="0" deltaY="hWall" color="#01168a" color.1="#8a8a8a" x="70.69444444444444" z="111.31944444444444" w="10" d="5" h="0" angle="270" />
+  <Ramp y="0" thickness="0" deltaY="hWall" color="#01168a" color.1="#8a8a8a" x="85.69444444444444" z="111.31944444444444" w="10" d="5" h="0" angle="90" />
   <set wallHeight="hWall" baseHeight="1 * hWall" />
-  <Wall fill="#3366ff" frame="#000000" x="63.19444444444444" z="81.31944444444444" w="35" d="35" h="0" />
-  <Wall fill="#0000dd" frame="#000000" x="83.19444444444444" z="81.31944444444444" w="5" d="5" h="0" />
+  <Wall color="#4180ff" color.1="#000000" x="63.19444444444444" z="81.31944444444444" w="35" d="35" h="0" />
+  <Wall color="#012ce4" color.1="#000000" x="83.19444444444444" z="81.31944444444444" w="5" d="5" h="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenW" />
-  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="12" start="mShow" out="mTaken" fill="#0000dd" frame="#aa0000" cx="88.22916666666667" cz="81.35416666666666" angle="90" />
-  <Wall fill="#0000dd" frame="#000000" x="63.19444444444444" z="101.31944444444444" w="5" d="5" h="0" />
+  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="12" start="mShow" out="mTaken" color="#012ce4" color.1="#bb1800" cx="88.22916666666667" cz="81.35416666666666" angle="270" />
+  <Wall color="#012ce4" color.1="#000000" x="63.19444444444444" z="101.31944444444444" w="5" d="5" h="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="12" start="mShow" out="mTaken" fill="#0000dd" frame="#aa0000" cx="63.22916666666667" cz="106.35416666666667" angle="90" />
-  <Ramp y="0" thickness="0" deltaY="hWall" fill="#0000dd" frame="#777777" x="83.19444444444444" z="88.81944444444444" w="5" d="10" h="0" angle="0" />
-  <Ramp y="0" thickness="0" deltaY="hWall" fill="#0000dd" frame="#777777" x="83.19444444444444" z="73.81944444444444" w="5" d="10" h="0" angle="180" />
-  <Ramp y="0" thickness="0" deltaY="hWall" fill="#0000dd" frame="#777777" x="70.69444444444444" z="101.31944444444444" w="10" d="5" h="0" angle="270" />
-  <Ramp y="0" thickness="0" deltaY="hWall" fill="#0000dd" frame="#777777" x="55.69444444444445" z="101.31944444444444" w="10" d="5" h="0" angle="90" />
+  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="12" start="mShow" out="mTaken" color="#012ce4" color.1="#bb1800" cx="63.22916666666667" cz="106.35416666666667" angle="270" />
+  <Ramp y="0" thickness="0" deltaY="hWall" color="#012ce4" color.1="#8a8a8a" x="83.19444444444444" z="88.81944444444444" w="5" d="10" h="0" angle="180" />
+  <Ramp y="0" thickness="0" deltaY="hWall" color="#012ce4" color.1="#8a8a8a" x="83.19444444444444" z="73.81944444444444" w="5" d="10" h="0" angle="0" />
+  <Ramp y="0" thickness="0" deltaY="hWall" color="#012ce4" color.1="#8a8a8a" x="70.69444444444444" z="101.31944444444444" w="10" d="5" h="0" angle="90" />
+  <Ramp y="0" thickness="0" deltaY="hWall" color="#012ce4" color.1="#8a8a8a" x="55.69444444444445" z="101.31944444444444" w="10" d="5" h="0" angle="270" />
   <set wallHeight="hWall" baseHeight="2 * hWall" />
-  <Wall fill="#66ccff" frame="#000000" x="58.19444444444444" z="76.31944444444444" w="25" d="25" h="0" />
-  <Wall fill="#3399ff" frame="#000000" x="48.19444444444445" z="91.31944444444444" w="5" d="5" h="0" />
+  <Wall color="#76d6ff" color.1="#000000" x="58.19444444444444" z="76.31944444444444" w="25" d="25" h="0" />
+  <Wall color="#3dacff" color.1="#000000" x="48.19444444444445" z="91.31944444444444" w="5" d="5" h="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenW" />
-  <Goody shape="bspMissile" y="grenH" speed="2" missiles="8" start="mShow" out="mTaken" fill="#0000dd" frame="#aa0000" cx="76.97916666666666" cz="95.10416666666667" angle="90" />
-  <Wall fill="#3399ff" frame="#000000" x="73.19444444444444" z="66.31944444444444" w="5" d="5" h="0" />
-  <Ramp y="0" thickness="0" deltaY="hWall" fill="#3399ff" frame="#777777" x="73.19444444444444" z="73.81944444444444" w="5" d="10" h="0" angle="0" />
-  <Ramp y="0" thickness="0" deltaY="hWall" fill="#3399ff" frame="#777777" x="55.69444444444445" z="91.31944444444444" w="10" d="5" h="0" angle="270" />
+  <Goody shape="bspMissile" y="grenH" speed="2" missiles="8" start="mShow" out="mTaken" color="#012ce4" color.1="#bb1800" cx="76.97916666666666" cz="95.10416666666667" angle="270" />
+  <Wall color="#3dacff" color.1="#000000" x="73.19444444444444" z="66.31944444444444" w="5" d="5" h="0" />
+  <Ramp y="0" thickness="0" deltaY="hWall" color="#3dacff" color.1="#8a8a8a" x="73.19444444444444" z="73.81944444444444" w="5" d="10" h="0" angle="180" />
+  <Ramp y="0" thickness="0" deltaY="hWall" color="#3dacff" color.1="#8a8a8a" x="55.69444444444445" z="91.31944444444444" w="10" d="5" h="0" angle="90" />
   <set wallHeight="hWall" baseHeight="3 * hWall" />
-  <Wall fill="#000055" frame="#000000" x="55.69444444444445" z="66.31944444444444" w="10" d="5" h="0" />
-  <Wall fill="#000055" frame="#000000" x="55.69444444444445" z="76.31944444444444" w="10" d="5" h="0" />
-  <Wall fill="#000055" frame="#000000" x="48.19444444444445" z="71.31944444444444" w="5" d="15" h="0" />
-  <Wall fill="#000055" frame="#000000" x="63.19444444444444" z="81.31944444444444" w="5" d="5" h="0" />
+  <Wall color="#010e68" color.1="#000000" x="55.69444444444445" z="66.31944444444444" w="10" d="5" h="0" />
+  <Wall color="#010e68" color.1="#000000" x="55.69444444444445" z="76.31944444444444" w="10" d="5" h="0" />
+  <Wall color="#010e68" color.1="#000000" x="48.19444444444445" z="71.31944444444444" w="5" d="15" h="0" />
+  <Wall color="#010e68" color.1="#000000" x="63.19444444444444" z="81.31944444444444" w="5" d="5" h="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenW" />
-  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="12" start="mShow" out="mTaken" fill="#0000dd" frame="#aa0000" cx="67.60416666666666" cz="85.72916666666666" angle="90" />
-  <Ramp y="0" thickness="0" deltaY="hWall" fill="#000055" frame="#777777" x="63.19444444444444" z="73.81944444444444" w="5" d="10" h="0" angle="180" />
-  <Wall fill="#000055" frame="#000000" x="58.19444444444445" z="71.31944444444444" w="5" d="5" h="0" />
-  <Ramp y="0" thickness="0" deltaY="hWall" fill="#000055" frame="#777777" x="55.69444444444445" z="81.31944444444444" w="10" d="5" h="0" angle="90" />
-  <SkyColor fill="#0000dd" frame="#00ccff" />
-  <GroundColor fill="#009999" />
+  <Goody shape="bspGrenade" y="grenH" speed="2" grenades="12" start="mShow" out="mTaken" color="#012ce4" color.1="#bb1800" cx="67.60416666666666" cz="85.72916666666666" angle="270" />
+  <Ramp y="0" thickness="0" deltaY="hWall" color="#010e68" color.1="#8a8a8a" x="63.19444444444444" z="73.81944444444444" w="5" d="10" h="0" angle="0" />
+  <Wall color="#010e68" color.1="#000000" x="58.19444444444445" z="71.31944444444444" w="5" d="5" h="0" />
+  <Ramp y="0" thickness="0" deltaY="hWall" color="#010e68" color.1="#8a8a8a" x="55.69444444444445" z="81.31944444444444" w="10" d="5" h="0" angle="270" />
+  <SkyColor color="#012ce4" color.1="#00d5ff" />
+  <GroundColor color="#00a8aa" />
   <set wallHeight=".87 * hWall" baseHeight="3 * hWall" />
-  <Wall fill="#ff0000" frame="#ff0000" x="53.19444444444445" z="71.31944444444444" w="5" d="5" h="0" />
-  <Goal shape="bspFloorFrame" scale=".48" goalScore="5000" y=".87 * hWall" motionRange="2" activeRange="1.2" roll="0" pitch="0" goalMsg="@basket" fill="#ffff00" frame="#ff0000" cx="53.22916666666667" cz="71.35416666666666" angle="0" />
+  <Wall color="#ff2600" color.1="#ff2600" x="53.19444444444445" z="71.31944444444444" w="5" d="5" h="0" />
+  <Goal shape="bspFloorFrame" scale=".48" goalScore="5000" y=".87 * hWall" motionRange="2" activeRange="1.2" roll="0" pitch="0" goalMsg="@basket" color="#fffb00" color.1="#ff2600" cx="53.22916666666667" cz="71.35416666666666" angle="180" />
   <set wallHeight="0 * hWall" baseHeight="0 * hWall" />
-  <Wall fill="#000055" frame="#000000" x="115.06944444444446" z="64.44444444444444" w="38.75" d="1.25" h="0" />
-  <Wall fill="#000055" frame="#000000" x="46.31944444444445" z="133.19444444444446" w="1.25" d="38.75" h="0" />
-  <WallDoor midYaw="-45" fill="#000055" frame="#000000" x="124.16666666666667" z="142.29166666666669" w="1.25" d="30" h="0" />
-  <Wall fill="#000055" frame="#000000" x="135.06944444444446" z="97.56944444444446" w="1.25" d="67.5" h="0" />
-  <Wall fill="#000055" frame="#000000" x="79.44444444444444" z="153.19444444444446" w="67.5" d="1.25" h="0" />
+  <Wall color="#010e68" color.1="#000000" x="115.06944444444446" z="64.44444444444444" w="38.75" d="1.25" h="0" />
+  <Wall color="#010e68" color.1="#000000" x="46.31944444444445" z="133.19444444444446" w="1.25" d="38.75" h="0" />
+  <WallDoor midYaw="-45" color="#010e68" color.1="#000000" x="124.16666666666667" z="142.29166666666669" w="1.25" d="30" h="0" />
+  <Wall color="#010e68" color.1="#000000" x="135.06944444444446" z="97.56944444444446" w="1.25" d="67.5" h="0" />
+  <Wall color="#010e68" color.1="#000000" x="79.44444444444444" z="153.19444444444446" w="67.5" d="1.25" h="0" />
   <set wallHeight="6.75 * hWall" baseHeight="0 * hWall" />
-  <Field deltaY="yPower" deltaX="0 * xPower" deltaZ="zPower" visible="fieldVis" stop="@offField1" start="@start" fill="#00ccff" frame="#000000" x="55.06944444444444" z="61.31944444444445" w="28.75" d="5" h="0" cx="53.22916666666667" cz="71.35416666666666" angle="0" />
-  <Field deltaY="yPower" deltaX="0 * xPower" deltaZ="zPower" visible="fieldVis" stop="@offField1" start="@start" fill="#00ccff" frame="#000000" x="83.81944444444444" z="61.31944444444445" w="28.75" d="5" h="0" cx="53.22916666666667" cz="71.35416666666666" angle="0" />
-  <Field deltaY="yPower" deltaX="0 * xPower" deltaZ="zPower" visible="fieldVis" stop="@offField1" start="@start" fill="#00ccff" frame="#000000" x="112.88194444444446" z="61.31944444444445" w="29.375" d="5" h="0" cx="53.22916666666667" cz="71.35416666666666" angle="0" />
-  <Field deltaY="yPower" deltaX="xPower" deltaZ="0 * zPower" visible="fieldVis" stop="@offField4" start="@start" fill="#00ccff" frame="#000000" x="43.19444444444444" z="78.19444444444444" w="5" d="28.75" h="0" cx="53.22916666666667" cz="71.35416666666666" angle="0" />
-  <Field deltaY="yPower" deltaX="xPower" deltaZ="0 * zPower" visible="fieldVis" stop="@offField4" start="@start" fill="#00ccff" frame="#000000" x="43.19444444444444" z="106.94444444444444" w="5" d="28.75" h="0" cx="53.22916666666667" cz="71.35416666666666" angle="0" />
-  <Field deltaY="yPower" deltaX="xPower" deltaZ="0 * zPower" visible="fieldVis" stop="@offField4" start="@start" fill="#00ccff" frame="#000000" x="43.19444444444444" z="135.69444444444446" w="5" d="28.75" h="0" cx="53.22916666666667" cz="71.35416666666666" angle="0" />
-  <Field deltaY="yPower" deltaX="xPower" deltaZ="0 * zPower" visible="fieldVis" stop="@offField4" start="@start" fill="#00ccff" frame="#000000" x="43.19444444444444" z="151.94444444444446" w="5" d="3.75" h="0" cx="53.22916666666667" cz="71.35416666666666" angle="0" />
-  <Field deltaY="yPower" deltaX="0 * xPower" deltaZ="zPower" visible="fieldVis" stop="@offField1" start="@start" fill="#00ccff" frame="#000000" x="131.63194444444446" z="61.31944444444445" w="8.125" d="5" h="0" cx="53.22916666666667" cz="71.35416666666666" angle="0" />
+  <Field deltaY="yPower" deltaX="0 * xPower" deltaZ="zPower" visible="fieldVis" stop="@offField1" start="@start" color="#00d5ff" color.1="#000000" x="55.06944444444444" z="61.31944444444445" w="28.75" d="5" h="0" cx="53.22916666666667" cz="71.35416666666666" angle="180" />
+  <Field deltaY="yPower" deltaX="0 * xPower" deltaZ="zPower" visible="fieldVis" stop="@offField1" start="@start" color="#00d5ff" color.1="#000000" x="83.81944444444444" z="61.31944444444445" w="28.75" d="5" h="0" cx="53.22916666666667" cz="71.35416666666666" angle="180" />
+  <Field deltaY="yPower" deltaX="0 * xPower" deltaZ="zPower" visible="fieldVis" stop="@offField1" start="@start" color="#00d5ff" color.1="#000000" x="112.88194444444446" z="61.31944444444445" w="29.375" d="5" h="0" cx="53.22916666666667" cz="71.35416666666666" angle="180" />
+  <Field deltaY="yPower" deltaX="xPower" deltaZ="0 * zPower" visible="fieldVis" stop="@offField4" start="@start" color="#00d5ff" color.1="#000000" x="43.19444444444444" z="78.19444444444444" w="5" d="28.75" h="0" cx="53.22916666666667" cz="71.35416666666666" angle="180" />
+  <Field deltaY="yPower" deltaX="xPower" deltaZ="0 * zPower" visible="fieldVis" stop="@offField4" start="@start" color="#00d5ff" color.1="#000000" x="43.19444444444444" z="106.94444444444444" w="5" d="28.75" h="0" cx="53.22916666666667" cz="71.35416666666666" angle="180" />
+  <Field deltaY="yPower" deltaX="xPower" deltaZ="0 * zPower" visible="fieldVis" stop="@offField4" start="@start" color="#00d5ff" color.1="#000000" x="43.19444444444444" z="135.69444444444446" w="5" d="28.75" h="0" cx="53.22916666666667" cz="71.35416666666666" angle="180" />
+  <Field deltaY="yPower" deltaX="xPower" deltaZ="0 * zPower" visible="fieldVis" stop="@offField4" start="@start" color="#00d5ff" color.1="#000000" x="43.19444444444444" z="151.94444444444446" w="5" d="3.75" h="0" cx="53.22916666666667" cz="71.35416666666666" angle="180" />
+  <Field deltaY="yPower" deltaX="0 * xPower" deltaZ="zPower" visible="fieldVis" stop="@offField1" start="@start" color="#00d5ff" color.1="#000000" x="131.63194444444446" z="61.31944444444445" w="8.125" d="5" h="0" cx="53.22916666666667" cz="71.35416666666666" angle="180" />
   <set wallYon=".001" />
-  <Wall fill="#ffff33" frame="#000000" x="77.56944444444444" z="155.69444444444446" w="73.75" d="3.75" h="0" />
-  <Incarnator y="startHeight" status="false" start="@mountainTeles" cx="49.61805555555556" cz="106.31944444444444" angle="270" />
-  <Incarnator y="startHeight" status="false" start="@mountainTeles" cx="49.61805555555556" cz="96.31944444444444" angle="270" />
-  <Incarnator y="startHeight" status="false" start="@mountainTeles" cx="78.29861111111111" cz="67.43055555555556" angle="0" />
-  <Incarnator y="startHeight" status="false" start="@mountainTeles" cx="88.29861111111111" cz="67.43055555555556" angle="0" />
-  <Incarnator y="startHeight" status="false" start="@mountainTeles" cx="49.61805555555556" cz="85.69444444444444" angle="270" />
-  <Incarnator y="startHeight" status="false" start="@mountainTeles" cx="68.29861111111111" cz="67.43055555555556" angle="0" />
-  <WallDoor midYaw="-45" fill="#ffff33" frame="#000000" x="125.7638888888889" z="143.61111111111111" w="2.5" d="10" h="0" />
-  <WallDoor midYaw="-45" fill="#ffff33" frame="#000000" x="118.61111111111111" z="150.76388888888889" w="2.5" d="10" h="0" />
-  <WallDoor midYaw="-45" fill="#ffff33" frame="#000000" x="132.91666666666669" z="136.52777777777777" w="2.5" d="10" h="0" />
-  <Wall fill="#ffff33" frame="#000000" x="137.25694444444446" z="97.98611111111111" w="3.125" d="68.33333333333331" h="0" />
+  <Wall color="#fffc41" color.1="#000000" x="77.56944444444444" z="155.69444444444446" w="73.75" d="3.75" h="0" />
+  <Incarnator y="startHeight" status="false" start="@mountainTeles" cx="49.61805555555556" cz="106.31944444444444" angle="90" />
+  <Incarnator y="startHeight" status="false" start="@mountainTeles" cx="49.61805555555556" cz="96.31944444444444" angle="90" />
+  <Incarnator y="startHeight" status="false" start="@mountainTeles" cx="78.29861111111111" cz="67.43055555555556" angle="180" />
+  <Incarnator y="startHeight" status="false" start="@mountainTeles" cx="88.29861111111111" cz="67.43055555555556" angle="180" />
+  <Incarnator y="startHeight" status="false" start="@mountainTeles" cx="49.61805555555556" cz="85.69444444444444" angle="90" />
+  <Incarnator y="startHeight" status="false" start="@mountainTeles" cx="68.29861111111111" cz="67.43055555555556" angle="180" />
+  <WallDoor midYaw="-45" color="#fffc41" color.1="#000000" x="125.7638888888889" z="143.61111111111111" w="2.5" d="10" h="0" />
+  <WallDoor midYaw="-45" color="#fffc41" color.1="#000000" x="118.61111111111111" z="150.76388888888889" w="2.5" d="10" h="0" />
+  <WallDoor midYaw="-45" color="#fffc41" color.1="#000000" x="132.91666666666669" z="136.52777777777777" w="2.5" d="10" h="0" />
+  <Wall color="#fffc41" color.1="#000000" x="137.25694444444446" z="97.98611111111111" w="3.125" d="68.33333333333331" h="0" />
   <set wallHeight="1.5" baseHeight="7" wallYon=".001" />
-  <Wall fill="#000055" frame="#000000" x="101.00694444444444" z="123.50694444444446" w="1.875" d="1.875" h="0" />
-  <Wall fill="#000055" frame="#000000" x="105.38194444444444" z="119.13194444444444" w="1.875" d="1.875" h="0" />
-  <Teleporter stop="@offTele" start="@basket" status="false" group="-1" mask="allTeams" y="20" activeRange="10000" deadRange="0" destGroup="@new" shape="0" fill="#0066ff" frame="#000000" cx="55" cz="72.08333333333334" angle="225" />
+  <Wall color="#010e68" color.1="#000000" x="101.00694444444444" z="123.50694444444446" w="1.875" d="1.875" h="0" />
+  <Wall color="#010e68" color.1="#000000" x="105.38194444444444" z="119.13194444444444" w="1.875" d="1.875" h="0" />
+  <Teleporter stop="@offTele" start="@basket" status="false" group="-1" mask="allTeams" y="20" activeRange="10000" deadRange="0" destGroup="@new" shape="0" color="#0080ff" color.1="#000000" cx="55" cz="72.08333333333334" angle="45" />
   <Timer in="@basket" out="@offTele" wait="1" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@enterT3" didOpen="@add1Red" close="@redClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ff6666" frame="#000000" x="413.33333333333337" z="569.0277777777778" w="2.7777777777777715" d="1.5277777777778283" h="2" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@enterT2" didOpen="@add1Yellow" close="@yellowClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ffff33" frame="#000000" x="387.9166666666667" z="569.3055555555557" w="2.7777777777778283" d="1.5277777777777146" h="2" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@enterT6" didOpen="@add1Blue" close="@blueClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#00ccff" frame="#000000" x="400.83333333333337" z="569.2361111111111" w="2.7777777777777715" d="1.5277777777777146" h="2" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@enterT3" didOpen="@add1Red" close="@redClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="#ff7e79" color.1="#000000" x="413.33333333333337" z="569.0277777777778" w="2.7777777777777715" d="1.5277777777778283" h="2" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@enterT2" didOpen="@add1Yellow" close="@yellowClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="#fffc41" color.1="#000000" x="387.9166666666667" z="569.3055555555557" w="2.7777777777778283" d="1.5277777777777146" h="2" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@enterT6" didOpen="@add1Blue" close="@blueClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="#00d5ff" color.1="#000000" x="400.83333333333337" z="569.2361111111111" w="2.7777777777777715" d="1.5277777777777146" h="2" />
   <Timer in.0="@start" in.1="@fifteen" wait="15" out.0="@fifteen" />
   <Timer in="@fifteen" wait="1" out="@sixteen" />
   <Timer in="@fifteen" wait="10" out.0="@yellowClose" out.1="@blueClose" out.2="@redClose" out.3="@pinkClose" out.4="@purpleClose" out.5="@greenClose" />
@@ -167,15 +167,15 @@
   <Counter in="@add1Pink" n="kTimeTele" out="@telePink" restart="true" />
   <Counter in="@add1Purple" n="kTimeTele" out="@telePurple" restart="true" />
   <Counter in="@add1Green" n="kTimeTele" out="@teleGreen" restart="true" />
-  <Teleporter stop="@offBlue" start="@teleBlue" status="false" group="-2" mask="T6" y="teleY" activeRange="teleRange" deadRange="0" destGroup="@new" shape="0" fill="#ff6600" frame="#000000" cx="53.19444444444445" cz="71.31944444444444" angle="90" />
-  <Teleporter stop="@offRed" start="@teleRed" status="false" group="-3" mask="T3" y="teleY" activeRange="teleRange" deadRange="0" destGroup="@new" shape="0" fill="#ff6600" frame="#000000" cx="53.19444444444445" cz="71.31944444444444" angle="90" />
-  <Teleporter stop="@offYellow" start="@teleYellow" status="false" group="-4" mask="T2" y="teleY" activeRange="teleRange" deadRange="0" destGroup="@new" shape="0" fill="#ff6600" frame="#000000" cx="53.19444444444445" cz="71.31944444444444" angle="90" />
-  <Teleporter stop="@offGreen" start="@teleGreen" status="false" group="-5" mask="T1" y="teleY" activeRange="teleRange" deadRange="0" destGroup="@new" shape="0" fill="#ff6600" frame="#000000" cx="53.19444444444445" cz="71.31944444444444" angle="90" />
-  <Teleporter stop="@offPink" start="@telePink" status="false" group="-6" mask="T4" y="teleY" activeRange="teleRange" deadRange="0" destGroup="@new" shape="0" fill="#ff6600" frame="#000000" cx="53.19444444444445" cz="71.31944444444444" angle="90" />
-  <Teleporter stop="@offPurple" start="@telePurple" status="false" group="-7" mask="T5" y="teleY" activeRange="teleRange" deadRange="0" destGroup="@new" shape="0" fill="#ff6600" frame="#000000" cx="53.19444444444445" cz="71.31944444444444" angle="90" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@enterT5" didOpen="@add1Purple" close="@purpleClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#9900cc" frame="#000000" x="412.70833333333337" z="587.1527777777778" w="2.7777777777777715" d="1.5277777777778283" h="2" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@enterT1" didOpen="@add1Green" close="@greenClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#008800" frame="#000000" x="387.2916666666667" z="587.4305555555557" w="2.7777777777778283" d="1.5277777777777146" h="2" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@enterT4" didOpen="@add1Pink" close="@pinkClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ff33cc" frame="#000000" x="400.20833333333337" z="587.3611111111111" w="2.7777777777777715" d="1.5277777777777146" h="2" />
+  <Teleporter stop="@offBlue" start="@teleBlue" status="false" group="-2" mask="T6" y="teleY" activeRange="teleRange" deadRange="0" destGroup="@new" shape="0" color="#ff7c00" color.1="#000000" cx="53.19444444444445" cz="71.31944444444444" angle="270" />
+  <Teleporter stop="@offRed" start="@teleRed" status="false" group="-3" mask="T3" y="teleY" activeRange="teleRange" deadRange="0" destGroup="@new" shape="0" color="#ff7c00" color.1="#000000" cx="53.19444444444445" cz="71.31944444444444" angle="270" />
+  <Teleporter stop="@offYellow" start="@teleYellow" status="false" group="-4" mask="T2" y="teleY" activeRange="teleRange" deadRange="0" destGroup="@new" shape="0" color="#ff7c00" color.1="#000000" cx="53.19444444444445" cz="71.31944444444444" angle="270" />
+  <Teleporter stop="@offGreen" start="@teleGreen" status="false" group="-5" mask="T1" y="teleY" activeRange="teleRange" deadRange="0" destGroup="@new" shape="0" color="#ff7c00" color.1="#000000" cx="53.19444444444445" cz="71.31944444444444" angle="270" />
+  <Teleporter stop="@offPink" start="@telePink" status="false" group="-6" mask="T4" y="teleY" activeRange="teleRange" deadRange="0" destGroup="@new" shape="0" color="#ff7c00" color.1="#000000" cx="53.19444444444445" cz="71.31944444444444" angle="270" />
+  <Teleporter stop="@offPurple" start="@telePurple" status="false" group="-7" mask="T5" y="teleY" activeRange="teleRange" deadRange="0" destGroup="@new" shape="0" color="#ff7c00" color.1="#000000" cx="53.19444444444445" cz="71.31944444444444" angle="270" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@enterT5" didOpen="@add1Purple" close="@purpleClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="#ab30d6" color.1="#000000" x="412.70833333333337" z="587.1527777777778" w="2.7777777777777715" d="1.5277777777778283" h="2" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@enterT1" didOpen="@add1Green" close="@greenClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="#009600" color.1="#000000" x="387.2916666666667" z="587.4305555555557" w="2.7777777777778283" d="1.5277777777777146" h="2" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@enterT4" didOpen="@add1Pink" close="@pinkClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="#ff56d6" color.1="#000000" x="400.20833333333337" z="587.3611111111111" w="2.7777777777777715" d="1.5277777777777146" h="2" />
   <Timer in="@teleBlue" out="@offBlue" wait="1" />
   <Timer in="@teleRed" out="@offRed" wait="1" />
   <Timer in="@teleYellow" out="@offYellow" wait="1" />

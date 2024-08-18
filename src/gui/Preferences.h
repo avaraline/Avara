@@ -13,6 +13,9 @@ using json = nlohmann::json;
 #define kInvertYAxisTag "invertYAxis"
 #define kLatencyToleranceTag "latencyTolerance"
 #define kHullTypeTag "hull"
+#define kFrameTimeTag "frameTime"
+#define kThrottle "throttle"
+#define kSpawnOrder "spawnOrder"
 
 // TODO: split this into separate prefs
 #define kServerOptionsTag "_serverOptions"
@@ -27,17 +30,48 @@ using json = nlohmann::json;
 #define kKeyboardMappingTag "keyboard"
 
 #define kPlayerNameTag "playerName"
+#define kPlayerHullColorTag "hullColor"
+#define kPlayerHullTrimColorTag "hullTrimColor"
+#define kPlayerCockpitColorTag "cockpitColor"
+#define kPlayerGunColorTag "gunColor"
+#define kIgnoreCustomColorsTag "ignoreCustomColors"
 
 // GL stuff
 #define kWindowWidth "windowWidth"
 #define kWindowHeight "windowHeight"
-#define kMultiSamplesTag "multiSamples"
 #define kFullScreenTag "fullscreen"
 #define kFOV "fov"
+#define kFXAA "fxaa"
+#define kUseLegacyRenderer "useLegacyRenderer"
 
 // Other graphics settings
 #define kColorBlindMode "colorBlindMode"
-#define kWeaponSightAlpha "weaponSightAlpha"
+#define kHUDColor "hudColor"
+#define kHUDPositiveColor "hudPositiveColor"
+#define kHUDWarningColor "hudWarningColor"
+#define kHUDCriticalColor "hudCriticalColor"
+#define kHUDAlpha "hudAlpha"
+#define kHUDPreset "hudPreset"
+#define kHUDInertia "hudInertia"
+#define kHUDArrowStyle "hudArrowStyle"
+#define kHUDArrowScale "hudArrowScale"
+#define kHUDArrowDistance "hudArrowDistance"
+#define kHUDShowMissileLock "hudShowMissileLock"
+#define kHUDShowShieldGauge "hudShowShieldGauge"
+#define kHUDShowEnergyGauge "hudShowEnergyGauge"
+#define kHUDShowBoosterCount "hudShowBoosterCount"
+#define kHUDShowGrenadeCount "hudShowGrenadeCount"
+#define kHUDShowMissileCount "hudShowMissileCount"
+#define kHUDShowLivesCount "hudShowLivesCount"
+#define kHUDShowLevelMessages "hudShowLevelMessages"
+#define kHUDShowSystemMessages "hudShowSystemMessages"
+#define kHUDShowPlayerList "hudShowPlayerList"
+#define kHUDShowDirArrow "hudShowDirArrow"
+#define kHUDShowScore "hudShowScore"
+#define kHUDShowTime "hudShowTime"
+#define kHUDShowKillFeed "hudShowKillFeed"
+#define kShowNewHUD "showNewHUD"
+#define kIgnoreLevelCustomColorsTag "ignoreLevelCustomColors"
 
 // Network & Tracker
 #define kLastAddress "lastAddress"
@@ -48,11 +82,21 @@ using json = nlohmann::json;
 #define kTrackerRegisterAddress "trackerRegisterAddress"
 #define kTrackerRegisterFrequency "trackerRegisterFrequency"
 #define kTrackerAddress "trackerAddress"
+#define kPunchServerAddress "udpPunchServerAddress"
+#define kPunchServerPort "udpPunchServerPort"
+#define kPunchHoles "udpHolePunch"
 
 // Levels
 #define kRecentSets "recentSets"
 #define kRecentLevels "recentLevels"
+
+// Sound
 #define kIgnoreCustomGoodySound "ignoreCustomGoodySound"
+#define kSoundVolume "soundVolume"
+
+// other
+#define kGoodGamePhrases "ggs"
+#define kShowElo "showElo"
 
 // Key names are from https://wiki.libsdl.org/SDL_Scancode
 static json defaultPrefs = {
@@ -60,7 +104,7 @@ static json defaultPrefs = {
     // {kJoystickModeTag, false},
     {kInvertYAxisTag, false},
     {kMouseSensitivityTag, 0},
-    {kLatencyToleranceTag, 1},
+    {kLatencyToleranceTag, 1.0},
     {kHullTypeTag, 0}, // 0 = light, 1 = medium, 2 = heavy
     {kServerOptionsTag, 129}, // 1 = allow load, 128 = auto latency
     {kDefaultUDPPort, 19567},
@@ -84,34 +128,76 @@ static json defaultPrefs = {
         {"lookRight", "3"},
         {"zoomIn", "="},
         {"zoomOut", "-"},
+        {"toggleFreeCam", "Space"},
         {"scoutView", "Tab"},
         {"scoutControl", {"2", "Up", "Down", "Left", "Right"}},
         {"spectateNext", "]"},
         {"spectatePrevious", "["},
         {"scoreboard", "/"},
         {"chatMode", "Return"},
+        {"freeCamUp", "R"},
+        {"freeCamDown", "F"},
         {"debug1", "5"},
         {"debug2", "6"}}
     },
     {kPlayerNameTag, "Unnamed Player"},
-    {kMultiSamplesTag, 0},
+    {kPlayerHullColorTag, "default"},
+    {kPlayerHullTrimColorTag, "#2b2b2b"},
+    {kPlayerCockpitColorTag, "#0333ff"},
+    {kPlayerGunColorTag, "#929292"},
     {kWindowWidth, 1024},
     {kWindowHeight, 768},
     {kFullScreenTag, false},
     {kFOV, 50.0},
+    {kFXAA, true},
     {kColorBlindMode, 0},
-    {kWeaponSightAlpha, 1.0},
+    {kHUDColor, "#03f5f5"},
+    {kHUDPositiveColor, "#51e87e"},
+    {kHUDWarningColor, "#edd62d"},
+    {kHUDCriticalColor, "#fa1313"},
+    {kHUDAlpha, 1.0},
+    {kHUDPreset, 2},
+    {kHUDInertia, 1.0},
+    {kHUDArrowScale, 1.0},
+    {kHUDArrowDistance, 8.0},
+    {kHUDArrowStyle, 2},
+    {kHUDShowMissileLock, true},
+    {kHUDShowShieldGauge, true},
+    {kHUDShowEnergyGauge, true},
+    {kHUDShowBoosterCount, true},
+    {kHUDShowGrenadeCount, true},
+    {kHUDShowMissileCount, true},
+    {kHUDShowLivesCount, true},
+    {kHUDShowSystemMessages, true},
+    {kHUDShowLevelMessages, true},
+    {kHUDShowPlayerList, true},
+    {kHUDShowScore, true},
+    {kHUDShowTime, true},
+    {kHUDShowKillFeed, true},
+    {kSpawnOrder, 3},
+    {kShowNewHUD, true},
+    {kFrameTimeTag, 16},
     {kLastAddress, ""},
     {kServerDescription, ""},
     {kServerPassword, ""},
     {kClientPassword, ""},
-    {kTrackerAddress, "avara.io"},
+    {kTrackerAddress, "tracker.avara.gg"},
     {kTrackerRegister, 1},
-    {kTrackerRegisterAddress, "avara.io"},
+    {kTrackerRegisterAddress, "tracker.avara.gg"},
     {kTrackerRegisterFrequency, 5},
+    {kPunchServerAddress, "tracker.avara.gg"},
+    {kPunchServerPort, 19555},
+    {kPunchHoles, true},
     {kRecentSets, {}},
     {kRecentLevels, {}},
-    {kIgnoreCustomGoodySound, false}
+    {kSoundVolume, 100},
+    {kIgnoreCustomColorsTag, false},
+    {kIgnoreLevelCustomColorsTag, false},
+    {kIgnoreCustomGoodySound, false},
+    {kThrottle, 0},
+    {kGoodGamePhrases, {}},
+    {kShowElo, false},
+    {kUseLegacyRenderer, false}
 };
 
 
@@ -123,7 +209,11 @@ static std::string PrefPath() {
     return jsonPath;
 }
 
-static json ReadPrefs() {
+static inline json ReadDefaultPrefs() {
+    return defaultPrefs;
+}
+
+static inline json ReadPrefs() {
     json prefs;
     std::ifstream in(PrefPath());
 
@@ -151,7 +241,7 @@ static json ReadPrefs() {
     return prefs;
 }
 
-static void WritePrefs(json prefs) {
+static inline void WritePrefs(json prefs) {
     try {
         std::ostringstream oss;
         oss << std::setw(4) << prefs << std::endl;

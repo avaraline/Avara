@@ -354,7 +354,7 @@
             "description": "A bit like a `WallSolid`, but movable by external impulses from shots and explosions."
         },
         "Dome": {
-            "type": "placed",
+            "type": "glow",
             "attrs": {
                 "hasFloor": {
                     "default": false,
@@ -551,6 +551,17 @@
             "attrs": {},
             "index": 37,
             "description": ""
+        },
+        "TeamColor": {
+            "type": "actor",
+            "attrs": {
+                "mask": {
+                    "default": "allTeams",
+                    "description": "Specifies the team(s) whose colors will be overridden by this adjuster. Usable values include `T1`, `T2`, ...`T8`, or even expressions like `T1 + T3 + T5 + T7`."
+                }
+            },
+            "index": 38,
+            "description": "Adjusts the team color value for the specified team(s)."
         }
     }
 }

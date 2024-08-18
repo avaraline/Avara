@@ -379,6 +379,9 @@ extern NANOGUI_EXPORT void init();
 /// Static shutdown; should be called before the application terminates.
 extern NANOGUI_EXPORT void shutdown();
 
+/// How long to wait/timeout between events (poll events if <= 0)
+extern int throttle;
+
 /**
  * \brief Enter the application main loop
  *
@@ -387,18 +390,6 @@ extern NANOGUI_EXPORT void shutdown();
  *     received. In the absence of any external events, it enforces a redraw
  *     once every ``refresh`` milliseconds. To disable the refresh timer,
  *     specify a negative value here.
- *
- * \param detach
- *     This parameter only exists in the Python bindings. When the active
- *     \c Screen instance is provided via the \c detach parameter, the
- *     ``mainloop()`` function becomes non-blocking and returns
- *     immediately (in this case, the main loop runs in parallel on a newly
- *     created thread). This feature is convenient for prototyping user
- *     interfaces on an interactive Python command prompt. When
- *     ``detach != None``, the function returns an opaque handle that
- *     will release any resources allocated by the created thread when the
- *     handle's ``join()`` method is invoked (or when it is garbage
- *     collected).
  *
  * \remark
  *     Unfortunately, Mac OS X strictly requires all event processing to take
