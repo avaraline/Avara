@@ -98,6 +98,14 @@ protected:
     glm::vec4 v = glm::vec4(normalized_x, normalized_y, 1.0, -1);
     return gRenderer->ScreenSpaceToWorldSpace(&v);
   }
+    
+  const glm::vec3 windowToWorld(Point *p) {
+    float normalized_x = (((float)p->h / (float)gApplication->win_size_x) * 2.0) - 1.0;
+    float normalized_y = ((((float)p->v / (float)gApplication->win_size_y) * 2.0) - 1.0) * -1.0;
+    glm::vec4 v = glm::vec4(normalized_x, normalized_y, 1.0, -1);
+    return gRenderer->ScreenSpaceToWorldSpace(&v);
+  }
+    
 
   static int text_width(mu_Font f, const char *text, int len) {
     return (int)round(nvgTextBounds(gApplication->nvg_context, 0, 0, text, nullptr, nullptr));
@@ -116,9 +124,10 @@ protected:
     return p;
   }
 
-  static const long RGBAToLong(mu_Color c) {
-    return ((static_cast<int>(c.a + 0.5) << 24) + (static_cast<int>(c.r) << 16) + (static_cast<int>(c.g) << 8) +
-            static_cast<int>(c.b));
+  static const ARGBColor RGBAToLong(mu_Color c) {
+      
+    return static_cast<uint32_t>(((static_cast<int>(c.a + 0.5) << 24) + (static_cast<int>(c.r) << 16) + (static_cast<int>(c.g) << 8) +
+            static_cast<int>(c.b)));
   }
 
   static const NVGcolor toNVGcolor(mu_Color other) {

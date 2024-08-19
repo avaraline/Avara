@@ -136,7 +136,7 @@ CApplication::CApplication(std::string the_title) {
 
    
 
-    nvgBeginFrame(nvg_context, win_size_x, win_size_y, pixel_ratio);
+    nvgBeginFrame(nvg_context, fb_size_x, fb_size_y, pixel_ratio);
     nvgEndFrame(nvg_context);
 #if defined(__APPLE__)
     /* Poll for events once before starting a potentially
