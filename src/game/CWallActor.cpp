@@ -81,8 +81,7 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
     resId = ReadLongVar(dim[1] == 0 ? iFloorTemplateResource : iWallTemplateResource);
 
     partCount = 1;
-    box = new CSmartBox;
-    box->ISmartBox(resId, dim, GetPixelColor(), GetOtherPixelColor(), this, 0);
+    box = new CSmartBox(resId, dim, GetPixelColor(), GetOtherPixelColor(), this, 0);
     box->Reset();
     TranslatePart(box, centerX, addAlt + dim[1], centerZ);
     box->MoveDone();
@@ -113,7 +112,9 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
         itsGame->AddActor(this);
 
         stepSound = ReadLongVar(iStepSound);
-        gHub->LoadSample(stepSound);
+
+        // Preload sounds.
+        auto _ = AssetManager::GetOgg(stepSound);
 
         lastWallActor = this;
 
@@ -143,7 +144,7 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
         }
         */
     } else {
-        Dispose();
+        delete this;
     }
 }
 
@@ -154,8 +155,7 @@ void CWallActor::MakeWallFromDims(Vector dims, Fixed x, Fixed y, Fixed z) {
     FreshCalc();
 
     partCount = 1;
-    CSmartBox* box = new CSmartBox;
-    box->ISmartBox(400, dims, GetPixelColor(), GetOtherPixelColor(), this, 0);
+    CSmartBox* box = new CSmartBox(400, dims, GetPixelColor(), GetOtherPixelColor(), this, 0);
     box->Reset();
     TranslatePart(box, x, y, z);
     box->MoveDone();
@@ -178,6 +178,6 @@ void CWallActor::MakeWallFromDims(Vector dims, Fixed x, Fixed y, Fixed z) {
 
         lastWallActor = this;
     } else {
-        Dispose();
+        //Dispose();
     }
 }

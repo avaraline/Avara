@@ -14,10 +14,10 @@ class CGlowActors : public CPlacedActors {
 public:
     Fixed glow;
     Boolean canGlow;
-    CGlowActors();
+
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
     virtual void FrameAction();
     virtual void WasHit(RayHitRecord *theHit, Fixed hitEnergy);
-    
+    CGlowActors();
 };

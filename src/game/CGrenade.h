@@ -13,7 +13,7 @@
 
 class CDepot;
 
-class CGrenade : public CWeapon {
+class CGrenade final : public CWeapon {
 public:
     Fixed gravity, classicGravity;
     Fixed friction, classicFriction;

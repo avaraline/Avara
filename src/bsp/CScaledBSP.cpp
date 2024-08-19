@@ -10,10 +10,8 @@
 #include "CScaledBSP.h"
 
 #include "Memory.h"
-#include "Resource.h"
-#include "AvaraGL.h"
 
-void CScaledBSP::IScaledBSP(Fixed scale, short resId, CAbstractActor *anActor, short aPartCode) {
+CScaledBSP::CScaledBSP(Fixed scale, short resId, CAbstractActor *anActor, short aPartCode) {
     isMorphable = false;
 
     CSmartPart::ISmartPart(resId, anActor, aPartCode);
@@ -73,6 +71,3 @@ void CScaledBSP::Reset() {
     }
 }
 
-void CScaledBSP::Dispose() {
-    CSmartPart::Dispose();
-}

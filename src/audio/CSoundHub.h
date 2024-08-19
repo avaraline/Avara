@@ -10,7 +10,10 @@
 #pragma once
 #include "CBasicSound.h"
 #include "CDirectObject.h"
+#include "OggFile.h"
 #include "SoundSystemDefines.h"
+
+#include <memory>
 
 #define EXTRASOUNDLINKCOUNT 32
 
@@ -27,17 +30,8 @@ public:
     virtual void AttachMixer(CSoundMixer *aMixer) = 0;
     //virtual void CreateSound(short kind) = 0;
 
-    virtual SampleHeaderHandle LoadSample(short resId) = 0;
-    virtual SampleHeaderHandle LoadSampleLegacy(short resId) = 0;
-    virtual SampleHeaderHandle PreLoadSample(short resId) = 0;
-    virtual SampleHeaderHandle RequestSample(short resId) = 0;
-    virtual void FreeUnusedSamples() = 0;
-
-    virtual void FreeOldSamples() = 0;
-    virtual void FlagOldSamples() = 0;
-
     virtual void Restock(CBasicSound *aSound) = 0;
-    //virtual CBasicSound *Aquire(short kind) = 0;
+    //virtual CBasicSound *Acquire(short kind) = 0;
     virtual CBasicSound *GetSoundSampler(short kind, short resId) = 0;
 
     //virtual void CreateSoundLinks(short n) = 0;
@@ -61,7 +55,6 @@ public:
     CHuffProcessor *itsCompressor;
     CSoundMixer *itsMixer;
     CBasicSound *soundList[hubSoundKinds];
-    SampleHeaderHandle sampleList;
 
     Ptr soundLinkStorage;
     SoundLink *firstFreeLink;
@@ -71,17 +64,8 @@ public:
     virtual void AttachMixer(CSoundMixer *aMixer);
     virtual void CreateSound(short kind);
 
-    virtual SampleHeaderHandle LoadSample(short resId);
-    virtual SampleHeaderHandle LoadSampleLegacy(short resId);
-    virtual SampleHeaderHandle PreLoadSample(short resId);
-    virtual SampleHeaderHandle RequestSample(short resId);
-    virtual void FreeUnusedSamples();
-
-    virtual void FreeOldSamples();
-    virtual void FlagOldSamples();
-
     virtual void Restock(CBasicSound *aSound);
-    virtual CBasicSound *Aquire(short kind);
+    virtual CBasicSound *Acquire(short kind);
     virtual CBasicSound *GetSoundSampler(short kind, short resId);
 
     virtual void CreateSoundLinks(short n);

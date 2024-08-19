@@ -1,6 +1,6 @@
 #define APPLICATIONMAIN
 #include "CApplication.h"
-#include "AvaraGL.h"
+
 #include "ColorManager.h"
 #include "Preferences.h"
 #include "Resource.h"
@@ -13,7 +13,7 @@
 #include <string>
 #include <vector>
 
-#define NANOVG_GL2_IMPLEMENTATION
+#define NANOVG_GL3_IMPLEMENTATION
 #include "nanovg_gl.h"
 #include "nanovg.h"
 
@@ -34,8 +34,8 @@ CApplication::CApplication(std::string the_title) {
     window_title = the_title;
     gApplication = this;
 
-    auto glMajor = 2;
-    auto glMinor = 1;
+    auto glMajor = 3;
+    auto glMinor = 3;
 
     auto colorBits = 8;
     auto depthBits = 24;
@@ -54,10 +54,12 @@ CApplication::CApplication(std::string the_title) {
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
     SDL_GL_SetAttribute(SDL_GL_SHARE_WITH_CURRENT_CONTEXT, 1);
+    /*
     if (_prefs[kMultiSamplesTag] > 0) {
         SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
         SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, _prefs[kMultiSamplesTag]);
     }
+    */
     auto flags = SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_RESIZABLE;
     if (_prefs[kFullScreenTag]) {
         flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
@@ -70,7 +72,6 @@ CApplication::CApplication(std::string the_title) {
         flags);
     window_id = SDL_GetWindowID(window);
     gl_context = SDL_GL_CreateContext(window);
-
     if (!window || !gl_context) {
         SDL_Log("Could not create an OpenGL %s.%s context", 
             std::to_string(glMajor).c_str(),
@@ -79,7 +80,6 @@ CApplication::CApplication(std::string the_title) {
     }
 
     SDL_GL_MakeCurrent(window, gl_context);
-    //glGetError();
 
     if (!gladLoadGLLoader((GLADloadproc) SDL_GL_GetProcAddress)) {
         SDL_Log("Could not initialize GLAD!");
@@ -88,6 +88,8 @@ CApplication::CApplication(std::string the_title) {
     //glGetError(); // pull and ignore unhandled errors like GL_INVALID_ENUM
     
     
+    auto v = glGetString(GL_VERSION);
+    SDL_Log("GL Version: %s", v);
 
     window_id = SDL_GetWindowID(window);
     SDL_GetWindowSize(window, &win_size_x, &win_size_y);
@@ -115,15 +117,14 @@ CApplication::CApplication(std::string the_title) {
         glGetIntegerv(GL_SAMPLES, &nSamples);
     } catch (const std::exception e) { }
     int nvgflags = 0;
-    if (stencilBits >= 8)
-       nvgflags |= NVG_STENCIL_STROKES;
-    if (nSamples <= 1)
-       nvgflags |= NVG_ANTIALIAS;
 
     nvgflags |= NVG_DEBUG;
 
-    nvg_context = nvgCreateGL2(nvgflags);
-
+    nvg_context = nvgCreateGL3(nvgflags);
+    if (nvg_context == nullptr) {
+        SDL_Log("Could not initialize NanoVG!");
+        return;
+    }
     /* Font loading here */
 
     nvgCreateFontMem(nvg_context, "sans", roboto_regular_ttf, roboto_regular_ttf_size, 0);
@@ -133,13 +134,10 @@ CApplication::CApplication(std::string the_title) {
     
     nvgCreateFont(nvg_context, "archivo", "rsrc/ArchivoNarrow-BoldItalic.ttf");
 
-    if (nvg_context == nullptr) {
-        SDL_Log("Could not initialize NanoVG!");
-        return;
-    }
+   
 
-    //nvgBeginFrame(nvg_context, win_size_x, win_size_y, pixel_ratio);
-    //nvgEndFrame(nvg_context);
+    nvgBeginFrame(nvg_context, win_size_x, win_size_y, pixel_ratio);
+    nvgEndFrame(nvg_context);
 #if defined(__APPLE__)
     /* Poll for events once before starting a potentially
        lengthy loading process. This is needed to be
@@ -155,7 +153,7 @@ CApplication::CApplication(std::string the_title) {
 
 CApplication::~CApplication() {
     if (nvg_context)
-        nvgDeleteGL2(nvg_context);
+        nvgDeleteGL3(nvg_context);
     if (window)
         SDL_DestroyWindow(window);
 }
@@ -188,6 +186,7 @@ void CApplication::BroadcastCommand(int theCommand) {
 
 void CApplication::PrefChanged(std::string name) {
     ColorManager::refresh(this);
+    
     for (auto win : windowList) {
         win->PrefChanged(name);
     }
@@ -276,12 +275,20 @@ bool CApplication::Update(const std::string name, std::string &value) {
     }
     try {
         json updatePref = json::parse("{ \"" + name + "\": " + value + "}");
-        _prefs.update(updatePref);
-        WritePrefs(_prefs);
+        
+        // If the type of the new value is different than the old one
+        // this will easily cause a crash when reading the json
+        if (_prefs[name].type_name() == updatePref[name].type_name()) {
+            _prefs.update(updatePref);
+            WritePrefs(_prefs);
+        } else {
+            SDL_Log("Type mismatch. User added type '%s' did not match existing type '%s'. Prefs were not updated.", _prefs[name].type_name(), updatePref[name].type_name());
+            return false;
+        }
     }
     catch (json::parse_error &ex) {
         // User typed in the command to change a pref. The value type did not match for the given pref
-        SDL_Log("User input value '%s' did not parse to the correct type.", name.c_str());
+        SDL_Log("User input value for '%s' did not parse to the correct type.", name.c_str());
         return false;  // Did not update pref
     }
     return true;  // Successfully updated pref

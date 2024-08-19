@@ -10,7 +10,6 @@
 #include "CCommManager.h"
 
 #include "Memory.h"
-#include "Resource.h"
 #include "System.h"
 #include "Debug.h"
 

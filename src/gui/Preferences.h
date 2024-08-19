@@ -16,6 +16,7 @@ using json = nlohmann::json;
 #define kHullTypeTag "hull"
 #define kFrameTimeTag "frameTime"
 #define kThrottle "throttle"
+#define kSpawnOrder "spawnOrder"
 
 // TODO: split this into separate prefs
 #define kServerOptionsTag "_serverOptions"
@@ -39,9 +40,10 @@ using json = nlohmann::json;
 // GL stuff
 #define kWindowWidth "windowWidth"
 #define kWindowHeight "windowHeight"
-#define kMultiSamplesTag "multiSamples"
 #define kFullScreenTag "fullscreen"
 #define kFOV "fov"
+#define kFXAA "fxaa"
+#define kUseLegacyRenderer "useLegacyRenderer"
 
 // Other graphics settings
 #define kColorBlindMode "colorBlindMode"
@@ -70,6 +72,7 @@ using json = nlohmann::json;
 #define kHUDShowTime "hudShowTime"
 #define kHUDShowKillFeed "hudShowKillFeed"
 #define kShowNewHUD "showNewHUD"
+#define kIgnoreLevelCustomColorsTag "ignoreLevelCustomColors"
 
 // Network & Tracker
 #define kLastAddress "lastAddress"
@@ -94,6 +97,7 @@ using json = nlohmann::json;
 
 // other
 #define kGoodGamePhrases "ggs"
+#define kShowElo "showElo"
 
 // Key names are from https://wiki.libsdl.org/SDL_Scancode
 static json defaultPrefs = {
@@ -125,12 +129,15 @@ static json defaultPrefs = {
         {"lookRight", "3"},
         {"zoomIn", "="},
         {"zoomOut", "-"},
+        {"toggleFreeCam", "Space"},
         {"scoutView", "Tab"},
         {"scoutControl", {"2", "Up", "Down", "Left", "Right"}},
         {"spectateNext", "]"},
         {"spectatePrevious", "["},
         {"scoreboard", "/"},
         {"chatMode", "Return"},
+        {"freeCamUp", "R"},
+        {"freeCamDown", "F"},
         {"debug1", "5"},
         {"debug2", "6"}}
     },
@@ -139,11 +146,11 @@ static json defaultPrefs = {
     {kPlayerHullTrimColorTag, "#2b2b2b"},
     {kPlayerCockpitColorTag, "#0333ff"},
     {kPlayerGunColorTag, "#929292"},
-    {kMultiSamplesTag, 0},
     {kWindowWidth, 1024},
     {kWindowHeight, 768},
     {kFullScreenTag, false},
     {kFOV, 50.0},
+    {kFXAA, true},
     {kColorBlindMode, 0},
     {kHUDColor, "#03f5f5"},
     {kHUDPositiveColor, "#51e87e"},
@@ -168,6 +175,7 @@ static json defaultPrefs = {
     {kHUDShowScore, true},
     {kHUDShowTime, true},
     {kHUDShowKillFeed, true},
+    {kSpawnOrder, 3},
     {kShowNewHUD, true},
     {kFrameTimeTag, 16},
     {kLastAddress, ""},
@@ -185,9 +193,12 @@ static json defaultPrefs = {
     {kRecentLevels, {}},
     {kSoundVolume, 100},
     {kIgnoreCustomColorsTag, false},
+    {kIgnoreLevelCustomColorsTag, false},
     {kIgnoreCustomGoodySound, false},
     {kThrottle, 0},
     {kGoodGamePhrases, {}},
+    {kShowElo, false},
+    {kUseLegacyRenderer, false}
 };
 
 
@@ -210,11 +221,12 @@ static json optionsScreens {
             {1, "something else"},
             {2, "third thing"}}}
         },
+        /*
         {"Multisampling", kMultiSamplesTag, kOptionTypeChoice, {
             {0, "off"},
             {4, "medium"},
             {8, "high"}
-        }},  
+        }},*/
     },
     {"Game", {
         {"Yon (render distance)", kYonPrefTag, kOptionTypeInteger},

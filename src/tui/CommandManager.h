@@ -55,4 +55,5 @@ public:
 
     // Coding helpers
     bool SetDebugFlag(VectorOfArgs);
+    std::string GetOsName();
 };

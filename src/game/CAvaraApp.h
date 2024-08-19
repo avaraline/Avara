@@ -13,6 +13,7 @@
 #include "CGUI.h"
 #include "CPlayerManager.h"
 //#include "PolyColor.h"
+#include "CHUD.h"
 #include "CommandManager.h"
 #include "Messages.h"
 
@@ -68,6 +69,7 @@ private:
     std::unique_ptr<CAvaraGame> itsGame;
     CNetManager *gameNet;
     CommandManager *itsTui;
+    std::unique_ptr<CHUD> ui;
 
 public:
 

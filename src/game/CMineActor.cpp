@@ -76,7 +76,10 @@ CAbstractActor *CMineActor::EndScript() {
 
     activateSound = ReadLongVar(iActivateSound);
     activateVolume = ReadFixedVar(iActivateVolume);
-    gHub->PreLoadSample(activateSound);
+
+    // Preload sounds.
+    auto _ = AssetManager::GetOgg(activateSound);
+    
     RegisterReceiver(&activator, ReadLongVar(iBoom));
 
     radius = ReadFixedVar(iRange);
@@ -146,15 +149,13 @@ void CMineActor::Activate() {
     }
 }
 
-void CMineActor::Dispose() {
+CMineActor::~CMineActor() {
     itsGame->RemoveReceiver(&activator);
 
     if (itsSoundLink) {
         gHub->ReleaseLinkAndKillSounds(itsSoundLink);
         itsSoundLink = NULL;
     }
-
-    CGlowActors::Dispose();
 }
 
 void CMineActor::FrameAction() {

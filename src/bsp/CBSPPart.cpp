@@ -7,13 +7,14 @@
     Modified: Monday, September 9, 1996, 00:15
 */
 
-#include "AvaraGL.h"
 #include "CBSPPart.h"
 
+#include "AbstractRenderer.h"
+#include "AssetManager.h"
+#include "AvaraDefines.h"
 #include "CViewParameters.h"
 #include "Memory.h"
-#include "Resource.h"
-#include "AvaraDefines.h"
+#include "Debug.h"
 
 #include <fstream>
 #include <iostream>
@@ -30,10 +31,15 @@ Vector **bspPointTemp = 0;
 
 ARGBColor ***bspColorLookupTable = 0;
 
-using json = nlohmann::json;
+CBSPPart *CBSPPart::Create(short resId) {
+    CBSPPart *part = new CBSPPart;
+    part->IBSPPart(resId);
+    return part;
+}
+
 
 void CBSPPart::IBSPPart(short resId) {
-    //SDL_Log("Loading BSP: %s\n", bspName);
+    DBG_Log("bsp", "Loading BSP: %d\n", resId);
     lightSeed = 0;
     nextTemp = NULL;
     // colorReplacements = NULL;    //  Use default colors.
@@ -50,8 +56,8 @@ void CBSPPart::IBSPPart(short resId) {
     yon = FIX(500); //  500 m   sets the flags above and forgets to set the values.
     userFlags = 0;
 
-    json doc = GetBSPJSON(resId);
-    if (doc == nullptr) {
+    auto json = AssetManager::GetBsp(resId);
+    if (!json) {
         colorCount = 0;
         polyCount = 0;
         pointCount = 0;
@@ -59,6 +65,7 @@ void CBSPPart::IBSPPart(short resId) {
     }
 
     // Fill in some default values in case values are missing.
+    auto doc = **json;
     doc.emplace("radius1", 0.0);
     doc.emplace("radius2", 0.0);
     doc.emplace("center", json::array({0.0, 0.0, 0.0}));
@@ -95,13 +102,17 @@ void CBSPPart::IBSPPart(short resId) {
     maxBounds.z = ToFixed(mxZ);
     maxBounds.w = FIX1;
 
+    DBG_Log("bsp", "  bounds.x = [%d, %d]\n", minBounds.x, maxBounds.x);
+    DBG_Log("bsp", "  bounds.y = [%d, %d]\n", minBounds.y, maxBounds.y);
+    DBG_Log("bsp", "  bounds.z = [%d, %d]\n", minBounds.z, maxBounds.z);
+
     origColorTable = std::make_unique<ARGBColor[]>(colorCount);
     currColorTable = std::make_unique<ARGBColor[]>(colorCount);
     pointTable = std::make_unique<Vector[]>(pointCount);
     polyTable = std::make_unique<PolyRecord[]>(polyCount);
 
     for (uint16_t i = 0; i < colorCount; i++) {
-        json value = doc["colors"][i];
+        nlohmann::json value = doc["colors"][i];
         ARGBColor color = ARGBColor::Parse(value)
             .value_or(ARGBColor(0x00ffffff)); // Fallback to invisible "white."
         origColorTable[i] = color;
@@ -117,25 +128,29 @@ void CBSPPart::IBSPPart(short resId) {
     
     CheckForAlpha();
 
+    // if command is "/dbg bsp 666" then show points for resId 666
+    bool showPoints = (Debug::GetValue("bsp") == resId);
+    if (showPoints) { DBG_Log("bsp", "  points:\n"); }
     for (uint32_t i = 0; i < pointCount; i++) {
-        json pt = doc["points"][i];
+        nlohmann::json pt = doc["points"][i];
         pointTable[i][0] = ToFixed(pt[0]);
         pointTable[i][1] = ToFixed(pt[1]);
         pointTable[i][2] = ToFixed(pt[2]);
         pointTable[i][3] = FIX1;
+        if (showPoints) { DBG_Log("bsp", "    %s\n", FormatVector(pointTable[i]).c_str()); }
     }
 
     totalPoints = 0;
 
     for (uint32_t i = 0; i < polyCount; i++) {
-        json poly = doc["polys"][i];
-        json pt;
+        nlohmann::json poly = doc["polys"][i];
+        nlohmann::json pt;
         // Color
         polyTable[i].colorIdx = static_cast<uint16_t>(poly["color"]);
         // Normal
-        json norms = doc["normals"];
+        nlohmann::json norms = doc["normals"];
         int idx = poly["normal"];
-        json norm = norms[idx];
+        nlohmann::json norm = norms[idx];
         polyTable[i].normal[0] = norm[0];
         polyTable[i].normal[1] = norm[1];
         polyTable[i].normal[2] = norm[2];
@@ -163,16 +178,15 @@ void CBSPPart::IBSPPart(short resId) {
 
     BuildBoundingVolumes();
     Reset();
-    AvaraGLUpdateData(this);
+
+    vData = gRenderer->NewVertexDataInstance();
+    if (vData) vData->Replace(*this);
 }
 
 void CBSPPart::PostRender() {}
 
 void CBSPPart::TransformLights() {
-    CViewParameters *vp;
-    //Matrix *invFull;
-
-    vp = currentView;
+    auto vp = gRenderer->viewParams;
     if (!ignoreDirectionalLights) {
         if (lightSeed != vp->lightSeed) {
             lightSeed = vp->lightSeed;
@@ -186,22 +200,13 @@ void CBSPPart::TransformLights() {
     localViewOrigin[2] = invFullTransform[3][2];
 }
 
-void CBSPPart::DrawPolygons() {
-    AvaraGLDrawPolygons(this);
-}
-
 Boolean CBSPPart::InViewPyramid() {
-    CViewParameters *vp;
-    //short i;
-    //Vector *norms;
     Fixed radius;
     Fixed distance;
     Fixed x, y;
     Fixed z;
 
-    //return true;
-
-    vp = currentView;
+    auto vp = gRenderer->viewParams;
 
     if (hither >= yon)
         return false;
@@ -265,11 +270,11 @@ void CBSPPart::PrintMatrix(Matrix *m) {
 **  See if the part is in the viewing pyramid and do calculations
 **  in preparation to shading.
 */
-Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
+Boolean CBSPPart::PrepareForRender() {
+    auto vp = gRenderer->viewParams;
     Boolean inPyramid = vp->showTransparent || !isTransparent;
 
     if (inPyramid) {
-        currentView = vp;
 
         if (!usesPrivateHither)
             hither = vp->hitherBound;
@@ -303,23 +308,6 @@ Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
     }
 
     return inPyramid;
-}
-
-/*
-**  Normally you would create a CBSPWorld and attach the
-**  part to that world. However, if you only have a single
-**  CBSPPart, you can call Render and you don't need a
-**  CBSPWorld. Even then it is recommended that you use a
-**  CBSPWorld, since it really doesn't add any significant
-**  overhead.
-*/
-void CBSPPart::Render(CViewParameters *vp) {
-    vp->DoLighting();
-
-    if (PrepareForRender(vp)) {
-        DrawPolygons();
-        PostRender();
-    }
 }
 
 /*
@@ -420,21 +408,27 @@ Matrix *CBSPPart::GetInverseTransform() {
 }
 
 void CBSPPart::ReplaceColor(ARGBColor origColor, ARGBColor newColor) {
+    bool colorReplaced = false;
     for (int i = 0; i < colorCount; i++) {
         if (origColorTable[i] == origColor) {
             currColorTable[i] = newColor;
+            colorReplaced = true;
         }
     }
     CheckForAlpha();
-    AvaraGLUpdateData(this);
+    if (colorReplaced && vData) vData->Replace(*this);
 }
 
 void CBSPPart::ReplaceAllColors(ARGBColor newColor) {
+    bool colorReplaced = false;
     for (int i = 0; i < colorCount; i++) {
+        if (currColorTable[i] != newColor) {
+            colorReplaced = true;
+        }
         currColorTable[i] = newColor;
     }
     hasAlpha = (newColor.GetA() != 0xff);
-    AvaraGLUpdateData(this);
+    if (colorReplaced && vData) vData->Replace(*this);
 }
 
 void CBSPPart::BuildBoundingVolumes() {
@@ -455,18 +449,7 @@ void CBSPPart::BuildBoundingVolumes() {
         tolerance = MINIMUM_TOLERANCE;
 }
 
-void CBSPPart::Dispose() {
-    if(polyCount < 1) {
-        CDirectObject::Dispose();
-        return;
-    }
-    if (AvaraGLIsRendering()) {
-        glDataSize = 0;
-        glDeleteVertexArrays(1, &vertexArray);
-        glDeleteBuffers(1, &vertexBuffer);
-    }
-    CDirectObject::Dispose();
-}
+CBSPPart::~CBSPPart() {}
 
 void CBSPPart::CheckForAlpha() {
     hasAlpha = false;
@@ -478,7 +461,7 @@ void CBSPPart::CheckForAlpha() {
     }
 }
 
-bool CBSPPart::HasAlpha() {
+bool CBSPPart::HasAlpha() const {
     return hasAlpha;
 }
 

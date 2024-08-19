@@ -9,13 +9,13 @@
 
 #include "LevelLoader.h"
 
-#include "AvaraGL.h"
+#include "AbstractRenderer.h"
+#include "AssetManager.h"
 #include "CAvaraGame.h"
 #include "CWallActor.h"
 #include "FastMat.h"
 #include "Memory.h"
 #include "Parser.h"
-#include "Resource.h"
 #include "pugixml.hpp"
 
 #include <SDL2/SDL.h>
@@ -154,11 +154,12 @@ struct ALFWalker: pugi::xml_tree_walker {
     }
 
     void handle_element(pugi::xml_node& node, std::string& name) {
-        // eval ALL node attributes and put them into the symbol table
-        // unless it's a 'unique' and then it doesn't make any sense
-        if (name.compare("unique") != 0)
-        handle_set(node);
-        // Read any global state we can from the element.
+        // Eval ALL node attributes and put them into the symbol table
+        // unless it's a 'unique' and then it doesn't make any sense.
+        if (name.compare("unique") != 0) {
+            handle_set(node);
+        }
+
         read_context(node);
 
         if (name.compare("map") == 0) handle_map(node);
@@ -266,6 +267,9 @@ struct ALFWalker: pugi::xml_tree_walker {
 
             lastArcAngle = (900 - arcAngle) % 360;
             lastDomeAngle = 360 - arcAngle;
+        } else {
+            lastArcAngle = 0;
+            lastDomeAngle = 0;
         }
 
         return true;
@@ -288,13 +292,13 @@ struct ALFWalker: pugi::xml_tree_walker {
     void handle_enum(pugi::xml_node& node) {
         std::stringstream script;
         script << "enum " << node.attribute("start").value() << " " << node.attribute("vars").value() << " end";
-        RunThis((StringPtr)script.str().c_str());
+        RunThis(script.str());
     }
 
     void handle_unique(pugi::xml_node& node) {
         std::stringstream script;
         script << "unique " << node.attribute("vars").value() << " end";
-        RunThis((StringPtr)script.str().c_str());
+        RunThis(script.str());
     }
 
     void handle_set(pugi::xml_node& node) {
@@ -308,11 +312,11 @@ struct ALFWalker: pugi::xml_tree_walker {
         }
         std::string result = script.str();
         if (wrote && result.length() > 0)
-        RunThis((StringPtr)result.c_str());
+        RunThis(result);
     }
 
     void handle_script(pugi::xml_node& node) {
-        RunThis((StringPtr)node.child_value());
+        RunThis(std::string(node.child_value()));
     }
 
     void handle_wall(pugi::xml_node& node) {
@@ -320,7 +324,7 @@ struct ALFWalker: pugi::xml_tree_walker {
         if (!y.empty()) {
             std::stringstream script;
             script << "wa = " << y << "\n";
-            RunThis((StringPtr)script.str().c_str());
+            RunThis(script.str());
         }
         CWallActor *theWall = new CWallActor;
         theWall->MakeWallFromRect(&gLastBoxRect, gLastBoxRounding, 0, true);
@@ -339,13 +343,15 @@ struct ALFWalker: pugi::xml_tree_walker {
             // Ensure path separators are appropriate for the current platform.
             std::regex pattern("\\\\|/");
             path = std::regex_replace(path, pattern, PATHSEP);
-            path = GetALFPath(path);
 
-            pugi::xml_document shard;
-            pugi::xml_parse_result result = shard.load_file(path.c_str());
-            if (result) {
-                ALFWalker includeWalker(depth + 1);
-                shard.traverse(includeWalker);
+            std::optional<std::string> maybePath = AssetManager::GetResolvedAlfPath(path);
+            if (maybePath) {
+                pugi::xml_document shard;
+                pugi::xml_parse_result result = shard.load_file(maybePath->c_str());
+                if (result) {
+                    ALFWalker includeWalker(depth + 1);
+                    shard.traverse(includeWalker);
+                }
             }
         }
     }
@@ -359,7 +365,7 @@ struct ALFWalker: pugi::xml_tree_walker {
             script << attr << " = " << value << "\n";
         }
         script << "end";
-        RunThis((StringPtr)script.str().c_str());
+        RunThis(script.str());
     }
 
 private:
@@ -367,7 +373,7 @@ private:
 };
 
 bool LoadALF(std::string levelPath) {
-    AvaraGLLightDefaults();
+    gRenderer->ResetLights();
     InitParser();
 
     pugi::xml_document doc;

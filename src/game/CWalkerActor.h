@@ -57,7 +57,7 @@ public:
 
     virtual void StartSystems();
     virtual void LoadParts();
-    virtual void Dispose();
+    virtual ~CWalkerActor();
 
     virtual void KeyboardControl(FunctionTable *ft);
 

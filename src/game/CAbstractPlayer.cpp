@@ -11,6 +11,7 @@
 
 #include "CAbstractPlayer.h"
 
+#include "AbstractRenderer.h"
 #include "AvaraDefines.h"
 #include "CBSPWorld.h"
 #include "CScaledBSP.h"
@@ -18,6 +19,7 @@
 #include "CPlayerManager.h"
 #include "CPlayerMissile.h"
 #include "CScout.h"
+#include "CFreeCam.h"
 #include "CSmartPart.h"
 #include "CViewParameters.h"
 //#include "CInfoPanel.h"
@@ -55,41 +57,40 @@ void CAbstractPlayer::LoadParts() {}
 
 void CAbstractPlayer::LoadHUDParts() {
     short i;
-    CBSPWorld *hudWorld;
-
-    hudWorld = itsGame->hudWorld;
 
     for (i = 0; i < 2; i++) {
-        targetOns[i] = new CBSPPart;
-        targetOns[i]->IBSPPart(kTargetOk);
+        targetOns[i] = CBSPPart::Create(kTargetOk);
         targetOns[i]->ReplaceColor(0xffff2600, ColorManager::getPlasmaSightsOnColor());
         targetOns[i]->privateAmbient = SIGHTSAMBIENT;
         targetOns[i]->yon = LONGYON * 2;
         targetOns[i]->usesPrivateYon = true;
+        targetOns[i]->ignoreDepthTesting = true;
         targetOns[i]->ignoreDirectionalLights = true;
         targetOns[i]->isTransparent = true;
-        hudWorld->AddPart(targetOns[i]);
+        gRenderer->AddHUDPart(targetOns[i]);
 
-        targetOffs[i] = new CBSPPart;
-        targetOffs[i]->IBSPPart(kTargetOff);
+        targetOffs[i] = CBSPPart::Create(kTargetOff);
         targetOffs[i]->ReplaceColor(0xff008f00, ColorManager::getPlasmaSightsOffColor());
         targetOffs[i]->privateAmbient = SIGHTSAMBIENT;
         targetOffs[i]->yon = LONGYON * 2;
         targetOffs[i]->usesPrivateYon = true;
+        targetOffs[i]->ignoreDepthTesting = true;
         targetOffs[i]->ignoreDirectionalLights = true;
         targetOffs[i]->isTransparent = true;
-        hudWorld->AddPart(targetOffs[i]);
+        gRenderer->AddHUDPart(targetOffs[i]);
     }
 
     dirArrowHeight = FIX3(750);
-    dirArrow = new CBSPPart;
-    dirArrow->IBSPPart(kDirIndBSP);
+    dirArrow = CBSPPart::Create(kDirIndBSP);
     dirArrow->ReplaceColor(0xff000000, ColorManager::getLookForwardColor());
+    dirArrow->ignoreDepthTesting = true;
     dirArrow->ignoreDirectionalLights = true;
     dirArrow->privateAmbient = FIX1;
     dirArrow->isTransparent = true;
-    hudWorld->AddPart(dirArrow);
+    gRenderer->AddHUDPart(dirArrow);
 
+    showHud = itsGame->showNewHUD;
+    hudPreset = itsGame->itsApp->Get(kHUDPreset);
     LoadDashboardParts();
 }
 
@@ -161,6 +162,7 @@ void CAbstractPlayer::StartSystems() {
     scoutView = false;
     scoutIdent = 0;
     scoutBaseHeight = FIX3(2000);
+    freeCamIdent = 0;
 
     sliverCounts[kSmallSliver] = 12;
     sliverCounts[kMediumSliver] = 18;
@@ -173,6 +175,7 @@ void CAbstractPlayer::StartSystems() {
 
     nextGrenadeLoad = 0;
     nextMissileLoad = 0;
+    nextPlasmaShot = 0;
 
     // variables in AdaptableSettings need to have "classic" counterparts in case they are changed in CWalkerActor::ReceiveConfig()
     classicGeneratorPower = FIX3(30);
@@ -193,6 +196,18 @@ void CAbstractPlayer::LoadScout() {
     itsScout->BeginScript();
     FreshCalc();
     itsScout->EndScript();
+}
+
+void CAbstractPlayer::LoadFreeCam() {
+    itsFreeCam = new CFreeCam(this);
+    itsFreeCam->BeginScript();
+    FreshCalc();
+    itsFreeCam->EndScript();
+    SetFreeCamState(false);
+}
+
+void CAbstractPlayer::WriteDBG(float val) {
+    freeCamDBG.push_back(val);
 }
 
 void CAbstractPlayer::ReplacePartColors() {
@@ -252,9 +267,10 @@ CAbstractActor *CAbstractPlayer::EndScript() {
     loseSound = ReadLongVar(iLoseSound);
     loseVolume = ReadFixedVar(iLoseVolume);
 
-    gHub->PreLoadSample(incarnateSound);
-    gHub->PreLoadSample(winSound);
-    gHub->PreLoadSample(loseSound);
+    // Preload sounds.
+    auto _ = AssetManager::GetOgg(incarnateSound);
+    _ = AssetManager::GetOgg(winSound);
+    _ = AssetManager::GetOgg(loseSound);
 
     lives = ReadLongVar(iLives);
 
@@ -280,6 +296,7 @@ CAbstractActor *CAbstractPlayer::EndScript() {
     ReplacePartColors();
     LoadHUDParts();
     LoadScout();
+    LoadFreeCam();
     PlaceParts();
     LinkPartSpheres();
 
@@ -299,9 +316,8 @@ void CAbstractPlayer::AdaptableSettings() {
                     &motorFriction, &motorAcceleration);
 }
 
-void CAbstractPlayer::Dispose() {
+CAbstractPlayer::~CAbstractPlayer() {
     short i;
-    CBSPWorld *hudWorld;
 
     if (itsGame->nextPlayer == this) {
         itsGame->nextPlayer = nextPlayer;
@@ -317,103 +333,106 @@ void CAbstractPlayer::Dispose() {
     }
 
     if (itsScout) {
-        itsScout->Dispose();
+        delete itsScout;
         scoutIdent = 0;
     }
 
-    hudWorld = itsGame->hudWorld;
+    if (freeCamIdent) {
+        itsFreeCam = (CFreeCam *)gCurrentGame->FindIdent(freeCamIdent);
+    }
 
-    hudWorld->RemovePart(dirArrow);
-    dirArrow->Dispose();
+    if (freeView) {
+        delete itsFreeCam;
+        freeCamIdent = 0;
+    }
+
+    gRenderer->RemoveHUDPart(dirArrow);
+    delete dirArrow;
 
     for (i = 0; i < 2; i++) {
-        hudWorld->RemovePart(targetOns[i]);
-        targetOns[i]->Dispose();
-        hudWorld->RemovePart(targetOffs[i]);
-        targetOffs[i]->Dispose();
+        gRenderer->RemoveHUDPart(targetOns[i]);
+        delete targetOns[i];
+        gRenderer->RemoveHUDPart(targetOffs[i]);
+        delete targetOffs[i];
     }
     DisposeDashboard();
 
     gHub->ReleaseLink(teleportSoundLink);
 
-    CRealMovers::Dispose();
 }
 
 void CAbstractPlayer::DisposeDashboard() {
-    if (!itsGame->showNewHUD) return;
-
-    CBSPWorld *hudWorld;
-    hudWorld = itsGame->hudWorld;
+    if (!showHud) return;
 
     if (itsGame->itsApp->Get(kHUDShowMissileLock)) {
-        hudWorld->RemovePart(lockLight);
-        lockLight->Dispose();
+        gRenderer->RemoveHUDPart(lockLight);
+        delete lockLight;
     }
 
-    hudWorld->RemovePart(groundDirArrow);
-    groundDirArrow->Dispose();
+    gRenderer->RemoveHUDPart(groundDirArrow);
+    delete groundDirArrow;
 
-    hudWorld->RemovePart(groundDirArrowSlow);
-    groundDirArrowSlow->Dispose();
+    gRenderer->RemoveHUDPart(groundDirArrowSlow);
+    delete groundDirArrowSlow;
 
-    hudWorld->RemovePart(groundDirArrowFast);
-    groundDirArrowFast->Dispose();
+    gRenderer->RemoveHUDPart(groundDirArrowFast);
+    delete groundDirArrowFast;
 
-    hudWorld->RemovePart(energyLabel);
-    energyLabel->Dispose();
+    gRenderer->RemoveHUDPart(energyLabel);
+    delete energyLabel;
 
-    hudWorld->RemovePart(shieldLabel);
-    shieldLabel->Dispose();
+    gRenderer->RemoveHUDPart(shieldLabel);
+    delete shieldLabel;
 
-    hudWorld->RemovePart(grenadeLabel);
-    grenadeLabel->Dispose();
+    gRenderer->RemoveHUDPart(grenadeLabel);
+    delete grenadeLabel;
 
-    hudWorld->RemovePart(missileLabel);
-    missileLabel->Dispose();
+    gRenderer->RemoveHUDPart(missileLabel);
+    delete missileLabel;
 
-    hudWorld->RemovePart(boosterLabel);
-    boosterLabel->Dispose();
+    gRenderer->RemoveHUDPart(boosterLabel);
+    delete boosterLabel;
 
-    hudWorld->RemovePart(livesLabel);
-    livesLabel->Dispose();
+    gRenderer->RemoveHUDPart(livesLabel);
+    delete livesLabel;
 
-    hudWorld->RemovePart(shieldGauge);
-    shieldGauge->Dispose();
+    gRenderer->RemoveHUDPart(shieldGauge);
+    delete shieldGauge;
 
-    hudWorld->RemovePart(shieldGaugeBackLight);
-    shieldGaugeBackLight->Dispose();
+    gRenderer->RemoveHUDPart(shieldGaugeBackLight);
+    delete shieldGaugeBackLight;
 
-    hudWorld->RemovePart(energyGauge);
-    energyGauge->Dispose();
+    gRenderer->RemoveHUDPart(energyGauge);
+    delete energyGauge;
 
-    hudWorld->RemovePart(energyGaugeBackLight);
-    energyGaugeBackLight->Dispose();
+    gRenderer->RemoveHUDPart(energyGaugeBackLight);
+    delete energyGaugeBackLight;
 
 
     for (int i = 0; i < 4; i++) {
-        hudWorld->RemovePart(grenadeMeter[i]);
-        grenadeMeter[i]->Dispose();
+        gRenderer->RemoveHUDPart(grenadeMeter[i]);
+        delete grenadeMeter[i];
 
-        hudWorld->RemovePart(grenadeBox[i]);
-        grenadeBox[i]->Dispose();
+        gRenderer->RemoveHUDPart(grenadeBox[i]);
+        delete grenadeBox[i];
 
-        hudWorld->RemovePart(missileMeter[i]);
-        missileMeter[i]->Dispose();
+        gRenderer->RemoveHUDPart(missileMeter[i]);
+        delete missileMeter[i];
 
-        hudWorld->RemovePart(missileBox[i]);
-        missileBox[i]->Dispose();
+        gRenderer->RemoveHUDPart(missileBox[i]);
+        delete missileBox[i];
 
-        hudWorld->RemovePart(boosterMeter[i]);
-        boosterMeter[i]->Dispose();
+        gRenderer->RemoveHUDPart(boosterMeter[i]);
+        delete boosterMeter[i];
 
-        hudWorld->RemovePart(boosterBox[i]);
-        boosterBox[i]->Dispose();
+        gRenderer->RemoveHUDPart(boosterBox[i]);
+        delete boosterBox[i];
 
-        hudWorld->RemovePart(livesMeter[i]);
-        livesMeter[i]->Dispose();
+        gRenderer->RemoveHUDPart(livesMeter[i]);
+        delete livesMeter[i];
 
-        hudWorld->RemovePart(livesBox[i]);
-        livesBox[i]->Dispose();
+        gRenderer->RemoveHUDPart(livesBox[i]);
+        delete livesBox[i];
     }
 }
 
@@ -434,7 +453,8 @@ void CAbstractPlayer::PlaceHUDParts() {
     RayHitRecord theHit;
     CWeapon *weapon = NULL;
 
-    if (itsGame->itsApp->Get(kHUDArrowStyle) == 1) {
+    // Make sure we always default to the old style arrow if other arrow styles are turned off
+    if ((itsGame->itsApp->Get(kHUDArrowStyle) == 1) || !itsGame->showNewHUD) {
         dirArrow->Reset();
         InitialRotatePartY(dirArrow, heading);
         TranslatePart(dirArrow, location[0], location[1] + dirArrowHeight, location[2]);
@@ -450,15 +470,9 @@ void CAbstractPlayer::PlaceHUDParts() {
     } else {
         mt = &viewPortPart->itsTransform;
 
-        if (debug2Flag) {
-            theHit.direction[0] = FMul((*mt)[2][0], PLAYERMISSILESPEED) + speed[0];
-            theHit.direction[1] = FMul((*mt)[2][1], PLAYERMISSILESPEED) + speed[1];
-            theHit.direction[2] = FMul((*mt)[2][2], PLAYERMISSILESPEED) + speed[2];
-        } else {
-            theHit.direction[0] = FMul((*mt)[2][0], PLAYERMISSILESPEED);
-            theHit.direction[1] = FMul((*mt)[2][1], PLAYERMISSILESPEED);
-            theHit.direction[2] = FMul((*mt)[2][2], PLAYERMISSILESPEED);
-        }
+        theHit.direction[0] = FMul((*mt)[2][0], PLAYERMISSILESPEED);
+        theHit.direction[1] = FMul((*mt)[2][1], PLAYERMISSILESPEED);
+        theHit.direction[2] = FMul((*mt)[2][2], PLAYERMISSILESPEED);
 
         theHit.direction[3] = 0;
         NormalizeVector(3, theHit.direction);
@@ -530,13 +544,10 @@ void CAbstractPlayer::PlaceHUDParts() {
 }
 
 CScaledBSP* CAbstractPlayer::DashboardPart(uint16_t id, Fixed scale) {
-    CScaledBSP* bsp = new CScaledBSP;
-    bsp->IScaledBSP(scale, id, this, 0);
+    CScaledBSP* bsp = new CScaledBSP(scale, id, this, 0);
     bsp->ReplaceAllColors(ColorManager::getHUDColor());
-    bsp->privateAmbient = FIX1;
-    bsp->ignoreDirectionalLights = true;
     bsp->isTransparent = true;
-    itsGame->hudWorld->AddPart(bsp);
+    gRenderer->AddHUDPart(bsp);
     return bsp;
 }
 
@@ -551,7 +562,7 @@ void CAbstractPlayer::LoadDashboardParts() {
     dashboardSpinSpeed = ToFixed(100);
     dashboardSpinHeading = 0;
 
-    int layout = itsGame->itsApp->Get(kHUDPreset);
+    layout = itsGame->itsApp->Get(kHUDPreset);
     //float alpha = itsGame->itsApp->Get(kHUDAlpha);
     //Fixed hudAlpha = FIX1 * alpha;
 
@@ -617,15 +628,20 @@ void CAbstractPlayer::LoadDashboardParts() {
 
     if (itsGame->itsApp->Get(kHUDShowMissileLock)) {
         lockLight = DashboardPart(kLockLight, FIX3(600));
+        lockLight->ignoreDepthTesting = true;
     }
 
     groundDirArrow = DashboardPart(kGroundDirArrow, FIX3(1000 * arrowScale));
+    groundDirArrow->ignoreDepthTesting = true;
     groundDirArrowSlow = DashboardPart(kGroundDirArrowSlow, FIX3(1000 * arrowScale));
+    groundDirArrowSlow->ignoreDepthTesting = true;
     groundDirArrowFast = DashboardPart(kGroundDirArrowFast, FIX3(1000 * arrowScale));
+    groundDirArrowFast->ignoreDepthTesting = true;
 
     // Shields
     shieldLabel = DashboardPart(kShieldBSP, FIX3(70*layoutScale));
     shieldGauge = DashboardPart(gaugeBSP);
+    shieldGauge->ignoreDepthTesting = true;
     shieldGauge->isMorphable = true;
 
     shieldGaugeBackLight = DashboardPart(gaugeBSP, ToFixed(layoutScale));
@@ -634,6 +650,7 @@ void CAbstractPlayer::LoadDashboardParts() {
     // Energy
     energyLabel = DashboardPart(kEnergyBSP, FIX3(170*layoutScale));
     energyGauge = DashboardPart(gaugeBSP);
+    energyGauge->ignoreDepthTesting = true;
     energyGauge->isMorphable = true;
 
     energyGaugeBackLight = DashboardPart(gaugeBSP, ToFixed(layoutScale));
@@ -642,7 +659,7 @@ void CAbstractPlayer::LoadDashboardParts() {
     // Weapons
     grenadeLabel = DashboardPart(kGrenadeBSP, FIX3(700*layoutScale));
     missileLabel = DashboardPart(kMissileBSP, FIX3(700*layoutScale));
-    boosterLabel = DashboardPart(kBoosterBSP, FIX3(20*layoutScale));
+    boosterLabel = DashboardPart(kBoosterBSP, FIX3(27*(layoutScale)));
     livesLabel = DashboardPart(hullConfig.hullBSP, FIX3(140*layoutScale));
     for (int i = 0; i < 4; i++) {
         grenadeMeter[i] = DashboardPart(kFilledBox, FIX3(100*layoutScale));
@@ -659,8 +676,30 @@ void CAbstractPlayer::LoadDashboardParts() {
     }
 }
 
+// Check if the user changed the 'showNewHud' pref
+// Load or Unload the dashboard based on the new setting
+void CAbstractPlayer::DashboardReloadCheck() {
+    // User toggled the entire HUD on/off
+    if (showHud != itsGame->showNewHUD) {
+        if (itsGame->showNewHUD) {
+            LoadDashboardParts();
+        } else {
+            DisposeDashboard();
+        }
+        showHud = itsGame->showNewHUD;
+    }
+
+    // User changed the hud layout
+    if (hudPreset != itsGame->itsApp->Get(kHUDPreset)) {
+        DisposeDashboard();
+        LoadDashboardParts();
+        hudPreset = itsGame->itsApp->Get(kHUDPreset);
+    }
+}
+
 // Place parts on screen
 void CAbstractPlayer::RenderDashboard() {
+    DashboardReloadCheck();
     if (!itsGame->showNewHUD) return;
     if (scoutView) {
         ResetDashboard();
@@ -679,21 +718,22 @@ void CAbstractPlayer::RenderDashboard() {
         // Lastly set relativeImpulse based on the impact location of the hit to bump the HUD
         Fixed hitAngle = FOneArcTan2(dSpeed[2], dSpeed[0]);
         Fixed angleDiff = hitAngle - viewYaw;
+        float magnitude = ToFloat(VectorLength(3, dSpeed));
         
         if (angleDiff > 0) {
             // Hit from the right side
-            relativeImpulse[0] = FIX(1.0);
+            relativeImpulse[0] = FIX(1.0*magnitude);
         } else if (angleDiff < 0) {
             // Hit from the left side
-            relativeImpulse[0] = FIX(-1.0);
+            relativeImpulse[0] = FIX(-1.0*magnitude);
         }
 
         if (dSpeed[1] > FIX(.5)) {
             // Hit from the top
-            relativeImpulse[1] = FIX(1.0);
+            relativeImpulse[1] = FIX(1.0*magnitude);
         } else if (dSpeed[1] < FIX(-.5)) {
             // Hit from the bottom
-            relativeImpulse[1] = FIX(-1.0);
+            relativeImpulse[1] = FIX(-1.0*magnitude);
         }
 
         pidReset(&pMotionX);
@@ -740,7 +780,7 @@ void CAbstractPlayer::RenderDashboard() {
 
     if (itsGame->itsApp->Get(kHUDShowMissileLock)) {
         if (weapon && weapon->isTargetLocked) {
-            DashboardPosition(lockLight, 0.0, -0.1);
+            DashboardPosition(lockLight, 0.0, -0.1, false);
             lockLight->Scale(FIX(.6));
         }
     }
@@ -760,19 +800,19 @@ void CAbstractPlayer::RenderDashboard() {
 
     // Ammo Labels
     if (itsGame->itsApp->Get(kHUDShowGrenadeCount) && grenadeLimit != 0) {
-        DashboardPosition(grenadeLabel, false, grenadePosition[0], grenadePosition[1]-(.09f*(layoutScale/2.0)), 0, dashboardSpinHeading, 0);
+        DashboardPosition(grenadeLabel, false, grenadePosition[0], grenadePosition[1]-(.09f*(layoutScale/2.0)), false, 0, dashboardSpinHeading, 0);
     }
 
     if (itsGame->itsApp->Get(kHUDShowMissileCount) && missileLimit != 0) {
-        DashboardPosition(missileLabel, false, missilePosition[0], missilePosition[1]-(.09f*(layoutScale/2.0)), 0, dashboardSpinHeading, 0);
+        DashboardPosition(missileLabel, false, missilePosition[0], missilePosition[1]-(.09f*(layoutScale/2.0)), false, 0, dashboardSpinHeading, 0);
     }
 
     if (itsGame->itsApp->Get(kHUDShowBoosterCount) && boosterLimit != 0) {
-        DashboardPosition(boosterLabel, false, boosterPosition[0], boosterPosition[1]-(.03f*(layoutScale/2.0)), FIX(90.0), FIX(60.0), 0);
+        DashboardPosition(boosterLabel, false, boosterPosition[0], boosterPosition[1]-(.036f*(layoutScale/2.0)), false, FIX(-90.0), 0, 0);
     }
 
     if (itsGame->itsApp->Get(kHUDShowLivesCount) && lives > 0 && lives <= 10) {
-        DashboardPosition(livesLabel, false, livesPosition[0], livesPosition[1]-(.045f*(layoutScale/2.0)), FIX(40.0), dashboardSpinHeading, 0);
+        DashboardPosition(livesLabel, false, livesPosition[0], livesPosition[1]-(.045f*(layoutScale/2.0)), false, FIX(40.0), dashboardSpinHeading, 0);
     }
 
     // Ammo counts
@@ -780,48 +820,48 @@ void CAbstractPlayer::RenderDashboard() {
         if (itsGame->itsApp->Get(kHUDShowGrenadeCount) && 0 < grenadeLimit) {
             if (float(i)/4.0 < float(grenadeCount)/float(grenadeLimit)) {
                 // Fill box
-                DashboardPosition(grenadeMeter[i], true, grenadePosition[0], grenadePosition[1]+(float(i)/weaponSpacing));
+                DashboardPosition(grenadeMeter[i], true, grenadePosition[0], grenadePosition[1]+(float(i)/weaponSpacing), false);
             } else {
                 // Empty box
-                DashboardPosition(grenadeBox[i], true, grenadePosition[0], grenadePosition[1]+(float(i)/weaponSpacing));
+                DashboardPosition(grenadeBox[i], true, grenadePosition[0], grenadePosition[1]+(float(i)/weaponSpacing), false);
             }
         }
 
         if (itsGame->itsApp->Get(kHUDShowMissileCount) && 0 < missileLimit) {
             if (i < missileCount) {
                 // Fill box
-                DashboardPosition(missileMeter[i], true, missilePosition[0], missilePosition[1]+(float(i)/weaponSpacing));
+                DashboardPosition(missileMeter[i], true, missilePosition[0], missilePosition[1]+(float(i)/weaponSpacing), false);
             } else {
                 // Empty box
-                DashboardPosition(missileBox[i], true, missilePosition[0], missilePosition[1]+(float(i)/weaponSpacing));
+                DashboardPosition(missileBox[i], true, missilePosition[0], missilePosition[1]+(float(i)/weaponSpacing), false);
             }
         }
 
         if (itsGame->itsApp->Get(kHUDShowBoosterCount) && 0 < boosterLimit) {
             if (i < boostsRemaining) {
                 // Fill box
-                DashboardPosition(boosterMeter[i], true, boosterPosition[0], boosterPosition[1]+(float(i)/boosterSpacing));
+                DashboardPosition(boosterMeter[i], true, boosterPosition[0], boosterPosition[1]+(float(i)/boosterSpacing), false);
             } else {
                 // Empty box
-                DashboardPosition(boosterBox[i], true, boosterPosition[0], boosterPosition[1]+(float(i)/boosterSpacing));
+                DashboardPosition(boosterBox[i], true, boosterPosition[0], boosterPosition[1]+(float(i)/boosterSpacing), false);
             }
         }
 
         if (itsGame->itsApp->Get(kHUDShowLivesCount) && lives > 0 && lives <= 10) {
             if (i < lives) {
                 // Fill box
-                DashboardPosition(livesMeter[i], true, livesPosition[0], livesPosition[1]+(float(i)/livesSpacing));
+                DashboardPosition(livesMeter[i], true, livesPosition[0], livesPosition[1]+(float(i)/livesSpacing), false);
             } else {
                 // Empty box
-                DashboardPosition(livesBox[i], true, livesPosition[0], livesPosition[1]+(float(i)/livesSpacing));
+                DashboardPosition(livesBox[i], true, livesPosition[0], livesPosition[1]+(float(i)/livesSpacing), false);
             }
         }
     }
 
     // Shields
     if (itsGame->itsApp->Get(kHUDShowShieldGauge)) {
-        DashboardPosition(shieldLabel, false, shieldPosition[0], shieldPosition[1]-(.22f*(layoutScale/2.0)));
-        DashboardPosition(shieldGaugeBackLight, shieldPosition[0], shieldPosition[1]);
+        DashboardPosition(shieldLabel, false, shieldPosition[0], shieldPosition[1]-(.22f*(layoutScale/2.0)), false);
+        DashboardPosition(shieldGaugeBackLight, shieldPosition[0], shieldPosition[1], false);
 
         Fixed shieldPercent = 0;
         if (maxShields > 0) shieldPercent = FDiv(shields, maxShields);
@@ -841,14 +881,14 @@ void CAbstractPlayer::RenderDashboard() {
         // Gauge moves further when energy is lower
         float shieldYOffset = abs(ToFloat(FIX1 - shieldPercent));
 
-        DashboardPosition(shieldGauge, shieldPosition[0], shieldPosition[1] - (offsetMultiplier * shieldYOffset));
+        DashboardPosition(shieldGauge, shieldPosition[0], shieldPosition[1] - (offsetMultiplier * shieldYOffset), true);
         shieldGauge->ScaleXYZ(ToFixed(layoutScale), shieldHeight, ToFixed(layoutScale));
     }
 
     // Energy
     if (itsGame->itsApp->Get(kHUDShowEnergyGauge)) {
-        DashboardPosition(energyLabel, false, energyPosition[0], energyPosition[1]-(.21f*(layoutScale/2.0)));
-        DashboardPosition(energyGaugeBackLight, energyPosition[0], energyPosition[1]);
+        DashboardPosition(energyLabel, false, energyPosition[0], energyPosition[1]-(.21f*(layoutScale/2.0)), false);
+        DashboardPosition(energyGaugeBackLight, energyPosition[0], energyPosition[1], false);
 
         Fixed energyPercent = 0;
         if (maxEnergy > 0) energyPercent = FDiv(energy, maxEnergy);
@@ -869,30 +909,30 @@ void CAbstractPlayer::RenderDashboard() {
         // Gauge moves further when energy is lower
         float energyYOffset = abs(ToFloat(FIX1 - energyPercent));
 
-        DashboardPosition(energyGauge, energyPosition[0], energyPosition[1] - (offsetMultiplier * energyYOffset ));
+        DashboardPosition(energyGauge, energyPosition[0], energyPosition[1] - (offsetMultiplier * energyYOffset ), true);
         energyGauge->ScaleXYZ(ToFixed(layoutScale), energyHeight, ToFixed(layoutScale));
     }
 }
 
-void CAbstractPlayer::DashboardPosition(CScaledBSP *part, float x, float y) {
-    DashboardPosition(part, false, x, y, 0, 0, 0);
+void CAbstractPlayer::DashboardPosition(CScaledBSP *part, float x, float y, bool useZOffset) {
+    DashboardPosition(part, false, x, y, useZOffset, 0, 0, 0);
 }
-void CAbstractPlayer::DashboardPosition(CScaledBSP *part, bool autoRot, float x, float y) {
-    DashboardPosition(part, autoRot, x, y, 0, 0, 0);
+void CAbstractPlayer::DashboardPosition(CScaledBSP *part, bool autoRot, float x, float y, bool useZOffset) {
+    DashboardPosition(part, autoRot, x, y, useZOffset, 0, 0, 0);
 }
-void CAbstractPlayer::DashboardPosition(CScaledBSP *part, bool autoRot, float x, float y, Fixed x_rot, Fixed y_rot, Fixed z_rot) {
+void CAbstractPlayer::DashboardPosition(CScaledBSP *part, bool autoRot, float x, float y, bool useZOffset, Fixed x_rot, Fixed y_rot, Fixed z_rot) {
     // Draw a part on the dashboard
-    // Coordinates on the screen are roughly described as a percentage of the screen away from the bottom and the left
+    // X/Y Coordinates on the screen are roughly described as a percentage of the screen away from the bottom and the left
     // (-1.0, -1.0) is the bottom left of the screen
     // (1.0, 1.0) is the top right of the screen
-
-
-    // TODO: Adjust these until it looks good, then go multiply 
-    // all the DashboardPosition parameters by these numbers, and
-    // then delete these
+    
     float scale_x = 11.12;
     float scale_y = 8.23;
     Fixed hud_dist = (FIX3(6000) * 25)/8;
+
+    // Prevent z-fighting if parts are layered on top of each other
+    if (useZOffset)
+        hud_dist -= FIX3(1);
 
     // Turn elements toward the center of the screen for a better 3d look
     // Being further away from the center results in greater rotation
@@ -900,17 +940,14 @@ void CAbstractPlayer::DashboardPosition(CScaledBSP *part, bool autoRot, float x,
 
     if (autoRot) {
         if (x < 0.0) {
-            yAng = -60*x + 15;
+            yAng = -35*x + 15;
         }
 
         if (x > 0.0) {
-            yAng = -60*x - 15;
+            yAng = -35*x - 15;
         }
     }
 
-    //InitialRotatePartX(part, FDegToRad(x_rot));
-    //InitialRotatePartY(part, FDegToRad(y_rot + ToFixed(yAng)));
-    //InitialRotatePartZ(part, FDegToRad(z_rot));
     part->isTransparent = false;
     part->Reset();
     part->RotateOneX(FDegToOne(x_rot));
@@ -941,7 +978,8 @@ void CAbstractPlayer::DashboardFixedPosition(CScaledBSP *part, float dist, Fixed
 }
 
 void CAbstractPlayer::ResetDashboard() {
-    if (!itsGame->showNewHUD) return;
+    DashboardReloadCheck();
+    if (!showHud) return;
 
     if (itsGame->itsApp->Get(kHUDShowMissileLock)) {
         lockLight->isTransparent = true;
@@ -975,6 +1013,21 @@ void CAbstractPlayer::ResetDashboard() {
     }
 }
 
+void CAbstractPlayer::ToggleFreeCam() {
+    SetFreeCamState(!freeView);
+}
+
+void CAbstractPlayer::SetFreeCamState(Boolean state) {
+    freeView = state;
+
+    itsGame->ToggleFreeCam(freeView);
+    itsFreeCam->ToggleState(freeView);
+}
+
+Boolean CAbstractPlayer::IsFreeCamAttached() {
+    return itsFreeCam->IsAttached();
+}
+
 void CAbstractPlayer::ControlSoundPoint() {
     Fixed theRight[] = {FIX(-1), 0, 0};
     Matrix *m;
@@ -989,9 +1042,7 @@ void CAbstractPlayer::ControlSoundPoint() {
 }
 
 void CAbstractPlayer::ControlViewPoint() {
-    CViewParameters *theView;
-
-    theView = itsGame->itsView;
+    auto vp = gRenderer->viewParams;
 
     if (!isInLimbo)
         PlaceHUDParts();
@@ -1005,54 +1056,60 @@ void CAbstractPlayer::ControlViewPoint() {
             if (itsScout)
                 itsScout->ControlViewPoint();
         }
+    } else if (freeView && freeCamIdent && itsManager->IsLocalPlayer()) {
+        itsFreeCam = (CFreeCam *)itsGame->FindIdent(freeCamIdent);
+        if (itsFreeCam) {
+            itsFreeCam->ControlViewPoint();
+        }
     } else {
-        MATRIXCOPY(&theView->viewMatrix, viewPortPart->GetInverseTransform());
-        MTranslate(viewOffset[0], viewOffset[1], viewOffset[2], &theView->viewMatrix);
+        MATRIXCOPY(&vp->viewMatrix, viewPortPart->GetInverseTransform());
+        MTranslate(viewOffset[0], viewOffset[1], viewOffset[2], &vp->viewMatrix);
 
         if (lookDirection) {
             Fixed a;
 
             a = FMul(lookDirection, 43690);
-            MRotateY(FOneSin(a), FOneCos(a), &theView->viewMatrix);
+            MRotateY(FOneSin(a), FOneCos(a), &vp->viewMatrix);
         }
 
-        theView->inverseDone = false;
+        vp->inverseDone = false;
     }
 
     RecalculateViewDistance();
 
     // SetPort(itsGame->itsWindow);
-    ControlSoundPoint();
+    if (!freeView) {
+        ControlSoundPoint();
+    }
 }
 
 void CAbstractPlayer::RecalculateViewDistance() {
-    CViewParameters *theView;
     Fixed viewDist;
     Fixed frameYon;
 
-    theView = itsGame->itsView;
+    auto vp = gRenderer->viewParams;
 
-    viewDist = FMulDivNZ(theView->viewWidth, FDegCos(fieldOfView), 2 * FDegSin(fieldOfView));
+    viewDist = FMulDivNZ(vp->viewWidth, FDegCos(fieldOfView), 2 * FDegSin(fieldOfView));
 
     if (itsGame->yonList) {
-        frameYon = itsGame->yonList->AdjustYon((*theView->GetInverseMatrix())[3], yonBound);
+        frameYon = itsGame->yonList->AdjustYon((*vp->GetInverseMatrix())[3], yonBound);
     } else {
         frameYon = yonBound;
     }
 
-    if (viewDist != theView->viewDistance || frameYon != theView->yonBound) {
-        if (frameYon != theView->yonBound) {
-            theView->yonBound = frameYon;
+    if (viewDist != vp->viewDistance || frameYon != vp->yonBound) {
+        if (frameYon != vp->yonBound) {
+            vp->yonBound = frameYon;
         }
-        theView->viewDistance = viewDist;
-        theView->Recalculate();
-        theView->CalculateViewPyramidCorners();
+        vp->viewDistance = viewDist;
+        vp->Recalculate();
+        vp->CalculateViewPyramidCorners();
     }
 }
 
 void CAbstractPlayer::ResetCamera() {
     fieldOfView = maxFOV;
-    AvaraGLSetFOV(ToFloat(fieldOfView));
+    gRenderer->SetFOV(ToFloat(fieldOfView));
     RecalculateViewDistance();
 }
 
@@ -1085,12 +1142,12 @@ void CAbstractPlayer::ArmSmartMissile() {
     }
 
     if (!didDetach && oldKind != kweSmart && missileCount) {
-        if (nextMissileLoad < itsGame->frameNumber) {
+        if (nextMissileLoad <= itsGame->frameNumber) {
             theWeapon = itsGame->itsDepot->AquireWeapon(kweSmart);
             weaponIdent = theWeapon->Arm(viewPortPart);
             if (weaponIdent) {
                 missileCount--;
-                nextMissileLoad = itsGame->FramesFromNow(3);
+                nextMissileLoad = itsGame->FramesFromNow(4);
             }
         } else
             fireGun = false;
@@ -1118,12 +1175,12 @@ void CAbstractPlayer::ArmGrenade() {
     }
 
     if (!didDetach && oldKind != kweGrenade && grenadeCount) {
-        if (nextGrenadeLoad < itsGame->frameNumber) {
+        if (nextGrenadeLoad <= itsGame->frameNumber) {
             theWeapon = itsGame->itsDepot->AquireWeapon(kweGrenade);
             weaponIdent = theWeapon->Arm(viewPortPart);
             if (weaponIdent) {
                 grenadeCount--;
-                nextGrenadeLoad = itsGame->FramesFromNow(2);
+                nextGrenadeLoad = itsGame->FramesFromNow(3);
             }
         } else
             fireGun = false;
@@ -1235,11 +1292,11 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
 
             FPS_DEBUG("   motors after keyb  = " << FormatVector(motors, 2) << std::endl);
 
-            if (TESTFUNC(kfuBoostEnergy, ft->down) && boostsRemaining && (boostEndFrame < itsGame->frameNumber)) {
+            if (TESTFUNC(kfuBoostEnergy, ft->down) && boostsRemaining && (boostEndFrame <= itsGame->frameNumber)) {
                 CBasicSound *theSound;
 
                 boostsRemaining--;
-                boostEndFrame = itsGame->FramesFromNow(BOOSTLENGTH);
+                boostEndFrame = itsGame->FramesFromNow(BOOSTLENGTH+1);
 
                 if (!boostControlLink)
                     boostControlLink = gHub->GetSoundLink();
@@ -1270,12 +1327,25 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             if (TESTFUNC(kfuLoadMissile, ft->down))
                 ArmSmartMissile();
         }
-        else if(lives == 0) {
+        else if(lives == 0 && limboCount < 0) {
+            // These controls only function after the limbo pause
             if (itsManager->IsLocalPlayer() && TESTFUNC(kfuSpectateNext, ft->down)) {
                 itsGame->SpectateNext();
+                if (freeView) {
+                    itsFreeCam->SetAttached(true);
+                }
             }
             if (itsManager->IsLocalPlayer() && TESTFUNC(kfuSpectatePrevious, ft->down)) {
                 itsGame->SpectatePrevious();
+                if (freeView) {
+                    itsFreeCam->SetAttached(true);
+                }
+            }
+            if (itsManager->IsLocalPlayer() && TESTFUNC(kfuToggleFreeCam, ft->down)) {
+                ToggleFreeCam();
+            }
+            if (freeView) {
+                itsFreeCam->ViewControl(ft);
             }
         }
 
@@ -1312,9 +1382,12 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             }
         }
 
-        if (winFrame < 0) {
+        // Disable local scout controls while spectating (players in the game still control their scouts)
+        if (winFrame < 0 && !itsManager->IsDeadOrDone()) {
             Boolean doRelease = false;
 
+//            SDL_Log("keys> fn=%d: down=%08x, held=%08x, up=%08x\n",
+//                    itsGame->frameNumber, ft->down, ft->held, ft->up);
             if (TESTFUNC(kfuScoutView, ft->down)) {
                 if (!scoutView && !scoutIdent) {
                     doRelease = true;
@@ -1357,9 +1430,9 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
         if (TESTFUNC(kfuDebug2, ft->down))
             debug2Flag = !debug2Flag;
 
-        if (TESTFUNC(kfuZoomIn, ft->held))
+        if (TESTFUNC(kfuZoomIn, ft->held) && !freeView)
             fieldOfView -= FOVSTEP;
-        if (TESTFUNC(kfuZoomOut, ft->held))
+        if (TESTFUNC(kfuZoomOut, ft->held) && !freeView)
             fieldOfView += FOVSTEP;
 
 #define LOOKSTEP FpsCoefficient2(0x1000L)
@@ -1390,7 +1463,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
 
         if (itsManager->IsLocalPlayer() &&
             (TESTFUNC(kfuZoomOut, ft->held) || TESTFUNC(kfuZoomIn, ft->held)))
-            AvaraGLSetFOV(ToFloat(fieldOfView));
+            gRenderer->SetFOV(ToFloat(fieldOfView));
 
         if (fireGun)
             mouseShootTime = FpsFramesPerClassic(MOUSESHOOTDELAY);
@@ -1499,7 +1572,7 @@ void CAbstractPlayer::FrameAction() {
         }
 
         // if a frag frame is specified with /dbg, force a frag on that frame by messing with FRandSeed
-        int fragFrame = Debug::GetValue("frag");
+        int fragFrame = Debug::GetValue("ffrag");
         if (fragFrame > 0 && itsGame->frameNumber == fragFrame) {
             extern Fixed FRandSeed; // to intentionally cause frags below
             FRandSeed += 1;
@@ -1551,13 +1624,14 @@ void CAbstractPlayer::PlayerAction() {
                         }
                         Reincarnate();
                     } else {
+                        limboCount = -1; // No need for limboCount to continue counting down at this point
                         itsManager->DeadOrDone();
 
                         // Auto spectate another player if:
                         //   - The player runs out of lives
-                        //   - The player being spectated runs out of lives
+                        //   - The player being spectated runs out of lives (check that players limbo timer to prevent fast transition)
                         if ((itsGame->GetSpectatePlayer() == NULL && itsManager->IsLocalPlayer()) ||
-                            (itsGame->GetSpectatePlayer() != NULL && itsGame->GetSpectatePlayer()->lives == 0)) {
+                            (itsGame->GetSpectatePlayer() != NULL && itsGame->GetSpectatePlayer()->lives == 0 && itsGame->GetSpectatePlayer()->limboCount <= 0)) {
                             itsGame->SpectateNext();
                         }
                     }
@@ -1639,7 +1713,8 @@ void CAbstractPlayer::GunActions() {
         if (weapon) {
             weapon->Fire();
             weaponIdent = 0;
-        } else {
+        } else if (nextPlasmaShot <= itsGame->frameNumber) {
+            nextPlasmaShot = itsGame->FramesFromNow(1);
             i = gunEnergy[0] < gunEnergy[1];
             if (gunEnergy[i] >= activeGunEnergy) {
                 Vector missileSpeed;
@@ -1649,15 +1724,9 @@ void CAbstractPlayer::GunActions() {
                 CombineTransforms(&m1, &m2, &viewPortPart->itsTransform);
                 MTranslate(speed[0], speed[1], speed[2], &m2);
 
-                if (debug2Flag) {
-                    theHit.direction[0] = FMul(m2[2][0], PLAYERMISSILESPEED) + speed[0];
-                    theHit.direction[1] = FMul(m2[2][1], PLAYERMISSILESPEED) + speed[1];
-                    theHit.direction[2] = FMul(m2[2][2], PLAYERMISSILESPEED) + speed[2];
-                } else {
-                    theHit.direction[0] = FMul(m2[2][0], PLAYERMISSILESPEED);
-                    theHit.direction[1] = FMul(m2[2][1], PLAYERMISSILESPEED);
-                    theHit.direction[2] = FMul(m2[2][2], PLAYERMISSILESPEED);
-                }
+                theHit.direction[0] = FMul(m2[2][0], PLAYERMISSILESPEED);
+                theHit.direction[1] = FMul(m2[2][1], PLAYERMISSILESPEED);
+                theHit.direction[2] = FMul(m2[2][2], PLAYERMISSILESPEED);
 
                 missileSpeed[0] = theHit.direction[0];
                 missileSpeed[1] = theHit.direction[1];
@@ -1784,39 +1853,112 @@ void CAbstractPlayer::IncarnateSound() {
     gHub->ReleaseLink(aLink);
 }
 
+void CAbstractPlayer::Incarnate() {
+    // for the initial spawn use the simple "usage" ordering
+    // note: this value is updated with the server's setting after the initial call (see CNetManager::DoConfig())
+    itsGame->spawnOrder = ksUsage;
+    Reincarnate();
+}
+
+Fixed CAbstractPlayer::ClosestOpponentDistance(Vector &location) {
+    Fixed minDist = MAXFIXED;
+    DBG_Log("spawn", "    Finding closest OPPONENT to INCARN");
+
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        if(i != itsManager->Slot()) {
+            CAbstractPlayer* player = itsGame->itsNet->playerTable[i]->GetPlayer();
+            if (player != NULL && !player->isOut && teamMask != player->teamMask) {
+                DBG_Log("spawn", "      OPPONENT[%d] LOC= %s", i, FormatVectorFloat(player->location).c_str());
+
+                if(i != itsManager->Slot()) {
+                    Fixed d = FDistanceEstimate(player->location, location);
+                    DBG_Log("spawn", "         dist= %.4f", ToFloat(d));
+                    if (d < minDist) {
+                        minDist = d;
+                        DBG_Log("spawn", "         CLOSEST OPPONENT, dist= %.4f", ToFloat(d));
+                    }
+                }
+            }
+        }
+    }
+    return minDist;
+}
+
 void CAbstractPlayer::Reincarnate() {
-    CIncarnator *placeList;
-    long bestCount = LONG_MAX;
+    std::list<CIncarnator *> sortedIncarnators;
+    Fixed furthest = MINFIXED;
 
-    // first, determine the count for the least-visited Incarnator
-    for (placeList = itsGame->incarnatorList; placeList != nullptr; placeList = placeList->nextIncarnator) {
-        if (placeList->enabled && (placeList->colorMask & teamMask) && (placeList->useCount < bestCount)) {
-            bestCount = placeList->useCount;
-        }
-    }
+    DBG_Log("spawn", "Reincarnate() SLOT= %d, ORDER = %d", itsManager->Slot(), itsGame->spawnOrder);
 
-    // try the least-visited Incarnators until one works
-    for (placeList = itsGame->incarnatorList; placeList != nullptr; placeList = placeList->nextIncarnator) {
-        if (placeList->enabled && (placeList->colorMask & teamMask) && (placeList->useCount == bestCount)) {
-            if (itsManager->Presence() != kzSpectating && ReincarnateComplete(placeList)) {
-                break;
+    for (CIncarnator *incarnator = itsGame->incarnatorList; incarnator != nullptr; incarnator = incarnator->nextIncarnator) {
+        if (incarnator->enabled && (incarnator->colorMask & teamMask)) { //} && incarnator->useCount == 0) {
+            DBG_Log("spawn", "\n");
+            DBG_Log("spawn", "INCARN LOC= %s", FormatVectorFloat(incarnator->location).c_str());
+
+            if (itsGame->spawnOrder == ksDistance || itsGame->spawnOrder == ksHybrid) {
+                Fixed minDist = ClosestOpponentDistance(incarnator->location);
+
+                static double alpha = 0.6;  // 0.0-1.0   higher == more randomness
+                incarnator->distance = minDist * ((1.0-alpha) + 2.0*alpha*FRandom()/FIX1);
+
+                DBG_Log("spawn", "         dist= %.4f ~dist= %.4f", ToFloat(minDist), ToFloat(incarnator->distance));
+                if(incarnator->distance > furthest) {
+                    furthest = incarnator->distance;
+                    DBG_Log("spawn", "         FURTHEST SO FAR");
+                }
+
+            } else if (itsGame->spawnOrder == ksRandom) {
+                incarnator->distance = FRandom();
+            } else {  // ksUsage
+                incarnator->distance = FIX1;
             }
+
+            switch (itsGame->spawnOrder) {
+                case ksDistance:
+                case ksRandom:
+                    // ignore usage for these order types
+                    incarnator->useCount = 1;
+                    break;
+                case ksHybrid:
+                    // start useCount = 1 so that distance is respected from the beginning
+                    incarnator->useCount = std::max(incarnator->useCount, 1L);
+                    break;
+                default:
+                    break;
+            }
+
+            // to be sorted below
+            sortedIncarnators.push_back(incarnator);
+
+            DBG_Log("spawn", "    ~dist= %.4f, useCount=%ld", ToFloat(incarnator->distance), incarnator->useCount);
         }
     }
 
+    sortedIncarnators.sort([](const CIncarnator *a, const CIncarnator *b) {
+        // like comparing a->distance/a->useCount to b->distance/b->useCount but avoiding divide-by-zero
+        return (a->distance * b->useCount) > (b->distance * a->useCount);
+    });
+
+    // try sorted Incarnators until one works
+    DBG_Log("spawn", "\n");
+    for (auto incarnator : sortedIncarnators) {
+        DBG_Log("spawn", "TRYING INCARNATOR AT LOC= %s", FormatVectorFloat(incarnator->location).c_str());
+        if (ReincarnateComplete(incarnator)) {
+            DBG_Log("spawn", "<------USING THIS INCARNATOR------>");
+            return;
+        }
+    }
+
+    DBG_Log("spawn", "NO incarnators found, trying RANDOM");
     // if couldn't find an available Incarnator above, try creating a random one
-    if (placeList == nullptr) {
-        // why 3 tries?  it's somewhat arbitrary but if there's a (high) 10% chance of not working,
-        // then 3 tries will get that down to 0.1%.  In most levels, the not-working chance is probably
-        // closer to 1% so 3 tries = 0.0001%
-        for (int tries = 3; isInLimbo && tries > 0; tries--) {
-            CRandomIncarnator waldo(itsGame->actorList);
-            if (ReincarnateComplete(&waldo)) {
-                break;
-            }
+    for (int tries = 3; isInLimbo && tries > 0; tries--) {
+        CRandomIncarnator waldo(itsGame->actorList);
+        if (ReincarnateComplete(&waldo)) {
+            break;
         }
     }
 }
+
 
 bool CAbstractPlayer::ReincarnateComplete(CIncarnator* newSpot) {
     // increment useCount regardless of success, so the next player doesn't try to use this spot
@@ -1843,13 +1985,13 @@ bool CAbstractPlayer::ReincarnateComplete(CIncarnator* newSpot) {
         LinkPartSpheres();
 
         if (reEnergize) {
-            boostEndFrame = itsGame->FramesFromNow(MINIBOOSTTIME);
+            boostEndFrame = itsGame->FramesFromNow(MINIBOOSTTIME+1);
             reEnergize = false;
-            if (shields < (maxShields >> 1))
-                shields = maxShields >> 1;
+            if (shields < maxShields)
+                shields = maxShields;
 
-            if (energy < (maxEnergy >> 1))
-                energy = maxEnergy >> 1;
+            if (energy < maxEnergy)
+                energy = maxEnergy;
         }
 
         doIncarnateSound = true;
@@ -2117,10 +2259,8 @@ void CAbstractPlayer::ReceiveConfig(PlayerConfigRecord *config) {
 
         // Reload the livesLabel to reflect the hull shape.
         if (!itsGame->showNewHUD) return;
-        CBSPWorld *hudWorld;
-        hudWorld = itsGame->hudWorld;
-        hudWorld->RemovePart(livesLabel);
-        livesLabel->Dispose();
+        gRenderer->RemoveHUDPart(livesLabel);
+        delete livesLabel;
         livesLabel = DashboardPart(hullConfig.hullBSP, FIX3(140*layoutScale));
     }
 }
@@ -2158,10 +2298,10 @@ void CAbstractPlayer::TakeGoody(GoodyRecord *gr) {
     if (energy > maxEnergy)
         energy = maxEnergy;
 
-    if (gr->boostTime > 0 && (boostEndFrame < itsGame->frameNumber)) {
+    if (gr->boostTime > 0 && (boostEndFrame <= itsGame->frameNumber)) {
         CBasicSound *theSound;
 
-        boostEndFrame = itsGame->FramesFromNow(gr->boostTime);
+        boostEndFrame = itsGame->FramesFromNow(gr->boostTime+1);
 
         if (!boostControlLink)
             boostControlLink = gHub->GetSoundLink();

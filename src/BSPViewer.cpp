@@ -67,12 +67,10 @@ public:
         marker1 = ColorManager::getTeamColor(3).value();
         marker2 = ColorManager::getTeamColor(2).value(); 
         current_id = id;
-        itsWorld = new CBSPWorldImpl;
-        itsWorld->IBSPWorld(1);
+        itsWorld = new CBSPWorldImpl(1);
         newPart(current_id);
 
         itsView = new CViewParameters;
-        itsView->IViewParameters();
 
         itsView->yonBound = FIX(100);
         itsView->dirtyLook = true;
@@ -124,8 +122,7 @@ public:
             if (itsWorld->GetPartCount() > 0) {
                 itsWorld->RemovePart(itsPart);
             }
-            itsPart = new CBSPPart;
-            itsPart->IBSPPart(id);
+            itsPart = CBSPPart::Create(id);
             if (itsPart->polyCount > 0) {
                 itsPart->ReplaceColor(
                     *ColorManager::getMarkerColor(0),

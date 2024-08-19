@@ -13,7 +13,6 @@
 #include "CStringDictionary.h"
 
 #include "RamFiles.h"
-#include "Resource.h"
 #include "PascalStrings.h"
 
 #include <cstring>

@@ -7,7 +7,6 @@
     Modified: Monday, September 2, 1996, 17:39
 */
 
-#include "AvaraGL.h"
 #include "AvaraTCP.h"
 #include "CAvaraApp.h"
 #include "CAvaraGame.h"
@@ -17,10 +16,10 @@
 #include "FastMat.h"
 #include "Preferences.h"
 
-#include <string.h>
 
 #ifdef _WIN32
-
+#include <Windows.h>
+#include <ShellAPI.h>
 typedef enum PROCESS_DPI_AWARENESS {
     PROCESS_DPI_UNAWARE = 0,
     PROCESS_SYSTEM_DPI_AWARE = 1,
@@ -38,6 +37,10 @@ void SetHiDPI() {
     SetProcessDpiAwareness(PROCESS_PER_MONITOR_DPI_AWARE);
 #endif
 }
+
+#include <SDL2/SDL.h>
+#include <string.h>
+
 
 void NullLogger(void *userdata, int category, SDL_LogPriority priority, const char *message) {}
 

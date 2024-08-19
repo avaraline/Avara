@@ -9,7 +9,6 @@
 
 #pragma once
 #include "AvaraDefines.h"
-#include "AvaraGL.h"
 #include "AvaraScoreInterface.h"
 #include "AvaraTypes.h"
 #include "CDirectObject.h"
@@ -48,6 +47,14 @@
 
 enum GameStatus { kPlayingStatus, kAbortStatus, kReadyStatus, kPauseStatus, kNoVehicleStatus, kWinStatus, kLoseStatus };
 
+enum SpawnOrder {
+    ksRandom,   // picks at random which Incarnator to choose
+    ksUsage,    // this is the "Classic" setting, uses hit count to choose
+    ksDistance, // uses slightly-randomized distance
+    ksHybrid,   // uses count & distance
+    ksNumSpawnOrders
+};
+
 class CAbstractActor;
 class CAbstractPlayer;
 class CPlayerManager;
@@ -64,13 +71,10 @@ class CAvaraApp;
 
 class CSoundHub;
 class CIncarnator;
-class CWorldShader;
 class CScoreKeeper;
 class CAbstractYon;
 
-class CHUD;
-
-class CAvaraGame : public CDirectObject {
+class CAvaraGame {
 public:
     std::string loadedFilename = "";
     std::string loadedLevel = "";
@@ -91,6 +95,8 @@ public:
     FrameTime frameTime; //	In milliseconds.
     double fpsScale;  // 0.25 => CLASSICFRAMETIME / 4
 
+    SpawnOrder spawnOrder;
+
     GameStatus gameStatus;
     GameStatus statusRequest;
     short pausePlayer;
@@ -104,6 +110,8 @@ public:
     long playersStanding;
     short teamsStandingMask;
     short teamsStanding;
+
+    Boolean freeCamState;
 
     CIncarnator *incarnatorList;
     CAbstractPlayer *freshPlayerList;
@@ -123,9 +131,6 @@ public:
     CAvaraApp *itsApp;
     // WindowPtr		itsWindow;
     // PolyWorld		itsPolyWorld;
-    CBSPWorld *itsWorld;
-    CBSPWorld *hudWorld;
-    CViewParameters *itsView;
     CAbstractYon *yonList;
 
     // UI
@@ -150,9 +155,7 @@ public:
     CDepot *itsDepot; //	Storage maintenance for ammo
     CSoundHub *soundHub; //	Sound playback and control hub
     std::unique_ptr<CNetManager> itsNet; //	Networking management
-    CWorldShader *worldShader; //	Manages ground and sky colors.
     CScoreKeeper *scoreKeeper;
-    CHUD *hud;
 
     //	Sound related variables:
     int soundTime;
@@ -176,6 +179,7 @@ public:
 
     uint32_t nextScheduledFrame;
     uint32_t nextPingTime;
+    uint32_t nextLoadTime;
     long lastFrameTime;
     Boolean canPreSend;
 
@@ -199,10 +203,8 @@ public:
     CAvaraGame(FrameTime frameTime = 64);
     //	Methods:
     virtual void IAvaraGame(CAvaraApp *theApp);
-    virtual CBSPWorld* CreateCBSPWorld(short initialObjectSpace);
     virtual CSoundHub* CreateSoundHub();
     virtual std::unique_ptr<CNetManager> CreateNetManager();
-    virtual void LoadImages(NVGcontext *ctx);
 
     virtual void InitLocatorTable();
     virtual void IncrementGameCounter();
@@ -240,14 +242,11 @@ public:
     virtual void GameStart();
     virtual bool GameTick();
     virtual void GameStop();
-    virtual void Dispose();
+    virtual ~CAvaraGame();
 
     virtual void SpectateNext();
     virtual void SpectatePrevious();
     virtual bool canBeSpectated(CAbstractPlayer *player);
-
-
-    virtual void UpdateViewRect(int width, int height, float pixelRatio);
 
     virtual void RegisterReceiver(MessageRecord *theMsg, MsgType messageNum);
     virtual void RemoveReceiver(MessageRecord *theMsg);
@@ -256,8 +255,9 @@ public:
     virtual void MessageCleanup(CAbstractActor *deadActor);
 
     virtual void StopGame();
-    virtual void Render(NVGcontext *ctx);
+    virtual void Render();
     virtual void ViewControl();
+    virtual void ToggleFreeCam(Boolean state);
 
     virtual void InitMixer(Boolean silentFlag);
 
@@ -270,7 +270,8 @@ public:
     virtual FrameNumber NextFrameForPeriod(long period, long referenceFrame = 0);
     virtual void SetFrameTime(int32_t ft);
     virtual void IncrementFrame(bool firstFrame = false);
-    virtual FrameNumber FramesFromNow(FrameNumber classicFrames);
+    virtual FrameNumber FramesFromNow(double classicFrames);
+    virtual void SetSpawnOrder(SpawnOrder order);
 
     void SetKeysFromStdin() { keysFromStdin = true; };
     void SetKeysToStdout() { keysToStdout = true; };

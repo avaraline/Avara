@@ -7,6 +7,9 @@
 
 #include "PlayerRatingsSimpleElo.h"
 
+#include "CAvaraGame.h"
+#include "CAvaraApp.h"
+
 #include <SDL2/SDL.h>
 #include <fstream>
 #include <iostream>
@@ -23,9 +26,11 @@ PlayerRatingsSimpleElo::PlayerRatingsSimpleElo() :
 // this macro tells nholmann::json how to serialize/deserialize the Rating struct
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Rating, count, rating);
 
-inline float kFactor(int count) {
-    // for first 40 games kFactor is higher then it sticks at 24 after that
-    return std::max(30.0, 60.0 - count/2);
+inline float kFactor(int ratingsCount, size_t playerCount) {
+    // kFactor starts at 60/sqrt(N-1) then gradually reduces to 30/sqrt(N-1)
+    // the numerator helps the rating get in the right ballpark quickly for new players
+    // and the denomiator helps to reduce the effect of many players on the score
+    return std::max(30.0, 60.0 - ratingsCount/2) / sqrt(playerCount - 1.0);
 }
 
 // expected probability for player1 to beat player2
@@ -59,24 +64,44 @@ void PlayerRatingsSimpleElo::UpdateRatings(std::vector<PlayerResult> &playerResu
             float delta = (1.0 - expectation(ratingsMap[currId].rating, ratingsMap[prevId].rating));
 
             // all adjustments are made all at once after exiting this loop
-            adjustments[currId].rating += kFactor(ratingsMap[currId].count) * delta;
+            adjustments[currId].rating += kFactor(ratingsMap[currId].count, playerResults.size()) * delta;
             if (delta > 0.05) {
                 // don't increase count if prohibitive favorite (e.g. playing bots)
                 adjustments[currId].count++;
             }
-            adjustments[prevId].rating -= kFactor(ratingsMap[prevId].count) * delta;
+            adjustments[prevId].rating -= kFactor(ratingsMap[prevId].count, playerResults.size()) * delta;
             adjustments[prevId].count++;
         }
         prevPlayer = currPlayer;
     }
     // apply all the adjustments
+    std::ostringstream oss;
+    int outCount = 0;
     for (auto result: playerResults) {
         auto playerId = result.playerId;
         ratingsMap[playerId].rating += adjustments[playerId].rating;
         ratingsMap[playerId].count += adjustments[playerId].count > 0 ? 1 : 0;  // don't count game more than once
         ratingsMap[playerId].rating = std::roundf(ratingsMap[playerId].rating*4)/4;
-        DBG_Log("elo", "rating[%d] for %s = %.0f (%+.1f)\n",
-                ratingsMap[playerId].count, playerId.c_str(), ratingsMap[playerId].rating, adjustments[playerId].rating);
+
+        // output updated Elo ratings if "showElow" pref set to true
+        if (Debug::IsEnabled("elo") || gApplication->Boolean(kShowElo)) {
+            if (result == playerResults.front()) {
+                gCurrentGame->itsApp->AddMessageLine("Updated Elo Ratings:");
+            }
+            // format results like this:
+            //        PlayerName[111] = 1622(+22)
+            //   LongerPlayerName[22] = 1477( -6)
+            oss << std::right << std::setw(21)
+                << (playerId + "[" + std::to_string(ratingsMap[playerId].count) + "] = ")
+                << std::fixed << std::setprecision(0)
+                << std::setw(4) << ratingsMap[playerId].rating
+                << "(" << std::showpos  << std::setw(3) << adjustments[playerId].rating << std::noshowpos << ")" ;
+            // display 2 results on each message line
+            if ((++outCount % 2) == 0 || result == playerResults.back()) {
+                gCurrentGame->itsApp->AddMessageLine(oss.str());
+                oss.str("");
+            }
+        }
     }
 
     // remove blank playerId from ratings (could happen if someone disonnects before game is recorded)

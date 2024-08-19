@@ -1,7 +1,7 @@
 #pragma once
 #include "ARGBColor.h"
 #include "CommandManager.h"
-#include "AvaraGL.h"
+#include "AbstractRenderer.h"
 #include "CApplication.h"
 #include "CBSPPart.h"
 #include "CBSPWorld.h"
@@ -36,7 +36,7 @@ public:
   void SetActive(bool a) { active = a; };
   void ClearParts() {
     for (const auto &x : actors) {
-      x.second->Dispose();
+      //x.second->Dispose();
       delete x.second;
     }
     actors.clear();
@@ -96,7 +96,7 @@ protected:
     float normalized_x = (((float)p->h / (float)gApplication->fb_size_x) * 2.0) - 1.0;
     float normalized_y = ((((float)p->v / (float)gApplication->fb_size_y) * 2.0) - 1.0) * -1.0;
     glm::vec4 v = glm::vec4(normalized_x, normalized_y, 1.0, -1);
-    return AvaraGLScreenSpaceToWorldSpace(itsView, &v);
+    return gRenderer->ScreenSpaceToWorldSpace(&v);
   }
 
   static int text_width(mu_Font f, const char *text, int len) {

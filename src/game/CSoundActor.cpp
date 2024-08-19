@@ -50,7 +50,8 @@ CAbstractActor *CSoundActor::EndScript() {
         rate = ReadFixedVar(iRate);
 
         if (!isAmbient || (itsGame->soundSwitches & kAmbientSoundToggle))
-            gHub->PreLoadSample(soundId);
+            // Preload sounds.
+            auto _ = AssetManager::GetOgg(soundId);
 
         if (isPlaced) {
             itsSoundLink = gHub->GetSoundLink();
@@ -163,13 +164,11 @@ void CSoundActor::FrameAction() {
     }
 }
 
-void CSoundActor::Dispose() {
+CSoundActor::~CSoundActor() {
     if (controlLink) {
         gHub->ReleaseLink(controlLink);
         controlLink = NULL;
     }
-
-    CPlacedActors::Dispose();
 }
 
 Boolean CSoundActor::ShouldPlay() {

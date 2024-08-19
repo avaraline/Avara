@@ -1,5 +1,4 @@
-#version 120
-#extension GL_ARB_explicit_attrib_location : require
+#version 330 core
 
 in vec3 tex_coord;
 

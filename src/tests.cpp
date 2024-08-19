@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include <SDL2/SDL_log.h>
+#include "AssetManager.h"
 #include "CAvaraApp.h"
 #include "CBSPPart.h"
 #include "CPlayerManager.h"
@@ -13,11 +14,11 @@
 #include "CGrenade.h"
 #include "CSmart.h"
 #include "CScout.h"
-#include "AvaraGL.h"
 #include "Messages.h"
 #include "Preferences.h"
 #include "System.h"
 #include "CUDPConnection.h"
+#include "NullRenderer.h"
 
 #include <iostream>
 using namespace std;
@@ -41,6 +42,7 @@ public:
         FunctionTable &ft = *(this->ft);
         ft.down = ft.up = ft.held = ft.mouseDelta.h = ft.mouseDelta.v = ft.buttonStatus = ft.msgChar = 0;
     }
+    ~TestPlayerManager() {}
     virtual CAbstractPlayer* GetPlayer() { return playa; }
     virtual void SetPlayer(CAbstractPlayer* p) { playa = p; }
     virtual short Slot() { return 0; }
@@ -52,6 +54,7 @@ public:
     virtual void GameKeyPress(char c) {}
     virtual FunctionTable *GetFunctions() { return ft; }
     virtual void DeadOrDone() {}
+    virtual bool IsDeadOrDone() { return false; }
     virtual short Position() { return 0; }
     virtual Str255& PlayerName() { return str; }
     virtual std::string GetPlayerName() { return std::string((char *)str + 1, str[0]); }
@@ -130,6 +133,8 @@ public:
 class TestApp : public CAvaraApp {
 public:
     TestApp() {
+        AssetManager::Init();
+        
         // Silence SDL logging with a no-op callback.
         SDL_LogSetOutputFunction([](void *d, int c, SDL_LogPriority p, const char *m){}, nullptr);
     }
@@ -181,7 +186,14 @@ public:
         // force tick to happen by resetting nextScheduledFrame
         nextScheduledFrame = 0;
         itsNet->activePlayersDistribution = 1;
+        nextPingTime = std::numeric_limits<uint32_t>::max(); // prevent pings
         return CAvaraGame::GameTick();
+    }
+};
+
+class TestWalkerActor : public CWalkerActor {
+    void ResetCamera() {
+
     }
 };
 
@@ -195,12 +207,14 @@ public:
         app.itsGame = std::make_unique<TestGame>(frameTime);
         game = (TestGame*)app.itsGame.get();
         gCurrentGame = game;
+        gRenderer = new NullRenderer();
+
         InitParser();
         game->IAvaraGame(&app);
         game->EndScript();
         app.GetNet()->ChangeNet(kNullNet, "");
         game->LevelReset(false);
-        hector = new CWalkerActor();
+        hector = new TestWalkerActor();
         hector->BeginScript();
         hector->EndScript();
         game->itsNet->playerTable[0]->SetPlayer(hector);
@@ -210,6 +224,7 @@ public:
         hector->location[2] = hectorZ;
         hector->location[3] = FIX1;
         game->AddActor(hector);
+        game->freshPlayerList = 0;
         game->GameStart();
     }
 };
@@ -453,11 +468,11 @@ vector<HectorEnergyReadings> HectorEnergyRegen(int steps, bool useBoost, int fra
     int ticksPerStep = GetTicksPerStep(frameTime);
 
     scenario.hector->energy = scenario.hector->maxEnergy * 0.5;
-    if (useBoost) {
-        scenario.hector->itsManager->GetFunctions()->down = (1 << kfuBoostEnergy);
-    }
 
     for (int i = 0; i < steps; i++) {
+        if (i == 1 && useBoost) {
+            scenario.hector->itsManager->GetFunctions()->down = (1 << kfuBoostEnergy);
+        }
         HectorEnergyReadings current(scenario.hector);
         energyValues.push_back(current);
         for (int k = 0; k < ticksPerStep; k++) {
@@ -475,11 +490,11 @@ vector<HectorEnergyReadings> HectorPlasmaRegen(int steps, bool useBoost, int fra
 
     scenario.hector->gunEnergy[0] = 0;
     scenario.hector->gunEnergy[1] = 0;
-    if (useBoost) {
-        scenario.hector->itsManager->GetFunctions()->down = (1 << kfuBoostEnergy);
-    }
 
     for (int i = 0; i < steps; i++) {
+        if (i == 1 && useBoost) {
+            scenario.hector->itsManager->GetFunctions()->down = (1 << kfuBoostEnergy);
+        }
         HectorEnergyReadings current(scenario.hector);
         energyValues.push_back(current);
         for (int k = 0; k < ticksPerStep; k++) {
@@ -496,11 +511,11 @@ vector<HectorEnergyReadings> HectorShieldRegen(int steps, bool useBoost, int fra
     int ticksPerStep = GetTicksPerStep(frameTime);
 
     scenario.hector->shields = scenario.hector->maxShields * 0.5;
-    if (useBoost) {
-        scenario.hector->itsManager->GetFunctions()->down = (1 << kfuBoostEnergy);
-    }
 
     for (int i = 0; i < steps; i++) {
+        if (i == 1 && useBoost) {
+            scenario.hector->itsManager->GetFunctions()->down = (1 << kfuBoostEnergy);
+        }
         HectorEnergyReadings current(scenario.hector);
         energyValues.push_back(current);
         for (int k = 0; k < ticksPerStep; k++) {
@@ -1171,7 +1186,11 @@ TEST(QUEUES, Clean) {
 }
 
 int main(int argc, char **argv) {
+<<<<<<< HEAD
     AvaraGLToggleRendering(0);
+=======
+    nanogui::init();
+>>>>>>> c19a43f958cbfd6314bc9681b5e79afc6fc4a785
     InitMatrix();
     ::testing::InitGoogleTest(&argc, argv);
     int r = RUN_ALL_TESTS();

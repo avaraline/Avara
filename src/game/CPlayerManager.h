@@ -81,6 +81,7 @@ public:
     virtual void GameKeyPress(char c) = 0;
     virtual FunctionTable *GetFunctions() = 0;
     virtual void DeadOrDone() = 0;
+    virtual bool IsDeadOrDone() = 0;
     virtual short Position() = 0;
     virtual Str255& PlayerName() = 0;
     virtual std::string GetPlayerName() = 0;
@@ -265,6 +266,7 @@ public:
     virtual void RemoveFromGame();
 
     virtual void DeadOrDone();
+    virtual bool IsDeadOrDone();
 
     virtual short GetStatusChar();
     virtual short GetMessageIndicator();

@@ -73,8 +73,11 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
         {"scoutControl", 1 << kfuScoutControl},
         {"spectateNext", 1 << kfuSpectateNext},
         {"spectatePrevious", 1 << kfuSpectatePrevious},
+        {"toggleFreeCam", 1 << kfuToggleFreeCam},
         {"scoreboard", 1 << kfuScoreboard},
         {"chatMode", 1 << kfuTypeText},
+        {"freeCamUp", 1 << kfuFreeCamUp},
+        {"freeCamDown", 1 << kfuFreeCamDown},
         {"debug1", 1 << kfuDebug1},
         {"debug2", 1 << kfuDebug2}};
 
@@ -524,8 +527,8 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
     static int ASK_INTERVAL = MSEC_TO_TICK_COUNT(500);
     static int WAITING_MESSAGE_COUNT = 4;
 
-    // if player is finished don't wait for their frames to sync up
-    if (frameFuncs[i].validFrame != itsGame->frameNumber && itsPlayer->lives > 0) {
+    // don't wait for for players who are completely done (after last life and after limbo)
+    if (frameFuncs[i].validFrame != itsGame->frameNumber && !IsDeadOrDone()) {
         long firstTime = askAgainTime = TickCount();
         long quickTick = firstTime;
         long giveUpTime = firstTime + MSEC_TO_TICK_COUNT(15000);
@@ -896,7 +899,7 @@ void CPlayerManagerImpl::NetDisconnect() {
         if (theNetManager->isPlaying) {
             itsPlayer->netDestruct = true;
         } else {
-            itsPlayer->Dispose();
+            delete itsPlayer;
         }
     }
 
@@ -1043,10 +1046,10 @@ CAbstractPlayer *CPlayerManagerImpl::ChooseActor(CAbstractPlayer *actorList, sho
         itsPlayer->itsManager = shared_from_this();
 
         itsPlayer->teamMask = myTeamMask;
-        itsPlayer->Reincarnate();
+        itsPlayer->Incarnate();
 
         if (itsPlayer->isInLimbo) {
-            itsPlayer->Dispose();
+            delete itsPlayer;
             itsPlayer = NULL;
         } else {
             itsPlayer->AddToGame();
@@ -1068,10 +1071,10 @@ Boolean CPlayerManagerImpl::IncarnateInAnyColor() {
         itsPlayer->itsManager = shared_from_this();
 
         itsPlayer->teamMask = 1 << i;  // set in case Incarnators discriminate on color
-        itsPlayer->Reincarnate();
+        itsPlayer->Incarnate();
 
         if (itsPlayer->isInLimbo) {
-            itsPlayer->Dispose();
+            delete itsPlayer;
             itsPlayer = NULL;
         } else {
             itsPlayer->AddToGame();
@@ -1133,11 +1136,17 @@ void CPlayerManagerImpl::AbortRequest() {
 
 void CPlayerManagerImpl::RemoveFromGame() {
     theNetManager->activePlayersDistribution &= ~(1 << slot);
-    theNetManager->itsCommManager->SendUrgentPacket(kdEveryone, kpRemoveMeFromGame, 0, 0, 0, 0, 0);
+    // let inactive players know (not sure if this is even necessary)
+    uint16_t dist = kdEveryone & ~theNetManager->activePlayersDistribution;
+    theNetManager->itsCommManager->SendPacket(dist, kpRemoveMeFromGame, 0, 0, 0, 0, 0);
 }
 
 void CPlayerManagerImpl::DeadOrDone() {
     theNetManager->deadOrDonePlayers |= 1 << slot;
+}
+
+bool CPlayerManagerImpl::IsDeadOrDone() {
+    return (theNetManager->deadOrDonePlayers & (1 << slot));
 }
 
 short CPlayerManagerImpl::GetStatusChar() {

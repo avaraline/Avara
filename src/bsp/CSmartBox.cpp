@@ -11,10 +11,21 @@
 
 #include "Memory.h"
 #include "Resource.h"
-#include "AvaraGL.h"
 
 #define DIMEPSILON 16
 
+typedef struct {
+    Fixed baseSize;
+    short scaleStyle;
+} bspsResource;
+
+/*
+{
+"400": {"1:1 size": 1.0,"Stretch/Scale (0/1)": 0},
+"401": {"1:1 size": 1.0,"Stretch/Scale (0/1)": 0},
+"722": {"1:1 size": 5.0,"Stretch/Scale (0/1)": 0}
+}
+*/
 
 void CSmartBox::ScaleTemplate(Fixed *dimensions, Fixed baseSize) {
     Vector *p;
@@ -100,26 +111,38 @@ void CSmartBox::StretchTemplate(Fixed *dimensions, Fixed baseSize) {
     FindEnclosure();
 }
 
-void CSmartBox::ISmartBox(short resId,
+CSmartBox::CSmartBox(
+    short resId,
     Fixed *dimensions,
     ARGBColor color,
     ARGBColor altColor,
     CAbstractActor *anActor,
-    short aPartCode) {
+    short aPartCode
+) {
+    bspsResource **config;
     Fixed baseSize;
     Boolean stretchFlag;
 
-    char bsp[PATH_MAX];
-    bool found = GetBSPPath(resId, bsp);
-    if (!found) {
+    Handle res = GetResource(BSPTEMPLATETYPE, resId);
+    if (res == NULL) {
         resId = dimensions[1] ? BOXTEMPLATERESOURCE : PLATETEMPLATERESOURCE;
-    } 
+    } else {
+        ReleaseResource(res);
+    }
+
     CSmartPart::ISmartPart(resId, anActor, aPartCode);
 
-    bspsResource* config = GetBSPScaling(resId);
-    stretchFlag = config->scaleStyle;
-    baseSize = config->baseSize;
-    delete config;
+    auto scalingRes = GetResource(BSPSCALETYPE, resId);
+    config = (bspsResource **)scalingRes;
+    if (config) {
+        stretchFlag = ntohs((*config)->scaleStyle);
+        baseSize = ntohl((*config)->baseSize);
+    } else {
+        stretchFlag = false;
+        baseSize = FIX1;
+    }
+    ReleaseResource(scalingRes);
+
     if (stretchFlag) {
         ScaleTemplate(dimensions, baseSize);
     } else {
@@ -135,25 +158,11 @@ void CSmartBox::ISmartBox(short resId,
     rSquare[0] = 0;
     rSquare[1] = 0;
     FSquareAccumulate(enclosureRadius, rSquare);
-    AvaraGLUpdateData(this);
-}
-
-void CSmartBox::Dispose() {
-    /*
-    Handle				handCopy;
-    BSPResourceHeader	*bp;
-
-    handCopy = itsBSPResource;
-    bp = (BSPResourceHeader *)*handCopy;
-    bp->refCount = 99;	//	Prevent ReleaseResource call!
-    */
-    CSmartPart::Dispose();
-
-    // DisposeHandle(handCopy);
+    if (vData) vData->Replace(*this);
 }
 
 void CSmartBox::FindEnclosure() {
-    //	Uses algorithm from Graphics Gems I
+    //    Uses algorithm from Graphics Gems I
     long i;
 
     Fixed xspan, yspan, zspan;

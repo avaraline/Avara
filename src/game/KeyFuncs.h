@@ -76,6 +76,8 @@ enum {
     kfuSpectateNext,
     kfuSpectatePrevious,
 
+    kfuToggleFreeCam,
+
     kfuScoreboard,
 
     kfuPauseGame,
@@ -88,6 +90,9 @@ enum {
     kfuLookLeft,
     kfuLookRight,
     kfuAimForward,
+
+    kfuFreeCamUp,
+    kfuFreeCamDown,
 
     kKeyFuncCount
 };

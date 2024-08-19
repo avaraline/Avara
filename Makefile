@@ -55,7 +55,7 @@ else
 	FRAMEWORK_PATH = /Library/Frameworks
 endif
 	CPPFLAGS += -F$(FRAMEWORK_PATH)
-	LDFLAGS += -F$(FRAMEWORK_PATH) -L/opt/homebrew/lib -L/usr/local/lib -lstdc++ -lm -lpthread -framework SDL2 -framework OpenGL -framework AppKit
+	LDFLAGS += -F$(FRAMEWORK_PATH) -rpath $(FRAMEWORK_PATH) -L/opt/homebrew/lib -L/usr/local/lib -lstdc++ -lm -lpthread -framework SDL2 -framework OpenGL -framework AppKit
 	POST_PROCESS ?= dsymutil
 
 	JOBS := $(shell sysctl -n hw.ncpu)

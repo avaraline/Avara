@@ -10,6 +10,7 @@
 #include "CMissile.h"
 
 CMissile::CMissile(CDepot *theDepot) : CAbstractMissile(theDepot) {
+    maxFrameCount = FpsFramesPerClassic(50);
     partCount = 1;
     LoadPart(0, kMissileBSP);
 }

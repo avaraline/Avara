@@ -17,8 +17,6 @@
 #define MINEBLOWSOUND 301
 
 CWeapon::CWeapon(CDepot *theDepot) {
-
-
     nextWeapon = NULL;
 
     maskBits |= kSolidBit | kTargetBit | kCollisionDamageBit | kCanPushBit;
@@ -156,7 +154,7 @@ void CWeapon::PostMortemBlast(short scoreTeam, short scoreColor, Boolean doDispo
 }
 
 void CWeapon::PreLoadSounds() {
-    gHub->PreLoadSample(blastSound);
+    auto _ = AssetManager::GetOgg(blastSound);
 }
 
 void CWeapon::Accelerate(Fixed *direction) {

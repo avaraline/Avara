@@ -23,6 +23,7 @@ CRealShooters::CRealShooters() {
     watchTeams = -2;
     watchMask = kPlayerBit;
 }
+
 void CRealShooters::BeginScript() {
     CRealMovers::BeginScript();
 

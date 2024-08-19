@@ -20,7 +20,7 @@ CAbstractMissile::CAbstractMissile(CDepot *theDepot) {
     itsGame = itsDepot->itsGame;
 
     speed = FIX3(2000);
-    maxFrameCount = FpsFramesPerClassic(50);
+
     energy = 0;
 
     nextMissile = NULL;
@@ -29,8 +29,8 @@ CAbstractMissile::CAbstractMissile(CDepot *theDepot) {
 }
 
 void CAbstractMissile::PreLoadSounds() {
-    gHub->PreLoadSample(GROUNDHITSOUNDID);
-    gHub->PreLoadSample(soundResId);
+    auto _ = AssetManager::GetOgg(GROUNDHITSOUNDID);
+    _ = AssetManager::GetOgg(soundResId);
 }
 
 void CAbstractMissile::Deactivate() {
@@ -94,6 +94,7 @@ void CAbstractMissile::FrameAction() {
             energy -= FpsCoefficient2(energy >> 3);
     }
 }
+
 
 void CAbstractMissile::MoveForward() {
     partList[0]->isTransparent = false;

@@ -10,6 +10,7 @@
 #pragma once
 #include "ARGBColor.h"
 #include "ColorManager.h"
+#include "FastMat.h"
 
 struct PlayerConfigRecord {
     short numGrenades {};
@@ -18,6 +19,8 @@ struct PlayerConfigRecord {
     short hullType {};
     short frameLatency {};
     short frameTime {};
+    short spawnOrder {};
+    short _spare {};
     ARGBColor hullColor { (*ColorManager::getMarkerColor(0)).WithA(0xff) };
     ARGBColor trimColor { (*ColorManager::getMarkerColor(1)).WithA(0xff) };
     ARGBColor cockpitColor { (*ColorManager::getMarkerColor(2)).WithA(0xff) };

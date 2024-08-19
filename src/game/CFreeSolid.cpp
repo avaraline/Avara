@@ -11,6 +11,7 @@
 
 #include "CFreeSolid.h"
 
+#include "AbstractRenderer.h"
 #include "CBSPWorld.h"
 #include "CSmartPart.h"
 #include "CWallActor.h"
@@ -73,15 +74,15 @@ CAbstractActor *CFreeSolid::EndScript() {
 
             //TranslatePartY(thePart, ReadLongVar(iHeight));
             VECTORCOPY(location, thePart->itsTransform[3]);
-            itsGame->itsWorld->RemovePart(thePart);
+            gRenderer->RemovePart(thePart);
 
             heading = 0;
             lastWallActor->partList[0] = NULL;
             lastWallActor->partCount = 0;
-            lastWallActor->Dispose(); //	Destroy wall actor (now without shape).
+            delete lastWallActor; //	Destroy wall actor (now without shape).
             lastWallActor = NULL;
         } else {
-            Dispose();
+            delete this;
             return NULL;
         }
 

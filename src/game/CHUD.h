@@ -1,3 +1,5 @@
+#pragma once
+
 #include "CDirectObject.h"
 #include <vector>
 #include "CViewParameters.h"
@@ -15,11 +17,11 @@ public:
     CHUD(CAvaraGame *game);
     virtual ~CHUD() {}
 
-    void Render(CViewParameters *view, NVGcontext *ctx);
-    void RenderNewHUD(CViewParameters *view, NVGcontext *ctx);
-    void DrawLevelName(CViewParameters *view, NVGcontext *ctx);
-    void DrawPaused(CViewParameters *view, NVGcontext *ctx);
-    void DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, CViewParameters *view, NVGcontext *ctx);
+    void Render(NVGcontext *ctx);
+    void RenderNewHUD(NVGcontext *ctx);
+    void DrawLevelName(NVGcontext *ctx);
+    void DrawPaused(NVGcontext *ctx);
+    void DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, NVGcontext *ctx);
     void DrawShadowBox(NVGcontext *ctx, int x, int y, int height, int width);
     void DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, float fontSize);
     void LoadImages(NVGcontext *ctx);

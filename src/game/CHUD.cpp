@@ -1,4 +1,6 @@
 #include "CHUD.h"
+#include "AssetManager.h"
+#include "AbstractRenderer.h"
 #include "CAbstractPlayer.h"
 #include "CNetManager.h"
 #include "CAvaraGame.h"
@@ -27,10 +29,12 @@ bool sortByScore(std::pair<PlayerScoreRecord, int> i, std::pair<PlayerScoreRecor
 }
 
 void CHUD::LoadImages(NVGcontext *ctx) {
-    images = nvgCreateImage(ctx, "rsrc/img/atlas.png", 0);
+    std::string imgPath = AssetManager::GetImagePath(NoPackage, "atlas.png");
+    images = nvgCreateImage(ctx, imgPath.c_str(), 0);
 }
 
-void CHUD::DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, CViewParameters *view, NVGcontext *ctx) {
+void CHUD::DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, NVGcontext *ctx) {
+    auto view = gRenderer->viewParams;
     CAbstractPlayer *player = itsGame->GetLocalPlayer();
     CPlayerManager *playerManager = itsGame->FindPlayerManager(player);
 
@@ -202,7 +206,8 @@ void CHUD::DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, C
     }
 }
 
-void CHUD::DrawLevelName(CViewParameters *view, NVGcontext *ctx) {
+void CHUD::DrawLevelName(NVGcontext *ctx) {
+    auto view = gRenderer->viewParams;
     std::string level = itsGame->loadedLevel;
     if(itsGame->gameStatus != kPlayingStatus && level.length() > 0) {
         int bufferWidth = view->viewPixelDimensions.h;
@@ -233,8 +238,9 @@ void CHUD::DrawLevelName(CViewParameters *view, NVGcontext *ctx) {
     }
 }
 
-void CHUD::DrawPaused(CViewParameters *view, NVGcontext *ctx) {
-    if(itsGame->gameStatus == kPauseStatus) {
+void CHUD::DrawPaused(NVGcontext *ctx) {
+    auto view = gRenderer->viewParams;
+    if (itsGame->gameStatus == kPauseStatus) {
         int bufferWidth = view->viewPixelDimensions.h;
         int bufferHeight = view->viewPixelDimensions.v;
         int centerX = bufferWidth / 2;
@@ -280,16 +286,15 @@ void CHUD::DrawImage(NVGcontext* ctx, int image, float alpha,
 	nvgFill(ctx);
 }
 
-void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
-    int bufferWidth = view->viewPixelDimensions.h, bufferHeight = view->viewPixelDimensions.v;
-    nvgBeginFrame(ctx, bufferWidth, bufferHeight, view->viewPixelRatio);
+void CHUD::Render(NVGcontext *ctx) {
+    auto view = gRenderer->viewParams;
+    int bufferWidth = view->viewPixelDimensions.h;
+    int bufferHeight = view->viewPixelDimensions.v;
     CAbstractPlayer *player = itsGame->GetLocalPlayer();
     CAbstractPlayer *spectatePlayer = itsGame->GetSpectatePlayer();
     CNetManager *net = itsGame->itsApp->GetNet();
-
-    DrawLevelName(view, ctx);
-    if (itsGame->gameStatus != kPlayingStatus) return;
-    DrawPaused(view, ctx);
+    DrawLevelName(ctx);
+    DrawPaused(ctx);
 
     std::vector<CPlayerManager*> thePlayers = net->ActivePlayers(); // only players actively playing
 
@@ -300,7 +305,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
 
     int chudHeight = 13 * lastPlayerSlot;
 
-    DrawScore(thePlayers, chudHeight, view, ctx);
+    DrawScore(thePlayers, chudHeight, ctx);
 
     nvgBeginPath(ctx);
     nvgRect(ctx, 0, bufferHeight - chudHeight, bufferWidth, chudHeight);
@@ -719,7 +724,7 @@ void CHUD::DrawShadowBox(NVGcontext *ctx, int x, int y, int width, int height) {
 
 void CHUD::DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, float fontSize) {
     // Kill Events
-    if (itsGame->itsApp->Get(kHUDShowKillFeed) && !itsGame->scoreEventList.empty()) {
+    if (itsGame->itsApp->Get(kHUDShowKillFeed) && net->isPlaying && !itsGame->scoreEventList.empty()) {
         float killEventPosition[2] = {(float)bufferWidth - 50.0f, 200.0f};
         float killEventSize[2] = {0, 0};
 
@@ -739,10 +744,15 @@ void CHUD::DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, floa
                     // Event player names
                     std::string killerName = " " + event.player;
                     std::string killedName = " " + event.playerTarget;
-                    float teamColorRGB[3], teamTargetColorRGB[3];
+                    float teamColorRGB[3], teamTargetColorRGB[3], iconLeftMargin = 23.0f;
 
                     // Get how wide the event rect needs to be
                     std::string eventText = killerName + "     " + killedName;
+                    if (event.weaponUsed == ksiObjectCollision) {
+                        eventText = "    " + killedName;
+                        killerName = "";
+                        iconLeftMargin = 11.0f;
+                    }
                     nvgBeginPath(ctx);
                     nvgTextAlign(ctx, NVG_ALIGN_RIGHT);
                     nvgFontSize(ctx, fontSize);
@@ -753,7 +763,7 @@ void CHUD::DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, floa
                     // Get Measurements based on text size for the total size of the event box
                     killEventSize[0] = killEventBounds[2] - killEventBounds[0] + 20.0f;
                     killEventSize[1] = killEventBounds[3] - killEventBounds[1] + 10.0f;
-                    killEventIconXPosition = killEventKillerNameBounds[2] - killEventKillerNameBounds[0] + 23.0f;   // Position the icon in the empty space
+                    killEventIconXPosition = killEventKillerNameBounds[2] - killEventKillerNameBounds[0] + iconLeftMargin;   // Position the icon in the empty space
                     eventPositionY = killEventPosition[1] + ((float)eventCount * (killEventSize[1] + 10.0f));
 
                     // Background box
@@ -785,10 +795,10 @@ void CHUD::DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, floa
                             iHeight = 51.0;
                             break;
                         case ksiObjectCollision:
-                            ix = 0.0;
+                            ix = 173.0;
                             iy = 0.0;
-                            iWidth = 0.0;
-                            iHeight = 0.0;
+                            iWidth = 58.0;
+                            iHeight = 51.0;
                             break;
                         default:
                             ix = 0.0;
@@ -803,19 +813,25 @@ void CHUD::DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, floa
                     longTeamTargetColor.ExportGLFloats(teamTargetColorRGB, 3);
                     float teamTargetColorPosition = killEventPosition[0] - killEventSize[0] + killEventIconXPosition + imgWidth + 15.0f;
 
-                    nvgBeginPath(ctx);
-                    nvgRect(ctx, killEventPosition[0] - killEventSize[0] + 10.0f, eventPositionY + 10.0f, 9.0, killEventSize[1] - 20.0f);
-                    nvgFillColor(ctx, nvgRGBAf(teamColorRGB[0], teamColorRGB[1], teamColorRGB[2], 1.0));
-                    nvgFill(ctx);
+                    // Team color of killer
+                    if (event.weaponUsed != ksiObjectCollision) {
+                        nvgBeginPath(ctx);
+                        nvgRect(ctx, killEventPosition[0] - killEventSize[0] + 10.0f, eventPositionY + 10.0f, 9.0, killEventSize[1] - 20.0f);
+                        nvgFillColor(ctx, nvgRGBAf(teamColorRGB[0], teamColorRGB[1], teamColorRGB[2], 1.0));
+                        nvgFill(ctx);
+                    }
                     
+                    // Team color of killed
                     nvgBeginPath(ctx);
                     nvgRect(ctx, teamTargetColorPosition, eventPositionY + 10.0f, 9.0, killEventSize[1] - 20.0f);
                     nvgFillColor(ctx, nvgRGBAf(teamTargetColorRGB[0], teamTargetColorRGB[1], teamTargetColorRGB[2], 1.0));
                     nvgFill(ctx);
 
+                    // Draw icon for death reason
                     DrawImage(ctx, images, 1.0, ix, iy, iWidth, iHeight, 
                         killEventPosition[0] - killEventSize[0] + killEventIconXPosition, eventPositionY + 5.0f, imgWidth, killEventSize[1] - 10.0f);
 
+                    // Draw display text for event
                     nvgBeginPath(ctx);
                     nvgTextAlign(ctx, NVG_ALIGN_LEFT);
                     nvgFontSize(ctx, fontSize);
@@ -826,13 +842,21 @@ void CHUD::DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, floa
                     break;
                 }
 
-                case ksiScoreGoal: {
+                case ksiScoreGoal:
+                case ksiGrabBall: {
                     // Event player names
                     std::string playerName = " " + event.player;
                     float teamColorRGB[3];
 
+                    std::string eventText;
+                    if (event.scoreType == ksiScoreGoal) {
+                        eventText = playerName + " scored!";
+                    } else if (event.scoreType == ksiGrabBall) {
+                        eventText = playerName + " has the ball!";
+                    } else {
+                        eventText = "";
+                    }
                     // Get how wide the event rect needs to be
-                    std::string eventText = playerName + " scored!";
                     nvgBeginPath(ctx);
                     nvgTextAlign(ctx, NVG_ALIGN_RIGHT);
                     nvgFontSize(ctx, fontSize);
@@ -854,55 +878,13 @@ void CHUD::DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, floa
                     ARGBColor longTeamColor = *ColorManager::getTeamColor(event.team);
                     longTeamColor.ExportGLFloats(teamColorRGB, 3);
 
+                    // Draw player's team color
                     nvgBeginPath(ctx);
                     nvgRect(ctx, killEventPosition[0] - killEventSize[0] + 10.0f, eventPositionY + 10.0f, 9.0, killEventSize[1] - 20.0f);
                     nvgFillColor(ctx, nvgRGBAf(teamColorRGB[0], teamColorRGB[1], teamColorRGB[2], 1.0));
                     nvgFill(ctx);
 
-                    nvgBeginPath(ctx);
-                    nvgTextAlign(ctx, NVG_ALIGN_LEFT);
-                    nvgFontSize(ctx, fontSize);
-                    nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
-                    nvgText(ctx, killEventPosition[0] - killEventSize[0] + 10.0f, eventPositionY + 25.0f, eventText.c_str(), NULL);
-
-                    eventCount++;
-                    break;
-                }
-
-                case ksiGrabBall:
-                {
-                    // Event player names
-                    std::string playerName = " " + event.player;
-                    float teamColorRGB[3];
-
-                    // Get how wide the event rect needs to be
-                    std::string eventText = playerName + " has the ball!";
-                    nvgBeginPath(ctx);
-                    nvgTextAlign(ctx, NVG_ALIGN_RIGHT);
-                    nvgFontSize(ctx, fontSize);
-                    nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
-                    nvgTextBounds(ctx, 0, 0, eventText.c_str(), NULL, killEventBounds);             // Size of the entire rendered text
-
-                    // Get Measurements based on text size for the total size of the event box
-                    killEventSize[0] = killEventBounds[2] - killEventBounds[0] + 20.0f;
-                    killEventSize[1] = killEventBounds[3] - killEventBounds[1] + 10.0f;
-                    eventPositionY = killEventPosition[1] + ((float)eventCount * (killEventSize[1] + 10.0f));
-
-                    // Background box
-                    DrawShadowBox(ctx, killEventPosition[0] - killEventSize[0], eventPositionY, killEventSize[0], killEventSize[1]);
-                    nvgBeginPath(ctx);
-                    nvgRoundedRect(ctx, killEventPosition[0] - killEventSize[0], eventPositionY, killEventSize[0], killEventSize[1], 4.0);
-                    nvgFillColor(ctx, BACKGROUND_COLOR);
-                    nvgFill(ctx);
-
-                    ARGBColor longTeamColor = *ColorManager::getTeamColor(event.team);
-                    longTeamColor.ExportGLFloats(teamColorRGB, 3);
-
-                    nvgBeginPath(ctx);
-                    nvgRect(ctx, killEventPosition[0] - killEventSize[0] + 10.0f, eventPositionY + 10.0f, 9.0, killEventSize[1] - 20.0f);
-                    nvgFillColor(ctx, nvgRGBAf(teamColorRGB[0], teamColorRGB[1], teamColorRGB[2], 1.0));
-                    nvgFill(ctx);
-
+                    // Draw event text
                     nvgBeginPath(ctx);
                     nvgTextAlign(ctx, NVG_ALIGN_LEFT);
                     nvgFontSize(ctx, fontSize);
@@ -923,13 +905,14 @@ void CHUD::DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, floa
     }
 }
 
-void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
+void CHUD::RenderNewHUD(NVGcontext *ctx) {
+    auto view = gRenderer->viewParams;
     CAbstractPlayer *player = itsGame->GetLocalPlayer();
     CAbstractPlayer *spectatePlayer = itsGame->GetSpectatePlayer();
     CNetManager *net = itsGame->itsApp->GetNet();
 
-    DrawLevelName(view, ctx);
-    DrawPaused(view, ctx);
+    DrawLevelName(ctx);
+    DrawPaused(ctx);
 
     std::vector<CPlayerManager*> thePlayers = net->ActivePlayers(); // only players actively playing
 
@@ -944,7 +927,7 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
     int bufferWidth = view->viewPixelDimensions.h, bufferHeight = view->viewPixelDimensions.v;
     int chudHeight = 13 * playerCount;
 
-    DrawScore(thePlayers, chudHeight, view, ctx);
+    DrawScore(thePlayers, chudHeight, ctx);
 
     nvgBeginFrame(ctx, bufferWidth, bufferHeight, view->viewPixelRatio);
 
@@ -1222,26 +1205,33 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
             if(spectatePlayer != NULL && thisPlayer->GetPlayer() == spectatePlayer) {
                 float fontsz_m = 24.0;
                 float fontsz_s = 18.0;
-                float bounds[4], nextBounds[4], prevBounds[4];
+                float bounds[4], nextBounds[4], prevBounds[4], toggleBounds[4];
+                std::string on("On");
+                std::string off("Off");
+
                 std::string specMessage("Spectating " + playerName);
                 std::string nextMessage("Spectate Next: ]");
                 std::string prevMessage("Spectate Previous: [");
+                std::string toggleCamMessage("Toggle Free Cam: Space Bar");
+                std::string camStatusMessage("Free Cam: " + (player->freeView ? on : off));
 
-                nvgBeginPath(ctx);
-                nvgFontFace(ctx, "mono");
-                nvgTextAlign(ctx, NVG_ALIGN_MIDDLE | NVG_ALIGN_BOTTOM);
-                nvgFontSize(ctx, fontsz_m);
-                nvgTextBounds(ctx, spectatePlayerPosition[0], spectatePlayerPosition[1], specMessage.c_str(), NULL, bounds);
+                if (!player->freeView || (player->freeView && player->IsFreeCamAttached())) {
+                    nvgBeginPath(ctx);
+                    nvgFontFace(ctx, "mono");
+                    nvgTextAlign(ctx, NVG_ALIGN_MIDDLE | NVG_ALIGN_BOTTOM);
+                    nvgFontSize(ctx, fontsz_m);
+                    nvgTextBounds(ctx, spectatePlayerPosition[0], spectatePlayerPosition[1], specMessage.c_str(), NULL, bounds);
 
-                //draw box for text
-                nvgBeginPath(ctx);
-                nvgRoundedRect(ctx, spectatePlayerPosition[0] - 100, spectatePlayerPosition[1], (bounds[2]-bounds[0])+10, 28.0, 3.0);
-                nvgFillColor(ctx, BACKGROUND_COLOR);
-                nvgFill(ctx);
+                    //draw box for text
+                    nvgBeginPath(ctx);
+                    nvgRoundedRect(ctx, spectatePlayerPosition[0] - 100, spectatePlayerPosition[1], (bounds[2]-bounds[0])+10, 28.0, 3.0);
+                    nvgFillColor(ctx, BACKGROUND_COLOR);
+                    nvgFill(ctx);
 
-                //draw text
-                nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
-                nvgText(ctx, spectatePlayerPosition[0] - 100 + 5, spectatePlayerPosition[1] + 14, specMessage.c_str(), NULL);
+                    //draw text
+                    nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+                    nvgText(ctx, spectatePlayerPosition[0] - 100 + 5, spectatePlayerPosition[1] + 14, specMessage.c_str(), NULL);
+                }
 
                 nvgBeginPath(ctx);
                 nvgFontFace(ctx, "mono");
@@ -1249,6 +1239,7 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
                 nvgFontSize(ctx, fontsz_s);
                 nvgTextBounds(ctx, spectatePlayerPosition[0], spectatePlayerPosition[1], nextMessage.c_str(), NULL, nextBounds);
                 nvgTextBounds(ctx, spectatePlayerPosition[0], spectatePlayerPosition[1], prevMessage.c_str(), NULL, prevBounds);
+                nvgTextBounds(ctx, spectatePlayerPosition[0], spectatePlayerPosition[1], toggleCamMessage.c_str(), NULL, toggleBounds);
 
                 //Spectate Next
                 nvgBeginPath(ctx);
@@ -1268,12 +1259,36 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
 
                 nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
                 nvgText(ctx, spectatePlayerPosition[0] - 220 + 5, spectatePlayerPosition[1] + 44, prevMessage.c_str(), NULL);
+
+                // Toggle Free Cam Message
+                nvgBeginPath(ctx);
+                nvgRoundedRect(ctx, spectatePlayerPosition[0] - 270, spectatePlayerPosition[1] + 60, (toggleBounds[2]-toggleBounds[0])+10, 28.0, 3.0);
+                nvgFillColor(ctx, BACKGROUND_COLOR);
+                nvgFill(ctx);
+
+                nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+                nvgText(ctx, spectatePlayerPosition[0] - 270 + 5, spectatePlayerPosition[1] + 74, toggleCamMessage.c_str(), NULL);
+
+                // Free Cam Status Message
+                nvgBeginPath(ctx);
+                nvgFontSize(ctx, fontsz_s);
+                nvgRoundedRect(ctx, spectatePlayerPosition[0] + 25, spectatePlayerPosition[1] + 60, (nextBounds[2]-nextBounds[0])+10, 28.0, 3.0);
+                if (player->freeView) {
+                    nvgFillColor(ctx, nvgRGBA(0, 50, 0, 180));
+                } else {
+                    nvgFillColor(ctx, nvgRGBA(50, 0, 0, 180));
+                }
+                nvgFill(ctx);
+
+                nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+                nvgText(ctx, spectatePlayerPosition[0] + 25 + 5, spectatePlayerPosition[1] + 74, camStatusMessage.c_str(), NULL);
             }
         }
     }
 
-    if (!player)
+    if (!player) {
         return;
+    }
 
     if(spectatePlayer != NULL)
         player = spectatePlayer;

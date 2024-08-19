@@ -320,7 +320,6 @@ if (IsClassicInterval()) { // indented like this because hope to remove it in th
         rayHit.closestHit = NULL;
 
         rayHit.distance = NormalizeVector(3, rayHit.direction);
-
         realSpeed = rayHit.distance;
 
         RayTestWithGround(&rayHit, kSolidBit);
@@ -419,7 +418,7 @@ if (IsClassicInterval()) {
 void CSmart::PreLoadSounds() {
     CWeapon::PreLoadSounds();
 
-    gHub->PreLoadSample(201);
+    auto _ = AssetManager::GetOgg(201);
 }
 
 bool CSmart::IsClassicInterval() {

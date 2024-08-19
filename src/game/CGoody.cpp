@@ -15,6 +15,7 @@
 #include "CWallActor.h"
 #include "GoodyRecord.h"
 #include "Preferences.h"
+#include "Debug.h"
 
 #define kGoodySound 250
 
@@ -102,9 +103,10 @@ CAbstractActor *CGoody::EndScript() {
         closeSoundId = ReadLongVar(iCloseSound);
         volume = ReadFixedVar(iVolume);
 
-        gHub->PreLoadSample(soundId);
-        gHub->PreLoadSample(openSoundId);
-        gHub->PreLoadSample(closeSoundId);
+        // Preload sounds.
+        auto _ = AssetManager::GetOgg(soundId);
+        _ = AssetManager::GetOgg(openSoundId);
+        _ = AssetManager::GetOgg(closeSoundId);
 
         isActive = kIsInactive;
         frequency = ReadLongVar(iFrequency);
@@ -201,6 +203,7 @@ void CGoody::FrameAction() {
     // the goody heading can make a difference in determing a collision with a Hector
     // FRandSeed += heading;
     UpdateFRandSeed((uint32_t)heading);
-    // SDL_Log("fn = %ld, goody=%ld: heading = %8d, FRandSeed = %10d\n",
-    //         itsGame->frameNumber, ident, heading, (Fixed)FRandSeed);
+    DBG_Log("frag", "fn=%d, FRandSeed=%11d, heading=%7d, goody=%ld, grenades=%d, missiles=%d\n",
+
+            itsGame->frameNumber, (Fixed)FRandSeed, heading, ident, grenades, missiles);
 }

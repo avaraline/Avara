@@ -214,10 +214,10 @@
 <Wall color="#ad6a6c" x="0" z="7.5" w="15" d="0" h="2" />
 <Wall color="#ad6a6c" x="-7.5" z="0" w="0" d="15" h="2" />
 <Wall color="#ad6a6c" x="7.5" z="0" w="0" d="15" h="2" />
-<Solid y="2.01" shape="bspGrid7.5" scale="5" color="#3a2c2c" cx="0" cz="4.5" pitch="90" angle="0" />
-<Solid y="2.01" shape="bspEnso" scale="4" color="#3a2c2c" cx="1.75" cz="3.25" angle="-20" />
-<Solid y="2.01" shape="bspGroundStar" scale="0.1" color="#3a2c2c" cx="2.25" cz="3" angle="0" />
-<Solid y="2.01" shape="bspGroundStar" scale="0.1" color="#3a2c2c" cx="1.75" cz="3.5" angle="0" />
+<Hologram y="2.01" shape="bspGrid7.5" scale="5" color="#3a2c2c" cx="0" cz="4.5" pitch="90" angle="0" />
+<Hologram y="2.01" shape="bspEnso" scale="4" color="#3a2c2c" cx="1.75" cz="3.25" angle="-20" />
+<Hologram y="2.01" shape="bspGroundStar" scale="0.1" color="#3a2c2c" cx="2.25" cz="3" angle="0" />
+<Hologram y="2.01" shape="bspGroundStar" scale="0.1" color="#3a2c2c" cx="1.75" cz="3.5" angle="0" />
 
 <Teleporter y="20" shape="0" activeRange="35 * 5" deadRange="28 * 5" destGroup="@recenter" cx="0" cz="0" />
 <Teleporter y="15" shape="0" group="@recenter" cx="0" cz="0" />

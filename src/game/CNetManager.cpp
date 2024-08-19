@@ -11,6 +11,7 @@
 
 #include "CNetManager.h"
 
+#include "AssetManager.h"
 #include "CApplication.h"
 #include "CAvaraGame.h"
 #include "CPlayerManager.h"
@@ -658,8 +659,7 @@ void CNetManager::ResumeGame() {
 
     // Pull grenade/missile/booster counts from HULL resource
     long hullRes = ReadLongVar(iHull01 + config.hullType);
-    HullConfigRecord hull;
-    LoadHullFromSetJSON(&hull, hullRes);
+    HullConfigRecord hull = **AssetManager::GetHull(hullRes);
     config.numGrenades = hull.maxGrenades;
     config.numMissiles = hull.maxMissiles;
     config.numBoosters = hull.maxBoosters;
@@ -685,6 +685,8 @@ void CNetManager::ResumeGame() {
         copy.hullType = ntohs(config.hullType);
         copy.frameLatency = ntohs(config.frameLatency);
         copy.frameTime = ntohs(config.frameTime);
+        copy.spawnOrder = ntohs(config.spawnOrder);
+
         copy.hullColor = ntohl(config.hullColor.GetRaw());
         copy.trimColor = ntohl(config.trimColor.GetRaw());
         copy.cockpitColor = ntohl(config.cockpitColor.GetRaw());
@@ -1167,7 +1169,7 @@ short CNetManager::SelfDistribution() {
 }
 
 short CNetManager::AlivePlayersDistribution() {
-    return activePlayersDistribution & ~deadOrDonePlayers;
+    return startPlayersDistribution & ~deadOrDonePlayers;
 }
 
 bool CNetManager::IAmAlive() {
@@ -1251,7 +1253,7 @@ void CNetManager::AttachPlayers(CAbstractPlayer *playerActorList) {
     //	Throw away the rest.
     while (playerActorList) {
         nextPlayer = (CAbstractPlayer *)playerActorList->nextActor;
-        playerActorList->Dispose();
+        delete playerActorList;
         playerActorList = nextPlayer;
     }
 }
@@ -1264,6 +1266,7 @@ void CNetManager::ConfigPlayer(short senderSlot, Ptr configData) {
     config->hullType = ntohs(config->hullType);
     config->frameLatency = ntohs(config->frameLatency);
     config->frameTime = ntohs(config->frameTime);
+    config->spawnOrder = ntohs(config->spawnOrder);
     config->hullColor = ntohl(config->hullColor.GetRaw());
     config->trimColor = ntohl(config->trimColor.GetRaw());
     config->cockpitColor = ntohl(config->cockpitColor.GetRaw());
@@ -1283,6 +1286,7 @@ void CNetManager::DoConfig(short senderSlot) {
         // transmitting latencyTolerance in terms of frameLatency to keep it as a short value on transmission
         itsGame->SetFrameTime(theConfig->frameTime);
         itsGame->SetFrameLatency(theConfig->frameLatency, -1);
+        itsGame->SetSpawnOrder((SpawnOrder)theConfig->spawnOrder);
         latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD);
     }
 }
@@ -1294,6 +1298,7 @@ void CNetManager::UpdateLocalConfig() {
         ? gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale
         : 0;
     config.frameTime = itsGame->frameTime;
+    config.spawnOrder = gApplication ? gApplication->Get<short>(kSpawnOrder) : ksHybrid;
     config.hullType = gApplication ? gApplication->Number(kHullTypeTag) : 0;
     config.hullColor = gApplication
         ? ARGBColor::Parse(gApplication->String(kPlayerHullColorTag))

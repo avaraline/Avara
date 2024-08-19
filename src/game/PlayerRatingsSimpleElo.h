@@ -32,6 +32,9 @@ struct PlayerResult {
     int teamId;
 //    int lives;
 //    long score;
+    bool operator==(const PlayerResult &rhs) {
+        return playerId == rhs.playerId;
+    }
 };
 
 struct Rating {

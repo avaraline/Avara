@@ -19,9 +19,7 @@ CGUI::CGUI(CAvaraAppImpl *app) {
     itsApp = app;
     itsGame = app->GetGame();
     itsTui = app->GetTui();
-    itsWorld = new CBSPWorldImpl;
-    itsWorld->IBSPWorld(50);
-    itsView = itsGame->itsView;
+    itsView = gRenderer->viewParams;
     itsLocalPlayer = CPlayerManagerImpl::LocalPlayer();
     LookAtGUI();
 
@@ -30,13 +28,10 @@ CGUI::CGUI(CAvaraAppImpl *app) {
     mui_ctx->text_width = text_width;
     mui_ctx->text_height = text_height;
 
-    itsCursor = new CScaledBSP;
-    itsCursor->IScaledBSP(FIX3(100), kCursorBSP, 0, 0);
+    itsCursor = new CScaledBSP(FIX3(100), kCursorBSP, 0, 0);
     itsCursor->privateAmbient = FIX3(800);
-    AvaraGLUpdateData(itsCursor);
-    cursorWorld = new CBSPWorldImpl;
-    cursorWorld->IBSPWorld(1);
-    cursorWorld->AddPart(itsCursor);
+    //AvaraGLUpdateData(itsCursor);
+    gRenderer->AddPart(itsCursor);
 
     started = SDL_GetTicks();
     anim_timer = 0;
@@ -66,7 +61,10 @@ void CGUI::Update() {
     const int row_height = std::floor(fb_size_y / 9.0);
     if(mu_begin_window_ex(mui_ctx, "Main", screen, muiflags)) {
         mu_layout_row(mui_ctx, 1, row_widths, row_height);
+        
+        // state function
         state = state();
+        
         mu_end_window(mui_ctx);
     }
     mu_end(mui_ctx);
@@ -106,8 +104,9 @@ int CGUI::BSPWidget(mu_Rect r, int res, mu_Id mu_id) {
         CWallActor *theWall = new CWallActor();
         theWall->MakeWallFromDims(dims, ToFixed(worldpos.x), ToFixed(worldpos.y), 0);
         long color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BASE]);
-
-        theWall->partList[0]->ReplaceColor(0x00fefefe, color);
+        auto _part = theWall->partList[0];
+        _part->ReplaceColor(0x00fefefe, (uint32_t)color);
+        //gRenderer->AddPart(_part);
         //Vector _partLoc;
         //AvaraGLUpdateData(_part);
         //itsWorld->AddPart(_part);
@@ -129,12 +128,12 @@ int CGUI::BSPButton(std::string s) {
     CSmartPart* _part = _wall->partList[0];
     /* hover */
     if (mui_ctx->hover == mu_id) {
-        long color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BUTTONHOVER]);
-        _part->ReplaceColor(0xfefefe, color);
+        uint32_t color = (uint32_t)RGBAToLong(mui_ctx->style->colors[MU_COLOR_BUTTONHOVER]);
+        _part->ReplaceColor(0xfffefefe, color);
     }
     else {
-        long color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BUTTON]);
-        _part->ReplaceColor(0xfefefe, color);
+        uint32_t color = (uint32_t)RGBAToLong(mui_ctx->style->colors[MU_COLOR_BUTTON]);
+        _part->ReplaceColor(0xfffefefe, color);
     }
     /* handle click */
     if (mui_ctx->mouse_pressed == MU_MOUSE_LEFT && mui_ctx->focus == mu_id) {
@@ -173,7 +172,7 @@ int CGUI::BSPTextInput(const char *id, std::string &s) {
         _part->ReplaceColor(0xfefefe, ColorManager::getEnergyGaugeColor());
     }
     else {
-        long color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BASE]);
+        uint32_t color = (uint32_t)RGBAToLong(mui_ctx->style->colors[MU_COLOR_BASE]);
         _part->ReplaceColor(0xfefefe, color);
     }
     return res;
@@ -187,7 +186,7 @@ int CGUI::BSPCheckbox(const char *label, bool *state) {
     int res = 0;
     BSPWidget(r, res, mu_id);
     CAbstractActor* _wall = actors.at(mu_id);
-    CSmartPart* _part = _wall->partList[0];
+    //CSmartPart* _part = _wall->partList[0];
     if (mui_ctx->mouse_pressed == MU_MOUSE_LEFT && mui_ctx->focus == mu_id) {
         res |= MU_RES_CHANGE;
         *state = !*state;
@@ -211,7 +210,7 @@ void CGUI::PlaySound(short theSound) {
     v[1] = FIX(0);
     v[2] = FIX(0);
     v[3] = FIX(1);
-    gHub->LoadSample(theSound);
+    
     aSound = gHub->GetSoundSampler(hubRate, theSound);
     aSound->SetVolume(FIX(12));
     aLink = gHub->GetSoundLink();
@@ -335,13 +334,13 @@ StateFunction CGUI::_test() {
     int w = text_width(0, label, strlen(label));
     mu_layout_row(mui_ctx, 2, (int[]) { w + 50, 400 }, 0);
     mu_label(mui_ctx, label);
-    BSPTextInput("myinputid", teststring);
+    //BSPTextInput("myinputid", teststring);
 
     const char* label2 = "A checkbox:";
     w = text_width(0, label2, strlen(label2));
     mu_layout_row(mui_ctx, 2, (int[]) { w + 50, 75 }, 0);
     mu_label(mui_ctx, label2);
-    BSPCheckbox("checkboxid", &testbool);
+    //BSPCheckbox("checkboxid", &testbool);
 
     return STAY;
 }
@@ -355,7 +354,7 @@ void CGUI::Render(NVGcontext *ctx) {
     nvgFontFace(ctx, "mono");
     nvgFontSize(ctx, 55);
     //LookAtGUI();
-    itsWorld->Render(itsView);
+    //itsWorld->Render(itsView);
     //screen->Render(ctx);
 
     mu_Command *cmd = NULL;
@@ -380,7 +379,7 @@ void CGUI::Render(NVGcontext *ctx) {
         }
     }
     nvgEndFrame(ctx);
-    cursorWorld->Render(itsView);
+    //cursorWorld->Render(itsView);
 }
 
 void CGUI::Dispose() {

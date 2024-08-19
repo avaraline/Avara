@@ -11,7 +11,8 @@
 
 #include "CAvaraApp.h"
 
-#include "AvaraGL.h"
+#include "AssetManager.h"
+#include "ColorManager.h"
 #include "AvaraScoreInterface.h"
 #include "AvaraTCP.h"
 #include "CAvaraGame.h"
@@ -26,7 +27,6 @@
 #include "LevelLoader.h"
 #include "Parser.h"
 #include "Preferences.h"
-#include "Resource.h"
 #include "System.h"
 #include "InfoMessages.h"
 #include "Messages.h"
@@ -36,6 +36,8 @@
 #include <json.hpp>
 #include "Tags.h"
 #include "Debug.h"
+#include "ModernOpenGLRenderer.h"
+#include "LegacyOpenGLRenderer.h"
 
 // included while we fake things out
 #include "CPlayerManager.h"
@@ -68,14 +70,31 @@ void TrackerPinger(CAvaraAppImpl *app) {
 }
 
 CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
-    AvaraGLInitContext();
+    AssetManager::Init();
+    
     itsGame = std::make_unique<CAvaraGame>(Get<FrameTime>(kFrameTimeTag));
     gCurrentGame = itsGame.get();
-    itsGame->IAvaraGame(this);
-    itsGame->UpdateViewRect(win_size_x, win_size_y, pixel_ratio);
-    itsGame->LoadImages(nvg_context);
 
-    AvaraGLSetFOV(Number(kFOV));
+    if (nvg_context) {
+        ui = std::make_unique<CHUD>(gCurrentGame);
+        ui->LoadImages(nvg_context);
+    }
+#ifdef FRAMEBUFFERS_AVAILABLE
+    if (Get(kUseLegacyRenderer)) {
+        gRenderer = new LegacyOpenGLRenderer(window);
+    }
+    else {
+        gRenderer = new ModernOpenGLRenderer(window);
+    }
+#else
+    gRenderer = new LegacyOpenGLRenderer(window);
+#endif
+
+    gRenderer->UpdateViewRect(fb_size_x, fb_size_y, pixel_ratio);
+    gRenderer->SetFOV(Number(kFOV));
+    gRenderer->ResetLights();
+
+    itsGame->IAvaraGame(this);
 
     gameNet->ChangeNet(kNullNet, "");
 
@@ -104,11 +123,9 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     }
 
     itsGUI = new CGUI(this);
-    LoadDefaultOggFiles();
 }
 
 CAvaraAppImpl::~CAvaraAppImpl() {
-    itsGame->Dispose();
     DeallocParser();
 }
 
@@ -119,29 +136,56 @@ void CAvaraAppImpl::Done() {
 }
 
 void CAvaraAppImpl::idle() {
+    static double avg = 0;
+    FrameNumber curFrame = itsGame->frameNumber;
+    uint32_t procTime = SDL_GetTicks();
+    itsGUI->Update();
+
     CheckSockets();
     TrackerUpdate();
-    itsGame->GameTick();
-    itsGUI->Update();
+    if (itsGame->GameTick()) {
+        
+    }
+    drawContents();
+    // output a coarse estimate of cpu time & percent every second when enabled
+    if (curFrame > 0 && curFrame != itsGame->frameNumber && Debug::IsEnabled("cpu")) {
+        procTime = SDL_GetTicks() - procTime;
+        avg = 0.99*avg + 0.01*procTime;
+        if (curFrame % (1000/itsGame->frameTime) == 0) {
+            DBG_Log("cpu", "%.1fms (%.0f%%)\n", avg, 100.0*avg/itsGame->frameTime);
+        }
+    }
 }
 
 void CAvaraAppImpl::drawContents() {
-    if(animatePreview) {
+    if (animatePreview) {
+        auto vp = gRenderer->viewParams;
         Fixed x = overhead[0] + FMul(previewRadius, FOneCos(previewAngle));
         Fixed y = overhead[1] + FMul(FMul(extent[3], FIX(2)), FOneSin(previewAngle) + FIX1);
         Fixed z = overhead[2] + FMul(previewRadius, FOneSin(previewAngle));
-        itsGame->itsView->LookFrom(x, y, z);
-        itsGame->itsView->LookAt(overhead[0], overhead[1], overhead[2]);
-        itsGame->itsView->PointCamera();
-        previewAngle += FIX3(itsGame->fpsScale);
+
+        vp->LookFrom(x, y, z);
+        vp->LookAt(overhead[0], overhead[1], overhead[2]);
+        vp->PointCamera();
+        previewAngle += FIX3(1);
     }
-    itsGame->Render(nvg_context);
+    itsGame->Render();
+    if (ui) {
+        if (Get<bool>(kShowNewHUD)) {
+            ui->RenderNewHUD(nvg_context);
+        } else {
+            ui->Render(nvg_context);
+        }
+    }
     itsGUI->Render(nvg_context);
+    gRenderer->RefreshWindow();
 }
 
 void CAvaraAppImpl::WindowResized(int width, int height) {
-    //SDL_Log("Resize event: %i %i", width, height);
-    itsGame->UpdateViewRect(width, height, pixel_ratio);
+    // Only update if the resolution is actually changing
+    if (gRenderer->viewParams->viewPixelDimensions.h != width || gRenderer->viewParams->viewPixelDimensions.v != height)
+        gRenderer->UpdateViewRect(width, height, pixel_ratio);
+    //performLayout();
 }
 
 bool CAvaraAppImpl::handleSDLEvent(SDL_Event &event) {
@@ -158,8 +202,9 @@ bool CAvaraAppImpl::handleSDLEvent(SDL_Event &event) {
 }
 
 void CAvaraAppImpl::GameStarted(std::string set, std::string level) {
+    auto vp = gRenderer->viewParams;
     animatePreview = false;
-    itsGame->itsView->showTransparent = false;
+    vp->showTransparent = false;
     itsGame->IncrementGameCounter();
     MessageLine(kmStarted, MsgAlignment::Center);
 }
@@ -221,50 +266,15 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
     itsGame->LevelReset(false);
     gCurrentGame = itsGame.get();
     itsGame->loadedSet = set;
-    UseLevelFolder(set);
 
-    OSErr result = fnfErr;
-    json setManifest = GetManifestJSON(set);
-    if (setManifest == -1) return result;
-    if (setManifest.find("LEDI") == setManifest.end()) return result;
+    ColorManager::resetOverrides();
 
-    if (setManifest.find("REQD") == setManifest.end()) {
-        ClearExternalPackages();
-    } else {
-        for (auto &ext : setManifest["REQD"].items()) {
-            json pkg = ext.value();
-            std::string pkgPath = pkg.value("Package", "");
-            // TODO: Support version constraints?
-            if (!pkgPath.empty() &&
-                pkgPath.rfind(".", 0) != 0 &&
-                pkgPath.find("..") == std::string::npos &&
-                pkgPath.find("/") == std::string::npos &&
-                pkgPath.find("\\") == std::string::npos) {
-                AddExternalPackage(pkgPath);
-            }
-        }
-    }
-
-    json ledi = NULL;
-    for (auto &ld : setManifest["LEDI"].items()) {
-        if (ld.value()["Alf"] == levelTag)
-            ledi = ld.value();
-    }
-    if (ledi == NULL) return result;
-
-    if (ledi.contains("Aftershock") && ledi["Aftershock"] == true) {
-        UseBaseFolder("rsrc/aftershock");
-    } else {
-        UseBaseFolder("rsrc");
-    }
-
-    LoadLevelOggFiles(set);
-
-    if(LoadALF(GetALFPath(levelTag))) result = noErr;
+    std::string levelName;
+    OSErr result = AssetManager::LoadLevel(set, levelTag, levelName);
 
     if (result == noErr) {
         //playerWindow->RepopulateHullOptions();
-        itsGame->loadedLevel = ledi["Name"];
+        itsGame->loadedLevel = levelName;
         itsGame->loadedFilename  = levelTag;
         itsGame->loadedTags = Tags::GetTagsForLevel(Tags::LevelURL(itsGame->loadedSet, itsGame->loadedLevel));
         std::string msgStr = "Loaded";
@@ -283,9 +293,11 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
 
         //levelWindow->SelectLevel(set, itsGame->loadedLevel);
 
-        itsGame->itsWorld->OverheadPoint(overhead, extent);
-        itsGame->itsView->yonBound = FIX(10000);
-        itsGame->itsView->showTransparent = true;
+        gRenderer->OverheadPoint(overhead, extent);
+
+        auto vp = gRenderer->viewParams;
+        vp->yonBound = FIX(10000);
+        vp->showTransparent = true;
 
         previewAngle = 0;
         previewRadius = std::max(extent[1] - extent[0], extent[5] - extent[4]);
@@ -412,6 +424,9 @@ void CAvaraAppImpl::ParamLine(short index, MsgAlignment align, StringPtr param1,
             break;
         case kmAKilledBPlayer:
             buffa << a << " killed " << b << ".";
+            break;
+        case kmKilledByCollision:
+            buffa << a << " was killed by the world.";
             break;
         case kmUnavailableNote:
             buffa << a << " is busy.";

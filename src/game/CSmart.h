@@ -13,7 +13,7 @@
 
 class CDepot;
 
-class CSmart : public CWeapon {
+class CSmart final : public CWeapon {
 public:
     Fixed goodYaw;
     Fixed goodPitch;
