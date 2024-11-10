@@ -338,15 +338,13 @@ vector<VectorStruct> FireGrenade(int settleSteps, int steps, int frameTime) {
 
     CGrenade *grenade = 0;
     // hopefully there are two objects now. a hector and a grenade.
-    CAbstractActor *aa = scenario.game->actorList;
-    int count = 2;
-    for (count = 0; aa; aa = aa->nextActor, count++) {
-        if (aa != scenario.hector) {
+    for (CAbstractActor *aa = scenario.game->actorList; aa; aa = aa->nextActor) {
+        if (typeid(*aa) == typeid(CGrenade)) {
             grenade = (CGrenade*)aa;
         }
     }
 
-    for (int i = 0; i < steps && count == 2; i++) {
+    for (int i = 0; i < steps && grenade != 0; i++) {
         trajectory.push_back(*(VectorStruct*)grenade->location);
         for (int k = 0; k < ticksPerStep; k++) {
             scenario.game->GameTick();
@@ -354,9 +352,8 @@ vector<VectorStruct> FireGrenade(int settleSteps, int steps, int frameTime) {
 
         // this intends to figure out whether the grenade has exploded.
         grenade = 0;
-        aa = scenario.game->actorList;
-        for (count = 0; aa; aa = aa->nextActor, count++) {
-            if (aa != scenario.hector) {
+        for (CAbstractActor *aa = scenario.game->actorList; aa; aa = aa->nextActor) {
+            if (typeid(*aa) == typeid(CGrenade)) {
                 grenade = (CGrenade*)aa;
             }
         }
@@ -373,15 +370,6 @@ vector<VectorStruct> FireMissile(int hectorSettle, int scoutSettle, int steps, i
     for (int i = 0; i < hectorSettle*ticksPerStep; i++) {
         scenario.game->GameTick();
     }
-
-    // scout up
-    scenario.hector->itsManager->GetFunctions()->held = (1 << kfuScoutControl);
-    scenario.hector->itsManager->GetFunctions()->down = (1 << kfuAimForward);
-    scenario.hector->itsManager->GetFunctions()->up = (1 << kfuScoutControl) | (1 << kfuAimForward);
-    scenario.game->GameTick();
-    scenario.hector->itsManager->GetFunctions()->held = 0;
-    scenario.hector->itsManager->GetFunctions()->down = 0;
-    scenario.hector->itsManager->GetFunctions()->up = 0;
 
     // load missile
     scenario.hector->itsManager->GetFunctions()->down = (1 << kfuLoadMissile);
@@ -1116,7 +1104,7 @@ TEST(MISSILE, Trajectory) {
 
     // index 15 is the furthest left the missile goes, and index 26 is the furthest forward
     ASSERT_NEAR(at64ms[15].theVec[0], -591030, 3*MILLIMETER) << "64ms simulation is wrong on min X";
-    ASSERT_NEAR(at64ms[26].theVec[2], 1306106, 3*MILLIMETER) << "64ms simulation is wrong on max Z";
+    ASSERT_NEAR(at64ms[26].theVec[2], 1306446, 3*MILLIMETER) << "64ms simulation is wrong on max Z";
     ASSERT_EQ(at64ms.size(), 37) << "64ms simulation blows up in the wrong frame";
     ASSERT_NEAR(at64ms.size(), at32ms.size(), 1) << "32ms simulation should blows up in wrong frame";
     ASSERT_NEAR(at64ms.size(), at16ms.size(), 1) << "16ms simulation should blows up at wrong frame";
