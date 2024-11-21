@@ -124,12 +124,12 @@ int CGUI::BSPButton(std::string s) {
     /* hover */
     if (mui_ctx->hover == mu_id) {
         ARGBColor color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BUTTONHOVER]);
-        _part->ReplaceColor(*ColorManager::getMarkerColor(0), color);
+        _part->ReplaceColor(*ColorManager::getMarkerColor(1), color);
     }
     else {
         ARGBColor color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BUTTON]);
-        _part->ReplaceColor(*ColorManager::getMarkerColor(0), color);
-        gRenderer->r
+        _part->ReplaceColor(*ColorManager::getMarkerColor(1), color);
+        //gRenderer->r
     }
     /* handle click */
     if (mui_ctx->mouse_pressed == MU_MOUSE_LEFT && mui_ctx->focus == mu_id) {
@@ -215,8 +215,10 @@ void CGUI::PlaySound(short theSound) {
     gHub->ReleaseLink(aLink);
 }
 
-void CGUI::mouse() {
-    cursor_buttons = SDL_GetMouseState(&cursor_x, &cursor_y);
+void CGUI::mouse(SDL_Event e) {
+    //cursor_buttons = SDL_GetMouseState(&cursor_x, &cursor_y);
+    cursor_x = e.motion.x;
+    cursor_y = e.motion.y;
 
     Point p = pt(cursor_x, cursor_y);
     glm::vec3 worldpos = windowToWorld(&p);
@@ -244,7 +246,7 @@ bool CGUI::handleSDLEvent(SDL_Event &event) {
     if (!active) return false;
     switch(event.type) {
         case SDL_MOUSEMOTION: {
-            mouse();
+            mouse(event);
             mu_input_mousemove(mui_ctx, event.motion.x, event.motion.y);
             return true;
         }
@@ -270,7 +272,7 @@ bool CGUI::handleSDLEvent(SDL_Event &event) {
 
         case SDL_MOUSEBUTTONDOWN:
         case SDL_MOUSEBUTTONUP: {
-            mouse();
+            mouse(event);
             int b = event.button.button;
             if (b && event.type == SDL_MOUSEBUTTONDOWN) {
                 mu_input_mousedown(mui_ctx, event.button.x, event.button.y, b);

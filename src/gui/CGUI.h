@@ -52,7 +52,7 @@ protected:
   void LookAtGUI();
   void PlaySound(short theSound);
 
-  void mouse();
+  void mouse(SDL_Event event);
   void kb();
   void joystick();
 
