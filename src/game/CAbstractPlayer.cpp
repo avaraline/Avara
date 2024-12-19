@@ -1569,7 +1569,7 @@ void CAbstractPlayer::FrameAction() {
 
         if (doIncarnateSound) {
             IncarnateSound();
-            if (itsManager->Presence() == kzAvailable && 
+            if (itsScout && itsManager->Presence() == kzAvailable &&
                 itsScout->action == kScoutInactive) {
                 itsScout->ToggleState(kScoutUp);
             }
