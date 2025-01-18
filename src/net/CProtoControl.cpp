@@ -203,7 +203,7 @@ Boolean CProtoControl::PacketHandler(PacketInfo *thePacket) {
         case kpLoginAck:
             itsManager->myId = thePacket->p1;
             DBG_Log("login", "kpLoginAck received with myId = %d\n", itsManager->myId);
-            itsManager->SendPacket(kdEveryone - (1 << thePacket->p1), kpPing, 0, 0, 32, 0, NULL);
+            itsManager->SendPacket(kdEveryone - (1 << thePacket->p1), kpPing, 0, 0, 6, 0, NULL);
             // kpLoginAck is called when anyone joins/exits, so good place to check where the "local" player is
             for (int i = 0; i < kMaxAvaraPlayers; i++) {
                 theNet->playerTable[i]->SetLocal(); // reset which player is "local"
