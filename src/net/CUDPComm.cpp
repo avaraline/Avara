@@ -385,9 +385,10 @@ std::string CUDPComm::FormatConnectionTable(CompleteAddress *table) {
 }
 
 
-// the first part of the IP address is 192 (probably a double-NAT situation)
+// the first part of the IP address is 192 or 10 (probably a double-NAT situation)
 bool CUDPComm::IsDoubleNAT(uint32_t host) {
-    return (SDL_SwapBE32(host) >> 24) == 192;
+    uint8_t sub = (SDL_SwapBE32(host) >> 24);
+    return (sub == 192 || sub == 10);
 }
 
 /*
