@@ -67,6 +67,7 @@ public:
     int32_t seed;
 
     ip_addr ipAddr;
+    ip_addr ipAddrExt;   // external IP address as seen by tracker
     port_num port;
 
     short myId;

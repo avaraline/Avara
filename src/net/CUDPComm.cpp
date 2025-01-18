@@ -384,6 +384,12 @@ std::string CUDPComm::FormatConnectionTable(CompleteAddress *table) {
     return oss.str();
 }
 
+
+// the first part of the IP address is 192 (probably a double-NAT situation)
+bool CUDPComm::IsDoubleNAT(uint32_t host) {
+    return (SDL_SwapBE32(host) >> 24) == 192;
+}
+
 /*
 **	The connection table contains the Id number for the receiver
 **	and an IP address + port number for every participating Id.
@@ -397,6 +403,7 @@ void CUDPComm::SendConnectionTable() {
     PacketInfo *theDuplicate;
     CUDPConnection *conn;
     CompleteAddress *table;
+    bool sendConnTable = true;
 
     tablePack = GetPacket();
     if (tablePack) {
@@ -407,11 +414,9 @@ void CUDPComm::SendConnectionTable() {
         // int i=0;
         for (conn = connections; conn; conn = conn->next) {
             if (conn->port && !conn->killed) {
-                // if (i++ < 1) {
-                //     table->host = SDL_SwapBE32(0x68e809d0);
-                // } else {
-                table->host = conn->ipAddr;
-                // }
+                // send external host/IP because we don't want to mess with our already connected IP (which might be the NAT)
+                table->host = conn->ipAddrExt;
+                sendConnTable = sendConnTable && !IsDoubleNAT(conn->ipAddrExt);
                 table->port = conn->port;
             } else {
                 table->host = 0;
@@ -420,25 +425,53 @@ void CUDPComm::SendConnectionTable() {
             table++;
         }
 
-        DBG_Log("login", "Sending Connection Table ...\n%s", FormatConnectionTable((CompleteAddress *)tablePack->dataBuffer).c_str());
+        if (sendConnTable) {
+            DBG_Log("login", "Sending Connection Table ...\n%s", FormatConnectionTable((CompleteAddress *)tablePack->dataBuffer).c_str());
 
-        tablePack->dataLen = ((Ptr)table) - tablePack->dataBuffer;
+            tablePack->dataLen = ((Ptr)table) - tablePack->dataBuffer;
 
-        for (conn = connections; conn; conn = conn->next) {
-            if (conn->port && !conn->killed) {
-                tablePack->p1 = conn->myId;
-                tablePack->p2 = 0;
-                tablePack->p3 = conn->seed;
-                tablePack->distribution = 1 << (conn->myId);
-                theDuplicate = DuplicatePacket(tablePack);
-                WriteAndSignPacket(theDuplicate);
+            for (conn = connections; conn; conn = conn->next) {
+                if (conn->port && !conn->killed) {
+                    tablePack->p1 = conn->myId;
+                    tablePack->p2 = 0;
+                    tablePack->p3 = conn->seed;
+                    tablePack->distribution = 1 << (conn->myId);
+                    theDuplicate = DuplicatePacket(tablePack);
+                    WriteAndSignPacket(theDuplicate);
+                }
+            }
+
+            ReleasePacket(tablePack);
+
+            SendPacket(kdEveryone, kpPacketProtocolControl, udpCramInfo, cramData, 0, 0, NULL);
+
+        } else {
+                DBG_Log("login", "NOT sending connection table because server might be double-NAT (waiting for punch IP)\n");
+                // this lambda will be called after the punch server returns the external IP address
+                SetPunchAddressHandler([this](const IPaddress &addr) -> void {
+                    DBG_Log("login", "punch server returned address of %s\n", FormatAddr(addr).c_str());
+                    ReplaceMatchingNAT(addr);
+                });
             }
         }
+}
 
-        ReleasePacket(tablePack);
-
-        SendPacket(kdEveryone, kpPacketProtocolControl, udpCramInfo, cramData, 0, 0, NULL);
+// if a double NAT situation, replace IP address (192.x.x.x:PORT) in the connection table with
+// the external IP address matching the port
+void CUDPComm::ReplaceMatchingNAT(const IPaddress &addr) {
+    CUDPConnection *conn;
+    for (conn = connections; conn; conn = conn->next) {
+        if (conn->port == addr.port && IsDoubleNAT(conn->ipAddrExt) && conn->ipAddrExt != addr.host) {
+            // set external host to the host returned by punch and try sending the connection table again
+            DBG_Log("login", "replacing NAT'd %s with punch server value %s\n",
+                    FormatHostPort(conn->ipAddr, conn->port).c_str(),
+                    FormatAddr(addr).c_str());
+            conn->ipAddrExt = addr.host;
+            SendConnectionTable();
+            break;
+        }
     }
+    return;
 }
 
 void CUDPComm::SendRejectPacket(ip_addr remoteHost, port_num remotePort, OSErr loginErr) {
