@@ -846,7 +846,7 @@ void CUDPConnection::FreshClient(ip_addr remoteHost, port_num remotePort, uint16
     nextAckTime = validTime + kAckRetransmitBase;
     haveToSendAck = true;
 
-    ipAddr = remoteHost;
+    ipAddr = ipAddrExt = remoteHost;
     port = remotePort;
 
     // Normal client-client Avara packets will do the hole-punching for us, so this is unnecessary.
