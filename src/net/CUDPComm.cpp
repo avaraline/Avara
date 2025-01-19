@@ -385,10 +385,18 @@ std::string CUDPComm::FormatConnectionTable(CompleteAddress *table) {
 }
 
 
-// the first part of the IP address is 192 or 10 (probably a double-NAT situation)
+// the first part of the IP address "non-routable" (probably a double-NAT situation)
+// https://www.geeksforgeeks.org/non-routable-address-space/
+//   10.0.0.0/8 ( Range: 10.0.0.0 – 10.255.255.255 )
+//   172.16.0.0/12 ( Range: 172.16.0.0 – 172.31.255.255 )
+//   192.168.0.0/16 ( Range: 192.168.0.0 – 192.168.255.255 )
 bool CUDPComm::IsDoubleNAT(uint32_t host) {
-    uint8_t sub = (SDL_SwapBE32(host) >> 24);
-    return (sub == 192 || sub == 10);
+    ip_addr ipaddr = SDL_SwapBE32(host);
+    uint8_t ip1 = (ipaddr >> 24);
+    uint8_t ip2 = ((ipaddr >> 16) & 0xff);
+    return ((ip1 == 10) ||
+            (ip1 == 172 && ip2 >= 16 && ip2 <= 31) ||
+            (ip1 == 192 && ip2 == 168));
 }
 
 /*
