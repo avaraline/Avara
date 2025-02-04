@@ -71,7 +71,9 @@ enum {
     kpPing, // 31
     kpRealName, // 32
 
-    kpJSON      // 33
+    kpJSON, // 33
+
+    kpLiveReloadPause // 34
 };
 
 /*

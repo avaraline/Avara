@@ -763,6 +763,11 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                             p->distribution = *inData.w++;
                         else
                             p->distribution = 1 << myId;
+                        
+                        if (p->command == kpLiveReloadPause) {
+                            SDL_Log("CProtoControl::PacketHandler kpLiveReloadPause");
+                            DispatchPacket(p);
+                        }
 
                         p->p3 = (flags & 4) ? *inData.l++ : (flags & 32) ? *inData.uw++ : 0;
                         p->p2 = (flags & 2) ? *inData.w++ : 0;

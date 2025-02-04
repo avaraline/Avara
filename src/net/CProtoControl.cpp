@@ -170,6 +170,12 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             theNet->LoginRefused();
             break;
 
+        case kpLiveReloadPause:
+            SDL_Log("CProtoControl::DelayedPacketHandler * * * kpLiveReloadPause");
+            theGame->statusRequest = kPauseStatus;
+            theGame->pausePlayer = 0;
+            break;
+
         default:
             didHandle = false;
     }
