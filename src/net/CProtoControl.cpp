@@ -171,10 +171,14 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             break;
 
         case kpLiveReloadPause:
-            SDL_Log("CProtoControl::DelayedPacketHandler * * * kpLiveReloadPause");
             theGame->statusRequest = kPauseStatus;
             theGame->pausePlayer = 0;
             theGame->GameStop();
+            break;
+        
+        case kpLiveReloadLevel:
+            if (theGame->loadedFilename.length() > 0)
+                theNet->SendLoadLevel(theGame->loadedSet, theGame->loadedFilename);
             break;
 
         default:

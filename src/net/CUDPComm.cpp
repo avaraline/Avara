@@ -764,8 +764,10 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                         else
                             p->distribution = 1 << myId;
                         
-                        if (p->command == kpLiveReloadPause) {
-                            SDL_Log("CProtoControl::PacketHandler kpLiveReloadPause");
+                        if (
+                            p->command == kpLiveReloadPause ||
+                            p->command == kpLiveReloadLevel
+                        ) {
                             DispatchPacket(p);
                         }
 
