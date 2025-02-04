@@ -174,6 +174,7 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             SDL_Log("CProtoControl::DelayedPacketHandler * * * kpLiveReloadPause");
             theGame->statusRequest = kPauseStatus;
             theGame->pausePlayer = 0;
+            theGame->GameStop();
             break;
 
         default:
