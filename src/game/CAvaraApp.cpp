@@ -182,6 +182,10 @@ void CAvaraAppImpl::idle() {
 }
 
 void CAvaraAppImpl::drawContents() {
+    if (itsGame->liveReloadStateExists) {
+        itsGame->Render();
+        return;
+    }
     if (animatePreview) {
         auto vp = gRenderer->viewParams;
         Fixed x = overhead[0] + FMul(previewRadius, FOneCos(previewAngle));
@@ -343,6 +347,8 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
 
         previewAngle = 0;
         previewRadius = std::max(extent[1] - extent[0], extent[5] - extent[4]);
+
+        // don't animate preview during live reloading
         animatePreview = true;
     }
 
