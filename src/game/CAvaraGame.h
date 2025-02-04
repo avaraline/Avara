@@ -194,6 +194,11 @@ public:
 
     Boolean showNewHUD;
 
+    Vector liveReloadLocation;
+    Fixed liveReloadHeading;
+    Fixed liveReloadViewYaw;
+    Fixed liveReloadViewPitch;
+
     // Moved here from GameLoop so it can run on the normal event loop
     // long            frameCredit;
     // long            frameAdvance;
@@ -276,6 +281,9 @@ public:
 
     void SetKeysFromStdin() { keysFromStdin = true; };
     void SetKeysToStdout() { keysToStdout = true; };
+
+    virtual void PersistLiveReloadState();
+    virtual void RestoreLiveReloadState();
 };
 
 #ifndef MAINAVARAGAME

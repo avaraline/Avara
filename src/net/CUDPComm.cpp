@@ -767,7 +767,8 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                         if (
                             p->command == kpLiveReloadPause ||
                             p->command == kpLiveReloadLevel ||
-                            p->command == kpLiveReloadStart
+                            p->command == kpLiveReloadStart ||
+                            p->command == kpLiveReloadRestore
                         ) {
                             DispatchPacket(p);
                         }

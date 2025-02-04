@@ -174,6 +174,7 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             theGame->statusRequest = kPauseStatus;
             theGame->pausePlayer = 0;
             theGame->GameStop();
+            theGame->PersistLiveReloadState();
             break;
         
         case kpLiveReloadLevel:
@@ -183,6 +184,10 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
         
         case kpLiveReloadStart:
             theGame->SendStartCommand();
+            break;
+        
+        case kpLiveReloadRestore:
+            theGame->RestoreLiveReloadState();
             break;
 
         default:

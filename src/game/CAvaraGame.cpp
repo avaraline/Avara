@@ -25,6 +25,7 @@
 #include "CDepot.h"
 #include "CNetManager.h"
 #include "CPlayerManager.h"
+#include "CPlayerActor.h"
 //#include "CInfoPanel.h"
 #include "CAbstractActor.h"
 #include "CAbstractPlayer.h"
@@ -1157,5 +1158,35 @@ void CAvaraGame::SetSpawnOrder(SpawnOrder order) {
     itsApp->AddMessageLine(oss.str(), MsgAlignment::Left, MsgCategory::System);
     if (gApplication) {
         gApplication->Set(kSpawnOrder, spawnOrder);
+    }
+}
+
+void CAvaraGame::PersistLiveReloadState() {
+    CPlayerActor *actor = static_cast<CPlayerActor*>(GetLocalPlayer());
+
+    if (actor) {
+        liveReloadLocation[0] = actor->location[0];
+        liveReloadLocation[1] = actor->location[1];
+        liveReloadLocation[2] = actor->location[2];
+        liveReloadLocation[3] = actor->location[3];
+
+        liveReloadHeading = actor->heading;
+        liveReloadViewYaw = actor->viewYaw;
+        liveReloadViewPitch = actor->viewPitch;
+    }
+}
+
+void CAvaraGame::RestoreLiveReloadState() {
+    CPlayerActor *actor = static_cast<CPlayerActor*>(GetLocalPlayer());
+
+    if (actor) {
+        actor->location[0] = liveReloadLocation[0];
+        actor->location[1] = liveReloadLocation[1];
+        actor->location[2] = liveReloadLocation[2];
+        actor->location[3] = liveReloadLocation[3];
+
+        actor->heading = liveReloadHeading;
+        actor->viewYaw = liveReloadViewYaw;
+        actor->viewPitch = liveReloadViewPitch;
     }
 }
