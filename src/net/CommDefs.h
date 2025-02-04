@@ -75,8 +75,7 @@ enum {
 
     kpLiveReloadPause, // 34
     kpLiveReloadLevel, // 35
-    kpLiveReloadStart, // 36
-    kpLiveReloadRestore // 37
+    kpLiveReloadStart // 36
 };
 
 /*

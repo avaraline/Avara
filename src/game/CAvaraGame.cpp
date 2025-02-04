@@ -759,6 +759,7 @@ void CAvaraGame::GameStart() {
     ResumeActors();
 
     if (frameNumber == 0) {
+        RestoreLiveReloadState();
         FlagMessage(iStartMsg + firstVariable);
     }
 
@@ -1173,10 +1174,15 @@ void CAvaraGame::PersistLiveReloadState() {
         liveReloadHeading = actor->heading;
         liveReloadViewYaw = actor->viewYaw;
         liveReloadViewPitch = actor->viewPitch;
+
+        liveReloadStateExists = true;
     }
 }
 
 void CAvaraGame::RestoreLiveReloadState() {
+    if (!liveReloadStateExists)
+        return;
+    
     CPlayerActor *actor = static_cast<CPlayerActor*>(GetLocalPlayer());
 
     if (actor) {
@@ -1188,5 +1194,8 @@ void CAvaraGame::RestoreLiveReloadState() {
         actor->heading = liveReloadHeading;
         actor->viewYaw = liveReloadViewYaw;
         actor->viewPitch = liveReloadViewPitch;
+
+        // reset flag so state isn't restored when game is started manually
+        liveReloadStateExists = false;
     }
 }

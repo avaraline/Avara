@@ -185,10 +185,6 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
         case kpLiveReloadStart:
             theGame->SendStartCommand();
             break;
-        
-        case kpLiveReloadRestore:
-            theGame->RestoreLiveReloadState();
-            break;
 
         default:
             didHandle = false;

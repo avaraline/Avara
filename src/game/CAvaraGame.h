@@ -194,6 +194,7 @@ public:
 
     Boolean showNewHUD;
 
+    Boolean liveReloadStateExists = false;
     Vector liveReloadLocation;
     Fixed liveReloadHeading;
     Fixed liveReloadViewYaw;
