@@ -74,7 +74,8 @@ enum {
     kpJSON, // 33
 
     kpLiveReloadPause, // 34
-    kpLiveReloadLevel // 35
+    kpLiveReloadLevel, // 35
+    kpLiveReloadStart // 36
 };
 
 /*

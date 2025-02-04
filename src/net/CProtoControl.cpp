@@ -180,6 +180,10 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             if (theGame->loadedFilename.length() > 0)
                 theNet->SendLoadLevel(theGame->loadedSet, theGame->loadedFilename);
             break;
+        
+        case kpLiveReloadStart:
+            theGame->SendStartCommand();
+            break;
 
         default:
             didHandle = false;
