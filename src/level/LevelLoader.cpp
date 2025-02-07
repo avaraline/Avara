@@ -27,7 +27,6 @@
 #include <regex>
 
 #define POINTTOUNIT(pt) (pt * 20480 / 9)
-#define UNITPOINTS (double)14.4 // 72 / 5
 
 typedef struct {
     Fixed v;
@@ -40,7 +39,7 @@ static short lastArcAngle;
 static FixedPoint2D lastOvalPoint;
 static Fixed lastOvalRadius;
 
-Rect gLastBoxRect;
+RectDouble gLastBoxRect;
 Fixed gLastBoxRounding;
 
 static FixedPoint2D lastDomeCenter;
@@ -228,18 +227,18 @@ struct ALFWalker: pugi::xml_tree_walker {
 
         if (!node.attribute("x").empty() && !node.attribute("z").empty() &&
             !node.attribute("w").empty() && !node.attribute("d").empty()) {
-            double boxCenterX = ReadDoubleVar("x") * UNITPOINTS,
-                   boxCenterZ = ReadDoubleVar("z") * UNITPOINTS,
-                   boxWidth = ReadDoubleVar("w") * UNITPOINTS,
-                   boxDepth = ReadDoubleVar("d") * UNITPOINTS;
+            double boxCenterX = ReadDoubleVar("x"),
+                   boxCenterZ = ReadDoubleVar("z"),
+                   boxWidth = ReadDoubleVar("w"),
+                   boxDepth = ReadDoubleVar("d");
             double boxLeft = boxCenterX - (boxWidth / 2.0),
                    boxRight = boxLeft + boxWidth,
                    boxTop = boxCenterZ - (boxDepth / 2.0),
                    boxBottom = boxTop + boxDepth;
-            gLastBoxRect.top = std::lround(boxTop);
-            gLastBoxRect.left = std::lround(boxLeft);
-            gLastBoxRect.bottom = std::lround(boxBottom);
-            gLastBoxRect.right = std::lround(boxRight);
+            gLastBoxRect.top = boxTop;
+            gLastBoxRect.left = boxLeft;
+            gLastBoxRect.bottom = boxBottom;
+            gLastBoxRect.right = boxRight;
         }
 
         if (!node.attribute("cx").empty() && !node.attribute("cz").empty()) {

@@ -11,7 +11,7 @@
 
 #include "CSmartBox.h"
 
-extern Rect gLastBoxRect;
+extern RectDouble gLastBoxRect;
 extern Fixed gLastBoxRounding;
 
 static void SolveOrientation(Fixed x, Fixed y, Fixed h, Fixed *w, Fixed *angle) {
@@ -62,9 +62,9 @@ CAbstractActor *CRamp::EndScript() {
         maskBits |= kSolidBit + kDoorIgnoreBit;
 
         deltaY = ReadFixedVar(iDeltaY);
-        dims[0] = FMulDivNZ(gLastBoxRect.right - gLastBoxRect.left, FIX(5), 72);
+        dims[0] = FIX(gLastBoxRect.right - gLastBoxRect.left);
         dims[1] = ReadFixedVar(iThickness);
-        dims[2] = FMulDivNZ(gLastBoxRect.bottom - gLastBoxRect.top, FIX(5), 72);
+        dims[2] = FIX(gLastBoxRect.bottom - gLastBoxRect.top);
 
         if (dims[0] > LOCATORRECTSIZE)
             dims[0] = LOCATORRECTSIZE;
@@ -77,8 +77,8 @@ CAbstractActor *CRamp::EndScript() {
             heading += 0x8000;
         }
 
-        location[0] = FMulDivNZ(gLastBoxRect.right + gLastBoxRect.left, FIX(5), 144);
-        location[2] = FMulDivNZ(gLastBoxRect.bottom + gLastBoxRect.top, FIX(5), 144);
+        location[0] = FIX((gLastBoxRect.right + gLastBoxRect.left) / 2);
+        location[2] = FIX((gLastBoxRect.bottom + gLastBoxRect.top) / 2);
 
         partCount = 1;
 

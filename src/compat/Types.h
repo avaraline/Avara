@@ -43,6 +43,14 @@ struct Rect {
 };
 typedef struct Rect Rect;
 
+struct RectDouble {
+    double top;
+    double left;
+    double bottom;
+    double right;
+};
+typedef struct RectDouble RectDouble;
+
 typedef int16_t OSErr;
 typedef uint32_t OSType;
 
