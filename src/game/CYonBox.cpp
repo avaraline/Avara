@@ -9,7 +9,7 @@
 
 #include "CYonBox.h"
 
-extern RectDouble gLastBoxRect;
+extern Rect gLastBoxRect;
 extern Fixed gLastBoxRounding;
 
 void CYonBox::BeginScript() {
@@ -22,11 +22,11 @@ CAbstractActor *CYonBox::EndScript() {
     if (CAbstractYon::EndScript()) {
         Fixed deltaY;
 
-        minBounds[0] = FIX(gLastBoxRect.left);
-        minBounds[2] = FIX(gLastBoxRect.top);
+        minBounds[0] = gLastBoxRect.left;
+        minBounds[2] = gLastBoxRect.top;
 
-        maxBounds[0] = FIX(gLastBoxRect.right);
-        maxBounds[2] = FIX(gLastBoxRect.bottom);
+        maxBounds[0] = gLastBoxRect.right;
+        maxBounds[2] = gLastBoxRect.bottom;
 
         deltaY = ReadFixedVar(iDeltaY);
         if (deltaY <= 0) {

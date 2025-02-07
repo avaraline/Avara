@@ -20,7 +20,7 @@ CWallActor *lastWallActor = 0;
 #define kEastWall 4
 #define kWestWall 8
 
-void CWallActor::MakeWallFromRect(RectDouble *theRect, Fixed height, short decimateWalls, Boolean isOrigWall) {
+void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWalls, Boolean isOrigWall) {
     Boolean tooBig;
     Fixed centerX, centerZ;
     Vector dim;
@@ -37,15 +37,15 @@ void CWallActor::MakeWallFromRect(RectDouble *theRect, Fixed height, short decim
     partYon = ReadFixedVar(iWallYon);
 
     do {
-        dim[0] = FIX(theRect->right - theRect->left);
+        dim[0] = theRect->right - theRect->left;
         dim[1] = 0;
-        dim[2] = FIX(theRect->bottom - theRect->top);
+        dim[2] = theRect->bottom - theRect->top;
 
         tooBig =
             dim[0] > LOCATORRECTSIZE || dim[2] > LOCATORRECTSIZE; // VectorLength(3, dim) > LOCATORRECTSIZE/5;
         if (tooBig) {
             CWallActor *otherWall;
-            RectDouble smallRect;
+            Rect smallRect;
             short newDecim;
 
             smallRect = *theRect;
@@ -66,8 +66,8 @@ void CWallActor::MakeWallFromRect(RectDouble *theRect, Fixed height, short decim
         }
     } while (tooBig);
 
-    centerX = FIX((theRect->right + theRect->left) / 2);
-    centerZ = FIX((theRect->bottom + theRect->top) / 2);
+    centerX = (theRect->right + theRect->left) / 2;
+    centerZ = (theRect->bottom + theRect->top) / 2;
 
     dim[0] = dim[0] / 2;
     dim[2] = dim[2] / 2;

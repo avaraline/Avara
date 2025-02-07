@@ -39,7 +39,7 @@ static short lastArcAngle;
 static FixedPoint2D lastOvalPoint;
 static Fixed lastOvalRadius;
 
-RectDouble gLastBoxRect;
+Rect gLastBoxRect;
 Fixed gLastBoxRounding;
 
 static FixedPoint2D lastDomeCenter;
@@ -227,14 +227,14 @@ struct ALFWalker: pugi::xml_tree_walker {
 
         if (!node.attribute("x").empty() && !node.attribute("z").empty() &&
             !node.attribute("w").empty() && !node.attribute("d").empty()) {
-            double boxCenterX = ReadDoubleVar("x"),
-                   boxCenterZ = ReadDoubleVar("z"),
-                   boxWidth = ReadDoubleVar("w"),
-                   boxDepth = ReadDoubleVar("d");
-            double boxLeft = boxCenterX - (boxWidth / 2.0),
-                   boxRight = boxLeft + boxWidth,
-                   boxTop = boxCenterZ - (boxDepth / 2.0),
-                   boxBottom = boxTop + boxDepth;
+            Fixed boxCenterX = FIX(ReadDoubleVar("x")),
+                  boxCenterZ = FIX(ReadDoubleVar("z")),
+                  boxWidth = FIX(ReadDoubleVar("w")),
+                  boxDepth = FIX(ReadDoubleVar("d"));
+            Fixed boxLeft = boxCenterX - (boxWidth / 2),
+                  boxRight = boxLeft + boxWidth,
+                  boxTop = boxCenterZ - (boxDepth / 2),
+                  boxBottom = boxTop + boxDepth;
             gLastBoxRect.top = boxTop;
             gLastBoxRect.left = boxLeft;
             gLastBoxRect.bottom = boxBottom;
