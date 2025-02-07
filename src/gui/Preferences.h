@@ -97,6 +97,7 @@ using json = nlohmann::json;
 // other
 #define kGoodGamePhrases "ggs"
 #define kShowElo "showElo"
+#define kDefaultArgs "defaultArgs"
 
 // Key names are from https://wiki.libsdl.org/SDL_Scancode
 static json defaultPrefs = {
@@ -197,7 +198,8 @@ static json defaultPrefs = {
     {kThrottle, 0},
     {kGoodGamePhrases, {}},
     {kShowElo, false},
-    {kUseLegacyRenderer, false}
+    {kUseLegacyRenderer, false},
+    {kDefaultArgs, "-/ '/rand avara aa emo ex #fav -#bad'"}
 };
 
 
