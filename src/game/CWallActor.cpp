@@ -50,12 +50,12 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
 
             smallRect = *theRect;
             if (smallRect.right - smallRect.left > smallRect.bottom - smallRect.top) {
-                smallRect.left += (smallRect.right - smallRect.left) / 2;
+                smallRect.left += (smallRect.right - smallRect.left) >> 1;
                 theRect->right = smallRect.left;
                 newDecim = decimateWalls | kEastWall;
                 decimateWalls |= kWestWall;
             } else {
-                smallRect.top += (smallRect.bottom - smallRect.top) / 2;
+                smallRect.top += (smallRect.bottom - smallRect.top) >> 1;
                 theRect->bottom = smallRect.top;
                 newDecim = decimateWalls | kNorthWall;
                 decimateWalls |= kSouthWall;

@@ -77,8 +77,8 @@ CAbstractActor *CRamp::EndScript() {
             heading += 0x8000;
         }
 
-        location[0] = (gLastBoxRect.right + gLastBoxRect.left) / 2;
-        location[2] = (gLastBoxRect.bottom + gLastBoxRect.top) / 2;
+        location[0] = (gLastBoxRect.right + gLastBoxRect.left) >> 1;
+        location[2] = (gLastBoxRect.bottom + gLastBoxRect.top) >> 1;
 
         partCount = 1;
 
