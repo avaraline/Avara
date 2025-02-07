@@ -227,10 +227,10 @@ struct ALFWalker: pugi::xml_tree_walker {
 
         if (!node.attribute("x").empty() && !node.attribute("z").empty() &&
             !node.attribute("w").empty() && !node.attribute("d").empty()) {
-            Fixed boxCenterX = FIX(ReadDoubleVar("x")),
-                  boxCenterZ = FIX(ReadDoubleVar("z")),
-                  boxWidth = FIX(ReadDoubleVar("w")),
-                  boxDepth = FIX(ReadDoubleVar("d"));
+            Fixed boxCenterX = ToFixed(ReadDoubleVar("x")),
+                  boxCenterZ = ToFixed(ReadDoubleVar("z")),
+                  boxWidth = ToFixed(ReadDoubleVar("w")),
+                  boxDepth = ToFixed(ReadDoubleVar("d"));
             Fixed boxLeft = boxCenterX - (boxWidth / 2),
                   boxRight = boxLeft + boxWidth,
                   boxTop = boxCenterZ - (boxDepth / 2),
