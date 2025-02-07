@@ -1362,7 +1362,6 @@ bool CPlayerManagerImpl::GetShowScoreboard() {
     return showScoreboard;
 }
 void CPlayerManagerImpl::SetShowEditingHud(bool b) {
-    SDL_Log("CPlayerManagerImpl::SetShowEditingHud b=%d", b);
     showEditingHud = b;
 }
 bool CPlayerManagerImpl::GetShowEditingHud() {
