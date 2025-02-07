@@ -21,6 +21,7 @@ public:
     void DrawLevelName(NVGcontext *ctx);
     void DrawPaused(NVGcontext *ctx);
     void DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, NVGcontext *ctx);
+    void DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx);
     void DrawShadowBox(NVGcontext *ctx, int x, int y, int height, int width);
     void DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, float fontSize);
     void LoadImages(NVGcontext *ctx);

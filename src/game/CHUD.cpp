@@ -2,12 +2,14 @@
 #include "AssetManager.h"
 #include "AbstractRenderer.h"
 #include "CAbstractPlayer.h"
+#include "CPlayerActor.h"
 #include "CAvaraGame.h"
 #include "ColorManager.h"
 #include "CPlayerManager.h"
 #include "AvaraDefines.h"
 #include "CScoreKeeper.h"
 #include "ARGBColor.h"
+#include "CSmartPart.h"
 
 #include <stdint.h>
 
@@ -17,6 +19,8 @@ CHUD::CHUD(CAvaraGame *game) {
 
 const int CHAT_CHARS = 40;
 const NVGcolor BACKGROUND_COLOR = nvgRGBA(30, 30, 30, 180);
+
+const int EHUD_SIGHT_MAX_DISTANCE = 1000;
 
 bool sortByScore(std::pair<PlayerScoreRecord, int> i, std::pair<PlayerScoreRecord, int> j) {
     if(i.first.points == j.first.points) {
@@ -205,6 +209,96 @@ void CHUD::DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, N
     }
 }
 
+void CHUD::DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx) {
+    if (!player) {
+        return;
+    }
+    CPlayerManager *playerManager = itsGame->FindPlayerManager(player);
+    if (!playerManager) {
+        return;
+    }
+    if (playerManager->GetShowEditingHud()) {
+        float boardWidth = 400;
+        float boardHeight = 99;
+        float x = 20;
+        float y = 20;
+        float fontsz = 18.0;
+        float lineHeight = 20;
+
+        nvgBeginPath(ctx);
+        nvgFillColor(ctx, nvgRGBA(20, 20, 20, 160));
+        nvgRoundedRect(ctx, x, y, boardWidth, boardHeight, 4.0);
+        nvgFill(ctx);
+
+        nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+        nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
+        nvgFontSize(ctx, fontsz);
+
+        x += 14;
+        y += 11;
+
+        char ehudText[64];
+
+        CPlayerActor *actor = static_cast<CPlayerActor*>(player);
+
+        float playerY = ToFloat(actor->location[1]) + 0.1; // not sure why + 0.1 is needed
+
+        snprintf(ehudText, sizeof(ehudText), "Player x/z/y: %.1f, %.1f, %.1f",
+            ToFloat(actor->location[0]),
+            ToFloat(actor->location[2]),
+            playerY > 0.0 ? playerY : 0.0
+        );
+        nvgText(ctx, x, y, ehudText, NULL);
+
+        y += lineHeight;
+        int heading = floor(abs((player->heading - 32768) % 65536) / 65536.0 * 360);
+        snprintf(ehudText, sizeof(ehudText), "Heading: %d", heading);
+
+        // 32768 @ angle=0
+        // 0     @ angle=180
+
+        nvgText(ctx, x, y, ehudText, NULL);
+
+        RayHitRecord theHit;
+        Matrix *mt = &player->viewPortPart->itsTransform;
+        Matrix m1, m2;
+        OneMatrix(&m1);
+        CombineTransforms(&m1, &m2, mt);
+        theHit.direction[0] = (*mt)[2][0];
+        theHit.direction[1] = (*mt)[2][1];
+        theHit.direction[2] = (*mt)[2][2];
+        theHit.origin[0] = m2[3][0];
+        theHit.origin[1] = m2[3][1];
+        theHit.origin[2] = m2[3][2];
+        theHit.distance = MAXFIXED;
+        theHit.closestHit = NULL;
+        player->RayTestWithGround(&theHit, kSolidBit);
+
+        float distance = ToFloat(theHit.distance);
+
+        y += lineHeight;
+        if (distance > EHUD_SIGHT_MAX_DISTANCE) {
+            snprintf(ehudText, sizeof(ehudText), "Sight x/z/y: --");
+        } else {
+            NormalizeVector(3, theHit.direction);
+            snprintf(ehudText, sizeof(ehudText), "Sight x/z/y: %.1f, %.1f, %.1f",
+                ToFloat(theHit.origin[0] + theHit.direction[0] * distance),
+                ToFloat(theHit.origin[2] + theHit.direction[2] * distance),
+                ToFloat(theHit.origin[1] + theHit.direction[1] * distance)
+            );
+        }
+        nvgText(ctx, x, y, ehudText, NULL);
+
+        y += lineHeight;
+        if (distance > EHUD_SIGHT_MAX_DISTANCE) {
+            snprintf(ehudText, sizeof(ehudText), "Distance: --");
+        } else {
+            snprintf(ehudText, sizeof(ehudText), "Distance: %.1f", ToFloat(theHit.distance));
+        }
+        nvgText(ctx, x, y, ehudText, NULL);
+    }
+}
+
 void CHUD::DrawLevelName(NVGcontext *ctx) {
     auto view = gRenderer->viewParams;
     std::string level = itsGame->loadedLevel;
@@ -297,6 +391,7 @@ void CHUD::Render(NVGcontext *ctx) {
     int chudHeight = 13 * lastPlayerSlot;
 
     DrawScore(thePlayers, chudHeight, ctx);
+    DrawEditingHud(player, ctx);
 
     nvgBeginFrame(ctx, bufferWidth, bufferHeight, view->viewPixelRatio);
 
@@ -921,6 +1016,7 @@ void CHUD::RenderNewHUD(NVGcontext *ctx) {
     int chudHeight = 13 * playerCount;
 
     DrawScore(thePlayers, chudHeight, ctx);
+    DrawEditingHud(player, ctx);
 
     nvgBeginFrame(ctx, bufferWidth, bufferHeight, view->viewPixelRatio);
 

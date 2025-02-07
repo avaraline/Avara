@@ -130,6 +130,10 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
         return false;
     });
     TextCommand::Register(cmd);
+
+    cmd = new TextCommand("/ehud          <- toggle level editing HUD on/off",
+                          METHOD_TO_LAMBDA_VARGS(ToggleEditingHud));
+    TextCommand::Register(cmd);
 }
 
 
@@ -684,4 +688,10 @@ std::string CommandManager::GetOsName() {
     #else
     return "Unknown OS";
     #endif
+}
+
+bool CommandManager::ToggleEditingHud(VectorOfArgs vargs) {
+    CPlayerManager *manager = CPlayerManagerImpl::LocalPlayer();
+    manager->SetShowEditingHud(!manager->GetShowEditingHud());
+    return true;
 }

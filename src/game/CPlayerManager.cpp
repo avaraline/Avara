@@ -1361,6 +1361,13 @@ void CPlayerManagerImpl::SetShowScoreboard(bool b) {
 bool CPlayerManagerImpl::GetShowScoreboard() {
     return showScoreboard;
 }
+void CPlayerManagerImpl::SetShowEditingHud(bool b) {
+    SDL_Log("CPlayerManagerImpl::SetShowEditingHud b=%d", b);
+    showEditingHud = b;
+}
+bool CPlayerManagerImpl::GetShowEditingHud() {
+    return showEditingHud;
+}
 
 void CPlayerManagerImpl::PlaybackAndRecord(FunctionTable &ft) {
     if (isLocalPlayer && itsGame->keysFromStdin) {

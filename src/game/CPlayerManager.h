@@ -142,6 +142,8 @@ public:
     virtual void IncrementAskAgainTime(int) = 0;
     virtual void SetShowScoreboard(bool b) = 0;
     virtual bool GetShowScoreboard() = 0;
+    virtual void SetShowEditingHud(bool b) = 0;
+    virtual bool GetShowEditingHud() = 0;
 };
 
 class CPlayerManagerImpl : public CDirectObject, public CPlayerManager, public std::enable_shared_from_this<CPlayerManagerImpl> {
@@ -194,6 +196,7 @@ private:
     short playerColor;
 
     bool showScoreboard = false;
+    bool showEditingHud = false;
 
     Point mouseCenterPosition;
     Boolean isLocalPlayer;
@@ -304,6 +307,8 @@ public:
     virtual void IncrementAskAgainTime(int);
     virtual void SetShowScoreboard(bool b);
     virtual bool GetShowScoreboard();
+    virtual void SetShowEditingHud(bool b);
+    virtual bool GetShowEditingHud();
 
     void PlaybackAndRecord(FunctionTable &ft);
 };
