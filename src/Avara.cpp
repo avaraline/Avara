@@ -38,11 +38,48 @@ void SetHiDPI() {
 
 #include <SDL2/SDL.h>
 #include <nanogui/nanogui.h>
-#include <string.h>
+#include <sstream>
+#include <string>
 
 using namespace nanogui;
 
 void NullLogger(void *userdata, int category, SDL_LogPriority priority, const char *message) {}
+
+// combine 'defaultArgs' and command-line arguments
+std::vector<std::string> combinedArgs(std::string defaultArgs, int argc, char* argv[]) {
+    std::vector<std::string> args;
+    // first parse/insert the defaultArgs
+    std::stringstream ss(defaultArgs);
+    std::string arg, text;
+    while (std::getline(ss, text, ' ')) {
+        // look for quoted text
+        if (text[0] == '\'') {
+            arg = text.substr(1);
+            // wait for the entire quoted string
+            continue;
+        } else if (arg.size() > 0) {
+            // append to existing until we find the final quote
+            arg += ' ';
+            size_t lastChar = text.size() - 1;
+            if (text[lastChar] == '\'') {
+                arg += text.substr(0, lastChar);
+            } else {
+                arg += text;
+                continue;
+            }
+        } else {
+            arg = text;
+        }
+        args.push_back(arg);
+        arg = "";
+    }
+
+    // now add actual command-line arguments (inserted AFTER defaultArgs so they override)
+    for (int i = 1; i < argc; i++) {
+        args.push_back(std::string(argv[i]));
+    }
+    return args;
+}
 
 int main(int argc, char *argv[]) {
     // Allow Windows to run in HiDPI mode.
@@ -58,58 +95,56 @@ int main(int argc, char *argv[]) {
     OpenAvaraTCP();
 
     // The Avara application itself.
-    CAvaraApp *app = new CAvaraAppImpl();
+    CAvaraAppImpl *app = new CAvaraAppImpl();
 
     // process command-line arguments
     std::string connectAddress;
     std::vector<std::string> textCommands;
     bool host = false;
-    for (int i = 1; i < argc; i++) {
-        std::string arg = argv[i];
+    std::vector<std::string> args = combinedArgs(app->Get<std::string>(kDefaultArgs), argc, argv);
+    for (int i = 0; i < args.size(); i++) {
+        std::string &arg = args[i];
         if (arg == "-p" || arg == "--port") {
-            int port = atoi(argv[++i]);  // pre-inc to next arg
+            int port = atoi(args[++i].c_str());  // pre-inc to next arg
             app->Set(kDefaultClientUDPPort, port);
         } else if (arg == "-n" || arg == "--name") {
-            app->Set(kPlayerNameTag, std::string(argv[++i]));
+            app->Set(kPlayerNameTag, args[++i]);
         } else if (arg == "-c" || arg == "--connect") {
-            connectAddress = std::string(argv[++i]);
+            connectAddress = args[++i];
             app->Set(kLastAddress, connectAddress);
         } else if (arg == "-s" || arg == "--serve" ||
                    arg == "-S" || arg == "--Serve") {
             host = true;
             app->Set(kTrackerRegister, arg[1] == 'S' || arg[2] == 'S');
         } else if (arg == "-f" || arg == "--frametime") {
-            uint16_t frameTime = atol(argv[++i]);  // pre-inc to next arg
+            uint16_t frameTime = atol(args[++i].c_str());  // pre-inc to next arg
             app->GetGame()->SetFrameTime(frameTime);
         } else if (arg == "-i" || arg == "--keys-from-stdin") {
             app->GetGame()->SetKeysFromStdin();
         } else if (arg == "-if" || arg == "--keys-from-file") {
             // redirect a playback file to stdin
-            freopen(argv[++i], "r", stdin);
+            freopen(args[++i].c_str(), "r", stdin);
             app->GetGame()->SetKeysFromStdin();
         } else if (arg == "-o" || arg == "--keys-to-stdout") {
             app->GetGame()->SetKeysToStdout();
         } else if (arg == "-/" || arg == "--command") {
-            std::string textCommand = argv[++i];
+            std::string textCommand = args[++i];
             if (textCommand[0] != '/') {
                 textCommand.insert(0, "/");
             }
             textCommands.push_back(textCommand);
         } else {
-            SDL_Log("Unknown command-line argument '%s'\n", argv[i]);
+            SDL_Log("Unknown command-line argument '%s'\n", args[i].c_str());
             exit(1);
         }
     }
 
-    auto p = CPlayerManagerImpl::LocalPlayer();
-    auto *tui = ((CAvaraAppImpl *)app)->GetTui();
-    auto defaultCmd = "/rand avara aa emo ex #fav -#bad -#koth";
     if (textCommands.size() > 0) {
+        auto p = CPlayerManagerImpl::LocalPlayer();
+        auto *tui = ((CAvaraAppImpl *)app)->GetTui();
         for (auto cmd: textCommands) {
             tui->ExecuteMatchingCommand(cmd, p);
         }
-    } else {
-        tui->ExecuteMatchingCommand(defaultCmd, p);
     }
 
     if(host == true) {
