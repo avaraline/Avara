@@ -1188,7 +1188,7 @@ ClockTick CUDPComm::GetClock() {
 **	more urgent data. If not, any data marked urgent will be resent even if there
 **	no other data to send within twice that period.
 */
-void CUDPComm::IUDPComm(short clientCount, short bufferCount, short version, ClockTick urgentTimePeriod) {
+void CUDPComm::IUDPComm(short clientCount, short bufferCount, uint16_t version, ClockTick urgentTimePeriod) {
     // create queues big enough to hold UDPPacketInfo packets
     InitializePacketQueues(bufferCount, sizeof(UDPPacketInfo));
 
