@@ -398,6 +398,7 @@ void CNetManager::DisconnectSome(short mask) {
 }
 
 void CNetManager::HandleDisconnect(short slotId, short why) {
+    DBG_Log("login+", "HandleDisconnect called for slot #%d, why=%d", slotId, why);
     itsCommManager->DisconnectSlot(slotId);
 
     if (slotId == itsCommManager->myId) {

@@ -626,7 +626,7 @@ Boolean CUDPComm::PacketHandler(PacketInfo *thePacket) {
         case kpPacketProtocolTOC:
             if (!isServing && thePacket->p3 == seed) {
                 ReadFromTOC(thePacket);
-                DBG_Log("login", "sending kpPacketProtocolTOC to kdEveryone\n");
+                DBG_Log("login+", "sending kpPacketProtocolControl to kdEveryone with cramData = %d\n", cramData);
                 SendPacket(kdEveryone, kpPacketProtocolControl, udpCramInfo, cramData, 0, 0, NULL);
             }
             break;
@@ -647,6 +647,7 @@ Boolean CUDPComm::PacketHandler(PacketInfo *thePacket) {
             }
             break;
         case kpPacketProtocolControl:
+            DBG_Log("login+", "received kpPacketProtocolControl from %d with cramData = %d\n", thePacket->sender, thePacket->p2);
             connections->ReceiveControlPacket(thePacket);
             break;
         case kpKickClient:

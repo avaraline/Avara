@@ -764,6 +764,7 @@ void CUDPConnection::MarkOpenConnections(CompleteAddress *table) {
             table++;
         }
 
+        DBG_Log("login", "%s no longer in connection table, marking as GONE", FormatHostPort(ipAddr, port).c_str());
         port = 0;
         ipAddr = 0;
         myId = -1;
@@ -849,10 +850,10 @@ void CUDPConnection::FreshClient(ip_addr remoteHost, port_num remotePort, uint16
     ipAddr = ipAddrExt = remoteHost;
     port = remotePort;
 
-    // Normal client-client Avara packets will do the hole-punching for us, so this is unnecessary.
-    // But maybe this could speed things up?
-    // IPaddress addr = { remoteHost, remotePort };
-    // Punch(addr);
+    // Normal client-client Avara packets will do the hole-punching for us, so this is unnecessary?
+    // Sometimes the hole needs to be punched between clients such as when they are both behind double-NAT.
+    IPaddress addr = { remoteHost, remotePort };
+    RequestPunch(addr);
 }
 
 Boolean CUDPConnection::AreYouDone() {
