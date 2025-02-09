@@ -252,8 +252,9 @@ void CHUD::DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx) {
 
         y += lineHeight;
         // Heading is 32768 at an ALF angle of 0, and 0 at an ALF angle of 180.
-        int heading = floor(abs((player->heading - 32768) % 65536) / 65536.0 * 360);
-        snprintf(ehudText, sizeof(ehudText), "Heading: %d", heading);
+        int heading = ceil(((player->heading - 32768) % 65536) / 65536.0 * 360);
+        heading = heading <= 0 ? -heading : 360 - heading;
+        snprintf(ehudText, sizeof(ehudText), "Heading (ALF angle): %d", heading);
 
         nvgText(ctx, x, y, ehudText, NULL);
 
