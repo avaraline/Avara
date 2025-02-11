@@ -684,6 +684,10 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
         char *inEnd;
         short inLen;
 
+        #if PACKET_DEBUG > 2
+            SDL_Log("CUDPComm::ReadComplete raw packet from=%s\n", FormatAddr(packet->address).c_str());
+        #endif
+
         #if SIMULATE_LATENCY_ON_CLIENTS
             SIMULATE_LATENCY_CODE("read")
         #endif
