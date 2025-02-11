@@ -925,17 +925,33 @@ void CNetManager::ViewControl() {
     playerTable[itsCommManager->myId]->ViewControl();
 }
 
-void CNetManager::SendPingCommand(int trips) {
+void CNetManager::SendPingCommand(int pingTrips) {
     // there & back = 2 trips... send less to/from players in game
-    int notMe = totalDistribution & ~(1 << itsCommManager->myId);
-    int playingDist = (itsGame->gameStatus == kPlayingStatus) ? activePlayersDistribution : 0;
-    // only send 1-way pings to/from active players just to keep the connection alive
-    int activeTrips = 1;
-    int inactiveTrips = isPlaying ? activeTrips : trips;
-    itsCommManager->SendPacket(playingDist & notMe,
-                               kpPing, 0, 0, activeTrips-1, 0, NULL);
-    itsCommManager->SendPacket(~playingDist & notMe,
-                               kpPing, 0, 0, inactiveTrips-1, 0, NULL);
+    // a "poke" is a one-way ping, for just keeping the connection open with less traffic
+    int pokeTrips = 1;
+    int pokeDist = activePlayersDistribution;
+
+    // send periodic poke to those who have NOT finished logging in in hopes that it will help get their connection going
+    pokeDist |= ~totalDistribution;
+
+    if (isPlaying) {
+        // if I'm playing, ONLY send pokes
+        pokeDist = kdEveryone;
+    }
+
+    // normal pings for everyone else
+    int pingDist = ~pokeDist;
+
+    // but don't ping/poke myself
+    pokeDist &= ~(1 << itsCommManager->myId);
+    pingDist &= ~(1 << itsCommManager->myId);
+
+//    SDL_Log("pokeDist = %x, pingDist = %x\n", pokeDist, pingDist);
+
+    itsCommManager->SendPacket(pokeDist,
+                               kpPing, 0, 0, pokeTrips-1, 0, NULL);
+    itsCommManager->SendPacket(pingDist,
+                               kpPing, 0, 0, pingTrips-1, 0, NULL);
 }
 
 bool CNetManager::CanPlay() {
