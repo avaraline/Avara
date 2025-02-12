@@ -219,7 +219,7 @@ void CHUD::DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx) {
     }
     if (playerManager->GetShowEditingHud()) {
         float boardWidth = 400;
-        float boardHeight = 99;
+        float boardHeight = 119;
         float x = 20;
         float y = 20;
         float fontsz = 18.0;
@@ -251,12 +251,14 @@ void CHUD::DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx) {
         nvgText(ctx, x, y, ehudText, NULL);
 
         y += lineHeight;
+
         // Heading is 32768 at an ALF angle of 0, and 0 at an ALF angle of 180.
         int heading = ceil(((player->heading - 32768) % 65536) / 65536.0 * 360);
         heading = heading <= 0 ? -heading : 360 - heading;
         snprintf(ehudText, sizeof(ehudText), "Heading (ALF angle): %d", heading);
-
         nvgText(ctx, x, y, ehudText, NULL);
+
+        y += lineHeight;
 
         RayHitRecord theHit;
         Matrix *mt = &player->viewPortPart->itsTransform;
@@ -266,6 +268,15 @@ void CHUD::DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx) {
         theHit.direction[0] = (*mt)[2][0];
         theHit.direction[1] = (*mt)[2][1];
         theHit.direction[2] = (*mt)[2][2];
+
+        snprintf(ehudText, sizeof(ehudText), "Sight sign vector x/z: %2d, %2d",
+            theHit.direction[0] < 0 ? -1 : theHit.direction[0] == 0 ? 0 : 1,
+            theHit.direction[2] < 0 ? -1 : theHit.direction[2] == 0 ? 0 : 1
+        );
+        nvgText(ctx, x, y, ehudText, NULL);
+
+        y += lineHeight;
+
         theHit.origin[0] = m2[3][0];
         theHit.origin[1] = m2[3][1];
         theHit.origin[2] = m2[3][2];
@@ -274,8 +285,7 @@ void CHUD::DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx) {
         player->RayTestWithGround(&theHit, kSolidBit);
 
         float distance = ToFloat(theHit.distance);
-
-        y += lineHeight;
+        
         if (distance > EHUD_SIGHT_MAX_DISTANCE) {
             snprintf(ehudText, sizeof(ehudText), "Sight x/z/y: --");
         } else {
@@ -289,6 +299,7 @@ void CHUD::DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx) {
         nvgText(ctx, x, y, ehudText, NULL);
 
         y += lineHeight;
+
         if (distance > EHUD_SIGHT_MAX_DISTANCE) {
             snprintf(ehudText, sizeof(ehudText), "Distance: --");
         } else {
