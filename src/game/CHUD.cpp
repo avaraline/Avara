@@ -268,15 +268,6 @@ void CHUD::DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx) {
         theHit.direction[0] = (*mt)[2][0];
         theHit.direction[1] = (*mt)[2][1];
         theHit.direction[2] = (*mt)[2][2];
-
-        snprintf(ehudText, sizeof(ehudText), "Sight sign vector x/z: %2d, %2d",
-            theHit.direction[0] < 0 ? -1 : theHit.direction[0] == 0 ? 0 : 1,
-            theHit.direction[2] < 0 ? -1 : theHit.direction[2] == 0 ? 0 : 1
-        );
-        nvgText(ctx, x, y, ehudText, NULL);
-
-        y += lineHeight;
-
         theHit.origin[0] = m2[3][0];
         theHit.origin[1] = m2[3][1];
         theHit.origin[2] = m2[3][2];
@@ -284,12 +275,20 @@ void CHUD::DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx) {
         theHit.closestHit = NULL;
         player->RayTestWithGround(&theHit, kSolidBit);
 
+        NormalizeVector(3, theHit.direction);
+
+        snprintf(ehudText, sizeof(ehudText), "Sight unit vec x/z: %.2f, %.2f",
+            ToFloat(theHit.direction[0]),
+            ToFloat(theHit.direction[2])
+        );
+        nvgText(ctx, x, y, ehudText, NULL);
+
+        y += lineHeight;
+
         float distance = ToFloat(theHit.distance);
-        
         if (distance > EHUD_SIGHT_MAX_DISTANCE) {
             snprintf(ehudText, sizeof(ehudText), "Sight x/z/y: --");
         } else {
-            NormalizeVector(3, theHit.direction);
             snprintf(ehudText, sizeof(ehudText), "Sight x/z/y: %.1f, %.1f, %.1f",
                 ToFloat(theHit.origin[0] + theHit.direction[0] * distance),
                 ToFloat(theHit.origin[2] + theHit.direction[2] * distance),
