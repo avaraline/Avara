@@ -28,7 +28,7 @@
 #define kMaxReceiveQueueLength kMaxTransmitQueueLength   // receive as much as is sent
 
 #define RTTSMOOTHFACTOR_UP 100
-#define RTTSMOOTHFACTOR_DOWN 200
+#define RTTSMOOTHFACTOR_DOWN 100
 #define COUNTSMOOTHFACTOR 1000
 
 #define MAX_RESENDS_WITHOUT_RECEIVE 3

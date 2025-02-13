@@ -686,7 +686,6 @@ void CAvaraGame::ReadGamePrefs() {
     }
     sensitivity = pow(2.0, gApplication->Get<double>(kMouseSensitivityTag));
     SDL_Log("mouse sensitivity multiplier = %.2lf\n", sensitivity);
-    latencyTolerance = gApplication->Get<double>(kLatencyToleranceTag);
 }
 
 void CAvaraGame::ResumeGame() {
@@ -1091,9 +1090,6 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, CPlayer
         // make prettier version of the LT string (C++ sucks with strings)
         std::ostringstream ltOss;
         ltOss << std::fixed << std::setprecision(int(1/(2*fpsScale))) << latencyTolerance;
-
-        // save as application preference (which also makes it show up on the UI)
-        gApplication->Set(kLatencyToleranceTag, latencyTolerance);
 
         // if it changed
         if (latencyTolerance != oldLatency && statusRequest == kPlayingStatus) {
