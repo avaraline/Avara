@@ -243,7 +243,7 @@ void CHUD::DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx) {
 
         float playerY = ToFloat(actor->location[1]) + 0.1; // not sure why + 0.1 is needed
 
-        snprintf(ehudText, sizeof(ehudText), "Player x/z/y: %.1f, %.1f, %.1f",
+        snprintf(ehudText, sizeof(ehudText), "       Player x/z/y: %.1f, %.1f, %.1f",
             ToFloat(actor->location[0]),
             ToFloat(actor->location[2]),
             playerY > 0.0 ? playerY : 0.0
@@ -277,7 +277,7 @@ void CHUD::DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx) {
 
         NormalizeVector(3, theHit.direction);
 
-        snprintf(ehudText, sizeof(ehudText), "Sight unit vec x/z: %.2f, %.2f",
+        snprintf(ehudText, sizeof(ehudText), " Sight unit vec x/z: %.2f, %.2f",
             ToFloat(theHit.direction[0]),
             ToFloat(theHit.direction[2])
         );
@@ -287,9 +287,9 @@ void CHUD::DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx) {
 
         float distance = ToFloat(theHit.distance);
         if (distance > EHUD_SIGHT_MAX_DISTANCE) {
-            snprintf(ehudText, sizeof(ehudText), "Sight x/z/y: --");
+            snprintf(ehudText, sizeof(ehudText), "        Sight x/z/y: --");
         } else {
-            snprintf(ehudText, sizeof(ehudText), "Sight x/z/y: %.1f, %.1f, %.1f",
+            snprintf(ehudText, sizeof(ehudText), "        Sight x/z/y: %.1f, %.1f, %.1f",
                 ToFloat(theHit.origin[0] + theHit.direction[0] * distance),
                 ToFloat(theHit.origin[2] + theHit.direction[2] * distance),
                 ToFloat(theHit.origin[1] + theHit.direction[1] * distance)
@@ -300,9 +300,9 @@ void CHUD::DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx) {
         y += lineHeight;
 
         if (distance > EHUD_SIGHT_MAX_DISTANCE) {
-            snprintf(ehudText, sizeof(ehudText), "Distance: --");
+            snprintf(ehudText, sizeof(ehudText), "           Distance: --");
         } else {
-            snprintf(ehudText, sizeof(ehudText), "Distance: %.1f", ToFloat(theHit.distance));
+            snprintf(ehudText, sizeof(ehudText), "           Distance: %.1f", ToFloat(theHit.distance));
         }
         nvgText(ctx, x, y, ehudText, NULL);
     }
