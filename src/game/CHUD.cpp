@@ -287,9 +287,9 @@ void CHUD::DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx) {
 
         float distance = ToFloat(theHit.distance);
         if (distance > EHUD_SIGHT_MAX_DISTANCE) {
-            snprintf(ehudText, sizeof(ehudText), "        Sight x/z/y: --");
+            snprintf(ehudText, sizeof(ehudText), "    Sight hit x/z/y: --");
         } else {
-            snprintf(ehudText, sizeof(ehudText), "        Sight x/z/y: %.1f, %.1f, %.1f",
+            snprintf(ehudText, sizeof(ehudText), "    Sight hit x/z/y: %.1f, %.1f, %.1f",
                 ToFloat(theHit.origin[0] + theHit.direction[0] * distance),
                 ToFloat(theHit.origin[2] + theHit.direction[2] * distance),
                 ToFloat(theHit.origin[1] + theHit.direction[1] * distance)
