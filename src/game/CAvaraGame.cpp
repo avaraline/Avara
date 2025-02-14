@@ -1071,7 +1071,7 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, CPlayer
         static int reduceLatencyCounter = 0;
         static int increaseLatencyCounter = 0;
         if (newLatency < latencyTolerance) {
-            static const int REDUCE_LATENCY_COUNT = 8;
+            static const int REDUCE_LATENCY_COUNT = 2;
             // need REDUCE_LATENCY_COUNT consecutive requests to reduce latency
             if (maxChange == MAX_LATENCY || ++reduceLatencyCounter >= REDUCE_LATENCY_COUNT) {
                 latencyTolerance = std::max(latencyTolerance-maxChange, std::max(newLatency, double(0.0)));

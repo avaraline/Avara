@@ -1950,22 +1950,32 @@ void CUDPComm::Reconfigure() {
 long CUDPComm::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
     float maxTrip = 0;
     CUDPConnection *conn;
+    // if set, use "rttx" value to multiply standard deviations
+    float mult = Debug::GetValue("rttx") / 10.0;  // rttx=25 --> mult=2.5
+    if (mult < 0) {
+        // 1.3*stdev = ~90.3% prob
+        mult = 1.3;
+    }
 
     for (conn = connections; conn; conn = conn->next) {
         if (conn->port && (distribution & (1 << conn->myId))) {
-            // add in 3.0*stdev (~99.7% prob) but max it at CLASSICFRAMETIME (don't add more than 0.5 to LT)
-            // note: is this really a erlang distribution?  if so, what's the proper equation?
             float stdev = sqrt(conn->varRoundTripTime);
-            float rtt = conn->meanRoundTripTime + std::min(3.0*stdev, (1.0*CLASSICFRAMECLOCK));
+            // add in mult*stdev but max it at CLASSICFRAMETIME (so we don't add more than 0.5 to LT)
+            // note: is this really a erlang distribution?  if so, what's the proper equation?
+            float rtt = conn->meanRoundTripTime + std::min<float>(mult*stdev, (1.0*CLASSICFRAMECLOCK));
             if (rtt > maxTrip) {
                 maxTrip = rtt;
                 if (slowPlayerId != nullptr) {
                     *slowPlayerId = conn->myId;
-                    // SDL_Log("meanRTT[%d] = %.1f, stdevRTT = %.1f, maxRtt=%.1f\n",
-                    //         conn->myId,
-                    //         conn->meanRoundTripTime*MSEC_PER_GET_CLOCK,
-                    //         stdev*MSEC_PER_GET_CLOCK,
-                    //         rtt*MSEC_PER_GET_CLOCK);
+                    DBG_Log("rtt", "RTT[%d] = %.1f(%.2f) + min(%.1f * %.1f(%.2f), 64(0.5)) = %.1f(%.2fLT)\n",
+                            conn->myId,
+                            conn->meanRoundTripTime*MSEC_PER_GET_CLOCK,
+                            conn->meanRoundTripTime*MSEC_PER_GET_CLOCK / (2*CLASSICFRAMETIME),
+                            mult,
+                            stdev*MSEC_PER_GET_CLOCK,
+                            stdev*MSEC_PER_GET_CLOCK / (2*CLASSICFRAMETIME),
+                            rtt*MSEC_PER_GET_CLOCK,
+                            rtt*MSEC_PER_GET_CLOCK / (2*CLASSICFRAMETIME));
                 }
             }
         }
