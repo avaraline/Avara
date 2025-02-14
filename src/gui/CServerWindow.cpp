@@ -60,25 +60,25 @@ CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
     latencyBox->setEnabled(true);
     latencyBox->setCallback([this](std::string value) -> bool {
         double newLT = std::stod(value);
-        // let SetFrameLatency() enforce limits on latencyTolerance AND set the pref
+        // let SetFrameLatency() enforce limits on latencyTolerance
         gCurrentGame->SetFrameLatency(std::ceil(newLT/gCurrentGame->fpsScale), -1);
 
         // it might be modified on a bad input so retrieve the computed value
         latencyBox->setValue(std::to_string(gCurrentGame->latencyTolerance).substr(0, 5));
+
+        // save the pref
+        gApplication->Set(kLatencyToleranceTag, gCurrentGame->latencyTolerance);
+
         return true;
     });
 
-    autoLatencyBox = new nanogui::CheckBox(this, "Auto Latency", [this, app](bool checked) {
+    autoLatencyBox = new nanogui::CheckBox(this, "Auto Latency", [&, app](bool checked) {
         long options = app->Number(kServerOptionsTag);
         if (checked) {
             options |= 1 << kUseAutoLatencyBit;
-            latencyBox->setEditable(false);
-            latencyBox->setEnabled(false);
         }
         else {
             options &= ~(long)(1 << kUseAutoLatencyBit);
-            latencyBox->setEditable(true);
-            latencyBox->setEnabled(true);
         }
         app->Set(kServerOptionsTag, options);
         ((CAvaraAppImpl *)app)->GetNet()->ChangedServerOptions(options);

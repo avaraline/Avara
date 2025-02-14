@@ -171,6 +171,7 @@ public:
     double sensitivity;
 
     double latencyTolerance;
+    short initialFrameLatency = 0;
 
     ScoreInterfaceReasons scoreReason;
     ScoreInterfaceReasons killReason;

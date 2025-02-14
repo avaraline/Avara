@@ -40,7 +40,7 @@
 #define AUTOLATENCYDELAY  448   // msec (divisible by 64)
 #define LOWERLATENCYCOUNT   2
 #define HIGHERLATENCYCOUNT  (0.25 * AUTOLATENCYPERIOD / itsGame->frameTime)       // 25% of frames
-#define DECREASELATENCYPERIOD (itsGame->TimeToFrameCount(AUTOLATENCYPERIOD*16))  // 16 consecutive votes ≈ 61 sec
+#define DECREASELATENCYPERIOD (itsGame->TimeToFrameCount(AUTOLATENCYPERIOD*2))    // 2 consecutive votes ≈ 7.7 sec
 
 
 #if ROUTE_THRU_SERVER
@@ -824,6 +824,9 @@ void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
                 // but addOneLatency helps account for deficiencies in the calculation by measuring how often clients had to wait too long for packets to arrive
                 short maxFrameLatency = addOneLatency + itsGame->RoundTripToFrameLatency(maxRoundTripLatency);
 
+                // treat kLatencyToleranceTag as upper limit when in AutoLT mode
+                maxFrameLatency = std::min<short>(maxFrameLatency, gApplication->Get<double>(kLatencyToleranceTag)/itsGame->fpsScale);
+
                 DBG_Log("lt", "  fn=%d RTT=%d, Classic LT=%.2lf, add=%lf --> FL=%d\n",
                         frameNumber, maxRoundTripLatency,
                         (maxRoundTripLatency) / (2.0*CLASSICFRAMETIME), addOneLatency*itsGame->fpsScale, maxFrameLatency);
@@ -929,7 +932,7 @@ void CNetManager::SendPingCommand(int pingTrips) {
     // there & back = 2 trips... send less to/from players in game
     // a "poke" is a one-way ping, for just keeping the connection open with less traffic
     int pokeTrips = 1;
-    int pokeDist = activePlayersDistribution;
+    int pokeDist = itsGame->IsPlaying() ? activePlayersDistribution : 0;
 
     // send periodic poke to those who have NOT finished logging in in hopes that it will help get their connection going
     pokeDist |= ~totalDistribution;
@@ -1303,6 +1306,7 @@ void CNetManager::DoConfig(short senderSlot) {
         // transmitting latencyTolerance in terms of frameLatency to keep it as a short value on transmission
         itsGame->SetFrameTime(theConfig->frameTime);
         itsGame->SetFrameLatency(theConfig->frameLatency, -1);
+        SDL_Log("DoConfig LT = %lf\n", itsGame->latencyTolerance);
         itsGame->SetSpawnOrder((SpawnOrder)theConfig->spawnOrder);
         latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD);
     }
@@ -1312,8 +1316,10 @@ void CNetManager::UpdateLocalConfig() {
     CPlayerManager *thePlayerManager = playerTable[itsCommManager->myId].get();
 
     config.frameLatency = gApplication
-        ? gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale
-        : 0;
+        ? gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale : 0;
+    if (IsAutoLatencyEnabled()) {
+        config.frameLatency = std::min<short>(config.frameLatency, itsGame->initialFrameLatency);
+    }
     config.frameTime = itsGame->frameTime;
     config.spawnOrder = gApplication ? gApplication->Get<short>(kSpawnOrder) : ksHybrid;
     config.hullType = gApplication ? gApplication->Number(kHullTypeTag) : 0;
