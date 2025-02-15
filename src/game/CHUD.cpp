@@ -1093,6 +1093,10 @@ void CHUD::RenderNewHUD(NVGcontext *ctx) {
             if(thisPlayer->IsAway()) {
                 textColor = nvgRGBA(255, 255, 255, 150);
                 colorBoxAlpha = 0.5;
+
+                teamColorRGB[0] = 0;
+                teamColorRGB[1] = 0;
+                teamColorRGB[2] = 0;
             }
             else {
                 textColor = nvgRGBA(255, 255, 255, 255);
