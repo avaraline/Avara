@@ -38,6 +38,7 @@
 #include "Debug.h"
 #include "ModernOpenGLRenderer.h"
 #include "LegacyOpenGLRenderer.h"
+#include "GitVersion.h"
 
 // included while we fake things out
 #include "CPlayerManager.h"
@@ -506,7 +507,9 @@ void CAvaraAppImpl::TrackerUpdate() {
     if(trackerState["players"].empty()) {
         trackerState["players"].push_back(String(kPlayerNameTag));
     }
-    trackerState["description"] = String(kServerDescription);
+    std::string gitv = std::string(GIT_VERSION);
+    trackerState["git-version"] = gitv;
+    trackerState["description"] = gitv.substr(0, 6) + (gitv.length() > 8 ? "\\*: " : ": ") + String(kServerDescription);
     trackerState["password"] = String(kServerPassword).length() > 0 ? true : false;
 
     DBG_Log("tracker", "%s", trackerState.dump().c_str());
