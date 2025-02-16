@@ -34,6 +34,9 @@
 
 #define kMaxLatencyTolerance 8
 
+#define kAvaraNetVersion 13
+
+
 enum { kNullNet, kServerNet, kClientNet };
 
 //	Server option bits

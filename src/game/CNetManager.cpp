@@ -42,13 +42,6 @@
 #define HIGHERLATENCYCOUNT  (0.25 * AUTOLATENCYPERIOD / itsGame->frameTime)       // 25% of frames
 #define DECREASELATENCYPERIOD (itsGame->TimeToFrameCount(AUTOLATENCYPERIOD*2))    // 2 consecutive votes ≈ 7.7 sec
 
-
-#if ROUTE_THRU_SERVER
-    #define kAvaraNetVersion 666
-#else
-    #define kAvaraNetVersion 13
-#endif
-
 #define kMessageBufferMaxAge 90
 #define kMessageBufferMinAge 30
 #define kMessageWaitTime 12
