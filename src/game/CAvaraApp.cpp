@@ -38,7 +38,8 @@
 #include "Debug.h"
 #include "ModernOpenGLRenderer.h"
 #include "LegacyOpenGLRenderer.h"
-#include "GitVersion.h"
+#include "GitVersion.h"   // version.git
+#include "CNetManager.h"  // version.net
 
 // included while we fake things out
 #include "CPlayerManager.h"
@@ -508,7 +509,8 @@ void CAvaraAppImpl::TrackerUpdate() {
         trackerState["players"].push_back(String(kPlayerNameTag));
     }
     std::string gitv = std::string(GIT_VERSION);
-    trackerState["git-version"] = gitv;
+    trackerState["version"]["git"] = gitv;
+    trackerState["version"]["net"] = kAvaraNetVersion;
     trackerState["description"] = gitv.substr(0, 6) + (gitv.length() > 8 ? "\\*: " : ": ") + String(kServerDescription);
     trackerState["password"] = String(kServerPassword).length() > 0 ? true : false;
 
