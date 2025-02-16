@@ -40,6 +40,7 @@ void CApplication::Done() {
     _prefs[kWindowHeight] = mSize[1];
     _prefs.erase(kDefaultClientUDPPort);  // don't save client port
     WritePrefs(_prefs);
+    std::exit(EXIT_SUCCESS);
 }
 
 void CApplication::BroadcastCommand(int theCommand) {

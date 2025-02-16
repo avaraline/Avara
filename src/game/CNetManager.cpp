@@ -1587,9 +1587,20 @@ std::vector<CPlayerManager*> CNetManager::AllPlayers() {
     return players;
 }
 
+// return a lowercase copy of string
+inline std::string lowerStr(std::string s)
+{
+    std::string low(s);
+    std::transform(low.begin(), low.end(), low.begin(), ::tolower);
+    return low;
+}
+
 int CNetManager::PlayerSlot(std::string playerName) {
+    std::string lowerName1(lowerStr(playerName));
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
-        if (playerTable[i].get()->GetPlayerName() == playerName) {
+        std::string lowerName2(lowerStr(playerTable[i].get()->GetPlayerName()));
+        // case-insensitive name comparison ("FreD" == "fred")
+        if (lowerName1 == lowerName2) {
             return i;
         }
     }
