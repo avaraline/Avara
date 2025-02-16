@@ -82,7 +82,6 @@ void PlayerRatingsSimpleElo::UpdateRatings(std::vector<PlayerResult> &playerResu
 
         // if a player changed the CASE of their name (FreD to fREd)...
         if (playerId != ratingsMap.find(playerId)->first) {
-            std::cout << "LOOK at " << playerId << std::endl;
             // pull the old node out of the map and reinsert with the new name
             auto rating = ratingsMap.extract(playerId);
             rating.key() = playerId;
