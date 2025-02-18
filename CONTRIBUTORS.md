@@ -12,4 +12,4 @@ The following people have contributed to this port:
 * Eric Blenkush <@blenkush> - user interface, spectator mode, scoreboard, bug fixes
 * Tom Anderson <@tra> - critical networking fixes and updates, fps improvements
 * Jack Carlson <@JackCarlson> - user interface, bug fixes, playtesting
-* Ben Darling <@Ymihere03> - user interface, bug fixes, playtesting
+* Ben Darling <@Ymihere03> - user interface, HUD design, in-game kill feed, spectator camera, bug fixes, playtesting

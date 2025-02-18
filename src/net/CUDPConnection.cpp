@@ -28,7 +28,7 @@
 #define kMaxReceiveQueueLength kMaxTransmitQueueLength   // receive as much as is sent
 
 #define RTTSMOOTHFACTOR_UP 100
-#define RTTSMOOTHFACTOR_DOWN 200
+#define RTTSMOOTHFACTOR_DOWN 100
 #define COUNTSMOOTHFACTOR 1000
 
 #define MAX_RESENDS_WITHOUT_RECEIVE 3
@@ -391,6 +391,12 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, int32_t when) {
                         myId, thePacket->packet.command, roundTrip, meanRoundTripTime, sqrt(varRoundTripTime), uint16_t(maxValid));
             #endif
         } else if (commandMultiplier > 0) {
+            if (thePacket->packet.command == kpPing) {
+                // decrease ping roundTrip by about 20% because pings aren't as fast as urgent game packets and we
+                // want to start the game at about the right LT (based on average ping times)
+                roundTrip *= 0.8;
+            }
+
             // compute an exponential moving average & variance of the roundTrip time
             // see: https://fanf2.user.srcf.net/hermes/doc/antiforgery/stats.pdf
             float difference = roundTrip - meanRoundTripTime;
@@ -764,6 +770,7 @@ void CUDPConnection::MarkOpenConnections(CompleteAddress *table) {
             table++;
         }
 
+        DBG_Log("login", "%s no longer in connection table, marking as GONE", FormatHostPort(ipAddr, port).c_str());
         port = 0;
         ipAddr = 0;
         myId = -1;
@@ -846,13 +853,13 @@ void CUDPConnection::FreshClient(ip_addr remoteHost, port_num remotePort, uint16
     nextAckTime = validTime + kAckRetransmitBase;
     haveToSendAck = true;
 
-    ipAddr = remoteHost;
+    ipAddr = ipAddrExt = remoteHost;
     port = remotePort;
 
-    // Normal client-client Avara packets will do the hole-punching for us, so this is unnecessary.
-    // But maybe this could speed things up?
-    // IPaddress addr = { remoteHost, remotePort };
-    // Punch(addr);
+    // Normal client-client Avara packets will do the hole-punching for us, so this is unnecessary?
+    // Sometimes the hole needs to be punched between clients such as when they are both behind double-NAT.
+    IPaddress addr = { remoteHost, remotePort };
+    RequestPunch(addr);
 }
 
 Boolean CUDPConnection::AreYouDone() {

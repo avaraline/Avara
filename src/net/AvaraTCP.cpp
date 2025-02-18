@@ -54,6 +54,7 @@ enum { kPunchPing = 1, kPunchRequest = 2, kPunch = 3 };
 static Boolean gAvaraTCPOpen = false;
 static int gAvaraSocket = -1;
 UDPReadData gReadCallback;
+PunchAddressHandler gPunchAddressHandler;
 
 static IPaddress punchServer = {0, 0};
 static IPaddress punchLocal = {0, 0};
@@ -222,6 +223,11 @@ void HandlePunchPacket(UDPpacket *packet) {
     }
     PunchPacket *pp = (PunchPacket *)packet->data;
     SDL_Log("Got packet from punch server - (%d) %s", pp->command, FormatAddress(pp->address).c_str());
+
+    if (gPunchAddressHandler) {
+        gPunchAddressHandler(pp->address);
+    }
+
     if (pp->command == kPunch) {
         Punch(pp->address);
     }
@@ -325,4 +331,8 @@ std::string FormatHostPort(uint32_t host, uint16_t port) {
 
 std::string FormatAddress(IPaddress &addr) {
     return FormatHostPort(addr.host, addr.port);
+}
+
+void SetPunchAddressHandler(PunchAddressHandler handler) {
+    gPunchAddressHandler = handler;
 }

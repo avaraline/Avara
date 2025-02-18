@@ -36,10 +36,10 @@ typedef uint16_t port_num;
 typedef int32_t ClockTick;   // integer counter returned by UDPComm::GetClock()
 
 struct Rect {
-    int16_t top;
-    int16_t left;
-    int16_t bottom;
-    int16_t right;
+    Fixed top;
+    Fixed left;
+    Fixed bottom;
+    Fixed right;
 };
 typedef struct Rect Rect;
 

@@ -37,12 +37,12 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
     partYon = ReadFixedVar(iWallYon);
 
     do {
-        dim[0] = FDivNZ(theRect->right - theRect->left, 72);
+        dim[0] = theRect->right - theRect->left;
         dim[1] = 0;
-        dim[2] = FDivNZ(theRect->bottom - theRect->top, 72);
+        dim[2] = theRect->bottom - theRect->top;
 
         tooBig =
-            dim[0] > LOCATORRECTSIZE / 5 || dim[2] > LOCATORRECTSIZE / 5; // VectorLength(3, dim) > LOCATORRECTSIZE/5;
+            dim[0] > LOCATORRECTSIZE || dim[2] > LOCATORRECTSIZE; // VectorLength(3, dim) > LOCATORRECTSIZE/5;
         if (tooBig) {
             CWallActor *otherWall;
             Rect smallRect;
@@ -66,11 +66,11 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
         }
     } while (tooBig);
 
-    centerX = FMulDivNZ(theRect->right + theRect->left, FIX(5), 144);
-    centerZ = FMulDivNZ(theRect->bottom + theRect->top, FIX(5), 144);
+    centerX = (theRect->right + theRect->left) / 2;
+    centerZ = (theRect->bottom + theRect->top) / 2;
 
-    dim[0] = dim[0] * 5 / 2;
-    dim[2] = dim[2] * 5 / 2;
+    dim[0] = dim[0] / 2;
+    dim[2] = dim[2] / 2;
     if (height) {
         dim[1] = (1 + height) >> 1;
         //dim[1] = (1 + height * ReadFixedVar(iPixelToThickness)) >> 1;

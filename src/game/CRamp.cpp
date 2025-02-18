@@ -62,9 +62,9 @@ CAbstractActor *CRamp::EndScript() {
         maskBits |= kSolidBit + kDoorIgnoreBit;
 
         deltaY = ReadFixedVar(iDeltaY);
-        dims[0] = FMulDivNZ(gLastBoxRect.right - gLastBoxRect.left, FIX(5), 72);
+        dims[0] = gLastBoxRect.right - gLastBoxRect.left;
         dims[1] = ReadFixedVar(iThickness);
-        dims[2] = FMulDivNZ(gLastBoxRect.bottom - gLastBoxRect.top, FIX(5), 72);
+        dims[2] = gLastBoxRect.bottom - gLastBoxRect.top;
 
         if (dims[0] > LOCATORRECTSIZE)
             dims[0] = LOCATORRECTSIZE;
@@ -77,8 +77,8 @@ CAbstractActor *CRamp::EndScript() {
             heading += 0x8000;
         }
 
-        location[0] = FMulDivNZ(gLastBoxRect.right + gLastBoxRect.left, FIX(5), 144);
-        location[2] = FMulDivNZ(gLastBoxRect.bottom + gLastBoxRect.top, FIX(5), 144);
+        location[0] = (gLastBoxRect.right + gLastBoxRect.left) >> 1;
+        location[2] = (gLastBoxRect.bottom + gLastBoxRect.top) >> 1;
 
         partCount = 1;
 

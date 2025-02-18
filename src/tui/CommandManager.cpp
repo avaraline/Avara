@@ -14,6 +14,10 @@
 #include "Tags.h"
 #include "GitVersion.h"
 
+#include <nanogui/nanogui.h>
+
+using namespace nanogui;
+
 CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
 
     // register commands
@@ -119,6 +123,14 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
         //itsApp->rosterWindow->SendRosterMessage(infoString);
         //itsApp->rosterWindow->SendRosterMessage(GIT_VERSION);
 
+        return false;
+    });
+    TextCommand::Register(cmd);
+
+    cmd = new TextCommand("/quit            <- quit",
+                          [this](VectorOfArgs vargs) -> bool {
+        itsApp->Done();
+	leave();
         return false;
     });
     TextCommand::Register(cmd);

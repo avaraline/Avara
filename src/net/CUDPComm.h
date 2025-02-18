@@ -34,7 +34,7 @@ enum { udpCramInfo }; //	Selectors for kpPacketProtocolControl packer p1 params.
 class CUDPComm : public CCommManager {
 public:
     int32_t seed;
-    short softwareVersion;
+    uint16_t softwareVersion;
     short maxClients;
     short clientLimit;
     Str255 password;
@@ -97,7 +97,7 @@ public:
     Boolean specialWakeup;
     Str255 inviteString;
 
-    virtual void IUDPComm(short clientCount, short bufferCount, short version, ClockTick urgentTimePeriod);
+    virtual void IUDPComm(short clientCount, short bufferCount, uint16_t version, ClockTick urgentTimePeriod);
 
     virtual void Disconnect();
     virtual void WritePrefs();
@@ -117,7 +117,9 @@ public:
     virtual void ProcessQueue();
 
     virtual std::string FormatConnectionTable(CompleteAddress *table);
+    virtual bool IsDoubleNAT(uint32_t host);
     virtual void SendConnectionTable();
+    virtual void ReplaceMatchingNAT(const IPaddress &addr);
     virtual void ReadFromTOC(PacketInfo *thePacket);
 
     virtual void SendRejectPacket(ip_addr remoteHost, port_num remotePort, OSErr loginErr);

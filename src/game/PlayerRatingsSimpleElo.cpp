@@ -79,6 +79,15 @@ void PlayerRatingsSimpleElo::UpdateRatings(std::vector<PlayerResult> &playerResu
     int outCount = 0;
     for (auto result: playerResults) {
         auto playerId = result.playerId;
+
+        // if a player changed the CASE of their name (FreD to fREd)...
+        if (playerId != ratingsMap.find(playerId)->first) {
+            // pull the old node out of the map and reinsert with the new name
+            auto rating = ratingsMap.extract(playerId);
+            rating.key() = playerId;
+            ratingsMap.insert(std::move(rating));
+        }
+
         ratingsMap[playerId].rating += adjustments[playerId].rating;
         ratingsMap[playerId].count += adjustments[playerId].count > 0 ? 1 : 0;  // don't count game more than once
         ratingsMap[playerId].rating = std::roundf(ratingsMap[playerId].rating*4)/4;
@@ -88,11 +97,14 @@ void PlayerRatingsSimpleElo::UpdateRatings(std::vector<PlayerResult> &playerResu
             if (result == playerResults.front()) {
                 gCurrentGame->itsApp->AddMessageLine("Updated Elo Ratings:");
             }
-            // format results like this:
-            //        PlayerName[111] = 1622(+22)
-            //   LongerPlayerName[22] = 1477( -6)
-            oss << std::right << std::setw(21)
-                << (playerId + "[" + std::to_string(ratingsMap[playerId].count) + "] = ")
+            // format results like this (stop displaying game count over 99):
+            //           PlayerName = 1622(+22)
+            //   LongPlayerName[22] = 1477( -6)
+            std::string numPlayed(ratingsMap[playerId].count > 99 ?
+                                  "" :
+                                  "[" + std::to_string(ratingsMap[playerId].count) + "]");
+            oss << std::right << std::setw(19)
+                << (playerId + numPlayed + " = ")
                 << std::fixed << std::setprecision(0)
                 << std::setw(4) << ratingsMap[playerId].rating
                 << "(" << std::showpos  << std::setw(3) << adjustments[playerId].rating << std::noshowpos << ")" ;
