@@ -30,7 +30,7 @@ private:
         std::size_t idx;
         if (value < minValue) {
             idx = 0;
-        } else if (value > maxValue) {
+        } else if (value >= maxValue) {
             idx = cellCounts.size() - 1;
         } else {
             idx = (value - minValue) / stepSize;
