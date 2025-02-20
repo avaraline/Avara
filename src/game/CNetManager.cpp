@@ -815,16 +815,18 @@ void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
 
                 // Usually maxFrameLatency is determined primarily by maxRoundTripLatency...
                 // but addOneLatency helps account for deficiencies in the calculation by measuring how often clients had to wait too long for packets to arrive
-                short maxFrameLatency = addOneLatency + itsGame->RoundTripToFrameLatency(maxRoundTripLatency);
+                short newFrameLatency = addOneLatency + itsGame->RoundTripToFrameLatency(maxRoundTripLatency);
 
-                // treat kLatencyToleranceTag as upper limit when in AutoLT mode
-                maxFrameLatency = std::min<short>(maxFrameLatency, gApplication->Get<double>(kLatencyToleranceTag)/itsGame->fpsScale);
+                // limit LT unless it's set to zero
+                if (maxAutoLatency > 0) {
+                    newFrameLatency = std::min<short>(newFrameLatency, maxAutoLatency);
+                }
 
                 DBG_Log("lt", "  fn=%d RTT=%d, Classic LT=%.2lf, add=%lf --> FL=%d\n",
                         frameNumber, maxRoundTripLatency,
-                        (maxRoundTripLatency) / (2.0*CLASSICFRAMETIME), addOneLatency*itsGame->fpsScale, maxFrameLatency);
+                        (maxRoundTripLatency) / (2.0*CLASSICFRAMETIME), addOneLatency*itsGame->fpsScale, newFrameLatency);
 
-                itsGame->SetFrameLatency(maxFrameLatency, 2, maxPlayer);
+                itsGame->SetFrameLatency(newFrameLatency, 2, maxPlayer);
             }
 
             ResetLatencyVote();
@@ -1298,8 +1300,17 @@ void CNetManager::DoConfig(short senderSlot) {
     if (PermissionQuery(kAllowLatencyBit, 0) || !(activePlayersDistribution & kdServerOnly) || senderSlot == 0) {
         // transmitting latencyTolerance in terms of frameLatency to keep it as a short value on transmission
         itsGame->SetFrameTime(theConfig->frameTime);
-        itsGame->SetFrameLatency(theConfig->frameLatency, -1);
-        SDL_Log("DoConfig LT = %lf\n", itsGame->latencyTolerance);
+        maxAutoLatency = theConfig->frameLatency;
+        short initFrameLatency = theConfig->frameLatency;
+        if (IsAutoLatencyEnabled()) {
+            // try setting initial FL from max local RTT value, maybe need the server to send this?  we'll see
+            initFrameLatency = itsGame->RoundTripToFrameLatency(itsCommManager->GetMaxRoundTrip(AlivePlayersDistribution()));
+            if (maxAutoLatency > 0) {
+                initFrameLatency = std::min<short>(initFrameLatency, maxAutoLatency);
+            }
+        }
+        itsGame->SetFrameLatency(initFrameLatency, -1);
+        SDL_Log("DoConfig LT = %lf, FL = %d\n", itsGame->latencyTolerance, maxAutoLatency);
         itsGame->SetSpawnOrder((SpawnOrder)theConfig->spawnOrder);
         latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD);
     }
@@ -1310,9 +1321,6 @@ void CNetManager::UpdateLocalConfig() {
 
     config.frameLatency = gApplication
         ? gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale : 0;
-    if (IsAutoLatencyEnabled()) {
-        config.frameLatency = std::min<short>(config.frameLatency, itsGame->initialFrameLatency);
-    }
     config.frameTime = itsGame->frameTime;
     config.spawnOrder = gApplication ? gApplication->Get<short>(kSpawnOrder) : ksHybrid;
     config.hullType = gApplication ? gApplication->Number(kHullTypeTag) : 0;

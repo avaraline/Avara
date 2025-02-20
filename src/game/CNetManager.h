@@ -96,6 +96,7 @@ public:
 
     short serverOptions;
     short loaderSlot;
+    short maxAutoLatency;  // max frame latency for auto-LT
 
     PlayerConfigRecord config {};
 
