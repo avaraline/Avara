@@ -89,6 +89,7 @@ std::unique_ptr<CNetManager> CAvaraGame::CreateNetManager() {
 
 CAvaraGame::CAvaraGame(FrameTime frameTime) {
     SetFrameTime(frameTime);
+    latencyTolerance = 0.0;
 }
 void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     itsApp = theApp;
@@ -1074,18 +1075,20 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, CPlayer
             static const int REDUCE_LATENCY_COUNT = 2;
             // need REDUCE_LATENCY_COUNT consecutive requests to reduce latency
             if (maxChange == MAX_LATENCY || ++reduceLatencyCounter >= REDUCE_LATENCY_COUNT) {
-                latencyTolerance = std::max(latencyTolerance-maxChange, std::max(newLatency, double(0.0)));
+                latencyTolerance = std::max(latencyTolerance-maxChange, newLatency);
                 reduceLatencyCounter = 0;
                 increaseLatencyCounter = 0;
             }
         } else {
             static const int INCREASE_LATENCY_COUNT = 1;
             if (maxChange == MAX_LATENCY || ++increaseLatencyCounter >= INCREASE_LATENCY_COUNT) {
-                latencyTolerance = std::min(latencyTolerance+maxChange, std::min(newLatency, double(MAX_LATENCY)));
+                latencyTolerance = std::min(latencyTolerance+maxChange, newLatency);
                 reduceLatencyCounter = 0;
                 increaseLatencyCounter = 0;
             }
         }
+        // make sure it's always between 0 and MAX_LATENCY
+        latencyTolerance = std::min(std::max(latencyTolerance, 0.0), double(MAX_LATENCY));
 
         // make prettier version of the LT string (C++ sucks with strings)
         std::ostringstream ltOss;

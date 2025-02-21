@@ -55,7 +55,7 @@ CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
     });
 
     latencyBox = new nanogui::TextBox(this);
-    latencyBox->setValue(std::to_string(app->Get<float>(kLatencyToleranceTag)).substr(0, 5));
+    latencyBox->setValue(std::to_string(app->Get<float>(kLatencyToleranceTag)));
     latencyBox->setEditable(true);
     latencyBox->setEnabled(true);
     latencyBox->setCallback([this](std::string value) -> bool {
@@ -64,7 +64,7 @@ CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
         gCurrentGame->SetFrameLatency(std::ceil(newLT/gCurrentGame->fpsScale), -1);
 
         // it might be modified on a bad input so retrieve the computed value
-        latencyBox->setValue(std::to_string(gCurrentGame->latencyTolerance).substr(0, 5));
+        latencyBox->setValue(std::to_string(gCurrentGame->latencyTolerance));
 
         // save the pref
         gApplication->Set(kLatencyToleranceTag, gCurrentGame->latencyTolerance);
@@ -134,7 +134,7 @@ bool CServerWindow::DoCommand(int theCommand) {
 
 void CServerWindow::PrefChanged(std::string name) {
     frameTimeBox->setSelectedIndex(6-log2(gCurrentGame->frameTime));
-    latencyBox->setValue(std::to_string(mApplication->Get<float>(kLatencyToleranceTag)).substr(0, 5));
+    latencyBox->setValue(std::to_string(mApplication->Get<float>(kLatencyToleranceTag)).substr(0, 8-log2(gCurrentGame->frameTime)));
     registerBox->setChecked(mApplication->Get<int>(kTrackerRegister) != 0);
 }
 
