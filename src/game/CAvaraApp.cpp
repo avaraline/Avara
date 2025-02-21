@@ -511,7 +511,7 @@ void CAvaraAppImpl::TrackerUpdate() {
     std::string gitv = std::string(GIT_VERSION);
     trackerState["version"]["git"] = gitv;
     trackerState["version"]["net"] = kAvaraNetVersion;
-    trackerState["description"] = gitv.substr(0, 6) + (gitv.length() > 8 ? "*: " : ": ") + String(kServerDescription);
+    trackerState["description"] = gitv.substr(0, 6) + (gitv.length() > 8 ? "\\*: " : ": ") + String(kServerDescription);
     trackerState["password"] = String(kServerPassword).length() > 0 ? true : false;
 
     DBG_Log("tracker", "%s", trackerState.dump().c_str());
