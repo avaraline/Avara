@@ -38,8 +38,8 @@
 
 #define AUTOLATENCYPERIOD 3840  // msec (divisible by 64)
 #define AUTOLATENCYDELAY  448   // msec (divisible by 64)
-#define LOWERLATENCYCOUNT   2
-#define HIGHERLATENCYCOUNT  (0.25 * AUTOLATENCYPERIOD / itsGame->frameTime)       // 25% of frames
+#define LOWERLATENCYCOUNT   (0.03 * AUTOLATENCYPERIOD / itsGame->frameTime)       // waited on <3% of frames
+#define HIGHERLATENCYCOUNT  (0.25 * AUTOLATENCYPERIOD / itsGame->frameTime)       // waited on >25% of frames
 #define DECREASELATENCYPERIOD (itsGame->TimeToFrameCount(AUTOLATENCYPERIOD*2))    // 2 consecutive votes ≈ 7.7 sec
 
 #define kMessageBufferMaxAge 90
@@ -686,6 +686,7 @@ void CNetManager::ResumeGame() {
         copy.cockpitColor = ntohl(config.cockpitColor.GetRaw());
         copy.gunColor = ntohl(config.gunColor.GetRaw());
 
+        // everyone sends this packet which eventually sets the LoadingStatus() to kLActive
         itsCommManager->SendUrgentPacket(
             kdEveryone, kpStartSynch, 0, kLActive, FRandSeed, sizeof(PlayerConfigRecord), (Ptr)&copy);
 
@@ -697,15 +698,18 @@ void CNetManager::ResumeGame() {
 
             statusTest = 0;
             for (i = 0; i < kMaxAvaraPlayers; i++) {
+                // mark which players we have received kLActive from
                 if (playerTable[i]->LoadingStatus() == kLActive) {
                     statusTest |= 1 << i;
                 }
             }
 
+            // have we received kLActive from everyone who's playing?
             if ((statusTest & activePlayersDistribution) == activePlayersDistribution) {
                 notReady = false;
             }
 
+            // process packets until we receive all the kpStartSynch messages (with kLActive status)
             ProcessQueue();
             // Do we need this?
             // itsGame->itsApp->DoUpdate();
@@ -1296,21 +1300,16 @@ void CNetManager::DoConfig(short senderSlot) {
         playerTable[senderSlot]->GetPlayer()->ReceiveConfig(theConfig);
     }
 
-    // any reason for these conditionals?  seems like we should always set frameTime etc.
+    // gets the frame info from the server (senderSlot==0) if server is playing OR anyone else if server not playing (seems bad)
+    // ... but what about the kAllowLatencyBit?
     if (PermissionQuery(kAllowLatencyBit, 0) || !(activePlayersDistribution & kdServerOnly) || senderSlot == 0) {
+        // save the frameTime, latency, maxLatency sent by the server (normally)
+
         // transmitting latencyTolerance in terms of frameLatency to keep it as a short value on transmission
         itsGame->SetFrameTime(theConfig->frameTime);
-        maxAutoLatency = theConfig->frameLatency;
-        short initFrameLatency = theConfig->frameLatency;
-        if (IsAutoLatencyEnabled()) {
-            // try setting initial FL from max local RTT value, maybe need the server to send this?  we'll see
-            initFrameLatency = itsGame->RoundTripToFrameLatency(itsCommManager->GetMaxRoundTrip(AlivePlayersDistribution()));
-            if (maxAutoLatency > 0) {
-                initFrameLatency = std::min<short>(initFrameLatency, maxAutoLatency);
-            }
-        }
-        itsGame->SetFrameLatency(initFrameLatency, -1);
-        SDL_Log("DoConfig LT = %lf, FL = %d\n", itsGame->latencyTolerance, maxAutoLatency);
+        maxAutoLatency = theConfig->maxFrameLatency;
+        itsGame->SetFrameLatency(theConfig->frameLatency, -1);
+        SDL_Log("DoConfig LT = %lf, maxFL = %d\n", itsGame->latencyTolerance, maxAutoLatency);
         itsGame->SetSpawnOrder((SpawnOrder)theConfig->spawnOrder);
         latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD);
     }
@@ -1319,8 +1318,16 @@ void CNetManager::DoConfig(short senderSlot) {
 void CNetManager::UpdateLocalConfig() {
     CPlayerManager *thePlayerManager = playerTable[itsCommManager->myId].get();
 
-    config.frameLatency = gApplication
+    config.maxFrameLatency = gApplication
         ? gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale : 0;
+    if (IsAutoLatencyEnabled()) {
+        // start with the max RTT value
+        config.frameLatency = itsGame->RoundTripToFrameLatency(itsCommManager->GetMaxRoundTrip(AlivePlayersDistribution()));
+        config.frameLatency = std::min(config.frameLatency, config.maxFrameLatency);
+    } else {
+        // fix LT to kLatencyToleranceTag
+        config.frameLatency = config.maxFrameLatency;
+    }
     config.frameTime = itsGame->frameTime;
     config.spawnOrder = gApplication ? gApplication->Get<short>(kSpawnOrder) : ksHybrid;
     config.hullType = gApplication ? gApplication->Number(kHullTypeTag) : 0;

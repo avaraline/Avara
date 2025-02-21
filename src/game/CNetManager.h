@@ -34,7 +34,7 @@
 
 #define kMaxLatencyTolerance 8
 
-#define kAvaraNetVersion 13
+#define kAvaraNetVersion 14
 
 
 enum { kNullNet, kServerNet, kClientNet };
