@@ -39,6 +39,7 @@ class CAbstractPlayer;
 #define kEnergyBSP 604
 #define kShieldBSP 603
 #define kBoosterBSP 600
+#define kEhudAxes 250
 
 #define kDefaultTeleportSound 410
 
@@ -226,6 +227,7 @@ public:
     CScaledBSP *missileMeter[4] = {0, 0, 0, 0};
     CScaledBSP *boosterMeter[4] = {0, 0, 0, 0};
     CScaledBSP *livesMeter[4] = {0, 0, 0, 0};
+    CScaledBSP *ehudAxes = 0;
 
     // HUD Layout Prefs
     int layout;

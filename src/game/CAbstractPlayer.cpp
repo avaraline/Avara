@@ -638,6 +638,8 @@ void CAbstractPlayer::LoadDashboardParts() {
     groundDirArrowFast = DashboardPart(kGroundDirArrowFast, FIX3(1000 * arrowScale));
     groundDirArrowFast->ignoreDepthTesting = true;
 
+    ehudAxes = DashboardPart(kEhudAxes, FIX3(1000));
+
     // Shields
     shieldLabel = DashboardPart(kShieldBSP, FIX3(70*layoutScale));
     shieldGauge = DashboardPart(gaugeBSP);
@@ -796,6 +798,21 @@ void CAbstractPlayer::RenderDashboard() {
         }
         float dist = itsGame->itsApp->Get(kHUDArrowDistance);
         DashboardFixedPosition(arrow, dist, 0);
+    }
+
+    ehudAxes->isTransparent = true;
+    if (itsManager->GetShowEditingHud()) {
+        RayHitRecord theHit;
+        SightRayTest(&theHit);
+        CSmartPart *hitPart = theHit.closestHit;
+        if (hitPart) {
+            ehudAxes->isTransparent = false;
+            ehudAxes->Reset();
+            TranslatePart(ehudAxes, hitPart->itsTransform[3][0],
+                                    hitPart->itsTransform[3][1],
+                                    hitPart->itsTransform[3][2]);
+            ehudAxes->MoveDone();
+        }
     }
 
     // Ammo Labels
