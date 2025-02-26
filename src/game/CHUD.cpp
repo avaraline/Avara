@@ -219,7 +219,7 @@ void CHUD::DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx) {
     }
     if (playerManager->GetShowEditingHud()) {
         float boardWidth = 600;
-        float boardHeight = 219;
+        float boardHeight = 240;
         float x = 20;
         float y = 20;
         float fontsz = 18.0;
@@ -300,15 +300,15 @@ void CHUD::DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx) {
         y += lineHeight;
 
         if (distance > EHUD_SIGHT_MAX_DISTANCE) {
-            snprintf(ehudText, sizeof(ehudText), "        Hit Distance: --");
+            snprintf(ehudText, sizeof(ehudText), "  Sight hit distance: --");
         } else {
-            snprintf(ehudText, sizeof(ehudText), "        Hit Distance: %.1f", ToFloat(theHit.distance));
+            snprintf(ehudText, sizeof(ehudText), "  Sight hit distance: %.1f", ToFloat(theHit.distance));
         }
         nvgText(ctx, x, y, ehudText, NULL);
 
         y += lineHeight * 2;
 
-        CBSPPart *hitPart = theHit.closestHit;
+        CSmartPart *hitPart = theHit.closestHit;
 
         if (hitPart) {
             snprintf(ehudText, sizeof(ehudText), "    Hit center x/z/y: %.1f, %.1f, %.2f",
@@ -355,6 +355,15 @@ void CHUD::DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx) {
                 ToFloat(hitPart->itsTransform[3][1] + hitPart->minBounds.y),
                 ToFloat(hitPart->itsTransform[3][1] + hitPart->maxBounds.y)
             );
+        }
+        nvgText(ctx, x, y, ehudText, NULL);
+
+        y += lineHeight;
+
+        if (!hitPart || hitPart->theOwner->etag.length() == 0) {
+            snprintf(ehudText, sizeof(ehudText), "            Hit etag: --");
+        } else {
+            snprintf(ehudText, sizeof(ehudText), "            Hit etag: %s", hitPart->theOwner->etag.c_str());
         }
         nvgText(ctx, x, y, ehudText, NULL);
     }

@@ -143,6 +143,8 @@ public:
     Fixed traction;
     Fixed friction;
 
+    std::string etag;
+
     virtual void LoadPart(short ind, short resId);
     virtual void LoadPartWithColors(short ind, short resId);
 

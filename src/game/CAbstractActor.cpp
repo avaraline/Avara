@@ -399,6 +399,8 @@ void CAbstractActor::BeginScript() {
     ProgramReference(iFriction, iDefaultFriction);
 
     ProgramLongVar(iTargetGroup, 0);
+
+    ProgramLongVar(iEtag, 0);
 }
 
 CAbstractActor *CAbstractActor::EndScript() {
@@ -437,6 +439,8 @@ CAbstractActor *CAbstractActor::EndScript() {
     friction = ReadFixedVar(iFriction);
 
     stepSound = ReadLongVar(iStepSound);
+
+    etag = ReadStringVar(iEtag);
 
     // Preload sounds.
     auto _ = AssetManager::GetOgg(blastSound);

@@ -140,6 +140,7 @@ struct ALFWalker: pugi::xml_tree_walker {
             attr.compare("color[1]") == 0 ||
             attr.compare("color[2]") == 0 ||
             attr.compare("color[3]") == 0 ||
+            attr.compare("etag") == 0 ||
             (attr.size() > 2 && attr.compare(attr.size() - 2, 2, ".c") == 0)
         ) {
             if (value[0] == '$') {
@@ -327,6 +328,9 @@ struct ALFWalker: pugi::xml_tree_walker {
         }
         CWallActor *theWall = new CWallActor;
         theWall->MakeWallFromRect(&gLastBoxRect, gLastBoxRounding, 0, true);
+        if (node.attribute("etag")) {
+            theWall->etag = node.attribute("etag").value();
+        }
     }
 
     void handle_include(pugi::xml_node& node) {

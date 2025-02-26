@@ -314,6 +314,9 @@ enum {
     iWallShields,
     iWallPower,
 
+    // This enum's order must match the order in default.avarascript!
+    iEtag,
+
     iVarInternalVariableCount
 };
 
