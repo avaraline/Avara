@@ -261,19 +261,7 @@ void CHUD::DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx) {
         y += lineHeight * 2;
 
         RayHitRecord theHit;
-        Matrix *mt = &player->viewPortPart->itsTransform;
-        Matrix m1, m2;
-        OneMatrix(&m1);
-        CombineTransforms(&m1, &m2, mt);
-        theHit.direction[0] = (*mt)[2][0];
-        theHit.direction[1] = (*mt)[2][1];
-        theHit.direction[2] = (*mt)[2][2];
-        theHit.origin[0] = m2[3][0];
-        theHit.origin[1] = m2[3][1];
-        theHit.origin[2] = m2[3][2];
-        theHit.distance = MAXFIXED;
-        theHit.closestHit = NULL;
-        player->RayTestWithGround(&theHit, kSolidBit);
+        player->SightRayTest(&theHit);
 
         NormalizeVector(3, theHit.direction);
 

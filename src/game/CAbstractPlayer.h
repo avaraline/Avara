@@ -338,5 +338,7 @@ public:
         CSmartPart **hostPart);
     virtual void WasHit(RayHitRecord *theHit, Fixed hitEnergy);
 
+    virtual void SightRayTest(RayHitRecord *theHit);
+
     virtual bool HandlesFastFPS() { return true; }
 };
