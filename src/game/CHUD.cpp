@@ -218,8 +218,8 @@ void CHUD::DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx) {
         return;
     }
     if (playerManager->GetShowEditingHud()) {
-        float boardWidth = 400;
-        float boardHeight = 119;
+        float boardWidth = 600;
+        float boardHeight = 219;
         float x = 20;
         float y = 20;
         float fontsz = 18.0;
@@ -243,7 +243,7 @@ void CHUD::DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx) {
 
         float playerY = ToFloat(actor->location[1]) + 0.1; // not sure why + 0.1 is needed
 
-        snprintf(ehudText, sizeof(ehudText), "       Player x/z/y: %.1f, %.1f, %.1f",
+        snprintf(ehudText, sizeof(ehudText), "        Player x/z/y: %.1f, %.1f, %.1f",
             ToFloat(actor->location[0]),
             ToFloat(actor->location[2]),
             playerY > 0.0 ? playerY : 0.0
@@ -255,10 +255,10 @@ void CHUD::DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx) {
         // Heading is 32768 at an ALF angle of 0, and 0 at an ALF angle of 180.
         int heading = ceil(((player->heading - 32768) % 65536) / 65536.0 * 360);
         heading = heading <= 0 ? -heading : 360 - heading;
-        snprintf(ehudText, sizeof(ehudText), "Heading (ALF angle): %d", heading);
+        snprintf(ehudText, sizeof(ehudText), " Heading (ALF angle): %d", heading);
         nvgText(ctx, x, y, ehudText, NULL);
 
-        y += lineHeight;
+        y += lineHeight * 2;
 
         RayHitRecord theHit;
         Matrix *mt = &player->viewPortPart->itsTransform;
@@ -277,7 +277,7 @@ void CHUD::DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx) {
 
         NormalizeVector(3, theHit.direction);
 
-        snprintf(ehudText, sizeof(ehudText), " Sight unit vec x/z: %.2f, %.2f",
+        snprintf(ehudText, sizeof(ehudText), "  Sight unit vec x/z: %.2f, %.2f",
             ToFloat(theHit.direction[0]),
             ToFloat(theHit.direction[2])
         );
@@ -287,9 +287,9 @@ void CHUD::DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx) {
 
         float distance = ToFloat(theHit.distance);
         if (distance > EHUD_SIGHT_MAX_DISTANCE) {
-            snprintf(ehudText, sizeof(ehudText), "    Sight hit x/z/y: --");
+            snprintf(ehudText, sizeof(ehudText), "     Sight hit x/z/y: --");
         } else {
-            snprintf(ehudText, sizeof(ehudText), "    Sight hit x/z/y: %.1f, %.1f, %.1f",
+            snprintf(ehudText, sizeof(ehudText), "     Sight hit x/z/y: %.1f, %.1f, %.1f",
                 ToFloat(theHit.origin[0] + theHit.direction[0] * distance),
                 ToFloat(theHit.origin[2] + theHit.direction[2] * distance),
                 ToFloat(theHit.origin[1] + theHit.direction[1] * distance)
@@ -300,9 +300,61 @@ void CHUD::DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx) {
         y += lineHeight;
 
         if (distance > EHUD_SIGHT_MAX_DISTANCE) {
-            snprintf(ehudText, sizeof(ehudText), "           Distance: --");
+            snprintf(ehudText, sizeof(ehudText), "        Hit Distance: --");
         } else {
-            snprintf(ehudText, sizeof(ehudText), "           Distance: %.1f", ToFloat(theHit.distance));
+            snprintf(ehudText, sizeof(ehudText), "        Hit Distance: %.1f", ToFloat(theHit.distance));
+        }
+        nvgText(ctx, x, y, ehudText, NULL);
+
+        y += lineHeight * 2;
+
+        CBSPPart *hitPart = theHit.closestHit;
+
+        if (hitPart) {
+            snprintf(ehudText, sizeof(ehudText), "    Hit center x/z/y: %.1f, %.1f, %.2f",
+                ToFloat(hitPart->itsTransform[3][0]),
+                ToFloat(hitPart->itsTransform[3][2]),
+                ToFloat(hitPart->itsTransform[3][1])
+            );
+        } else {
+            snprintf(ehudText, sizeof(ehudText), "    Hit center x/z/y: --");
+        }
+        nvgText(ctx, x, y, ehudText, NULL);
+
+        y += lineHeight;
+
+        if (hitPart) {
+            snprintf(ehudText, sizeof(ehudText), "Hit dimensions w/d/h: %.1f, %.1f, %.1f",
+                ToFloat(hitPart->maxBounds.x - hitPart->minBounds.x),
+                ToFloat(hitPart->maxBounds.z - hitPart->minBounds.z),
+                ToFloat(hitPart->maxBounds.y - hitPart->minBounds.y)
+            );
+        } else {
+            snprintf(ehudText, sizeof(ehudText), "Hit dimensions w/d/h: --");
+        }
+        nvgText(ctx, x, y, ehudText, NULL);
+
+        y += lineHeight;
+
+        if (!hitPart || hitPart->itsTransform[0][2] != 0 || hitPart->itsTransform[0][3] != 0) {
+            snprintf(ehudText, sizeof(ehudText), "    Hit bounds x/z/y: --");
+        } else if (hitPart->itsTransform[0][0] != 65536 || hitPart->itsTransform[1][1] != 65536 || hitPart->itsTransform[2][2] != 65536) {
+            // TODO: display ramp y bounds
+            snprintf(ehudText, sizeof(ehudText), "    Hit bounds x/z/y: (%.1f, %.1f) (%.1f, %.1f) (--)",
+                ToFloat(hitPart->itsTransform[3][0] + hitPart->minBounds.x),
+                ToFloat(hitPart->itsTransform[3][0] + hitPart->maxBounds.x),
+                ToFloat(hitPart->itsTransform[3][2] + hitPart->minBounds.z),
+                ToFloat(hitPart->itsTransform[3][2] + hitPart->maxBounds.z)
+            );
+        } else {
+            snprintf(ehudText, sizeof(ehudText), "    Hit bounds x/z/y: (%.1f, %.1f) (%.1f, %.1f) (%.1f, %.1f)",
+                ToFloat(hitPart->itsTransform[3][0] + hitPart->minBounds.x),
+                ToFloat(hitPart->itsTransform[3][0] + hitPart->maxBounds.x),
+                ToFloat(hitPart->itsTransform[3][2] + hitPart->minBounds.z),
+                ToFloat(hitPart->itsTransform[3][2] + hitPart->maxBounds.z),
+                ToFloat(hitPart->itsTransform[3][1] + hitPart->minBounds.y),
+                ToFloat(hitPart->itsTransform[3][1] + hitPart->maxBounds.y)
+            );
         }
         nvgText(ctx, x, y, ehudText, NULL);
     }
