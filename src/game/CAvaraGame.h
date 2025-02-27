@@ -266,7 +266,8 @@ public:
     virtual CPlayerManager *FindPlayerManager(CAbstractPlayer *thePlayer);
 
     virtual long RoundTripToFrameLatency(long rtt);
-    virtual void SetFrameLatency(short newFrameLatency, short maxChange = 2, CPlayerManager *slowPlayer = nullptr);
+    virtual void SetFrameLatency(short newFrameLatency, CPlayerManager *slowPlayer = nullptr);
+    virtual short FrameLatency();
     virtual FrameNumber TimeToFrameCount(long timeInMsec);
     virtual FrameNumber NextFrameForPeriod(long period, long referenceFrame = 0);
     virtual void SetFrameTime(int32_t ft);
