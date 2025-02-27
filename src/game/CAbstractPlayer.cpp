@@ -819,7 +819,7 @@ void CAbstractPlayer::RenderDashboard() {
             v[1] = viewPortPart->itsTransform[3][1] - hitPart->itsTransform[3][1];
             v[2] = viewPortPart->itsTransform[3][2] - hitPart->itsTransform[3][2];
             Fixed distance = VectorLength(3, v);
-            ehudAxes->Scale(FMul(distance, FIX(0.025)));
+            ehudAxes->Scale(FMul(distance, FIX(0.02)));
             TranslatePart(ehudAxes,
                 hitPart->itsTransform[3][0],
                 hitPart->itsTransform[3][1],
