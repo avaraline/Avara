@@ -803,6 +803,7 @@ void CAbstractPlayer::RenderDashboard() {
         DashboardFixedPosition(arrow, dist, 0);
     }
 
+    ehudAxes->isTransparent = true;
     if (itsManager->GetShowEditingHud()) {
         RayHitRecord theHit;
         SightRayTest(&theHit);
@@ -821,8 +822,6 @@ void CAbstractPlayer::RenderDashboard() {
                 hitPart->itsTransform[3][1],
                 hitPart->itsTransform[3][2]);
             ehudAxes->MoveDone();
-        } else {
-            ehudAxes->isTransparent = true;
         }
     }
 
