@@ -408,6 +408,9 @@ void CAbstractPlayer::DisposeDashboard() {
     gRenderer->RemoveHUDPart(energyGaugeBackLight);
     delete energyGaugeBackLight;
 
+    gRenderer->RemoveHUDPart(ehudAxes);
+    delete ehudAxes;
+
 
     for (int i = 0; i < 4; i++) {
         gRenderer->RemoveHUDPart(grenadeMeter[i]);
@@ -1024,6 +1027,7 @@ void CAbstractPlayer::ResetDashboard() {
     shieldGaugeBackLight->isTransparent = true;
     energyGauge->isTransparent = true;
     energyGaugeBackLight->isTransparent = true;
+    ehudAxes->isTransparent = true;
 
     for (int i = 0; i < 4; i++) {
         grenadeMeter[i]->isTransparent = true;
