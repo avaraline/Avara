@@ -39,7 +39,7 @@ class CAbstractPlayer;
 #define kEnergyBSP 604
 #define kShieldBSP 603
 #define kBoosterBSP 600
-#define kEhudAxes 250
+#define kEhudAxes 900
 
 #define kDefaultTeleportSound 410
 

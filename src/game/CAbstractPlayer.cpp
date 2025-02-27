@@ -638,7 +638,10 @@ void CAbstractPlayer::LoadDashboardParts() {
     groundDirArrowFast = DashboardPart(kGroundDirArrowFast, FIX3(1000 * arrowScale));
     groundDirArrowFast->ignoreDepthTesting = true;
 
-    ehudAxes = DashboardPart(kEhudAxes, FIX3(1000));
+    ehudAxes = new CScaledBSP(FIX3(1000), kEhudAxes, this, 0);
+    ehudAxes->isTransparent = true;
+    ehudAxes->isMorphable = true;
+    gRenderer->AddHUDPart(ehudAxes);
 
     // Shields
     shieldLabel = DashboardPart(kShieldBSP, FIX3(70*layoutScale));
@@ -800,7 +803,6 @@ void CAbstractPlayer::RenderDashboard() {
         DashboardFixedPosition(arrow, dist, 0);
     }
 
-    ehudAxes->isTransparent = true;
     if (itsManager->GetShowEditingHud()) {
         RayHitRecord theHit;
         SightRayTest(&theHit);
@@ -808,10 +810,19 @@ void CAbstractPlayer::RenderDashboard() {
         if (hitPart) {
             ehudAxes->isTransparent = false;
             ehudAxes->Reset();
-            TranslatePart(ehudAxes, hitPart->itsTransform[3][0],
-                                    hitPart->itsTransform[3][1],
-                                    hitPart->itsTransform[3][2]);
+            Vector v;
+            v[0] = viewPortPart->itsTransform[3][0] - hitPart->itsTransform[3][0];
+            v[1] = viewPortPart->itsTransform[3][1] - hitPart->itsTransform[3][1];
+            v[2] = viewPortPart->itsTransform[3][2] - hitPart->itsTransform[3][2];
+            Fixed distance = VectorLength(3, v);
+            ehudAxes->Scale(FMul(distance, FIX(0.025)));
+            TranslatePart(ehudAxes,
+                hitPart->itsTransform[3][0],
+                hitPart->itsTransform[3][1],
+                hitPart->itsTransform[3][2]);
             ehudAxes->MoveDone();
+        } else {
+            ehudAxes->isTransparent = true;
         }
     }
 
