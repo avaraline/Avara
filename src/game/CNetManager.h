@@ -34,7 +34,7 @@
 
 #define kMaxLatencyTolerance 8
 
-#define kAvaraNetVersion 14
+#define kAvaraNetVersion 15
 
 
 enum { kNullNet, kServerNet, kClientNet };
@@ -112,7 +112,7 @@ public:
     FrameNumber latencyVoteFrame;
     short maxRoundTripLatency;
     short addOneLatency;
-    long subtractOneCheck;
+    short reduceLatencyCounter;
     CPlayerManager *maxPlayer;
     Boolean latencyVoteOpen;
     std::map<int32_t, std::vector<int16_t>> fragmentMap;  // maps FRandSeed to list of players having that seed
