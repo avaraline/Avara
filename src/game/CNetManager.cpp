@@ -828,7 +828,7 @@ void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
                     addOneLatency = std::max<short>(0, (curFrameLatency - rttFrameLatency));
                     addOneLatency = std::min<short>(addOneLatency, addOneLimit);
                     reduceLatencyCounter = 0;
-                    DBG_Log("lt+", "  ==addOneLatency = %hd, reduceLatencyCounter = %d\n", addOneLatency, reduceLatencyCounter);
+                    DBG_Log("lt+", "  ==addOneLatency = %hd\n", addOneLatency);
                 } else if (++reduceLatencyCounter >= 2) {   // autoLatencyVote <= LOWERLATENCYCOUNT
                     // allow LT to decrease but still possible to increase if RTT jumps
                     // Examples:
@@ -845,6 +845,11 @@ void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
                         // reset counter only if the FrameLatency will change
                         reduceLatencyCounter = 0;
                     }
+                } else /* (reduceLatencyCounter < 2) */ {
+                    // try to keep LT where it is until the counter says we can change it
+                    addOneLatency = std::max<short>(0, (curFrameLatency - rttFrameLatency));
+                    addOneLatency = std::min<short>(addOneLatency, addOneLimit);
+                    DBG_Log("lt+", "  <<addOneLatency = %hd, reduceLatencyCounter = %d\n", addOneLatency, reduceLatencyCounter);
                 }
 
                 short newFrameLatency = rttFrameLatency + addOneLatency;
