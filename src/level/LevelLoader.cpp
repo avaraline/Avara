@@ -327,10 +327,10 @@ struct ALFWalker: pugi::xml_tree_walker {
             RunThis(script.str());
         }
         CWallActor *theWall = new CWallActor;
-        theWall->MakeWallFromRect(&gLastBoxRect, gLastBoxRounding, 0, true);
         if (node.attribute("etag")) {
             theWall->etag = node.attribute("etag").value();
         }
+        theWall->MakeWallFromRect(&gLastBoxRect, gLastBoxRounding, 0, true);
     }
 
     void handle_include(pugi::xml_node& node) {
