@@ -6,6 +6,7 @@
 #include "CAvaraGame.h"
 #include "CPlayerManager.h"
 #include "CAbstractActor.h" // TeamColor
+#include "CAbstractPlayer.h"
 #include "CScoreKeeper.h"
 
 #include "CommDefs.h"       // kdEveryone
@@ -133,6 +134,10 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
 
     cmd = new TextCommand("/ehud          <- toggle level editing HUD on/off",
                           METHOD_TO_LAMBDA_VARGS(ToggleEditingHud));
+    TextCommand::Register(cmd);
+
+    cmd = new TextCommand("/tele          <- teleport to the target in your sights",
+            METHOD_TO_LAMBDA_VARGS(TeleportToTarget));
     TextCommand::Register(cmd);
 }
 
@@ -693,5 +698,16 @@ std::string CommandManager::GetOsName() {
 bool CommandManager::ToggleEditingHud(VectorOfArgs vargs) {
     CPlayerManager *manager = CPlayerManagerImpl::LocalPlayer();
     manager->SetShowEditingHud(!manager->GetShowEditingHud());
+    return true;
+}
+
+bool CommandManager::TeleportToTarget(VectorOfArgs vargs) {
+    CAvaraGame *theGame = itsApp->GetGame();
+    if (theGame) {
+        CAbstractPlayer *player = theGame->GetLocalPlayer();
+        if (player) {
+            player->TeleportToTarget();
+        }
+    }
     return true;
 }

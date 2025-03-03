@@ -53,5 +53,7 @@ public:
     bool SetDebugFlag(VectorOfArgs);
     std::string GetOsName();
 
+    // Level editing tools
     bool ToggleEditingHud(VectorOfArgs);
+    bool TeleportToTarget(VectorOfArgs);
 };

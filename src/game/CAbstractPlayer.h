@@ -341,6 +341,7 @@ public:
     virtual void WasHit(RayHitRecord *theHit, Fixed hitEnergy);
 
     virtual void SightRayTest(RayHitRecord *theHit);
+    virtual void TeleportToTarget();
 
     virtual bool HandlesFastFPS() { return true; }
 };

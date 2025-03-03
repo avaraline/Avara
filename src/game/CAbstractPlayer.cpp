@@ -2411,3 +2411,25 @@ void CAbstractPlayer::SightRayTest(RayHitRecord *theHit) {
     theHit->closestHit = NULL;
     RayTestWithGround(theHit, kSolidBit);
 }
+
+void CAbstractPlayer::TeleportToTarget() {
+    RayHitRecord theHit;
+    SightRayTest(&theHit);
+    CSmartPart *hitPart = theHit.closestHit;
+    Vector loc;
+    if (hitPart) {
+        loc[0] = hitPart->itsTransform[3][0];
+        loc[1] = hitPart->itsTransform[3][1] + hitPart->maxBounds.y + 2;
+        loc[2] = hitPart->itsTransform[3][2];
+        TryTransport(loc, 0, 0, kFragmentOption);
+    } else {
+        float distance = ToFloat(theHit.distance);
+        if (distance < 500) {
+            NormalizeVector(3, theHit.direction);
+            loc[0] = theHit.origin[0] + theHit.direction[0] * distance;
+            loc[1] = theHit.origin[1] + theHit.direction[1] * distance + ToFixed(2.0);
+            loc[2] = theHit.origin[2] + theHit.direction[2] * distance;
+            TryTransport(loc, 0, 0, kFragmentOption);
+        }
+    }
+}
