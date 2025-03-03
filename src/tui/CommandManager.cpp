@@ -7,7 +7,9 @@
 #include "CPlayerManager.h"
 #include "CAbstractActor.h" // TeamColor
 #include "CAbstractPlayer.h"
+#include "CSmartPart.h"
 #include "CScoreKeeper.h"
+#include "CUDPComm.h"
 
 #include "CommDefs.h"       // kdEveryone
 #include "Debug.h"          // Debug::methods
@@ -137,7 +139,11 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/tele          <- teleport to the target in your sights",
-            METHOD_TO_LAMBDA_VARGS(TeleportToTarget));
+                          METHOD_TO_LAMBDA_VARGS(TeleportToTarget));
+    TextCommand::Register(cmd);
+
+    cmd = new TextCommand("/find          <- reveal target etag in ALF",
+                          METHOD_TO_LAMBDA_VARGS(RevealEtagInALF));
     TextCommand::Register(cmd);
 }
 
@@ -707,6 +713,26 @@ bool CommandManager::TeleportToTarget(VectorOfArgs vargs) {
         CAbstractPlayer *player = theGame->GetLocalPlayer();
         if (player) {
             player->TeleportToTarget();
+        }
+    }
+    return true;
+}
+
+bool CommandManager::RevealEtagInALF(VectorOfArgs vargs) {
+    CAvaraGame *theGame = itsApp->GetGame();
+    if (theGame) {
+        CAbstractPlayer *player = theGame->GetLocalPlayer();
+        if (player) {
+            RayHitRecord theHit;
+            player->SightRayTest(&theHit);
+            CSmartPart *hitPart = theHit.closestHit;
+            if (hitPart) {
+                std::string etag = hitPart->theOwner->etag;
+                if (etag.length() != 0) {
+                    IPaddress addr = {0x7f000001, 19569}; // 127.0.0.1:19569
+                    CUDPComm::DirtyUDPWrite(addr, etag.c_str(), etag.length());
+                }
+            }
         }
     }
     return true;

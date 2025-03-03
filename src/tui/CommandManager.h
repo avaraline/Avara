@@ -56,4 +56,5 @@ public:
     // Level editing tools
     bool ToggleEditingHud(VectorOfArgs);
     bool TeleportToTarget(VectorOfArgs);
+    bool RevealEtagInALF(VectorOfArgs);
 };

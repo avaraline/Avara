@@ -776,14 +776,7 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
 
                             // send an ACK
                             IPaddress addr = {0x7f000001, 19568}; // 127.0.0.1:19568
-                            int sock = socket(AF_INET, SOCK_DGRAM, 0);
-                            struct sockaddr_in sock_addr;
-                            memset(&sock_addr, 0, sizeof(sock_addr));
-                            sock_addr.sin_family = AF_INET;
-                            sock_addr.sin_addr.s_addr = INADDR_ANY;
-                            sock_addr.sin_port = htons(addr.port);
-                            sendto(sock, "ACK", 3, 0, (struct sockaddr *)&sock_addr, sizeof(sock_addr));
-                            close(sock);
+                            DirtyUDPWrite(addr, "ACK", 3);
                         }
 
                         p->p3 = (flags & 4) ? *inData.l++ : (flags & 32) ? *inData.uw++ : 0;
@@ -2056,4 +2049,15 @@ void CUDPComm::BuildServerTags() {
         theConn = theConn->next;
     }
     */
+}
+
+void CUDPComm::DirtyUDPWrite(IPaddress addr, const char *data, int len) {
+    int sock = socket(AF_INET, SOCK_DGRAM, 0);
+    struct sockaddr_in sock_addr;
+    memset(&sock_addr, 0, sizeof(sock_addr));
+    sock_addr.sin_family = AF_INET;
+    sock_addr.sin_addr.s_addr = INADDR_ANY;
+    sock_addr.sin_port = htons(addr.port);
+    sendto(sock, data, len, 0, (struct sockaddr *)&sock_addr, sizeof(sock_addr));
+    close(sock);
 }
