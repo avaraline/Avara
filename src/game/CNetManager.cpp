@@ -829,24 +829,26 @@ void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
                     addOneLatency = std::min<short>(addOneLatency, addOneLimit);
                     reduceLatencyCounter = 0;
                     DBG_Log("lt+", "  ==addOneLatency = %hd\n", addOneLatency);
-                } else if (++reduceLatencyCounter >= 2) {   // autoLatencyVote <= LOWERLATENCYCOUNT
-                    // allow LT to decrease but still possible to increase if RTT jumps
+                } else if ((rttFrameLatency + std::max<short>(addOneLatency-1, 0)) < curFrameLatency &&  // if LT would decrease &&
+                           ++reduceLatencyCounter >= 2) {                                                // enough consecutive votes
+                    // LT will decrease, either from RTT or add1
                     // Examples:
-                    //    LT=2.25 , rtt = 1.50, add1 = 0.50 --> add1 = 0.50 (LT -> 2.00)   [keep add1 when RTT improves]
+                    //    LT=2.25 , rtt = 1.00, add1 = 0.50 --> add1 = 0.50 (LT -> 1.50)   [don't increase add1 when RTT improves alot]
+                    //    LT=2.25 , rtt = 1.50, add1 = 0.50 --> add1 = 0.50 (LT -> 2.00)   [con't change add1]
                     //  * LT=2.25 , rtt = 1.75, add1 = 0.50 --> add1 = 0.25 (LT -> 2.00)   [decrease add1]
-                    //    LT=2.25 , rtt = 2.00, add1 = 0.50 --> add1 = 0.25 (LT -> 2.25)
-                    //    LT=2.25 , rtt = 2.25, add1 = 0.50 --> add1 = 0.25 (LT -> 2.50)
-                    //    LT=2.25 , rtt = 2.50, add1 = 0.50 --> add1 = 0.25 (LT -> 2.75)
+                    //    LT=2.25 , rtt = 2.00, add1 = 0.25 --> add1 = 0.00 (LT -> 2.00)   [decrease add1]
+                    //    LT=2.25 , rtt = 2.00, add1 = 0.00 --> add1 = 0.00 (LT -> 2.00)
+                    //    LT=2.25 , rtt = 2.00, add1 = 0.50                                [shouldn't get here]
+                    //    LT=2.25 , rtt = 2.25, add1 = 0.00                                [shouldn't get here]
+                    // bottom line: addOneLatency either stays the same or goes down 1 (but RTT can go down more)
                     addOneLatency = std::max<short>(addOneLatency - 1,
                                                     std::min<short>(addOneLatency, (curFrameLatency - 1) - rttFrameLatency));
                     addOneLatency = std::max<short>(addOneLatency, 0);
                     DBG_Log("lt+", "  --addOneLatency = %hd\n", addOneLatency);
-                    if (curFrameLatency != rttFrameLatency + addOneLatency) {
-                        // reset counter only if the FrameLatency will change
-                        reduceLatencyCounter = 0;
-                    }
-                } else /* (reduceLatencyCounter < 2) */ {
+                    reduceLatencyCounter = 0;
+                } else {
                     // try to keep LT where it is until the counter says we can change it
+                    // ... same logic as (autoLatencyVote > LOWERLATENCYCOUNT) but don't reset reduceLatencyCounter
                     addOneLatency = std::max<short>(0, (curFrameLatency - rttFrameLatency));
                     addOneLatency = std::min<short>(addOneLatency, addOneLimit);
                     DBG_Log("lt+", "  <<addOneLatency = %hd, reduceLatencyCounter = %d\n", addOneLatency, reduceLatencyCounter);
