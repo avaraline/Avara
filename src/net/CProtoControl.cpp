@@ -83,7 +83,10 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             break;
         case kpNameChange:
             theNet->RecordNameAndState(
-                thePacket->sender, (StringPtr)thePacket->dataBuffer, (LoadingState)thePacket->p2, (PresenceType)thePacket->p3);
+                thePacket->sender, (StringPtr)thePacket->dataBuffer,
+                (LoadingState)thePacket->p2,
+                (PresenceType)thePacket->p1,
+                thePacket->p3/4.0);
             break;
         case kpOrderChange:
             theNet->PositionsChanged(thePacket->dataBuffer);

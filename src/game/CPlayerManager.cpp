@@ -1275,7 +1275,7 @@ Str255& CPlayerManagerImpl::PlayerName() {
     return playerName;
 }
 std::string CPlayerManagerImpl::GetPlayerName() {
-    return std::string((char *)playerName + 1, playerName[0]);
+    return ToString(playerName);
 }
 std::deque<char>& CPlayerManagerImpl::LineBuffer() {
     return lineBuffer;

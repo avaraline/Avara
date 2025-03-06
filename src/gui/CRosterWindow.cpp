@@ -362,7 +362,7 @@ std::string CRosterWindow::ChatPromptFor(std::string theName) {
     return paddedName.substr(0, len) + ": ";
 }
 void CRosterWindow::NewChatLine(Str255 playerName, std::string message) {
-    std::string name = std::string((char *)playerName + 1, playerName[0]);
+    std::string name = ToString(playerName);
     std::string chatLine = ChatPromptFor(name) + message;
 
     AdvancedGridLayout *gridLayout = (AdvancedGridLayout*) chatPanel->layout();
