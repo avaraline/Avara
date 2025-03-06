@@ -23,6 +23,7 @@ typedef uint32_t UnsignedFixed;
 
 typedef uint8_t *StringPtr;
 typedef uint8_t Str255[256];
+static inline std::string ToString(Str255 s255) { return std::string((char *)s255 + 1, s255[0]); }
 
 typedef uint8_t Byte;
 typedef int8_t SignedByte;

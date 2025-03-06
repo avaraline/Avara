@@ -448,10 +448,10 @@ void CAvaraAppImpl::LevelReset() {}
 void CAvaraAppImpl::ParamLine(short index, MsgAlignment align, StringPtr param1, StringPtr param2) {
     SDL_Log("CAvaraAppImpl::ParamLine(%d)\n", index);
     std::stringstream buffa;
-    std::string a = std::string((char *)param1 + 1, param1[0]);
+    std::string a = ToString(param1);
     std::string b;
     MsgCategory category = MsgCategory::System;
-    if (param2) b = std::string((char *)param2 + 1, param2[0]);
+    if (param2) b = ToString(param2);
 
     switch(index) {
         case kmPaused:

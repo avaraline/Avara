@@ -34,7 +34,7 @@
 
 #define kMaxLatencyTolerance 8
 
-#define kAvaraNetVersion 15
+#define kAvaraNetVersion 16
 
 
 enum { kNullNet, kServerNet, kClientNet };
@@ -138,7 +138,7 @@ public:
     virtual void SendRealName(short toSlot);
     virtual void RealNameReport(short slot, short regStatus, StringPtr realName);
     virtual void NameChange(StringPtr newName);
-    virtual void RecordNameAndState(short slotId, StringPtr theName, LoadingState status, PresenceType presence);
+    virtual void RecordNameAndState(short slotId, StringPtr theName, LoadingState status, PresenceType presence, float elo);
     virtual void ValueChange(short slot, std::string attributeName, bool value);
 
     virtual void SwapPositions(short ind1, short ind2);

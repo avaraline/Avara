@@ -252,7 +252,10 @@ void CNetManager::NameChange(StringPtr newName) {
     */
     LoadingState status = playerTable[itsCommManager->myId]->LoadingStatus();
     PresenceType presence = playerTable[itsCommManager->myId]->Presence();
-    itsCommManager->SendPacket(kdEveryone, kpNameChange, 0, status, presence, newName[0] + 1, (Ptr)newName);
+
+    std::string nameStr = ToString(newName);
+    auto rating = itsGame->scoreKeeper->playerRatings->GetRating(nameStr);
+    itsCommManager->SendPacket(kdEveryone, kpNameChange, presence, status, rating.second.rating*4, newName[0] + 1, (Ptr)newName);
 }
 
 void CNetManager::ValueChange(short slot, std::string attributeName, bool value) {
@@ -262,13 +265,21 @@ void CNetManager::ValueChange(short slot, std::string attributeName, bool value)
     itsCommManager->SendPacket(kdEveryone, kpJSON, slot, 0, 0, strlen(c), c);
 }
 
-void CNetManager::RecordNameAndState(short theId, StringPtr theName, LoadingState status, PresenceType presence) {
+void CNetManager::RecordNameAndState(short theId, StringPtr theName, LoadingState status, PresenceType presence, float elo) {
     if (theId >= 0 && theId < kMaxAvaraPlayers) {
         totalDistribution |= 1 << theId;
         if (status != 0)
             playerTable[theId]->SetPlayerStatus(status, presence, -1);
 
         playerTable[theId]->ChangeName(theName);
+
+        // Trust each user to have the most accurate value for their Elo since they record all the games they have played.
+        // BUT, don't update if more than 200 higher than current local value (to ward off cheaters - probably need a better mechanism)
+        std::pair<std::string,Rating> ratingPair = itsGame->scoreKeeper->playerRatings->GetRating(playerTable[theId]->GetPlayerName());
+        if (elo != ratingPair.second.rating && elo < ratingPair.second.rating + 200) {
+            SDL_Log("Updating Elo value for '%s' from %.2f to %.2f", ratingPair.first.c_str(), ratingPair.second.rating, elo);
+            itsGame->scoreKeeper->playerRatings->UpdateRating(ratingPair.first, elo);
+        }
     }
 }
 
