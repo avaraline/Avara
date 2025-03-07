@@ -392,9 +392,9 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, int32_t when) {
             #endif
         } else if (commandMultiplier > 0) {
             if (thePacket->packet.command == kpPing) {
-                // decrease ping roundTrip by about 20% because pings aren't as fast as urgent game packets and we
-                // want to start the game at about the right LT (based on average ping times)
-                roundTrip *= 0.8;
+                // decrease ping roundTrip because pings aren't as fast as urgent game packets and we
+                // want to start the game at about the right LT (which is based the average ping times)
+                roundTrip *= 0.9;
             }
 
             // compute an exponential moving average & variance of the roundTrip time

@@ -89,6 +89,7 @@ std::unique_ptr<CNetManager> CAvaraGame::CreateNetManager() {
 
 CAvaraGame::CAvaraGame(FrameTime frameTime) {
     SetFrameTime(frameTime);
+    latencyTolerance = 0.0;
 }
 void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     itsApp = theApp;
@@ -1060,35 +1061,16 @@ long CAvaraGame::RoundTripToFrameLatency(long roundTrip) {
 
 // "frameLatency" is the integer number of frames to delay;
 // latencyTolerance is the number of classic (64ms) frames (= frameLatency * fpsScale).
-void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, CPlayerManager* slowPlayer) {
+void CAvaraGame::SetFrameLatency(short newFrameLatency, CPlayerManager* slowPlayer) {
     double newLatency = newFrameLatency * fpsScale;
     if (latencyTolerance != newLatency) {
-        #define MAX_LATENCY (8)   // in classic units
-        if (maxChange < 0) {
-            // allow latency to jump to any value
-            maxChange = MAX_LATENCY;
-        }
+        static const double MAX_LATENCY = 8.0;
 
         double oldLatency = latencyTolerance;
+        latencyTolerance = newLatency;
 
-        static int reduceLatencyCounter = 0;
-        static int increaseLatencyCounter = 0;
-        if (newLatency < latencyTolerance) {
-            static const int REDUCE_LATENCY_COUNT = 2;
-            // need REDUCE_LATENCY_COUNT consecutive requests to reduce latency
-            if (maxChange == MAX_LATENCY || ++reduceLatencyCounter >= REDUCE_LATENCY_COUNT) {
-                latencyTolerance = std::max(latencyTolerance-maxChange, std::max(newLatency, double(0.0)));
-                reduceLatencyCounter = 0;
-                increaseLatencyCounter = 0;
-            }
-        } else {
-            static const int INCREASE_LATENCY_COUNT = 1;
-            if (maxChange == MAX_LATENCY || ++increaseLatencyCounter >= INCREASE_LATENCY_COUNT) {
-                latencyTolerance = std::min(latencyTolerance+maxChange, std::min(newLatency, double(MAX_LATENCY)));
-                reduceLatencyCounter = 0;
-                increaseLatencyCounter = 0;
-            }
-        }
+        // make sure it's always between 0 and MAX_LATENCY
+        latencyTolerance = std::min(std::max(latencyTolerance, 0.0), MAX_LATENCY);
 
         // make prettier version of the LT string (C++ sucks with strings)
         std::ostringstream ltOss;
@@ -1107,6 +1089,11 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, CPlayer
             itsApp->AddMessageLine(oss.str());
         }
     }
+}
+
+short CAvaraGame::FrameLatency(void) {
+    // example for 16ms frame: 1.75 LT --> 7 frames
+    return latencyTolerance / fpsScale;
 }
 
 FrameNumber CAvaraGame::TimeToFrameCount(long timeInMsec) {
