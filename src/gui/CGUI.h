@@ -75,7 +75,7 @@ protected:
   CBSPWorldImpl *itsWorld;
   CBSPWorldImpl *cursorWorld;
   CViewParameters *itsView;
-  CScaledBSP *itsCursor;
+  std::unique_ptr<CScaledBSP> itsCursor;
   uint32_t cursor_buttons;
   int cursor_x;
   int cursor_y;
@@ -113,8 +113,8 @@ protected:
 
   const Point pt(short x, short y) {
     Point p;
-    p.h = x;
-    p.v = y;
+    p.h = x * gApplication->pixel_ratio;
+    p.v = y * gApplication->pixel_ratio;
     return p;
   }
 

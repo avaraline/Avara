@@ -34,11 +34,11 @@ CGUI::CGUI(CAvaraAppImpl *app) {
     mu_init(mui_ctx);
     mui_ctx->text_width = text_width;
     mui_ctx->text_height = text_height;
-
-    itsCursor = new CScaledBSP(FIX3(100), kCursorBSP, 0, 0);
+    itsCursor = std::make_unique<CScaledBSP>((Fixed)FIX3(100), (short)kCursorBSP, (CAbstractActor*)NULL, (short)0);
     itsCursor->privateAmbient = FIX3(800);
+    //itsCursor->
     //AvaraGLUpdateData(itsCursor);
-    gRenderer->AddPart(itsCursor);
+    gRenderer->AddPart(itsCursor.get());
 
     started = SDL_GetTicks();
     anim_timer = 0;
@@ -229,7 +229,7 @@ void CGUI::mouse(SDL_Event e) {
     cursor_y = e.motion.y;
 
     Point p = pt(cursor_x, cursor_y);
-    glm::vec3 worldpos = windowToWorld(&p);
+    glm::vec3 worldpos = screenToWorld(&p);
     itsCursor->Reset();
     itsCursor->RotateZ(FIX(15 * dt));
     itsCursor->RotateX(FIX(270));
@@ -335,19 +335,19 @@ StateFunction CGUI::_test() {
         SetActive(false);
         pushQuit();
     }
-    /*
+    
     const char* label = "A text input:";
     int w = text_width(0, label, (int)strlen(label));
-    mu_layout_row(mu_ctx, 2, (int[]) { w + 50, 400 }, 0);
-    mu_label(mu_ctx, label);
+    mu_layout_row(mui_ctx, 2, (int[]) { w + 50, 400 }, 0);
+    mu_label(mui_ctx, label);
     BSPTextInput("myinputid", teststring);
 
     const char* label2 = "A checkbox:";
     w = text_width(0, label2, (int)strlen(label2));
-    mu_layout_row(mu_ctx, 2, (int[]) { w + 50, 75 }, 0);
-    mu_label(mu_ctx, label2);
+    mu_layout_row(mui_ctx, 2, (int[]) { w + 50, 75 }, 0);
+    mu_label(mui_ctx, label2);
     BSPCheckbox("checkboxid", &testbool);
-    */
+    
     return STAY;
 }
 
@@ -387,6 +387,21 @@ void CGUI::Render(NVGcontext *ctx) {
             nvgText(ctx, cmd->text.pos.x, cmd->text.pos.y, cmd->text.str, NULL);
         }
     }
+    NVGcolor c = toNVGcolor(mui_ctx->style->colors[MU_COLOR_BASE]);
+    nvgBeginPath(ctx);
+    nvgStrokeColor(ctx, c);
+    nvgMoveTo(ctx, cursor_x, 0);
+    nvgLineTo(ctx, cursor_x, gApplication->fb_size_y);
+    nvgStroke(ctx);
+    nvgClosePath(ctx);
+    
+    nvgBeginPath(ctx);
+    nvgStrokeColor(ctx, c);
+    nvgMoveTo(ctx, 0, cursor_y);
+    nvgLineTo(ctx, gApplication->fb_size_x, cursor_y);
+    nvgStroke(ctx);
+    nvgClosePath(ctx);
+    
     nvgEndFrame(ctx);
     //cursorWorld->Render(itsView);
 }
