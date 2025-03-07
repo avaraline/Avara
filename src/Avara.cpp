@@ -165,14 +165,12 @@ int main(int argc, char *argv[]) {
 
     bool main_loop_active = true;
     SDL_Event event;
-    
+    int64_t last_tick = SDL_GetTicks();
     while (main_loop_active) {
         glClearColor(.3, .5, .3, 1);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
         app->idle();
-        app->drawContents();
-        SDL_GL_SwapWindow(app->window);
         
         if (SDL_WaitEventTimeout(&event, app->throttle)) {
             if (event.type == SDL_QUIT) {
@@ -180,6 +178,10 @@ int main(int argc, char *argv[]) {
             }
             app->handleSDLEvent(event);
         }
+        if(SDL_GetTicks() - last_tick < app->throttle) continue;
+        app->drawContents();
+        SDL_GL_SwapWindow(app->window);
+        SDL_PollEvent(&event);
     }
     SDL_PollEvent(&event);
     app->Done();

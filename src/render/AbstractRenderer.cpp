@@ -55,15 +55,6 @@ void AbstractRenderer::UpdateViewRect(int width, int height, float pixelRatio)
 
 glm::vec3 AbstractRenderer::ScreenSpaceToWorldSpace(glm::vec4 *ss_vec)
 {
-    glm::mat4 proj = glm::scale(
-        glm::perspective(
-            glm::radians(fov),
-            (float)viewParams->viewPixelDimensions.h / (float)viewParams->viewPixelDimensions.v,
-            0.099f,
-            1000.0f
-        ),
-        glm::vec3(-1, 1, -1)
-    );
     glm::mat4 v = ToFloatMat(viewParams->viewMatrix);
     glm::mat4 pv = glm::inverse(proj * v);
     return glm::vec3(pv * (*ss_vec));

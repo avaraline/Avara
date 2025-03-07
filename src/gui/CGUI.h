@@ -35,10 +35,6 @@ public:
   void Update();
   void SetActive(bool a) { active = a; };
   void ClearParts() {
-    for (const auto &x : actors) {
-      //x.second->Dispose();
-      delete x.second;
-    }
     actors.clear();
   }
 
@@ -71,9 +67,7 @@ protected:
   void PlaceGUIPart(CBSPPart *_part, mu_Rect r);
 
   mu_Context *mui_ctx;
-  // std::map<mu_Id, CSmartBox*> boxes;
-  // std::map<mu_Id, CSmartBox*> outlines;
-  std::map<mu_Id, CAbstractActor *> actors;
+  std::map<mu_Id, std::shared_ptr<CAbstractActor>> actors;
   int BSPButton(std::string label);
   int BSPWidget(mu_Rect r, int res, mu_Id mu_id);
   int BSPTextInput(const char *id, std::string &s);
@@ -125,9 +119,7 @@ protected:
   }
 
   static const ARGBColor RGBAToLong(mu_Color c) {
-      
-    return static_cast<uint32_t>(((static_cast<int>(c.a + 0.5) << 24) + (static_cast<int>(c.r) << 16) + (static_cast<int>(c.g) << 8) +
-            static_cast<int>(c.b)));
+      return ARGBColor(0xffffffff);
   }
 
   static const NVGcolor toNVGcolor(mu_Color other) {

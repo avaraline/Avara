@@ -14,10 +14,6 @@
 #include "Tags.h"
 #include "GitVersion.h"
 
-#include <nanogui/nanogui.h>
-
-using namespace nanogui;
-
 CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
 
     // register commands
@@ -130,7 +126,7 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
     cmd = new TextCommand("/quit            <- quit",
                           [this](VectorOfArgs vargs) -> bool {
         itsApp->Done();
-	leave();
+	//leave();
         return false;
     });
     TextCommand::Register(cmd);
@@ -404,6 +400,7 @@ bool CommandManager::LoadNamedLevel(VectorOfArgs vargs) {
         auto manifest = *AssetManager::GetManifest(set);
         for (auto &ledi : manifest->levelDirectory) {
             std::string level = ledi.levelName;
+            std::string alf = ledi.alfPath;
             std::string levelUpper = ledi.levelName;
             std::transform(levelUpper.begin(), levelUpper.end(), levelUpper.begin(), ::toupper);
 
@@ -412,10 +409,10 @@ bool CommandManager::LoadNamedLevel(VectorOfArgs vargs) {
                 // the shorter the match string, the better (e.g. match string "bwadi" picks "Bwadi" over "Bwadi Remix")
                 if (bestLevels.empty() || level.size() < bestLevels[0].second.size()) {
                     bestLevels.clear();
-                    bestLevels.push_back({set, level});
+                    bestLevels.push_back({set, alf});
                     SDL_Log("/load leading candidate: %s/%s\n", set.c_str(), level.c_str());
                 } else if (!bestLevels.empty() && level.size() == bestLevels[0].second.size()) {
-                    bestLevels.push_back({set, level});
+                    bestLevels.push_back({set, alf});
                     SDL_Log("/load   equal candidate: %s/%s\n", set.c_str(), level.c_str());
                 } else {
                     SDL_Log("/load         not using: %s/%s\n", set.c_str(), level.c_str());
@@ -465,9 +462,9 @@ bool CommandManager::LoadRandomLevel(VectorOfArgs matchArgs) {
                     auto manifest = *AssetManager::GetManifest(setName);
                     for (auto level : manifest->levelDirectory) {
                         if (addLevels) {
-                            allLevels.insert(Tags::LevelURL(setName, level.levelName));
+                            allLevels.insert(Tags::LevelURL(setName, level.alfPath));
                         } else {
-                            allLevels.erase(Tags::LevelURL(setName, level.levelName));
+                            allLevels.erase(Tags::LevelURL(setName, level.alfPath));
                         }
                     }
                 }

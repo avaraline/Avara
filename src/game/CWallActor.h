@@ -9,6 +9,7 @@
 
 #pragma once
 #include "CAbstractActor.h"
+#include "CSmartBox.h"
 
 class CWallActor : public CAbstractActor {
 public:

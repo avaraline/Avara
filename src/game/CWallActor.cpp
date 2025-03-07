@@ -168,7 +168,7 @@ void CWallActor::MakeWallFromDims(Vector dims, Fixed x, Fixed y, Fixed z) {
 
     if (partList[0]) {
         LinkPartBoxes();
-
+        hitSoundId = 210;
         hitSoundVolume = DEFAULTHITVOLUME;
         itsGame = gCurrentGame;
         itsGame->AddActor(this);

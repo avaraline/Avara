@@ -102,7 +102,7 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
 
     previewAngle = 0;
     previewRadius = 0;
-    animatePreview = true;
+    animatePreview = false;
     nextTrackerUpdate = 0;
     trackerUpdatePending = false;
     trackerThread = new std::thread(TrackerPinger, this);
@@ -123,7 +123,6 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
         SDL_Log("Enabling UDP hole punching via %s:%d", host.c_str(), port);
         PunchSetup(host.c_str(), port);
     }
-
     itsGUI = new CGUI(this);
 }
 
@@ -141,8 +140,6 @@ void CAvaraAppImpl::idle() {
     static double avg = 0;
     FrameNumber curFrame = itsGame->frameNumber;
     uint32_t procTime = SDL_GetTicks();
-    itsGUI->Update();
-
     CheckSockets();
     TrackerUpdate();
     if (itsGame->GameTick()) {
@@ -157,6 +154,7 @@ void CAvaraAppImpl::idle() {
             DBG_Log("cpu", "%.1fms (%.0f%%)\n", avg, 100.0*avg/itsGame->frameTime);
         }
     }
+    itsGUI->Update();
 }
 
 void CAvaraAppImpl::drawContents() {

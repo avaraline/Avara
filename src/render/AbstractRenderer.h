@@ -113,6 +113,7 @@ public:
     virtual glm::vec3 ScreenSpaceToWorldSpace(glm::vec4 *ss_vec);
 protected:
     float fov = 50.0f;
+    glm::mat4 proj;
 };
 
 extern AbstractRenderer *gRenderer;

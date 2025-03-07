@@ -15,6 +15,13 @@ std::string teststring = "hella";
 bool testbool = false;
 #define TEXT_INPUT_TEMP_BUFFER_SIZE 1024
 
+void pushQuit()
+{
+    SDL_Event ev;
+    ev.type = SDL_QUIT;
+    SDL_PushEvent(&ev);
+}
+
 CGUI::CGUI(CAvaraAppImpl *app) {
     itsApp = app;
     itsGame = app->GetGame();
@@ -51,12 +58,12 @@ void CGUI::Update() {
     t = SDL_GetTicks();
     dt = t - last_t;
     anim_timer += dt;
-    int fb_size_x = gApplication->fb_size_x;
-    int fb_size_y = gApplication->fb_size_y;
+    int fb_size_x = gApplication->win_size_x;
+    int fb_size_y = gApplication->win_size_y;
     mu_Rect screen = mu_rect(0, 0, fb_size_x, fb_size_x);
     mui_ctx->style->padding = 20;
     mu_begin(mui_ctx);
-    int muiflags =0;
+    int muiflags = 0;
     const int row_widths[] = { (int)std::floor(fb_size_x / 5.0) };
     const int row_height = std::floor(fb_size_y / 9.0);
     if(mu_begin_window_ex(mui_ctx, "Main", screen, muiflags)) {
@@ -83,11 +90,12 @@ int CGUI::BSPWidget(mu_Rect r, int res, mu_Id mu_id) {
 
     if (actors.count(mu_id) > std::size_t(0)) {
         //CSmartBox* _part = boxes.at(mu_id);
-        CAbstractActor* _wall = actors.at(mu_id);
-        CSmartPart* _part = _wall->partList[0];
+        std::shared_ptr<CAbstractActor> _wall = actors.at(mu_id);
+        //CBSPPart* _part = parts.at(mu_id);
+        auto _part = _wall->partList[0];
         _part->Reset();
         TranslatePart(_part, ToFixed(worldpos.x), ToFixed(worldpos.y), 0);
-        //_part->MoveDone();
+        _part->MoveDone();
     }
     else {
         Point s_topleft = pt(r.x, r.y);
@@ -99,14 +107,15 @@ int CGUI::BSPWidget(mu_Rect r, int res, mu_Id mu_id) {
         dims[0] = ToFixed((ws_bottomright.x - ws_topleft.x) / 2.0);
         dims[1] = ToFixed((ws_bottomright.y - ws_topleft.y) / 2.0);
         dims[2] = FIX3(1);
-
-
-        CWallActor *theWall = new CWallActor();
-        theWall->MakeWallFromDims(dims, ToFixed(worldpos.x), ToFixed(worldpos.y), 0);
+        
+        
         ARGBColor color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BASE]);
-        auto _part = theWall->partList[0];
-        _part->ReplaceColor(*ColorManager::getMarkerColor(0), color);
+        std::shared_ptr<CWallActor> theWall = std::make_shared<CWallActor>();
+        theWall->MakeWallFromDims(dims, ToFixed(worldpos.x), ToFixed(worldpos.y), ToFixed(0.1f));
+        auto theBox = theWall->partList[0];
+        theBox->ReplaceColor(0x00fefefe, color);
         actors.emplace(mu_id, theWall);
+        //boxes.emplace(mu_id, (CSmartBox*)theBox);
     }
     return res;
 }
@@ -118,23 +127,21 @@ int CGUI::BSPButton(std::string s) {
     mu_Rect r = mu_layout_next(mui_ctx);
     mu_update_control(mui_ctx, mu_id, r, 0);
     BSPWidget(r, res, mu_id);
-    CAbstractActor* _wall = actors.at(mu_id);
-    CSmartPart* _part = _wall->partList[0];
-    if (!_part) return res;
+    auto _wall = actors.at(mu_id);
     /* hover */
     if (mui_ctx->hover == mu_id) {
         ARGBColor color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BUTTONHOVER]);
-        _part->ReplaceColor(*ColorManager::getMarkerColor(1), color);
+        //_wall->partList[0]->ReplaceColor(ColorManager::getMarkerColor(0).value(), color);
     }
     else {
         ARGBColor color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BUTTON]);
-        _part->ReplaceColor(*ColorManager::getMarkerColor(1), color);
+        //_wall->partList[0]->ReplaceColor(ColorManager::getMarkerColor(0).value(), color);
         //gRenderer->r
     }
     /* handle click */
     if (mui_ctx->mouse_pressed == MU_MOUSE_LEFT && mui_ctx->focus == mu_id) {
         res |= MU_RES_SUBMIT;
-        _wall->Blast();
+        actors.at(mu_id)->Blast();
         return res;
     }
     /* draw */
@@ -147,8 +154,8 @@ int CGUI::BSPTextInput(const char *id, std::string &s) {
     mu_Rect r = mu_layout_next(mui_ctx);
     int res = 0;
     BSPWidget(r, res, mu_id);
-    CAbstractActor* _wall = actors.at(mu_id);
-    CSmartPart* _part = _wall->partList[0];
+    auto _wall = actors.at(mu_id);
+    auto _part = _wall->partList[0];
 
     // TODO: something different than this
     // can the mu_textbox use a std::string buffa somehow?
@@ -159,16 +166,17 @@ int CGUI::BSPTextInput(const char *id, std::string &s) {
         // overflow, truncating
         temp[len - 1] = '\0';
     }
-
+    
     res |= mu_textbox_raw(mui_ctx, temp, len, mu_id, r, 0);
     // temp now contains updated string
     s.assign(temp);
+    if (!_part) return res;
     if (mui_ctx->focus == mu_id) {
-        _part->ReplaceColor(*ColorManager::getMarkerColor(0), ColorManager::getEnergyGaugeColor());
+        //_part->ReplaceColor(ColorManager::getMarkerColor(0).value(), ColorManager::getEnergyGaugeColor());
     }
     else {
         ARGBColor color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BASE]);
-        _part->ReplaceColor(*ColorManager::getMarkerColor(0), color);
+        //_part->ReplaceColor(0x00fefefe, color);
     }
     return res;
 }
@@ -180,7 +188,7 @@ int CGUI::BSPCheckbox(const char *label, bool *state) {
     mu_update_control(mui_ctx, mu_id, r, 0);
     int res = 0;
     BSPWidget(r, res, mu_id);
-    CAbstractActor* _wall = actors.at(mu_id);
+    //std::shared_ptr<CWallActor> _wall = actors.at(mu_id);
     //CSmartPart* _part = _wall->partList[0];
     if (mui_ctx->mouse_pressed == MU_MOUSE_LEFT && mui_ctx->focus == mu_id) {
         res |= MU_RES_CHANGE;
@@ -301,43 +309,45 @@ StateFunction CGUI::_transitionScreen() {
     //itsGame->RunFrameActions();
     return STAY;
 }
+
 bool levelloaded = false;
 StateFunction CGUI::_test() {
     std::stringstream fps;
     fps << "frame in: " << dt << "ms";
     mu_label(mui_ctx, fps.str().c_str());
-    if (levelloaded) {
-        if (BSPButton("PLAY")) {
-            itsGame->SendStartCommand();
-            active = false;
-        }
+    /*if (BSPButton("PLAY")) {
+        itsGame->SendStartCommand();
+        active = false;
     }
-    else {
+    return STAY;
+    */
+    /*else {
         if (BSPButton("LOAD")) {
             itsTui->ExecuteMatchingCommand("/rand avara aa emo ex", itsLocalPlayer);
             levelloaded = true;
         }
     }
+    */
     if (BSPButton("ABOUT")) {
         PlaySound(411);
     }
     if (BSPButton("QUIT")) {
         SetActive(false);
-        exit(0);
+        pushQuit();
     }
-
+    /*
     const char* label = "A text input:";
-    int w = text_width(0, label, strlen(label));
-    mu_layout_row(mui_ctx, 2, (int[]) { w + 50, 400 }, 0);
-    mu_label(mui_ctx, label);
+    int w = text_width(0, label, (int)strlen(label));
+    mu_layout_row(mu_ctx, 2, (int[]) { w + 50, 400 }, 0);
+    mu_label(mu_ctx, label);
     BSPTextInput("myinputid", teststring);
 
     const char* label2 = "A checkbox:";
-    w = text_width(0, label2, strlen(label2));
-    mu_layout_row(mui_ctx, 2, (int[]) { w + 50, 75 }, 0);
-    mu_label(mui_ctx, label2);
+    w = text_width(0, label2, (int)strlen(label2));
+    mu_layout_row(mu_ctx, 2, (int[]) { w + 50, 75 }, 0);
+    mu_label(mu_ctx, label2);
     BSPCheckbox("checkboxid", &testbool);
-
+    */
     return STAY;
 }
 
@@ -349,14 +359,15 @@ void CGUI::Render(NVGcontext *ctx) {
 
     nvgFontFace(ctx, "mono");
     nvgFontSize(ctx, 55);
-    //LookAtGUI();
+    LookAtGUI();
     //itsWorld->Render(itsView);
     //screen->Render(ctx);
 
     mu_Command *cmd = NULL;
     while (mu_next_command(mui_ctx, &cmd)) {
-        /*
+        
         if (cmd->type == MU_COMMAND_RECT) {
+            /*
             mu_Rect rect = cmd->rect.rect;
             NVGcolor c = toNVGcolor(cmd->rect.color);
             nvgBeginPath(ctx);
@@ -366,8 +377,10 @@ void CGUI::Render(NVGcontext *ctx) {
             nvgStroke(ctx);
             nvgFill(ctx);
             nvgClosePath(ctx);
+            */
+            
         }
-        */
+        
         if (cmd->type == MU_COMMAND_TEXT) {
             nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
             nvgFillColor(ctx, toNVGcolor(cmd->text.color));
