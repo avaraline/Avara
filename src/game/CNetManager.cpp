@@ -783,13 +783,15 @@ void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
             if (IAmAlive()) {
 
                 latencyVoteFrame = frameNumber;  // record the actual frame where the vote is initiated
+                // only use the "alive" players for the maxRTT calculation
                 maxRoundLatency = itsCommManager->GetMaxRoundTrip(AlivePlayersDistribution(), &maxId);
                 maxPlayer = playerTable[maxId].get();
                 uint8_t llv = std::min(long(UINT8_MAX), localLatencyVote);  // just in case, p1 can only accept a max of 256
 
+                // send to all "active" players ("alive" plus spectators)
                 itsCommManager->SendUrgentPacket(
                     activePlayersDistribution, kpLatencyVote, llv, maxRoundLatency, FRandSeed, 0, NULL);
-                DBG_Log("lt+", "*** fn=%d Sending kpLatencyVote to 0x%2hx, localLatencyVote=%ld, maxRoundLatency=%ld FRandSeed=%d\n",
+                DBG_Log("lt+", "*** fn=%d Sending kpLatencyVote to 0x%02hx, localLatencyVote=%ld, maxRoundLatency=%ld FRandSeed=%d\n",
                         frameNumber, activePlayersDistribution, localLatencyVote, maxRoundLatency, FRandSeed);
             } else {
                 // spectator just sends FRandSeed to self for fragmentation check
