@@ -1126,6 +1126,7 @@ bool CPlayerManagerImpl::IsAway() {
 
 void CPlayerManagerImpl::AbortRequest() {
     theNetManager->activePlayersDistribution &= ~(1 << slot);
+    DeadOrDone();
     if (isLocalPlayer) {
         itsGame->statusRequest = kAbortStatus;
     }

@@ -1962,19 +1962,21 @@ long CUDPComm::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
             // add in mult*stdev but max it at CLASSICFRAMETIME (so we don't add more than 0.5 to LT)
             // note: is this really a erlang distribution?  if so, what's the proper equation?
             float rtt = conn->meanRoundTripTime + std::min<float>(mult*stdev, (1.0*CLASSICFRAMECLOCK));
+            if (slowPlayerId != nullptr) {
+                DBG_Log("rtt", "RTT[%d] = %.1f(%.2f) + min(%.1f * %.1f(%.2f), 64(0.5)) = %.1f(%.2fLT)\n",
+                        conn->myId,
+                        conn->meanRoundTripTime*MSEC_PER_GET_CLOCK,
+                        conn->meanRoundTripTime*MSEC_PER_GET_CLOCK / (2*CLASSICFRAMETIME),
+                        mult,
+                        stdev*MSEC_PER_GET_CLOCK,
+                        stdev*MSEC_PER_GET_CLOCK / (2*CLASSICFRAMETIME),
+                        rtt*MSEC_PER_GET_CLOCK,
+                        rtt*MSEC_PER_GET_CLOCK / (2*CLASSICFRAMETIME));
+            }
             if (rtt > maxTrip) {
                 maxTrip = rtt;
                 if (slowPlayerId != nullptr) {
                     *slowPlayerId = conn->myId;
-                    DBG_Log("rtt", "RTT[%d] = %.1f(%.2f) + min(%.1f * %.1f(%.2f), 64(0.5)) = %.1f(%.2fLT)\n",
-                            conn->myId,
-                            conn->meanRoundTripTime*MSEC_PER_GET_CLOCK,
-                            conn->meanRoundTripTime*MSEC_PER_GET_CLOCK / (2*CLASSICFRAMETIME),
-                            mult,
-                            stdev*MSEC_PER_GET_CLOCK,
-                            stdev*MSEC_PER_GET_CLOCK / (2*CLASSICFRAMETIME),
-                            rtt*MSEC_PER_GET_CLOCK,
-                            rtt*MSEC_PER_GET_CLOCK / (2*CLASSICFRAMETIME));
                 }
             }
         }
