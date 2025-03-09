@@ -796,7 +796,7 @@ void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
             } else {
                 // spectator just sends FRandSeed to self for fragmentation check
                 itsCommManager->SendUrgentPacket(
-                    SelfDistribution(), kpLatencyVote, 0, 0, FRandSeed, 0, NULL);
+                    SelfDistribution(), kpLatencyVote, 0, -1, FRandSeed, 0, NULL);
             }
             localLatencyVote = 0;
             latencyVoteOpen = true;
@@ -927,10 +927,12 @@ void CNetManager::ReceiveLatencyVote(int16_t sender,
                                      int32_t p3) {      // FRandSeed
 
     DBG_Log("lt+", "CNetManager::ReceiveLatencyVote(%d, %d, %hd, %d)\n", sender, p1, p2, p3);
-    autoLatencyVoteCount++;
-    autoLatencyVote += p1;
-
-    maxRoundTripLatency = std::max(maxRoundTripLatency, p2);
+    // ignore my own latency votes if I'm dead/spectating
+    if (p2 >= 0) {
+        autoLatencyVoteCount++;
+        autoLatencyVote += p1;
+        maxRoundTripLatency = std::max(maxRoundTripLatency, p2);
+    }
 
     playerTable[sender]->RandomKey(p3);
 
