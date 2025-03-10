@@ -34,6 +34,7 @@
 #include <utf8.h>
 
 CPlayerManager* CPlayerManager::theLocalPlayer;
+CPlayerManager* CPlayerManager::theServerPlayer;
 
 void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManager *aNetManager) {
     // Rect	*mainScreenRect;
@@ -129,6 +130,9 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
 
     NetDisconnect();
     SetLocal();
+    if (slot == 0) {
+        CPlayerManagerImpl::theServerPlayer = this;
+    }
 
     prevKeyboardActive = keyboardActive;
 }
@@ -1122,6 +1126,10 @@ void CPlayerManagerImpl::SetPlayerReady(bool isReady) {
 
 bool CPlayerManagerImpl::IsAway() {
     return (presence == kzAway);
+}
+
+bool CPlayerManagerImpl::IsSpectating() {
+    return (presence == kzSpectating);
 }
 
 void CPlayerManagerImpl::AbortRequest() {

@@ -299,9 +299,11 @@ bool CommandManager::KickPlayer(int slot) {
 
     std::string slotString(std::to_string(slot));
 
-    if(CPlayerManagerImpl::LocalPlayer()->Slot() != 0) {
+    if(CPlayerManagerImpl::LocalPlayer() != CPlayerManagerImpl::ServerPlayer() &&
+       !CPlayerManagerImpl::ServerPlayer()->IsAway() &&
+       !CPlayerManagerImpl::ServerPlayer()->IsSpectating()) {
         itsApp->AddMessageLine(
-            "Only the host can issue kick commands.",
+            "You can only kick players if the host is away/spectating.",
             MsgAlignment::Left,
             MsgCategory::Error
         );

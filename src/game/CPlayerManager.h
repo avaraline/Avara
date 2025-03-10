@@ -64,9 +64,11 @@ static const char* eyeballs_utf8  = "\xF0\x9F\x91\x80";
 class CPlayerManager {
 protected:
     static CPlayerManager* theLocalPlayer;
+    static CPlayerManager* theServerPlayer;
 public:
     static CPlayerManager* LocalPlayer() { return theLocalPlayer; };  // the current/local player
-
+    static CPlayerManager* ServerPlayer() { return theServerPlayer; };  // the serving player
+    
     virtual std::string GetChatString(int maxChars) = 0;
     virtual std::string GetChatLine() = 0;
     virtual CAbstractPlayer* GetPlayer() = 0;
@@ -99,6 +101,7 @@ public:
     virtual void SetPresence(PresenceType) = 0;
     virtual void SetPlayerStatus(LoadingState newStatus, PresenceType newPresence, FrameNumber theWin) = 0;
     virtual bool IsAway() = 0;
+    virtual bool IsSpectating() = 0;
 
     virtual void ChangeName(StringPtr theName) = 0;
     virtual void SetPosition(short pos) = 0;
@@ -245,6 +248,7 @@ public:
     virtual void SetPlayerStatus(LoadingState newStatus, PresenceType newPresence, FrameNumber theWin);
     virtual void SetPlayerReady(bool isReady);
     virtual bool IsAway();
+    virtual bool IsSpectating();
 
     virtual void ResendFrame(FrameNumber theFrame, short requesterId, short commandCode);
 
