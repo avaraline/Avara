@@ -687,6 +687,7 @@ void CNetManager::ResumeGame() {
         copy.numMissiles = ntohs(config.numMissiles);
         copy.numBoosters = ntohs(config.numBoosters);
         copy.hullType = ntohs(config.hullType);
+        copy.frameLatencyLimits = ntohs(config.frameLatencyLimits);
         copy.frameLatency = ntohs(config.frameLatency);
         copy.frameTime = ntohs(config.frameTime);
         copy.spawnOrder = ntohs(config.spawnOrder);
@@ -869,11 +870,11 @@ void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
                     DBG_Log("lt+", "  <<addOneLatency = %hd, reduceLatencyCounter = %d\n", addOneLatency, reduceLatencyCounter);
                 }
 
-                short newFrameLatency = rttFrameLatency + addOneLatency;
+                uint8_t newFrameLatency = rttFrameLatency + addOneLatency;
 
-                // limit LT unless it's set to zero
+                // limit LT unless max set to zero
                 if (maxAutoLatency > 0) {
-                    newFrameLatency = std::min<short>(newFrameLatency, maxAutoLatency);
+                    newFrameLatency = std::max(std::min(newFrameLatency, maxAutoLatency), minAutoLatency);
                 }
 
                 DBG_Log("lt", "  fn=%d RTT=%d, Classic LT=%.2lf, add=%.2lf --> FL=%d\n",
@@ -1344,6 +1345,7 @@ void CNetManager::ConfigPlayer(short senderSlot, Ptr configData) {
     config->numBoosters = ntohs(config->numBoosters);
     config->hullType = ntohs(config->hullType);
     config->frameLatency = ntohs(config->frameLatency);
+    config->frameLatencyLimits = ntohs(config->frameLatencyLimits);
     config->frameTime = ntohs(config->frameTime);
     config->spawnOrder = ntohs(config->spawnOrder);
     config->hullColor = ntohl(config->hullColor.GetRaw());
@@ -1367,9 +1369,10 @@ void CNetManager::DoConfig(short senderSlot) {
 
         // transmitting latencyTolerance in terms of frameLatency to keep it as a short value on transmission
         itsGame->SetFrameTime(theConfig->frameTime);
-        maxAutoLatency = theConfig->maxFrameLatency;
+        minAutoLatency = theConfig->frameLatencyLimits >> 8;    // top 8 bits
+        maxAutoLatency = theConfig->frameLatencyLimits & 0xff;  // bottom 8 bits
         itsGame->SetFrameLatency(theConfig->frameLatency);
-        SDL_Log("DoConfig LT = %lf, maxFL = %d\n", itsGame->latencyTolerance, maxAutoLatency);
+        SDL_Log("DoConfig LT = %.2lf, minFL = %d, maxFL = %d\n", itsGame->latencyTolerance, minAutoLatency, maxAutoLatency);
         itsGame->SetSpawnOrder((SpawnOrder)theConfig->spawnOrder);
         latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD);
     }
@@ -1378,17 +1381,20 @@ void CNetManager::DoConfig(short senderSlot) {
 void CNetManager::UpdateLocalConfig() {
     CPlayerManager *thePlayerManager = playerTable[itsCommManager->myId].get();
 
-    config.maxFrameLatency = gApplication
+    uint16_t minFrameLatency = gApplication
+        ? gApplication->Get<float>(kLatencyToleranceMinTag) / itsGame->fpsScale : 0;
+    uint16_t maxFrameLatency = gApplication
         ? gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale : 0;
     if (IsAutoLatencyEnabled()) {
         // start with the max RTT value
         config.frameLatency = itsGame->RoundTripToFrameLatency(itsCommManager->GetMaxRoundTrip(AlivePlayersDistribution()));
         config.frameLatency += 0.25/itsGame->fpsScale;  // a wee buffer on startup LT (adds 0.25LT for 62.5 fps)
-        config.frameLatency = std::min(config.frameLatency, config.maxFrameLatency);
+        config.frameLatency = std::max(std::min(config.frameLatency, maxFrameLatency), minFrameLatency);
     } else {
         // fix LT to kLatencyToleranceTag
-        config.frameLatency = config.maxFrameLatency;
+        config.frameLatency = maxFrameLatency;
     }
+    config.frameLatencyLimits = (minFrameLatency << 8) | maxFrameLatency;
     config.frameTime = itsGame->frameTime;
     config.spawnOrder = gApplication ? gApplication->Get<short>(kSpawnOrder) : ksHybrid;
     config.hullType = gApplication ? gApplication->Number(kHullTypeTag) : 0;
