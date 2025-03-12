@@ -17,8 +17,8 @@ struct PlayerConfigRecord {
     short numMissiles {};
     short numBoosters {};
     short hullType {};
-    short frameLatency {};
-    short maxFrameLatency {};
+    uint16_t frameLatency {};
+    uint16_t frameLatencyLimits {};   // min & max values in each byte
     short frameTime {};
     short spawnOrder {};
     ARGBColor hullColor { (*ColorManager::getMarkerColor(0)).WithA(0xff) };
