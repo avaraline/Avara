@@ -27,4 +27,5 @@ public:
     void LoadImages(NVGcontext *ctx);
     void DrawImage(NVGcontext* ctx, int image, float alpha, float sx, float sy, float sw, float sh, float x, float y, float w, float h);
 
+    char ehudText[4][128];
 };
