@@ -367,8 +367,8 @@ void CHUD::DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx) {
                 sightDist = PLAYERMISSILERANGE;
             }
             float shiftFactor = ToFloat(PLAYERMISSILERANGE) / ToFloat(theHit.distance);
-            float shiftX = 3.2 * shiftFactor + 10;
-            float shiftY = 1.5 * shiftFactor;
+            float shiftX = bufferWidth * 0.0019 * shiftFactor + 10;
+            float shiftY = bufferHeight * 0.0018 * shiftFactor;
 
             x = bufferWidth / 2 + shiftX;
             y = bufferHeight * 0.5 - boardHeight / 2 + shiftY;
