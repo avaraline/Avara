@@ -57,4 +57,6 @@ public:
     bool ToggleEditingHud(VectorOfArgs);
     bool TeleportToTarget(VectorOfArgs);
     bool RevealEtagInALF(VectorOfArgs);
+    bool PickEditingTarget(VectorOfArgs);
+    bool SetEditingTargetParam(VectorOfArgs);
 };

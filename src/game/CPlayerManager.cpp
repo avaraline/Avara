@@ -1367,6 +1367,12 @@ void CPlayerManagerImpl::SetShowEditingHud(bool b) {
 bool CPlayerManagerImpl::GetShowEditingHud() {
     return showEditingHud;
 }
+void CPlayerManagerImpl::SetPickTargetEtag(std::string etag) {
+    pickTargetEtag = etag;
+}
+std::string CPlayerManagerImpl::GetPickTargetEtag() {
+    return pickTargetEtag;
+}
 
 void CPlayerManagerImpl::PlaybackAndRecord(FunctionTable &ft) {
     if (isLocalPlayer && itsGame->keysFromStdin) {

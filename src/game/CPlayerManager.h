@@ -144,6 +144,8 @@ public:
     virtual bool GetShowScoreboard() = 0;
     virtual void SetShowEditingHud(bool b) = 0;
     virtual bool GetShowEditingHud() = 0;
+    virtual void SetPickTargetEtag(std::string etag) = 0;
+    virtual std::string GetPickTargetEtag() = 0;
 };
 
 class CPlayerManagerImpl : public CDirectObject, public CPlayerManager, public std::enable_shared_from_this<CPlayerManagerImpl> {
@@ -197,6 +199,7 @@ private:
 
     bool showScoreboard = false;
     bool showEditingHud = false;
+    std::string pickTargetEtag = "";
 
     Point mouseCenterPosition;
     Boolean isLocalPlayer;
@@ -309,6 +312,8 @@ public:
     virtual bool GetShowScoreboard();
     virtual void SetShowEditingHud(bool b);
     virtual bool GetShowEditingHud();
+    virtual void SetPickTargetEtag(std::string etag);
+    virtual std::string GetPickTargetEtag();
 
     void PlaybackAndRecord(FunctionTable &ft);
 };

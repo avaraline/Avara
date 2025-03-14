@@ -99,6 +99,9 @@ using json = nlohmann::json;
 #define kShowElo "showElo"
 #define kDefaultArgs "defaultArgs"
 
+// editing tools
+#define kEditingToolsDispatcherPort 19569
+
 // Key names are from https://wiki.libsdl.org/SDL_Scancode
 static json defaultPrefs = {
     {kYonPrefTag, 0},

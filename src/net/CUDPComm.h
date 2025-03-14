@@ -158,5 +158,5 @@ public:
 
     virtual void BuildServerTags();
 
-    static void DirtyUDPWrite(IPaddress addr, const char *data, int len);
+    static void RawUDPWrite(IPaddress addr, const char *data, int len);
 };

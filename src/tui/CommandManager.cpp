@@ -145,6 +145,14 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
     cmd = new TextCommand("/find          <- reveal target etag in ALF",
                           METHOD_TO_LAMBDA_VARGS(RevealEtagInALF));
     TextCommand::Register(cmd);
+
+    cmd = new TextCommand("/pick          <- set editing target",
+                          METHOD_TO_LAMBDA_VARGS(PickEditingTarget));
+    TextCommand::Register(cmd);
+
+    cmd = new TextCommand("/set           <- set editing target param",
+                          METHOD_TO_LAMBDA_VARGS(SetEditingTargetParam));
+    TextCommand::Register(cmd);
 }
 
 
@@ -728,12 +736,62 @@ bool CommandManager::RevealEtagInALF(VectorOfArgs vargs) {
             CSmartPart *hitPart = theHit.closestHit;
             if (hitPart) {
                 std::string etag = hitPart->theOwner->etag;
-                if (etag.length() != 0) {
-                    IPaddress addr = {0x7f000001, 19569}; // 127.0.0.1:19569
-                    CUDPComm::DirtyUDPWrite(addr, etag.c_str(), etag.length());
+                char message[32];
+                snprintf(message, 32, "findEtag %s", etag.c_str());
+                if (etag.length() > 0) {
+                    IPaddress addr = {0x7f000001, kEditingToolsDispatcherPort}; // 127.0.0.1
+                    CUDPComm::RawUDPWrite(addr, message, strlen(message));
+                } else {
+                    itsApp->AddMessageLine("Can't /find actor because it has no etag.");
                 }
             }
         }
+    }
+    return true;
+}
+
+bool CommandManager::PickEditingTarget(VectorOfArgs vargs) {
+    CAvaraGame *theGame = itsApp->GetGame();
+    if (theGame) {
+        CAbstractPlayer *player = theGame->GetLocalPlayer();
+        if (player) {
+            RayHitRecord theHit;
+            player->SightRayTest(&theHit);
+            CSmartPart *hitPart = theHit.closestHit;
+            if (hitPart) {
+                std::string etag = hitPart->theOwner->etag;
+                if (etag.length() > 0) {
+                    CPlayerManager *playerManager = CPlayerManagerImpl::LocalPlayer();
+                    playerManager->SetPickTargetEtag(etag);
+                    char message[64];
+                    snprintf(message, 64, "Picked actor with etag \"%s\".", etag.c_str());
+                    itsApp->AddMessageLine(message);
+                } else {
+                    itsApp->AddMessageLine("Cannot /pick actor because it has no etag.");
+                }
+            }
+        }
+    }
+    return true;
+}
+
+bool CommandManager::SetEditingTargetParam(VectorOfArgs vargs) {
+    if (vargs.size() != 1) {
+        itsApp->AddMessageLine("Expected one argument. Example: \"/set w=5\"");
+        return true;
+    }
+    std::string etag = CPlayerManagerImpl::LocalPlayer()->GetPickTargetEtag();
+    if (etag.length() > 0) {
+        std::string arg = vargs[0];
+        int offset = arg.find("=");
+        std::string param = arg.substr(0, offset);
+        std::string value = arg.substr(offset + 1, arg.length());
+        char message[64];
+        snprintf(message, 64, "setParamOnEtag %s,%s,%s", param.c_str(), value.c_str(), etag.c_str());
+        IPaddress addr = {0x7f000001, kEditingToolsDispatcherPort}; // 127.0.0.1
+        CUDPComm::RawUDPWrite(addr, message, strlen(message));
+    } else {
+        itsApp->AddMessageLine("You must /pick an actor before you can /set its params.");
     }
     return true;
 }
