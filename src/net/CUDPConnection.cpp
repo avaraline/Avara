@@ -363,7 +363,7 @@ float CommandMultiplierForStats(const PacketInfo& thePacketInfo) {
             if (thePacketInfo.p3 > 0) {
                 // the last ping time can be too big if there aren't other messages coming after it
                 // because the receiver may have no reason to respond in a timely manner so ignore p3==0
-                multiplier = (RTTSMOOTHFACTOR_UP) * 0.3;
+                multiplier = CLASSICFRAMETIME * 0.4;  // smooth similarly to in-game rate
             }
             break;
     }
@@ -394,7 +394,7 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, int32_t when) {
             if (thePacket->packet.command == kpPing) {
                 // decrease ping roundTrip because pings aren't as fast as urgent game packets and we
                 // want to start the game at about the right LT (which is based the average ping times)
-                roundTrip *= 0.9;
+                roundTrip *= 0.82;
             }
 
             // compute an exponential moving average & variance of the roundTrip time

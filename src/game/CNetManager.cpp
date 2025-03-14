@@ -38,7 +38,7 @@
 
 #define AUTOLATENCYPERIOD 3840  // msec (divisible by 64)
 #define AUTOLATENCYDELAY  448   // msec (divisible by 64)
-#define LOWERLATENCYCOUNT   (0.025 * AUTOLATENCYPERIOD / itsGame->frameTime)      // waited on >2.5% of frames
+#define LOWERLATENCYCOUNT   (0.03 * AUTOLATENCYPERIOD / itsGame->frameTime)       // waited on >3% of frames
 #define HIGHERLATENCYCOUNT  (0.20 * AUTOLATENCYPERIOD / itsGame->frameTime)       // waited on >20% of frames
 
 #define kMessageBufferMaxAge 90
@@ -820,7 +820,7 @@ void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
                 // how often clients had to wait for packets to arrive (autoLatencyVote)
                 short addOneLimit = (1.0/itsGame->fpsScale);
                 short deltaFrameLatency = curFrameLatency - rttFrameLatency;   // how far below LT is the current RTT(in frames)
-                if (autoLatencyVote >= HIGHERLATENCYCOUNT) {
+                if (autoLatencyVote > HIGHERLATENCYCOUNT) {                                // wait count is too high
                     // players had to wait too much, LT needs to go up, either via RTT or addOneLatency
                     // Examples:
                     //    LT=2.25 , rtt = 1.75, add1 = 0.25 --> add1 = 0.75 (LT -> 2.50)   [increase add1]
@@ -830,10 +830,9 @@ void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
                     //  * = previous value of rtt
                     addOneLatency = std::max<short>(addOneLatency, deltaFrameLatency + 1);
                     addOneLatency = std::min<short>(addOneLatency, addOneLimit);
-                    DBG_Log("lt+", "  ++addOneLatency = %hd\n", addOneLatency);
+                    DBG_Log("lt+", "  >>addOneLatency = %hd\n", addOneLatency);
                     reduceLatencyCounter = 0;
-                } else if (autoLatencyVote > LOWERLATENCYCOUNT ||                          // count between higher/lower
-                           addOneLatency > deltaFrameLatency || deltaFrameLatency == 0) {  // count lower but LT would NOT decrease
+                } else if (autoLatencyVote > LOWERLATENCYCOUNT) {                          // count between higher/lower limits
                     // try to keep LT where it is (unless RTT goes above LT)
                     // Examples:
                     //    LT=2.25 , rtt = 1.25, add1 = 0.25 --> add1 = 1.00 (LT -> 2.25)   [adjust add1 over full range]
@@ -844,30 +843,42 @@ void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
                     addOneLatency = std::max<short>(0, deltaFrameLatency);
                     addOneLatency = std::min<short>(addOneLatency, addOneLimit);
                     reduceLatencyCounter = 0;
-                    DBG_Log("lt+", "  ==addOneLatency = %hd\n", addOneLatency);
-                } else if (++reduceLatencyCounter >= 2) {                                  // is it time to reduce LT?
-                    // LT will decrease, either from RTT or add1
-                    // Examples:
-                    //    LT=2.25 , rtt = 1.00, add1 = 0.50 --> add1 = 0.50 (LT -> 1.50)   [don't increase add1 when RTT improves alot]
-                    //    LT=2.25 , rtt = 1.50, add1 = 0.50 --> add1 = 0.50 (LT -> 2.00)   [don't change add1]
-                    //  * LT=2.25 , rtt = 1.75, add1 = 0.50 --> add1 = 0.25 (LT -> 2.00)   [decrease add1]
-                    //    LT=2.25 , rtt = 2.00, add1 = 0.25 --> add1 = 0.00 (LT -> 2.00)   [decrease add1]
-                    //    LT=2.25 , rtt = 2.00, add1 = 0.00 --> add1 = 0.00 (LT -> 2.00)
-                    //    LT=2.25 , rtt = 2.00, add1 = 0.50                                [shouldn't get here]
-                    //    LT=2.25 , rtt = 2.25, add1 = 0.00                                [shouldn't get here]
-                    // bottom line: if RTT goes down MORE than 1 frame (0.25), don't change addOneLatency and let RTT alone reduce LT,
-                    //              otherwise decrement addOneLatency
-                    if (addOneLatency == deltaFrameLatency && addOneLatency > 0) {
-                        --addOneLatency;
+                    DBG_Log("lt+", "  <>addOneLatency = %hd\n", addOneLatency);
+                } else /* (autoLatencyVote <= LOWERLATENCYCOUNT) */ {
+                    // the "wait" counts are nice and low, keep it here for at least 2 consecutive low votes then consider decreasing LT
+                    bool rttCouldReduceLT = (addOneLatency < deltaFrameLatency);
+                    bool add1CouldReduceLT = (addOneLatency == deltaFrameLatency && addOneLatency > 0);
+                    // note: only increase counter if the LT could be reduced
+                    if ((rttCouldReduceLT || add1CouldReduceLT) && ++reduceLatencyCounter >= 2) {
+                        // LT will decrease, either from RTT or add1
+                        // Examples:
+                        //    LT=2.25 , rtt = 1.00, add1 = 0.50 --> add1 = 0.50 (LT -> 1.50)   [don't increase add1 when RTT improves alot]
+                        //    LT=2.25 , rtt = 1.50, add1 = 0.50 --> add1 = 0.50 (LT -> 2.00)   [don't change add1]
+                        //  * LT=2.25 , rtt = 1.75, add1 = 0.50 --> add1 = 0.25 (LT -> 2.00)   [decrease add1]
+                        //    LT=2.25 , rtt = 2.00, add1 = 0.25 --> add1 = 0.00 (LT -> 2.00)   [decrease add1]
+                        //    LT=2.25 , rtt = 2.00, add1 = 0.00 --> add1 = 0.00 (LT -> 2.00)
+                        //    LT=2.25 , rtt = 2.00, add1 = 0.50                                [shouldn't get here]
+                        //    LT=2.25 , rtt = 2.25, add1 = 0.00                                [shouldn't get here]
+                        // bottom line: if RTT goes down MORE than 1 frame (0.25), don't change addOneLatency and let RTT alone reduce LT,
+                        //              otherwise decrement addOneLatency
+                        if (rttCouldReduceLT) {
+                            // RTT will be small enough to reduce LT, don't change addOneLatency
+                            DBG_Log("lt+", "  <<addOneLatency = %hd\n", addOneLatency);
+                        } else /* add1WillReduce */ {
+                            // decreasing addOneLatency by 1 frame will reduce LT
+                            --addOneLatency;
+                            DBG_Log("lt+", "  --addOneLatency = %hd\n", addOneLatency);
+                        }
+                        reduceLatencyCounter = 0;
+                    } else {
+                        // wait counts are low so try to keep LT where it is, even if add1 goes a little negative
+                        addOneLatency = std::min(std::max<short>(-1, deltaFrameLatency), addOneLimit);
+                        if (!rttCouldReduceLT && !add1CouldReduceLT) {
+                            // we wouldn't have reduced LT in either case, so reset the counter
+                            reduceLatencyCounter = 0;
+                        }
+                        DBG_Log("lt+", "  ==addOneLatency = %hd, reduceLatencyCounter = %d\n", addOneLatency, reduceLatencyCounter);
                     }
-                    DBG_Log("lt+", "  --addOneLatency = %hd\n", addOneLatency);
-                    reduceLatencyCounter = 0;
-                } else {
-                    // try to keep LT where it is until the counter says we can change it
-                    // ... same logic as (autoLatencyVote > LOWERLATENCYCOUNT...) BUT don't reset reduceLatencyCounter
-                    addOneLatency = std::max<short>(0, deltaFrameLatency);
-                    addOneLatency = std::min<short>(addOneLatency, addOneLimit);
-                    DBG_Log("lt+", "  <<addOneLatency = %hd, reduceLatencyCounter = %d\n", addOneLatency, reduceLatencyCounter);
                 }
 
                 uint8_t newFrameLatency = rttFrameLatency + addOneLatency;
@@ -1388,7 +1399,6 @@ void CNetManager::UpdateLocalConfig() {
     if (IsAutoLatencyEnabled()) {
         // start with the max RTT value
         config.frameLatency = itsGame->RoundTripToFrameLatency(itsCommManager->GetMaxRoundTrip(AlivePlayersDistribution()));
-        config.frameLatency += 0.25/itsGame->fpsScale;  // a wee buffer on startup LT (adds 0.25LT for 62.5 fps)
         config.frameLatency = std::max(std::min(config.frameLatency, maxFrameLatency), minFrameLatency);
     } else {
         // fix LT to kLatencyToleranceTag
