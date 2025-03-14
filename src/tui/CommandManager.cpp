@@ -777,17 +777,13 @@ bool CommandManager::PickEditingTarget(VectorOfArgs vargs) {
 
 bool CommandManager::SetEditingTargetParam(VectorOfArgs vargs) {
     if (vargs.size() != 1) {
-        itsApp->AddMessageLine("Expected one argument. Example: \"/set w=5\"");
+        itsApp->AddMessageLine("Expected one argument. Example: \"/set x=2,w=5\"");
         return true;
     }
     std::string etag = CPlayerManagerImpl::LocalPlayer()->GetPickTargetEtag();
     if (etag.length() > 0) {
-        std::string arg = vargs[0];
-        int offset = arg.find("=");
-        std::string param = arg.substr(0, offset);
-        std::string value = arg.substr(offset + 1, arg.length());
         char message[64];
-        snprintf(message, 64, "setParamOnEtag %s,%s,%s", param.c_str(), value.c_str(), etag.c_str());
+        snprintf(message, 64, "setParamOnEtag %s,etag=%s", vargs[0].c_str(), etag.c_str());
         IPaddress addr = {0x7f000001, kEditingToolsDispatcherPort}; // 127.0.0.1
         CUDPComm::RawUDPWrite(addr, message, strlen(message));
     } else {
