@@ -81,7 +81,7 @@ public:
     std::string loadedSet = "";
     std::string loadedDesigner = "";
     std::string loadedInfo = "";
-    std::set<std::string> loadedTags;
+    std::string loadedTags;
     long loadedTimeLimit;
     int32_t timeInSeconds;
     FrameNumber frameNumber;

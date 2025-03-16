@@ -109,12 +109,14 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     levelLoaded = playersLayer->add<Text>("", false, 16);
     levelDesigner = playersLayer->add<Text>("", false, 16);
     levelDescription = playersLayer->add<Label>("No level loaded");
+    levelTags = playersLayer->add<Text>("", false, 16);
 
     levelLoaded->setAlignment(Text::Alignment::Left);
     levelDesigner->setAlignment(Text::Alignment::Left);
     //levelDescription->setAlignment(Text::Alignment::Left);
     levelDescription->setFixedHeight(90);
     levelDescription->setFixedWidth(450);
+    levelTags->setAlignment(Text::Alignment::Left);
 
     //chat tab
     Widget *chatTab = tabWidget->createTab("Chat");
@@ -237,6 +239,7 @@ void CRosterWindow::UpdateRoster() {
             std::string theLevel = theGame->loadedLevel;
             std::string theDesigner = theGame->loadedDesigner;
 
+
             if (theLevel.length() > 0) levelLoaded->setValue(theLevel);
             else levelLoaded->setValue("");
             if (theDesigner.length() > 0) levelDesigner->setValue(theDesigner);
@@ -245,6 +248,8 @@ void CRosterWindow::UpdateRoster() {
             if (theGame->loadedInfo.length() > 0) levelDescription->setCaption(theGame->loadedInfo);
             else levelDescription->setCaption("No additional information about this mission is available.");
             currentLevel = theGame->loadedFilename;
+
+            UpdateTags(theGame->loadedTags);
         }
     }
     else if (tabWidget->activeTab() == 2) {
@@ -466,3 +471,9 @@ void CRosterWindow::PrefChanged(std::string name) {
         colors[i]->setNeedsLayout();
     }
 }
+
+
+void CRosterWindow::UpdateTags(std::string& tags) {
+    levelTags->setValue("tags:" + tags);
+}
+

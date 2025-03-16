@@ -645,11 +645,8 @@ bool CommandManager::HandleTags(VectorOfArgs vargs) {
         }
     }
 
-    std::string msg = "tags for \"" + curLevel.first + "/" + curLevel.second + "\":";
-    for (auto tag: Tags::GetTagsForLevel(curLevel)) {
-        msg +=  " " + tag;
-    }
-    itsApp->AddMessageLine(msg);
+    auto tagsStr = Tags::TagsStringForLevel(curLevel);
+    itsApp->rosterWindow->UpdateTags(tagsStr);
 
     return true;
 }
