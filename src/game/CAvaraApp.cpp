@@ -318,19 +318,12 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
         playerWindow->RepopulateHullOptions();
         itsGame->loadedLevel = levelName;
         itsGame->loadedFilename  = levelTag;
-        itsGame->loadedTags = Tags::GetTagsForLevel(Tags::LevelURL(itsGame->loadedSet, itsGame->loadedLevel));
+        itsGame->loadedTags = Tags::TagsStringForLevel(Tags::LevelURL(itsGame->loadedSet, itsGame->loadedLevel));
         std::string msgStr = "Loaded";
         if (sendingPlayer != NULL) {
             msgStr = sendingPlayer->GetPlayerName() + " loaded";
         }
         msgStr += " \"" + itsGame->loadedLevel + "\" from \"" + set + "\".";
-        if (!itsGame->loadedTags.empty()) {
-            msgStr += " (tags:";
-            for (auto tag: itsGame->loadedTags) {
-                msgStr += " " + tag;
-            }
-            msgStr += ")";
-        }
         AddMessageLine(msgStr);
 
         levelWindow->SelectLevel(set, itsGame->loadedLevel);

@@ -47,6 +47,17 @@ const std::set<std::string>& Tags::GetTagsForLevel(LevelURL level) {
     return _tags[level.first][level.second];
 }
 
+std::string Tags::TagsStringForLevel(LevelURL level) {
+    std::string tagsStr;
+    auto levelTags = GetTagsForLevel(level);
+    if (!levelTags.empty()) {
+        for (auto tag: levelTags) {
+            tagsStr += " " + tag;
+        }
+    }
+    return tagsStr;
+}
+
 std::string Tags::NormalizeTagName(std::string tag) {
     if (tag[0] != '#') {
         tag = '#' + tag;
