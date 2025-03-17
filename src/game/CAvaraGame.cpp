@@ -662,7 +662,7 @@ void CAvaraGame::StartIfReady() {
         bool allReady = true;
         for (int i = 0; i < kMaxAvaraPlayers; i++) {
             CPlayerManager *mgr = itsNet->playerTable[i].get();
-            if (mgr && mgr->LoadingStatus() == kLLoaded && mgr->Presence() == kzAvailable) {
+            if (mgr && mgr->IsLoaded() && mgr->Presence() == kzAvailable) {
                 allReady = false;
                 break;
             }
