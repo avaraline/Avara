@@ -1032,55 +1032,48 @@ bool CNetManager::CanPlay() {
    return (!isPlaying && !playerTable[itsCommManager->myId]->IsAway());
 }
 
-void CNetManager::SendStartCommand(int16_t originalSender) {
-    SDL_Log("CNetManager::SendStartCommand(%d)\n", originalSender);
+void CNetManager::SendStartCommand() {
+    SDL_Log("CNetManager::SendStartCommand()\n");
 
     uint16_t dist = 0;
-
-    // TODO: shouldn't set these in case the server is playing in another game
-    activePlayersDistribution = 0;
-    startPlayersDistribution = 0;
-    // set readyPlayers partly as an indicator that a start command is being processed
-    readyPlayers = 0;
-    readyPlayersConsensus = 0;
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        if ((playerTable[i]->LoadingStatus() == kLLoaded ||
+             playerTable[i]->LoadingStatus() == kLReady) &&
+            playerTable[i]->Presence() != kzAway)
+        {
+            dist |= 1 << i;
+        }
+    }
 
     if (itsCommManager->myId == 0) {
         // to avoid multiple simultaneous starts, only the server sends the kpStartLevel requests to everyone
-        for (int i = 0; i < kMaxAvaraPlayers; i++) {
-            SDL_Log("  loadingStatus[%d] = %d\n", i, playerTable[i]->LoadingStatus());
-            if ((playerTable[i]->LoadingStatus() == kLLoaded ||
-                 playerTable[i]->LoadingStatus() == kLReady) &&
-                playerTable[i]->Presence() != kzAway)
-            {
-                dist |= 1 << i;
-            }
-        }
-        SDL_Log("  server sending kpStartLevel to everyone = 0x%02x\n", activePlayersDistribution);
+        SDL_Log("  server sending kpStartLevel to all active = 0x%02x\n", activePlayersDistribution);
         if (dist & kdServerOnly) {
             // only if server will be playing
             startingGame = true;
         }
+        itsCommManager->SendPacket(dist, kpStartLevel, 0, dist, 0, 0, 0);
     } else {
         // clients ask the server to forward the kpStartLevel request to everyone
         SDL_Log("  client sending kpStartLevel to server only = 0x01\n");
-        dist = kdServerOnly;
         startingGame = false;
+        itsCommManager->SendPacket(kdServerOnly, kpStartLevel, 0, dist, 0, 0, 0);
     }
 
-    itsCommManager->SendPacket(dist, kpStartLevel, originalSender, dist, 0, 0, 0);
 }
 
-void CNetManager::ReceiveStartCommand(short activeDistribution, int16_t senderSlot, int16_t originalSender) {
-    SDL_Log("CNetManager::ReceiveStartCommand(0x%02x, %d, %d)\n", activeDistribution, senderSlot, originalSender);
+void CNetManager::ReceiveStartCommand(uint16_t activeDistribution, int16_t senderSlot) {
+    SDL_Log("CNetManager::ReceiveStartCommand(0x%02x, %d)\n", activeDistribution, senderSlot);
 
     if (senderSlot != 0) {
         // The server will forward clients' kpStartLevel message to kdEveryone,
         // iff readyPlayers hasn't been set, to make sure we aren't sending multiple start commands.
         if (itsCommManager->myId == 0) {
             if (!startingGame) {
-                SDL_Log("  server sending kpStartLevel on behalf of %s\n",
-                        playerTable[senderSlot]->GetPlayerName().c_str());
-                SendStartCommand(senderSlot);
+                SDL_Log("  server sending kpStartLevel on behalf of %s to 0x%02x\n",
+                        playerTable[senderSlot]->GetPlayerName().c_str(), activeDistribution);
+                SendStartCommand();
+                itsCommManager->SendPacket(activeDistribution, kpStartLevel, 0, activeDistribution, 0, 0, 0);
             } else {
                 SDL_Log("  server NOT sending kpStartLevel on behalf of %s because it's already trying to start a game\n",
                         playerTable[senderSlot]->GetPlayerName().c_str());
@@ -1091,6 +1084,10 @@ void CNetManager::ReceiveStartCommand(short activeDistribution, int16_t senderSl
             deadOrDonePlayers = 0;
             activePlayersDistribution = activeDistribution;
             startPlayersDistribution = activeDistribution;
+            // set readyPlayers partly as an indicator that a start command is being processed
+            readyPlayers = 0;
+            readyPlayersConsensus = 0;
+
             itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
             isPlaying = true;
             itsGame->ResumeGame();
@@ -1098,44 +1095,35 @@ void CNetManager::ReceiveStartCommand(short activeDistribution, int16_t senderSl
     }
 }
 
-void CNetManager::SendResumeCommand(int16_t originalSender, uint16_t dist, Fixed seed) {
-    SDL_Log("CNetManager::SendResumeCommand(%d, 0x%02x)\n", originalSender, dist);
+void CNetManager::SendResumeCommand() {
+    SDL_Log("CNetManager::SendResumeCommand()\n");
 
     uint16_t finalDestination = activePlayersDistribution;
 
     if (itsCommManager->myId == 0) {
         // to avoid multiple simultaneous starts, only the server sends the kpResumeLevel requests to everyone
-        // if called with default dist, then server is in-game and trying to resume directly
-        if (dist == 0) {
-            dist = activePlayersDistribution;
-            startingGame = true;
-            seed = FRandSeed;
-        } else {
-            finalDestination = dist;
-        }
-        SDL_Log("  server sending kpResumeLevel to all active = 0x%02x\n", dist);
+        startingGame = true;
+        SDL_Log("  server sending kpResumeLevel to all active = 0x%02x\n", activePlayersDistribution);
+        itsCommManager->SendPacket(activePlayersDistribution, kpResumeLevel, 0, finalDestination, FRandSeed, 0, 0);
     } else {
-        // clients ask the server to forward the kpStartLevel request to everyone
-        dist = kdServerOnly;
-        seed = FRandSeed;
+        // clients ask the server to forward the kpStartLevel request to all active players
         startingGame = false;
-        SDL_Log("  client sending kpResumeLevel to server only = 0x01\n");
+        SDL_Log("  client asking server to send kpResumeLevel to 0x%02x\n", activePlayersDistribution);
+        itsCommManager->SendPacket(kdServerOnly, kpResumeLevel, 0, finalDestination, FRandSeed, 0, 0);
     }
-
-    itsCommManager->SendPacket(dist, kpResumeLevel, originalSender, finalDestination, seed, 0, 0);
 }
 
-void CNetManager::ReceiveResumeCommand(short activeDistribution, short senderSlot, Fixed randomKey, int16_t originalSender) {
-    SDL_Log("CNetManager::ReceiveResumeCommand(0x%02x, %d, 0x%08x, %d)\n", activeDistribution, senderSlot, randomKey, originalSender);
+void CNetManager::ReceiveResumeCommand(uint16_t activeDistribution, short senderSlot, Fixed randomKey) {
+    SDL_Log("CNetManager::ReceiveResumeCommand(0x%02x, %d, 0x%08x)\n", activeDistribution, senderSlot, randomKey);
 
     if (senderSlot != 0) {
         // The server will forward clients' kpStartLevel message to kdEveryone,
         // iff startingGame hasn't been set, to make sure we aren't sending multiple start commands.
         if (itsCommManager->myId == 0) {
             if (!startingGame) {
-                SDL_Log("  server sending kpResumeLevel on behalf of %s\n",
-                        playerTable[senderSlot]->GetPlayerName().c_str());
-                SendResumeCommand(senderSlot, activeDistribution, randomKey);
+                SDL_Log("  server sending kpResumeLevel on behalf of %s to 0x%02x\n",
+                        playerTable[senderSlot]->GetPlayerName().c_str(), activeDistribution);
+                itsCommManager->SendPacket(activeDistribution, kpResumeLevel, senderSlot, activeDistribution, randomKey, 0, 0);
             } else {
                 SDL_Log("  server NOT sending kpResumeLevel on behalf of %s because it's already trying to resume a game\n",
                         playerTable[senderSlot]->GetPlayerName().c_str());

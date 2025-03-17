@@ -34,7 +34,7 @@
 
 #define kMaxLatencyTolerance 8
 
-#define kAvaraNetVersion 16
+#define kAvaraNetVersion 17
 
 
 enum { kNullNet, kServerNet, kClientNet };
@@ -164,11 +164,11 @@ public:
     virtual void SendPingCommand(int trips);
     virtual Boolean ResumeEnabled();
     virtual bool CanPlay();
-    virtual void SendStartCommand(int16_t originalSender = 0);
-    virtual void ReceiveStartCommand(short activeDistribution, int16_t senderSlot, int16_t originalSender);
+    virtual void SendStartCommand();
+    virtual void ReceiveStartCommand(uint16_t activeDistribution, int16_t senderSlot);
 
-    virtual void SendResumeCommand(int16_t originalSender = 0, uint16_t dist = 0, Fixed seed = 0);
-    virtual void ReceiveResumeCommand(short activeDistribution, short fromSlot, Fixed randomKey, int16_t originalSender);
+    virtual void SendResumeCommand();
+    virtual void ReceiveResumeCommand(uint16_t activeDistribution, short fromSlot, Fixed randomKey);
     virtual void ReceiveReady(short slot, uint32_t readyPlayers);
 
     virtual void ReceivePlayerStatus(short slotId, LoadingState newStatus, PresenceType newPresence, Fixed randomKey, FrameNumber winFrame);

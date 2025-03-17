@@ -111,10 +111,10 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             theGame->itsApp->BroadcastCommand(kNetChangedCmd);
             break;
         case kpStartLevel:
-            theNet->ReceiveStartCommand(thePacket->p2, thePacket->sender, thePacket->p1);
+            theNet->ReceiveStartCommand(thePacket->p2, thePacket->sender);
             break;
         case kpResumeLevel:
-            theNet->ReceiveResumeCommand(thePacket->p2, thePacket->sender, thePacket->p3, thePacket->p1);
+            theNet->ReceiveResumeCommand(thePacket->p2, thePacket->sender, thePacket->p3);
             break;
         case kpReadySynch:
             theNet->ReceiveReady(thePacket->sender, thePacket->p2);
