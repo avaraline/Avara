@@ -167,7 +167,7 @@ public:
     virtual void SendStartCommand(int16_t originalSender = 0);
     virtual void ReceiveStartCommand(short activeDistribution, int16_t senderSlot, int16_t originalSender);
 
-    virtual void SendResumeCommand(int16_t originalSender = 0);
+    virtual void SendResumeCommand(int16_t originalSender = 0, uint16_t dist = 0, Fixed seed = 0);
     virtual void ReceiveResumeCommand(short activeDistribution, short fromSlot, Fixed randomKey, int16_t originalSender);
     virtual void ReceiveReady(short slot, uint32_t readyPlayers);
 
