@@ -1137,6 +1137,10 @@ bool CPlayerManagerImpl::IsLoaded() {
     return LoadingStatusIsIn(kLLoaded, kLPaused);
 }
 
+bool CPlayerManagerImpl::IsReady() {
+    return loadingStatus == kLReady;
+}
+
 void CPlayerManagerImpl::AbortRequest() {
     theNetManager->activePlayersDistribution &= ~(1 << slot);
     DeadOrDone();

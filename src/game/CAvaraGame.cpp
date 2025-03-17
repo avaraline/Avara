@@ -657,19 +657,23 @@ void CAvaraGame::SendStartCommand() {
 }
 
 void CAvaraGame::StartIfReady() {
-    // server sends the start command if everyone is "ready"
-    if (itsNet->itsCommManager->myId == 0) {
-        bool allReady = true;
-        for (int i = 0; i < kMaxAvaraPlayers; i++) {
-            CPlayerManager *mgr = itsNet->playerTable[i].get();
-            if (mgr && mgr->IsLoaded() && mgr->Presence() == kzAvailable) {
+    // if the server is not playing, we want initial LT to be calculated by a player who IS playing
+    int firstReady = kMaxAvaraPlayers;
+    bool allReady = true;
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        CPlayerManager *mgr = itsNet->playerTable[i].get();
+        if (mgr) {
+            if (mgr->IsLoaded() && mgr->Presence() == kzAvailable) {
                 allReady = false;
                 break;
+            } else if (mgr->IsReady() && i < firstReady) {
+                firstReady = i;
             }
         }
-        if (allReady) {
-            SendStartCommand();
-        }
+    }
+    if (allReady && firstReady == itsNet->itsCommManager->myId) {
+        // to avoid race conditions, only the first active player sends the start request
+        SendStartCommand();
     }
 }
 
