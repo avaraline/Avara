@@ -249,7 +249,7 @@ void CHUD::DrawEditingHud(CAbstractPlayer *player, NVGcontext *ctx) {
         float playerY = ToFloat(actor->location[1]) + 0.1; // not sure why + 0.1 is needed
 
         snprintf(ehudText[0], sizeof(ehudText[0]), "        Player x/z/y: %.2f, %.2f, %.2f",
-            ehudRound(ToFloat(actor->location[0]) * 100),
+            ehudRound(ToFloat(actor->location[0])),
             ehudRound(ToFloat(actor->location[2])),
             ehudRound(playerY > 0.0 ? playerY : 0.0)
         );
