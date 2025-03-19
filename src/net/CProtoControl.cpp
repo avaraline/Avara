@@ -112,6 +112,7 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             break;
         case kpStartRequest:
             theNet->ReceiveStartRequest(thePacket->p2, thePacket->p1, thePacket->sender);
+            break;
         case kpStartLevel:
             theNet->ReceiveStartLevel(thePacket->p2, thePacket->p1);
             break;
