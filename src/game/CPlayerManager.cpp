@@ -963,7 +963,7 @@ void CPlayerManagerImpl::SetPosition(short pos) {
 void CPlayerManagerImpl::LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag) {
     short oldStatus;
 
-    if (loadingStatus != kLNotConnected && loadingStatus != kLActive && presence != kzAway)
+    if (loadingStatus != kLNotConnected && loadingStatus != kLActive)
     {
         oldStatus = loadingStatus;
 
@@ -1115,12 +1115,13 @@ void CPlayerManagerImpl::SetPlayerStatus(LoadingState newStatus, PresenceType ne
 }
 
 void CPlayerManagerImpl::SetPlayerReady(bool isReady) {
-    // toggle between kLLoaded and kLReady but not to/from other states
-    if (loadingStatus == kLLoaded && isReady) {
+    // toggle between kLLoaded/kLPaused and kLReady but not to/from other states
+    if (IsLoaded() && isReady) {
+        prevState = loadingStatus;
         loadingStatus = kLReady;
         itsGame->StartIfReady();
     } else if (loadingStatus == kLReady && !isReady) {
-        loadingStatus = kLLoaded;
+        loadingStatus = prevState;
     }
 }
 
@@ -1130,6 +1131,14 @@ bool CPlayerManagerImpl::IsAway() {
 
 bool CPlayerManagerImpl::IsSpectating() {
     return (presence == kzSpectating);
+}
+
+bool CPlayerManagerImpl::IsLoaded() {
+    return LoadingStatusIsIn(kLLoaded, kLPaused);
+}
+
+bool CPlayerManagerImpl::IsReady() {
+    return loadingStatus == kLReady;
 }
 
 void CPlayerManagerImpl::AbortRequest() {

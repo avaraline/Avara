@@ -477,7 +477,7 @@ void CNetManager::ReceiveLoadLevel(short senderSlot, int16_t originalSender, cha
                     theSetAndTag, playerTable[senderSlot]->GetPlayerName().c_str());
             SendLoadLevel(set, tag, senderSlot);
         }
-    } else if (isPlaying) {
+    } else if (isPlaying && originalSender != itsCommManager->myId) {
         // save off the player that originally loaded this level to help loading side games
         loaderSlot = originalSender;
     } else {
@@ -681,21 +681,8 @@ void CNetManager::ResumeGame() {
     if (thePlayerManager->GetPlayer()) {
         thePlayerManager->DoMouseControl(&tempPoint, !(itsGame->moJoOptions & kJoystickMode));
 
-        PlayerConfigRecord copy {};
-        BlockMoveData(&config, &copy, sizeof(PlayerConfigRecord));
-        copy.numGrenades = ntohs(config.numGrenades);
-        copy.numMissiles = ntohs(config.numMissiles);
-        copy.numBoosters = ntohs(config.numBoosters);
-        copy.hullType = ntohs(config.hullType);
-        copy.frameLatencyLimits = ntohs(config.frameLatencyLimits);
-        copy.frameLatency = ntohs(config.frameLatency);
-        copy.frameTime = ntohs(config.frameTime);
-        copy.spawnOrder = ntohs(config.spawnOrder);
-
-        copy.hullColor = ntohl(config.hullColor.GetRaw());
-        copy.trimColor = ntohl(config.trimColor.GetRaw());
-        copy.cockpitColor = ntohl(config.cockpitColor.GetRaw());
-        copy.gunColor = ntohl(config.gunColor.GetRaw());
+        PlayerConfigRecord copy = config;
+        ConfigByteSwap(&copy);
 
         // everyone sends this packet which eventually sets the LoadingStatus() to kLActive
         itsCommManager->SendUrgentPacket(
@@ -742,6 +729,7 @@ void CNetManager::ResumeGame() {
                 }
             }
         }
+        DoServerConfig();
 
         ProcessQueue();
         if (notReady) { // SysBeep(10);
@@ -1032,113 +1020,105 @@ bool CNetManager::CanPlay() {
    return (!isPlaying && !playerTable[itsCommManager->myId]->IsAway());
 }
 
-void CNetManager::SendStartCommand(int16_t originalSender) {
-    SDL_Log("CNetManager::SendStartCommand(%d)\n", originalSender);
+void CNetManager::SendStartCommand() {
+    SDL_Log("CNetManager::SendStartCommand()\n");
 
-    activePlayersDistribution = 0;
-    startPlayersDistribution = 0;
-    // set readyPlayers partly as an indicator that a start command is being processed
-    readyPlayers = 0;
-    readyPlayersConsensus = 0;
-
-    if (itsCommManager->myId == 0) {
-        // to avoid multiple simultaneous starts, only the server sends the kpStartLevel requests to everyone
-        for (int i = 0; i < kMaxAvaraPlayers; i++) {
-            SDL_Log("  loadingStatus[%d] = %d\n", i, playerTable[i]->LoadingStatus());
-            if ((playerTable[i]->LoadingStatus() == kLLoaded ||
-                 playerTable[i]->LoadingStatus() == kLReady) &&
-                playerTable[i]->Presence() != kzAway)
-            {
-                activePlayersDistribution |= 1 << i;
-            }
+    uint16_t dist = 0;
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        if ((playerTable[i]->LoadingStatus() == kLLoaded ||
+             playerTable[i]->LoadingStatus() == kLReady) &&
+            playerTable[i]->Presence() != kzAway)
+        {
+            dist |= 1 << i;
         }
-        SDL_Log("  server sending kpStartLevel to everyone = 0x%02x\n", activePlayersDistribution);
-        startingGame = true;
-    } else {
-        // clients ask the server to forward the kpStartLevel request to everyone
-        SDL_Log("  client sending kpStartLevel to server only = 0x01\n");
-        activePlayersDistribution = kdServerOnly;
-        startingGame = false;
     }
+    // estimate initial frameLatency from RTT amongst players in dist
+    int8_t rttFL = itsGame->RoundTripToFrameLatency(itsCommManager->GetMaxRoundTrip(dist));
 
-    itsCommManager->SendPacket(activePlayersDistribution, kpStartLevel, originalSender, activePlayersDistribution, 0, 0, 0);
+    itsCommManager->SendPacket(kdServerOnly, kpStartRequest, rttFL, dist, 0, 0, 0);
 }
 
-void CNetManager::ReceiveStartCommand(short activeDistribution, int16_t senderSlot, int16_t originalSender) {
-    SDL_Log("CNetManager::ReceiveStartCommand(0x%02x, %d, %d)\n", activeDistribution, senderSlot, originalSender);
-
-    if (senderSlot != 0) {
-        // The server will forward clients' kpStartLevel message to kdEveryone,
-        // iff readyPlayers hasn't been set, to make sure we aren't sending multiple start commands.
-        if (itsCommManager->myId == 0) {
-            if (!startingGame) {
-                SDL_Log("  server sending kpStartLevel on behalf of %s\n",
-                        playerTable[senderSlot]->GetPlayerName().c_str());
-                SendStartCommand(senderSlot);
-            } else {
-                SDL_Log("  server NOT sending kpStartLevel on behalf of %s because it's already trying to start a game\n",
-                        playerTable[senderSlot]->GetPlayerName().c_str());
-            }
+void CNetManager::ReceiveStartRequest(uint16_t activeDistribution, uint8_t initialFL, int16_t senderSlot) {
+    // called by the server in response to a client asking the server to send the kpStartLevel to everyone
+    SDL_Log("CNetManager::ReceiveStartRequest(0x%02x, %d, %d)\n", activeDistribution, initialFL, senderSlot);
+    // The server will forward clients' kpStartLevel message to activeDistribution,
+    // iff startingGame hasn't been set (to make sure we aren't sending multiple start commands).
+    if (!startingGame) {
+        // flag only set if server will be playing
+        startingGame = (activeDistribution & kdServerOnly);
+        SDL_Log("  server sending kpStartLevel on behalf of %s to 0x%02x\n",
+                playerTable[senderSlot]->GetPlayerName().c_str(), activeDistribution);
+        // if server isn't playing, need to send the server's config
+        if (!(activeDistribution & kdServerOnly)) {
+            UpdateLocalConfig();
+            PlayerConfigRecord copy = config;
+            ConfigByteSwap(&copy);
+            itsCommManager->SendUrgentPacket(activeDistribution, kpSendConfig, 0, 0, 0, sizeof(copy), (Ptr)&copy);
         }
+        itsCommManager->SendPacket(activeDistribution, kpStartLevel, initialFL, activeDistribution, 0, 0, 0);
     } else {
-        if (CanPlay()) {
-            deadOrDonePlayers = 0;
-            activePlayersDistribution = activeDistribution;
-            startPlayersDistribution = activeDistribution;
-            itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
-            isPlaying = true;
-            itsGame->ResumeGame();
-        }
+        SDL_Log("  server NOT sending kpStartLevel on behalf of %s because it's already trying to start a game\n",
+                playerTable[senderSlot]->GetPlayerName().c_str());
     }
 }
 
-void CNetManager::SendResumeCommand(int16_t originalSender) {
-    SDL_Log("CNetManager::SendResumeCommand(%d)\n", originalSender);
+void CNetManager::ReceiveStartLevel(uint16_t activeDistribution, uint8_t initialFL) {
+    // called by everyone in response to the server sending the kpStartLevel message
+    SDL_Log("CNetManager::ReceiveStartLevel(0x%02x, %d)\n", activeDistribution, initialFL);
 
-    activePlayersDistribution = 0;
-
-    if (itsCommManager->myId == 0) {
-        // to avoid multiple simultaneous starts, only the server sends the kpResumeLevel requests to everyone
-        for (int i = 0; i < kMaxAvaraPlayers; i++) {
-            if (playerTable[i]->GetPlayer() && !playerTable[i]->GetPlayer()->isOut) {
-                activePlayersDistribution |= 1 << i;
-            }
-        }
-        startingGame = true;
-        SDL_Log("  server sending kpResumeLevel to everyone = 0x%02x\n", activePlayersDistribution);
-    } else {
-        // clients ask the server to forward the kpStartLevel request to everyone
-        activePlayersDistribution = kdServerOnly;
-        startingGame = false;
-        SDL_Log("  client sending kpResumeLevel to server only = 0x01\n");
-    }
-
-    itsCommManager->SendPacket(activePlayersDistribution, kpResumeLevel, originalSender, activePlayersDistribution, FRandSeed, 0, 0);
-}
-
-void CNetManager::ReceiveResumeCommand(short activeDistribution, short senderSlot, Fixed randomKey, int16_t originalSender) {
-    SDL_Log("CNetManager::ReceiveResumeCommand(0x%02x, %d, 0x%08x, %d)\n", activeDistribution, senderSlot, randomKey, originalSender);
-
-    if (senderSlot != 0) {
-        // The server will forward clients' kpStartLevel message to kdEveryone,
-        // iff readyPlayers hasn't been set, to make sure we aren't sending multiple start commands.
-        if (itsCommManager->myId == 0) {
-            if (!startingGame) {
-                SDL_Log("  server sending kpResumeLevel on behalf of %s\n",
-                        playerTable[senderSlot]->GetPlayerName().c_str());
-                SendResumeCommand(senderSlot);
-            } else {
-                SDL_Log("  server NOT sending kpResumeLevel on behalf of %s because it's already trying to resume a game\n",
-                        playerTable[senderSlot]->GetPlayerName().c_str());
-            }
-        }
-    } else {
+    if (CanPlay()) {
+        deadOrDonePlayers = 0;
         activePlayersDistribution = activeDistribution;
-        if (CanPlay() && randomKey == FRandSeed) {
-            itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
-            isPlaying = true;
-            itsGame->ResumeGame();
+        startPlayersDistribution = activeDistribution;
+        // set readyPlayers partly as an indicator that a start command is being processed
+        readyPlayers = 0;
+        readyPlayersConsensus = 0;
+
+        itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
+        isPlaying = true;
+        itsGame->ResumeGame();
+
+        // set initial LT based on passed rttFL and config/limits
+        if (IsAutoLatencyEnabled()) {
+            initialFL = std::min(std::max(minAutoLatency, initialFL), maxAutoLatency);
+        } else {
+            // fix LT to kLatencyToleranceTag value
+            initialFL = maxAutoLatency;
         }
+        itsGame->SetFrameLatency(initialFL);
+    }
+}
+
+void CNetManager::SendResumeCommand() {
+    SDL_Log("CNetManager::SendResumeCommand(): dist=0x%02x\n", activePlayersDistribution);
+
+    itsCommManager->SendPacket(kdServerOnly, kpResumeRequest, 0, activePlayersDistribution, FRandSeed, 0, 0);
+}
+
+void CNetManager::ReceiveResumeRequest(uint16_t activeDistribution, Fixed randomKey, int16_t senderSlot) {
+    SDL_Log("CNetManager::ReceiveResumeRequest(0x%02x, 0x%08x, %d)\n", activeDistribution, randomKey, senderSlot);
+
+    // The server will forward clients' kpStartLevel message to activeDistribution,
+    // iff startingGame hasn't been set, to make sure we aren't sending multiple start commands.
+    if (!startingGame) {
+        startingGame = (activeDistribution & kdServerOnly);
+        SDL_Log("  server sending kpResumeLevel on behalf of %s to 0x%02x\n",
+                playerTable[senderSlot]->GetPlayerName().c_str(), activeDistribution);
+        itsCommManager->SendPacket(activeDistribution, kpResumeLevel, 0, activeDistribution, randomKey, 0, 0);
+    } else {
+        SDL_Log("  server NOT sending kpResumeLevel on behalf of %s because it's already trying to resume a game\n",
+                playerTable[senderSlot]->GetPlayerName().c_str());
+    }
+}
+
+void CNetManager::ReceiveResumeLevel(uint16_t activeDistribution, Fixed randomKey) {
+    SDL_Log("CNetManager::ReceiveResumeCommand(0x%02x, 0x%08x)\n", activeDistribution, randomKey);
+
+    activePlayersDistribution = activeDistribution;
+    if (CanPlay() && randomKey == FRandSeed) {
+        itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
+        isPlaying = true;
+        itsGame->ResumeGame();
     }
 }
 
@@ -1349,20 +1329,24 @@ void CNetManager::AttachPlayers(CAbstractPlayer *playerActorList) {
     }
 }
 
-void CNetManager::ConfigPlayer(short senderSlot, Ptr configData) {
-    PlayerConfigRecord *config = (PlayerConfigRecord *)configData;
+void CNetManager::ConfigByteSwap(PlayerConfigRecord *config) {
     config->numGrenades = ntohs(config->numGrenades);
     config->numMissiles = ntohs(config->numMissiles);
     config->numBoosters = ntohs(config->numBoosters);
     config->hullType = ntohs(config->hullType);
-    config->frameLatency = ntohs(config->frameLatency);
-    config->frameLatencyLimits = ntohs(config->frameLatencyLimits);
+    config->frameLatencyMin = ntohs(config->frameLatencyMin);
+    config->frameLatencyMax= ntohs(config->frameLatencyMax);
     config->frameTime = ntohs(config->frameTime);
     config->spawnOrder = ntohs(config->spawnOrder);
     config->hullColor = ntohl(config->hullColor.GetRaw());
     config->trimColor = ntohl(config->trimColor.GetRaw());
     config->cockpitColor = ntohl(config->cockpitColor.GetRaw());
     config->gunColor = ntohl(config->gunColor.GetRaw());
+}
+
+void CNetManager::ConfigPlayer(short senderSlot, Ptr configData) {
+    PlayerConfigRecord *config = (PlayerConfigRecord *)configData;
+    ConfigByteSwap(config);
     playerTable[senderSlot]->TheConfiguration() = *config;
 }
 
@@ -1372,40 +1356,32 @@ void CNetManager::DoConfig(short senderSlot) {
     if (playerTable[senderSlot]->GetPlayer()) {
         playerTable[senderSlot]->GetPlayer()->ReceiveConfig(theConfig);
     }
+}
 
-    // gets the frame info from the server (senderSlot==0) if server is playing OR anyone else if server not playing (seems bad)
-    // ... but what about the kAllowLatencyBit?
-    if (PermissionQuery(kAllowLatencyBit, 0) || !(activePlayersDistribution & kdServerOnly) || senderSlot == 0) {
-        // save the frameTime, latency, maxLatency sent by the server (normally)
+void CNetManager::DoServerConfig() {
+    // gets the frame info from the server (senderSlot==0)
+    PlayerConfigRecord *theConfig = &playerTable[0]->TheConfiguration();
+    // save the frameTime, latency, maxLatency sent by the server
 
-        // transmitting latencyTolerance in terms of frameLatency to keep it as a short value on transmission
-        itsGame->SetFrameTime(theConfig->frameTime);
-        minAutoLatency = theConfig->frameLatencyLimits >> 8;    // top 8 bits
-        maxAutoLatency = theConfig->frameLatencyLimits & 0xff;  // bottom 8 bits
-        itsGame->SetFrameLatency(theConfig->frameLatency);
-        SDL_Log("DoConfig LT = %.2lf, minFL = %d, maxFL = %d\n", itsGame->latencyTolerance, minAutoLatency, maxAutoLatency);
-        itsGame->SetSpawnOrder((SpawnOrder)theConfig->spawnOrder);
-        latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD);
-    }
+    // (transmitting latencyTolerance in terms of frameLatency to keep it as a short value on transmission)
+    itsGame->SetFrameTime(theConfig->frameTime);
+    minAutoLatency = theConfig->frameLatencyMin;
+    maxAutoLatency = theConfig->frameLatencyMax;
+    SDL_Log("DoServerConfig(): frameTime = %d, FL = [%d, %d]\n", theConfig->frameTime, minAutoLatency, maxAutoLatency);
+
+    itsGame->SetSpawnOrder((SpawnOrder)theConfig->spawnOrder);
+    latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD);
 }
 
 void CNetManager::UpdateLocalConfig() {
     CPlayerManager *thePlayerManager = playerTable[itsCommManager->myId].get();
 
-    uint16_t minFrameLatency = gApplication
-        ? gApplication->Get<float>(kLatencyToleranceMinTag) / itsGame->fpsScale : 0;
-    uint16_t maxFrameLatency = gApplication
-        ? gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale : 0;
-    if (IsAutoLatencyEnabled()) {
-        // start with the max RTT value
-        config.frameLatency = itsGame->RoundTripToFrameLatency(itsCommManager->GetMaxRoundTrip(AlivePlayersDistribution()));
-        config.frameLatency = std::max(std::min(config.frameLatency, maxFrameLatency), minFrameLatency);
-    } else {
-        // fix LT to kLatencyToleranceTag
-        config.frameLatency = maxFrameLatency;
-    }
-    config.frameLatencyLimits = (minFrameLatency << 8) | maxFrameLatency;
     config.frameTime = itsGame->frameTime;
+    config.frameLatencyMin = gApplication
+        ? gApplication->Get<float>(kLatencyToleranceMinTag) / itsGame->fpsScale : 0;
+    config.frameLatencyMax = gApplication
+        ? gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale : 0;
+
     config.spawnOrder = gApplication ? gApplication->Get<short>(kSpawnOrder) : ksHybrid;
     config.hullType = gApplication ? gApplication->Number(kHullTypeTag) : 0;
     config.hullColor = gApplication

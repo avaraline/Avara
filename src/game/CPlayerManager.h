@@ -102,6 +102,8 @@ public:
     virtual void SetPlayerStatus(LoadingState newStatus, PresenceType newPresence, FrameNumber theWin) = 0;
     virtual bool IsAway() = 0;
     virtual bool IsSpectating() = 0;
+    virtual bool IsLoaded() = 0;
+    virtual bool IsReady() = 0;
 
     virtual void ChangeName(StringPtr theName) = 0;
     virtual void SetPosition(short pos) = 0;
@@ -191,7 +193,7 @@ private:
     std::deque<char> lineBuffer;
 
     FrameNumber winFrame;
-    LoadingState loadingStatus;
+    LoadingState loadingStatus, prevState;
     PresenceType presence;
     short slot;
     short playerColor;
@@ -249,6 +251,8 @@ public:
     virtual void SetPlayerReady(bool isReady);
     virtual bool IsAway();
     virtual bool IsSpectating();
+    virtual bool IsLoaded();
+    virtual bool IsReady();
 
     virtual void ResendFrame(FrameNumber theFrame, short requesterId, short commandCode);
 

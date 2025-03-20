@@ -110,14 +110,23 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
         case kpKillNet:
             theGame->itsApp->BroadcastCommand(kNetChangedCmd);
             break;
+        case kpStartRequest:
+            theNet->ReceiveStartRequest(thePacket->p2, thePacket->p1, thePacket->sender);
+            break;
         case kpStartLevel:
-            theNet->ReceiveStartCommand(thePacket->p2, thePacket->sender, thePacket->p1);
+            theNet->ReceiveStartLevel(thePacket->p2, thePacket->p1);
+            break;
+        case kpResumeRequest:
+            theNet->ReceiveResumeRequest(thePacket->p2, thePacket->p3, thePacket->sender);
             break;
         case kpResumeLevel:
-            theNet->ReceiveResumeCommand(thePacket->p2, thePacket->sender, thePacket->p3, thePacket->p1);
+            theNet->ReceiveResumeLevel(thePacket->p2, thePacket->p3);
             break;
         case kpReadySynch:
             theNet->ReceiveReady(thePacket->sender, thePacket->p2);
+            break;
+        case kpSendConfig:
+            theNet->ConfigPlayer(thePacket->sender, thePacket->dataBuffer);
             break;
         case kpStartSynch:
             theNet->ConfigPlayer(thePacket->sender, thePacket->dataBuffer);
