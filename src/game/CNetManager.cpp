@@ -1119,6 +1119,7 @@ void CNetManager::ReceiveResumeLevel(uint16_t activeDistribution, Fixed randomKe
         itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
         isPlaying = true;
         itsGame->ResumeGame();
+        SDL_Log("Resume with LT = %.2lf\n", itsGame->latencyTolerance);
     }
 }
 

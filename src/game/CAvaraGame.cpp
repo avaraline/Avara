@@ -746,7 +746,6 @@ bool CAvaraGame::IsPlaying() {
 // Run when the game is started or resumed
 void CAvaraGame::GameStart() {
     SDL_Log("CAvaraGame::GameStart\n");
-    latencyTolerance = 0;
     didWait = false;
     longWait = false;
 
