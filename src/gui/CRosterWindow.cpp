@@ -369,17 +369,31 @@ std::string CRosterWindow::ChatPromptFor(std::string theName) {
 void CRosterWindow::NewChatLine(Str255 playerName, std::string message) {
     std::string name = ToString(playerName);
     std::string chatLine = ChatPromptFor(name) + message;
+    static std::deque<Label*> chatLabels;
 
     AdvancedGridLayout *gridLayout = (AdvancedGridLayout*) chatPanel->layout();
-    gridLayout->appendRow(1, 0.1);
-    gridLayout->appendCol(1, 1);
+    static int CHAT_LIMIT = 256;
+    if (chatLabels.size() >= gridLayout->rowCount() && chatLabels.size() < CHAT_LIMIT) {
+        gridLayout->appendRow(1, 0.1);
+        gridLayout->appendCol(1, 1);
+    }
 
     auto chatLabel = chatPanel->add<Label>(chatLine);
     chatLabel->setFontSize(ROSTER_FONT_SIZE + 2);
     chatLabel->setFont("mono");
     chatLabel->setFixedWidth(ROSTER_WINDOW_WIDTH - 20);
 
-    gridLayout->setAnchor(chatLabel, AdvancedGridLayout::Anchor(0, gridLayout->rowCount() - 1));
+    if (chatLabels.size() >= CHAT_LIMIT) {
+        chatPanel->removeChild(chatLabels.front());  // this also deletes the Widget
+        chatLabels.pop_front();
+    }
+    chatLabels.push_back(chatLabel);
+
+    int i = gridLayout->rowCount() - int(chatLabels.size());
+    for (auto label: chatLabels) {
+        gridLayout->setAnchor(label, AdvancedGridLayout::Anchor(0, i++));
+    }
+
     ResetChatPrompt();
 
     Screen* screen = chatLabel->screen();
