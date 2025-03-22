@@ -23,6 +23,7 @@ AbstractRenderer::~AbstractRenderer()
 
 void AbstractRenderer::LevelReset()
 {
+    selectedPart = nullptr;
     skyParams->Reset();
     ResetLights();
 }
@@ -42,6 +43,11 @@ void AbstractRenderer::SetFOV(float fov)
 {
     this->fov = fov;
     ApplyProjection();
+}
+
+void AbstractRenderer::SetSelectedPart(CSmartPart *part)
+{
+    selectedPart = part;
 }
 
 void AbstractRenderer::UpdateViewRect(int width, int height, float pixelRatio)

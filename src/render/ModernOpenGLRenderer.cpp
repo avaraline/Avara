@@ -12,6 +12,9 @@
 #define SKY_VERT "sky_vert.glsl"
 #define SKY_FRAG "sky_frag.glsl"
 
+#define WIRE_VERT "wireframe_vert.glsl"
+#define WIRE_FRAG "wireframe_frag.glsl"
+
 #define OBJ_VERT "world_vert.glsl"
 #define OBJ_FRAG "world_frag.glsl"
 
@@ -143,6 +146,7 @@ ModernOpenGLRenderer::ModernOpenGLRenderer(SDL_Window *window) : AbstractRendere
 
     // Initialize shaders.
     skyShader = LoadShader(SKY_VERT, SKY_FRAG);
+    wireframeShader = LoadShader(WIRE_VERT, WIRE_FRAG);
     worldShader = LoadShader(OBJ_VERT, OBJ_FRAG);
     worldPostShader = LoadShader(OBJ_POST_VERT, OBJ_POST_FRAG);
     hudShader = LoadShader(HUD_VERT, HUD_FRAG);
@@ -261,6 +265,10 @@ void ModernOpenGLRenderer::ApplyProjection()
 
     skyShader->Use();
     skyShader->SetMat4("proj", proj);
+    glCheckErrors();
+    
+    wireframeShader->Use();
+    wireframeShader->SetMat4("proj", proj);
     glCheckErrors();
 
     worldShader->Use();
@@ -389,6 +397,17 @@ void ModernOpenGLRenderer::RenderFrame()
         }
         partList++;
     }
+    
+    if (selectedPart != nullptr) {
+        glDisable(GL_DEPTH_TEST);
+        glDisable(GL_CULL_FACE);
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        Draw(*wireframeShader, *selectedPart, defaultAmbient, false);
+        Draw(*wireframeShader, *selectedPart, defaultAmbient, true);
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        glEnable(GL_CULL_FACE);
+        glEnable(GL_DEPTH_TEST);
+    }
 
     // First pass of sky and world rendering complete, post-process into second offscreen FBO.
     glBindFramebuffer(GL_FRAMEBUFFER, fbo[1]);
@@ -459,6 +478,10 @@ void ModernOpenGLRenderer::ApplyView()
     worldShader->Use();
     worldShader->SetMat4("view", glMatrix);
     glCheckErrors();
+    
+    wireframeShader->Use();
+    wireframeShader->SetMat4("view", glMatrix);
+    glCheckErrors();
 
     hudShader->Use();
     hudShader->SetMat4("view", glMatrix);
@@ -524,12 +547,9 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
     SetTransforms(part);
     shader.Use();
     glCheckErrors();
-
-    if (!useAlphaBuffer) {
-        glDrawArrays(GL_TRIANGLES, 0, glData->opaque.pointCount);
-    } else {
-        glDrawArrays(GL_TRIANGLES, 0, glData->alpha.pointCount);
-    }
+    
+    uint16_t numPts = (!useAlphaBuffer) ? glData->opaque.pointCount : glData->alpha.pointCount;
+    glDrawArrays(GL_TRIANGLES, 0, numPts);
 
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
@@ -632,6 +652,9 @@ void ModernOpenGLRenderer::SetTransforms(const CBSPPart &part) {
     worldShader->Use();
     worldShader->SetMat4("modelview", mv);
     worldShader->SetMat3("normalTransform", normalMat, true);
+    
+    wireframeShader->Use();
+    wireframeShader->SetMat4("modelview", mv);
 
     hudShader->Use();
     hudShader->SetMat4("modelview", mv);

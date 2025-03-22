@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CBSPPart.h"
+#include "CSmartPart.h"
 #include "CViewParameters.h"
 #include "CWorldShader.h"
 #include "VertexData.h"
@@ -95,6 +96,13 @@ public:
      * @param fov The field of view we want to use.
      */
     void SetFOV(float fov);
+    
+    /**
+     * Designate a single model for hilighting in some way.
+     *
+     * @param part The model we want to hilight.
+     */
+    void SetSelectedPart(CSmartPart *part);
 
     /**
      * Update the camera with the currently configured view parameters.
@@ -106,6 +114,7 @@ public:
     virtual void UpdateViewRect(int width, int height, float pixelRatio) = 0;
 protected:
     float fov = 50.0f;
+    CSmartPart *selectedPart = nullptr;
 };
 
 extern AbstractRenderer *gRenderer;

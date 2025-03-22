@@ -34,6 +34,7 @@ private:
     CBSPWorldImpl *hudWorld;
     
     std::unique_ptr<OpenGLShader> skyShader;
+    std::unique_ptr<OpenGLShader> wireframeShader;
     std::unique_ptr<OpenGLShader> worldShader;
     std::unique_ptr<OpenGLShader> worldPostShader;
     std::unique_ptr<OpenGLShader> hudShader;

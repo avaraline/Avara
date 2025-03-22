@@ -806,12 +806,14 @@ void CAbstractPlayer::RenderDashboard() {
         DashboardFixedPosition(arrow, dist, 0);
     }
 
+    gRenderer->SetSelectedPart(nullptr);
     ehudAxes->isTransparent = true;
     if (itsManager->GetShowEditingHud()) {
         RayHitRecord theHit;
         SightRayTest(&theHit);
         CSmartPart *hitPart = theHit.closestHit;
         if (hitPart) {
+            gRenderer->SetSelectedPart(hitPart);
             ehudAxes->isTransparent = false;
             ehudAxes->Reset();
             Vector v;
