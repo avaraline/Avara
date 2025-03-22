@@ -200,6 +200,8 @@ public:
     Fixed liveReloadViewYaw;
     Fixed liveReloadViewPitch;
 
+    Boolean isGameWindowFocused;
+
     // Moved here from GameLoop so it can run on the normal event loop
     // long            frameCredit;
     // long            frameAdvance;

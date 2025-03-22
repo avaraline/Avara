@@ -151,6 +151,8 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     // vg = AvaraVGContext();
     // font = nvgCreateFont(vg, "sans", BundlePath("fonts/Roboto-Regular.ttf"));
+
+    isGameWindowFocused = true;
 }
 
 CSoundHub* CAvaraGame::CreateSoundHub() {
@@ -767,8 +769,6 @@ void CAvaraGame::GameStart() {
     teamsStanding = 0;
     nextScheduledFrame = SDL_GetTicks(); // Run next frame immediately
 
-    // frameAdvance = INIT_ADVANCE;
-    // frameCredit = frameAdvance << 16;
     canPreSend = false;
 
     // The difference between the last frame's time and frameTime
@@ -778,16 +778,13 @@ void CAvaraGame::GameStart() {
         itsNet->FrameAction();
     }
 
-    // SDL_ShowCursor(SDL_DISABLE);
-    // SDL_CaptureMouse(SDL_TRUE);
-
-    SDL_SetRelativeMouseMode(SDL_TRUE);
+    if (isGameWindowFocused) {
+        SDL_SetRelativeMouseMode(SDL_TRUE);
 #ifdef WIN32
 #else
-    SDL_SetHint(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1");
+        SDL_SetHint(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1");
 #endif
-    // HideCursor();
-    // FlushEvents(everyEvent, 0);
+    }
 
     // change the event processing time during the game (0 = poll)
 #ifdef _WIN32
@@ -828,8 +825,23 @@ void CAvaraGame::GameStop() {
 }
 
 void CAvaraGame::HandleEvent(SDL_Event &event) {
+    if (event.type == SDL_WINDOWEVENT) {
+        switch (event.window.event) {
+            case SDL_WINDOWEVENT_FOCUS_GAINED:
+                isGameWindowFocused = true;
+                SDL_SetRelativeMouseMode(SDL_TRUE);
+#ifdef WIN32
+#else
+                SDL_SetHint(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1");
+#endif
+                break;
+            case SDL_WINDOWEVENT_FOCUS_LOST:
+                isGameWindowFocused = false;
+                break;
+        }
+    }
     // Queue any keyboard/mouse events for the next frame.
-    if (IsPlaying())
+    if (IsPlaying() && isGameWindowFocused)
         itsNet->HandleEvent(event);
 }
 

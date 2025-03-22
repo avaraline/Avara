@@ -147,7 +147,9 @@ uint32_t CPlayerManagerImpl::DoMouseControl(Point *deltaMouse, Boolean doCenter)
     if (itsGame->moJoOptions & kFlipAxis) {
         deltaMouse->v = -deltaMouse->v;
 	}
-    SDL_WarpMouseInWindow(itsGame->itsApp->sdlWindow(), mouseCenterPosition.h, mouseCenterPosition.v);
+    if (itsGame->isGameWindowFocused) {
+        SDL_WarpMouseInWindow(itsGame->itsApp->sdlWindow(), mouseCenterPosition.h, mouseCenterPosition.v);
+    }
     return state;
 }
 
