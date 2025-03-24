@@ -2084,7 +2084,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GIT_HASH=`/usr/bin/git describe --always --dirty`\necho \"#define GIT_VERSION \\\"$GIT_HASH\\\"\" > src/util/GitVersion.h\n";
+			shellScript = "GIT_HASH=`/usr/bin/git describe --always --dirty` \ngrep -q $GIT_HASH src/util/GitVersion.h || (echo \"#define GIT_VERSION \\\"$GIT_HASH\\\"\" > src/util/GitVersion.h)\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
