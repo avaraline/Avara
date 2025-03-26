@@ -448,10 +448,8 @@ void CAvaraGame::RunFrameActions() {
     RunActorFrameActions();
 
     itsNet->ProcessQueue();
-    if (!latencyTolerance) {
-        while (frameNumber > topSentFrame) {
-            itsNet->FrameAction();
-        }
+    while (topSentFrame <= FramesFromNow(latencyTolerance)) {
+        itsNet->FrameAction();   // increments topSentFrame while sending frame packet
     }
 
     thePlayer = playerList;
@@ -917,10 +915,6 @@ bool CAvaraGame::GameTick() {
     IncrementFrame();
 
     timeInSeconds = frameNumber * frameTime / 1000;
-
-    if (latencyTolerance)
-        while (FramesFromNow(latencyTolerance) > topSentFrame)
-            itsNet->FrameAction();
 
     canPreSend = true;
 
