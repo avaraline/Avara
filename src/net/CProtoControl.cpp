@@ -140,11 +140,6 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             theNet->ReceiveJSON(
                 thePacket->p1, thePacket->p2, thePacket->p3, std::string(thePacket->dataBuffer));
             break;
-        case kpKeyAndMouseRequest: {
-            theGame->itsNet->playerTable[itsManager->myId]->ResendFrame(
-                thePacket->p3, thePacket->sender, kpKeyAndMouse);
-        } break;
-
         case kpGetMugShot:
             theNet->MugShotRequest(thePacket->sender, thePacket->p3);
             break;
@@ -222,9 +217,9 @@ Boolean CProtoControl::PacketHandler(PacketInfo *thePacket) {
             }
             break;
         case kpKeyAndMouseRequest:
-
-            didHandle = false;
-            //	Fall through to kpKeyAndMouse!
+            // handle the resend request right away
+            theNet->playerTable[itsManager->myId]->ResendFrame(thePacket->p3, thePacket->sender, kpKeyAndMouse);
+            //	Fall through to kpKeyAndMouse because this request ALSO contains kpKeyAndMouse info from the sender!
         case kpKeyAndMouse: {
             short playerIndex;
 
