@@ -567,7 +567,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                 SendResendRequest(askCount++);
                 // if we get the packet from the Resend above, it might be stuck on the end of the readQ waiting for
                 // a lost packet, so skip 1 lost packet every other time until it frees up the queue again
-                if (askCount % 2 == 1) {
+                if (askCount % 2 == 0) {
                     theNetManager->SkipLostPackets(1 << slot);
                 }
 
