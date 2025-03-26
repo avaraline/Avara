@@ -1062,6 +1062,18 @@ void CNetManager::ReceiveStartRequest(uint16_t activeDistribution, uint8_t initi
     }
 }
 
+void CNetManager::SetLT(uint8_t frameLatency) {
+    // set LT based on passed frameLatency and server's config/limits
+    if (IsAutoLatencyEnabled()) {
+        frameLatency = std::min(std::max(minAutoLatency, frameLatency), maxAutoLatency);
+    } else {
+        // fix LT to kLatencyToleranceTag value
+        frameLatency = maxAutoLatency;
+    }
+    itsGame->latencyTolerance = 0; // forces SetFrameLatency() to output the message
+    itsGame->SetFrameLatency(frameLatency);
+}
+
 void CNetManager::ReceiveStartLevel(uint16_t activeDistribution, uint8_t initialFL) {
     // called by everyone in response to the server sending the kpStartLevel message
     SDL_Log("CNetManager::ReceiveStartLevel(0x%02x, %d)\n", activeDistribution, initialFL);
@@ -1078,14 +1090,8 @@ void CNetManager::ReceiveStartLevel(uint16_t activeDistribution, uint8_t initial
         isPlaying = true;
         itsGame->ResumeGame();
 
-        // set initial LT based on passed rttFL and config/limits
-        if (IsAutoLatencyEnabled()) {
-            initialFL = std::min(std::max(minAutoLatency, initialFL), maxAutoLatency);
-        } else {
-            // fix LT to kLatencyToleranceTag value
-            initialFL = maxAutoLatency;
-        }
-        itsGame->SetFrameLatency(initialFL);
+        SetLT(initialFL);
+        SDL_Log("Start with LT = %.2lf\n", itsGame->latencyTolerance);
     }
 }
 
@@ -1119,6 +1125,9 @@ void CNetManager::ReceiveResumeLevel(uint16_t activeDistribution, Fixed randomKe
         itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
         isPlaying = true;
         itsGame->ResumeGame();
+
+        // if the server changes LT or AutoLT mode, this makes sure we use the correct LT
+        SetLT(itsGame->FrameLatency());
         SDL_Log("Resume with LT = %.2lf\n", itsGame->latencyTolerance);
     }
 }

@@ -167,6 +167,7 @@ public:
 
     virtual void SendStartCommand();
     virtual void ReceiveStartRequest(uint16_t activeDistribution, uint8_t initialLT, int16_t senderSlot);
+    virtual void SetLT(uint8_t frameLatency);
     virtual void ReceiveStartLevel(uint16_t activeDistribution, uint8_t initialLT);
 
     virtual void SendResumeCommand();
