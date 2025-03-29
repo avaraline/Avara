@@ -20,6 +20,7 @@ public:
     virtual void AddPart(CBSPPart *part) override;
     virtual void ApplyLights() override;
     virtual void ApplyProjection() override;
+    virtual void ApplySky() override;
     virtual void LevelReset() override;
     virtual std::unique_ptr<VertexData> NewVertexDataInstance() override;
     virtual void OverheadPoint(Fixed *pt, Fixed *extent) override;

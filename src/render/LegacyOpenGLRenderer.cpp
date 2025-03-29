@@ -231,6 +231,22 @@ void LegacyOpenGLRenderer::ApplyProjection()
     __glCheckErrors();
 }
 
+void LegacyOpenGLRenderer::ApplySky()
+{
+    float groundColorRGB[3];
+    float lowSkyColorRGB[3];
+    float highSkyColorRGB[3];
+    skyParams->groundColor.ExportGLFloats(groundColorRGB, 3);
+    skyParams->lowSkyColor.ExportGLFloats(lowSkyColorRGB, 3);
+    skyParams->highSkyColor.ExportGLFloats(highSkyColorRGB, 3);
+    
+    skyShader->Use();
+    skyShader->SetFloat3("groundColor", groundColorRGB);
+    skyShader->SetFloat3("horizonColor", lowSkyColorRGB);
+    skyShader->SetFloat3("skyColor", highSkyColorRGB);
+    skyShader->SetFloat("highAlt", ToFloat(skyParams->highSkyAltitude) / 20000.0f);
+}
+
 void LegacyOpenGLRenderer::UpdateViewRect(int width, int height, float pixelRatio)
 {
     AbstractRenderer::UpdateViewRect(width, height, pixelRatio);
@@ -282,13 +298,6 @@ void LegacyOpenGLRenderer::RenderFrame()
     glm::mat4 glMatrix = ToFloatMat(*trans);
     glMatrix[3][0] = glMatrix[3][1] = glMatrix[3][2] = 0;
 
-    float groundColorRGB[3];
-    float lowSkyColorRGB[3];
-    float highSkyColorRGB[3];
-    skyParams->groundColor.ExportGLFloats(groundColorRGB, 3);
-    skyParams->lowSkyColor.ExportGLFloats(lowSkyColorRGB, 3);
-    skyParams->highSkyColor.ExportGLFloats(highSkyColorRGB, 3);
-
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -302,9 +311,6 @@ void LegacyOpenGLRenderer::RenderFrame()
 
     skyShader->Use();
     skyShader->SetMat4("view", glMatrix);
-    skyShader->SetFloat3("groundColor", groundColorRGB);
-    skyShader->SetFloat3("horizonColor", lowSkyColorRGB);
-    skyShader->SetFloat3("skyColor", highSkyColorRGB);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);

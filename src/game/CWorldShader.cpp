@@ -25,7 +25,7 @@ void CWorldShader::Reset() {
     skyShadeCount = DEFAULT_SKY_SHADE_COUNT;
 
     lowSkyAltitude = FIX(0);
-    highSkyAltitude = FIX(500);
+    highSkyAltitude = FIX(1000);
 }
 
 #define GROUNDOFFSET FIX(-2)
