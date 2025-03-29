@@ -287,6 +287,7 @@ void ModernOpenGLRenderer::ApplySky()
     skyShader->SetFloat3("groundColor", groundColorRGB);
     skyShader->SetFloat3("horizonColor", lowSkyColorRGB);
     skyShader->SetFloat3("skyColor", highSkyColorRGB);
+    skyShader->SetFloat("lowAlt", ToFloat(skyParams->lowSkyAltitude) / 20000.0f);
     skyShader->SetFloat("highAlt", ToFloat(skyParams->highSkyAltitude) / 20000.0f);
 }
 

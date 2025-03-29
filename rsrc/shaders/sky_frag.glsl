@@ -14,11 +14,20 @@ void main()
 {
     float phi = normalize(tex_coord).y;
 
-    color = vec4(mix(
-                mix( // TODO: lowAlt messes up the gradient
-                    mix(skyColor * (phi / highAlt) + horizonColor * (1.0 - (phi / highAlt)),
-                        horizonColor, float(phi < lowAlt)
-                    ), skyColor, float(phi > highAlt)
-                ), groundColor, float(phi <= 0.0)
-            ), 1.0);
+    color = vec4(
+        mix(
+            mix( // TODO: lowAlt messes up the gradient
+                mix(
+                    skyColor * (phi / highAlt) + horizonColor * (1.0 - (phi / highAlt)),
+                    horizonColor,
+                    float(phi < lowAlt)
+                ),
+                skyColor,
+                float(phi > highAlt)
+            ),
+            groundColor,
+            float(phi <= 0.0)
+        ),
+        1.0
+    );
 }
