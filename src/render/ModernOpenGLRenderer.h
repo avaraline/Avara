@@ -9,6 +9,7 @@
 #include <SDL2/SDL.h>
 
 #include <memory>
+#include <vector>
 
 class ModernOpenGLRenderer final: public AbstractRenderer {
 public:
@@ -39,6 +40,8 @@ private:
     std::unique_ptr<OpenGLShader> hudShader;
     std::unique_ptr<OpenGLShader> hudPostShader;
     std::unique_ptr<OpenGLShader> finalShader;
+    
+    std::vector<CBSPPart*> alphaParts;
 
     GLsizei resolution[2];
     GLuint skyBuffer;
