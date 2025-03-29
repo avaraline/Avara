@@ -13,12 +13,13 @@ out vec4 color;
 void main()
 {
     float phi = normalize(tex_coord).y;
+    float gradientHeight = (phi - lowAlt) / (highAlt - lowAlt);
 
     color = vec4(
         mix(
-            mix( // TODO: lowAlt messes up the gradient
+            mix(
                 mix(
-                    skyColor * (phi / highAlt) + horizonColor * (1.0 - (phi / highAlt)),
+                    skyColor * gradientHeight + horizonColor * (1.0 - gradientHeight),
                     horizonColor,
                     float(phi < lowAlt)
                 ),
