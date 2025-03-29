@@ -9,6 +9,7 @@
 #include <SDL2/SDL.h>
 
 #include <memory>
+#include <vector>
 
 class ModernOpenGLRenderer final: public AbstractRenderer {
 public:
@@ -19,6 +20,7 @@ public:
     virtual void AddPart(CBSPPart *part) override;
     virtual void ApplyLights() override;
     virtual void ApplyProjection() override;
+    virtual void ApplySky() override;
     virtual void LevelReset() override;
     virtual std::unique_ptr<VertexData> NewVertexDataInstance() override;
     virtual void OverheadPoint(Fixed *pt, Fixed *extent) override;
@@ -39,6 +41,8 @@ private:
     std::unique_ptr<OpenGLShader> hudShader;
     std::unique_ptr<OpenGLShader> hudPostShader;
     std::unique_ptr<OpenGLShader> finalShader;
+    
+    std::vector<CBSPPart*> alphaParts;
 
     GLsizei resolution[2];
     GLuint skyBuffer;

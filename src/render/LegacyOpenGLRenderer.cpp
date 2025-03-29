@@ -115,12 +115,15 @@ LegacyOpenGLRenderer::LegacyOpenGLRenderer(SDL_Window *window) : AbstractRendere
     viewParams->viewPixelDimensions.v = h;
 
     dynamicWorld = new CBSPWorldImpl(100);
+    hudWorld = new CBSPWorldImpl(30);
 
     // Initialize shaders.
     skyShader = LoadShader(SKY_VERT, SKY_FRAG);
     worldShader = LoadShader(OBJ_VERT, OBJ_FRAG);
     ApplyLights();
     ApplyProjection();
+    
+    alphaParts = {};
 
     // Create a separate VBO and VAO for the skybox, and upload its geometry to the GPU.
     glGenVertexArrays(1, &skyVertArray);
@@ -145,7 +148,15 @@ LegacyOpenGLRenderer::LegacyOpenGLRenderer(SDL_Window *window) : AbstractRendere
 
 LegacyOpenGLRenderer::~LegacyOpenGLRenderer() {
     delete dynamicWorld;
+    delete hudWorld;
     AbstractRenderer::~AbstractRenderer();
+}
+
+void LegacyOpenGLRenderer::AddHUDPart(CBSPPart *part)
+{
+    part->ignoreDirectionalLights = true;
+    part->ignoreDepthTesting = true;
+    hudWorld->AddPart(part);
 }
 
 void LegacyOpenGLRenderer::AddPart(CBSPPart *part)
@@ -158,9 +169,6 @@ void LegacyOpenGLRenderer::ApplyLights()
     float ambientIntensity = ToFloat(viewParams->ambientLight);
     float ambientRGB[3];
     viewParams->ambientLightColor.ExportGLFloats(ambientRGB, 3);
-
-    //hudShader->Use();
-    //AdjustAmbient(*hudShader, HUD_AMBIENT);
 
     worldShader->Use();
     AdjustAmbient(*worldShader, ambientIntensity);
@@ -221,10 +229,23 @@ void LegacyOpenGLRenderer::ApplyProjection()
     worldShader->Use();
     worldShader->SetMat4("proj", proj);
     __glCheckErrors();
+}
 
-    //hudShader->Use();
-    //hudShader->SetMat4("proj", proj);
-    //glCheckErrors();
+void LegacyOpenGLRenderer::ApplySky()
+{
+    float groundColorRGB[3];
+    float lowSkyColorRGB[3];
+    float highSkyColorRGB[3];
+    skyParams->groundColor.ExportGLFloats(groundColorRGB, 3);
+    skyParams->lowSkyColor.ExportGLFloats(lowSkyColorRGB, 3);
+    skyParams->highSkyColor.ExportGLFloats(highSkyColorRGB, 3);
+    
+    skyShader->Use();
+    skyShader->SetFloat3("groundColor", groundColorRGB);
+    skyShader->SetFloat3("horizonColor", lowSkyColorRGB);
+    skyShader->SetFloat3("skyColor", highSkyColorRGB);
+    skyShader->SetFloat("lowAlt", ToFloat(skyParams->lowSkyAltitude) / 20000.0f);
+    skyShader->SetFloat("highAlt", ToFloat(skyParams->highSkyAltitude) / 20000.0f);
 }
 
 void LegacyOpenGLRenderer::UpdateViewRect(int width, int height, float pixelRatio)
@@ -236,6 +257,7 @@ void LegacyOpenGLRenderer::UpdateViewRect(int width, int height, float pixelRati
 void LegacyOpenGLRenderer::LevelReset()
 {
     dynamicWorld->DisposeParts();
+    hudWorld->DisposeParts();
     AbstractRenderer::LevelReset();
 }
 
@@ -252,6 +274,11 @@ void LegacyOpenGLRenderer::OverheadPoint(Fixed *pt, Fixed *extent)
 void LegacyOpenGLRenderer::RefreshWindow()
 {
     SDL_GL_SwapWindow(window);
+}
+
+void LegacyOpenGLRenderer::RemoveHUDPart(CBSPPart *part)
+{
+    hudWorld->RemovePart(part);
 }
 
 void LegacyOpenGLRenderer::RemovePart(CBSPPart *part)
@@ -272,15 +299,6 @@ void LegacyOpenGLRenderer::RenderFrame()
     glm::mat4 glMatrix = ToFloatMat(*trans);
     glMatrix[3][0] = glMatrix[3][1] = glMatrix[3][2] = 0;
 
-    float groundColorRGB[3];
-    float lowSkyColorRGB[3];
-    float highSkyColorRGB[3];
-    skyParams->groundColor.ExportGLFloats(groundColorRGB, 3);
-    skyParams->lowSkyColor.ExportGLFloats(lowSkyColorRGB, 3);
-    skyParams->highSkyColor.ExportGLFloats(highSkyColorRGB, 3);
-
-    // Switch to first offscreen FBO.
-    //glBindFramebuffer(GL_FRAMEBUFFER, fbo[0]);
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -294,9 +312,6 @@ void LegacyOpenGLRenderer::RenderFrame()
 
     skyShader->Use();
     skyShader->SetMat4("view", glMatrix);
-    skyShader->SetFloat3("groundColor", groundColorRGB);
-    skyShader->SetFloat3("horizonColor", lowSkyColorRGB);
-    skyShader->SetFloat3("skyColor", highSkyColorRGB);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -304,6 +319,7 @@ void LegacyOpenGLRenderer::RenderFrame()
     glDisableVertexAttribArray(0);
 
     __glCheckErrors();
+    
     // RENDER WORLD ////////////////////////////////////////////////////////////////////////
 
     glEnable(GL_CULL_FACE);
@@ -318,12 +334,34 @@ void LegacyOpenGLRenderer::RenderFrame()
     __glCheckErrors();
     float defaultAmbient = ToFloat(viewParams->ambientLight);
 
+    // Draw opaque geometry. Parts are sorted far-to-near, so traverse in
+    // reverse so the depth buffer can help out.
     auto partList = dynamicWorld->GetVisiblePartListPointer();
     auto partCount = dynamicWorld->GetVisiblePartCount();
+    CBSPPart **partPtr = partList + (partCount - 1);
+    alphaParts.clear();
     for (uint16_t i = 0; i < partCount; i++) {
-        Draw(*worldShader, **partList, defaultAmbient);
+        Draw(*worldShader, **partPtr, defaultAmbient, false);
+        if ((*partPtr)->HasAlpha()) {
+            alphaParts.push_back(*partPtr);
+        }
+        partPtr--;
+    }
+    
+    // Draw translucent geometry in a separate pass. Far-to-near is good here.
+    for (auto it = alphaParts.rbegin(); it != alphaParts.rend(); ++it) {
+        Draw(*worldShader, **it, defaultAmbient, true);
+    }
+    
+    // RENDER HUD //////////////////////////////////////////////////////////////////////////////////
+    hudWorld->PrepareForRender();
+    partList = hudWorld->GetVisiblePartListPointer();
+    partCount = hudWorld->GetVisiblePartCount();
+    for (uint16_t i = 0; i < partCount; i++) {
+        Draw(*worldShader, **partList, defaultAmbient, false);
         partList++;
     }
+
 }
 
 void LegacyOpenGLRenderer::AdjustAmbient(OpenGLShader &shader, float intensity)
@@ -346,15 +384,26 @@ void LegacyOpenGLRenderer::Clear()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 
-void LegacyOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, float defaultAmbient)
+void LegacyOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, float defaultAmbient, bool useAlphaBuffer)
 {
     OpenGLVertices *glData = dynamic_cast<OpenGLVertices*>(part.vData.get());
 
     if (glData == nullptr) return;
 
-    glBindVertexArray(glData->opaque.vertexArray);
-    glBindBuffer(GL_ARRAY_BUFFER, glData->opaque.vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, glData->opaque.glDataSize, glData->opaque.glData.data(), GL_STREAM_DRAW);
+    if (!useAlphaBuffer) {
+        glBindVertexArray(glData->opaque.vertexArray);
+        glBindBuffer(GL_ARRAY_BUFFER, glData->opaque.vertexBuffer);
+        glBufferData(GL_ARRAY_BUFFER, glData->opaque.glDataSize, glData->opaque.glData.data(), GL_STREAM_DRAW);
+    } else {
+        glData->alpha.SortFromCamera(
+            ToFloat(part.invFullTransform[3][0]),
+            ToFloat(part.invFullTransform[3][1]),
+            ToFloat(part.invFullTransform[3][2])
+        );
+        glBindVertexArray(glData->alpha.vertexArray);
+        glBindBuffer(GL_ARRAY_BUFFER, glData->alpha.vertexBuffer);
+        glBufferData(GL_ARRAY_BUFFER, glData->alpha.glDataSize, glData->alpha.glData.data(), GL_STREAM_DRAW);
+    }
 
     // Position!
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), 0);
@@ -388,24 +437,11 @@ void LegacyOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
     shader.Use();
     __glCheckErrors();
 
-    glDrawArrays(GL_TRIANGLES, 0, glData->opaque.pointCount);
-
-    glBindVertexArray(glData->alpha.vertexArray);
-    glBindBuffer(GL_ARRAY_BUFFER, glData->alpha.vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, glData->alpha.glDataSize, glData->alpha.glData.data(), GL_STREAM_DRAW);
-
-    // Position!
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), 0);
-    glEnableVertexAttribArray(0);
-
-    // RGBAColor!
-    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(3 * sizeof(float)));
-    glEnableVertexAttribArray(1);
-
-    // Normal!
-    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(7 * sizeof(float)));
-    glEnableVertexAttribArray(2);
-    glDrawArrays(GL_TRIANGLES, 0, glData->alpha.pointCount);
+    if (!useAlphaBuffer) {
+        glDrawArrays(GL_TRIANGLES, 0, glData->opaque.pointCount);
+    } else {
+        glDrawArrays(GL_TRIANGLES, 0, glData->alpha.pointCount);
+    }
 
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);

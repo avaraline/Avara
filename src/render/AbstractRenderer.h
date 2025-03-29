@@ -38,6 +38,11 @@ public:
      * Update the camera with the currently configured resolution and FOV.
      */
     virtual void ApplyProjection() = 0;
+    
+    /**
+     * Update the sky in the scene with the currently configured parameters.
+     */
+    virtual void ApplySky() = 0;
 
     /**
      * Reset the renderer's state back to its defaults.

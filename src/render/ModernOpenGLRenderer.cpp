@@ -150,6 +150,8 @@ ModernOpenGLRenderer::ModernOpenGLRenderer(SDL_Window *window) : AbstractRendere
     finalShader = LoadShader(FINAL_VERT, FINAL_FRAG);
     ApplyLights();
     ApplyProjection();
+    
+    alphaParts = {};
 
     // Create a separate VBO and VAO for the skybox, and upload its geometry to the GPU.
     glGenVertexArrays(1, &skyVertArray);
@@ -272,6 +274,23 @@ void ModernOpenGLRenderer::ApplyProjection()
     glCheckErrors();
 }
 
+void ModernOpenGLRenderer::ApplySky()
+{
+    float groundColorRGB[3];
+    float lowSkyColorRGB[3];
+    float highSkyColorRGB[3];
+    skyParams->groundColor.ExportGLFloats(groundColorRGB, 3);
+    skyParams->lowSkyColor.ExportGLFloats(lowSkyColorRGB, 3);
+    skyParams->highSkyColor.ExportGLFloats(highSkyColorRGB, 3);
+    
+    skyShader->Use();
+    skyShader->SetFloat3("groundColor", groundColorRGB);
+    skyShader->SetFloat3("horizonColor", lowSkyColorRGB);
+    skyShader->SetFloat3("skyColor", highSkyColorRGB);
+    skyShader->SetFloat("lowAlt", ToFloat(skyParams->lowSkyAltitude) / 20000.0f);
+    skyShader->SetFloat("highAlt", ToFloat(skyParams->highSkyAltitude) / 20000.0f);
+}
+
 void ModernOpenGLRenderer::UpdateViewRect(int width, int height, float pixelRatio)
 {
     AbstractRenderer::UpdateViewRect(width, height, pixelRatio);
@@ -328,13 +347,6 @@ void ModernOpenGLRenderer::RenderFrame()
     glm::mat4 glMatrix = ToFloatMat(*trans);
     glMatrix[3][0] = glMatrix[3][1] = glMatrix[3][2] = 0;
 
-    float groundColorRGB[3];
-    float lowSkyColorRGB[3];
-    float highSkyColorRGB[3];
-    skyParams->groundColor.ExportGLFloats(groundColorRGB, 3);
-    skyParams->lowSkyColor.ExportGLFloats(lowSkyColorRGB, 3);
-    skyParams->highSkyColor.ExportGLFloats(highSkyColorRGB, 3);
-
     // Switch to first offscreen FBO.
     glBindFramebuffer(GL_FRAMEBUFFER, fbo[0]);
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -350,9 +362,6 @@ void ModernOpenGLRenderer::RenderFrame()
 
     skyShader->Use();
     skyShader->SetMat4("view", glMatrix);
-    skyShader->SetFloat3("groundColor", groundColorRGB);
-    skyShader->SetFloat3("horizonColor", lowSkyColorRGB);
-    skyShader->SetFloat3("skyColor", highSkyColorRGB);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -372,22 +381,23 @@ void ModernOpenGLRenderer::RenderFrame()
 
     float defaultAmbient = ToFloat(viewParams->ambientLight);
 
-    // Draw opaque geometry.
+    // Draw opaque geometry. Parts are sorted far-to-near, so traverse in
+    // reverse so the depth buffer can help out.
     auto partList = dynamicWorld->GetVisiblePartListPointer();
     auto partCount = dynamicWorld->GetVisiblePartCount();
+    CBSPPart **partPtr = partList + (partCount - 1);
+    alphaParts.clear();
     for (uint16_t i = 0; i < partCount; i++) {
-        Draw(*worldShader, **partList, defaultAmbient, false);
-        partList++;
+        Draw(*worldShader, **partPtr, defaultAmbient, false);
+        if ((*partPtr)->HasAlpha()) {
+            alphaParts.push_back(*partPtr);
+        }
+        partPtr--;
     }
 
-    // Draw translucent geometry in a separate pass.
-    partList = dynamicWorld->GetVisiblePartListPointer();
-    partCount = dynamicWorld->GetVisiblePartCount();
-    for (uint16_t i = 0; i < partCount; i++) {
-        if ((**partList).HasAlpha()) {
-            Draw(*worldShader, **partList, defaultAmbient, true);
-        }
-        partList++;
+    // Draw translucent geometry in a separate pass. Far-to-near is good here.
+    for (auto it = alphaParts.rbegin(); it != alphaParts.rend(); ++it) {
+        Draw(*worldShader, **it, defaultAmbient, true);
     }
 
     // First pass of sky and world rendering complete, post-process into second offscreen FBO.

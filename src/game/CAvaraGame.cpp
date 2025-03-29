@@ -587,6 +587,7 @@ void CAvaraGame::EndScript() {
         }
     }
     gRenderer->ApplyLights();
+    gRenderer->ApplySky();
 
     color = *ARGBColor::Parse(ReadStringVar(iMissileArmedColor));
     ColorManager::setMissileArmedColor(color);
