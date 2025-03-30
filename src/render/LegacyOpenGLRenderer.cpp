@@ -135,15 +135,11 @@ LegacyOpenGLRenderer::LegacyOpenGLRenderer(SDL_Window *window) : AbstractRendere
     glBufferData(GL_ARRAY_BUFFER, sizeof(legacySkyboxVertices), legacySkyboxVertices, GL_STATIC_DRAW);
 
     __glCheckErrors();
+    
     // Rebind to default VBO/VAO.
     glBindVertexArray(0);
     __glCheckErrors();
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    glEnable(GL_BLEND);
-    glBlendFuncSeparate(GL_SRC_ALPHA, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE);
-    __glCheckErrors();
-
 }
 
 LegacyOpenGLRenderer::~LegacyOpenGLRenderer() {
@@ -349,6 +345,9 @@ void LegacyOpenGLRenderer::RenderFrame()
     }
     
     // Draw translucent geometry in a separate pass. Far-to-near is good here.
+    glEnable(GL_BLEND);
+    glBlendEquation(GL_FUNC_ADD);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     for (auto it = alphaParts.rbegin(); it != alphaParts.rend(); ++it) {
         Draw(*worldShader, **it, defaultAmbient, true);
     }
@@ -361,6 +360,7 @@ void LegacyOpenGLRenderer::RenderFrame()
         Draw(*worldShader, **partList, defaultAmbient, false);
         partList++;
     }
+    glDisable(GL_BLEND);
 
 }
 

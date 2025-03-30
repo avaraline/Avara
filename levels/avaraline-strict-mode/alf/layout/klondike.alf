@@ -112,19 +112,19 @@
 <Wall color="#f2f2f2" color.1="#000000" x="0" z="-5" y="-0.001" w="8.75" d="1.25" h="0" />
 <Wall color="#f2f2f2" color.1="#000000" x="0" z="5" y="-0.001" w="8.75" d="1.25" h="0" />
 
-<Solid y="2" shape="bspIce" canGlow="true" shield="3" color="hsla(188, 100%, 94%, 0.25)" color.1="#000000" cx="-2.5" cz="12.5" angle="0" />
-<Solid y="2" shape="bspIce" canGlow="true" shield="3" color="hsla(188, 100%, 94%, 0.25)" color.1="#000000" cx="-12.5" cz="-2.5" angle="90" />
-<Solid y="2" shape="bspIce" canGlow="true" shield="3" color="hsla(188, 100%, 94%, 0.25)" color.1="#000000" cx="2.5" cz="-12.5" angle="180" />
-<Solid y="2" shape="bspIce" canGlow="true" shield="3" color="hsla(188, 100%, 94%, 0.25)" color.1="#000000" cx="12.5" cz="2.5" angle="270" />
-<Solid y="9" shape="bspIce" canGlow="true" roll="180" shield="3" color="hsla(188, 100%, 94%, 0.25)" color.1="#000000" cx="-22.5" cz="8.75" angle="270" />
-<Solid y="9" shape="bspIce" canGlow="true" roll="180" shield="3" color="hsla(188, 100%, 94%, 0.25)" color.1="#000000" cx="22.5" cz="-8.75" angle="90" />
-<Solid y="9" shape="bspIce" canGlow="true" roll="180" shield="3" color="hsla(188, 100%, 94%, 0.25)" color.1="#000000" cx="-8.75" cz="-22.5" angle="0" />
-<Solid y="9" shape="bspIce" canGlow="true" roll="180" shield="3" color="hsla(188, 100%, 94%, 0.25)" color.1="#000000" cx="8.75" cz="22.5" angle="180" />
+<Solid y="2" shape="bspIce" canGlow="true" shield="3" color="hsla(188, 100%, 94%, 0.75)" color.1="#000000" cx="-2.5" cz="12.5" angle="0" />
+<Solid y="2" shape="bspIce" canGlow="true" shield="3" color="hsla(188, 100%, 94%, 0.75)" color.1="#000000" cx="-12.5" cz="-2.5" angle="90" />
+<Solid y="2" shape="bspIce" canGlow="true" shield="3" color="hsla(188, 100%, 94%, 0.75)" color.1="#000000" cx="2.5" cz="-12.5" angle="180" />
+<Solid y="2" shape="bspIce" canGlow="true" shield="3" color="hsla(188, 100%, 94%, 0.75)" color.1="#000000" cx="12.5" cz="2.5" angle="270" />
+<Solid y="9" shape="bspIce" canGlow="true" roll="180" shield="3" color="hsla(188, 100%, 94%, 0.75)" color.1="#000000" cx="-22.5" cz="8.75" angle="270" />
+<Solid y="9" shape="bspIce" canGlow="true" roll="180" shield="3" color="hsla(188, 100%, 94%, 0.75)" color.1="#000000" cx="22.5" cz="-8.75" angle="90" />
+<Solid y="9" shape="bspIce" canGlow="true" roll="180" shield="3" color="hsla(188, 100%, 94%, 0.75)" color.1="#000000" cx="-8.75" cz="-22.5" angle="0" />
+<Solid y="9" shape="bspIce" canGlow="true" roll="180" shield="3" color="hsla(188, 100%, 94%, 0.75)" color.1="#000000" cx="8.75" cz="22.5" angle="180" />
 
-<WallDoor canGlow="true" shield="25" color="rgba(255, 255, 255, 0.25)" color.1="#000000" x="10" z="-45" w="10" d="10" h="1" y="5" />
-<WallDoor canGlow="true" shield="25" color="rgba(255, 255, 255, 0.25)" color.1="#000000" x="45" z="10" w="10" d="10" h="1" y="5" />
-<WallDoor canGlow="true" shield="25" color="rgba(255, 255, 255, 0.25)" color.1="#000000" x="-10" z="45" w="10" d="10" h="1" y="5" />
-<WallDoor canGlow="true" shield="25" color="rgba(255, 255, 255, 0.25)" color.1="#000000" x="-45" z="-10" w="10" d="10" h="1" y="5" />
+<WallDoor canGlow="true" shield="25" color="rgba(255, 255, 255, 0.75)" color.1="#000000" x="10" z="-45" w="10" d="10" h="1" y="5" />
+<WallDoor canGlow="true" shield="25" color="rgba(255, 255, 255, 0.75)" color.1="#000000" x="45" z="10" w="10" d="10" h="1" y="5" />
+<WallDoor canGlow="true" shield="25" color="rgba(255, 255, 255, 0.75)" color.1="#000000" x="-10" z="45" w="10" d="10" h="1" y="5" />
+<WallDoor canGlow="true" shield="25" color="rgba(255, 255, 255, 0.75)" color.1="#000000" x="-45" z="-10" w="10" d="10" h="1" y="5" />
 <Ramp y="2" deltaY="4" color="#e2fbff" color.1="#000000" x="-22.5" z="52.5" w="15" d="5" h="0" angle="270" />
 <Ramp y="2" deltaY="4" color="#e2fbff" color.1="#000000" x="22.5" z="-52.5" w="15" d="5" h="0" angle="90" />
 <Ramp y="2" deltaY="4" color="#e2fbff" color.1="#000000" x="52.5" z="22.5" w="5" d="15" h="0" angle="180" />

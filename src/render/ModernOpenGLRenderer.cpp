@@ -178,10 +178,6 @@ ModernOpenGLRenderer::ModernOpenGLRenderer(SDL_Window *window) : AbstractRendere
     // Rebind to default VBO/VAO.
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    // Configure alpha blending.
-    glEnable(GL_BLEND);
-    glBlendFuncSeparate(GL_SRC_ALPHA, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE);
 }
 
 ModernOpenGLRenderer::~ModernOpenGLRenderer() {
@@ -396,9 +392,13 @@ void ModernOpenGLRenderer::RenderFrame()
     }
 
     // Draw translucent geometry in a separate pass. Far-to-near is good here.
+    glEnable(GL_BLEND);
+    glBlendEquation(GL_FUNC_ADD);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     for (auto it = alphaParts.rbegin(); it != alphaParts.rend(); ++it) {
         Draw(*worldShader, **it, defaultAmbient, true);
     }
+    glDisable(GL_BLEND);
 
     // First pass of sky and world rendering complete, post-process into second offscreen FBO.
     glBindFramebuffer(GL_FRAMEBUFFER, fbo[1]);
@@ -437,7 +437,11 @@ void ModernOpenGLRenderer::RenderFrame()
 
     glDisable(GL_DEPTH_TEST);
     glBindTexture(GL_TEXTURE_2D, texture[0]);
+    glEnable(GL_BLEND);
+    glBlendEquation(GL_FUNC_ADD);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glDrawArrays(GL_TRIANGLES, 0, 6);
+    glDisable(GL_BLEND);
     glEnable(GL_DEPTH_TEST);
 
     // FINAL POST-PROCESSING, SEND TO DEFAULT FRAMEBUFFER //////////////////////////////////////////
