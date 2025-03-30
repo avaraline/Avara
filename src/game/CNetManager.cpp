@@ -773,7 +773,7 @@ void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
 
                 latencyVoteFrame = frameNumber;  // record the actual frame where the vote is initiated
                 // only use the "alive" players for the maxRTT calculation
-                maxRoundLatency = itsCommManager->GetMaxRoundTrip(AlivePlayersDistribution(), &maxId);
+                maxRoundLatency = itsCommManager->GetMaxRoundTrip(AlivePlayersDistribution(), -1, &maxId);
                 maxPlayer = playerTable[maxId].get();
                 uint8_t llv = std::min(long(UINT8_MAX), localLatencyVote);  // just in case, p1 can only accept a max of 256
 
@@ -796,9 +796,10 @@ void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
                 itsGame->itsApp->AddMessageLine(FragmentMapToString(), MsgAlignment::Left, MsgCategory::Error);
             }
 
+            if (autoLatencyVoteCount)
+                DBG_Log("lt+", "====autoLatencyVote = %ld\n", autoLatencyVote/autoLatencyVoteCount);
             if (IsAutoLatencyEnabled() && autoLatencyVoteCount) {
                 autoLatencyVote /= autoLatencyVoteCount;
-                DBG_Log("lt+", "====autoLatencyVote = %ld\n", autoLatencyVote);
 
                 short curFrameLatency = itsGame->FrameLatency();
                 short rttFrameLatency = itsGame->RoundTripToFrameLatency(maxRoundTripLatency);
@@ -1033,7 +1034,7 @@ void CNetManager::SendStartCommand() {
         }
     }
     // estimate initial frameLatency from RTT amongst players in dist
-    int8_t rttFL = itsGame->RoundTripToFrameLatency(itsCommManager->GetMaxRoundTrip(dist));
+    int8_t rttFL = itsGame->RoundTripToFrameLatency(itsCommManager->GetMaxRoundTrip(dist, -1));
 
     itsCommManager->SendPacket(kdServerOnly, kpStartRequest, rttFL, dist, 0, 0, 0);
 }

@@ -5,6 +5,8 @@
     File: RolloverCounter.h
 */
 
+#pragma once
+
 #include <limits>
 #include <iostream>
 
