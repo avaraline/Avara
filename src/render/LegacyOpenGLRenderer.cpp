@@ -242,6 +242,9 @@ void LegacyOpenGLRenderer::ApplySky()
     skyShader->SetFloat3("skyColor", highSkyColorRGB);
     skyShader->SetFloat("lowAlt", ToFloat(skyParams->lowSkyAltitude) / 20000.0f);
     skyShader->SetFloat("highAlt", ToFloat(skyParams->highSkyAltitude) / 20000.0f);
+    
+    worldShader->Use();
+    worldShader->SetFloat3("horizonColor", lowSkyColorRGB);
 }
 
 void LegacyOpenGLRenderer::UpdateViewRect(int width, int height, float pixelRatio)
@@ -330,25 +333,21 @@ void LegacyOpenGLRenderer::RenderFrame()
     __glCheckErrors();
     float defaultAmbient = ToFloat(viewParams->ambientLight);
 
-    // Draw opaque geometry. Parts are sorted far-to-near, so traverse in
-    // reverse so the depth buffer can help out.
+    // Draw opaque geometry.
     auto partList = dynamicWorld->GetVisiblePartListPointer();
     auto partCount = dynamicWorld->GetVisiblePartCount();
-    CBSPPart **partPtr = partList + (partCount - 1);
     alphaParts.clear();
+    BlendingOn();
     for (uint16_t i = 0; i < partCount; i++) {
-        Draw(*worldShader, **partPtr, defaultAmbient, false);
-        if ((*partPtr)->HasAlpha()) {
-            alphaParts.push_back(*partPtr);
+        Draw(*worldShader, **partList, defaultAmbient, false);
+        if ((*partList)->HasAlpha()) {
+            alphaParts.push_back(*partList);
         }
-        partPtr--;
+        partList++;
     }
     
-    // Draw translucent geometry in a separate pass. Far-to-near is good here.
-    glEnable(GL_BLEND);
-    glBlendEquation(GL_FUNC_ADD);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    for (auto it = alphaParts.rbegin(); it != alphaParts.rend(); ++it) {
+    // Draw translucent geometry.
+    for (auto it = alphaParts.begin(); it != alphaParts.end(); ++it) {
         Draw(*worldShader, **it, defaultAmbient, true);
     }
     
@@ -360,7 +359,7 @@ void LegacyOpenGLRenderer::RenderFrame()
         Draw(*worldShader, **partList, defaultAmbient, false);
         partList++;
     }
-    glDisable(GL_BLEND);
+    BlendingOff();
 
 }
 
@@ -375,7 +374,20 @@ void LegacyOpenGLRenderer::ApplyView()
 
     worldShader->Use();
     worldShader->SetMat4("view", glMatrix);
+    worldShader->SetFloat("worldYon", ToFloat(viewParams->yonBound));
     __glCheckErrors();
+}
+
+void LegacyOpenGLRenderer::BlendingOff()
+{
+    glDisable(GL_BLEND);
+}
+
+void LegacyOpenGLRenderer::BlendingOn()
+{
+    glEnable(GL_BLEND);
+    glBlendEquation(GL_FUNC_ADD);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void LegacyOpenGLRenderer::Clear()
@@ -419,6 +431,7 @@ void LegacyOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
 
     // Custom, per-object lighting and depth testing!
     float extraAmbient = ToFloat(part.extraAmbient);
+    float currentYon = ToFloat(gRenderer->viewParams->yonBound);
     if (part.privateAmbient != -1) {
         AdjustAmbient(shader, ToFloat(part.privateAmbient));
     }
@@ -431,6 +444,9 @@ void LegacyOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
     if (part.ignoreDirectionalLights) {
         IgnoreDirectionalLights(shader, true);
         __glCheckErrors();
+    }
+    if (part.usesPrivateYon) {
+        shader.SetFloat("worldYon", ToFloat(part.yon));
     }
 
     SetTransforms(part);
@@ -459,6 +475,9 @@ void LegacyOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
     if (part.ignoreDirectionalLights) {
         IgnoreDirectionalLights(shader, false);
         __glCheckErrors();
+    }
+    if (part.usesPrivateYon) {
+        shader.SetFloat("worldYon", currentYon);
     }
 
     glBindVertexArray(0);

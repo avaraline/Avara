@@ -285,6 +285,9 @@ void ModernOpenGLRenderer::ApplySky()
     skyShader->SetFloat3("skyColor", highSkyColorRGB);
     skyShader->SetFloat("lowAlt", ToFloat(skyParams->lowSkyAltitude) / 20000.0f);
     skyShader->SetFloat("highAlt", ToFloat(skyParams->highSkyAltitude) / 20000.0f);
+    
+    worldShader->Use();
+    worldShader->SetFloat3("horizonColor", lowSkyColorRGB);
 }
 
 void ModernOpenGLRenderer::UpdateViewRect(int width, int height, float pixelRatio)
@@ -377,28 +380,24 @@ void ModernOpenGLRenderer::RenderFrame()
 
     float defaultAmbient = ToFloat(viewParams->ambientLight);
 
-    // Draw opaque geometry. Parts are sorted far-to-near, so traverse in
-    // reverse so the depth buffer can help out.
+    // Draw opaque geometry.
     auto partList = dynamicWorld->GetVisiblePartListPointer();
     auto partCount = dynamicWorld->GetVisiblePartCount();
-    CBSPPart **partPtr = partList + (partCount - 1);
     alphaParts.clear();
+    BlendingOn();
     for (uint16_t i = 0; i < partCount; i++) {
-        Draw(*worldShader, **partPtr, defaultAmbient, false);
-        if ((*partPtr)->HasAlpha()) {
-            alphaParts.push_back(*partPtr);
+        Draw(*worldShader, **partList, defaultAmbient, false);
+        if ((*partList)->HasAlpha()) {
+            alphaParts.push_back(*partList);
         }
-        partPtr--;
+        partList++;
     }
 
-    // Draw translucent geometry in a separate pass. Far-to-near is good here.
-    glEnable(GL_BLEND);
-    glBlendEquation(GL_FUNC_ADD);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    for (auto it = alphaParts.rbegin(); it != alphaParts.rend(); ++it) {
+    // Draw translucent geometry.
+    for (auto it = alphaParts.begin(); it != alphaParts.end(); ++it) {
         Draw(*worldShader, **it, defaultAmbient, true);
     }
-    glDisable(GL_BLEND);
+    BlendingOff();
 
     // First pass of sky and world rendering complete, post-process into second offscreen FBO.
     glBindFramebuffer(GL_FRAMEBUFFER, fbo[1]);
@@ -437,11 +436,9 @@ void ModernOpenGLRenderer::RenderFrame()
 
     glDisable(GL_DEPTH_TEST);
     glBindTexture(GL_TEXTURE_2D, texture[0]);
-    glEnable(GL_BLEND);
-    glBlendEquation(GL_FUNC_ADD);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    BlendingOn();
     glDrawArrays(GL_TRIANGLES, 0, 6);
-    glDisable(GL_BLEND);
+    BlendingOff();
     glEnable(GL_DEPTH_TEST);
 
     // FINAL POST-PROCESSING, SEND TO DEFAULT FRAMEBUFFER //////////////////////////////////////////
@@ -472,11 +469,24 @@ void ModernOpenGLRenderer::ApplyView()
 
     worldShader->Use();
     worldShader->SetMat4("view", glMatrix);
+    worldShader->SetFloat("worldYon", ToFloat(viewParams->yonBound));
     glCheckErrors();
 
     hudShader->Use();
     hudShader->SetMat4("view", glMatrix);
     glCheckErrors();
+}
+
+void ModernOpenGLRenderer::BlendingOff()
+{
+    glDisable(GL_BLEND);
+}
+
+void ModernOpenGLRenderer::BlendingOn()
+{
+    glEnable(GL_BLEND);
+    glBlendEquation(GL_FUNC_ADD);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void ModernOpenGLRenderer::Clear()
@@ -521,6 +531,7 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
 
     // Custom, per-object lighting and depth testing!
     float extraAmbient = ToFloat(part.extraAmbient);
+    float currentYon = ToFloat(gRenderer->viewParams->yonBound);
     if (part.privateAmbient != -1) {
         AdjustAmbient(shader, ToFloat(part.privateAmbient));
     }
@@ -533,6 +544,9 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
     if (part.ignoreDirectionalLights) {
         IgnoreDirectionalLights(shader, true);
         glCheckErrors();
+    }
+    if (part.usesPrivateYon) {
+        shader.SetFloat("worldYon", ToFloat(part.yon));
     }
 
     SetTransforms(part);
@@ -560,6 +574,9 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
     if (part.ignoreDirectionalLights) {
         IgnoreDirectionalLights(shader, false);
         glCheckErrors();
+    }
+    if (part.usesPrivateYon) {
+        shader.SetFloat("worldYon", currentYon);
     }
 
     glBindVertexArray(0);
