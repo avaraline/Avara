@@ -919,8 +919,13 @@ bool CAvaraGame::GameTick() {
     canPreSend = true;
 
     // if the game hasn't kept up with the frame schedule, reset the next frame time (prevents chipmunk mode, unless player is dead)
-    if (nextScheduledFrame < startTime && itsNet->IAmAlive()) {
-        nextScheduledFrame = startTime + frameTime;
+    // [empirically a -0.5 frameTime multiplier seems to give best FPS... FPS flattens out below -0.5]
+    uint32_t nextFrameFloor = startTime - 0.5*frameTime;
+    if (nextScheduledFrame < nextFrameFloor && itsNet->IAmAlive()) {
+        // at the start of this frame we were ALREADY a full frame or more behind...
+        // (the further back we can stay, the closer we are to original frame rate, the better it is for smoothness)
+        DBG_Log("presend", "fn=%d, frame reset %u --> %u = +%d\n", frameNumber, nextScheduledFrame, nextFrameFloor, nextFrameFloor-nextScheduledFrame);
+        nextScheduledFrame = nextFrameFloor;
     }
 
     itsDepot->RunSliverActions();
@@ -1063,7 +1068,7 @@ CPlayerManager *CAvaraGame::GetPlayerManager(CAbstractPlayer *thePlayer) {
 // at the current frame rate.
 long CAvaraGame::RoundTripToFrameLatency(long roundTrip) {
     // half of the roundTripTime in units of frameTime, rounded up (ceil)
-    return std::ceil(roundTrip/2.0/frameTime);
+    return std::ceil(roundTrip/2.0/frameTime) - 1;
 }
 
 // "frameLatency" is the integer number of frames to delay;

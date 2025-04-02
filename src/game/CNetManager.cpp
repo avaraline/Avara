@@ -1071,7 +1071,7 @@ void CNetManager::SetLT(uint8_t frameLatency) {
         // fix LT to kLatencyToleranceTag value
         frameLatency = maxAutoLatency;
     }
-    itsGame->latencyTolerance = 0; // forces SetFrameLatency() to output the message
+    itsGame->latencyTolerance = -1; // forces SetFrameLatency() to output the message
     itsGame->SetFrameLatency(frameLatency);
 }
 
