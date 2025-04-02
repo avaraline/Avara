@@ -536,6 +536,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
         long firstTime = askAgainTime = TickCount();
         long quickTick = firstTime;
         long giveUpTime = firstTime + MSEC_TO_TICK_COUNT(15000);
+        uint32_t time0 = SDL_GetTicks();
 
         short askCount = 0;
         LoadingState oldStatus = loadingStatus;
@@ -612,11 +613,12 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
             // HideCursor();
         }
 
-        if (quickTick != firstTime) {
-            if (quickTick > firstTime + 3 || itsGame->longWait) {
+        uint32_t waitTime = SDL_GetTicks() - time0;
+        if (waitTime >= itsGame->frameTime) {
+            if (waitTime > 3*itsGame->frameTime || itsGame->longWait) {
                 itsGame->veryLongWait = true;
             }
-
+//            SDL_Log("fn=%d, waitTime = %u\n", itsGame->frameNumber, waitTime);
             itsGame->longWait = true;
         }
     }
