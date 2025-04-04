@@ -16,6 +16,7 @@ uniform float ambient = 0.0;
 uniform vec3 ambientColor = vec3(1, 1, 1);
 uniform float lightsActive = 1.0;
 uniform float worldYon = 180.0;
+uniform float objectYon = 180.0;
 uniform vec3 horizonColor;
 
 out vec4 color;
@@ -47,8 +48,8 @@ void main() {
     float atmosMult = pow((dist / worldYon), 0.5) * 0.2;
     color = mix(color, vec4(horizonColor, color.a), atmosMult);
     
-    float yonFadeRange = min(5.0, worldYon - (worldYon * 0.9));
-    float yonFadeDist = worldYon - yonFadeRange;
+    float yonFadeRange = min(5.0, objectYon - (objectYon * 0.9));
+    float yonFadeDist = objectYon - yonFadeRange;
     float alphaMult = pow(clamp((yonFadeRange + yonFadeDist - dist) / yonFadeRange, 0.0, 1.0), 0.5);
     color.a *= alphaMult;
 }

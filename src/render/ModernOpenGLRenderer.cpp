@@ -470,6 +470,7 @@ void ModernOpenGLRenderer::ApplyView()
     worldShader->Use();
     worldShader->SetMat4("view", glMatrix);
     worldShader->SetFloat("worldYon", ToFloat(viewParams->yonBound));
+    worldShader->SetFloat("objectYon", ToFloat(viewParams->yonBound));
     glCheckErrors();
 
     hudShader->Use();
@@ -546,7 +547,7 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
         glCheckErrors();
     }
     if (part.usesPrivateYon) {
-        shader.SetFloat("worldYon", ToFloat(part.yon));
+        shader.SetFloat("objectYon", ToFloat(part.yon));
     }
 
     SetTransforms(part);
@@ -576,7 +577,7 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
         glCheckErrors();
     }
     if (part.usesPrivateYon) {
-        shader.SetFloat("worldYon", currentYon);
+        shader.SetFloat("objectYon", currentYon);
     }
 
     glBindVertexArray(0);

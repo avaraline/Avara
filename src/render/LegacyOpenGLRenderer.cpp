@@ -375,6 +375,7 @@ void LegacyOpenGLRenderer::ApplyView()
     worldShader->Use();
     worldShader->SetMat4("view", glMatrix);
     worldShader->SetFloat("worldYon", ToFloat(viewParams->yonBound));
+    worldShader->SetFloat("objectYon", ToFloat(viewParams->yonBound));
     __glCheckErrors();
 }
 
@@ -446,7 +447,7 @@ void LegacyOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
         __glCheckErrors();
     }
     if (part.usesPrivateYon) {
-        shader.SetFloat("worldYon", ToFloat(part.yon));
+        shader.SetFloat("objectYon", ToFloat(part.yon));
     }
 
     SetTransforms(part);
@@ -477,7 +478,7 @@ void LegacyOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
         __glCheckErrors();
     }
     if (part.usesPrivateYon) {
-        shader.SetFloat("worldYon", currentYon);
+        shader.SetFloat("objectYon", currentYon);
     }
 
     glBindVertexArray(0);
