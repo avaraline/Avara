@@ -55,6 +55,8 @@ private:
 
     void AdjustAmbient(OpenGLShader &shader, float intensity);
     void ApplyView();
+    void BlendingOff();
+    void BlendingOn();
     void Clear();
     void Draw(OpenGLShader &shader, const CBSPPart &part, float defaultAmbient, bool useAlphaBuffer = false);
     void IgnoreDirectionalLights(OpenGLShader &shader, bool yn);
