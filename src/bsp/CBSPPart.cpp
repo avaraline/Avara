@@ -40,27 +40,13 @@ CBSPPart *CBSPPart::Create(short resId) {
 
 void CBSPPart::IBSPPart(short resId) {
     DBG_Log("bsp", "Loading BSP: %d\n", resId);
-    lightSeed = 0;
-    nextTemp = NULL;
-    // colorReplacements = NULL;    //  Use default colors.
-    isTransparent = false;
-    ignoreDirectionalLights = false;
-
-    usesPrivateHither = false;
-    usesPrivateYon = false;
-
-    extraAmbient = 0;
-    privateAmbient = -1;
-
-    hither = FIX3(500); //  50 cm   I set these variables just in case some bozo
-    yon = FIX(500); //  500 m   sets the flags above and forgets to set the values.
-    userFlags = 0;
+    
+    uint16_t colorCount = 0;
+    uint32_t pointCount = 0;
+    uint32_t polyCount = 0;
 
     auto json = AssetManager::GetBsp(resId);
     if (!json) {
-        colorCount = 0;
-        polyCount = 0;
-        pointCount = 0;
         return;
     }
 
@@ -73,8 +59,8 @@ void CBSPPart::IBSPPart(short resId) {
     doc["bounds"].emplace("max", json::array({0.0, 0.0, 0.0}));
 
     colorCount = static_cast<uint16_t>(doc["colors"].size());
-    polyCount = static_cast<uint32_t>(doc["polys"].size());
     pointCount = static_cast<uint32_t>(doc["points"].size());
+    polyCount = static_cast<uint32_t>(doc["polys"].size());
 
     enclosureRadius = ToFixed(doc["radius1"]);
     bigRadius = ToFixed(doc["radius2"]);
@@ -106,24 +92,28 @@ void CBSPPart::IBSPPart(short resId) {
     DBG_Log("bsp", "  bounds.y = [%d, %d]\n", minBounds.y, maxBounds.y);
     DBG_Log("bsp", "  bounds.z = [%d, %d]\n", minBounds.z, maxBounds.z);
 
-    origColorTable = std::make_unique<ARGBColor[]>(colorCount);
-    currColorTable = std::make_unique<ARGBColor[]>(colorCount);
-    pointTable = std::make_unique<Vector[]>(pointCount);
-    polyTable = std::make_unique<PolyRecord[]>(polyCount);
+    colorTable = std::vector<ColorRecord>();
+    pointTable = std::vector<FixedPoint>();
+    polyTable = std::vector<PolyRecord>();
+    
+    colorTable.reserve(colorCount);
+    pointTable.reserve(pointCount);
+    polyTable.reserve(polyCount);
 
+    ARGBColor original, current;
     for (uint16_t i = 0; i < colorCount; i++) {
         nlohmann::json value = doc["colors"][i];
-        ARGBColor color = ARGBColor::Parse(value)
+        original = ARGBColor::Parse(value)
             .value_or(ARGBColor(0x00ffffff)); // Fallback to invisible "white."
-        origColorTable[i] = color;
-        if (color == *ColorManager::getMarkerColor(0) ||
-            color == *ColorManager::getMarkerColor(1) ||
-            color == *ColorManager::getMarkerColor(2) ||
-            color == *ColorManager::getMarkerColor(3)) {
-            currColorTable[i] = color.WithA(0xff);
+        if (original == *ColorManager::getMarkerColor(0) ||
+            original == *ColorManager::getMarkerColor(1) ||
+            original == *ColorManager::getMarkerColor(2) ||
+            original == *ColorManager::getMarkerColor(3)) {
+            current = original.WithA(0xff);
         } else {
-            currColorTable[i] = color;
+            current = original;
         }
+        colorTable.push_back(ColorRecord(original, current));
     }
     
     CheckForAlpha();
@@ -133,11 +123,9 @@ void CBSPPart::IBSPPart(short resId) {
     if (showPoints) { DBG_Log("bsp", "  points:\n"); }
     for (uint32_t i = 0; i < pointCount; i++) {
         nlohmann::json pt = doc["points"][i];
-        pointTable[i][0] = ToFixed(pt[0]);
-        pointTable[i][1] = ToFixed(pt[1]);
-        pointTable[i][2] = ToFixed(pt[2]);
-        pointTable[i][3] = FIX1;
-        if (showPoints) { DBG_Log("bsp", "    %s\n", FormatVector(pointTable[i]).c_str()); }
+        FixedPoint v = FixedPoint(ToFixed(pt[0]), ToFixed(pt[1]), ToFixed(pt[2]), FIX1);
+        pointTable.push_back(v);
+        if (showPoints) { DBG_Log("bsp", "    %s\n", pointTable[i].Format().c_str()); }
     }
 
     totalPoints = 0;
@@ -145,42 +133,43 @@ void CBSPPart::IBSPPart(short resId) {
     for (uint32_t i = 0; i < polyCount; i++) {
         nlohmann::json poly = doc["polys"][i];
         nlohmann::json pt;
+        PolyRecord r = PolyRecord();
         // Color
-        polyTable[i].colorIdx = static_cast<uint16_t>(poly["color"]);
+        r.colorIdx = static_cast<uint16_t>(poly["color"]);
         // Normal
         nlohmann::json norms = doc["normals"];
         int idx = poly["normal"];
         nlohmann::json norm = norms[idx];
-        polyTable[i].normal[0] = norm[0];
-        polyTable[i].normal[1] = norm[1];
-        polyTable[i].normal[2] = norm[2];
+        r.normal.x = norm[0];
+        r.normal.y = norm[1];
+        r.normal.z = norm[2];
         // Triangle points
-        polyTable[i].vis = static_cast<uint8_t>(poly["vis"]);
-        polyTable[i].triCount = poly["tris"].size() / 3;
-        polyTable[i].triPoints = std::make_unique<uint16_t[]>(poly["tris"].size());
+        r.vis = static_cast<uint8_t>(poly["vis"]);
+        r.triCount = poly["tris"].size() / 3;
+        r.triPoints = std::make_unique<uint16_t[]>(poly["tris"].size());
         for (size_t j = 0; j < poly["tris"].size(); j += 3) {
             for (size_t k = 0; k < 3; k++) {
                 pt = poly["tris"][j + k];
-                polyTable[i].triPoints[j + k] = (uint16_t)pt;
+                r.triPoints[j + k] = (uint16_t)pt;
                 totalPoints += 1;
             }
         }
         if (poly.contains("front")) {
-            polyTable[i].front = poly["front"];
+            r.front = poly["front"];
+        } else {
+            r.front = uint16_t(-1);
         }
-        else polyTable[i].front = uint16_t(-1);
 
         if (poly.contains("back")) {
-            polyTable[i].back = poly["back"];
+            r.back = poly["back"];
+        } else {
+            r.back = uint16_t(-1);
         }
-        else polyTable[i].back = uint16_t(-1);
+        polyTable.push_back(std::move(r));
     }
 
     BuildBoundingVolumes();
     Reset();
-
-    vData = gRenderer->NewVertexDataInstance();
-    if (vData) vData->Replace(*this);
 }
 
 void CBSPPart::PostRender() {}
@@ -409,9 +398,9 @@ Matrix *CBSPPart::GetInverseTransform() {
 
 void CBSPPart::ReplaceColor(ARGBColor origColor, ARGBColor newColor) {
     bool colorReplaced = false;
-    for (int i = 0; i < colorCount; i++) {
-        if (origColorTable[i] == origColor) {
-            currColorTable[i] = newColor;
+    for (auto &color : colorTable) {
+        if (color.original == origColor) {
+            color.current = newColor;
             colorReplaced = true;
         }
     }
@@ -421,11 +410,11 @@ void CBSPPart::ReplaceColor(ARGBColor origColor, ARGBColor newColor) {
 
 void CBSPPart::ReplaceAllColors(ARGBColor newColor) {
     bool colorReplaced = false;
-    for (int i = 0; i < colorCount; i++) {
-        if (currColorTable[i] != newColor) {
+    for (auto &color : colorTable) {
+        if (color.current != newColor) {
             colorReplaced = true;
         }
-        currColorTable[i] = newColor;
+        color.current = newColor;
     }
     hasAlpha = (newColor.GetA() != 0xff);
     if (colorReplaced && vData) vData->Replace(*this);
@@ -453,8 +442,8 @@ CBSPPart::~CBSPPart() {}
 
 void CBSPPart::CheckForAlpha() {
     hasAlpha = false;
-    for (uint16_t i = 0; i < colorCount; i++) {
-        if (currColorTable[i].GetA() != 0xff) {
+    for (auto &color : colorTable) {
+        if (color.current.GetA() != 0xff) {
             hasAlpha = true;
             return;
         }

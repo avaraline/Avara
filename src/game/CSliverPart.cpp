@@ -38,10 +38,10 @@ void CSliverPart::Activate(Fixed *origin,
     short age,
     CBSPPart *fromObject) {
     PolyRecord *borrowPoly;
-    int offset = FSysRandom() % (fromObject->polyCount);
+    int offset = FSysRandom() % (fromObject->polyTable.size());
     borrowPoly = &fromObject->polyTable[offset];
 
-    ARGBColor c = fromObject->currColorTable[borrowPoly->colorIdx];
+    ARGBColor c = fromObject->colorTable[borrowPoly->colorIdx].current;
 
     ReplaceColor(*ColorManager::getMarkerColor(0), c);
 

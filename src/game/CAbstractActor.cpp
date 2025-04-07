@@ -28,6 +28,10 @@ void CAbstractActor::LoadPart(short ind, short resId) {
         partList[ind]->usesPrivateYon = true;
         partList[ind]->yon = partYon;
     }
+    
+    if (IsGeometryStatic()) {
+        partList[ind]->userFlags |= CBSPUserFlags::kIsStatic;
+    }
 }
 
 void CAbstractActor::LoadPartWithColors(short ind, short resId) {
@@ -36,6 +40,10 @@ void CAbstractActor::LoadPartWithColors(short ind, short resId) {
     partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(1), GetOtherPixelColor());
     partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(2), GetTertiaryColor());
     partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(3), GetQuaternaryColor());
+}
+
+bool CAbstractActor::IsGeometryStatic() {
+    return false;
 }
 
 void CAbstractActor::InitLocationLinks() {
@@ -297,7 +305,7 @@ void CAbstractActor::Shatter(short firstSliverType,
 
     while ((thePart = *partInd++)) {
         if (!thePart->isTransparent)
-            totalPolys += thePart->polyCount;
+            totalPolys += thePart->polyTable.size();
     }
 
     if (totalPolys) {
@@ -318,7 +326,7 @@ void CAbstractActor::Shatter(short firstSliverType,
             // FSqrt(thePart->enclosureRadius));
 
             if (!thePart->isTransparent) {
-                counter += thePart->polyCount;
+                counter += thePart->polyTable.size();
                 for (i = 0; i < sizesCount; i++) {
                     if (sCounts[i] && sLives[i]) {
                         short share;
@@ -353,8 +361,8 @@ void CAbstractActor::Blast() {
 
         for (i = 0; i < partCount; i++) {
             thePart = partList[i];
-            if ((!thePart->isTransparent) && thePart->polyCount > maxCount) {
-                maxCount = thePart->polyCount;
+            if ((!thePart->isTransparent) && thePart->polyTable.size() > maxCount) {
+                maxCount = thePart->polyTable.size();
                 maxPart = thePart;
             }
         }

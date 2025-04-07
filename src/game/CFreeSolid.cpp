@@ -68,6 +68,9 @@ CAbstractActor *CFreeSolid::EndScript() {
 
             thePart = lastWallActor->partList[0];
             thePart->theOwner = this;
+            if (!IsGeometryStatic() && thePart->userFlags & CBSPUserFlags::kIsStatic) {
+                thePart->userFlags -= CBSPUserFlags::kIsStatic;
+            }
 
             partCount = 1;
             partList[0] = thePart;

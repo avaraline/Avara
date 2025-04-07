@@ -32,6 +32,7 @@ public:
 private:
     SDL_Window *window;
     
+    CBSPPart *staticGeometry;
     CBSPWorldImpl *dynamicWorld;
     CBSPWorldImpl *hudWorld;
     

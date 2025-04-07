@@ -22,6 +22,9 @@ void CWallSolid::LoadPart(short ind, short resId) {
 
         thePart = lastWallActor->partList[0];
         thePart->theOwner = this;
+        if (!IsGeometryStatic() && thePart->userFlags & CBSPUserFlags::kIsStatic) {
+            thePart->userFlags -= CBSPUserFlags::kIsStatic;
+        }
 
         partList[ind] = thePart;
 

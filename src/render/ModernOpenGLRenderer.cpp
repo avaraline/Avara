@@ -188,11 +188,35 @@ ModernOpenGLRenderer::~ModernOpenGLRenderer() {
 
 void ModernOpenGLRenderer::AddHUDPart(CBSPPart *part)
 {
+    if (part->vData == nullptr) {
+        part->vData = NewVertexDataInstance();
+        part->vData->Replace(*part);
+    }
     hudWorld->AddPart(part);
 }
 
 void ModernOpenGLRenderer::AddPart(CBSPPart *part)
 {
+    /*
+    if (!part->usesPrivateYon && part->userFlags & CBSPUserFlags::kIsStatic) {
+        if (staticGeometry == nullptr) {
+            staticGeometry = (CBSPPart *)malloc(sizeof(CBSPPart));
+            *staticGeometry = *part;
+            staticGeometry->vData = NewVertexDataInstance();
+        }
+        staticGeometry->vData->Append(*part);
+    } else {
+        if (part->vData == nullptr) {
+            part->vData = NewVertexDataInstance();
+            part->vData->Replace(*part);
+        }
+        dynamicWorld->AddPart(part);
+    }
+    */
+    if (part->vData == nullptr) {
+        part->vData = NewVertexDataInstance();
+        part->vData->Replace(*part);
+    }
     dynamicWorld->AddPart(part);
 }
 
@@ -367,7 +391,7 @@ void ModernOpenGLRenderer::RenderFrame()
     glDrawArrays(GL_TRIANGLE_STRIP, 0, sizeof(skyboxVertices));
     glDisableVertexAttribArray(0);
 
-    // RENDER DYNAMIC WORLD ////////////////////////////////////////////////////////////////////////
+    // RENDER WORLD ////////////////////////////////////////////////////////////////////////////////
 
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
@@ -381,6 +405,7 @@ void ModernOpenGLRenderer::RenderFrame()
     float defaultAmbient = ToFloat(viewParams->ambientLight);
 
     // Draw opaque geometry.
+    // Draw(*worldShader, *staticGeometry, defaultAmbient, false);
     auto partList = dynamicWorld->GetVisiblePartListPointer();
     auto partCount = dynamicWorld->GetVisiblePartCount();
     alphaParts.clear();
@@ -394,6 +419,7 @@ void ModernOpenGLRenderer::RenderFrame()
     }
 
     // Draw translucent geometry.
+    // Draw(*worldShader, *staticGeometry, defaultAmbient, true);
     for (auto it = alphaParts.begin(); it != alphaParts.end(); ++it) {
         Draw(*worldShader, **it, defaultAmbient, true);
     }

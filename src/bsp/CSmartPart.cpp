@@ -29,7 +29,6 @@ void CSmartPart::ISmartPart(short resId, CAbstractActor *anActor, short aPartCod
     FSquareAccumulate(enclosureRadius, rSquare);
 
     MoveDone();
-    if (vData) vData->Replace(*this);
 }
 
 Boolean CSmartPart::HitTestBoxes(CSmartPart *other) {

@@ -26,6 +26,8 @@
 		947F5C662B576B9F00F41689 /* ModernOpenGLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 947F5C642B576B9F00F41689 /* ModernOpenGLRenderer.cpp */; };
 		948CBF142B335A1400147E80 /* BaseAssetStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */; };
 		948CBF152B335A1400147E80 /* BaseAssetStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */; };
+		948DF4162DA365CF007FEFDE /* CCompoundShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948DF4152DA365CB007FEFDE /* CCompoundShape.cpp */; };
+		948DF4172DA365CF007FEFDE /* CCompoundShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948DF4152DA365CB007FEFDE /* CCompoundShape.cpp */; };
 		94924EAF2B3A894900197378 /* OggFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94924EAE2B3A894900197378 /* OggFile.cpp */; };
 		94924EB02B3A894900197378 /* OggFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94924EAE2B3A894900197378 /* OggFile.cpp */; };
 		94EE531F2BA0AFCF00EE9056 /* CFreeCam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94EE531D2BA0AFCF00EE9056 /* CFreeCam.cpp */; };
@@ -412,6 +414,8 @@
 		948CBF112B33581D00147E80 /* AssetStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetStorage.h; sourceTree = "<group>"; };
 		948CBF122B3359D700147E80 /* BaseAssetStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseAssetStorage.h; sourceTree = "<group>"; };
 		948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BaseAssetStorage.cpp; sourceTree = "<group>"; };
+		948DF4142DA364C7007FEFDE /* CCompoundShape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCompoundShape.h; sourceTree = "<group>"; };
+		948DF4152DA365CB007FEFDE /* CCompoundShape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CCompoundShape.cpp; sourceTree = "<group>"; };
 		94924EAD2B3A893900197378 /* OggFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OggFile.h; sourceTree = "<group>"; };
 		94924EAE2B3A894900197378 /* OggFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OggFile.cpp; sourceTree = "<group>"; };
 		94EE531D2BA0AFCF00EE9056 /* CFreeCam.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CFreeCam.cpp; sourceTree = "<group>"; };
@@ -1407,6 +1411,8 @@
 		E5890C5F29895118007A875D /* bsp */ = {
 			isa = PBXGroup;
 			children = (
+				948DF4152DA365CB007FEFDE /* CCompoundShape.cpp */,
+				948DF4142DA364C7007FEFDE /* CCompoundShape.h */,
 				E5890C6829895118007A875D /* CBSPPart.cpp */,
 				E5890C6629895118007A875D /* CBSPPart.h */,
 				E5890C6129895118007A875D /* CBSPWorld.cpp */,
@@ -2249,6 +2255,7 @@
 				E517F0DD299713DB0036B206 /* slider.cpp in Sources */,
 				E517F0DE299713DB0036B206 /* stackedwidget.cpp in Sources */,
 				E517F0DF299713DB0036B206 /* tabheader.cpp in Sources */,
+				948DF4172DA365CF007FEFDE /* CCompoundShape.cpp in Sources */,
 				E517F0E0299713DB0036B206 /* tabwidget.cpp in Sources */,
 				E517F0E1299713DB0036B206 /* text.cpp in Sources */,
 				E517F0E2299713DB0036B206 /* textbox.cpp in Sources */,
@@ -2310,6 +2317,7 @@
 				E5890CFB29895118007A875D /* CViewParameters.cpp in Sources */,
 				E5890CCA29895118007A875D /* CWorldShader.cpp in Sources */,
 				E5890CA629895118007A875D /* CProtoControl.cpp in Sources */,
+				948DF4162DA365CF007FEFDE /* CCompoundShape.cpp in Sources */,
 				E5890D1329895118007A875D /* CBaseObject.cpp in Sources */,
 				E5890F0129895124007A875D /* messagedialog.cpp in Sources */,
 				94F17DDD29920D90001F5950 /* ARGBColor.cpp in Sources */,
