@@ -2,7 +2,10 @@
 
 CCompoundShape::CCompoundShape() : CBSPPart()
 {
-
+    itsTransform[0][0] = invGlobTransform[0][0] = -FIX1;
+    itsTransform[1][1] = invGlobTransform[1][1] = FIX1;
+    itsTransform[2][2] = invGlobTransform[2][2] = -FIX1;
+    itsTransform[3][3] = invGlobTransform[3][3] = FIX1;
 }
 
 CCompoundShape::~CCompoundShape()
@@ -20,8 +23,16 @@ void CCompoundShape::Append(CBSPPart &part)
     }
     
     for (FixedPoint &point : part.pointTable) {
-        // TODO: Apply transforms to points to convert to world space.
-        pointTable.push_back(point);
+        Vector p;
+        p[0] = point.x;
+        p[1] = point.y;
+        p[2] = point.z;
+        p[3] = point.w;
+        
+        Vector dest;
+        VectorMatrixProduct(1, &p, &dest, &part.itsTransform);
+        FixedPoint fp = FixedPoint(dest[0], dest[1], dest[2], dest[3]);
+        pointTable.push_back(fp);
     }
     
     for (PolyRecord &poly : part.polyTable) {

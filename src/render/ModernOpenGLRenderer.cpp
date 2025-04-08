@@ -410,6 +410,7 @@ void ModernOpenGLRenderer::RenderFrame()
 
     // Draw opaque geometry.
     if (staticGeometry) {
+        staticGeometry->PrepareForRender();
         Draw(*worldShader, *staticGeometry, defaultAmbient, false);
     }
     auto partList = dynamicWorld->GetVisiblePartListPointer();
