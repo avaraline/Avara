@@ -202,6 +202,15 @@ void OpenGLVertices::Append(const CBSPPart &part)
     // Make sure we filled in the arrays correctly.
     assert(pOpaque == tmpOpaquePointCount);
     assert(pAlpha == tmpAlphaPointCount);
+    
+    // Upload to GPU.
+    GLint currBuffer;
+    glGetIntegerv(GL_ARRAY_BUFFER_BINDING, &currBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, opaque.vertexBuffer);
+    glBufferData(GL_ARRAY_BUFFER, opaque.glDataSize, opaque.glData.data(), GL_STREAM_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, alpha.vertexBuffer);
+    glBufferData(GL_ARRAY_BUFFER, alpha.glDataSize, alpha.glData.data(), GL_STREAM_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, currBuffer);
 }
 
 void OpenGLVertices::Replace(const CBSPPart &part)

@@ -541,7 +541,6 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
         if (glData->opaque.glDataSize == 0) return;
         glBindVertexArray(glData->opaque.vertexArray);
         glBindBuffer(GL_ARRAY_BUFFER, glData->opaque.vertexBuffer);
-        glBufferData(GL_ARRAY_BUFFER, glData->opaque.glDataSize, glData->opaque.glData.data(), GL_STREAM_DRAW);
     } else {
         if (glData->alpha.glDataSize == 0) return;
         glData->alpha.SortFromCamera(
@@ -551,7 +550,6 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
         );
         glBindVertexArray(glData->alpha.vertexArray);
         glBindBuffer(GL_ARRAY_BUFFER, glData->alpha.vertexBuffer);
-        glBufferData(GL_ARRAY_BUFFER, glData->alpha.glDataSize, glData->alpha.glData.data(), GL_STREAM_DRAW);
     }
     glCheckErrors();
 
