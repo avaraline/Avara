@@ -27,6 +27,12 @@ void CCompoundShape::Append(CBSPPart &part)
         p[2] = point.z;
         p[3] = point.w;
         
+        if (part.hasScale) {
+            p[0] = FMul(p[0], part.scale[0]);
+            p[1] = FMul(p[1], part.scale[1]);
+            p[2] = FMul(p[2], part.scale[2]);
+        }
+        
         // Dest holds new point with transform applied
         Vector dest;
         VectorMatrixProduct(1, &p, &dest, &part.itsTransform);
