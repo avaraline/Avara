@@ -114,6 +114,7 @@ LegacyOpenGLRenderer::LegacyOpenGLRenderer(SDL_Window *window) : AbstractRendere
     viewParams->viewPixelDimensions.h = w;
     viewParams->viewPixelDimensions.v = h;
 
+    staticWorld = new CBSPWorldImpl(100);
     dynamicWorld = new CBSPWorldImpl(100);
     hudWorld = new CBSPWorldImpl(30);
 
@@ -143,6 +144,7 @@ LegacyOpenGLRenderer::LegacyOpenGLRenderer(SDL_Window *window) : AbstractRendere
 }
 
 LegacyOpenGLRenderer::~LegacyOpenGLRenderer() {
+    delete staticWorld;
     delete dynamicWorld;
     delete hudWorld;
 }
@@ -151,12 +153,27 @@ void LegacyOpenGLRenderer::AddHUDPart(CBSPPart *part)
 {
     part->ignoreDirectionalLights = true;
     part->ignoreDepthTesting = true;
+    if (part->vData == nullptr) {
+        part->vData = NewVertexDataInstance();
+        part->vData->Replace(*part);
+    }
     hudWorld->AddPart(part);
 }
 
 void LegacyOpenGLRenderer::AddPart(CBSPPart *part)
 {
-    dynamicWorld->AddPart(part);
+    if (part->usesPrivateYon && part->yon < FIX3(100)) {
+        // Don't add the part to anything! It's (effectively) invisible and
+        // will never be rendered.
+    } else if (!part->usesPrivateYon && part->userFlags & CBSPUserFlags::kIsStatic) {
+        staticWorld->AddPart(part);
+    } else {
+        if (part->vData == nullptr) {
+            part->vData = NewVertexDataInstance();
+            part->vData->Replace(*part);
+        }
+        dynamicWorld->AddPart(part);
+    }
 }
 
 void LegacyOpenGLRenderer::ApplyLights()
@@ -254,6 +271,10 @@ void LegacyOpenGLRenderer::UpdateViewRect(int width, int height, float pixelRati
 
 void LegacyOpenGLRenderer::LevelReset()
 {
+    if (staticGeometry) {
+        staticGeometry.reset();
+    }
+    staticWorld->DisposeParts();
     dynamicWorld->DisposeParts();
     hudWorld->DisposeParts();
     AbstractRenderer::LevelReset();
@@ -269,6 +290,13 @@ void LegacyOpenGLRenderer::OverheadPoint(Fixed *pt, Fixed *extent)
     dynamicWorld->OverheadPoint(pt, extent);
 }
 
+void LegacyOpenGLRenderer::PostLevelLoad()
+{
+    staticGeometry = staticWorld->Squash();
+    staticGeometry->vData = NewVertexDataInstance();
+    staticGeometry->vData->Replace(*staticGeometry);
+}
+
 void LegacyOpenGLRenderer::RefreshWindow()
 {
     SDL_GL_SwapWindow(window);
@@ -281,6 +309,7 @@ void LegacyOpenGLRenderer::RemoveHUDPart(CBSPPart *part)
 
 void LegacyOpenGLRenderer::RemovePart(CBSPPart *part)
 {
+    staticWorld->RemovePart(part);
     dynamicWorld->RemovePart(part);
 }
 
@@ -333,10 +362,14 @@ void LegacyOpenGLRenderer::RenderFrame()
     float defaultAmbient = ToFloat(viewParams->ambientLight);
 
     // Draw opaque geometry.
+    BlendingOn();
+    if (staticGeometry) {
+        staticGeometry->PrepareForRender();
+        Draw(*worldShader, *staticGeometry, defaultAmbient, false);
+    }
     auto partList = dynamicWorld->GetVisiblePartListPointer();
     auto partCount = dynamicWorld->GetVisiblePartCount();
     alphaParts.clear();
-    BlendingOn();
     for (uint16_t i = 0; i < partCount; i++) {
         Draw(*worldShader, **partList, defaultAmbient, false);
         if ((*partList)->HasAlpha()) {
@@ -346,6 +379,9 @@ void LegacyOpenGLRenderer::RenderFrame()
     }
     
     // Draw translucent geometry.
+    if (staticGeometry) {
+        Draw(*worldShader, *staticGeometry, defaultAmbient, true);
+    }
     for (auto it = alphaParts.begin(); it != alphaParts.end(); ++it) {
         Draw(*worldShader, **it, defaultAmbient, true);
     }
@@ -359,7 +395,6 @@ void LegacyOpenGLRenderer::RenderFrame()
         partList++;
     }
     BlendingOff();
-
 }
 
 void LegacyOpenGLRenderer::AdjustAmbient(OpenGLShader &shader, float intensity)
@@ -403,10 +438,11 @@ void LegacyOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
     if (glData == nullptr) return;
 
     if (!useAlphaBuffer) {
+        if (glData->opaque.glDataSize == 0) return;
         glBindVertexArray(glData->opaque.vertexArray);
         glBindBuffer(GL_ARRAY_BUFFER, glData->opaque.vertexBuffer);
-        glBufferData(GL_ARRAY_BUFFER, glData->opaque.glDataSize, glData->opaque.glData.data(), GL_STREAM_DRAW);
     } else {
+        if (glData->alpha.glDataSize == 0) return;
         glData->alpha.SortFromCamera(
             ToFloat(part.invFullTransform[3][0]),
             ToFloat(part.invFullTransform[3][1]),
@@ -414,6 +450,8 @@ void LegacyOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
         );
         glBindVertexArray(glData->alpha.vertexArray);
         glBindBuffer(GL_ARRAY_BUFFER, glData->alpha.vertexBuffer);
+        
+        // Reupload sorted tris to GPU.
         glBufferData(GL_ARRAY_BUFFER, glData->alpha.glDataSize, glData->alpha.glData.data(), GL_STREAM_DRAW);
     }
 

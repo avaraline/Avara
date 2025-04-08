@@ -3,6 +3,7 @@
 #include "AbstractRenderer.h"
 #include "CBSPPart.h"
 #include "CBSPWorld.h"
+#include "CCompoundShape.h"
 #include "OpenGLShader.h"
 #include "VertexData.h"
 
@@ -24,6 +25,7 @@ public:
     virtual void LevelReset() override;
     virtual std::unique_ptr<VertexData> NewVertexDataInstance() override;
     virtual void OverheadPoint(Fixed *pt, Fixed *extent) override;
+    virtual void PostLevelLoad() override;
     virtual void RefreshWindow() override;
     virtual void RemoveHUDPart(CBSPPart *part) override;
     virtual void RemovePart(CBSPPart *part) override;
@@ -32,8 +34,11 @@ public:
 private:
     SDL_Window *window;
     
+    std::unique_ptr<CCompoundShape> staticGeometry = nullptr;
+    CBSPWorldImpl *staticWorld;
     CBSPWorldImpl *dynamicWorld;
     CBSPWorldImpl *hudWorld;
+    
     std::unique_ptr<OpenGLShader> skyShader;
     std::unique_ptr<OpenGLShader> worldShader;
     
