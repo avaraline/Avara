@@ -409,6 +409,7 @@ void ModernOpenGLRenderer::RenderFrame()
     float defaultAmbient = ToFloat(viewParams->ambientLight);
 
     // Draw opaque geometry.
+    BlendingOn();
     if (staticGeometry) {
         staticGeometry->PrepareForRender();
         Draw(*worldShader, *staticGeometry, defaultAmbient, false);
@@ -416,7 +417,6 @@ void ModernOpenGLRenderer::RenderFrame()
     auto partList = dynamicWorld->GetVisiblePartListPointer();
     auto partCount = dynamicWorld->GetVisiblePartCount();
     alphaParts.clear();
-    BlendingOn();
     for (uint16_t i = 0; i < partCount; i++) {
         Draw(*worldShader, **partList, defaultAmbient, false);
         if ((*partList)->HasAlpha()) {
