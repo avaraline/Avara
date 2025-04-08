@@ -2,10 +2,7 @@
 
 CCompoundShape::CCompoundShape() : CBSPPart()
 {
-    itsTransform[0][0] = invGlobTransform[0][0] = -FIX1;
-    itsTransform[1][1] = invGlobTransform[1][1] = FIX1;
-    itsTransform[2][2] = invGlobTransform[2][2] = -FIX1;
-    itsTransform[3][3] = invGlobTransform[3][3] = FIX1;
+    Reset();
 }
 
 CCompoundShape::~CCompoundShape()
@@ -23,18 +20,37 @@ void CCompoundShape::Append(CBSPPart &part)
     }
     
     for (FixedPoint &point : part.pointTable) {
+        // Convert FixedPoint struct to Vector
         Vector p;
         p[0] = point.x;
         p[1] = point.y;
         p[2] = point.z;
         p[3] = point.w;
         
+        // Dest holds new point with transform applied
         Vector dest;
         VectorMatrixProduct(1, &p, &dest, &part.itsTransform);
+
+        // Adjust bounds
+        if (dest[0] > maxX) maxX = dest[0];
+        if (dest[0] < minX) minX = dest[0];
+
+        if (dest[1] > maxY) maxY = dest[1];
+        if (dest[1] < minY) minY = dest[1];
+
+        if (dest[2] > maxZ) maxZ = dest[2];
+        if (dest[2] < minZ) minZ = dest[2];
+
+        // Convert back to struct and add to point table
         FixedPoint fp = FixedPoint(dest[0], dest[1], dest[2], dest[3]);
         pointTable.push_back(fp);
     }
     
+    // Calculate the body diagonal of the new bbox and use
+    // it for the enclosureRadius.
+    enclosureRadius = FDistanceOverEstimate(maxX - minX, maxY - minY, maxZ - minZ);
+    MoveDone();
+
     for (PolyRecord &poly : part.polyTable) {
         // Construct a new polygon, correcting color and point indices.
         PolyRecord newPoly = PolyRecord();
