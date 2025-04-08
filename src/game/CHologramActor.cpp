@@ -38,6 +38,9 @@ CAbstractActor *CHologramActor::EndScript() {
         thePart = (CBSPPart *)partList[0];
         if (ReadLongVar(iIsAmbient) > 0)
             thePart->userFlags |= CBSPUserFlags::kIsAmbient;
+        if (IsGeometryStatic()) {
+            thePart->userFlags |= CBSPUserFlags::kIsStatic;
+        }
         thePart->Reset();
         thePart->RotateZ(ReadFixedVar(iRoll));
         thePart->RotateX(ReadFixedVar(iPitch));

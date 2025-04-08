@@ -157,8 +157,6 @@ CSmartBox::CSmartBox(
 
 void CSmartBox::FindEnclosure() {
     //	Uses algorithm from Graphics Gems I
-    long i;
-
     Fixed xspan, yspan, zspan;
     Fixed maxspan;
     Fixed rad;

@@ -171,7 +171,6 @@ public:
     Fixed maxY = 0;
 
     //	members used during rendering:
-    int totalPoints = 0;
     std::vector<ColorRecord> colorTable;
     std::vector<FixedPoint> pointTable;
     std::vector<PolyRecord> polyTable;

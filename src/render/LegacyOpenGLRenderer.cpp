@@ -145,7 +145,6 @@ LegacyOpenGLRenderer::LegacyOpenGLRenderer(SDL_Window *window) : AbstractRendere
 LegacyOpenGLRenderer::~LegacyOpenGLRenderer() {
     delete dynamicWorld;
     delete hudWorld;
-    AbstractRenderer::~AbstractRenderer();
 }
 
 void LegacyOpenGLRenderer::AddHUDPart(CBSPPart *part)

@@ -46,6 +46,7 @@ CAbstractActor *CForceField::EndScript() {
         shapeId = ReadLongVar(iShape);
         watchBits = ReadLongVar(iWatchMask);
         watchTeams = ReadLongVar(iMask);
+        spinSpeed = FDegToOne(ReadFixedVar(iSpeed));
 
         if (shapeId) {
             partCount = 1;
@@ -96,8 +97,6 @@ CAbstractActor *CForceField::EndScript() {
         force[0] = ReadFixedVar(iDeltaX);
         force[1] = ReadFixedVar(iDeltaY);
         force[2] = ReadFixedVar(iDeltaZ);
-
-        spinSpeed = FDegToOne(ReadFixedVar(iSpeed));
 
         return this;
     } else {
@@ -157,4 +156,9 @@ void CForceField::FrameAction() {
             partList[0]->MoveDone();
         }
     }
+}
+
+bool CForceField::IsGeometryStatic()
+{
+    return (spinSpeed == 0);
 }

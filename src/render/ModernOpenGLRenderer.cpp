@@ -138,6 +138,7 @@ ModernOpenGLRenderer::ModernOpenGLRenderer(SDL_Window *window) : AbstractRendere
     viewParams->viewPixelDimensions.h = w;
     viewParams->viewPixelDimensions.v = h;
 
+    staticWorld = new CBSPWorldImpl(100);
     dynamicWorld = new CBSPWorldImpl(100);
     hudWorld = new CBSPWorldImpl(30);
 
@@ -181,9 +182,9 @@ ModernOpenGLRenderer::ModernOpenGLRenderer(SDL_Window *window) : AbstractRendere
 }
 
 ModernOpenGLRenderer::~ModernOpenGLRenderer() {
+    delete staticWorld;
     delete dynamicWorld;
     delete hudWorld;
-    AbstractRenderer::~AbstractRenderer();
 }
 
 void ModernOpenGLRenderer::AddHUDPart(CBSPPart *part)
@@ -197,14 +198,11 @@ void ModernOpenGLRenderer::AddHUDPart(CBSPPart *part)
 
 void ModernOpenGLRenderer::AddPart(CBSPPart *part)
 {
-    /*
-    if (!part->usesPrivateYon && part->userFlags & CBSPUserFlags::kIsStatic) {
-        if (staticGeometry == nullptr) {
-            staticGeometry = (CBSPPart *)malloc(sizeof(CBSPPart));
-            *staticGeometry = *part;
-            staticGeometry->vData = NewVertexDataInstance();
-        }
-        staticGeometry->vData->Append(*part);
+    if (part->usesPrivateYon && part->yon < FIX3(100)) {
+        // Don't add the part to anything! It's (effectively) invisible and
+        // will never be rendered.
+    } else if (!part->usesPrivateYon && part->userFlags & CBSPUserFlags::kIsStatic) {
+        staticWorld->AddPart(part);
     } else {
         if (part->vData == nullptr) {
             part->vData = NewVertexDataInstance();
@@ -212,12 +210,6 @@ void ModernOpenGLRenderer::AddPart(CBSPPart *part)
         }
         dynamicWorld->AddPart(part);
     }
-    */
-    if (part->vData == nullptr) {
-        part->vData = NewVertexDataInstance();
-        part->vData->Replace(*part);
-    }
-    dynamicWorld->AddPart(part);
 }
 
 void ModernOpenGLRenderer::ApplyLights()
@@ -327,6 +319,10 @@ void ModernOpenGLRenderer::UpdateViewRect(int width, int height, float pixelRati
 
 void ModernOpenGLRenderer::LevelReset()
 {
+    if (staticGeometry) {
+        staticGeometry.reset();
+    }
+    staticWorld->DisposeParts();
     dynamicWorld->DisposeParts();
     hudWorld->DisposeParts();
     AbstractRenderer::LevelReset();
@@ -342,6 +338,13 @@ void ModernOpenGLRenderer::OverheadPoint(Fixed *pt, Fixed *extent)
     dynamicWorld->OverheadPoint(pt, extent);
 }
 
+void ModernOpenGLRenderer::PostLevelLoad()
+{
+    staticGeometry = staticWorld->Squash();
+    staticGeometry->vData = NewVertexDataInstance();
+    staticGeometry->vData->Replace(*staticGeometry);
+}
+
 void ModernOpenGLRenderer::RefreshWindow()
 {
     SDL_GL_SwapWindow(window);
@@ -354,6 +357,7 @@ void ModernOpenGLRenderer::RemoveHUDPart(CBSPPart *part)
 
 void ModernOpenGLRenderer::RemovePart(CBSPPart *part)
 {
+    staticWorld->RemovePart(part);
     dynamicWorld->RemovePart(part);
 }
 
@@ -405,7 +409,9 @@ void ModernOpenGLRenderer::RenderFrame()
     float defaultAmbient = ToFloat(viewParams->ambientLight);
 
     // Draw opaque geometry.
-    // Draw(*worldShader, *staticGeometry, defaultAmbient, false);
+    if (staticGeometry) {
+        Draw(*worldShader, *staticGeometry, defaultAmbient, false);
+    }
     auto partList = dynamicWorld->GetVisiblePartListPointer();
     auto partCount = dynamicWorld->GetVisiblePartCount();
     alphaParts.clear();
@@ -419,7 +425,9 @@ void ModernOpenGLRenderer::RenderFrame()
     }
 
     // Draw translucent geometry.
-    // Draw(*worldShader, *staticGeometry, defaultAmbient, true);
+    if (staticGeometry) {
+        Draw(*worldShader, *staticGeometry, defaultAmbient, true);
+    }
     for (auto it = alphaParts.begin(); it != alphaParts.end(); ++it) {
         Draw(*worldShader, **it, defaultAmbient, true);
     }
@@ -529,10 +537,12 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
     if (glData == nullptr) return;
 
     if (!useAlphaBuffer) {
+        if (glData->opaque.glDataSize == 0) return;
         glBindVertexArray(glData->opaque.vertexArray);
         glBindBuffer(GL_ARRAY_BUFFER, glData->opaque.vertexBuffer);
         glBufferData(GL_ARRAY_BUFFER, glData->opaque.glDataSize, glData->opaque.glData.data(), GL_STREAM_DRAW);
     } else {
+        if (glData->alpha.glDataSize == 0) return;
         glData->alpha.SortFromCamera(
             ToFloat(part.invFullTransform[3][0]),
             ToFloat(part.invFullTransform[3][1]),

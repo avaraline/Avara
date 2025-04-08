@@ -128,8 +128,6 @@ void CBSPPart::IBSPPart(short resId) {
         if (showPoints) { DBG_Log("bsp", "    %s\n", pointTable[i].Format().c_str()); }
     }
 
-    totalPoints = 0;
-
     for (uint32_t i = 0; i < polyCount; i++) {
         nlohmann::json poly = doc["polys"][i];
         nlohmann::json pt;
@@ -151,7 +149,6 @@ void CBSPPart::IBSPPart(short resId) {
             for (size_t k = 0; k < 3; k++) {
                 pt = poly["tris"][j + k];
                 r.triPoints[j + k] = (uint16_t)pt;
-                totalPoints += 1;
             }
         }
         if (poly.contains("front")) {
