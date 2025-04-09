@@ -798,7 +798,12 @@ void CAvaraGame::GameStart() {
 #ifdef _WIN32
     nanogui::throttle = 0;   // let 'er rip
 #else
-    nanogui::throttle = std::min(static_cast<FrameTime>(itsApp->Number(kThrottle)), frameTime);
+    FrameTime throttle = static_cast<FrameTime>(itsApp->Number(kThrottle));
+    if (Debug::IsEnabled("cpu")) {
+        // when measuring "cpu", disable throttle so it doesn't thow off the cpu usage calculation
+        throttle = 0;
+    }
+    nanogui::throttle = std::min(throttle, frameTime);
 #endif
     SDL_Log("CAvaraGame::GameStart, throttle = %d\n", nanogui::throttle);
 }
