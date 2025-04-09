@@ -639,6 +639,9 @@
     <ClInclude Include="..\src\render\LegacyOpenGLRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\bsp\CCompoundShape.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\util\ARGBColor.cpp">
@@ -1122,6 +1125,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\render\LegacyOpenGLRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\bsp\CCompoundShape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

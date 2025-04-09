@@ -172,6 +172,7 @@
     <ClInclude Include="..\src\base\CTagBase.h" />
     <ClInclude Include="..\src\bsp\CBSPPart.h" />
     <ClInclude Include="..\src\bsp\CBSPWorld.h" />
+    <ClInclude Include="..\src\bsp\CCompoundShape.h" />
     <ClInclude Include="..\src\bsp\CScaledBSP.h" />
     <ClInclude Include="..\src\bsp\CSmartBox.h" />
     <ClInclude Include="..\src\bsp\CSmartPart.h" />
@@ -379,6 +380,7 @@
     <ClCompile Include="..\src\base\CTagBase.cpp" />
     <ClCompile Include="..\src\bsp\CBSPPart.cpp" />
     <ClCompile Include="..\src\bsp\CBSPWorld.cpp" />
+    <ClCompile Include="..\src\bsp\CCompoundShape.cpp" />
     <ClCompile Include="..\src\bsp\CScaledBSP.cpp" />
     <ClCompile Include="..\src\bsp\CSmartBox.cpp" />
     <ClCompile Include="..\src\bsp\CSmartPart.cpp" />
