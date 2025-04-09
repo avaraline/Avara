@@ -114,6 +114,7 @@ LegacyOpenGLRenderer::LegacyOpenGLRenderer(SDL_Window *window) : AbstractRendere
     viewParams->viewPixelDimensions.h = w;
     viewParams->viewPixelDimensions.v = h;
 
+    staticWorld = new CBSPWorldImpl(100);
     dynamicWorld = new CBSPWorldImpl(100);
     hudWorld = new CBSPWorldImpl(30);
 
@@ -143,21 +144,36 @@ LegacyOpenGLRenderer::LegacyOpenGLRenderer(SDL_Window *window) : AbstractRendere
 }
 
 LegacyOpenGLRenderer::~LegacyOpenGLRenderer() {
+    delete staticWorld;
     delete dynamicWorld;
     delete hudWorld;
-    AbstractRenderer::~AbstractRenderer();
 }
 
 void LegacyOpenGLRenderer::AddHUDPart(CBSPPart *part)
 {
     part->ignoreDirectionalLights = true;
     part->ignoreDepthTesting = true;
+    if (part->vData == nullptr) {
+        part->vData = NewVertexDataInstance();
+        part->vData->Replace(*part);
+    }
     hudWorld->AddPart(part);
 }
 
 void LegacyOpenGLRenderer::AddPart(CBSPPart *part)
 {
-    dynamicWorld->AddPart(part);
+    if (part->usesPrivateYon && part->yon < FIX3(100)) {
+        // Don't add the part to anything! It's (effectively) invisible and
+        // will never be rendered.
+    } else if (!part->usesPrivateYon && part->userFlags & CBSPUserFlags::kIsStatic) {
+        staticWorld->AddPart(part);
+    } else {
+        if (part->vData == nullptr) {
+            part->vData = NewVertexDataInstance();
+            part->vData->Replace(*part);
+        }
+        dynamicWorld->AddPart(part);
+    }
 }
 
 void LegacyOpenGLRenderer::ApplyLights()
@@ -242,6 +258,9 @@ void LegacyOpenGLRenderer::ApplySky()
     skyShader->SetFloat3("skyColor", highSkyColorRGB);
     skyShader->SetFloat("lowAlt", ToFloat(skyParams->lowSkyAltitude) / 20000.0f);
     skyShader->SetFloat("highAlt", ToFloat(skyParams->highSkyAltitude) / 20000.0f);
+    
+    worldShader->Use();
+    worldShader->SetFloat3("horizonColor", lowSkyColorRGB);
 }
 
 void LegacyOpenGLRenderer::UpdateViewRect(int width, int height, float pixelRatio)
@@ -252,6 +271,10 @@ void LegacyOpenGLRenderer::UpdateViewRect(int width, int height, float pixelRati
 
 void LegacyOpenGLRenderer::LevelReset()
 {
+    if (staticGeometry) {
+        staticGeometry.reset();
+    }
+    staticWorld->DisposeParts();
     dynamicWorld->DisposeParts();
     hudWorld->DisposeParts();
     AbstractRenderer::LevelReset();
@@ -267,6 +290,13 @@ void LegacyOpenGLRenderer::OverheadPoint(Fixed *pt, Fixed *extent)
     dynamicWorld->OverheadPoint(pt, extent);
 }
 
+void LegacyOpenGLRenderer::PostLevelLoad()
+{
+    staticGeometry = staticWorld->Squash();
+    staticGeometry->vData = NewVertexDataInstance();
+    staticGeometry->vData->Replace(*staticGeometry);
+}
+
 void LegacyOpenGLRenderer::RefreshWindow()
 {
     SDL_GL_SwapWindow(window);
@@ -279,6 +309,7 @@ void LegacyOpenGLRenderer::RemoveHUDPart(CBSPPart *part)
 
 void LegacyOpenGLRenderer::RemovePart(CBSPPart *part)
 {
+    staticWorld->RemovePart(part);
     dynamicWorld->RemovePart(part);
 }
 
@@ -330,25 +361,28 @@ void LegacyOpenGLRenderer::RenderFrame()
     __glCheckErrors();
     float defaultAmbient = ToFloat(viewParams->ambientLight);
 
-    // Draw opaque geometry. Parts are sorted far-to-near, so traverse in
-    // reverse so the depth buffer can help out.
+    // Draw opaque geometry.
+    BlendingOn();
+    if (staticGeometry) {
+        staticGeometry->PrepareForRender();
+        Draw(*worldShader, *staticGeometry, defaultAmbient, false);
+    }
     auto partList = dynamicWorld->GetVisiblePartListPointer();
     auto partCount = dynamicWorld->GetVisiblePartCount();
-    CBSPPart **partPtr = partList + (partCount - 1);
     alphaParts.clear();
     for (uint16_t i = 0; i < partCount; i++) {
-        Draw(*worldShader, **partPtr, defaultAmbient, false);
-        if ((*partPtr)->HasAlpha()) {
-            alphaParts.push_back(*partPtr);
+        Draw(*worldShader, **partList, defaultAmbient, false);
+        if ((*partList)->HasAlpha()) {
+            alphaParts.push_back(*partList);
         }
-        partPtr--;
+        partList++;
     }
     
-    // Draw translucent geometry in a separate pass. Far-to-near is good here.
-    glEnable(GL_BLEND);
-    glBlendEquation(GL_FUNC_ADD);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    for (auto it = alphaParts.rbegin(); it != alphaParts.rend(); ++it) {
+    // Draw translucent geometry.
+    if (staticGeometry) {
+        Draw(*worldShader, *staticGeometry, defaultAmbient, true);
+    }
+    for (auto it = alphaParts.begin(); it != alphaParts.end(); ++it) {
         Draw(*worldShader, **it, defaultAmbient, true);
     }
     
@@ -360,8 +394,7 @@ void LegacyOpenGLRenderer::RenderFrame()
         Draw(*worldShader, **partList, defaultAmbient, false);
         partList++;
     }
-    glDisable(GL_BLEND);
-
+    BlendingOff();
 }
 
 void LegacyOpenGLRenderer::AdjustAmbient(OpenGLShader &shader, float intensity)
@@ -375,7 +408,21 @@ void LegacyOpenGLRenderer::ApplyView()
 
     worldShader->Use();
     worldShader->SetMat4("view", glMatrix);
+    worldShader->SetFloat("worldYon", ToFloat(viewParams->yonBound));
+    worldShader->SetFloat("objectYon", ToFloat(viewParams->yonBound));
     __glCheckErrors();
+}
+
+void LegacyOpenGLRenderer::BlendingOff()
+{
+    glDisable(GL_BLEND);
+}
+
+void LegacyOpenGLRenderer::BlendingOn()
+{
+    glEnable(GL_BLEND);
+    glBlendEquation(GL_FUNC_ADD);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void LegacyOpenGLRenderer::Clear()
@@ -391,10 +438,11 @@ void LegacyOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
     if (glData == nullptr) return;
 
     if (!useAlphaBuffer) {
+        if (glData->opaque.glDataSize == 0) return;
         glBindVertexArray(glData->opaque.vertexArray);
         glBindBuffer(GL_ARRAY_BUFFER, glData->opaque.vertexBuffer);
-        glBufferData(GL_ARRAY_BUFFER, glData->opaque.glDataSize, glData->opaque.glData.data(), GL_STREAM_DRAW);
     } else {
+        if (glData->alpha.glDataSize == 0) return;
         glData->alpha.SortFromCamera(
             ToFloat(part.invFullTransform[3][0]),
             ToFloat(part.invFullTransform[3][1]),
@@ -402,6 +450,8 @@ void LegacyOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
         );
         glBindVertexArray(glData->alpha.vertexArray);
         glBindBuffer(GL_ARRAY_BUFFER, glData->alpha.vertexBuffer);
+        
+        // Reupload sorted tris to GPU.
         glBufferData(GL_ARRAY_BUFFER, glData->alpha.glDataSize, glData->alpha.glData.data(), GL_STREAM_DRAW);
     }
 
@@ -419,6 +469,7 @@ void LegacyOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
 
     // Custom, per-object lighting and depth testing!
     float extraAmbient = ToFloat(part.extraAmbient);
+    float currentYon = ToFloat(gRenderer->viewParams->yonBound);
     if (part.privateAmbient != -1) {
         AdjustAmbient(shader, ToFloat(part.privateAmbient));
     }
@@ -431,6 +482,9 @@ void LegacyOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
     if (part.ignoreDirectionalLights) {
         IgnoreDirectionalLights(shader, true);
         __glCheckErrors();
+    }
+    if (part.usesPrivateYon) {
+        shader.SetFloat("objectYon", ToFloat(part.yon));
     }
 
     SetTransforms(part);
@@ -459,6 +513,9 @@ void LegacyOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
     if (part.ignoreDirectionalLights) {
         IgnoreDirectionalLights(shader, false);
         __glCheckErrors();
+    }
+    if (part.usesPrivateYon) {
+        shader.SetFloat("objectYon", currentYon);
     }
 
     glBindVertexArray(0);

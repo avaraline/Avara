@@ -145,6 +145,7 @@ public:
 
     virtual void LoadPart(short ind, short resId);
     virtual void LoadPartWithColors(short ind, short resId);
+    virtual bool IsGeometryStatic();
 
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();

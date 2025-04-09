@@ -138,6 +138,7 @@ ModernOpenGLRenderer::ModernOpenGLRenderer(SDL_Window *window) : AbstractRendere
     viewParams->viewPixelDimensions.h = w;
     viewParams->viewPixelDimensions.v = h;
 
+    staticWorld = new CBSPWorldImpl(100);
     dynamicWorld = new CBSPWorldImpl(100);
     hudWorld = new CBSPWorldImpl(30);
 
@@ -181,19 +182,34 @@ ModernOpenGLRenderer::ModernOpenGLRenderer(SDL_Window *window) : AbstractRendere
 }
 
 ModernOpenGLRenderer::~ModernOpenGLRenderer() {
+    delete staticWorld;
     delete dynamicWorld;
     delete hudWorld;
-    AbstractRenderer::~AbstractRenderer();
 }
 
 void ModernOpenGLRenderer::AddHUDPart(CBSPPart *part)
 {
+    if (part->vData == nullptr) {
+        part->vData = NewVertexDataInstance();
+        part->vData->Replace(*part);
+    }
     hudWorld->AddPart(part);
 }
 
 void ModernOpenGLRenderer::AddPart(CBSPPart *part)
 {
-    dynamicWorld->AddPart(part);
+    if (part->usesPrivateYon && part->yon < FIX3(100)) {
+        // Don't add the part to anything! It's (effectively) invisible and
+        // will never be rendered.
+    } else if (!part->usesPrivateYon && part->userFlags & CBSPUserFlags::kIsStatic) {
+        staticWorld->AddPart(part);
+    } else {
+        if (part->vData == nullptr) {
+            part->vData = NewVertexDataInstance();
+            part->vData->Replace(*part);
+        }
+        dynamicWorld->AddPart(part);
+    }
 }
 
 void ModernOpenGLRenderer::ApplyLights()
@@ -285,6 +301,9 @@ void ModernOpenGLRenderer::ApplySky()
     skyShader->SetFloat3("skyColor", highSkyColorRGB);
     skyShader->SetFloat("lowAlt", ToFloat(skyParams->lowSkyAltitude) / 20000.0f);
     skyShader->SetFloat("highAlt", ToFloat(skyParams->highSkyAltitude) / 20000.0f);
+    
+    worldShader->Use();
+    worldShader->SetFloat3("horizonColor", lowSkyColorRGB);
 }
 
 void ModernOpenGLRenderer::UpdateViewRect(int width, int height, float pixelRatio)
@@ -300,6 +319,10 @@ void ModernOpenGLRenderer::UpdateViewRect(int width, int height, float pixelRati
 
 void ModernOpenGLRenderer::LevelReset()
 {
+    if (staticGeometry) {
+        staticGeometry.reset();
+    }
+    staticWorld->DisposeParts();
     dynamicWorld->DisposeParts();
     hudWorld->DisposeParts();
     AbstractRenderer::LevelReset();
@@ -315,6 +338,13 @@ void ModernOpenGLRenderer::OverheadPoint(Fixed *pt, Fixed *extent)
     dynamicWorld->OverheadPoint(pt, extent);
 }
 
+void ModernOpenGLRenderer::PostLevelLoad()
+{
+    staticGeometry = staticWorld->Squash();
+    staticGeometry->vData = NewVertexDataInstance();
+    staticGeometry->vData->Replace(*staticGeometry);
+}
+
 void ModernOpenGLRenderer::RefreshWindow()
 {
     SDL_GL_SwapWindow(window);
@@ -327,6 +357,7 @@ void ModernOpenGLRenderer::RemoveHUDPart(CBSPPart *part)
 
 void ModernOpenGLRenderer::RemovePart(CBSPPart *part)
 {
+    staticWorld->RemovePart(part);
     dynamicWorld->RemovePart(part);
 }
 
@@ -364,7 +395,7 @@ void ModernOpenGLRenderer::RenderFrame()
     glDrawArrays(GL_TRIANGLE_STRIP, 0, sizeof(skyboxVertices));
     glDisableVertexAttribArray(0);
 
-    // RENDER DYNAMIC WORLD ////////////////////////////////////////////////////////////////////////
+    // RENDER WORLD ////////////////////////////////////////////////////////////////////////////////
 
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
@@ -377,28 +408,31 @@ void ModernOpenGLRenderer::RenderFrame()
 
     float defaultAmbient = ToFloat(viewParams->ambientLight);
 
-    // Draw opaque geometry. Parts are sorted far-to-near, so traverse in
-    // reverse so the depth buffer can help out.
+    // Draw opaque geometry.
+    BlendingOn();
+    if (staticGeometry) {
+        staticGeometry->PrepareForRender();
+        Draw(*worldShader, *staticGeometry, defaultAmbient, false);
+    }
     auto partList = dynamicWorld->GetVisiblePartListPointer();
     auto partCount = dynamicWorld->GetVisiblePartCount();
-    CBSPPart **partPtr = partList + (partCount - 1);
     alphaParts.clear();
     for (uint16_t i = 0; i < partCount; i++) {
-        Draw(*worldShader, **partPtr, defaultAmbient, false);
-        if ((*partPtr)->HasAlpha()) {
-            alphaParts.push_back(*partPtr);
+        Draw(*worldShader, **partList, defaultAmbient, false);
+        if ((*partList)->HasAlpha()) {
+            alphaParts.push_back(*partList);
         }
-        partPtr--;
+        partList++;
     }
 
-    // Draw translucent geometry in a separate pass. Far-to-near is good here.
-    glEnable(GL_BLEND);
-    glBlendEquation(GL_FUNC_ADD);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    for (auto it = alphaParts.rbegin(); it != alphaParts.rend(); ++it) {
+    // Draw translucent geometry.
+    if (staticGeometry) {
+        Draw(*worldShader, *staticGeometry, defaultAmbient, true);
+    }
+    for (auto it = alphaParts.begin(); it != alphaParts.end(); ++it) {
         Draw(*worldShader, **it, defaultAmbient, true);
     }
-    glDisable(GL_BLEND);
+    BlendingOff();
 
     // First pass of sky and world rendering complete, post-process into second offscreen FBO.
     glBindFramebuffer(GL_FRAMEBUFFER, fbo[1]);
@@ -437,11 +471,9 @@ void ModernOpenGLRenderer::RenderFrame()
 
     glDisable(GL_DEPTH_TEST);
     glBindTexture(GL_TEXTURE_2D, texture[0]);
-    glEnable(GL_BLEND);
-    glBlendEquation(GL_FUNC_ADD);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    BlendingOn();
     glDrawArrays(GL_TRIANGLES, 0, 6);
-    glDisable(GL_BLEND);
+    BlendingOff();
     glEnable(GL_DEPTH_TEST);
 
     // FINAL POST-PROCESSING, SEND TO DEFAULT FRAMEBUFFER //////////////////////////////////////////
@@ -472,11 +504,25 @@ void ModernOpenGLRenderer::ApplyView()
 
     worldShader->Use();
     worldShader->SetMat4("view", glMatrix);
+    worldShader->SetFloat("worldYon", ToFloat(viewParams->yonBound));
+    worldShader->SetFloat("objectYon", ToFloat(viewParams->yonBound));
     glCheckErrors();
 
     hudShader->Use();
     hudShader->SetMat4("view", glMatrix);
     glCheckErrors();
+}
+
+void ModernOpenGLRenderer::BlendingOff()
+{
+    glDisable(GL_BLEND);
+}
+
+void ModernOpenGLRenderer::BlendingOn()
+{
+    glEnable(GL_BLEND);
+    glBlendEquation(GL_FUNC_ADD);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void ModernOpenGLRenderer::Clear()
@@ -492,10 +538,11 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
     if (glData == nullptr) return;
 
     if (!useAlphaBuffer) {
+        if (glData->opaque.glDataSize == 0) return;
         glBindVertexArray(glData->opaque.vertexArray);
         glBindBuffer(GL_ARRAY_BUFFER, glData->opaque.vertexBuffer);
-        glBufferData(GL_ARRAY_BUFFER, glData->opaque.glDataSize, glData->opaque.glData.data(), GL_STREAM_DRAW);
     } else {
+        if (glData->alpha.glDataSize == 0) return;
         glData->alpha.SortFromCamera(
             ToFloat(part.invFullTransform[3][0]),
             ToFloat(part.invFullTransform[3][1]),
@@ -503,6 +550,8 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
         );
         glBindVertexArray(glData->alpha.vertexArray);
         glBindBuffer(GL_ARRAY_BUFFER, glData->alpha.vertexBuffer);
+        
+        // Reupload sorted tris to GPU.
         glBufferData(GL_ARRAY_BUFFER, glData->alpha.glDataSize, glData->alpha.glData.data(), GL_STREAM_DRAW);
     }
     glCheckErrors();
@@ -521,6 +570,7 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
 
     // Custom, per-object lighting and depth testing!
     float extraAmbient = ToFloat(part.extraAmbient);
+    float currentYon = ToFloat(gRenderer->viewParams->yonBound);
     if (part.privateAmbient != -1) {
         AdjustAmbient(shader, ToFloat(part.privateAmbient));
     }
@@ -533,6 +583,9 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
     if (part.ignoreDirectionalLights) {
         IgnoreDirectionalLights(shader, true);
         glCheckErrors();
+    }
+    if (part.usesPrivateYon) {
+        shader.SetFloat("objectYon", ToFloat(part.yon));
     }
 
     SetTransforms(part);
@@ -560,6 +613,9 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
     if (part.ignoreDirectionalLights) {
         IgnoreDirectionalLights(shader, false);
         glCheckErrors();
+    }
+    if (part.usesPrivateYon) {
+        shader.SetFloat("objectYon", currentYon);
     }
 
     glBindVertexArray(0);

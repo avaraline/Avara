@@ -611,6 +611,8 @@ void CAvaraGame::EndScript() {
     itsDepot->EndScript();
 
     scoreKeeper->EndScript();
+    
+    gRenderer->PostLevelLoad();
 }
 
 void CAvaraGame::ResumeActors() {

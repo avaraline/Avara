@@ -116,6 +116,9 @@ CAbstractActor *CRamp::EndScript() {
             box->usesPrivateYon = true;
             box->yon = partYon;
         }
+        if (IsGeometryStatic()) {
+            box->userFlags |= CBSPUserFlags::kIsStatic;
+        }
 
         partList[0] = box;
         LinkPartBoxes();

@@ -305,3 +305,13 @@ void CBSPWorldImpl::VisibilitySort(CBSPPart **parts, short overlapCount) {
         listStart = listStart->nextTemp;
     } while (listStart);
 }
+
+std::unique_ptr<CCompoundShape> CBSPWorldImpl::Squash()
+{
+    auto compoundShape = std::make_unique<CCompoundShape>();
+    compoundShape->Reserve(*this);
+    for (size_t i = 0; i < partCount; i++) {
+        compoundShape->Append(*(*partList)[i]);
+    }
+    return compoundShape;
+}

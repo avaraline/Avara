@@ -15,6 +15,8 @@
 #include "VertexData.h"
 
 #include <memory>
+#include <sstream>
+#include <vector>
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -34,25 +36,47 @@ class CViewParameters;
 
 enum { noLineClip = 0, touchFrontClip = 1, touchBackClip = 2, lineVisibleClip = 4, edgeExitsFlag = 0x8000 };
 
-typedef struct {
-    Fixed x;
-    Fixed y;
-    Fixed z;
-    Fixed w;
-} FixedPoint;
+struct FixedPoint {
+    Fixed x = 0;
+    Fixed y = 0;
+    Fixed z = 0;
+    Fixed w = 0;
+    FixedPoint() {};
+    FixedPoint(Fixed x, Fixed y, Fixed z, Fixed w) : x(x), y(y), z(z), w(w) {}
+    std::string Format() {
+        std::ostringstream oss;
+        oss << "[" << x << ", " << y << ", " << z << ", " << w << "]";
+        return oss.str();
+    }
+};
 
-typedef struct {
-    float normal[3];
+struct FloatNormal {
+    float x = 0.0;
+    float y = 0.0;
+    float z = 0.0;
+    FloatNormal() {};
+    FloatNormal(float x, float y, float z) : x(x), y(y), z(z) {}
+};
+
+struct ColorRecord {
+    ARGBColor original;
+    ARGBColor current;
+    ColorRecord(ARGBColor original, ARGBColor current) : original(original), current(current) {}
+};
+
+struct PolyRecord {
+    FloatNormal normal;
     uint16_t triCount;
     std::unique_ptr<uint16_t[]> triPoints;
     uint16_t front;
     uint16_t back;
     uint16_t colorIdx;
     uint8_t vis;
-} PolyRecord;
+};
 
 namespace CBSPUserFlags {
     constexpr short kIsAmbient = 1;
+    constexpr short kIsStatic = 2;
 }
 
 /*
@@ -125,10 +149,10 @@ public:
     Matrix fullTransform = {{0}}; // modelview
     Matrix invFullTransform = {{0}}; // inverse modelview
 
-    Fixed hither = 0;
-    Fixed yon = 0;
+    Fixed hither = FIX3(500); // 50 cm
+    Fixed yon = FIX(500);     // 500 m
     Fixed extraAmbient = 0;
-    Fixed privateAmbient = 0;
+    Fixed privateAmbient = -1;
 
     //	Bounding volumes:
     Vector sphereCenter = {0}; //	In view coordinates.
@@ -147,14 +171,9 @@ public:
     Fixed maxY = 0;
 
     //	members used during rendering:
-    uint16_t colorCount = 0;
-    uint32_t pointCount = 0;
-    uint32_t polyCount = 0;
-    int totalPoints = 0;
-    std::unique_ptr<ARGBColor[]> origColorTable;
-    std::unique_ptr<ARGBColor[]> currColorTable;
-    std::unique_ptr<Vector[]> pointTable;
-    std::unique_ptr<PolyRecord[]> polyTable;
+    std::vector<ColorRecord> colorTable;
+    std::vector<FixedPoint> pointTable;
+    std::vector<PolyRecord> polyTable;
     std::unique_ptr<VertexData> vData;
 
     //	Lighting vectors in object space
@@ -164,14 +183,14 @@ public:
     //	Used by a CBSPWorld to score and sort objects:
     short worldIndex = 0;
     Boolean worldFlag = 0;
-    CBSPPart *nextTemp = 0; //	Used temporarily for linked lists.
+    CBSPPart *nextTemp = nullptr; //	Used temporarily for linked lists.
 
     Boolean invGlobDone = 0;
-    Boolean usesPrivateHither = 0;
-    Boolean usesPrivateYon = 0;
-    Boolean isTransparent = 0;
+    Boolean usesPrivateHither = false;
+    Boolean usesPrivateYon = false;
+    Boolean isTransparent = false;
     Boolean ignoreDepthTesting = false;
-    Boolean ignoreDirectionalLights = 0;
+    Boolean ignoreDirectionalLights = false;
     short userFlags = 0; //	Can be used for various flags by user.
 
     static CBSPPart *Create(short resId);

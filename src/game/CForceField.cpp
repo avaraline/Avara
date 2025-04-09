@@ -46,6 +46,7 @@ CAbstractActor *CForceField::EndScript() {
         shapeId = ReadLongVar(iShape);
         watchBits = ReadLongVar(iWatchMask);
         watchTeams = ReadLongVar(iMask);
+        spinSpeed = FDegToOne(ReadFixedVar(iSpeed));
 
         if (shapeId) {
             partCount = 1;
@@ -59,6 +60,9 @@ CAbstractActor *CForceField::EndScript() {
 
             thePart = lastWallActor->partList[0];
             thePart->theOwner = this;
+            if (!IsGeometryStatic() && thePart->userFlags & CBSPUserFlags::kIsStatic) {
+                thePart->userFlags -= CBSPUserFlags::kIsStatic;
+            }
 
             partCount = 1;
             partList[0] = thePart;
@@ -93,8 +97,6 @@ CAbstractActor *CForceField::EndScript() {
         force[0] = ReadFixedVar(iDeltaX);
         force[1] = ReadFixedVar(iDeltaY);
         force[2] = ReadFixedVar(iDeltaZ);
-
-        spinSpeed = FDegToOne(ReadFixedVar(iSpeed));
 
         return this;
     } else {
@@ -154,4 +156,9 @@ void CForceField::FrameAction() {
             partList[0]->MoveDone();
         }
     }
+}
+
+bool CForceField::IsGeometryStatic()
+{
+    return (spinSpeed == 0);
 }
