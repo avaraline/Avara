@@ -919,13 +919,16 @@ bool CAvaraGame::GameTick() {
     canPreSend = true;
 
     // if the game hasn't kept up with the frame schedule, reset the next frame time (prevents chipmunk mode, unless player is dead)
-    // [empirically a -0.5 frameTime multiplier seems to give best FPS... FPS flattens out below -0.5]
-    uint32_t nextFrameFloor = startTime - 0.5*frameTime;
-    if (nextScheduledFrame < nextFrameFloor && itsNet->IAmAlive()) {
+    if (nextScheduledFrame < startTime && itsNet->IAmAlive()) {
         // at the start of this frame we were ALREADY a full frame or more behind...
-        // (the further back we can stay, the closer we are to original frame rate, the better it is for smoothness)
-        DBG_Log("presend", "fn=%d, frame reset %u --> %u = +%d\n", frameNumber, nextScheduledFrame, nextFrameFloor, nextFrameFloor-nextScheduledFrame);
-        nextScheduledFrame = nextFrameFloor;
+        // the further back we can stay, the closer we are to original frame rate, the better it is for
+        // smoothness.  But that has to be weighed against micro-jitter.  Ideally we want to minimze the
+        // percentage of time the frame boundary is adjusted because that is perceived as jitter.  That
+        // is traded off with reducing overall wait time.  Sometimes it's better to wait longer if we
+        // have fewer interruptions.
+        uint32_t prevNSF = nextScheduledFrame;
+        nextScheduledFrame = startTime + 0.25*frameTime;
+        DBG_Log("presend", "fn=%d, frame reset %u --> %u = +%d\n", frameNumber, prevNSF, nextScheduledFrame, nextScheduledFrame - prevNSF);
     }
 
     itsDepot->RunSliverActions();
