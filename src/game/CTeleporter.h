@@ -49,5 +49,4 @@ public:
     virtual void TeleportPlayer(CAbstractPlayer *thePlayer);
     virtual Boolean ReceivePlayer(CAbstractPlayer *thePlayer);
     virtual bool HandlesFastFPS() override { return true; }
-    virtual bool IsGeometryStatic() override;
 };

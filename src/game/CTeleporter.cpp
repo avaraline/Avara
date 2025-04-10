@@ -234,14 +234,3 @@ Boolean CTeleporter::ReceivePlayer(CAbstractPlayer *thePlayer) {
 
     return didMove;
 }
-
-bool CTeleporter::IsGeometryStatic()
-{
-    if ((startMsg.messageId == iStartMsg + firstVariable || enabled || options & kShowAlwaysOption) &&
-        (stopMsg.messageId == 0 || options & kShowAlwaysOption) &&
-        rotationSpeed == 0
-    ) {
-        return true;
-    }
-    return false;
-}

@@ -16,7 +16,8 @@ public:
     Vector midDeltas;
     Vector midTwists;
 
-    virtual void PlaceParts();
-    virtual void ProgramDoorVariables();
-    virtual void ReadDoorVariables();
+    virtual void PlaceParts() override;
+    virtual void ProgramDoorVariables() override;
+    virtual void ReadDoorVariables() override;
+    virtual bool IsGeometryStatic() override;
 };

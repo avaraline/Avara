@@ -379,32 +379,32 @@ bool CDoorActor::IsGeometryStatic()
         return false;
     }
     
-    if (doorStatus == kDoorClosed && openActivator.messageId > 0) {
-        if (classicOpenSpeed != 0 && (
-                deltas[0] != 0 ||
-                deltas[1] != 0 ||
-                deltas[2] != 0 ||
-                twists[0] != 0 ||
-                twists[1] != 0 ||
-                twists[2] != 0
-            )
-        ) {
-            return false;
-        }
+    if (doorStatus == kDoorClosed &&
+        openActivator.messageId > 0 &&
+        classicOpenSpeed != 0 && (
+            deltas[0] != 0 ||
+            deltas[1] != 0 ||
+            deltas[2] != 0 ||
+            twists[0] != 0 ||
+            twists[1] != 0 ||
+            twists[2] != 0
+        )
+    ) {
+        return false;
     }
     
-    if (doorStatus == kDoorOpen && closeActivator.messageId > 0) {
-        if (classicCloseSpeed != 0 && (
-                deltas[0] != 0 ||
-                deltas[1] != 0 ||
-                deltas[2] != 0 ||
-                twists[0] != 0 ||
-                twists[1] != 0 ||
-                twists[2] != 0
-            )
-        ) {
-            return false;
-        }
+    if (doorStatus == kDoorOpen &&
+        closeActivator.messageId > 0 &&
+        classicCloseSpeed != 0 && (
+            deltas[0] != 0 ||
+            deltas[1] != 0 ||
+            deltas[2] != 0 ||
+            twists[0] != 0 ||
+            twists[1] != 0 ||
+            twists[2] != 0
+        )
+    ) {
+        return false;
     }
     
     return true;
