@@ -51,22 +51,23 @@ public:
 
     Fixed lastMovement[3];
 
-    virtual void BeginScript();
-    virtual CAbstractActor *EndScript();
-    virtual void AdaptableSettings();
+    virtual void BeginScript() override;
+    virtual CAbstractActor *EndScript() override;
+    virtual void AdaptableSettings() override;
     virtual ~CDoorActor();
     
     virtual CSmartPart *CollisionTest();
     virtual void TouchDamage();
-    virtual void PlaceParts();
-    virtual void FrameAction();
+    virtual void PlaceParts() override;
+    virtual void FrameAction() override;
 
     virtual void DoorSound();
 
     virtual void ProgramDoorVariables();
     virtual void ReadDoorVariables();
 
-    virtual void StandingOn(CAbstractActor *who, Fixed *where, Boolean firstLeg);
+    virtual void StandingOn(CAbstractActor *who, Fixed *where, Boolean firstLeg) override;
 
-    virtual bool HandlesFastFPS() { return true; }
+    virtual bool HandlesFastFPS() override { return true; }
+    virtual bool IsGeometryStatic() override;
 };

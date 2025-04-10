@@ -180,6 +180,12 @@ CAbstractActor *CDoorActor::EndScript() {
         //		location[2] = (location[2] + FIX3(125)) & ~(FIX3(250)-1);
 
         hitPower = ReadFixedVar(iShotPower);
+        
+        classicOpenDelay = FrameNumber(ReadLongVar(iOpenDelay));
+        classicCloseDelay = FrameNumber(ReadLongVar(iCloseDelay));
+        classicGuardDelay = FrameNumber(ReadLongVar(iGuardDelay));
+        classicOpenSpeed = ReadFixedVar(iOpenSpeed);
+        classicCloseSpeed = ReadFixedVar(iCloseSpeed);
 
         ReadDoorVariables();
 
@@ -195,12 +201,6 @@ CAbstractActor *CDoorActor::EndScript() {
         partCount = 1;
         action = kDoorStopped;
         isActive = kIsActive;
-
-        classicOpenDelay = FrameNumber(ReadLongVar(iOpenDelay));
-        classicCloseDelay = FrameNumber(ReadLongVar(iCloseDelay));
-        classicGuardDelay = FrameNumber(ReadLongVar(iGuardDelay));
-        classicOpenSpeed = ReadFixedVar(iOpenSpeed);
-        classicCloseSpeed = ReadFixedVar(iCloseSpeed);
     }
 
     return this;
@@ -371,4 +371,41 @@ void CDoorActor::StandingOn(CAbstractActor *who, //	Who is touching me?
     if (firstLeg && action != kDoorStopped) {
         who->Slide(lastMovement);
     }
+}
+
+bool CDoorActor::IsGeometryStatic()
+{
+    if (!CGlowActors::IsGeometryStatic()) {
+        return false;
+    }
+    
+    if (doorStatus == kDoorClosed && openActivator.messageId > 0) {
+        if (classicOpenSpeed != 0 && (
+                deltas[0] != 0 ||
+                deltas[1] != 0 ||
+                deltas[2] != 0 ||
+                twists[0] != 0 ||
+                twists[1] != 0 ||
+                twists[2] != 0
+            )
+        ) {
+            return false;
+        }
+    }
+    
+    if (doorStatus == kDoorOpen && closeActivator.messageId > 0) {
+        if (classicCloseSpeed != 0 && (
+                deltas[0] != 0 ||
+                deltas[1] != 0 ||
+                deltas[2] != 0 ||
+                twists[0] != 0 ||
+                twists[1] != 0 ||
+                twists[2] != 0
+            )
+        ) {
+            return false;
+        }
+    }
+    
+    return true;
 }
