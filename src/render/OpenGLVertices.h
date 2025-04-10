@@ -26,7 +26,7 @@ struct GLVertexCollection {
 public:
     GLuint vertexBuffer = 0;
     GLuint vertexArray = 0;
-    uint16_t pointCount = 0;
+    uint32_t pointCount = 0;
     std::vector<GLData> glData = {};
     GLsizeiptr glDataSize = 0;
 

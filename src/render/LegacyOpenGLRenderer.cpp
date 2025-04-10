@@ -370,7 +370,7 @@ void LegacyOpenGLRenderer::RenderFrame()
     auto partList = dynamicWorld->GetVisiblePartListPointer();
     auto partCount = dynamicWorld->GetVisiblePartCount();
     alphaParts.clear();
-    for (uint16_t i = 0; i < partCount; i++) {
+    for (uint32_t i = 0; i < partCount; i++) {
         Draw(*worldShader, **partList, defaultAmbient, false);
         if ((*partList)->HasAlpha()) {
             alphaParts.push_back(*partList);
@@ -390,7 +390,7 @@ void LegacyOpenGLRenderer::RenderFrame()
     hudWorld->PrepareForRender();
     partList = hudWorld->GetVisiblePartListPointer();
     partCount = hudWorld->GetVisiblePartCount();
-    for (uint16_t i = 0; i < partCount; i++) {
+    for (uint32_t i = 0; i < partCount; i++) {
         Draw(*worldShader, **partList, defaultAmbient, false);
         partList++;
     }
