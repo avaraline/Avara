@@ -181,8 +181,15 @@ public:
     uint32_t nextScheduledFrame;
     uint32_t nextPingTime;
     uint32_t nextLoadTime;
-    long lastFrameTime;
+
     Boolean canPreSend;
+
+    uint32_t nextStatTime;
+    long lastFrameTime;
+    RolloverCounter<uint32_t> lastFramePackets;
+    float msecPerFrame;
+    float packetsPerFrame;
+    float effectiveLT;
 
     Boolean didWait;
     Boolean longWait;
@@ -244,6 +251,7 @@ public:
     virtual bool GameTick();
     virtual void GameStop();
     virtual ~CAvaraGame();
+    virtual void DoStats(uint32_t frameStartTime, int interval);
 
     virtual void SpectateNext();
     virtual void SpectatePrevious();

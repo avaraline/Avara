@@ -723,12 +723,11 @@ void CAvaraGame::ResumeGame() {
         // TODO: syncing start dialog
         scoreKeeper->StartResume(gameStatus == kReadyStatus);
 
-        // SetPort(itsWindow);
-        // SetPolyWorld(&itsPolyWorld);
-        // ClearRegions();
-        // CalcGameRect();
-        // ResizeRenderingArea(&gameRect);
-        // ResetView();
+        // init time-based stat vars
+        lastFrameTime = SDL_GetTicks() - frameTime;
+        lastFramePackets = itsNet->itsCommManager->TotalPacketsSent();
+        nextStatTime = SDL_GetTicks();
+        SDL_Log("lastFrameTime = %ld, lastFramePackets = %u\n", lastFrameTime, uint32_t(lastFramePackets));
 
         // Start the game, run the first tick
         GameStart();
@@ -765,6 +764,10 @@ void CAvaraGame::GameStart() {
 
     if (frameNumber == 0) {
         FlagMessage(iStartMsg + firstVariable);
+        // init stat vars
+        msecPerFrame = frameTime;
+        packetsPerFrame = 1.0;
+        effectiveLT = latencyTolerance;
     }
 
     playersStanding = 0;
@@ -797,7 +800,12 @@ void CAvaraGame::GameStart() {
 #ifdef _WIN32
     nanogui::throttle = 0;   // let 'er rip
 #else
-    nanogui::throttle = std::min(static_cast<FrameTime>(itsApp->Number(kThrottle)), frameTime);
+    FrameTime throttle = static_cast<FrameTime>(itsApp->Number(kThrottle));
+    if (Debug::IsEnabled("cpu")) {
+        // when measuring "cpu", disable throttle so it doesn't thow off the cpu usage calculation
+        throttle = 0;
+    }
+    nanogui::throttle = std::min(throttle, frameTime);
 #endif
     SDL_Log("CAvaraGame::GameStart, throttle = %d\n", nanogui::throttle);
 }
@@ -828,7 +836,7 @@ void CAvaraGame::GameStop() {
 
     // event wait timeout used by mainloop()
     nanogui::throttle = INACTIVE_LOOP_REFRESH;
-    SDL_Log("CAvaraGame::GameStop, throttle = %d\n", nanogui::throttle);
+    SDL_Log("CAvaraGame::GameStop throttle = %d, frameNumber = %d\n", nanogui::throttle, frameNumber);
 }
 
 void CAvaraGame::HandleEvent(SDL_Event &event) {
@@ -870,6 +878,10 @@ bool CAvaraGame::GameTick() {
 
     // SDL_Log("CAvaraGame::GameTick frame=%d dt=%d start=%d end=%d\n", frameNumber, SDL_GetTicks() - lastFrameTime,
     // startTime, endTime); lastFrameTime = SDL_GetTicks();
+
+    if (Debug::IsEnabled("stats")) {
+        DoStats(SDL_GetTicks(), Debug::GetValue("stats"));
+    }
 
     oldPlayersStanding = playersStanding;
     oldTeamsStanding = teamsStanding;
@@ -1147,5 +1159,39 @@ void CAvaraGame::SetSpawnOrder(SpawnOrder order) {
     itsApp->AddMessageLine(oss.str(), MsgAlignment::Left, MsgCategory::System);
     if (gApplication) {
         gApplication->Set(kSpawnOrder, spawnOrder);
+    }
+}
+
+void CAvaraGame::DoStats(uint32_t startTime, int interval) {
+    static float ALPHA = 0.01;
+
+    if (interval <= 0) {
+        interval = 5000;
+    } else if (interval < 100) {
+        // assume seconds if a small number
+        interval *= 1000;
+    }
+
+    float deltaT = (startTime - lastFrameTime);
+    msecPerFrame = msecPerFrame*(1-ALPHA) + ALPHA*deltaT;
+
+    RolloverCounter<uint32_t> curPackets = itsNet->itsCommManager->TotalPacketsSent();
+    packetsPerFrame = packetsPerFrame*(1-ALPHA) + ALPHA*(curPackets - lastFramePackets);
+
+    effectiveLT = effectiveLT*(1-ALPHA) + ALPHA*(fpsScale * (topSentFrame - frameNumber));
+
+    lastFrameTime = startTime;
+    lastFramePackets = curPackets;
+
+    if (startTime > nextStatTime) {
+        char statBuf[64];
+        std::snprintf(statBuf, sizeof(statBuf), "fps=%.1lf ppf=%.1lf rtt=%d lt=%.2lf",
+                      1000.0 / msecPerFrame,
+                      packetsPerFrame,
+                      (int)itsNet->itsCommManager->GetMaxRoundTrip(itsNet->activePlayersDistribution),
+                      effectiveLT);
+        itsApp->AddMessageLine(statBuf);
+
+        nextStatTime = startTime + interval;
     }
 }

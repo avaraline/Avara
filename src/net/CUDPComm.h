@@ -152,7 +152,7 @@ public:
 
     virtual Boolean ReconfigureAvailable();
     virtual void Reconfigure();
-    virtual long GetMaxRoundTrip(short distribution, short *slowPlayerId = nullptr);
+    virtual long GetMaxRoundTrip(short distribution, float multiplier = 0.0, short *slowPlayerId = nullptr);
     virtual float GetMaxMeanSendCount(short distribution);
     virtual float GetMaxMeanReceiveCount(short distribution);
 

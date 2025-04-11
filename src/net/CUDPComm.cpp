@@ -1004,6 +1004,9 @@ Boolean CUDPComm::AsyncWrite() {
             char *fp;
             uint8_t flags = 0;
 
+            // increment global packet counter
+            totalPacketsSent++;
+
             p = &thePacket->packet;
 
             *outData.uw++ = thePacket->serialNumber;
@@ -1947,13 +1950,12 @@ void CUDPComm::Reconfigure() {
     */
 }
 
-long CUDPComm::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
+long CUDPComm::GetMaxRoundTrip(short distribution, float mult, short *slowPlayerId) {
     float maxTrip = 0;
     CUDPConnection *conn;
     // 1.3*stdev = 90.3% prob, 1.4=91.9%, 1.5=93.3%, 1.6=94.5
-    float mult = 1.5;
-    if (Debug::IsEnabled("rttx")) {
-        mult = Debug::GetValue("rttx") / 10.0;  // rttx=25 --> mult=2.5
+    if (mult < 0) {
+        mult = 1.5;  // default
     }
 
     for (conn = connections; conn; conn = conn->next) {

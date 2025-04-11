@@ -1,13 +1,20 @@
 #!/bin/sh # -x
+
+host=localhost
+if [ "$1" == "-x" ]; then
+    host=`curl locallhost.com 2> /dev/null`
+    shift # $2 -> $1
+fi
+
 if [ "$#" -lt 1 ] || [ $1 -lt 2 ]; then
-    echo "Usage: $0 num" >&2
-    echo "  where num = number of players (min. 2)" >&2
+    echo "Usage: $0 [-x] num" >&2
+    echo "  num = number of players (min. 2)" >&2
+    echo "  -x use external IP when connecting to server" >&2
     exit 1
 fi
 
 count=$1
 
-host=localhost
 server_options=(-s)
 client_options=(-c $host)
 both_options=(-/ "p soundVolume 5")

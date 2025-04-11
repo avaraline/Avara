@@ -60,6 +60,7 @@ CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
     latencyBox->setEnabled(true);
     latencyBox->setCallback([this](std::string value) -> bool {
         double newLT = std::stod(value);
+        double curLT = gCurrentGame->latencyTolerance;
         // let SetFrameLatency() enforce limits on latencyTolerance
         gCurrentGame->SetFrameLatency(std::ceil(newLT/gCurrentGame->fpsScale));
 
@@ -68,7 +69,8 @@ CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
 
         // save the pref
         gApplication->Set(kLatencyToleranceTag, gCurrentGame->latencyTolerance);
-
+        // restore the game LT
+        gCurrentGame->latencyTolerance = curLT;
         return true;
     });
 
