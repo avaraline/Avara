@@ -114,10 +114,8 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
     
     cmd = new TextCommand("/info           <- show build info",
                           [this](VectorOfArgs vargs) -> bool {
-        std::string infoString(GetOsName());
-        infoString += " ";
+        std::string infoString(GetOsName() + " " + GIT_VERSION + "\r");
         itsApp->rosterWindow->SendRosterMessage(infoString);
-        itsApp->rosterWindow->SendRosterMessage(GIT_VERSION);
 
         return false;
     });
