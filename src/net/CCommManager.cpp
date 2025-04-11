@@ -331,7 +331,7 @@ Boolean CCommManager::ReconfigureAvailable() {
 
 void CCommManager::Reconfigure() {}
 
-long CCommManager::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
+long CCommManager::GetMaxRoundTrip(short distribution, float stdMult, short *slowPlayerId) {
     return 0; //	Local net.
 }
 float CCommManager::GetMaxMeanSendCount(short distribution) {
@@ -339,4 +339,8 @@ float CCommManager::GetMaxMeanSendCount(short distribution) {
 }
 float CCommManager::GetMaxMeanReceiveCount(short distribution) {
     return 0; //	Local net.
+}
+
+const RolloverCounter<uint32_t>& CCommManager::TotalPacketsSent() {
+    return totalPacketsSent;
 }
