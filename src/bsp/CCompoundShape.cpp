@@ -12,8 +12,8 @@ CCompoundShape::~CCompoundShape()
 
 void CCompoundShape::Append(CBSPPart &part)
 {
-    size_t startingColorCount = colorTable.size();
-    size_t startingPointCount = pointTable.size();
+    uint16_t startingColorCount = static_cast<uint16_t>(colorTable.size());
+    uint32_t startingPointCount = static_cast<uint32_t>(pointTable.size());
     
     for (ColorRecord &color : part.colorTable) {
         colorTable.push_back(color);
@@ -62,9 +62,9 @@ void CCompoundShape::Append(CBSPPart &part)
         PolyRecord newPoly = PolyRecord();
         newPoly.normal = FloatNormal(poly.normal);
         newPoly.triCount = poly.triCount;
-        newPoly.triPoints = std::make_unique<uint16_t[]>(poly.triCount * 3);
+        newPoly.triPoints = std::make_unique<uint32_t[]>(poly.triCount * 3);
         
-        for (uint16_t i = 0; i < poly.triCount * 3; i++) {
+        for (uint32_t i = 0; i < poly.triCount * 3; i++) {
             newPoly.triPoints[i] = poly.triPoints[i] + startingPointCount;
         }
         
@@ -86,8 +86,8 @@ void CCompoundShape::Reserve(CBSPWorldImpl &world)
     size_t polyCount = 0;
     
     CBSPPart *part;
-    uint16_t partCount = world.GetPartCount();
-    for (uint16_t i = 0; i < partCount; i++) {
+    uint32_t partCount = world.GetPartCount();
+    for (uint32_t i = 0; i < partCount; i++) {
         part = world.GetIndPart(i);
         colorCount += part->colorTable.size();
         pointCount += part->pointTable.size();

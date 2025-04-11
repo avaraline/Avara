@@ -250,3 +250,16 @@ void CGuardActor::FrameAction() {
         fireActivator.triggerCount = 0;
     }
 }
+
+bool CGuardActor::IsGeometryStatic()
+{
+    if (!CGlowActors::IsGeometryStatic()) {
+        return false;
+    }
+    
+    if (trackingActivator.messageId > 0 && rotSpeed != 0) {
+        return false;
+    }
+    
+    return true;
+}

@@ -66,10 +66,10 @@ struct ColorRecord {
 
 struct PolyRecord {
     FloatNormal normal;
-    uint16_t triCount;
-    std::unique_ptr<uint16_t[]> triPoints;
-    uint16_t front;
-    uint16_t back;
+    uint32_t triCount;
+    std::unique_ptr<uint32_t[]> triPoints;
+    uint32_t front;
+    uint32_t back;
     uint16_t colorIdx;
     uint8_t vis;
 };

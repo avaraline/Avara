@@ -143,24 +143,24 @@ void CBSPPart::IBSPPart(short resId) {
         r.normal.z = norm[2];
         // Triangle points
         r.vis = static_cast<uint8_t>(poly["vis"]);
-        r.triCount = poly["tris"].size() / 3;
-        r.triPoints = std::make_unique<uint16_t[]>(poly["tris"].size());
+        r.triCount = static_cast<uint32_t>(poly["tris"].size()) / 3;
+        r.triPoints = std::make_unique<uint32_t[]>(poly["tris"].size());
         for (size_t j = 0; j < poly["tris"].size(); j += 3) {
             for (size_t k = 0; k < 3; k++) {
                 pt = poly["tris"][j + k];
-                r.triPoints[j + k] = (uint16_t)pt;
+                r.triPoints[j + k] = (uint32_t)pt;
             }
         }
         if (poly.contains("front")) {
             r.front = poly["front"];
         } else {
-            r.front = uint16_t(-1);
+            r.front = uint32_t(-1);
         }
 
         if (poly.contains("back")) {
             r.back = poly["back"];
         } else {
-            r.back = uint16_t(-1);
+            r.back = uint32_t(-1);
         }
         polyTable.push_back(std::move(r));
     }

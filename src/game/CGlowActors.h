@@ -15,9 +15,10 @@ public:
     Fixed glow;
     Boolean canGlow;
 
-    virtual void BeginScript();
-    virtual CAbstractActor *EndScript();
-    virtual void FrameAction();
-    virtual void WasHit(RayHitRecord *theHit, Fixed hitEnergy);
     CGlowActors();
+    virtual void BeginScript() override;
+    virtual CAbstractActor *EndScript() override;
+    virtual void FrameAction() override;
+    virtual void WasHit(RayHitRecord *theHit, Fixed hitEnergy) override;
+    virtual bool IsGeometryStatic() override;
 };
