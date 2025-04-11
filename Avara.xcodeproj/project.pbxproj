@@ -36,6 +36,7 @@
 		E2210CC12A1C9D9C000712AA /* Tags.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20752EE2A003EC600DCC210 /* Tags.cpp */; };
 		E247DE242A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E247DE222A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp */; };
 		E247DE252A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E247DE222A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp */; };
+		E2CF30032DA88F4D002DD786 /* LegacyOpenGLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60C274E22C23EBE9005B67A9 /* LegacyOpenGLRenderer.cpp */; };
 		E2DCC6562BDE0D3200D70C49 /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5890F9729895294007A875D /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E517F053299713DB0036B206 /* tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2B62D7D2997052B00600401 /* tests.cpp */; };
 		E517F054299713DB0036B206 /* CBasicSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7529895118007A875D /* CBasicSound.cpp */; };
@@ -1984,10 +1985,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E517F052299713990036B206 /* Build configuration list for PBXNativeTarget "AvaraTests" */;
 			buildPhases = (
+				E2DCC6552BDE0D1B00D70C49 /* Embed Frameworks */,
 				E517F048299713990036B206 /* Sources */,
 				E517F049299713990036B206 /* Frameworks */,
 				E517F04A299713990036B206 /* CopyFiles */,
-				E2DCC6552BDE0D1B00D70C49 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2224,6 +2225,7 @@
 				E517F0C5299713DB0036B206 /* CHuffProcessor.cpp in Sources */,
 				E517F0C6299713DB0036B206 /* CAbstractPipe.cpp in Sources */,
 				E517F0C7299713DB0036B206 /* CAbstractHuffPipe.cpp in Sources */,
+				E2CF30032DA88F4D002DD786 /* LegacyOpenGLRenderer.cpp in Sources */,
 				E517F0C8299713DB0036B206 /* CHandlePipe.cpp in Sources */,
 				E517F0C9299713DB0036B206 /* PascalStrings.cpp in Sources */,
 				E517F0CA299713DB0036B206 /* RamFiles.cpp in Sources */,

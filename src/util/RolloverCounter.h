@@ -15,10 +15,10 @@ class RolloverCounter {
 private:
     T counter;
 
-    const static T halfMax = std::numeric_limits<T>::max() / 2;
+    const static bool isUnsigned = (std::numeric_limits<T>::min() == 0);
+    const static T midPoint = (std::numeric_limits<T>::min() +
+                               std::numeric_limits<T>::max()) / 2;
 
-    int diff(T x, T y) {
-        // This is the crux of this class.
         // Integer subtraction across a rollover point will give a positive result if the
         // operands are cast (i.e. T(x-y)) because the C standard defines it as a modulo behavior.
         // It should be noted that *unsigned* integers have this well-defined behavior:
@@ -26,21 +26,16 @@ private:
         // But *signed* integers may or may not have this behavior so it's best to
         // template this class with an unsigned integer type even though it will probably
         // work fine with signed integers too.
-        int diff = 0;
-        if (x > y) {
-            if ((x - y) <= halfMax) {
-                diff = (x - y);
-            } else {
-                diff = -T(y - x);
-            }
-        } else if (x < y) {
-            if ((y - x) < halfMax) {
-                diff = (x - y);
-            } else {
-                diff = T(x - y);
-            }
+
+    // used by comparison operators to compare against midPoint
+    T compare(T x, T y) {
+        if (isUnsigned) {
+            // with unsigned types the midpoint will be MAX/2 so we use the x-y value
+            return (x - y);
+        } else {
+            // for signed types the midpoint will be 0 so compare the y-x value
+            return (y - x);
         }
-        return diff;
     }
 
 public:
@@ -49,7 +44,7 @@ public:
     }
 
     // casting operator so you can assign to a variable of type T
-    operator T()   const { return counter; }
+    operator T() const { return counter; }
 
 
     RolloverCounter<T>& operator++() {  // ++prefix
@@ -83,27 +78,31 @@ public:
 
     // when subtracting a value, assumed to be a small-ish delta and that you want a RolloverCounter object returned
     RolloverCounter<T> operator-(T value) {
-        return RolloverCounter<T>(diff(counter, value));
+        return RolloverCounter<T>(counter - value);
     }
     RolloverCounter<T> operator-(int value) {
-        return RolloverCounter<T>(diff(counter, value));
+        return RolloverCounter<T>(counter - value);
     }
     
     // when subtracting another RolloverCounter<T>, it is comparing 2 RolloverCounter objects so return value of type int (can be negative)
     int operator-(const RolloverCounter<T>& that) {
-        return diff(counter, that.counter);
+        T diff;
+        if (*this < that) {
+            // in case we have unsigned counters, subtract bigger value then negate
+            diff = that.counter - counter;
+            return -int(diff);
+        }
+        diff = counter - that.counter;
+        return diff;
     }
 
-    bool operator>(const T value) { return diff(counter, value) > 0; }
+    bool operator>=(const T value) { return compare(counter, value) <= midPoint; }
+    bool operator<(const T value) { return !(*this >= value); }
 
-    bool operator>=(const T value) { return !(*this < value); }
-
-    bool operator<(const T value) { return diff(counter, value) < 0; }
-
-    bool operator<=(const T value) { return !(*this > value); }
+    bool operator<=(const T value) { return compare(value, counter) <= midPoint; }
+    bool operator>(const T value) { return !(*this <= value); }
 
     bool operator==(const T value) { return (counter == value); }
-    // bool operator==(const int value) { return (counter == value); }
 
     T operator&(T value) { return counter & value; }
     T operator&(int value) { return counter & value; }
