@@ -773,7 +773,7 @@ void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
 
                 latencyVoteFrame = frameNumber;  // record the actual frame where the vote is initiated
                 // only use the "alive" players for the maxRTT calculation
-                maxRoundLatency = itsCommManager->GetMaxRoundTrip(AlivePlayersDistribution(), &maxId);
+                maxRoundLatency = itsCommManager->GetMaxRoundTrip(AlivePlayersDistribution(), -1, &maxId);
                 maxPlayer = playerTable[maxId].get();
                 uint8_t llv = std::min(long(UINT8_MAX), localLatencyVote);  // just in case, p1 can only accept a max of 256
 
@@ -796,9 +796,10 @@ void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
                 itsGame->itsApp->AddMessageLine(FragmentMapToString(), MsgAlignment::Left, MsgCategory::Error);
             }
 
+            if (autoLatencyVoteCount)
+                DBG_Log("lt+", "====autoLatencyVote = %ld\n", autoLatencyVote/autoLatencyVoteCount);
             if (IsAutoLatencyEnabled() && autoLatencyVoteCount) {
                 autoLatencyVote /= autoLatencyVoteCount;
-                DBG_Log("lt+", "====autoLatencyVote = %ld\n", autoLatencyVote);
 
                 short curFrameLatency = itsGame->FrameLatency();
                 short rttFrameLatency = itsGame->RoundTripToFrameLatency(maxRoundTripLatency);
@@ -1033,7 +1034,7 @@ void CNetManager::SendStartCommand() {
         }
     }
     // estimate initial frameLatency from RTT amongst players in dist
-    int8_t rttFL = itsGame->RoundTripToFrameLatency(itsCommManager->GetMaxRoundTrip(dist));
+    int8_t rttFL = itsGame->RoundTripToFrameLatency(itsCommManager->GetMaxRoundTrip(dist, -1));
 
     itsCommManager->SendPacket(kdServerOnly, kpStartRequest, rttFL, dist, 0, 0, 0);
 }
@@ -1062,6 +1063,18 @@ void CNetManager::ReceiveStartRequest(uint16_t activeDistribution, uint8_t initi
     }
 }
 
+void CNetManager::SetLT(uint8_t frameLatency) {
+    // set LT based on passed frameLatency and server's config/limits
+    if (IsAutoLatencyEnabled()) {
+        frameLatency = std::min(std::max(minAutoLatency, frameLatency), maxAutoLatency);
+    } else {
+        // fix LT to kLatencyToleranceTag value
+        frameLatency = maxAutoLatency;
+    }
+    itsGame->latencyTolerance = -1; // forces SetFrameLatency() to output the message
+    itsGame->SetFrameLatency(frameLatency);
+}
+
 void CNetManager::ReceiveStartLevel(uint16_t activeDistribution, uint8_t initialFL) {
     // called by everyone in response to the server sending the kpStartLevel message
     SDL_Log("CNetManager::ReceiveStartLevel(0x%02x, %d)\n", activeDistribution, initialFL);
@@ -1078,14 +1091,8 @@ void CNetManager::ReceiveStartLevel(uint16_t activeDistribution, uint8_t initial
         isPlaying = true;
         itsGame->ResumeGame();
 
-        // set initial LT based on passed rttFL and config/limits
-        if (IsAutoLatencyEnabled()) {
-            initialFL = std::min(std::max(minAutoLatency, initialFL), maxAutoLatency);
-        } else {
-            // fix LT to kLatencyToleranceTag value
-            initialFL = maxAutoLatency;
-        }
-        itsGame->SetFrameLatency(initialFL);
+        SetLT(initialFL);
+        SDL_Log("Start with LT = %.2lf\n", itsGame->latencyTolerance);
     }
 }
 
@@ -1119,6 +1126,9 @@ void CNetManager::ReceiveResumeLevel(uint16_t activeDistribution, Fixed randomKe
         itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
         isPlaying = true;
         itsGame->ResumeGame();
+
+        // if the server changes LT or AutoLT mode, this makes sure we use the correct LT
+        SetLT(itsGame->FrameLatency());
         SDL_Log("Resume with LT = %.2lf\n", itsGame->latencyTolerance);
     }
 }
