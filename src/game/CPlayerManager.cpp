@@ -854,7 +854,7 @@ void CPlayerManagerImpl::RosterMessageText(short len, const char *c) {
 
 std::string CPlayerManagerImpl::GetChatLine() {
     std::string theChat(lineBuffer.begin(), lineBuffer.end());
-    std::size_t found = theChat.find_last_of("\xC2\xAC", theChat.length() - 2);
+    std::size_t found = theChat.rfind("\xC2\xAC", theChat.length() - 3);
     if(found == std::string::npos)
         found = 0;
     else
