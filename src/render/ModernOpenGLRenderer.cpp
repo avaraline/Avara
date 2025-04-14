@@ -295,15 +295,22 @@ void ModernOpenGLRenderer::ApplySky()
     skyParams->lowSkyColor.ExportGLFloats(lowSkyColorRGB, 3);
     skyParams->highSkyColor.ExportGLFloats(highSkyColorRGB, 3);
     
+    float lowAlt = ToFloat(skyParams->lowSkyAltitude) / 20000.0f;
+    float highAlt = ToFloat(skyParams->highSkyAltitude) / 20000.0f;
+    float hazeDensity = skyParams->hazeDensity;
+    
     skyShader->Use();
     skyShader->SetFloat3("groundColor", groundColorRGB);
     skyShader->SetFloat3("horizonColor", lowSkyColorRGB);
     skyShader->SetFloat3("skyColor", highSkyColorRGB);
-    skyShader->SetFloat("lowAlt", ToFloat(skyParams->lowSkyAltitude) / 20000.0f);
-    skyShader->SetFloat("highAlt", ToFloat(skyParams->highSkyAltitude) / 20000.0f);
+    skyShader->SetFloat("lowAlt", lowAlt);
+    skyShader->SetFloat("highAlt", highAlt);
     
     worldShader->Use();
     worldShader->SetFloat3("horizonColor", lowSkyColorRGB);
+    worldShader->SetFloat3("skyColor", highSkyColorRGB);
+    worldShader->SetFloat("highAlt", highAlt);
+    worldShader->SetFloat("hazeDensity", hazeDensity);
 }
 
 void ModernOpenGLRenderer::UpdateViewRect(int width, int height, float pixelRatio)

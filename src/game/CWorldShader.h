@@ -37,6 +37,7 @@ public:
     short skyShadeCount = DEFAULT_SKY_SHADE_COUNT;
     Fixed lowSkyAltitude;
     Fixed highSkyAltitude;
+    float hazeDensity;
 
     short numShades;
     short shadeColors[MAXTOTALSHADES];

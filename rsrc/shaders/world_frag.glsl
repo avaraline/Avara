@@ -18,14 +18,18 @@ uniform float lightsActive = 1.0;
 uniform float worldYon = 180.0;
 uniform float objectYon = 180.0;
 uniform vec3 horizonColor;
+uniform vec3 skyColor;
+uniform float highAlt;
+uniform float hazeDensity;
 
 out vec4 color;
 
-vec3 apply_fog(vec3 col, // color of pixel
-               float t)  // distance to point
+vec3 apply_fog(vec3 color, float dist)
 {
-    float fogAmount = 1.0 - exp(-t * 0.0005);
-    return mix(col, horizonColor, fogAmount);
+    vec3 hazeColor = mix(skyColor, horizonColor, max(highAlt * 2, 1.0));
+    vec3 extColor = vec3(exp(-dist * hazeDensity), exp(-dist * hazeDensity), exp(-dist * hazeDensity));
+    vec3 insColor = vec3(exp(-dist * hazeDensity), exp(-dist * hazeDensity), exp(-dist * hazeDensity));
+    return color * extColor + hazeColor * (1.0 - insColor);
 }
 
 vec3 diffuse_light(vec3 light, vec3 lightColor) {
