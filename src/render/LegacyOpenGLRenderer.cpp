@@ -328,12 +328,6 @@ void LegacyOpenGLRenderer::RenderFrame()
 
     // RENDER SKYBOX ///////////////////////////////////////////////////////////////////////////////
 
-    Matrix *trans = &(viewParams->viewMatrix);
-
-    // Get rid of the view translation.
-    glm::mat4 glMatrix = ToFloatMat(*trans);
-    glMatrix[3][0] = glMatrix[3][1] = glMatrix[3][2] = 0;
-
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -346,7 +340,6 @@ void LegacyOpenGLRenderer::RenderFrame()
     glEnableVertexAttribArray(0);
 
     skyShader->Use();
-    skyShader->SetMat4("view", glMatrix);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -413,6 +406,16 @@ void LegacyOpenGLRenderer::AdjustAmbient(OpenGLShader &shader, float intensity)
 void LegacyOpenGLRenderer::ApplyView()
 {
     glm::mat4 glMatrix = ToFloatMat(viewParams->viewMatrix);
+    glm::mat4 glInvMatrix = ToFloatMat(*viewParams->GetInverseMatrix());
+    
+    // Get rid of the view translation for the sky.
+    glm::mat4 glSkyMatrix = ToFloatMat(viewParams->viewMatrix);
+    glSkyMatrix[3][0] = glSkyMatrix[3][1] = glSkyMatrix[3][2] = 0;
+    
+    skyShader->Use();
+    skyShader->SetMat4("view", glSkyMatrix);
+    skyShader->SetMat4("invView", glInvMatrix);
+    skyShader->SetFloat("maxHazeDist", ToFloat(viewParams->yonBound));
 
     worldShader->Use();
     worldShader->SetMat4("view", glMatrix);
