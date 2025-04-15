@@ -7,8 +7,19 @@ uniform vec3 horizonColor;
 uniform vec3 skyColor;
 uniform float lowAlt = 0;
 uniform float highAlt = .05;
+uniform float hazeDensity = 0;
 
 out vec4 color;
+
+const float maxHazeDist = 180.0;
+
+vec3 apply_fog(vec3 color, float dist)
+{
+    vec3 hazeColor = mix(skyColor, horizonColor, max(highAlt * 2, 1.0));
+    vec3 extColor = vec3(exp(-dist * hazeDensity), exp(-dist * hazeDensity), exp(-dist * hazeDensity));
+    vec3 insColor = vec3(exp(-dist * hazeDensity), exp(-dist * hazeDensity), exp(-dist * hazeDensity));
+    return color * extColor + hazeColor * (1.0 - insColor);
+}
 
 void main()
 {
@@ -31,4 +42,7 @@ void main()
         ),
         1.0
     );
+    
+    float dist = pow(clamp(phi + 1, 0.0, 1.0), 5) * maxHazeDist;
+    color.rgb = apply_fog(color.rgb, dist);
 }
