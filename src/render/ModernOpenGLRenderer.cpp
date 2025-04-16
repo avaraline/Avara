@@ -515,6 +515,7 @@ void ModernOpenGLRenderer::ApplyView()
 
     worldShader->Use();
     worldShader->SetMat4("view", glMatrix);
+    worldShader->SetMat4("invView", glInvMatrix);
     worldShader->SetFloat("worldYon", ToFloat(viewParams->yonBound));
     worldShader->SetFloat("objectYon", ToFloat(viewParams->yonBound));
     glCheckErrors();
@@ -711,9 +712,9 @@ void ModernOpenGLRenderer::SetTransforms(const CBSPPart &part) {
     }
 
     worldShader->Use();
-    worldShader->SetMat4("modelview", mv);
+    worldShader->SetMat4("modelView", mv);
     worldShader->SetMat3("normalTransform", normalMat, true);
 
     hudShader->Use();
-    hudShader->SetMat4("modelview", mv);
+    hudShader->SetMat4("modelView", mv);
 }

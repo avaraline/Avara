@@ -1,8 +1,10 @@
 #version 330 core
 
+in vec4 gl_FragCoord;
 in vec4 fragmentColor;
 in vec3 fragmentNormal;
-in vec4 gl_FragCoord;
+in vec3 fragPos;
+in vec3 camPos;
 
 uniform vec3 light0 = vec3(0, 0, 0);
 uniform vec3 light0Color = vec3(1, 1, 1);
@@ -62,4 +64,5 @@ void main() {
     float yonFadeDist = objectYon - yonFadeRange;
     float alphaMult = pow(clamp((yonFadeRange + yonFadeDist - dist) / yonFadeRange, 0.0, 1.0), 0.5);
     color.a *= alphaMult;
+    color.rgb = normalize(fragPos);
 }

@@ -574,6 +574,6 @@ void LegacyOpenGLRenderer::SetTransforms(const CBSPPart &part) {
     }
 
     worldShader->Use();
-    worldShader->SetMat4("modelview", mv);
+    worldShader->SetMat4("modelView", mv);
     worldShader->SetMat3("normalTransform", normalMat, true);
 }
