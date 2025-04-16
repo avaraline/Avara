@@ -514,14 +514,14 @@ void ModernOpenGLRenderer::ApplyView()
     skyShader->SetFloat("maxHazeDist", ToFloat(viewParams->yonBound));
 
     worldShader->Use();
-    worldShader->SetMat4("view", glMatrix);
+    worldShader->SetMat4("view", glMatrix, true);
     worldShader->SetMat4("invView", glInvMatrix);
     worldShader->SetFloat("worldYon", ToFloat(viewParams->yonBound));
     worldShader->SetFloat("objectYon", ToFloat(viewParams->yonBound));
     glCheckErrors();
 
     hudShader->Use();
-    hudShader->SetMat4("view", glMatrix);
+    hudShader->SetMat4("view", glMatrix, true);
     glCheckErrors();
 }
 
@@ -694,27 +694,19 @@ void ModernOpenGLRenderer::AdjustFramebuffer(short index, GLsizei width, GLsizei
 }
 
 void ModernOpenGLRenderer::SetTransforms(const CBSPPart &part) {
-    glm::mat4 mv = ToFloatMat(part.fullTransform);
+    glm::mat4 m = ToFloatMat(part.itsTransform);
     if (part.hasScale) {
         glm::vec3 sc = glm::vec3(
             ToFloat(part.scale[0]),
             ToFloat(part.scale[1]),
             ToFloat(part.scale[2])
         );
-        mv = glm::scale(mv, sc);
-    }
-
-    glm::mat3 normalMat = glm::mat3(1.0f);
-    for (int i = 0; i < 3; i ++) {
-        normalMat[0][i] = ToFloat((part.itsTransform)[0][i]);
-        normalMat[1][i] = ToFloat((part.itsTransform)[1][i]);
-        normalMat[2][i] = ToFloat((part.itsTransform)[2][i]);
+        m = glm::scale(m, sc);
     }
 
     worldShader->Use();
-    worldShader->SetMat4("modelView", mv);
-    worldShader->SetMat3("normalTransform", normalMat, true);
+    worldShader->SetMat4("model", m, true);
 
     hudShader->Use();
-    hudShader->SetMat4("modelView", mv);
+    hudShader->SetMat4("model", m, true);
 }
