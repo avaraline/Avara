@@ -106,17 +106,22 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
         colors.push_back(color);
     }
 
-    levelLoaded = playersLayer->add<Text>("", false, 16);
+    // LevelName  <---------------> tags: {list of tags}
+    auto levelNamePanel = playersLayer->add<Widget>();
+    levelNamePanel->setLayout(new GridLayout(Orientation::Horizontal, 2, Alignment::Fill));
+
+    levelLoaded = levelNamePanel->add<Text>("", false, 16);
+    levelLoaded->setAlignment(Text::Alignment::Left);
+    levelTags = levelNamePanel->add<Text>("", false, 16);
+    levelTags->setAlignment(Text::Alignment::Right);
+
     levelDesigner = playersLayer->add<Text>("", false, 16);
     levelDescription = playersLayer->add<Label>("No level loaded");
-    levelTags = playersLayer->add<Text>("", false, 16);
 
-    levelLoaded->setAlignment(Text::Alignment::Left);
     levelDesigner->setAlignment(Text::Alignment::Left);
     //levelDescription->setAlignment(Text::Alignment::Left);
     levelDescription->setFixedHeight(90);
     levelDescription->setFixedWidth(450);
-    levelTags->setAlignment(Text::Alignment::Left);
 
     //chat tab
     Widget *chatTab = tabWidget->createTab("Chat");
@@ -488,6 +493,10 @@ void CRosterWindow::PrefChanged(std::string name) {
 
 
 void CRosterWindow::UpdateTags(std::string& tags) {
-    levelTags->setValue("tags:" + tags);
+    if (tags.length() > 0) {
+        levelTags->setValue("tags:" + tags);
+    } else {
+        levelTags->setValue("tags: <none>");
+    }
 }
 
