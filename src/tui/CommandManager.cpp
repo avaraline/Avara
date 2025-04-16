@@ -646,6 +646,11 @@ bool CommandManager::HandleTags(VectorOfArgs vargs) {
     auto tagsStr = Tags::TagsStringForLevel(curLevel);
     itsApp->rosterWindow->UpdateTags(tagsStr);
 
+    if (vargs.size() == 0) {
+        std::string msg = "tags for \"" + curLevel.first + "/" + curLevel.second + "\": " + tagsStr;
+        itsApp->AddMessageLine(msg);
+    }
+
     return true;
 }
 
