@@ -419,6 +419,7 @@ void LegacyOpenGLRenderer::ApplyView()
 
     worldShader->Use();
     worldShader->SetMat4("view", glMatrix);
+    worldShader->SetMat4("invView", glInvMatrix);
     worldShader->SetFloat("worldYon", ToFloat(viewParams->yonBound));
     worldShader->SetFloat("objectYon", ToFloat(viewParams->yonBound));
     __glCheckErrors();
