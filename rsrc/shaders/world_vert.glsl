@@ -8,6 +8,7 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 invView;
 uniform mat4 proj;
+uniform mat3 normalTransform;
 
 out vec4 fragmentColor;
 out vec3 fragmentNormal;
@@ -18,7 +19,7 @@ void main() {
     vec4 pos = vec4(vertexPosition_modelspace, 1.0);
     gl_Position = proj * (pos * model * view);
     fragmentColor = vertexColor;
-    fragmentNormal = (vec4(vertexNormal, 1.0) * model).xyz;
+    fragmentNormal = vertexNormal * normalTransform;
     fragPos = (pos * model).xyz;
     camPos = vec3(invView[3][0], invView[3][1], invView[3][2]);
 }

@@ -57,12 +57,12 @@ vec4 light_color() {
 void main() {
     color = light_color();
     
-    float dist = gl_FragCoord.z / gl_FragCoord.w;
+    vec3 fragRay = camPos - fragPos;
+    float dist = length(fragRay);
     color.rgb = apply_fog(color.rgb, dist);
     
     float yonFadeRange = min(5.0, objectYon - (objectYon * 0.9));
     float yonFadeDist = objectYon - yonFadeRange;
     float alphaMult = pow(clamp((yonFadeRange + yonFadeDist - dist) / yonFadeRange, 0.0, 1.0), 0.5);
     color.a *= alphaMult;
-    color.rgb = normalize(fragPos);
 }

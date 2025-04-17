@@ -703,9 +703,17 @@ void ModernOpenGLRenderer::SetTransforms(const CBSPPart &part) {
         );
         m = glm::scale(m, sc);
     }
+    
+    glm::mat3 normalMat = glm::mat3(1.0f);
+    for (int i = 0; i < 3; i ++) {
+        normalMat[0][i] = ToFloat((part.modelTransform)[0][i]);
+        normalMat[1][i] = ToFloat((part.modelTransform)[1][i]);
+        normalMat[2][i] = ToFloat((part.modelTransform)[2][i]);
+    }
 
     worldShader->Use();
     worldShader->SetTransposedMat4("model", m);
+    worldShader->SetTransposedMat3("normalTransform", normalMat);
 
     hudShader->Use();
     hudShader->SetTransposedMat4("model", m);
