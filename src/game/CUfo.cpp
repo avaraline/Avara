@@ -134,7 +134,7 @@ void CUfo::PlaceParts() {
     TranslatePart(partList[0], location[0], location[1], location[2]);
 
     partList[0]->MoveDone();
-    LinkSphere(partList[0]->itsTransform[3], partList[0]->bigRadius);
+    LinkSphere(partList[0]->modelTransform[3], partList[0]->bigRadius);
 
     CRealShooters::PlaceParts();
 }
@@ -240,7 +240,7 @@ Fixed CUfo::EvaluatePosition(Fixed *position, Boolean doAttack) {
             Vector delta;
 
             if (theTarget->teamMask & watchTeams) {
-                ploc = theTarget->partList[0]->itsTransform[3];
+                ploc = theTarget->partList[0]->modelTransform[3];
 
                 rayHit.direction[0] = delta[0] = ploc[0] - rayHit.origin[0];
                 rayHit.direction[1] = delta[1] = ploc[1] - rayHit.origin[1];

@@ -556,9 +556,9 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
     } else {
         if (glData->alpha.glDataSize == 0) return;
         glData->alpha.SortFromCamera(
-            ToFloat(part.invFullTransform[3][0]),
-            ToFloat(part.invFullTransform[3][1]),
-            ToFloat(part.invFullTransform[3][2])
+            ToFloat(part.invModelViewTransform[3][0]),
+            ToFloat(part.invModelViewTransform[3][1]),
+            ToFloat(part.invModelViewTransform[3][2])
         );
         glBindVertexArray(glData->alpha.vertexArray);
         glBindBuffer(GL_ARRAY_BUFFER, glData->alpha.vertexBuffer);
@@ -694,7 +694,7 @@ void ModernOpenGLRenderer::AdjustFramebuffer(short index, GLsizei width, GLsizei
 }
 
 void ModernOpenGLRenderer::SetTransforms(const CBSPPart &part) {
-    glm::mat4 m = ToFloatMat(part.itsTransform);
+    glm::mat4 m = ToFloatMat(part.modelTransform);
     if (part.hasScale) {
         glm::vec3 sc = glm::vec3(
             ToFloat(part.scale[0]),
