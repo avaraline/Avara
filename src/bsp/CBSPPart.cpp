@@ -177,13 +177,13 @@ void CBSPPart::TransformLights() {
         if (lightSeed != vp->lightSeed) {
             lightSeed = vp->lightSeed;
 
-            VectorMatrixProduct(vp->lightSourceCount, vp->lightSources, objLights, &invGlobTransform);
+            VectorMatrixProduct(vp->lightSourceCount, vp->lightSources, objLights, &invModelTransform);
         }
     }
 
-    localViewOrigin[0] = invFullTransform[3][0];
-    localViewOrigin[1] = invFullTransform[3][1];
-    localViewOrigin[2] = invFullTransform[3][2];
+    localViewOrigin[0] = invModelViewTransform[3][0];
+    localViewOrigin[1] = invModelViewTransform[3][1];
+    localViewOrigin[2] = invModelViewTransform[3][2];
 }
 
 Boolean CBSPPart::InViewPyramid() {
@@ -270,26 +270,26 @@ Boolean CBSPPart::PrepareForRender() {
         inPyramid = InViewPyramid();
 
         if (inPyramid) {
-            // SDL_Log("itsTransform:\n");
-            // PrintMatrix(&itsTransform);
+            // SDL_Log("modelTransform:\n");
+            // PrintMatrix(&modelTransform);
 
-            CombineTransforms(&itsTransform, &fullTransform, &vp->viewMatrix);
+            CombineTransforms(&modelTransform, &modelViewTransform, &vp->viewMatrix);
 
-            InverseTransform(&fullTransform, &invFullTransform);
+            InverseTransform(&modelViewTransform, &invModelViewTransform);
 
-            // SDL_Log("fullTransform:\n");
-            // PrintMatrix(&fullTransform);
-            // PrintMatrix(invFullTransform);
+            // SDL_Log("modelViewTransform:\n");
+            // PrintMatrix(&modelViewTransform);
+            // PrintMatrix(invModelViewTransform);
 
             if (!invGlobDone) {
-                InverseTransform(&itsTransform, &invGlobTransform);
+                InverseTransform(&modelTransform, &invModelTransform);
                 invGlobDone = true;
             }
 
             TransformLights();
 
             // transform all the points before rendering
-            //VectorMatrixProduct(pointCount, pointTable, transformedPoints, &fullTransform);
+            //VectorMatrixProduct(pointCount, pointTable, transformedPoints, &modelViewTransform);
         }
     }
 
@@ -302,12 +302,12 @@ Boolean CBSPPart::PrepareForRender() {
 */
 void CBSPPart::Reset() {
     lightSeed = 0;
-    OneMatrix(&itsTransform);
+    OneMatrix(&modelTransform);
 }
 
 //  invalidates data & calcs sphereGlobCenter
 void CBSPPart::MoveDone() {
-    VectorMatrixProduct(1, (Vector *)&enclosurePoint, &sphereGlobCenter, &itsTransform);
+    VectorMatrixProduct(1, (Vector *)&enclosurePoint, &sphereGlobCenter, &modelTransform);
     invGlobDone = false;
     lightSeed = 0;
 }
@@ -317,80 +317,80 @@ void CBSPPart::MoveDone() {
 **  Move by xt, yt, zt
 */
 void CBSPPart::Translate(Fixed xt, Fixed yt, Fixed zt) {
-    itsTransform[3][0] += xt;
-    itsTransform[3][1] += yt;
-    itsTransform[3][2] += zt;
+    modelTransform[3][0] += xt;
+    modelTransform[3][1] += yt;
+    modelTransform[3][2] += zt;
 }
 #endif
 
 void CBSPPart::RotateX(Fixed angle) {
     angle = FDegToOne(angle);
-    MRotateX(FOneSin(angle), FOneCos(angle), &itsTransform);
+    MRotateX(FOneSin(angle), FOneCos(angle), &modelTransform);
 }
 
 void CBSPPart::RotateY(Fixed angle) {
     angle = FDegToOne(angle);
-    MRotateY(FOneSin(angle), FOneCos(angle), &itsTransform);
+    MRotateY(FOneSin(angle), FOneCos(angle), &modelTransform);
 }
 
 void CBSPPart::RotateZ(Fixed angle) {
     angle = FDegToOne(angle);
-    MRotateZ(FOneSin(angle), FOneCos(angle), &itsTransform);
+    MRotateZ(FOneSin(angle), FOneCos(angle), &modelTransform);
 }
 
 void CBSPPart::RotateRadX(Fixed angle) {
     angle = FRadToOne(angle);
-    MRotateX(FOneSin(angle), FOneCos(angle), &itsTransform);
+    MRotateX(FOneSin(angle), FOneCos(angle), &modelTransform);
 }
 
 void CBSPPart::RotateRadY(Fixed angle) {
     angle = FRadToOne(angle);
-    MRotateY(FOneSin(angle), FOneCos(angle), &itsTransform);
+    MRotateY(FOneSin(angle), FOneCos(angle), &modelTransform);
 }
 
 void CBSPPart::RotateRadZ(Fixed angle) {
     angle = FRadToOne(angle);
-    MRotateZ(FOneSin(angle), FOneCos(angle), &itsTransform);
+    MRotateZ(FOneSin(angle), FOneCos(angle), &modelTransform);
 }
 
 void CBSPPart::RotateOneX(Fixed angle) {
-    MRotateX(FOneSin(angle), FOneCos(angle), &itsTransform);
+    MRotateX(FOneSin(angle), FOneCos(angle), &modelTransform);
 }
 
 void CBSPPart::RotateOneY(Fixed angle) {
-    MRotateY(FOneSin(angle), FOneCos(angle), &itsTransform);
+    MRotateY(FOneSin(angle), FOneCos(angle), &modelTransform);
 }
 void CBSPPart::RotateOneZ(Fixed angle) {
-    MRotateZ(FOneSin(angle), FOneCos(angle), &itsTransform);
+    MRotateZ(FOneSin(angle), FOneCos(angle), &modelTransform);
 }
 
 void CBSPPart::CopyTransform(Matrix *m) {
     invGlobDone = false;
-    *(MatrixStruct *)&itsTransform = *(MatrixStruct *)m;
+    *(MatrixStruct *)&modelTransform = *(MatrixStruct *)m;
 }
 
 void CBSPPart::ApplyMatrix(Matrix *m) {
     Matrix fullMatrix;
 
-    CombineTransforms(&itsTransform, &fullMatrix, m);
+    CombineTransforms(&modelTransform, &fullMatrix, m);
 
-    *((MatrixStruct *)&itsTransform) = *(MatrixStruct *)&fullMatrix;
+    *((MatrixStruct *)&modelTransform) = *(MatrixStruct *)&fullMatrix;
 }
 void CBSPPart::PrependMatrix(Matrix *m) {
     Matrix fullMatrix;
 
-    CombineTransforms(m, &fullMatrix, &itsTransform);
+    CombineTransforms(m, &fullMatrix, &modelTransform);
 
-    *((MatrixStruct *)&itsTransform) = *(MatrixStruct *)&fullMatrix;
+    *((MatrixStruct *)&modelTransform) = *(MatrixStruct *)&fullMatrix;
 }
 
 Matrix *CBSPPart::GetInverseTransform() {
     if (!invGlobDone) {
         invGlobDone = true;
-        InverseTransform(&itsTransform, &invGlobTransform);
+        InverseTransform(&modelTransform, &invModelTransform);
     }
 
-    return &invGlobTransform;
+    return &invModelTransform;
 }
 
 void CBSPPart::ReplaceColor(ARGBColor origColor, ARGBColor newColor) {
@@ -590,7 +590,7 @@ Boolean CBSPPart::Obscures(CBSPPart *other) {
         return false;
     }
 
-    VectorMatrixProduct(1, &other->sphereGlobCenter, &center, &invGlobTransform);
+    VectorMatrixProduct(1, &other->sphereGlobCenter, &center, &invModelTransform);
     r = other->enclosureRadius - tolerance;
 
     if ((localViewOrigin[0] < minBounds.x && center[0] <= minBounds.x - r) ||
@@ -603,7 +603,7 @@ Boolean CBSPPart::Obscures(CBSPPart *other) {
         return false;
     }
 
-    VectorMatrixProduct(1, &sphereGlobCenter, &center, &other->invGlobTransform);
+    VectorMatrixProduct(1, &sphereGlobCenter, &center, &other->invModelTransform);
     r = enclosureRadius - other->tolerance;
 
     if ((other->localViewOrigin[0] > other->minBounds.x && center[0] <= other->minBounds.x - r) ||
@@ -621,7 +621,7 @@ Boolean CBSPPart::Obscures(CBSPPart *other) {
         (localViewOrigin[2] < minBounds.z) || (localViewOrigin[2] > maxBounds.z)) {
         didTests = 1;
 
-        CombineTransforms(&itsTransform, &combinedTransform, &other->invGlobTransform);
+        CombineTransforms(&modelTransform, &combinedTransform, &other->invModelTransform);
 
         TransformBoundingBox(&combinedTransform, &minBounds.x, &maxBounds.x, myCorners);
         if (!other->HopeDoesObscure(this, myCorners)) {
@@ -634,7 +634,7 @@ Boolean CBSPPart::Obscures(CBSPPart *other) {
         (other->localViewOrigin[1] > other->minBounds.y) || (other->localViewOrigin[1] < other->maxBounds.y) ||
         (other->localViewOrigin[2] > other->minBounds.z) || (other->localViewOrigin[2] < other->maxBounds.z)) {
         didTests |= 2;
-        CombineTransforms(&other->itsTransform, &combinedTransform, &invGlobTransform);
+        CombineTransforms(&other->modelTransform, &combinedTransform, &invModelTransform);
 
         TransformBoundingBox(&combinedTransform, &other->minBounds.x, &other->maxBounds.x, otherCorners);
 

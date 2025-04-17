@@ -101,9 +101,9 @@ CSmartPart *CGuardActor::FindClosestTarget() {
         if (theActor->teamMask & watchTeams) {
             thePart = theActor->partList[0];
             if (thePart) {
-                current = FDistanceEstimate(location[0] - thePart->itsTransform[3][0],
-                    location[1] - thePart->itsTransform[3][1],
-                    location[2] - thePart->itsTransform[3][2]);
+                current = FDistanceEstimate(location[0] - thePart->modelTransform[3][0],
+                    location[1] - thePart->modelTransform[3][1],
+                    location[2] - thePart->modelTransform[3][2]);
                 if (current < closest) {
                     closest = current;
                     closestPart = thePart;
@@ -195,7 +195,7 @@ void CGuardActor::FrameAction() {
             CAbstractActor *theActor;
             Fixed groundDist;
 
-            gunMatrix = partList[0]->itsTransform;
+            gunMatrix = partList[0]->modelTransform;
             fireCount = fireFrequency;
 
             theHit.distance = STANDARDMISSILERANGE;
@@ -231,7 +231,7 @@ void CGuardActor::FrameAction() {
                     theHit.team = teamColor;
                     theHit.playerId = -1;
                     theMissile = itsGame->itsDepot->LaunchMissile(
-                        kmiFlat, &partList[0]->itsTransform, &theHit, this, shotPower, NULL);
+                        kmiFlat, &partList[0]->modelTransform, &theHit, this, shotPower, NULL);
                     if (theMissile)
                         theMissile->TransparentStep();
                 }
@@ -241,7 +241,7 @@ void CGuardActor::FrameAction() {
                 theHit.team = teamColor;
                 theHit.playerId = -1;
                 theMissile = itsGame->itsDepot->LaunchMissile(
-                    kmiFlat, &partList[0]->itsTransform, &theHit, this, shotPower, NULL);
+                    kmiFlat, &partList[0]->modelTransform, &theHit, this, shotPower, NULL);
                 if (theMissile)
                     theMissile->TransparentStep();
             }

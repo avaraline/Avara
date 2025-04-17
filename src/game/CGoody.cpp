@@ -79,7 +79,7 @@ CAbstractActor *CGoody::EndScript() {
         if (altShapeId) {
             partCount = 2;
             LoadPart(1, shapeId);
-            partList[1]->CopyTransform(&partList[0]->itsTransform);
+            partList[1]->CopyTransform(&partList[0]->modelTransform);
             partList[1]->MoveDone();
         }
 
@@ -188,7 +188,7 @@ void CGoody::FrameAction() {
         partList[0]->MoveDone();
 
         if (partList[1]) {
-            partList[1]->CopyTransform(&partList[0]->itsTransform);
+            partList[1]->CopyTransform(&partList[0]->modelTransform);
             partList[1]->MoveDone();
         }
     }

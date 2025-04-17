@@ -84,7 +84,7 @@ void CZombieActor::PlaceParts() {
     TranslatePart(partList[0], location[0], location[1], location[2]);
     partList[0]->MoveDone();
 
-    partList[1]->CopyTransform(&partList[0]->itsTransform);
+    partList[1]->CopyTransform(&partList[0]->modelTransform);
     partList[1]->MoveDone();
     LinkPartSpheres();
 

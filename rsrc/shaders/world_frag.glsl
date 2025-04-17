@@ -1,8 +1,10 @@
 #version 330 core
 
+in vec4 gl_FragCoord;
 in vec4 fragmentColor;
 in vec3 fragmentNormal;
-in vec4 gl_FragCoord;
+in vec3 fragPos;
+in vec3 camPos;
 
 uniform vec3 light0 = vec3(0, 0, 0);
 uniform vec3 light0Color = vec3(1, 1, 1);
@@ -55,7 +57,8 @@ vec4 light_color() {
 void main() {
     color = light_color();
     
-    float dist = gl_FragCoord.z / gl_FragCoord.w;
+    vec3 fragRay = camPos - fragPos;
+    float dist = length(fragRay);
     color.rgb = apply_fog(color.rgb, dist);
     
     float yonFadeRange = min(5.0, objectYon - (objectYon * 0.9));

@@ -514,13 +514,14 @@ void ModernOpenGLRenderer::ApplyView()
     skyShader->SetFloat("maxHazeDist", ToFloat(viewParams->yonBound));
 
     worldShader->Use();
-    worldShader->SetMat4("view", glMatrix);
+    worldShader->SetTransposedMat4("view", glMatrix);
+    worldShader->SetMat4("invView", glInvMatrix);
     worldShader->SetFloat("worldYon", ToFloat(viewParams->yonBound));
     worldShader->SetFloat("objectYon", ToFloat(viewParams->yonBound));
     glCheckErrors();
 
     hudShader->Use();
-    hudShader->SetMat4("view", glMatrix);
+    hudShader->SetTransposedMat4("view", glMatrix);
     glCheckErrors();
 }
 
@@ -555,9 +556,9 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
     } else {
         if (glData->alpha.glDataSize == 0) return;
         glData->alpha.SortFromCamera(
-            ToFloat(part.invFullTransform[3][0]),
-            ToFloat(part.invFullTransform[3][1]),
-            ToFloat(part.invFullTransform[3][2])
+            ToFloat(part.invModelViewTransform[3][0]),
+            ToFloat(part.invModelViewTransform[3][1]),
+            ToFloat(part.invModelViewTransform[3][2])
         );
         glBindVertexArray(glData->alpha.vertexArray);
         glBindBuffer(GL_ARRAY_BUFFER, glData->alpha.vertexBuffer);
@@ -693,27 +694,27 @@ void ModernOpenGLRenderer::AdjustFramebuffer(short index, GLsizei width, GLsizei
 }
 
 void ModernOpenGLRenderer::SetTransforms(const CBSPPart &part) {
-    glm::mat4 mv = ToFloatMat(part.fullTransform);
+    glm::mat4 m = ToFloatMat(part.modelTransform);
     if (part.hasScale) {
         glm::vec3 sc = glm::vec3(
             ToFloat(part.scale[0]),
             ToFloat(part.scale[1]),
             ToFloat(part.scale[2])
         );
-        mv = glm::scale(mv, sc);
+        m = glm::scale(m, sc);
     }
-
+    
     glm::mat3 normalMat = glm::mat3(1.0f);
     for (int i = 0; i < 3; i ++) {
-        normalMat[0][i] = ToFloat((part.itsTransform)[0][i]);
-        normalMat[1][i] = ToFloat((part.itsTransform)[1][i]);
-        normalMat[2][i] = ToFloat((part.itsTransform)[2][i]);
+        normalMat[0][i] = ToFloat((part.modelTransform)[0][i]);
+        normalMat[1][i] = ToFloat((part.modelTransform)[1][i]);
+        normalMat[2][i] = ToFloat((part.modelTransform)[2][i]);
     }
 
     worldShader->Use();
-    worldShader->SetMat4("modelview", mv);
-    worldShader->SetMat3("normalTransform", normalMat, true);
+    worldShader->SetTransposedMat4("model", m);
+    worldShader->SetTransposedMat3("normalTransform", normalMat);
 
     hudShader->Use();
-    hudShader->SetMat4("modelview", mv);
+    hudShader->SetTransposedMat4("model", m);
 }

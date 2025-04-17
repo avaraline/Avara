@@ -35,7 +35,7 @@ void CCompoundShape::Append(CBSPPart &part)
         
         // Dest holds new point with transform applied
         Vector dest;
-        VectorMatrixProduct(1, &p, &dest, &part.itsTransform);
+        VectorMatrixProduct(1, &p, &dest, &part.modelTransform);
 
         // Adjust bounds
         if (dest[0] > maxX) maxX = dest[0];

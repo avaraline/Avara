@@ -76,7 +76,7 @@ CAbstractActor *CFreeSolid::EndScript() {
             partList[0] = thePart;
 
             //TranslatePartY(thePart, ReadLongVar(iHeight));
-            VECTORCOPY(location, thePart->itsTransform[3]);
+            VECTORCOPY(location, thePart->modelTransform[3]);
             gRenderer->RemovePart(thePart);
 
             heading = 0;
@@ -214,7 +214,7 @@ void CFreeSolid::FrameAction() {
                     searchCount = ++itsGame->searchCount;
 
                     theBlast.blastPower = hitPower;
-                    VECTORCOPY(theBlast.blastPoint, partList[0]->itsTransform[3]);
+                    VECTORCOPY(theBlast.blastPoint, partList[0]->modelTransform[3]);
                     theBlast.team = teamColor;
                     theBlast.playerId = -1;
 

@@ -468,7 +468,7 @@ void CAbstractPlayer::PlaceHUDParts() {
     if (weapon) {
         weapon->ShowTarget();
     } else {
-        mt = &viewPortPart->itsTransform;
+        mt = &viewPortPart->modelTransform;
 
         theHit.direction[0] = FMul((*mt)[2][0], PLAYERMISSILESPEED);
         theHit.direction[1] = FMul((*mt)[2][1], PLAYERMISSILESPEED);
@@ -954,7 +954,7 @@ void CAbstractPlayer::DashboardPosition(CScaledBSP *part, bool autoRot, float x,
     part->RotateOneZ(FDegToOne(z_rot));
     part->RotateOneY(FDegToOne(ToFixed(yAng) + y_rot));
     TranslatePart(part, -ToFixed((x * scale_x) + hudRestingX), ToFixed((y * scale_y) + hudRestingY), hud_dist);
-    part->ApplyMatrix(&viewPortPart->itsTransform);
+    part->ApplyMatrix(&viewPortPart->modelTransform);
     part->MoveDone();
 }
 
@@ -1032,7 +1032,7 @@ void CAbstractPlayer::ControlSoundPoint() {
     Fixed theRight[] = {FIX(-1), 0, 0};
     Matrix *m;
 
-    m = &viewPortPart->itsTransform;
+    m = &viewPortPart->modelTransform;
     theRight[0] = -(*m)[0][0];
     theRight[1] = -(*m)[0][1];
     theRight[2] = -(*m)[0][2];
@@ -1697,7 +1697,7 @@ void CAbstractPlayer::PlayerAction() {
     }
 
     if (teleportSoundLink->refCount == 1) {
-        UpdateSoundLink(itsSoundLink, viewPortPart->itsTransform[3], speed, itsGame->soundTime);
+        UpdateSoundLink(itsSoundLink, viewPortPart->modelTransform[3], speed, itsGame->soundTime);
     }
 }
 
@@ -1725,7 +1725,7 @@ void CAbstractPlayer::GunActions() {
 
                 OneMatrix(&m1);
                 MTranslate(i ? gunOffset[0] : -gunOffset[0], gunOffset[1], gunOffset[2], &m1);
-                CombineTransforms(&m1, &m2, &viewPortPart->itsTransform);
+                CombineTransforms(&m1, &m2, &viewPortPart->modelTransform);
                 MTranslate(speed[0], speed[1], speed[2], &m2);
 
                 theHit.direction[0] = FMul(m2[2][0], PLAYERMISSILESPEED);
@@ -2141,7 +2141,7 @@ void CAbstractPlayer::Win(long winScore, CAbstractActor *teleport) {
 
         transparentSave = teleport->partList[0]->isTransparent;
         teleport->partList[0]->isTransparent = false;
-        VECTORCOPY(delta, teleport->partList[0]->itsTransform[3]);
+        VECTORCOPY(delta, teleport->partList[0]->modelTransform[3]);
         delta[0] = location[0] - delta[0];
         delta[1] = location[1] - delta[1];
         delta[2] = location[2] - delta[2];
@@ -2171,7 +2171,7 @@ void CAbstractPlayer::Win(long winScore, CAbstractActor *teleport) {
     theSound->SetSoundLink(itsSoundLink);
     theSound->Start();
 
-    MatrixToQuaternion(&viewPortPart->itsTransform, &winStart);
+    MatrixToQuaternion(&viewPortPart->modelTransform, &winStart);
 
     OneMatrix(&tempMatrix);
     MRotateX(FOneSin(0x4000), FOneCos(0x4000), &tempMatrix);
@@ -2203,17 +2203,17 @@ void CAbstractPlayer::WinAction() {
         interQ.y = winStart.y + FMul(winEnd.y - winStart.y, inter2);
         interQ.z = winStart.z + FMul(winEnd.z - winStart.z, inter2);
         NormalizeVector(4, (Fixed *)&interQ);
-        QuaternionToMatrix(&interQ, &viewPortPart->itsTransform);
+        QuaternionToMatrix(&interQ, &viewPortPart->modelTransform);
 
         speed[1] = FMul(inter2, FIX3(800));
-        viewPortPart->itsTransform[3][1] += speed[1];
+        viewPortPart->modelTransform[3][1] += speed[1];
         viewPortPart->invGlobDone = false;
     } else {
         if (interFrame <= INTERPTIME * 2) {
             interFrame = 2 * INTERPTIME - interFrame;
             inter2 = FDiv(interFrame * interFrame, INTERPTIME * INTERPTIME);
             speed[1] = FMul(inter2, FIX3(800));
-            viewPortPart->itsTransform[3][1] += speed[1];
+            viewPortPart->modelTransform[3][1] += speed[1];
             viewPortPart->invGlobDone = false;
         } else {
             if (interFrame == INTERPTIME * 4) {
@@ -2340,7 +2340,7 @@ short CAbstractPlayer::GetBallSnapPoint(long theGroup,
         delta[3] = FIX1;
 
         *hostPart = viewPortPart;
-        VectorMatrixProduct(1, (Vector *)delta, (Vector *)snapDest, &viewPortPart->itsTransform);
+        VectorMatrixProduct(1, (Vector *)delta, (Vector *)snapDest, &viewPortPart->modelTransform);
 
         globDelta[0] = ballLocation[0] - snapDest[0];
         globDelta[1] = ballLocation[1] - snapDest[1];

@@ -83,39 +83,39 @@ namespace CBSPUserFlags {
 **	Special macros for rotations and translations for speed (unfortunately):
 */
 #define TranslatePart(part, dx, dy, dz) \
-    part->itsTransform[3][0] += dx; \
-    part->itsTransform[3][1] += dy; \
-    part->itsTransform[3][2] += dz
+    part->modelTransform[3][0] += dx; \
+    part->modelTransform[3][1] += dy; \
+    part->modelTransform[3][2] += dz
 
-#define TranslatePartX(part, delta) part->itsTransform[3][0] += delta
-#define TranslatePartY(part, delta) part->itsTransform[3][1] += delta
-#define TranslatePartZ(part, delta) part->itsTransform[3][2] += delta
+#define TranslatePartX(part, delta) part->modelTransform[3][0] += delta
+#define TranslatePartY(part, delta) part->modelTransform[3][1] += delta
+#define TranslatePartZ(part, delta) part->modelTransform[3][2] += delta
 
 #define InitialRotatePartZ(part, angle) \
     { \
         Fixed tempAngle = angle; \
-        part->itsTransform[0][0] = part->itsTransform[1][1] = FOneCos(tempAngle); \
-        part->itsTransform[1][0] = -(part->itsTransform[0][1] = FOneSin(tempAngle)); \
+        part->modelTransform[0][0] = part->modelTransform[1][1] = FOneCos(tempAngle); \
+        part->modelTransform[1][0] = -(part->modelTransform[0][1] = FOneSin(tempAngle)); \
     }
 
 #define InitialRotatePartY(part, angle) \
     { \
         Fixed tempAngle = angle; \
-        part->itsTransform[0][0] = part->itsTransform[2][2] = FOneCos(tempAngle); \
-        part->itsTransform[0][2] = -(part->itsTransform[2][0] = FOneSin(tempAngle)); \
+        part->modelTransform[0][0] = part->modelTransform[2][2] = FOneCos(tempAngle); \
+        part->modelTransform[0][2] = -(part->modelTransform[2][0] = FOneSin(tempAngle)); \
     }
 
 #define InitialRotatePartX(part, angle) \
     { \
         Fixed tempAngle = angle; \
-        part->itsTransform[1][1] = part->itsTransform[2][2] = FOneCos(tempAngle); \
-        part->itsTransform[2][1] = -(part->itsTransform[1][2] = FOneSin(tempAngle)); \
+        part->modelTransform[1][1] = part->modelTransform[2][2] = FOneCos(tempAngle); \
+        part->modelTransform[2][1] = -(part->modelTransform[1][2] = FOneSin(tempAngle)); \
     }
 
 #define NegateTransformRow(part, row) \
-    part->itsTransform[row][0] = -part->itsTransform[row][0]; \
-    part->itsTransform[row][1] = -part->itsTransform[row][1]; \
-    part->itsTransform[row][2] = -part->itsTransform[row][2];
+    part->modelTransform[row][0] = -part->modelTransform[row][0]; \
+    part->modelTransform[row][1] = -part->modelTransform[row][1]; \
+    part->modelTransform[row][2] = -part->modelTransform[row][2];
 
 #define PreFlipX(part) \
     NegateTransformRow(part, 1); \
@@ -143,11 +143,11 @@ public:
 
     // Handle				colorReplacements;	//	Table of colors that replace defaults.
 
-    Matrix itsTransform = {{0}}; //	Transforms to world coordinates. (model)
-    Matrix invGlobTransform = {{0}}; // (inverse model)
+    Matrix modelTransform = {{0}}; //	Transforms to world coordinates. (model)
+    Matrix invModelTransform = {{0}}; // (inverse model)
 
-    Matrix fullTransform = {{0}}; // modelview
-    Matrix invFullTransform = {{0}}; // inverse modelview
+    Matrix modelViewTransform = {{0}}; // modelview
+    Matrix invModelViewTransform = {{0}}; // inverse modelview
 
     Fixed hither = FIX3(500); // 50 cm
     Fixed yon = FIX(500);     // 500 m
@@ -221,9 +221,9 @@ public:
     virtual void RotateOneY(Fixed angle);
     virtual void RotateOneZ(Fixed angle);
 
-    virtual void CopyTransform(Matrix *m); //	itsTransform = m
-    virtual void ApplyMatrix(Matrix *m); //	itsTransform = itsTransform * m
-    virtual void PrependMatrix(Matrix *m); //	itsTransform = m * itsTransform
+    virtual void CopyTransform(Matrix *m); //	modelTransform = m
+    virtual void ApplyMatrix(Matrix *m); //	modelTransform = modelTransform * m
+    virtual void PrependMatrix(Matrix *m); //	modelTransform = m * modelTransform
     virtual Matrix *GetInverseTransform();
 
     virtual bool HasAlpha() const;

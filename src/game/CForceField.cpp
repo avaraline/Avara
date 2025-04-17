@@ -68,7 +68,7 @@ CAbstractActor *CForceField::EndScript() {
             partList[0] = thePart;
 
             //TranslatePartY(thePart, ReadLongVar(iHeight));
-            VECTORCOPY(location, thePart->itsTransform[3]);
+            VECTORCOPY(location, thePart->modelTransform[3]);
             gRenderer->RemovePart(thePart);
 
             heading = 0;
