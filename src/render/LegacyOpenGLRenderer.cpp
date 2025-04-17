@@ -418,7 +418,7 @@ void LegacyOpenGLRenderer::ApplyView()
     skyShader->SetFloat("maxHazeDist", ToFloat(viewParams->yonBound));
 
     worldShader->Use();
-    worldShader->SetMat4("view", glMatrix, true);
+    worldShader->SetTransposedMat4("view", glMatrix);
     worldShader->SetMat4("invView", glInvMatrix);
     worldShader->SetFloat("worldYon", ToFloat(viewParams->yonBound));
     worldShader->SetFloat("objectYon", ToFloat(viewParams->yonBound));
@@ -568,5 +568,5 @@ void LegacyOpenGLRenderer::SetTransforms(const CBSPPart &part) {
     }
 
     worldShader->Use();
-    worldShader->SetMat4("model", m, true);
+    worldShader->SetTransposedMat4("model", m);
 }

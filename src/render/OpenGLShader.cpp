@@ -114,22 +114,42 @@ void OpenGLShader::SetFloat3(const std::string &uniform, const float value[3]) c
     glUniform3fv(glGetUniformLocation(id, uniform.c_str()), 1, value);
 }
 
-void OpenGLShader::SetMat3(const std::string &uniform, const glm::mat3 &value, bool transpose) const
+void OpenGLShader::SetMat3(const std::string &uniform, const glm::mat3 &value) const
 {
     glUniformMatrix3fv(
         glGetUniformLocation(id, uniform.c_str()),
         1,
-        (transpose) ? GL_TRUE : GL_FALSE, 
+        GL_FALSE,
         glm::value_ptr(value)
     );
 }
 
-void OpenGLShader::SetMat4(const std::string &uniform, const glm::mat4 &value, bool transpose) const
+void OpenGLShader::SetTransposedMat3(const std::string &uniform, const glm::mat3 &value) const
+{
+    glUniformMatrix3fv(
+        glGetUniformLocation(id, uniform.c_str()),
+        1,
+        GL_TRUE,
+        glm::value_ptr(value)
+    );
+}
+
+void OpenGLShader::SetMat4(const std::string &uniform, const glm::mat4 &value) const
 {
     glUniformMatrix4fv(
         glGetUniformLocation(id, uniform.c_str()),
         1,
-        (transpose) ? GL_TRUE : GL_FALSE,
+        GL_FALSE,
+        glm::value_ptr(value)
+    );
+}
+
+void OpenGLShader::SetTransposedMat4(const std::string &uniform, const glm::mat4 &value) const
+{
+    glUniformMatrix4fv(
+        glGetUniformLocation(id, uniform.c_str()),
+        1,
+        GL_TRUE,
         glm::value_ptr(value)
     );
 }

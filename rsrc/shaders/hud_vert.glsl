@@ -15,5 +15,5 @@ void main() {
     vec4 pos = vec4(vertexPosition_modelspace, 1.0);
     gl_Position = proj * (pos * model * view);
     fragmentColor = vertexColor;
-    fragmentNormal = (vec4(vertexNormal, 1.0) * model).xyz;
+    fragmentNormal = vertexNormal;
 }
