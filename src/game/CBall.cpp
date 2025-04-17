@@ -228,14 +228,14 @@ void CBall::PlaceParts() {
     theBall->Reset();
     if (hostPart) {
         TranslatePart(theBall, localSnap[0], localSnap[1], localSnap[2]);
-        theBall->ApplyMatrix(&hostPart->itsTransform);
+        theBall->ApplyMatrix(&hostPart->modelTransform);
     } else {
         TranslatePart(theBall, location[0], location[1], location[2]);
     }
 
     theBall->MoveDone();
 
-    LinkSphere(theBall->itsTransform[3], theBall->bigRadius);
+    LinkSphere(theBall->modelTransform[3], theBall->bigRadius);
 
     CRealShooters::PlaceParts();
 }
@@ -253,9 +253,9 @@ void CBall::ReleaseAttachment() {
             host->Detach(&clamp);
             hostIdent = 0;
             hostPart = NULL;
-            location[0] = partList[0]->itsTransform[3][0];
-            location[1] = partList[0]->itsTransform[3][1];
-            location[2] = partList[0]->itsTransform[3][2];
+            location[0] = partList[0]->modelTransform[3][0];
+            location[1] = partList[0]->modelTransform[3][1];
+            location[2] = partList[0]->modelTransform[3][2];
         }
     }
 }
@@ -306,7 +306,7 @@ void CBall::MagnetAction() {
                 Matrix savedMatrix;
                 CAbstractActor *hostActor;
 
-                MATRIXCOPY(savedMatrix, partList[0]->itsTransform);
+                MATRIXCOPY(savedMatrix, partList[0]->modelTransform);
                 hostPart = newHost;
                 hostActor = newHost->theOwner;
                 PlaceParts();
@@ -316,7 +316,7 @@ void CBall::MagnetAction() {
                 if (DoCollisionTest(&proximityList.p)) {
                     hostPart = NULL;
                     snapCode = kSnapAttract;
-                    MATRIXCOPY(partList[0]->itsTransform, savedMatrix);
+                    MATRIXCOPY(partList[0]->modelTransform, savedMatrix);
                     partList[0]->MoveDone();
 
                     BuildActorProximityList(location, partList[0]->bigRadius, kBallSnapBit);
@@ -535,9 +535,9 @@ long CBall::ReceiveSignal(long theSignal, void *miscData) {
             looseFrame = itsGame->FramesFromNow(33);
             oldHost = hostIdent;
             ReleaseAttachment();
-            speed[0] += FMul(pitchZ, theBall->itsTransform[2][0]) + FMul(pitchY, theBall->itsTransform[1][0]);
-            speed[1] += FMul(pitchZ, theBall->itsTransform[2][1]) + FMul(pitchY, theBall->itsTransform[1][1]);
-            speed[2] += FMul(pitchZ, theBall->itsTransform[2][2]) + FMul(pitchY, theBall->itsTransform[1][2]);
+            speed[0] += FMul(pitchZ, theBall->modelTransform[2][0]) + FMul(pitchY, theBall->modelTransform[1][0]);
+            speed[1] += FMul(pitchZ, theBall->modelTransform[2][1]) + FMul(pitchY, theBall->modelTransform[1][1]);
+            speed[2] += FMul(pitchZ, theBall->modelTransform[2][2]) + FMul(pitchY, theBall->modelTransform[1][2]);
 
             DoSound(ejectSound, partList[0]->sphereGlobCenter, ejectVolume, FIX1);
             return true;

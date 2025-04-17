@@ -163,14 +163,14 @@ void CViewParameters::LookAt(Fixed x, Fixed y, Fixed z) {
 void CViewParameters::LookAtPart(CBSPPart *thePart) {
     Fixed *v;
 
-    v = thePart->itsTransform[3];
+    v = thePart->modelTransform[3];
     LookAt(v[0], v[1], v[2]);
 }
 
 void CViewParameters::LookFromPart(CBSPPart *thePart) {
     Fixed *v;
 
-    v = thePart->itsTransform[3];
+    v = thePart->modelTransform[3];
     LookFrom(v[0], v[1], v[2]);
 }
 

@@ -26,6 +26,7 @@ void CWorldShader::Reset() {
 
     lowSkyAltitude = FIX(0);
     highSkyAltitude = FIX(1000);
+    hazeDensity = 0.0f;
 }
 
 #define GROUNDOFFSET FIX(-2)

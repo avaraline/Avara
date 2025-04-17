@@ -80,7 +80,7 @@ void CBSPWorldImpl::OverheadPoint(Fixed *c, Fixed *e) {
           maxZ = FIX(-9999),
           maxY = 0;
     for (int i = 0; i < partCount; i++) {
-        Fixed *t = (*partList)[i]->itsTransform[3];
+        Fixed *t = (*partList)[i]->modelTransform[3];
         minX = t[0] < minX ? t[0] : minX;
         maxX = t[0] > maxX ? t[0] : maxX;
         minZ = t[2] < minZ ? t[2] : minZ;

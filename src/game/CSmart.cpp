@@ -41,7 +41,7 @@ void CSmart::PlaceParts() {
 
     if (flyCount == 0 && hostPart) {
         TranslatePart(partList[0], 0, FIX3(450), FIX3(600));
-        partList[0]->ApplyMatrix(&hostPart->itsTransform);
+        partList[0]->ApplyMatrix(&hostPart->modelTransform);
     } else {
         InitialRotatePartZ(partList[0], roll);
         partList[0]->RotateOneX(pitch);
@@ -50,7 +50,7 @@ void CSmart::PlaceParts() {
     }
 
     partList[0]->MoveDone();
-    LinkSphere(partList[0]->itsTransform[3], partList[0]->bigRadius);
+    LinkSphere(partList[0]->modelTransform[3], partList[0]->bigRadius);
 
     CWeapon::PlaceParts();
 }
@@ -71,8 +71,8 @@ long CSmart::Arm(CSmartPart *aPart) {
 void CSmart::DoTargeting() {
     RayHitRecord rayHit;
 
-    VECTORCOPY(rayHit.origin, partList[0]->itsTransform[3]);
-    VECTORCOPY(rayHit.direction, partList[0]->itsTransform[2]);
+    VECTORCOPY(rayHit.origin, partList[0]->modelTransform[3]);
+    VECTORCOPY(rayHit.direction, partList[0]->modelTransform[2]);
     NormalizeVector(3, rayHit.direction);
     rayHit.distance = FIX(120);
     rayHit.closestHit = NULL;
@@ -109,10 +109,10 @@ void CSmart::ShowTarget() {
     itsGame->itsApp->BrightBox(itsGame->frameNumber, inSight);
 
     if (dist > 0) {
-        v = partList[0]->itsTransform[2];
+        v = partList[0]->modelTransform[2];
 
         targ = itsDepot->smartSight;
-        targ->CopyTransform(&partList[0]->itsTransform);
+        targ->CopyTransform(&partList[0]->modelTransform);
         TranslatePart(targ, FMul(v[0], dist), FMul(v[1], dist), FMul(v[2], dist));
         targ->MoveDone();
         targ->isTransparent = false;
@@ -126,8 +126,8 @@ void CSmart::ShowTarget() {
         if (targetActor) {
             RayHitRecord rayHit;
 
-            v = targetPart->itsTransform[3];
-            u = partList[0]->itsTransform[3];
+            v = targetPart->modelTransform[3];
+            u = partList[0]->modelTransform[3];
             VECTORCOPY(rayHit.origin, u);
 
             rayHit.direction[0] = v[0] - u[0];
@@ -147,7 +147,7 @@ void CSmart::ShowTarget() {
                     v = rayHit.direction;
 
                     targ = itsDepot->smartHairs;
-                    targ->CopyTransform(&partList[0]->itsTransform);
+                    targ->CopyTransform(&partList[0]->modelTransform);
                     TranslatePart(targ, FMul(v[0], dist), FMul(v[1], dist), FMul(v[2], dist));
                     targ->MoveDone();
                     targ->isTransparent = false;
@@ -165,9 +165,9 @@ void CSmart::Locate() {
         theHost = hostPart->theOwner;
         theHost->GetSpeedEstimate(speed);
 
-        location[0] = partList[0]->itsTransform[3][0];
-        location[1] = partList[0]->itsTransform[3][1];
-        location[2] = partList[0]->itsTransform[3][2];
+        location[0] = partList[0]->modelTransform[3][0];
+        location[1] = partList[0]->modelTransform[3][1];
+        location[2] = partList[0]->modelTransform[3][2];
     } else {
         teamColor = 0;
         teamMask = 1;
@@ -176,9 +176,9 @@ void CSmart::Locate() {
         speed[2] = 0;
     }
     PlaceParts();
-    VECTORCOPY(location, partList[0]->itsTransform[3]);
+    VECTORCOPY(location, partList[0]->modelTransform[3]);
 
-    MATRIXCOPY(fullTransform, partList[0]->itsTransform);
+    MATRIXCOPY(fullTransform, partList[0]->modelTransform);
 
     fullTransform[3][0] = 0;
     fullTransform[3][1] = 0;
@@ -229,8 +229,8 @@ void CSmart::TurnTowardsTarget() {
         if (targetActor) {
             RayHitRecord rayHit;
 
-            v = targetPart->itsTransform[3];
-            u = partList[0]->itsTransform[3];
+            v = targetPart->modelTransform[3];
+            u = partList[0]->modelTransform[3];
             VECTORCOPY(rayHit.origin, u);
 
             toTarget[0] = v[0] - u[0];

@@ -92,7 +92,7 @@ void CDoorActor::TouchDamage() {
         searchCount = ++itsGame->searchCount;
 
         theBlast.blastPower = hitPower;
-        VECTORCOPY(theBlast.blastPoint, partList[0]->itsTransform[3]);
+        VECTORCOPY(theBlast.blastPoint, partList[0]->modelTransform[3]);
         theBlast.team = teamColor;
         theBlast.playerId = -1;
 
@@ -254,7 +254,7 @@ void CDoorActor::DoorSound() {
 
     if (theId) {
         itsSoundLink = gHub->GetSoundLink();
-        PlaceSoundLink(itsSoundLink, partList[0]->itsTransform[3]);
+        PlaceSoundLink(itsSoundLink, partList[0]->modelTransform[3]);
         theSound = gHub->GetSoundSampler(hubRate, theId);
         theSound->SetVolume(doorSoundVolume);
         theSound->SetLoopCount(soundLoop);
@@ -302,9 +302,9 @@ void CDoorActor::FrameAction() {
         FPS_DEBUG("\n frameNumber = " << itsGame->frameNumber << "\n");
         Vector oldOrigin;
 
-        oldOrigin[0] = partList[0]->itsTransform[3][0];
-        oldOrigin[1] = partList[0]->itsTransform[3][1];
-        oldOrigin[2] = partList[0]->itsTransform[3][2];
+        oldOrigin[0] = partList[0]->modelTransform[3][0];
+        oldOrigin[1] = partList[0]->modelTransform[3][1];
+        oldOrigin[2] = partList[0]->modelTransform[3][2];
 
         FPS_DEBUG("oldOrigin = " << FormatVector(oldOrigin, 3) << "\n");
 
@@ -350,14 +350,14 @@ void CDoorActor::FrameAction() {
         }
 
         // lastMovement is for external interfaces (sound, slide), so it belongs in classic units
-        lastMovement[0] = ClassicCoefficient2(partList[0]->itsTransform[3][0] - oldOrigin[0]);
-        lastMovement[1] = ClassicCoefficient2(partList[0]->itsTransform[3][1] - oldOrigin[1]);
-        lastMovement[2] = ClassicCoefficient2(partList[0]->itsTransform[3][2] - oldOrigin[2]);
+        lastMovement[0] = ClassicCoefficient2(partList[0]->modelTransform[3][0] - oldOrigin[0]);
+        lastMovement[1] = ClassicCoefficient2(partList[0]->modelTransform[3][1] - oldOrigin[1]);
+        lastMovement[2] = ClassicCoefficient2(partList[0]->modelTransform[3][2] - oldOrigin[2]);
 
         FPS_DEBUG("lastMovement = " << FormatVector(lastMovement, 3) << "\n");
 
         if (itsSoundLink) {
-            UpdateSoundLink(itsSoundLink, partList[0]->itsTransform[3], lastMovement, itsGame->soundTime);
+            UpdateSoundLink(itsSoundLink, partList[0]->modelTransform[3], lastMovement, itsGame->soundTime);
         }
     }
 }
