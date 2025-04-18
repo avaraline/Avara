@@ -557,10 +557,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                 theNetManager->HandleEvent(event);
             }
 
-            if (itsGame->canPreSend && (long)(SDL_GetTicks() - itsGame->nextScheduledFrame) >= 0) {
-                itsGame->canPreSend = false;
-                theNetManager->FrameAction();
-            }
+            itsGame->PreSendFrameActions();
 
             quickTick = TickCount();
 
@@ -594,6 +591,9 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                 itsGame->statusRequest = kAbortStatus;
                 break;
             }
+
+            // sleep 1% of frameTime (0.16msec) to reduce CPU load while we wait
+            std::this_thread::sleep_for(std::chrono::microseconds(itsGame->frameTime*10));
         }
 
         // give up after newer frames appear in the frameFuncs buffer because that
@@ -621,6 +621,12 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
 //            SDL_Log("fn=%d, waitTime = %u\n", itsGame->frameNumber, waitTime);
             itsGame->longWait = true;
         }
+
+        if (frameFuncs[i].validFrame == itsGame->frameNumber) {
+            DBG_Log("presend", "fn=%d, <-GOT pkt, ts=#%d, N=%d, ahead=%d, start=%d time=%d nSF=%d\n", itsGame->frameNumber, itsGame->topSentFrame, itsGame->preSendCount, itsGame->topSentFrame - itsGame->frameNumber, itsGame->frameStart, SDL_GetTicks(), itsGame->nextScheduledFrame);
+        }
+    } else if (!IsLocalPlayer()) {
+        DBG_Log("presend+", "fn=%d, NO waiting    #%d, N=%d, ahead=%d, start=%d time=%d nSF=%d\n", itsGame->frameNumber, itsGame->topSentFrame, itsGame->preSendCount, itsGame->topSentFrame - itsGame->frameNumber, itsGame->frameStart, SDL_GetTicks(), itsGame->nextScheduledFrame);
     }
 
     return &frameFuncs[i].ft;
