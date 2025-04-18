@@ -401,12 +401,12 @@ void CRosterWindow::NewChatLine(Str255 playerName, std::string message) {
 
     ResetChatPrompt();
 
-    Screen* screen = chatLabel->screen();
-    NVGcontext* context = screen->nvgContext();
-    chatLabel->parent()->performLayout(context);
-
-    VScrollPanel *scroll = (VScrollPanel*)chatPanel->parent();
-    scroll->setScroll(1);
+    NVGcontext* context = chatPanel->screen()->nvgContext();
+    if (context) {
+        VScrollPanel *scroll = (VScrollPanel*)chatPanel->parent();
+        scroll->performLayout(context);
+        scroll->setScroll(1);
+    }
 }
 
 bool CRosterWindow::handleSDLEvent(SDL_Event &event) {

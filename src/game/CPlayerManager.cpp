@@ -818,7 +818,7 @@ void CPlayerManagerImpl::RosterMessageText(short len, const char *c) {
                 break;
             case 13:
                 // ¬
-                ((CAvaraAppImpl*)itsGame->itsApp)->rosterWindow->NewChatLine(playerName, GetChatLine());
+                ((CAvaraAppImpl*)itsGame->itsApp)->rosterWindow->NewChatLine(playerName, chatText);
 
                 lineBuffer.insert(lineBuffer.end(), lThing_utf8, lThing_utf8 + strlen(lThing_utf8));
                 // FlushMessageText(true);
@@ -860,7 +860,10 @@ std::string CPlayerManagerImpl::GetChatLine() {
     else
         found += 2;
 
-    return theChat.substr(found);
+    auto line = theChat.substr(found);
+    // usually there's a leading space character because --> "¬ ", so strip that
+    if (line[0] == ' ') line.erase(0, 1);
+    return line;
 }
 
 std::string CPlayerManagerImpl::GetChatString(int maxChars) {
