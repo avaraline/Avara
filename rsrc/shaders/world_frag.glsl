@@ -57,7 +57,7 @@ vec4 light_color() {
 void main() {
     color = light_color();
     
-    vec3 fragRay = camPos - fragPos;
+    vec3 fragRay = fragPos - camPos;
     float dist = length(fragRay);
     color.rgb = apply_fog(color.rgb, dist);
     
