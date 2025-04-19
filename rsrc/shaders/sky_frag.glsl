@@ -2,6 +2,7 @@
 
 in vec3 tex_coord;
 in vec3 camPos;
+in vec3 fragPos;
 
 uniform vec3 groundColor;
 uniform vec3 horizonColor;
@@ -43,6 +44,13 @@ void main()
         1.0
     );
     
-    float dist = clamp((pow(clamp(phi + 1, 0.0, 1.0), 4) * maxHazeDist) + camPos.y, 0, maxHazeDist);
+    float dist = min(
+        mix(
+            -dot(camPos, vec3(0, 1, 0)) / dot(normalize(fragPos - camPos), vec3(0, 1, 0)),
+            maxHazeDist,
+            float(phi >= 0.0)
+        ),
+        maxHazeDist
+    );
     color.rgb = apply_fog(color.rgb, dist);
 }
