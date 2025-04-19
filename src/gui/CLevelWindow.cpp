@@ -5,27 +5,19 @@
 #include "CAvaraGame.h"
 #include "CNetManager.h"
 #include "Preferences.h"
+#include "CRUD.h"
 
 CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     // Searches "levels/" directory alongside application.
     // will eventually use level search API
+
     levelSets = AssetManager::GetAvailablePackages();
 
-    json sets = app->Get(kRecentSets);
-    json levels = app->Get(kRecentLevels);
-    if (sets.size() == levels.size()) {
-        for (unsigned i = 0; i < sets.size(); ++i) {
-            std::string set = sets.at(i);
-            auto exists = AssetManager::PackageInStorage(set);
-            if (exists) {
-                recentSets.push_back(set);
-                recentLevels.push_back(levels.at(i));
-            }
-        }
+    CRUD::RecentLevelsList recents = static_cast<CAvaraAppImpl *>(app)->itsAPI->GetRecentLevels();
+    for (auto recent : recents) {
+        recentSets.push_back(recent.setTag);
+        recentLevels.push_back(recent.levelName);
     }
-
-    app->Set(kRecentSets, recentSets);
-    app->Set(kRecentLevels, recentLevels);
 
     setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 10, 10));
 
@@ -65,19 +57,19 @@ bool CLevelWindow::DoCommand(int theCommand) {
     return false;
 }
 
-void CLevelWindow::AddRecent(std::string set, std::string levelName) {
-    if (json::accept("[\"" + set + "\", \"" + levelName + "\"]")) {
+void CLevelWindow::AddRecent(const LevelInfo &loaded) {
+    if (json::accept("[\"" + loaded.setTag + "\", \"" + loaded.levelName + "\"]")) {
         // remove level if it is already in recents
         for (unsigned i = 0; i < recentSets.size(); i++) {
-            if (recentSets[i].compare(set) == 0 && recentLevels[i].compare(levelName) == 0) {
+            if (recentSets[i].compare(loaded.setTag) == 0 && recentLevels[i].compare(loaded.levelName) == 0) {
                 recentSets.erase(recentSets.begin() + i);
                 recentLevels.erase(recentLevels.begin() + i);
                 break;
             }
         }
 
-        recentSets.insert(recentSets.begin(), set);
-        recentLevels.insert(recentLevels.begin(), levelName);
+        recentSets.insert(recentSets.begin(), loaded.setTag);
+        recentLevels.insert(recentLevels.begin(), loaded.levelName);
 
         if (recentSets.size() > 64) {
             recentSets.pop_back();
@@ -88,6 +80,7 @@ void CLevelWindow::AddRecent(std::string set, std::string levelName) {
         recentsBox->setCaption("Recents");
         recentsBox->setNeedsLayout();
 
+        // TODO: delete this...
         mApplication->Set(kRecentSets, recentSets);
         mApplication->Set(kRecentLevels, recentLevels);
     } else {

@@ -20,6 +20,7 @@
 #include "CTrackerWindow.h"
 #include "CommandManager.h"
 #include "Messages.h"
+#include "CRUD.h"
 
 #include <SDL2/SDL.h>
 #include <string>
@@ -39,7 +40,7 @@ class CNetManager;
 class CAvaraApp {
 public:
     virtual bool DoCommand(int theCommand) = 0;
-    virtual void GameStarted(std::string set, std::string level) = 0;
+    virtual void GameStarted(const LevelInfo &loadedLevel) = 0;
     virtual void MessageLine(short index, MsgAlignment align) = 0;
     virtual void AddMessageLine(std::string lines, MsgAlignment align = MsgAlignment::Left, MsgCategory category = MsgCategory::System) = 0;
     virtual void RenderContents() = 0;
@@ -70,11 +71,13 @@ public:
 class CAvaraAppImpl : public CApplication, public CAvaraApp {
 private:
     std::unique_ptr<CAvaraGame> itsGame;
+
     CNetManager *gameNet;
     CommandManager *itsTui;
     std::unique_ptr<CHUD> ui;
 
 public:
+    std::unique_ptr<CRUD> itsAPI;
     CPlayerWindow *playerWindow;
     CLevelWindow *levelWindow;
     CNetworkWindow *networkWindow;
@@ -113,7 +116,7 @@ public:
     virtual void NotifyUser() override;
 
     virtual void AddMessageLine(std::string lines, MsgAlignment align = MsgAlignment::Left, MsgCategory category = MsgCategory::System) override;
-    virtual void GameStarted(std::string set, std::string level) override;
+    virtual void GameStarted(const LevelInfo &loadedLevel) override;
 
     // From CInfoPanel
     virtual void SetIndicatorDisplay(short i, short v);
