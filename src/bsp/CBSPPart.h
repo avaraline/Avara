@@ -56,6 +56,17 @@ struct FloatNormal {
     float z = 0.0;
     FloatNormal() {};
     FloatNormal(float x, float y, float z) : x(x), y(y), z(z) {}
+    void ApplyTransform(Matrix &m) {
+        Vector v, dest;
+        v[0] = ToFixed(x);
+        v[1] = ToFixed(y);
+        v[2] = ToFixed(z);
+        v[3] = FIX(0);
+        VectorMatrixProduct(1, &v, &dest, &m);
+        x = ToFloat(dest[0]);
+        y = ToFloat(dest[1]);
+        z = ToFloat(dest[2]);
+    }
 };
 
 struct ColorRecord {

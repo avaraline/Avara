@@ -61,6 +61,7 @@ void CCompoundShape::Append(CBSPPart &part)
         // Construct a new polygon, correcting color and point indices.
         PolyRecord newPoly = PolyRecord();
         newPoly.normal = FloatNormal(poly.normal);
+        newPoly.normal.ApplyTransform(part.modelTransform);
         newPoly.triCount = poly.triCount;
         newPoly.triPoints = std::make_unique<uint32_t[]>(poly.triCount * 3);
         
