@@ -40,7 +40,7 @@ class CNetManager;
 class CAvaraApp {
 public:
     virtual bool DoCommand(int theCommand) = 0;
-    virtual void GameStarted(const LevelInfo &loadedLevel) = 0;
+    virtual void GameStarted(LevelInfo &loadedLevel) = 0;
     virtual void MessageLine(short index, MsgAlignment align) = 0;
     virtual void AddMessageLine(std::string lines, MsgAlignment align = MsgAlignment::Left, MsgCategory category = MsgCategory::System) = 0;
     virtual void RenderContents() = 0;
@@ -116,7 +116,7 @@ public:
     virtual void NotifyUser() override;
 
     virtual void AddMessageLine(std::string lines, MsgAlignment align = MsgAlignment::Left, MsgCategory category = MsgCategory::System) override;
-    virtual void GameStarted(const LevelInfo &loadedLevel) override;
+    virtual void GameStarted(LevelInfo &loadedLevel) override;
 
     // From CInfoPanel
     virtual void SetIndicatorDisplay(short i, short v);

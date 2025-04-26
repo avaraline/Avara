@@ -162,7 +162,7 @@ int CRUDsqlite::InsertInto(const std::string clause, const std::vector<int> intB
 }
 
 
-int CRUDsqlite::RecordLevelInfo(const LevelInfo& info) {
+int CRUDsqlite::RecordLevelInfo(LevelInfo& info) {
     SDL_Log("CRUDsqlite::RecordLevelInfo(%s)\n", info.URL().c_str());
 
     int levelId = InsertInto("levels(url, set_name, level_name) VALUES (?,?,?)",
@@ -180,7 +180,7 @@ int CRUDsqlite::RecordLevelInfo(const LevelInfo& info) {
 
 // public/interface methods
 
-void CRUDsqlite::RecordRecentLevel(const LevelInfo& info) {
+void CRUDsqlite::RecordRecentLevel(LevelInfo& info) {
     SDL_Log("CRUDsqlite::RecordRecentLevel(%s)\n", info.URL().c_str());
 
     int levelId = RecordLevelInfo(info);

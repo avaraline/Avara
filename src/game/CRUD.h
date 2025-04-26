@@ -18,7 +18,7 @@
 class CRUD {
 public:
     virtual ~CRUD() {};
-    virtual void RecordRecentLevel(const LevelInfo &info) = 0;
+    virtual void RecordRecentLevel(LevelInfo &info) = 0;
 
     typedef std::vector<LevelInfo> RecentLevelsList;
     virtual RecentLevelsList GetRecentLevels(int count = 50) = 0;

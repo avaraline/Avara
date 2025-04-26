@@ -255,7 +255,7 @@ void CRosterWindow::UpdateRoster() {
             else levelDescription->setCaption("No additional information about this mission is available.");
             currentLevel = theGame->loadedLevelInfo->URL();
 
-            UpdateTags(theGame->loadedTags);
+            UpdateTags(theGame->loadedLevelInfo->TagsString());
         }
     }
     else if (tabWidget->activeTab() == 2) {
@@ -493,7 +493,7 @@ void CRosterWindow::PrefChanged(std::string name) {
 }
 
 
-void CRosterWindow::UpdateTags(std::string& tags) {
+void CRosterWindow::UpdateTags(std::string tags) {
     if (tags.length() > 0) {
         levelTags->setValue("tags:" + tags);
     } else {

@@ -23,13 +23,13 @@ private:
 protected:
     int InsertInto(const std::string clause, const std::vector<std::string> textBinds = {}, const char* returnField = NULL);
     int InsertInto(const std::string clause, const std::vector<int> intBinds, const char* returnField = NULL);
-    int RecordLevelInfo(const LevelInfo &info);
+    int RecordLevelInfo(LevelInfo &info);
 
 public:
     CRUDsqlite();
     ~CRUDsqlite();
 
-    virtual void RecordRecentLevel(const LevelInfo &info) override;
+    virtual void RecordRecentLevel(LevelInfo &info) override;
 
     virtual RecentLevelsList GetRecentLevels(int count = 50) override;
 };

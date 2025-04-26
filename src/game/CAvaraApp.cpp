@@ -246,7 +246,7 @@ void CAvaraAppImpl::drawAll() {
     }
 }
 
-void CAvaraAppImpl::GameStarted(const LevelInfo &loadedLevel) {
+void CAvaraAppImpl::GameStarted(LevelInfo &loadedLevel) {
     auto vp = gRenderer->viewParams;
     animatePreview = false;
     vp->showTransparent = false;
@@ -320,14 +320,12 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
 
     if (result == noErr) {
         playerWindow->RepopulateHullOptions();
-        auto &level = itsGame->loadedLevelInfo->levelName;
-        itsGame->loadedTags = Tags::TagsStringForLevel(Tags::LevelURL(set, level));
-        itsGame->loadedLevelInfo->Authors();
 
         std::string msgStr = "Loaded";
         if (sendingPlayer != NULL) {
             msgStr = sendingPlayer->GetPlayerName() + " loaded";
         }
+        auto &level = itsGame->loadedLevelInfo->levelName;
         msgStr += " \"" + level + "\" from \"" + set + "\".";
         AddMessageLine(msgStr);
 

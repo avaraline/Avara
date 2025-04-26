@@ -78,7 +78,6 @@ class CAbstractYon;
 class CAvaraGame {
 public:
     std::unique_ptr<LevelInfo> loadedLevelInfo = std::make_unique<LevelInfo>("", "");
-    std::string loadedTags; // TODO: move into LevelInfo
     long loadedTimeLimit;
     int32_t timeInSeconds;
     FrameNumber frameNumber;

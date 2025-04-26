@@ -10,7 +10,7 @@
 #include <regex>
 #include "Tags.h"
 
-std::vector<std::string> LevelInfo::Authors() const {
+std::vector<std::string> LevelInfo::Authors() {
     // Try to extract author's name/handle from "designer" variable.  Here are some real examples (with names changed):
     //   Real Name <author>
     //   Real Name (author)  <email@example.com>
@@ -85,6 +85,6 @@ std::vector<std::string> LevelInfo::Authors() const {
     return authors;
 }
 
-std::string LevelInfo::TagsString() const {
-    return Tags::TagsStringForLevel(Tags::LevelURL(setTag, levelTag));
+std::string LevelInfo::TagsString() {
+    return Tags::TagsStringForLevel(Tags::LevelURL(setTag, levelName));
 }
