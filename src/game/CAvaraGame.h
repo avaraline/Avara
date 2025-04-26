@@ -175,11 +175,12 @@ public:
     ScoreInterfaceReasons lastReason;
     std::deque<ScoreInterfaceEvent> scoreEventList;
 
+    uint32_t frameStart;
     uint32_t nextScheduledFrame;
     uint32_t nextPingTime;
     uint32_t nextLoadTime;
 
-    Boolean canPreSend;
+    int preSendCount;
 
     uint32_t nextStatTime;
     long lastFrameTime;
@@ -229,6 +230,7 @@ public:
     virtual void PauseActors();
     virtual void RunFrameActions();
     virtual void RunActorFrameActions();
+    virtual void PreSendFrameActions();
 
     virtual void Score(short team, short player, long points, Fixed energy, short hitTeam, short hitPlayer);
     virtual void AddScoreNotify(ScoreInterfaceEvent event);
