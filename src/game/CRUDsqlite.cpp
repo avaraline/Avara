@@ -58,7 +58,7 @@ static std::vector<std::vector<std::string>> migrations = {
     // all subsequent migrations look something like this (DO NOT CHANGE PREVIOUS MIGRATIONS)
 //        {
 //            "CREATE TABLE new_table (...);",
-//            "UPDATE TABLE existing_table (...);"
+//            "ALTER TABLE existing_table (...);"
 //        },
 };
 
