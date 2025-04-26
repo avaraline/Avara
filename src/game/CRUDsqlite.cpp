@@ -8,6 +8,7 @@
 #include "CRUDsqlite.h"
 
 #include <SDL2/SDL.h>
+#include <stdexcept>   // runtime_error
 
 CRUDsqlite::CRUDsqlite() {
     char *ppath = SDL_GetPrefPath("Avaraline", "Avara");
