@@ -84,7 +84,7 @@ public:
     bool isClassicFrame;
     int32_t frameAdjust;
 
-    int currentGameId = 0; // Increments when a new game starts
+    int currentGameId = 0; // resets when a new game starts
 
     FrameNumber topSentFrame;
 

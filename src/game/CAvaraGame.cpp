@@ -80,7 +80,8 @@ void CAvaraGame::InitLocatorTable() {
 }
 
 void CAvaraGame::IncrementGameCounter() {
-    currentGameId++;
+    extern Fixed FRandSeed;
+    currentGameId = int(FRandSeed);
 }
 
 std::unique_ptr<CNetManager> CAvaraGame::CreateNetManager() {

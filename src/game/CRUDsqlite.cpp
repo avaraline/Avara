@@ -51,15 +51,16 @@ static std::vector<std::vector<std::string>> migrations = {
                                      "UNIQUE(level_id, author_id), "
                                      "FOREIGN KEY(level_id) REFERENCES levels(id), "
                                      "FOREIGN KEY(author_id) REFERENCES authors(id))",
-        "CREATE TABLE recents        (created timestamp default current_timestamp, "
+        "CREATE TABLE games          (created timestamp default current_timestamp, "
+                                     "id INTEGER PRIMARY KEY, "
                                      "level_id INTEGER NOT NULL, "
                                      "FOREIGN KEY(level_id) REFERENCES levels(id))",
     },
     // all subsequent migrations look something like this (DO NOT CHANGE PREVIOUS MIGRATIONS)
-//        {
-//            "CREATE TABLE new_table (...);",
-//            "ALTER TABLE existing_table (...);"
-//        },
+    //        {
+    //            "CREATE TABLE new_table (...);",
+    //            "ALTER TABLE existing_table (...);"
+    //        },
 };
 
 void CRUDsqlite::MigrateTables() {
@@ -162,7 +163,7 @@ int CRUDsqlite::InsertInto(const std::string clause, const std::vector<int> intB
 }
 
 
-int CRUDsqlite::RecordLevelInfo(LevelInfo& info) {
+int CRUDsqlite::RecordLevelInfo(const LevelInfo& info) {
     SDL_Log("CRUDsqlite::RecordLevelInfo(%s)\n", info.URL().c_str());
 
     int levelId = InsertInto("levels(url, set_name, level_name) VALUES (?,?,?)",
@@ -177,26 +178,45 @@ int CRUDsqlite::RecordLevelInfo(LevelInfo& info) {
     return levelId;
 }
 
+std::string CRUDsqlite::RecentsView() {
+    // static so it's only created once
+    static std::string viewName;
+    // create the temporary view and return the view name
+    if (viewName.empty()) {
+        viewName = "recent_levels";
+        // because it's temporary you can modify this view as needed (no migration needed)
+        auto query = "CREATE TEMPORARY VIEW " + viewName + " AS "
+                     "SELECT MAX(G.created) AS created, L.set_name, L.level_name "
+                     "FROM (games G LEFT JOIN levels L on G.level_id=L.id)"
+                     "GROUP BY L.id "
+                     "ORDER BY created DESC";
+        char *errMsg = nullptr;
+        if (sqlite3_exec(myDb, query.c_str(), NULL, NULL, &errMsg) != SQLITE_OK) {
+            SDL_Log("ERROR CREATING RecentsView: %s\n", errMsg);
+            // fall back to pulling from levels?
+            viewName = "levels";
+        }
+    }
+    return viewName;
+}
 
 // public/interface methods
 
-void CRUDsqlite::RecordRecentLevel(LevelInfo& info) {
-    SDL_Log("CRUDsqlite::RecordRecentLevel(%s)\n", info.URL().c_str());
+void CRUDsqlite::RecordGameStart(int gameId, const LevelInfo& info) {
+    SDL_Log("CRUDsqlite::RecordGameStart(%0xd, %s)\n", gameId, info.URL().c_str());
 
     int levelId = RecordLevelInfo(info);
 
-    InsertInto("recents(level_id) VALUES (?)", { levelId });
+    InsertInto("games(id, level_id) VALUES (?, ?)", { gameId, levelId });
 }
 
-CRUD::RecentLevelsList CRUDsqlite::GetRecentLevels(int count) {
-    SDL_Log("CRUDsqlite::GetRecentLevels(%d)\n", count);
+CRUD::RecentLevelsList CRUDsqlite::GetRecentLevels(int limit) {
+    SDL_Log("CRUDsqlite::GetRecentLevels(%d)\n", limit);
     CRUD::RecentLevelsList recents;
 
-    auto query = "SELECT L.set_name, L.level_name "
-                 "FROM (recents R LEFT JOIN levels L on R.level_id=L.id) "
-                 "ORDER BY R.created DESC";
+    std::string query = "SELECT set_name, level_name FROM " + RecentsView() + " LIMIT " + std::to_string(limit);
 
-    sqlite3_exec(myDb, query, [](void* data, int argc, char** argv, char** colName) {
+    sqlite3_exec(myDb, query.c_str(), [](void* data, int argc, char** argv, char** colName) {
         CRUD::RecentLevelsList *list = (CRUD::RecentLevelsList *)data;
         list->push_back(LevelInfo(argv[0], argv[1]));
         return 0;

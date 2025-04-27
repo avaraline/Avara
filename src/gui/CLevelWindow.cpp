@@ -7,17 +7,15 @@
 #include "Preferences.h"
 #include "CRUD.h"
 
+static int MAX_RECENTS = 50;
+
 CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     // Searches "levels/" directory alongside application.
     // will eventually use level search API
 
     levelSets = AssetManager::GetAvailablePackages();
 
-    CRUD::RecentLevelsList recents = static_cast<CAvaraAppImpl *>(app)->itsAPI->GetRecentLevels();
-    for (auto recent : recents) {
-        recentSets.push_back(recent.setTag);
-        recentLevels.push_back(recent.levelName);
-    }
+    FetchRecents();
 
     setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 10, 10));
 
@@ -57,35 +55,21 @@ bool CLevelWindow::DoCommand(int theCommand) {
     return false;
 }
 
-void CLevelWindow::AddRecent(const LevelInfo &loaded) {
-    if (json::accept("[\"" + loaded.setTag + "\", \"" + loaded.levelName + "\"]")) {
-        // remove level if it is already in recents
-        for (unsigned i = 0; i < recentSets.size(); i++) {
-            if (recentSets[i].compare(loaded.setTag) == 0 && recentLevels[i].compare(loaded.levelName) == 0) {
-                recentSets.erase(recentSets.begin() + i);
-                recentLevels.erase(recentLevels.begin() + i);
-                break;
-            }
-        }
-
-        recentSets.insert(recentSets.begin(), loaded.setTag);
-        recentLevels.insert(recentLevels.begin(), loaded.levelName);
-
-        if (recentSets.size() > 64) {
-            recentSets.pop_back();
-            recentLevels.pop_back();
-        }
-
-        recentsBox->setItems(recentLevels, recentSets);
-        recentsBox->setCaption("Recents");
-        recentsBox->setNeedsLayout();
-
-        // TODO: delete this...
-        mApplication->Set(kRecentSets, recentSets);
-        mApplication->Set(kRecentLevels, recentLevels);
-    } else {
-        SDL_Log("AddRecent ignoring bad set/level name.");
+void CLevelWindow::FetchRecents() {
+    recentSets.clear();
+    recentLevels.clear();
+    CRUD::RecentLevelsList recents = static_cast<CAvaraAppImpl *>(mApplication)->itsAPI->GetRecentLevels(MAX_RECENTS);
+    for (auto recent : recents) {
+        recentSets.push_back(recent.setTag);
+        recentLevels.push_back(recent.levelName);
     }
+}
+
+void CLevelWindow::UpdateRecents() {
+    FetchRecents();
+    recentsBox->setItems(recentLevels, recentSets);
+    recentsBox->setCaption("Recents");
+    recentsBox->setNeedsLayout();
 }
 
 void CLevelWindow::SelectLevel(std::string set, std::string levelName) {

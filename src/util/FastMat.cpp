@@ -82,7 +82,8 @@ Fixed NormalizeVector(long n, Fixed *v) {
 
 void InitMatrix() {
     InitTrigTables();
-    FRandSeed = (Fixed)TickCount();
+    srandom((unsigned)time(nullptr));
+    FRandSeed = (Fixed)random();
 }
 
 Fixed FSqroot(int *ab) {

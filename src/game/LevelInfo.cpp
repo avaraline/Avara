@@ -10,7 +10,7 @@
 #include <regex>
 #include "Tags.h"
 
-std::vector<std::string> LevelInfo::Authors() {
+std::vector<std::string> LevelInfo::Authors() const {
     // Try to extract author's name/handle from "designer" variable.  Here are some real examples (with names changed):
     //   Real Name <author>
     //   Real Name (author)  <email@example.com>

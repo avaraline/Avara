@@ -20,7 +20,8 @@ public:
     void SelectSet(int selected);
     void SelectSet(std::string set);
     void SelectLevel(std::string set, std::string levelName);
-    void AddRecent(const LevelInfo &loadedLevel);
+    void FetchRecents();
+    void UpdateRecents();
     void SetIntro(int selected);
     void SendLoad();
 

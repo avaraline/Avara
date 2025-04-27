@@ -23,15 +23,16 @@ private:
 protected:
     int InsertInto(const std::string clause, const std::vector<std::string> textBinds = {}, const char* returnField = NULL);
     int InsertInto(const std::string clause, const std::vector<int> intBinds, const char* returnField = NULL);
-    int RecordLevelInfo(LevelInfo &info);
+    int RecordLevelInfo(const LevelInfo &info);
+    std::string RecentsView();
 
 public:
     CRUDsqlite();
     ~CRUDsqlite();
 
-    virtual void RecordRecentLevel(LevelInfo &info) override;
+    virtual void RecordGameStart(int gameId, const LevelInfo &info) override;
 
-    virtual RecentLevelsList GetRecentLevels(int count = 50) override;
+    virtual RecentLevelsList GetRecentLevels(int limit) override;
 };
 
 #endif /* CRUDsqlite_h */

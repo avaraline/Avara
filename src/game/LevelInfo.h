@@ -27,7 +27,7 @@ public:
 
     std::string URL() const { return "file:///levels/" + setTag + "/" + levelTag; };
 
-    std::vector<std::string> Authors();
+    std::vector<std::string> Authors() const;
     std::string TagsString();
 };
 

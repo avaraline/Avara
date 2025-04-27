@@ -252,8 +252,8 @@ void CAvaraAppImpl::GameStarted(LevelInfo &loadedLevel) {
     vp->showTransparent = false;
     itsGame->IncrementGameCounter();
     MessageLine(kmStarted, MsgAlignment::Center);
-    levelWindow->AddRecent(loadedLevel);
-    itsAPI->RecordRecentLevel(loadedLevel);
+    itsAPI->RecordGameStart(itsGame->currentGameId, loadedLevel);
+    levelWindow->UpdateRecents();
 }
 
 bool CAvaraAppImpl::DoCommand(int theCommand) {
