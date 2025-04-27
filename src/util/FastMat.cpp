@@ -81,10 +81,22 @@ Fixed NormalizeVector(long n, Fixed *v) {
     return l;
 }
 
+// because Windows is fussy about random/srandom, here's a quick version that's
+// good enough for the purposes of a starting game seed.  Here's the Wikipedia page that describe
+// Linear congruential generator algorithms (Juri's FRand() looks like a variation of mcg16807)
+//   https://en.wikipedia.org/wiki/Linear_congruential_generator
+uint32_t seedLCG = (uint32_t)time(nullptr);
+uint32_t randLCG() {
+    seedLCG = 1664525 * seedLCG + 1013904223;
+    return seedLCG;
+}
+
 void InitMatrix() {
     InitTrigTables();
-    srandom((unsigned)time(nullptr));
-    FRandSeed = (Fixed)random();
+    // call randLCG() a "few" times for a good shuffle
+    for (short count = 2 + (randLCG() & 0x3); count > 0; count--) {
+        FRandSeed = (Fixed)randLCG();
+    }
 }
 
 Fixed FSqroot(int *ab) {
