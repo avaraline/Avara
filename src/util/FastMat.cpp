@@ -15,6 +15,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <utility>
+#include <time.h>    // time()
 
 #define ARCUSTABLEBITS 9
 #define ARCUSTABLESIZE (1 + (1 << ARCUSTABLEBITS))
