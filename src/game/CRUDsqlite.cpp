@@ -9,6 +9,7 @@
 
 #include <SDL2/SDL.h>
 #include <stdexcept>   // runtime_error
+#include "Debug.h"
 
 CRUDsqlite::CRUDsqlite() {
     char *ppath = SDL_GetPrefPath("Avaraline", "Avara");
@@ -19,6 +20,8 @@ CRUDsqlite::CRUDsqlite() {
         SDL_Log("Database opened: %s\n", path.c_str());
         // foreign key enforcement must be enabled on each connection
         sqlite3_exec(myDb, "PRAGMA foreign_keys = ON", NULL, 0, NULL);
+        // max wait if the table is locked (helpful when testing with multiple clients on same computer)
+        sqlite3_busy_timeout(myDb, 5 /* msec */);
         // migrate/create the database tables
         MigrateTables();
     } else {
@@ -108,7 +111,7 @@ void CRUDsqlite::MigrateTables() {
 
 // for internal use only, you should probably use the methods that call this one
 int CRUDsqlite::InsertInto(const std::string clause, const char* returnField, std::function<void(sqlite3_stmt *)> bind_values) {
-    SDL_Log("CRUDsqlite::InsertInto(%s, (...), %s)\n", clause.c_str(), returnField);
+    DBG_Log("sql", "CRUDsqlite::InsertInto(%s, (...), %s)\n", clause.c_str(), returnField);
 
     sqlite3_stmt * stmt;
     std::string query = "INSERT INTO " + clause;
@@ -122,18 +125,20 @@ int CRUDsqlite::InsertInto(const std::string clause, const char* returnField, st
 
     int rc = sqlite3_prepare_v2(myDb, query.c_str(), -1, &stmt, NULL);
     bind_values(stmt);
-    if (rc != SQLITE_OK) {
-        SDL_Log("ERROR inserting data: %s\n", sqlite3_errmsg(myDb));
-        return 0;
-    }
 
-    sqlite3_step(stmt);
+    rc = sqlite3_step(stmt);
+    if ((returnField && rc != SQLITE_ROW) || (!returnField && rc != SQLITE_DONE)) {
+        SDL_Log("possible ERROR inserting data: [%d] %s\n", rc, sqlite3_errmsg(myDb));
+    }
     int result = 0;
     if (returnField) {
         // get the requested returnField
         result = sqlite3_column_int(stmt, 0);
     }
-    sqlite3_finalize(stmt);
+    rc = sqlite3_finalize(stmt);
+    if (rc != SQLITE_OK) {
+        SDL_Log("ERROR finalizing insert: [%d] %s\n", rc, sqlite3_errmsg(myDb));
+    }
 
     return result;
 }
@@ -141,7 +146,7 @@ int CRUDsqlite::InsertInto(const std::string clause, const char* returnField, st
 // an insert utility that also helps to avoid SQL injection and can return the id of the inserted/matching record
 int CRUDsqlite::InsertInto(const std::string clause, const std::vector<std::string> textBinds, const char* returnField)
 {
-    SDL_Log("CRUDsqlite::InsertInto(%s, strings[..], %s)\n", clause.c_str(), returnField);
+    DBG_Log("sql", "CRUDsqlite::InsertInto(%s, strings[...], %s)\n", clause.c_str(), returnField);
 
     return InsertInto(clause, returnField, [&](sqlite3_stmt * stmt) {
         for (int i = 0; i < textBinds.size(); i++) {
@@ -153,7 +158,7 @@ int CRUDsqlite::InsertInto(const std::string clause, const std::vector<std::stri
 // same as above but for inserting ints
 int CRUDsqlite::InsertInto(const std::string clause, const std::vector<int> intBinds, const char* returnField)
 {
-    SDL_Log("CRUDsqlite::InsertInto(%s, ints[..], %s)\n", clause.c_str(), returnField);
+    DBG_Log("sql", "CRUDsqlite::InsertInto(%s, ints[..], %s)\n", clause.c_str(), returnField);
 
     return InsertInto(clause, returnField, [&](sqlite3_stmt * stmt) {
         for (int i = 0; i < intBinds.size(); i++) {
@@ -164,7 +169,7 @@ int CRUDsqlite::InsertInto(const std::string clause, const std::vector<int> intB
 
 
 int CRUDsqlite::RecordLevelInfo(const LevelInfo& info) {
-    SDL_Log("CRUDsqlite::RecordLevelInfo(%s)\n", info.URL().c_str());
+    DBG_Log("sql", "CRUDsqlite::RecordLevelInfo(%s)\n", info.URL().c_str());
 
     int levelId = InsertInto("levels(url, set_name, level_name) VALUES (?,?,?)",
                              { info.URL(), info.setTag, info.levelName }, "id");
@@ -203,7 +208,7 @@ std::string CRUDsqlite::RecentsView() {
 // public/interface methods
 
 void CRUDsqlite::RecordGameStart(int gameId, const LevelInfo& info) {
-    SDL_Log("CRUDsqlite::RecordGameStart(%0xd, %s)\n", gameId, info.URL().c_str());
+    DBG_Log("sql", "CRUDsqlite::RecordGameStart(%0xd, %s)\n", gameId, info.URL().c_str());
 
     int levelId = RecordLevelInfo(info);
 
@@ -211,7 +216,7 @@ void CRUDsqlite::RecordGameStart(int gameId, const LevelInfo& info) {
 }
 
 CRUD::RecentLevelsList CRUDsqlite::GetRecentLevels(int limit) {
-    SDL_Log("CRUDsqlite::GetRecentLevels(%d)\n", limit);
+    DBG_Log("sql", "CRUDsqlite::GetRecentLevels(%d)\n", limit);
     CRUD::RecentLevelsList recents;
 
     std::string query = "SELECT set_name, level_name FROM " + RecentsView() + " LIMIT " + std::to_string(limit);
@@ -220,7 +225,7 @@ CRUD::RecentLevelsList CRUDsqlite::GetRecentLevels(int limit) {
         CRUD::RecentLevelsList *list = (CRUD::RecentLevelsList *)data;
         list->push_back(LevelInfo(argv[0], argv[1]));
         return 0;
-    }, &recents, NULL);
+    }, &recents, nullptr);
 
     return recents;
 }
