@@ -34,12 +34,12 @@ void CAbstractActor::LoadPart(short ind, short resId) {
     }
 }
 
-void CAbstractActor::LoadPartWithColors(short ind, short resId) {
+void CAbstractActor::LoadPartWithMaterials(short ind, short resId) {
     LoadPart(ind, resId);
-    partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(0), GetPixelColor());
-    partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(1), GetOtherPixelColor());
-    partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(2), GetTertiaryColor());
-    partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(3), GetQuaternaryColor());
+    partList[ind]->ReplaceMaterialForColor(*ColorManager::getMarkerColor(0), GetPixelMaterial());
+    partList[ind]->ReplaceMaterialForColor(*ColorManager::getMarkerColor(1), GetOtherPixelMaterial());
+    partList[ind]->ReplaceMaterialForColor(*ColorManager::getMarkerColor(2), GetTertiaryMaterial());
+    partList[ind]->ReplaceMaterialForColor(*ColorManager::getMarkerColor(3), GetQuaternaryMaterial());
 }
 
 bool CAbstractActor::IsGeometryStatic() {

@@ -31,10 +31,10 @@ void AbstractRenderer::ResetLights()
 {
     viewParams->ambientLight = ToFixed(0.4f);
     viewParams->ambientLightColor = DEFAULT_LIGHT_COLOR;
-    viewParams->SetLight(0, ToFixed(0.4f), ToFixed(45.0f), ToFixed(20.0f), DEFAULT_LIGHT_COLOR, kLightGlobalCoordinates);
-    viewParams->SetLight(1, ToFixed(0.3f), ToFixed(20.0f), ToFixed(200.0f), DEFAULT_LIGHT_COLOR, kLightGlobalCoordinates);
-    viewParams->SetLight(2, 0, 0, 0, DEFAULT_LIGHT_COLOR, kLightOff);
-    viewParams->SetLight(3, 0, 0, 0, DEFAULT_LIGHT_COLOR, kLightOff);
+    viewParams->SetLight(0, ToFixed(0.4f), ToFixed(45.0f), ToFixed(20.0f), DEFAULT_LIGHT_COLOR, false, kLightGlobalCoordinates);
+    viewParams->SetLight(1, ToFixed(0.3f), ToFixed(20.0f), ToFixed(200.0f), DEFAULT_LIGHT_COLOR, false, kLightGlobalCoordinates);
+    viewParams->SetLight(2, 0, 0, 0, DEFAULT_LIGHT_COLOR, false, kLightOff);
+    viewParams->SetLight(3, 0, 0, 0, DEFAULT_LIGHT_COLOR, false, kLightOff);
     ApplyLights();
 }
 

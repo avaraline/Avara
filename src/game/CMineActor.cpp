@@ -96,8 +96,8 @@ CAbstractActor *CMineActor::EndScript() {
 
     partCount = 2;
 
-    LoadPartWithColors(0, primeShapeId);
-    LoadPartWithColors(1, altShapeId);
+    LoadPartWithMaterials(0, primeShapeId);
+    LoadPartWithMaterials(1, altShapeId);
 
     InitialRotatePartY(partList[0], heading);
     TranslatePart(partList[0], location[0], location[1], location[2]);

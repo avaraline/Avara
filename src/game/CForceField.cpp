@@ -50,7 +50,7 @@ CAbstractActor *CForceField::EndScript() {
 
         if (shapeId) {
             partCount = 1;
-            LoadPartWithColors(0, shapeId);
+            LoadPartWithMaterials(0, shapeId);
             partList[0]->RotateZ(ReadFixedVar(iRoll));
             partList[0]->RotateOneY(heading);
             TranslatePart(partList[0], location[0], location[1], location[2]);

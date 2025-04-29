@@ -55,10 +55,10 @@ CAbstractActor *CZombieActor::EndScript() {
         watchFlip = 1;
 
         partCount = 2;
-        LoadPartWithColors(0, 810);
-        LoadPartWithColors(1, 811);
+        LoadPartWithMaterials(0, 810);
+        LoadPartWithMaterials(1, 811);
 
-        repColor = GetPixelColor();
+        repColor = GetPixelMaterial().GetColor();
 
         bigRadius = partList[0]->bigRadius;
         if (partList[1]->bigRadius > bigRadius)

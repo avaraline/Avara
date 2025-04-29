@@ -28,8 +28,8 @@ CAbstractActor *CSkyColorAdjuster::EndScript() {
     CAbstractActor::EndScript();
 
     auto theShader = gRenderer->skyParams;
-    theShader->lowSkyColor = GetPixelColor();
-    theShader->highSkyColor = GetOtherPixelColor();
+    theShader->lowSkyColor = GetPixelMaterial().GetColor();
+    theShader->highSkyColor = GetOtherPixelMaterial().GetColor();
 
     shadeCount = ReadLongVar(iCount);
     if (shadeCount < 0)

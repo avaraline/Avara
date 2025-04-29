@@ -557,6 +557,7 @@ void CAvaraGame::EndScript() {
     short i;
     ARGBColor color = 0;
     Fixed intensity, angle1, angle2;
+    bool applySpecular;
     auto vp = gRenderer->viewParams;
 
     gameStatus = kReadyStatus;
@@ -567,21 +568,22 @@ void CAvaraGame::EndScript() {
         .value_or(DEFAULT_LIGHT_COLOR);
 
     for (i = 0; i < 4; i++) {
-        intensity = ReadFixedVar(iLightsTable + 4 * i);
+        intensity = ReadFixedVar(iLightsTable + 5 * i);
 
         if (intensity >= 2048) {
-            angle1 = ReadFixedVar(iLightsTable + 1 + 4 * i);
-            angle2 = ReadFixedVar(iLightsTable + 2 + 4 * i);
-            color = ARGBColor::Parse(ReadStringVar(iLightsTable + 3 + 4 * i))
+            angle1 = ReadFixedVar(iLightsTable + 1 + 5 * i);
+            angle2 = ReadFixedVar(iLightsTable + 2 + 5 * i);
+            color = ARGBColor::Parse(ReadStringVar(iLightsTable + 3 + 5 * i))
                 .value_or(DEFAULT_LIGHT_COLOR);
+            applySpecular = ReadLongVar(iLightsTable + 4 + 5 * i);
 
-            vp->SetLight(i, angle1, angle2, intensity, color, kLightGlobalCoordinates);
+            vp->SetLight(i, angle1, angle2, intensity, color, applySpecular, kLightGlobalCoordinates);
             // SDL_Log("Light from light table - idx: %d i: %f a: %f b: %f c: %x",
             //        i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), color);
 
             //The b angle is the compass reading and the a angle is the angle from the horizon.
         } else {
-            vp->SetLight(i, 0, 0, 0, DEFAULT_LIGHT_COLOR, kLightOff);
+            vp->SetLight(i, 0, 0, 0, DEFAULT_LIGHT_COLOR, false, kLightOff);
         }
     }
     gRenderer->ApplyLights();
