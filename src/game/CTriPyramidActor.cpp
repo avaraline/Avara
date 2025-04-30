@@ -17,7 +17,7 @@ CAbstractActor *CTriPyramidActor::EndScript() {
     maskBits |= kSolidBit + kDoorIgnoreBit;
     partCount = 1;
 
-    LoadPartWithColors(0, kTriPyramidBSP);
+    LoadPartWithMaterials(0, kTriPyramidBSP);
     partList[0]->RotateZ(FIX(45));
     partList[0]->RotateX(FIX3(35264));
     partList[0]->RotateOneY(heading);

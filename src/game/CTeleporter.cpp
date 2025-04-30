@@ -91,7 +91,7 @@ CAbstractActor *CTeleporter::EndScript() {
 
     if (shapeRes) {
         partCount = 1;
-        LoadPartWithColors(0, shapeRes);
+        LoadPartWithMaterials(0, shapeRes);
         partList[0]->Reset();
         if (ReadLongVar(iIsAmbient) > 0)
             partList[0]->userFlags |= CBSPUserFlags::kIsAmbient;

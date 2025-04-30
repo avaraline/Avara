@@ -41,7 +41,7 @@ void CSliverPart::Activate(Fixed *origin,
     int offset = FSysRandom() % (fromObject->polyTable.size());
     borrowPoly = &fromObject->polyTable[offset];
 
-    ARGBColor c = fromObject->colorTable[borrowPoly->colorIdx].current;
+    ARGBColor c = fromObject->materialTable[borrowPoly->materialIdx].current.GetColor();
 
     ReplaceColor(*ColorManager::getMarkerColor(0), c);
 

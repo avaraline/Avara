@@ -194,6 +194,7 @@ void AssetManager::Init()
     LoadManifest(NoPackage);
     LoadScript(NoPackage);
     LoadEnumeratedObjectTypes();
+    InitParser();
 }
 
 OSErr AssetManager::LoadLevel(std::string packageName, std::string relativePath, std::string &levelName)

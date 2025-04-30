@@ -187,11 +187,12 @@ void LegacyOpenGLRenderer::ApplyLights()
     worldShader->SetFloat3("ambientColor", ambientRGB);
 
     for (int i = 0; i < 4; i++) {
+        float rgb[3];
         float intensity = ToFloat(viewParams->dirLightSettings[i].intensity);
         float elevation = ToFloat(viewParams->dirLightSettings[i].angle1);
         float azimuth = ToFloat(viewParams->dirLightSettings[i].angle2);
-        float rgb[3];
         viewParams->dirLightSettings[i].color.ExportGLFloats(rgb, 3);
+        bool applySpecular = viewParams->dirLightSettings[i].applySpecular;
 
         float xyz[3] = {
             sin(Deg2Rad(-azimuth)) * intensity,
@@ -199,22 +200,51 @@ void LegacyOpenGLRenderer::ApplyLights()
             cos(Deg2Rad(azimuth)) * intensity
         };
 
+        worldShader->Use();
         switch (i) {
             case 0:
-                worldShader->SetFloat3("light0", xyz);
-                worldShader->SetFloat3("light0Color", rgb);
+                worldShader->SetFloat3("lights[0]", xyz);
+                worldShader->SetFloat3("lightColors[0]", rgb);
+                worldShader->SetBool("lightApplySpecular[0]", applySpecular);
                 break;
             case 1:
-                worldShader->SetFloat3("light1", xyz);
-                worldShader->SetFloat3("light1Color", rgb);
+                worldShader->SetFloat3("lights[1]", xyz);
+                worldShader->SetFloat3("lightColors[1]", rgb);
+                worldShader->SetBool("lightApplySpecular[1]", applySpecular);
                 break;
             case 2:
-                worldShader->SetFloat3("light2", xyz);
-                worldShader->SetFloat3("light2Color", rgb);
+                worldShader->SetFloat3("lights[2]", xyz);
+                worldShader->SetFloat3("lightColors[2]", rgb);
+                worldShader->SetBool("lightApplySpecular[2]", applySpecular);
                 break;
             case 3:
-                worldShader->SetFloat3("light3", xyz);
-                worldShader->SetFloat3("light3Color", rgb);
+                worldShader->SetFloat3("lights[3]", xyz);
+                worldShader->SetFloat3("lightColors[3]", rgb);
+                worldShader->SetBool("lightApplySpecular[3]", applySpecular);
+                break;
+        }
+        
+        skyShader->Use();
+        switch (i) {
+            case 0:
+                skyShader->SetFloat3("lights[0]", xyz);
+                skyShader->SetFloat3("lightColors[0]", rgb);
+                skyShader->SetBool("lightApplySpecular[0]", applySpecular);
+                break;
+            case 1:
+                skyShader->SetFloat3("lights[1]", xyz);
+                skyShader->SetFloat3("lightColors[1]", rgb);
+                skyShader->SetBool("lightApplySpecular[1]", applySpecular);
+                break;
+            case 2:
+                skyShader->SetFloat3("lights[2]", xyz);
+                skyShader->SetFloat3("lightColors[2]", rgb);
+                skyShader->SetBool("lightApplySpecular[2]", applySpecular);
+                break;
+            case 3:
+                skyShader->SetFloat3("lights[3]", xyz);
+                skyShader->SetFloat3("lightColors[3]", rgb);
+                skyShader->SetBool("lightApplySpecular[3]", applySpecular);
                 break;
         }
     }
@@ -245,28 +275,34 @@ void LegacyOpenGLRenderer::ApplyProjection()
 
 void LegacyOpenGLRenderer::ApplySky()
 {
-    float groundColorRGB[3];
-    float lowSkyColorRGB[3];
     float highSkyColorRGB[3];
-    skyParams->groundColor.ExportGLFloats(groundColorRGB, 3);
-    skyParams->lowSkyColor.ExportGLFloats(lowSkyColorRGB, 3);
+    float lowSkyColorRGB[3];
+    float groundColorRGB[3];
+    float groundSpecRGB[3];
+    float groundShininess;
     skyParams->highSkyColor.ExportGLFloats(highSkyColorRGB, 3);
+    skyParams->lowSkyColor.ExportGLFloats(lowSkyColorRGB, 3);
+    skyParams->groundMaterial.GetColor().ExportGLFloats(groundColorRGB, 3);
+    skyParams->groundMaterial.GetSpecular().ExportGLFloats(groundSpecRGB, 3);
+    groundShininess = skyParams->groundMaterial.GetShininess() / 255.0f;
     
     float lowAlt = ToFloat(skyParams->lowSkyAltitude) / 20000.0f;
     float highAlt = ToFloat(skyParams->highSkyAltitude) / 20000.0f;
     float hazeDensity = skyParams->hazeDensity;
     
     skyShader->Use();
-    skyShader->SetFloat3("groundColor", groundColorRGB);
-    skyShader->SetFloat3("horizonColor", lowSkyColorRGB);
     skyShader->SetFloat3("skyColor", highSkyColorRGB);
+    skyShader->SetFloat3("horizonColor", lowSkyColorRGB);
+    skyShader->SetFloat3("groundColor", groundColorRGB);
+    skyShader->SetFloat3("groundSpec", groundSpecRGB);
+    skyShader->SetFloat("groundShininess", groundShininess);
     skyShader->SetFloat("lowAlt", lowAlt);
     skyShader->SetFloat("highAlt", highAlt);
     skyShader->SetFloat("hazeDensity", hazeDensity);
     
     worldShader->Use();
-    worldShader->SetFloat3("horizonColor", lowSkyColorRGB);
     worldShader->SetFloat3("skyColor", highSkyColorRGB);
+    worldShader->SetFloat3("horizonColor", lowSkyColorRGB);
     worldShader->SetFloat("highAlt", highAlt);
     worldShader->SetFloat("hazeDensity", hazeDensity);
 }
@@ -472,12 +508,16 @@ void LegacyOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
     glEnableVertexAttribArray(0);
 
     // RGBAColor!
-    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(3 * sizeof(float)));
+    glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(GLData), (void *)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
+    
+    // Specular!
+    glVertexAttribPointer(2, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(GLData), (void *)((3 * sizeof(float)) + (4 * sizeof(uint8_t))));
+    glEnableVertexAttribArray(2);
 
     // Normal!
-    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(7 * sizeof(float)));
-    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)((3 * sizeof(float)) + (8 * sizeof(uint8_t))));
+    glEnableVertexAttribArray(3);
 
     // Custom, per-object lighting and depth testing!
     float extraAmbient = ToFloat(part.extraAmbient);
@@ -537,7 +577,7 @@ void LegacyOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
 
 void LegacyOpenGLRenderer::IgnoreDirectionalLights(OpenGLShader &shader, bool yn)
 {
-    shader.SetFloat("lightsActive", (yn) ? 0.0f : 1.0f);
+    shader.SetBool("lightsActive", !yn);
 }
 
 std::unique_ptr<OpenGLShader> LegacyOpenGLRenderer::LoadShader(const std::string &vertFile,
