@@ -24,7 +24,7 @@ jobs:
         run: .\bin\winavarazip.ps1
         shell: pwsh
       - name: deploy main nightly
-        if: startsWith(github.repository_owner, 'avaraline') && (github.refname == 'beta')
+        if: startsWith(github.repository_owner, 'avaraline') && (github.refname != 'main')
         uses: WebFreak001/deploy-nightly@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -49,7 +49,7 @@ jobs:
       - name: make macdist
         run: make -j4 clean macdist
       - name: deploy main nightly
-        if: startsWith(github.repository_owner, 'avaraline') && (github.ref == 'beta')
+        if: startsWith(github.repository_owner, 'avaraline') && (github.ref != 'main')
         uses: WebFreak001/deploy-nightly@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
