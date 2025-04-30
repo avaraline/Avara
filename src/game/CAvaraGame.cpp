@@ -460,7 +460,7 @@ void CAvaraGame::RunFrameActions() {
     // Time out old score events
     if (!scoreEventList.empty()) {
         ScoreInterfaceEvent event = scoreEventList.front();
-        if (event.frameNumber + 480 < frameNumber || event.gameId < currentGameId) {
+        if (event.frameNumber < FramesFromNow(-120) || event.gameId != currentGameId) {
             scoreEventList.pop_front();
         }
     }
