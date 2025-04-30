@@ -212,6 +212,8 @@ public:
     virtual void ReplaceColor(ARGBColor origColor, ARGBColor newColor);
     virtual void ReplaceAllColors(ARGBColor newColor);
     virtual void ReplaceMaterialForColor(ARGBColor origColor, Material newMaterial);
+    virtual void ReplaceSpecularForColor(ARGBColor origColor, ARGBColor newSpecular);
+    virtual void ReplaceShininessForColor(ARGBColor origColor, uint8_t newShininess);
     virtual void ReplaceMaterial(Material origMaterial, Material newMaterial);
     virtual void ReplaceAllMaterials(Material newMaterial);
 

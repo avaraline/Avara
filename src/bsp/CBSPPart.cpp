@@ -453,6 +453,30 @@ void CBSPPart::ReplaceMaterialForColor(ARGBColor origColor, Material newMaterial
     if (materialReplaced && vData) vData->Replace(*this);
 }
 
+void CBSPPart::ReplaceSpecularForColor(ARGBColor origColor, ARGBColor newSpecular) {
+    bool specularReplaced = false;
+    for (auto &material : materialTable) {
+        if (material.original.GetColor() == origColor) {
+            material.current = material.current.WithSpecular(newSpecular);
+            specularReplaced = true;
+        }
+    }
+    // (No need to check for alpha here.)
+    if (specularReplaced && vData) vData->Replace(*this);
+}
+
+void CBSPPart::ReplaceShininessForColor(ARGBColor origColor, uint8_t newShininess) {
+    bool shininessReplaced = false;
+    for (auto &material : materialTable) {
+        if (material.original.GetColor() == origColor) {
+            material.current = material.current.WithShininess(newShininess);
+            shininessReplaced = true;
+        }
+    }
+    // (No need to check for alpha here.)
+    if (shininessReplaced && vData) vData->Replace(*this);
+}
+
 void CBSPPart::ReplaceMaterial(Material origMaterial, Material newMaterial) {
     bool materialReplaced = false;
     for (auto &material : materialTable) {
