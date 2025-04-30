@@ -114,7 +114,7 @@ void OpenGLVertices::Append(const CBSPPart &part)
     for (auto &poly : part.polyTable)
     {
         material = part.materialTable[poly.materialIdx].current;
-        vis = (part.HasAlpha() && poly.vis != 0) ? 3 : poly.vis;
+        vis = (part.HasAlpha() && poly.vis != 0 && part.Has3D()) ? 3 : poly.vis;
         if (!vis) vis = 0;
         switch (vis) {
             case 0:
@@ -148,7 +148,7 @@ void OpenGLVertices::Append(const CBSPPart &part)
     int pAlpha = 0;
     for (auto &poly : part.polyTable) {
         material = part.materialTable[poly.materialIdx].current;
-        uint8_t vis = (part.HasAlpha() && poly.vis != 0) ? 3 : poly.vis;
+        uint8_t vis = (part.HasAlpha() && poly.vis != 0 && part.Has3D()) ? 3 : poly.vis;
         if (!vis) vis = 0; // default to 0 (none) if vis is empty
 
         // vis can ONLY be 0 for None, 1 for Front, 2 for Back, or 3 for Both

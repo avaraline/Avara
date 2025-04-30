@@ -531,6 +531,12 @@ void CBSPPart::CheckForAlpha() {
     }
 }
 
+bool CBSPPart::Has3D() const {
+    return !(maxBounds.x == minBounds.x ||
+             maxBounds.y == minBounds.y ||
+             maxBounds.z == minBounds.z);
+}
+
 bool CBSPPart::HasAlpha() const {
     return hasAlpha;
 }
