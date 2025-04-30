@@ -243,6 +243,7 @@ public:
     virtual void PrependMatrix(Matrix *m); //	modelTransform = m * modelTransform
     virtual Matrix *GetInverseTransform();
 
+    virtual bool Has3D() const;
     virtual bool HasAlpha() const;
     virtual void SetScale(Fixed x, Fixed y, Fixed z);
     virtual void ResetScale();
