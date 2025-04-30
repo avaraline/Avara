@@ -13,6 +13,7 @@
 #include "AssetManager.h"
 #include "AvaraDefines.h"
 #include "CViewParameters.h"
+#include "LevelLoader.h"
 #include "Memory.h"
 #include "Debug.h"
 
@@ -41,7 +42,7 @@ CBSPPart *CBSPPart::Create(short resId) {
 void CBSPPart::IBSPPart(short resId) {
     DBG_Log("bsp", "Loading BSP: %d\n", resId);
     
-    uint16_t colorCount = 0;
+    uint16_t materialCount = 0;
     uint32_t pointCount = 0;
     uint32_t polyCount = 0;
 
@@ -58,7 +59,7 @@ void CBSPPart::IBSPPart(short resId) {
     doc["bounds"].emplace("min", json::array({0.0, 0.0, 0.0}));
     doc["bounds"].emplace("max", json::array({0.0, 0.0, 0.0}));
 
-    colorCount = static_cast<uint16_t>(doc["colors"].size());
+    materialCount = static_cast<uint16_t>(doc["materials"].size());
     pointCount = static_cast<uint32_t>(doc["points"].size());
     polyCount = static_cast<uint32_t>(doc["polys"].size());
 
@@ -92,28 +93,51 @@ void CBSPPart::IBSPPart(short resId) {
     DBG_Log("bsp", "  bounds.y = [%d, %d]\n", minBounds.y, maxBounds.y);
     DBG_Log("bsp", "  bounds.z = [%d, %d]\n", minBounds.z, maxBounds.z);
 
-    colorTable = std::vector<ColorRecord>();
+    materialTable = std::vector<MaterialRecord>();
     pointTable = std::vector<FixedPoint>();
     polyTable = std::vector<PolyRecord>();
     
-    colorTable.reserve(colorCount);
+    materialTable.reserve(materialCount);
     pointTable.reserve(pointCount);
     polyTable.reserve(polyCount);
 
-    ARGBColor original, current;
-    for (uint16_t i = 0; i < colorCount; i++) {
-        nlohmann::json value = doc["colors"][i];
-        original = ARGBColor::Parse(value)
-            .value_or(ARGBColor(0x00ffffff)); // Fallback to invisible "white."
-        if (original == *ColorManager::getMarkerColor(0) ||
-            original == *ColorManager::getMarkerColor(1) ||
-            original == *ColorManager::getMarkerColor(2) ||
-            original == *ColorManager::getMarkerColor(3)) {
-            current = original.WithA(0xff);
-        } else {
-            current = original;
+    Material defaultMaterial, baseMaterial, original, current;
+    defaultMaterial = GetDefaultMaterial();
+    baseMaterial = GetBaseMaterial();
+    for (uint16_t i = 0; i < materialCount; i++) {
+        original = baseMaterial;
+        current = baseMaterial;
+        nlohmann::json mat = doc["materials"][i];
+        ARGBColor color = ARGBColor(0x00ffffff); // Default to invisible "white."
+        ARGBColor spec = defaultMaterial.GetSpecular().WithA(defaultMaterial.GetShininess());
+        
+        if (mat.find("base") != mat.end()) {
+            color = ARGBColor::Parse(mat["base"])
+                .value_or(color);
         }
-        colorTable.push_back(ColorRecord(original, current));
+        original = original.WithColor(color);
+        if (color == *ColorManager::getMarkerColor(0) ||
+            color == *ColorManager::getMarkerColor(1) ||
+            color == *ColorManager::getMarkerColor(2) ||
+            color == *ColorManager::getMarkerColor(3)) {
+            current = current.WithColor(color.WithA(0xff));
+        } else {
+            current = current.WithColor(color);
+        }
+        
+        if (mat.find("spec") != mat.end()) {
+            spec = ARGBColor::Parse(mat["spec"])
+                .value_or(spec);
+        }
+        original = original.WithSpecular(spec).WithShininess(spec.GetA());
+        if (spec.GetR() == defaultMaterial.GetSpecR() &&
+            spec.GetG() == defaultMaterial.GetSpecG() &&
+            spec.GetB() == defaultMaterial.GetSpecB() &&
+            spec.GetA() == defaultMaterial.GetShininess()) {
+            spec = baseMaterial.GetSpecular().WithA(baseMaterial.GetShininess());
+        }
+        current = current.WithSpecular(spec).WithShininess(spec.GetA());
+        materialTable.push_back(MaterialRecord(original, current));
     }
     
     CheckForAlpha();
@@ -132,8 +156,8 @@ void CBSPPart::IBSPPart(short resId) {
         nlohmann::json poly = doc["polys"][i];
         nlohmann::json pt;
         PolyRecord r = PolyRecord();
-        // Color
-        r.colorIdx = static_cast<uint16_t>(poly["color"]);
+        // Material
+        r.materialIdx = static_cast<uint16_t>(poly["mat"]);
         // Normal
         nlohmann::json norms = doc["normals"];
         int idx = poly["normal"];
@@ -395,9 +419,9 @@ Matrix *CBSPPart::GetInverseTransform() {
 
 void CBSPPart::ReplaceColor(ARGBColor origColor, ARGBColor newColor) {
     bool colorReplaced = false;
-    for (auto &color : colorTable) {
-        if (color.original == origColor) {
-            color.current = newColor;
+    for (auto &material : materialTable) {
+        if (material.original.GetColor() == origColor) {
+            material.current = material.current.WithColor(newColor);
             colorReplaced = true;
         }
     }
@@ -407,14 +431,74 @@ void CBSPPart::ReplaceColor(ARGBColor origColor, ARGBColor newColor) {
 
 void CBSPPart::ReplaceAllColors(ARGBColor newColor) {
     bool colorReplaced = false;
-    for (auto &color : colorTable) {
-        if (color.current != newColor) {
+    for (auto &material : materialTable) {
+        if (material.current.GetColor() != newColor) {
             colorReplaced = true;
         }
-        color.current = newColor;
+        material.current = material.current.WithColor(newColor);
     }
     hasAlpha = (newColor.GetA() != 0xff);
     if (colorReplaced && vData) vData->Replace(*this);
+}
+
+void CBSPPart::ReplaceMaterialForColor(ARGBColor origColor, Material newMaterial) {
+    bool materialReplaced = false;
+    for (auto &material : materialTable) {
+        if (material.original.GetColor() == origColor) {
+            material.current = newMaterial;
+            materialReplaced = true;
+        }
+    }
+    CheckForAlpha();
+    if (materialReplaced && vData) vData->Replace(*this);
+}
+
+void CBSPPart::ReplaceSpecularForColor(ARGBColor origColor, ARGBColor newSpecular) {
+    bool specularReplaced = false;
+    for (auto &material : materialTable) {
+        if (material.original.GetColor() == origColor) {
+            material.current = material.current.WithSpecular(newSpecular);
+            specularReplaced = true;
+        }
+    }
+    // (No need to check for alpha here.)
+    if (specularReplaced && vData) vData->Replace(*this);
+}
+
+void CBSPPart::ReplaceShininessForColor(ARGBColor origColor, uint8_t newShininess) {
+    bool shininessReplaced = false;
+    for (auto &material : materialTable) {
+        if (material.original.GetColor() == origColor) {
+            material.current = material.current.WithShininess(newShininess);
+            shininessReplaced = true;
+        }
+    }
+    // (No need to check for alpha here.)
+    if (shininessReplaced && vData) vData->Replace(*this);
+}
+
+void CBSPPart::ReplaceMaterial(Material origMaterial, Material newMaterial) {
+    bool materialReplaced = false;
+    for (auto &material : materialTable) {
+        if (material.original == origMaterial) {
+            material.current = newMaterial;
+            materialReplaced = true;
+        }
+    }
+    CheckForAlpha();
+    if (materialReplaced && vData) vData->Replace(*this);
+}
+
+void CBSPPart::ReplaceAllMaterials(Material newMaterial) {
+    bool materialReplaced = false;
+    for (auto &material : materialTable) {
+        if (material.current != newMaterial) {
+            materialReplaced = true;
+        }
+        material.current = newMaterial;
+    }
+    hasAlpha = (newMaterial.GetA() != 0xff);
+    if (materialReplaced && vData) vData->Replace(*this);
 }
 
 void CBSPPart::BuildBoundingVolumes() {
@@ -439,12 +523,18 @@ CBSPPart::~CBSPPart() {}
 
 void CBSPPart::CheckForAlpha() {
     hasAlpha = false;
-    for (auto &color : colorTable) {
-        if (color.current.GetA() != 0xff) {
+    for (auto &material : materialTable) {
+        if (material.current.HasAlpha()) {
             hasAlpha = true;
             return;
         }
     }
+}
+
+bool CBSPPart::Has3D() const {
+    return !(maxBounds.x == minBounds.x ||
+             maxBounds.y == minBounds.y ||
+             maxBounds.z == minBounds.z);
 }
 
 bool CBSPPart::HasAlpha() const {

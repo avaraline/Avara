@@ -425,6 +425,7 @@
 		948DF4152DA365CB007FEFDE /* CCompoundShape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CCompoundShape.cpp; sourceTree = "<group>"; };
 		94924EAD2B3A893900197378 /* OggFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OggFile.h; sourceTree = "<group>"; };
 		94924EAE2B3A894900197378 /* OggFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OggFile.cpp; sourceTree = "<group>"; };
+		94D27A932DB9D77F0076D1E5 /* Material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
 		94EE531D2BA0AFCF00EE9056 /* CFreeCam.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CFreeCam.cpp; sourceTree = "<group>"; };
 		94EE531E2BA0AFCF00EE9056 /* CFreeCam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFreeCam.h; sourceTree = "<group>"; };
 		94F17DDB2991FACE001F5950 /* ARGBColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARGBColor.h; sourceTree = "<group>"; };
@@ -1114,6 +1115,7 @@
 				941D878D2B5A206A00E5577C /* OpenGLVertices.h */,
 				946EF8D12B6D9CB2000EF17E /* AbstractRenderer.cpp */,
 				947F5C622B57693300F41689 /* AbstractRenderer.h */,
+				94D27A932DB9D77F0076D1E5 /* Material.h */,
 				941D878C2B5A1EEC00E5577C /* VertexData.h */,
 			);
 			path = render;

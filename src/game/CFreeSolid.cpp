@@ -61,7 +61,7 @@ CAbstractActor *CFreeSolid::EndScript() {
         shapeId = ReadLongVar(iShape); //	Read our shape resource ID
         if (shapeId) {
             partCount = 1;
-            LoadPartWithColors(0, shapeId); //	Create our shape
+            LoadPartWithMaterials(0, shapeId); //	Create our shape
         } else if (lastWallActor) //	Use the last wall brick as our shape
         {
             CSmartPart *thePart;

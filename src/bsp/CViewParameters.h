@@ -23,6 +23,7 @@ public:
     Fixed angle1 = FIX(0);
     Fixed angle2 = FIX(0);
     ARGBColor color = DEFAULT_LIGHT_COLOR;
+    bool applySpecular = false;
 };
 
 class CBSPPart;
@@ -76,7 +77,7 @@ public:
     virtual void CalculateViewPyramidNormals();
     virtual ~CViewParameters() {}
 
-    virtual void SetLight(short n, Fixed angle1, Fixed angle2, Fixed intensity, ARGBColor color, short mode);
+    virtual void SetLight(short n, Fixed angle1, Fixed angle2, Fixed intensity, ARGBColor color, bool applySpecular, short mode);
     virtual void DoLighting();
 
     virtual void SetViewRect(short width, short height, short centerX, short centerY);

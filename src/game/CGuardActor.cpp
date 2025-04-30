@@ -59,7 +59,7 @@ CAbstractActor *CGuardActor::EndScript() {
     pitch = 0;
     fireCount = 0;
 
-    LoadPartWithColors(0, ReadLongVar(iShape));
+    LoadPartWithMaterials(0, ReadLongVar(iShape));
 
     PlaceParts();
     LinkPartSpheres();

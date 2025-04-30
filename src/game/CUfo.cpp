@@ -88,7 +88,7 @@ CAbstractActor *CUfo::EndScript() {
         status = ReadLongVar(iStatus);
 
         partCount = 1;
-        LoadPartWithColors(0, shapeRes);
+        LoadPartWithMaterials(0, shapeRes);
         if (location[1] < -partList[0]->minBounds.y)
             location[1] = -partList[0]->minBounds.y;
 

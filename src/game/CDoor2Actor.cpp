@@ -100,6 +100,10 @@ void CDoor2Actor::ReadDoorVariables() {
 
 bool CDoor2Actor::IsGeometryStatic()
 {
+    if (!CGlowActors::IsGeometryStatic()) {
+        return false;
+    }
+    
     if (doorStatus == kDoorClosed &&
         openActivator.messageId > 0 &&
         classicOpenSpeed != 0 && (

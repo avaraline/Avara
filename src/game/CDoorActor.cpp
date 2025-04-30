@@ -189,7 +189,7 @@ CAbstractActor *CDoorActor::EndScript() {
 
         ReadDoorVariables();
 
-        LoadPartWithColors(0, resId);
+        LoadPartWithMaterials(0, resId);
 
         PlaceParts();
         LinkPartSpheres();

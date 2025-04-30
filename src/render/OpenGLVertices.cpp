@@ -101,7 +101,7 @@ OpenGLVertices::~OpenGLVertices()
 
 void OpenGLVertices::Append(const CBSPPart &part)
 {
-    ARGBColor color;
+    Material material;
     uint8_t vis;
     int tris, points;
 
@@ -113,8 +113,8 @@ void OpenGLVertices::Append(const CBSPPart &part)
     int tmpAlphaPointCount = 0;
     for (auto &poly : part.polyTable)
     {
-        color = part.colorTable[poly.colorIdx].current;
-        vis = (part.HasAlpha() && poly.vis != 0) ? 3 : poly.vis;
+        material = part.materialTable[poly.materialIdx].current;
+        vis = (part.HasAlpha() && poly.vis != 0 && part.Has3D()) ? 3 : poly.vis;
         if (!vis) vis = 0;
         switch (vis) {
             case 0:
@@ -128,7 +128,7 @@ void OpenGLVertices::Append(const CBSPPart &part)
                 break;
         }
         points = tris * 3;
-        if (color.HasAlpha()) {
+        if (material.HasAlpha()) {
             alpha.pointCount += points;
             tmpAlphaPointCount += points;
         } else {
@@ -147,8 +147,8 @@ void OpenGLVertices::Append(const CBSPPart &part)
     int pOpaque = 0;
     int pAlpha = 0;
     for (auto &poly : part.polyTable) {
-        color = part.colorTable[poly.colorIdx].current;
-        uint8_t vis = (part.HasAlpha() && poly.vis != 0) ? 3 : poly.vis;
+        material = part.materialTable[poly.materialIdx].current;
+        uint8_t vis = (part.HasAlpha() && poly.vis != 0 && part.Has3D()) ? 3 : poly.vis;
         if (!vis) vis = 0; // default to 0 (none) if vis is empty
 
         // vis can ONLY be 0 for None, 1 for Front, 2 for Back, or 3 for Both
@@ -162,11 +162,18 @@ void OpenGLVertices::Append(const CBSPPart &part)
                 vertex.x = ToFloat(pt->x);
                 vertex.y = ToFloat(pt->y);
                 vertex.z = ToFloat(pt->z);
-                color.ExportGLFloats(&vertex.r, 4);
+                vertex.r = material.GetR();
+                vertex.g = material.GetG();
+                vertex.b = material.GetB();
+                vertex.a = material.GetA();
+                vertex.specR = material.GetSpecR();
+                vertex.specG = material.GetSpecG();
+                vertex.specB = material.GetSpecB();
+                vertex.specS = material.GetShininess();
                 vertex.nx = poly.normal.x;
                 vertex.ny = poly.normal.y;
                 vertex.nz = poly.normal.z;
-                if (color.HasAlpha()) {
+                if (material.HasAlpha()) {
                     alpha.glData.push_back(vertex);
                     pAlpha++;
                 } else {
@@ -184,11 +191,18 @@ void OpenGLVertices::Append(const CBSPPart &part)
                 vertex.x = ToFloat(pt->x);
                 vertex.y = ToFloat(pt->y);
                 vertex.z = ToFloat(pt->z);
-                color.ExportGLFloats(&vertex.r, 4);
+                vertex.r = material.GetR();
+                vertex.g = material.GetG();
+                vertex.b = material.GetB();
+                vertex.a = material.GetA();
+                vertex.specR = material.GetSpecR();
+                vertex.specG = material.GetSpecG();
+                vertex.specB = material.GetSpecB();
+                vertex.specS = material.GetShininess();
                 vertex.nx = -poly.normal.x;
                 vertex.ny = -poly.normal.y;
                 vertex.nz = -poly.normal.z;
-                if (color.HasAlpha()) {
+                if (material.HasAlpha()) {
                     alpha.glData.push_back(vertex);
                     pAlpha++;
                 } else {
