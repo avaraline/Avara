@@ -72,7 +72,7 @@ void main()
                 skyColor,
                 float(phi > highAlt)
             ),
-            groundColor + spec() + noise(),
+            groundColor + spec(),
             float(phi <= 0.0)
         ),
         1.0
@@ -86,5 +86,5 @@ void main()
         ),
         maxHazeDist
     );
-    color.rgb = apply_fog(color.rgb, dist);
+    color.rgb = apply_fog(color.rgb, dist) + noise();
 }

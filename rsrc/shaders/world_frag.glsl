@@ -75,7 +75,7 @@ float noise() {
 vec4 light_color() {
     return mix(
         ambient * vec4(ambientColor, 1.0) * fragmentColor,
-        vec4((ambient * ambientColor) + diffuse() + spec() + noise(), 1.0) * fragmentColor,
+        vec4((ambient * ambientColor) + diffuse() + spec(), 1.0) * fragmentColor,
         float(lightsActive)
     );
 }
@@ -91,4 +91,5 @@ void main() {
     float yonFadeDist = objectYon - yonFadeRange;
     float alphaMult = pow(clamp((yonFadeRange + yonFadeDist - dist) / yonFadeRange, 0.0, 1.0), 0.5);
     color.a *= alphaMult;
+    color.rgb += noise();
 }
