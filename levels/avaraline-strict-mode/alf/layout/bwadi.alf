@@ -1,6 +1,6 @@
 <!-- @param int pCenterGoodyRespawn center goody respawn delay in ticks -->
 
-<SkyColor color="#99fdff" color.1="#c3cde6" />
+<SkyColor color="#99fdff" color.1="#c3cde6" thickness="500" />
 <GroundColor color="#3a404d" color.1="#000000" />
 <set
   designer="$mMalkfox"
@@ -9,7 +9,10 @@
   light.0.i="0.8"
   light.0.a="30"
   light.0.b="10"
+  light.0.s="true"
   light.1.i="0.5"
+  baseMaterial.specular="#332433"
+  baseMaterial.shininess="8.0"
   wallHeight="0"
 />
 
@@ -20,8 +23,6 @@
 
 <Wall color="#ccfeff" color.1="#000000" x="0" z="0" w="20" d="20" h="2" />
 <Wall color="#99fdff" color.1="#000000" x="0" z="0" w="10" d="10" h="2" y="2" />
-<Wall color="#003399" color.1="#000000" x="0" z="0" w="1.25" d="1.25" h="0" y="4.05" />
-<WallDoor midYaw="45" color="#003399" color.1="#000000" x="0" z="0" w="1.25" d="1.25" h="0" y="4.05" />
 
 <Wall color="#ccfeff" color.1="#000000" x="-42.5" z="-15" w="5" d="10" h="2" />
 <Wall color="#ccfeff" color.1="#000000" x="-27.5" z="-15" w="5" d="20" h="2" />
@@ -50,10 +51,6 @@
 <Ramp y="0" deltaY="4.5" color="#293333" color.1="#000000" x="-1" z="55.5" w="8" d="15" h="0" angle="180" />
 <Ramp y="0" deltaY="4.5" color="#293333" color.1="#000000" x="10.25" z="44" w="14.5" d="8" h="0" angle="90" />
 
-<unique vars="mShow mTaken" />
-<And in="@start" out="mShow" />
-<Timer in="mTaken" out="mShow" wait="pCenterGoodyRespawn" />
-<Goody shape="bspAvaraA" y="4 + mGoodyOffset" speed="2" grenades="mLgGrenade" missiles="mLgMissile" start="mShow" out="mTaken" color="#00a8aa" color.1="#000000" cx="0" cz="0" angle="45" />
 <unique vars="mShow mTaken" />
 <And in="@start" out="mShow" />
 <Timer in="mTaken" out="mShow" wait="250" />
@@ -91,3 +88,40 @@
 <Incarnator y="30" cx="0" cz="15" angle="180" stop="@start" />
 <Incarnator y="30" cx="-15" cz="0" angle="270" stop="@start" />
 <Incarnator y="30" cx="15" cz="0" angle="90" stop="@start" />
+
+<set
+  material.specular="#a1a1ba"
+  material.shininess="96.0"
+/>
+<Wall color="#003399" color.1="#000000" x="0" z="0" w="1.25" d="1.25" h="0" y="4.05" />
+<WallDoor midYaw="45" color="#003399" color.1="#000000" x="0" z="0" w="1.25" d="1.25" h="0" y="4.05" />
+
+<Hologram scale="0.05" shape="bspFloorFrame" y="4.55" color="#003399" color.1="#000000" cx="1" cz="-44" angle="45" />
+<Field visible="true" deltaY="0" color="#003399" color.1="#000000" x="1" y="4.55" z="-44" h="0" w="0.31" d="0.31" />
+
+<Hologram scale="0.05" shape="bspFloorFrame" y="4.55" color="#003399" color.1="#000000" cx="-1" cz="44" angle="45" />
+<Field visible="true" deltaY="0" color="#003399" color.1="#000000" x="-1" y="4.55" z="44" h="0" w="0.31" d="0.31" />
+
+<set
+  material.specular="#82baba"
+/>
+<Hologram scale="0.05" shape="bspFloorFrame" y="0" color="#00a8aa" color.1="#000000" cx="35" cz="15" angle="45" />
+<Field visible="true" deltaY="0" color="#00a8aa" color.1="#000000" x="35" y="0" z="15" h="0" w="0.31" d="0.31" />
+
+<Hologram scale="0.05" shape="bspFloorFrame" y="0" color="#00a8aa" color.1="#000000" cx="-30" cz="30" angle="45" />
+<Field visible="true" deltaY="0" color="#00a8aa" color.1="#000000" x="-30" y="0" z="30" h="0" w="0.31" d="0.31" />
+
+<Hologram scale="0.05" shape="bspFloorFrame" y="0" color="#00a8aa" color.1="#000000" cx="-35" cz="-15" angle="45" />
+<Field visible="true" deltaY="0" color="#00a8aa" color.1="#000000" x="-35" y="0" z="-15" h="0" w="0.31" d="0.31" />
+
+<Hologram scale="0.05" shape="bspFloorFrame" y="0" color="#00a8aa" color.1="#000000" cx="30" cz="-30" angle="45" />
+<Field visible="true" deltaY="0" color="#00a8aa" color.1="#000000" x="30" y="0" z="-30" h="0" w="0.31" d="0.31" />
+
+<set
+  material.specular="#464b4b"
+  material.shininess="16.0"
+/>
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="pCenterGoodyRespawn" />
+<Goody shape="bspAvaraA" y="4 + mGoodyOffset" speed="2" grenades="mLgGrenade" missiles="mLgMissile" start="mShow" out="mTaken" color="#00a8aa" color.1="#000000" cx="0" cz="0" angle="45" />

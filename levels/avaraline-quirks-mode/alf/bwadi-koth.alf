@@ -2,7 +2,12 @@
   <set pCenterGoodyRespawn="110" />
   <include alf="layout/bwadi.alf" />
 
-  <set floorTemplate="bspFloorFrame" hillSize="10" />
+  <set
+    floorTemplate="bspFloorFrame"
+    hillSize="10"
+    material.specular="#a1a1ba"
+    material.shininess="96.0"
+  />
   <Wall x="0" y="4.01" z="0" w="hillSize" d="hillSize" h="0" color="#003399" />
 
   <set
