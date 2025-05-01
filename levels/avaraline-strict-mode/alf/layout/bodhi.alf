@@ -1,23 +1,21 @@
-<SkyColor color="#cca3bf" color.1="#cee6f2" />
+<SkyColor color="#cca3bf" color.1="#cee6f2" thickness="1000" verticalRangeMax="2500" />
 <GroundColor color="#3d6658" />
 <set
   designer="$mSilverfox"
   light.0.i="0.8"
   light.0.a="30"
   light.0.b="10"
+  light.0.s="true"
+  baseMaterial.specular="#1a1a1a"
+  baseMaterial.shininess="8.0"
   wallHeight="0"
 />
 
 <Wall color="#3d6658" color.1="#000000" x="0" z="0" w="15" d="25" h="4" />
-<Ramp y="0" deltaY="4" color="#ffc68c" color.1="#000000" x="0" z="17.5" w="15" d="10" h="0" angle="180" />
-<Ramp y="0" deltaY="4" color="#ffc68c" color.1="#000000" x="0" z="-17.5" w="15" d="10" h="0" angle="0" />
-<Ramp y="0" deltaY="4" color="#ffc68c" color.1="#000000" x="12.5" z="-7.5" w="10" d="10" h="0" angle="90" />
-<Ramp y="0" deltaY="4" color="#ffc68c" color.1="#000000" x="-12.5" z="7.5" w="10" d="10" h="0" angle="270" />
 <Wall color="#3d6658" color.1="#000000" x="12.5" z="5" w="10" d="15" h="2" />
 <Wall color="#3d6658" color.1="#000000" x="-12.5" z="-5" w="10" d="15" h="2" />
 <Wall color="#3d6658" color.1="#000000" x="10" z="5" w="5" d="15" h="2" y="2" />
 <Wall color="#3d6658" color.1="#000000" x="-10" z="-5" w="5" d="15" h="2" y="2" />
-<WallDoor midYaw="45" color="#ffc68c" color.1="#000000" x="0" z="0" w="2.5" d="2.5" h="0" y="4.05" />
 <Wall color="#002619" color.1="#000000" x="20" z="50" w="15" d="5" h="2" />
 <Wall color="#002619" color.1="#000000" x="30" z="40" w="5" d="15" h="2" />
 <Wall color="#1a4033" color.1="#000000" x="30" z="55" w="5" d="15" h="2.5" />
@@ -32,9 +30,7 @@
 <Wall color="#1a4033" color.1="#000000" x="47.5" z="-37.5" w="10" d="10" h="0" y="6" />
 <Wall color="#1a4033" color.1="#000000" x="52.5" z="-47.5" w="10" d="10" h="1" y="5" />
 <Wall color="#002619" color.1="#000000" x="47.5" z="-17.5" w="10" d="10" h="2" />
-<Ramp y="2" deltaY="4" color="#ffc68c" color.1="#000000" x="47.5" z="-27.5" w="10" d="10" h="0" angle="180" />
 <Wall color="#002619" color.1="#000000" x="25" z="-47.5" w="15" d="10" h="2" />
-<Ramp y="2" deltaY="4" color="#ffc68c" color.1="#000000" x="40" z="-47.5" w="15" d="10" h="0" angle="270" />
 <Wall color="#0a3325" color.1="#000000" x="47.5" z="-32.5" w="10" d="0" h="6" />
 <Wall color="#001a11" color.1="#000000" x="47.5" z="-22.5" w="10" d="0" h="2" />
 <Field visible="true" deltaY="0" color="#264d40" color.1="#000000" x="47.5" z="-27.5" w="10" d="10" h="0" y="0" />
@@ -44,9 +40,7 @@
 <Wall color="#1a4033" color.1="#000000" x="-47.5" z="37.5" w="10" d="10" h="0" y="6" />
 <Wall color="#1a4033" color.1="#000000" x="-52.5" z="47.5" w="10" d="10" h="1" y="5" />
 <Wall color="#002619" color.1="#000000" x="-47.5" z="17.5" w="10" d="10" h="2" />
-<Ramp y="2" deltaY="4" color="#ffc68c" color.1="#000000" x="-47.5" z="27.5" w="10" d="10" h="0" angle="0" />
 <Wall color="#002619" color.1="#000000" x="-25" z="47.5" w="15" d="10" h="2" />
-<Ramp y="2" deltaY="4" color="#ffc68c" color.1="#000000" x="-40" z="47.5" w="15" d="10" h="0" angle="90" />
 <Wall color="#0a3325" color.1="#000000" x="-47.5" z="32.5" w="10" d="0" h="6" />
 <Wall color="#001a11" color.1="#000000" x="-47.5" z="22.5" w="10" d="0" h="2" />
 <Field visible="true" deltaY="0" color="#264d40" color.1="#000000" x="-47.5" z="27.5" w="10" d="10" h="0" y="0" />
@@ -55,11 +49,6 @@
 <WallDoor midYaw="45" color="#002619" color.1="#000000" x="-47.5" z="-12.5" w="7.5" d="7.5" h="7" />
 <WallDoor midYaw="45" color="#99bfb3" color.1="#000000" x="-47.5" z="-12.5" w="11.25" d="11.25" h="0.5" y="7" />
 <WallDoor midYaw="45" color="#3d6658" color.1="#000000" x="-47.5" z="-12.5" w="12.5" d="12.5" h="0.3" y="7.5" />
-<WallDoor midYaw="45" color="#ffc68c" color.1="#000000" x="-32.5" z="37.5" w="2.5" d="2.5" h="0" y="6.05" />
-<WallDoor midYaw="45" color="#ffc68c" color.1="#000000" x="32.5" z="-37.5" w="2.5" d="2.5" h="0" y="6.05" />
-<WallDoor midYaw="45" color="#ffc68c" color.1="#000000" x="-37.5" z="-57.5" w="2.5" d="2.5" h="0" y="-0.05" />
-<WallDoor midYaw="45" color="#ffc68c" color.1="#000000" x="37.5" z="57.5" w="2.5" d="2.5" h="0" y="-0.05" />
-<Wall color="#ffc68c" color.1="#000000" x="-47.5" z="-12.5" w="2.5" d="2.5" h="0" y="7.81" />
 <Wall color="#3d6658" color.1="#000000" x="-12.5" z="-17.5" w="10" d="10" h="4" />
 <Wall color="#3d6658" color.1="#000000" x="12.5" z="-17.5" w="10" d="10" h="4" />
 <Wall color="#3d6658" color.1="#000000" x="12.5" z="17.5" w="10" d="10" h="4" />
@@ -68,10 +57,7 @@
 <WallDoor midYaw="45" color="#002619" color.1="#000000" x="47.5" z="12.5" w="7.5" d="7.5" h="7" />
 <WallDoor midYaw="45" color="#99bfb3" color.1="#000000" x="47.5" z="12.5" w="11.25" d="11.25" h="0.5" y="7" />
 <WallDoor midYaw="45" color="#3d6658" color.1="#000000" x="47.5" z="12.5" w="12.5" d="12.5" h="0.3" y="7.5" />
-<Wall color="#ffc68c" color.1="#000000" x="47.5" z="12.5" w="2.5" d="2.5" h="0" y="7.81" />
 <WallDoor midYaw="45" color="#264d40" color.1="#000000" x="47.5" z="12.5" w="12.5" d="12.5" h="0" y="-0.05" />
-<Dome y="4" color="#cef2e6" color.1="#000000" cx="12.5" cz="17.5" r="2.5" angle="180" quarters="4" />
-<Dome y="4" color="#cef2e6" color.1="#000000" cx="-12.5" cz="-17.5" r="2.5" angle="180" quarters="4" />
 
 <Teleporter y="0.05" shape="bspLotus" scale=".3" speed="2" mask="0" color="#ffe5f6" color.1="#000000" cx="-47.5" cz="27.5" angle="45" />
 <Teleporter y="0" shape="0" group="@floor" destGroup="@pillar" spin="true" color="#ffe5f6" color.1="#000000" cx="-47.5" cz="27.5" angle="45" />
@@ -106,18 +92,6 @@
 <Goody y="7.75" shape="bspGrenade" speed="-2" grenades="mLgGrenade" start="mShow" out="mTaken" color="#ffc68c" color.1="#000000" cx="-32.5" cz="37.5" angle="225" />
 <unique vars="mShow mTaken" />
 <And in="@start" out="mShow" />
-<Timer in="mTaken" out="mShow" wait="300" />
-<Goody y="9.55" shape="bspAvaraA" speed="-2" grenades="mMdGrenade" missiles="mMdMissile" start="mShow" out="mTaken" color="#ffe5f6" color.1="#000000" cx="-47.5" cz="-12.5" angle="225" />
-<unique vars="mShow mTaken" />
-<And in="@start" out="mShow" />
-<Timer in="mTaken" out="mShow" wait="300" />
-<Goody y="9.55" shape="bspAvaraA" speed="-2" grenades="mMdGrenade" missiles="mMdMissile" start="mShow" out="mTaken" color="#ffe5f6" color.1="#000000" cx="47.5" cz="12.5" angle="225" />
-<unique vars="mShow mTaken" />
-<And in="@start" out="mShow" />
-<Timer in="mTaken" out="mShow" wait="400" />
-<Goody y="5.75" shape="bspAvaraA" speed="-2" grenades="mXLgGrenade" missiles="mXLgMissile" start="mShow" out="mTaken" color="#ffbb99" color.1="#000000" cx="0" cz="0" angle="225" />
-<unique vars="mShow mTaken" />
-<And in="@start" out="mShow" />
 <Timer in="mTaken" out="mShow" wait="150" />
 <Goody y="1.75" shape="bspMissile" speed="-2" missiles="mLgMissile" start="mShow" out="mTaken" color="#ffc68c" color.1="#000000" cx="-37.5" cz="-57.5" angle="225" />
 <unique vars="mShow mTaken" />
@@ -141,5 +115,50 @@
 <Incarnator y="24" cx="5" cz="10" angle="135" stop="@start" />
 <Incarnator y="24" cx="5" cz="-10" angle="45" stop="@start" />
 <Incarnator y="24" cx="-5" cz="10" angle="225" stop="@start" />
+
+<set
+  material.specular="#666666"
+  material.shininess="256.0"
+/>
+<Dome y="4" color="#cef2e6" color.1="#000000" cx="12.5" cz="17.5" r="2.5" angle="180" quarters="4" />
+<Dome y="4" color="#cef2e6" color.1="#000000" cx="-12.5" cz="-17.5" r="2.5" angle="180" quarters="4" />
+
+<set
+  material.specular="#ff8359"
+  material.shininess="128.0"
+/>
+<Ramp y="0" deltaY="4" color="#ffc68c" color.1="#000000" x="0" z="17.5" w="15" d="10" h="0" angle="180" />
+<Ramp y="0" deltaY="4" color="#ffc68c" color.1="#000000" x="0" z="-17.5" w="15" d="10" h="0" angle="0" />
+<Ramp y="0" deltaY="4" color="#ffc68c" color.1="#000000" x="12.5" z="-7.5" w="10" d="10" h="0" angle="90" />
+<Ramp y="0" deltaY="4" color="#ffc68c" color.1="#000000" x="-12.5" z="7.5" w="10" d="10" h="0" angle="270" />
+<Ramp y="2" deltaY="4" color="#ffc68c" color.1="#000000" x="47.5" z="-27.5" w="10" d="10" h="0" angle="180" />
+<Ramp y="2" deltaY="4" color="#ffc68c" color.1="#000000" x="40" z="-47.5" w="15" d="10" h="0" angle="270" />
+<Ramp y="2" deltaY="4" color="#ffc68c" color.1="#000000" x="-47.5" z="27.5" w="10" d="10" h="0" angle="0" />
+<Ramp y="2" deltaY="4" color="#ffc68c" color.1="#000000" x="-40" z="47.5" w="15" d="10" h="0" angle="90" />
+
+<WallDoor midYaw="45" color="#ffc68c" color.1="#000000" x="0" z="0" w="2.5" d="2.5" h="0" y="4.05" />
+<WallDoor midYaw="45" color="#ffc68c" color.1="#000000" x="-32.5" z="37.5" w="2.5" d="2.5" h="0" y="6.05" />
+<WallDoor midYaw="45" color="#ffc68c" color.1="#000000" x="32.5" z="-37.5" w="2.5" d="2.5" h="0" y="6.05" />
+<WallDoor midYaw="45" color="#ffc68c" color.1="#000000" x="-37.5" z="-57.5" w="2.5" d="2.5" h="0" y="-0.05" />
+<WallDoor midYaw="45" color="#ffc68c" color.1="#000000" x="37.5" z="57.5" w="2.5" d="2.5" h="0" y="-0.05" />
+<Wall color="#ffc68c" color.1="#000000" x="-47.5" z="-12.5" w="2.5" d="2.5" h="0" y="7.81" />
+<Wall color="#ffc68c" color.1="#000000" x="47.5" z="12.5" w="2.5" d="2.5" h="0" y="7.81" />
+
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="400" />
+<Goody y="5.75" shape="bspAvaraA" speed="-2" grenades="mXLgGrenade" missiles="mXLgMissile" start="mShow" out="mTaken" color="#ffbb99" color.1="#000000" cx="0" cz="0" angle="225" />
+
+<set
+  material.specular="#c536c9"
+/>
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="300" />
+<Goody y="9.55" shape="bspAvaraA" speed="-2" grenades="mMdGrenade" missiles="mMdMissile" start="mShow" out="mTaken" color="#ffe5f6" color.1="#000000" cx="-47.5" cz="-12.5" angle="225" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="300" />
+<Goody y="9.55" shape="bspAvaraA" speed="-2" grenades="mMdGrenade" missiles="mMdMissile" start="mShow" out="mTaken" color="#ffe5f6" color.1="#000000" cx="47.5" cz="12.5" angle="225" />
 
 <Sound y="200" sound="snUnderwater" isAmbient="true" loopCount="-1" volume="80" cx="0" cz="0" angle="135" />

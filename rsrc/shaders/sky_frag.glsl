@@ -33,8 +33,8 @@ vec3 spec_light(int i) {
     vec3 viewDir = normalize(camPos - fragPos);
     vec4 lightPos = vec4(lights[i] * -1000, 1);
     vec3 lightDir = normalize(lightPos.xyz - fragPos);
-    vec3 reflectDir = reflect(-lightDir, vec3(0, 1, 0));
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), groundShininess * 2048.0);
+    vec3 halfwayDir = normalize(lightDir + viewDir);
+    float spec = pow(max(dot(vec3(0, 1, 0), halfwayDir), 0.0), groundShininess * 2048.0);
     return lightColors[i] * (spec * groundSpec);
 }
 
