@@ -62,6 +62,16 @@ vec3 spec() {
     return sum;
 }
 
+/* Toned down version of Magic GLSL One-liner from:
+   https://blog.frost.kiwi/GLSL-noise-and-radial-gradient/ */
+float noise() {
+    return mix(
+        -1.0 / 255.0,
+        1.0 / 255.0,
+        fract(52.9829189 * fract(dot(gl_FragCoord.xy, vec2(0.06711056, 0.00583715))))
+    );
+}
+
 vec4 light_color() {
     return mix(
         ambient * vec4(ambientColor, 1.0) * fragmentColor,
@@ -81,4 +91,5 @@ void main() {
     float yonFadeDist = objectYon - yonFadeRange;
     float alphaMult = pow(clamp((yonFadeRange + yonFadeDist - dist) / yonFadeRange, 0.0, 1.0), 0.5);
     color.a *= alphaMult;
+    color.rgb += noise();
 }
