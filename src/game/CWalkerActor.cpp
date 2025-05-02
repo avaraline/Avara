@@ -801,8 +801,8 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
             (*thePart)->ReplaceShininessForColor(*ColorManager::getMarkerColor(1), 4);
             (*thePart)->ReplaceSpecularForColor(*ColorManager::getMarkerColor(2), ARGBColor(0xa6a6a6));
             (*thePart)->ReplaceShininessForColor(*ColorManager::getMarkerColor(2), 12);
-            (*thePart)->ReplaceSpecularForColor(*ColorManager::getMarkerColor(2), ARGBColor(0x808080));
-            (*thePart)->ReplaceShininessForColor(*ColorManager::getMarkerColor(2), 8);
+            (*thePart)->ReplaceSpecularForColor(*ColorManager::getMarkerColor(3), ARGBColor(0x808080));
+            (*thePart)->ReplaceShininessForColor(*ColorManager::getMarkerColor(3), 8);
         }
 
         proximityRadius = viewPortPart->enclosureRadius << 2;
