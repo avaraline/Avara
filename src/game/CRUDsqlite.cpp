@@ -193,8 +193,8 @@ std::string CRUDsqlite::RecentsView() {
         auto query = "CREATE TEMPORARY VIEW " + viewName + " AS "
                      "SELECT MAX(G.created) AS created, L.set_name, L.level_name "
                      "FROM (games G LEFT JOIN levels L on G.level_id=L.id)"
-                     "GROUP BY L.id "
-                     "ORDER BY created DESC";
+                     "GROUP BY G.level_id "
+                     "ORDER BY G.created DESC";
         char *errMsg = nullptr;
         if (sqlite3_exec(myDb, query.c_str(), NULL, NULL, &errMsg) != SQLITE_OK) {
             SDL_Log("ERROR CREATING RecentsView: %s\n", errMsg);
