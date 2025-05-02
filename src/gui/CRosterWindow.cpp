@@ -21,10 +21,10 @@ using namespace nanogui;
 
 std::vector<Text *> statuses;
 std::vector<Text *> chats;
+static std::deque<Label*> chatLabels;
 std::vector<ColorComboBox *> colors;
 std::string currentLevel;
 TabWidget *tabWidget;
-
 
 std::vector<Text *> scoreTeams;
 std::vector<Text *> scoreNames;
@@ -37,6 +37,12 @@ const int CHAT_CHARS = 57;
 const int ROSTER_FONT_SIZE = 15;
 const int ROSTER_WINDOW_WIDTH = 470;
 const int SCORE_FONT_SIZE = 16;
+const int VISIBLE_CHAT_LINES = 28;
+const std::string CHAT_FONT = "mono";
+const int CHAT_FONT_SIZE = ROSTER_FONT_SIZE + 2;
+const int CHAT_LINE_WIDTH = ROSTER_WINDOW_WIDTH - 20;
+const int CHAT_LINE_HEIGHT = 20;
+
 char backspace[1] = {'\b'};
 char clearline[1] = {'\x1B'};
 char endline[1] = {13};
@@ -129,33 +135,27 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
 
     VScrollPanel *scrollPanel = new VScrollPanel(chatTab);
     scrollPanel->setFixedWidth(ROSTER_WINDOW_WIDTH);
-    scrollPanel->setFixedHeight(500);
 
     chatPanel = new Widget(scrollPanel);
-    AdvancedGridLayout *chatLayout = new AdvancedGridLayout();
+    GridLayout *chatLayout = new GridLayout(Orientation::Horizontal, 1, Alignment::Fill);
     chatPanel->setLayout(chatLayout);
 
-    //placeholder lines for now
-    for (int i = 0; i < 20; i++) {
-        chatLayout->appendRow(1, 0.1);
-        chatLayout->appendCol(1, 1);
-
-        auto chatLine = chatPanel->add<Label>("");
-        chatLine->setFontSize(ROSTER_FONT_SIZE + 2);
-        chatLine->setFont("mono");
-        chatLine->setFixedWidth(ROSTER_WINDOW_WIDTH - 20);
-        chatLine->setFixedHeight(20);
-
-        chatLayout->setAnchor(chatLine, AdvancedGridLayout::Anchor(0, i));
+    //placeholder lines to set the initial height & spacing
+    for (int i = 0; i < VISIBLE_CHAT_LINES; i++) {
+        auto chatLabel = chatPanel->add<Label>("");
+        chatLabel->setFontSize(CHAT_FONT_SIZE);
+        chatLabel->setFont(CHAT_FONT);
+        chatLabel->setFixedWidth(CHAT_LINE_WIDTH);
+        chatLabel->setFixedHeight(CHAT_LINE_HEIGHT);
+        chatLabels.push_back(chatLabel);
     }
 
     //chat input
     std::string theName = ((CAvaraAppImpl *)gApplication)->String(kPlayerNameTag);
     chatInput = chatTab->add<Label>(theName + ": ");
-    chatInput->setFontSize(ROSTER_FONT_SIZE + 2);
-    chatInput->setFont("mono");
-    chatInput->setFixedWidth(ROSTER_WINDOW_WIDTH - 20);
-    chatInput->setFixedHeight(70);
+    chatInput->setFontSize(CHAT_FONT_SIZE);
+    chatInput->setFont(CHAT_FONT);
+    chatInput->setFixedWidth(CHAT_LINE_WIDTH);
 
     //scores tab
     Widget *scoreLayer = tabWidget->createTab("Scores");
@@ -368,37 +368,28 @@ void CRosterWindow::ResetChatPrompt() {
     chatInput->setCaption(ChatPromptFor(theName));
 }
 std::string CRosterWindow::ChatPromptFor(std::string theName) {
-    int len = 9;
+    int len = 10;
     std::string paddedName = theName + "        ";
     return paddedName.substr(0, len) + ": ";
 }
 void CRosterWindow::NewChatLine(Str255 playerName, std::string message) {
     std::string name = ToString(playerName);
     std::string chatLine = ChatPromptFor(name) + message;
-    static std::deque<Label*> chatLabels;
 
-    AdvancedGridLayout *gridLayout = (AdvancedGridLayout*) chatPanel->layout();
     static int CHAT_LIMIT = 256;
-    if (chatLabels.size() >= gridLayout->rowCount() && chatLabels.size() < CHAT_LIMIT) {
-        gridLayout->appendRow(1, 0.1);
-        gridLayout->appendCol(1, 1);
-    }
 
     auto chatLabel = chatPanel->add<Label>(chatLine);
-    chatLabel->setFontSize(ROSTER_FONT_SIZE + 2);
-    chatLabel->setFont("mono");
-    chatLabel->setFixedWidth(ROSTER_WINDOW_WIDTH - 20);
+    chatLabel->setFontSize(CHAT_FONT_SIZE);
+    chatLabel->setFont(CHAT_FONT);
+    chatLabel->setFixedWidth(CHAT_LINE_WIDTH);
 
-    if (chatLabels.size() >= CHAT_LIMIT) {
+    // above limit or still has initial placeholders
+    if (chatLabels.size() >= CHAT_LIMIT ||
+        (chatLabels.size() > (VISIBLE_CHAT_LINES + 4) && chatLabels.front()->caption() == "")) {
         chatPanel->removeChild(chatLabels.front());  // this also deletes the Widget
         chatLabels.pop_front();
     }
     chatLabels.push_back(chatLabel);
-
-    int i = gridLayout->rowCount() - int(chatLabels.size());
-    for (auto label: chatLabels) {
-        gridLayout->setAnchor(label, AdvancedGridLayout::Anchor(0, i++));
-    }
 
     ResetChatPrompt();
 
