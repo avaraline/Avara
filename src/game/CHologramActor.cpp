@@ -34,7 +34,7 @@ CAbstractActor *CHologramActor::EndScript() {
     if (bsp) {
         CBSPPart *thePart;
 
-        LoadPartWithColors(0, resId);
+        LoadPartWithMaterials(0, resId);
         thePart = (CBSPPart *)partList[0];
         if (ReadLongVar(iIsAmbient) > 0)
             thePart->userFlags |= CBSPUserFlags::kIsAmbient;

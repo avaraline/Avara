@@ -793,6 +793,17 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
                 config->gunColor.WithA(0xff)
             );
         }
+        
+        for (CSmartPart **thePart = partList; *thePart; thePart++) {
+            (*thePart)->ReplaceSpecularForColor(*ColorManager::getMarkerColor(0), ARGBColor(0x333333));
+            (*thePart)->ReplaceShininessForColor(*ColorManager::getMarkerColor(0), 2);
+            (*thePart)->ReplaceSpecularForColor(*ColorManager::getMarkerColor(1), ARGBColor(0x454545));
+            (*thePart)->ReplaceShininessForColor(*ColorManager::getMarkerColor(1), 4);
+            (*thePart)->ReplaceSpecularForColor(*ColorManager::getMarkerColor(2), ARGBColor(0xa6a6a6));
+            (*thePart)->ReplaceShininessForColor(*ColorManager::getMarkerColor(2), 12);
+            (*thePart)->ReplaceSpecularForColor(*ColorManager::getMarkerColor(3), ARGBColor(0x808080));
+            (*thePart)->ReplaceShininessForColor(*ColorManager::getMarkerColor(3), 8);
+        }
 
         proximityRadius = viewPortPart->enclosureRadius << 2;
 

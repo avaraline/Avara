@@ -56,7 +56,7 @@ CAbstractActor *CParasite::EndScript() {
         range = ReadFixedVar(iRange);
 
         partCount = 1;
-        LoadPartWithColors(0, ReadLongVar(iShape));
+        LoadPartWithMaterials(0, ReadLongVar(iShape));
         location[1] -= partList[0]->minBounds.x;
 
         acceleration = ReadFixedVar(iAccelerate);

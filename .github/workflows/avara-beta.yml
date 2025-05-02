@@ -1,0 +1,60 @@
+name: Beta Release
+
+on: workflow_dispatch
+
+jobs:
+  Windows:
+    name: Windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v2
+      - name: Setup vcpkg
+        uses: lukka/run-vcpkg@v11
+      - name: Build
+        run: |
+          vcpkg integrate install
+          .\bin\git_version.ps1
+          msbuild /m /p:Platform=x64 /p:Configuration=Release .\Avara.msvc\Avara.sln
+        shell: pwsh
+      - name: WinAvara archive
+        run: .\bin\winavarazip.ps1
+        shell: pwsh
+      - name: deploy main nightly
+        if: startsWith(github.repository_owner, 'avaraline') && (github.refname != 'main')
+        uses: WebFreak001/deploy-nightly@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: https://uploads.github.com/repos/avaraline/Avara/releases/28954246/assets{?name,label}
+          release_id: 28954246
+          asset_path: ./WinAvara.zip
+          asset_name: Avara-Windows-BETA-$$.zip
+          asset_content_type: application/zip
+          max_releases: 1
+  macOS:
+    name: MacOS
+    runs-on: macos-13
+    steps:
+      - name: install dependencies
+        run: |
+          wget -q "https://github.com/libsdl-org/SDL/releases/download/release-2.26.2/SDL2-2.26.2.dmg"
+          hdiutil attach SDL2-2.26.2.dmg
+          sudo cp -R /Volumes/SDL2/SDL2.framework /Library/Frameworks/
+          brew install googletest
+      - uses: actions/checkout@v4
+      - name: make macdist
+        run: make -j4 clean macdist
+      - name: deploy main nightly
+        if: startsWith(github.repository_owner, 'avaraline') && (github.ref != 'main')
+        uses: WebFreak001/deploy-nightly@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: https://uploads.github.com/repos/avaraline/Avara/releases/28954246/assets{?name,label}
+          release_id: 28954246
+          asset_path: ./build/MacAvara.zip
+          asset_name: Avara-MacOS-BETA-$$.zip
+          asset_content_type: application/zip
+          max_releases: 1

@@ -12,6 +12,7 @@
 #include "CDirectObject.h"
 #include "ColorManager.h"
 #include "FastMat.h"
+#include "Material.h"
 #include "VertexData.h"
 
 #include <memory>
@@ -69,10 +70,10 @@ struct FloatNormal {
     }
 };
 
-struct ColorRecord {
-    ARGBColor original;
-    ARGBColor current;
-    ColorRecord(ARGBColor original, ARGBColor current) : original(original), current(current) {}
+struct MaterialRecord {
+    Material original;
+    Material current;
+    MaterialRecord(Material original, Material current) : original(original), current(current) {}
 };
 
 struct PolyRecord {
@@ -81,7 +82,7 @@ struct PolyRecord {
     std::unique_ptr<uint32_t[]> triPoints;
     uint32_t front;
     uint32_t back;
-    uint16_t colorIdx;
+    uint16_t materialIdx;
     uint8_t vis;
 };
 
@@ -182,7 +183,7 @@ public:
     Fixed maxY = 0;
 
     //	members used during rendering:
-    std::vector<ColorRecord> colorTable;
+    std::vector<MaterialRecord> materialTable;
     std::vector<FixedPoint> pointTable;
     std::vector<PolyRecord> polyTable;
     std::unique_ptr<VertexData> vData;
@@ -210,6 +211,11 @@ public:
 
     virtual void ReplaceColor(ARGBColor origColor, ARGBColor newColor);
     virtual void ReplaceAllColors(ARGBColor newColor);
+    virtual void ReplaceMaterialForColor(ARGBColor origColor, Material newMaterial);
+    virtual void ReplaceSpecularForColor(ARGBColor origColor, ARGBColor newSpecular);
+    virtual void ReplaceShininessForColor(ARGBColor origColor, uint8_t newShininess);
+    virtual void ReplaceMaterial(Material origMaterial, Material newMaterial);
+    virtual void ReplaceAllMaterials(Material newMaterial);
 
     virtual Boolean PrepareForRender();
 
@@ -237,6 +243,7 @@ public:
     virtual void PrependMatrix(Matrix *m); //	modelTransform = m * modelTransform
     virtual Matrix *GetInverseTransform();
 
+    virtual bool Has3D() const;
     virtual bool HasAlpha() const;
     virtual void SetScale(Fixed x, Fixed y, Fixed z);
     virtual void ResetScale();

@@ -175,12 +175,12 @@ CAbstractActor *CBall::EndScript() {
         hostIdent = 0;
         looseFrame = 0;
 
-        origLongColor = GetPixelColor();
+        origLongColor = GetPixelMaterial().GetColor();
         origWatchTeams = watchTeams;
         origTeam = teamColor;
 
         partCount = 1;
-        LoadPartWithColors(0, ReadLongVar(iShape));
+        LoadPartWithMaterials(0, ReadLongVar(iShape));
 
         PlaceParts();
         VECTORCOPY(origLocation, location);

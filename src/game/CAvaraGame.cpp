@@ -448,6 +448,7 @@ void CAvaraGame::RunFrameActions() {
     RunActorFrameActions();
 
     itsNet->ProcessQueue();
+
     while (topSentFrame <= FramesFromNow(latencyTolerance)) {
         itsNet->FrameAction();   // increments topSentFrame while sending frame packet
     }
@@ -480,6 +481,19 @@ void CAvaraGame::RunActorFrameActions() {
               theActor->FrameAction();
             }
         }
+    }
+}
+
+void CAvaraGame::PreSendFrameActions() {
+    // When called, send up to preSendCount frames early based on whether the clock is "behind".
+    // "behind" is defined as our current time being beyond the projected time of topSentFrame minus an offset.
+    // This allows us to increase the effective LT by as many as FRAME_OFFSET frames during a wait loop.
+    static float FRAME_OFFSET = 2.0;
+    while (preSendCount > 0 &&
+           SDL_GetTicks() >= nextScheduledFrame + frameTime*(topSentFrame-frameNumber-FRAME_OFFSET)) {
+        itsNet->FrameAction();
+        DBG_Log("presend", "fn=%d, preSent frame #%d, N=%d, ahead=%d, start=%d time=%d nSF=%d\n", frameNumber, topSentFrame, preSendCount, topSentFrame - frameNumber, frameStart, SDL_GetTicks(), nextScheduledFrame);
+        preSendCount--;
     }
 }
 
@@ -557,6 +571,7 @@ void CAvaraGame::EndScript() {
     short i;
     ARGBColor color = 0;
     Fixed intensity, angle1, angle2;
+    bool applySpecular;
     auto vp = gRenderer->viewParams;
 
     gameStatus = kReadyStatus;
@@ -567,21 +582,22 @@ void CAvaraGame::EndScript() {
         .value_or(DEFAULT_LIGHT_COLOR);
 
     for (i = 0; i < 4; i++) {
-        intensity = ReadFixedVar(iLightsTable + 4 * i);
+        intensity = ReadFixedVar(iLightsTable + 5 * i);
 
         if (intensity >= 2048) {
-            angle1 = ReadFixedVar(iLightsTable + 1 + 4 * i);
-            angle2 = ReadFixedVar(iLightsTable + 2 + 4 * i);
-            color = ARGBColor::Parse(ReadStringVar(iLightsTable + 3 + 4 * i))
+            angle1 = ReadFixedVar(iLightsTable + 1 + 5 * i);
+            angle2 = ReadFixedVar(iLightsTable + 2 + 5 * i);
+            color = ARGBColor::Parse(ReadStringVar(iLightsTable + 3 + 5 * i))
                 .value_or(DEFAULT_LIGHT_COLOR);
+            applySpecular = ReadLongVar(iLightsTable + 4 + 5 * i);
 
-            vp->SetLight(i, angle1, angle2, intensity, color, kLightGlobalCoordinates);
+            vp->SetLight(i, angle1, angle2, intensity, color, applySpecular, kLightGlobalCoordinates);
             // SDL_Log("Light from light table - idx: %d i: %f a: %f b: %f c: %x",
             //        i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), color);
 
             //The b angle is the compass reading and the a angle is the angle from the horizon.
         } else {
-            vp->SetLight(i, 0, 0, 0, DEFAULT_LIGHT_COLOR, kLightOff);
+            vp->SetLight(i, 0, 0, 0, DEFAULT_LIGHT_COLOR, false, kLightOff);
         }
     }
     gRenderer->ApplyLights();
@@ -765,7 +781,7 @@ void CAvaraGame::GameStart() {
         // init stat vars
         msecPerFrame = frameTime;
         packetsPerFrame = 1.0;
-        effectiveLT = latencyTolerance;
+        effectiveLT = latencyTolerance + 1;
     }
 
     playersStanding = 0;
@@ -774,7 +790,7 @@ void CAvaraGame::GameStart() {
 
     // frameAdvance = INIT_ADVANCE;
     // frameCredit = frameAdvance << 16;
-    canPreSend = false;
+    preSendCount = 0;
 
     // The difference between the last frame's time and frameTime
     frameAdjust = 0;
@@ -844,25 +860,25 @@ void CAvaraGame::HandleEvent(SDL_Event &event) {
 }
 
 bool CAvaraGame::GameTick() {
-    uint32_t startTime = SDL_GetTicks();
+    frameStart = SDL_GetTicks();
 
     // No matter what, process any pending network packets
     itsNet->ProcessQueue();
 
-    if (startTime > nextPingTime) {
+    if (frameStart > nextPingTime) {
         // 3 pings every second, 1 ping used by each client for RTT calc (last ping not used)
         static uint32_t pingInterval = 1000; // msec
         itsNet->SendPingCommand(4);
-        nextPingTime = startTime + pingInterval;
+        nextPingTime = frameStart + pingInterval;
     }
 
     int randLoadPeriod = Debug::GetValue("rload"); // randomly load a level every `rload` seconds
     if (randLoadPeriod > 0) {
-        if (startTime > nextLoadTime) {
+        if (frameStart > nextLoadTime) {
             auto p = CPlayerManagerImpl::LocalPlayer();
             auto *tui = itsApp->GetTui();
             tui->ExecuteMatchingCommand("/rand", p);
-            nextLoadTime = startTime + 1000*randLoadPeriod;
+            nextLoadTime = frameStart + 1000*randLoadPeriod;
         }
     }
 
@@ -871,11 +887,11 @@ bool CAvaraGame::GameTick() {
         return false;
 
     // Not time to process the next frame yet
-    if (startTime < nextScheduledFrame)
+    if (frameStart < nextScheduledFrame)
         return false;
 
     // SDL_Log("CAvaraGame::GameTick frame=%d dt=%d start=%d end=%d\n", frameNumber, SDL_GetTicks() - lastFrameTime,
-    // startTime, endTime); lastFrameTime = SDL_GetTicks();
+    // frameStart, endTime); lastFrameTime = SDL_GetTicks();
 
     if (Debug::IsEnabled("stats")) {
         DoStats(SDL_GetTicks(), Debug::GetValue("stats"));
@@ -890,6 +906,7 @@ bool CAvaraGame::GameTick() {
     playersStanding = 0;
     teamsStanding = 0;
     teamsStandingMask = 0;
+    preSendCount = 2;
 
     ViewControl(); // This was called by itsApp->theGameWind->DoUpdate() calling RefreshWindow
 
@@ -918,10 +935,8 @@ bool CAvaraGame::GameTick() {
 
     timeInSeconds = frameNumber * frameTime / 1000;
 
-    canPreSend = true;
-
     // if the game hasn't kept up with the frame schedule, reset the next frame time (prevents chipmunk mode, unless player is dead)
-    if (nextScheduledFrame < startTime && itsNet->IAmAlive()) {
+    if (nextScheduledFrame < frameStart && itsNet->IAmAlive()) {
         // at the start of this frame we were ALREADY a full frame or more behind...
         // the further back we can stay, the closer we are to original frame rate, the better it is for
         // smoothness.  But that has to be weighed against micro-jitter.  Ideally we want to minimze the
@@ -929,7 +944,7 @@ bool CAvaraGame::GameTick() {
         // is traded off with reducing overall wait time.  Sometimes it's better to wait longer if we
         // have fewer interruptions.
         uint32_t prevNSF = nextScheduledFrame;
-        nextScheduledFrame = startTime + 0.25*frameTime;
+        nextScheduledFrame = frameStart + 0.25*frameTime;
         DBG_Log("presend", "fn=%d, frame reset %u --> %u = +%d\n", frameNumber, prevNSF, nextScheduledFrame, nextScheduledFrame - prevNSF);
     }
 

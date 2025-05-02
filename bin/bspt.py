@@ -532,7 +532,7 @@ class BSP(object):
     def avara_format(self):
         d = self.triangulate(int_colors=True)
         out = {
-            'colors': readable_colors(d['colors']),
+            'materials': readable_materials(d['colors']),
             'points': [p[:3] for p in d['points']],
             'normals': [v[:3] for v in d['vectors']],
             'bounds': {
@@ -549,7 +549,7 @@ class BSP(object):
                 # basepoint is not used, we are sending triangles instead of polygons.
                 # nvis is the normal record visibility flag, which i can't determine
                 # any use of
-                vec_idx, basept, color_idx, nvis = d['normals'][normal_idx]
+                vec_idx, basept, material_idx, nvis = d['normals'][normal_idx]
 
                 # these were set in the triangulation step
                 tris = d['triangles_poly'][idx]
@@ -566,7 +566,7 @@ class BSP(object):
                 # the flag
                 out['polys'].append({
                     'normal': vec_idx,
-                    'color': color_idx,
+                    'mat': material_idx,
                     'front': fp, # index of the poly in front of this one
                     'back': bp, # index of the poly in back of this one
                     'tris': tri_list,
@@ -577,20 +577,21 @@ class BSP(object):
         return json.dumps(out, indent=None, separators=(", ", ":"), sort_keys=True)
 
 
-def readable_colors(color_list):
+def readable_materials(color_list):
     out_list = []
     for color in color_list:
         if color == 0x00fefefe:
-            out_list.append("marker(0)")
+            mat = {"base": "marker(0)"}
         elif color == 0x00fe0000:
-            out_list.append("marker(1)")
+            mat = {"base": "marker(1)"}
         elif color == 0x000333ff:
-            out_list.append("marker(2)")
+            mat = {"base": "marker(2)"}
         elif color == 0x00929292:
-            out_list.append("marker(3)")
+            mat = {"base": "marker(3)"}
         else:
             # remaining colors implicitly given full alpha via CSS syntax
-            out_list.append("#" + hex(color)[2:].zfill(6))
+            mat = {"base": "#" + hex(color)[2:].zfill(6), "spec": "rgba(0,0,0,0)"}
+        out_list.append(mat)
     return out_list
 
 

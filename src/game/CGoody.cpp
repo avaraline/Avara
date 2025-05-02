@@ -70,7 +70,7 @@ CAbstractActor *CGoody::EndScript() {
         altShapeId = ReadLongVar(iAltShape);
 
         partCount = 1;
-        LoadPartWithColors(0, shapeId);
+        LoadPartWithMaterials(0, shapeId);
         partList[0]->RotateZ(partRoll = ReadFixedVar(iRoll));
         partList[0]->RotateOneY(heading);
         TranslatePart(partList[0], location[0], location[1], location[2]);

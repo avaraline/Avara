@@ -8,6 +8,7 @@
 */
 
 #include "CSmartBox.h"
+#include "ColorManager.h"
 
 #include "Memory.h"
 #include "Resource.h"
@@ -109,8 +110,8 @@ void CSmartBox::StretchTemplate(Fixed *dimensions, Fixed baseSize) {
 CSmartBox::CSmartBox(
     short resId,
     Fixed *dimensions,
-    ARGBColor color,
-    ARGBColor altColor,
+    Material material,
+    Material altMaterial,
     CAbstractActor *anActor,
     short aPartCode
 ) {
@@ -144,9 +145,8 @@ CSmartBox::CSmartBox(
         StretchTemplate(dimensions, baseSize);
     }
 
-    // Just replace every color, because these shapes
-    // always only have one. They're wall templates!
-    ReplaceAllColors(color);
+    ReplaceMaterialForColor(*ColorManager::getMarkerColor(0), material);
+    ReplaceMaterialForColor(*ColorManager::getMarkerColor(1), altMaterial);
 
     MoveDone();
 

@@ -1,12 +1,18 @@
 #version 330 core
+#define MAX_LIGHTS 4
 
 in vec3 tex_coord;
 in vec3 camPos;
 in vec3 fragPos;
 
-uniform vec3 groundColor;
-uniform vec3 horizonColor;
+uniform vec3 lights[MAX_LIGHTS] = vec3[MAX_LIGHTS](vec3(0, 0, 0), vec3(0, 0, 0), vec3(0, 0, 0), vec3(0, 0, 0));
+uniform vec3 lightColors[MAX_LIGHTS] = vec3[MAX_LIGHTS](vec3(1, 1, 1), vec3(1, 1, 1), vec3(1, 1, 1), vec3(1, 1, 1));
+uniform bool lightApplySpecular[MAX_LIGHTS] = bool[MAX_LIGHTS](false, false, false, false);
 uniform vec3 skyColor;
+uniform vec3 horizonColor;
+uniform vec3 groundColor;
+uniform vec3 groundSpec;
+uniform float groundShininess;
 uniform float lowAlt = 0;
 uniform float highAlt = .05;
 uniform float hazeDensity = 0;
@@ -20,6 +26,34 @@ vec3 apply_fog(vec3 color, float dist)
     vec3 extColor = vec3(exp(-dist * hazeDensity), exp(-dist * hazeDensity), exp(-dist * hazeDensity));
     vec3 insColor = vec3(exp(-dist * hazeDensity), exp(-dist * hazeDensity), exp(-dist * hazeDensity));
     return color * extColor + hazeColor * (1.0 - insColor);
+}
+
+vec3 spec_light(int i) {
+    if (!lightApplySpecular[i] || groundShininess == 0) return vec3(0);
+    vec3 viewDir = normalize(camPos - fragPos);
+    vec4 lightPos = vec4(lights[i] * -1000, 1);
+    vec3 lightDir = normalize(lightPos.xyz - fragPos);
+    vec3 halfwayDir = normalize(lightDir + viewDir);
+    float spec = pow(max(dot(vec3(0, 1, 0), halfwayDir), 0.0), groundShininess * 2048.0);
+    return lightColors[i] * (spec * groundSpec);
+}
+
+vec3 spec() {
+    vec3 sum = vec3(0, 0, 0);
+    for (int i = 0; i < MAX_LIGHTS; i++) {
+        sum += spec_light(i);
+    }
+    return sum;
+}
+
+/* Toned down version of Magic GLSL One-liner from:
+   https://blog.frost.kiwi/GLSL-noise-and-radial-gradient/ */
+float noise() {
+    return mix(
+        -1.0 / 255.0,
+        1.0 / 255.0,
+        fract(52.9829189 * fract(dot(gl_FragCoord.xy, vec2(0.06711056, 0.00583715))))
+    );
 }
 
 void main()
@@ -38,7 +72,7 @@ void main()
                 skyColor,
                 float(phi > highAlt)
             ),
-            groundColor,
+            groundColor + spec(),
             float(phi <= 0.0)
         ),
         1.0
@@ -52,5 +86,5 @@ void main()
         ),
         maxHazeDist
     );
-    color.rgb = apply_fog(color.rgb, dist);
+    color.rgb = apply_fog(color.rgb, dist) + noise();
 }

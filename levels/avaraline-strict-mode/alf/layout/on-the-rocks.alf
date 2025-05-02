@@ -1,7 +1,11 @@
-<SkyColor color="#73ace5" color.1="#334d66" />
-<GroundColor color="#00274d" />
+<SkyColor color="#73ace5" color.1="#334d66" thickness="500" />
+<GroundColor color="#00274d" material.specular="#080808" material.shininess="8.0" />
 <set
   designer="$mSilvermantis"
+  light.0.s="true"
+  light.1.s="true"
+  baseMaterial.specular="#333333"
+  baseMaterial.shininess="16.0"
   wallHeight="0"
 />
 
@@ -39,42 +43,6 @@
 <WallDoor midYaw="45" w="7.5" d="7.5" h="3" x="0" y="0" z="54.8025" color="#1a2633" color.1="#000000" />
 <Wall w="7.5" d="7.5" h="3" x="-38.75" y="0" z="38.75" color="#1a2633" color.1="#000000" />
 <WallDoor midYaw="45" w="7.5" d="7.5" h="3" x="-54.8025" y="0" z="0" color="#1a2633" color.1="#000000" />
-
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-30" z="-30" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-20" z="-30" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-10" z="-30" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-30" z="-20" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-10" z="-20" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-30" z="-10" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-20" z="-10" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-10" z="-10" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="30" z="-30" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="20" z="-30" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="10" z="-30" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="30" z="-20" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="10" z="-20" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="30" z="-10" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="20" z="-10" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="10" z="-10" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="30" z="30" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="20" z="30" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="10" z="30" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="30" z="20" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="10" z="20" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="30" z="10" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="20" z="10" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="10" z="10" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-30" z="30" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-20" z="30" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-10" z="30" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-30" z="20" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-10" z="20" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-30" z="10" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-20" z="10" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
-<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-10" z="10" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
 
 <unique vars="mShow mTaken" />
 <And in="@start" out="mShow" />
@@ -121,3 +89,40 @@
 <Incarnator cx="20" cz="0" y="30" angle="270" />
 <Incarnator cx="0" cz="20" y="30" angle="0" />
 <Incarnator cx="-20" cz="0" y="30" angle="90" />
+
+<set material.specular="#ffffff" material.shininess="512.0" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-30" z="-30" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-20" z="-30" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-10" z="-30" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-30" z="-20" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-10" z="-20" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-30" z="-10" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-20" z="-10" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-10" z="-10" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="30" z="-30" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="20" z="-30" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="10" z="-30" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="30" z="-20" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="10" z="-20" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="30" z="-10" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="20" z="-10" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="10" z="-10" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="30" z="30" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="20" z="30" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="10" z="30" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="30" z="20" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="10" z="20" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="30" z="10" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="20" z="10" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="10" z="10" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-30" z="30" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-20" z="30" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-10" z="30" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-30" z="20" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-10" z="20" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-30" z="10" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-20" z="10" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-10" z="10" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
