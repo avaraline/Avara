@@ -264,6 +264,7 @@ class BSP(object):
             self.points = []
             self.vectors = []
             self.unique_edges = []
+            self.bad_polys = []
             return
 
         normal_offset = bytes_to_unsigned_long(raw_data[84:88])
@@ -368,9 +369,10 @@ class BSP(object):
         d["triangles_poly"] = list()
         d["triangles_verts_poly"] = list()
         # print(self.name)
+        bad_polys = []
         # avara stored individual shape faces as
         # N-gons
-        for poly in self.polys:
+        for poly_idx, poly in enumerate(self.polys):
             # lookup the normal record
             normal_rec = self.normals[poly.normal_index]
             normal_idx = normal_rec.normal_index
@@ -392,8 +394,9 @@ class BSP(object):
                 myidx_b = verts.index(e.b)
                 edges.append([myidx_a, myidx_b])
 
-            if (poly.edge_count < 3):
+            if poly.edge_count < 3 or len(verts) < 3:
                 # can't triangulate less than 3 points
+                bad_polys.append(poly_idx)
                 continue
 
             # this doesn't work and it drives me abs.
@@ -428,12 +431,17 @@ class BSP(object):
                 # create input for triangle library
                 the_dict = dict(vertices=face_points, segments=edges)
                 # do triangulation in planar straignt line graph mode
-                result = triangle.triangulate(the_dict, 'p')
+                try: 
+                    result = triangle.triangulate(the_dict, 'p')
+                except ValueError:
+                    bad_polys.append(poly_idx)
+                    continue
 
                 if "triangles" not in result:
                     # the triangulator didn't work for some reason
                     # this is usually because there was just terrible
                     # shape data that made no sense
+                    bad_polys.append(poly_idx)
                     continue
 
                 vert_diff = len(result["vertices"]) - len(the_dict["vertices"])
@@ -517,6 +525,8 @@ class BSP(object):
                 # add triangles and indexes to dictionary for use in avara_format
                 d["triangles_poly"].append(new_tris)
                 d["triangles_verts_poly"].append(verts)
+        for del_poly_idx in bad_polys:
+            del d["polys"][del_poly_idx]
         return d
 
     def avara_format(self):
