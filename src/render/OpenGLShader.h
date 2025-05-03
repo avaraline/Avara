@@ -5,6 +5,7 @@
 #endif
 #include <glad/glad.h>
 #include <glm/detail/type_mat.hpp>
+#include <glm/detail/type_vec.hpp>
 
 #include <string>
 
@@ -22,6 +23,7 @@ public:
     void SetTransposedMat3(const std::string &uniform, const glm::mat3 &value) const;
     void SetMat4(const std::string &uniform, const glm::mat4 &value) const;
     void SetTransposedMat4(const std::string &uniform, const glm::mat4 &value) const;
+    void SetVec3(const std::string &uniform, const glm::vec3 &value) const;
 private:
     GLuint id;
 };

@@ -22,6 +22,7 @@ public:
     Fixed intensity = FIX(0);
     Fixed angle1 = FIX(0);
     Fixed angle2 = FIX(0);
+    float direction[3] = {0.0, 0.0, 0.0};
     ARGBColor color = DEFAULT_LIGHT_COLOR;
     bool applySpecular = false;
 };

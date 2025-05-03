@@ -254,6 +254,14 @@ void CViewParameters::SetLight(short n, Fixed angle1, Fixed angle2, Fixed intens
         x = FMul(FDegSin(-angle2), x);
 
         SetLightValues(n, x, y, z, mode);
+        
+        // Precalculate relative light location.
+        float intensityF = ToFloat(intensity);
+        float elevation = ToFloat(angle1);
+        float azimuth = ToFloat(angle2);
+        dirLightSettings[n].direction[0] = sin(Deg2Rad(-azimuth)) * intensityF;
+        dirLightSettings[n].direction[1] = sin(Deg2Rad(-elevation)) * intensityF;
+        dirLightSettings[n].direction[2] = cos(Deg2Rad(azimuth)) * intensityF;
     }
 
 }

@@ -1,5 +1,5 @@
 <SkyColor color="#fffff0" color.1="#bde8ff" thickness="3000" verticalRangeMin="1000" verticalRangeMax="6000" />
-<GroundColor color="#fff9d9" />
+<GroundColor color="#fff9d9" material.specular="#ffffff" material.shininess="16.0" />
 <set
   designer="$mSilverfox"
   information="Between the sun, sand, and glint of metal, it was nearly impossible to trust my eyes, but I swear the place was not as I left it."
@@ -7,6 +7,9 @@
   light.0.i="0.9"
   light.0.a="30"
   light.0.b="10"
+  light.0.s="true"
+  baseMaterial.specular="$defaultMaterial.specular"
+  baseMaterial.shininess="defaultMaterial.shininess"
   wallHeight="0"
 />
 
