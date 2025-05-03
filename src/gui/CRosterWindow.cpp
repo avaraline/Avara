@@ -188,7 +188,7 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     }
 
     tabWidget->setActiveTab(0);
-    currentLevel = ((CAvaraAppImpl *)gApplication)->GetGame()->loadedFilename;
+    currentLevel = ((CAvaraAppImpl *)gApplication)->GetGame()->loadedLevelInfo->URL();
 
     UpdateRoster();
 
@@ -240,21 +240,22 @@ void CRosterWindow::UpdateRoster() {
             theGame->initialFrameLatency = theGame->RoundTripToFrameLatency(maxRtt);
         }
 
-        if (theGame->loadedFilename.compare(currentLevel) != 0) {
-            std::string theLevel = theGame->loadedLevel;
-            std::string theDesigner = theGame->loadedDesigner;
-
+        if (theGame->loadedLevelInfo->URL().compare(currentLevel) != 0) {
+            auto theLevel = theGame->loadedLevelInfo->levelName;
+            auto theDesigner = theGame->loadedLevelInfo->designer;
 
             if (theLevel.length() > 0) levelLoaded->setValue(theLevel);
             else levelLoaded->setValue("");
             if (theDesigner.length() > 0) levelDesigner->setValue(theDesigner);
             else levelDesigner->setValue("");
 
-            if (theGame->loadedInfo.length() > 0) levelDescription->setCaption(theGame->loadedInfo);
+            if (theGame->loadedLevelInfo->information.length() > 0) {
+                levelDescription->setCaption(theGame->loadedLevelInfo->information);
+            }
             else levelDescription->setCaption("No additional information about this mission is available.");
-            currentLevel = theGame->loadedFilename;
+            currentLevel = theGame->loadedLevelInfo->URL();
 
-            UpdateTags(theGame->loadedTags);
+            UpdateTags(theGame->loadedLevelInfo->TagsString());
         }
     }
     else if (tabWidget->activeTab() == 2) {
@@ -492,7 +493,7 @@ void CRosterWindow::PrefChanged(std::string name) {
 }
 
 
-void CRosterWindow::UpdateTags(std::string& tags) {
+void CRosterWindow::UpdateTags(std::string tags) {
     if (tags.length() > 0) {
         levelTags->setValue("tags:" + tags);
     } else {

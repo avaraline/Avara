@@ -231,6 +231,8 @@
     <ClInclude Include="..\src\game\CRandomIncarnator.h" />
     <ClInclude Include="..\src\game\CRealMovers.h" />
     <ClInclude Include="..\src\game\CRealShooters.h" />
+    <ClInclude Include="..\src\game\CRUD.h" />
+    <ClInclude Include="..\src\game\CRUDsqlite.h" />
     <ClInclude Include="..\src\game\CScoreKeeper.h" />
     <ClInclude Include="..\src\game\CScout.h" />
     <ClInclude Include="..\src\game\CShuriken.h" />
@@ -258,6 +260,7 @@
     <ClInclude Include="..\src\game\GoodyRecord.h" />
     <ClInclude Include="..\src\game\InfoMessages.h" />
     <ClInclude Include="..\src\game\KeyFuncs.h" />
+    <ClInclude Include="..\src\game\LevelInfo.h" />
     <ClInclude Include="..\src\game\Messages.h" />
     <ClInclude Include="..\src\game\PlayerConfig.h" />
     <ClInclude Include="..\src\game\PlayerRatingsSimpleElo.h" />
@@ -434,6 +437,7 @@
     <ClCompile Include="..\src\game\CRandomIncarnator.cpp" />
     <ClCompile Include="..\src\game\CRealMovers.cpp" />
     <ClCompile Include="..\src\game\CRealShooters.cpp" />
+    <ClCompile Include="..\src\game\CRUDsqlite.cpp" />
     <ClCompile Include="..\src\game\CScoreKeeper.cpp" />
     <ClCompile Include="..\src\game\CScout.cpp" />
     <ClCompile Include="..\src\game\CShuriken.cpp" />
@@ -459,6 +463,7 @@
     <ClCompile Include="..\src\game\CYonSphere.cpp" />
     <ClCompile Include="..\src\game\CZombieActor.cpp" />
     <ClCompile Include="..\src\game\KeyFuncs.cpp" />
+    <ClCompile Include="..\src\game\LevelInfo.cpp" />
     <ClCompile Include="..\src\game\PlayerRatingsSimpleElo.cpp" />
     <ClCompile Include="..\src\gui\CApplication.cpp" />
     <ClCompile Include="..\src\gui\CLevelWindow.cpp" />

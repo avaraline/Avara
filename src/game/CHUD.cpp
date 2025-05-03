@@ -207,7 +207,7 @@ void CHUD::DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, N
 
 void CHUD::DrawLevelName(NVGcontext *ctx) {
     auto view = gRenderer->viewParams;
-    std::string level = itsGame->loadedLevel;
+    auto level = itsGame->loadedLevelInfo->levelName;
     if(itsGame->gameStatus != kPlayingStatus && level.length() > 0) {
         int bufferWidth = view->viewPixelDimensions.h;
         int bufferHeight = view->viewPixelDimensions.v;
@@ -992,7 +992,7 @@ void CHUD::RenderNewHUD(NVGcontext *ctx) {
 
         // Filter messages that are older than the current game
         // Don't keep reading messages when a message from a previous game is found
-        if (msg.gameId < itsGame->currentGameId) break; 
+        if (msg.gameId != itsGame->currentGameId) break; 
 
         // Set initial message params based on category
         // This determines which display panel the message gets added to

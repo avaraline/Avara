@@ -43,7 +43,7 @@ public:
         FunctionTable &ft = *(this->ft);
         ft.down = ft.up = ft.held = ft.mouseDelta.h = ft.mouseDelta.v = ft.buttonStatus = ft.msgChar = 0;
     }
-    ~TestPlayerManager() {}
+    virtual ~TestPlayerManager() {}
     virtual CAbstractPlayer* GetPlayer() { return playa; }
     virtual void SetPlayer(CAbstractPlayer* p) { playa = p; }
     virtual short Slot() { return 0; }
@@ -170,7 +170,7 @@ public:
     virtual CAvaraGame* GetGame() { return 0; }
     virtual void Done() {}
     virtual void BroadcastCommand(int) {}
-    virtual void GameStarted(std::string set, std::string level) {};
+    virtual void GameStarted(LevelInfo &loadedLevel) {};
     virtual std::deque<MsgLine>& MessageLines() { return msgLines; }
     virtual CommandManager* GetTui() { return 0; }
 public:

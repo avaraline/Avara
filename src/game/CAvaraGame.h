@@ -14,6 +14,7 @@
 #include "CDirectObject.h"
 #include "Types.h"
 #include "CNetManager.h"
+#include "LevelInfo.h"
 
 #include <SDL2/SDL.h>
 #include <string>
@@ -76,19 +77,14 @@ class CAbstractYon;
 
 class CAvaraGame {
 public:
-    std::string loadedFilename = "";
-    std::string loadedLevel = "";
-    std::string loadedSet = "";
-    std::string loadedDesigner = "";
-    std::string loadedInfo = "";
-    std::string loadedTags;
+    std::unique_ptr<LevelInfo> loadedLevelInfo = std::make_unique<LevelInfo>("", "");
     long loadedTimeLimit;
     int32_t timeInSeconds;
     FrameNumber frameNumber;
     bool isClassicFrame;
     int32_t frameAdjust;
 
-    int currentGameId = 0; // Increments when a new game starts
+    int currentGameId = 0; // resets when a new game starts
 
     FrameNumber topSentFrame;
 

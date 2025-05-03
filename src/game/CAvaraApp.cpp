@@ -40,6 +40,7 @@
 #include "LegacyOpenGLRenderer.h"
 #include "GitVersion.h"   // version.git
 #include "CNetManager.h"  // version.net
+#include "CRUDsqlite.h"
 
 // included while we fake things out
 #include "CPlayerManager.h"
@@ -76,6 +77,9 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     
     itsGame = std::make_unique<CAvaraGame>(Get<FrameTime>(kFrameTimeTag));
     gCurrentGame = itsGame.get();
+
+    // use sqlite to persist stuff
+    itsAPI = std::make_unique<CRUDsqlite>();
 
     if (mNVGContext) {
         ui = std::make_unique<CHUD>(gCurrentGame);
@@ -242,13 +246,14 @@ void CAvaraAppImpl::drawAll() {
     }
 }
 
-void CAvaraAppImpl::GameStarted(std::string set, std::string level) {
+void CAvaraAppImpl::GameStarted(LevelInfo &loadedLevel) {
     auto vp = gRenderer->viewParams;
     animatePreview = false;
     vp->showTransparent = false;
     itsGame->IncrementGameCounter();
     MessageLine(kmStarted, MsgAlignment::Center);
-    levelWindow->AddRecent(set, level);
+    itsAPI->RecordGameStart(itsGame->currentGameId, loadedLevel);
+    levelWindow->UpdateRecents();
 }
 
 bool CAvaraAppImpl::DoCommand(int theCommand) {
@@ -307,26 +312,24 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
     SDL_Log("LOADING LEVEL %s FROM %s\n", levelTag.c_str(), set.c_str());
     itsGame->LevelReset(false);
     gCurrentGame = itsGame.get();
-    itsGame->loadedSet = set;
 
     ColorManager::resetOverrides();
 
-    std::string levelName;
-    OSErr result = AssetManager::LoadLevel(set, levelTag, levelName);
+    itsGame->loadedLevelInfo = std::make_unique<LevelInfo>(set, "loading...", levelTag);
+    OSErr result = AssetManager::LoadLevel(set, levelTag, itsGame->loadedLevelInfo->levelName);
 
     if (result == noErr) {
         playerWindow->RepopulateHullOptions();
-        itsGame->loadedLevel = levelName;
-        itsGame->loadedFilename  = levelTag;
-        itsGame->loadedTags = Tags::TagsStringForLevel(Tags::LevelURL(itsGame->loadedSet, itsGame->loadedLevel));
+
         std::string msgStr = "Loaded";
         if (sendingPlayer != NULL) {
             msgStr = sendingPlayer->GetPlayerName() + " loaded";
         }
-        msgStr += " \"" + itsGame->loadedLevel + "\" from \"" + set + "\".";
+        auto &level = itsGame->loadedLevelInfo->levelName;
+        msgStr += " \"" + level + "\" from \"" + set + "\".";
         AddMessageLine(msgStr);
 
-        levelWindow->SelectLevel(set, itsGame->loadedLevel);
+        levelWindow->SelectLevel(set, level);
 
         gRenderer->OverheadPoint(overhead, extent);
 

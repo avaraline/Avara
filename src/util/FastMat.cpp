@@ -15,6 +15,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <utility>
+#include <time.h>    // time()
 
 #define ARCUSTABLEBITS 9
 #define ARCUSTABLESIZE (1 + (1 << ARCUSTABLEBITS))
@@ -80,9 +81,22 @@ Fixed NormalizeVector(long n, Fixed *v) {
     return l;
 }
 
+// because Windows is fussy about random/srandom, here's a quick version that's
+// good enough for the purposes of a starting game seed.  Here's the Wikipedia page that describe
+// Linear congruential generator algorithms (Juri's FRand() looks like a variation of mcg16807)
+//   https://en.wikipedia.org/wiki/Linear_congruential_generator
+uint32_t seedLCG = (uint32_t)time(nullptr);
+uint32_t randLCG() {
+    seedLCG = 1664525 * seedLCG + 1013904223;
+    return seedLCG;
+}
+
 void InitMatrix() {
     InitTrigTables();
-    FRandSeed = (Fixed)TickCount();
+    // call randLCG() a "few" times for a good shuffle
+    for (short count = 2 + (randLCG() & 0x3); count > 0; count--) {
+        FRandSeed = (Fixed)randLCG();
+    }
 }
 
 Fixed FSqroot(int *ab) {

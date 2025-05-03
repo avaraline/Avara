@@ -66,10 +66,11 @@ void CScoreKeeper::IScoreKeeper(CAvaraGame *theGame) {
     // iface.resultsWindow = ((CAvaraApp *)gApplication)->theRosterWind->itsWindow;
     // SetRect(&iface.resultsRect, 0,0, 0,0);
     // iface.theEvent = NULL;
-    iface.levelName = itsGame->loadedLevel;
-    iface.levelName = itsGame->loadedDesigner;
-    iface.levelName = itsGame->loadedInfo;
-    iface.directory = itsGame->loadedFilename;
+    iface.levelName = itsGame->loadedLevelInfo->levelName;
+    iface.levelCreator = itsGame->loadedLevelInfo->designer;
+    iface.levelDescription = itsGame->loadedLevelInfo->information;
+    iface.directory = itsGame->loadedLevelInfo->setTag;
+
     iface.playerID = 0;
     iface.playerTeam = 0;
     iface.playerLives = 0;
@@ -103,8 +104,8 @@ void CScoreKeeper::Dispose() {
 
 void CScoreKeeper::EndScript() {
     iface.command = ksiLevelLoaded;
-    iface.levelName = itsGame->loadedLevel;
-    iface.directory = itsGame->loadedSet;
+    iface.levelName = itsGame->loadedLevelInfo->levelName;
+    iface.directory = itsGame->loadedLevelInfo->setTag;
     // this method called on level-load regardless if local player is playing or not, clear out the names here
     for (auto &name: playerNames) {
         name.clear();

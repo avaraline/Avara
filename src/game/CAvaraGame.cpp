@@ -80,7 +80,8 @@ void CAvaraGame::InitLocatorTable() {
 }
 
 void CAvaraGame::IncrementGameCounter() {
-    currentGameId++;
+    extern Fixed FRandSeed;
+    currentGameId = int(FRandSeed);
 }
 
 std::unique_ptr<CNetManager> CAvaraGame::CreateNetManager() {
@@ -130,10 +131,6 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     allowBackgroundProcessing = false;
 
-    loadedFilename = "";
-    loadedLevel = "";
-    loadedDesigner = "";
-    loadedInfo = "";
     loadedTimeLimit = 600;
     timeInSeconds = 0;
     simpleExplosions = false;
@@ -463,7 +460,7 @@ void CAvaraGame::RunFrameActions() {
     // Time out old score events
     if (!scoreEventList.empty()) {
         ScoreInterfaceEvent event = scoreEventList.front();
-        if (event.frameNumber + 480 < frameNumber || event.gameId < currentGameId) {
+        if (event.frameNumber < FramesFromNow(-120) || event.gameId != currentGameId) {
             scoreEventList.pop_front();
         }
     }
@@ -507,9 +504,6 @@ void CAvaraGame::LevelReset(Boolean clearReset) {
 
     gameStatus = kAbortStatus;
 
-    loadedLevel = "";
-    loadedDesigner = "";
-    loadedInfo = "";
     loadedTimeLimit = 600;
     timeInSeconds = 0;
 
@@ -610,8 +604,9 @@ void CAvaraGame::EndScript() {
 
     friendlyHitMultiplier = ReadFixedVar(iFriendlyHitMultiplier);
 
-    loadedDesigner = ReadStringVar(iDesignerName);
-    loadedInfo = ReadStringVar(iLevelInformation);
+    loadedLevelInfo->designer    = ReadStringVar(iDesignerName);
+    loadedLevelInfo->information = ReadStringVar(iLevelInformation);
+
     loadedTimeLimit = ReadLongVar(iTimeLimit);
 
     groundTraction = ReadFixedVar(iDefaultTraction);
@@ -724,8 +719,7 @@ void CAvaraGame::ResumeGame() {
 
     if (doStart) {
         if (freshMission) {
-            itsApp->GameStarted(loadedSet,
-                                loadedLevel);
+            itsApp->GameStarted(*loadedLevelInfo);
             itsNet->AttachPlayers((CAbstractPlayer *)freshPlayerList);
             freshPlayerList = NULL;
             InitMixer(false);

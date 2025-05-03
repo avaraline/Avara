@@ -87,10 +87,6 @@ using json = nlohmann::json;
 #define kPunchServerPort "udpPunchServerPort"
 #define kPunchHoles "udpHolePunch"
 
-// Levels
-#define kRecentSets "recentSets"
-#define kRecentLevels "recentLevels"
-
 // Sound
 #define kIgnoreCustomGoodySound "ignoreCustomGoodySound"
 #define kSoundVolume "soundVolume"
@@ -191,8 +187,6 @@ static json defaultPrefs = {
     {kPunchServerAddress, "tracker.avara.gg"},
     {kPunchServerPort, 19555},
     {kPunchHoles, true},
-    {kRecentSets, {}},
-    {kRecentLevels, {}},
     {kSoundVolume, 100},
     {kIgnoreCustomColorsTag, false},
     {kIgnoreLevelCustomColorsTag, false},

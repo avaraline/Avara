@@ -38,6 +38,12 @@
 		E2210CC12A1C9D9C000712AA /* Tags.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20752EE2A003EC600DCC210 /* Tags.cpp */; };
 		E247DE242A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E247DE222A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp */; };
 		E247DE252A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E247DE222A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp */; };
+		E2CD7F9D2DB32EB800C3665F /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E2CD7F9C2DB32EB800C3665F /* libsqlite3.tbd */; };
+		E2CD7FA42DB459C500C3665F /* CRUDsqlite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2CD7FA32DB459C500C3665F /* CRUDsqlite.cpp */; };
+		E2CD7FA52DB459C500C3665F /* CRUDsqlite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2CD7FA32DB459C500C3665F /* CRUDsqlite.cpp */; };
+		E2CD7FAB2DB5BE1D00C3665F /* LevelInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2CD7FAA2DB5BE1D00C3665F /* LevelInfo.cpp */; };
+		E2CD7FAC2DB5BE1D00C3665F /* LevelInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2CD7FAA2DB5BE1D00C3665F /* LevelInfo.cpp */; };
+		E2CD7FAE2DBC204E00C3665F /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E2CD7F9C2DB32EB800C3665F /* libsqlite3.tbd */; };
 		E2CF30032DA88F4D002DD786 /* LegacyOpenGLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60C274E22C23EBE9005B67A9 /* LegacyOpenGLRenderer.cpp */; };
 		E2DCC6562BDE0D3200D70C49 /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5890F9729895294007A875D /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E517F053299713DB0036B206 /* tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2B62D7D2997052B00600401 /* tests.cpp */; };
@@ -431,6 +437,12 @@
 		E247DE232A0EB51B001CA630 /* PlayerRatingsSimpleElo.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = PlayerRatingsSimpleElo.h; sourceTree = "<group>"; };
 		E248724C29A480990079337E /* prefs.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = prefs.json; path = "~/Library/Application Support/Avaraline/Avara/prefs.json"; sourceTree = "<group>"; };
 		E2B62D7D2997052B00600401 /* tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tests.cpp; sourceTree = "<group>"; };
+		E2CD7F9C2DB32EB800C3665F /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		E2CD7FA12DB455D500C3665F /* CRUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRUD.h; sourceTree = "<group>"; };
+		E2CD7FA22DB459C500C3665F /* CRUDsqlite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRUDsqlite.h; sourceTree = "<group>"; };
+		E2CD7FA32DB459C500C3665F /* CRUDsqlite.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CRUDsqlite.cpp; sourceTree = "<group>"; };
+		E2CD7FAA2DB5BE1D00C3665F /* LevelInfo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LevelInfo.cpp; sourceTree = "<group>"; };
+		E2CD7FAD2DB5BEB100C3665F /* LevelInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LevelInfo.h; sourceTree = "<group>"; };
 		E2D76F732A1680FD000D24B3 /* JSONify.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONify.h; sourceTree = "<group>"; };
 		E517F04C299713990036B206 /* AvaraTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AvaraTests; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5253ED82996DD2200F8C1E8 /* PascalStrings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PascalStrings.cpp; sourceTree = "<group>"; };
@@ -1053,6 +1065,7 @@
 			files = (
 				E517F0EE299715950036B206 /* SDL2.framework in Frameworks */,
 				E517F0EF2997159D0036B206 /* AppKit.framework in Frameworks */,
+				E2CD7FAE2DBC204E00C3665F /* libsqlite3.tbd in Frameworks */,
 				E517F0F0299715A00036B206 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1061,6 +1074,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2CD7F9D2DB32EB800C3665F /* libsqlite3.tbd in Frameworks */,
 				E5890F9A2989529B007A875D /* AppKit.framework in Frameworks */,
 				E5890F9C298952A1007A875D /* OpenGL.framework in Frameworks */,
 				E5E510F8298960F300EA1AEB /* SDL2.framework in Frameworks */,
@@ -1272,6 +1286,9 @@
 				E5890C3729895118007A875D /* CAreaActor.cpp */,
 				E5890C1429895118007A875D /* CAreaActor.h */,
 				E5890C0B29895118007A875D /* CAvaraApp.cpp */,
+				E2CD7FA12DB455D500C3665F /* CRUD.h */,
+				E2CD7FA22DB459C500C3665F /* CRUDsqlite.h */,
+				E2CD7FA32DB459C500C3665F /* CRUDsqlite.cpp */,
 				E5890C0129895118007A875D /* CAvaraApp.h */,
 				E5890C2A29895118007A875D /* CAvaraGame.cpp */,
 				E5890BD529895118007A875D /* CAvaraGame.h */,
@@ -1407,6 +1424,8 @@
 				E5890BE429895118007A875D /* PlayerConfig.h */,
 				E247DE222A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp */,
 				E247DE232A0EB51B001CA630 /* PlayerRatingsSimpleElo.h */,
+				E2CD7FAA2DB5BE1D00C3665F /* LevelInfo.cpp */,
+				E2CD7FAD2DB5BEB100C3665F /* LevelInfo.h */,
 			);
 			path = game;
 			sourceTree = "<group>";
@@ -1979,6 +1998,7 @@
 		E5890F9629895294007A875D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E2CD7F9C2DB32EB800C3665F /* libsqlite3.tbd */,
 				E5890F9B298952A1007A875D /* OpenGL.framework */,
 				E5890F992989529B007A875D /* AppKit.framework */,
 				E5890F9729895294007A875D /* SDL2.framework */,
@@ -2124,6 +2144,7 @@
 				E517F061299713DB0036B206 /* CViewParameters.cpp in Sources */,
 				E517F063299713DB0036B206 /* Memory.cpp in Sources */,
 				E517F064299713DB0036B206 /* Resource.cpp in Sources */,
+				E2CD7FAB2DB5BE1D00C3665F /* LevelInfo.cpp in Sources */,
 				E517F065299713DB0036B206 /* System.cpp in Sources */,
 				E517F066299713DB0036B206 /* KeyFuncs.cpp in Sources */,
 				E517F067299713DB0036B206 /* CAbstractActor.cpp in Sources */,
@@ -2264,6 +2285,7 @@
 				E517F0E1299713DB0036B206 /* text.cpp in Sources */,
 				E517F0E2299713DB0036B206 /* textbox.cpp in Sources */,
 				E517F0E3299713DB0036B206 /* theme.cpp in Sources */,
+				E2CD7FA42DB459C500C3665F /* CRUDsqlite.cpp in Sources */,
 				E517F0E4299713DB0036B206 /* vscrollpanel.cpp in Sources */,
 				E517F0E5299713DB0036B206 /* widget.cpp in Sources */,
 				E517F0E6299713DB0036B206 /* window.cpp in Sources */,
@@ -2297,6 +2319,7 @@
 				E5890F1929895124007A875D /* glad.c in Sources */,
 				E5890CFA29895118007A875D /* CSmartBox.cpp in Sources */,
 				E5890D1529895118007A875D /* CDirectObject.cpp in Sources */,
+				E2CD7FAC2DB5BE1D00C3665F /* LevelInfo.cpp in Sources */,
 				E5890CAC29895118007A875D /* CHandlePipe.cpp in Sources */,
 				E5890CC729895118007A875D /* LinkLoose.cpp in Sources */,
 				E5890F0329895124007A875D /* textbox.cpp in Sources */,
@@ -2437,6 +2460,7 @@
 				E5890CE829895118007A875D /* CSkyColorAdjuster.cpp in Sources */,
 				E5890CEE29895118007A875D /* CScoreKeeper.cpp in Sources */,
 				E5890D0129895118007A875D /* CRateSound.cpp in Sources */,
+				E2CD7FA52DB459C500C3665F /* CRUDsqlite.cpp in Sources */,
 				E5890CFD29895118007A875D /* CBSPPart.cpp in Sources */,
 				E5890CEF29895118007A875D /* CWallSolid.cpp in Sources */,
 				E5890CB529895118007A875D /* CFreeSolid.cpp in Sources */,
