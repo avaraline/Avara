@@ -28,7 +28,6 @@ std::vector<ColorComboBox *> colors;
 std::string currentLevel;
 TabWidget *tabWidget;
 
-
 std::vector<Text *> scoreTeams;
 std::vector<Text *> scoreNames;
 std::vector<Text *> scoreExitRanks;
@@ -374,6 +373,7 @@ void CRosterWindow::ChatLineDelete() {
 void CRosterWindow::ResetChatPrompt() {
     chatInput->setCaption(CHAT_PROMPT);
 }
+
 void CRosterWindow::NewChatLine(Str255 playerName, short slot, std::string message) {
     std::string name = ToString(playerName);
 
@@ -391,6 +391,12 @@ void CRosterWindow::NewChatLine(Str255 playerName, short slot, std::string messa
                                          (int)(colorOptions[i] >> 8) & 0xff,
                                          (int)colorOptions[i] & 0xff,
                                          255));
+    chatPlayer->setTextColor(nanogui::Color(
+        (*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)).GetR(),
+        (*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)).GetG(),
+        (*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)).GetB(),
+        (*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)).GetA()
+    ));
 
     auto chatText = chatPanel->add<Label>(message);
     chatText->setFontSize(CHAT_FONT_SIZE);
