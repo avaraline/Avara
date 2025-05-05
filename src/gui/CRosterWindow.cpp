@@ -19,7 +19,6 @@
 #include <nanogui/tabwidget.h>
 using namespace nanogui;
 
-std::vector<long> colorOptions;
 std::vector<Text *> statuses;
 std::vector<Text *> chats;
 typedef std::pair<Widget*,Label*> ChatLine;
@@ -56,6 +55,15 @@ char checkline[1] = {6};
 Widget *chatPanel;
 
 
+// quick & dirty color converter
+inline nanogui::Color ToNanoguiColor(const ARGBColor &argbColor) {
+    return nanogui::Color(argbColor.GetR(),
+                          argbColor.GetG(),
+                          argbColor.GetB(),
+                          argbColor.GetA());
+}
+
+
 CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     setFixedWidth(470);
 
@@ -72,7 +80,7 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     auto panel = playersLayer->add<Widget>();
     panel->setLayout(layout);
     theNet = ((CAvaraAppImpl *)gApplication)->GetNet();
-    colorOptions = {
+    std::vector<long> colorOptions = {
         static_cast<long>(ColorManager::getTeamColor(1).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
         static_cast<long>(ColorManager::getTeamColor(2).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
         static_cast<long>(ColorManager::getTeamColor(3).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
@@ -231,12 +239,7 @@ void CRosterWindow::UpdateRoster() {
             statuses[i]->setValue(theStatus.c_str());
             chats[i]->setValue(theChat.c_str());
             colors[i]->setSelectedIndex(theNet->teamColors[i]);
-            colors[i]->setTextColor(nanogui::Color(
-                (*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)).GetR(),
-                (*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)).GetG(),
-                (*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)).GetB(),
-                (*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)).GetA()
-            ));
+            colors[i]->setTextColor(ToNanoguiColor(*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)));
             colors[i]->setCaption(theName.c_str());
             colors[i]->popup()->setAnchorPos(nanogui::Vector2i(235, 68 + 60 * i));
         }
@@ -386,17 +389,10 @@ void CRosterWindow::NewChatLine(Str255 playerName, short slot, std::string messa
     chatPlayer->setFontSize(CHAT_FONT_SIZE);
     chatPlayer->setFont(CHAT_FONT);
     chatPlayer->setFixedWidth(CHAT_NAME_WIDTH);
-    int i = theNet->teamColors[slot];
-    chatPlayer->setBackgroundColor(Color((int)(colorOptions[i] >> 16) & 0xff,
-                                         (int)(colorOptions[i] >> 8) & 0xff,
-                                         (int)colorOptions[i] & 0xff,
-                                         255));
-    chatPlayer->setTextColor(nanogui::Color(
-        (*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)).GetR(),
-        (*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)).GetG(),
-        (*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)).GetB(),
-        (*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)).GetA()
-    ));
+    int i1 = theNet->teamColors[slot] + 1;
+    // using Base colors in chat, not level-specific overridden colors
+    chatPlayer->setBackgroundColor(ToNanoguiColor(*ColorManager::getTeamBaseColor(i1)));
+    chatPlayer->setTextColor(ToNanoguiColor(*ColorManager::getTeamTextBaseColor(i1)));
 
     auto chatText = chatPanel->add<Label>(message);
     chatText->setFontSize(CHAT_FONT_SIZE);
