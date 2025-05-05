@@ -1424,12 +1424,12 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
                 scoutCommand = kScoutNullCommand;
             }
         }
-
+#if DEBUG_AVARA
         if (TESTFUNC(kfuDebug1, ft->down))
             debugView = !debugView;
         if (TESTFUNC(kfuDebug2, ft->down))
             debug2Flag = !debug2Flag;
-
+#endif
         if (TESTFUNC(kfuZoomIn, ft->held) && !freeView)
             fieldOfView -= FOVSTEP;
         if (TESTFUNC(kfuZoomOut, ft->held) && !freeView)
