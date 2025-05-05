@@ -3,7 +3,7 @@
   <SkyColor n="15" color="#f8e0e0" color.1="#8a637e" />
   <GroundColor color="#12030d" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#12030d" color.1="#f1f0ed" cx="4.444444444444445" cz="2.5" angle="0" />
-  <set designer="Designed by Sphinx" information="Genre: Classic Deathmatch&#10;   Map Size: Small" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" />
+  <set designer="Designed by Sphinx" information="&#10;Genre: Classic Deathmatch&#10;   Map Size: Large&#10;Relatives: None" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" />
   <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#f8e0e0" color.1="#000000" x="128.75" z="69.30555555555556" w="10" d="10" h="0" angle="270" />
   <set wallHeight="3" />
   <Wall color="#f8e0e0" color.1="#000000" x="141.25" z="69.30555555555556" w="15" d="10" h="0" />
@@ -213,7 +213,7 @@
   <Goody shape="1002" speed="6" yon="300" y="2" grenades="6" missiles="3" start="gShow" out="gTaken" color="#ffe7e8" color.1="#000000" cx="113.75" cz="109.30555555555556" angle="45" />
   <Teleporter group="-1" y="-30" activeRange="33 * 5" deadRange="30 * 5" destGroup="@recenter" shape="0" spin="false" color="#817777" color.1="#000000" cx="113.75" cz="109.30555555555556" angle="225" />
   <Sound y="80" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="50" cx="113.75" cz="109.30555555555556" angle="315" />
-  <Teleporter y="30" shape="0" group="@recenter" spin="false" color="#f1f0ed" color.1="#000000" cx="113.75" cz="109.30555555555556" angle="135" />
+  <Teleporter y="30" shape="0" group="@recenter" mask="0" spin="false" color="#f1f0ed" color.1="#000000" cx="113.75" cz="109.30555555555556" angle="135" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />

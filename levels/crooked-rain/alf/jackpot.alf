@@ -2,7 +2,7 @@
   <SkyColor n="15" color="#ffffff" color.1="#ecf4ff" />
   <GroundColor color="#d3dbed" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#d3dbed" color.1="#d3dbed" cx="4.444444444444445" cz="2.5" angle="0" />
-  <set designer="Designed by Sphinx" information="Genre: Classic Deathmatch&#10;   Map Size: Small" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" />
+  <set designer="Designed by Sphinx" information="&#10;Genre: Classic Deathmatch&#10;   Map Size: Small&#10;Relatives: None" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" />
   <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#e1e9f6" color.1="#000000" x="118.75" z="134.30555555555557" w="10" d="30" h="0" angle="270" />
   <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#e1e9f6" color.1="#000000" x="93.75" z="104.30555555555556" w="10" d="30" h="0" angle="90" />
   <set wallHeight="7.5" />
@@ -118,7 +118,7 @@
   <Goody shape="bspGrenade" y="5" speed="6" grenades="6" start="zShow" yon="500" out="zTaken" color="#3b599a" color.1="#3b599a" cx="128.75" cz="134.30555555555557" angle="135" />
   <Teleporter group="-1" y="-30" activeRange="33 * 5" deadRange="19.5 * 5" destGroup="@recenter" shape="0" spin="false" color="#817777" color.1="#000000" cx="106.25" cz="119.30555555555556" angle="225" />
   <Sound y="80" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="50" cx="106.25" cz="119.30555555555556" angle="315" />
-  <Teleporter y="30" shape="0" group="@recenter" spin="false" mask="0" color="#d3dbed" color.1="#000000" cx="106.25" cz="119.30555555555556" angle="135" />
+  <Teleporter y="30" shape="0" group="@recenter" mask="0" spin="false" mask="0" color="#d3dbed" color.1="#000000" cx="106.25" cz="119.30555555555556" angle="135" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="550" />

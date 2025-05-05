@@ -18,7 +18,7 @@
   <SkyColor n="15" color="#c3ccd8" color.1="#948c7e" />
   <GroundColor color="#625a4e" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#625a4e" color.1="#453f35" cx="4.305555555555555" cz="1.875" angle="0" />
-  <set designer="Designed by Sphinx" information="Genre: Classic Deathmatch&#10;Map Size: Medium" />
+  <set designer="Designed by Sphinx" information="&#10;Genre: Classic Deathmatch&#10;Map Size: Medium&#10;Relatives: Nefarious, Panacea" />
   <Ramp deltaY="4" y="0" thickness="0" color="#acb5c2" color.1="#000000" x="138.61111111111111" z="68.68055555555556" w="10" d="10" h="0" angle="90" />
   <set wallHeight="4" />
   <Wall color="#625a4e" color.1="#000000" x="128.61111111111111" z="118.68055555555556" w="30" d="10" h="0" />
@@ -229,12 +229,12 @@
   <Wall color="#acb5c2" color.1="#000000" x="133.61111111111111" z="43.68055555555556" w="2.5" d="2.5" h="0" y="6" />
   <Teleporter group="@side1" destGroup="@center" shape="1001" scale=".7" spin="false" color="#c3ccd8" color.1="#000000" cx="146.11111111111111" cz="31.180555555555557" angle="270" />
   <Teleporter group="@side2" destGroup="@ttt" shape="1001" scale=".7" spin="false" color="#c3ccd8" color.1="#000000" cx="31.111111111111114" cz="146.18055555555557" angle="270" />
-  <Teleporter y="30" shape="0" group="@center" spin="false" color="#9e9485" color.1="#000000" cx="133.61111111111111" cz="43.68055555555556" angle="270" />
-  <Teleporter y="30" shape="0" group="@ttt" spin="false" color="#9e9485" color.1="#000000" cx="43.611111111111114" cz="133.68055555555557" angle="270" />
+  <Teleporter y="30" shape="0" group="@center" mask="0" spin="false" color="#9e9485" color.1="#000000" cx="133.61111111111111" cz="43.68055555555556" angle="270" />
+  <Teleporter y="30" shape="0" group="@ttt" mask="0" spin="false" color="#9e9485" color.1="#000000" cx="43.611111111111114" cz="133.68055555555557" angle="270" />
   <Teleporter group="@side3" destGroup="@xxx" shape="1001" scale=".7" spin="false" color="#c3ccd8" color.1="#000000" cx="31.111111111111114" cz="31.180555555555557" angle="270" />
-  <Teleporter y="30" shape="0" group="@xxx" spin="false" color="#9e9485" color.1="#000000" cx="43.611111111111114" cz="43.68055555555556" angle="270" />
+  <Teleporter y="30" shape="0" group="@xxx" mask="0" spin="false" color="#9e9485" color.1="#000000" cx="43.611111111111114" cz="43.68055555555556" angle="270" />
   <Teleporter group="@side4" destGroup="@rrr" shape="1001" scale=".7" spin="false" color="#c3ccd8" color.1="#000000" cx="146.11111111111111" cz="146.18055555555557" angle="270" />
-  <Teleporter y="30" shape="0" group="@rrr" spin="false" color="#9e9485" color.1="#000000" cx="133.61111111111111" cz="133.68055555555557" angle="270" />
+  <Teleporter y="30" shape="0" group="@rrr" mask="0" spin="false" color="#9e9485" color.1="#000000" cx="133.61111111111111" cz="133.68055555555557" angle="270" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="375" />
@@ -252,7 +252,7 @@
   <Timer in="gTaken" out="gShow" wait="375" />
   <Goody shape="bspMissile" speed="6" yon="300" y="13" missiles="3" start="gShow" out="gTaken" color="#c3ccd8" color.1="#c3ccd8" cx="43.611111111111114" cz="133.68055555555557" angle="45" />
   <Sound y="80" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="50" cx="88.61111111111111" cz="88.68055555555556" angle="135" />
-  <Teleporter y="25" shape="0" group="@recenter" spin="false" color="#737e7c" color.1="#000000" cx="88.61111111111111" cz="88.68055555555556" angle="315" />
+  <Teleporter y="25" shape="0" group="@recenter" mask="0" spin="false" color="#737e7c" color.1="#000000" cx="88.61111111111111" cz="88.68055555555556" angle="315" />
   <Teleporter group="-1" y="-30" activeRange="33 * 5" deadRange="22 * 5" destGroup="@recenter" shape="0" spin="false" color="#acb5c2" color.1="#000000" cx="88.61111111111111" cz="88.68055555555556" angle="225" />
   <Incarnator y="30" cx="88.68055555555556" cz="21.180555555555557" angle="180" />
   <Incarnator y="30" cx="88.68055555555556" cz="156.18055555555557" angle="0" />

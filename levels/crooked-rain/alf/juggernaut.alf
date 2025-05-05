@@ -34,7 +34,7 @@
   <SkyColor n="15" color="#f1fce3" color.1="#bac3ad" />
   <GroundColor color="#282c25" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#282c25" color.1="#000000" cx="4.444444444444445" cz="2.5" angle="0" />
-  <set designer="Designed by Sphinx" information="Genre: Classic Deathmatch&#10;   Map Size: Small" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" />
+  <set designer="Designed by Sphinx" information="&#10;Genre: Classic Deathmatch&#10;   Map Size: Large&#10;Relatives: None" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" />
   <Ramp y="6" deltaY="3" thickness="0" color="#8a9181" color.1="#000000" x="103.75" z="101.80555555555556" w="10" d="15" h="0" angle="90" />
   <set wallHeight="6" />
   <Wall color="#bbc4ae" color.1="#000000" x="113.75" z="109.30555555555556" w="10" d="10" h="0" />
@@ -329,20 +329,20 @@
   <Field visible="true" isAmbient="false" color="#42483e" color.1="#000000" x="171.25" z="51.80555555555556" w="2.5" d="2.5" h="0" cx="35.625" cz="118.75" angle="180" />
   <set wallHeight="0" />
   <Field visible="true" isAmbient="false" color="#42483e" color.1="#000000" x="56.25" z="166.80555555555557" w="2.5" d="2.5" h="0" cx="35.625" cz="118.75" angle="180" />
-  <Incarnator y="30" cx="43.75" cz="39.30555555555556" angle="135" />
-  <Incarnator y="30" cx="183.75" cz="179.30555555555557" angle="315" />
-  <Incarnator y="30" cx="38.75" cz="184.30555555555557" angle="45" />
-  <Incarnator y="30" cx="188.75" cz="34.30555555555556" angle="225" />
-  <Incarnator y="30" cx="113.68055555555556" cz="174.30555555555557" angle="0" />
-  <Incarnator y="30" cx="113.68055555555556" cz="44.30555555555556" angle="180" />
-  <Incarnator y="30" cx="48.75" cz="109.30555555555556" angle="90" />
-  <Incarnator y="30" cx="178.75" cz="109.23611111111111" angle="270" />
+  <Walker yon="1000" y="30" cx="43.75" cz="39.30555555555556" angle="135" />
+  <Walker yon="1000" y="30" cx="183.75" cz="179.30555555555557" angle="315" />
+  <Walker yon="1000" y="30" cx="38.75" cz="184.30555555555557" angle="45" />
+  <Walker yon="1000" y="30" cx="188.75" cz="34.30555555555556" angle="225" />
+  <Walker yon="1000" y="30" cx="113.68055555555556" cz="174.30555555555557" angle="0" />
+  <Walker yon="1000" y="30" cx="113.68055555555556" cz="44.30555555555556" angle="180" />
+  <Walker yon="1000" y="30" cx="48.75" cz="109.30555555555556" angle="90" />
+  <Walker yon="1000" y="30" cx="178.75" cz="109.23611111111111" angle="270" />
   <Teleporter group="-1" y="-30" activeRange="39 * 5" deadRange="26 * 5" destGroup="@recenter" shape="0" spin="false" color="#817777" color.1="#000000" cx="113.75" cz="109.30555555555556" angle="225" />
   <Sound y="80" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="50" cx="113.75" cz="109.30555555555556" angle="315" />
-  <Teleporter y="40" shape="0" group="@recenter" spin="false" color="#f1f0ed" color.1="#000000" cx="83.75" cz="79.30555555555556" angle="135" />
-  <Teleporter y="40" shape="0" group="@recenter" spin="false" color="#f1f0ed" color.1="#000000" cx="143.75" cz="79.30555555555556" angle="135" />
-  <Teleporter y="40" shape="0" group="@recenter" spin="false" color="#f1f0ed" color.1="#000000" cx="143.75" cz="139.30555555555557" angle="135" />
-  <Teleporter y="40" shape="0" group="@recenter" spin="false" color="#f1f0ed" color.1="#000000" cx="83.75" cz="139.30555555555557" angle="135" />
+  <Teleporter y="40" shape="0" group="@recenter" mask="0" spin="false" color="#f1f0ed" color.1="#000000" cx="83.75" cz="79.30555555555556" angle="135" />
+  <Teleporter y="40" shape="0" group="@recenter" mask="0" spin="false" color="#f1f0ed" color.1="#000000" cx="143.75" cz="79.30555555555556" angle="135" />
+  <Teleporter y="40" shape="0" group="@recenter" mask="0" spin="false" color="#f1f0ed" color.1="#000000" cx="143.75" cz="139.30555555555557" angle="135" />
+  <Teleporter y="40" shape="0" group="@recenter" mask="0" spin="false" color="#f1f0ed" color.1="#000000" cx="83.75" cz="139.30555555555557" angle="135" />
   <unique vars="mShow mTaken zShow zTaken" />
   <And in="@start" out="mShow" />
   <Timer in="zTaken" out="mShow" wait="550" />
@@ -413,12 +413,6 @@
   <Goody shape="bspGrenade" y="8" speed="6" grenades="4" start="zShow" yon="500" out="zTaken" color="#f1fce3" color.1="#96719e" cx="68.75" cz="109.30555555555556" angle="135" />
   <unique vars="mShow mTaken zShow zTaken" />
   <And in="@start" out="mShow" />
-  <Timer in="zTaken" out="mShow" wait="450" />
-  <Goody shape="bspMissile" y="8" speed="6" missiles="3" start="mShow" yon="500" out="mTaken" color="#f1fce3" color.1="#96719e" cx="113.75" cz="154.30555555555557" angle="135" />
-  <Timer in="mTaken" out="zShow" wait="450" />
-  <Goody shape="bspGrenade" y="8" speed="6" grenades="4" start="zShow" yon="500" out="zTaken" color="#f1fce3" color.1="#96719e" cx="113.75" cz="154.30555555555557" angle="135" />
-  <unique vars="mShow mTaken zShow zTaken" />
-  <And in="@start" out="mShow" />
   <Timer in="zTaken" out="mShow" wait="3" />
   <Goody shape="bspGrenade" y="11" speed="6" grenades="3" start="mShow" yon="500" out="mTaken" color="#96719e" color.1="#000000" cx="93.75" cz="129.30555555555557" angle="135" />
   <Timer in="mTaken" out="zShow" wait="3" />
@@ -445,4 +439,18 @@
   <Timer in="mTaken" out="zShow" wait="3" />
   <Goody shape="bspGrenade" y="5" speed="6" grenades="3" start="zShow" yon="500" out="zTaken" color="#96719e" color.1="#000000" cx="93.75" cz="88.68055555555556" angle="135" />
   <Ramp y="9.005" deltaY="2.995" thickness="0" color="#6a4b6f" color.1="#000000" x="103.75" z="109.30555555555556" w="10" d="10" h="0" angle="270" />
+  <unique vars="mShow mTaken zShow zTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="zTaken" out="mShow" wait="450" />
+  <Goody shape="bspMissile" y="8" speed="6" missiles="3" start="mShow" yon="500" out="mTaken" color="#f1fce3" color.1="#96719e" cx="113.75" cz="154.30555555555557" angle="135" />
+  <Timer in="mTaken" out="zShow" wait="450" />
+  <Goody shape="bspGrenade" y="8" speed="6" grenades="4" start="zShow" yon="500" out="zTaken" color="#f1fce3" color.1="#96719e" cx="113.75" cz="154.30555555555557" angle="135" />
+  <Incarnator y="30" cx="48.75" cz="109.30555555555556" angle="90" />
+  <Incarnator y="30" cx="43.75" cz="39.30555555555556" angle="135" />
+  <Incarnator y="30" cx="113.68055555555556" cz="44.30555555555556" angle="180" />
+  <Incarnator y="30" cx="188.75" cz="34.30555555555556" angle="225" />
+  <Incarnator y="30" cx="178.75" cz="109.30555555555556" angle="270" />
+  <Incarnator y="30" cx="183.75" cz="179.30555555555557" angle="315" />
+  <Incarnator y="30" cx="113.68055555555556" cz="174.30555555555557" angle="0" />
+  <Incarnator y="30" cx="38.75" cz="184.30555555555557" angle="45" />
 </map>

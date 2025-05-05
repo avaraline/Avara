@@ -2,7 +2,7 @@
   <SkyColor n="15" color="#416aaa" color.1="#00a8aa" />
   <GroundColor color="#00071e" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#00071e" color.1="#00071e" cx="4.444444444444445" cz="2.5" angle="0" />
-  <set designer="Designed by Sphinx" information="Genre: Classic Deathmatch&#10;   Map Size: Small" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" light.0.i="0.6" light.0.a="20" light.0.b="10" />
+  <set designer="Designed by Sphinx" information="&#10;Genre: Classic Deathmatch&#10;   Map Size: Large&#10;Relatives: None" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" light.0.i="0.6" light.0.a="20" light.0.b="10" />
   <Ramp y="1.5" deltaY="1.5" yon="1000" thickness="0" color="#5378b5" color.1="#000000" x="118.75" z="134.30555555555557" w="10" d="10" h="0" angle="270" />
   <Ramp y="1.5" deltaY="1.5" yon="1000" thickness="0" color="#5378b5" color.1="#000000" x="98.75" z="134.30555555555557" w="10" d="10" h="0" angle="90" />
   <Ramp y="1.5" deltaY="1.5" yon="1000" thickness="0" color="#5378b5" color.1="#000000" x="108.75" z="124.30555555555557" w="10" d="10" h="0" angle="180" />
@@ -303,5 +303,5 @@
   <Goody shape="6002" speed="6" yon="300" scale="0.45" y="3.5" boosters="1" start="gShow" out="gTaken" color="#ffffff" color.1="#000000" cx="108.75" cz="134.30555555555557" angle="45" />
   <Teleporter group="-1" y="-30" activeRange="33 * 5" deadRange="25 * 5" destGroup="@recenter" shape="0" spin="false" color="#817777" color.1="#000000" cx="108.75" cz="134.30555555555557" angle="225" />
   <Sound y="80" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="50" cx="108.75" cz="134.30555555555557" angle="315" />
-  <Teleporter y="30" shape="0" mask="0" group="@recenter" spin="false" color="#00071e" color.1="#000000" cx="108.75" cz="134.30555555555557" angle="135" />
+  <Teleporter y="30" shape="0" mask="0" group="@recenter" mask="0" spin="false" color="#00071e" color.1="#000000" cx="108.75" cz="134.30555555555557" angle="135" />
 </map>

@@ -2,7 +2,7 @@
   <SkyColor n="15" color="#7c8497" color.1="#dacfda" />
   <GroundColor color="#1a1c21" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#1a1c21" color.1="#f1f0ed" cx="4.444444444444445" cz="2.5" angle="0" />
-  <set designer="Designed by Sphinx" information="Genre: Classic Deathmatch&#10;   Map Size: Small" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" />
+  <set designer="Designed by Sphinx" information="&#10;Genre: Classic Deathmatch&#10;   Map Size: Medium&#10;Relatives: Benign, Defiance" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" />
   <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#dacfda" color.1="#000000" x="78.75" z="84.30555555555556" w="10" d="10" h="0" angle="270" />
   <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#dacfda" color.1="#000000" x="98.75" z="84.30555555555556" w="10" d="10" h="0" angle="90" />
   <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#dacfda" color.1="#000000" x="88.75" z="74.30555555555556" w="10" d="10" h="0" angle="0" />
@@ -220,13 +220,9 @@
   <Incarnator y="30" cx="148.75" cz="144.30555555555557" angle="315" />
   <Incarnator y="30" cx="28.75" cz="144.30555555555557" angle="45" />
   <Incarnator y="30" cx="148.75" cz="24.305555555555557" angle="225" />
-  <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" />
-  <Timer in="gTaken" out="gShow" wait="425" />
-  <Goody shape="1002" speed="6" yon="300" y="5" grenades="6" missiles="3" start="gShow" out="gTaken" color="#292c35" color.1="#000000" cx="88.75" cz="84.30555555555556" angle="45" />
   <Teleporter group="-1" y="-30" activeRange="33 * 5" deadRange="23 * 5" destGroup="@recenter" shape="0" spin="false" color="#817777" color.1="#000000" cx="88.75" cz="84.30555555555556" angle="225" />
   <Sound y="80" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="50" cx="88.75" cz="84.30555555555556" angle="315" />
-  <Teleporter y="30" shape="0" group="@recenter" spin="false" color="#f1f0ed" color.1="#000000" cx="88.75" cz="84.30555555555556" angle="135" />
+  <Teleporter y="30" shape="0" group="@recenter" mask="0" spin="false" color="#f1f0ed" color.1="#000000" cx="88.75" cz="84.30555555555556" angle="135" />
   <unique vars="mShow mTaken zShow zTaken" />
   <And in="@start" out="mShow" />
   <Timer in="zTaken" out="mShow" wait="350" />
@@ -291,4 +287,10 @@
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="350" />
   <Goody shape="bspGrenade" y="5" speed="6" grenades="6" start="mShow" out="mTaken" color="#79879e" color.1="#000000" cx="28.75" cz="84.30555555555556" angle="315" />
+  <unique vars="mShow mTaken zShow zTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="zTaken" out="mShow" wait="425" />
+  <Goody shape="1002" y="5" speed="6" missiles="3" grenades="6" start="mShow" yon="500" out="mTaken" color="#292c35" color.1="#000000" cx="88.75" cz="84.30555555555556" angle="45" />
+  <Timer in="mTaken" out="zShow" wait="400" />
+  <Goody shape="6002" scale="0.45" y="5" speed="6" boosters="1" start="zShow" yon="500" out="zTaken" color="#292c35" color.1="#000000" cx="88.75" cz="84.30555555555556" angle="45" />
 </map>

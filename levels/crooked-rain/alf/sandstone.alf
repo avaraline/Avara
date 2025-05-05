@@ -33,7 +33,7 @@
   <SkyColor n="15" color="#7c4129" color.1="#bf8966" />
   <GroundColor color="#bea99d" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#bea99d" color.1="#000000" cx="4.444444444444445" cz="2.5" angle="0" />
-  <set designer="Designed by Sphinx" information="Genre: Classic Deathmatch&#10;   Map Size: Large" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" light.0.i="0.3" light.0.a="45" light.0.b="20" light.1.i="0.25" light.1.a="20" light.1.b="200" light.2.i="0.25" light.2.a="0" light.2.b="0" wallHeight="6" />
+  <set designer="Designed by Sphinx" information="&#10;Genre: Classic Deathmatch&#10;   Map Size: Large&#10;Relatives: Euphoria, Optimal, Snafu" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" light.0.i="0.3" light.0.a="45" light.0.b="20" light.1.i="0.25" light.1.a="20" light.1.b="200" light.2.i="0.25" light.2.a="0" light.2.b="0" wallHeight="6" />
   <Wall color="#aa7b5a" color.1="#000000" x="168.75" z="155.24305555555557" w="20" d="1.875" h="0" />
   <set wallHeight="6" />
   <Wall color="#aa7b5a" color.1="#000000" x="168.75" z="168.36805555555557" w="20" d="1.875" h="0" />
@@ -402,7 +402,7 @@
   <Field visible="true" isAmbient="false" color="#bf8966" color.1="#000000" x="146.25" z="229.30555555555557" w="2.5" d="2.5" h="0" cx="136.875" cz="151.25" angle="90" y="13.501" />
   <Teleporter group="-1" y="-30" activeRange="50 * 5" deadRange="40 * 5" destGroup="@recenter" shape="0" spin="false" color="#817777" color.1="#000000" cx="186.25" cz="161.80555555555557" angle="225" />
   <Sound y="80" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="50" cx="186.25" cz="161.80555555555557" angle="315" />
-  <Teleporter y="30" shape="0" group="@recenter" spin="false" color="#f1f0ed" color.1="#000000" cx="186.25" cz="161.80555555555557" angle="135" />
+  <Teleporter y="30" shape="0" group="@recenter" mask="0" spin="false" color="#f1f0ed" color.1="#000000" cx="186.25" cz="161.80555555555557" angle="135" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="550" />
@@ -504,28 +504,36 @@
   <Wall color="#f0cbb3" color.1="#000000" x="288.75" z="161.80555555555554" w="0" d="205" h="0" y="44.75" />
   <set wallHeight="0.25" />
   <Wall color="#f0cbb3" color.1="#000000" x="83.75" z="161.80555555555554" w="0" d="205" h="0" y="44.75" />
-  <set wallYon="0.01" />
-  <set wallHeight="18.75" />
-  <Wall color="#fdf200" color.1="#000000" x="83.75" z="161.80555555555554" w="0" d="205" h="0" y="27" />
-  <set wallHeight="18.75" />
-  <Wall color="#fdf200" color.1="#000000" x="186.25" z="264.30555555555554" w="205" d="0" h="0" y="27" />
-  <set wallHeight="18.75" />
-  <Wall color="#fdf200" color.1="#000000" x="186.25" z="59.30555555555556" w="205" d="0" h="0" y="27" />
-  <set wallHeight="18.75" />
-  <Wall color="#fdf200" color.1="#000000" x="288.75" z="161.80555555555554" w="0" d="205" h="0" y="27" />
-  <set wallYon="defaultYon" />
   <Hologram shape="1003" y="35.5" scale="4" isAmbient="true" yon="1000" color="#f0cbb3" color.1="#004d4d" cx="186.25" cz="59.30555555555556" angle="180" />
   <Hologram shape="1003" y="35.5" scale="4" yon="1000" isAmbient="true" color="#f0cbb3" color.1="#004d4d" cx="186.25" cz="264.30555555555554" angle="0" />
   <Hologram shape="1003" y="35.5" scale="4" yon="1000" isAmbient="true" color="#f0cbb3" color.1="#004d4d" cx="288.75" cz="161.80555555555557" angle="270" />
   <Hologram shape="1003" y="35.5" scale="4" yon="1000" isAmbient="true" color="#f0cbb3" color.1="#004d4d" cx="83.75" cz="161.80555555555557" angle="90" />
-  <Incarnator y="50" cx="153.75" cz="69.30555555555556" angle="135" />
-  <Incarnator y="50" cx="218.75" cz="254.30555555555554" angle="315" />
-  <Incarnator y="50" cx="93.75" cz="251.80555555555557" angle="45" />
-  <Incarnator y="50" cx="278.75" cz="71.80555555555556" angle="225" />
-  <Incarnator y="50" cx="278.75" cz="196.18055555555557" angle="270" />
-  <Incarnator y="50" cx="93.75" cz="126.80555555555557" angle="90" />
-  <Incarnator y="50" cx="217.43055555555557" cz="69.30555555555556" angle="180" />
-  <Incarnator y="50" cx="155.69444444444446" cz="254.30555555555554" angle="0" />
+  <Walker y="50" yon="1000" cx="153.75" cz="69.30555555555556" angle="135" />
+  <Walker y="50" yon="1000" cx="218.75" cz="254.30555555555554" angle="315" />
+  <Walker y="50" yon="1000" cx="93.75" cz="251.80555555555557" angle="45" />
+  <Walker y="50" yon="1000" cx="278.75" cz="71.80555555555556" angle="225" />
+  <Walker y="50" yon="1000" cx="278.75" cz="196.18055555555557" angle="270" />
+  <Walker y="50" yon="1000" cx="93.75" cz="126.80555555555557" angle="90" />
+  <Walker y="50" yon="1000" cx="217.43055555555557" cz="69.30555555555556" angle="180" />
+  <Walker y="50" yon="1000" cx="155.69444444444446" cz="254.30555555555554" angle="0" />
   <Ramp y="16.5" deltaY="3" yon="1000" thickness="0" color="#ddb59c" color.1="#000000" x="175.3125" z="254.30555555555554" w="26.875" d="10" h="0" angle="0" />
   <Ramp y="16.5" deltaY="3" yon="1000" thickness="0" color="#ddb59c" color.1="#000000" x="178.75" z="69.30555555555556" w="30" d="10" h="0" angle="180" />
+  <Incarnator y="50" cx="153.75" cz="69.30555555555556" angle="135" />
+  <Incarnator y="50" cx="217.5" cz="69.30555555555556" angle="180" />
+  <Incarnator y="50" cx="278.75" cz="71.80555555555556" angle="225" />
+  <Incarnator y="50" cx="278.75" cz="196.18055555555557" angle="270" />
+  <Incarnator y="50" cx="218.75" cz="254.30555555555554" angle="315" />
+  <Incarnator y="50" cx="155.625" cz="254.30555555555554" angle="0" />
+  <Incarnator y="50" cx="93.75" cz="251.80555555555557" angle="45" />
+  <Incarnator y="50" cx="93.75" cz="126.80555555555557" angle="90" />
+  <set wallYon="1000" />
+  <set wallHeight="17.75" />
+  <Wall color="rgba(235,191,164,0.15)" color.1="#000000" x="83.75" z="161.80555555555554" w="0" d="205" h="0" y="27" />
+  <set wallHeight="17.75" />
+  <Wall color="rgba(235,191,164,0.15)" color.1="#000000" x="186.25" z="264.30555555555554" w="205" d="0" h="0" y="27" />
+  <set wallHeight="17.75" />
+  <Wall color="rgba(235,191,164,0.15)" color.1="#000000" x="186.25" z="59.30555555555556" w="205" d="0" h="0" y="27" />
+  <set wallHeight="17.75" />
+  <Wall color="rgba(235,191,164,0.15)" color.1="#000000" x="288.75" z="161.80555555555554" w="0" d="205" h="0" y="27" />
+  <set wallYon="defaultYon" />
 </map>

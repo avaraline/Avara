@@ -1,19 +1,13 @@
 <map>
   <set wallHeight="1.5" />
   <Wall color="#493546" color.1="#000000" x="143.75" z="109.30555555555556" w="20" d="20" h="0" />
-  <unique vars="mShow mTaken zShow zTaken" />
-  <And in="@start" out="mShow" />
-  <Timer in="zTaken" out="mShow" wait="450" />
-  <Goody shape="1002" y="12" speed="6" missiles="3" grenades="6" start="mShow" yon="500" out="mTaken" color="#b67966" color.1="#000000" cx="143.75" cz="109.30555555555556" angle="135" />
-  <Timer in="mTaken" out="zShow" wait="450" />
-  <Goody shape="1002" y="5" speed="6" missiles="3" grenades="6" start="zShow" yon="500" out="zTaken" color="#b67966" color.1="#000000" cx="143.75" cz="109.30555555555556" angle="135" />
   <set wallHeight="1" />
   <Wall color="#6b4c66" color.1="#000000" x="143.75" z="109.30555555555556" w="10" d="10" h="0" y="16" />
   <set wallYon="1000" />
   <SkyColor n="15" color="#493546" color.1="#926c6b" />
   <GroundColor color="#0d060d" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#0d060d" color.1="#000000" cx="4.444444444444445" cz="2.5" angle="0" />
-  <set designer="Designed by Sphinx" information="Genre: Classic Deathmatch&#10;   Map Size: Small" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" />
+  <set designer="Designed by Sphinx" information="&#10;Genre: Classic Deathmatch&#10;   Map Size: Large&#10;Relatives: Felicity" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" />
   <Ramp y="0" deltaY="2" thickness="0" color="#b38384" color.1="#000000" x="116.25" z="151.80555555555557" w="15" d="5" h="0" angle="180" />
   <set wallHeight="4" />
   <Wall color="#3d293a" color.1="#000000" x="123.75" z="146.80555555555557" w="10" d="5" h="0" />
@@ -162,21 +156,21 @@
   <set wallHeight="1.5" />
   <Wall color="#926c6b" color.1="#000000" x="81.25" z="56.80555555555556" w="5" d="15" h="0" />
   <set wallHeight="1.5" />
-  <Wall color="#725353" color.1="#000000" x="126.25" z="51.80555555555556" w="25" d="5" h="0" />
+  <Wall color="#725352" color.1="#000000" x="126.25" z="51.80555555555556" w="25" d="5" h="0" />
   <set wallHeight="1.5" />
-  <Wall color="#725353" color.1="#000000" x="161.25" z="51.80555555555556" w="25" d="5" h="0" />
+  <Wall color="#725352" color.1="#000000" x="161.25" z="51.80555555555556" w="25" d="5" h="0" />
   <set wallHeight="1.5" />
-  <Wall color="#725353" color.1="#000000" x="126.25" z="166.80555555555557" w="25" d="5" h="0" />
+  <Wall color="#725352" color.1="#000000" x="126.25" z="166.80555555555557" w="25" d="5" h="0" />
   <set wallHeight="1.5" />
-  <Wall color="#725353" color.1="#000000" x="161.25" z="166.80555555555557" w="25" d="5" h="0" />
+  <Wall color="#725352" color.1="#000000" x="161.25" z="166.80555555555557" w="25" d="5" h="0" />
   <set wallHeight="1.5" />
-  <Wall color="#725353" color.1="#000000" x="201.25" z="126.80555555555557" w="5" d="25" h="0" />
+  <Wall color="#725352" color.1="#000000" x="201.25" z="126.80555555555557" w="5" d="25" h="0" />
   <set wallHeight="1.5" />
-  <Wall color="#725353" color.1="#000000" x="201.25" z="91.80555555555556" w="5" d="25" h="0" />
+  <Wall color="#725352" color.1="#000000" x="201.25" z="91.80555555555556" w="5" d="25" h="0" />
   <set wallHeight="1.5" />
-  <Wall color="#725353" color.1="#000000" x="86.25" z="126.80555555555557" w="5" d="25" h="0" />
+  <Wall color="#725352" color.1="#000000" x="86.25" z="126.80555555555557" w="5" d="25" h="0" />
   <set wallHeight="1.5" />
-  <Wall color="#725353" color.1="#000000" x="86.25" z="91.80555555555556" w="5" d="25" h="0" />
+  <Wall color="#725352" color.1="#000000" x="86.25" z="91.80555555555556" w="5" d="25" h="0" />
   <Ramp y="4" deltaY="3.992" thickness="0" color="#b38384" color.1="#000000" x="158.75" z="139.30555555555557" w="20" d="10" h="0" angle="180" />
   <Ramp y="4" deltaY="4" thickness="0" color="#b38384" color.1="#000000" x="128.75" z="79.30555555555556" w="20" d="10" h="0" angle="0" />
   <Ramp y="4" deltaY="4" thickness="0" color="#b38384" color.1="#000000" x="158.75" z="79.30555555555556" w="20" d="10" h="0" angle="0" />
@@ -351,7 +345,7 @@
   <Field visible="true" isAmbient="false" color="#5f445b" color.1="#000000" x="143.75" z="109.30555555555556" w="2.5" d="2.5" h="0" cx="146.25" cz="116.25" angle="0" y="17.001" />
   <Teleporter group="-1" y="-30" activeRange="33 * 5" deadRange="27.5 * 5" destGroup="@recenter" shape="0" spin="false" color="#817777" color.1="#000000" cx="143.75" cz="109.30555555555556" angle="225" />
   <Sound y="80" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="50" cx="143.75" cz="109.30555555555556" angle="315" />
-  <Teleporter y="45" shape="0" group="@recenter" spin="false" color="#f1f0ed" color.1="#000000" cx="143.75" cz="109.30555555555556" angle="135" />
+  <Teleporter y="45" shape="0" group="@recenter" mask="0" spin="false" color="#f1f0ed" color.1="#000000" cx="143.75" cz="109.30555555555556" angle="135" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="450" />
@@ -442,4 +436,12 @@
   <Ramp y="0" deltaY="3.992" thickness="0" color="#a67473" color.1="#000000" x="135" z="139.30555555555557" w="17.5" d="10" h="0" angle="0" />
   <set wallHeight="1.5" />
   <Wall color="#281c27" color.1="#000000" x="143.75" z="109.30555555555556" w="10" d="10" h="0" y="1.5" />
+  <unique vars="gShow gTaken" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="450" />
+  <Goody shape="1002" speed="6" yon="300" y="12" grenades="6" missiles="3" start="gShow" out="gTaken" color="#b67966" color.1="#000000" cx="143.75" cz="109.30555555555556" angle="45" />
+  <unique vars="gShow gTaken" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="550" />
+  <Goody shape="6002" speed="6" yon="300" scale="0.45" y="5" boosters="1" start="gShow" out="gTaken" color="#b67966" color.1="#000000" cx="143.75" cz="109.30555555555556" angle="45" />
 </map>

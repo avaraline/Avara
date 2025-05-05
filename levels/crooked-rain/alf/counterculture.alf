@@ -22,7 +22,7 @@
   <Wall color="#6c616c" color.1="#000000" x="115.41666666666667" z="109.79166666666667" w="8.75" d="20" h="0" />
   <GroundColor color="#504950" />
   <SkyColor n="15" color="#495e49" color.1="#7a6e79" />
-  <set designer="Designed by Sphinx" information="Genre: Classic Deathmatch&#10;Map Size: Small" />
+  <set designer="Designed by Sphinx" information="&#10;Genre: Classic Deathmatch&#10;Map Size: Small&#10;Relatives: Fountainhead, Iniquity, Spectacle, Zenith" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#495e49" color.1="#7a6e79" cx="4.305555555555555" cz="1.8055555555555558" angle="180" />
   <set wallHeight="3" />
   <Wall color="#6c616c" color.1="#000000" x="79.79166666666667" z="79.79166666666667" w="20" d="20" h="0" />
@@ -193,7 +193,7 @@
   <Incarnator y="30" cx="42.91666666666667" cz="42.91666666666667" angle="135" />
   <Incarnator y="30" cx="116.66666666666667" cz="116.66666666666667" angle="315" />
   <Sound y="80" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="50" cx="79.79166666666667" cz="79.79166666666667" angle="225" />
-  <Teleporter y="25" shape="0" group="@recenter" spin="false" color="#3d4f3e" color.1="#000000" cx="79.79166666666667" cz="79.79166666666667" angle="315" />
+  <Teleporter y="25" shape="0" group="@recenter" mask="0" spin="false" color="#3d4f3e" color.1="#000000" cx="79.79166666666667" cz="79.79166666666667" angle="315" />
   <Teleporter group="-1" y="-30" activeRange="33 * 5" deadRange="18 * 5" destGroup="@recenter" shape="0" spin="false" color="#324232" color.1="#000000" cx="79.79166666666667" cz="79.79166666666667" angle="45" />
   <Teleporter y="30" shape="0" group="@xxx" color="#aa9aa9" color.1="#000000" cx="79.79166666666667" cz="79.79166666666667" angle="270" />
   <set wallHeight=".25" />
@@ -265,16 +265,17 @@
   <Timer in="mTaken" out="zShow" wait="275" />
   <Goody shape="bspMissile" y="2" speed="6" missiles="3" start="zShow" yon="500" out="zTaken" color="#867986" color.1="#495e49" cx="49.79166666666667" cz="79.79166666666667" angle="135" />
   <Hologram shape="1003" y="21.5" scale="4" isAmbient="true" color="#a38d8d" color.1="#000000" cx="79.79166666666667" cz="34.79166666666667" angle="180" />
-  <set wallHeight="20" wallYon="0.01" />
-  <Wall color="#f42300" color.1="#000000" x="34.79166666666667" z="79.79166666666667" w="0" d="90" h="0" y="13" />
-  <set wallHeight="20" wallYon="0.01" />
-  <Wall color="#f42300" color.1="#000000" x="124.79166666666667" z="79.79166666666667" w="0" d="90" h="0" y="13" />
-  <set wallHeight="20" wallYon="0.01" />
-  <Wall color="#f42300" color.1="#000000" x="79.79166666666667" z="34.79166666666667" w="90" d="0" h="0" y="13" />
-  <set wallHeight="20" wallYon="0.01" />
-  <Wall color="#f42300" color.1="#000000" x="79.79166666666667" z="124.79166666666667" w="90" d="0" h="0" y="13" />
-  <set wallYon="defaultYon" />
   <Hologram shape="1003" y="21.5" scale="4" isAmbient="true" color="#a38d8d" color.1="#000000" cx="79.79166666666667" cz="124.79166666666667" angle="0" />
   <Hologram shape="1003" y="21.5" scale="4" isAmbient="true" color="#a38d8d" color.1="#000000" cx="124.79166666666667" cz="79.79166666666667" angle="270" />
   <Hologram shape="1003" y="21.5" scale="4" isAmbient="true" color="#a38d8d" color.1="#000000" cx="34.79166666666667" cz="79.79166666666667" angle="90" />
+  <set wallYon="1000" />
+  <set wallHeight="18.75" />
+  <Wall color="rgba(153,135,153,0.2)"  color.1="#000000" x="34.79166666666667" z="79.79166666666667" w="0" d="90" h="0" y="13" />
+  <set wallHeight="18.75" />
+  <Wall color="rgba(153,135,153,0.2)" color.1="#000000" x="124.79166666666667" z="79.79166666666667" w="0" d="90" h="0" y="13" />
+  <set wallHeight="18.75" />
+  <Wall color="rgba(153,135,153,0.2)" color.1="#000000" x="79.79166666666667" z="34.79166666666667" w="90" d="0" h="0" y="13" />
+  <set wallHeight="18.75" />
+  <Wall color="rgba(153,135,153,0.2)" color.1="#000000" x="79.79166666666667" z="124.79166666666667" w="90" d="0" h="0" y="13" />
+  <set wallYon="defaultYon" />
 </map>

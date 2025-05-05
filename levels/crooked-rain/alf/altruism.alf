@@ -2,11 +2,11 @@
   <SkyColor n="15" color="#cae7cb" color.1="#defadf" />
   <GroundColor color="#effeef" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#effeef" color.1="#000000" cx="4.444444444444445" cz="2.5" angle="0" />
-  <set designer="Designed by Sphinx" information="Genre: Classic Deathmatch&#10;   Map Size: Small" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" />
+  <set designer="Designed by Sphinx" information="&#10;Genre: Classic Deathmatch&#10;   Map Size: Medium&#10;Relatives: Hypnotic" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" />
   <Ramp y="0" deltaY="3" thickness="0" color="#cae7cb" color.1="#000000" x="63.75" z="109.30555555555556" w="20" d="10" h="0" angle="180" />
   <Ramp y="0" deltaY="3" thickness="0" color="#cae7cb" color.1="#000000" x="88.75" z="134.30555555555557" w="10" d="20" h="0" angle="270" />
   <set wallHeight="3" />
-  <Wall color="#cae7cb" color.1="#000000" x="73.75" z="99.30555555555556" w="40" d="10" h="0" />
+  <Wall color="#c6e3c7" color.1="#000000" x="73.75" z="99.30555555555556" w="40" d="10" h="0" />
   <set wallHeight="4.5" />
   <Wall color="#7f4351" color.1="#000000" x="98.75" z="99.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="4.5" />
@@ -16,11 +16,11 @@
   <set wallHeight="4.5" />
   <Wall color="#7f4351" color.1="#000000" x="106.25" z="96.80555555555556" w="5" d="5" h="0" />
   <set wallHeight="3" />
-  <Wall color="#cae7cb" color.1="#000000" x="98.75" z="124.30555555555557" w="10" d="40" h="0" />
+  <Wall color="#c6e3c7" color.1="#000000" x="98.75" z="124.30555555555557" w="10" d="40" h="0" />
   <set wallHeight="3" />
-  <Wall color="#cae7cb" color.1="#000000" x="108.75" z="64.30555555555556" w="10" d="40" h="0" />
+  <Wall color="#c6e3c7" color.1="#000000" x="108.75" z="64.30555555555556" w="10" d="40" h="0" />
   <set wallHeight="3" />
-  <Wall color="#cae7cb" color.1="#000000" x="133.75" z="89.30555555555556" w="40" d="10" h="0" />
+  <Wall color="#c6e3c7" color.1="#000000" x="133.75" z="89.30555555555556" w="40" d="10" h="0" />
   <Ramp y="0" deltaY="3" thickness="0" color="#cae7cb" color.1="#000000" x="123.75" z="79.30555555555556" w="20" d="10" h="0" angle="0" />
   <Ramp y="0" deltaY="3" thickness="0" color="#cae7cb" color.1="#000000" x="118.75" z="54.30555555555556" w="10" d="20" h="0" angle="90" />
   <set wallHeight="3" />
@@ -174,13 +174,9 @@
   <Incarnator y="30" cx="28.75" cz="69.30555555555556" angle="90" />
   <set wallHeight="0" />
   <Field visible="true" isAmbient="false" color="#935464" color.1="#004d4d" x="103.75" z="94.30555555555556" w="2.5" d="2.5" h="0" cx="28.75" cz="69.30555555555556" angle="90" y="4.501" />
-  <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" />
-  <Timer in="gTaken" out="gShow" wait="550" />
-  <Goody shape="1002" speed="6" yon="300" y="6.5" grenades="6" missiles="3" start="gShow" out="gTaken" color="#defadf" color.1="#000000" cx="103.75" cz="94.30555555555556" angle="45" />
   <Teleporter group="-1" y="-30" activeRange="33 * 5" deadRange="27 * 5" destGroup="@recenter" shape="0" spin="false" color="#817777" color.1="#000000" cx="103.75" cz="94.30555555555556" angle="225" />
   <Sound y="80" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="50" cx="103.75" cz="94.30555555555556" angle="315" />
-  <Teleporter y="30" shape="0" group="@recenter" spin="false" color="#f1f0ed" color.1="#000000" cx="103.75" cz="94.30555555555556" angle="135" />
+  <Teleporter y="30" shape="0" group="@recenter" mask="0" spin="false" color="#f1f0ed" color.1="#000000" cx="103.75" cz="94.30555555555556" angle="135" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="375" />
@@ -229,6 +225,12 @@
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
   <Goody shape="bspGrenade" y="5" speed="6" grenades="4" start="mShow" out="mTaken" color="#433f34" color.1="#004d4d" cx="108.75" cz="64.30555555555556" angle="315" />
-  <Teleporter y="30" shape="0" group="@recenter" spin="false" color="#f1f0ed" color.1="#000000" cx="53.75" cz="44.30555555555556" angle="135" />
-  <Teleporter y="30" shape="0" group="@recenter" spin="false" color="#f1f0ed" color.1="#000000" cx="153.75" cz="144.30555555555557" angle="135" />
+  <Teleporter y="30" shape="0" group="@recenter" mask="0" spin="false" color="#f1f0ed" color.1="#000000" cx="53.75" cz="44.30555555555556" angle="135" />
+  <Teleporter y="30" shape="0" group="@recenter" mask="0" spin="false" color="#f1f0ed" color.1="#000000" cx="153.75" cz="144.30555555555557" angle="135" />
+  <unique vars="mShow mTaken zShow zTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="zTaken" out="mShow" wait="500" />
+  <Goody shape="1002" y="6.5" speed="6" missiles="3" grenades="6" start="mShow" yon="500" out="mTaken" color="#defadf" color.1="#000000" cx="103.75" cz="94.30555555555556" angle="45" />
+  <Timer in="mTaken" out="zShow" wait="400" />
+  <Goody shape="6002" scale="0.45" y="6.5" speed="6" boosters="1" start="zShow" yon="500" out="zTaken" color="#defadf" color.1="#000000" cx="103.75" cz="94.30555555555556" angle="45" />
 </map>

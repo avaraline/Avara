@@ -4,7 +4,7 @@
   <SkyColor n="15" color="#9e9dcc" color.1="#252f71" />
   <GroundColor color="#00011b" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#00011b" color.1="#00011b" cx="4.444444444444445" cz="2.5" angle="0" />
-  <set designer="Designed by Sphinx" information="Genre: Classic Deathmatch&#10;   Map Size: Small" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" wallHeight="1.5" />
+  <set designer="Designed by Sphinx" information="&#10;Genre: Classic Deathmatch&#10;   Map Size: Medium&#10;Relatives: Epitome, Prodigy" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" wallHeight="1.5" />
   <Wall color="#3b536f" color.1="#000000" x="78.75" z="74.30555555555556" w="10" d="10" h="0" />
   <Ramp y="0" deltaY="3" yon="500" thickness="0" color="#77a8d2" color.1="#000000" x="78.75" z="84.30555555555556" w="10" d="10" h="0" angle="270" />
   <Ramp y="0" deltaY="3" yon="500" thickness="0" color="#77a8d2" color.1="#000000" x="98.75" z="84.30555555555556" w="10" d="10" h="0" angle="90" />
@@ -161,7 +161,7 @@
   <Goody shape="1002" speed="6" yon="300" y="6.5" grenades="6" missiles="3" start="gShow" out="gTaken" color="#9e9dcc" color.1="#000000" cx="88.75" cz="84.30555555555556" angle="45" />
   <Teleporter group="-1" y="-30" activeRange="33 * 5" deadRange="22 * 5" destGroup="@recenter" shape="0" spin="false" color="#817777" color.1="#000000" cx="88.75" cz="84.30555555555556" angle="225" />
   <Sound y="80" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="50" cx="88.75" cz="84.30555555555556" angle="315" />
-  <Teleporter y="30" shape="0" group="@recenter" spin="false" color="#00011b" color.1="#000000" cx="88.75" cz="84.30555555555556" angle="135" />
+  <Teleporter y="30" shape="0" group="@recenter" mask="0" spin="false" color="#00011b" color.1="#000000" cx="88.75" cz="84.30555555555556" angle="135" />
   <Incarnator y="30" cx="33.75" cz="84.23611111111111" angle="90" />
   <Incarnator y="30" cx="143.75" cz="84.375" angle="270" />
   <Incarnator y="30" cx="63.75" cz="49.375" angle="135" />

@@ -5,7 +5,7 @@
   <Wall color="#f7b976" color.1="#000000" x="49.79166666666667" z="44.79166666666667" w="32.5" d="32.5" h="0" y="-0.001" />
   <GroundColor color="#f7b976" />
   <SkyColor n="15" color="#ffaa79" color.1="#ff7e79" />
-  <set designer="Designed by Sphinx" information="Genre: Classic Deathmatch&#10;   Map Size: Small, enclosed" />
+  <set designer="Designed by Sphinx" information="&#10;Genre: Classic Deathmatch&#10;   Map Size: Small&#10;Relatives: Jinxed, Tantrum" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#ffaa79" color.1="#ff7e79" cx="4.305555555555555" cz="1.8055555555555558" angle="180" />
   <set light.0.i="0.8" light.0.a="20" light.0.b="10" />
   <Ramp y="0" deltaY="3" thickness="0" color="#f4bc78" color.1="#000000" x="109.79166666666667" z="34.79166666666667" w="10" d="10" h="0" angle="90" />
@@ -230,21 +230,21 @@
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
   <Goody shape="bspGrenade" y="2" speed="6" grenades="6" start="mShow" out="mTaken" color="#ffaa79" color.1="#000000" cx="119.79166666666667" cz="34.79166666666667" angle="315" />
-  <Teleporter y="30" shape="0" group="@recenter" spin="false" color="#468585" color.1="#000000" cx="79.79166666666667" cz="74.79166666666667" angle="315" />
+  <Teleporter y="30" shape="0" group="@recenter" mask="0" spin="false" color="#468585" color.1="#000000" cx="79.79166666666667" cz="74.79166666666667" angle="315" />
   <Teleporter group="-1" y="-30" activeRange="33 * 5" deadRange="18 * 5" destGroup="@recenter" shape="0" spin="false" color="#3f787b" color.1="#000000" cx="79.79166666666667" cz="74.79166666666667" angle="225" />
   <Sound y="80" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="50" cx="79.79166666666667" cz="74.79166666666667" angle="135" />
   <Hologram shape="1003" y="18.5" scale="4" isAmbient="true" color="#4c938f" color.1="#000000" cx="29.791666666666668" cz="74.79166666666667" angle="90" />
   <Hologram shape="1003" y="18.5" scale="4" isAmbient="true" color="#4c938f" color.1="#000000" cx="129.79166666666669" cz="74.79166666666667" angle="270" />
   <Hologram shape="1003" y="18.5" scale="4" isAmbient="true" color="#4c938f" color.1="#000000" cx="79.79166666666667" cz="124.79166666666667" angle="0" />
   <Hologram shape="1003" y="18.5" scale="4" isAmbient="true" color="#4c938f" color.1="#000000" cx="79.79166666666667" cz="24.791666666666668" angle="180" />
-  <set wallYon="0.01" />
+  <set defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" wallYon="1000" />
   <set wallHeight="18.75" />
-  <Wall color="#ff2600" color.1="#000000" x="29.791666666666668" z="74.79166666666667" w="0" d="100" h="0" y="10" />
+  <Wall color="rgba(235,192,106,0.2)" color.1="#000000" x="29.791666666666668" z="74.79166666666667" w="0" d="100" h="0" y="10" />
   <set wallHeight="18.75" />
-  <Wall color="#ff2600" color.1="#000000" x="129.79166666666669" z="74.79166666666667" w="0" d="100" h="0" y="10" />
+  <Wall color="rgba(235,192,106,0.2)" color.1="#000000" x="129.79166666666669" z="74.79166666666667" w="0" d="100" h="0" y="10" />
   <set wallHeight="18.75" />
-  <Wall color="#ff2600" color.1="#000000" x="79.79166666666667" z="24.791666666666668" w="100" d="0" h="0" y="10" />
+  <Wall color="rgba(235,192,106,0.2)" color.1="#000000" x="79.79166666666667" z="24.791666666666668" w="100" d="0" h="0" y="10" />
   <set wallHeight="18.75" />
-  <Wall color="#ff2600" color.1="#000000" x="79.79166666666667" z="124.79166666666667" w="100" d="0" h="0" y="10" />
-  <set wallYon="defaultYon" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" />
+  <Wall color="rgba(235,192,106,0.2)" color.1="#000000" x="79.79166666666667" z="124.79166666666667" w="100" d="0" h="0" y="10" />
+  <set wallYon="defaultYon" />
 </map>

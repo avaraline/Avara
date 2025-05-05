@@ -28,14 +28,14 @@
   <SkyColor n="15" color="#bac8cb" color.1="#002030" />
   <GroundColor color="#000c15" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#000c15" color.1="#000000" cx="4.444444444444445" cz="1.8055555555555558" angle="0" />
-  <set designer="Designed by Sphinx" information="Genre: Enhanced deathmatch&#10;Map Size: Small&#10;Features: 50% reduced gravity. 5 lives." />
+  <set designer="Designed by Sphinx" information="&#10;Genre: Classic deathmatch&#10;Map Size: Medium&#10;Relatives: Frenzy, Fluke" />
   <set wallHeight="0" />
   <Wall color="#00273d" color.1="#000000" x="161.875" z="106.11111111111111" w="2.5" d="2.5" h="0" />
   <set wallHeight="0" />
   <WallDoor midYaw="45" color="#00273d" color.1="#000000" x="145.625" z="66.73611111111111" w="2.5" d="2.5" h="0" />
   <set wallHeight="0" />
   <WallDoor midYaw="135" color="#00273d" color.1="#000000" x="66.875" z="66.73611111111111" w="2.5" d="2.5" h="0" />
-  <set light.0.i="0.8" light.0.a="20" light.0.b="10" defaultLives="5" />
+  <set light.0.i="0.8" light.0.a="20" light.0.b="10" />
   <Incarnator y="30" cx="117.84722222222223" cz="80.69444444444444" angle="203" />
   <Incarnator y="30" cx="94.58333333333334" cz="131.73611111111111" angle="23" />
   <Incarnator y="30" cx="80.625" cz="94.86111111111111" angle="115" />

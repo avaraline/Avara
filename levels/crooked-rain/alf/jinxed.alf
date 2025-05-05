@@ -1,4 +1,5 @@
 <map>
+  <set wallYon="1000" />
   <set wallHeight="3" />
   <Wall color="#9a6283" color.1="#000000" x="48.958333333333336" z="54.583333333333336" w="10" d="10" h="0" />
   <set wallHeight="3" />
@@ -24,7 +25,7 @@
   <set wallHeight="3" />
   <Wall color="#f7c2a9" color.1="#000000" x="118.95833333333334" z="94.58333333333334" w="10" d="10" h="0" />
   <Ramp y="0" deltaY="3" thickness="0" color="#f7c2a9" color.1="#000000" x="88.95833333333334" z="104.58333333333334" w="10" d="10" h="0" angle="270" />
-  <set designer="Designed by Sphinx" information="Genre: Classic Deathmatch&#10;   Map Size: Medium, enclosed&#10;Use the center teleporter to reach the top of the towers." />
+  <set designer="Designed by Sphinx" information="&#10;Genre: Classic Deathmatch&#10;   Map Size: Medium&#10;Relatives: Moonshine, Tantrum" />
   <GroundColor color="#361142" />
   <SkyColor n="15" color="#7e7c87" color.1="#e1acac" />
   <set defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" />
@@ -203,16 +204,16 @@
   <set wallYon="defaultYon" />
   <set wallHeight="0" />
   <Field visible="true" isAmbient="false" color="#6d2f52" color.1="#000000" x="108.95833333333334" z="54.583333333333336" w="2.5" d="2.5" h="0" cx="28.958333333333336" cz="94.58333333333334" angle="90" y="15.001" />
-  <Teleporter y="45" shape="0" group="@tower" spin="false" color="#f7c2a9" color.1="#000000" cx="108.95833333333334" cz="54.583333333333336" angle="270" />
+  <Teleporter y="45" shape="0" group="@tower" mask="0" spin="false" color="#f7c2a9" color.1="#000000" cx="108.95833333333334" cz="54.583333333333336" angle="270" />
   <set wallHeight="0" />
   <Field visible="true" isAmbient="false" color="#6d2f52" color.1="#000000" x="138.95833333333334" z="94.58333333333334" w="2.5" d="2.5" h="0" cx="108.95833333333334" cz="54.583333333333336" angle="270" y="15.001" />
-  <Teleporter y="45" shape="0" group="@tower" spin="false" color="#f7c2a9" color.1="#000000" cx="138.95833333333334" cz="94.58333333333334" angle="270" />
+  <Teleporter y="45" shape="0" group="@tower" mask="0" spin="false" color="#f7c2a9" color.1="#000000" cx="138.95833333333334" cz="94.58333333333334" angle="270" />
   <set wallHeight="0" />
   <Field visible="true" isAmbient="false" color="#6d2f52" color.1="#000000" x="108.95833333333334" z="134.58333333333334" w="2.5" d="2.5" h="0" cx="138.95833333333334" cz="94.58333333333334" angle="270" y="15.001" />
-  <Teleporter y="45" shape="0" group="@tower" spin="false" color="#f7c2a9" color.1="#000000" cx="108.95833333333334" cz="134.58333333333334" angle="270" />
+  <Teleporter y="45" shape="0" group="@tower" mask="0" spin="false" color="#f7c2a9" color.1="#000000" cx="108.95833333333334" cz="134.58333333333334" angle="270" />
   <set wallHeight="0" />
   <Field visible="true" isAmbient="false" color="#6d2f52" color.1="#000000" x="78.95833333333334" z="94.58333333333334" w="2.5" d="2.5" h="0" cx="108.95833333333334" cz="134.58333333333334" angle="270" y="15.001" />
-  <Teleporter y="45" shape="0" group="@tower" spin="false" color="#f7c2a9" color.1="#000000" cx="78.95833333333334" cz="94.58333333333334" angle="270" />
+  <Teleporter y="45" shape="0" group="@tower" mask="0" spin="false" color="#f7c2a9" color.1="#000000" cx="78.95833333333334" cz="94.58333333333334" angle="270" />
   <set wallHeight="0" />
   <Field visible="true" isAmbient="false" color="#82375e" color.1="#000000" x="108.95833333333334" z="94.58333333333334" w="2.5" d="2.5" h="0" cx="78.95833333333334" cz="94.58333333333334" angle="270" y="10.501" />
   <set wallHeight="0" />
@@ -269,15 +270,15 @@
   <Incarnator y="30" cx="108.95833333333334" cz="144.58333333333334" angle="0" />
   <Incarnator y="30" cx="175.83333333333334" cz="94.58333333333334" angle="270" />
   <Incarnator y="30" cx="42.083333333333336" cz="94.58333333333334" angle="90" />
-  <set wallYon="0.01" />
+  <set wallYon="1000" />
   <set wallHeight="18.75" />
-  <Wall color="#ff2600" color.1="#000000" x="108.95833333333334" z="34.583333333333336" w="160" d="0" h="0" y="13" />
+  <Wall color="rgba(41,13,51,0.25)" color.1="#000000" x="108.95833333333334" z="34.583333333333336" w="160" d="0" h="0" y="13" />
   <set wallHeight="18.75" />
-  <Wall color="#ff2600" color.1="#000000" x="108.95833333333334" z="154.58333333333334" w="160" d="0" h="0" y="13" />
+  <Wall color="rgba(41,13,51,0.25)" color.1="#000000" x="108.95833333333334" z="154.58333333333334" w="160" d="0" h="0" y="13" />
   <set wallHeight="18.75" />
-  <Wall color="#ff2600" color.1="#000000" x="188.95833333333334" z="94.58333333333334" w="0" d="120" h="0" y="13" />
+  <Wall color="rgba(41,13,51,0.25)" color.1="#000000" x="188.95833333333334" z="94.58333333333334" w="0" d="120" h="0" y="13" />
   <set wallHeight="18.75" />
-  <Wall color="#ff2600" color.1="#000000" x="28.958333333333336" z="94.58333333333334" w="0" d="120" h="0" y="13" />
+  <Wall color="rgba(41,13,51,0.25)" color.1="#000000" x="28.958333333333336" z="94.58333333333334" w="0" d="120" h="0" y="13" />
   <set wallYon="defaultYon" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
@@ -343,7 +344,7 @@
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="500" />
   <Goody shape="bspMissile" y="17" speed="6" missiles="6" start="mShow" out="mTaken" color="#0c0539" color.1="#8c456a" cx="108.95833333333334" cz="134.58333333333334" angle="45" />
-  <Teleporter y="45" shape="0" group="@recenter" spin="false" color="#e1acac" color.1="#000000" cx="108.95833333333334" cz="94.58333333333334" angle="45" />
+  <Teleporter y="45" shape="0" group="@recenter" mask="0" spin="false" color="#e1acac" color.1="#000000" cx="108.95833333333334" cz="94.58333333333334" angle="45" />
   <Teleporter group="@central" destGroup="@tower" shape="1001" y="1.501" scale=".7" spin="false" color="#8e5777" color.1="#000000" cx="108.95833333333334" cz="94.58333333333334" angle="270" />
   <unique vars="mShow mTaken zShow zTaken" />
   <And in="@start" out="mShow" />

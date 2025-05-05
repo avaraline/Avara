@@ -58,8 +58,8 @@
   <set wallHeight="3" />
   <WallDoor midYaw="45" color="#00c97d" color.1="#000000" x="78.75" z="119.93055555555556" w="15" d="15" h="0" />
   <set wallHeight="3" />
-  <WallDoor midYaw="45" color="#00c97d" color.1="#000000" x="38.125" z="79.30555555555556" w="15" d="15" h="0" />
-  <set gravity="0.5" defaultLives="5" designer="Designed by Sphinx" information="Genre: Enhanced deathmatch&#10;Map Size: Small&#10;Features: 50% reduced gravity. 5 lives." />
+  <WallDoor midYaw="45" color="#00c97d" color.1="#000000" x="38.125" z="78.68055555555556" w="15" d="15" h="0" />
+  <set gravity="0.5" defaultLives="5" designer="Designed by Sphinx" information="&#10;Genre: Enhanced deathmatch&#10;Map Size: Small&#10;Features: 50% reduced gravity, 5 lives&#10;Relatives: Frenzy, Seance" />
   <Incarnator y="30" cx="33.75" cz="54.30555555555556" angle="135" />
   <Incarnator y="30" cx="123.75" cz="104.30555555555556" angle="315" />
   <Incarnator y="30" cx="53.75" cz="124.30555555555556" angle="45" />
@@ -129,10 +129,7 @@
   <WallDoor midYaw="135" color="#00b36f" color.1="#000000" x="38.125" z="79.30555555555556" w="8.75" d="8.75" h="0" y="10.75" />
   <set wallHeight="0" />
   <WallDoor midYaw="135" color="#00be76" color.1="#000000" x="38.125" z="79.30555555555556" w="2.5" d="2.5" h="0" y="11.001" />
-  <Teleporter y="11" shape="0" group="@pad" mask="0" spin="false" color="#707d95" color.1="#000000" cx="38.125" cz="79.30555555555556" angle="270" />
-  <Teleporter y="11" shape="0" group="@pad" mask="0" spin="false" color="#707d95" color.1="#000000" cx="78.75" cz="38.68055555555556" angle="270" />
-  <Teleporter y="11" shape="0" group="@pad" mask="0" spin="false" color="#707d95" color.1="#000000" cx="119.375" cz="79.30555555555556" angle="270" />
-  <Teleporter y="11" shape="0" group="@pad" mask="0" spin="false" color="#707d95" color.1="#000000" cx="78.75" cz="119.93055555555556" angle="270" />
+  <Teleporter y="11" shape="0" group="@pad" mask="0" spin="false" color="#707d95" color.1="#000000" cx="78.75" cz="79.30555555555556" angle="270" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="750" />
@@ -149,4 +146,12 @@
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="750" />
   <Goody shape="6002" speed="6" yon="300" scale="0.45" y="13" boosters="1" start="gShow" out="gTaken" color="#00b5b9" color.1="#000000" cx="78.75" cz="38.68055555555556" angle="45" />
+  <Teleporter y="30" shape="0" mask="0" group="@p1" spin="false" color="#ddeee3" color.1="#000000" cx="38.125" cz="79.30555555555556" angle="90" />
+  <Teleporter group="@central" destGroup="@p1" shape="1001" y="3.002" scale=".7" spin="false" color="#007744" color.1="#000000" cx="38.125" cz="79.30555555555556" angle="270" />
+  <Teleporter y="30" shape="0" mask="0" group="@p2" spin="false" color="#ddeee3" color.1="#000000" cx="78.75" cz="38.68055555555556" angle="90" />
+  <Teleporter group="@central" destGroup="@p2" shape="1001" y="3.002" scale=".7" spin="false" color="#007744" color.1="#000000" cx="78.75" cz="38.68055555555556" angle="270" />
+  <Teleporter y="30" shape="0" mask="0" group="@p3" spin="false" color="#ddeee3" color.1="#000000" cx="119.375" cz="79.30555555555556" angle="90" />
+  <Teleporter group="@central" destGroup="@p3" shape="1001" y="3.002" scale=".7" spin="false" color="#007744" color.1="#000000" cx="119.375" cz="79.30555555555556" angle="270" />
+  <Teleporter y="30" shape="0" mask="0" group="@p4" spin="false" color="#ddeee3" color.1="#000000" cx="78.75" cz="119.93055555555556" angle="90" />
+  <Teleporter group="@central" destGroup="@p4" shape="1001" y="3.002" scale=".7" spin="false" color="#007744" color.1="#000000" cx="78.75" cz="119.93055555555556" angle="270" />
 </map>
