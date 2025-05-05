@@ -2,7 +2,7 @@
   <SkyColor n="15" color="#00609c" color.1="#f5edd5" />
   <GroundColor color="#1c1200" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#1c1200" color.1="#f1f0ed" cx="4.444444444444445" cz="2.5" angle="0" />
-  <set designer="Designed by Sphinx" information="Genre: Classic Deathmatch&#10;   Map Size: Small" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" />
+  <set designer="Designed by Sphinx" information="&#10;Genre: Classic Deathmatch&#10;   Map Size: Large&#10;Relatives: None" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" />
   <Ramp y="4.5" deltaY="1.5" yon="1000" thickness="0" color="#2c6b9e" color.1="#000000" x="133.75" z="119.30555555555556" w="20" d="10" h="0" angle="0" />
   <set wallHeight="7.5" />
   <Wall color="#00447b" color.1="#000000" x="118.75" z="149.30555555555557" w="10" d="10" h="0" />
@@ -306,16 +306,16 @@
   <Goody shape="1002" speed="6" yon="300" y="2" grenades="6" missiles="3" start="gShow" out="gTaken" color="#ffffff" color.1="#000000" cx="133.75" cz="164.30555555555557" angle="45" />
   <Teleporter group="-1" y="-30" activeRange="33 * 5" deadRange="30 * 5" destGroup="@recenter" shape="0" spin="false" color="#817777" color.1="#000000" cx="133.75" cz="164.30555555555557" angle="225" />
   <Sound y="80" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="50" cx="133.75" cz="164.30555555555557" angle="315" />
-  <Teleporter y="30" shape="0" group="@recenter" spin="false" color="#f1f0ed" color.1="#000000" cx="118.75" cz="149.30555555555557" angle="135" />
+  <Teleporter y="30" shape="0" group="@recenter" mask="0" spin="false" color="#f1f0ed" color.1="#000000" cx="118.75" cz="149.30555555555557" angle="135" />
   <set wallHeight="7.5" />
   <Wall color="#00447b" color.1="#000000" x="148.75" z="149.30555555555557" w="10" d="10" h="0" />
-  <Teleporter y="30" shape="0" group="@recenter" spin="false" color="#f1f0ed" color.1="#000000" cx="148.75" cz="149.30555555555557" angle="135" />
+  <Teleporter y="30" shape="0" group="@recenter" mask="0" spin="false" color="#f1f0ed" color.1="#000000" cx="148.75" cz="149.30555555555557" angle="135" />
   <set wallHeight="7.5" />
   <Wall color="#00447b" color.1="#000000" x="148.75" z="179.30555555555557" w="10" d="10" h="0" />
-  <Teleporter y="30" shape="0" group="@recenter" spin="false" color="#f1f0ed" color.1="#000000" cx="148.75" cz="179.30555555555557" angle="135" />
+  <Teleporter y="30" shape="0" group="@recenter" mask="0" spin="false" color="#f1f0ed" color.1="#000000" cx="148.75" cz="179.30555555555557" angle="135" />
   <set wallHeight="7.5" />
   <Wall color="#00447b" color.1="#000000" x="118.75" z="179.30555555555557" w="10" d="10" h="0" />
-  <Teleporter y="30" shape="0" group="@recenter" spin="false" color="#f1f0ed" color.1="#000000" cx="118.75" cz="179.30555555555557" angle="135" />
+  <Teleporter y="30" shape="0" group="@recenter" mask="0" spin="false" color="#f1f0ed" color.1="#000000" cx="118.75" cz="179.30555555555557" angle="135" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="350" />

@@ -4,7 +4,7 @@
   <SkyColor n="15" color="#d8e0e5" color.1="#e7e1dc" />
   <GroundColor color="#f5f4f1" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#f5f4f1" color.1="#000000" cx="4.444444444444445" cz="2.5" angle="0" />
-  <set designer="Designed by Sphinx" information="Genre: Classic Deathmatch&#10;Map Size: Medium" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" />
+  <set designer="Designed by Sphinx" information="&#10;Genre: Classic Deathmatch&#10;Map Size: Medium&#10;Relatives: None" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" />
   <set wallHeight="1.5" />
   <Wall color="#d8e0e5" color.1="#000000" x="101.25" z="86.80555555555556" w="25" d="25" h="0" />
   <set wallHeight="1.5" />
@@ -313,7 +313,7 @@
   <Goody shape="bspGrenade" y="2" speed="6" grenades="3" start="mShow" out="mTaken" color="#8c99b2" color.1="#000000" cx="101.25" cz="66.80555555555556" angle="315" />
   <Teleporter group="-1" y="-30" activeRange="30 * 5" deadRange="26 * 5" destGroup="@recenter" shape="0" spin="false" color="#817777" color.1="#000000" cx="101.25" cz="86.80555555555556" angle="225" />
   <Sound y="80" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="50" cx="101.25" cz="86.80555555555556" angle="315" />
-  <Teleporter y="30" shape="0" group="@recenter" spin="false" color="#f5f4f1" color.1="#000000" cx="101.25" cz="86.80555555555556" angle="135" />
+  <Teleporter y="30" shape="0" group="@recenter" mask="0" spin="false" color="#f5f4f1" color.1="#000000" cx="101.25" cz="86.80555555555556" angle="135" />
   <set wallHeight="1.5" />
   <Wall color="#8c99b2" color.1="#000000" x="31.25" z="86.80555555555556" w="5" d="25" h="0" />
   <set wallHeight="1.5" />

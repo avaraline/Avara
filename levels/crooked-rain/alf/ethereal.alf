@@ -15,7 +15,7 @@
   <Ramp y="0" deltaY="3" thickness="0" color="#bdc6d1" color.1="#000000" x="74.79166666666667" z="64.79166666666667" w="10" d="10" h="0" angle="180" />
   <GroundColor color="#e4e4e4" />
   <SkyColor n="15" color="#c6c6c6" color.1="#c3ccd8" />
-  <set designer="Designed by Sphinx" information="Genre: Classic Deathmatch&#10;Map Size: Medium" />
+  <set designer="Designed by Sphinx" information="&#10;Genre: Classic Deathmatch&#10;Map Size: Medium&#10;Relatives: Adversity, Nuance" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#c6c6c6" color.1="#c3ccd8" cx="4.305555555555555" cz="1.8055555555555558" angle="180" />
   <set wallHeight="2" />
   <Wall color="#c3ccd8" color.1="#000000" x="74.79166666666667" z="89.79166666666667" w="10" d="10" h="0" y="4" />
@@ -246,7 +246,7 @@
   <Timer in="gTaken" out="gShow" wait="450" />
   <Goody shape="1002" speed="6" yon="300" y="13" grenades="6" missiles="3" start="gShow" out="gTaken" color="#c3ccd8" color.1="#98a1ac" cx="74.79166666666667" cz="89.79166666666667" angle="45" />
   <Sound y="80" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="50" cx="74.79166666666667" cz="89.79166666666667" angle="225" />
-  <Teleporter y="30" shape="0" group="@recenter" spin="false" color="#c6c6c6" color.1="#000000" cx="74.79166666666667" cz="89.79166666666667" angle="315" />
+  <Teleporter y="30" shape="0" group="@recenter" mask="0" spin="false" color="#c6c6c6" color.1="#000000" cx="74.79166666666667" cz="89.79166666666667" angle="315" />
   <Teleporter group="-1" y="-30" activeRange="33 * 5" deadRange="22 * 5" destGroup="@recenter" shape="0" spin="false" color="#c3ccd8" color.1="#000000" cx="74.79166666666667" cz="89.79166666666667" angle="135" />
   <Incarnator y="30" cx="74.79166666666667" cz="127.91666666666669" angle="0" />
 </map>

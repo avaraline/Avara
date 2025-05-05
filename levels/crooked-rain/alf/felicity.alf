@@ -2,7 +2,7 @@
   <SkyColor n="15" color="#fbf4ca" color.1="#cdbe90" />
   <GroundColor color="#2b2b12" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#2b2b12" color.1="#2b2b12" cx="4.444444444444445" cz="2.5" angle="0" />
-  <set designer="Designed by Sphinx" information="Genre: Classic Deathmatch&#10;   Map Size: Small" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" ambient.i="0.1" light.0.i="0.6" light.0.a="20" light.0.b="10" />
+  <set designer="Designed by Sphinx" information="&#10;Genre: Classic Deathmatch&#10;   Map Size: Medium&#10;Relatives: Legendary" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" ambient.i="0.1" light.0.i="0.6" light.0.a="20" light.0.b="10" />
   <Ramp y="0" deltaY="4" thickness="0" color="#efe7bf" color.1="#000000" x="113.75" z="124.30555555555557" w="30" d="10" h="0" angle="0" />
   <Ramp y="0" deltaY="4" thickness="0" color="#efe7bf" color.1="#000000" x="133.75" z="144.30555555555557" w="10" d="30" h="0" angle="90" />
   <Ramp y="0" deltaY="4" thickness="0" color="#efe7bf" color.1="#000000" x="93.75" z="144.30555555555557" w="10" d="30" h="0" angle="270" />
@@ -227,8 +227,8 @@
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="500" />
   <Goody shape="1002" speed="6" yon="300" y="3" grenades="6" missiles="3" start="gShow" out="gTaken" color="#67542a" color.1="#000000" cx="113.75" cz="144.30555555555557" angle="45" />
-  <Teleporter y="30" shape="0" mask="0" group="@recenter" spin="false" color="#2b2b12" color.1="#000000" cx="158.75" cz="99.30555555555556" angle="135" />
-  <Teleporter y="30" shape="0" mask="0" group="@recenter" spin="false" color="#2b2b12" color.1="#000000" cx="158.75" cz="189.30555555555557" angle="135" />
-  <Teleporter y="30" shape="0" mask="0" group="@recenter" spin="false" color="#2b2b12" color.1="#000000" cx="68.75" cz="189.30555555555557" angle="135" />
-  <Teleporter y="30" shape="0" mask="0" group="@recenter" spin="false" color="#2b2b12" color.1="#000000" cx="68.75" cz="99.30555555555556" angle="135" />
+  <Teleporter y="30" shape="0" mask="0" group="@recenter" mask="0" spin="false" color="#2b2b12" color.1="#000000" cx="158.75" cz="99.30555555555556" angle="135" />
+  <Teleporter y="30" shape="0" mask="0" group="@recenter" mask="0" spin="false" color="#2b2b12" color.1="#000000" cx="158.75" cz="189.30555555555557" angle="135" />
+  <Teleporter y="30" shape="0" mask="0" group="@recenter" mask="0" spin="false" color="#2b2b12" color.1="#000000" cx="68.75" cz="189.30555555555557" angle="135" />
+  <Teleporter y="30" shape="0" mask="0" group="@recenter" mask="0" spin="false" color="#2b2b12" color.1="#000000" cx="68.75" cz="99.30555555555556" angle="135" />
 </map>

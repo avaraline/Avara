@@ -1,5 +1,5 @@
 <map>
-  <set designer="Designed by Sphinx" information="Genre: Classic Deathmatch&#10;   Map Size: Medium" />
+  <set designer="Designed by Sphinx" information="&#10;Genre: Classic Deathmatch&#10;   Map Size: Medium&#10;Relatives: Counterculture, Fountainhead, Spectacle, Zenith" />
   <GroundColor color="#f7c4b4" />
   <SkyColor n="15" color="#7e7c87" color.1="#e1acac" />
   <set defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" />
@@ -339,12 +339,12 @@
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
   <Goody shape="bspGrenade" y="5" speed="6" grenades="4" start="mShow" out="mTaken" color="#7e7c87" color.1="#000000" cx="78.95833333333334" cz="169.58333333333334" angle="315" />
-  <Teleporter y="30" shape="0" group="@recenter" spin="false" color="#e1acac" color.1="#000000" cx="93.95833333333334" cz="94.58333333333334" angle="315" />
+  <Teleporter y="30" shape="0" group="@recenter" mask="0" spin="false" color="#e1acac" color.1="#000000" cx="93.95833333333334" cz="94.58333333333334" angle="315" />
   <Teleporter group="-1" y="-30" activeRange="33 * 5" deadRange="22 * 5" destGroup="@recenter" shape="0" spin="false" color="#e1acac" color.1="#000000" cx="78.95833333333334" cz="109.58333333333334" angle="225" />
   <Sound y="80" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="50" cx="78.95833333333334" cz="109.58333333333334" angle="315" />
-  <Teleporter y="30" shape="0" group="@recenter" spin="false" color="#e1acac" color.1="#000000" cx="63.95833333333334" cz="124.58333333333334" angle="315" />
-  <Teleporter y="30" shape="0" group="@recenter" spin="false" color="#e1acac" color.1="#000000" cx="63.95833333333334" cz="94.58333333333334" angle="315" />
-  <Teleporter y="30" shape="0" group="@recenter" spin="false" color="#e1acac" color.1="#000000" cx="93.95833333333334" cz="124.58333333333334" angle="315" />
+  <Teleporter y="30" shape="0" group="@recenter" mask="0" spin="false" color="#e1acac" color.1="#000000" cx="63.95833333333334" cz="124.58333333333334" angle="315" />
+  <Teleporter y="30" shape="0" group="@recenter" mask="0" spin="false" color="#e1acac" color.1="#000000" cx="63.95833333333334" cz="94.58333333333334" angle="315" />
+  <Teleporter y="30" shape="0" group="@recenter" mask="0" spin="false" color="#e1acac" color.1="#000000" cx="93.95833333333334" cz="124.58333333333334" angle="315" />
   <unique vars="mShow mTaken zShow zTaken" />
   <And in="@start" out="mShow" />
   <Timer in="zTaken" out="mShow" wait="350" />
