@@ -1,0 +1,196 @@
+<map>
+  <SkyColor n="15" color="#838b86" color.1="#f0d0b9" />
+  <GroundColor color="#bfbfb3" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#bfbfb3" color.1="#f1f0ed" cx="4.444444444444445" cz="2.5" angle="0" />
+  <set designer="Designed by Sphinx" information="Genre: Classic Deathmatch&#10;   Map Size: Small" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#e8e1d9" color.1="#000000" x="63.75" z="79.30555555555556" w="10" d="20" h="0" angle="270" />
+  <set wallHeight="7.5" />
+  <Wall color="#838b86" color.1="#000000" x="63.75" z="64.30555555555556" w="10" d="10" h="0" />
+  <set wallHeight="7.5" />
+  <Wall color="#838b86" color.1="#000000" x="93.75" z="64.30555555555556" w="10" d="10" h="0" />
+  <set wallHeight="7.5" />
+  <Wall color="#838b86" color.1="#000000" x="93.75" z="94.30555555555556" w="10" d="10" h="0" />
+  <set wallHeight="7.5" />
+  <Wall color="#838b86" color.1="#000000" x="63.75" z="94.30555555555556" w="10" d="10" h="0" />
+  <Ramp y="3" deltaY="3" yon="1000" thickness="0" color="#f0d0b9" color.1="#000000" x="93.75" z="84.30555555555556" w="10" d="10" h="0" angle="270" />
+  <Ramp y="3" deltaY="3" yon="1000" thickness="0" color="#f0d0b9" color.1="#000000" x="83.75" z="64.30555555555556" w="10" d="10" h="0" angle="180" />
+  <Ramp y="3" deltaY="3" yon="1000" thickness="0" color="#f0d0b9" color.1="#000000" x="73.75" z="94.30555555555556" w="10" d="10" h="0" angle="0" />
+  <Ramp y="3" deltaY="3" yon="1000" thickness="0" color="#f0d0b9" color.1="#000000" x="63.75" z="74.30555555555556" w="10" d="10" h="0" angle="90" />
+  <set wallHeight="0" />
+  <Wall color="#f0d0b9" color.1="#000000" x="78.75" z="104.30555555555556" w="40" d="10" h="0" y="6" />
+  <set wallHeight="0" />
+  <Wall color="#f0d0b9" color.1="#000000" x="78.75" z="54.30555555555556" w="40" d="10" h="0" y="6" />
+  <Ramp y="3" deltaY="3" yon="1000" thickness="0" color="#f0d0b9" color.1="#000000" x="63.75" z="44.30555555555556" w="10" d="10" h="0" angle="0" />
+  <Ramp y="3" deltaY="3" yon="1000" thickness="0" color="#f0d0b9" color.1="#000000" x="93.75" z="44.30555555555556" w="10" d="10" h="0" angle="0" />
+  <Ramp y="3" deltaY="3" yon="1000" thickness="0" color="#f0d0b9" color.1="#000000" x="93.75" z="114.30555555555556" w="10" d="10" h="0" angle="180" />
+  <Ramp y="3" deltaY="3" yon="1000" thickness="0" color="#f0d0b9" color.1="#000000" x="63.75" z="114.30555555555556" w="10" d="10" h="0" angle="180" />
+  <Ramp y="3" deltaY="3" yon="1000" thickness="0" color="#f0d0b9" color.1="#000000" x="43.75" z="94.30555555555556" w="10" d="10" h="0" angle="270" />
+  <Ramp y="3" deltaY="3" yon="1000" thickness="0" color="#f0d0b9" color.1="#000000" x="43.75" z="64.30555555555556" w="10" d="10" h="0" angle="270" />
+  <Ramp y="3" deltaY="3" yon="1000" thickness="0" color="#f0d0b9" color.1="#000000" x="113.75" z="64.30555555555556" w="10" d="10" h="0" angle="90" />
+  <Ramp y="3" deltaY="3" yon="1000" thickness="0" color="#f0d0b9" color.1="#000000" x="113.75" z="94.30555555555556" w="10" d="10" h="0" angle="90" />
+  <set wallHeight="4.5" />
+  <Wall color="#bfbfb3" color.1="#000000" x="123.75" z="34.30555555555556" w="10" d="10" h="0" />
+  <set wallHeight="4.5" />
+  <Wall color="#bfbfb3" color.1="#000000" x="123.75" z="124.30555555555557" w="10" d="10" h="0" />
+  <set wallHeight="4.5" />
+  <Wall color="#bfbfb3" color.1="#000000" x="33.75" z="124.30555555555557" w="10" d="10" h="0" />
+  <set wallHeight="4.5" />
+  <Wall color="#bfbfb3" color.1="#000000" x="33.75" z="34.30555555555556" w="10" d="10" h="0" />
+  <set wallHeight="3" />
+  <Wall color="#e8e1d9" color.1="#000000" x="33.75" z="79.30555555555556" w="10" d="80" h="0" />
+  <set wallHeight="3" />
+  <Wall color="#e8e1d9" color.1="#000000" x="123.75" z="79.30555555555556" w="10" d="80" h="0" />
+  <set wallHeight="3" />
+  <Wall color="#e8e1d9" color.1="#000000" x="78.75" z="124.30555555555557" w="80" d="10" h="0" />
+  <set wallHeight="3" />
+  <Wall color="#e8e1d9" color.1="#000000" x="78.75" z="34.30555555555556" w="80" d="10" h="0" />
+  <set wallHeight="7.5" />
+  <Wall color="#4f4941" color.1="#000000" x="78.75" z="24.305555555555557" w="120" d="10" h="0" />
+  <set wallHeight="7.5" />
+  <Wall color="#4f4941" color.1="#000000" x="133.75" z="79.30555555555557" w="10" d="100" h="0" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#e3c5af" color.1="#000000" x="113.75" z="54.30555555555556" w="10" d="30" h="0" angle="270" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#e3c5af" color.1="#000000" x="113.75" z="104.30555555555556" w="10" d="30" h="0" angle="270" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#e3c5af" color.1="#000000" x="113.75" z="79.30555555555556" w="10" d="20" h="0" angle="270" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#e3c5af" color.1="#000000" x="78.75" z="44.30555555555556" w="20" d="10" h="0" angle="180" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#e3c5af" color.1="#000000" x="103.75" z="44.30555555555556" w="30" d="10" h="0" angle="180" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#e3c5af" color.1="#000000" x="53.75" z="44.30555555555556" w="30" d="10" h="0" angle="180" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#e3c5af" color.1="#000000" x="43.75" z="79.30555555555556" w="10" d="20" h="0" angle="90" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#e3c5af" color.1="#000000" x="43.75" z="54.30555555555556" w="10" d="30" h="0" angle="90" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#e3c5af" color.1="#000000" x="43.75" z="104.30555555555556" w="10" d="30" h="0" angle="90" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#e3c5af" color.1="#000000" x="78.75" z="114.30555555555556" w="20" d="10" h="0" angle="0" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#e3c5af" color.1="#000000" x="53.75" z="114.30555555555556" w="30" d="10" h="0" angle="0" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#e3c5af" color.1="#000000" x="103.75" z="114.30555555555556" w="30" d="10" h="0" angle="0" />
+  <set wallHeight="3" />
+  <Wall color="#bfbfb3" color.1="#000000" x="78.75" z="79.30555555555556" w="20" d="20" h="0" />
+  <set wallHeight="7.5" />
+  <Wall color="#4f4941" color.1="#000000" x="78.75" z="134.30555555555557" w="120" d="10" h="0" />
+  <set wallHeight="7.5" />
+  <Wall color="#4f4941" color.1="#000000" x="23.75" z="79.30555555555557" w="10" d="100" h="0" />
+  <set ambient.i="0.14" light.0.i="0.5" light.0.a="45" light.0.b="20" light.1.i="0.45" light.1.a="20" light.1.b="200" light.2.i="0.45" light.2.a="0" light.2.b="0" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#e8e1d9" color.1="#000000" x="78.75" z="64.30555555555556" w="20" d="10" h="0" angle="0" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#e8e1d9" color.1="#000000" x="93.75" z="79.30555555555556" w="10" d="20" h="0" angle="90" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#e8e1d9" color.1="#000000" x="78.75" z="94.30555555555556" w="20" d="10" h="0" angle="180" />
+  <set wallHeight="0.25" />
+  <Wall color="#838b86" color.1="#000000" x="78.75" z="24.305555555555557" w="110" d="0" h="0" y="8.25" />
+  <set wallHeight="0.25" />
+  <Wall color="#838b86" color.1="#000000" x="78.75" z="24.305555555555557" w="110" d="0" h="0" y="27.25" />
+  <Hologram shape="1003" y="17" scale="4" isAmbient="true" color="#838b86" color.1="#004d4d" cx="78.75" cz="24.305555555555557" angle="180" />
+  <set wallHeight="0.25" />
+  <Wall color="#838b86" color.1="#000000" x="78.75" z="134.30555555555557" w="110" d="0" h="0" y="8.25" />
+  <set wallHeight="0.25" />
+  <Wall color="#838b86" color.1="#000000" x="78.75" z="134.30555555555557" w="110" d="0" h="0" y="27.25" />
+  <Hologram shape="1003" y="17" scale="4" isAmbient="true" color="#838b86" color.1="#004d4d" cx="78.75" cz="134.30555555555557" angle="0" />
+  <set wallHeight="0.25" />
+  <Wall color="#838b86" color.1="#000000" x="133.75" z="79.30555555555557" w="0" d="110" h="0" y="8.25" />
+  <set wallHeight="0.25" />
+  <Wall color="#838b86" color.1="#000000" x="133.75" z="79.30555555555557" w="0" d="110" h="0" y="27.25" />
+  <set wallHeight="0.25" />
+  <Wall color="#838b86" color.1="#000000" x="23.75" z="79.30555555555557" w="0" d="110" h="0" y="8.25" />
+  <set wallHeight="0.25" />
+  <Wall color="#838b86" color.1="#000000" x="23.75" z="79.30555555555557" w="0" d="110" h="0" y="27.25" />
+  <Hologram shape="1003" y="17" scale="4" isAmbient="true" color="#838b86" color.1="#004d4d" cx="23.75" cz="79.30555555555556" angle="90" />
+  <Hologram shape="1003" y="17" scale="4" isAmbient="true" color="#838b86" color.1="#004d4d" cx="133.75" cz="79.30555555555556" angle="270" />
+  <set wallHeight="0" />
+  <Field visible="true" isAmbient="false" color="#cacabe" color.1="#000000" x="78.75" z="79.30555555555556" w="2.5" d="2.5" h="0" cx="133.75" cz="79.30555555555556" angle="270" y="3.001" />
+  <set wallHeight="0" />
+  <Wall color="#f0d0b9" color.1="#000000" x="103.75" z="79.30555555555556" w="10" d="47.5" h="0" y="6" />
+  <set wallHeight="0" />
+  <Wall color="#fadac2" color.1="#000000" x="103.75" z="104.30555555555556" w="2.5" d="2.5" h="0" y="6" />
+  <set wallHeight="0" />
+  <Wall color="#fadac2" color.1="#000000" x="103.75" z="54.30555555555556" w="2.5" d="2.5" h="0" y="6" />
+  <set wallHeight="0" />
+  <Wall color="#f0d0b9" color.1="#000000" x="103.75" z="51.18055555555556" w="10" d="3.75" h="0" y="6" />
+  <set wallHeight="0" />
+  <Wall color="#f0d0b9" color.1="#000000" x="103.75" z="107.43055555555556" w="10" d="3.75" h="0" y="6" />
+  <set wallHeight="0" />
+  <Wall color="#f0d0b9" color.1="#000000" x="100.625" z="104.30555555555556" w="3.75" d="2.5" h="0" y="6" />
+  <set wallHeight="0" />
+  <Wall color="#f0d0b9" color.1="#000000" x="106.875" z="104.30555555555556" w="3.75" d="2.5" h="0" y="6" />
+  <set wallHeight="0" />
+  <Wall color="#f0d0b9" color.1="#000000" x="100.625" z="54.30555555555556" w="3.75" d="2.5" h="0" y="6" />
+  <set wallHeight="0" />
+  <Wall color="#f0d0b9" color.1="#000000" x="106.875" z="54.30555555555556" w="3.75" d="2.5" h="0" y="6" />
+  <set wallHeight="0" />
+  <Wall color="#f0d0b9" color.1="#000000" x="53.75" z="79.30555555555556" w="10" d="47.5" h="0" y="6" />
+  <set wallHeight="0" />
+  <Wall color="#fadac2" color.1="#000000" x="53.75" z="104.30555555555556" w="2.5" d="2.5" h="0" y="6" />
+  <set wallHeight="0" />
+  <Wall color="#fadac2" color.1="#000000" x="53.75" z="54.30555555555556" w="2.5" d="2.5" h="0" y="6" />
+  <set wallHeight="0" />
+  <Wall color="#f0d0b9" color.1="#000000" x="53.75" z="51.18055555555556" w="10" d="3.75" h="0" y="6" />
+  <set wallHeight="0" />
+  <Wall color="#f0d0b9" color.1="#000000" x="53.75" z="107.43055555555556" w="10" d="3.75" h="0" y="6" />
+  <set wallHeight="0" />
+  <Wall color="#f0d0b9" color.1="#000000" x="50.625" z="104.30555555555556" w="3.75" d="2.5" h="0" y="6" />
+  <set wallHeight="0" />
+  <Wall color="#f0d0b9" color.1="#000000" x="56.875" z="104.30555555555556" w="3.75" d="2.5" h="0" y="6" />
+  <set wallHeight="0" />
+  <Wall color="#f0d0b9" color.1="#000000" x="50.625" z="54.30555555555556" w="3.75" d="2.5" h="0" y="6" />
+  <set wallHeight="0" />
+  <Wall color="#f0d0b9" color.1="#000000" x="56.875" z="54.30555555555556" w="3.75" d="2.5" h="0" y="6" />
+  <set wallHeight="0" />
+  <Field visible="true" isAmbient="false" color="#f3ece4" color.1="#000000" x="33.75" z="79.30555555555556" w="2.5" d="2.5" h="0" cx="133.75" cz="79.30555555555556" angle="270" y="3.001" />
+  <set wallHeight="0" />
+  <Field visible="true" isAmbient="false" color="#f3ece4" color.1="#000000" x="123.75" z="79.30555555555556" w="2.5" d="2.5" h="0" cx="133.75" cz="79.30555555555556" angle="270" y="3.001" />
+  <set wallHeight="0" />
+  <Field visible="true" isAmbient="false" color="#f3ece4" color.1="#000000" x="78.75" z="124.30555555555556" w="2.5" d="2.5" h="0" cx="133.75" cz="79.30555555555556" angle="270" y="3.001" />
+  <set wallHeight="0" />
+  <Field visible="true" isAmbient="false" color="#f3ece4" color.1="#000000" x="78.75" z="34.30555555555556" w="2.5" d="2.5" h="0" cx="133.75" cz="79.30555555555556" angle="270" y="3.001" />
+  <set wallYon="0.01" />
+  <set wallHeight="18.75" />
+  <Wall color="#fdf200" color.1="#000000" x="133.75" z="79.30555555555557" w="0" d="110" h="0" y="8.5" />
+  <set wallHeight="18.75" />
+  <Wall color="#fdf200" color.1="#000000" x="23.75" z="79.30555555555557" w="0" d="110" h="0" y="8.5" />
+  <set wallHeight="18.75" />
+  <Wall color="#fdf200" color.1="#000000" x="78.75" z="24.305555555555557" w="110" d="0" h="0" y="8.5" />
+  <set wallHeight="18.75" />
+  <Wall color="#fdf200" color.1="#000000" x="78.75" z="134.30555555555557" w="110" d="0" h="0" y="8.5" />
+  <set wallYon="defaultYon" />
+  <unique vars="gShow gTaken" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="400" />
+  <Goody shape="1002" speed="6" yon="300" y="5" grenades="6" missiles="3" start="gShow" out="gTaken" color="#a6ada2" color.1="#000000" cx="78.75" cz="79.30555555555556" angle="45" />
+  <Teleporter group="-1" y="-30" activeRange="33 * 5" deadRange="22 * 5" destGroup="@recenter" shape="0" spin="false" color="#817777" color.1="#000000" cx="78.75" cz="79.30555555555556" angle="225" />
+  <Sound y="80" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="50" cx="78.75" cz="79.30555555555556" angle="315" />
+  <Teleporter y="30" shape="0" group="@recenter" spin="false" color="#f1f0ed" color.1="#000000" cx="78.75" cz="79.30555555555556" angle="135" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspMissile" y="8" speed="6" missiles="3" start="mShow" out="mTaken" color="#a5b0c6" color.1="#f0d0b9" cx="53.75" cz="104.30555555555556" angle="45" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspMissile" y="8" speed="6" missiles="3" start="mShow" out="mTaken" color="#a5b0c6" color.1="#f0d0b9" cx="103.75" cz="104.30555555555556" angle="45" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspMissile" y="8" speed="6" missiles="3" start="mShow" out="mTaken" color="#a5b0c6" color.1="#f0d0b9" cx="103.75" cz="54.30555555555556" angle="45" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspMissile" y="8" speed="6" missiles="3" start="mShow" out="mTaken" color="#a5b0c6" color.1="#f0d0b9" cx="53.75" cz="54.30555555555556" angle="45" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspGrenade" y="5" speed="6" grenades="6" start="mShow" out="mTaken" color="#79879e" color.1="#000000" cx="33.75" cz="79.30555555555556" angle="315" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspGrenade" y="5" speed="6" grenades="6" start="mShow" out="mTaken" color="#79879e" color.1="#000000" cx="123.75" cz="79.30555555555556" angle="315" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspGrenade" y="5" speed="6" grenades="6" start="mShow" out="mTaken" color="#79879e" color.1="#000000" cx="78.75" cz="124.30555555555556" angle="315" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspGrenade" y="5" speed="6" grenades="6" start="mShow" out="mTaken" color="#79879e" color.1="#000000" cx="78.75" cz="34.30555555555556" angle="315" />
+  <Incarnator y="30" cx="31.875" cz="32.43055555555556" angle="135" />
+  <Incarnator y="30" cx="125.625" cz="126.18055555555557" angle="315" />
+  <Incarnator y="30" cx="31.875" cz="126.18055555555557" angle="45" />
+  <Incarnator y="30" cx="125.625" cz="32.43055555555556" angle="225" />
+  <Incarnator y="30" cx="31.875" cz="75.55555555555556" angle="90" />
+  <Incarnator y="30" cx="125.625" cz="83.05555555555556" angle="270" />
+  <Incarnator y="30" cx="82.43055555555556" cz="32.43055555555556" angle="180" />
+  <Incarnator y="30" cx="74.93055555555556" cz="126.18055555555557" angle="0" />
+</map>
