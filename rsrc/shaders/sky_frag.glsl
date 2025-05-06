@@ -38,17 +38,25 @@ vec3 apply_fog(vec3 color, float dist) {
     return color * extColor + hazeColor * (1.0 - insColor);
 }
 
-vec3 draw_celestial(vec3 inColor, float phi, int i) {
+vec3 draw_celestial(vec3 inColor, float phi, float gradientHeight, int i) {
     if (!lightApplySpecular[i] || phi <= 0.0) return inColor;
     vec3 offsetFragPos = normalize(camPos - fragPos) * -1000;
     float dist = distance(offsetFragPos, lightPos[i]);
-    return mix(inColor, lightColor[i], float(dist <= 75.0));
+    return mix(
+        inColor,
+        mix(
+            lightColor[i],
+            lightColor[i] * gradientHeight + horizonColor * (1.0 - gradientHeight),
+            float(phi < highAlt)
+        ),
+        float(dist <= 75.0)
+    );
 }
 
 vec3 spec_light(int i) {
     if (!lightApplySpecular[i] || groundShininess == 0) return vec3(0);
     vec3 viewRay = normalize(camPos - fragPos);
-    vec3 lightRay = normalize(lightPos[i] - fragPos);
+    vec3 lightRay = normalize((lightPos[i] + camPos) - fragPos);
     vec3 halfwayDir = normalize(lightRay + viewRay);
     float spec = pow(max(dot(vec3(0, 1, 0), halfwayDir), 0.0), groundShininess * 2048.0);
     return lightColor[i] * (spec * groundSpec);
@@ -95,7 +103,7 @@ void main()
     );
     
     for (int i = 0; i < MAX_LIGHTS; i++) {
-        color.rgb = draw_celestial(color.rgb, phi, i);
+        color.rgb = draw_celestial(color.rgb, phi, gradientHeight, i);
     }
     
     float dist = min(

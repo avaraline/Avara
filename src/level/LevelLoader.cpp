@@ -168,14 +168,8 @@ struct ALFWalker: pugi::xml_tree_walker {
             attr.compare("color[1]") == 0 ||
             attr.compare("color[2]") == 0 ||
             attr.compare("color[3]") == 0 ||
-            attr.compare("defaultMaterial.specular") == 0 ||
-            attr.compare("baseMaterial.specular") == 0 ||
-            attr.compare("material.specular") == 0 ||
-            attr.compare("material[0].specular") == 0 ||
-            attr.compare("material[1].specular") == 0 ||
-            attr.compare("material[2].specular") == 0 ||
-            attr.compare("material[3].specular") == 0 ||
-            (attr.size() > 2 && attr.compare(attr.size() - 2, 2, ".c") == 0)
+            (attr.size() > 2 && attr.compare(attr.size() - 2, 2, ".c") == 0) ||
+            (attr.size() > 9 && attr.compare(attr.size() - 9, 9, ".specular") == 0)
         ) {
             if (value[0] == '$') {
                 return value.substr(1);
