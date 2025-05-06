@@ -824,7 +824,7 @@ void CPlayerManagerImpl::RosterMessageText(short len, const char *c) {
                 break;
             case 13:
                 // ¬
-                ((CAvaraAppImpl*)itsGame->itsApp)->rosterWindow->NewChatLine(playerName, chatText);
+                ((CAvaraAppImpl*)itsGame->itsApp)->rosterWindow->NewChatLine(playerName, slot, chatText);
 
                 lineBuffer.insert(lineBuffer.end(), lThing_utf8, lThing_utf8 + strlen(lThing_utf8));
                 // FlushMessageText(true);
