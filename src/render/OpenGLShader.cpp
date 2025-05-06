@@ -47,7 +47,7 @@ OpenGLShader::OpenGLShader(const std::string vertPath, const std::string fragPat
         glGetShaderiv(vertex, GL_INFO_LOG_LENGTH, &infoLogLength);
         std::vector<char> errorMessage(infoLogLength + 1);
         glGetShaderInfoLog(vertex, infoLogLength, NULL, &errorMessage[0]);
-        SDL_Log("Failed to compile vertex shader\n%s", &errorMessage[0]);
+        SDL_Log("Failed to compile vertex shader %s\n%s", vertPath.c_str(), &errorMessage[0]);
         exit(1);
     };
 
@@ -60,7 +60,7 @@ OpenGLShader::OpenGLShader(const std::string vertPath, const std::string fragPat
         glGetShaderiv(fragment, GL_INFO_LOG_LENGTH, &infoLogLength);
         std::vector<char> errorMessage(infoLogLength + 1);
         glGetShaderInfoLog(fragment, infoLogLength, NULL, &errorMessage[0]);
-        SDL_Log("Failed to compile fragment shader\n%s", &errorMessage[0]);
+        SDL_Log("Failed to compile fragment shader %s\n%s", fragPath.c_str(), &errorMessage[0]);
         exit(1);
     };
 

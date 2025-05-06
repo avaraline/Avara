@@ -9,11 +9,17 @@
 
 #include <SDL2/SDL.h>
 
-#define SKY_VERT "sky_vert.glsl"
-#define SKY_FRAG "sky_frag.glsl"
-
-#define OBJ_VERT "world_vert.glsl"
-#define OBJ_FRAG "world_frag.glsl"
+#if defined(AVARA_GLES)
+    #define SKY_VERT "gles/sky_vert.glsl"
+    #define SKY_FRAG "gles/sky_frag.glsl"
+    #define OBJ_VERT "gles/world_vert.glsl"
+    #define OBJ_FRAG "gles/world_frag.glsl"
+#else
+    #define SKY_VERT "sky_vert.glsl"
+    #define SKY_FRAG "sky_frag.glsl"
+    #define OBJ_VERT "world_vert.glsl"
+    #define OBJ_FRAG "world_frag.glsl"
+#endif
 
 const float legacySkyboxVertices[] = {
     -5.0f,  5.0f, -5.0f,

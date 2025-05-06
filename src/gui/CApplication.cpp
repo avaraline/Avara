@@ -13,8 +13,16 @@
 json CApplication::_prefs = ReadPrefs();
 json CApplication::_defaultPrefs = ReadDefaultPrefs();
 
+#if defined(AVARA_GLES)
+    #define AVARA_GL_MAJOR 3
+    #define AVARA_GL_MINOR 0
+#else
+    #define AVARA_GL_MAJOR 3
+    #define AVARA_GL_MINOR 3
+#endif
+
 CApplication::CApplication(std::string title) :
-nanogui::Screen(nanogui::Vector2i(_prefs[kWindowWidth], _prefs[kWindowHeight]), title, true, _prefs[kFullScreenTag], 8, 8, 24, 8, 0) {
+nanogui::Screen(nanogui::Vector2i(_prefs[kWindowWidth], _prefs[kWindowHeight]), title, true, _prefs[kFullScreenTag], 8, 8, 24, 8, 0, AVARA_GL_MAJOR, AVARA_GL_MINOR) {
     gApplication = this;
     setResizeCallback([this](nanogui::Vector2i newSize) {
         this->WindowResized(newSize.x, newSize.y);
