@@ -21,7 +21,8 @@ using namespace nanogui;
 
 std::vector<Text *> statuses;
 std::vector<Text *> chats;
-static std::deque<Label*> chatLabels;
+typedef std::pair<Widget*,Label*> ChatLine;
+static std::deque<ChatLine> chatLines;
 std::vector<ColorComboBox *> colors;
 std::string currentLevel;
 TabWidget *tabWidget;
@@ -37,11 +38,14 @@ const int CHAT_CHARS = 57;
 const int ROSTER_FONT_SIZE = 15;
 const int ROSTER_WINDOW_WIDTH = 470;
 const int SCORE_FONT_SIZE = 16;
-const int VISIBLE_CHAT_LINES = 28;
-const std::string CHAT_FONT = "mono";
-const int CHAT_FONT_SIZE = ROSTER_FONT_SIZE + 2;
+const int VISIBLE_CHAT_LINES = 21;
+const int CHAT_FONT_SIZE = 17;
 const int CHAT_LINE_WIDTH = ROSTER_WINDOW_WIDTH - 20;
-const int CHAT_LINE_HEIGHT = 20;
+const int CHAT_NAME_WIDTH = 105;
+const int CHAT_SPACING = 8;
+const int CHAT_TEXT_WIDTH = CHAT_LINE_WIDTH - CHAT_NAME_WIDTH - CHAT_SPACING;
+const std::string CHAT_FONT = "mono";
+const std::string CHAT_PROMPT = "  > ";
 
 char backspace[1] = {'\b'};
 char clearline[1] = {'\x1B'};
@@ -49,6 +53,16 @@ char endline[1] = {13};
 char bellline[1] = {7};
 char checkline[1] = {6};
 Widget *chatPanel;
+
+
+// quick & dirty color converter
+inline nanogui::Color ToNanoguiColor(const ARGBColor &argbColor) {
+    return nanogui::Color(argbColor.GetR(),
+                          argbColor.GetG(),
+                          argbColor.GetB(),
+                          argbColor.GetA());
+}
+
 
 CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     setFixedWidth(470);
@@ -137,24 +151,25 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     scrollPanel->setFixedWidth(ROSTER_WINDOW_WIDTH);
 
     chatPanel = new Widget(scrollPanel);
-    GridLayout *chatLayout = new GridLayout(Orientation::Horizontal, 1, Alignment::Fill);
+    GridLayout *chatLayout = new GridLayout(Orientation::Horizontal, 2, Alignment::Fill);
+    chatLayout->setSpacing(0, CHAT_SPACING);
     chatPanel->setLayout(chatLayout);
 
     //placeholder lines to set the initial height & spacing
     for (int i = 0; i < VISIBLE_CHAT_LINES; i++) {
-        auto chatLabel = chatPanel->add<Label>("");
-        chatLabel->setFontSize(CHAT_FONT_SIZE);
-        chatLabel->setFont(CHAT_FONT);
-        chatLabel->setFixedWidth(CHAT_LINE_WIDTH);
-        chatLabel->setFixedHeight(CHAT_LINE_HEIGHT);
-        chatLabels.push_back(chatLabel);
+        auto chatPlayer = chatPanel->add<Label>("");
+        chatPlayer->setFixedWidth(CHAT_NAME_WIDTH);
+        chatPlayer->setFixedHeight(CHAT_FONT_SIZE + 10); // name-button height
+        auto chatText = chatPanel->add<Label>("");
+        chatText->setFixedWidth(CHAT_TEXT_WIDTH);
+        chatLines.push_back(ChatLine(chatPlayer, chatText));
     }
 
     //chat input
     std::string theName = ((CAvaraAppImpl *)gApplication)->String(kPlayerNameTag);
-    chatInput = chatTab->add<Label>(theName + ": ");
+    chatInput = chatTab->add<Label>(CHAT_PROMPT);
     chatInput->setFontSize(CHAT_FONT_SIZE);
-    chatInput->setFont(CHAT_FONT);
+    chatInput->setFont("mono");
     chatInput->setFixedWidth(CHAT_LINE_WIDTH);
 
     //scores tab
@@ -224,12 +239,7 @@ void CRosterWindow::UpdateRoster() {
             statuses[i]->setValue(theStatus.c_str());
             chats[i]->setValue(theChat.c_str());
             colors[i]->setSelectedIndex(theNet->teamColors[i]);
-            colors[i]->setTextColor(nanogui::Color(
-                (*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)).GetR(),
-                (*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)).GetG(),
-                (*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)).GetB(),
-                (*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)).GetA()
-            ));
+            colors[i]->setTextColor(ToNanoguiColor(*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)));
             colors[i]->setCaption(theName.c_str());
             colors[i]->popup()->setAnchorPos(nanogui::Vector2i(235, 68 + 60 * i));
         }
@@ -364,32 +374,38 @@ void CRosterWindow::ChatLineDelete() {
 }
 
 void CRosterWindow::ResetChatPrompt() {
-    std::string theName = ((CAvaraAppImpl *)gApplication)->String(kPlayerNameTag);
-    chatInput->setCaption(ChatPromptFor(theName));
+    chatInput->setCaption(CHAT_PROMPT);
 }
-std::string CRosterWindow::ChatPromptFor(std::string theName) {
-    int len = 10;
-    std::string paddedName = theName + "        ";
-    return paddedName.substr(0, len) + ": ";
-}
-void CRosterWindow::NewChatLine(Str255 playerName, std::string message) {
+
+void CRosterWindow::NewChatLine(Str255 playerName, short slot, std::string message) {
     std::string name = ToString(playerName);
-    std::string chatLine = ChatPromptFor(name) + message;
 
     static int CHAT_LIMIT = 256;
-
-    auto chatLabel = chatPanel->add<Label>(chatLine);
-    chatLabel->setFontSize(CHAT_FONT_SIZE);
-    chatLabel->setFont(CHAT_FONT);
-    chatLabel->setFixedWidth(CHAT_LINE_WIDTH);
-
-    // above limit or still has initial placeholders
-    if (chatLabels.size() >= CHAT_LIMIT ||
-        (chatLabels.size() > (VISIBLE_CHAT_LINES + 4) && chatLabels.front()->caption() == "")) {
-        chatPanel->removeChild(chatLabels.front());  // this also deletes the Widget
-        chatLabels.pop_front();
+    if (Debug::IsEnabled("chat")) {
+        CHAT_LIMIT = Debug::GetValue("chat");
     }
-    chatLabels.push_back(chatLabel);
+
+    auto chatPlayer = chatPanel->add<Button>(name);
+    chatPlayer->setFontSize(CHAT_FONT_SIZE);
+    chatPlayer->setFont(CHAT_FONT);
+    chatPlayer->setFixedWidth(CHAT_NAME_WIDTH);
+    int i1 = theNet->teamColors[slot] + 1;
+    // using Base colors in chat, not level-specific overridden colors
+    chatPlayer->setBackgroundColor(ToNanoguiColor(*ColorManager::getTeamBaseColor(i1)));
+    chatPlayer->setTextColor(ToNanoguiColor(*ColorManager::getTeamTextBaseColor(i1)));
+
+    auto chatText = chatPanel->add<Label>(message);
+    chatText->setFontSize(CHAT_FONT_SIZE);
+    chatText->setFont(CHAT_FONT);
+    chatText->setFixedWidth(CHAT_TEXT_WIDTH);
+
+    // above limit OR still has initial placeholders
+    if (chatLines.size() >= CHAT_LIMIT || chatLines.front().second->caption().length() == 0) {
+        chatPanel->removeChild(chatLines.front().first);  // this also deletes the Widget
+        chatPanel->removeChild(chatLines.front().second);
+        chatLines.pop_front();
+    }
+    chatLines.push_back(ChatLine(chatPlayer, chatText));
 
     ResetChatPrompt();
 
