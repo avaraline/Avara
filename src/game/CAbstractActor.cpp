@@ -439,7 +439,12 @@ CAbstractActor *CAbstractActor::EndScript() {
     teamMask = 1 << teamColor;
 
     partScale = ReadFixedVar(iScale);
-    partYon = ReadFixedVar(iYon);
+    
+    Fixed defaultYon = ReadFixedVar(iDefaultYon);
+    Fixed activeYon = ReadFixedVar(iYon);
+    partYon = (activeYon != defaultYon)
+        ? activeYon
+        : 0;
 
     traction = ReadFixedVar(iTraction);
     friction = ReadFixedVar(iFriction);

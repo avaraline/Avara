@@ -234,7 +234,8 @@ void CAbstractPlayer::BeginScript() {
     itsManager = NULL;
     maskBits |= kSolidBit + kTargetBit + kPlayerBit + kCollisionDamageBit + kBallSnapBit;
 
-    yonBound = LONGYON;
+    Fixed defaultYon = ReadFixedVar(iDefaultYon);
+    yonBound = defaultYon;
 
     isOut = false;
     winFrame = -1;
