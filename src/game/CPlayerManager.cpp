@@ -234,6 +234,7 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
 
     if (event.type == itsGame->itsApp->ControllerAxisEventType()) {
         ControllerAxisState *state = (ControllerAxisState *)event.user.data1;
+        float mult = 1.0 + pow((abs(state->current) / 32767.0) * 1.25, 4.0);
         switch (event.user.code) {
             case SDL_CONTROLLER_AXIS_LEFTX:
                 HandleKeyUp(1 << kfuRight);
@@ -248,10 +249,10 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
                 else if (state->current < 0) HandleKeyDown(1 << kfuForward);
                 break;
             case SDL_CONTROLLER_AXIS_RIGHTX:
-                mouseX += int(state->current * 1.25 + state->previous) >> 11;
+                mouseX += int(state->current * mult) >> 11;
                 break;
             case SDL_CONTROLLER_AXIS_RIGHTY:
-                mouseY += int(state->current * 1.25 + state->previous) >> 11;
+                mouseY += int(state->current * mult) >> 11;
                 break;
             case SDL_CONTROLLER_AXIS_TRIGGERLEFT:
                 if (state->flags) HandleKeyDown(1 << kfuLoadMissile);
