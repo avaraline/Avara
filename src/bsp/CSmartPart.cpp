@@ -100,7 +100,8 @@ Boolean CSmartPart::CollisionTest(CSmartPart *other) {
     quickDist = FDistanceEstimate(sphereGlobCenter[0] - other->sphereGlobCenter[0],
         sphereGlobCenter[1] - other->sphereGlobCenter[1],
         sphereGlobCenter[2] - other->sphereGlobCenter[2]);
-    if (quickDist < enclosureRadius + other->enclosureRadius) { //	It seems the bounding spheres overlap, so we have to
+    if (other->theOwner->isInGame &&
+        quickDist < enclosureRadius + other->enclosureRadius) { //	It seems the bounding spheres overlap, so we have to
                                                                 // do more exhaustive tests.
         //	We end up here about half the time this function is called, if reasonable initial
         //	culling is done.
