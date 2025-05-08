@@ -33,6 +33,13 @@
 
 using json = nlohmann::json;
 
+typedef struct {
+    int16_t current;
+    int16_t previous;
+    int16_t rel;
+    int16_t flags;
+    uint16_t clamp;
+} ControllerAxisState;
 
 class CAvaraGame;
 class CNetManager;
@@ -86,9 +93,10 @@ public:
     CRosterWindow *rosterWindow;
     CTrackerWindow *trackerWindow;
     
-    SDL_GameController *controller;
-    uint32_t controllerAxisEvent;
-    uint32_t lastAxisEvent;
+    SDL_GameController *controller; // currently paired controller
+    uint32_t controllerAxisEvent; // registered with SDL_RegisterEvents
+    uint32_t lastAxisEvent; // time of last controller axis polling
+    ControllerAxisState controllerAxes[SDL_CONTROLLER_AXIS_MAX]; // state of each controller axis
 
     std::deque<MsgLine> messageLines;
     // std::deque<std::string> chatCommandHistory;

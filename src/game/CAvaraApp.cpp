@@ -12,35 +12,36 @@
 #include "CAvaraApp.h"
 
 #include "AssetManager.h"
-#include "ColorManager.h"
 #include "AvaraScoreInterface.h"
 #include "AvaraTCP.h"
+#include "Beeper.h"
 #include "CAvaraGame.h"
 #include "CBSPWorld.h"
-#include "CharWordLongPointer.h"
 #include "CNetManager.h"
+#include "CNetManager.h" // version.net
 #include "CRC.h"
+#include "CRUDsqlite.h"
 #include "CSoundMixer.h"
 #include "CViewParameters.h"
+#include "CharWordLongPointer.h"
+#include "ColorManager.h"
 #include "CommandList.h"
+#include "Debug.h"
+#include "GitVersion.h" // version.git
+#include "InfoMessages.h"
 #include "KeyFuncs.h"
+#include "LegacyOpenGLRenderer.h"
 #include "LevelLoader.h"
+#include "Messages.h"
+#include "ModernOpenGLRenderer.h"
 #include "Parser.h"
 #include "Preferences.h"
 #include "System.h"
-#include "InfoMessages.h"
-#include "Messages.h"
-#include "Beeper.h"
+#include "Tags.h"
 #include "httplib.h"
+
 #include <chrono>
 #include <json.hpp>
-#include "Tags.h"
-#include "Debug.h"
-#include "ModernOpenGLRenderer.h"
-#include "LegacyOpenGLRenderer.h"
-#include "GitVersion.h"   // version.git
-#include "CNetManager.h"  // version.net
-#include "CRUDsqlite.h"
 
 // included while we fake things out
 #include "CPlayerManager.h"
@@ -49,11 +50,11 @@ std::mutex trackerLock;
 
 void TrackerPinger(CAvaraAppImpl *app) {
     while (true) {
-        if(app->Number(kTrackerRegister) == 1 && app->GetNet()->netStatus == kServerNet) {
+        if (app->Number(kTrackerRegister) == 1 && app->GetNet()->netStatus == kServerNet) {
             std::string payload = app->TrackerPayload();
             if (payload.size() > 0) {
                 // Probably not thread-safe.
-               std::string address = app->String(kTrackerRegisterAddress);
+                std::string address = app->String(kTrackerRegisterAddress);
                 DBG_Log("tracker", "Pinging %s", address.c_str());
                 size_t sepIndex = address.find(":");
                 if (sepIndex != std::string::npos) {
@@ -61,8 +62,7 @@ void TrackerPinger(CAvaraAppImpl *app) {
                     int port = std::stoi(address.substr(sepIndex + 1));
                     httplib::Client client(host.c_str(), port);
                     client.Post("/api/v1/games/", payload, "application/json");
-                }
-                else {
+                } else {
                     httplib::Client client(address.c_str(), 80);
                     client.Post("/api/v1/games/", payload, "application/json");
                 }
@@ -72,18 +72,25 @@ void TrackerPinger(CAvaraAppImpl *app) {
     }
 }
 
-CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
-    AssetManager::Init();
-    
-    controllerAxisEvent = SDL_RegisterEvents(1);
-    lastAxisEvent = 0;
-
-    controller = nullptr;
+SDL_GameController *FindGameController() {
     for (int i = 0; i < SDL_NumJoysticks(); i++) {
         if (SDL_IsGameController(i)) {
-            controller = SDL_GameControllerOpen(i);
-            break;
+            return SDL_GameControllerOpen(i);
         }
+    }
+
+    return nullptr;
+}
+
+CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
+    AssetManager::Init();
+
+    controllerAxisEvent = SDL_RegisterEvents(1);
+    lastAxisEvent = 0;
+    controller = FindGameController();
+    for (int axis = SDL_CONTROLLER_AXIS_LEFTX; axis < SDL_CONTROLLER_AXIS_MAX; axis++) {
+        uint16_t clamp = (axis == SDL_CONTROLLER_AXIS_LEFTX || axis == SDL_CONTROLLER_AXIS_LEFTY) ? 12288 : 4096;
+        controllerAxes[axis] = {0, 0, 0, 0, clamp};
     }
 
     itsGame = std::make_unique<CAvaraGame>(Get<FrameTime>(kFrameTimeTag));
@@ -99,8 +106,7 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
 
     if (Get(kUseLegacyRenderer)) {
         gRenderer = new LegacyOpenGLRenderer(mSDLWindow);
-    }
-    else {
+    } else {
         gRenderer = new ModernOpenGLRenderer(mSDLWindow);
     }
 
@@ -150,10 +156,7 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     itsTui = new CommandManager(this);
 
     MessageLine(kmWelcome1, MsgAlignment::Center);
-    AddMessageLine(
-        "Type /help and press return for a list of chat commands.",
-        MsgAlignment::Center
-    );
+    AddMessageLine("Type /help and press return for a list of chat commands.", MsgAlignment::Center);
 
     // load up a random decent starting level
 
@@ -167,12 +170,13 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
 
 CAvaraAppImpl::~CAvaraAppImpl() {
     DeallocParser();
-    if (controller) SDL_GameControllerClose(controller);
 }
 
 void CAvaraAppImpl::Done() {
     // This will trigger a clean disconnect if connected.
     gameNet->ChangeNet(kNullNet, "");
+    if (controller)
+        SDL_GameControllerClose(controller);
     CApplication::Done();
 }
 
@@ -185,19 +189,28 @@ void CAvaraAppImpl::idle() {
     TrackerUpdate();
 
     // Poll for controller axis value at 60 fps
-    if(controller && (procTime - lastAxisEvent) > 16) {
+    if (controller && (procTime - lastAxisEvent) > 16) {
         lastAxisEvent = procTime;
         for (int axis = SDL_CONTROLLER_AXIS_LEFTX; axis < SDL_CONTROLLER_AXIS_MAX; axis++) {
+            ControllerAxisState *state = &controllerAxes[axis];
             int16_t value = SDL_GameControllerGetAxis(controller, (SDL_GameControllerAxis)axis);
-            if (abs(value) > 2048) {
-                SDL_Event axisEvent;
-                void *valueData = malloc(sizeof(value));
-                memcpy(valueData, &value, sizeof(value));
-                axisEvent.type = controllerAxisEvent;
-                axisEvent.user.code = axis;
-                axisEvent.user.data1 = valueData;
-                SDL_PushEvent(&axisEvent);
+            if (abs(value) < state->clamp)
+                value = 0;
+
+            state->previous = state->current;
+            state->current = value;
+            state->rel = state->current - state->previous;
+            state->flags = 0;
+            if ((state->previous != state->current) &&
+                ((state->previous >= 0 && state->current <= 0) || (state->previous <= 0 && state->current >= 0))) {
+                state->flags |= 1;
             }
+
+            SDL_Event axisEvent;
+            axisEvent.type = controllerAxisEvent;
+            axisEvent.user.code = axis;
+            axisEvent.user.data1 = state;
+            SDL_PushEvent(&axisEvent);
         }
     }
 
@@ -208,9 +221,9 @@ void CAvaraAppImpl::idle() {
     // output a coarse estimate of cpu time & percent every second when enabled
     if (curFrame > 1 && curFrame != itsGame->frameNumber && Debug::IsEnabled("cpu")) {
         procTime = SDL_GetTicks() - procTime;
-        avg = 0.99*avg + 0.01*procTime;
-        if (curFrame % (1000/itsGame->frameTime) == 0) {
-            DBG_Log("cpu", "%.1fms (%.0f%%)\n", avg, 100.0*avg/itsGame->frameTime);
+        avg = 0.99 * avg + 0.01 * procTime;
+        if (curFrame % (1000 / itsGame->frameTime) == 0) {
+            DBG_Log("cpu", "%.1fms (%.0f%%)\n", avg, 100.0 * avg / itsGame->frameTime);
         }
     }
 }
@@ -246,17 +259,31 @@ void CAvaraAppImpl::WindowResized(int width, int height) {
     // Only update if the resolution is actually changing
     if (gRenderer->viewParams->viewPixelDimensions.h != width || gRenderer->viewParams->viewPixelDimensions.v != height)
         gRenderer->UpdateViewRect(width, height, mPixelRatio);
-    //performLayout();
+    // performLayout();
 }
 
 bool CAvaraAppImpl::handleSDLEvent(SDL_Event &event) {
-    if(itsGame->IsPlaying()) {
+    switch (event.type) {
+        case SDL_CONTROLLERDEVICEADDED:
+            if (!controller) {
+                controller = SDL_GameControllerOpen(event.cdevice.which);
+            }
+            break;
+        case SDL_CONTROLLERDEVICEREMOVED:
+            if (controller &&
+                event.cdevice.which == SDL_JoystickInstanceID(SDL_GameControllerGetJoystick(controller))) {
+                SDL_GameControllerClose(controller);
+                controller = FindGameController();
+            }
+            break;
+    }
+
+    if (itsGame->IsPlaying()) {
         itsGame->HandleEvent(event);
         return true;
-    }
-    else {
+    } else {
         for (int i = 0; i < windowList.size(); i++) {
-            if(windowList[i]->editing()) {
+            if (windowList[i]->editing()) {
                 CApplication::handleSDLEvent(event);
                 return true;
             }
@@ -337,7 +364,6 @@ bool CAvaraAppImpl::DoCommand(int theCommand) {
     */
 }
 
-
 OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerManager *sendingPlayer) {
     SDL_Log("LOADING LEVEL %s FROM %s\n", levelTag.c_str(), set.c_str());
     itsGame->LevelReset(false);
@@ -375,22 +401,21 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
     return result;
 }
 
-
 void CAvaraAppImpl::NotifyUser() {
     // TODO: Bell sound(s)
     SDL_Log("BEEP!!!\n");
     Beep();
 }
 
-CAvaraGame* CAvaraAppImpl::GetGame() {
+CAvaraGame *CAvaraAppImpl::GetGame() {
     return itsGame.get();
 }
 
-CNetManager* CAvaraAppImpl::GetNet() {
+CNetManager *CAvaraAppImpl::GetNet() {
     return gameNet;
 }
 
-CommandManager* CAvaraAppImpl::GetTui() {
+CommandManager *CAvaraAppImpl::GetTui() {
     return itsTui;
 }
 
@@ -398,11 +423,7 @@ void CAvaraAppImpl::SetNet(CNetManager *theNet) {
     gameNet = theNet;
 }
 
-void CAvaraAppImpl::AddMessageLine(
-    std::string lines,
-    MsgAlignment align,
-    MsgCategory category
-    ) {
+void CAvaraAppImpl::AddMessageLine(std::string lines, MsgAlignment align, MsgCategory category) {
     std::istringstream iss(lines);
     std::string line;
     MsgLine msg;
@@ -412,7 +433,7 @@ void CAvaraAppImpl::AddMessageLine(
     msg.gameId = itsGame->currentGameId;
 
     // split string on newlines
-    while(std::getline(iss, line)) {
+    while (std::getline(iss, line)) {
         SDL_Log("Message: %s", line.c_str());
         msg.text = line;
         messageLines.push_back(msg);
@@ -423,8 +444,8 @@ void CAvaraAppImpl::AddMessageLine(
 }
 
 void CAvaraAppImpl::MessageLine(short index, MsgAlignment align) {
-    //SDL_Log("CAvaraAppImpl::MessageLine(%d)\n", index);
-    switch(index) {
+    // SDL_Log("CAvaraAppImpl::MessageLine(%d)\n", index);
+    switch (index) {
         case kmWelcome1:
         case kmWelcome2:
         case kmWelcome3:
@@ -450,24 +471,15 @@ void CAvaraAppImpl::MessageLine(short index, MsgAlignment align) {
             AddMessageLine("Self-destruct activated.", align);
             break;
         case kmFragmentAlert:
-            AddMessageLine(
-                "ALERT: Reality fragmentation detected!",
-                align,
-                MsgCategory::Error
-            );
+            AddMessageLine("ALERT: Reality fragmentation detected!", align, MsgCategory::Error);
             break;
         case kmRefusedLogin:
-            AddMessageLine(
-                "Login refused.",
-                align,
-                MsgCategory::Error
-            );
+            AddMessageLine("Login refused.", align, MsgCategory::Error);
             break;
     }
-
 }
 
-std::deque<MsgLine>& CAvaraAppImpl::MessageLines() {
+std::deque<MsgLine> &CAvaraAppImpl::MessageLines() {
     return messageLines;
 }
 void CAvaraAppImpl::LevelReset() {}
@@ -477,9 +489,10 @@ void CAvaraAppImpl::ParamLine(short index, MsgAlignment align, StringPtr param1,
     std::string a = ToString(param1);
     std::string b;
     MsgCategory category = MsgCategory::System;
-    if (param2) b = ToString(param2);
+    if (param2)
+        b = ToString(param2);
 
-    switch(index) {
+    switch (index) {
         case kmPaused:
             buffa << "Game paused by " << a << ".";
             break;
@@ -516,8 +529,10 @@ void CAvaraAppImpl::ComposeParamLine(StringPtr destStr, short index, StringPtr p
 }
 
 void CAvaraAppImpl::TrackerUpdate() {
-    if (SDL_GetTicks() < nextTrackerUpdate) return;
-    if (gameNet->netStatus != kServerNet) return;
+    if (SDL_GetTicks() < nextTrackerUpdate)
+        return;
+    if (gameNet->netStatus != kServerNet)
+        return;
 
     const std::lock_guard<std::mutex> lock(trackerLock);
     long freq = Number(kTrackerRegisterFrequency);
@@ -531,7 +546,7 @@ void CAvaraAppImpl::TrackerUpdate() {
             trackerState["players"].push_back(playerName);
         }
     }
-    if(trackerState["players"].empty()) {
+    if (trackerState["players"].empty()) {
         trackerState["players"].push_back(String(kPlayerNameTag));
     }
     std::string gitv = std::string(GIT_VERSION);
@@ -552,7 +567,6 @@ std::string CAvaraAppImpl::TrackerPayload() {
     trackerUpdatePending = false;
     return payload;
 }
-
 
 void CAvaraAppImpl::SetIndicatorDisplay(short i, short v) {}
 void CAvaraAppImpl::NumberLine(long theNum, short align) {}

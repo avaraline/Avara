@@ -113,17 +113,19 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
     }
     itsGame->itsApp->Set(kKeyboardMappingTag, newMap);
 
-    controllerButtonMap[SDL_CONTROLLER_BUTTON_DPAD_UP] = 1 << kfuForward;
-    controllerButtonMap[SDL_CONTROLLER_BUTTON_DPAD_DOWN] = 1 << kfuReverse;
-    controllerButtonMap[SDL_CONTROLLER_BUTTON_DPAD_LEFT] = 1 << kfuLeft;
-    controllerButtonMap[SDL_CONTROLLER_BUTTON_DPAD_RIGHT] = 1 << kfuRight;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_DPAD_UP] = (1 << kfuScoutControl) | (1 << kfuForward);
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_DPAD_DOWN] = (1 << kfuScoutControl) | (1 << kfuReverse);
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_DPAD_LEFT] = (1 << kfuScoutControl) | (1 << kfuLeft);
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_DPAD_RIGHT] = (1 << kfuScoutControl) | (1 << kfuRight);
     controllerButtonMap[SDL_CONTROLLER_BUTTON_A] = 1 << kfuJump;
-    controllerButtonMap[SDL_CONTROLLER_BUTTON_B] = 1 << kfuLoadGrenade;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_B] = (1 << kfuScoutControl) | (1 << kfuAimForward);
     controllerButtonMap[SDL_CONTROLLER_BUTTON_X] = 1 << kfuBoostEnergy;
-    controllerButtonMap[SDL_CONTROLLER_BUTTON_Y] = 1 << kfuLoadMissile;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_Y] = 1 << kfuScoutView;
     controllerButtonMap[SDL_CONTROLLER_BUTTON_RIGHTSTICK] = 1 << kfuAimForward;
     controllerButtonMap[SDL_CONTROLLER_BUTTON_LEFTSHOULDER] = (1 << kfuLoadGrenade) | (1 << kfuFireWeapon);
     controllerButtonMap[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] = 1 << kfuFireWeapon;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_BACK] = 1 << kfuAbortGame;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_START] = 1 << kfuPauseGame;
 
     // mainScreenRect = &(*GetMainDevice())->gdRect;
     // mouseCenterPosition.h = (mainScreenRect->left + mainScreenRect->right) / 2;
@@ -231,24 +233,31 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
     // FrameFunction *ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & (itsGame->frameNumber + 1)];
 
     if (event.type == itsGame->itsApp->ControllerAxisEventType()) {
-        int16_t value = 0;
-        memcpy(&value, event.user.data1, sizeof(value));
-        free(event.user.data1);
-        
+        ControllerAxisState *state = (ControllerAxisState *)event.user.data1;
         switch (event.user.code) {
             case SDL_CONTROLLER_AXIS_LEFTX:
+                HandleKeyUp(1 << kfuRight);
+                HandleKeyUp(1 << kfuLeft);
+                if (state->current > 0) HandleKeyDown(1 << kfuRight);
+                else if (state->current < 0) HandleKeyDown(1 << kfuLeft);
                 break;
             case SDL_CONTROLLER_AXIS_LEFTY:
+                HandleKeyUp(1 << kfuForward);
+                HandleKeyUp(1 << kfuReverse);
+                if (state->current > 0) HandleKeyDown(1 << kfuReverse);
+                else if (state->current < 0) HandleKeyDown(1 << kfuForward);
                 break;
             case SDL_CONTROLLER_AXIS_RIGHTX:
-                mouseX += value / 1024;
+                mouseX += int(state->current * 1.25 + state->previous) >> 11;
                 break;
             case SDL_CONTROLLER_AXIS_RIGHTY:
-                mouseY += value / 1024;
+                mouseY += int(state->current * 1.25 + state->previous) >> 11;
                 break;
             case SDL_CONTROLLER_AXIS_TRIGGERLEFT:
+                if (state->flags) HandleKeyDown(1 << kfuLoadMissile);
                 break;
             case SDL_CONTROLLER_AXIS_TRIGGERRIGHT:
+                if (state->flags) HandleKeyDown(1 << kfuLoadGrenade);
                 break;
         }
     }
