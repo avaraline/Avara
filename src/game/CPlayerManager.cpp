@@ -113,6 +113,18 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
     }
     itsGame->itsApp->Set(kKeyboardMappingTag, newMap);
 
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_DPAD_UP] = 1 << kfuForward;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_DPAD_DOWN] = 1 << kfuReverse;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_DPAD_LEFT] = 1 << kfuLeft;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_DPAD_RIGHT] = 1 << kfuRight;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_A] = 1 << kfuJump;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_B] = 1 << kfuLoadGrenade;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_X] = 1 << kfuBoostEnergy;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_Y] = 1 << kfuLoadMissile;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_RIGHTSTICK] = 1 << kfuAimForward;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_LEFTSHOULDER] = (1 << kfuLoadGrenade) | (1 << kfuFireWeapon);
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] = 1 << kfuFireWeapon;
+
     // mainScreenRect = &(*GetMainDevice())->gdRect;
     // mouseCenterPosition.h = (mainScreenRect->left + mainScreenRect->right) / 2;
     // mouseCenterPosition.v = (mainScreenRect->top + mainScreenRect->bottom) / 2;
@@ -218,6 +230,29 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
     // Events coming in are for the next frame to be sent.
     // FrameFunction *ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & (itsGame->frameNumber + 1)];
 
+    if (event.type == itsGame->itsApp->ControllerAxisEventType()) {
+        int16_t value = 0;
+        memcpy(&value, event.user.data1, sizeof(value));
+        free(event.user.data1);
+        
+        switch (event.user.code) {
+            case SDL_CONTROLLER_AXIS_LEFTX:
+                break;
+            case SDL_CONTROLLER_AXIS_LEFTY:
+                break;
+            case SDL_CONTROLLER_AXIS_RIGHTX:
+                mouseX += value / 1024;
+                break;
+            case SDL_CONTROLLER_AXIS_RIGHTY:
+                mouseY += value / 1024;
+                break;
+            case SDL_CONTROLLER_AXIS_TRIGGERLEFT:
+                break;
+            case SDL_CONTROLLER_AXIS_TRIGGERRIGHT:
+                break;
+        }
+    }
+
     switch (event.type) {
         case SDL_KEYDOWN:
             // only add to keysDown if it's NOT from a keyboard repeat
@@ -271,6 +306,12 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
                 buttonStatus |= kbuIsDown;
             }
 
+            break;
+        case SDL_CONTROLLERBUTTONDOWN:
+            HandleKeyDown(controllerButtonMap[event.cbutton.button]);
+            break;
+        case SDL_CONTROLLERBUTTONUP:
+            HandleKeyUp(controllerButtonMap[event.cbutton.button]);
             break;
         case SDL_MOUSEBUTTONUP:
             if(event.button.button == SDL_BUTTON_RIGHT) {

@@ -75,6 +75,17 @@ void TrackerPinger(CAvaraAppImpl *app) {
 CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     AssetManager::Init();
     
+    controllerAxisEvent = SDL_RegisterEvents(1);
+    lastAxisEvent = 0;
+
+    controller = nullptr;
+    for (int i = 0; i < SDL_NumJoysticks(); i++) {
+        if (SDL_IsGameController(i)) {
+            controller = SDL_GameControllerOpen(i);
+            break;
+        }
+    }
+
     itsGame = std::make_unique<CAvaraGame>(Get<FrameTime>(kFrameTimeTag));
     gCurrentGame = itsGame.get();
 
@@ -156,6 +167,7 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
 
 CAvaraAppImpl::~CAvaraAppImpl() {
     DeallocParser();
+    if (controller) SDL_GameControllerClose(controller);
 }
 
 void CAvaraAppImpl::Done() {
@@ -171,6 +183,24 @@ void CAvaraAppImpl::idle() {
 
     CheckSockets();
     TrackerUpdate();
+
+    // Poll for controller axis value at 60 fps
+    if(controller && (procTime - lastAxisEvent) > 16) {
+        lastAxisEvent = procTime;
+        for (int axis = SDL_CONTROLLER_AXIS_LEFTX; axis < SDL_CONTROLLER_AXIS_MAX; axis++) {
+            int16_t value = SDL_GameControllerGetAxis(controller, (SDL_GameControllerAxis)axis);
+            if (abs(value) > 2048) {
+                SDL_Event axisEvent;
+                void *valueData = malloc(sizeof(value));
+                memcpy(valueData, &value, sizeof(value));
+                axisEvent.type = controllerAxisEvent;
+                axisEvent.user.code = axis;
+                axisEvent.user.data1 = valueData;
+                SDL_PushEvent(&axisEvent);
+            }
+        }
+    }
+
     if (itsGame->GameTick()) {
         RenderContents();
     }
