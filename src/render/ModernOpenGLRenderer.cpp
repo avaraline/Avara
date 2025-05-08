@@ -5,6 +5,8 @@
 #include "FastMat.h"
 #include "OpenGLVertices.h"
 
+#include <algorithm>
+
 #include <glm/gtc/matrix_transform.hpp>
 
 #include <SDL2/SDL.h>
@@ -181,7 +183,8 @@ ModernOpenGLRenderer::ModernOpenGLRenderer(SDL_Window *window) : AbstractRendere
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-ModernOpenGLRenderer::~ModernOpenGLRenderer() {
+ModernOpenGLRenderer::~ModernOpenGLRenderer()
+{
     delete staticWorld;
     delete dynamicWorld;
     delete hudWorld;
@@ -225,67 +228,24 @@ void ModernOpenGLRenderer::ApplyLights()
     AdjustAmbient(*worldShader, ambientIntensity);
     worldShader->SetFloat3("ambientColor", ambientRGB);
 
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < MAXLIGHTS; i++) {
         float rgb[3];
-        float intensity = ToFloat(viewParams->dirLightSettings[i].intensity);
-        float elevation = ToFloat(viewParams->dirLightSettings[i].angle1);
-        float azimuth = ToFloat(viewParams->dirLightSettings[i].angle2);
         viewParams->dirLightSettings[i].color.ExportGLFloats(rgb, 3);
         bool applySpecular = viewParams->dirLightSettings[i].applySpecular;
-
-        float xyz[3] = {
-            sin(Deg2Rad(-azimuth)) * intensity,
-            sin(Deg2Rad(-elevation)) * intensity,
-            cos(Deg2Rad(azimuth)) * intensity
-        };
+        
+        const std::string dirUniform = "lightDir[" + std::to_string(i) + "]";
+        const std::string colorUniform = "lightColor[" + std::to_string(i) + "]";
+        const std::string specUniform = "lightApplySpecular[" + std::to_string(i) + "]";
 
         worldShader->Use();
-        switch (i) {
-            case 0:
-                worldShader->SetFloat3("lights[0]", xyz);
-                worldShader->SetFloat3("lightColors[0]", rgb);
-                worldShader->SetBool("lightApplySpecular[0]", applySpecular);
-                break;
-            case 1:
-                worldShader->SetFloat3("lights[1]", xyz);
-                worldShader->SetFloat3("lightColors[1]", rgb);
-                worldShader->SetBool("lightApplySpecular[1]", applySpecular);
-                break;
-            case 2:
-                worldShader->SetFloat3("lights[2]", xyz);
-                worldShader->SetFloat3("lightColors[2]", rgb);
-                worldShader->SetBool("lightApplySpecular[2]", applySpecular);
-                break;
-            case 3:
-                worldShader->SetFloat3("lights[3]", xyz);
-                worldShader->SetFloat3("lightColors[3]", rgb);
-                worldShader->SetBool("lightApplySpecular[3]", applySpecular);
-                break;
-        }
+        worldShader->SetFloat3(dirUniform, viewParams->dirLightSettings[i].direction);
+        worldShader->SetFloat3(colorUniform, rgb);
+        worldShader->SetBool(specUniform, applySpecular);
         
         skyShader->Use();
-        switch (i) {
-            case 0:
-                skyShader->SetFloat3("lights[0]", xyz);
-                skyShader->SetFloat3("lightColors[0]", rgb);
-                skyShader->SetBool("lightApplySpecular[0]", applySpecular);
-                break;
-            case 1:
-                skyShader->SetFloat3("lights[1]", xyz);
-                skyShader->SetFloat3("lightColors[1]", rgb);
-                skyShader->SetBool("lightApplySpecular[1]", applySpecular);
-                break;
-            case 2:
-                skyShader->SetFloat3("lights[2]", xyz);
-                skyShader->SetFloat3("lightColors[2]", rgb);
-                skyShader->SetBool("lightApplySpecular[2]", applySpecular);
-                break;
-            case 3:
-                skyShader->SetFloat3("lights[3]", xyz);
-                skyShader->SetFloat3("lightColors[3]", rgb);
-                skyShader->SetBool("lightApplySpecular[3]", applySpecular);
-                break;
-        }
+        skyShader->SetFloat3(dirUniform, viewParams->dirLightSettings[i].direction);
+        skyShader->SetFloat3(colorUniform, rgb);
+        skyShader->SetBool(specUniform, applySpecular);
     }
 }
 
@@ -538,7 +498,6 @@ void ModernOpenGLRenderer::AdjustAmbient(OpenGLShader &shader, float intensity)
 void ModernOpenGLRenderer::ApplyView()
 {
     glm::mat4 glMatrix = ToFloatMat(viewParams->viewMatrix);
-    glm::mat4 glInvMatrix = ToFloatMat(*viewParams->GetInverseMatrix());
     
     // Get rid of the view translation for the sky.
     glm::mat4 glSkyMatrix = ToFloatMat(viewParams->viewMatrix);
@@ -546,14 +505,14 @@ void ModernOpenGLRenderer::ApplyView()
     
     skyShader->Use();
     skyShader->SetMat4("view", glSkyMatrix);
-    skyShader->SetMat4("invView", glInvMatrix);
     skyShader->SetFloat("maxHazeDist", ToFloat(viewParams->yonBound));
+    SetPositions(*skyShader);
 
     worldShader->Use();
     worldShader->SetTransposedMat4("view", glMatrix);
-    worldShader->SetMat4("invView", glInvMatrix);
     worldShader->SetFloat("worldYon", ToFloat(viewParams->yonBound));
     worldShader->SetFloat("objectYon", ToFloat(viewParams->yonBound));
+    SetPositions(*worldShader);
     glCheckErrors();
 
     hudShader->Use();
@@ -733,7 +692,28 @@ void ModernOpenGLRenderer::AdjustFramebuffer(short index, GLsizei width, GLsizei
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void ModernOpenGLRenderer::SetTransforms(const CBSPPart &part) {
+void ModernOpenGLRenderer::SetPositions(OpenGLShader &shader)
+{
+    glm::mat4 glInvMatrix = ToFloatMat(*viewParams->GetInverseMatrix());
+    float camPos[3] = {glInvMatrix[3][0], glInvMatrix[3][1], glInvMatrix[3][2]};
+    
+    shader.Use();
+    shader.SetFloat3("camPos", camPos);
+    for (int i = 0; i < MAXLIGHTS; i++) {
+        glm::vec3 lightDir = {
+            viewParams->dirLightSettings[i].direction[0],
+            viewParams->dirLightSettings[i].direction[1],
+            viewParams->dirLightSettings[i].direction[2]
+        };
+        glm::vec3 lightPos = glm::normalize(lightDir) * -1000.0f;
+        
+        const std::string uniform = "lightPos[" + std::to_string(i) + "]";
+        shader.SetVec3(uniform, lightPos);
+    }
+}
+
+void ModernOpenGLRenderer::SetTransforms(const CBSPPart &part)
+{
     glm::mat4 m = ToFloatMat(part.modelTransform);
     if (part.hasScale) {
         glm::vec3 sc = glm::vec3(

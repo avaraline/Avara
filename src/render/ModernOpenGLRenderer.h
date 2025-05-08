@@ -66,5 +66,6 @@ private:
     void IgnoreDirectionalLights(OpenGLShader &shader, bool yn);
     std::unique_ptr<OpenGLShader> LoadShader(const std::string &vertFile, const std::string &fragFile);
     void AdjustFramebuffer(short index, GLsizei width, GLsizei height);
+    void SetPositions(OpenGLShader &shader);
     void SetTransforms(const CBSPPart &part);
 };

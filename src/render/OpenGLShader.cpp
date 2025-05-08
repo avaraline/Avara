@@ -153,3 +153,8 @@ void OpenGLShader::SetTransposedMat4(const std::string &uniform, const glm::mat4
         glm::value_ptr(value)
     );
 }
+
+void OpenGLShader::SetVec3(const std::string &uniform, const glm::vec3 &value) const
+{
+    glUniform3fv(glGetUniformLocation(id, uniform.c_str()), 1, glm::value_ptr(value));
+}
