@@ -89,9 +89,10 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     lastAxisEvent = 0;
     controller = FindGameController();
     for (int axis = SDL_CONTROLLER_AXIS_LEFTX; axis < SDL_CONTROLLER_AXIS_MAX; axis++) {
-        uint16_t clamp = (axis == SDL_CONTROLLER_AXIS_LEFTX || axis == SDL_CONTROLLER_AXIS_LEFTY) ? 12288 : 4096;
+        uint16_t clamp = (axis == SDL_CONTROLLER_AXIS_LEFTX || axis == SDL_CONTROLLER_AXIS_LEFTY) ? 20480 : 2048;
         controllerAxes[axis] = {0, 0, 0, 0, clamp};
     }
+    controllerPollMillis = 1000 / Number(kControllerPollRate);
 
     itsGame = std::make_unique<CAvaraGame>(Get<FrameTime>(kFrameTimeTag));
     gCurrentGame = itsGame.get();
@@ -189,7 +190,7 @@ void CAvaraAppImpl::idle() {
     TrackerUpdate();
 
     // Poll for controller axis value at 60 fps
-    if (controller && (procTime - lastAxisEvent) > 16) {
+    if (controller && (procTime - lastAxisEvent) > controllerPollMillis) {
         lastAxisEvent = procTime;
         for (int axis = SDL_CONTROLLER_AXIS_LEFTX; axis < SDL_CONTROLLER_AXIS_MAX; axis++) {
             ControllerAxisState *state = &controllerAxes[axis];

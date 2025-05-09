@@ -97,6 +97,7 @@ public:
     SDL_GameController *controller; // currently paired controller
     uint32_t controllerAxisEvent; // registered with SDL_RegisterEvents
     uint32_t lastAxisEvent; // time of last controller axis polling
+    uint32_t controllerPollMillis;
     ControllerAxisState controllerAxes[SDL_CONTROLLER_AXIS_MAX]; // state of each controller axis
 
     std::deque<MsgLine> messageLines;

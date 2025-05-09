@@ -210,7 +210,9 @@ private:
     PlayerConfigRecord theConfiguration {};
 
     std::unordered_map<SDL_Scancode, uint32_t> keyMap; // maps keyboard key to keyFunc
+    
     std::unordered_map<uint8_t, uint32_t> controllerButtonMap;
+    float controllerCurveExp, controllerMaxMove;
 public:
 
     virtual void IPlayerManager(CAvaraGame *theGame, short id, CNetManager *aNetManager);
