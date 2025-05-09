@@ -33,6 +33,13 @@
 
 using json = nlohmann::json;
 
+typedef struct {
+    int16_t current;
+    int16_t previous;
+    int16_t rel;
+    int16_t flags;
+    uint16_t clamp;
+} ControllerAxisState;
 
 class CAvaraGame;
 class CNetManager;
@@ -67,15 +74,17 @@ public:
     virtual void Done() = 0;
     virtual void BroadcastCommand(int theCommand) = 0;
     virtual CommandManager* GetTui() = 0;
+    virtual uint32_t ControllerAxisEventType() = 0;
+    virtual void Rumble(Fixed hitEnergy) = 0;
 };
 class CAvaraAppImpl : public CApplication, public CAvaraApp {
 private:
     std::unique_ptr<CAvaraGame> itsGame;
-
+    
     CNetManager *gameNet;
     CommandManager *itsTui;
     std::unique_ptr<CHUD> ui;
-
+    
 public:
     std::unique_ptr<CRUD> itsAPI;
     CPlayerWindow *playerWindow;
@@ -84,6 +93,11 @@ public:
     CServerWindow *serverWindow;
     CRosterWindow *rosterWindow;
     CTrackerWindow *trackerWindow;
+    
+    SDL_GameController *controller; // currently paired controller
+    uint32_t controllerAxisEvent; // registered with SDL_RegisterEvents
+    uint32_t lastAxisEvent; // time of last controller axis polling
+    ControllerAxisState controllerAxes[SDL_CONTROLLER_AXIS_MAX]; // state of each controller axis
 
     std::deque<MsgLine> messageLines;
     // std::deque<std::string> chatCommandHistory;
@@ -91,30 +105,30 @@ public:
     Fixed overhead[3], extent[6];
     Fixed previewAngle, previewRadius;
     bool animatePreview;
-
+    
     CAvaraAppImpl();
     ~CAvaraAppImpl();
-
+    
     long nextTrackerUpdate;
     json trackerState;
     bool trackerUpdatePending;
     std::thread *trackerThread;
-
+    
     virtual std::deque<MsgLine>& MessageLines() override;
     virtual void idle() override;
     virtual void drawContents() override;
     virtual void RenderContents() override;
-
+    
     virtual bool DoCommand(int theCommand) override;
     virtual void WindowResized(int width, int height) override;
-
+    
     virtual void Done() override;
-
+    
     virtual bool handleSDLEvent(SDL_Event &event) override;
     virtual void drawAll() override;
     OSErr LoadLevel(std::string set, std::string levelTag, CPlayerManager *sendingPlayer) override;
     virtual void NotifyUser() override;
-
+    
     virtual void AddMessageLine(std::string lines, MsgAlignment align = MsgAlignment::Left, MsgCategory category = MsgCategory::System) override;
     virtual void GameStarted(LevelInfo &loadedLevel) override;
 
@@ -133,7 +147,7 @@ public:
     virtual CNetManager* GetNet() override;
     virtual CAvaraGame* GetGame() override;
     virtual CommandManager* GetTui() override;
-
+    
     virtual void BroadcastCommand(int theCommand) override { CApplication::BroadcastCommand(theCommand); }
     virtual json Get(const std::string name) override { return CApplication::Get(name); }
     virtual void Set(const std::string name, const std::string value) override { CApplication::Set(name, value); }
@@ -143,7 +157,10 @@ public:
     virtual long Number(const std::string name) override { return CApplication::Number(name); }
     virtual bool Boolean(const std::string name) override { return CApplication::Boolean(name); }
     template <class T> T Get(const std::string name) { return CApplication::Get<T>(name); }
-
+    
     void TrackerUpdate();
     std::string TrackerPayload();
+    
+    virtual uint32_t ControllerAxisEventType() override { return controllerAxisEvent; }
+    virtual void Rumble(Fixed hitEnergy) override;
 };

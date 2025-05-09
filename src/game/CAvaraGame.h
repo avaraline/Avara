@@ -283,6 +283,8 @@ public:
 
     void SetKeysFromStdin() { keysFromStdin = true; };
     void SetKeysToStdout() { keysToStdout = true; };
+    
+    virtual ARGBColor GetLocalTeamColor();
 };
 
 #ifndef MAINAVARAGAME

@@ -719,8 +719,8 @@ void CAvaraGame::ResumeGame() {
 
     if (doStart) {
         if (freshMission) {
-            itsApp->GameStarted(*loadedLevelInfo);
             itsNet->AttachPlayers((CAbstractPlayer *)freshPlayerList);
+            itsApp->GameStarted(*loadedLevelInfo);
             freshPlayerList = NULL;
             InitMixer(false);
         } else {
@@ -1204,4 +1204,8 @@ void CAvaraGame::DoStats(uint32_t startTime, int interval) {
 
         nextStatTime = startTime + interval;
     }
+}
+
+ARGBColor CAvaraGame::GetLocalTeamColor() {
+    return GetLocalPlayer()->GetTeamColorOr(ColorManager::getDefaultTeamColor());
 }
