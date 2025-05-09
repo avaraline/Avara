@@ -485,8 +485,10 @@ void CAvaraGame::PreSendFrameActions() {
     // When called, send up to preSendCount frames early based on whether the clock is "behind".
     // "behind" is defined as our current time being beyond the projected time of topSentFrame minus an offset.
     // This allows us to increase the effective LT by as many as FRAME_OFFSET frames during a wait loop.
-    static float FRAME_OFFSET = 2.0;
+    const float FRAME_OFFSET = 2.0;
+    const int MAX_DYNAMIC_LT = 4;  // don't send anything extra above this LT
     while (preSendCount > 0 &&
+           topSentFrame - frameNumber < MAX_DYNAMIC_LT / fpsScale &&
            SDL_GetTicks() >= nextScheduledFrame + frameTime*(topSentFrame-frameNumber-FRAME_OFFSET)) {
         itsNet->FrameAction();
         DBG_Log("presend", "fn=%d, preSent frame #%d, N=%d, ahead=%d, start=%d time=%d nSF=%d\n", frameNumber, topSentFrame, preSendCount, topSentFrame - frameNumber, frameStart, SDL_GetTicks(), nextScheduledFrame);
