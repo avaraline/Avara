@@ -174,6 +174,7 @@ public:
     virtual std::deque<MsgLine>& MessageLines() { return msgLines; }
     virtual CommandManager* GetTui() { return 0; }
     virtual uint32_t ControllerAxisEventType() { return 0; }
+    virtual void Rumble(Fixed hitEnergy) {}
 public:
     std::unique_ptr<CAvaraGame> itsGame;
 private:

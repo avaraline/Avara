@@ -75,6 +75,7 @@ public:
     virtual void BroadcastCommand(int theCommand) = 0;
     virtual CommandManager* GetTui() = 0;
     virtual uint32_t ControllerAxisEventType() = 0;
+    virtual void Rumble(Fixed hitEnergy) = 0;
 };
 class CAvaraAppImpl : public CApplication, public CAvaraApp {
 private:
@@ -130,7 +131,7 @@ public:
     
     virtual void AddMessageLine(std::string lines, MsgAlignment align = MsgAlignment::Left, MsgCategory category = MsgCategory::System) override;
     virtual void GameStarted(LevelInfo &loadedLevel) override;
-    
+
     // From CInfoPanel
     virtual void SetIndicatorDisplay(short i, short v);
     virtual void NumberLine(long theNum, short align);
@@ -161,4 +162,5 @@ public:
     std::string TrackerPayload();
     
     virtual uint32_t ControllerAxisEventType() override { return controllerAxisEvent; }
+    virtual void Rumble(Fixed hitEnergy) override;
 };

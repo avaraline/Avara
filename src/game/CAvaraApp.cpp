@@ -311,6 +311,16 @@ void CAvaraAppImpl::GameStarted(LevelInfo &loadedLevel) {
     MessageLine(kmStarted, MsgAlignment::Center);
     itsAPI->RecordGameStart(itsGame->currentGameId, loadedLevel);
     levelWindow->UpdateRecents();
+    if (controller) {
+        auto color = itsGame->GetLocalTeamColor();
+        SDL_GameControllerSetLED(controller, color.GetR(), color.GetG(), color.GetB());
+    }
+}
+
+void CAvaraAppImpl::Rumble(Fixed hitEnergy) {
+    if (controller) {
+        SDL_GameControllerRumble(controller, 0x00FF, 0xFF00, 250);
+    }
 }
 
 bool CAvaraAppImpl::DoCommand(int theCommand) {

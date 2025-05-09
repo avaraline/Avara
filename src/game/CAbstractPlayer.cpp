@@ -2361,6 +2361,8 @@ short CAbstractPlayer::GetBallSnapPoint(long theGroup,
 
 void CAbstractPlayer::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
     SignalAttachments(kHostDamage, &hitEnergy);
-
+    if (itsManager->IsLocalPlayer()) {
+        itsGame->itsApp->Rumble(hitEnergy);
+    }
     CRealMovers::WasHit(theHit, hitEnergy);
 }
