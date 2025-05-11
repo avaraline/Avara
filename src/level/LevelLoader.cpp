@@ -414,7 +414,7 @@ struct ALFWalker: pugi::xml_tree_walker {
         }
         std::string result = script.str();
         if (wrote && result.length() > 0)
-        RunThis(result);
+            RunThis(result);
     }
 
     void handle_script(pugi::xml_node& node) {
