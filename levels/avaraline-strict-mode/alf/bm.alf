@@ -1,0 +1,35 @@
+<map>
+<set
+  designer="$mSilverfox"
+  information="Between the sun, sand, and glint of metal, it was nearly impossible to trust my eyes, but I swear the place was not as I left it."
+  ambient.c="#fffff0"
+  light.0.i="0.9"
+  light.0.a="30"
+  light.0.b="10"
+  light.0.s="true"
+  sand.specular="#33322b"
+  sand.shininess="8.0"
+  shiny.specular="#00cccc"
+  shiny.shininess="128.0"
+  wallHeight="0"
+/>
+
+<SkyColor color="#fffff0" color.1="#bde8ff" thickness="3000" verticalRangeMin="1000" verticalRangeMax="6000" />
+
+<!-- The ground should use the sand values. This works. -->
+<GroundColor color="#3a404d" color.1="#000000" material.specular="$sand.specular" material.shininess="sand.shininess" />
+
+<!-- This wall should use the default values (flat shading). This also works. -->
+<Wall d="3" w="3" h="0" color="#111111" material.specular="$defaultMaterial.specular" material.shininess="defaultMaterial.shininess" x="0" z="0" />
+
+<!-- This is *supposed* to set anything with the default material, or markers 0-3 to shiny. It does not apply to the following walls. -->
+<set
+  baseMaterial.specular="$shiny.specular"
+  baseMaterial.shininess="shiny.shininess"
+/>
+
+<set wallHeight="9" />
+<Wall d="1" w="4" color="#111111" x="10" z="0" />
+<set wallHeight="9" />
+<Wall d="1" w="4" color="#111111" x="-10" z="0" />
+</map>
