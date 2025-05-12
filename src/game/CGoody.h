@@ -39,5 +39,5 @@ public:
     virtual void AdaptableSettings();
     virtual void FrameAction();
     virtual bool HandlesFastFPS() { return true; }
-    virtual bool UseForRandomIncarnator() { return true; }
+    virtual bool UseForExtent();
 };

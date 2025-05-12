@@ -207,3 +207,7 @@ void CGoody::FrameAction() {
 
             itsGame->frameNumber, (Fixed)FRandSeed, heading, ident, grenades, missiles);
 }
+
+bool CGoody::UseForExtent() {
+    return (grenades > 0 || missiles > 0 || boosters > 0);
+}

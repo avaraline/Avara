@@ -55,15 +55,6 @@ public:
      * @return a new, empty VertexData instance
      */
     virtual std::unique_ptr<VertexData> NewVertexDataInstance() = 0;
-
-    /**
-     * Populate the provided Fixed arrays with 1) the center point of the level and 2) how far the
-     * level extends.
-     *
-     * @param pt The array of Fixed values (x, y, and z coordinates) to populate with the "center" point of a level.
-     * @param extent The array of Fixed values (min X, max X, min Y, max Y, min Z, max Z) to populate with coordinates that represent the "extent" of a level's boundaries.
-     */
-    virtual void OverheadPoint(Fixed *pt, Fixed *extent) = 0;
     
     /**
      * Perform desired actions after level load.

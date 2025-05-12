@@ -329,11 +329,6 @@ std::unique_ptr<VertexData> LegacyOpenGLRenderer::NewVertexDataInstance()
     return std::make_unique<OpenGLVertices>();
 }
 
-void LegacyOpenGLRenderer::OverheadPoint(Fixed *pt, Fixed *extent)
-{
-    dynamicWorld->OverheadPoint(pt, extent);
-}
-
 void LegacyOpenGLRenderer::PostLevelLoad()
 {
     staticGeometry = staticWorld->Squash();
