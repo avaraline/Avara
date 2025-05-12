@@ -25,7 +25,6 @@ public:
 
     virtual void AddPart(CBSPPart *thePart) {};
     virtual void DisposeParts() {};
-    virtual void OverheadPoint(Fixed *pt, Fixed *extent) {};
     virtual void PrepareForRender() {};
     virtual void RemovePart(CBSPPart *thePart) {};
 };
@@ -48,7 +47,6 @@ public:
     virtual uint16_t GetPartCount();
     virtual uint16_t GetVisiblePartCount();
     virtual CBSPPart **GetVisiblePartListPointer();
-    virtual void OverheadPoint(Fixed *pt, Fixed *extent);
     virtual void PrepareForRender();
     virtual void RemovePart(CBSPPart *thePart);
     virtual void ScoreAndSort(CBSPPart **firstPart, short overlapCount);

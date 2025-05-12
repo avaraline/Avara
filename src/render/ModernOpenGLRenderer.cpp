@@ -377,11 +377,6 @@ std::unique_ptr<VertexData> ModernOpenGLRenderer::NewVertexDataInstance()
     return std::make_unique<OpenGLVertices>();
 }
 
-void ModernOpenGLRenderer::OverheadPoint(Fixed *pt, Fixed *extent)
-{
-    dynamicWorld->OverheadPoint(pt, extent);
-}
-
 void ModernOpenGLRenderer::PostLevelLoad()
 {
     staticGeometry = staticWorld->Squash();

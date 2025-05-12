@@ -1957,7 +1957,7 @@ void CAbstractPlayer::Reincarnate() {
     DBG_Log("spawn", "NO incarnators found, trying RANDOM");
     // if couldn't find an available Incarnator above, try creating a random one
     for (int tries = 3; isInLimbo && tries > 0; tries--) {
-        CRandomIncarnator waldo(itsGame->actorList);
+        CRandomIncarnator waldo(itsGame->extentMin, itsGame->extentMax);
         if (ReincarnateComplete(&waldo)) {
             break;
         }

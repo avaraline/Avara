@@ -24,7 +24,6 @@ public:
     virtual void ApplySky() override;
     virtual void LevelReset() override;
     virtual std::unique_ptr<VertexData> NewVertexDataInstance() override;
-    virtual void OverheadPoint(Fixed *pt, Fixed *extent) override;
     virtual void PostLevelLoad() override;
     virtual void RefreshWindow() override;
     virtual void RemoveHUDPart(CBSPPart *part) override;
