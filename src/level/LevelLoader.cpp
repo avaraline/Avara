@@ -438,7 +438,7 @@ struct ALFWalker: pugi::xml_tree_walker {
             catch (const std::invalid_argument& e) {
                 // temporary script to evaluate expression
                 std::stringstream script;
-                std::string key = "alfyvalue";
+                std::string key = "privateAlf.tmpY";
                 script << key << " = " << y << "\n";
                 RunThis(script.str());
                 auto index = IndexForEntry(key.c_str());
