@@ -440,16 +440,10 @@ struct ALFWalker: pugi::xml_tree_walker {
                 std::stringstream script;
                 std::string key = "alfyvalue";
                 script << key << " = " << y << "\n";
-                auto scriptstr = script.str();
                 RunThis(script.str());
                 auto index = IndexForEntry(key.c_str());
                 // immediately evaluate temporary variable
-                y_alt = ToFixed(EvalVariable(index + firstVariable, false));
-                // clear out temporary variable
-                script.str("");
-                script.clear();
-                script << key << " = " << 0 << "\n";
-                RunThis(script.str());
+                y_alt = ToFixed(EvalVariable(index + firstVariable, true));
             }
             catch (const std::out_of_range& e) { }
         }
