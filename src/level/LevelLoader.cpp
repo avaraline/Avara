@@ -428,14 +428,33 @@ struct ALFWalker: pugi::xml_tree_walker {
     }
 
     void handle_wall(pugi::xml_node& node) {
+        Fixed y_alt = 0;
         std::string y = node.attribute("y").value();
         if (!y.empty()) {
-            std::stringstream script;
-            script << "wa = " << y << "\n";
-            RunThis(script.str());
+            try {
+                double yvalue = std::stod(y);
+                y_alt = ToFixed(yvalue);
+            }
+            catch (const std::invalid_argument& e) {
+                // temporary script to evaluate expression
+                std::stringstream script;
+                std::string key = "alfyvalue";
+                script << key << " = " << y << "\n";
+                auto scriptstr = script.str();
+                RunThis(script.str());
+                auto index = IndexForEntry(key.c_str());
+                // immediately evaluate temporary variable
+                y_alt = ToFixed(EvalVariable(index + firstVariable, false));
+                // clear out temporary variable
+                script.str("");
+                script.clear();
+                script << key << " = " << 0 << "\n";
+                RunThis(script.str());
+            }
+            catch (const std::out_of_range& e) { }
         }
         CWallActor *theWall = new CWallActor;
-        theWall->MakeWallFromRect(&gLastBoxRect, gLastBoxRounding, 0, true);
+        theWall->MakeWallFromRect(&gLastBoxRect, gLastBoxRounding, y_alt, 0, true);
     }
 
     void handle_include(pugi::xml_node& node) {
