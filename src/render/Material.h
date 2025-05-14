@@ -60,11 +60,11 @@ public:
         return Material(color, specular.WithA(s));
     }
     inline Material WithShininessVar(short index) {
-        Fixed shininess = ReadFixedVar(index);
+        Fixed shininess = ReadFixedMaterialVar(index);
         return Material(color, specular.WithA(ConstrainShininess(shininess)));
     }
     inline Material WithShininessVar(const char *s) {
-        Fixed shininess = ReadFixedVar(s);
+        Fixed shininess = ReadFixedMaterialVar(s);
         return Material(color, specular.WithA(ConstrainShininess(shininess)));
     }
 private:

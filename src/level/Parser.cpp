@@ -1122,16 +1122,20 @@ short ReadShortVar(const char *s) {
 }
 
 const std::optional<ARGBColor> ReadColorVar(short index) {
-    // first just try parsing the color string (e.g. fill="#ffcc44" or fill="rgba(255,204,68)")
-    std::optional<ARGBColor> color = ARGBColor::Parse(ReadStringVar(index));
-    if (!color) {
-        // try dereferencing color to a variable (e.g. myFill='"#ffcc44"' --> fill="myFill")
-        color = ARGBColor::Parse(ReadStringVar(ReadStringVar(index).c_str()));
-    }
+    index = EvalVariable(index + firstVariable, true); // eager evaluation!
+    std::string value = (index) ? symTable->GetIndEntry(index) : "";
+    std::optional<ARGBColor> color = ARGBColor::Parse(value);
     return color;
 }
 const std::optional<ARGBColor> ReadColorVar(const char *s) {
     return ReadColorVar(IndexForEntry(s));
+}
+
+const Fixed ReadFixedMaterialVar(short index) {
+    return ToFixed(EvalVariable(index + firstVariable, true)); // eager evaluation!
+}
+const Fixed ReadFixedMaterialVar(const char *s) {
+    return ReadFixedVar(IndexForEntry(s));
 }
 
 std::string ReadStringVar(short index) {
