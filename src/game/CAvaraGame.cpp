@@ -1123,9 +1123,9 @@ CPlayerManager *CAvaraGame::GetPlayerManager(CAbstractPlayer *thePlayer) {
 
 // FrameLatency is slightly different than LatencyTolerance.  It is in terms of integer frames
 // at the current frame rate.
-long CAvaraGame::RoundTripToFrameLatency(long roundTrip) {
+short CAvaraGame::RoundTripToFrameLatency(long roundTrip) {
     // half of the roundTripTime in units of frameTime, rounded up (ceil)
-    return std::ceil(roundTrip/2.0/frameTime) - 1;
+    return std::max(0.0, std::ceil(roundTrip/2.0/frameTime) - 1);
 }
 
 // "frameLatency" is the integer number of frames to delay;
