@@ -212,7 +212,7 @@ private:
     std::unordered_map<SDL_Scancode, uint32_t> keyMap; // maps keyboard key to keyFunc
     
     std::unordered_map<uint8_t, uint32_t> controllerButtonMap;
-    float controllerCurveExp, controllerMaxMove;
+    float controllerCurveExp, controllerMaxMove, controllerMultiplyX, controllerMultiplyY;
 public:
 
     virtual void IPlayerManager(CAvaraGame *theGame, short id, CNetManager *aNetManager);

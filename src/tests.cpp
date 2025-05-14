@@ -173,7 +173,7 @@ public:
     virtual void GameStarted(LevelInfo &loadedLevel) {};
     virtual std::deque<MsgLine>& MessageLines() { return msgLines; }
     virtual CommandManager* GetTui() { return 0; }
-    virtual uint32_t ControllerAxisEventType() { return 0; }
+    virtual uint32_t ControllerEventType() { return 0; }
     virtual void Rumble(Fixed hitEnergy) {}
 public:
     std::unique_ptr<CAvaraGame> itsGame;

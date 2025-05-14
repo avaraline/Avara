@@ -122,8 +122,8 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
     controllerButtonMap[SDL_CONTROLLER_BUTTON_X] = 1 << kfuBoostEnergy;
     controllerButtonMap[SDL_CONTROLLER_BUTTON_Y] = 1 << kfuScoutView;
     controllerButtonMap[SDL_CONTROLLER_BUTTON_RIGHTSTICK] = 1 << kfuAimForward;
-    controllerButtonMap[SDL_CONTROLLER_BUTTON_LEFTSHOULDER] = (1 << kfuLoadGrenade) | (1 << kfuFireWeapon);
-    controllerButtonMap[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] = 1 << kfuFireWeapon;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_LEFTSHOULDER] = 1 << kfuLoadMissile;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] = 1 << kfuLoadGrenade;
     controllerButtonMap[SDL_CONTROLLER_BUTTON_BACK] = 1 << kfuAbortGame;
     controllerButtonMap[SDL_CONTROLLER_BUTTON_START] = 1 << kfuPauseGame;
 
@@ -228,38 +228,71 @@ uint32_t CPlayerManagerImpl::GetKeyBits() {
     return keys;
 }
 
+short AxisMovement(ControllerAxis &axis, float exp, float max, float mult) {
+    return axis.value * abs(pow(axis.value, exp - 1.0f)) * max * mult;
+}
+
 void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
     // Events coming in are for the next frame to be sent.
     // FrameFunction *ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & (itsGame->frameNumber + 1)];
 
-    if (event.type == itsGame->itsApp->ControllerAxisEventType()) {
-        ControllerAxisState *state = (ControllerAxisState *)event.user.data1;
-        float mult = pow((abs(state->current) / 32768.0), controllerCurveExp);
-        switch (event.user.code) {
-            case SDL_CONTROLLER_AXIS_LEFTX:
+    if (event.type == itsGame->itsApp->ControllerEventType()) {
+        ControllerSticks *sticks = (ControllerSticks *)event.user.data1;
+        ControllerTriggers *triggers = (ControllerTriggers *)event.user.data2;
+
+        mouseX += AxisMovement(sticks->right.x,
+                               controllerCurveExp,
+                               controllerMaxMove,
+                               controllerMultiplyX);
+        mouseY += AxisMovement(sticks->right.y,
+                               controllerCurveExp,
+                               controllerMaxMove,
+                               controllerMultiplyY);
+
+        if (sticks->left.x.active) {
+            if (sticks->left.x.value < 0) {
                 HandleKeyUp(1 << kfuRight);
+                if (sticks->left.x.value < -0.5f) HandleKeyDown(1 << kfuLeft);
+            }
+            else {
                 HandleKeyUp(1 << kfuLeft);
-                if (state->current > 0) HandleKeyDown(1 << kfuRight);
-                else if (state->current < 0) HandleKeyDown(1 << kfuLeft);
-                break;
-            case SDL_CONTROLLER_AXIS_LEFTY:
-                HandleKeyUp(1 << kfuForward);
+                if (sticks->left.x.value > 0.5f) HandleKeyDown(1 << kfuRight);
+            }
+        }
+        else {
+            HandleKeyUp(1 << kfuRight);
+            HandleKeyUp(1 << kfuLeft);
+        }
+
+        if (sticks->left.y.active) {
+            if (sticks->left.y.value < 0) {
                 HandleKeyUp(1 << kfuReverse);
-                if (state->current > 0) HandleKeyDown(1 << kfuReverse);
-                else if (state->current < 0) HandleKeyDown(1 << kfuForward);
-                break;
-            case SDL_CONTROLLER_AXIS_RIGHTX:
-                mouseX += int(mult * ((state->current * controllerMaxMove) / 32768.0));
-                break;
-            case SDL_CONTROLLER_AXIS_RIGHTY:
-                mouseY += int(mult * ((state->current * controllerMaxMove) / 32768.0));
-                break;
-            case SDL_CONTROLLER_AXIS_TRIGGERLEFT:
-                if (state->flags) HandleKeyDown(1 << kfuLoadMissile);
-                break;
-            case SDL_CONTROLLER_AXIS_TRIGGERRIGHT:
-                if (state->flags) HandleKeyDown(1 << kfuLoadGrenade);
-                break;
+                if (sticks->left.y.value < -0.5f) HandleKeyDown(1 << kfuForward);
+            }
+            else {
+                HandleKeyUp(1 << kfuForward);
+                if (sticks->left.y.value > 0.5f) HandleKeyDown(1 << kfuReverse);
+            }
+        }
+        else {
+            HandleKeyUp(1 << kfuReverse);
+            HandleKeyUp(1 << kfuForward);
+        }
+
+        if (triggers->right.t.value >= 0.5f) {
+            HandleKeyDown((1 << kfuLoadGrenade) | (1 << kfuFireWeapon));
+        }
+        else {
+            HandleKeyUp((1 << kfuLoadGrenade) | (1 << kfuFireWeapon));
+        }
+        
+        if (triggers->left.t.value >= 0.5f) {
+            if (triggers->left.t.last < 0.5f) buttonStatus |= kbuWentDown;
+            buttonStatus |= kbuIsDown;
+        }
+        else {
+            if (triggers->left.t.last >= 0.5f) buttonStatus |= kbuWentUp;
+            buttonStatus &= ~kbuIsDown;
         }
     }
 
@@ -304,6 +337,12 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
         case SDL_KEYUP:
             HandleKeyUp(keyMap[event.key.keysym.scancode]);
             break;
+        case SDL_CONTROLLERBUTTONDOWN:
+            HandleKeyDown(controllerButtonMap[event.cbutton.button]);
+            break;
+        case SDL_CONTROLLERBUTTONUP:
+            HandleKeyUp(controllerButtonMap[event.cbutton.button]);
+            break;
         case SDL_MOUSEBUTTONDOWN:
             if(event.button.button == SDL_BUTTON_RIGHT) {
                 HandleKeyDown(keyMap[SDL_SCANCODE_APP1]);
@@ -316,12 +355,6 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
                 buttonStatus |= kbuIsDown;
             }
 
-            break;
-        case SDL_CONTROLLERBUTTONDOWN:
-            HandleKeyDown(controllerButtonMap[event.cbutton.button]);
-            break;
-        case SDL_CONTROLLERBUTTONUP:
-            HandleKeyUp(controllerButtonMap[event.cbutton.button]);
             break;
         case SDL_MOUSEBUTTONUP:
             if(event.button.button == SDL_BUTTON_RIGHT) {
@@ -529,8 +562,10 @@ void CPlayerManagerImpl::ResumeGame() {
     mouseX = mouseY = 0;
     buttonStatus = 0;
     
-    controllerCurveExp = float(itsGame->itsApp->Number(kControllerExponent));
+    controllerCurveExp = itsGame->itsApp->Number(kControllerExponent);
     controllerMaxMove = float(itsGame->itsApp->Number(kControllerMax));
+    controllerMultiplyX = itsGame->itsApp->Get(kControllerX);
+    controllerMultiplyY = itsGame->itsApp->Get(kControllerY);
 }
 
 void CPlayerManagerImpl::ProtocolHandler(struct PacketInfo *thePacket) {

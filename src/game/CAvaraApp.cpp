@@ -41,6 +41,7 @@
 #include "httplib.h"
 
 #include <chrono>
+#include <cmath>
 #include <json.hpp>
 
 // included while we fake things out
@@ -82,18 +83,72 @@ SDL_GameController *FindGameController() {
     return nullptr;
 }
 
+void InitAxis(ControllerAxis &axis) {
+    axis.last = 0.0f;
+    axis.value = 0.0f;
+    axis.elapsed = 0;
+    axis.active = 0;
+    axis.toggled = 0;
+}
+
+void InitStick(ControllerStick &stick, uint16_t clamp_low = 4000, uint16_t clamp_high = 28000) {
+    stick.clamp_inner = clamp_low;
+    stick.clamp_outer = clamp_high;
+    InitAxis(stick.x);
+    InitAxis(stick.y);
+}
+
+void InitTrigger(ControllerTrigger &trigger) {
+    trigger.clamp_low = 3000;
+    trigger.clamp_high = 30000;
+    InitAxis(trigger.t);
+}
+
+void UpdateAxis(ControllerAxis &axis, float value, uint32_t elapsed) {
+    if (abs(value) < 0.00001f) value = 0.0f;
+    axis.last = axis.value;
+    axis.value = value;
+    axis.active = (value != 0);
+    if (axis.last != axis.value) {
+        axis.elapsed += elapsed;
+        axis.toggled = (axis.value < 0) != (axis.last < 0);
+    } else {
+        if (axis.value == 0) {
+            axis.elapsed = 0;
+        } else {
+            axis.elapsed += elapsed;
+        }
+        axis.toggled = 0;
+    }
+}
+
+void UpdateStick(ControllerStick &stick, int32_t x, int32_t y, uint32_t elapsed) {
+    int32_t magnitude = sqrt((x * x) + (y * y));
+    float scale = float(magnitude - stick.clamp_inner) / float(stick.clamp_outer - stick.clamp_inner);
+    scale = std::clamp(scale, 0.0f, 1.0f) / magnitude;
+    UpdateAxis(stick.x, x * scale, elapsed);
+    UpdateAxis(stick.y, y * scale, elapsed);
+}
+
+void UpdateTrigger(ControllerTrigger &trigger, uint16_t t, uint32_t elapsed) {
+    float scaled = float(t - trigger.clamp_low) / float(trigger.clamp_high - trigger.clamp_low);
+    scaled = std::clamp(scaled, 0.0f, 1.0f) * t;
+    UpdateAxis(trigger.t, scaled, elapsed);
+}
+
 CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     AssetManager::Init();
 
-    controllerAxisEvent = SDL_RegisterEvents(1);
-    lastAxisEvent = 0;
+    controllerBaseEvent = SDL_RegisterEvents(1);
+    lastControllerEvent = 0;
     controller = FindGameController();
-    for (int axis = SDL_CONTROLLER_AXIS_LEFTX; axis < SDL_CONTROLLER_AXIS_MAX; axis++) {
-        uint16_t clamp = (axis == SDL_CONTROLLER_AXIS_LEFTX || axis == SDL_CONTROLLER_AXIS_LEFTY) ? 20480 : 2048;
-        controllerAxes[axis] = {0, 0, 0, 0, clamp};
-    }
     controllerPollMillis = 1000 / Number(kControllerPollRate);
 
+    InitStick(sticks.left);
+    InitStick(sticks.right);
+    InitTrigger(triggers.left);
+    InitTrigger(triggers.right);
+    
     itsGame = std::make_unique<CAvaraGame>(Get<FrameTime>(kFrameTimeTag));
     gCurrentGame = itsGame.get();
 
@@ -189,30 +244,30 @@ void CAvaraAppImpl::idle() {
     CheckSockets();
     TrackerUpdate();
 
-    // Poll for controller axis value at 60 fps
-    if (controller && (procTime - lastAxisEvent) > controllerPollMillis) {
-        lastAxisEvent = procTime;
-        for (int axis = SDL_CONTROLLER_AXIS_LEFTX; axis < SDL_CONTROLLER_AXIS_MAX; axis++) {
-            ControllerAxisState *state = &controllerAxes[axis];
-            int16_t value = SDL_GameControllerGetAxis(controller, (SDL_GameControllerAxis)axis);
-            if (abs(value) < state->clamp)
-                value = 0;
+    // Poll for controller axis value at kControllerPollRate
+    uint32_t elapsed = procTime - lastControllerEvent;
+    if (controller && elapsed > controllerPollMillis) {
+        int16_t leftX = SDL_GameControllerGetAxis(controller, SDL_CONTROLLER_AXIS_LEFTX);
+        int16_t leftY = SDL_GameControllerGetAxis(controller, SDL_CONTROLLER_AXIS_LEFTY);
+        UpdateStick(sticks.left, leftX, leftY, elapsed);
+        
+        int16_t rightX = SDL_GameControllerGetAxis(controller, SDL_CONTROLLER_AXIS_RIGHTX);
+        int16_t rightY = SDL_GameControllerGetAxis(controller, SDL_CONTROLLER_AXIS_RIGHTY);
+        UpdateStick(sticks.right, rightX, rightY, elapsed);
+        
+        int16_t leftT = SDL_GameControllerGetAxis(controller, SDL_CONTROLLER_AXIS_TRIGGERLEFT);
+        UpdateTrigger(triggers.left, leftT, elapsed);
 
-            state->previous = state->current;
-            state->current = value;
-            state->rel = state->current - state->previous;
-            state->flags = 0;
-            if ((state->previous != state->current) &&
-                ((state->previous >= 0 && state->current <= 0) || (state->previous <= 0 && state->current >= 0))) {
-                state->flags |= 1;
-            }
+        int16_t rightT = SDL_GameControllerGetAxis(controller, SDL_CONTROLLER_AXIS_TRIGGERRIGHT);
+        UpdateTrigger(triggers.right, rightT, elapsed);
 
-            SDL_Event axisEvent;
-            axisEvent.type = controllerAxisEvent;
-            axisEvent.user.code = axis;
-            axisEvent.user.data1 = state;
-            SDL_PushEvent(&axisEvent);
-        }
+        SDL_Event controllerEvent;
+        controllerEvent.type = controllerBaseEvent;
+        controllerEvent.user.data1 = &sticks;
+        controllerEvent.user.data2 = &triggers;
+        SDL_PushEvent(&controllerEvent);
+
+        lastControllerEvent = procTime;
     }
 
     if (itsGame->GameTick()) {

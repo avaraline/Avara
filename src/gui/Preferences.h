@@ -95,6 +95,8 @@ using json = nlohmann::json;
 #define kControllerExponent "controllerExponent"
 #define kControllerMax "controllerMax"
 #define kControllerPollRate "controllerPollRate"
+#define kControllerX "controllerX"
+#define kControllerY "controllerY"
 
 // other
 #define kGoodGamePhrases "ggs"
@@ -201,9 +203,11 @@ static json defaultPrefs = {
     {kShowElo, false},
     {kUseLegacyRenderer, false},
     {kDefaultArgs, "-/ '/rand avara aa emo ex #fav -#bad'"},
-    {kControllerPollRate, 120},
-    {kControllerExponent, 3},
-    {kControllerMax, 10}
+    {kControllerPollRate, 60},
+    {kControllerExponent, 3.0},
+    {kControllerMax, 45},
+    {kControllerX, 1.0},
+    {kControllerY, 1.0}
 };
 
 

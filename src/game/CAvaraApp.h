@@ -33,13 +33,36 @@
 
 using json = nlohmann::json;
 
-typedef struct {
-    int16_t current;
-    int16_t previous;
-    int16_t rel;
-    int16_t flags;
-    uint16_t clamp;
-} ControllerAxisState;
+struct ControllerAxis {
+    float last;
+    float value;
+    uint32_t elapsed : 30;
+    uint32_t active : 1;
+    uint32_t toggled : 1;
+};
+
+struct ControllerStick {
+    uint16_t clamp_inner;
+    uint16_t clamp_outer;
+    ControllerAxis x;
+    ControllerAxis y;
+};
+
+struct ControllerTrigger {
+    uint16_t clamp_low;
+    uint16_t clamp_high;
+    ControllerAxis t;
+};
+
+struct ControllerSticks {
+    ControllerStick left;
+    ControllerStick right;
+};
+
+struct ControllerTriggers {
+    ControllerTrigger left;
+    ControllerTrigger right;
+};
 
 class CAvaraGame;
 class CNetManager;
@@ -74,7 +97,7 @@ public:
     virtual void Done() = 0;
     virtual void BroadcastCommand(int theCommand) = 0;
     virtual CommandManager* GetTui() = 0;
-    virtual uint32_t ControllerAxisEventType() = 0;
+    virtual uint32_t ControllerEventType() = 0;
     virtual void Rumble(Fixed hitEnergy) = 0;
 };
 class CAvaraAppImpl : public CApplication, public CAvaraApp {
@@ -95,10 +118,12 @@ public:
     CTrackerWindow *trackerWindow;
     
     SDL_GameController *controller; // currently paired controller
-    uint32_t controllerAxisEvent; // registered with SDL_RegisterEvents
-    uint32_t lastAxisEvent; // time of last controller axis polling
+    uint32_t controllerBaseEvent; // registered with SDL_RegisterEvents
+    uint32_t lastControllerEvent; // time of last controller axis polling
     uint32_t controllerPollMillis;
-    ControllerAxisState controllerAxes[SDL_CONTROLLER_AXIS_MAX]; // state of each controller axis
+    
+    ControllerSticks sticks;
+    ControllerTriggers triggers;
 
     std::deque<MsgLine> messageLines;
     // std::deque<std::string> chatCommandHistory;
@@ -162,6 +187,6 @@ public:
     void TrackerUpdate();
     std::string TrackerPayload();
     
-    virtual uint32_t ControllerAxisEventType() override { return controllerAxisEvent; }
+    virtual uint32_t ControllerEventType() override { return controllerBaseEvent; }
     virtual void Rumble(Fixed hitEnergy) override;
 };
