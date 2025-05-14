@@ -113,6 +113,20 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
     }
     itsGame->itsApp->Set(kKeyboardMappingTag, newMap);
 
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_DPAD_UP] = (1 << kfuScoutControl) | (1 << kfuForward);
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_DPAD_DOWN] = (1 << kfuScoutControl) | (1 << kfuReverse);
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_DPAD_LEFT] = (1 << kfuScoutControl) | (1 << kfuLeft);
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_DPAD_RIGHT] = (1 << kfuScoutControl) | (1 << kfuRight);
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_A] = 1 << kfuJump;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_B] = (1 << kfuScoutControl) | (1 << kfuAimForward);
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_X] = 1 << kfuBoostEnergy;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_Y] = 1 << kfuScoutView;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_RIGHTSTICK] = 1 << kfuAimForward;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_LEFTSHOULDER] = 1 << kfuLoadMissile;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] = 1 << kfuLoadGrenade;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_BACK] = 1 << kfuAbortGame;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_START] = 1 << kfuPauseGame;
+
     // mainScreenRect = &(*GetMainDevice())->gdRect;
     // mouseCenterPosition.h = (mainScreenRect->left + mainScreenRect->right) / 2;
     // mouseCenterPosition.v = (mainScreenRect->top + mainScreenRect->bottom) / 2;
@@ -214,9 +228,73 @@ uint32_t CPlayerManagerImpl::GetKeyBits() {
     return keys;
 }
 
+short AxisMovement(ControllerAxis &axis, float exp, float max, float mult) {
+    return axis.value * abs(pow(axis.value, exp - 1.0f)) * max * mult;
+}
+
 void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
     // Events coming in are for the next frame to be sent.
     // FrameFunction *ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & (itsGame->frameNumber + 1)];
+
+    if (event.type == itsGame->itsApp->ControllerEventType()) {
+        ControllerSticks *sticks = (ControllerSticks *)event.user.data1;
+        ControllerTriggers *triggers = (ControllerTriggers *)event.user.data2;
+
+        mouseX += AxisMovement(sticks->right.x,
+                               controllerCurveExp,
+                               controllerMaxMove,
+                               controllerMultiplyX);
+        mouseY += AxisMovement(sticks->right.y,
+                               controllerCurveExp,
+                               controllerMaxMove,
+                               controllerMultiplyY);
+
+        if (sticks->left.x.active) {
+            if (sticks->left.x.value < 0) {
+                HandleKeyUp(1 << kfuRight);
+                if (sticks->left.x.value < -0.5f) HandleKeyDown(1 << kfuLeft);
+            }
+            else {
+                HandleKeyUp(1 << kfuLeft);
+                if (sticks->left.x.value > 0.5f) HandleKeyDown(1 << kfuRight);
+            }
+        }
+        else {
+            HandleKeyUp(1 << kfuRight);
+            HandleKeyUp(1 << kfuLeft);
+        }
+
+        if (sticks->left.y.active) {
+            if (sticks->left.y.value < 0) {
+                HandleKeyUp(1 << kfuReverse);
+                if (sticks->left.y.value < -0.5f) HandleKeyDown(1 << kfuForward);
+            }
+            else {
+                HandleKeyUp(1 << kfuForward);
+                if (sticks->left.y.value > 0.5f) HandleKeyDown(1 << kfuReverse);
+            }
+        }
+        else {
+            HandleKeyUp(1 << kfuReverse);
+            HandleKeyUp(1 << kfuForward);
+        }
+
+        if (triggers->right.t.value >= 0.5f) {
+            HandleKeyDown((1 << kfuLoadGrenade) | (1 << kfuFireWeapon));
+        }
+        else {
+            HandleKeyUp((1 << kfuLoadGrenade) | (1 << kfuFireWeapon));
+        }
+        
+        if (triggers->left.t.value >= 0.5f) {
+            if (triggers->left.t.last < 0.5f) buttonStatus |= kbuWentDown;
+            buttonStatus |= kbuIsDown;
+        }
+        else {
+            if (triggers->left.t.last >= 0.5f) buttonStatus |= kbuWentUp;
+            buttonStatus &= ~kbuIsDown;
+        }
+    }
 
     switch (event.type) {
         case SDL_KEYDOWN:
@@ -258,6 +336,12 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
             break;
         case SDL_KEYUP:
             HandleKeyUp(keyMap[event.key.keysym.scancode]);
+            break;
+        case SDL_CONTROLLERBUTTONDOWN:
+            HandleKeyDown(controllerButtonMap[event.cbutton.button]);
+            break;
+        case SDL_CONTROLLERBUTTONUP:
+            HandleKeyUp(controllerButtonMap[event.cbutton.button]);
             break;
         case SDL_MOUSEBUTTONDOWN:
             if(event.button.button == SDL_BUTTON_RIGHT) {
@@ -477,6 +561,11 @@ void CPlayerManagerImpl::ResumeGame() {
     keysDown = keysUp = keysHeld = dupKeysHeld = 0;
     mouseX = mouseY = 0;
     buttonStatus = 0;
+    
+    controllerCurveExp = itsGame->itsApp->Number(kControllerExponent);
+    controllerMaxMove = float(itsGame->itsApp->Number(kControllerMax));
+    controllerMultiplyX = itsGame->itsApp->Get(kControllerX);
+    controllerMultiplyY = itsGame->itsApp->Get(kControllerY);
 }
 
 void CPlayerManagerImpl::ProtocolHandler(struct PacketInfo *thePacket) {

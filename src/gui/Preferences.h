@@ -91,6 +91,13 @@ using json = nlohmann::json;
 #define kIgnoreCustomGoodySound "ignoreCustomGoodySound"
 #define kSoundVolume "soundVolume"
 
+// Controller
+#define kControllerExponent "controllerExponent"
+#define kControllerMax "controllerMax"
+#define kControllerPollRate "controllerPollRate"
+#define kControllerX "controllerX"
+#define kControllerY "controllerY"
+
 // other
 #define kGoodGamePhrases "ggs"
 #define kShowElo "showElo"
@@ -195,7 +202,12 @@ static json defaultPrefs = {
     {kGoodGamePhrases, {}},
     {kShowElo, false},
     {kUseLegacyRenderer, false},
-    {kDefaultArgs, "-/ '/rand avara aa emo ex crook #fav -#bad'"}
+    {kDefaultArgs, "-/ '/rand avara aa emo ex crook #fav -#bad'"},
+    {kControllerPollRate, 60},
+    {kControllerExponent, 3.0},
+    {kControllerMax, 45},
+    {kControllerX, 1.0},
+    {kControllerY, 1.0}
 };
 
 
