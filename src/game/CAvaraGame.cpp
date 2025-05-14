@@ -300,6 +300,47 @@ void CAvaraGame::RemoveActor(CAbstractActor *theActor) {
     RemoveIdent(theActor->ident);
 }
 
+// extent of all visible actors, this drives the level previews and random incarnators
+void CAvaraGame::CalculateExtent() {
+    int foundLocations = 0;
+    extentMin[0] = extentMin[1] = extentMin[2] = std::numeric_limits<Fixed>::max();
+    extentMax[0] = extentMax[1] = extentMax[2] = std::numeric_limits<Fixed>::min();
+
+    // get the extent of all the CPlacedActors
+    for (CAbstractActor* actor = actorList;
+         actor != nullptr;
+         actor = actor->nextActor) {
+        // check CPlacedActors that set UseForExtent() which includes incarnators, goodies, ramps
+        CPlacedActors* placedActor = dynamic_cast<CPlacedActors*>(actor);
+        if (placedActor != nullptr && placedActor->UseForExtent()) {
+            extentMin[0] = std::min(extentMin[0], placedActor->location[0]);
+            extentMin[1] = std::min(extentMin[1], placedActor->location[1]);
+            extentMin[2] = std::min(extentMin[2], placedActor->location[2]);
+            extentMax[0] = std::max(extentMax[0], placedActor->location[0]);
+            extentMax[1] = std::max(extentMax[1], placedActor->location[1]);
+            extentMax[2] = std::max(extentMax[2], placedActor->location[2]);
+            foundLocations++;
+        }
+    }
+
+    // use "reasonable" defaults if there aren't enough actor locations to calculate the extent
+    const Fixed DEFAULT_OFFSET = FIX(9);
+    if (foundLocations == 0) {
+        extentMin[0] = extentMin[2] = -DEFAULT_OFFSET;
+        extentMax[0] = extentMax[2] = +DEFAULT_OFFSET;
+        extentMin[1] = 0;
+        extentMax[1] = DEFAULT_OFFSET;
+    } else if (foundLocations == 1) {
+        extentMin[0] -= DEFAULT_OFFSET; extentMin[1] -= 0;              extentMin[0] -= DEFAULT_OFFSET;
+        extentMax[0] += DEFAULT_OFFSET; extentMax[1] += DEFAULT_OFFSET; extentMax[0] += DEFAULT_OFFSET;
+    }
+
+    extentCenter[0] = (extentMax[0] + extentMin[0]) / 2;
+    extentCenter[1] = (extentMax[1] + extentMin[1]) / 2;
+    extentCenter[2] = (extentMax[2] + extentMin[2]) / 2;
+    extentRadius = std::max(extentMax[0] - extentMin[0], extentMax[2] - extentMin[2]) / 2;
+}
+
 void CAvaraGame::RegisterReceiver(MessageRecord *theMsg, MsgType messageNum) {
     MessageRecord **head;
 
@@ -485,8 +526,10 @@ void CAvaraGame::PreSendFrameActions() {
     // When called, send up to preSendCount frames early based on whether the clock is "behind".
     // "behind" is defined as our current time being beyond the projected time of topSentFrame minus an offset.
     // This allows us to increase the effective LT by as many as FRAME_OFFSET frames during a wait loop.
-    static float FRAME_OFFSET = 2.0;
+    const float FRAME_OFFSET = 2.0;
+    const int MAX_DYNAMIC_LT = 4;  // don't send anything extra above this LT
     while (preSendCount > 0 &&
+           topSentFrame - frameNumber < MAX_DYNAMIC_LT / fpsScale &&
            SDL_GetTicks() >= nextScheduledFrame + frameTime*(topSentFrame-frameNumber-FRAME_OFFSET)) {
         itsNet->FrameAction();
         DBG_Log("presend", "fn=%d, preSent frame #%d, N=%d, ahead=%d, start=%d time=%d nSF=%d\n", frameNumber, topSentFrame, preSendCount, topSentFrame - frameNumber, frameStart, SDL_GetTicks(), nextScheduledFrame);

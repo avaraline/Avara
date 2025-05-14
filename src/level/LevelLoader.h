@@ -31,6 +31,7 @@ enum {
     iShape,
     iAltShape,
     iScale,
+    iDefaultYon,
     iYon,
     iWallYon,
     iHasFloor,

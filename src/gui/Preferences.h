@@ -202,7 +202,7 @@ static json defaultPrefs = {
     {kGoodGamePhrases, {}},
     {kShowElo, false},
     {kUseLegacyRenderer, false},
-    {kDefaultArgs, "-/ '/rand avara aa emo ex #fav -#bad'"},
+    {kDefaultArgs, "-/ '/rand avara aa emo ex crook #fav -#bad'"},
     {kControllerPollRate, 60},
     {kControllerExponent, 3.0},
     {kControllerMax, 45},

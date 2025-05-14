@@ -34,7 +34,11 @@ CAbstractActor *CAbstractYon::EndScript() {
 }
 
 void CAbstractYon::SetYon() {
-    partYon = ReadFixedVar(iYon);
+    Fixed defaultYon = ReadFixedVar(iDefaultYon);
+    Fixed activeYon = ReadFixedVar(iYon);
+    partYon = (activeYon != defaultYon)
+        ? activeYon
+        : 0;
     if (partYon <= 0) {
         partYon = sphere[3] + sphere[3] - partYon;
     }

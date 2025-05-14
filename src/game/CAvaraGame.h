@@ -79,6 +79,8 @@ class CAvaraGame {
 public:
     std::unique_ptr<LevelInfo> loadedLevelInfo = std::make_unique<LevelInfo>("", "");
     long loadedTimeLimit;
+    Vector extentMin, extentMax, extentCenter;
+    Fixed extentRadius;
     int32_t timeInSeconds;
     FrameNumber frameNumber;
     bool isClassicFrame;
@@ -224,6 +226,7 @@ public:
 
     virtual void AddActor(CAbstractActor *theActor);
     virtual void RemoveActor(CAbstractActor *theActor);
+    virtual void CalculateExtent();
 
     virtual void ResumeActors();
     virtual void PauseActors();

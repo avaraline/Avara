@@ -126,9 +126,6 @@ public:
     ControllerTriggers triggers;
 
     std::deque<MsgLine> messageLines;
-    // std::deque<std::string> chatCommandHistory;
-    // std::deque<std::string>::iterator chatCommandHistoryIterator;
-    Fixed overhead[3], extent[6];
     Fixed previewAngle, previewRadius;
     bool animatePreview;
     

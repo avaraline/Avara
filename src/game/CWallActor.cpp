@@ -34,7 +34,11 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
         FreshCalc();
 
     addAlt = ReadFixedVar(iBaseHeight) + ReadFixedVar(iWallAltitude);
-    partYon = ReadFixedVar(iWallYon);
+    Fixed defaultYon = ReadFixedVar(iDefaultYon);
+    Fixed activeYon = ReadFixedVar(iWallYon);
+    partYon = (activeYon != defaultYon)
+        ? activeYon
+        : 0;
 
     do {
         dim[0] = theRect->right - theRect->left;
