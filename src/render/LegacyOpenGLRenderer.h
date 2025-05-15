@@ -56,5 +56,6 @@ private:
     void Draw(OpenGLShader &shader, const CBSPPart &part, float defaultAmbient, bool useAlphaBuffer = false);
     void IgnoreDirectionalLights(OpenGLShader &shader, bool yn);
     std::unique_ptr<OpenGLShader> LoadShader(const std::string &vertFile, const std::string &fragFile);
+    void SetPositions(OpenGLShader &shader);
     void SetTransforms(const CBSPPart &part);
 };

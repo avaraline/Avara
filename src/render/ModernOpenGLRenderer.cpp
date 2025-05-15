@@ -226,8 +226,8 @@ void ModernOpenGLRenderer::ApplyLights()
 
     worldShader->Use();
     AdjustAmbient(*worldShader, ambientIntensity);
-    worldShader->SetFloat("maxShininess", MAX_SHININESS_EXP);
     worldShader->SetFloat3("ambientColor", ambientRGB);
+    worldShader->SetFloat("maxShininess", MAX_SHININESS_EXP);
 
     for (int i = 0; i < MAXLIGHTS; i++) {
         float rgb[3];
@@ -390,6 +390,8 @@ void ModernOpenGLRenderer::RenderFrame()
     glEnableVertexAttribArray(0);
 
     skyShader->Use();
+    skyShader->SetBool("dither", gApplication ? gApplication->Get<bool>(kDither) : true);
+    skyShader->SetBool("showSpecular", gApplication ? gApplication->Get<bool>(kSpecular) : true);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -404,6 +406,8 @@ void ModernOpenGLRenderer::RenderFrame()
     glEnable(GL_DEPTH_TEST);
 
     worldShader->Use();
+    worldShader->SetBool("dither", gApplication ? gApplication->Get<bool>(kDither) : true);
+    worldShader->SetBool("showSpecular", gApplication ? gApplication->Get<bool>(kSpecular) : true);
 
     dynamicWorld->PrepareForRender();
 

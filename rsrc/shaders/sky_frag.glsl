@@ -5,6 +5,8 @@ in vec3 tex_coord;
 in vec3 fragPos;
 
 uniform vec3 camPos;
+uniform bool dither;
+uniform bool showSpecular;
 uniform vec3 lightDir[MAX_LIGHTS] = vec3[MAX_LIGHTS](vec3(0, 0, 0), vec3(0, 0, 0), vec3(0, 0, 0), vec3(0, 0, 0));
 uniform vec3 lightPos[MAX_LIGHTS] = vec3[MAX_LIGHTS](vec3(0, 0, 0), vec3(0, 0, 0), vec3(0, 0, 0), vec3(0, 0, 0));
 uniform vec3 lightColor[MAX_LIGHTS] = vec3[MAX_LIGHTS](vec3(1, 1, 1), vec3(1, 1, 1), vec3(1, 1, 1), vec3(1, 1, 1));
@@ -65,8 +67,10 @@ vec3 spec_light(int i) {
 
 vec3 spec() {
     vec3 sum = vec3(0, 0, 0);
-    for (int i = 0; i < MAX_LIGHTS; i++) {
-        sum += spec_light(i);
+    if (showSpecular) {
+        for (int i = 0; i < MAX_LIGHTS; i++) {
+            sum += spec_light(i);
+        }
     }
     return sum;
 }
@@ -115,5 +119,6 @@ void main()
         ),
         maxHazeDist
     );
-    color.rgb = apply_fog(color.rgb, dist) + noise();
+    color.rgb = apply_fog(color.rgb, dist);
+    if (dither) color.rgb += noise();
 }
