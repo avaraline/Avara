@@ -1135,7 +1135,7 @@ const Fixed ReadFixedMaterialVar(short index) {
     return ToFixed(EvalVariable(index + firstVariable, true)); // eager evaluation!
 }
 const Fixed ReadFixedMaterialVar(const char *s) {
-    return ReadFixedVar(IndexForEntry(s));
+    return ReadFixedMaterialVar(IndexForEntry(s));
 }
 
 std::string ReadStringVar(short index) {
