@@ -143,7 +143,8 @@ LegacyOpenGLRenderer::LegacyOpenGLRenderer(SDL_Window *window) : AbstractRendere
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-LegacyOpenGLRenderer::~LegacyOpenGLRenderer() {
+LegacyOpenGLRenderer::~LegacyOpenGLRenderer()
+{
     delete staticWorld;
     delete dynamicWorld;
     delete hudWorld;
@@ -185,68 +186,29 @@ void LegacyOpenGLRenderer::ApplyLights()
     worldShader->Use();
     AdjustAmbient(*worldShader, ambientIntensity);
     worldShader->SetFloat3("ambientColor", ambientRGB);
+    worldShader->SetFloat("maxShininess", MAX_SHININESS_EXP);
 
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < MAXLIGHTS; i++) {
         float rgb[3];
-        float intensity = ToFloat(viewParams->dirLightSettings[i].intensity);
-        float elevation = ToFloat(viewParams->dirLightSettings[i].angle1);
-        float azimuth = ToFloat(viewParams->dirLightSettings[i].angle2);
         viewParams->dirLightSettings[i].color.ExportGLFloats(rgb, 3);
         bool applySpecular = viewParams->dirLightSettings[i].applySpecular;
-
-        float xyz[3] = {
-            sin(Deg2Rad(-azimuth)) * intensity,
-            sin(Deg2Rad(-elevation)) * intensity,
-            cos(Deg2Rad(azimuth)) * intensity
-        };
+        
+        const std::string dirUniform = "lightDir[" + std::to_string(i) + "]";
+        const std::string colorUniform = "lightColor[" + std::to_string(i) + "]";
+        const std::string radUniform = "lightCelestialRadius[" + std::to_string(i) + "]";
+        const std::string specUniform = "lightApplySpecular[" + std::to_string(i) + "]";
 
         worldShader->Use();
-        switch (i) {
-            case 0:
-                worldShader->SetFloat3("lights[0]", xyz);
-                worldShader->SetFloat3("lightColors[0]", rgb);
-                worldShader->SetBool("lightApplySpecular[0]", applySpecular);
-                break;
-            case 1:
-                worldShader->SetFloat3("lights[1]", xyz);
-                worldShader->SetFloat3("lightColors[1]", rgb);
-                worldShader->SetBool("lightApplySpecular[1]", applySpecular);
-                break;
-            case 2:
-                worldShader->SetFloat3("lights[2]", xyz);
-                worldShader->SetFloat3("lightColors[2]", rgb);
-                worldShader->SetBool("lightApplySpecular[2]", applySpecular);
-                break;
-            case 3:
-                worldShader->SetFloat3("lights[3]", xyz);
-                worldShader->SetFloat3("lightColors[3]", rgb);
-                worldShader->SetBool("lightApplySpecular[3]", applySpecular);
-                break;
-        }
+        worldShader->SetFloat3(dirUniform, viewParams->dirLightSettings[i].direction);
+        worldShader->SetFloat3(colorUniform, rgb);
+        worldShader->SetFloat(radUniform, ToFloat(viewParams->dirLightSettings[i].celestialRadius));
+        worldShader->SetBool(specUniform, applySpecular);
         
         skyShader->Use();
-        switch (i) {
-            case 0:
-                skyShader->SetFloat3("lights[0]", xyz);
-                skyShader->SetFloat3("lightColors[0]", rgb);
-                skyShader->SetBool("lightApplySpecular[0]", applySpecular);
-                break;
-            case 1:
-                skyShader->SetFloat3("lights[1]", xyz);
-                skyShader->SetFloat3("lightColors[1]", rgb);
-                skyShader->SetBool("lightApplySpecular[1]", applySpecular);
-                break;
-            case 2:
-                skyShader->SetFloat3("lights[2]", xyz);
-                skyShader->SetFloat3("lightColors[2]", rgb);
-                skyShader->SetBool("lightApplySpecular[2]", applySpecular);
-                break;
-            case 3:
-                skyShader->SetFloat3("lights[3]", xyz);
-                skyShader->SetFloat3("lightColors[3]", rgb);
-                skyShader->SetBool("lightApplySpecular[3]", applySpecular);
-                break;
-        }
+        skyShader->SetFloat3(dirUniform, viewParams->dirLightSettings[i].direction);
+        skyShader->SetFloat3(colorUniform, rgb);
+        skyShader->SetFloat(radUniform, ToFloat(viewParams->dirLightSettings[i].celestialRadius));
+        skyShader->SetBool(specUniform, applySpecular);
     }
 }
 
@@ -284,7 +246,7 @@ void LegacyOpenGLRenderer::ApplySky()
     skyParams->lowSkyColor.ExportGLFloats(lowSkyColorRGB, 3);
     skyParams->groundMaterial.GetColor().ExportGLFloats(groundColorRGB, 3);
     skyParams->groundMaterial.GetSpecular().ExportGLFloats(groundSpecRGB, 3);
-    groundShininess = skyParams->groundMaterial.GetShininess() / 255.0f;
+    groundShininess = skyParams->groundMaterial.GetShininess() / 255.0f * MAX_SHININESS_EXP;
     
     float lowAlt = ToFloat(skyParams->lowSkyAltitude) / 20000.0f;
     float highAlt = ToFloat(skyParams->highSkyAltitude) / 20000.0f;
@@ -371,6 +333,8 @@ void LegacyOpenGLRenderer::RenderFrame()
     glEnableVertexAttribArray(0);
 
     skyShader->Use();
+    skyShader->SetBool("dither", gApplication ? gApplication->Get<bool>(kDither) : true);
+    skyShader->SetBool("showSpecular", gApplication ? gApplication->Get<bool>(kSpecular) : true);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -387,6 +351,8 @@ void LegacyOpenGLRenderer::RenderFrame()
     glEnable(GL_DEPTH_TEST);
 
     worldShader->Use();
+    worldShader->SetBool("dither", gApplication ? gApplication->Get<bool>(kDither) : true);
+    worldShader->SetBool("showSpecular", gApplication ? gApplication->Get<bool>(kSpecular) : true);
 
     dynamicWorld->PrepareForRender();
 
@@ -437,7 +403,6 @@ void LegacyOpenGLRenderer::AdjustAmbient(OpenGLShader &shader, float intensity)
 void LegacyOpenGLRenderer::ApplyView()
 {
     glm::mat4 glMatrix = ToFloatMat(viewParams->viewMatrix);
-    glm::mat4 glInvMatrix = ToFloatMat(*viewParams->GetInverseMatrix());
     
     // Get rid of the view translation for the sky.
     glm::mat4 glSkyMatrix = ToFloatMat(viewParams->viewMatrix);
@@ -445,14 +410,14 @@ void LegacyOpenGLRenderer::ApplyView()
     
     skyShader->Use();
     skyShader->SetMat4("view", glSkyMatrix);
-    skyShader->SetMat4("invView", glInvMatrix);
     skyShader->SetFloat("maxHazeDist", ToFloat(viewParams->yonBound));
+    SetPositions(*skyShader);
 
     worldShader->Use();
     worldShader->SetTransposedMat4("view", glMatrix);
-    worldShader->SetMat4("invView", glInvMatrix);
     worldShader->SetFloat("worldYon", ToFloat(viewParams->yonBound));
     worldShader->SetFloat("objectYon", ToFloat(viewParams->yonBound));
+    SetPositions(*worldShader);
     __glCheckErrors();
 }
 
@@ -591,7 +556,28 @@ std::unique_ptr<OpenGLShader> LegacyOpenGLRenderer::LoadShader(const std::string
     return std::make_unique<OpenGLShader>(*vertPath, *fragPath);
 }
 
-void LegacyOpenGLRenderer::SetTransforms(const CBSPPart &part) {
+void LegacyOpenGLRenderer::SetPositions(OpenGLShader &shader)
+{
+    glm::mat4 glInvMatrix = ToFloatMat(*viewParams->GetInverseMatrix());
+    float camPos[3] = {glInvMatrix[3][0], glInvMatrix[3][1], glInvMatrix[3][2]};
+    
+    shader.Use();
+    shader.SetFloat3("camPos", camPos);
+    for (int i = 0; i < MAXLIGHTS; i++) {
+        glm::vec3 lightDir = {
+            viewParams->dirLightSettings[i].direction[0],
+            viewParams->dirLightSettings[i].direction[1],
+            viewParams->dirLightSettings[i].direction[2]
+        };
+        glm::vec3 lightPos = glm::normalize(lightDir) * -1000.0f;
+        
+        const std::string uniform = "lightPos[" + std::to_string(i) + "]";
+        shader.SetVec3(uniform, lightPos);
+    }
+}
+
+void LegacyOpenGLRenderer::SetTransforms(const CBSPPart &part)
+{
     glm::mat4 m = ToFloatMat(part.modelTransform);
     if (part.hasScale) {
         glm::vec3 sc = glm::vec3(

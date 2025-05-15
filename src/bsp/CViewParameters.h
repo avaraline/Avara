@@ -22,7 +22,9 @@ public:
     Fixed intensity = FIX(0);
     Fixed angle1 = FIX(0);
     Fixed angle2 = FIX(0);
+    float direction[3] = {0.0, 0.0, 0.0};
     ARGBColor color = DEFAULT_LIGHT_COLOR;
+    Fixed celestialRadius = FIX(0);
     bool applySpecular = false;
 };
 
@@ -77,7 +79,7 @@ public:
     virtual void CalculateViewPyramidNormals();
     virtual ~CViewParameters() {}
 
-    virtual void SetLight(short n, Fixed angle1, Fixed angle2, Fixed intensity, ARGBColor color, bool applySpecular, short mode);
+    virtual void SetLight(short n, Fixed angle1, Fixed angle2, Fixed intensity, ARGBColor color, Fixed celestialRadius, bool applySpecular, short mode);
     virtual void DoLighting();
 
     virtual void SetViewRect(short width, short height, short centerX, short centerY);

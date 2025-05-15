@@ -3,13 +3,18 @@
 
 in vec4 gl_FragCoord;
 in vec4 fragmentColor;
-in vec4 fragmentSpecular;
+in vec3 fragmentSpecular;
+in float fragmentShininess;
 in vec3 fragmentNormal;
 in vec3 fragPos;
-in vec3 camPos;
 
-uniform vec3 lights[MAX_LIGHTS] = vec3[MAX_LIGHTS](vec3(0, 0, 0), vec3(0, 0, 0), vec3(0, 0, 0), vec3(0, 0, 0));
-uniform vec3 lightColors[MAX_LIGHTS] = vec3[MAX_LIGHTS](vec3(1, 1, 1), vec3(1, 1, 1), vec3(1, 1, 1), vec3(1, 1, 1));
+uniform vec3 camPos;
+uniform bool dither;
+uniform bool showSpecular;
+uniform vec3 lightDir[MAX_LIGHTS] = vec3[MAX_LIGHTS](vec3(0, 0, 0), vec3(0, 0, 0), vec3(0, 0, 0), vec3(0, 0, 0));
+uniform vec3 lightPos[MAX_LIGHTS] = vec3[MAX_LIGHTS](vec3(0, 0, 0), vec3(0, 0, 0), vec3(0, 0, 0), vec3(0, 0, 0));
+uniform vec3 lightColor[MAX_LIGHTS] = vec3[MAX_LIGHTS](vec3(1, 1, 1), vec3(1, 1, 1), vec3(1, 1, 1), vec3(1, 1, 1));
+uniform float lightCelestialRadius[MAX_LIGHTS] = float[MAX_LIGHTS](0.0, 0.0, 0.0, 0.0);
 uniform bool lightApplySpecular[MAX_LIGHTS] = bool[MAX_LIGHTS](false, false, false, false);
 uniform float ambient = 0.0;
 uniform vec3 ambientColor = vec3(1, 1, 1);
@@ -32,7 +37,7 @@ vec3 apply_fog(vec3 color, float dist)
 }
 
 vec3 diffuse_light(int i) {
-    return max(dot(fragmentNormal, lights[i]), 0.0) * lightColors[i];
+    return max(dot(fragmentNormal, lightDir[i]), 0.0) * lightColor[i];
 }
 
 vec3 diffuse() {
@@ -45,19 +50,20 @@ vec3 diffuse() {
 }
 
 vec3 spec_light(int i) {
-    if (!lightApplySpecular[i] || fragmentSpecular.a == 0 || !lightsActive) return vec3(0);
-    vec3 viewDir = normalize(camPos - fragPos);
-    vec4 lightPos = vec4(lights[i] * -1000, 1);
-    vec3 lightDir = normalize(lightPos.xyz - fragPos);
-    vec3 halfwayDir = normalize(lightDir + viewDir);
-    float spec = pow(max(dot(fragmentNormal, -halfwayDir), 0.0), fragmentSpecular.a * 2048.0);
-    return lightColors[i] * (spec * fragmentSpecular.rgb);
+    if (!lightApplySpecular[i] || fragmentShininess == 0 || !lightsActive) return vec3(0);
+    vec3 viewRay = normalize(camPos - fragPos);
+    vec3 lightRay = normalize((lightPos[i] + camPos) - fragPos);
+    vec3 halfwayDir = normalize(lightRay + viewRay);
+    float spec = pow(max(dot(fragmentNormal, -halfwayDir), 0.0), fragmentShininess);
+    return lightColor[i] * (spec * fragmentSpecular);
 }
 
 vec3 spec() {
     vec3 sum = vec3(0, 0, 0);
-    for (int i = 0; i < MAX_LIGHTS; i++) {
-        sum += spec_light(i);
+    if (showSpecular) {
+        for (int i = 0; i < MAX_LIGHTS; i++) {
+            sum += spec_light(i);
+        }
     }
     return sum;
 }
@@ -83,13 +89,12 @@ vec4 light_color() {
 void main() {
     color = light_color();
     
-    vec3 fragRay = fragPos - camPos;
-    float dist = length(fragRay);
+    float dist = length(fragPos - camPos);
     color.rgb = apply_fog(color.rgb, dist);
     
     float yonFadeRange = min(5.0, objectYon - (objectYon * 0.9));
     float yonFadeDist = objectYon - yonFadeRange;
     float alphaMult = pow(clamp((yonFadeRange + yonFadeDist - dist) / yonFadeRange, 0.0, 1.0), 0.5);
     color.a *= alphaMult;
-    color.rgb += noise();
+    if (dither) color.rgb += noise();
 }
