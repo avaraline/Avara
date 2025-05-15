@@ -90,7 +90,7 @@
 <Incarnator cx="0" cz="20" y="30" angle="0" />
 <Incarnator cx="-20" cz="0" y="30" angle="90" />
 
-<set material.specular="#ffffff" material.shininess="512.0" />
+<set baseMaterial.specular="#ffffff" baseMaterial.shininess="512.0" />
 <FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-30" z="-30" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
 <FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-20" z="-30" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />
 <FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-10" z="-30" y="0" color="rgba(204, 229, 255, 0.5)" color.1="#000000" />

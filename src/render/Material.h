@@ -74,10 +74,10 @@ private:
     /**
      * Constrain input values for shininess.
      *
-     * @param shininess  The fixed-point shininess value. Valid range is 0 to 2048.
+     * @param shininess  The fixed-point shininess value. Valid range is 0 to 1024.
      * @return the nearest approximate value that we can cram into 8 bits, i.e. scaled to a range of 0 - 255
      */
     inline uint8_t ConstrainShininess(Fixed shininess) {
-        return std::round(std::clamp(ToFloat(shininess), 0.0f, 2048.0f) * 255 / 2048.0f);
+        return std::round(std::clamp(ToFloat(shininess), 0.0f, 1024.0f) * 255 / 1024.0f);
     }
 };

@@ -117,15 +117,15 @@
 <Incarnator y="24" cx="-5" cz="10" angle="225" stop="@start" />
 
 <set
-  material.specular="#666666"
-  material.shininess="256.0"
+  baseMaterial.specular="#666666"
+  baseMaterial.shininess="256.0"
 />
 <Dome y="4" color="#cef2e6" color.1="#000000" cx="12.5" cz="17.5" r="2.5" angle="180" quarters="4" />
 <Dome y="4" color="#cef2e6" color.1="#000000" cx="-12.5" cz="-17.5" r="2.5" angle="180" quarters="4" />
 
 <set
-  material.specular="#ff8359"
-  material.shininess="128.0"
+  baseMaterial.specular="#ff8359"
+  baseMaterial.shininess="128.0"
 />
 <Ramp y="0" deltaY="4" color="#ffc68c" color.1="#000000" x="0" z="17.5" w="15" d="10" h="0" angle="180" />
 <Ramp y="0" deltaY="4" color="#ffc68c" color.1="#000000" x="0" z="-17.5" w="15" d="10" h="0" angle="0" />
@@ -150,7 +150,7 @@
 <Goody y="5.75" shape="bspAvaraA" speed="-2" grenades="mXLgGrenade" missiles="mXLgMissile" start="mShow" out="mTaken" color="#ffbb99" color.1="#000000" cx="0" cz="0" angle="225" />
 
 <set
-  material.specular="#c536c9"
+  baseMaterial.specular="#c536c9"
 />
 <unique vars="mShow mTaken" />
 <And in="@start" out="mShow" />

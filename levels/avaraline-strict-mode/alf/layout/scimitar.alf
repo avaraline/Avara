@@ -9,7 +9,7 @@
   baseMaterial.specular="#54544f"
   baseMaterial.shininess="8.0"
   sand.specular="#33322b"
-  sand.shininess="8.0"
+  sand.shininess="4.0"
   basalt.specular="#555458"
   basalt.shininess="38.0"
   metal.specular="#82d9cb"
@@ -27,8 +27,8 @@
 <Ramp angle="90" d="15" deltaY="3" color="#82d9cb" material.specular="$metal.specular" material.shininess="metal.shininess" h="0" w="10" x="12.5" y="0" z="0" />
 
 <set
-  material.specular="$basalt.specular"
-  material.shininess="basalt.shininess"
+  baseMaterial.specular="$basalt.specular"
+  baseMaterial.shininess="basalt.shininess"
 />
 
 <!-- BASALT PILLAR 1 -->
@@ -822,8 +822,8 @@
 <Wall d="20" color="#403b36" material.specular="$basalt.specular" material.shininess="basalt.shininess" h="2" w="10" x="-37.5" z="-32.5" />
 <Wall d="10" color="#403b36" material.specular="$basalt.specular" material.shininess="basalt.shininess" h="2" w="35" x="-40" z="-47.5" />
 <set
-  material.specular="$metal.specular"
-  material.shininess="metal.shininess"
+  baseMaterial.specular="$metal.specular"
+  baseMaterial.shininess="metal.shininess"
 />
 <Ramp angle="270" d="19.930555555555554" deltaY="1.95" color="#a1e6da" h="0.2" w="5" x="-44.93055555555556" y="0" z="-32.53472222222222" />
 <Ramp angle="270" d="19.930555555555554" deltaY="1.8" color="#a1e6da" h="0.4" w="4.652777777777779" x="-44.548611111111114" y="0" z="-32.53472222222222" />
@@ -840,8 +840,8 @@
 <Wall d="20" color="#403b36" material.specular="$basalt.specular" material.shininess="basalt.shininess" h="2" w="10" x="37.5" z="32.5" />
 <Wall d="10" color="#403b36" material.specular="$basalt.specular" material.shininess="basalt.shininess" h="2" w="35" x="40" z="47.5" />
 <set
-  material.specular="$metal.specular"
-  material.shininess="metal.shininess"
+  baseMaterial.specular="$metal.specular"
+  baseMaterial.shininess="metal.shininess"
 />
 <Ramp angle="90" d="19.930555555555554" deltaY="1.95" color="#a1e6da" h="0.2" w="5" x="44.93055555555556" y="0" z="32.53472222222222" />
 <Ramp angle="90" d="19.930555555555554" deltaY="1.8" color="#a1e6da" h="0.4" w="4.652777777777779" x="44.548611111111114" y="0" z="32.53472222222222" />
@@ -856,8 +856,8 @@
 
 <!-- MISSILE STRUCTURE 1 -->
 <set
-  material.specular="$sand.specular"
-  material.shininess="sand.shininess"
+  baseMaterial.specular="$sand.specular"
+  baseMaterial.shininess="sand.shininess"
 />
 <Wall d="17" color="#ffe9a6" h="3.4" w="10" x="-22.5" z="39" />
 <Wall d="10" color="#ffe9a6" h="3.4" w="17" x="-9" z="52.5" />
@@ -886,8 +886,8 @@
 
 <!-- MISSILE STRUCTURE 2 -->
 <set
-  material.specular="$sand.specular"
-  material.shininess="sand.shininess"
+  baseMaterial.specular="$sand.specular"
+  baseMaterial.shininess="sand.shininess"
 />
 <Wall d="17" color="#ffe9a6" h="3.4" w="10" x="22.5" z="-39" />
 <Wall d="10" color="#ffe9a6" h="3.4" w="17" x="9" z="-52.5" />
@@ -915,8 +915,8 @@
 <Wall d="7.986111111111114" color="#66ccbb" material.specular="$metal.specular" material.shininess="metal.shininess" h="1.7" w="7.986111111111111" x="21.493055555555557" z="-51.49305555555556" />
 
 <set
-  material.specular="$basalt.specular"
-  material.shininess="basalt.shininess"
+  baseMaterial.specular="$basalt.specular"
+  baseMaterial.shininess="basalt.shininess"
 />
 
 <!-- GRENADE STRUCTURE 1 -->
@@ -966,8 +966,8 @@
 <Ramp angle="180" d="1.8055555555555554" deltaY="2.4" color="#666561" h="1" w="7.5" x="55" y="0" z="-4.027777777777778" />
 
 <set
-  material.specular="$metal.specular"
-  material.shininess="metal.shininess"
+  baseMaterial.specular="$metal.specular"
+  baseMaterial.shininess="metal.shininess"
 />
 <Field deltaY="0" visible="true" d="1" color="#aaf2da" h="0" w="1" x="0" y="3.05" z="0" />
 <Field deltaY="0" visible="true" d="1" color="#aaf2da" h="0" w="1" x="-47.5" y="3.05" z="2.5" />
@@ -978,6 +978,11 @@
 <Field deltaY="0" visible="true" d="1" color="#aaf2da" h="0" w="1" x="32.5" z="-62.5" />
 <Field deltaY="0" visible="true" d="1" color="#aaf2da" h="0" w="1" x="-15" z="-30" />
 <Field deltaY="0" visible="true" d="1" color="#aaf2da" h="0" w="1" x="15" z="30" />
+
+<set
+  baseMaterial.specular="#54544f"
+  baseMaterial.shininess="8.0"
+/>
 
 <unique vars="mShow mTaken" />
 <And in="@start" out="mShow" />

@@ -90,8 +90,8 @@
 <Incarnator y="30" cx="15" cz="0" angle="90" stop="@start" />
 
 <set
-  material.specular="#a1a1ba"
-  material.shininess="96.0"
+  baseMaterial.specular="#a1a1ba"
+  baseMaterial.shininess="96.0"
 />
 <Wall color="#003399" color.1="#000000" x="0" z="0" w="1.25" d="1.25" h="0" y="4.05" />
 <WallDoor midYaw="45" color="#003399" color.1="#000000" x="0" z="0" w="1.25" d="1.25" h="0" y="4.05" />
@@ -103,7 +103,7 @@
 <Field visible="true" deltaY="0" color="#003399" color.1="#000000" x="-1" y="4.55" z="44" h="0" w="0.31" d="0.31" />
 
 <set
-  material.specular="#82baba"
+  baseMaterial.specular="#82baba"
 />
 <Hologram scale="0.05" shape="bspFloorFrame" y="0" color="#00a8aa" color.1="#000000" cx="35" cz="15" angle="45" />
 <Field visible="true" deltaY="0" color="#00a8aa" color.1="#000000" x="35" y="0" z="15" h="0" w="0.31" d="0.31" />
@@ -118,8 +118,8 @@
 <Field visible="true" deltaY="0" color="#00a8aa" color.1="#000000" x="30" y="0" z="-30" h="0" w="0.31" d="0.31" />
 
 <set
-  material.specular="#464b4b"
-  material.shininess="16.0"
+  baseMaterial.specular="#464b4b"
+  baseMaterial.shininess="16.0"
 />
 <unique vars="mShow mTaken" />
 <And in="@start" out="mShow" />
