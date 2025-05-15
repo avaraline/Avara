@@ -3,7 +3,8 @@
 
 in vec4 gl_FragCoord;
 in vec4 fragmentColor;
-in vec4 fragmentSpecular;
+in vec3 fragmentSpecular;
+in float fragmentShininess;
 in vec3 fragmentNormal;
 in vec3 fragPos;
 
@@ -46,12 +47,12 @@ vec3 diffuse() {
 }
 
 vec3 spec_light(int i) {
-    if (!lightApplySpecular[i] || fragmentSpecular.a == 0 || !lightsActive) return vec3(0);
+    if (!lightApplySpecular[i] || fragmentShininess == 0 || !lightsActive) return vec3(0);
     vec3 viewRay = normalize(camPos - fragPos);
     vec3 lightRay = normalize((lightPos[i] + camPos) - fragPos);
     vec3 halfwayDir = normalize(lightRay + viewRay);
-    float spec = pow(max(dot(fragmentNormal, -halfwayDir), 0.0), fragmentSpecular.a * 1024.0);
-    return lightColor[i] * (spec * fragmentSpecular.rgb);
+    float spec = pow(max(dot(fragmentNormal, -halfwayDir), 0.0), fragmentShininess);
+    return lightColor[i] * (spec * fragmentSpecular);
 }
 
 vec3 spec() {

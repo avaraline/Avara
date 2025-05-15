@@ -8,6 +8,8 @@
 #include <algorithm>
 #include <cmath>
 
+#define MAX_SHININESS_EXP 1024.0f
+
 class Material {
 public:
     void* operator new(std::size_t) = delete;
@@ -74,10 +76,10 @@ private:
     /**
      * Constrain input values for shininess.
      *
-     * @param shininess  The fixed-point shininess value. Valid range is 0 to 1024.
+     * @param shininess  The fixed-point shininess value. Valid range is 0 to MAX_SHININESS_EXP.
      * @return the nearest approximate value that we can cram into 8 bits, i.e. scaled to a range of 0 - 255
      */
     inline uint8_t ConstrainShininess(Fixed shininess) {
-        return std::round(std::clamp(ToFloat(shininess), 0.0f, 1024.0f) * 255 / 1024.0f);
+        return std::round(std::clamp(ToFloat(shininess), 0.0f, MAX_SHININESS_EXP) * 255 / MAX_SHININESS_EXP);
     }
 };

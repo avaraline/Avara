@@ -226,6 +226,7 @@ void ModernOpenGLRenderer::ApplyLights()
 
     worldShader->Use();
     AdjustAmbient(*worldShader, ambientIntensity);
+    worldShader->SetFloat("maxShininess", MAX_SHININESS_EXP);
     worldShader->SetFloat3("ambientColor", ambientRGB);
 
     for (int i = 0; i < MAXLIGHTS; i++) {
@@ -287,7 +288,7 @@ void ModernOpenGLRenderer::ApplySky()
     skyParams->lowSkyColor.ExportGLFloats(lowSkyColorRGB, 3);
     skyParams->groundMaterial.GetColor().ExportGLFloats(groundColorRGB, 3);
     skyParams->groundMaterial.GetSpecular().ExportGLFloats(groundSpecRGB, 3);
-    groundShininess = skyParams->groundMaterial.GetShininess() / 255.0f;
+    groundShininess = skyParams->groundMaterial.GetShininess() / 255.0f * MAX_SHININESS_EXP;
     
     float lowAlt = ToFloat(skyParams->lowSkyAltitude) / 20000.0f;
     float highAlt = ToFloat(skyParams->highSkyAltitude) / 20000.0f;
