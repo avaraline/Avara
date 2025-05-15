@@ -42,9 +42,11 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     loadBtn = new nanogui::Button(this, "Load Level");
     loadBtn->setCallback([this] { this->SendLoad(); });
 
-    startBtn = new nanogui::Button(this, "Start Game");
-    startBtn->setCallback([app] { ((CAvaraAppImpl *)app)->GetGame()->SendStartCommand(); });
-
+    startBtn = new nanogui::Button(this, "Start/Ready");
+    startBtn->setCallback([app] {
+        CNetManager* net = ((CAvaraAppImpl *)app)->GetNet();
+        net->SendRosterMessage(checkMark_utf8);
+    });
     SelectSet(0);
     levelBox->setSelectedIndex(0);
 }
