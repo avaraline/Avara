@@ -12,6 +12,7 @@ uniform vec3 camPos;
 uniform vec3 lightDir[MAX_LIGHTS] = vec3[MAX_LIGHTS](vec3(0, 0, 0), vec3(0, 0, 0), vec3(0, 0, 0), vec3(0, 0, 0));
 uniform vec3 lightPos[MAX_LIGHTS] = vec3[MAX_LIGHTS](vec3(0, 0, 0), vec3(0, 0, 0), vec3(0, 0, 0), vec3(0, 0, 0));
 uniform vec3 lightColor[MAX_LIGHTS] = vec3[MAX_LIGHTS](vec3(1, 1, 1), vec3(1, 1, 1), vec3(1, 1, 1), vec3(1, 1, 1));
+uniform float lightCelestialRadius[MAX_LIGHTS] = float[MAX_LIGHTS](0.0, 0.0, 0.0, 0.0);
 uniform bool lightApplySpecular[MAX_LIGHTS] = bool[MAX_LIGHTS](false, false, false, false);
 uniform float ambient = 0.0;
 uniform vec3 ambientColor = vec3(1, 1, 1);

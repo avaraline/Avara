@@ -256,10 +256,10 @@
 
   // Lights (default light settings are stored here)
   ambient.i  = 0.4  ambient.c  =  0
-  light[0].i = 0.4  light[0].a =  45  light[0].b = 20   light[0].c = 0  light[0].s = 0
-  light[1].i = 0.3  light[1].a =  20  light[1].b = 200  light[1].c = 0  light[1].s = 0
-  light[2].i = 0.0  light[2].a =  45  light[2].b = 90   light[2].c = 0  light[2].s = 0
-  light[3].i = 0.0  light[3].a =  45  light[3].b = 180  light[3].c = 0  light[3].s = 0
+  light[0].i = 0.4  light[0].a =  45  light[0].b = 20   light[0].c = 0  light[0].r = 0  light[0].s = 0
+  light[1].i = 0.3  light[1].a =  20  light[1].b = 200  light[1].c = 0  light[1].r = 0  light[1].s = 0
+  light[2].i = 0.0  light[2].a =  45  light[2].b = 90   light[2].c = 0  light[2].r = 0  light[2].s = 0
+  light[3].i = 0.0  light[3].a =  45  light[3].b = 180  light[3].c = 0  light[3].r = 0  light[3].s = 0
 
   // Material properties:
   defaultMaterial.specular = 0

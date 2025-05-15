@@ -123,7 +123,7 @@ CViewParameters::CViewParameters() {
 
     ambientLight = 32768L;
 
-    SetLight(0, 0, FIX(45), FIX3(900) - ambientLight, DEFAULT_LIGHT_COLOR, false, kLightGlobalCoordinates);
+    SetLight(0, 0, FIX(45), FIX3(900) - ambientLight, DEFAULT_LIGHT_COLOR, FIX(0), false, kLightGlobalCoordinates);
 
     hitherBound = FIX3(1000); //	0.5 m
     yonBound = FIX(500); //	500 m
@@ -238,7 +238,7 @@ void CViewParameters::SetLightValues(short n, Fixed dx, Fixed dy, Fixed dz, shor
     }
 }
 
-void CViewParameters::SetLight(short n, Fixed angle1, Fixed angle2, Fixed intensity, ARGBColor color, bool applySpecular, short mode) {
+void CViewParameters::SetLight(short n, Fixed angle1, Fixed angle2, Fixed intensity, ARGBColor color, Fixed celestialRadius, bool applySpecular, short mode) {
     Fixed x, y, z;
 
     if (n >= 0 && n < MAXLIGHTS) {
@@ -246,6 +246,7 @@ void CViewParameters::SetLight(short n, Fixed angle1, Fixed angle2, Fixed intens
         dirLightSettings[n].angle1 = angle1;
         dirLightSettings[n].angle2 = angle2;
         dirLightSettings[n].color = color;
+        dirLightSettings[n].celestialRadius = celestialRadius;
         dirLightSettings[n].applySpecular = applySpecular;
 
         x = FMul(FDegCos(angle1), intensity);

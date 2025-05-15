@@ -236,16 +236,19 @@ void ModernOpenGLRenderer::ApplyLights()
         
         const std::string dirUniform = "lightDir[" + std::to_string(i) + "]";
         const std::string colorUniform = "lightColor[" + std::to_string(i) + "]";
+        const std::string radUniform = "lightCelestialRadius[" + std::to_string(i) + "]";
         const std::string specUniform = "lightApplySpecular[" + std::to_string(i) + "]";
 
         worldShader->Use();
         worldShader->SetFloat3(dirUniform, viewParams->dirLightSettings[i].direction);
         worldShader->SetFloat3(colorUniform, rgb);
+        worldShader->SetFloat(radUniform, ToFloat(viewParams->dirLightSettings[i].celestialRadius));
         worldShader->SetBool(specUniform, applySpecular);
         
         skyShader->Use();
         skyShader->SetFloat3(dirUniform, viewParams->dirLightSettings[i].direction);
         skyShader->SetFloat3(colorUniform, rgb);
+        skyShader->SetFloat(radUniform, ToFloat(viewParams->dirLightSettings[i].celestialRadius));
         skyShader->SetBool(specUniform, applySpecular);
     }
 }

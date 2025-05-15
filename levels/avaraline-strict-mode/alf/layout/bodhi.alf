@@ -1,10 +1,12 @@
-<SkyColor color="#cca3bf" color.1="#cee6f2" thickness="1000" verticalRangeMax="2500" />
+<SkyColor color="#cca3bf" color.1="#cee6f2" thickness="1500" verticalRangeMax="9000" />
 <GroundColor color="#3d6658" />
 <set
   designer="$mSilverfox"
   light.0.i="0.8"
-  light.0.a="30"
+  light.0.a="25"
   light.0.b="10"
+  light.0.c="#ffd9cc"
+  light.0.r="90.0"
   light.0.s="true"
   baseMaterial.specular="#1a1a1a"
   baseMaterial.shininess="8.0"
@@ -118,14 +120,14 @@
 
 <set
   baseMaterial.specular="#666666"
-  baseMaterial.shininess="256.0"
+  baseMaterial.shininess="64.0"
 />
 <Dome y="4" color="#cef2e6" color.1="#000000" cx="12.5" cz="17.5" r="2.5" angle="180" quarters="4" />
 <Dome y="4" color="#cef2e6" color.1="#000000" cx="-12.5" cz="-17.5" r="2.5" angle="180" quarters="4" />
 
 <set
   baseMaterial.specular="#ff8359"
-  baseMaterial.shininess="128.0"
+  baseMaterial.shininess="20.0"
 />
 <Ramp y="0" deltaY="4" color="#ffc68c" color.1="#000000" x="0" z="17.5" w="15" d="10" h="0" angle="180" />
 <Ramp y="0" deltaY="4" color="#ffc68c" color.1="#000000" x="0" z="-17.5" w="15" d="10" h="0" angle="0" />

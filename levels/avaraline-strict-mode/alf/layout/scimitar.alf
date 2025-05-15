@@ -5,6 +5,7 @@
   light.0.i="0.9"
   light.0.a="30"
   light.0.b="10"
+  light.0.r="128.0"
   light.0.s="true"
   baseMaterial.specular="#54544f"
   baseMaterial.shininess="8.0"
@@ -13,7 +14,7 @@
   basalt.specular="#555458"
   basalt.shininess="38.0"
   metal.specular="#82d9cb"
-  metal.shininess="80.0"
+  metal.shininess="50.0"
   wallHeight="0"
 />
 <SkyColor color="#fffff0" color.1="#bde8ff" thickness="3000" verticalRangeMin="1000" verticalRangeMax="6000" />

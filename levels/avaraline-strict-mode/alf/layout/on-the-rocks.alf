@@ -2,7 +2,9 @@
 <GroundColor color="#00274d" material.specular="#080808" material.shininess="8.0" />
 <set
   designer="$mSilvermantis"
+  light.0.r="50.0"
   light.0.s="true"
+  light.1.r="30.0"
   light.1.s="true"
   baseMaterial.specular="#333333"
   baseMaterial.shininess="16.0"
