@@ -91,12 +91,18 @@ uint32_t randLCG() {
     return seedLCG;
 }
 
-void InitMatrix() {
-    InitTrigTables();
+Fixed NewFRandSeed() {
+    Fixed seed = 0;
     // call randLCG() a "few" times for a good shuffle
     for (short count = 2 + (randLCG() & 0x3); count > 0; count--) {
-        FRandSeed = (Fixed)randLCG();
+        seed = (Fixed)randLCG();
     }
+    return (seed ^ FRandSeed);  // XOR with FRandSeed to add even more randomness via actual game play
+}
+
+void InitMatrix() {
+    InitTrigTables();
+    FRandSeed = NewFRandSeed();
 }
 
 Fixed FSqroot(int *ab) {
