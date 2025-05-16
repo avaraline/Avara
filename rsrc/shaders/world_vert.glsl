@@ -10,7 +10,6 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 proj;
 uniform mat3 normalTransform;
-uniform vec3 camPos;
 
 out vec4 fragmentColor;
 out vec3 fragmentSpecular;
