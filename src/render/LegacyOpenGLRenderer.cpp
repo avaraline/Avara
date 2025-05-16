@@ -570,9 +570,17 @@ void LegacyOpenGLRenderer::SetPositions(OpenGLShader &shader)
             viewParams->dirLightSettings[i].direction[2]
         };
         glm::vec3 lightPos = glm::normalize(lightDir) * -1000.0f;
+        glm::vec3 adjLightPos = {
+            lightPos[0] + camPos[0],
+            lightPos[1] + camPos[1],
+            lightPos[2] + camPos[2]
+        };
         
-        const std::string uniform = "lightPos[" + std::to_string(i) + "]";
-        shader.SetVec3(uniform, lightPos);
+        const std::string posUniform = "lightPos[" + std::to_string(i) + "]";
+        shader.SetVec3(posUniform, lightPos);
+        
+        const std::string adjPosUniform = "adjustedLightPos[" + std::to_string(i) + "]";
+        shader.SetVec3(adjPosUniform, adjLightPos);
     }
 }
 
