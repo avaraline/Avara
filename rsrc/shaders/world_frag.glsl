@@ -55,7 +55,7 @@ vec3 spec_light(int i, vec3 viewDir) {
     if (!lightApplySpecular[i] || fragmentShininess == 0 || !lightsActive) return vec3(0);
     vec3 lightDir = normalize(adjustedLightPos[i] - fragPos);
     vec3 halfwayDir = normalize(lightDir + viewDir);
-    float spec = pow(max(dot(fragmentNormal, -halfwayDir), 0.0), fragmentShininess);
+    float spec = pow(max(dot(-fragmentNormal, halfwayDir), 0.0), fragmentShininess);
     return lightColor[i] * (spec * fragmentSpecular);
 }
 
