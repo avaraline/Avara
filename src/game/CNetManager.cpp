@@ -357,6 +357,10 @@ void CNetManager::SendRosterMessage(size_t len, char *c) {
     }
 }
 
+void CNetManager::SendRosterMessage(const std::string msg) {
+    SendRosterMessage(msg.length(), (char*)msg.c_str());
+}
+
 void CNetManager::ReceiveRosterMessage(short slotId, short len, char *c) {
     CPlayerManager *thePlayer;
 
