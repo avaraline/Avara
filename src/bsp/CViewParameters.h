@@ -14,6 +14,7 @@
 #include "CDirectObject.h"
 
 #define DEFAULT_LIGHT_COLOR 0xffffffff
+#define DIR_LIGHT_DISTANCE 1000.0f
 
 enum { kLightOff, kLightViewCoordinates, kLightGlobalCoordinates };
 
@@ -23,6 +24,7 @@ public:
     Fixed angle1 = FIX(0);
     Fixed angle2 = FIX(0);
     float direction[3] = {0.0, 0.0, 0.0};
+    float position[3] = {0.0, 0.0, 0.0};
     ARGBColor color = DEFAULT_LIGHT_COLOR;
     Fixed celestialRadius = FIX(0);
     bool applySpecular = false;
