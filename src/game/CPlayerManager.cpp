@@ -232,6 +232,16 @@ short AxisMovement(ControllerAxis &axis, float exp, float max, float mult) {
     return axis.value * abs(pow(axis.value, exp - 1.0f)) * max * mult;
 }
 
+void CPlayerManagerImpl::HandleAxis(float value, float threshold, int bit) {
+    bool down = (threshold < 0) ? (value <= threshold) : (value >= threshold);
+    if (down) {
+        if (!TESTFUNC(bit, keysHeld) && !TESTFUNC(bit, keysDown)) HandleKeyDown(1 << bit);
+    }
+    else {
+        if (TESTFUNC(bit, keysHeld) || TESTFUNC(bit, keysDown) || TESTFUNC(bit, dupKeysHeld)) HandleKeyUp(1 << bit);
+    }
+}
+
 void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
     // Events coming in are for the next frame to be sent.
     // FrameFunction *ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & (itsGame->frameNumber + 1)];
@@ -240,60 +250,32 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
         ControllerSticks *sticks = (ControllerSticks *)event.user.data1;
         ControllerTriggers *triggers = (ControllerTriggers *)event.user.data2;
 
+        float damper = controllerDamper > 0 ? std::clamp(float(sticks->right.elapsed) / controllerDamper, 0.0f, 1.0f) : 1.0f;
         mouseX += AxisMovement(sticks->right.x,
                                controllerCurveExp,
                                controllerMaxMove,
-                               controllerMultiplyX);
+                               controllerMultiplyX * damper);
         mouseY += AxisMovement(sticks->right.y,
                                controllerCurveExp,
                                controllerMaxMove,
-                               controllerMultiplyY);
+                               controllerMultiplyY * damper);
 
-        if (sticks->left.x.active) {
-            if (sticks->left.x.value < 0) {
-                HandleKeyUp(1 << kfuRight);
-                if (sticks->left.x.value < -0.5f) HandleKeyDown(1 << kfuLeft);
-            }
-            else {
-                HandleKeyUp(1 << kfuLeft);
-                if (sticks->left.x.value > 0.5f) HandleKeyDown(1 << kfuRight);
-            }
-        }
-        else {
-            HandleKeyUp(1 << kfuRight);
-            HandleKeyUp(1 << kfuLeft);
-        }
+        HandleAxis(sticks->left.x.value, -controllerStickThreshold, kfuLeft);
+        HandleAxis(sticks->left.x.value, controllerStickThreshold, kfuRight);
+        HandleAxis(sticks->left.y.value, -controllerStickThreshold, kfuForward);
+        HandleAxis(sticks->left.y.value, controllerStickThreshold, kfuReverse);
 
-        if (sticks->left.y.active) {
-            if (sticks->left.y.value < 0) {
-                HandleKeyUp(1 << kfuReverse);
-                if (sticks->left.y.value < -0.5f) HandleKeyDown(1 << kfuForward);
-            }
-            else {
-                HandleKeyUp(1 << kfuForward);
-                if (sticks->left.y.value > 0.5f) HandleKeyDown(1 << kfuReverse);
-            }
-        }
-        else {
-            HandleKeyUp(1 << kfuReverse);
-            HandleKeyUp(1 << kfuForward);
-        }
-
-        if (triggers->right.t.value >= 0.5f) {
-            HandleKeyDown((1 << kfuLoadGrenade) | (1 << kfuFireWeapon));
-        }
-        else {
-            HandleKeyUp((1 << kfuLoadGrenade) | (1 << kfuFireWeapon));
-        }
-        
-        if (triggers->left.t.value >= 0.5f) {
-            if (triggers->left.t.last < 0.5f) buttonStatus |= kbuWentDown;
+        if (triggers->right.t.value >= controllerTriggerThreshold) {
+            if (triggers->right.t.last < controllerTriggerThreshold) buttonStatus |= kbuWentDown;
             buttonStatus |= kbuIsDown;
         }
         else {
-            if (triggers->left.t.last >= 0.5f) buttonStatus |= kbuWentUp;
+            if (triggers->right.t.last >= controllerTriggerThreshold) buttonStatus |= kbuWentUp;
             buttonStatus &= ~kbuIsDown;
         }
+
+        HandleAxis(triggers->left.t.value, controllerTriggerThreshold, kfuLoadGrenade);
+        HandleAxis(triggers->left.t.value, controllerTriggerThreshold, kfuFireWeapon);
     }
 
     switch (event.type) {
@@ -543,21 +525,21 @@ void CPlayerManagerImpl::ResendFrame(FrameNumber theFrame, short requesterId, sh
 
 void CPlayerManagerImpl::ResumeGame() {
     short i;
-
+    
     for (i = 0; i < FUNCTIONBUFFERS; i++) {
         SDL_memset(&frameFuncs[i], 0, sizeof(FrameFunction));
         frameFuncs[i].validFrame = -1;
     }
-
+    
     bufferStart = 0;
     bufferEnd = 0;
     keyboardActive = false;
-
+    
     oldHeld = 0;
     oldModifiers = 0;
     oldButton = 0;
     SetLocal();
-
+    
     keysDown = keysUp = keysHeld = dupKeysHeld = 0;
     mouseX = mouseY = 0;
     buttonStatus = 0;
@@ -566,6 +548,9 @@ void CPlayerManagerImpl::ResumeGame() {
     controllerMaxMove = float(itsGame->itsApp->Number(kControllerMax));
     controllerMultiplyX = itsGame->itsApp->Get(kControllerX);
     controllerMultiplyY = itsGame->itsApp->Get(kControllerY);
+    controllerStickThreshold = itsGame->itsApp->Get(kControllerStickThreshold);
+    controllerTriggerThreshold = itsGame->itsApp->Get(kControllerTriggerThreshold);
+    controllerDamper = itsGame->itsApp->Get(kControllerDamperMillis);
 }
 
 void CPlayerManagerImpl::ProtocolHandler(struct PacketInfo *thePacket) {

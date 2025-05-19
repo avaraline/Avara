@@ -36,14 +36,15 @@ using json = nlohmann::json;
 struct ControllerAxis {
     float last;
     float value;
-    uint32_t elapsed : 30;
-    uint32_t active : 1;
-    uint32_t toggled : 1;
+    uint8_t active : 1;
+    uint8_t last_active : 1;
+    uint8_t toggled : 1;
 };
 
 struct ControllerStick {
     uint16_t clamp_inner;
     uint16_t clamp_outer;
+    uint32_t elapsed;
     ControllerAxis x;
     ControllerAxis y;
 };
@@ -51,6 +52,7 @@ struct ControllerStick {
 struct ControllerTrigger {
     uint16_t clamp_low;
     uint16_t clamp_high;
+    uint32_t elapsed;
     ControllerAxis t;
 };
 
