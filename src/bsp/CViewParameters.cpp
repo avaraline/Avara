@@ -260,9 +260,17 @@ void CViewParameters::SetLight(short n, Fixed angle1, Fixed angle2, Fixed intens
         float intensityF = ToFloat(intensity);
         float elevation = ToFloat(angle1);
         float azimuth = ToFloat(angle2);
-        dirLightSettings[n].direction[0] = sin(Deg2Rad(-azimuth)) * intensityF;
-        dirLightSettings[n].direction[1] = sin(Deg2Rad(-elevation)) * intensityF;
-        dirLightSettings[n].direction[2] = cos(Deg2Rad(azimuth)) * intensityF;
+        float xF = sin(Deg2Rad(-azimuth));
+        float yF = sin(Deg2Rad(-elevation));
+        float zF = cos(Deg2Rad(azimuth));
+        float magnitude = sqrt(pow(xF, 2.0) + pow(yF, 2.0) + pow(zF, 2.0));
+        dirLightSettings[n].direction[0] = xF * -intensityF;
+        dirLightSettings[n].direction[1] = yF * -intensityF;
+        dirLightSettings[n].direction[2] = zF * -intensityF;
+        dirLightSettings[n].position[0] = xF / magnitude * -DIR_LIGHT_DISTANCE;
+        dirLightSettings[n].position[1] = yF / magnitude * -DIR_LIGHT_DISTANCE;
+        dirLightSettings[n].position[2] = zF / magnitude * -DIR_LIGHT_DISTANCE;
+        
     }
 
 }

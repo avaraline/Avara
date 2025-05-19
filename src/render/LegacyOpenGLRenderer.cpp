@@ -187,6 +187,9 @@ void LegacyOpenGLRenderer::ApplyLights()
     AdjustAmbient(*worldShader, ambientIntensity);
     worldShader->SetFloat3("ambientColor", ambientRGB);
     worldShader->SetFloat("maxShininess", MAX_SHININESS_EXP);
+    
+    skyShader->Use();
+    skyShader->SetFloat("celestialDistance", DIR_LIGHT_DISTANCE);
 
     for (int i = 0; i < MAXLIGHTS; i++) {
         float rgb[3];
@@ -194,18 +197,21 @@ void LegacyOpenGLRenderer::ApplyLights()
         bool applySpecular = viewParams->dirLightSettings[i].applySpecular;
         
         const std::string dirUniform = "lightDir[" + std::to_string(i) + "]";
+        const std::string posUniform = "lightPos[" + std::to_string(i) + "]";
         const std::string colorUniform = "lightColor[" + std::to_string(i) + "]";
         const std::string radUniform = "lightCelestialRadius[" + std::to_string(i) + "]";
         const std::string specUniform = "lightApplySpecular[" + std::to_string(i) + "]";
 
         worldShader->Use();
         worldShader->SetFloat3(dirUniform, viewParams->dirLightSettings[i].direction);
+        worldShader->SetFloat3(posUniform, viewParams->dirLightSettings[i].position);
         worldShader->SetFloat3(colorUniform, rgb);
         worldShader->SetFloat(radUniform, ToFloat(viewParams->dirLightSettings[i].celestialRadius));
         worldShader->SetBool(specUniform, applySpecular);
         
         skyShader->Use();
         skyShader->SetFloat3(dirUniform, viewParams->dirLightSettings[i].direction);
+        skyShader->SetFloat3(posUniform, viewParams->dirLightSettings[i].position);
         skyShader->SetFloat3(colorUniform, rgb);
         skyShader->SetFloat(radUniform, ToFloat(viewParams->dirLightSettings[i].celestialRadius));
         skyShader->SetBool(specUniform, applySpecular);
@@ -564,20 +570,11 @@ void LegacyOpenGLRenderer::SetPositions(OpenGLShader &shader)
     shader.Use();
     shader.SetFloat3("camPos", camPos);
     for (int i = 0; i < MAXLIGHTS; i++) {
-        glm::vec3 lightDir = {
-            viewParams->dirLightSettings[i].direction[0],
-            viewParams->dirLightSettings[i].direction[1],
-            viewParams->dirLightSettings[i].direction[2]
-        };
-        glm::vec3 lightPos = glm::normalize(lightDir) * -1000.0f;
         glm::vec3 adjLightPos = {
-            lightPos[0] + camPos[0],
-            lightPos[1] + camPos[1],
-            lightPos[2] + camPos[2]
+            viewParams->dirLightSettings[i].position[0] + camPos[0],
+            viewParams->dirLightSettings[i].position[1] + camPos[1],
+            viewParams->dirLightSettings[i].position[2] + camPos[2]
         };
-        
-        const std::string posUniform = "lightPos[" + std::to_string(i) + "]";
-        shader.SetVec3(posUniform, lightPos);
         
         const std::string adjPosUniform = "adjustedLightPos[" + std::to_string(i) + "]";
         shader.SetVec3(adjPosUniform, adjLightPos);
