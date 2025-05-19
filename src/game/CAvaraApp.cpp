@@ -86,14 +86,15 @@ SDL_GameController *FindGameController() {
 void InitAxis(ControllerAxis &axis) {
     axis.last = 0.0f;
     axis.value = 0.0f;
-    axis.elapsed = 0;
     axis.active = 0;
+    axis.last_active = 0;
     axis.toggled = 0;
 }
 
 void InitStick(ControllerStick &stick, uint16_t clamp_low = 4000, uint16_t clamp_high = 28000) {
     stick.clamp_inner = clamp_low;
     stick.clamp_outer = clamp_high;
+    stick.elapsed = 0;
     InitAxis(stick.x);
     InitAxis(stick.y);
 }
@@ -101,39 +102,51 @@ void InitStick(ControllerStick &stick, uint16_t clamp_low = 4000, uint16_t clamp
 void InitTrigger(ControllerTrigger &trigger) {
     trigger.clamp_low = 3000;
     trigger.clamp_high = 30000;
+    trigger.elapsed = 0;
     InitAxis(trigger.t);
 }
 
-void UpdateAxis(ControllerAxis &axis, float value, uint32_t elapsed) {
-    if (abs(value) < 0.00001f) value = 0.0f;
+int UpdateAxis(ControllerAxis &axis, float value) {
+    axis.last_active = axis.active;
+    if (abs(value) < 0.0001f) {
+        value = 0.0f;
+        axis.active = 0;
+    }
+    else {
+        axis.active = 1;
+    }
     axis.last = axis.value;
     axis.value = value;
-    axis.active = (value != 0);
-    if (axis.last != axis.value) {
-        axis.elapsed += elapsed;
-        axis.toggled = (axis.value < 0) != (axis.last < 0);
-    } else {
-        if (axis.value == 0) {
-            axis.elapsed = 0;
-        } else {
-            axis.elapsed += elapsed;
-        }
-        axis.toggled = 0;
-    }
+    axis.toggled = (axis.value <= 0) != (axis.last <= 0);
+    // We want to send the an event if the axis is active *or* it just became inactive.
+    return axis.active + axis.last_active + axis.toggled;
 }
 
-void UpdateStick(ControllerStick &stick, int32_t x, int32_t y, uint32_t elapsed) {
+int UpdateStick(ControllerStick &stick, int32_t x, int32_t y, uint32_t elapsed) {
     int32_t magnitude = sqrt((x * x) + (y * y));
     float scale = float(magnitude - stick.clamp_inner) / float(stick.clamp_outer - stick.clamp_inner);
     scale = std::clamp(scale, 0.0f, 1.0f) / magnitude;
-    UpdateAxis(stick.x, x * scale, elapsed);
-    UpdateAxis(stick.y, y * scale, elapsed);
+    if (UpdateAxis(stick.x, x * scale) + UpdateAxis(stick.y, y * scale)) {
+        stick.elapsed += elapsed;
+        return 1;
+    }
+    else {
+        stick.elapsed = 0;
+        return 0;
+    }
 }
 
-void UpdateTrigger(ControllerTrigger &trigger, uint16_t t, uint32_t elapsed) {
+int UpdateTrigger(ControllerTrigger &trigger, uint16_t t, uint32_t elapsed) {
     float scaled = float(t - trigger.clamp_low) / float(trigger.clamp_high - trigger.clamp_low);
     scaled = std::clamp(scaled, 0.0f, 1.0f) * t;
-    UpdateAxis(trigger.t, scaled, elapsed);
+    if (UpdateAxis(trigger.t, scaled)) {
+        trigger.elapsed += elapsed;
+        return 1;
+    }
+    else {
+        trigger.elapsed = 0;
+        return 0;
+    }
 }
 
 CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
@@ -247,26 +260,30 @@ void CAvaraAppImpl::idle() {
     // Poll for controller axis value at kControllerPollRate
     uint32_t elapsed = procTime - lastControllerEvent;
     if (controller && elapsed > controllerPollMillis) {
+        int controllerActive = 0;
+        
         int16_t leftX = SDL_GameControllerGetAxis(controller, SDL_CONTROLLER_AXIS_LEFTX);
         int16_t leftY = SDL_GameControllerGetAxis(controller, SDL_CONTROLLER_AXIS_LEFTY);
-        UpdateStick(sticks.left, leftX, leftY, elapsed);
+        controllerActive += UpdateStick(sticks.left, leftX, leftY, elapsed);
         
         int16_t rightX = SDL_GameControllerGetAxis(controller, SDL_CONTROLLER_AXIS_RIGHTX);
         int16_t rightY = SDL_GameControllerGetAxis(controller, SDL_CONTROLLER_AXIS_RIGHTY);
-        UpdateStick(sticks.right, rightX, rightY, elapsed);
+        controllerActive += UpdateStick(sticks.right, rightX, rightY, elapsed);
         
         int16_t leftT = SDL_GameControllerGetAxis(controller, SDL_CONTROLLER_AXIS_TRIGGERLEFT);
-        UpdateTrigger(triggers.left, leftT, elapsed);
+        controllerActive += UpdateTrigger(triggers.left, leftT, elapsed);
 
         int16_t rightT = SDL_GameControllerGetAxis(controller, SDL_CONTROLLER_AXIS_TRIGGERRIGHT);
-        UpdateTrigger(triggers.right, rightT, elapsed);
+        controllerActive += UpdateTrigger(triggers.right, rightT, elapsed);
 
-        SDL_Event controllerEvent;
-        controllerEvent.type = controllerBaseEvent;
-        controllerEvent.user.data1 = &sticks;
-        controllerEvent.user.data2 = &triggers;
-        SDL_PushEvent(&controllerEvent);
-
+        if (controllerActive) {
+            SDL_Event controllerEvent;
+            controllerEvent.type = controllerBaseEvent;
+            controllerEvent.user.data1 = &sticks;
+            controllerEvent.user.data2 = &triggers;
+            SDL_PushEvent(&controllerEvent);
+        }
+        
         lastControllerEvent = procTime;
     }
 
