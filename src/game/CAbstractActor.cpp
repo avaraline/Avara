@@ -508,7 +508,8 @@ void CAbstractActor::BuildPartProximityList(Fixed *origin, Fixed range, MaskType
 
             while (head->next) {
                 anActor = head->me;
-                if (anActor->searchCount != searchCount) {
+                if (anActor->isInGame &&
+                    anActor->searchCount != searchCount) {
                     anActor->searchCount = searchCount;
                     if (anActor->maskBits & filterMask) {
                         for (thePart = anActor->partList; *thePart; thePart++) {
