@@ -46,6 +46,7 @@
 #define kMessageWaitTime 12
 
 extern Fixed FRandSeed;
+extern Fixed NewFRandSeed();
 
 void CNetManager::INetManager(CAvaraGame *theGame) {
     short i;
@@ -356,6 +357,10 @@ void CNetManager::SendRosterMessage(size_t len, char *c) {
     }
 }
 
+void CNetManager::SendRosterMessage(const std::string msg) {
+    SendRosterMessage(msg.length(), (char*)msg.c_str());
+}
+
 void CNetManager::ReceiveRosterMessage(short slotId, short len, char *c) {
     CPlayerManager *thePlayer;
 
@@ -426,7 +431,7 @@ void CNetManager::SendLoadLevel(std::string theSet, std::string levelTag, int16_
     aPacket->command = kpLoadLevel;
     aPacket->p1 = 0;
     aPacket->p2 = originalSender;
-    aPacket->p3 = FRandSeed;
+    aPacket->p3 = NewFRandSeed();
     if (itsCommManager->myId == 0) {
         // to avoid multiple simultaneous loads, only the server sends the kpLoadLevel requests to everyone
         SDL_Log("  server sending to everyone\n");

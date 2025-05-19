@@ -78,12 +78,12 @@
   <Goody shape="bspGroundStar" scale="0.618" yon="500" sound="0" y="startY+0.001" speed="-1.2" grenades="0" start="mShow" out="mShow" color="#000000" color.1="#000000" cx="0" cz="0" angle="45" />
 
   <!-- Upside down domes provides a floor that shows the extent of the level -->
-  <Dome hasFloor="true" color="domeColor" cx="0" cz="0" y="-0.001" r="50" roll="180" yon="domeYon" angle="0" />
-  <Dome hasFloor="true" color="domeColor" cx="0" cz="0" y="-0.003" r="50" roll="180" yon="domeYon" angle="7.5" />
-  <Dome hasFloor="true" color="domeColor" cx="0" cz="0" y="-0.005" r="50" roll="180" yon="domeYon" angle="15" />
-  <Dome hasFloor="true" color="domeColor" cx="0" cz="0" y="-0.006" r="50" roll="180" yon="domeYon" angle="22.5" />
-  <Dome hasFloor="true" color="domeColor" cx="0" cz="0" y="-0.004" r="50" roll="180" yon="domeYon" angle="30" />
-  <Dome hasFloor="true" color="domeColor" cx="0" cz="0" y="-0.002" r="50" roll="180" yon="domeYon" angle="37.5" />
+  <Dome hasFloor="true" color="$domeColor" cx="0" cz="0" y="-0.001" r="50" roll="180" yon="domeYon" angle="0" />
+  <Dome hasFloor="true" color="$domeColor" cx="0" cz="0" y="-0.003" r="50" roll="180" yon="domeYon" angle="7.5" />
+  <Dome hasFloor="true" color="$domeColor" cx="0" cz="0" y="-0.005" r="50" roll="180" yon="domeYon" angle="15" />
+  <Dome hasFloor="true" color="$domeColor" cx="0" cz="0" y="-0.006" r="50" roll="180" yon="domeYon" angle="22.5" />
+  <Dome hasFloor="true" color="$domeColor" cx="0" cz="0" y="-0.004" r="50" roll="180" yon="domeYon" angle="30" />
+  <Dome hasFloor="true" color="$domeColor" cx="0" cz="0" y="-0.002" r="50" roll="180" yon="domeYon" angle="37.5" />
 
   <!-- Grenades -->
   <unique vars="mShow mTaken" />

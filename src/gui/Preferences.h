@@ -43,6 +43,8 @@ using json = nlohmann::json;
 #define kFullScreenTag "fullscreen"
 #define kFOV "fov"
 #define kFXAA "fxaa"
+#define kDither "dither"
+#define kSpecular "showSpecular"
 #define kUseLegacyRenderer "useLegacyRenderer"
 
 // Other graphics settings
@@ -156,6 +158,8 @@ static json defaultPrefs = {
     {kFullScreenTag, false},
     {kFOV, 50.0},
     {kFXAA, true},
+    {kDither, true},
+    {kSpecular, true},
     {kColorBlindMode, 0},
     {kHUDColor, "#03f5f5"},
     {kHUDPositiveColor, "#51e87e"},

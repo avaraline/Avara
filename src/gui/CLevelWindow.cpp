@@ -42,9 +42,16 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     loadBtn = new nanogui::Button(this, "Load Level");
     loadBtn->setCallback([this] { this->SendLoad(); });
 
-    startBtn = new nanogui::Button(this, "Start Game");
-    startBtn->setCallback([app] { ((CAvaraAppImpl *)app)->GetGame()->SendStartCommand(); });
-
+    startBtn = new nanogui::Button(this, "Start/Ready");
+    startBtn->setCallback([app] {
+        if (SDL_GetModState() & KMOD_ALT) {
+            // if ALT key pressed, start right away
+            ((CAvaraAppImpl *)app)->GetGame()->SendStartCommand();
+        } else {
+            // send the "ready" checkmark √
+            ((CAvaraAppImpl *)app)->GetNet()->SendRosterMessage(checkMark_utf8);
+        }
+    });
     SelectSet(0);
     levelBox->setSelectedIndex(0);
 }

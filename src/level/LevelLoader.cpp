@@ -168,14 +168,8 @@ struct ALFWalker: pugi::xml_tree_walker {
             attr.compare("color[1]") == 0 ||
             attr.compare("color[2]") == 0 ||
             attr.compare("color[3]") == 0 ||
-            attr.compare("defaultMaterial.specular") == 0 ||
-            attr.compare("baseMaterial.specular") == 0 ||
-            attr.compare("material.specular") == 0 ||
-            attr.compare("material[0].specular") == 0 ||
-            attr.compare("material[1].specular") == 0 ||
-            attr.compare("material[2].specular") == 0 ||
-            attr.compare("material[3].specular") == 0 ||
-            (attr.size() > 2 && attr.compare(attr.size() - 2, 2, ".c") == 0)
+            (attr.size() > 2 && attr.compare(attr.size() - 2, 2, ".c") == 0) ||
+            (attr.size() > 9 && attr.compare(attr.size() - 9, 9, ".specular") == 0)
         ) {
             if (value[0] == '$') {
                 return value.substr(1);
@@ -420,7 +414,7 @@ struct ALFWalker: pugi::xml_tree_walker {
         }
         std::string result = script.str();
         if (wrote && result.length() > 0)
-        RunThis(result);
+            RunThis(result);
     }
 
     void handle_script(pugi::xml_node& node) {
@@ -428,14 +422,27 @@ struct ALFWalker: pugi::xml_tree_walker {
     }
 
     void handle_wall(pugi::xml_node& node) {
+        Fixed y_alt = 0;
         std::string y = node.attribute("y").value();
         if (!y.empty()) {
-            std::stringstream script;
-            script << "wa = " << y << "\n";
-            RunThis(script.str());
+            try {
+                double yvalue = std::stod(y);
+                y_alt = ToFixed(yvalue);
+            }
+            catch (const std::invalid_argument& e) {
+                // temporary script to evaluate expression
+                std::stringstream script;
+                std::string key = "privateAlf.tmpY";
+                script << key << " = " << y << "\n";
+                RunThis(script.str());
+                auto index = IndexForEntry(key.c_str());
+                // immediately evaluate temporary variable
+                y_alt = ToFixed(EvalVariable(index + firstVariable, true));
+            }
+            catch (const std::out_of_range& e) { }
         }
         CWallActor *theWall = new CWallActor;
-        theWall->MakeWallFromRect(&gLastBoxRect, gLastBoxRounding, 0, true);
+        theWall->MakeWallFromRect(&gLastBoxRect, gLastBoxRounding, y_alt, 0, true);
     }
 
     void handle_include(pugi::xml_node& node) {
