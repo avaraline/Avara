@@ -56,6 +56,7 @@ vec3 spec_light(int i, vec3 viewDir) {
     vec3 lightDir = normalize(adjustedLightPos[i] - fragPos);
     vec3 halfwayDir = normalize(lightDir + viewDir);
     float spec = pow(max(dot(fragmentNormal, halfwayDir), 0.0), fragmentShininess);
+    spec = spec * float(dot(fragmentNormal, lightDir) >= 0.0);
     return lightColor[i] * (spec * fragmentSpecular);
 }
 
