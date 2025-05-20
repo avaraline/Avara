@@ -9,17 +9,10 @@
 
 #include <SDL2/SDL.h>
 
-#if defined(AVARA_GLES)
-    #define SKY_VERT "gles/sky_vert.glsl"
-    #define SKY_FRAG "gles/sky_frag.glsl"
-    #define OBJ_VERT "gles/world_vert.glsl"
-    #define OBJ_FRAG "gles/world_frag.glsl"
-#else
-    #define SKY_VERT "sky_vert.glsl"
-    #define SKY_FRAG "sky_frag.glsl"
-    #define OBJ_VERT "world_vert.glsl"
-    #define OBJ_FRAG "world_frag.glsl"
-#endif
+#define SKY_VERT "sky_vert.glsl"
+#define SKY_FRAG "sky_frag.glsl"
+#define OBJ_VERT "world_vert.glsl"
+#define OBJ_FRAG "world_frag.glsl"
 
 const float legacySkyboxVertices[] = {
     -5.0f,  5.0f, -5.0f,
@@ -193,7 +186,8 @@ void LegacyOpenGLRenderer::ApplyLights()
     AdjustAmbient(*worldShader, ambientIntensity);
     worldShader->SetFloat3("ambientColor", ambientRGB);
     worldShader->SetFloat("maxShininess", MAX_SHININESS_EXP);
-    
+    worldShader->SetBool("lightsActive", true);
+
     skyShader->Use();
     skyShader->SetFloat("celestialDistance", DIR_LIGHT_DISTANCE);
 

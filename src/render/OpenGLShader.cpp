@@ -22,9 +22,21 @@ OpenGLShader::OpenGLShader(const std::string vertPath, const std::string fragPat
         FragmentShaderStream.open(fragPath);
 
         std::stringstream sstr;
+#if defined(AVARA_GLES)
+        sstr << "#version 300 es\n";
+        sstr << "precision highp float;\n\n";
+#else
+        sstr << "#version 330 core\n";
+#endif
         sstr << VertexShaderStream.rdbuf();
         VertexShaderCode = sstr.str();
         sstr.str("");
+#if defined(AVARA_GLES)
+        sstr << "#version 300 es\n";
+        sstr << "precision highp float;\n\n";
+#else
+        sstr << "#version 330 core\n";
+#endif
         sstr << FragmentShaderStream.rdbuf();
         FragmentShaderCode = sstr.str();
 

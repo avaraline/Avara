@@ -1,8 +1,6 @@
-#version 330 core
-
 in vec2 texCoords;
 
-uniform float hudAlpha = 1.0;
+uniform float hudAlpha; // = 1.0;
 uniform sampler2D screenTexture;
 
 out vec4 color;
