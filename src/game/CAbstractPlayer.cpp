@@ -234,7 +234,8 @@ void CAbstractPlayer::BeginScript() {
     itsManager = NULL;
     maskBits |= kSolidBit + kTargetBit + kPlayerBit + kCollisionDamageBit + kBallSnapBit;
 
-    yonBound = LONGYON;
+    Fixed defaultYon = ReadFixedVar(iDefaultYon);
+    yonBound = defaultYon;
 
     isOut = false;
     winFrame = -1;
@@ -1424,12 +1425,12 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
                 scoutCommand = kScoutNullCommand;
             }
         }
-
+#if DEBUG_AVARA
         if (TESTFUNC(kfuDebug1, ft->down))
             debugView = !debugView;
         if (TESTFUNC(kfuDebug2, ft->down))
             debug2Flag = !debug2Flag;
-
+#endif
         if (TESTFUNC(kfuZoomIn, ft->held) && !freeView)
             fieldOfView -= FOVSTEP;
         if (TESTFUNC(kfuZoomOut, ft->held) && !freeView)
@@ -1956,7 +1957,7 @@ void CAbstractPlayer::Reincarnate() {
     DBG_Log("spawn", "NO incarnators found, trying RANDOM");
     // if couldn't find an available Incarnator above, try creating a random one
     for (int tries = 3; isInLimbo && tries > 0; tries--) {
-        CRandomIncarnator waldo(itsGame->actorList);
+        CRandomIncarnator waldo(itsGame->extentMin, itsGame->extentMax);
         if (ReincarnateComplete(&waldo)) {
             break;
         }
@@ -2361,6 +2362,8 @@ short CAbstractPlayer::GetBallSnapPoint(long theGroup,
 
 void CAbstractPlayer::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
     SignalAttachments(kHostDamage, &hitEnergy);
-
+    if (itsManager->IsLocalPlayer()) {
+        itsGame->itsApp->Rumble(hitEnergy);
+    }
     CRealMovers::WasHit(theHit, hitEnergy);
 }

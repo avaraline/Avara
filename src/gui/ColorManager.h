@@ -158,6 +158,18 @@ public:
             : std::optional<ARGBColor>{};
     }
 
+    static inline std::optional<ARGBColor> getTeamBaseColor(uint8_t num) {
+        return (num <= kMaxTeamColors)
+            ? teamColors[num]
+            : std::optional<ARGBColor>{};
+    }
+
+    static inline std::optional<ARGBColor> getTeamTextBaseColor(uint8_t num) {
+        return (num <= kMaxTeamColors)
+            ? teamTextColors[num]
+            : std::optional<ARGBColor>{};
+    }
+
     static inline std::optional<std::string> getTeamColorName(uint8_t num) {
         return (num <= kMaxTeamColors)
             ? teamColorNames[num]

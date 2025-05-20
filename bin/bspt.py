@@ -127,6 +127,35 @@ class UniquePoint():
         return [self.x, self.y, self.z, self.w]
 
 
+
+UniqueVectorLength = 16
+
+
+class UniqueVector(UniquePoint):
+    size = 16
+
+    def __init__(self, raw_data=None):
+        if raw_data is None:
+            self.x = 0
+            self.y = 0
+            self.z = 0
+            self.w = 0
+        else:
+            assert(len(raw_data) == UniqueVectorLength)
+            self.x = bytes_to_fixed(raw_data[0:4])
+            self.y = bytes_to_fixed(raw_data[4:8])
+            self.z = bytes_to_fixed(raw_data[8:12])
+            self.w = bytes_to_fixed(raw_data[12:16])
+            # Negate vectors from original data for modern compatibility.
+            self.x = -self.x if self.x != 0 else self.x
+            self.y = -self.y if self.y != 0 else self.y
+            self.z = -self.z if self.z != 0 else self.z
+
+    def __repr__(self):
+        tup = (self.x, self.y, self.z, self.w)
+        return "UniqueVector(%f %f %f %f)" % tup
+
+
 NormalRecordLength = 8
 
 
@@ -264,6 +293,7 @@ class BSP(object):
             self.points = []
             self.vectors = []
             self.unique_edges = []
+            self.bad_polys = []
             return
 
         normal_offset = bytes_to_unsigned_long(raw_data[84:88])
@@ -314,9 +344,9 @@ class BSP(object):
         self.vectors = list_of_fixedsize_recs(
             raw_data,
             vector_offset,
-            UniquePointLength,
+            UniqueVectorLength,
             self.vector_count,
-            UniquePoint)
+            UniqueVector)
 
         self.unique_edges = list_of_fixedsize_recs(
             raw_data,
@@ -368,9 +398,10 @@ class BSP(object):
         d["triangles_poly"] = list()
         d["triangles_verts_poly"] = list()
         # print(self.name)
+        bad_polys = []
         # avara stored individual shape faces as
         # N-gons
-        for poly in self.polys:
+        for poly_idx, poly in enumerate(self.polys):
             # lookup the normal record
             normal_rec = self.normals[poly.normal_index]
             normal_idx = normal_rec.normal_index
@@ -392,8 +423,9 @@ class BSP(object):
                 myidx_b = verts.index(e.b)
                 edges.append([myidx_a, myidx_b])
 
-            if (poly.edge_count < 3):
+            if poly.edge_count < 3 or len(verts) < 3:
                 # can't triangulate less than 3 points
+                bad_polys.append(poly_idx)
                 continue
 
             # this doesn't work and it drives me abs.
@@ -428,12 +460,17 @@ class BSP(object):
                 # create input for triangle library
                 the_dict = dict(vertices=face_points, segments=edges)
                 # do triangulation in planar straignt line graph mode
-                result = triangle.triangulate(the_dict, 'p')
+                try: 
+                    result = triangle.triangulate(the_dict, 'p')
+                except ValueError:
+                    bad_polys.append(poly_idx)
+                    continue
 
                 if "triangles" not in result:
                     # the triangulator didn't work for some reason
                     # this is usually because there was just terrible
                     # shape data that made no sense
+                    bad_polys.append(poly_idx)
                     continue
 
                 vert_diff = len(result["vertices"]) - len(the_dict["vertices"])
@@ -517,6 +554,8 @@ class BSP(object):
                 # add triangles and indexes to dictionary for use in avara_format
                 d["triangles_poly"].append(new_tris)
                 d["triangles_verts_poly"].append(verts)
+        for del_poly_idx in bad_polys:
+            del d["polys"][del_poly_idx]
         return d
 
     def avara_format(self):
@@ -545,6 +584,7 @@ class BSP(object):
                 tris = d['triangles_poly'][idx]
                 tri_points = d['triangles_verts_poly'][idx]
                 tri_list = [pt for tri in [[tri_points[i] for i in t] for t in tris] for pt in tri]
+                tri_list.reverse() # reverse winding due to flipped normals
 
                 # in avara, each poly has a flag to determine if the front,
                 # back, or both sides should be drawn.

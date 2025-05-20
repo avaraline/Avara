@@ -626,8 +626,8 @@ bool CommandManager::SplitIntoTeams(VectorOfArgs vargs) {
 
 
 bool CommandManager::HandleTags(VectorOfArgs vargs) {
-    Tags::LevelURL curLevel(itsApp->GetGame()->loadedSet,
-                            itsApp->GetGame()->loadedLevel);
+    Tags::LevelURL curLevel(itsApp->GetGame()->loadedLevelInfo->setTag,
+                            itsApp->GetGame()->loadedLevelInfo->levelName);
 
     if (vargs.size() > 0) {
         for (auto tag: vargs) {

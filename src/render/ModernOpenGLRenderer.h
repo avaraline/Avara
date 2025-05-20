@@ -24,7 +24,6 @@ public:
     virtual void ApplySky() override;
     virtual void LevelReset() override;
     virtual std::unique_ptr<VertexData> NewVertexDataInstance() override;
-    virtual void OverheadPoint(Fixed *pt, Fixed *extent) override;
     virtual void PostLevelLoad() override;
     virtual void RefreshWindow() override;
     virtual void RemoveHUDPart(CBSPPart *part) override;
@@ -66,5 +65,6 @@ private:
     void IgnoreDirectionalLights(OpenGLShader &shader, bool yn);
     std::unique_ptr<OpenGLShader> LoadShader(const std::string &vertFile, const std::string &fragFile);
     void AdjustFramebuffer(short index, GLsizei width, GLsizei height);
+    void SetPositions(OpenGLShader &shader);
     void SetTransforms(const CBSPPart &part);
 };

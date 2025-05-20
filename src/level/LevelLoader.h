@@ -31,6 +31,7 @@ enum {
     iShape,
     iAltShape,
     iScale,
+    iDefaultYon,
     iYon,
     iWallYon,
     iHasFloor,
@@ -268,7 +269,7 @@ enum {
     iAmbient,
     iAmbientColor,
     iLightsTable,
-    iLightsTableEnd = iLightsTable + 19, //	a 4 x 5 table
+    iLightsTableEnd = iLightsTable + 23, //	a 4 x 6 table
 
     //  Materials
     iDefaultMaterialSpecular,

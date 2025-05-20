@@ -46,6 +46,7 @@
 #define kMessageWaitTime 12
 
 extern Fixed FRandSeed;
+extern Fixed NewFRandSeed();
 
 void CNetManager::INetManager(CAvaraGame *theGame) {
     short i;
@@ -175,7 +176,7 @@ void CNetManager::ChangeNet(short netKind, std::string address, std::string pass
             totalDistribution = 0;
             DBG_Log("login", "sending kpLogin to server with presence=%d\n", keepPresence);
             itsCommManager->SendPacket(kdServerOnly, kpLogin, 0, keepPresence, 0, 0L, NULL);
-            if (itsGame->loadedFilename.length() > 0) {
+            if (itsGame->loadedLevelInfo->levelName.length() > 0) {
                 itsGame->LevelReset(true);
                 // theRoster->InvalidateArea(kBottomBox, 0);
             }
@@ -356,6 +357,10 @@ void CNetManager::SendRosterMessage(size_t len, char *c) {
     }
 }
 
+void CNetManager::SendRosterMessage(const std::string msg) {
+    SendRosterMessage(msg.length(), (char*)msg.c_str());
+}
+
 void CNetManager::ReceiveRosterMessage(short slotId, short len, char *c) {
     CPlayerManager *thePlayer;
 
@@ -426,7 +431,7 @@ void CNetManager::SendLoadLevel(std::string theSet, std::string levelTag, int16_
     aPacket->command = kpLoadLevel;
     aPacket->p1 = 0;
     aPacket->p2 = originalSender;
-    aPacket->p3 = FRandSeed;
+    aPacket->p3 = NewFRandSeed();
     if (itsCommManager->myId == 0) {
         // to avoid multiple simultaneous loads, only the server sends the kpLoadLevel requests to everyone
         SDL_Log("  server sending to everyone\n");

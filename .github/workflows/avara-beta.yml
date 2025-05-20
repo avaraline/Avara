@@ -21,7 +21,7 @@ jobs:
       - name: WinAvara archive
         run: .\bin\winavarazip.ps1
         shell: pwsh
-      - name: deploy main nightly
+      - name: Deploy beta
         if: startsWith(github.repository_owner, 'avaraline') && (github.refname != 'main')
         uses: WebFreak001/deploy-nightly@v1.0.1
         env:
@@ -46,7 +46,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: make macdist
         run: make -j4 clean macdist
-      - name: deploy main nightly
+      - name: Deploy beta
         if: startsWith(github.repository_owner, 'avaraline') && (github.ref != 'main')
         uses: WebFreak001/deploy-nightly@v1.0.1
         env:

@@ -1,0 +1,279 @@
+<map>
+  <Teleporter y="0" shape="bspFloorFrame" scale="0.55" group="@pad" mask="0" speed="0" start="@n17" stop="@s17" color="#2e0743" color.1="#728098" cx="33.75" cz="169.30555555555557" angle="270" />
+  <Teleporter y="0" shape="bspFloorFrame" scale="0.55" group="@pad" mask="0" speed="0" start="@s17" stop="@n17" color="#d783ff" color.1="#728098" cx="33.75" cz="169.30555555555557" angle="270" />
+  <And in="@start" out="@s17" />
+  <Timer in="@n17" out="@s17" wait="300" />
+  <Goody shape="bspMissile" y="2" start="@s17" out="@n17" missiles="6" color="#e8b7ff" color.1="#d783ff" cx="33.75" cz="169.30555555555557" angle="180" />
+  <Ramp y="0" deltaY="0.125" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="46.875" z="169.30555555555557" w="1.25" d="30" h="0" angle="270" />
+  <Ramp y="0.5" deltaY="1.5" yon="1000" thickness="0" color="rgba(204,102,255,0.5)" color.1="#000000" x="53.75" z="169.30555555555557" w="5" d="27.5" h="0" angle="270" />
+  <Ramp y="2" deltaY="2" yon="1000" thickness="0" color="rgba(204,102,255,0.5)" color.1="#000000" x="57.5" z="169.30555555555557" w="2.5" d="27.5" h="0" angle="270" />
+  <Ramp y="0.125" deltaY="0.375" yon="1000" thickness="0" color="rgba(204,102,255,0.5)" color.1="#000000" x="49.375" z="169.30555555555557" w="3.75" d="27.5" h="0" angle="270" />
+  <Ramp y="0.125" deltaY="0.375" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="49.375" z="154.93055555555557" w="3.75" d="1.25" h="0" angle="270" />
+  <Ramp y="0.125" deltaY="0.375" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="49.375" z="183.68055555555557" w="3.75" d="1.25" h="0" angle="270" />
+  <Ramp y="0.5" deltaY="1.5" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="53.75" z="154.93055555555557" w="5" d="1.25" h="0" angle="270" />
+  <Ramp y="0.5" deltaY="1.5" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="53.75" z="183.68055555555557" w="5" d="1.25" h="0" angle="270" />
+  <Ramp y="2" deltaY="2" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="57.5" z="154.93055555555557" w="2.5" d="1.25" h="0" angle="270" />
+  <Ramp y="2" deltaY="2" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="57.5" z="183.68055555555557" w="2.5" d="1.25" h="0" angle="270" />
+  <Ramp y="4" deltaY="2" yon="1000" thickness="0" color="rgba(204,102,255,0.5)" color.1="#000000" x="57.5" z="169.30555555555557" w="2.5" d="27.5" h="0" angle="90" />
+  <Ramp y="7.5" deltaY="0.375" yon="1000" thickness="0" color="rgba(204,102,255,0.5)" color.1="#000000" x="49.375" z="169.30555555555557" w="3.75" d="27.5" h="0" angle="90" />
+  <Ramp y="6" deltaY="1.5" yon="1000" thickness="0" color="rgba(204,102,255,0.5)" color.1="#000000" x="53.75" z="169.30555555555557" w="5" d="27.5" h="0" angle="90" />
+  <Ramp y="7.875" deltaY="0.125" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="46.875" z="169.30555555555557" w="1.25" d="30" h="0" angle="90" />
+  <Ramp y="7.5" deltaY="0.375" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="49.375" z="154.93055555555557" w="3.75" d="1.25" h="0" angle="90" />
+  <Ramp y="7.5" deltaY="0.375" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="49.375" z="183.68055555555557" w="3.75" d="1.25" h="0" angle="90" />
+  <Ramp y="6" deltaY="1.5" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="53.75" z="154.93055555555557" w="5" d="1.25" h="0" angle="90" />
+  <Ramp y="6" deltaY="1.5" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="53.75" z="183.68055555555557" w="5" d="1.25" h="0" angle="90" />
+  <Ramp y="4" deltaY="2" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="57.5" z="154.93055555555557" w="2.5" d="1.25" h="0" angle="90" />
+  <Ramp y="4" deltaY="2" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="57.5" z="183.68055555555557" w="2.5" d="1.25" h="0" angle="90" />
+  <Teleporter y="9.5" shape="bspFloorFrame" scale="0.25" group="@pad" mask="0" spin="true" speed="4" start="@n7" stop="@s7" color="#e8b7ff" color.1="#728098" cx="51.25" cz="169.93055555555557" angle="270" />
+  <Teleporter y="9.5" shape="bspFloorFrame" scale="0.25" group="@pad" mask="0" spin="true" speed="4" start="@s7" stop="@n7" color="#d783ff" color.1="#728098" cx="51.25" cz="169.93055555555557" angle="270" />
+  <And in="@start" out="@s7" />
+  <Timer in="@n7" out="@s7" wait="400" />
+  <Goody shape="bspGrenade" y="9.5" speed="6" grenades="0" start="@s7" stop="@n7" out="@n7" color="#e62300" color.1="#fdf200" cx="51.25" cz="169.93055555555557" angle="180" />
+  <Goody shape="bspGrenade" y="9.5" yon="0.01" scale="5" start="@s7" out="@n7" grenades="6" color="#e62300" color.1="#fdf200" cx="51.25" cz="169.93055555555557" angle="180" />
+  <SkyColor n="15" color="#d783ff" color.1="#010001" />
+  <GroundColor color="#010001" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#010001" color.1="#f1f0ed" cx="4.444444444444445" cz="2.5" angle="0" />
+  <set designer="Designed by Sphinx" information="&#10;Genre: Classic Deathmatch&#10;Map Size: Large&#10;Relatives: None" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" light.0.i="0.6" light.0.a="20" light.0.b="10" />
+  <Ramp y="0" deltaY="0.5" yon="1000" thickness="0" color="#450f5f" color.1="#000000" x="101.25" z="109.30555555555556" w="5" d="30" h="0" angle="270" />
+  <Ramp y="0.5" deltaY="1.5" yon="1000" thickness="0" color="#450f5f" color.1="#000000" x="106.25" z="109.30555555555556" w="5" d="30" h="0" angle="270" />
+  <Ramp y="2" deltaY="2" yon="1000" thickness="0" color="#450f5f" color.1="#000000" x="110" z="109.30555555555556" w="2.5" d="30" h="0" angle="270" />
+  <Ramp y="0" deltaY="0.5" yon="1000" thickness="0" color="#571679" color.1="#000000" x="96.25" z="109.30555555555556" w="5" d="30" h="0" angle="90" />
+  <Ramp y="0.5" deltaY="1.5" yon="1000" thickness="0" color="#571679" color.1="#000000" x="91.25" z="109.30555555555556" w="5" d="30" h="0" angle="90" />
+  <Ramp y="2" deltaY="2" yon="1000" thickness="0" color="#571679" color.1="#000000" x="87.5" z="109.30555555555556" w="2.5" d="30" h="0" angle="90" />
+  <Ramp y="4" deltaY="2" yon="1000" thickness="0" color="#4c1164" color.1="#000000" x="110" z="109.30555555555556" w="2.5" d="30" h="0" angle="90" />
+  <Ramp y="6" deltaY="1.5" yon="1000" thickness="0" color="#4c1164" color.1="#000000" x="106.25" z="109.30555555555556" w="5" d="30" h="0" angle="90" />
+  <Ramp y="7.5" deltaY="0.5" yon="1000" thickness="0" color="#4c1164" color.1="#000000" x="101.25" z="109.30555555555556" w="5" d="30" h="0" angle="90" />
+  <Ramp y="4" deltaY="2" yon="1000" thickness="0" color="#551574" color.1="#000000" x="87.5" z="109.30555555555556" w="2.5" d="30" h="0" angle="270" />
+  <Ramp y="6" deltaY="1.5" yon="1000" thickness="0" color="#551574" color.1="#000000" x="91.25" z="109.30555555555556" w="5" d="30" h="0" angle="270" />
+  <Ramp y="7.5" deltaY="0.5" yon="1000" thickness="0" color="#551574" color.1="#000000" x="96.25" z="109.30555555555556" w="5" d="30" h="0" angle="270" />
+  <Incarnator y="30" cx="98.68055555555556" cz="79.30555555555556" angle="180" />
+  <Ramp y="0" deltaY="0.5" yon="1000" thickness="0" color="#450f5f" color.1="#000000" x="101.25" z="199.30555555555557" w="5" d="30" h="0" angle="270" />
+  <Ramp y="0.5" deltaY="1.5" yon="1000" thickness="0" color="#450f5f" color.1="#000000" x="106.25" z="199.30555555555557" w="5" d="30" h="0" angle="270" />
+  <Ramp y="2" deltaY="2" yon="1000" thickness="0" color="#450f5f" color.1="#000000" x="110" z="199.30555555555557" w="2.5" d="30" h="0" angle="270" />
+  <Ramp y="0" deltaY="0.5" yon="1000" thickness="0" color="#571679" color.1="#000000" x="96.25" z="199.30555555555557" w="5" d="30" h="0" angle="90" />
+  <Ramp y="0.5" deltaY="1.5" yon="1000" thickness="0" color="#571679" color.1="#000000" x="91.25" z="199.30555555555557" w="5" d="30" h="0" angle="90" />
+  <Ramp y="2" deltaY="2" yon="1000" thickness="0" color="#571679" color.1="#000000" x="87.5" z="199.30555555555557" w="2.5" d="30" h="0" angle="90" />
+  <Ramp y="4" deltaY="2" yon="1000" thickness="0" color="#4c1164" color.1="#000000" x="110" z="199.30555555555557" w="2.5" d="30" h="0" angle="90" />
+  <Ramp y="6" deltaY="1.5" yon="1000" thickness="0" color="#4c1164" color.1="#000000" x="106.25" z="199.30555555555557" w="5" d="30" h="0" angle="90" />
+  <Ramp y="7.5" deltaY="0.5" yon="1000" thickness="0" color="#4c1164" color.1="#000000" x="101.25" z="199.30555555555557" w="5" d="30" h="0" angle="90" />
+  <Ramp y="4" deltaY="2" yon="1000" thickness="0" color="#551574" color.1="#000000" x="87.5" z="199.30555555555557" w="2.5" d="30" h="0" angle="270" />
+  <Ramp y="6" deltaY="1.5" yon="1000" thickness="0" color="#551574" color.1="#000000" x="91.25" z="199.30555555555557" w="5" d="30" h="0" angle="270" />
+  <Ramp y="7.5" deltaY="0.5" yon="1000" thickness="0" color="#551574" color.1="#000000" x="96.25" z="199.30555555555557" w="5" d="30" h="0" angle="270" />
+  <Ramp y="0" deltaY="0.5" yon="1000" thickness="0" color="#571679" color.1="#000000" x="43.75" z="139.30555555555557" w="5" d="30" h="0" angle="90" />
+  <Ramp y="0.5" deltaY="1.5" yon="1000" thickness="0" color="#571679" color.1="#000000" x="38.75" z="139.30555555555557" w="5" d="30" h="0" angle="90" />
+  <Ramp y="2" deltaY="2" yon="1000" thickness="0" color="#571679" color.1="#000000" x="35" z="139.30555555555557" w="2.5" d="30" h="0" angle="90" />
+  <Ramp y="4" deltaY="2" yon="1000" thickness="0" color="#551574" color.1="#000000" x="35" z="139.30555555555557" w="2.5" d="30" h="0" angle="270" />
+  <Ramp y="6" deltaY="1.5" yon="1000" thickness="0" color="#551574" color.1="#000000" x="38.75" z="139.30555555555557" w="5" d="30" h="0" angle="270" />
+  <Ramp y="7.5" deltaY="0.5" yon="1000" thickness="0" color="#551574" color.1="#000000" x="43.75" z="139.30555555555557" w="5" d="30" h="0" angle="270" />
+  <Ramp y="0" deltaY="0.5" yon="1000" thickness="0" color="#571679" color.1="#000000" x="43.75" z="199.30555555555557" w="5" d="30" h="0" angle="90" />
+  <Ramp y="0.5" deltaY="1.5" yon="1000" thickness="0" color="#571679" color.1="#000000" x="38.75" z="199.30555555555557" w="5" d="30" h="0" angle="90" />
+  <Ramp y="2" deltaY="2" yon="1000" thickness="0" color="#571679" color.1="#000000" x="35" z="199.30555555555557" w="2.5" d="30" h="0" angle="90" />
+  <Ramp y="4" deltaY="2" yon="1000" thickness="0" color="#551574" color.1="#000000" x="35" z="199.30555555555557" w="2.5" d="30" h="0" angle="270" />
+  <Ramp y="6" deltaY="1.5" yon="1000" thickness="0" color="#551574" color.1="#000000" x="38.75" z="199.30555555555557" w="5" d="30" h="0" angle="270" />
+  <Ramp y="7.5" deltaY="0.5" yon="1000" thickness="0" color="#551574" color.1="#000000" x="43.75" z="199.30555555555557" w="5" d="30" h="0" angle="270" />
+  <Ramp y="0" deltaY="0.5" yon="1000" thickness="0" color="#450f5f" color.1="#000000" x="153.75" z="169.30555555555557" w="5" d="30" h="0" angle="270" />
+  <Ramp y="0.5" deltaY="1.5" yon="1000" thickness="0" color="#450f5f" color.1="#000000" x="158.75" z="169.30555555555557" w="5" d="30" h="0" angle="270" />
+  <Ramp y="2" deltaY="2" yon="1000" thickness="0" color="#450f5f" color.1="#000000" x="162.5" z="169.30555555555557" w="2.5" d="30" h="0" angle="270" />
+  <Ramp y="4" deltaY="2" yon="1000" thickness="0" color="#4c1164" color.1="#000000" x="162.5" z="169.30555555555557" w="2.5" d="30" h="0" angle="90" />
+  <Ramp y="6" deltaY="1.5" yon="1000" thickness="0" color="#4c1164" color.1="#000000" x="158.75" z="169.30555555555557" w="5" d="30" h="0" angle="90" />
+  <Ramp y="7.5" deltaY="0.5" yon="1000" thickness="0" color="#4c1164" color.1="#000000" x="153.75" z="169.30555555555557" w="5" d="30" h="0" angle="90" />
+  <Ramp y="0" deltaY="0.5" yon="1000" thickness="0" color="#450f5f" color.1="#000000" x="153.75" z="109.30555555555556" w="5" d="30" h="0" angle="270" />
+  <Ramp y="0.5" deltaY="1.5" yon="1000" thickness="0" color="#450f5f" color.1="#000000" x="158.75" z="109.30555555555556" w="5" d="30" h="0" angle="270" />
+  <Ramp y="2" deltaY="2" yon="1000" thickness="0" color="#450f5f" color.1="#000000" x="162.5" z="109.30555555555556" w="2.5" d="30" h="0" angle="270" />
+  <Ramp y="4" deltaY="2" yon="1000" thickness="0" color="#4c1164" color.1="#000000" x="162.5" z="109.30555555555556" w="2.5" d="30" h="0" angle="90" />
+  <Ramp y="6" deltaY="1.5" yon="1000" thickness="0" color="#4c1164" color.1="#000000" x="158.75" z="109.30555555555556" w="5" d="30" h="0" angle="90" />
+  <Ramp y="7.5" deltaY="0.5" yon="1000" thickness="0" color="#4c1164" color.1="#000000" x="153.75" z="109.30555555555556" w="5" d="30" h="0" angle="90" />
+  <Ramp y="0.25" deltaY="3.5" yon="1000" thickness="0" color="rgba(204,102,255,0.5)" color.1="#000000" x="81.25" z="199.30555555555557" w="7.5" d="7.5" h="0" angle="270" />
+  <Ramp y="0" deltaY="0.25" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="76.875" z="199.30555555555557" w="1.25" d="10" h="0" angle="270" />
+  <Ramp y="3.75" deltaY="0.25" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="85.625" z="199.30555555555557" w="1.25" d="10" h="0" angle="270" />
+  <Ramp y="0.25" deltaY="3.5" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="81.25" z="194.93055555555557" w="7.5" d="1.25" h="0" angle="270" />
+  <Ramp y="0.25" deltaY="3.5" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="81.25" z="203.68055555555557" w="7.5" d="1.25" h="0" angle="270" />
+  <Ramp y="0.25" deltaY="3.5" yon="1000" thickness="0"  color="rgba(204,102,255,0.5)" color.1="#000000" x="81.25" z="109.30555555555556" w="7.5" d="7.5" h="0" angle="270" />
+  <Ramp y="0" deltaY="0.25" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="76.875" z="109.30555555555556" w="1.25" d="10" h="0" angle="270" />
+  <Ramp y="3.75" deltaY="0.25" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="85.625" z="109.30555555555556" w="1.25" d="10" h="0" angle="270" />
+  <Ramp y="0.25" deltaY="3.5" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="81.25" z="104.93055555555556" w="7.5" d="1.25" h="0" angle="270" />
+  <Ramp y="0.25" deltaY="3.5" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="81.25" z="113.68055555555556" w="7.5" d="1.25" h="0" angle="270" />
+  <Ramp y="0.25" deltaY="3.5" yon="1000" thickness="0"  color="rgba(204,102,255,0.5)" color.1="#000000" x="28.75" z="139.30555555555557" w="7.5" d="7.5" h="0" angle="270" />
+  <Ramp y="0" deltaY="0.25" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="24.375" z="139.30555555555557" w="1.25" d="10" h="0" angle="270" />
+  <Ramp y="3.75" deltaY="0.25" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="33.125" z="139.30555555555557" w="1.25" d="10" h="0" angle="270" />
+  <Ramp y="0.25" deltaY="3.5" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="28.75" z="134.93055555555557" w="7.5" d="1.25" h="0" angle="270" />
+  <Ramp y="0.25" deltaY="3.5" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="28.75" z="143.68055555555557" w="7.5" d="1.25" h="0" angle="270" />
+  <Ramp y="0.25" deltaY="3.5" yon="1000" thickness="0"  color="rgba(204,102,255,0.5)" color.1="#000000" x="28.75" z="199.30555555555557" w="7.5" d="7.5" h="0" angle="270" />
+  <Ramp y="0" deltaY="0.25" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="24.375" z="199.30555555555557" w="1.25" d="10" h="0" angle="270" />
+  <Ramp y="3.75" deltaY="0.25" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="33.125" z="199.30555555555557" w="1.25" d="10" h="0" angle="270" />
+  <Ramp y="0.25" deltaY="3.5" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="28.75" z="194.93055555555557" w="7.5" d="1.25" h="0" angle="270" />
+  <Ramp y="0.25" deltaY="3.5" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="28.75" z="203.68055555555557" w="7.5" d="1.25" h="0" angle="270" />
+  <Ramp y="3.75" deltaY="0.25" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="111.875" z="199.30555555555557" w="1.25" d="10" h="0" angle="90" />
+  <Ramp y="0.25" deltaY="3.5" yon="1000" thickness="0"  color="rgba(204,102,255,0.5)" color.1="#000000" x="116.25" z="199.30555555555557" w="7.5" d="7.5" h="0" angle="90" />
+  <Ramp y="0" deltaY="0.25" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="120.625" z="199.30555555555557" w="1.25" d="10" h="0" angle="90" />
+  <Ramp y="0.25" deltaY="3.5" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="116.25" z="194.93055555555557" w="7.5" d="1.25" h="0" angle="90" />
+  <Ramp y="0.25" deltaY="3.5" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="116.25" z="203.68055555555557" w="7.5" d="1.25" h="0" angle="90" />
+  <Ramp y="3.75" deltaY="0.25" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="111.875" z="109.30555555555556" w="1.25" d="10" h="0" angle="90" />
+  <Ramp y="0.25" deltaY="3.5" yon="1000" thickness="0"  color="rgba(204,102,255,0.5)" color.1="#000000" x="116.25" z="109.30555555555556" w="7.5" d="7.5" h="0" angle="90" />
+  <Ramp y="0" deltaY="0.25" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="120.625" z="109.30555555555556" w="1.25" d="10" h="0" angle="90" />
+  <Ramp y="0.25" deltaY="3.5" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="116.25" z="104.93055555555556" w="7.5" d="1.25" h="0" angle="90" />
+  <Ramp y="0.25" deltaY="3.5" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="116.25" z="113.68055555555556" w="7.5" d="1.25" h="0" angle="90" />
+  <Ramp y="3.75" deltaY="0.25" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="164.375" z="109.30555555555556" w="1.25" d="10" h="0" angle="90" />
+  <Ramp y="0.25" deltaY="3.5" yon="1000" thickness="0"  color="rgba(204,102,255,0.5)" color.1="#000000" x="168.75" z="109.30555555555556" w="7.5" d="7.5" h="0" angle="90" />
+  <Ramp y="0" deltaY="0.25" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="173.125" z="109.30555555555556" w="1.25" d="10" h="0" angle="90" />
+  <Ramp y="0.25" deltaY="3.5" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="168.75" z="104.93055555555556" w="7.5" d="1.25" h="0" angle="90" />
+  <Ramp y="0.25" deltaY="3.5" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="168.75" z="113.68055555555556" w="7.5" d="1.25" h="0" angle="90" />
+  <Ramp y="3.75" deltaY="0.25" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="164.375" z="169.30555555555557" w="1.25" d="10" h="0" angle="90" />
+  <Ramp y="0.25" deltaY="3.5" yon="1000" thickness="0"  color="rgba(204,102,255,0.5)" color.1="#000000" x="168.75" z="169.30555555555557" w="7.5" d="7.5" h="0" angle="90" />
+  <Ramp y="0" deltaY="0.25" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="173.125" z="169.30555555555557" w="1.25" d="10" h="0" angle="90" />
+  <Ramp y="0.25" deltaY="3.5" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="168.75" z="164.93055555555557" w="7.5" d="1.25" h="0" angle="90" />
+  <Ramp y="0.25" deltaY="3.5" yon="1000" thickness="0" color="#e8b7ff" color.1="#000000" x="168.75" z="173.68055555555557" w="7.5" d="1.25" h="0" angle="90" />
+  <Teleporter y="10" shape="bspFloorFrame" scale="0.25" group="@pad" mask="0" spin="true" speed="4" start="@n1" stop="@s1" color="#e8b7ff" color.1="#728098" cx="98.75" cz="199.30555555555557" angle="270" />
+  <Teleporter y="10" shape="bspFloorFrame" scale="0.25" group="@pad" mask="0" spin="true" speed="4" start="@s1" stop="@n1" color="#d783ff" color.1="#728098" cx="98.75" cz="199.30555555555557" angle="270" />
+  <And in="@start" out="@s1" />
+  <Timer in="@n1" out="@s1" wait="400" />
+  <Goody shape="bspMissile" y="10" speed="6" missiles="0" start="@s1" stop="@n1" out="@n1" color="#e62300" color.1="#d783ff" cx="98.75" cz="199.30555555555557" angle="180" />
+  <Goody shape="bspMissile" y="10" yon="0.01" scale="5" start="@s1" out="@n1" missiles="5" color="#e62300" color.1="#d783ff" cx="98.75" cz="199.30555555555557" angle="180" />
+  <Teleporter y="10" shape="bspFloorFrame" scale="0.25" group="@pad" mask="0" spin="true" speed="4" start="@n2" stop="@s2" color="#e8b7ff" color.1="#728098" cx="98.75" cz="109.30555555555556" angle="270" />
+  <Teleporter y="10" shape="bspFloorFrame" scale="0.25" group="@pad" mask="0" spin="true" speed="4" start="@s2" stop="@n2" color="#d783ff" color.1="#728098" cx="98.75" cz="109.30555555555556" angle="270" />
+  <And in="@start" out="@s2" />
+  <Timer in="@n2" out="@s2" wait="400" />
+  <Goody shape="bspMissile" y="10" speed="6" missiles="0" start="@s2" stop="@n2" out="@n2" color="#e62300" color.1="#d783ff" cx="98.75" cz="109.30555555555556" angle="180" />
+  <Goody shape="bspMissile" y="10" yon="0.01" scale="5" start="@s2" out="@n2" missiles="5" color="#e62300" color.1="#d783ff" cx="98.75" cz="109.30555555555556" angle="180" />
+  <Teleporter y="4" shape="bspFloorFrame" scale="0.25" group="@pad" mask="0" spin="true" speed="4" start="@n5" stop="@s5" color="#e8b7ff" color.1="#728098" cx="98.75" cz="154.30555555555557" angle="270" />
+  <Teleporter y="4" shape="bspFloorFrame" scale="0.25" group="@pad" mask="0" spin="true" speed="4" start="@s5" stop="@n5" color="#d783ff" color.1="#728098" cx="98.75" cz="154.30555555555557" angle="270" />
+  <And in="@start" out="@s5" />
+  <Timer in="@n5" out="@s5" wait="600" />
+  <Goody shape="1002" y="4" speed="6" missiles="0" start="@s5" stop="@n5" out="@n5" color="#e8b7ff" color.1="#d783ff" cx="98.75" cz="154.30555555555557" angle="180" />
+  <Goody shape="bspGrenade" y="4" yon="0.01" scale="5" start="@s5" out="@n5" missiles="5" grenades="12" color="#e8b7ff" color.1="#d783ff" cx="98.75" cz="154.30555555555557" angle="180" />
+  <Field shape="1008" scale="4" visible="true" isAmbient="false" color="#212121" color.1="#000000" x="168.75" z="173.68055555555557" w="7.5" d="1.25" h="0" cx="78.75" cz="169.30555555555557" angle="180" />
+  <Field shape="1008" scale="4" visible="true" isAmbient="false" color="#212121" color.1="#000000" x="168.75" z="173.68055555555557" w="7.5" d="1.25" h="0" cx="118.75" cz="139.30555555555557" angle="180" />
+  <Field shape="1008" scale="4" visible="true" isAmbient="false" color="#212121" color.1="#000000" x="168.75" z="173.68055555555557" w="7.5" d="1.25" h="0" cx="158.75" cz="139.30555555555557" angle="180" />
+  <Field shape="1008" scale="4" visible="true" isAmbient="false" color="#212121" color.1="#000000" x="168.75" z="173.68055555555557" w="7.5" d="1.25" h="0" cx="33.75" cz="169.30555555555557" angle="180" />
+  <Field shape="1008" scale="4" visible="true" isAmbient="false" color="#212121" color.1="#000000" x="168.75" z="173.68055555555557" w="7.5" d="1.25" h="0" cx="46.25" cz="109.30555555555556" angle="180" />
+  <Field shape="1008" scale="4" visible="true" isAmbient="false" color="#212121" color.1="#000000" x="168.75" z="173.68055555555557" w="7.5" d="1.25" h="0" cx="128.75" cz="84.30555555555556" angle="180" />
+  <Field shape="1008" scale="4" visible="true" isAmbient="false" color="#212121" color.1="#000000" x="168.75" z="173.68055555555557" w="7.5" d="1.25" h="0" cx="151.25" cz="199.30555555555557" angle="180" />
+  <Field shape="1008" scale="4" visible="true" isAmbient="false" color="#212121" color.1="#000000" x="168.75" z="173.68055555555557" w="7.5" d="1.25" h="0" cx="68.75" cz="224.30555555555557" angle="180" />
+  <Teleporter y="0" shape="bspFloorFrame" scale="0.55" group="@pad" mask="0" speed="0" start="@n10" stop="@s10" color="#2e0743" color.1="#728098" cx="46.25" cz="109.30555555555556" angle="270" />
+  <Teleporter y="0" shape="bspFloorFrame" scale="0.55" group="@pad" mask="0" speed="0" start="@s10" stop="@n10" color="#d783ff" color.1="#728098" cx="46.25" cz="109.30555555555556" angle="270" />
+  <And in="@start" out="@s10" />
+  <Timer in="@n10" out="@s10" wait="300" />
+  <Goody shape="bspGrenade" y="2" start="@s10" out="@n10" grenades="6" color="#e8b7ff" color.1="#d783ff" cx="46.25" cz="109.30555555555556" angle="180" />
+  <Teleporter y="0" shape="bspFloorFrame" scale="0.55" group="@pad" mask="0" speed="0" start="@n11" stop="@s11" color="#2e0743" color.1="#728098" cx="68.75" cz="224.30555555555557" angle="270" />
+  <Teleporter y="0" shape="bspFloorFrame" scale="0.55" group="@pad" mask="0" speed="0" start="@s11" stop="@n11" color="#d783ff" color.1="#728098" cx="68.75" cz="224.30555555555557" angle="270" />
+  <And in="@start" out="@s11" />
+  <Timer in="@n11" out="@s11" wait="300" />
+  <Goody shape="bspGrenade" y="2" start="@s11" out="@n11" grenades="6" color="#e8b7ff" color.1="#d783ff" cx="68.75" cz="224.30555555555557" angle="180" />
+  <Teleporter y="0" shape="bspFloorFrame" scale="0.55" group="@pad" mask="0" speed="0" start="@n12" stop="@s12" color="#2e0743" color.1="#728098" cx="78.75" cz="169.30555555555557" angle="270" />
+  <Teleporter y="0" shape="bspFloorFrame" scale="0.55" group="@pad" mask="0" speed="0" start="@s12" stop="@n12" color="#d783ff" color.1="#728098" cx="78.75" cz="169.30555555555557" angle="270" />
+  <And in="@start" out="@s12" />
+  <Timer in="@n12" out="@s12" wait="300" />
+  <Goody shape="bspGrenade" y="2" start="@s12" out="@n12" grenades="6" color="#e8b7ff" color.1="#d783ff" cx="78.75" cz="169.30555555555557" angle="180" />
+  <Teleporter y="0" shape="bspFloorFrame" scale="0.55" group="@pad" mask="0" speed="0" start="@n13" stop="@s13" color="#2e0743" color.1="#728098" cx="118.75" cz="139.30555555555557" angle="270" />
+  <Teleporter y="0" shape="bspFloorFrame" scale="0.55" group="@pad" mask="0" speed="0" start="@s13" stop="@n13" color="#d783ff" color.1="#728098" cx="118.75" cz="139.30555555555557" angle="270" />
+  <And in="@start" out="@s13" />
+  <Timer in="@n13" out="@s13" wait="300" />
+  <Goody shape="bspGrenade" y="2" start="@s13" out="@n13" grenades="6" color="#e8b7ff" color.1="#d783ff" cx="118.75" cz="139.30555555555557" angle="180" />
+  <Teleporter y="0" shape="bspFloorFrame" scale="0.55" group="@pad" mask="0" speed="0" start="@n14" stop="@s14" color="#2e0743" color.1="#728098" cx="151.25" cz="199.30555555555557" angle="270" />
+  <Teleporter y="0" shape="bspFloorFrame" scale="0.55" group="@pad" mask="0" speed="0" start="@s14" stop="@n14" color="#d783ff" color.1="#728098" cx="151.25" cz="199.30555555555557" angle="270" />
+  <And in="@start" out="@s14" />
+  <Timer in="@n14" out="@s14" wait="300" />
+  <Goody shape="bspGrenade" y="2" start="@s14" out="@n14" grenades="6" color="#e8b7ff" color.1="#d783ff" cx="151.25" cz="199.30555555555557" angle="180" />
+  <Teleporter y="0" shape="bspFloorFrame" scale="0.55" group="@pad" mask="0" speed="0" start="@n15" stop="@s15" color="#2e0743" color.1="#728098" cx="128.75" cz="84.30555555555556" angle="270" />
+  <Teleporter y="0" shape="bspFloorFrame" scale="0.55" group="@pad" mask="0" speed="0" start="@s15" stop="@n15" color="#d783ff" color.1="#728098" cx="128.75" cz="84.30555555555556" angle="270" />
+  <And in="@start" out="@s15" />
+  <Timer in="@n15" out="@s15" wait="300" />
+  <Goody shape="bspGrenade" y="2" start="@s15" out="@n15" grenades="6" color="#e8b7ff" color.1="#d783ff" cx="128.75" cz="84.30555555555556" angle="180" />
+  <Teleporter y="0" shape="bspFloorFrame" scale="0.55" group="@pad" mask="0" speed="0" start="@n16" stop="@s16" color="#2e0743" color.1="#728098" cx="158.75" cz="139.30555555555557" angle="270" />
+  <Teleporter y="0" shape="bspFloorFrame" scale="0.55" group="@pad" mask="0" speed="0" start="@s16" stop="@n16" color="#d783ff" color.1="#728098" cx="158.75" cz="139.30555555555557" angle="270" />
+  <And in="@start" out="@s16" />
+  <Timer in="@n16" out="@s16" wait="300" />
+  <Goody shape="bspMissile" y="2" start="@s16" out="@n16" missiles="6" color="#e8b7ff" color.1="#d783ff" cx="158.75" cz="139.30555555555557" angle="180" />
+  <Ramp y="0" deltaY="0.125" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="99.375" z="169.30555555555557" w="1.25" d="30" h="0" angle="270" />
+  <Ramp y="0.5" deltaY="1.5" yon="1000" thickness="0" color="rgba(204,102,255,0.5)" color.1="#000000" x="106.25" z="169.30555555555557" w="5" d="27.5" h="0" angle="270" />
+  <Ramp y="2" deltaY="2" yon="1000" thickness="0" color="rgba(204,102,255,0.5)" color.1="#000000" x="110" z="169.30555555555557" w="2.5" d="27.5" h="0" angle="270" />
+  <Ramp y="0.125" deltaY="0.375" yon="1000" thickness="0" color="rgba(204,102,255,0.5)" color.1="#000000" x="101.875" z="169.30555555555557" w="3.75" d="27.5" h="0" angle="270" />
+  <Ramp y="0.125" deltaY="0.375" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="101.875" z="154.93055555555557" w="3.75" d="1.25" h="0" angle="270" />
+  <Ramp y="0.125" deltaY="0.375" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="101.875" z="183.68055555555557" w="3.75" d="1.25" h="0" angle="270" />
+  <Ramp y="0.5" deltaY="1.5" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="106.25" z="154.93055555555557" w="5" d="1.25" h="0" angle="270" />
+  <Ramp y="0.5" deltaY="1.5" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="106.25" z="183.68055555555557" w="5" d="1.25" h="0" angle="270" />
+  <Ramp y="2" deltaY="2" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="110" z="154.93055555555557" w="2.5" d="1.25" h="0" angle="270" />
+  <Ramp y="2" deltaY="2" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="110" z="183.68055555555557" w="2.5" d="1.25" h="0" angle="270" />
+  <Ramp y="4" deltaY="2" yon="1000" thickness="0" color="rgba(204,102,255,0.5)" color.1="#000000" x="110" z="169.30555555555557" w="2.5" d="27.5" h="0" angle="90" />
+  <Ramp y="7.5" deltaY="0.375" yon="1000" thickness="0" color="rgba(204,102,255,0.5)" color.1="#000000" x="101.875" z="169.30555555555557" w="3.75" d="27.5" h="0" angle="90" />
+  <Ramp y="6" deltaY="1.5" yon="1000" thickness="0" color="rgba(204,102,255,0.5)" color.1="#000000" x="106.25" z="169.30555555555557" w="5" d="27.5" h="0" angle="90" />
+  <Ramp y="7.875" deltaY="0.125" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="99.375" z="169.30555555555557" w="1.25" d="30" h="0" angle="90" />
+  <Ramp y="7.5" deltaY="0.375" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="101.875" z="154.93055555555557" w="3.75" d="1.25" h="0" angle="90" />
+  <Ramp y="7.5" deltaY="0.375" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="101.875" z="183.68055555555557" w="3.75" d="1.25" h="0" angle="90" />
+  <Ramp y="6" deltaY="1.5" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="106.25" z="154.93055555555557" w="5" d="1.25" h="0" angle="90" />
+  <Ramp y="6" deltaY="1.5" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="106.25" z="183.68055555555557" w="5" d="1.25" h="0" angle="90" />
+  <Ramp y="4" deltaY="2" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="110" z="154.93055555555557" w="2.5" d="1.25" h="0" angle="90" />
+  <Ramp y="4" deltaY="2" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="110" z="183.68055555555557" w="2.5" d="1.25" h="0" angle="90" />
+  <Ramp y="0" deltaY="0.125" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="98.125" z="139.30555555555557" w="1.25" d="30" h="0" angle="90" />
+  <Ramp y="0.125" deltaY="0.375" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="95.625" z="124.93055555555556" w="3.75" d="1.25" h="0" angle="90" />
+  <Ramp y="2" deltaY="2" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="87.5" z="124.93055555555556" w="2.5" d="1.25" h="0" angle="90" />
+  <Ramp y="0.5" deltaY="1.5" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="91.25" z="124.93055555555556" w="5" d="1.25" h="0" angle="90" />
+  <Ramp y="0.125" deltaY="0.375" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="95.625" z="153.68055555555557" w="3.75" d="1.25" h="0" angle="90" />
+  <Ramp y="0.5" deltaY="1.5" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="91.25" z="153.68055555555557" w="5" d="1.25" h="0" angle="90" />
+  <Ramp y="0.125" deltaY="0.375" yon="1000" thickness="0" color="rgba(204,102,255,0.49)" color.1="#000000" x="95.625" z="139.30555555555557" w="3.75" d="27.5" h="0" angle="90" />
+  <Ramp y="0.5" deltaY="1.5" yon="1000" thickness="0" color="rgba(204,102,255,0.49)" color.1="#000000" x="91.25" z="139.30555555555557" w="5" d="27.5" h="0" angle="90" />
+  <Ramp y="2" deltaY="2" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="87.5" z="153.68055555555557" w="2.5" d="1.25" h="0" angle="90" />
+  <Ramp y="2" deltaY="2" yon="1000" thickness="0" color="rgba(204,102,255,0.49)" color.1="#000000" x="87.5" z="139.30555555555557" w="2.5" d="27.5" h="0" angle="90" />
+  <Ramp y="7.875" deltaY="0.125" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="98.125" z="139.30555555555557" w="1.25" d="30" h="0" angle="270" />
+  <Ramp y="7.5" deltaY="0.375" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="95.625" z="124.93055555555556" w="3.75" d="1.25" h="0" angle="270" />
+  <Ramp y="6" deltaY="1.5" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="91.25" z="124.93055555555556" w="5" d="1.25" h="0" angle="270" />
+  <Ramp y="4" deltaY="2" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="87.5" z="124.93055555555556" w="2.5" d="1.25" h="0" angle="270" />
+  <Ramp y="7.5" deltaY="0.375" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="95.625" z="153.68055555555557" w="3.75" d="1.25" h="0" angle="270" />
+  <Ramp y="6" deltaY="1.5" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="91.25" z="153.68055555555557" w="5" d="1.25" h="0" angle="270" />
+  <Ramp y="4" deltaY="2" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="87.5" z="153.68055555555557" w="2.5" d="1.25" h="0" angle="270" />
+  <Ramp y="4" deltaY="2" yon="1000" thickness="0" color="rgba(204,102,255,0.49)" color.1="#000000" x="87.5" z="139.30555555555557" w="2.5" d="27.5" h="0" angle="270" />
+  <Ramp y="6" deltaY="1.5" yon="1000" thickness="0" color="rgba(204,102,255,0.49)" color.1="#000000" x="91.25" z="139.30555555555557" w="5" d="27.5" h="0" angle="270" />
+  <Ramp y="7.5" deltaY="0.375" yon="1000" thickness="0" color="rgba(204,102,255,0.49)" color.1="#000000" x="95.625" z="139.30555555555557" w="3.75" d="27.5" h="0" angle="270" />
+  <Ramp y="0" deltaY="0.125" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="150.625" z="139.30555555555557" w="1.25" d="30" h="0" angle="90" />
+  <Ramp y="0.125" deltaY="0.375" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="148.125" z="124.93055555555556" w="3.75" d="1.25" h="0" angle="90" />
+  <Ramp y="2" deltaY="2" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="140" z="124.93055555555556" w="2.5" d="1.25" h="0" angle="90" />
+  <Ramp y="0.5" deltaY="1.5" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="143.75" z="124.93055555555556" w="5" d="1.25" h="0" angle="90" />
+  <Ramp y="0.125" deltaY="0.375" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="148.125" z="153.68055555555557" w="3.75" d="1.25" h="0" angle="90" />
+  <Ramp y="0.5" deltaY="1.5" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="143.75" z="153.68055555555557" w="5" d="1.25" h="0" angle="90" />
+  <Ramp y="0.125" deltaY="0.375" yon="1000" thickness="0" color="rgba(204,102,255,0.49)" color.1="#000000" x="148.125" z="139.30555555555557" w="3.75" d="27.5" h="0" angle="90" />
+  <Ramp y="0.5" deltaY="1.5" yon="1000" thickness="0" color="rgba(204,102,255,0.49)" color.1="#000000" x="143.75" z="139.30555555555557" w="5" d="27.5" h="0" angle="90" />
+  <Ramp y="2" deltaY="2" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="140" z="153.68055555555557" w="2.5" d="1.25" h="0" angle="90" />
+  <Ramp y="2" deltaY="2" yon="1000" thickness="0" color="rgba(204,102,255,0.49)" color.1="#000000" x="140" z="139.30555555555557" w="2.5" d="27.5" h="0" angle="90" />
+  <Ramp y="7.875" deltaY="0.125" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="150.625" z="139.30555555555557" w="1.25" d="30" h="0" angle="270" />
+  <Ramp y="7.5" deltaY="0.375" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="148.125" z="124.93055555555556" w="3.75" d="1.25" h="0" angle="270" />
+  <Ramp y="6" deltaY="1.5" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="143.75" z="124.93055555555556" w="5" d="1.25" h="0" angle="270" />
+  <Ramp y="4" deltaY="2" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="140" z="124.93055555555556" w="2.5" d="1.25" h="0" angle="270" />
+  <Ramp y="7.5" deltaY="0.375" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="148.125" z="153.68055555555557" w="3.75" d="1.25" h="0" angle="270" />
+  <Ramp y="6" deltaY="1.5" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="143.75" z="153.68055555555557" w="5" d="1.25" h="0" angle="270" />
+  <Ramp y="4" deltaY="2" yon="1000" thickness="0" color="#d783ff" color.1="#000000" x="140" z="153.68055555555557" w="2.5" d="1.25" h="0" angle="270" />
+  <Ramp y="4" deltaY="2" yon="1000" thickness="0" color="rgba(204,102,255,0.49)" color.1="#000000" x="140" z="139.30555555555557" w="2.5" d="27.5" h="0" angle="270" />
+  <Ramp y="6" deltaY="1.5" yon="1000" thickness="0" color="rgba(204,102,255,0.49)" color.1="#000000" x="143.75" z="139.30555555555557" w="5" d="27.5" h="0" angle="270" />
+  <Ramp y="7.5" deltaY="0.375" yon="1000" thickness="0" color="rgba(204,102,255,0.49)" color.1="#000000" x="148.125" z="139.30555555555557" w="3.75" d="27.5" h="0" angle="270" />
+  <Teleporter y="9.5" shape="bspFloorFrame" scale="0.25" group="@pad" mask="0" spin="true" speed="4" start="@n20" stop="@s20" color="#e8b7ff" color.1="#728098" cx="146.25" cz="139.30555555555557" angle="270" />
+  <Teleporter y="9.5" shape="bspFloorFrame" scale="0.25" group="@pad" mask="0" spin="true" speed="4" start="@s20" stop="@n20" color="#d783ff" color.1="#728098" cx="146.25" cz="139.30555555555557" angle="270" />
+  <And in="@start" out="@s20" />
+  <Timer in="@n20" out="@s20" wait="400" />
+  <Goody shape="bspGrenade" y="9.5" speed="6" grenades="0" start="@s20" stop="@n20" out="@n20" color="#e62300" color.1="#fdf200" cx="146.25" cz="139.30555555555557" angle="180" />
+  <Goody shape="bspGrenade" y="9.5" yon="0.01" scale="5" start="@s20" out="@n20" grenades="6" color="#e62300" color.1="#fdf200" cx="146.25" cz="139.30555555555557" angle="180" />
+  <Teleporter y="4" shape="bspFloorFrame" scale="0.25" group="@pad" mask="0" spin="true" speed="4" start="@n22" stop="@s22" color="#e8b7ff" color.1="#728098" cx="98.75" cz="109.30555555555556" angle="270" />
+  <Teleporter y="4" shape="bspFloorFrame" scale="0.25" group="@pad" mask="0" spin="true" speed="4" start="@s22" stop="@n22" color="#d783ff" color.1="#728098" cx="98.75" cz="109.30555555555556" angle="270" />
+  <And in="@start" out="@s22" />
+  <Timer in="@n22" out="@s22" wait="450" />
+  <Goody shape="bspGrenade" y="4" speed="6" grenades="0" start="@s22" stop="@n22" out="@n22" color="#e62300" color.1="#fdf200" cx="98.75" cz="109.30555555555556" angle="180" />
+  <Goody shape="bspGrenade" y="4" yon="0.01" scale="5" start="@s22" out="@n22" grenades="6" color="#e62300" color.1="#fdf200" cx="98.75" cz="109.30555555555556" angle="180" />
+  <Teleporter y="4" shape="bspFloorFrame" scale="0.25" group="@pad" mask="0" spin="true" speed="4" start="@n23" stop="@s23" color="#e8b7ff" color.1="#728098" cx="98.75" cz="199.30555555555557" angle="270" />
+  <Teleporter y="4" shape="bspFloorFrame" scale="0.25" group="@pad" mask="0" spin="true" speed="4" start="@s23" stop="@n23" color="#d783ff" color.1="#728098" cx="98.75" cz="199.30555555555557" angle="270" />
+  <And in="@start" out="@s23" />
+  <Timer in="@n23" out="@s23" wait="450" />
+  <Goody shape="bspGrenade" y="4" speed="6" grenades="0" start="@s23" stop="@n23" out="@n23" color="#e62300" color.1="#fdf200" cx="98.75" cz="199.30555555555557" angle="180" />
+  <Goody shape="bspGrenade" y="4" yon="0.01" scale="5" start="@s23" out="@n23" grenades="6" color="#e62300" color.1="#fdf200" cx="98.75" cz="199.30555555555557" angle="180" />
+  <Teleporter y="30" shape="0" group="@recenter" mask="0" spin="false" color="#f73096" color.1="#000000" cx="105" cz="169.30555555555557" angle="270" />
+  <Teleporter y="30" shape="0" group="@recenter" mask="0" spin="false" color="#f73096" color.1="#000000" cx="92.5" cz="139.93055555555557" angle="270" />
+  <Teleporter group="-1" y="-30" activeRange="33 * 5" deadRange="26 * 5" destGroup="@recenter" shape="0" spin="false" color="#f73096" color.1="#000000" cx="98.75" cz="154.30555555555557" angle="225" />
+  <Incarnator y="30" cx="98.81944444444444" cz="229.30555555555557" angle="0" />
+  <Incarnator y="30" cx="28.819444444444446" cz="91.80555555555556" angle="135" />
+  <Incarnator y="30" cx="168.81944444444446" cz="216.80555555555557" angle="315" />
+  <Incarnator y="30" cx="18.819444444444446" cz="229.30555555555557" angle="45" />
+  <Incarnator y="30" cx="178.75" cz="79.30555555555556" angle="225" />
+  <Incarnator y="30" cx="18.75" cz="169.30555555555557" angle="90" />
+  <Incarnator y="30" cx="173.75" cz="139.30555555555557" angle="270" />
+  <set wallYon="0.01" />
+  <set wallHeight="0" />
+  <Wall color="#bfe9ff" color.1="#000000" x="98.75" z="154.30555555555557" w="2.5" d="2.5" h="0" y="7.85" />
+  <set wallYon="defaultYon" />
+</map>

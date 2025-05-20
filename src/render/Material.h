@@ -8,6 +8,8 @@
 #include <algorithm>
 #include <cmath>
 
+#define MAX_SHININESS_EXP 1024.0f
+
 class Material {
 public:
     void* operator new(std::size_t) = delete;
@@ -60,11 +62,11 @@ public:
         return Material(color, specular.WithA(s));
     }
     inline Material WithShininessVar(short index) {
-        Fixed shininess = ReadFixedVar(index);
+        Fixed shininess = ReadFixedMaterialVar(index);
         return Material(color, specular.WithA(ConstrainShininess(shininess)));
     }
     inline Material WithShininessVar(const char *s) {
-        Fixed shininess = ReadFixedVar(s);
+        Fixed shininess = ReadFixedMaterialVar(s);
         return Material(color, specular.WithA(ConstrainShininess(shininess)));
     }
 private:
@@ -74,10 +76,10 @@ private:
     /**
      * Constrain input values for shininess.
      *
-     * @param shininess  The fixed-point shininess value. Valid range is 0 to 2048.
+     * @param shininess  The fixed-point shininess value. Valid range is 0 to MAX_SHININESS_EXP.
      * @return the nearest approximate value that we can cram into 8 bits, i.e. scaled to a range of 0 - 255
      */
     inline uint8_t ConstrainShininess(Fixed shininess) {
-        return std::round(std::clamp(ToFloat(shininess), 0.0f, 2048.0f) * 255 / 2048.0f);
+        return std::round(std::clamp(ToFloat(shininess), 0.0f, MAX_SHININESS_EXP) * 255 / MAX_SHININESS_EXP);
     }
 };

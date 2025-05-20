@@ -439,7 +439,12 @@ CAbstractActor *CAbstractActor::EndScript() {
     teamMask = 1 << teamColor;
 
     partScale = ReadFixedVar(iScale);
-    partYon = ReadFixedVar(iYon);
+    
+    Fixed defaultYon = ReadFixedVar(iDefaultYon);
+    Fixed activeYon = ReadFixedVar(iYon);
+    partYon = (activeYon != defaultYon)
+        ? activeYon
+        : 0;
 
     traction = ReadFixedVar(iTraction);
     friction = ReadFixedVar(iFriction);
@@ -503,7 +508,8 @@ void CAbstractActor::BuildPartProximityList(Fixed *origin, Fixed range, MaskType
 
             while (head->next) {
                 anActor = head->me;
-                if (anActor->searchCount != searchCount) {
+                if (anActor->isInGame &&
+                    anActor->searchCount != searchCount) {
                     anActor->searchCount = searchCount;
                     if (anActor->maskBits & filterMask) {
                         for (thePart = anActor->partList; *thePart; thePart++) {
