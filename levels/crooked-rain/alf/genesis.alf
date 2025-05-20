@@ -1,4 +1,5 @@
 <map>
+  <set defaultYon="1000" />
   <set wallYon="1000" wallHeight="1.5" />
   <Wall color="#367a7b" color.1="#000000" x="33.75" z="84.30555555555556" w="20" d="10" h="0" />
   <set wallHeight="1.5" />
@@ -118,7 +119,7 @@
   <Wall color="#8aabac" color.1="#000000" x="68.75" z="91.80555555555556" w="10" d="5" h="0" />
   <set wallHeight="1.5" />
   <Wall color="#8aabac" color.1="#000000" x="71.25" z="96.80555555555556" w="5" d="5" h="0" />
-  <Walker yon="1000" y="30" cx="48.75" cz="84.30555555555556" angle="135" />
+  <Incarnator y="30" cx="48.75" cz="84.30555555555556" angle="135" />
   <Ramp y="3" deltaY="3" yon="1000" thickness="0" color="#abc4c4" color.1="#000000" x="98.75" z="114.30555555555556" w="10" d="10" h="0" angle="180" />
   <Ramp y="3" deltaY="3" yon="1000" thickness="0" color="#abc4c4" color.1="#000000" x="33.75" z="119.30555555555556" w="10" d="10" h="0" angle="180" />
   <Ramp y="3" deltaY="3" yon="1000" thickness="0" color="#abc4c4" color.1="#000000" x="33.75" z="179.30555555555557" w="10" d="10" h="0" angle="180" />
@@ -168,13 +169,13 @@
   <Field visible="true" isAmbient="false" color="#8aabac" color.1="#000000" x="163.75" z="69.30555555555556" w="2.5" d="2.5" h="0" cx="147.5" cz="199.375" angle="90" y="3.001" />
   <set wallHeight="0" />
   <Field visible="true" isAmbient="false" color="#8aabac" color.1="#000000" x="33.75" z="69.30555555555556" w="2.5" d="2.5" h="0" cx="147.5" cz="199.375" angle="90" y="3.001" />
-  <Walker yon="1000" y="30" cx="148.75" cz="184.30555555555557" angle="315" />
-  <Walker yon="1000" y="30" cx="48.75" cz="184.30555555555557" angle="45" />
-  <Walker yon="1000" y="30" cx="148.75" cz="84.30555555555556" angle="225" />
-  <Walker yon="1000" y="30" cx="8.75" cz="134.30555555555557" angle="90" />
-  <Walker yon="1000" y="30" cx="188.75" cz="134.30555555555557" angle="270" />
-  <Walker yon="1000" y="30" cx="98.68055555555556" cz="44.30555555555556" angle="180" />
-  <Walker yon="1000" y="30" cx="98.68055555555556" cz="224.30555555555557" angle="0" />
+  <Incarnator y="30" cx="148.75" cz="184.30555555555557" angle="315" />
+  <Incarnator y="30" cx="48.75" cz="184.30555555555557" angle="45" />
+  <Incarnator y="30" cx="148.75" cz="84.30555555555556" angle="225" />
+  <Incarnator y="30" cx="8.75" cz="134.30555555555557" angle="90" />
+  <Incarnator y="30" cx="188.75" cz="134.30555555555557" angle="270" />
+  <Incarnator y="30" cx="98.68055555555556" cz="44.30555555555556" angle="180" />
+  <Incarnator y="30" cx="98.68055555555556" cz="224.30555555555557" angle="0" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="550" />
@@ -230,12 +231,4 @@
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="400" />
   <Goody shape="bspGrenade" y="5" speed="6" grenades="6" start="mShow" out="mTaken" color="#79879e" color.1="#000000" cx="33.75" cz="199.30555555555557" angle="315" />
-  <Incarnator y="30" cx="48.75" cz="84.30555555555556" angle="135" />
-  <Incarnator y="30" cx="98.68055555555556" cz="44.30555555555556" angle="180" />
-  <Incarnator y="30" cx="148.75" cz="84.30555555555556" angle="225" />
-  <Incarnator y="30" cx="188.75" cz="134.30555555555557" angle="270" />
-  <Incarnator y="30" cx="148.75" cz="184.30555555555557" angle="315" />
-  <Incarnator y="30" cx="98.68055555555556" cz="224.30555555555557" angle="0" />
-  <Incarnator y="30" cx="48.75" cz="184.30555555555557" angle="45" />
-  <Incarnator y="30" cx="8.75" cz="134.30555555555557" angle="90" />
 </map>

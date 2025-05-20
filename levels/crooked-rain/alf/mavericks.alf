@@ -1,4 +1,5 @@
 <map>
+  <set defaultYon="1000" />
   <Ramp y="30" deltaY="6" yon="0.01" thickness="0" color="#00fdff" color.1="#000000" x="125" z="84.30555555555556" w="27.5" d="30" h="0" angle="270" />
   <Ramp y="30" deltaY="6" yon="0.01" thickness="0" color="#00fdff" color.1="#000000" x="152.5" z="84.30555555555556" w="27.5" d="30" h="0" angle="90" />
   <Ramp y="30" deltaY="6" yon="0.01" thickness="0" color="#00fdff" color.1="#000000" x="125" z="114.30555555555557" w="27.5" d="30" h="0" angle="270" />
@@ -317,20 +318,12 @@
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="550" />
   <Goody shape="1002" speed="6" yon="300" y="12" grenades="6" missiles="3" start="gShow" out="gTaken" color="#f5f5f5" color.1="#000000" cx="138.75" cz="166.80555555555557" angle="45" />
-  <Walker yon="1000" y="22" cx="115.625" cz="73.68055555555556" angle="135" />
-  <Walker yon="1000" y="22" cx="161.875" cz="259.93055555555554" angle="315" />
-  <Walker yon="1000" y="14" cx="86.25" cz="91.80555555555556" angle="135" />
-  <Walker yon="1000" y="14" cx="191.25" cz="241.80555555555557" angle="315" />
-  <Walker yon="1000" y="14" cx="191.25" cz="91.80555555555556" angle="225" />
-  <Walker yon="1000" y="14" cx="86.25" cz="241.80555555555557" angle="45" />
-  <Walker yon="1000" y="22" cx="161.875" cz="73.68055555555556" angle="225" />
-  <Walker yon="1000" y="22" cx="115.625" cz="259.93055555555554" angle="45" />
   <Incarnator y="22" cx="115.625" cz="73.68055555555556" angle="135" />
   <Incarnator y="22" cx="161.875" cz="259.93055555555554" angle="315" />
-  <Incarnator y="14" cx="191.25" cz="91.80555555555556" angle="225" />
-  <Incarnator y="14" cx="86.25" cz="241.80555555555557" angle="45" />
   <Incarnator y="14" cx="86.25" cz="91.80555555555556" angle="135" />
   <Incarnator y="14" cx="191.25" cz="241.80555555555557" angle="315" />
+  <Incarnator y="14" cx="191.25" cz="91.80555555555556" angle="225" />
+  <Incarnator y="14" cx="86.25" cz="241.80555555555557" angle="45" />
   <Incarnator y="22" cx="161.875" cz="73.68055555555556" angle="225" />
   <Incarnator y="22" cx="115.625" cz="259.93055555555554" angle="45" />
   <set wallHeight="18" />

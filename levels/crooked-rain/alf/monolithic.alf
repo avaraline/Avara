@@ -1,4 +1,5 @@
 <map>
+  <set defaultYon="1000" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="600" />
@@ -78,7 +79,7 @@
   <Wall color="#f9f9f9" color.1="#000000" x="73.75" z="269.30555555555554" w="10" d="10" h="0" />
   <set wallHeight="1.5" />
   <Wall color="#f9f9f9" color.1="#000000" x="61.25" z="219.61805555555557" w="15" d="30.625" h="0" />
-  <Walker yon="1000" y="30" cx="168.75" cz="44.30555555555556" angle="180" />
+  <Incarnator y="30" cx="168.75" cz="44.30555555555556" angle="180" />
   <set wallHeight="1.5" />
   <Wall color="#fbfbfb" color.1="#000000" x="216.25" z="199.30555555555557" w="15" d="10" h="0" />
   <set wallHeight="1.5" />
@@ -405,13 +406,13 @@
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="350" />
   <Goody shape="bspGrenade" y="2" speed="6" grenades="4" start="mShow" out="mTaken" color="#79879e" color.1="#000000" cx="156.25" cz="176.80555555555557" angle="315" />
-  <Walker yon="1000" y="30" cx="168.75" cz="284.30555555555554" angle="0" />
-  <Walker yon="1000" y="30" cx="288.75" cz="164.30555555555557" angle="270" />
-  <Walker yon="1000" y="30" cx="48.75" cz="164.30555555555557" angle="90" />
-  <Walker yon="1000" y="30" cx="293.75" cz="39.30555555555556" angle="225" />
-  <Walker yon="1000" y="30" cx="43.75" cz="289.30555555555554" angle="45" />
-  <Walker yon="1000" y="30" cx="293.75" cz="289.30555555555554" angle="315" />
-  <Walker yon="1000" y="30" cx="43.75" cz="39.30555555555556" angle="135" />
+  <Incarnator y="30" cx="168.75" cz="284.30555555555554" angle="0" />
+  <Incarnator y="30" cx="288.75" cz="164.30555555555557" angle="270" />
+  <Incarnator y="30" cx="48.75" cz="164.30555555555557" angle="90" />
+  <Incarnator y="30" cx="293.75" cz="39.30555555555556" angle="225" />
+  <Incarnator y="30" cx="43.75" cz="289.30555555555554" angle="45" />
+  <Incarnator y="30" cx="293.75" cz="289.30555555555554" angle="315" />
+  <Incarnator y="30" cx="43.75" cz="39.30555555555556" angle="135" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="650" />
@@ -516,12 +517,4 @@
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="350" />
   <Goody shape="bspGrenade" y="2" speed="6" grenades="4" start="mShow" out="mTaken" color="#79879e" color.1="#000000" cx="181.25" cz="176.80555555555557" angle="315" />
-  <Incarnator y="30" cx="43.75" cz="39.30555555555556" angle="135" />
-  <Incarnator y="30" cx="168.75" cz="44.30555555555556" angle="180" />
-  <Incarnator y="30" cx="293.75" cz="39.30555555555556" angle="225" />
-  <Incarnator y="30" cx="288.75" cz="164.30555555555557" angle="270" />
-  <Incarnator y="30" cx="293.75" cz="289.30555555555554" angle="315" />
-  <Incarnator y="30" cx="168.75" cz="284.30555555555554" angle="0" />
-  <Incarnator y="30" cx="43.75" cz="289.30555555555554" angle="45" />
-  <Incarnator y="30" cx="48.75" cz="164.23611111111111" angle="90" />
 </map>

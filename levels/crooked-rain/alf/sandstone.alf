@@ -1,4 +1,5 @@
 <map>
+  <set defaultYon="1000" />
   <set wallYon="1000" />
   <set wallHeight="15" />
   <Wall color="#bf8966" color.1="#000000" x="263.75" z="185.86805555555557" w="10" d="13.125" h="0" />
@@ -508,24 +509,16 @@
   <Hologram shape="1003" y="35.5" scale="4" yon="1000" isAmbient="true" color="#f0cbb3" color.1="#004d4d" cx="186.25" cz="264.30555555555554" angle="0" />
   <Hologram shape="1003" y="35.5" scale="4" yon="1000" isAmbient="true" color="#f0cbb3" color.1="#004d4d" cx="288.75" cz="161.80555555555557" angle="270" />
   <Hologram shape="1003" y="35.5" scale="4" yon="1000" isAmbient="true" color="#f0cbb3" color.1="#004d4d" cx="83.75" cz="161.80555555555557" angle="90" />
-  <Walker y="50" yon="1000" cx="153.75" cz="69.30555555555556" angle="135" />
-  <Walker y="50" yon="1000" cx="218.75" cz="254.30555555555554" angle="315" />
-  <Walker y="50" yon="1000" cx="93.75" cz="251.80555555555557" angle="45" />
-  <Walker y="50" yon="1000" cx="278.75" cz="71.80555555555556" angle="225" />
-  <Walker y="50" yon="1000" cx="278.75" cz="196.18055555555557" angle="270" />
-  <Walker y="50" yon="1000" cx="93.75" cz="126.80555555555557" angle="90" />
-  <Walker y="50" yon="1000" cx="217.43055555555557" cz="69.30555555555556" angle="180" />
-  <Walker y="50" yon="1000" cx="155.69444444444446" cz="254.30555555555554" angle="0" />
-  <Ramp y="16.5" deltaY="3" yon="1000" thickness="0" color="#ddb59c" color.1="#000000" x="175.3125" z="254.30555555555554" w="26.875" d="10" h="0" angle="0" />
-  <Ramp y="16.5" deltaY="3" yon="1000" thickness="0" color="#ddb59c" color.1="#000000" x="178.75" z="69.30555555555556" w="30" d="10" h="0" angle="180" />
   <Incarnator y="50" cx="153.75" cz="69.30555555555556" angle="135" />
-  <Incarnator y="50" cx="217.5" cz="69.30555555555556" angle="180" />
+  <Incarnator y="50" cx="218.75" cz="254.30555555555554" angle="315" />
+  <Incarnator y="50" cx="93.75" cz="251.80555555555557" angle="45" />
   <Incarnator y="50" cx="278.75" cz="71.80555555555556" angle="225" />
   <Incarnator y="50" cx="278.75" cz="196.18055555555557" angle="270" />
-  <Incarnator y="50" cx="218.75" cz="254.30555555555554" angle="315" />
-  <Incarnator y="50" cx="155.625" cz="254.30555555555554" angle="0" />
-  <Incarnator y="50" cx="93.75" cz="251.80555555555557" angle="45" />
   <Incarnator y="50" cx="93.75" cz="126.80555555555557" angle="90" />
+  <Incarnator y="50" cx="217.43055555555557" cz="69.30555555555556" angle="180" />
+  <Incarnator y="50" cx="155.69444444444446" cz="254.30555555555554" angle="0" />
+  <Ramp y="16.5" deltaY="3" yon="1000" thickness="0" color="#ddb59c" color.1="#000000" x="175.3125" z="254.30555555555554" w="26.875" d="10" h="0" angle="0" />
+  <Ramp y="16.5" deltaY="3" yon="1000" thickness="0" color="#ddb59c" color.1="#000000" x="178.75" z="69.30555555555556" w="30" d="10" h="0" angle="180" />
   <set wallYon="1000" />
   <set wallHeight="17.75" />
   <Wall color="rgba(235,191,164,0.15)" color.1="#000000" x="83.75" z="161.80555555555554" w="0" d="205" h="0" y="27" />

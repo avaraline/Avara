@@ -1,4 +1,5 @@
 <map>
+  <set defaultYon="1000" />
   <set wallYon="1000" wallHeight="1.5" />
   <Wall color="#8082ae" color.1="#000000" x="136.25" z="29.305555555555557" w="5" d="20" h="0" />
   <set wallHeight="1.5" />
@@ -452,20 +453,12 @@
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="450" />
   <Goody shape="bspMissile" y="8" speed="6" missiles="4" start="mShow" out="mTaken" color="#d5bc76" color.1="#fff5d9" cx="123.75" cz="199.30555555555557" angle="45" />
-  <Walker yon="1000" y="30" cx="53.75" cz="44.30555555555556" angle="135" />
-  <Walker yon="1000" y="30" cx="193.75" cz="184.30555555555557" angle="315" />
-  <Walker yon="1000" y="30" cx="53.75" cz="184.30555555555557" angle="45" />
-  <Walker yon="1000" y="30" cx="193.75" cz="44.30555555555556" angle="225" />
-  <Walker yon="1000" y="30" cx="53.75" cz="114.30555555555556" angle="90" />
-  <Walker yon="1000" y="30" cx="193.75" cz="114.30555555555556" angle="270" />
-  <Walker yon="1000" y="30" cx="123.68055555555556" cz="44.30555555555556" angle="180" />
-  <Walker yon="1000" y="30" cx="123.68055555555556" cz="184.30555555555557" angle="0" />
   <Incarnator y="30" cx="53.75" cz="44.30555555555556" angle="135" />
-  <Incarnator y="30" cx="123.68055555555556" cz="44.30555555555556" angle="180" />
-  <Incarnator y="30" cx="193.75" cz="44.30555555555556" angle="225" />
-  <Incarnator y="30" cx="193.75" cz="114.30555555555556" angle="270" />
   <Incarnator y="30" cx="193.75" cz="184.30555555555557" angle="315" />
-  <Incarnator y="30" cx="123.68055555555556" cz="184.30555555555557" angle="0" />
   <Incarnator y="30" cx="53.75" cz="184.30555555555557" angle="45" />
+  <Incarnator y="30" cx="193.75" cz="44.30555555555556" angle="225" />
   <Incarnator y="30" cx="53.75" cz="114.30555555555556" angle="90" />
+  <Incarnator y="30" cx="193.75" cz="114.30555555555556" angle="270" />
+  <Incarnator y="30" cx="123.68055555555556" cz="44.30555555555556" angle="180" />
+  <Incarnator y="30" cx="123.68055555555556" cz="184.30555555555557" angle="0" />
 </map>
