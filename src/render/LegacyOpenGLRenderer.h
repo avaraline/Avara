@@ -30,6 +30,7 @@ public:
     virtual void RemovePart(CBSPPart *part) override;
     virtual void RenderFrame() override;
     void UpdateViewRect(int width, int height, float pixelRatio) override;
+    virtual void PrefChanged(std::string name) override;
 private:
     SDL_Window *window;
     
@@ -46,6 +47,8 @@ private:
     GLsizei resolution[2];
     GLuint skyBuffer;
     GLuint skyVertArray;
+
+    bool showSpecular, dither;
 
     void AdjustAmbient(OpenGLShader &shader, float intensity);
     void ApplyView();

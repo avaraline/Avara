@@ -105,6 +105,12 @@ public:
      * @param pixelRatio The pixel ratio.
      */
     virtual void UpdateViewRect(int width, int height, float pixelRatio) = 0;
+    
+    /**
+     * Sent when a preference value is updated. Can be used to alter render settings without checking every frame.
+     */
+    virtual void PrefChanged(std::string name) {}
+
 protected:
     float fov = 50.0f;
 };

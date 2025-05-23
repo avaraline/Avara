@@ -182,14 +182,21 @@ void LegacyOpenGLRenderer::ApplyLights()
     float ambientRGB[3];
     viewParams->ambientLightColor.ExportGLFloats(ambientRGB, 3);
 
+    dither = gApplication ? gApplication->Get<bool>(kDither) : true;
+    showSpecular = gApplication ? gApplication->Get<bool>(kSpecular) : true;
+    
     worldShader->Use();
     AdjustAmbient(*worldShader, ambientIntensity);
     worldShader->SetFloat3("ambientColor", ambientRGB);
     worldShader->SetFloat("maxShininess", MAX_SHININESS_EXP);
     worldShader->SetBool("lightsActive", true);
+    worldShader->SetBool("dither", dither);
+    worldShader->SetBool("showSpecular", showSpecular);
 
     skyShader->Use();
     skyShader->SetFloat("celestialDistance", DIR_LIGHT_DISTANCE);
+    skyShader->SetBool("dither", dither);
+    skyShader->SetBool("showSpecular", showSpecular);
 
     for (int i = 0; i < MAXLIGHTS; i++) {
         float rgb[3];
@@ -341,8 +348,6 @@ void LegacyOpenGLRenderer::RenderFrame()
     glEnableVertexAttribArray(0);
 
     skyShader->Use();
-    skyShader->SetBool("dither", gApplication ? gApplication->Get<bool>(kDither) : true);
-    skyShader->SetBool("showSpecular", gApplication ? gApplication->Get<bool>(kSpecular) : true);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -359,8 +364,6 @@ void LegacyOpenGLRenderer::RenderFrame()
     glEnable(GL_DEPTH_TEST);
 
     worldShader->Use();
-    worldShader->SetBool("dither", gApplication ? gApplication->Get<bool>(kDither) : true);
-    worldShader->SetBool("showSpecular", gApplication ? gApplication->Get<bool>(kSpecular) : true);
 
     dynamicWorld->PrepareForRender();
 
@@ -605,4 +608,19 @@ void LegacyOpenGLRenderer::SetTransforms(const CBSPPart &part)
     worldShader->Use();
     worldShader->SetTransposedMat4("model", m);
     worldShader->SetTransposedMat3("normalTransform", normalMat);
+}
+
+void LegacyOpenGLRenderer::PrefChanged(std::string name) {
+    if (gApplication) {
+        dither = gApplication->Get<bool>(kDither);
+        showSpecular = gApplication->Get<bool>(kSpecular);
+
+        worldShader->Use();
+        worldShader->SetBool("dither", dither);
+        worldShader->SetBool("showSpecular", showSpecular);
+
+        skyShader->Use();
+        skyShader->SetBool("dither", dither);
+        skyShader->SetBool("showSpecular", showSpecular);
+    }
 }

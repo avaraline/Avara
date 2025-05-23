@@ -124,6 +124,7 @@ bool CApplication::Update(const std::string name, std::string &value) {
         // this will easily cause a crash when reading the json
         if (_prefs[name].type_name() == updatePref[name].type_name()) {
             _prefs.update(updatePref);
+            PrefChanged(name);
             WritePrefs(_prefs);
         } else {
             SDL_Log("Type mismatch. User added type '%s' did not match existing type '%s'. Prefs were not updated.", _prefs[name].type_name(), updatePref[name].type_name());

@@ -743,7 +743,8 @@ void CAvaraGame::ReadGamePrefs() {
         moJoOptions += kFlipAxis;
     }
     sensitivity = pow(2.0, gApplication->Get<double>(kMouseSensitivityTag));
-    SDL_Log("mouse sensitivity multiplier = %.2lf\n", sensitivity);
+    //SDL_Log("mouse sensitivity multiplier = %.2lf\n", sensitivity);
+    showNewHUD = gApplication->Get<bool>(kShowNewHUD);
 }
 
 void CAvaraGame::ResumeGame() {
@@ -1102,7 +1103,6 @@ void CAvaraGame::StopGame() {
 
 void CAvaraGame::Render() {
     //if (gameStatus == kPlayingStatus || gameStatus == kPauseStatus || gameStatus == kWinStatus || gameStatus == kLoseStatus) {
-    showNewHUD = gApplication ? gApplication->Get<bool>(kShowNewHUD) : false;
     ViewControl();
     gRenderer->RenderFrame();
 }

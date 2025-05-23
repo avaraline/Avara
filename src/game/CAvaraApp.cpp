@@ -319,7 +319,7 @@ void CAvaraAppImpl::drawContents() {
     }
     itsGame->Render();
     if (ui) {
-        if (Get<bool>(kShowNewHUD)) {
+        if (itsGame->showNewHUD) {
             ui->RenderNewHUD(mNVGContext);
         } else {
             ui->Render(mNVGContext);
@@ -338,6 +338,12 @@ void CAvaraAppImpl::WindowResized(int width, int height) {
     if (gRenderer->viewParams->viewPixelDimensions.h != width || gRenderer->viewParams->viewPixelDimensions.v != height)
         gRenderer->UpdateViewRect(width, height, mPixelRatio);
     // performLayout();
+}
+
+void CAvaraAppImpl::PrefChanged(std::string name) {
+    CApplication::PrefChanged(name);
+    if (itsGame) itsGame->ReadGamePrefs();
+    if (gRenderer) gRenderer->PrefChanged(name);
 }
 
 bool CAvaraAppImpl::handleSDLEvent(SDL_Event &event) {

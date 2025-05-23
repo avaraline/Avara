@@ -146,7 +146,8 @@ public:
     
     virtual bool DoCommand(int theCommand) override;
     virtual void WindowResized(int width, int height) override;
-    
+    virtual void PrefChanged(std::string name) override;
+
     virtual void Done() override;
     
     virtual bool handleSDLEvent(SDL_Event &event) override;

@@ -30,6 +30,7 @@ public:
     virtual void RemovePart(CBSPPart *part) override;
     virtual void RenderFrame() override;
     virtual void UpdateViewRect(int width, int height, float pixelRatio) override;
+    virtual void PrefChanged(std::string name) override;
 private:
     SDL_Window *window;
     
@@ -55,6 +56,8 @@ private:
     GLuint fbo[2];
     GLuint rbo[2];
     GLuint texture[2];
+
+    bool showSpecular, dither, fxaa;
 
     void AdjustAmbient(OpenGLShader &shader, float intensity);
     void ApplyView();
