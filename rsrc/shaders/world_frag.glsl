@@ -94,7 +94,9 @@ void main() {
     color = light_color(viewRayNormalized);
     
     float dist = length(viewRay);
-    color.rgb = apply_fog(color.rgb, dist);
+    if (hazeDensity > 0.0) {
+        color.rgb = apply_fog(color.rgb, dist);
+    }
     
     float yonFadeRange = min(5.0, objectYon - (objectYon * 0.9));
     float yonFadeDist = objectYon - yonFadeRange;
