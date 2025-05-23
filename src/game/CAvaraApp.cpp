@@ -343,7 +343,7 @@ void CAvaraAppImpl::WindowResized(int width, int height) {
 void CAvaraAppImpl::PrefChanged(std::string name) {
     CApplication::PrefChanged(name);
     if (itsGame) itsGame->ReadGamePrefs();
-    if (gRenderer) gRenderer->PrefChanged(name);
+    if (gRenderer) gRenderer->ApplyPrefs(name);
 }
 
 bool CAvaraAppImpl::handleSDLEvent(SDL_Event &event) {
