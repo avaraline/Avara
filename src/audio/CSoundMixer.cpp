@@ -472,7 +472,8 @@ void CSoundMixer::DoubleBack(uint8_t *stream, int size) {
             mix++;
         } while (--i);
 
-        volumeLimit >>= 5;
+        // ignore mixes with volume below this threshold
+        volumeLimit /= maxChannels;
         if (volumeLimit) {
             mix = infoTable;
             i = maxChannels;

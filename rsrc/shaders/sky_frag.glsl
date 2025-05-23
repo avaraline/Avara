@@ -11,6 +11,7 @@ uniform vec3 lightPos[MAX_LIGHTS];
 uniform vec3 adjustedLightPos[MAX_LIGHTS];
 uniform vec3 lightColor[MAX_LIGHTS];
 uniform float lightCelestialRadius[MAX_LIGHTS];
+uniform float lightCelestialFogSpread[MAX_LIGHTS];
 uniform bool lightApplySpecular[MAX_LIGHTS];
 uniform float celestialDistance;
 uniform vec3 skyColor;
@@ -29,7 +30,7 @@ vec3 calculate_celestial_fog(vec3 hazeColor, vec3 viewDir, int i) {
     float celestialIntensity = length(lightDir[i]);
     if (lightCelestialRadius[i] == 0.0 || celestialIntensity == 0.0) return hazeColor;
     float celestialAmount = max(dot(-viewDir, normalize(lightDir[i])), 0.0);
-    return mix(hazeColor, lightColor[i] * celestialIntensity, pow(celestialAmount, ((1.0 - celestialIntensity) * 200.0) + 8.0));
+    return mix(hazeColor, lightColor[i], pow(celestialAmount, lightCelestialFogSpread[i]));
 }
 
 vec3 apply_fog(vec3 color, vec3 viewDir, float dist) {
@@ -113,14 +114,16 @@ void main()
         color.rgb = draw_celestial(color.rgb, phi, gradientHeight, offsetFragPos, i);
     }
     
-    float dist = min(
-        mix(
-            -dot(camPos, vec3(0, 1, 0)) / dot(-viewDir, vec3(0, 1, 0)),
-            maxHazeDist,
-            float(phi >= 0.0)
-        ),
-        maxHazeDist
-    );
-    color.rgb = apply_fog(color.rgb, viewDir, dist);
+    if (hazeDensity > 0.0) {
+        float dist = min(
+            mix(
+                -dot(camPos, vec3(0, 1, 0)) / dot(-viewDir, vec3(0, 1, 0)),
+                maxHazeDist,
+                float(phi >= 0.0)
+            ),
+            maxHazeDist
+        );
+        color.rgb = apply_fog(color.rgb, viewDir, dist);
+    }
     if (dither) color.rgb += noise();
 }
