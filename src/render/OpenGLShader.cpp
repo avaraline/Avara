@@ -22,9 +22,21 @@ OpenGLShader::OpenGLShader(const std::string vertPath, const std::string fragPat
         FragmentShaderStream.open(fragPath);
 
         std::stringstream sstr;
+#if defined(AVARA_GLES)
+        sstr << "#version 300 es\n";
+        sstr << "precision highp float;\n\n";
+#else
+        sstr << "#version 330 core\n";
+#endif
         sstr << VertexShaderStream.rdbuf();
         VertexShaderCode = sstr.str();
         sstr.str("");
+#if defined(AVARA_GLES)
+        sstr << "#version 300 es\n";
+        sstr << "precision highp float;\n\n";
+#else
+        sstr << "#version 330 core\n";
+#endif
         sstr << FragmentShaderStream.rdbuf();
         FragmentShaderCode = sstr.str();
 
@@ -47,7 +59,7 @@ OpenGLShader::OpenGLShader(const std::string vertPath, const std::string fragPat
         glGetShaderiv(vertex, GL_INFO_LOG_LENGTH, &infoLogLength);
         std::vector<char> errorMessage(infoLogLength + 1);
         glGetShaderInfoLog(vertex, infoLogLength, NULL, &errorMessage[0]);
-        SDL_Log("Failed to compile vertex shader\n%s", &errorMessage[0]);
+        SDL_Log("Failed to compile vertex shader %s\n%s", vertPath.c_str(), &errorMessage[0]);
         exit(1);
     };
 
@@ -60,7 +72,7 @@ OpenGLShader::OpenGLShader(const std::string vertPath, const std::string fragPat
         glGetShaderiv(fragment, GL_INFO_LOG_LENGTH, &infoLogLength);
         std::vector<char> errorMessage(infoLogLength + 1);
         glGetShaderInfoLog(fragment, infoLogLength, NULL, &errorMessage[0]);
-        SDL_Log("Failed to compile fragment shader\n%s", &errorMessage[0]);
+        SDL_Log("Failed to compile fragment shader %s\n%s", fragPath.c_str(), &errorMessage[0]);
         exit(1);
     };
 

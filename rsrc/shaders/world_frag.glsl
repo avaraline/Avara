@@ -1,7 +1,6 @@
-#version 330 core
 #define MAX_LIGHTS 4
 
-in vec4 gl_FragCoord;
+//in vec4 gl_FragCoord;
 in vec4 fragmentColor;
 in vec3 fragmentSpecular;
 in float fragmentShininess;
@@ -11,17 +10,17 @@ in vec3 fragPos;
 uniform vec3 camPos;
 uniform bool dither;
 uniform bool showSpecular;
-uniform vec3 lightDir[MAX_LIGHTS] = vec3[MAX_LIGHTS](vec3(0, 0, 0), vec3(0, 0, 0), vec3(0, 0, 0), vec3(0, 0, 0));
-uniform vec3 lightPos[MAX_LIGHTS] = vec3[MAX_LIGHTS](vec3(0, 0, 0), vec3(0, 0, 0), vec3(0, 0, 0), vec3(0, 0, 0));
-uniform vec3 adjustedLightPos[MAX_LIGHTS] = vec3[MAX_LIGHTS](vec3(0, 0, 0), vec3(0, 0, 0), vec3(0, 0, 0), vec3(0, 0, 0));
-uniform vec3 lightColor[MAX_LIGHTS] = vec3[MAX_LIGHTS](vec3(1, 1, 1), vec3(1, 1, 1), vec3(1, 1, 1), vec3(1, 1, 1));
-uniform float lightCelestialRadius[MAX_LIGHTS] = float[MAX_LIGHTS](0.0, 0.0, 0.0, 0.0);
-uniform bool lightApplySpecular[MAX_LIGHTS] = bool[MAX_LIGHTS](false, false, false, false);
-uniform float ambient = 0.0;
-uniform vec3 ambientColor = vec3(1, 1, 1);
-uniform bool lightsActive = true;
-uniform float worldYon = 180.0;
-uniform float objectYon = 180.0;
+uniform vec3 lightDir[MAX_LIGHTS];
+uniform vec3 lightPos[MAX_LIGHTS];
+uniform vec3 adjustedLightPos[MAX_LIGHTS];
+uniform vec3 lightColor[MAX_LIGHTS];
+uniform float lightCelestialRadius[MAX_LIGHTS];
+uniform bool lightApplySpecular[MAX_LIGHTS];
+uniform float ambient; // = 0.0;
+uniform vec3 ambientColor; // = vec3(1, 1, 1);
+uniform bool lightsActive; // = true;
+uniform float worldYon; // = 180.0;
+uniform float objectYon; // = 180.0;
 uniform vec3 skyColor;
 uniform vec3 horizonColor;
 uniform float highAlt;
@@ -31,7 +30,7 @@ out vec4 color;
 
 vec3 apply_fog(vec3 color, float dist)
 {
-    vec3 hazeColor = mix(skyColor, horizonColor, max(highAlt * 2, 1.0));
+    vec3 hazeColor = mix(skyColor, horizonColor, max(highAlt * 2.0, 1.0));
     float coefficient = exp(-dist * hazeDensity);
     vec3 extColor = vec3(coefficient, coefficient, coefficient);
     vec3 insColor = vec3(coefficient, coefficient, coefficient);
@@ -52,7 +51,7 @@ vec3 diffuse() {
 }
 
 vec3 spec_light(int i, vec3 viewDir) {
-    if (!lightApplySpecular[i] || fragmentShininess == 0 || !lightsActive) return vec3(0);
+    if (!lightApplySpecular[i] || fragmentShininess == 0.0 || !lightsActive) return vec3(0);
     vec3 lightDir = normalize(adjustedLightPos[i] - fragPos);
     vec3 halfwayDir = normalize(lightDir + viewDir);
     float spec = pow(max(dot(fragmentNormal, halfwayDir), 0.0), fragmentShininess);

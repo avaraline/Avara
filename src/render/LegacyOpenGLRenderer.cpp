@@ -11,7 +11,6 @@
 
 #define SKY_VERT "sky_vert.glsl"
 #define SKY_FRAG "sky_frag.glsl"
-
 #define OBJ_VERT "world_vert.glsl"
 #define OBJ_FRAG "world_frag.glsl"
 
@@ -187,7 +186,8 @@ void LegacyOpenGLRenderer::ApplyLights()
     AdjustAmbient(*worldShader, ambientIntensity);
     worldShader->SetFloat3("ambientColor", ambientRGB);
     worldShader->SetFloat("maxShininess", MAX_SHININESS_EXP);
-    
+    worldShader->SetBool("lightsActive", true);
+
     skyShader->Use();
     skyShader->SetFloat("celestialDistance", DIR_LIGHT_DISTANCE);
 

@@ -223,12 +223,14 @@ void ModernOpenGLRenderer::ApplyLights()
 
     hudShader->Use();
     AdjustAmbient(*hudShader, HUD_AMBIENT);
+    hudShader->SetBool("lightsActive", true);
 
     worldShader->Use();
     AdjustAmbient(*worldShader, ambientIntensity);
     worldShader->SetFloat3("ambientColor", ambientRGB);
     worldShader->SetFloat("maxShininess", MAX_SHININESS_EXP);
-    
+    worldShader->SetBool("lightsActive", true);
+
     skyShader->Use();
     skyShader->SetFloat("celestialDistance", DIR_LIGHT_DISTANCE);
 

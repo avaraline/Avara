@@ -1,11 +1,9 @@
-#version 330 core
-
 in vec4 fragmentColor;
 in vec4 fragmentSpecular;
 in vec3 fragmentNormal;
 
-uniform float ambient = 0.0;
-uniform bool lightsActive = true;
+uniform float ambient; // = 0.0;
+uniform bool lightsActive; // = true;
 
 out vec4 color;
 

@@ -173,11 +173,15 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
         ui->LoadImages(mNVGContext);
     }
 
+#if defined(AVARA_GLES)
+    gRenderer = new LegacyOpenGLRenderer(mSDLWindow);
+#else
     if (Get(kUseLegacyRenderer)) {
         gRenderer = new LegacyOpenGLRenderer(mSDLWindow);
     } else {
         gRenderer = new ModernOpenGLRenderer(mSDLWindow);
     }
+#endif
 
     gRenderer->UpdateViewRect(mSize.x, mSize.y, mPixelRatio);
     gRenderer->SetFOV(Number(kFOV));
