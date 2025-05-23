@@ -20,6 +20,7 @@ public:
     virtual void AddHUDPart(CBSPPart *part) override;
     virtual void AddPart(CBSPPart *part) override;
     virtual void ApplyLights() override;
+    virtual void ApplyPrefs(std::optional<std::string> name = std::optional<std::string>{}) override;
     virtual void ApplyProjection() override;
     virtual void ApplySky() override;
     virtual void LevelReset() override;
@@ -30,7 +31,6 @@ public:
     virtual void RemovePart(CBSPPart *part) override;
     virtual void RenderFrame() override;
     virtual void UpdateViewRect(int width, int height, float pixelRatio) override;
-    virtual void PrefChanged(std::string name) override;
 private:
     SDL_Window *window;
     

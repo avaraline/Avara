@@ -121,6 +121,7 @@ LegacyOpenGLRenderer::LegacyOpenGLRenderer(SDL_Window *window) : AbstractRendere
     skyShader = LoadShader(SKY_VERT, SKY_FRAG);
     worldShader = LoadShader(OBJ_VERT, OBJ_FRAG);
     ApplyLights();
+    ApplyPrefs();
     ApplyProjection();
     
     alphaParts = {};
@@ -181,22 +182,15 @@ void LegacyOpenGLRenderer::ApplyLights()
     float ambientIntensity = ToFloat(viewParams->ambientLight);
     float ambientRGB[3];
     viewParams->ambientLightColor.ExportGLFloats(ambientRGB, 3);
-
-    dither = gApplication ? gApplication->Get<bool>(kDither) : true;
-    showSpecular = gApplication ? gApplication->Get<bool>(kSpecular) : true;
     
     worldShader->Use();
     AdjustAmbient(*worldShader, ambientIntensity);
     worldShader->SetFloat3("ambientColor", ambientRGB);
     worldShader->SetFloat("maxShininess", MAX_SHININESS_EXP);
     worldShader->SetBool("lightsActive", true);
-    worldShader->SetBool("dither", dither);
-    worldShader->SetBool("showSpecular", showSpecular);
 
     skyShader->Use();
     skyShader->SetFloat("celestialDistance", DIR_LIGHT_DISTANCE);
-    skyShader->SetBool("dither", dither);
-    skyShader->SetBool("showSpecular", showSpecular);
 
     for (int i = 0; i < MAXLIGHTS; i++) {
         float rgb[3];
@@ -224,6 +218,30 @@ void LegacyOpenGLRenderer::ApplyLights()
         skyShader->SetFloat(radUniform, ToFloat(viewParams->dirLightSettings[i].celestialRadius));
         skyShader->SetFloat(fogUniform, viewParams->dirLightSettings[i].celestialFogSpread);
         skyShader->SetBool(specUniform, applySpecular);
+    }
+}
+
+void LegacyOpenGLRenderer::ApplyPrefs(std::optional<std::string> name) {
+    if (gApplication) {
+        if (!name || *name == kDither) {
+            dither = gApplication->Get<bool>(kDither);
+            
+            worldShader->Use();
+            worldShader->SetBool("dither", dither);
+            
+            skyShader->Use();
+            skyShader->SetBool("dither", dither);
+        }
+        
+        if (!name || *name == kSpecular) {
+            showSpecular = gApplication->Get<bool>(kSpecular);
+            
+            worldShader->Use();
+            worldShader->SetBool("showSpecular", showSpecular);
+            
+            skyShader->Use();
+            skyShader->SetBool("showSpecular", showSpecular);
+        }
     }
 }
 
@@ -608,19 +626,4 @@ void LegacyOpenGLRenderer::SetTransforms(const CBSPPart &part)
     worldShader->Use();
     worldShader->SetTransposedMat4("model", m);
     worldShader->SetTransposedMat3("normalTransform", normalMat);
-}
-
-void LegacyOpenGLRenderer::PrefChanged(std::string name) {
-    if (gApplication) {
-        dither = gApplication->Get<bool>(kDither);
-        showSpecular = gApplication->Get<bool>(kSpecular);
-
-        worldShader->Use();
-        worldShader->SetBool("dither", dither);
-        worldShader->SetBool("showSpecular", showSpecular);
-
-        skyShader->Use();
-        skyShader->SetBool("dither", dither);
-        skyShader->SetBool("showSpecular", showSpecular);
-    }
 }
