@@ -12,6 +12,8 @@
 #include "CBSPPart.h"
 #include "FastMat.h"
 
+#include <algorithm>
+
 #define PYRAMIDSCALE >> 2
 
 void CViewParameters::CalculateViewPyramidCorners() {
@@ -271,6 +273,12 @@ void CViewParameters::SetLight(short n, Fixed angle1, Fixed angle2, Fixed intens
         dirLightSettings[n].position[1] = yF / magnitude * -DIR_LIGHT_DISTANCE;
         dirLightSettings[n].position[2] = zF / magnitude * -DIR_LIGHT_DISTANCE;
         
+        // Precalculate how much of the light source should "bleed" into fog.
+        float radiusComponent = 524288.0f * pow(ToFloat(celestialRadius), -1.9f);
+        dirLightSettings[n].celestialFogSpread = std::max(
+            radiusComponent - (std::min(0.999f, intensityF) * radiusComponent),
+            1.0f
+        );
     }
 
 }

@@ -27,6 +27,7 @@ public:
     float position[3] = {0.0, 0.0, 0.0};
     ARGBColor color = DEFAULT_LIGHT_COLOR;
     Fixed celestialRadius = FIX(0);
+    float celestialFogSpread = 1.0f;
     bool applySpecular = false;
 };
 
