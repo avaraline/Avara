@@ -11,6 +11,7 @@
 #include "ColorManager.h"
 
 #include "Memory.h"
+#include "AssetManager.h"
 
 #define DIMEPSILON 16
 
@@ -118,7 +119,8 @@ CSmartBox::CSmartBox(
     Fixed baseSize = FIX1;
     Boolean stretchFlag = false;
 
-    if (resId != BOXTEMPLATERESOURCE && resId != PLATETEMPLATERESOURCE && resId != 722) {
+    auto boxTmpl = AssetManager::GetBsp(resId);
+    if (!boxTmpl) {
         resId = dimensions[1] ? BOXTEMPLATERESOURCE : PLATETEMPLATERESOURCE;
     }
 
