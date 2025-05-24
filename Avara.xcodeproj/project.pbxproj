@@ -2248,6 +2248,7 @@
 				E5890B2129894DB3007A875D /* Frameworks */,
 				E5890B2229894DB3007A875D /* Resources */,
 				E5E510FA298960F300EA1AEB /* Embed Frameworks */,
+				E55826812DE149C200796802 /* Remove .r Files */,
 			);
 			buildRules = (
 			);
@@ -2343,6 +2344,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		E55826812DE149C200796802 /* Remove .r Files */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Remove .r Files";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "RESOURCEDIR=\"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\nrm \"$RESOURCEDIR\"/levels/*.r\n";
+		};
 		E5C57BC3298997B6008740F4 /* Update GitVersion.h */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
