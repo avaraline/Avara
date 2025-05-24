@@ -62,7 +62,6 @@
 		E517F060299713DB0036B206 /* CSmartPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C6B29895118007A875D /* CSmartPart.cpp */; };
 		E517F061299713DB0036B206 /* CViewParameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C6529895118007A875D /* CViewParameters.cpp */; };
 		E517F063299713DB0036B206 /* Memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9129895118007A875D /* Memory.cpp */; };
-		E517F064299713DB0036B206 /* Resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9229895118007A875D /* Resource.cpp */; };
 		E517F065299713DB0036B206 /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9529895118007A875D /* System.cpp */; };
 		E517F066299713DB0036B206 /* KeyFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20A3C552991CC72005741F7 /* KeyFuncs.cpp */; };
 		E517F067299713DB0036B206 /* CAbstractActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BF629895118007A875D /* CAbstractActor.cpp */; };
@@ -204,7 +203,6 @@
 		E5253ED92996DD2200F8C1E8 /* PascalStrings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5253ED82996DD2200F8C1E8 /* PascalStrings.cpp */; };
 		E5890B8D29895078007A875D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5890B8A29895078007A875D /* Assets.xcassets */; };
 		E5890C9E29895118007A875D /* Memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9129895118007A875D /* Memory.cpp */; };
-		E5890C9F29895118007A875D /* Resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9229895118007A875D /* Resource.cpp */; };
 		E5890CA129895118007A875D /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9529895118007A875D /* System.cpp */; };
 		E5890CA229895118007A875D /* CCommManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9C29895118007A875D /* CCommManager.cpp */; };
 		E5890CA329895118007A875D /* CUDPComm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BA129895118007A875D /* CUDPComm.cpp */; };
@@ -379,7 +377,6 @@
 		E5A219CE2DC59135007D54FF /* CSmartPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C6B29895118007A875D /* CSmartPart.cpp */; };
 		E5A219CF2DC59135007D54FF /* CViewParameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C6529895118007A875D /* CViewParameters.cpp */; };
 		E5A219D02DC59135007D54FF /* Memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9129895118007A875D /* Memory.cpp */; };
-		E5A219D12DC59135007D54FF /* Resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9229895118007A875D /* Resource.cpp */; };
 		E5A219D22DC59135007D54FF /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9529895118007A875D /* System.cpp */; };
 		E5A219D32DC59135007D54FF /* KeyFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20A3C552991CC72005741F7 /* KeyFuncs.cpp */; };
 		E5A219D42DC59135007D54FF /* CAbstractActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BF629895118007A875D /* CAbstractActor.cpp */; };
@@ -632,10 +629,8 @@
 		E5890B2429894DB3007A875D /* Avara.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Avara.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5890B8A29895078007A875D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E5890B9129895118007A875D /* Memory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Memory.cpp; sourceTree = "<group>"; };
-		E5890B9229895118007A875D /* Resource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Resource.cpp; sourceTree = "<group>"; };
 		E5890B9329895118007A875D /* Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Types.h; sourceTree = "<group>"; };
 		E5890B9529895118007A875D /* System.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = System.cpp; sourceTree = "<group>"; };
-		E5890B9629895118007A875D /* Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resource.h; sourceTree = "<group>"; };
 		E5890B9729895118007A875D /* Memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Memory.h; sourceTree = "<group>"; };
 		E5890B9829895118007A875D /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
 		E5890B9B29895118007A875D /* CCommManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCommManager.h; sourceTree = "<group>"; };
@@ -1381,8 +1376,6 @@
 			children = (
 				E5890B9129895118007A875D /* Memory.cpp */,
 				E5890B9729895118007A875D /* Memory.h */,
-				E5890B9229895118007A875D /* Resource.cpp */,
-				E5890B9629895118007A875D /* Resource.h */,
 				E5890B9529895118007A875D /* System.cpp */,
 				E5890B9829895118007A875D /* System.h */,
 				E5890B9329895118007A875D /* Types.h */,
@@ -2361,7 +2354,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "RESOURCEDIR=\"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\nrm \"$RESOURCEDIR\"/levels/*.r\n";
+			shellScript = "RESOURCEDIR=\"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\nrm \"$RESOURCEDIR\"/levels/*.r\nrm \"$RESOURCEDIR\"/rsrc/Avara.r\n";
 		};
 		E5C57BC3298997B6008740F4 /* Update GitVersion.h */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2409,7 +2402,6 @@
 				E517F060299713DB0036B206 /* CSmartPart.cpp in Sources */,
 				E517F061299713DB0036B206 /* CViewParameters.cpp in Sources */,
 				E517F063299713DB0036B206 /* Memory.cpp in Sources */,
-				E517F064299713DB0036B206 /* Resource.cpp in Sources */,
 				E2CD7FAB2DB5BE1D00C3665F /* LevelInfo.cpp in Sources */,
 				E517F065299713DB0036B206 /* System.cpp in Sources */,
 				E517F066299713DB0036B206 /* KeyFuncs.cpp in Sources */,
@@ -2698,7 +2690,6 @@
 				6025AE4E2C255E6A00A57EFB /* LegacyOpenGLRenderer.cpp in Sources */,
 				E5890D0529895118007A875D /* CSoundMixer.cpp in Sources */,
 				E5890CF529895118007A875D /* CRamp.cpp in Sources */,
-				E5890C9F29895118007A875D /* Resource.cpp in Sources */,
 				E5890EEF29895124007A875D /* checkbox.cpp in Sources */,
 				E5890CCB29895118007A875D /* CGoody.cpp in Sources */,
 				E5890D1129895118007A875D /* LevelLoader.cpp in Sources */,
@@ -2764,7 +2755,6 @@
 				E5A219CE2DC59135007D54FF /* CSmartPart.cpp in Sources */,
 				E5A219CF2DC59135007D54FF /* CViewParameters.cpp in Sources */,
 				E5A219D02DC59135007D54FF /* Memory.cpp in Sources */,
-				E5A219D12DC59135007D54FF /* Resource.cpp in Sources */,
 				E5A219D22DC59135007D54FF /* System.cpp in Sources */,
 				E5A219D32DC59135007D54FF /* KeyFuncs.cpp in Sources */,
 				E5A219D42DC59135007D54FF /* CAbstractActor.cpp in Sources */,

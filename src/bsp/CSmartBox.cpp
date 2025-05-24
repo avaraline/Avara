@@ -11,17 +11,16 @@
 #include "ColorManager.h"
 
 #include "Memory.h"
-#include "Resource.h"
 
 #define DIMEPSILON 16
 
-typedef struct {
-    Fixed baseSize;
-    short scaleStyle;
-} bspsResource;
-
 /*
-{
+ typedef struct {
+     Fixed baseSize;
+     short scaleStyle;
+ } bspsResource;
+
+ {
 "400": {"1:1 size": 1.0,"Stretch/Scale (0/1)": 0},
 "401": {"1:1 size": 1.0,"Stretch/Scale (0/1)": 0},
 "722": {"1:1 size": 5.0,"Stretch/Scale (0/1)": 0}
@@ -115,19 +114,20 @@ CSmartBox::CSmartBox(
     CAbstractActor *anActor,
     short aPartCode
 ) {
-    bspsResource **config;
-    Fixed baseSize;
-    Boolean stretchFlag;
+    //bspsResource **config;
+    Fixed baseSize = FIX1;
+    Boolean stretchFlag = false;
 
-    Handle res = GetResource(BSPTEMPLATETYPE, resId);
-    if (res == NULL) {
+    if (resId != BOXTEMPLATERESOURCE && resId != PLATETEMPLATERESOURCE && resId != 722) {
         resId = dimensions[1] ? BOXTEMPLATERESOURCE : PLATETEMPLATERESOURCE;
-    } else {
-        ReleaseResource(res);
     }
 
     CSmartPart::ISmartPart(resId, anActor, aPartCode);
 
+    // Not sure what this is! Fort Warfare may use it?
+    if (resId == 722) baseSize = FIX(5);
+
+    /*
     auto scalingRes = GetResource(BSPSCALETYPE, resId);
     config = (bspsResource **)scalingRes;
     if (config) {
@@ -138,7 +138,8 @@ CSmartBox::CSmartBox(
         baseSize = FIX1;
     }
     ReleaseResource(scalingRes);
-
+    */
+    
     if (stretchFlag) {
         ScaleTemplate(dimensions, baseSize);
     } else {
