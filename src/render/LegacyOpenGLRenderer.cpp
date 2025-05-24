@@ -121,6 +121,7 @@ LegacyOpenGLRenderer::LegacyOpenGLRenderer(SDL_Window *window) : AbstractRendere
     skyShader = LoadShader(SKY_VERT, SKY_FRAG);
     worldShader = LoadShader(OBJ_VERT, OBJ_FRAG);
     ApplyLights();
+    ApplyPrefs();
     ApplyProjection();
     
     alphaParts = {};
@@ -181,7 +182,7 @@ void LegacyOpenGLRenderer::ApplyLights()
     float ambientIntensity = ToFloat(viewParams->ambientLight);
     float ambientRGB[3];
     viewParams->ambientLightColor.ExportGLFloats(ambientRGB, 3);
-
+    
     worldShader->Use();
     AdjustAmbient(*worldShader, ambientIntensity);
     worldShader->SetFloat3("ambientColor", ambientRGB);
@@ -217,6 +218,30 @@ void LegacyOpenGLRenderer::ApplyLights()
         skyShader->SetFloat(radUniform, ToFloat(viewParams->dirLightSettings[i].celestialRadius));
         skyShader->SetFloat(fogUniform, viewParams->dirLightSettings[i].celestialFogSpread);
         skyShader->SetBool(specUniform, applySpecular);
+    }
+}
+
+void LegacyOpenGLRenderer::ApplyPrefs(std::optional<std::string> name) {
+    if (gApplication) {
+        if (!name || *name == kDither) {
+            dither = gApplication->Get<bool>(kDither);
+            
+            worldShader->Use();
+            worldShader->SetBool("dither", dither);
+            
+            skyShader->Use();
+            skyShader->SetBool("dither", dither);
+        }
+        
+        if (!name || *name == kSpecular) {
+            showSpecular = gApplication->Get<bool>(kSpecular);
+            
+            worldShader->Use();
+            worldShader->SetBool("showSpecular", showSpecular);
+            
+            skyShader->Use();
+            skyShader->SetBool("showSpecular", showSpecular);
+        }
     }
 }
 
@@ -341,8 +366,6 @@ void LegacyOpenGLRenderer::RenderFrame()
     glEnableVertexAttribArray(0);
 
     skyShader->Use();
-    skyShader->SetBool("dither", gApplication ? gApplication->Get<bool>(kDither) : true);
-    skyShader->SetBool("showSpecular", gApplication ? gApplication->Get<bool>(kSpecular) : true);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -359,8 +382,6 @@ void LegacyOpenGLRenderer::RenderFrame()
     glEnable(GL_DEPTH_TEST);
 
     worldShader->Use();
-    worldShader->SetBool("dither", gApplication ? gApplication->Get<bool>(kDither) : true);
-    worldShader->SetBool("showSpecular", gApplication ? gApplication->Get<bool>(kSpecular) : true);
 
     dynamicWorld->PrepareForRender();
 

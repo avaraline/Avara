@@ -7,6 +7,16 @@
 
 #include <memory>
 
+#ifdef __has_include
+#  if __has_include(<optional>)                // Check for a standard library
+#    include <optional>
+#  elif __has_include(<experimental/optional>) // Check for an experimental version
+#    include <experimental/optional>           // Check if __has_include is present
+#  else                                        // Not found at all
+#     error "Missing <optional>"
+#  endif
+#endif
+
 class AbstractRenderer {
 public:
     CViewParameters *viewParams;
@@ -33,6 +43,11 @@ public:
      * Update lights in the scene with the currently configured lighting.
      */
     virtual void ApplyLights() = 0;
+    
+    /**
+     * Sent when a preference value is updated. Can be used to alter render settings without checking every frame.
+     */
+    virtual void ApplyPrefs(std::optional<std::string> name = std::optional<std::string>{}) {}
 
     /**
      * Update the camera with the currently configured resolution and FOV.
@@ -105,6 +120,7 @@ public:
      * @param pixelRatio The pixel ratio.
      */
     virtual void UpdateViewRect(int width, int height, float pixelRatio) = 0;
+
 protected:
     float fov = 50.0f;
 };

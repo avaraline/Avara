@@ -152,6 +152,7 @@ ModernOpenGLRenderer::ModernOpenGLRenderer(SDL_Window *window) : AbstractRendere
     hudPostShader = LoadShader(HUD_POST_VERT, HUD_POST_FRAG);
     finalShader = LoadShader(FINAL_VERT, FINAL_FRAG);
     ApplyLights();
+    ApplyPrefs();
     ApplyProjection();
     
     alphaParts = {};
@@ -260,6 +261,37 @@ void ModernOpenGLRenderer::ApplyLights()
         skyShader->SetFloat(radUniform, ToFloat(viewParams->dirLightSettings[i].celestialRadius));
         skyShader->SetFloat(fogUniform, viewParams->dirLightSettings[i].celestialFogSpread);
         skyShader->SetBool(specUniform, applySpecular);
+    }
+}
+
+void ModernOpenGLRenderer::ApplyPrefs(std::optional<std::string> name) {
+    if (gApplication) {
+        if (!name || *name == kDither) {
+            dither = gApplication->Get<bool>(kDither);
+            
+            worldShader->Use();
+            worldShader->SetBool("dither", dither);
+            
+            skyShader->Use();
+            skyShader->SetBool("dither", dither);
+        }
+        
+        if (!name || *name == kSpecular) {
+            showSpecular = gApplication->Get<bool>(kSpecular);
+            
+            worldShader->Use();
+            worldShader->SetBool("showSpecular", showSpecular);
+            
+            skyShader->Use();
+            skyShader->SetBool("showSpecular", showSpecular);
+        }
+        
+        if (!name || *name == kFXAA) {
+            fxaa = gApplication->Get<bool>(kFXAA);
+            
+            finalShader->Use();
+            finalShader->SetBool("fxaa", fxaa);
+        }
     }
 }
 
@@ -395,8 +427,6 @@ void ModernOpenGLRenderer::RenderFrame()
     glEnableVertexAttribArray(0);
 
     skyShader->Use();
-    skyShader->SetBool("dither", gApplication ? gApplication->Get<bool>(kDither) : true);
-    skyShader->SetBool("showSpecular", gApplication ? gApplication->Get<bool>(kSpecular) : true);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -411,8 +441,6 @@ void ModernOpenGLRenderer::RenderFrame()
     glEnable(GL_DEPTH_TEST);
 
     worldShader->Use();
-    worldShader->SetBool("dither", gApplication ? gApplication->Get<bool>(kDither) : true);
-    worldShader->SetBool("showSpecular", gApplication ? gApplication->Get<bool>(kSpecular) : true);
 
     dynamicWorld->PrepareForRender();
 
@@ -491,7 +519,6 @@ void ModernOpenGLRenderer::RenderFrame()
     float res[2] = {1.0f / (float)resolution[0], 1.0f / (float)resolution[1]};
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     finalShader->Use();
-    finalShader->SetBool("fxaa", gApplication ? gApplication->Get<bool>(kFXAA) : true);
     finalShader->SetFloat2("texelStep", res);
     finalShader->SetFloat("lumaThreshold", 0.0625f);
     finalShader->SetFloat("mulReduce", 1.0f / 8.0f);

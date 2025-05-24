@@ -20,6 +20,7 @@ public:
     virtual void AddHUDPart(CBSPPart *part) override;
     virtual void AddPart(CBSPPart *part) override;
     virtual void ApplyLights() override;
+    virtual void ApplyPrefs(std::optional<std::string> name = std::optional<std::string>{}) override;
     virtual void ApplyProjection() override;
     virtual void ApplySky() override;
     virtual void LevelReset() override;
@@ -55,6 +56,8 @@ private:
     GLuint fbo[2];
     GLuint rbo[2];
     GLuint texture[2];
+
+    bool showSpecular, dither, fxaa;
 
     void AdjustAmbient(OpenGLShader &shader, float intensity);
     void ApplyView();
