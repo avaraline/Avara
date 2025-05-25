@@ -1576,12 +1576,15 @@ void CAbstractPlayer::FrameAction() {
             }
         }
 
+//#define FRAG_FRAME 500  // 500*.016=8 seconds (uncomment if you want to force a frag)
+#ifdef FRAG_FRAME
         // if a frag frame is specified with /dbg, force a frag on that frame by messing with FRandSeed
-        int fragFrame = Debug::GetValue("ffrag");
-        if (fragFrame > 0 && itsGame->frameNumber == fragFrame) {
+        int fragFrame = FRAG_FRAME;
+        if (itsManager->Slot() == 0 && itsGame->frameNumber == fragFrame) {
             extern Fixed FRandSeed; // to intentionally cause frags below
             FRandSeed += 1;
         }
+#endif
     }
 }
 

@@ -908,16 +908,6 @@ bool CAvaraGame::GameTick() {
         nextPingTime = frameStart + pingInterval;
     }
 
-    int randLoadPeriod = Debug::GetValue("rload"); // randomly load a level every `rload` seconds
-    if (randLoadPeriod > 0) {
-        if (frameStart > nextLoadTime) {
-            auto p = CPlayerManagerImpl::LocalPlayer();
-            auto *tui = itsApp->GetTui();
-            tui->ExecuteMatchingCommand("/rand", p);
-            nextLoadTime = frameStart + 1000*randLoadPeriod;
-        }
-    }
-
     // Not playing? Nothing to do!
     if (statusRequest != kPlayingStatus)
         return false;
