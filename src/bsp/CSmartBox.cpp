@@ -15,18 +15,6 @@
 
 #define DIMEPSILON 16
 
-/*
- typedef struct {
-     Fixed baseSize;
-     short scaleStyle;
- } bspsResource;
-
- {
-"400": {"1:1 size": 1.0,"Stretch/Scale (0/1)": 0},
-"401": {"1:1 size": 1.0,"Stretch/Scale (0/1)": 0},
-"722": {"1:1 size": 5.0,"Stretch/Scale (0/1)": 0}
-}
-*/
 
 void CSmartBox::ScaleTemplate(Fixed *dimensions, Fixed baseSize) {
     Fixed x, y, z;
@@ -115,7 +103,6 @@ CSmartBox::CSmartBox(
     CAbstractActor *anActor,
     short aPartCode
 ) {
-    //bspsResource **config;
     Fixed baseSize = FIX1;
     Boolean stretchFlag = false;
 
@@ -126,21 +113,11 @@ CSmartBox::CSmartBox(
 
     CSmartPart::ISmartPart(resId, anActor, aPartCode);
 
-    // Not sure what this is! Fort Warfare may use it?
-    if (resId == 722) baseSize = FIX(5);
-
-    /*
-    auto scalingRes = GetResource(BSPSCALETYPE, resId);
-    config = (bspsResource **)scalingRes;
-    if (config) {
-        stretchFlag = ntohs((*config)->scaleStyle);
-        baseSize = ntohl((*config)->baseSize);
-    } else {
-        stretchFlag = false;
-        baseSize = FIX1;
+    auto bsps = AssetManager::GetBspScale(resId);
+    if (bsps) {
+        baseSize = (**bsps).baseSize;
+        stretchFlag = (**bsps).scaleStyle;
     }
-    ReleaseResource(scalingRes);
-    */
     
     if (stretchFlag) {
         ScaleTemplate(dimensions, baseSize);
