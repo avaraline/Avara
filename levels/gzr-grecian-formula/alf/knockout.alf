@@ -357,12 +357,12 @@
   <Timer in="@blueExits" wait="45" out="@blueDies" />
   <Timer in="@start" wait="1" out="@inArena" />
   <Text in="@inArena" showEveryone="true" text="Stepping on or over the line 
-means death!" cx="56.25" cz="506.3888888888889" r="3.75" />
+means death!" cx="155.59027777777777" cz="113.26388888888889" r="3.75" />
   <Text sound="kSnText" volume="1" in="@inArena" showEveryone="true" text="Do not fire until you are in the 
-ring!" cx="56.25" cz="506.3888888888889" r="3.75" />
+ring!" cx="155.59027777777777" cz="113.26388888888889" r="3.75" />
   <Timer in="@start" wait="30" out="@onTele" />
   <Timer in="@start" wait="4216" out="@thirtyLeft" />
-  <Text in="@thirtyLeft" sound="kSnText" volume="5" showEveryone="true" text="Thirty Seconds Left!" cx="69.23611111111111" cz="512.1527777777778" r="3.75" />
+  <Text in="@thirtyLeft" sound="kSnText" volume="5" showEveryone="true" text="Thirty Seconds Left!" cx="155.59027777777777" cz="113.26388888888889" r="3.75" />
   <Timer in="@thirtyLeft" wait="312" out="@ten10" />
   <Timer in="@ten10" wait="15" out="@nine9" />
   <Timer in="@nine9" wait="15" out="@eight8" />
@@ -373,15 +373,15 @@ ring!" cx="56.25" cz="506.3888888888889" r="3.75" />
   <Timer in="@four4" wait="15" out="@three3" />
   <Timer in="@three3" wait="15" out="@two2" />
   <Timer in="@two2" wait="15" out="@one1" />
-  <Text sound="kSnText" volume="1" in="@ten10" showEveryone="true" text="Ten!" cx="57.986111111111114" cz="534.6527777777778" r="3.75" />
-  <Text sound="kSnText" volume="1" in="@nine9" showEveryone="true" text="Nine!" cx="57.986111111111114" cz="534.6527777777778" r="3.75" />
-  <Text sound="kSnText" volume="1" in="@eight8" showEveryone="true" text="Eight!" cx="57.986111111111114" cz="534.6527777777778" r="3.75" />
-  <Text sound="kSnText" volume="1" in="@seven7" showEveryone="true" text="Seven!" cx="57.986111111111114" cz="534.6527777777778" r="3.75" />
-  <Text sound="kSnText" volume="1" in="@six6" showEveryone="true" text="Six!" cx="57.986111111111114" cz="534.6527777777778" r="3.75" />
-  <Text sound="kSnText" volume="1" in="@five5" showEveryone="true" text="Five!" cx="57.986111111111114" cz="534.6527777777778" r="3.75" />
-  <Text sound="kSnText" volume="1" in="@four4" showEveryone="true" text="Four!" cx="57.986111111111114" cz="534.6527777777778" r="3.75" />
-  <Text sound="kSnText" volume="1" in="@three3" showEveryone="true" text="Three!" cx="57.986111111111114" cz="534.6527777777778" r="3.75" />
-  <Text sound="kSnText" volume="1" in="@two2" showEveryone="true" text="Two!" cx="57.986111111111114" cz="534.6527777777778" r="3.75" />
-  <Text sound="kSnText" volume="1" in="@one1" showEveryone="true" text="Game Over!" cx="57.986111111111114" cz="534.6527777777778" r="3.75" />
-  <Text sound="kSnText" volume="1" in="@one1" showEveryone="true" text="One!" cx="57.986111111111114" cz="534.6527777777778" r="3.75" />
+  <Text sound="kSnText" volume="1" in="@ten10" showEveryone="true" text="Ten!" cx="155.59027777777777" cz="113.26388888888889" r="3.75" />
+  <Text sound="kSnText" volume="1" in="@nine9" showEveryone="true" text="Nine!" cx="155.59027777777777" cz="113.26388888888889" r="3.75" />
+  <Text sound="kSnText" volume="1" in="@eight8" showEveryone="true" text="Eight!" cx="155.59027777777777" cz="113.26388888888889" r="3.75" />
+  <Text sound="kSnText" volume="1" in="@seven7" showEveryone="true" text="Seven!" cx="155.59027777777777" cz="113.26388888888889" r="3.75" />
+  <Text sound="kSnText" volume="1" in="@six6" showEveryone="true" text="Six!" cx="155.59027777777777" cz="113.26388888888889" r="3.75" />
+  <Text sound="kSnText" volume="1" in="@five5" showEveryone="true" text="Five!" cx="155.59027777777777" cz="113.26388888888889" r="3.75" />
+  <Text sound="kSnText" volume="1" in="@four4" showEveryone="true" text="Four!" cx="155.59027777777777" cz="113.26388888888889" r="3.75" />
+  <Text sound="kSnText" volume="1" in="@three3" showEveryone="true" text="Three!" cx="155.59027777777777" cz="113.26388888888889" r="3.75" />
+  <Text sound="kSnText" volume="1" in="@two2" showEveryone="true" text="Two!" cx="155.59027777777777" cz="113.26388888888889" r="3.75" />
+  <Text sound="kSnText" volume="1" in="@one1" showEveryone="true" text="Game Over!" cx="155.59027777777777" cz="113.26388888888889" r="3.75" />
+  <Text sound="kSnText" volume="1" in="@one1" showEveryone="true" text="One!" cx="155.59027777777777" cz="113.26388888888889" r="3.75" />
 </map>

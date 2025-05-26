@@ -32,9 +32,9 @@
   <Solid shape="bspW5x1" color="#ff32a9" color.1="#000000" cx="107.36111111111111" cz="104.86111111111111" angle="315" />
   <Solid shape="bspW5x1" color="#ff32a9" color.1="#000000" cx="5.486111111111111" cz="101.11111111111111" angle="45" />
   <Door status="isOpen" open="@openDoorWest" close="@closeDoorWest" openSpeed="10" closeSpeed="25" shape="bspW1x1" color="#00ec00" color.1="#000000" cx="29.236111111111114" cz="57.361111111111114" angle="90" />
-  <Area enter="@openDoorEast" exit="@closeDoorWest" cx="29.236111111111114" cz="57.361111111111114" r="1.875" />
+  <Area enter="@openDoorEast" exit="@closeDoorWest" cx="29.479166666666664" cz="57.361111111111114" r="1.875" />
   <Door status="isOpen" open="@openDoorEast" close="@closeDoorEast" openSpeed="10" closeSpeed="25" color="#ff7c00" color.1="#000000" cx="89.16666666666667" cz="57.361111111111114" angle="90" />
-  <Area enter="@openDoorWest" exit="@closeDoorEast" cx="89.16666666666667" cz="57.361111111111114" r="2.5" />
+  <Area enter="@openDoorWest" exit="@closeDoorEast" cx="89.47916666666667" cz="56.736111111111114" r="2.5" />
   <Door status="isOpen" open="@openDoorSouth" close="@closeDoorSouth" openSpeed="10" closeSpeed="25" color="#4180ff" color.1="#000000" cx="59.47916666666667" cz="87.36111111111111" angle="0" />
   <Area enter="@openDoorNorth" exit="@closeDoorSouth" cx="59.47916666666667" cz="87.36111111111111" r="5.243055555555557" />
   <Area enter="@openDoorNorth" exit="@closeDoorNorth" cx="73.22916666666667" cz="17.36111111111111" r="5.243055555555557" />
@@ -49,7 +49,7 @@
   <Delay in="@wallSTestHit" out.0="@testMessage" wait="10" />
   <Field visible="false" deltaX="0" deltaY="0.04" enter="@closeDoorNorth" exit="@openDoorNorth" color="#fffb00" color.1="#000000" cx="26.770833333333336" cz="39.02777777777778" angle="89" x="36.666666666666664" z="6.041666666666667" w="12.36111111111111" d="11.111111111111112" h="6" />
   <WallDoor status="isOpen" open="@openDoorNorth" close="@closeDoorNorth" openSpeed="2" closeSpeed="2" middle="0.5" midZ="-5" deltaY="0" deltaZ="-5" deltaX="5" shape="bspW1x1" hitMsg="@closeDoorNorth" shotPower="5" color="#fffb00" color.1="#000000" x="59.236111111111114" z="27.36111111111111" w="5" d="5" h="0" />
-  <Area enter="@openDoorSouth" exit="@closeDoorNorth" cx="26.770833333333336" cz="39.02777777777778" r="1.2847222222222232" />
+  <Area enter="@openDoorSouth" exit="@closeDoorNorth" cx="73.22916666666667" cz="17.36111111111111" r="1.2847222222222232" />
   <WallDoor stepOnMsg="@stepOnYelloPlat" open="@stepOnYelloPlat" close="@stepOnYelloPlat" openDelay="5" closeDelay="100" closeSpeed="5" guardDelay="0" deltaY="10" yaw="360" color="#fffb00" color.1="#000000" x="94.16666666666667" z="22.291666666666668" w="4.861111111111114" d="4.861111111111114" h="0.25" />
   <Dome color="#fffb00" color.1="#000000" cx="70.625" cz="113.19444444444444" r="2.5" angle="0" quarters="4" />
   <unique vars="mShow mTaken" />

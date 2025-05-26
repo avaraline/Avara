@@ -39,7 +39,7 @@
   <Wall color="#fffb00" color.1="#000000" x="102.5" z="28.993055555555557" w="15" d="0.625" h="0.25" />
   <Wall color="#fffb00" color.1="#000000" x="22.1875" z="33.99305555555556" w="0.625" d="9.375" h="0.25" />
   <Walker team="1" y="10" cx="6.875" cz="11.805555555555555" angle="90" />
-  <Text showEveryone="true" text="Green team scores!" in="@g1" cx="66.59722222222223" cz="184.44444444444446" r="3.125" />
+  <Text showEveryone="true" text="Green team scores!" in="@g1" cx="101.11111111111111" cz="64.34027777777777" r="3.125" />
   <Wall color="#b8b8b8" color.1="#000000" x="71.875" z="75.86805555555556" w="22.5" d="16.875" h="3" />
   <Wall color="#c7c7c7" color.1="#000000" x="86.25" z="87.43055555555556" w="6.25" d="6.25" h="3" />
   <Wall color="#c7c7c7" color.1="#000000" x="86.25" z="64.30555555555556" w="6.25" d="6.25" h="3" />
@@ -89,19 +89,19 @@
   <Field mask="T2" deltaX="0" deltaY="0" deltaZ="-2" color="#fffb00" color.1="#000000" x="71.97916666666667" z="123.15972222222223" w="16.458333333333343" d="1.4583333333333428" h="6" cx="71.18055555555556" cz="76.45833333333334" angle="135" />
   <Field mask="T2" deltaX="0" deltaY="0" deltaZ="2" color="#fffb00" color.1="#000000" x="41.35416666666667" z="28.57638888888889" w="16.458333333333336" d="1.3194444444444429" h="6" cx="71.18055555555556" cz="76.45833333333334" angle="135" />
   <Distributor in="@greenscore" out.0="@g1" out.1="@g2" out.2="@g3" out.3="@g4" out.4="@g5" out.5="@g6" />
-  <Text showEveryone="true" text="Kick ass Green" in="@greenwin" cx="71.18055555555556" cz="76.45833333333334" r="1.25" />
+  <Text showEveryone="true" text="Kick ass Green" in="@greenwin" cx="101.11111111111111" cz="64.34027777777777" r="1.25" />
   <Distributor in.0="@g6" out.0="@greenwin" />
   <Timer in="@greenwin" out="@gameOver" wait="30" />
   <Distributor in="@gameOver" out="@gameEnds" />
-  <Text showEveryone="true" text="Excellent D, Yellow" in="@yellowwin" cx="71.18055555555556" cz="76.45833333333334" r="1.25" />
+  <Text showEveryone="true" text="Excellent D, Yellow" in="@yellowwin" cx="101.11111111111111" cz="64.34027777777777" r="1.25" />
   <set gameLength="5636" />
   <Timer wait="gameLength" in="@start" out="@yellowwin" />
   <Teleporter mask="T2" y="30" activeRange="10000" yon="0.01" start="@yellowwin" win="6001" color="#ffffff" color.1="#000000" cx="4.618055555555556" cz="152.84722222222223" angle="135" />
   <Teleporter mask="T1" y="30" activeRange="10000" yon="0.01" start="@yellowwin" win="1" color="#ffffff" color.1="#000000" cx="4.618055555555556" cz="152.84722222222223" angle="135" />
-  <Text showEveryone="true" text="That’s two for Green." in="@g2" cx="78.47222222222223" cz="184.44444444444446" r="3.125" />
-  <Text showEveryone="true" text="Green is half way there." in="@g3" cx="64.86111111111111" cz="190.69444444444446" r="3.2638888888888893" />
-  <Text showEveryone="true" text="Four.  Look out, Yellow!" in="@g4" cx="78.78472222222223" cz="191.31944444444446" r="3.4375" />
-  <Text showEveryone="true" text="Five goals. Stop them NOW, Yellow." in="@g5" cx="67.53472222222223" cz="198.19444444444446" r="4.6875" />
+  <Text showEveryone="true" text="That’s two for Green." in="@g2" cx="101.11111111111111" cz="64.34027777777777" r="3.125" />
+  <Text showEveryone="true" text="Green is half way there." in="@g3" cx="101.11111111111111" cz="64.34027777777777" r="3.2638888888888893" />
+  <Text showEveryone="true" text="Four.  Look out, Yellow!" in="@g4" cx="101.11111111111111" cz="64.34027777777777" r="3.4375" />
+  <Text showEveryone="true" text="Five goals. Stop them NOW, Yellow." in="@g5" cx="101.11111111111111" cz="64.34027777777777" r="4.6875" />
   <Incarnator mask="T1" y="2" start="@incarn" cx="56.38888888888889" cz="128.68055555555554" angle="90" />
   <Incarnator mask="T1" y="2" start="@incarn" cx="87.01388888888889" cz="23.055555555555557" angle="270.5" />
   <Field mask="T2" deltaX="0" deltaY="0" deltaZ="-2" color="#fffb00" color.1="#000000" x="102.60416666666667" z="123.15972222222223" w="16.458333333333343" d="1.4583333333333428" h="6" cx="87.01388888888889" cz="23.055555555555557" angle="270.5" />

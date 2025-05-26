@@ -586,8 +586,8 @@
   <Solid shape="bspShrub" scale="1 + random" color="#38d142" color.1="#000000" cx="114.58333333333334" cz="110.625" angle="315" />
   <Solid shape="bspShrub" scale="1 + random" color="#38d142" color.1="#000000" cx="70.83333333333334" cz="35.625" angle="315" />
   <Solid shape="bspShrub" scale="1 + random" color="#38d142" color.1="#000000" cx="199.58333333333334" cz="140.625" angle="315" />
-  <Text in="@rWin" text="Red captures blue flag - Red Wins" showEveryone="true" cx="199.58333333333334" cz="140.625" r="1.875" />
-  <Text in="@bWin" text="Blue captures red flag - Blue Wins" showEveryone="true" cx="199.58333333333334" cz="140.625" r="1.875" />
+  <Text in="@rWin" text="Red captures blue flag - Red Wins" showEveryone="true" cx="192.5" cz="192.5" r="1.875" />
+  <Text in="@bWin" text="Blue captures red flag - Blue Wins" showEveryone="true" cx="192.5" cz="192.5" r="1.875" />
   <Teleporter activeRange="2000" deadRange="250" y="70" shape="false" destGroup="2" color="#ffd479" color.1="#000000" cx="93.68055555555556" cz="110.41666666666667" angle="135" />
   <Teleporter activeRange="0" deadRange="1" y="60" shape="false" group="2" color="#ffd479" color.1="#000000" cx="93.68055555555556" cz="110.41666666666667" angle="135" />
 </map>
