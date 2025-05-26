@@ -105,7 +105,7 @@ bspviewer: $(BUILD_DIR)/BSPViewer resources
 
 levelviewer: $(BUILD_DIR)/AvaraLevelViewer resources
 
-hsnd2wav: $(BUILD_DIR)/hsnd2wav resources
+hsnd2wav: set-version $(BUILD_DIR)/hsnd2wav resources
 
 frandom: $(BUILD_DIR)/frandom
 

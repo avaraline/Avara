@@ -178,7 +178,6 @@
     <ClInclude Include="..\src\bsp\CSmartPart.h" />
     <ClInclude Include="..\src\bsp\CViewParameters.h" />
     <ClInclude Include="..\src\compat\Memory.h" />
-    <ClInclude Include="..\src\compat\Resource.h" />
     <ClInclude Include="..\src\compat\System.h" />
     <ClInclude Include="..\src\compat\Types.h" />
     <ClInclude Include="..\src\game\AvaraDefines.h" />
@@ -389,7 +388,6 @@
     <ClCompile Include="..\src\bsp\CSmartPart.cpp" />
     <ClCompile Include="..\src\bsp\CViewParameters.cpp" />
     <ClCompile Include="..\src\compat\Memory.cpp" />
-    <ClCompile Include="..\src\compat\Resource.cpp" />
     <ClCompile Include="..\src\compat\System.cpp" />
     <ClCompile Include="..\src\game\CAbstractActor.cpp" />
     <ClCompile Include="..\src\game\CAbstractMissile.cpp" />

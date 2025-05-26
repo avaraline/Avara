@@ -16,6 +16,11 @@
 #define BSPTEMPLATETYPE 'BSPT'
 #define BSPSCALETYPE 'BSPS'
 
+typedef struct {
+    Fixed baseSize;
+    short scaleStyle;
+} BSPSRecord;
+
 class CSmartBox final : public CSmartPart {
 public:
     CSmartBox(short resId,
