@@ -17,12 +17,12 @@ jobs:
         sudo apt-get update -y -qq
         sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libegl1-mesa-dev libgles2-mesa-dev libdirectfb-dev libgtest-dev libsqlite3-dev
     - uses: actions/checkout@v4
-    - name: make
-      run: make -j2
+    - name: Build
+      uses: threeal/cmake-action@v2.1.0
     - name: Run headless test
       uses: GabrielBB/xvfb-action@v1.7
       with:
-        run: make tests
+        run: ./build/tests
   Windows:
     name: Windows
     runs-on: windows-2022
@@ -32,12 +32,13 @@ jobs:
         uses: microsoft/setup-msbuild@v2
       - name: Setup vcpkg
         uses: lukka/run-vcpkg@v11
-      - name: Build
+      - name: vcpkg install and set GitVersion.h
         run: |
           vcpkg integrate install
           .\bin\git_version.ps1
-          msbuild /m /p:Platform=x64 /p:Configuration=Release .\Avara.msvc\Avara.sln
         shell: pwsh
+      - name: Build
+        uses: threeal/cmake-action@v2.1.0
       - name: Run headless test
         run: .\Avara.msvc\x64\Release\Tests.exe
         shell: pwsh
@@ -45,7 +46,7 @@ jobs:
         run: .\bin\winavarazip.ps1
         shell: pwsh
       - name: deploy main nightly
-        if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'cmake')
+        if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'main')
         uses: WebFreak001/deploy-nightly@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -67,10 +68,12 @@ jobs:
           sudo cp -R /Volumes/SDL2/SDL2.framework /Library/Frameworks/
           brew install googletest
       - uses: actions/checkout@v4
+      - name: Build
+        uses: threeal/cmake-action@v2.1.0
       - name: Run headless tests
-        run: make -j4 tests
+        run: ./build/tests
       - name: make macdist
-        run: make -j4 clean macdist
+        run: zip -rq MacAvara.zip ./build
       - name: deploy main nightly
         if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'main')
         uses: WebFreak001/deploy-nightly@v1.0.1
