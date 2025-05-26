@@ -215,6 +215,8 @@ def fix_quirks(text):
     text = text.replace(' "A"s ', ' ""A""s ')
     text = text.replace(' "Forseti" ', ' ""Forseti"" ')
     text = text.replace(' "Seven" ', ' ""Seven"" ')
+    # Stranded
+    text = text.replace('de;taY', 'deltaY')
     # Disk-o-tech -- not sure how this worked before?
     text = text.replace("snDoory =", "snDoor y =")
     text = text.replace("= 0speed =", "= 0 speed =")
@@ -343,6 +345,15 @@ class OvalOp(ArcOp):
 
     def __init__(self, context, verb, rect):
         super().__init__(context, verb, rect, 0, 360)
+
+    def process(self, context):
+        super().process(context)
+        context.update(
+            {
+                "ox": context["cx"],
+                "oz": context["cz"],
+            }
+        )
 
 
 def copy_attrs(wall, obj):
