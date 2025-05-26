@@ -1,0 +1,92 @@
+<map>
+  <FreeSolid shape="bspIce" shotPower="15" customGravity="0.1" color="#76d6ff" color.1="#000000" cx="41.18055555555556" cz="27.916666666666668" angle="180" />
+  <FreeSolid shape="bspBigIce" shotPower="20" customGravity="0.1" color="#76d6ff" color.1="#000000" cx="13.055555555555555" cz="24.791666666666668" angle="180" />
+  <set designer="Ryan Herriman 
+&lt;silverƒox&gt;" information="Turn the thermostat way &#10;up!" />
+  <SkyColor color="#000000" color.1="#ffffff" />
+  <GroundColor color="#d4feff" />
+  <Wall color="#0080ff" color.1="#000000" x="24.930555555555557" z="55.06944444444445" w="50" d="3.75" h="4.5" />
+  <Wall color="#0080ff" color.1="#000000" x="7.430555555555555" z="59.75694444444445" w="2.5" d="5.625" h="4.5" />
+  <Wall color="#0080ff" color.1="#000000" x="41.18055555555556" z="59.75694444444445" w="2.5" d="5.625" h="4.5" />
+  <Wall color="#0080ff" color.1="#000000" x="24.930555555555557" z="8.194444444444445" w="50" d="3.75" h="4.5" />
+  <Wall color="#0080ff" color.1="#000000" x="7.430555555555555" z="3.5069444444444446" w="2.5" d="5.625" h="4.5" />
+  <Wall color="#0080ff" color.1="#000000" x="41.18055555555556" z="3.5069444444444446" w="2.5" d="5.625" h="4.5" />
+  <set wallHeight=".5" />
+  <FreeSolid shape="bspBigIce" shotPower="20" customGravity="0.1" color="#76d6ff" color.1="#000000" cx="37.43055555555556" cz="17.916666666666668" angle="180" />
+  <FreeSolid shape="bspBigIce" shotPower="20" customGravity="0.1" color="#76d6ff" color.1="#000000" cx="33.68055555555556" cz="45.76388888888889" angle="180" />
+  <FreeSolid shape="bspIce" shotPower="15" customGravity="0.1" color="#76d6ff" color.1="#000000" cx="11.180555555555555" cz="46.04166666666667" angle="180" />
+  <FreeSolid shape="bspIce" shotPower="15" customGravity="0.1" color="#76d6ff" color.1="#000000" cx="44.93055555555556" cz="48.88888888888889" angle="180" />
+  <FreeSolid shape="bspIce" shotPower="15" customGravity="0.1" color="#76d6ff" color.1="#000000" cx="39.30555555555556" cz="39.51388888888889" angle="180" />
+  <FreeSolid shape="bspIce" shotPower="15" customGravity="0.1" color="#76d6ff" color.1="#000000" cx="9.930555555555555" cz="35.76388888888889" angle="180" />
+  <FreeSolid shape="bspBigIce" shotPower="20" customGravity="0.1" color="#76d6ff" color.1="#000000" cx="23.680555555555557" cz="20.76388888888889" angle="180" />
+  <FreeSolid shape="bspBigIce" shotPower="20" customGravity="0.1" color="#76d6ff" color.1="#000000" cx="4.305555555555556" cz="24.51388888888889" angle="180" />
+  <Wall color="#0080ff" color.1="#000000" x="19.305555555555557" z="33.50694444444444" w="2.5" d="11.875" h="0" />
+  <Wall color="#0080ff" color.1="#000000" x="31.180555555555557" z="33.50694444444444" w="2.5" d="11.875" h="0" />
+  <Wall color="#0080ff" color.1="#000000" x="25.243055555555557" z="28.506944444444446" w="9.375" d="1.875" h="0" />
+  <Wall color="#0080ff" color.1="#000000" x="25.243055555555557" z="38.50694444444444" w="9.375" d="1.875" h="0" />
+  <Incarnator y="10" cx="32.083333333333336" cz="58.81944444444444" angle="315" />
+  <Incarnator y="10" cx="23.333333333333336" cz="58.75" angle="315" />
+  <Incarnator y="10" cx="13.333333333333334" cz="58.75" angle="315" />
+  <Incarnator y="10" cx="33.333333333333336" cz="0.2777777777777777" angle="315" />
+  <Incarnator y="10" cx="22.083333333333336" cz="0" angle="315" />
+  <Incarnator y="10" cx="10.208333333333334" cz="0" angle="315" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="1" />
+  <Goody shape="bspGrenade" y="2" speed="5" grenades="6" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="18.819444444444446" cz="33.81944444444444" angle="45" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="1" />
+  <Goody shape="bspGrenade" y="2" speed="5" grenades="6" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="31.319444444444443" cz="33.40277777777778" angle="45" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="10" />
+  <Goody shape="bspMissile" y="2" speed="5" missiles="3" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="25.208333333333336" cz="38.40277777777778" angle="45" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="10" />
+  <Goody shape="bspMissile" y="2" speed="5" missiles="3" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="25.208333333333336" cz="28.958333333333336" angle="45" />
+  <set gravity=".5" grenadePower="5" missilePower="20" missileAcceleration="1" missileTurnRate="10" defaultTraction=".05" defaultFriction=".05" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="50" />
+  <Goody shape="bspGoody" y="2" speed="2" boosters="1" start="mShow" out="mTaken" color="#e62100" color.1="#000000" cx="24.444444444444446" cz="33.68055555555556" angle="45" />
+  <Teleporter group="-1" y="-30" activeRange="35 * 5" deadRange="28 * 5" destGroup="@recenter" shape="0" color="#e62100" color.1="#000000" cx="17.5" cz="22.083333333333336" angle="45" />
+  <Teleporter y="30" shape="0" group="@recenter" color="#e62100" color.1="#000000" cx="17.5" cz="22.083333333333336" angle="45" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#e62100" color.1="#000000" cx="17.5" cz="22.083333333333336" angle="45" />
+  <Incarnator y="30" stop="@start" cx="18.40277777777778" cz="22.708333333333336" angle="145" />
+  <Incarnator y="33" stop="@start" cx="18.40277777777778" cz="22.708333333333336" angle="145" />
+  <Incarnator y="30" stop="@start" cx="41.52777777777778" cz="48.958333333333336" angle="145" />
+  <Incarnator y="33" stop="@start" cx="41.52777777777778" cz="48.958333333333336" angle="145" />
+  <Wall color="#0080ff" color.1="#000000" x="33.36805555555556" z="33.50694444444444" w="1.875" d="1.875" h="0" />
+  <Wall color="#0080ff" color.1="#000000" x="17.118055555555557" z="33.50694444444444" w="1.875" d="1.875" h="0" />
+  <Wall color="#0080ff" color.1="#000000" x="25.243055555555557" z="26.631944444444446" w="1.875" d="1.875" h="0" />
+  <Wall color="#0080ff" color.1="#000000" x="25.243055555555557" z="40.38194444444444" w="1.875" d="1.875" h="0" />
+  <Wall color="#0080ff" color.1="#000000" x="33.36805555555556" z="26.631944444444446" w="1.875" d="1.875" h="0" />
+  <Wall color="#0080ff" color.1="#000000" x="33.36805555555556" z="40.38194444444444" w="1.875" d="1.875" h="0" />
+  <Wall color="#0080ff" color.1="#000000" x="17.118055555555557" z="40.38194444444444" w="1.875" d="1.875" h="0" />
+  <Wall color="#0080ff" color.1="#000000" x="17.118055555555557" z="26.631944444444446" w="1.875" d="1.875" h="0" />
+  <Wall color="#0080ff" color.1="#000000" x="15.243055555555557" z="30.069444444444443" w="1.875" d="5" h="0" />
+  <Wall color="#0080ff" color.1="#000000" x="15.243055555555557" z="36.94444444444444" w="1.875" d="5" h="0" />
+  <Wall color="#0080ff" color.1="#000000" x="35.24305555555556" z="30.069444444444443" w="1.875" d="5" h="0" />
+  <Wall color="#0080ff" color.1="#000000" x="35.24305555555556" z="36.94444444444444" w="1.875" d="5" h="0" />
+  <Wall color="#0080ff" color.1="#000000" x="21.180555555555557" z="24.756944444444446" w="6.25" d="1.875" h="0" />
+  <Wall color="#0080ff" color.1="#000000" x="29.305555555555557" z="24.756944444444446" w="6.25" d="1.875" h="0" />
+  <Wall color="#0080ff" color.1="#000000" x="21.180555555555557" z="42.25694444444444" w="6.25" d="1.875" h="0" />
+  <Wall color="#0080ff" color.1="#000000" x="29.305555555555557" z="42.25694444444444" w="6.25" d="1.875" h="0" />
+  <Wall color="#0080ff" color.1="#000000" x="37.11805555555556" z="33.50694444444444" w="1.875" d="1.875" h="0" />
+  <Wall color="#0080ff" color.1="#000000" x="25.243055555555557" z="44.13194444444444" w="1.875" d="1.875" h="0" />
+  <Wall color="#0080ff" color.1="#000000" x="13.368055555555555" z="33.50694444444444" w="1.875" d="1.875" h="0" />
+  <Wall color="#0080ff" color.1="#000000" x="25.243055555555557" z="22.881944444444446" w="1.875" d="1.875" h="0" />
+  <set defaultLives="7" />
+  <Wall color="#0080ff" color.1="#000000" x="18.993055555555557" z="13.819444444444446" w="1.875" d="7.5" h="4.5" />
+  <Wall color="#0080ff" color.1="#000000" x="31.493055555555557" z="13.819444444444446" w="1.875" d="7.5" h="4.5" />
+  <Wall color="#0080ff" color.1="#000000" x="18.993055555555557" z="49.44444444444445" w="1.875" d="7.5" h="4.5" />
+  <Wall color="#0080ff" color.1="#000000" x="31.493055555555557" z="49.44444444444445" w="1.875" d="7.5" h="4.5" />
+  <Wall color="#0080ff" color.1="#000000" x="22.118055555555557" z="46.63194444444445" w="4.375" d="1.875" h="4.5" />
+  <Wall color="#0080ff" color.1="#000000" x="28.368055555555557" z="46.63194444444445" w="4.375" d="1.875" h="4.5" />
+  <Wall color="#0080ff" color.1="#000000" x="22.118055555555557" z="16.631944444444446" w="4.375" d="1.875" h="4.5" />
+  <Wall color="#0080ff" color.1="#000000" x="28.368055555555557" z="16.631944444444446" w="4.375" d="1.875" h="4.5" />
+  <Wall color="#0080ff" color.1="#000000" x="25.243055555555557" z="51.31944444444445" w="1.875" d="3.75" h="4.5" />
+  <Wall color="#0080ff" color.1="#000000" x="25.243055555555557" z="11.944444444444445" w="1.875" d="3.75" h="4.5" />
+</map>

@@ -12,27 +12,21 @@
 #include "CAvaraApp.h"
 #include "CAvaraGame.h"
 #include "CViewParameters.h"
-#include "Resource.h"
 #include "CBSPPart.h"
-#include "AvaraGL.h"
 
-void CWorldShader::IWorldShader(CAvaraGame *theGame) {
-    itsGame = theGame;
-    Reset();
-}
-
-void CWorldShader::IWorldShader() {
+CWorldShader::CWorldShader() {
     Reset();
 }
 
 void CWorldShader::Reset() {
     lowSkyColor = DEFAULT_LOW_SKY_COLOR;
     highSkyColor = DEFAULT_HIGH_SKY_COLOR;
-    groundColor = DEFAULT_GROUND_COLOR;
+    groundMaterial = Material(DEFAULT_GROUND_COLOR);
     skyShadeCount = DEFAULT_SKY_SHADE_COUNT;
 
     lowSkyAltitude = FIX(0);
-    highSkyAltitude = FIX(500);
+    highSkyAltitude = FIX(1000);
+    hazeDensity = 0.0f;
 }
 
 #define GROUNDOFFSET FIX(-2)
@@ -65,9 +59,9 @@ void CWorldShader::Apply() {
             break;
     }
 
-    SetPolyWorld(&itsGame->itsPolyWorld);
+    SetPolyWorld(&gCurrentGame->itsPolyWorld);
     if(numShades == 0)
-    {	SetPolyWorldBackground(FindPolyColor(groundColor));
+    {	SetPolyWorldBackground(FindPolyColor(groundMaterial.GetColor()));
     }
     else
     if(numShades > 1)
@@ -80,7 +74,7 @@ void CWorldShader::Apply() {
     colors = shadeColors;
     alts = altitudes;
 
-    *colors++ = FindPolyColor(groundColor);
+    *colors++ = FindPolyColor(groundMaterial.GetColor());
     *alts++ = GROUNDOFFSET;
 
     tot = numShades - 1;
@@ -109,13 +103,5 @@ void CWorldShader::Apply() {
             *colors++ = FindPolyColor(RGBToLongColor(&interColor));
         }
     }
-    */
-}
-
-void CWorldShader::ShadeWorld(CViewParameters *theView) {
-    AvaraGLShadeWorld(this, theView);
-    /*
-    if(numShades)
-        theView->RenderPlanes(numShades, shadeColors, altitudes);
     */
 }

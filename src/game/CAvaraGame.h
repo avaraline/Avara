@@ -9,16 +9,17 @@
 
 #pragma once
 #include "AvaraDefines.h"
-#include "AvaraGL.h"
 #include "AvaraScoreInterface.h"
 #include "AvaraTypes.h"
 #include "CDirectObject.h"
 #include "Types.h"
 #include "CNetManager.h"
+#include "LevelInfo.h"
 
 #include <SDL.h>
 #include <string>
 #include <memory>
+#include <set>
 
 #define IDENTTABLESIZE 512
 
@@ -45,7 +46,15 @@
 
 #define INACTIVE_LOOP_REFRESH 16
 
-enum { kPlayingStatus, kAbortStatus, kReadyStatus, kPauseStatus, kNoVehicleStatus, kWinStatus, kLoseStatus };
+enum GameStatus { kPlayingStatus, kAbortStatus, kReadyStatus, kPauseStatus, kNoVehicleStatus, kWinStatus, kLoseStatus };
+
+enum SpawnOrder {
+    ksRandom,   // picks at random which Incarnator to choose
+    ksUsage,    // this is the "Classic" setting, uses hit count to choose
+    ksDistance, // uses slightly-randomized distance
+    ksHybrid,   // uses count & distance
+    ksNumSpawnOrders
+};
 
 class CAbstractActor;
 class CAbstractPlayer;
@@ -63,32 +72,31 @@ class CAvaraApp;
 
 class CSoundHub;
 class CIncarnator;
-class CWorldShader;
 class CScoreKeeper;
 class CAbstractYon;
 
-class CHUD;
-
-class CAvaraGame : public CDirectObject {
+class CAvaraGame {
 public:
-    std::string loadedTag = "";
-    std::string loadedLevel = "";
-    std::string loadedSet = "";
-    std::string loadedDesigner = "";
-    std::string loadedInfo = "";
+    std::unique_ptr<LevelInfo> loadedLevelInfo = std::make_unique<LevelInfo>("", "");
     long loadedTimeLimit;
+    Vector extentMin, extentMax, extentCenter;
+    Fixed extentRadius;
     int32_t timeInSeconds;
     FrameNumber frameNumber;
     bool isClassicFrame;
     int32_t frameAdjust;
+
+    int currentGameId = 0; // resets when a new game starts
 
     FrameNumber topSentFrame;
 
     FrameTime frameTime; //	In milliseconds.
     double fpsScale;  // 0.25 => CLASSICFRAMETIME / 4
 
-    short gameStatus;
-    short statusRequest;
+    SpawnOrder spawnOrder;
+
+    GameStatus gameStatus;
+    GameStatus statusRequest;
     short pausePlayer;
 
     CAbstractActor *actorList;
@@ -100,6 +108,8 @@ public:
     long playersStanding;
     short teamsStandingMask;
     short teamsStanding;
+
+    Boolean freeCamState;
 
     CIncarnator *incarnatorList;
     CAbstractPlayer *freshPlayerList;
@@ -119,9 +129,6 @@ public:
     CAvaraApp *itsApp;
     // WindowPtr		itsWindow;
     // PolyWorld		itsPolyWorld;
-    CBSPWorld *itsWorld;
-    CBSPWorld *hudWorld;
-    CViewParameters *itsView;
     CAbstractYon *yonList;
 
     // UI
@@ -132,7 +139,7 @@ public:
 
     Rect gameRect;
 
-    MessageRecord *messageBoard[MESSAGEHASH];
+    MessageRecord *messageBoard[MESSAGEHASH] = {};
     Fixed *baseLocation;
 
     Fixed gravityRatio;
@@ -146,9 +153,7 @@ public:
     CDepot *itsDepot; //	Storage maintenance for ammo
     CSoundHub *soundHub; //	Sound playback and control hub
     std::unique_ptr<CNetManager> itsNet; //	Networking management
-    CWorldShader *worldShader; //	Manages ground and sky colors.
     CScoreKeeper *scoreKeeper;
-    CHUD *hud;
 
     //	Sound related variables:
     int soundTime;
@@ -158,20 +163,32 @@ public:
     short groundStepSound;
 
     //	Networking & user control related stuff:
-    Handle mapRes; //	Keyboard mapping resource handle.
+    // Handle mapRes; //	Keyboard mapping resource handle.
 
     short moJoOptions; //	Mouse and Joystick options.
     double sensitivity;
 
     double latencyTolerance;
+    short initialFrameLatency = 0;
 
     ScoreInterfaceReasons scoreReason;
+    ScoreInterfaceReasons killReason;
     ScoreInterfaceReasons lastReason;
+    std::deque<ScoreInterfaceEvent> scoreEventList;
 
+    uint32_t frameStart;
     uint32_t nextScheduledFrame;
     uint32_t nextPingTime;
+    uint32_t nextLoadTime;
+
+    int preSendCount;
+
+    uint32_t nextStatTime;
     long lastFrameTime;
-    Boolean canPreSend;
+    RolloverCounter<uint32_t> lastFramePackets;
+    float msecPerFrame;
+    float packetsPerFrame;
+    float effectiveLT;
 
     Boolean didWait;
     Boolean longWait;
@@ -180,6 +197,8 @@ public:
     Boolean simpleExplosions;
     Boolean keysFromStdin;
     Boolean keysToStdout;
+
+    Boolean showNewHUD;
 
     // Moved here from GameLoop so it can run on the normal event loop
     // long            frameCredit;
@@ -191,11 +210,11 @@ public:
     CAvaraGame(FrameTime frameTime = 64);
     //	Methods:
     virtual void IAvaraGame(CAvaraApp *theApp);
-    virtual CBSPWorld* CreateCBSPWorld(short initialObjectSpace);
     virtual CSoundHub* CreateSoundHub();
     virtual std::unique_ptr<CNetManager> CreateNetManager();
 
     virtual void InitLocatorTable();
+    virtual void IncrementGameCounter();
 
     virtual CAbstractActor *FindIdent(long ident);
     virtual void GetIdent(CAbstractActor *theActor);
@@ -203,16 +222,20 @@ public:
 
     virtual CAbstractPlayer *GetSpectatePlayer();
     virtual CAbstractPlayer *GetLocalPlayer();
+    virtual std::string GetPlayerName(short id);
 
     virtual void AddActor(CAbstractActor *theActor);
     virtual void RemoveActor(CAbstractActor *theActor);
+    virtual void CalculateExtent();
 
     virtual void ResumeActors();
     virtual void PauseActors();
     virtual void RunFrameActions();
     virtual void RunActorFrameActions();
+    virtual void PreSendFrameActions();
 
     virtual void Score(short team, short player, long points, Fixed energy, short hitTeam, short hitPlayer);
+    virtual void AddScoreNotify(ScoreInterfaceEvent event);
 
     virtual void ChangeDirectoryFile();
     virtual void LevelReset(Boolean clearReset);
@@ -228,14 +251,12 @@ public:
     virtual void GameStart();
     virtual bool GameTick();
     virtual void GameStop();
-    virtual void Dispose();
+    virtual ~CAvaraGame();
+    virtual void DoStats(uint32_t frameStartTime, int interval);
 
     virtual void SpectateNext();
     virtual void SpectatePrevious();
     virtual bool canBeSpectated(CAbstractPlayer *player);
-
-
-    virtual void UpdateViewRect(int width, int height, float pixelRatio);
 
     virtual void RegisterReceiver(MessageRecord *theMsg, MsgType messageNum);
     virtual void RemoveReceiver(MessageRecord *theMsg);
@@ -244,24 +265,29 @@ public:
     virtual void MessageCleanup(CAbstractActor *deadActor);
 
     virtual void StopGame();
-    virtual void Render(NVGcontext *ctx);
+    virtual void Render();
     virtual void ViewControl();
+    virtual void ToggleFreeCam(Boolean state);
 
     virtual void InitMixer(Boolean silentFlag);
 
     virtual CPlayerManager *GetPlayerManager(CAbstractPlayer *thePlayer);
     virtual CPlayerManager *FindPlayerManager(CAbstractPlayer *thePlayer);
 
-    virtual long RoundTripToFrameLatency(long rtt);
-    virtual void SetFrameLatency(short newFrameLatency, short maxChange = 2, CPlayerManager *slowPlayer = nullptr);
+    virtual short RoundTripToFrameLatency(long rtt);
+    virtual void SetFrameLatency(short newFrameLatency, CPlayerManager *slowPlayer = nullptr);
+    virtual short FrameLatency();
     virtual FrameNumber TimeToFrameCount(long timeInMsec);
     virtual FrameNumber NextFrameForPeriod(long period, long referenceFrame = 0);
     virtual void SetFrameTime(int32_t ft);
     virtual void IncrementFrame(bool firstFrame = false);
-    virtual FrameNumber FramesFromNow(FrameNumber classicFrames);
+    virtual FrameNumber FramesFromNow(double classicFrames);
+    virtual void SetSpawnOrder(SpawnOrder order);
 
     void SetKeysFromStdin() { keysFromStdin = true; };
     void SetKeysToStdout() { keysToStdout = true; };
+    
+    virtual ARGBColor GetLocalTeamColor();
 };
 
 #ifndef MAINAVARAGAME

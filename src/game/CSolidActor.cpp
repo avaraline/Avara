@@ -7,6 +7,7 @@
     Modified: Monday, February 26, 1996, 16:00
 */
 
+#include "AssetManager.h"
 #include "CSolidActor.h"
 
 #include "CSmartPart.h"
@@ -28,8 +29,9 @@ CAbstractActor *CSolidActor::EndScript() {
 
     resId = ReadLongVar(iShape);
 
-    if (GetResource('BSPT', resId)) {
-        LoadPartWithColors(0, resId);
+    auto bsp = AssetManager::GetBsp(resId);
+    if (bsp) {
+        LoadPartWithMaterials(0, resId);
         partList[0]->Reset();
         partList[0]->RotateZ(ReadFixedVar(iRoll));
         partList[0]->RotateX(ReadFixedVar(iPitch));

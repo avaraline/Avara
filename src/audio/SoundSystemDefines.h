@@ -9,7 +9,10 @@
 
 #pragma once
 
+#include "OggFile.h"
 #include "Types.h"
+
+#include <memory>
 
 #define HSOUNDRESTYPE 'HSND'
 #define BITSPERSAMPLE 7
@@ -61,36 +64,9 @@ typedef struct {
 
 } SoundLink;
 
-struct SampleHeader {
-    int16_t resId;
-    int16_t refCount;
-    uint32_t len;
-    uint32_t loopStart;
-    uint32_t loopEnd;
-    uint32_t loopCount;
-    UnsignedFixed baseRate;
-    struct SampleHeader **nextSample;
-    int16_t flags;
-};
-
-enum { kOldSampleFlag = 1 };
-
-typedef struct SampleHeader SampleHeader;
-typedef SampleHeader *SampleHeaderPtr;
-typedef SampleHeaderPtr *SampleHeaderHandle;
-
 typedef WordSample SampleConvert[SAMPLERANGE];
 
-typedef struct {
-    uint32_t versNum;
-    uint32_t loopStart;
-    uint32_t loopEnd;
-    uint32_t loopCount;
-    uint32_t dataOffset;
-    UnsignedFixed baseRate;
-} HSNDRecord;
-
-int16_t RateMixer(Sample *source,
+int16_t RateMixer(std::shared_ptr<OggFile> source,
     WordSample *dest,
     WordSample *converter,
     int16_t outCount,

@@ -43,8 +43,8 @@ enum {
     kpResumeLevel, // 12
 
     kpReadySynch, // 13
-    kpUnavailableSynch, // 14
-    kpUnavailableZero, // 15
+    kpUnavailableSynch, // 14 (unused)
+    kpUnavailableZero, // 15 (unused)
     kpStartSynch, // 16
 
     kpKeyAndMouse, // 17
@@ -71,7 +71,11 @@ enum {
     kpPing, // 31
     kpRealName, // 32
 
-    kpJSON      // 33
+    kpSendConfig, // 33
+    kpStartRequest,  // 34
+    kpResumeRequest, // 35
+
+    kpJSON      // 36
 };
 
 /*

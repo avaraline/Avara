@@ -7,8 +7,45 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6025AE4E2C255E6A00A57EFB /* LegacyOpenGLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60C274E22C23EBE9005B67A9 /* LegacyOpenGLRenderer.cpp */; };
+		940541ED2B5875B200E32241 /* OpenGLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940541EC2B5875B200E32241 /* OpenGLShader.cpp */; };
+		940541EE2B5875B200E32241 /* OpenGLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940541EC2B5875B200E32241 /* OpenGLShader.cpp */; };
+		9419E8472B49ECB1007C50D0 /* CTeamColorAdjuster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9419E8462B49ECB1007C50D0 /* CTeamColorAdjuster.cpp */; };
+		9419E8482B49ECB1007C50D0 /* CTeamColorAdjuster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9419E8462B49ECB1007C50D0 /* CTeamColorAdjuster.cpp */; };
+		941D878F2B5A213200E5577C /* OpenGLVertices.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 941D878E2B5A213200E5577C /* OpenGLVertices.cpp */; };
+		941D87902B5A213200E5577C /* OpenGLVertices.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 941D878E2B5A213200E5577C /* OpenGLVertices.cpp */; };
+		944F2F702B323F1900856E53 /* LocalAssetRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 944F2F6F2B323F1900856E53 /* LocalAssetRepository.cpp */; };
+		944F2F712B323F1900856E53 /* LocalAssetRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 944F2F6F2B323F1900856E53 /* LocalAssetRepository.cpp */; };
+		9465BFD22B30C2A00050681C /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9465BFD12B30C2A00050681C /* AssetManager.cpp */; };
+		9465BFD32B30C2A00050681C /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9465BFD12B30C2A00050681C /* AssetManager.cpp */; };
+		9465BFD72B30EF680050681C /* PackageManifest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9465BFD52B30EF680050681C /* PackageManifest.cpp */; };
+		9465BFD82B30EF680050681C /* PackageManifest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9465BFD52B30EF680050681C /* PackageManifest.cpp */; };
+		946EF8D22B6D9CB2000EF17E /* AbstractRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 946EF8D12B6D9CB2000EF17E /* AbstractRenderer.cpp */; };
+		946EF8D32B6D9CB2000EF17E /* AbstractRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 946EF8D12B6D9CB2000EF17E /* AbstractRenderer.cpp */; };
+		947F5C652B576B9F00F41689 /* ModernOpenGLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 947F5C642B576B9F00F41689 /* ModernOpenGLRenderer.cpp */; };
+		947F5C662B576B9F00F41689 /* ModernOpenGLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 947F5C642B576B9F00F41689 /* ModernOpenGLRenderer.cpp */; };
+		948CBF142B335A1400147E80 /* BaseAssetStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */; };
+		948CBF152B335A1400147E80 /* BaseAssetStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */; };
+		948DF4162DA365CF007FEFDE /* CCompoundShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948DF4152DA365CB007FEFDE /* CCompoundShape.cpp */; };
+		948DF4172DA365CF007FEFDE /* CCompoundShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948DF4152DA365CB007FEFDE /* CCompoundShape.cpp */; };
+		94924EAF2B3A894900197378 /* OggFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94924EAE2B3A894900197378 /* OggFile.cpp */; };
+		94924EB02B3A894900197378 /* OggFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94924EAE2B3A894900197378 /* OggFile.cpp */; };
+		94EE531F2BA0AFCF00EE9056 /* CFreeCam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94EE531D2BA0AFCF00EE9056 /* CFreeCam.cpp */; };
+		94EE53202BA0AFCF00EE9056 /* CFreeCam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94EE531D2BA0AFCF00EE9056 /* CFreeCam.cpp */; };
 		94F17DDD29920D90001F5950 /* ARGBColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94F17DDC29920D90001F5950 /* ARGBColor.cpp */; };
+		E20752EF2A003EC600DCC210 /* Tags.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20752EE2A003EC600DCC210 /* Tags.cpp */; };
 		E20A3C562991CC72005741F7 /* KeyFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20A3C552991CC72005741F7 /* KeyFuncs.cpp */; };
+		E2210CC12A1C9D9C000712AA /* Tags.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20752EE2A003EC600DCC210 /* Tags.cpp */; };
+		E247DE242A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E247DE222A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp */; };
+		E247DE252A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E247DE222A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp */; };
+		E2CD7F9D2DB32EB800C3665F /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E2CD7F9C2DB32EB800C3665F /* libsqlite3.tbd */; };
+		E2CD7FA42DB459C500C3665F /* CRUDsqlite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2CD7FA32DB459C500C3665F /* CRUDsqlite.cpp */; };
+		E2CD7FA52DB459C500C3665F /* CRUDsqlite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2CD7FA32DB459C500C3665F /* CRUDsqlite.cpp */; };
+		E2CD7FAB2DB5BE1D00C3665F /* LevelInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2CD7FAA2DB5BE1D00C3665F /* LevelInfo.cpp */; };
+		E2CD7FAC2DB5BE1D00C3665F /* LevelInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2CD7FAA2DB5BE1D00C3665F /* LevelInfo.cpp */; };
+		E2CD7FAE2DBC204E00C3665F /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E2CD7F9C2DB32EB800C3665F /* libsqlite3.tbd */; };
+		E2CF30032DA88F4D002DD786 /* LegacyOpenGLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60C274E22C23EBE9005B67A9 /* LegacyOpenGLRenderer.cpp */; };
+		E2DCC6562BDE0D3200D70C49 /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5890F9729895294007A875D /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E517F053299713DB0036B206 /* tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2B62D7D2997052B00600401 /* tests.cpp */; };
 		E517F054299713DB0036B206 /* CBasicSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7529895118007A875D /* CBasicSound.cpp */; };
 		E517F055299713DB0036B206 /* CRateSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7029895118007A875D /* CRateSound.cpp */; };
@@ -24,7 +61,6 @@
 		E517F05F299713DB0036B206 /* CSmartBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C6329895118007A875D /* CSmartBox.cpp */; };
 		E517F060299713DB0036B206 /* CSmartPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C6B29895118007A875D /* CSmartPart.cpp */; };
 		E517F061299713DB0036B206 /* CViewParameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C6529895118007A875D /* CViewParameters.cpp */; };
-		E517F062299713DB0036B206 /* Files.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9429895118007A875D /* Files.cpp */; };
 		E517F063299713DB0036B206 /* Memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9129895118007A875D /* Memory.cpp */; };
 		E517F064299713DB0036B206 /* Resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9229895118007A875D /* Resource.cpp */; };
 		E517F065299713DB0036B206 /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9529895118007A875D /* System.cpp */; };
@@ -117,7 +153,6 @@
 		E517F0BC299713DB0036B206 /* CommandManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BC929895118007A875D /* CommandManager.cpp */; };
 		E517F0BD299713DB0036B206 /* TextCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BCA29895118007A875D /* TextCommand.cpp */; };
 		E517F0BE299713DB0036B206 /* ARGBColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94F17DDC29920D90001F5950 /* ARGBColor.cpp */; };
-		E517F0BF299713DB0036B206 /* AvaraGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BC429895118007A875D /* AvaraGL.cpp */; };
 		E517F0C0299713DB0036B206 /* Beeper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BB329895118007A875D /* Beeper.cpp */; };
 		E517F0C1299713DB0036B206 /* CRC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BAA29895118007A875D /* CRC.cpp */; };
 		E517F0C2299713DB0036B206 /* CStringDictionary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BC029895118007A875D /* CStringDictionary.cpp */; };
@@ -161,7 +196,6 @@
 		E517F0EA299714220036B206 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = E5890DBA29895123007A875D /* glad.c */; };
 		E517F0EB299714220036B206 /* nanovg.c in Sources */ = {isa = PBXBuildFile; fileRef = E5890ED729895124007A875D /* nanovg.c */; };
 		E517F0EC299714220036B206 /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = E5890D8629895123007A875D /* stb_vorbis.c */; };
-		E517F0ED299714340036B206 /* darwin.mm in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7829895123007A875D /* darwin.mm */; };
 		E517F0EE299715950036B206 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5890F9729895294007A875D /* SDL2.framework */; };
 		E517F0EF2997159D0036B206 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5890F992989529B007A875D /* AppKit.framework */; };
 		E517F0F0299715A00036B206 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5890F9B298952A1007A875D /* OpenGL.framework */; };
@@ -171,7 +205,6 @@
 		E5890B8D29895078007A875D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5890B8A29895078007A875D /* Assets.xcassets */; };
 		E5890C9E29895118007A875D /* Memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9129895118007A875D /* Memory.cpp */; };
 		E5890C9F29895118007A875D /* Resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9229895118007A875D /* Resource.cpp */; };
-		E5890CA029895118007A875D /* Files.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9429895118007A875D /* Files.cpp */; };
 		E5890CA129895118007A875D /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9529895118007A875D /* System.cpp */; };
 		E5890CA229895118007A875D /* CCommManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9C29895118007A875D /* CCommManager.cpp */; };
 		E5890CA329895118007A875D /* CUDPComm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BA129895118007A875D /* CUDPComm.cpp */; };
@@ -188,7 +221,6 @@
 		E5890CAE29895118007A875D /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BBF29895118007A875D /* Debug.cpp */; };
 		E5890CAF29895118007A875D /* CStringDictionary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BC029895118007A875D /* CStringDictionary.cpp */; };
 		E5890CB029895118007A875D /* RamFiles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BC129895118007A875D /* RamFiles.cpp */; };
-		E5890CB129895118007A875D /* AvaraGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BC429895118007A875D /* AvaraGL.cpp */; };
 		E5890CB229895118007A875D /* CommandManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BC929895118007A875D /* CommandManager.cpp */; };
 		E5890CB329895118007A875D /* TextCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BCA29895118007A875D /* TextCommand.cpp */; };
 		E5890CB429895118007A875D /* CLogic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BCF29895118007A875D /* CLogic.cpp */; };
@@ -302,7 +334,6 @@
 		E5890EF829895124007A875D /* layout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7429895123007A875D /* layout.cpp */; };
 		E5890EF929895124007A875D /* nanogui_resources.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7529895123007A875D /* nanogui_resources.cpp */; };
 		E5890EFA29895124007A875D /* glcanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7729895123007A875D /* glcanvas.cpp */; };
-		E5890EFB29895124007A875D /* darwin.mm in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7829895123007A875D /* darwin.mm */; };
 		E5890EFC29895124007A875D /* tabwidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7929895123007A875D /* tabwidget.cpp */; };
 		E5890EFD29895124007A875D /* progressbar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7A29895123007A875D /* progressbar.cpp */; };
 		E5890EFE29895124007A875D /* combobox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7B29895123007A875D /* combobox.cpp */; };
@@ -323,11 +354,196 @@
 		E5890F9C298952A1007A875D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5890F9B298952A1007A875D /* OpenGL.framework */; };
 		E5890FA3298958D2007A875D /* levels in Resources */ = {isa = PBXBuildFile; fileRef = E5890FA2298958C7007A875D /* levels */; };
 		E5890FA4298958D2007A875D /* rsrc in Resources */ = {isa = PBXBuildFile; fileRef = E5890FA1298958BC007A875D /* rsrc */; };
+		E5A219AC2DC58E14007D54FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5A219AB2DC58E14007D54FF /* Assets.xcassets */; };
+		E5A219AF2DC58E14007D54FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5A219AD2DC58E14007D54FF /* LaunchScreen.storyboard */; };
+		E5A219B72DC59058007D54FF /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5A219B62DC59058007D54FF /* OpenGLES.framework */; };
+		E5A219BB2DC59135007D54FF /* Avara.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7929895118007A875D /* Avara.cpp */; };
+		E5A219BC2DC59135007D54FF /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9465BFD12B30C2A00050681C /* AssetManager.cpp */; };
+		E5A219BD2DC59135007D54FF /* PackageManifest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9465BFD52B30EF680050681C /* PackageManifest.cpp */; };
+		E5A219BE2DC59135007D54FF /* LocalAssetRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 944F2F6F2B323F1900856E53 /* LocalAssetRepository.cpp */; };
+		E5A219BF2DC59135007D54FF /* BaseAssetStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */; };
+		E5A219C02DC59135007D54FF /* CBasicSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7529895118007A875D /* CBasicSound.cpp */; };
+		E5A219C12DC59135007D54FF /* CRateSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7029895118007A875D /* CRateSound.cpp */; };
+		E5A219C22DC59135007D54FF /* CSoundHub.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7329895118007A875D /* CSoundHub.cpp */; };
+		E5A219C32DC59135007D54FF /* CSoundMixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7729895118007A875D /* CSoundMixer.cpp */; };
+		E5A219C42DC59135007D54FF /* DopplerPlug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7429895118007A875D /* DopplerPlug.cpp */; };
+		E5A219C52DC59135007D54FF /* OggFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94924EAE2B3A894900197378 /* OggFile.cpp */; };
+		E5A219C62DC59135007D54FF /* CBaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9929895118007A875D /* CBaseObject.cpp */; };
+		E5A219C72DC59135007D54FF /* CDirectObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9D29895118007A875D /* CDirectObject.cpp */; };
+		E5A219C82DC59135007D54FF /* CTagBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9A29895118007A875D /* CTagBase.cpp */; };
+		E5A219C92DC59135007D54FF /* CCompoundShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948DF4152DA365CB007FEFDE /* CCompoundShape.cpp */; };
+		E5A219CA2DC59135007D54FF /* CBSPPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C6829895118007A875D /* CBSPPart.cpp */; };
+		E5A219CB2DC59135007D54FF /* CBSPWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C6129895118007A875D /* CBSPWorld.cpp */; };
+		E5A219CC2DC59135007D54FF /* CScaledBSP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C6729895118007A875D /* CScaledBSP.cpp */; };
+		E5A219CD2DC59135007D54FF /* CSmartBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C6329895118007A875D /* CSmartBox.cpp */; };
+		E5A219CE2DC59135007D54FF /* CSmartPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C6B29895118007A875D /* CSmartPart.cpp */; };
+		E5A219CF2DC59135007D54FF /* CViewParameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C6529895118007A875D /* CViewParameters.cpp */; };
+		E5A219D02DC59135007D54FF /* Memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9129895118007A875D /* Memory.cpp */; };
+		E5A219D12DC59135007D54FF /* Resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9229895118007A875D /* Resource.cpp */; };
+		E5A219D22DC59135007D54FF /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9529895118007A875D /* System.cpp */; };
+		E5A219D32DC59135007D54FF /* KeyFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20A3C552991CC72005741F7 /* KeyFuncs.cpp */; };
+		E5A219D42DC59135007D54FF /* CAbstractActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BF629895118007A875D /* CAbstractActor.cpp */; };
+		E5A219D52DC59135007D54FF /* CAbstractMissile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BEE29895118007A875D /* CAbstractMissile.cpp */; };
+		E5A219D62DC59135007D54FF /* CAbstractMovers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C3429895118007A875D /* CAbstractMovers.cpp */; };
+		E5A219D72DC59135007D54FF /* CAbstractPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C1129895118007A875D /* CAbstractPlayer.cpp */; };
+		E5A219D82DC59135007D54FF /* CAbstractYon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C2329895118007A875D /* CAbstractYon.cpp */; };
+		E5A219D92DC59135007D54FF /* CAreaActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C3729895118007A875D /* CAreaActor.cpp */; };
+		E5A219DA2DC59135007D54FF /* CAvaraApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C0B29895118007A875D /* CAvaraApp.cpp */; };
+		E5A219DB2DC59135007D54FF /* CAvaraGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C2A29895118007A875D /* CAvaraGame.cpp */; };
+		E5A219DC2DC59135007D54FF /* CBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C1A29895118007A875D /* CBall.cpp */; };
+		E5A219DD2DC59135007D54FF /* CDepot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C4329895118007A875D /* CDepot.cpp */; };
+		E5A219DE2DC59135007D54FF /* CDome.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BED29895118007A875D /* CDome.cpp */; };
+		E5A219DF2DC59135007D54FF /* CDoor2Actor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C5C29895118007A875D /* CDoor2Actor.cpp */; };
+		E5A219E02DC59135007D54FF /* CDoorActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BF929895118007A875D /* CDoorActor.cpp */; };
+		E5A219E12DC59135007D54FF /* CForceField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BD829895118007A875D /* CForceField.cpp */; };
+		E5A219E22DC59135007D54FF /* CFreeCam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94EE531D2BA0AFCF00EE9056 /* CFreeCam.cpp */; };
+		E5A219E32DC59135007D54FF /* CFreeSolid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BD029895118007A875D /* CFreeSolid.cpp */; };
+		E5A219E42DC59135007D54FF /* CGlowActors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C2429895118007A875D /* CGlowActors.cpp */; };
+		E5A219E52DC59135007D54FF /* CGoal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BF729895118007A875D /* CGoal.cpp */; };
+		E5A219E62DC59135007D54FF /* CGoody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C0929895118007A875D /* CGoody.cpp */; };
+		E5A219E72DC59135007D54FF /* CGrenade.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C3629895118007A875D /* CGrenade.cpp */; };
+		E5A219E82DC59135007D54FF /* CGroundColorAdjuster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C5929895118007A875D /* CGroundColorAdjuster.cpp */; };
+		E5A219E92DC59135007D54FF /* CGuardActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BFC29895118007A875D /* CGuardActor.cpp */; };
+		E5A219EA2DC59135007D54FF /* CHologramActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C1629895118007A875D /* CHologramActor.cpp */; };
+		E5A219EB2DC59135007D54FF /* CHUD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BDF29895118007A875D /* CHUD.cpp */; };
+		E5A219EC2DC59135007D54FF /* CIncarnator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BD329895118007A875D /* CIncarnator.cpp */; };
+		E5A219ED2DC59135007D54FF /* CLogic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BCF29895118007A875D /* CLogic.cpp */; };
+		E5A219EE2DC59135007D54FF /* CLogicAnd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C2C29895118007A875D /* CLogicAnd.cpp */; };
+		E5A219EF2DC59135007D54FF /* CLogicBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C0529895118007A875D /* CLogicBase.cpp */; };
+		E5A219F02DC59135007D54FF /* CLogicCounter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BFB29895118007A875D /* CLogicCounter.cpp */; };
+		E5A219F12DC59135007D54FF /* CLogicDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C3229895118007A875D /* CLogicDelay.cpp */; };
+		E5A219F22DC59135007D54FF /* CLogicDistributor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C3129895118007A875D /* CLogicDistributor.cpp */; };
+		E5A219F32DC59135007D54FF /* CLogicTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BFA29895118007A875D /* CLogicTimer.cpp */; };
+		E5A219F42DC59135007D54FF /* CMarkerActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C1F29895118007A875D /* CMarkerActor.cpp */; };
+		E5A219F52DC59135007D54FF /* CMineActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C0029895118007A875D /* CMineActor.cpp */; };
+		E5A219F62DC59135007D54FF /* CMissile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C4729895118007A875D /* CMissile.cpp */; };
+		E5A219F72DC59135007D54FF /* CNetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C3D29895118007A875D /* CNetManager.cpp */; };
+		E5A219F82DC59135007D54FF /* CParasite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BF829895118007A875D /* CParasite.cpp */; };
+		E5A219F92DC59135007D54FF /* CPill.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C5229895118007A875D /* CPill.cpp */; };
+		E5A219FA2DC59135007D54FF /* CPlacedActors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BD929895118007A875D /* CPlacedActors.cpp */; };
+		E5A219FB2DC59135007D54FF /* CPlayerActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C4429895118007A875D /* CPlayerActor.cpp */; };
+		E5A219FC2DC59135007D54FF /* CPlayerManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C4D29895118007A875D /* CPlayerManager.cpp */; };
+		E5A219FD2DC59135007D54FF /* CPlayerMissile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C0729895118007A875D /* CPlayerMissile.cpp */; };
+		E5A219FE2DC59135007D54FF /* CRamp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C5829895118007A875D /* CRamp.cpp */; };
+		E5A219FF2DC59135007D54FF /* CRandomIncarnator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C2629895118007A875D /* CRandomIncarnator.cpp */; };
+		E5A21A002DC59135007D54FF /* CRealMovers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C3529895118007A875D /* CRealMovers.cpp */; };
+		E5A21A012DC59135007D54FF /* CRealShooters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C5B29895118007A875D /* CRealShooters.cpp */; };
+		E5A21A022DC59135007D54FF /* CScoreKeeper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C4A29895118007A875D /* CScoreKeeper.cpp */; };
+		E5A21A032DC59135007D54FF /* CScout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BF029895118007A875D /* CScout.cpp */; };
+		E5A21A042DC59135007D54FF /* CShuriken.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C3B29895118007A875D /* CShuriken.cpp */; };
+		E5A21A052DC59135007D54FF /* CSkyColorAdjuster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C3C29895118007A875D /* CSkyColorAdjuster.cpp */; };
+		E5A21A062DC59135007D54FF /* CSliverPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C5129895118007A875D /* CSliverPart.cpp */; };
+		E5A21A072DC59135007D54FF /* CSmart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C1D29895118007A875D /* CSmart.cpp */; };
+		E5A21A082DC59135007D54FF /* CSolidActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C5729895118007A875D /* CSolidActor.cpp */; };
+		E5A21A092DC59135007D54FF /* CSoundActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C5329895118007A875D /* CSoundActor.cpp */; };
+		E5A21A0A2DC59135007D54FF /* CSphereActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C1229895118007A875D /* CSphereActor.cpp */; };
+		E5A21A0B2DC59135007D54FF /* CSwitchActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BF529895118007A875D /* CSwitchActor.cpp */; };
+		E5A21A0C2DC59135007D54FF /* CTeamColorAdjuster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9419E8462B49ECB1007C50D0 /* CTeamColorAdjuster.cpp */; };
+		E5A21A0D2DC59135007D54FF /* CTeleporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C4629895118007A875D /* CTeleporter.cpp */; };
+		E5A21A0E2DC59135007D54FF /* CTextActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C2B29895118007A875D /* CTextActor.cpp */; };
+		E5A21A0F2DC59135007D54FF /* CTriPyramidActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C0E29895118007A875D /* CTriPyramidActor.cpp */; };
+		E5A21A102DC59135007D54FF /* CUfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C1B29895118007A875D /* CUfo.cpp */; };
+		E5A21A112DC59135007D54FF /* CWalkerActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C3929895118007A875D /* CWalkerActor.cpp */; };
+		E5A21A122DC59135007D54FF /* CWallActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C0C29895118007A875D /* CWallActor.cpp */; };
+		E5A21A132DC59135007D54FF /* CWallDoor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C2529895118007A875D /* CWallDoor.cpp */; };
+		E5A21A142DC59135007D54FF /* CWallSolid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C4B29895118007A875D /* CWallSolid.cpp */; };
+		E5A21A152DC59135007D54FF /* CWeapon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BE329895118007A875D /* CWeapon.cpp */; };
+		E5A21A162DC59135007D54FF /* CWorldShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C0829895118007A875D /* CWorldShader.cpp */; };
+		E5A21A172DC59135007D54FF /* CYonBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C2F29895118007A875D /* CYonBox.cpp */; };
+		E5A21A182DC59135007D54FF /* CYonSphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C2829895118007A875D /* CYonSphere.cpp */; };
+		E5A21A192DC59135007D54FF /* CZombieActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C3A29895118007A875D /* CZombieActor.cpp */; };
+		E5A21A1A2DC59135007D54FF /* PlayerRatingsSimpleElo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E247DE222A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp */; };
+		E5A21A1B2DC59135007D54FF /* CApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C8D29895118007A875D /* CApplication.cpp */; };
+		E5A21A1C2DC59135007D54FF /* CLevelWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C8B29895118007A875D /* CLevelWindow.cpp */; };
+		E5A21A1D2DC59135007D54FF /* CNetworkWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7D29895118007A875D /* CNetworkWindow.cpp */; };
+		E5A21A1E2DC59135007D54FF /* ColorManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7E29895118007A875D /* ColorManager.cpp */; };
+		E5A21A1F2DC59135007D54FF /* CPlayerWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C8029895118007A875D /* CPlayerWindow.cpp */; };
+		E5A21A202DC59135007D54FF /* CRosterWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C8729895118007A875D /* CRosterWindow.cpp */; };
+		E5A21A212DC59135007D54FF /* CServerWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7C29895118007A875D /* CServerWindow.cpp */; };
+		E5A21A222DC59135007D54FF /* CTrackerWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C8629895118007A875D /* CTrackerWindow.cpp */; };
+		E5A21A232DC59135007D54FF /* CWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7F29895118007A875D /* CWindow.cpp */; };
+		E5A21A242DC59135007D54FF /* Tags.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20752EE2A003EC600DCC210 /* Tags.cpp */; };
+		E5A21A252DC59135007D54FF /* LevelLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9329895118007A875D /* LevelLoader.cpp */; };
+		E5A21A262DC59135007D54FF /* LinkLoose.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C0229895118007A875D /* LinkLoose.cpp */; };
+		E5A21A272DC59135007D54FF /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9629895118007A875D /* Parser.cpp */; };
+		E5A21A282DC59135007D54FF /* AvaraTCP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BA229895118007A875D /* AvaraTCP.cpp */; };
+		E5A21A292DC59135007D54FF /* CCommManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9C29895118007A875D /* CCommManager.cpp */; };
+		E5A21A2A2DC59135007D54FF /* CProtoControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BA729895118007A875D /* CProtoControl.cpp */; };
+		E5A21A2B2DC59135007D54FF /* CUDPComm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BA129895118007A875D /* CUDPComm.cpp */; };
+		E5A21A2C2DC59135007D54FF /* CUDPConnection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BA629895118007A875D /* CUDPConnection.cpp */; };
+		E5A21A2D2DC59135007D54FF /* ModernOpenGLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 947F5C642B576B9F00F41689 /* ModernOpenGLRenderer.cpp */; };
+		E5A21A2E2DC59135007D54FF /* LegacyOpenGLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60C274E22C23EBE9005B67A9 /* LegacyOpenGLRenderer.cpp */; };
+		E5A21A2F2DC59135007D54FF /* OpenGLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940541EC2B5875B200E32241 /* OpenGLShader.cpp */; };
+		E5A21A302DC59135007D54FF /* OpenGLVertices.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 941D878E2B5A213200E5577C /* OpenGLVertices.cpp */; };
+		E5A21A312DC59135007D54FF /* AbstractRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 946EF8D12B6D9CB2000EF17E /* AbstractRenderer.cpp */; };
+		E5A21A322DC59135007D54FF /* CommandManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BC929895118007A875D /* CommandManager.cpp */; };
+		E5A21A332DC59135007D54FF /* TextCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BCA29895118007A875D /* TextCommand.cpp */; };
+		E5A21A342DC59135007D54FF /* ARGBColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94F17DDC29920D90001F5950 /* ARGBColor.cpp */; };
+		E5A21A352DC59135007D54FF /* Beeper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BB329895118007A875D /* Beeper.cpp */; };
+		E5A21A362DC59135007D54FF /* CRC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BAA29895118007A875D /* CRC.cpp */; };
+		E5A21A372DC59135007D54FF /* CStringDictionary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BC029895118007A875D /* CStringDictionary.cpp */; };
+		E5A21A382DC59135007D54FF /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BBF29895118007A875D /* Debug.cpp */; };
+		E5A21A392DC59135007D54FF /* FastMat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BBD29895118007A875D /* FastMat.cpp */; };
+		E5A21A3A2DC59135007D54FF /* CHuffProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BB529895118007A875D /* CHuffProcessor.cpp */; };
+		E5A21A3B2DC59135007D54FF /* CAbstractPipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BB629895118007A875D /* CAbstractPipe.cpp */; };
+		E5A21A3C2DC59135007D54FF /* CAbstractHuffPipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BB729895118007A875D /* CAbstractHuffPipe.cpp */; };
+		E5A21A3D2DC59135007D54FF /* CHandlePipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BB929895118007A875D /* CHandlePipe.cpp */; };
+		E5A21A3E2DC59135007D54FF /* PascalStrings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5253ED82996DD2200F8C1E8 /* PascalStrings.cpp */; };
+		E5A21A3F2DC59135007D54FF /* RamFiles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BC129895118007A875D /* RamFiles.cpp */; };
+		E5A21A402DC59135007D54FF /* csscolorparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D3F29895123007A875D /* csscolorparser.cpp */; };
+		E5A21A412DC59135007D54FF /* button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D4C29895123007A875D /* button.cpp */; };
+		E5A21A422DC59135007D54FF /* checkbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D4A29895123007A875D /* checkbox.cpp */; };
+		E5A21A432DC59135007D54FF /* colorcombobox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D4829895123007A875D /* colorcombobox.cpp */; };
+		E5A21A442DC59135007D54FF /* combobox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7B29895123007A875D /* combobox.cpp */; };
+		E5A21A452DC59135007D54FF /* common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D4929895123007A875D /* common.cpp */; };
+		E5A21A462DC59135007D54FF /* desccombobox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D8429895123007A875D /* desccombobox.cpp */; };
+		E5A21A472DC59135007D54FF /* glcanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7729895123007A875D /* glcanvas.cpp */; };
+		E5A21A482DC59135007D54FF /* glutil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7F29895123007A875D /* glutil.cpp */; };
+		E5A21A492DC59135007D54FF /* label.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7D29895123007A875D /* label.cpp */; };
+		E5A21A4A2DC59135007D54FF /* layout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7429895123007A875D /* layout.cpp */; };
+		E5A21A4B2DC59135007D54FF /* messagedialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7E29895123007A875D /* messagedialog.cpp */; };
+		E5A21A4C2DC59135007D54FF /* nanogui_resources.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7529895123007A875D /* nanogui_resources.cpp */; };
+		E5A21A4D2DC59135007D54FF /* popup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7329895123007A875D /* popup.cpp */; };
+		E5A21A4E2DC59135007D54FF /* popupbutton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D8329895123007A875D /* popupbutton.cpp */; };
+		E5A21A4F2DC59135007D54FF /* progressbar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7A29895123007A875D /* progressbar.cpp */; };
+		E5A21A502DC59135007D54FF /* screen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7229895123007A875D /* screen.cpp */; };
+		E5A21A512DC59135007D54FF /* slider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D8229895123007A875D /* slider.cpp */; };
+		E5A21A522DC59135007D54FF /* stackedwidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D4E29895123007A875D /* stackedwidget.cpp */; };
+		E5A21A532DC59135007D54FF /* tabheader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D4F29895123007A875D /* tabheader.cpp */; };
+		E5A21A542DC59135007D54FF /* tabwidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7929895123007A875D /* tabwidget.cpp */; };
+		E5A21A552DC59135007D54FF /* text.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D4D29895123007A875D /* text.cpp */; };
+		E5A21A562DC59135007D54FF /* textbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D8029895123007A875D /* textbox.cpp */; };
+		E5A21A572DC59135007D54FF /* theme.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D7C29895123007A875D /* theme.cpp */; };
+		E5A21A582DC59135007D54FF /* vscrollpanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D4B29895123007A875D /* vscrollpanel.cpp */; };
+		E5A21A592DC59135007D54FF /* widget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D4729895123007A875D /* widget.cpp */; };
+		E5A21A5A2DC59135007D54FF /* window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D5029895123007A875D /* window.cpp */; };
+		E5A21A5B2DC59135007D54FF /* pugixml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890DBF29895123007A875D /* pugixml.cpp */; };
+		E5A21A5C2DC59144007D54FF /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = E5890DBA29895123007A875D /* glad.c */; };
+		E5A21A5D2DC59144007D54FF /* nanovg.c in Sources */ = {isa = PBXBuildFile; fileRef = E5890ED729895124007A875D /* nanovg.c */; };
+		E5A21A5E2DC59144007D54FF /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = E5890D8629895123007A875D /* stb_vorbis.c */; };
+		E5A21A792DC59F52007D54FF /* SDL2.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5A21A772DC59F2F007D54FF /* SDL2.xcframework */; };
+		E5A21A7A2DC59F52007D54FF /* SDL2.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5A21A772DC59F2F007D54FF /* SDL2.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E5A21A7B2DC5A598007D54FF /* rsrc in Resources */ = {isa = PBXBuildFile; fileRef = E5890FA1298958BC007A875D /* rsrc */; };
+		E5A21A7C2DC5A5A0007D54FF /* levels in Resources */ = {isa = PBXBuildFile; fileRef = E5890FA2298958C7007A875D /* levels */; };
+		E5ACAAB02DDCB3F7004F7D19 /* CRUDsqlite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2CD7FA32DB459C500C3665F /* CRUDsqlite.cpp */; };
+		E5ACAAB12DDCB401004F7D19 /* LevelInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2CD7FAA2DB5BE1D00C3665F /* LevelInfo.cpp */; };
+		E5ACAAB42DDCB4E7004F7D19 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E5ACAAB32DDCB4DD004F7D19 /* libsqlite3.tbd */; };
 		E5E510F8298960F300EA1AEB /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5890F9729895294007A875D /* SDL2.framework */; };
 		E5E510F9298960F300EA1AEB /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5890F9729895294007A875D /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		E2DCC6552BDE0D1B00D70C49 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E2DCC6562BDE0D3200D70C49 /* SDL2.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E517F04A299713990036B206 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
@@ -337,6 +553,17 @@
 				E517F0F3299726F30036B206 /* levels in CopyFiles */,
 				E517F0F4299726F30036B206 /* rsrc in CopyFiles */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5A219BA2DC590B1007D54FF /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E5A21A7A2DC59F52007D54FF /* SDL2.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		E5E510FA298960F300EA1AEB /* Embed Frameworks */ = {
@@ -353,10 +580,53 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		60C274E22C23EBE9005B67A9 /* LegacyOpenGLRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LegacyOpenGLRenderer.cpp; sourceTree = "<group>"; };
+		60C274E32C23EBE9005B67A9 /* LegacyOpenGLRenderer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = LegacyOpenGLRenderer.h; sourceTree = "<group>"; };
+		940541EB2B58744500E32241 /* OpenGLShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLShader.h; sourceTree = "<group>"; };
+		940541EC2B5875B200E32241 /* OpenGLShader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLShader.cpp; sourceTree = "<group>"; };
+		9419E8452B49EC89007C50D0 /* CTeamColorAdjuster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTeamColorAdjuster.h; sourceTree = "<group>"; };
+		9419E8462B49ECB1007C50D0 /* CTeamColorAdjuster.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CTeamColorAdjuster.cpp; sourceTree = "<group>"; };
+		941D878C2B5A1EEC00E5577C /* VertexData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VertexData.h; sourceTree = "<group>"; };
+		941D878D2B5A206A00E5577C /* OpenGLVertices.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLVertices.h; sourceTree = "<group>"; };
+		941D878E2B5A213200E5577C /* OpenGLVertices.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLVertices.cpp; sourceTree = "<group>"; };
+		944F2F6D2B32379C00856E53 /* AssetRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetRepository.h; sourceTree = "<group>"; };
+		944F2F6E2B323E2100856E53 /* LocalAssetRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalAssetRepository.h; sourceTree = "<group>"; };
+		944F2F6F2B323F1900856E53 /* LocalAssetRepository.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LocalAssetRepository.cpp; sourceTree = "<group>"; };
+		9465BFD02B30C2790050681C /* AssetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetManager.h; sourceTree = "<group>"; };
+		9465BFD12B30C2A00050681C /* AssetManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetManager.cpp; sourceTree = "<group>"; };
+		9465BFD52B30EF680050681C /* PackageManifest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PackageManifest.cpp; sourceTree = "<group>"; };
+		9465BFD92B30EFB40050681C /* PackageManifest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PackageManifest.h; sourceTree = "<group>"; };
+		946EF8D12B6D9CB2000EF17E /* AbstractRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AbstractRenderer.cpp; sourceTree = "<group>"; };
+		947F5C622B57693300F41689 /* AbstractRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AbstractRenderer.h; sourceTree = "<group>"; };
+		947F5C632B576ACD00F41689 /* ModernOpenGLRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModernOpenGLRenderer.h; sourceTree = "<group>"; };
+		947F5C642B576B9F00F41689 /* ModernOpenGLRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ModernOpenGLRenderer.cpp; sourceTree = "<group>"; };
+		947F5C672B57A30100F41689 /* NullRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NullRenderer.h; sourceTree = "<group>"; };
+		948CBF112B33581D00147E80 /* AssetStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetStorage.h; sourceTree = "<group>"; };
+		948CBF122B3359D700147E80 /* BaseAssetStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseAssetStorage.h; sourceTree = "<group>"; };
+		948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BaseAssetStorage.cpp; sourceTree = "<group>"; };
+		948DF4142DA364C7007FEFDE /* CCompoundShape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCompoundShape.h; sourceTree = "<group>"; };
+		948DF4152DA365CB007FEFDE /* CCompoundShape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CCompoundShape.cpp; sourceTree = "<group>"; };
+		94924EAD2B3A893900197378 /* OggFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OggFile.h; sourceTree = "<group>"; };
+		94924EAE2B3A894900197378 /* OggFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OggFile.cpp; sourceTree = "<group>"; };
+		94D27A932DB9D77F0076D1E5 /* Material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
+		94EE531D2BA0AFCF00EE9056 /* CFreeCam.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CFreeCam.cpp; sourceTree = "<group>"; };
+		94EE531E2BA0AFCF00EE9056 /* CFreeCam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFreeCam.h; sourceTree = "<group>"; };
 		94F17DDB2991FACE001F5950 /* ARGBColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARGBColor.h; sourceTree = "<group>"; };
 		94F17DDC29920D90001F5950 /* ARGBColor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ARGBColor.cpp; sourceTree = "<group>"; };
+		E20752ED29FF1EC500DCC210 /* Tags.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tags.h; sourceTree = "<group>"; };
+		E20752EE2A003EC600DCC210 /* Tags.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Tags.cpp; sourceTree = "<group>"; };
 		E20A3C552991CC72005741F7 /* KeyFuncs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeyFuncs.cpp; sourceTree = "<group>"; };
+		E247DE222A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerRatingsSimpleElo.cpp; sourceTree = "<group>"; };
+		E247DE232A0EB51B001CA630 /* PlayerRatingsSimpleElo.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = PlayerRatingsSimpleElo.h; sourceTree = "<group>"; };
+		E248724C29A480990079337E /* prefs.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = prefs.json; path = "~/Library/Application Support/Avaraline/Avara/prefs.json"; sourceTree = "<group>"; };
 		E2B62D7D2997052B00600401 /* tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tests.cpp; sourceTree = "<group>"; };
+		E2CD7F9C2DB32EB800C3665F /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		E2CD7FA12DB455D500C3665F /* CRUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRUD.h; sourceTree = "<group>"; };
+		E2CD7FA22DB459C500C3665F /* CRUDsqlite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRUDsqlite.h; sourceTree = "<group>"; };
+		E2CD7FA32DB459C500C3665F /* CRUDsqlite.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CRUDsqlite.cpp; sourceTree = "<group>"; };
+		E2CD7FAA2DB5BE1D00C3665F /* LevelInfo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LevelInfo.cpp; sourceTree = "<group>"; };
+		E2CD7FAD2DB5BEB100C3665F /* LevelInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LevelInfo.h; sourceTree = "<group>"; };
+		E2D76F732A1680FD000D24B3 /* JSONify.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONify.h; sourceTree = "<group>"; };
 		E517F04C299713990036B206 /* AvaraTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AvaraTests; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5253ED82996DD2200F8C1E8 /* PascalStrings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PascalStrings.cpp; sourceTree = "<group>"; };
 		E5890B2429894DB3007A875D /* Avara.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Avara.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -364,12 +634,10 @@
 		E5890B9129895118007A875D /* Memory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Memory.cpp; sourceTree = "<group>"; };
 		E5890B9229895118007A875D /* Resource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Resource.cpp; sourceTree = "<group>"; };
 		E5890B9329895118007A875D /* Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Types.h; sourceTree = "<group>"; };
-		E5890B9429895118007A875D /* Files.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Files.cpp; sourceTree = "<group>"; };
 		E5890B9529895118007A875D /* System.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = System.cpp; sourceTree = "<group>"; };
 		E5890B9629895118007A875D /* Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resource.h; sourceTree = "<group>"; };
 		E5890B9729895118007A875D /* Memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Memory.h; sourceTree = "<group>"; };
 		E5890B9829895118007A875D /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
-		E5890B9929895118007A875D /* Files.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Files.h; sourceTree = "<group>"; };
 		E5890B9B29895118007A875D /* CCommManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCommManager.h; sourceTree = "<group>"; };
 		E5890B9C29895118007A875D /* CCommManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCommManager.cpp; sourceTree = "<group>"; };
 		E5890B9D29895118007A875D /* UDPTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPTags.h; sourceTree = "<group>"; };
@@ -402,13 +670,11 @@
 		E5890BBB29895118007A875D /* CHandlePipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHandlePipe.h; sourceTree = "<group>"; };
 		E5890BBC29895118007A875D /* CAbstractHuffPipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAbstractHuffPipe.h; sourceTree = "<group>"; };
 		E5890BBD29895118007A875D /* FastMat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FastMat.cpp; sourceTree = "<group>"; };
-		E5890BBE29895118007A875D /* AvaraGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvaraGL.h; sourceTree = "<group>"; };
 		E5890BBF29895118007A875D /* Debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Debug.cpp; sourceTree = "<group>"; };
 		E5890BC029895118007A875D /* CStringDictionary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CStringDictionary.cpp; sourceTree = "<group>"; };
 		E5890BC129895118007A875D /* RamFiles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RamFiles.cpp; sourceTree = "<group>"; };
 		E5890BC229895118007A875D /* RayHit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RayHit.h; sourceTree = "<group>"; };
 		E5890BC329895118007A875D /* CharWordLongPointer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharWordLongPointer.h; sourceTree = "<group>"; };
-		E5890BC429895118007A875D /* AvaraGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AvaraGL.cpp; sourceTree = "<group>"; };
 		E5890BC529895118007A875D /* PascalStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PascalStrings.h; sourceTree = "<group>"; };
 		E5890BC629895118007A875D /* Beeper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Beeper.h; sourceTree = "<group>"; };
 		E5890BC829895118007A875D /* TextCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextCommand.h; sourceTree = "<group>"; };
@@ -673,7 +939,6 @@
 		E5890D7529895123007A875D /* nanogui_resources.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nanogui_resources.cpp; sourceTree = "<group>"; };
 		E5890D7629895123007A875D /* nanogui_resources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nanogui_resources.h; sourceTree = "<group>"; };
 		E5890D7729895123007A875D /* glcanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glcanvas.cpp; sourceTree = "<group>"; };
-		E5890D7829895123007A875D /* darwin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = darwin.mm; sourceTree = "<group>"; };
 		E5890D7929895123007A875D /* tabwidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tabwidget.cpp; sourceTree = "<group>"; };
 		E5890D7A29895123007A875D /* progressbar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = progressbar.cpp; sourceTree = "<group>"; };
 		E5890D7B29895123007A875D /* combobox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = combobox.cpp; sourceTree = "<group>"; };
@@ -971,6 +1236,12 @@
 		E5890F9B298952A1007A875D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		E5890FA1298958BC007A875D /* rsrc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = rsrc; sourceTree = "<group>"; };
 		E5890FA2298958C7007A875D /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; path = levels; sourceTree = "<group>"; };
+		E5A2199A2DC58E13007D54FF /* Avara-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Avara-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5A219AB2DC58E14007D54FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E5A219AE2DC58E14007D54FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E5A219B62DC59058007D54FF /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.4.sdk/System/Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
+		E5A21A772DC59F2F007D54FF /* SDL2.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = SDL2.xcframework; sourceTree = "<group>"; };
+		E5ACAAB32DDCB4DD004F7D19 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.4.sdk/usr/lib/libsqlite3.tbd; sourceTree = DEVELOPER_DIR; };
 		E5E510F429895E9F00EA1AEB /* Avara.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Avara.entitlements; sourceTree = "<group>"; };
 		E5E510F62989602200EA1AEB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -982,6 +1253,7 @@
 			files = (
 				E517F0EE299715950036B206 /* SDL2.framework in Frameworks */,
 				E517F0EF2997159D0036B206 /* AppKit.framework in Frameworks */,
+				E2CD7FAE2DBC204E00C3665F /* libsqlite3.tbd in Frameworks */,
 				E517F0F0299715A00036B206 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -990,21 +1262,71 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2CD7F9D2DB32EB800C3665F /* libsqlite3.tbd in Frameworks */,
 				E5890F9A2989529B007A875D /* AppKit.framework in Frameworks */,
 				E5890F9C298952A1007A875D /* OpenGL.framework in Frameworks */,
 				E5E510F8298960F300EA1AEB /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E5A219972DC58E13007D54FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5ACAAB42DDCB4E7004F7D19 /* libsqlite3.tbd in Frameworks */,
+				E5A21A792DC59F52007D54FF /* SDL2.xcframework in Frameworks */,
+				E5A219B72DC59058007D54FF /* OpenGLES.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9465BFCF2B30C2130050681C /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				9465BFD12B30C2A00050681C /* AssetManager.cpp */,
+				9465BFD02B30C2790050681C /* AssetManager.h */,
+				9465BFD52B30EF680050681C /* PackageManifest.cpp */,
+				9465BFD92B30EFB40050681C /* PackageManifest.h */,
+				944F2F6D2B32379C00856E53 /* AssetRepository.h */,
+				948CBF112B33581D00147E80 /* AssetStorage.h */,
+				944F2F6F2B323F1900856E53 /* LocalAssetRepository.cpp */,
+				944F2F6E2B323E2100856E53 /* LocalAssetRepository.h */,
+				948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */,
+				948CBF122B3359D700147E80 /* BaseAssetStorage.h */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		948128AD2B539B44002A3459 /* render */ = {
+			isa = PBXGroup;
+			children = (
+				947F5C642B576B9F00F41689 /* ModernOpenGLRenderer.cpp */,
+				947F5C632B576ACD00F41689 /* ModernOpenGLRenderer.h */,
+				60C274E22C23EBE9005B67A9 /* LegacyOpenGLRenderer.cpp */,
+				60C274E32C23EBE9005B67A9 /* LegacyOpenGLRenderer.h */,
+				947F5C672B57A30100F41689 /* NullRenderer.h */,
+				940541EC2B5875B200E32241 /* OpenGLShader.cpp */,
+				940541EB2B58744500E32241 /* OpenGLShader.h */,
+				941D878E2B5A213200E5577C /* OpenGLVertices.cpp */,
+				941D878D2B5A206A00E5577C /* OpenGLVertices.h */,
+				946EF8D12B6D9CB2000EF17E /* AbstractRenderer.cpp */,
+				947F5C622B57693300F41689 /* AbstractRenderer.h */,
+				94D27A932DB9D77F0076D1E5 /* Material.h */,
+				941D878C2B5A1EEC00E5577C /* VertexData.h */,
+			);
+			path = render;
+			sourceTree = "<group>";
+		};
 		E5890B1B29894DB3007A875D = {
 			isa = PBXGroup;
 			children = (
+				E248724C29A480990079337E /* prefs.json */,
 				E5890B8F29895118007A875D /* src */,
 				E5890D1629895123007A875D /* vendor */,
 				E5890B8729895078007A875D /* macos */,
+				E5A219952DC58D57007D54FF /* ios */,
 				E5890FA2298958C7007A875D /* levels */,
 				E5890FA1298958BC007A875D /* rsrc */,
 				E5890B2529894DB3007A875D /* Products */,
@@ -1017,6 +1339,7 @@
 			children = (
 				E5890B2429894DB3007A875D /* Avara.app */,
 				E517F04C299713990036B206 /* AvaraTests */,
+				E5A2199A2DC58E13007D54FF /* Avara-iOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1037,6 +1360,7 @@
 			children = (
 				E5890C7929895118007A875D /* Avara.cpp */,
 				E2B62D7D2997052B00600401 /* tests.cpp */,
+				9465BFCF2B30C2130050681C /* assets */,
 				E5890C6E29895118007A875D /* audio */,
 				E5890C9729895118007A875D /* base */,
 				E5890C5F29895118007A875D /* bsp */,
@@ -1045,6 +1369,7 @@
 				E5890C7B29895118007A875D /* gui */,
 				E5890C9029895118007A875D /* level */,
 				E5890B9A29895118007A875D /* net */,
+				948128AD2B539B44002A3459 /* render */,
 				E5890BC729895118007A875D /* tui */,
 				E5890BA829895118007A875D /* util */,
 			);
@@ -1054,8 +1379,6 @@
 		E5890B9029895118007A875D /* compat */ = {
 			isa = PBXGroup;
 			children = (
-				E5890B9429895118007A875D /* Files.cpp */,
-				E5890B9929895118007A875D /* Files.h */,
 				E5890B9129895118007A875D /* Memory.cpp */,
 				E5890B9729895118007A875D /* Memory.h */,
 				E5890B9229895118007A875D /* Resource.cpp */,
@@ -1092,8 +1415,6 @@
 			children = (
 				94F17DDC29920D90001F5950 /* ARGBColor.cpp */,
 				94F17DDB2991FACE001F5950 /* ARGBColor.h */,
-				E5890BC429895118007A875D /* AvaraGL.cpp */,
-				E5890BBE29895118007A875D /* AvaraGL.h */,
 				E5890BB329895118007A875D /* Beeper.cpp */,
 				E5890BC629895118007A875D /* Beeper.h */,
 				E5890BC329895118007A875D /* CharWordLongPointer.h */,
@@ -1114,6 +1435,7 @@
 				E5890BC229895118007A875D /* RayHit.h */,
 				E5890BB029895118007A875D /* RolloverCounter.h */,
 				E5890BB129895118007A875D /* SlidingHistogram.h */,
+				E2D76F732A1680FD000D24B3 /* JSONify.h */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -1164,6 +1486,9 @@
 				E5890C3729895118007A875D /* CAreaActor.cpp */,
 				E5890C1429895118007A875D /* CAreaActor.h */,
 				E5890C0B29895118007A875D /* CAvaraApp.cpp */,
+				E2CD7FA12DB455D500C3665F /* CRUD.h */,
+				E2CD7FA22DB459C500C3665F /* CRUDsqlite.h */,
+				E2CD7FA32DB459C500C3665F /* CRUDsqlite.cpp */,
 				E5890C0129895118007A875D /* CAvaraApp.h */,
 				E5890C2A29895118007A875D /* CAvaraGame.cpp */,
 				E5890BD529895118007A875D /* CAvaraGame.h */,
@@ -1179,6 +1504,8 @@
 				E5890C2929895118007A875D /* CDoorActor.h */,
 				E5890BD829895118007A875D /* CForceField.cpp */,
 				E5890BDC29895118007A875D /* CForceField.h */,
+				94EE531D2BA0AFCF00EE9056 /* CFreeCam.cpp */,
+				94EE531E2BA0AFCF00EE9056 /* CFreeCam.h */,
 				E5890BD029895118007A875D /* CFreeSolid.cpp */,
 				E5890C4929895118007A875D /* CFreeSolid.h */,
 				E5890C2429895118007A875D /* CGlowActors.cpp */,
@@ -1262,6 +1589,8 @@
 				E5890C1C29895118007A875D /* CSphereActor.h */,
 				E5890BF529895118007A875D /* CSwitchActor.cpp */,
 				E5890BDB29895118007A875D /* CSwitchActor.h */,
+				9419E8462B49ECB1007C50D0 /* CTeamColorAdjuster.cpp */,
+				9419E8452B49EC89007C50D0 /* CTeamColorAdjuster.h */,
 				E5890C4629895118007A875D /* CTeleporter.cpp */,
 				E5890BE129895118007A875D /* CTeleporter.h */,
 				E5890C2B29895118007A875D /* CTextActor.cpp */,
@@ -1291,9 +1620,12 @@
 				E5890C2129895118007A875D /* GoodyRecord.h */,
 				E5890C1029895118007A875D /* InfoMessages.h */,
 				E5890C4129895118007A875D /* KeyFuncs.h */,
-				E5890C0229895118007A875D /* LinkLoose.cpp */,
 				E5890BDD29895118007A875D /* Messages.h */,
 				E5890BE429895118007A875D /* PlayerConfig.h */,
+				E247DE222A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp */,
+				E247DE232A0EB51B001CA630 /* PlayerRatingsSimpleElo.h */,
+				E2CD7FAA2DB5BE1D00C3665F /* LevelInfo.cpp */,
+				E2CD7FAD2DB5BEB100C3665F /* LevelInfo.h */,
 			);
 			path = game;
 			sourceTree = "<group>";
@@ -1301,6 +1633,8 @@
 		E5890C5F29895118007A875D /* bsp */ = {
 			isa = PBXGroup;
 			children = (
+				948DF4152DA365CB007FEFDE /* CCompoundShape.cpp */,
+				948DF4142DA364C7007FEFDE /* CCompoundShape.h */,
 				E5890C6829895118007A875D /* CBSPPart.cpp */,
 				E5890C6629895118007A875D /* CBSPPart.h */,
 				E5890C6129895118007A875D /* CBSPWorld.cpp */,
@@ -1329,6 +1663,8 @@
 				E5890C7729895118007A875D /* CSoundMixer.cpp */,
 				E5890C7229895118007A875D /* CSoundMixer.h */,
 				E5890C7429895118007A875D /* DopplerPlug.cpp */,
+				94924EAE2B3A894900197378 /* OggFile.cpp */,
+				94924EAD2B3A893900197378 /* OggFile.h */,
 				E5890C7629895118007A875D /* SoundSystemDefines.h */,
 			);
 			path = audio;
@@ -1357,6 +1693,8 @@
 				E5890C7F29895118007A875D /* CWindow.cpp */,
 				E5890C8E29895118007A875D /* CWindow.h */,
 				E5890C8429895118007A875D /* Preferences.h */,
+				E20752ED29FF1EC500DCC210 /* Tags.h */,
+				E20752EE2A003EC600DCC210 /* Tags.cpp */,
 			);
 			path = gui;
 			sourceTree = "<group>";
@@ -1367,6 +1705,7 @@
 				E5890C9129895118007A875D /* InternalVars.h */,
 				E5890C9329895118007A875D /* LevelLoader.cpp */,
 				E5890C9529895118007A875D /* LevelLoader.h */,
+				E5890C0229895118007A875D /* LinkLoose.cpp */,
 				E5890C9229895118007A875D /* LinkLoose.h */,
 				E5890C9629895118007A875D /* Parser.cpp */,
 				E5890C9429895118007A875D /* Parser.h */,
@@ -1429,7 +1768,6 @@
 				E5890D4829895123007A875D /* colorcombobox.cpp */,
 				E5890D7B29895123007A875D /* combobox.cpp */,
 				E5890D4929895123007A875D /* common.cpp */,
-				E5890D7829895123007A875D /* darwin.mm */,
 				E5890D8429895123007A875D /* desccombobox.cpp */,
 				E5890D7729895123007A875D /* glcanvas.cpp */,
 				E5890D7F29895123007A875D /* glutil.cpp */,
@@ -1859,11 +2197,25 @@
 		E5890F9629895294007A875D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E5ACAAB32DDCB4DD004F7D19 /* libsqlite3.tbd */,
+				E5A219B62DC59058007D54FF /* OpenGLES.framework */,
+				E2CD7F9C2DB32EB800C3665F /* libsqlite3.tbd */,
 				E5890F9B298952A1007A875D /* OpenGL.framework */,
 				E5890F992989529B007A875D /* AppKit.framework */,
 				E5890F9729895294007A875D /* SDL2.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E5A219952DC58D57007D54FF /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				E5A219AB2DC58E14007D54FF /* Assets.xcassets */,
+				E5A219AD2DC58E14007D54FF /* LaunchScreen.storyboard */,
+				E5A21A772DC59F2F007D54FF /* SDL2.xcframework */,
+			);
+			name = ios;
+			path = platform/ios;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1873,6 +2225,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E517F052299713990036B206 /* Build configuration list for PBXNativeTarget "AvaraTests" */;
 			buildPhases = (
+				E2DCC6552BDE0D1B00D70C49 /* Embed Frameworks */,
 				E517F048299713990036B206 /* Sources */,
 				E517F049299713990036B206 /* Frameworks */,
 				E517F04A299713990036B206 /* CopyFiles */,
@@ -1895,6 +2248,7 @@
 				E5890B2129894DB3007A875D /* Frameworks */,
 				E5890B2229894DB3007A875D /* Resources */,
 				E5E510FA298960F300EA1AEB /* Embed Frameworks */,
+				E55826812DE149C200796802 /* Remove .r Files */,
 			);
 			buildRules = (
 			);
@@ -1905,6 +2259,26 @@
 			productReference = E5890B2429894DB3007A875D /* Avara.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E5A219992DC58E13007D54FF /* Avara-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E5A219B22DC58E14007D54FF /* Build configuration list for PBXNativeTarget "Avara-iOS" */;
+			buildPhases = (
+				E5A219962DC58E13007D54FF /* Sources */,
+				E5A219972DC58E13007D54FF /* Frameworks */,
+				E5A219982DC58E13007D54FF /* Resources */,
+				E5A219BA2DC590B1007D54FF /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Avara-iOS";
+			packageProductDependencies = (
+			);
+			productName = "Avara-iOS";
+			productReference = E5A2199A2DC58E13007D54FF /* Avara-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1912,13 +2286,16 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastUpgradeCheck = 1410;
+				LastUpgradeCheck = 1630;
 				TargetAttributes = {
 					E517F04B299713990036B206 = {
 						CreatedOnToolsVersion = 14.1;
 					};
 					E5890B2329894DB3007A875D = {
 						CreatedOnToolsVersion = 14.1;
+					};
+					E5A219992DC58E13007D54FF = {
+						CreatedOnToolsVersion = 16.3;
 					};
 				};
 			};
@@ -1936,6 +2313,7 @@
 			projectRoot = "";
 			targets = (
 				E5890B2329894DB3007A875D /* Avara */,
+				E5A219992DC58E13007D54FF /* Avara-iOS */,
 				E517F04B299713990036B206 /* AvaraTests */,
 			);
 		};
@@ -1952,9 +2330,39 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E5A219982DC58E13007D54FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5A21A7C2DC5A5A0007D54FF /* levels in Resources */,
+				E5A21A7B2DC5A598007D54FF /* rsrc in Resources */,
+				E5A219AF2DC58E14007D54FF /* LaunchScreen.storyboard in Resources */,
+				E5A219AC2DC58E14007D54FF /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		E55826812DE149C200796802 /* Remove .r Files */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Remove .r Files";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "RESOURCEDIR=\"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\nrm \"$RESOURCEDIR\"/levels/*.r\n";
+		};
 		E5C57BC3298997B6008740F4 /* Update GitVersion.h */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -1972,7 +2380,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GIT_HASH=`/usr/bin/git describe --always --dirty`\necho \"#define GIT_VERSION \\\"$GIT_HASH\\\"\" > src/util/GitVersion.h\n";
+			shellScript = "GIT_HASH=`/usr/bin/git describe --always --dirty` \ngrep -q $GIT_HASH src/util/GitVersion.h || (echo \"#define GIT_VERSION \\\"$GIT_HASH\\\"\" > src/util/GitVersion.h)\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1981,7 +2389,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E517F0ED299714340036B206 /* darwin.mm in Sources */,
 				E517F0EA299714220036B206 /* glad.c in Sources */,
 				E517F0EB299714220036B206 /* nanovg.c in Sources */,
 				E517F0EC299714220036B206 /* stb_vorbis.c in Sources */,
@@ -1992,6 +2399,7 @@
 				E517F057299713DB0036B206 /* CSoundMixer.cpp in Sources */,
 				E517F058299713DB0036B206 /* DopplerPlug.cpp in Sources */,
 				E517F059299713DB0036B206 /* CBaseObject.cpp in Sources */,
+				948CBF152B335A1400147E80 /* BaseAssetStorage.cpp in Sources */,
 				E517F05A299713DB0036B206 /* CDirectObject.cpp in Sources */,
 				E517F05B299713DB0036B206 /* CTagBase.cpp in Sources */,
 				E517F05C299713DB0036B206 /* CBSPPart.cpp in Sources */,
@@ -2000,9 +2408,9 @@
 				E517F05F299713DB0036B206 /* CSmartBox.cpp in Sources */,
 				E517F060299713DB0036B206 /* CSmartPart.cpp in Sources */,
 				E517F061299713DB0036B206 /* CViewParameters.cpp in Sources */,
-				E517F062299713DB0036B206 /* Files.cpp in Sources */,
 				E517F063299713DB0036B206 /* Memory.cpp in Sources */,
 				E517F064299713DB0036B206 /* Resource.cpp in Sources */,
+				E2CD7FAB2DB5BE1D00C3665F /* LevelInfo.cpp in Sources */,
 				E517F065299713DB0036B206 /* System.cpp in Sources */,
 				E517F066299713DB0036B206 /* KeyFuncs.cpp in Sources */,
 				E517F067299713DB0036B206 /* CAbstractActor.cpp in Sources */,
@@ -2012,6 +2420,7 @@
 				E517F06B299713DB0036B206 /* CAbstractYon.cpp in Sources */,
 				E517F06C299713DB0036B206 /* CAreaActor.cpp in Sources */,
 				E517F06D299713DB0036B206 /* CAvaraApp.cpp in Sources */,
+				94EE53202BA0AFCF00EE9056 /* CFreeCam.cpp in Sources */,
 				E517F06E299713DB0036B206 /* CAvaraGame.cpp in Sources */,
 				E517F06F299713DB0036B206 /* CBall.cpp in Sources */,
 				E517F070299713DB0036B206 /* CDepot.cpp in Sources */,
@@ -2032,19 +2441,24 @@
 				E517F07F299713DB0036B206 /* CLogic.cpp in Sources */,
 				E517F080299713DB0036B206 /* CLogicAnd.cpp in Sources */,
 				E517F081299713DB0036B206 /* CLogicBase.cpp in Sources */,
+				946EF8D32B6D9CB2000EF17E /* AbstractRenderer.cpp in Sources */,
 				E517F082299713DB0036B206 /* CLogicCounter.cpp in Sources */,
 				E517F083299713DB0036B206 /* CLogicDelay.cpp in Sources */,
 				E517F084299713DB0036B206 /* CLogicDistributor.cpp in Sources */,
 				E517F085299713DB0036B206 /* CLogicTimer.cpp in Sources */,
+				E2210CC12A1C9D9C000712AA /* Tags.cpp in Sources */,
 				E517F086299713DB0036B206 /* CMarkerActor.cpp in Sources */,
 				E517F087299713DB0036B206 /* CMineActor.cpp in Sources */,
 				E517F088299713DB0036B206 /* CMissile.cpp in Sources */,
+				940541EE2B5875B200E32241 /* OpenGLShader.cpp in Sources */,
+				941D87902B5A213200E5577C /* OpenGLVertices.cpp in Sources */,
 				E517F089299713DB0036B206 /* CNetManager.cpp in Sources */,
 				E517F08A299713DB0036B206 /* CParasite.cpp in Sources */,
 				E517F08B299713DB0036B206 /* CPill.cpp in Sources */,
 				E517F08C299713DB0036B206 /* CPlacedActors.cpp in Sources */,
 				E517F08D299713DB0036B206 /* CPlayerActor.cpp in Sources */,
 				E517F08E299713DB0036B206 /* CPlayerManager.cpp in Sources */,
+				947F5C662B576B9F00F41689 /* ModernOpenGLRenderer.cpp in Sources */,
 				E517F08F299713DB0036B206 /* CPlayerMissile.cpp in Sources */,
 				E517F090299713DB0036B206 /* CRamp.cpp in Sources */,
 				E517F091299713DB0036B206 /* CRandomIncarnator.cpp in Sources */,
@@ -2059,8 +2473,10 @@
 				E517F09A299713DB0036B206 /* CSolidActor.cpp in Sources */,
 				E517F09B299713DB0036B206 /* CSoundActor.cpp in Sources */,
 				E517F09C299713DB0036B206 /* CSphereActor.cpp in Sources */,
+				94924EB02B3A894900197378 /* OggFile.cpp in Sources */,
 				E517F09D299713DB0036B206 /* CSwitchActor.cpp in Sources */,
 				E517F09E299713DB0036B206 /* CTeleporter.cpp in Sources */,
+				9419E8482B49ECB1007C50D0 /* CTeamColorAdjuster.cpp in Sources */,
 				E517F09F299713DB0036B206 /* CTextActor.cpp in Sources */,
 				E517F0A0299713DB0036B206 /* CTriPyramidActor.cpp in Sources */,
 				E517F0A1299713DB0036B206 /* CUfo.cpp in Sources */,
@@ -2068,10 +2484,13 @@
 				E517F0A3299713DB0036B206 /* CWallActor.cpp in Sources */,
 				E517F0A4299713DB0036B206 /* CWallDoor.cpp in Sources */,
 				E517F0A5299713DB0036B206 /* CWallSolid.cpp in Sources */,
+				9465BFD82B30EF680050681C /* PackageManifest.cpp in Sources */,
 				E517F0A6299713DB0036B206 /* CWeapon.cpp in Sources */,
 				E517F0A7299713DB0036B206 /* CWorldShader.cpp in Sources */,
 				E517F0A8299713DB0036B206 /* CYonBox.cpp in Sources */,
+				944F2F712B323F1900856E53 /* LocalAssetRepository.cpp in Sources */,
 				E517F0A9299713DB0036B206 /* CYonSphere.cpp in Sources */,
+				9465BFD32B30C2A00050681C /* AssetManager.cpp in Sources */,
 				E517F0AA299713DB0036B206 /* CZombieActor.cpp in Sources */,
 				E517F0AB299713DB0036B206 /* LinkLoose.cpp in Sources */,
 				E517F0AC299713DB0036B206 /* CApplication.cpp in Sources */,
@@ -2093,7 +2512,6 @@
 				E517F0BC299713DB0036B206 /* CommandManager.cpp in Sources */,
 				E517F0BD299713DB0036B206 /* TextCommand.cpp in Sources */,
 				E517F0BE299713DB0036B206 /* ARGBColor.cpp in Sources */,
-				E517F0BF299713DB0036B206 /* AvaraGL.cpp in Sources */,
 				E517F0C0299713DB0036B206 /* Beeper.cpp in Sources */,
 				E517F0C1299713DB0036B206 /* CRC.cpp in Sources */,
 				E517F0C2299713DB0036B206 /* CStringDictionary.cpp in Sources */,
@@ -2102,6 +2520,7 @@
 				E517F0C5299713DB0036B206 /* CHuffProcessor.cpp in Sources */,
 				E517F0C6299713DB0036B206 /* CAbstractPipe.cpp in Sources */,
 				E517F0C7299713DB0036B206 /* CAbstractHuffPipe.cpp in Sources */,
+				E2CF30032DA88F4D002DD786 /* LegacyOpenGLRenderer.cpp in Sources */,
 				E517F0C8299713DB0036B206 /* CHandlePipe.cpp in Sources */,
 				E517F0C9299713DB0036B206 /* PascalStrings.cpp in Sources */,
 				E517F0CA299713DB0036B206 /* RamFiles.cpp in Sources */,
@@ -2113,6 +2532,7 @@
 				E517F0D0299713DB0036B206 /* combobox.cpp in Sources */,
 				E517F0D1299713DB0036B206 /* common.cpp in Sources */,
 				E517F0D2299713DB0036B206 /* desccombobox.cpp in Sources */,
+				E247DE252A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp in Sources */,
 				E517F0D3299713DB0036B206 /* glcanvas.cpp in Sources */,
 				E517F0D4299713DB0036B206 /* glutil.cpp in Sources */,
 				E517F0D5299713DB0036B206 /* label.cpp in Sources */,
@@ -2126,10 +2546,12 @@
 				E517F0DD299713DB0036B206 /* slider.cpp in Sources */,
 				E517F0DE299713DB0036B206 /* stackedwidget.cpp in Sources */,
 				E517F0DF299713DB0036B206 /* tabheader.cpp in Sources */,
+				948DF4172DA365CF007FEFDE /* CCompoundShape.cpp in Sources */,
 				E517F0E0299713DB0036B206 /* tabwidget.cpp in Sources */,
 				E517F0E1299713DB0036B206 /* text.cpp in Sources */,
 				E517F0E2299713DB0036B206 /* textbox.cpp in Sources */,
 				E517F0E3299713DB0036B206 /* theme.cpp in Sources */,
+				E2CD7FA42DB459C500C3665F /* CRUDsqlite.cpp in Sources */,
 				E517F0E4299713DB0036B206 /* vscrollpanel.cpp in Sources */,
 				E517F0E5299713DB0036B206 /* widget.cpp in Sources */,
 				E517F0E6299713DB0036B206 /* window.cpp in Sources */,
@@ -2152,6 +2574,7 @@
 				E5890CF129895118007A875D /* CSliverPart.cpp in Sources */,
 				E5890CD329895118007A875D /* CUfo.cpp in Sources */,
 				E5890D0A29895118007A875D /* ColorManager.cpp in Sources */,
+				948CBF142B335A1400147E80 /* BaseAssetStorage.cpp in Sources */,
 				E5890CDD29895118007A875D /* CLogicAnd.cpp in Sources */,
 				E5890CFC29895118007A875D /* CScaledBSP.cpp in Sources */,
 				E5890CD429895118007A875D /* CSmart.cpp in Sources */,
@@ -2162,6 +2585,7 @@
 				E5890F1929895124007A875D /* glad.c in Sources */,
 				E5890CFA29895118007A875D /* CSmartBox.cpp in Sources */,
 				E5890D1529895118007A875D /* CDirectObject.cpp in Sources */,
+				E2CD7FAC2DB5BE1D00C3665F /* LevelInfo.cpp in Sources */,
 				E5890CAC29895118007A875D /* CHandlePipe.cpp in Sources */,
 				E5890CC729895118007A875D /* LinkLoose.cpp in Sources */,
 				E5890F0329895124007A875D /* textbox.cpp in Sources */,
@@ -2171,6 +2595,7 @@
 				E5890CB229895118007A875D /* CommandManager.cpp in Sources */,
 				E5890CF629895118007A875D /* CGroundColorAdjuster.cpp in Sources */,
 				E5890CEA29895118007A875D /* CDepot.cpp in Sources */,
+				94EE531F2BA0AFCF00EE9056 /* CFreeCam.cpp in Sources */,
 				E5890EFF29895124007A875D /* theme.cpp in Sources */,
 				E5890F0229895124007A875D /* glutil.cpp in Sources */,
 				E5890F0529895124007A875D /* slider.cpp in Sources */,
@@ -2184,26 +2609,31 @@
 				E5890CA129895118007A875D /* System.cpp in Sources */,
 				E5890CFB29895118007A875D /* CViewParameters.cpp in Sources */,
 				E5890CCA29895118007A875D /* CWorldShader.cpp in Sources */,
-				E5890CB129895118007A875D /* AvaraGL.cpp in Sources */,
 				E5890CA629895118007A875D /* CProtoControl.cpp in Sources */,
+				948DF4162DA365CF007FEFDE /* CCompoundShape.cpp in Sources */,
 				E5890D1329895118007A875D /* CBaseObject.cpp in Sources */,
 				E5890F0129895124007A875D /* messagedialog.cpp in Sources */,
 				94F17DDD29920D90001F5950 /* ARGBColor.cpp in Sources */,
 				E5890CF429895118007A875D /* CSolidActor.cpp in Sources */,
 				E5890EFE29895124007A875D /* combobox.cpp in Sources */,
 				E5890D0B29895118007A875D /* CWindow.cpp in Sources */,
+				946EF8D22B6D9CB2000EF17E /* AbstractRenderer.cpp in Sources */,
 				E5890CA829895118007A875D /* Beeper.cpp in Sources */,
 				E5890CDE29895118007A875D /* CYonBox.cpp in Sources */,
 				E5890EF429895124007A875D /* tabheader.cpp in Sources */,
+				E20752EF2A003EC600DCC210 /* Tags.cpp in Sources */,
 				E5890D1029895118007A875D /* CApplication.cpp in Sources */,
 				E5890EEB29895124007A875D /* csscolorparser.cpp in Sources */,
 				E5890CF329895118007A875D /* CSoundActor.cpp in Sources */,
+				940541ED2B5875B200E32241 /* OpenGLShader.cpp in Sources */,
+				941D878F2B5A213200E5577C /* OpenGLVertices.cpp in Sources */,
 				E5890CF729895118007A875D /* CRealShooters.cpp in Sources */,
 				E5890CC829895118007A875D /* CLogicBase.cpp in Sources */,
 				E5890CA329895118007A875D /* CUDPComm.cpp in Sources */,
 				E5890CA229895118007A875D /* CCommManager.cpp in Sources */,
 				E5890CE629895118007A875D /* CZombieActor.cpp in Sources */,
 				E5890CB729895118007A875D /* CForceField.cpp in Sources */,
+				947F5C652B576B9F00F41689 /* ModernOpenGLRenderer.cpp in Sources */,
 				E5890CF929895118007A875D /* CBSPWorld.cpp in Sources */,
 				E5890CAE29895118007A875D /* Debug.cpp in Sources */,
 				E5890F3829895124007A875D /* glm.cpp in Sources */,
@@ -2218,8 +2648,9 @@
 				E5890EF929895124007A875D /* nanogui_resources.cpp in Sources */,
 				E5890CBD29895118007A875D /* CScout.cpp in Sources */,
 				E5890CA429895118007A875D /* AvaraTCP.cpp in Sources */,
-				E5890EFB29895124007A875D /* darwin.mm in Sources */,
+				94924EAF2B3A894900197378 /* OggFile.cpp in Sources */,
 				E5890CBC29895118007A875D /* CAbstractMissile.cpp in Sources */,
+				9419E8472B49ECB1007C50D0 /* CTeamColorAdjuster.cpp in Sources */,
 				E5890CD229895118007A875D /* CBall.cpp in Sources */,
 				E5890CC929895118007A875D /* CPlayerMissile.cpp in Sources */,
 				E5890F0729895124007A875D /* desccombobox.cpp in Sources */,
@@ -2227,9 +2658,13 @@
 				E5890CC029895118007A875D /* CGoal.cpp in Sources */,
 				E5890CA929895118007A875D /* CHuffProcessor.cpp in Sources */,
 				E5890EF729895124007A875D /* popup.cpp in Sources */,
+				9465BFD72B30EF680050681C /* PackageManifest.cpp in Sources */,
 				E5890CBA29895118007A875D /* CWeapon.cpp in Sources */,
+				E247DE242A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp in Sources */,
 				E5890CE429895118007A875D /* CAreaActor.cpp in Sources */,
+				944F2F702B323F1900856E53 /* LocalAssetRepository.cpp in Sources */,
 				E5890D0929895118007A875D /* CNetworkWindow.cpp in Sources */,
+				9465BFD22B30C2A00050681C /* AssetManager.cpp in Sources */,
 				E5890EFA29895124007A875D /* glcanvas.cpp in Sources */,
 				E5890CB029895118007A875D /* RamFiles.cpp in Sources */,
 				E5890CD929895118007A875D /* CRandomIncarnator.cpp in Sources */,
@@ -2249,7 +2684,6 @@
 				E5890CB829895118007A875D /* CPlacedActors.cpp in Sources */,
 				E5890CE929895118007A875D /* CNetManager.cpp in Sources */,
 				E5890CA729895118007A875D /* CRC.cpp in Sources */,
-				E5890CA029895118007A875D /* Files.cpp in Sources */,
 				E5890EF329895124007A875D /* stackedwidget.cpp in Sources */,
 				E5890EF029895124007A875D /* vscrollpanel.cpp in Sources */,
 				E5890CCF29895118007A875D /* CAbstractPlayer.cpp in Sources */,
@@ -2261,6 +2695,7 @@
 				E5890CBF29895118007A875D /* CAbstractActor.cpp in Sources */,
 				E5890CAA29895118007A875D /* CAbstractPipe.cpp in Sources */,
 				E5890F0929895124007A875D /* stb_vorbis.c in Sources */,
+				6025AE4E2C255E6A00A57EFB /* LegacyOpenGLRenderer.cpp in Sources */,
 				E5890D0529895118007A875D /* CSoundMixer.cpp in Sources */,
 				E5890CF529895118007A875D /* CRamp.cpp in Sources */,
 				E5890C9F29895118007A875D /* Resource.cpp in Sources */,
@@ -2290,6 +2725,7 @@
 				E5890CE829895118007A875D /* CSkyColorAdjuster.cpp in Sources */,
 				E5890CEE29895118007A875D /* CScoreKeeper.cpp in Sources */,
 				E5890D0129895118007A875D /* CRateSound.cpp in Sources */,
+				E2CD7FA52DB459C500C3665F /* CRUDsqlite.cpp in Sources */,
 				E5890CFD29895118007A875D /* CBSPPart.cpp in Sources */,
 				E5890CEF29895118007A875D /* CWallSolid.cpp in Sources */,
 				E5890CB529895118007A875D /* CFreeSolid.cpp in Sources */,
@@ -2297,7 +2733,191 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E5A219962DC58E13007D54FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5ACAAB12DDCB401004F7D19 /* LevelInfo.cpp in Sources */,
+				E5ACAAB02DDCB3F7004F7D19 /* CRUDsqlite.cpp in Sources */,
+				E5A21A5C2DC59144007D54FF /* glad.c in Sources */,
+				E5A21A5D2DC59144007D54FF /* nanovg.c in Sources */,
+				E5A21A5E2DC59144007D54FF /* stb_vorbis.c in Sources */,
+				E5A219BB2DC59135007D54FF /* Avara.cpp in Sources */,
+				E5A219BC2DC59135007D54FF /* AssetManager.cpp in Sources */,
+				E5A219BD2DC59135007D54FF /* PackageManifest.cpp in Sources */,
+				E5A219BE2DC59135007D54FF /* LocalAssetRepository.cpp in Sources */,
+				E5A219BF2DC59135007D54FF /* BaseAssetStorage.cpp in Sources */,
+				E5A219C02DC59135007D54FF /* CBasicSound.cpp in Sources */,
+				E5A219C12DC59135007D54FF /* CRateSound.cpp in Sources */,
+				E5A219C22DC59135007D54FF /* CSoundHub.cpp in Sources */,
+				E5A219C32DC59135007D54FF /* CSoundMixer.cpp in Sources */,
+				E5A219C42DC59135007D54FF /* DopplerPlug.cpp in Sources */,
+				E5A219C52DC59135007D54FF /* OggFile.cpp in Sources */,
+				E5A219C62DC59135007D54FF /* CBaseObject.cpp in Sources */,
+				E5A219C72DC59135007D54FF /* CDirectObject.cpp in Sources */,
+				E5A219C82DC59135007D54FF /* CTagBase.cpp in Sources */,
+				E5A219C92DC59135007D54FF /* CCompoundShape.cpp in Sources */,
+				E5A219CA2DC59135007D54FF /* CBSPPart.cpp in Sources */,
+				E5A219CB2DC59135007D54FF /* CBSPWorld.cpp in Sources */,
+				E5A219CC2DC59135007D54FF /* CScaledBSP.cpp in Sources */,
+				E5A219CD2DC59135007D54FF /* CSmartBox.cpp in Sources */,
+				E5A219CE2DC59135007D54FF /* CSmartPart.cpp in Sources */,
+				E5A219CF2DC59135007D54FF /* CViewParameters.cpp in Sources */,
+				E5A219D02DC59135007D54FF /* Memory.cpp in Sources */,
+				E5A219D12DC59135007D54FF /* Resource.cpp in Sources */,
+				E5A219D22DC59135007D54FF /* System.cpp in Sources */,
+				E5A219D32DC59135007D54FF /* KeyFuncs.cpp in Sources */,
+				E5A219D42DC59135007D54FF /* CAbstractActor.cpp in Sources */,
+				E5A219D52DC59135007D54FF /* CAbstractMissile.cpp in Sources */,
+				E5A219D62DC59135007D54FF /* CAbstractMovers.cpp in Sources */,
+				E5A219D72DC59135007D54FF /* CAbstractPlayer.cpp in Sources */,
+				E5A219D82DC59135007D54FF /* CAbstractYon.cpp in Sources */,
+				E5A219D92DC59135007D54FF /* CAreaActor.cpp in Sources */,
+				E5A219DA2DC59135007D54FF /* CAvaraApp.cpp in Sources */,
+				E5A219DB2DC59135007D54FF /* CAvaraGame.cpp in Sources */,
+				E5A219DC2DC59135007D54FF /* CBall.cpp in Sources */,
+				E5A219DD2DC59135007D54FF /* CDepot.cpp in Sources */,
+				E5A219DE2DC59135007D54FF /* CDome.cpp in Sources */,
+				E5A219DF2DC59135007D54FF /* CDoor2Actor.cpp in Sources */,
+				E5A219E02DC59135007D54FF /* CDoorActor.cpp in Sources */,
+				E5A219E12DC59135007D54FF /* CForceField.cpp in Sources */,
+				E5A219E22DC59135007D54FF /* CFreeCam.cpp in Sources */,
+				E5A219E32DC59135007D54FF /* CFreeSolid.cpp in Sources */,
+				E5A219E42DC59135007D54FF /* CGlowActors.cpp in Sources */,
+				E5A219E52DC59135007D54FF /* CGoal.cpp in Sources */,
+				E5A219E62DC59135007D54FF /* CGoody.cpp in Sources */,
+				E5A219E72DC59135007D54FF /* CGrenade.cpp in Sources */,
+				E5A219E82DC59135007D54FF /* CGroundColorAdjuster.cpp in Sources */,
+				E5A219E92DC59135007D54FF /* CGuardActor.cpp in Sources */,
+				E5A219EA2DC59135007D54FF /* CHologramActor.cpp in Sources */,
+				E5A219EB2DC59135007D54FF /* CHUD.cpp in Sources */,
+				E5A219EC2DC59135007D54FF /* CIncarnator.cpp in Sources */,
+				E5A219ED2DC59135007D54FF /* CLogic.cpp in Sources */,
+				E5A219EE2DC59135007D54FF /* CLogicAnd.cpp in Sources */,
+				E5A219EF2DC59135007D54FF /* CLogicBase.cpp in Sources */,
+				E5A219F02DC59135007D54FF /* CLogicCounter.cpp in Sources */,
+				E5A219F12DC59135007D54FF /* CLogicDelay.cpp in Sources */,
+				E5A219F22DC59135007D54FF /* CLogicDistributor.cpp in Sources */,
+				E5A219F32DC59135007D54FF /* CLogicTimer.cpp in Sources */,
+				E5A219F42DC59135007D54FF /* CMarkerActor.cpp in Sources */,
+				E5A219F52DC59135007D54FF /* CMineActor.cpp in Sources */,
+				E5A219F62DC59135007D54FF /* CMissile.cpp in Sources */,
+				E5A219F72DC59135007D54FF /* CNetManager.cpp in Sources */,
+				E5A219F82DC59135007D54FF /* CParasite.cpp in Sources */,
+				E5A219F92DC59135007D54FF /* CPill.cpp in Sources */,
+				E5A219FA2DC59135007D54FF /* CPlacedActors.cpp in Sources */,
+				E5A219FB2DC59135007D54FF /* CPlayerActor.cpp in Sources */,
+				E5A219FC2DC59135007D54FF /* CPlayerManager.cpp in Sources */,
+				E5A219FD2DC59135007D54FF /* CPlayerMissile.cpp in Sources */,
+				E5A219FE2DC59135007D54FF /* CRamp.cpp in Sources */,
+				E5A219FF2DC59135007D54FF /* CRandomIncarnator.cpp in Sources */,
+				E5A21A002DC59135007D54FF /* CRealMovers.cpp in Sources */,
+				E5A21A012DC59135007D54FF /* CRealShooters.cpp in Sources */,
+				E5A21A022DC59135007D54FF /* CScoreKeeper.cpp in Sources */,
+				E5A21A032DC59135007D54FF /* CScout.cpp in Sources */,
+				E5A21A042DC59135007D54FF /* CShuriken.cpp in Sources */,
+				E5A21A052DC59135007D54FF /* CSkyColorAdjuster.cpp in Sources */,
+				E5A21A062DC59135007D54FF /* CSliverPart.cpp in Sources */,
+				E5A21A072DC59135007D54FF /* CSmart.cpp in Sources */,
+				E5A21A082DC59135007D54FF /* CSolidActor.cpp in Sources */,
+				E5A21A092DC59135007D54FF /* CSoundActor.cpp in Sources */,
+				E5A21A0A2DC59135007D54FF /* CSphereActor.cpp in Sources */,
+				E5A21A0B2DC59135007D54FF /* CSwitchActor.cpp in Sources */,
+				E5A21A0C2DC59135007D54FF /* CTeamColorAdjuster.cpp in Sources */,
+				E5A21A0D2DC59135007D54FF /* CTeleporter.cpp in Sources */,
+				E5A21A0E2DC59135007D54FF /* CTextActor.cpp in Sources */,
+				E5A21A0F2DC59135007D54FF /* CTriPyramidActor.cpp in Sources */,
+				E5A21A102DC59135007D54FF /* CUfo.cpp in Sources */,
+				E5A21A112DC59135007D54FF /* CWalkerActor.cpp in Sources */,
+				E5A21A122DC59135007D54FF /* CWallActor.cpp in Sources */,
+				E5A21A132DC59135007D54FF /* CWallDoor.cpp in Sources */,
+				E5A21A142DC59135007D54FF /* CWallSolid.cpp in Sources */,
+				E5A21A152DC59135007D54FF /* CWeapon.cpp in Sources */,
+				E5A21A162DC59135007D54FF /* CWorldShader.cpp in Sources */,
+				E5A21A172DC59135007D54FF /* CYonBox.cpp in Sources */,
+				E5A21A182DC59135007D54FF /* CYonSphere.cpp in Sources */,
+				E5A21A192DC59135007D54FF /* CZombieActor.cpp in Sources */,
+				E5A21A1A2DC59135007D54FF /* PlayerRatingsSimpleElo.cpp in Sources */,
+				E5A21A1B2DC59135007D54FF /* CApplication.cpp in Sources */,
+				E5A21A1C2DC59135007D54FF /* CLevelWindow.cpp in Sources */,
+				E5A21A1D2DC59135007D54FF /* CNetworkWindow.cpp in Sources */,
+				E5A21A1E2DC59135007D54FF /* ColorManager.cpp in Sources */,
+				E5A21A1F2DC59135007D54FF /* CPlayerWindow.cpp in Sources */,
+				E5A21A202DC59135007D54FF /* CRosterWindow.cpp in Sources */,
+				E5A21A212DC59135007D54FF /* CServerWindow.cpp in Sources */,
+				E5A21A222DC59135007D54FF /* CTrackerWindow.cpp in Sources */,
+				E5A21A232DC59135007D54FF /* CWindow.cpp in Sources */,
+				E5A21A242DC59135007D54FF /* Tags.cpp in Sources */,
+				E5A21A252DC59135007D54FF /* LevelLoader.cpp in Sources */,
+				E5A21A262DC59135007D54FF /* LinkLoose.cpp in Sources */,
+				E5A21A272DC59135007D54FF /* Parser.cpp in Sources */,
+				E5A21A282DC59135007D54FF /* AvaraTCP.cpp in Sources */,
+				E5A21A292DC59135007D54FF /* CCommManager.cpp in Sources */,
+				E5A21A2A2DC59135007D54FF /* CProtoControl.cpp in Sources */,
+				E5A21A2B2DC59135007D54FF /* CUDPComm.cpp in Sources */,
+				E5A21A2C2DC59135007D54FF /* CUDPConnection.cpp in Sources */,
+				E5A21A2D2DC59135007D54FF /* ModernOpenGLRenderer.cpp in Sources */,
+				E5A21A2E2DC59135007D54FF /* LegacyOpenGLRenderer.cpp in Sources */,
+				E5A21A2F2DC59135007D54FF /* OpenGLShader.cpp in Sources */,
+				E5A21A302DC59135007D54FF /* OpenGLVertices.cpp in Sources */,
+				E5A21A312DC59135007D54FF /* AbstractRenderer.cpp in Sources */,
+				E5A21A322DC59135007D54FF /* CommandManager.cpp in Sources */,
+				E5A21A332DC59135007D54FF /* TextCommand.cpp in Sources */,
+				E5A21A342DC59135007D54FF /* ARGBColor.cpp in Sources */,
+				E5A21A352DC59135007D54FF /* Beeper.cpp in Sources */,
+				E5A21A362DC59135007D54FF /* CRC.cpp in Sources */,
+				E5A21A372DC59135007D54FF /* CStringDictionary.cpp in Sources */,
+				E5A21A382DC59135007D54FF /* Debug.cpp in Sources */,
+				E5A21A392DC59135007D54FF /* FastMat.cpp in Sources */,
+				E5A21A3A2DC59135007D54FF /* CHuffProcessor.cpp in Sources */,
+				E5A21A3B2DC59135007D54FF /* CAbstractPipe.cpp in Sources */,
+				E5A21A3C2DC59135007D54FF /* CAbstractHuffPipe.cpp in Sources */,
+				E5A21A3D2DC59135007D54FF /* CHandlePipe.cpp in Sources */,
+				E5A21A3E2DC59135007D54FF /* PascalStrings.cpp in Sources */,
+				E5A21A3F2DC59135007D54FF /* RamFiles.cpp in Sources */,
+				E5A21A402DC59135007D54FF /* csscolorparser.cpp in Sources */,
+				E5A21A412DC59135007D54FF /* button.cpp in Sources */,
+				E5A21A422DC59135007D54FF /* checkbox.cpp in Sources */,
+				E5A21A432DC59135007D54FF /* colorcombobox.cpp in Sources */,
+				E5A21A442DC59135007D54FF /* combobox.cpp in Sources */,
+				E5A21A452DC59135007D54FF /* common.cpp in Sources */,
+				E5A21A462DC59135007D54FF /* desccombobox.cpp in Sources */,
+				E5A21A472DC59135007D54FF /* glcanvas.cpp in Sources */,
+				E5A21A482DC59135007D54FF /* glutil.cpp in Sources */,
+				E5A21A492DC59135007D54FF /* label.cpp in Sources */,
+				E5A21A4A2DC59135007D54FF /* layout.cpp in Sources */,
+				E5A21A4B2DC59135007D54FF /* messagedialog.cpp in Sources */,
+				E5A21A4C2DC59135007D54FF /* nanogui_resources.cpp in Sources */,
+				E5A21A4D2DC59135007D54FF /* popup.cpp in Sources */,
+				E5A21A4E2DC59135007D54FF /* popupbutton.cpp in Sources */,
+				E5A21A4F2DC59135007D54FF /* progressbar.cpp in Sources */,
+				E5A21A502DC59135007D54FF /* screen.cpp in Sources */,
+				E5A21A512DC59135007D54FF /* slider.cpp in Sources */,
+				E5A21A522DC59135007D54FF /* stackedwidget.cpp in Sources */,
+				E5A21A532DC59135007D54FF /* tabheader.cpp in Sources */,
+				E5A21A542DC59135007D54FF /* tabwidget.cpp in Sources */,
+				E5A21A552DC59135007D54FF /* text.cpp in Sources */,
+				E5A21A562DC59135007D54FF /* textbox.cpp in Sources */,
+				E5A21A572DC59135007D54FF /* theme.cpp in Sources */,
+				E5A21A582DC59135007D54FF /* vscrollpanel.cpp in Sources */,
+				E5A21A592DC59135007D54FF /* widget.cpp in Sources */,
+				E5A21A5A2DC59135007D54FF /* window.cpp in Sources */,
+				E5A21A5B2DC59135007D54FF /* pugixml.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E5A219AD2DC58E14007D54FF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E5A219AE2DC58E14007D54FF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		E517F050299713990036B206 /* Debug */ = {
@@ -2309,12 +2929,14 @@
 				HEADER_SEARCH_PATHS = (
 					"vendor/**",
 					/opt/homebrew/include,
+					/usr/local/include,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/opt/homebrew/lib,
+					/usr/local/lib,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-DNANOGUI_GLAD",
@@ -2333,12 +2955,14 @@
 				HEADER_SEARCH_PATHS = (
 					"vendor/**",
 					/opt/homebrew/include,
+					/usr/local/include,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/opt/homebrew/lib,
+					/usr/local/lib,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-DNANOGUI_GLAD",
@@ -2464,6 +3088,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2488,6 +3113,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.avaraline.Avara;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = Debug;
@@ -2498,12 +3124,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = platform/macos/Avara.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=macosx*]" = Y56DGU8P8X;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2528,7 +3154,111 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.avaraline.Avara;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+		E5A219B32DC58E14007D54FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y56DGU8P8X;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/platform/ios",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = "vendor/**";
+				INFOPLIST_KEY_CFBundleDisplayName = Avara;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = metal;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-DNANOGUI_GLAD",
+					"-DAVARA_GLES",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "net.avaraline.Avara-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E5A219B42DC58E14007D54FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y56DGU8P8X;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/platform/ios",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = "vendor/**";
+				INFOPLIST_KEY_CFBundleDisplayName = Avara;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = metal;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-DNANOGUI_GLAD",
+					"-DAVARA_GLES",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "net.avaraline.Avara-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -2558,6 +3288,15 @@
 			buildConfigurations = (
 				E5890B3E29894DB4007A875D /* Debug */,
 				E5890B3F29894DB4007A875D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E5A219B22DC58E14007D54FF /* Build configuration list for PBXNativeTarget "Avara-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E5A219B32DC58E14007D54FF /* Debug */,
+				E5A219B42DC58E14007D54FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

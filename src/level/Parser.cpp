@@ -9,6 +9,7 @@
 
 #include "Parser.h"
 
+#include "AssetManager.h"
 #include "CAbstractActor.h"
 #include "CStringDictionary.h"
 #include "PascalStrings.h"
@@ -23,7 +24,6 @@
 
 #include "CApplication.h"
 #include "FastMat.h"
-#include "Resource.h"
 #include "Types.h"
 
 #define STACKSIZE 256
@@ -66,14 +66,13 @@ void CreateTheObject() {
     Str255 nameBuf;
 
     if (currentActor) {
-        currentActor->Dispose();
+        delete currentActor;
     }
 
     symTable->GetIndEntry(parserVar.lookahead.value.token, nameBuf);
 
     currentActor = (CAbstractActor *)CreateNamedObject(nameBuf);
     if (currentActor) {
-        currentActor->IAbstractActor();
         currentActor->BeginScript();
         currentLevel++;
     }
@@ -83,14 +82,13 @@ void CreateTheAdjuster() {
     Str255 nameBuf;
 
     if (currentActor) {
-        currentActor->Dispose();
+        delete currentActor;
     }
 
     symTable->GetIndEntry(parserVar.lookahead.value.token, nameBuf);
 
     currentActor = (CAbstractActor *)CreateNamedObject(nameBuf);
     if (currentActor) {
-        currentActor->IAbstractActor();
         currentActor->BeginScript();
         currentLevel++;
     }
@@ -988,11 +986,13 @@ char *fixedString(unsigned char *s) {
     return fixed;
 }
 
-void RunThis(unsigned char *script) {
+void RunThis(std::string script) {
     LexSymbol statement;
 
+    StringPtr scriptPtr = (StringPtr)script.c_str();
+
 #ifdef DEBUGPARSER
-    char *formattedScript = fixedString(script);
+    char *formattedScript = fixedString(scriptPtr);
     SDL_Log("Running script:\n%s\n", formattedScript);
     std::free(formattedScript);
 #endif
@@ -1014,7 +1014,7 @@ void RunThis(unsigned char *script) {
     }
     */
 
-    SetupCompiler(script);
+    SetupCompiler(scriptPtr);
     LexRead(&parserVar.lookahead);
 
     do {
@@ -1054,12 +1054,13 @@ void AllocParser() {
     stackP = stackMem;
 
     currentActor = NULL;
-    std::string base = GetBaseScript();
-    if (base.length() > 0)
-    RunThis((StringPtr)base.c_str());
-    std::string def = GetDefaultScript();
-    if (def.length() > 0)
-    RunThis((StringPtr)def.c_str());
+
+    std::vector<std::shared_ptr<std::string>> scripts = AssetManager::GetAllScripts();
+    for (auto const &script : scripts) {
+        if (script->length() > 0) {
+            RunThis(*script);
+        }
+    }
 }
 
 void DeallocParser() {
@@ -1069,14 +1070,14 @@ void DeallocParser() {
         variableBase->Dispose();
     if (programBase)
         programBase->Dispose();
-    
+
     stackP = NULL;
     symTable = NULL;
     variableBase = NULL;
     programBase = NULL;
 
     if (currentActor) {
-        currentActor->Dispose();
+        delete currentActor;
         currentActor = NULL;
     }
 }
@@ -1121,16 +1122,20 @@ short ReadShortVar(const char *s) {
 }
 
 const std::optional<ARGBColor> ReadColorVar(short index) {
-    // first just try parsing the color string (e.g. fill="#ffcc44" or fill="rgba(255,204,68)")
-    std::optional<ARGBColor> color = ARGBColor::Parse(ReadStringVar(index));
-    if (!color) {
-        // try dereferencing color to a variable (e.g. myFill='"#ffcc44"' --> fill="myFill")
-        color = ARGBColor::Parse(ReadStringVar(ReadStringVar(index).c_str()));
-    }
+    index = EvalVariable(index + firstVariable, true); // eager evaluation!
+    std::string value = (index) ? symTable->GetIndEntry(index) : "";
+    std::optional<ARGBColor> color = ARGBColor::Parse(value);
     return color;
 }
 const std::optional<ARGBColor> ReadColorVar(const char *s) {
     return ReadColorVar(IndexForEntry(s));
+}
+
+const Fixed ReadFixedMaterialVar(short index) {
+    return ToFixed(EvalVariable(index + firstVariable, true)); // eager evaluation!
+}
+const Fixed ReadFixedMaterialVar(const char *s) {
+    return ReadFixedMaterialVar(IndexForEntry(s));
 }
 
 std::string ReadStringVar(short index) {

@@ -7,25 +7,42 @@ on:
     branches: [ main ]
 
 jobs:
+  Ubuntu:
+    name: Ubuntu Latest
+    runs-on: ubuntu-latest
+    steps:
+    - name: install dependencies
+      run: |
+        sudo add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu `lsb_release -sc` main universe restricted multiverse"
+        sudo apt-get update -y -qq
+        sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libegl1-mesa-dev libgles2-mesa-dev libdirectfb-dev libgtest-dev libsqlite3-dev
+    - uses: actions/checkout@v4
+    - name: make
+      run: make -j2
+    - name: Run headless test
+      uses: GabrielBB/xvfb-action@v1.7
+      with:
+        run: make tests
   Windows:
     name: Windows
     runs-on: windows-2022
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Add MSBuild to PATH
-        uses: microsoft/setup-msbuild@v1.1.3
-      - name: Vcpkg Integration
-        run: |
-          $vcpkg_path = (Join-Path ${env:VCPKG_INSTALLATION_ROOT} vcpkg.exe)
-          &$vcpkg_path integrate install
-        shell: pwsh
+        uses: microsoft/setup-msbuild@v2
+      - name: Setup vcpkg
+        uses: lukka/run-vcpkg@v11
       - name: Build
         run: |
-          New-Item -Path .\out -ItemType Directory
-          Set-Location -Path .\out
-          $vcpkg_cmake = "-DCMAKE_TOOLCHAIN_FILE=" + (Join-Path ${env:VCPKG_INSTALLATION_ROOT} scripts\buildsystems\vcpkg.cmake)
-          cmake .. $vcpkg_cmake
-          cmake --build . --target package --config release
+          vcpkg integrate install
+          .\bin\git_version.ps1
+          msbuild /m /p:Platform=x64 /p:Configuration=Release .\Avara.msvc\Avara.sln
+        shell: pwsh
+      - name: Run headless test
+        run: .\Avara.msvc\x64\Release\Tests.exe
+        shell: pwsh
+      - name: WinAvara archive
+        run: .\bin\winavarazip.ps1
         shell: pwsh
       - name: deploy main nightly
         if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'cmake')
@@ -35,7 +52,34 @@ jobs:
         with:
           upload_url: https://uploads.github.com/repos/avaraline/Avara/releases/28954246/assets{?name,label}
           release_id: 28954246
-          asset_path: ./out/Avara-0.7.1-win64.exe
-          asset_name: Avara-Windows-Nightly-$$-installer.exe
-          asset_content_type: application/vnd.microsoft.portable-executable
+          asset_path: ./WinAvara.zip
+          asset_name: Avara-Windows-Nightly-$$.zip
+          asset_content_type: application/zip
+          max_releases: 1
+  macOS:
+    name: macOS
+    runs-on: macos-13
+    steps:
+      - name: install dependencies
+        run: |
+          wget -q "https://github.com/libsdl-org/SDL/releases/download/release-2.26.2/SDL2-2.26.2.dmg"
+          hdiutil attach SDL2-2.26.2.dmg
+          sudo cp -R /Volumes/SDL2/SDL2.framework /Library/Frameworks/
+          brew install googletest
+      - uses: actions/checkout@v4
+      - name: Run headless tests
+        run: make -j4 tests
+      - name: make macdist
+        run: make -j4 clean macdist
+      - name: deploy main nightly
+        if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'main')
+        uses: WebFreak001/deploy-nightly@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: https://uploads.github.com/repos/avaraline/Avara/releases/28954246/assets{?name,label}
+          release_id: 28954246
+          asset_path: ./build/MacAvara.zip
+          asset_name: Avara-macOS-Nightly-$$.zip
+          asset_content_type: application/zip
           max_releases: 1

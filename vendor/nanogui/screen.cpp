@@ -25,8 +25,12 @@
     #include <windows.h>
 #endif
 
-/* Allow enforcing the GL2 implementation of NanoVG */
-#define NANOVG_GL3_IMPLEMENTATION
+#if defined(AVARA_GLES)
+    #define NANOVG_GLES3_IMPLEMENTATION
+#else
+    #define NANOVG_GL3_IMPLEMENTATION
+#endif
+
 #include <nanovg_gl.h>
 
 NAMESPACE_BEGIN(nanogui)
@@ -170,9 +174,13 @@ Screen::Screen(const Vector2i &size, const std::string &caption, bool resizable,
 #if defined(NANOGUI_GLAD)
     if (!gladInitialized) {
         gladInitialized = true;
-        if (!gladLoadGL((GLADloadfunc) SDL_GL_GetProcAddress))
-        //if (!gladLoadGLLoader((GLADloadproc) SDL_GL_GetProcAddress))
+#if defined(AVARA_GLES)
+        if (!gladLoadGLES2Loader((GLADloadproc) SDL_GL_GetProcAddress))
             throw std::runtime_error("Could not initialize GLAD!");
+#else
+        if (!gladLoadGLLoader((GLADloadproc) SDL_GL_GetProcAddress))
+            throw std::runtime_error("Could not initialize GLAD!");
+#endif
         glGetError(); // pull and ignore unhandled errors like GL_INVALID_ENUM
     }
 #endif
@@ -215,17 +223,22 @@ void Screen::initialize(SDL_Window *window, bool shutdownSDLOnDestruct) {
 #if defined(NANOGUI_GLAD)
     if (!gladInitialized) {
         gladInitialized = true;
-        if (!gladLoadGL((GLADloadfunc) SDL_GL_GetProcAddress))
-        //if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress))
+#if defined(AVARA_GLES)
+        if (!gladLoadGLES2Loader((GLADloadproc) SDL_GL_GetProcAddress))
             throw std::runtime_error("Could not initialize GLAD!");
+#else
+        if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress))
+            throw std::runtime_error("Could not initialize GLAD!");
+#endif
         glGetError(); // pull and ignore unhandled errors like GL_INVALID_ENUM
     }
 #endif
 
     /* Detect framebuffer properties and set up compatible NanoVG context */
     GLint nStencilBits = 0, nSamples = 0;
-    glGetFramebufferAttachmentParameteriv(GL_DRAW_FRAMEBUFFER,
-        GL_STENCIL, GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE, &nStencilBits);
+#if !defined(AVARA_GLES)
+    glGetFramebufferAttachmentParameteriv(GL_DRAW_FRAMEBUFFER, GL_STENCIL, GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE, &nStencilBits);
+#endif
     glGetIntegerv(GL_SAMPLES, &nSamples);
 
     int flags = 0;
@@ -237,7 +250,11 @@ void Screen::initialize(SDL_Window *window, bool shutdownSDLOnDestruct) {
     flags |= NVG_DEBUG;
 #endif
 
+#if defined(AVARA_GLES)
+    mNVGContext = nvgCreateGLES3(flags);
+#else
     mNVGContext = nvgCreateGL3(flags);
+#endif
     if (mNVGContext == nullptr)
         throw std::runtime_error("Could not initialize NanoVG!");
 
@@ -275,8 +292,13 @@ Screen::~Screen() {
     for (auto it = mCursors.begin(); it != mCursors.end(); it++) {
         SDL_FreeCursor(it->second);
     }
-    if (mNVGContext)
+    if (mNVGContext) {
+#if defined(AVARA_GLES)
+        nvgDeleteGLES3(mNVGContext);
+#else
         nvgDeleteGL3(mNVGContext);
+#endif
+    }
     if (mSDLWindow && mShutdownSDLOnDestruct)
         SDL_DestroyWindow(mSDLWindow);
 }
@@ -343,7 +365,9 @@ void Screen::drawWidgets() {
 #endif
 
     glViewport(0, 0, mFBSize[0], mFBSize[1]);
+#if !defined(AVARA_GLES)
     glBindSampler(0, 0);
+#endif
     nvgBeginFrame(mNVGContext, mSize[0], mSize[1], mPixelRatio);
 
     draw(mNVGContext);
@@ -446,7 +470,7 @@ bool Screen::cursorPosCallbackEvent(double x, double y) {
             }
         } else {
             ret = mDragWidget->mouseDragEvent(
-                p - mDragWidget->parent()->absolutePosition(), p - mMousePos,
+                p - mDragWidget->parentPosition(), p - mMousePos,
                 mMouseState, mModifiers);
         }
 
@@ -484,7 +508,7 @@ bool Screen::mouseButtonCallbackEvent(int button, int action, int modifiers) {
         if (mDragActive && action == SDL_RELEASED &&
             dropWidget != mDragWidget)
             mDragWidget->mouseButtonEvent(
-                mMousePos - mDragWidget->parent()->absolutePosition(), button,
+                mMousePos - mDragWidget->parentPosition(), button,
                 false, mModifiers);
 
         if (dropWidget != nullptr && dropWidget->cursor() != mCursor) {
@@ -694,6 +718,17 @@ bool Screen::handleSDLEvent(SDL_Event &event) {
             break;
     }
     return false;
+}
+
+
+void Screen::removeNotifyParent(const Widget *w) {
+    // remove widget from various places before deletion
+    if (w == mDragWidget) {
+        mDragWidget = nullptr;
+        mDragActive = false;
+    }
+    mFocusPath.erase(std::remove(mFocusPath.begin(), mFocusPath.end(), w), mFocusPath.end());
+    Widget::removeNotifyParent(w);
 }
 
 NAMESPACE_END(nanogui)

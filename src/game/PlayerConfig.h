@@ -8,14 +8,27 @@
 */
 
 #pragma once
-typedef struct {
-    short numGrenades;
-    short numMissiles;
-    short numBoosters;
-    short hullType;
-    short frameLatency;
-    short frameTime;
-} PlayerConfigRecord;
+#include "ARGBColor.h"
+#include "ColorManager.h"
+#include "FastMat.h"
+
+struct PlayerConfigRecord {
+    // hull config
+    short numGrenades {};
+    short numMissiles {};
+    short numBoosters {};
+    short hullType {};
+    // server config
+    uint16_t frameLatencyMin {};
+    uint16_t frameLatencyMax {};
+    short frameTime {};
+    short spawnOrder {};
+    // hull colors
+    ARGBColor hullColor { (*ColorManager::getMarkerColor(0)).WithA(0xff) };
+    ARGBColor trimColor { (*ColorManager::getMarkerColor(1)).WithA(0xff) };
+    ARGBColor cockpitColor { (*ColorManager::getMarkerColor(2)).WithA(0xff) };
+    ARGBColor gunColor { (*ColorManager::getMarkerColor(3)).WithA(0xff) };
+};
 
 typedef struct {
     short hullBSP;

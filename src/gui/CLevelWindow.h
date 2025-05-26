@@ -6,6 +6,8 @@
 #include <string>
 #include <vector>
 
+#include "LevelInfo.h"
+
 class CLevelWindow : public CWindow {
 public:
     CLevelWindow(CApplication *app);
@@ -18,7 +20,8 @@ public:
     void SelectSet(int selected);
     void SelectSet(std::string set);
     void SelectLevel(std::string set, std::string levelName);
-    void AddRecent(std::string set, std::string levelName);
+    void FetchRecents();
+    void UpdateRecents();
     void SetIntro(int selected);
     void SendLoad();
 

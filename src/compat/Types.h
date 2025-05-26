@@ -23,6 +23,7 @@ typedef uint32_t UnsignedFixed;
 
 typedef uint8_t *StringPtr;
 typedef uint8_t Str255[256];
+static inline std::string ToString(Str255 s255) { return std::string((char *)s255 + 1, s255[0]); }
 
 typedef uint8_t UnsignedByte;
 typedef int8_t SignedByte;
@@ -36,10 +37,10 @@ typedef uint16_t port_num;
 typedef int32_t ClockTick;   // integer counter returned by UDPComm::GetClock()
 
 struct Rect {
-    int16_t top;
-    int16_t left;
-    int16_t bottom;
-    int16_t right;
+    Fixed top;
+    Fixed left;
+    Fixed bottom;
+    Fixed right;
 };
 typedef struct Rect Rect;
 
@@ -71,7 +72,6 @@ struct QElem {
 typedef struct QElem QElem;
 typedef QElem *QElemPtr;
 struct QHdr {
-    volatile int16_t qFlags;
     volatile QElemPtr qHead;
     volatile QElemPtr qTail;
 };
@@ -82,10 +82,6 @@ typedef QHdr *QHdrPtr;
 enum { kQDGrafVerbFrame = 0, kQDGrafVerbPaint = 1, kQDGrafVerbErase = 2, kQDGrafVerbInvert = 3, kQDGrafVerbFill = 4 };
 
 typedef uint8_t GrafVerb;
-
-typedef struct GLData {
-    float x, y, z, r, g, b, a, nx, ny, nz;
-} GLData;
 
 #ifdef _WIN32
 #include <winsock2.h>

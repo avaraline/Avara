@@ -13,11 +13,27 @@
 #include "CBSPPart.h"
 #include "CDirectObject.h"
 
+#define DEFAULT_LIGHT_COLOR 0xffffffff
+#define DIR_LIGHT_DISTANCE 1000.0f
+
 enum { kLightOff, kLightViewCoordinates, kLightGlobalCoordinates };
+
+struct LightSettings {
+public:
+    Fixed intensity = FIX(0);
+    Fixed angle1 = FIX(0);
+    Fixed angle2 = FIX(0);
+    float direction[3] = {0.0, 0.0, 0.0};
+    float position[3] = {0.0, 0.0, 0.0};
+    ARGBColor color = DEFAULT_LIGHT_COLOR;
+    Fixed celestialRadius = FIX(0);
+    float celestialFogSpread = 1.0f;
+    bool applySpecular = false;
+};
 
 class CBSPPart;
 
-class CViewParameters : public CDirectObject {
+class CViewParameters final {
 public:
     Vector fromPoint = {0, 0, 0};
     Vector atPoint = {0, 0, 0};
@@ -49,6 +65,7 @@ public:
 
     Fixed ambientLight = 0; //	Intensity of ambient (nondirectional) light
     ARGBColor ambientLightColor = 0xffffffff; // Color of ambient (nondirectional) light.
+    LightSettings dirLightSettings[MAXLIGHTS] = {};
 
     Fixed yonBound = 0;
     Fixed hitherBound = 0;
@@ -60,13 +77,12 @@ public:
     Boolean inverseDone = false;
     Boolean showTransparent = false;
 
-    virtual void IViewParameters();
+    CViewParameters();
     virtual void CalculateViewPyramidCorners();
     virtual void CalculateViewPyramidNormals();
-    virtual void Dispose();
+    virtual ~CViewParameters() {}
 
-    virtual void SetLightValues(short n, Fixed dx, Fixed dy, Fixed dz, short mode);
-    virtual void SetLight(short n, Fixed angle1, Fixed angle2, Fixed intensity, short mode);
+    virtual void SetLight(short n, Fixed angle1, Fixed angle2, Fixed intensity, ARGBColor color, Fixed celestialRadius, bool applySpecular, short mode);
     virtual void DoLighting();
 
     virtual void SetViewRect(short width, short height, short centerX, short centerY);
@@ -80,4 +96,6 @@ public:
 
     virtual void SetMatrix(Matrix *aViewMatrix);
     virtual Matrix *GetInverseMatrix();
+private:
+    virtual void SetLightValues(short n, Fixed dx, Fixed dy, Fixed dz, short mode);
 };

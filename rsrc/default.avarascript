@@ -11,7 +11,7 @@
 
   designer = 0
   information = 0
-  timeLimit = 2400 // Default time limit is 30 minutes.
+  timeLimit = 2400 // Default time limit is 40 minutes.
 
   gravity = 1
   customGravity = 0.12
@@ -19,6 +19,7 @@
   shape = 0     // Primary BSP shape resource id
   altShape = 0  // Possible alternate shape
   scale = 1
+  defaultYon = 180
   yon = 0
   wallYon = 0
   hasFloor = 0
@@ -256,10 +257,16 @@
 
   // Lights (default light settings are stored here)
   ambient.i  = 0.4  ambient.c  =  0
-  light[0].i = 0.4  light[0].a =  45  light[0].b = 20   light[0].c = 0
-  light[1].i = 0.3  light[1].a =  20  light[1].b = 200  light[1].c = 0
-  light[2].i = 0.0  light[2].a =  45  light[2].b = 90   light[2].c = 0
-  light[3].i = 0.0  light[3].a =  45  light[3].b = 180  light[3].c = 0
+  light[0].i = 0.4  light[0].a =  45  light[0].b = 20   light[0].c = 0  light[0].r = 0  light[0].s = 0
+  light[1].i = 0.3  light[1].a =  20  light[1].b = 200  light[1].c = 0  light[1].r = 0  light[1].s = 0
+  light[2].i = 0.0  light[2].a =  45  light[2].b = 90   light[2].c = 0  light[2].r = 0  light[2].s = 0
+  light[3].i = 0.0  light[3].a =  45  light[3].b = 180  light[3].c = 0  light[3].r = 0  light[3].s = 0
+
+  // Material properties:
+  defaultMaterial.specular = 0
+  defaultMaterial.shininess = 0
+  baseMaterial.specular = 0
+  baseMaterial.shininess = 0
 
   // Advanced weapon powers:
   grenadePower = 2.25
@@ -277,6 +284,23 @@
   hull[0] = 0
   hull[1] = 0
   hull[2] = 0
+  hull[3] = 0
+  hull[4] = 0
+  hull[5] = 0
+  hull[6] = 0
+  hull[7] = 0
+  hull[8] = 0
+  hull[9] = 0
+  hull[0].name = 0
+  hull[1].name = 0
+  hull[2].name = 0
+  hull[3].name = 0
+  hull[4].name = 0
+  hull[5].name = 0
+  hull[6].name = 0
+  hull[7].name = 0
+  hull[8].name = 0
+  hull[9].name = 0
 
   defaultTraction = 0.4
   defaultFriction = 0.15
@@ -505,12 +529,30 @@ information = "
 
 No additional information on this level is available."
 
+// Hull names
+hull[0].name = "Light"
+hull[1].name = "Medium"
+hull[2].name = "Heavy"
+hull[3].name = "Unnamed Hull"
+hull[4].name = "Unnamed Hull"
+hull[5].name = "Unnamed Hull"
+hull[6].name = "Unnamed Hull"
+hull[7].name = "Unnamed Hull"
+hull[8].name = "Unnamed Hull"
+hull[9].name = "Unnamed Hull"
+
 // Light colors
 ambient.c = "#ffffff"
 light[0].c = "#ffffff"
 light[1].c = "#ffffff"
 light[2].c = "#ffffff"
 light[3].c = "#ffffff"
+
+// Material
+defaultMaterial.specular = "#000000"
+defaultMaterial.shininess = 0
+baseMaterial.specular = defaultMaterial.specular
+baseMaterial.shininess = defaultMaterial.shininess
 
 // Other colors
 missileArmed.c = "#400000"

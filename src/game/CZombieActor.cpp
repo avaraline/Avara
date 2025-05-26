@@ -55,10 +55,10 @@ CAbstractActor *CZombieActor::EndScript() {
         watchFlip = 1;
 
         partCount = 2;
-        LoadPartWithColors(0, 810);
-        LoadPartWithColors(1, 811);
+        LoadPartWithMaterials(0, 810);
+        LoadPartWithMaterials(1, 811);
 
-        repColor = GetPixelColor();
+        repColor = GetPixelMaterial().GetColor();
 
         bigRadius = partList[0]->bigRadius;
         if (partList[1]->bigRadius > bigRadius)
@@ -84,7 +84,7 @@ void CZombieActor::PlaceParts() {
     TranslatePart(partList[0], location[0], location[1], location[2]);
     partList[0]->MoveDone();
 
-    partList[1]->CopyTransform(&partList[0]->itsTransform);
+    partList[1]->CopyTransform(&partList[0]->modelTransform);
     partList[1]->MoveDone();
     LinkPartSpheres();
 
@@ -117,7 +117,7 @@ Fixed CZombieActor::JudgePlace(Fixed *place) {
     for (i = 0; i < SMARTMEMSIZE; i++) {
         distance = FDistanceEstimate(place[0] - (*smarts)[0], place[1] - (*smarts)[1], place[2] - (*smarts)[2]);
 
-        if (distance > FIX(1)) {
+        if (distance > FIX1) {
             feeling = (*smarts)[3];
             placeScore += FDiv(feeling, distance);
             feeling -= feeling >> 3;
@@ -132,7 +132,7 @@ Fixed CZombieActor::JudgePlace(Fixed *place) {
 
 void CZombieActor::RememberExperience(Fixed *place, Fixed weight) {
     Fixed *smarts;
-    static long expoCount = 0;
+    // static long expoCount = 0;
 
     smarts = smartMem[nextSmart++];
 
@@ -144,7 +144,7 @@ void CZombieActor::RememberExperience(Fixed *place, Fixed weight) {
     smarts[2] = place[2];
     smarts[3] = weight;
 
-    expoCount++;
+    // expoCount++;
 }
 
 void CZombieActor::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
@@ -171,7 +171,7 @@ void CZombieActor::MoveForward() {
     if (delta > 0x4000)
         delta = 0x8000 - delta;
 
-    friction = FMul(zombieFriction, FIX(1) - delta);
+    friction = FMul(zombieFriction, FIX1 - delta);
 
     location[0] += speed[0];
     location[1] += speed[1];
@@ -226,7 +226,7 @@ void CZombieActor::FrameAction() {
             newScore = 0;
         } else {
             if (theHit.distance > FIX(16))
-                newScore = FIX(1);
+                newScore = FIX1;
             else
                 newScore = theHit.distance >> 4;
         }
@@ -255,7 +255,7 @@ void CZombieActor::FrameAction() {
     }
 
     if (DoCollisionTest(&proximityList.p)) {
-        collisionPain += FIX(1);
+        collisionPain += FIX1;
         RememberExperience(location, -collisionPain);
 
         speed[0] = 0;

@@ -10,6 +10,9 @@
 #pragma once
 #include "CDirectObject.h"
 #include "Memory.h"
+#include <list>
+#include <vector>
+#include "RolloverCounter.h"
 
 #define TALKERSTRINGS 1000
 #define PACKETDATABUFFERSIZE (1024-40)          // -40 to get UDPPacketInfo to 1024 bytes
@@ -22,8 +25,8 @@ typedef struct PacketInfo {
 
     int16_t sender;
     int16_t distribution;
-    char command;
-    char p1;
+    int8_t command;
+    int8_t p1;
     int16_t p2;
     int32_t p3;
     int16_t dataLen;
@@ -54,26 +57,29 @@ class CCommManager : public CDirectObject {
 public:
     short myId; //	Required/accessed publicly
 
-    Ptr packetBuffers;
+    std::size_t packetSize;
+    std::list<std::vector<std::byte>> packetBuffers;
     QHdr freeQ;
     QHdr inQ;
-    long freeCount;
 
     ReceiverRecord *firstReceivers[2]; //	Receiver queues
 
     short genericInfoTextRes;
 
+    RolloverCounter<uint32_t> totalPacketsSent = 0;
+
     //	For method documentation, see .c-file:
     ~CCommManager() { Dispose(); }
 
     virtual void ICommManager(short packetSpace);
-    virtual OSErr AllocatePacketBuffers(short numPackets);
+
+    void InitializePacketQueues(int numPackets, size_t packetSize);
+    void AllocatePacketBuffers(int numPackets);
     virtual void AddReceiver(ReceiverRecord *aReceiver, Boolean delayed);
     virtual void RemoveReceiver(ReceiverRecord *aReceiver, Boolean delayed);
 
-    virtual OSErr SendPacket(short distribution, char command, char p1, int16_t p2, int32_t p3, int16_t dataLen, Ptr dataPtr);
-    virtual OSErr
-    SendUrgentPacket(short distribution, char command, char p1, int16_t p2, int32_t p3, int16_t dataLen, Ptr dataPtr);
+    virtual OSErr SendPacket(short distribution, int8_t command, int8_t p1, int16_t p2, int32_t p3, int16_t dataLen, Ptr dataPtr, int16_t flags = 0);
+    virtual OSErr SendUrgentPacket(short distribution, int8_t command, int8_t p1, int16_t p2, int32_t p3, int16_t dataLen, Ptr dataPtr);
     virtual void Dispose();
 
     virtual PacketInfo *GetPacket();
@@ -95,7 +101,9 @@ public:
     virtual Boolean ReconfigureAvailable();
     virtual void Reconfigure();
 
-    virtual long GetMaxRoundTrip(short distribution, short *slowPlayerId = nullptr);
+    virtual long GetMaxRoundTrip(short distribution, float stdMult = 0.0, short *slowPlayerId = nullptr);
     virtual float GetMaxMeanSendCount(short distribution);
     virtual float GetMaxMeanReceiveCount(short distribution);
+
+    virtual const RolloverCounter<uint32_t>& TotalPacketsSent();
 };

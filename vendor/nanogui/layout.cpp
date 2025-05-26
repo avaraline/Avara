@@ -179,7 +179,7 @@ void FlowLayout::performLayout(NVGcontext *ctx, Widget *widget) const {
 
     Vector2i pos(mMargin, yOffset + mMargin);
     int axis2max = 0, idx = 0, column = 0;
-    Span* span = new Span[widget->childCount()];
+    Span *span = new Span[widget->childCount()];
 
     for (auto w : widget->children()) {
         if (!w->visible())

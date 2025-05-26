@@ -54,20 +54,7 @@ CAbstractActor *CTeleporter::EndScript() {
     CPlacedActors::EndScript();
 
     isActive = kIsActive;
-
-    shapeRes = ReadLongVar(iShape);
-
-    if (shapeRes) {
-        partCount = 1;
-        LoadPartWithColors(0, shapeRes);
-        partList[0]->Reset();
-        if (ReadLongVar(iIsAmbient) > 0)
-            partList[0]->userFlags |= CBSPUserFlags::kIsAmbient;
-        InitialRotatePartY(partList[0], heading);
-        TranslatePart(partList[0], location[0], location[1], location[2]);
-        partList[0]->MoveDone();
-    }
-
+    
     useCount = 0;
     goTimer = 0;
     noPullTimer = 0;
@@ -84,7 +71,9 @@ CAbstractActor *CTeleporter::EndScript() {
 
     soundId = ReadLongVar(iSound);
     volume = ReadFixedVar(iVolume);
-    gHub->PreLoadSample(soundId);
+
+    // Preload sounds.
+    auto _ = AssetManager::GetOgg(soundId);
 
     options = ReadLongVar(iSpinFlag) ? kSpinOption : 0;
     options |= ReadLongVar(iFragmentFlag) ? kFragmentOption : 0;
@@ -97,6 +86,19 @@ CAbstractActor *CTeleporter::EndScript() {
 
     didSendMsg = ReadLongVar(iOutVar);
     didReceiveMsg = ReadLongVar(iInVar);
+
+    shapeRes = ReadLongVar(iShape);
+
+    if (shapeRes) {
+        partCount = 1;
+        LoadPartWithMaterials(0, shapeRes);
+        partList[0]->Reset();
+        if (ReadLongVar(iIsAmbient) > 0)
+            partList[0]->userFlags |= CBSPUserFlags::kIsAmbient;
+        InitialRotatePartY(partList[0], heading);
+        TranslatePart(partList[0], location[0], location[1], location[2]);
+        partList[0]->MoveDone();
+    }
 
     return this;
 }
@@ -194,21 +196,22 @@ void CTeleporter::FrameAction() {
 }
 
 void CTeleporter::TeleportPlayer(CAbstractPlayer *thePlayer) {
-    CTeleporter *theActor;
+    CAbstractActor *theActor;
     CTeleporter *thePort;
     unsigned long maxUse = 0xffffFFFF;
 
-    theActor = (CTeleporter *)itsGame->actorList;
+    theActor = (CAbstractActor *)itsGame->actorList;
     thePort = NULL;
 
     while (theActor) {
         if (theActor->maskBits & kTeleportBit) {
-            if (theActor->transportGroup == destGroup && theActor->useCount < maxUse && theActor != this) {
-                maxUse = theActor->useCount;
-                thePort = theActor;
+            CTeleporter *teleActor = (CTeleporter *)theActor;
+            if (teleActor->transportGroup == destGroup && teleActor->useCount < maxUse && theActor != this) {
+                maxUse = teleActor->useCount;
+                thePort = teleActor;
             }
         }
-        theActor = (CTeleporter *)theActor->nextActor;
+        theActor = (CAbstractActor *)theActor->nextActor;
     }
 
     if (thePort) {
@@ -230,4 +233,9 @@ Boolean CTeleporter::ReceivePlayer(CAbstractPlayer *thePlayer) {
     useCount++;
 
     return didMove;
+}
+
+bool CTeleporter::UseForExtent() {
+    // teleporters that are destinations ("group" or iGroup) tend to be best
+    return (transportGroup > 0 && location[1] >= 0);
 }

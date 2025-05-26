@@ -26,14 +26,14 @@ enum {
     kScoutInactive
 };
 
-class CScout : public CRealMovers {
+class CScout final : public CRealMovers {
 public:
     Vector targetPosition;
     CAbstractPlayer *itsPlayer;
     short action;
     Boolean nextRotateFlag;
 
-    virtual void IScout(CAbstractPlayer *thePlayer, short theTeam, ARGBColor longTeamColor);
+    CScout(CAbstractPlayer *thePlayer, short theTeam, ARGBColor longTeamColor);
     virtual void PlaceParts();
     virtual void FrameAction();
     virtual void ControlViewPoint();

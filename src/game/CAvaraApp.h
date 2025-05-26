@@ -11,6 +11,7 @@
 
 #include "CApplication.h"
 //#include "PolyColor.h"
+#include "CHUD.h"
 #include "CLevelWindow.h"
 #include "CNetworkWindow.h"
 #include "CServerWindow.h"
@@ -19,6 +20,7 @@
 #include "CTrackerWindow.h"
 #include "CommandManager.h"
 #include "Messages.h"
+#include "CRUD.h"
 
 #include <SDL.h>
 #include <string>
@@ -31,6 +33,38 @@
 
 using json = nlohmann::json;
 
+struct ControllerAxis {
+    float last;
+    float value;
+    uint8_t active : 1;
+    uint8_t last_active : 1;
+    uint8_t toggled : 1;
+};
+
+struct ControllerStick {
+    uint16_t clamp_inner;
+    uint16_t clamp_outer;
+    uint32_t elapsed;
+    ControllerAxis x;
+    ControllerAxis y;
+};
+
+struct ControllerTrigger {
+    uint16_t clamp_low;
+    uint16_t clamp_high;
+    uint32_t elapsed;
+    ControllerAxis t;
+};
+
+struct ControllerSticks {
+    ControllerStick left;
+    ControllerStick right;
+};
+
+struct ControllerTriggers {
+    ControllerTrigger left;
+    ControllerTrigger right;
+};
 
 class CAvaraGame;
 class CNetManager;
@@ -38,7 +72,7 @@ class CNetManager;
 class CAvaraApp {
 public:
     virtual bool DoCommand(int theCommand) = 0;
-    virtual void GameStarted(std::string set, std::string level) = 0;
+    virtual void GameStarted(LevelInfo &loadedLevel) = 0;
     virtual void MessageLine(short index, MsgAlignment align) = 0;
     virtual void AddMessageLine(std::string lines, MsgAlignment align = MsgAlignment::Left, MsgCategory category = MsgCategory::System) = 0;
     virtual void RenderContents() = 0;
@@ -65,53 +99,64 @@ public:
     virtual void Done() = 0;
     virtual void BroadcastCommand(int theCommand) = 0;
     virtual CommandManager* GetTui() = 0;
+    virtual uint32_t ControllerEventType() = 0;
+    virtual void Rumble(Fixed hitEnergy) = 0;
 };
 class CAvaraAppImpl : public CApplication, public CAvaraApp {
 private:
     std::unique_ptr<CAvaraGame> itsGame;
+    
     CNetManager *gameNet;
     CommandManager *itsTui;
-
+    std::unique_ptr<CHUD> ui;
+    
 public:
+    std::unique_ptr<CRUD> itsAPI;
     CPlayerWindow *playerWindow;
     CLevelWindow *levelWindow;
     CNetworkWindow *networkWindow;
     CServerWindow *serverWindow;
     CRosterWindow *rosterWindow;
     CTrackerWindow *trackerWindow;
+    
+    SDL_GameController *controller; // currently paired controller
+    uint32_t controllerBaseEvent; // registered with SDL_RegisterEvents
+    uint32_t lastControllerEvent; // time of last controller axis polling
+    uint32_t controllerPollMillis;
+    
+    ControllerSticks sticks;
+    ControllerTriggers triggers;
 
     std::deque<MsgLine> messageLines;
-    // std::deque<std::string> chatCommandHistory;
-    // std::deque<std::string>::iterator chatCommandHistoryIterator;
-    Fixed overhead[3], extent[6];
     Fixed previewAngle, previewRadius;
     bool animatePreview;
-
+    
     CAvaraAppImpl();
     ~CAvaraAppImpl();
-
+    
     long nextTrackerUpdate;
     json trackerState;
     bool trackerUpdatePending;
     std::thread *trackerThread;
-
+    
     virtual std::deque<MsgLine>& MessageLines() override;
     virtual void idle() override;
     virtual void drawContents() override;
     virtual void RenderContents() override;
-
+    
     virtual bool DoCommand(int theCommand) override;
     virtual void WindowResized(int width, int height) override;
+    virtual void PrefChanged(std::string name) override;
 
     virtual void Done() override;
-
+    
     virtual bool handleSDLEvent(SDL_Event &event) override;
     virtual void drawAll() override;
     OSErr LoadLevel(std::string set, std::string levelTag, CPlayerManager *sendingPlayer) override;
     virtual void NotifyUser() override;
-
+    
     virtual void AddMessageLine(std::string lines, MsgAlignment align = MsgAlignment::Left, MsgCategory category = MsgCategory::System) override;
-    virtual void GameStarted(std::string set, std::string level) override;
+    virtual void GameStarted(LevelInfo &loadedLevel) override;
 
     // From CInfoPanel
     virtual void SetIndicatorDisplay(short i, short v);
@@ -128,7 +173,7 @@ public:
     virtual CNetManager* GetNet() override;
     virtual CAvaraGame* GetGame() override;
     virtual CommandManager* GetTui() override;
-
+    
     virtual void BroadcastCommand(int theCommand) override { CApplication::BroadcastCommand(theCommand); }
     virtual json Get(const std::string name) override { return CApplication::Get(name); }
     virtual void Set(const std::string name, const std::string value) override { CApplication::Set(name, value); }
@@ -138,7 +183,10 @@ public:
     virtual long Number(const std::string name) override { return CApplication::Number(name); }
     virtual bool Boolean(const std::string name) override { return CApplication::Boolean(name); }
     template <class T> T Get(const std::string name) { return CApplication::Get<T>(name); }
-
+    
     void TrackerUpdate();
     std::string TrackerPayload();
+    
+    virtual uint32_t ControllerEventType() override { return controllerBaseEvent; }
+    virtual void Rumble(Fixed hitEnergy) override;
 };

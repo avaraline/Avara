@@ -9,13 +9,13 @@
 
 #include "LevelLoader.h"
 
-#include "AvaraGL.h"
+#include "AbstractRenderer.h"
+#include "AssetManager.h"
 #include "CAvaraGame.h"
 #include "CWallActor.h"
 #include "FastMat.h"
 #include "Memory.h"
 #include "Parser.h"
-#include "Resource.h"
 #include "pugixml.hpp"
 
 #include <SDL.h>
@@ -26,8 +26,17 @@
 #include <streambuf>
 #include <regex>
 
+#ifdef __has_include
+#  if __has_include(<optional>)                // Check for a standard library
+#    include <optional>
+#  elif __has_include(<experimental/optional>) // Check for an experimental version
+#    include <experimental/optional>           // Check if __has_include is present
+#  else                                        // Not found at all
+#     error "Missing <optional>"
+#  endif
+#endif
+
 #define POINTTOUNIT(pt) (pt * 20480 / 9)
-#define UNITPOINTS (double)14.4 // 72 / 5
 
 typedef struct {
     Fixed v;
@@ -48,8 +57,7 @@ static short lastDomeAngle;
 static short lastDomeSpan;
 static Fixed lastDomeRadius;
 
-static ARGBColor fillColor(0), frameColor(0);
-
+static Material palette[4];
 
 Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle) {
     theLoc[0] = lastDomeCenter.h;
@@ -61,12 +69,40 @@ Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle) {
     return lastDomeRadius;
 }
 
-ARGBColor GetPixelColor() {
-    return fillColor;
+Material GetDefaultMaterial() {
+    Material defaultMaterial = Material();
+    std::optional<ARGBColor> specular = ReadColorVar(iDefaultMaterialSpecular);
+    if (specular) {
+        defaultMaterial = defaultMaterial.WithSpecular(*specular);
+    }
+    defaultMaterial = defaultMaterial.WithShininessVar(iDefaultMaterialShininess);
+    return defaultMaterial;
 }
 
-ARGBColor GetOtherPixelColor() {
-    return frameColor;
+Material GetBaseMaterial() {
+    Material baseMaterial = Material();
+    std::optional<ARGBColor> specular = ReadColorVar(iBaseMaterialSpecular);
+    if (specular) {
+        baseMaterial = baseMaterial.WithSpecular(*specular);
+    }
+    baseMaterial = baseMaterial.WithShininessVar(iBaseMaterialShininess);
+    return baseMaterial;
+}
+
+Material GetPixelMaterial() {
+    return palette[0];
+}
+
+Material GetOtherPixelMaterial() {
+    return palette[1];
+}
+
+Material GetTertiaryMaterial() {
+    return palette[2];
+}
+
+Material GetQuaternaryMaterial() {
+    return palette[3];
 }
 
 void GetLastArcLocation(Fixed *theLoc) {
@@ -92,6 +128,8 @@ Fixed GetLastArcDirection() {
 }
 
 struct ALFWalker: pugi::xml_tree_walker {
+    ALFWalker(uint8_t depth = 0): depth(depth) {};
+
     virtual bool for_each(pugi::xml_node& node) {
         std::string tag = node.name();
         std::string val;
@@ -99,9 +137,6 @@ struct ALFWalker: pugi::xml_tree_walker {
         switch (node.type()){
             case pugi::node_element:
                 handle_element(node, tag);
-                val = node.child_value();
-                if (val.length() > 0)
-                RunThis((StringPtr)val.c_str());
                 break;
             default:
                 break;
@@ -111,6 +146,13 @@ struct ALFWalker: pugi::xml_tree_walker {
     }
 
     std::string fix_attr(std::string attr) {
+        if (attr.compare("color") == 0) {
+            attr = "color.0";
+        } else if (attr.compare("material.specular") == 0) {
+            attr = "material.0.specular";
+        } else if (attr.compare("material.shininess") == 0) {
+            attr = "material.0.shininess";
+        }
         // XML attributes can't have brackets, so we turn light.0.i into light[0].i
         std::regex subscript("\\.(\\d+)");
         return std::regex_replace(attr, subscript, "[$1]");
@@ -121,9 +163,13 @@ struct ALFWalker: pugi::xml_tree_walker {
             attr.compare("text") == 0 ||
             attr.compare("designer") == 0 ||
             attr.compare("information") == 0 ||
-            attr.compare("fill") == 0 ||
-            attr.compare("frame") == 0 ||
-            (attr.size() > 2 && attr.compare(attr.size() - 2, 2, ".c") == 0)
+            attr.compare("color") == 0 ||
+            attr.compare("color[0]") == 0 ||
+            attr.compare("color[1]") == 0 ||
+            attr.compare("color[2]") == 0 ||
+            attr.compare("color[3]") == 0 ||
+            (attr.size() > 2 && attr.compare(attr.size() - 2, 2, ".c") == 0) ||
+            (attr.size() > 9 && attr.compare(attr.size() - 9, 9, ".specular") == 0)
         ) {
             if (value[0] == '$') {
                 return value.substr(1);
@@ -136,11 +182,12 @@ struct ALFWalker: pugi::xml_tree_walker {
     }
 
     void handle_element(pugi::xml_node& node, std::string& name) {
-        // eval ALL node attributes and put them into the symbol table
-        // unless it's a 'unique' and then it doesn't make any sense
-        if (name.compare("unique") != 0)
-        handle_set(node);
-        // Read any global state we can from the element.
+        // Eval ALL node attributes and put them into the symbol table
+        // unless it's a 'unique' and then it doesn't make any sense.
+        if (name.compare("unique") != 0) {
+            handle_set(node);
+        }
+
         read_context(node);
 
         if (name.compare("map") == 0) handle_map(node);
@@ -165,40 +212,136 @@ struct ALFWalker: pugi::xml_tree_walker {
             handle_object(node, name);
         }
         else if (name.compare("Wall") == 0) handle_wall(node);
+        else if (name.compare("include") == 0) handle_include(node);
         else handle_object(node, name);
     }
 
     bool read_context(pugi::xml_node& node) {
         gLastBoxRounding = node.attribute("h").empty() ? 0 : ReadFixedVar("h");
 
-        if (!node.attribute("fill").empty()) {
-            const std::optional<ARGBColor> color = ReadColorVar("fill");
+        if (!node.attribute("color").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar("color[0]");
             if (color) {
-                fillColor = *color;
+                palette[0] = palette[0].WithColor(*color);
             }
         }
 
-        if (!node.attribute("frame").empty()) {
-            const std::optional<ARGBColor> color = ReadColorVar("frame");
+        if (!node.attribute("color.0").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar("color[0]");
             if (color) {
-                frameColor = *color;
+                palette[0] = palette[0].WithColor(*color);
             }
+        }
+
+        if (!node.attribute("color.1").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar("color[1]");
+            if (color) {
+                palette[1] = palette[1].WithColor(*color);
+            }
+        }
+
+        if (!node.attribute("color.2").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar("color[2]");
+            if (color) {
+                palette[2] = palette[2].WithColor(*color);
+            }
+        }
+
+        if (!node.attribute("color.3").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar("color[3]");
+            if (color) {
+                palette[3] = palette[3].WithColor(*color);
+            }
+        }
+        
+        if (!node.attribute("baseMaterial.specular").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar(iBaseMaterialSpecular);
+            if (color) {
+                // When baseMaterial properties are set, apply it to all mats.
+                palette[0] = palette[0].WithSpecular(*color);
+                palette[1] = palette[1].WithSpecular(*color);
+                palette[2] = palette[2].WithSpecular(*color);
+                palette[3] = palette[3].WithSpecular(*color);
+            }
+        }
+        
+        if (!node.attribute("baseMaterial.shininess").empty()) {
+            // When baseMaterial properties are set, apply it to all mats.
+            palette[0] = palette[0].WithShininessVar(iBaseMaterialShininess);
+            palette[1] = palette[1].WithShininessVar(iBaseMaterialShininess);
+            palette[2] = palette[2].WithShininessVar(iBaseMaterialShininess);
+            palette[3] = palette[3].WithShininessVar(iBaseMaterialShininess);
+        }
+        
+        if (!node.attribute("material.specular").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar("material[0].specular");
+            if (color) {
+                palette[0] = palette[0].WithSpecular(*color);
+            }
+        }
+
+        if (!node.attribute("material.0.specular").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar("material[0].specular");
+            if (color) {
+                palette[0] = palette[0].WithSpecular(*color);
+            }
+        }
+
+        if (!node.attribute("material.1.specular").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar("material[1].specular");
+            if (color) {
+                palette[1] = palette[1].WithSpecular(*color);
+            }
+        }
+
+        if (!node.attribute("material.2.specular").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar("material[2].specular");
+            if (color) {
+                palette[2] = palette[2].WithSpecular(*color);
+            }
+        }
+
+        if (!node.attribute("material.3.specular").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar("material[3].specular");
+            if (color) {
+                palette[3] = palette[3].WithSpecular(*color);
+            }
+        }
+        
+        if (!node.attribute("material.shininess").empty()) {
+            palette[0] = palette[0].WithShininessVar("material[0].shininess");
+        }
+        
+        if (!node.attribute("material.0.shininess").empty()) {
+            palette[0] = palette[0].WithShininessVar("material[0].shininess");
+        }
+        
+        if (!node.attribute("material.1.shininess").empty()) {
+            palette[1] = palette[1].WithShininessVar("material[1].shininess");
+        }
+        
+        if (!node.attribute("material.2.shininess").empty()) {
+            palette[2] = palette[2].WithShininessVar("material[2].shininess");
+        }
+        
+        if (!node.attribute("material.3.shininess").empty()) {
+            palette[3] = palette[3].WithShininessVar("material[3].shininess");
         }
 
         if (!node.attribute("x").empty() && !node.attribute("z").empty() &&
             !node.attribute("w").empty() && !node.attribute("d").empty()) {
-            double boxCenterX = ReadDoubleVar("x") * UNITPOINTS,
-                   boxCenterZ = ReadDoubleVar("z") * UNITPOINTS,
-                   boxWidth = ReadDoubleVar("w") * UNITPOINTS,
-                   boxDepth = ReadDoubleVar("d") * UNITPOINTS;
-            double boxLeft = boxCenterX - (boxWidth / 2.0),
-                   boxRight = boxLeft + boxWidth,
-                   boxTop = boxCenterZ - (boxDepth / 2.0),
-                   boxBottom = boxTop + boxDepth;
-            gLastBoxRect.top = std::lround(boxTop);
-            gLastBoxRect.left = std::lround(boxLeft);
-            gLastBoxRect.bottom = std::lround(boxBottom);
-            gLastBoxRect.right = std::lround(boxRight);
+            Fixed boxCenterX = ToFixed(ReadDoubleVar("x")),
+                  boxCenterZ = ToFixed(ReadDoubleVar("z")),
+                  boxWidth = ToFixed(ReadDoubleVar("w")),
+                  boxDepth = ToFixed(ReadDoubleVar("d"));
+            Fixed boxLeft = boxCenterX - (boxWidth / 2),
+                  boxRight = boxLeft + boxWidth,
+                  boxTop = boxCenterZ - (boxDepth / 2),
+                  boxBottom = boxTop + boxDepth;
+            gLastBoxRect.top = boxTop;
+            gLastBoxRect.left = boxLeft;
+            gLastBoxRect.bottom = boxBottom;
+            gLastBoxRect.right = boxRight;
         }
 
         if (!node.attribute("cx").empty() && !node.attribute("cz").empty()) {
@@ -226,6 +369,9 @@ struct ALFWalker: pugi::xml_tree_walker {
 
             lastArcAngle = (900 - arcAngle) % 360;
             lastDomeAngle = 360 - arcAngle;
+        } else {
+            lastArcAngle = 0;
+            lastDomeAngle = 0;
         }
 
         return true;
@@ -248,13 +394,13 @@ struct ALFWalker: pugi::xml_tree_walker {
     void handle_enum(pugi::xml_node& node) {
         std::stringstream script;
         script << "enum " << node.attribute("start").value() << " " << node.attribute("vars").value() << " end";
-        RunThis((StringPtr)script.str().c_str());
+        RunThis(script.str());
     }
 
     void handle_unique(pugi::xml_node& node) {
         std::stringstream script;
         script << "unique " << node.attribute("vars").value() << " end";
-        RunThis((StringPtr)script.str().c_str());
+        RunThis(script.str());
     }
 
     void handle_set(pugi::xml_node& node) {
@@ -268,23 +414,61 @@ struct ALFWalker: pugi::xml_tree_walker {
         }
         std::string result = script.str();
         if (wrote && result.length() > 0)
-        RunThis((StringPtr)result.c_str());
+            RunThis(result);
     }
 
     void handle_script(pugi::xml_node& node) {
-        RunThis((StringPtr)node.child_value());
+        RunThis(std::string(node.child_value()));
     }
 
     void handle_wall(pugi::xml_node& node) {
+        Fixed y_alt = 0;
         std::string y = node.attribute("y").value();
         if (!y.empty()) {
-            std::stringstream script;
-            script << "wa = " << y << "\n";
-            RunThis((StringPtr)script.str().c_str());
+            try {
+                double yvalue = std::stod(y);
+                y_alt = ToFixed(yvalue);
+            }
+            catch (const std::invalid_argument& e) {
+                // temporary script to evaluate expression
+                std::stringstream script;
+                std::string key = "privateAlf.tmpY";
+                script << key << " = " << y << "\n";
+                RunThis(script.str());
+                auto index = IndexForEntry(key.c_str());
+                // immediately evaluate temporary variable
+                y_alt = ToFixed(EvalVariable(index + firstVariable, true));
+            }
+            catch (const std::out_of_range& e) { }
         }
         CWallActor *theWall = new CWallActor;
-        theWall->IAbstractActor();
-        theWall->MakeWallFromRect(&gLastBoxRect, gLastBoxRounding, 0, true);
+        theWall->MakeWallFromRect(&gLastBoxRect, gLastBoxRounding, y_alt, 0, true);
+    }
+
+    void handle_include(pugi::xml_node& node) {
+        std::string path = node.attribute("alf").value();
+        if (depth < 5 &&
+            // Relative paths only.
+            !path.empty() &&
+            path.rfind("..", 1) != 0 &&
+            path.rfind("/", 0) != 0 &&
+            path.rfind("./", 1) != 0 &&
+            path.rfind("\\", 0) != 0 &&
+            path.rfind(".\\", 1) != 0) {
+            // Ensure path separators are appropriate for the current platform.
+            std::regex pattern("\\\\|/");
+            path = std::regex_replace(path, pattern, PATHSEP);
+
+            std::optional<std::string> maybePath = AssetManager::GetResolvedAlfPath(path);
+            if (maybePath) {
+                pugi::xml_document shard;
+                pugi::xml_parse_result result = shard.load_file(maybePath->c_str());
+                if (result) {
+                    ALFWalker includeWalker(depth + 1);
+                    shard.traverse(includeWalker);
+                }
+            }
+        }
     }
 
     void handle_object(pugi::xml_node& node, std::string& name) {
@@ -296,16 +480,23 @@ struct ALFWalker: pugi::xml_tree_walker {
             script << attr << " = " << value << "\n";
         }
         script << "end";
-        RunThis((StringPtr)script.str().c_str());
+        RunThis(script.str());
     }
+
+private:
+    uint8_t depth;
 };
 
-bool LoadALF(std::string levelName) {
-    AvaraGLLightDefaults();
+bool LoadALF(std::string levelPath) {
+    gRenderer->ResetLights();
     InitParser();
+    palette[0] = GetDefaultMaterial();
+    palette[1] = GetDefaultMaterial();
+    palette[2] = Material((*ColorManager::getMarkerColor(2)).WithA(0xff));
+    palette[3] = Material((*ColorManager::getMarkerColor(3)).WithA(0xff));
 
     pugi::xml_document doc;
-    pugi::xml_parse_result result = doc.load_file(levelName.c_str());
+    pugi::xml_parse_result result = doc.load_file(levelPath.c_str());
 
     ALFWalker walker;
     doc.traverse(walker);

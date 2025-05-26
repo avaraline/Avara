@@ -1,4 +1,5 @@
 {
+  "REQD": [{"Package": "avaraline-strict-mode"}],
   "LEDI": [
     {
       "Alf": "air-voss.alf",
@@ -11,6 +12,26 @@
       "Message": "The unwanted stepchild of all Baghdad clones."
     },
     {
+      "Alf": "banzai-4mkf.alf",
+      "Name": "Banzai [4MKF]",
+      "Message": "Take a leap of faith. Four minute killfest version."
+    },
+    {
+      "Alf": "bodhi-4mkf.alf",
+      "Name": "Bodhi [4MKF]",
+      "Message": "Sought a yogi, found a grizzly. Four minute killfest version."
+    },
+    {
+      "Alf": "bwadi-4mkf.alf",
+      "Name": "Bwadi [4MKF]",
+      "Message": "A simple, open level with plenty of ammunition, updated for 2022. Four minute killfest version."
+    },
+    {
+      "Alf": "bwadi-koth.alf",
+      "Name": "Bwadi [KOTH]",
+      "Message": "A simple, open level with plenty of ammunition, updated for 2022. King of the hill version."
+    },
+    {
       "Alf": "choke-daddy.alf",
       "Name": "Choke Daddy",
       "Message": "A mash-up of Baghdad and Choke. Normal gravity with extra powerful missiles."
@@ -21,13 +42,88 @@
       "Message": "A mash-up of Baghdad, Choke, and Showdown. Low gravity with extra powerful grenades and missiles. Five lives."
     },
     {
+      "Alf": "crescent-4mkf.alf",
+      "Name": "Crescent [4MKF]",
+      "Message": "Two fortnights hence. Four minute killfest version."
+    },
+    {
+      "Alf": "don-quixote-koth.alf",
+      "Name": "Don Quixote [KOTH]",
+      "Message": "Rocinante needed a break, so Quixote rode on Sancho Panza's shoulders for a few hours."
+    },
+    {
+      "Alf": "enso-4mkf.alf",
+      "Name": "Ensō [4MKF]",
+      "Message": "Ink on paper. Four minute killfest version."
+    },
+    {
+      "Alf": "grimoire-4mkf.alf",
+      "Name": "Grimoire [4MKF]",
+      "Message": "Purely for academic purposes, you understand. Four minute killfest version."
+    },
+    {
+      "Alf": "hawthorne-4mkf.alf",
+      "Name": "Hawthorne [4MKF]",
+      "Message": "A small, enclosed level with moving blocks, updated for 2022. Four minute killfest version."
+    },
+    {
+      "Alf": "indra-4mkf.alf",
+      "Name": "Indra [4MKF]",
+      "Message": "Tossing lightning from the back of an elephant. Four minute killfest version."
+    },
+    {
+      "Alf": "io-4mkf.alf",
+      "Name": "I/O [4MKF]",
+      "Message": "Garbage in, garbage out. Four minute killfest version."
+    },
+    {
+      "Alf": "heir-apparent.alf",
+      "Name": "Heir Apparent [KOTH]",
+      "Message": "The King is dead. Long live the King."
+    },
+    {
+      "Alf": "majuscule-4mkf.alf",
+      "Name": "Majuscule [4MKF]",
+      "Message": "A mash-up of Coromoran and Fuchsia. Four minute killfest version."
+    },
+    {
       "Alf": "niflheim.alf",
-      "Name": "Niflheim",
+      "Name": "Niflheim [4MKF]",
       "Message": "Four minute Klondike killfest, with wig reveal! Patented Corpserot® missiles (a product of the Grimdark Corporation) are faster and more accurate at the expense of damage."
     },
     {
+      "Alf": "on-the-rocks-4mkf.alf",
+      "Name": "On the Rocks [4MKF]",
+      "Message": "The new original. Four minute killfest version."
+    },
+    {
+      "Alf": "scimitar-4mkf.alf",
+      "Name": "Scimitar [4MKF]",
+      "Message": "Awash in sand and heat. Four minute killfest version."
+    },
+    {
+      "Alf": "stratocaster-hss-4mkf.alf",
+      "Name": "Stratocaster HSS [4MKF]",
+      "Message": "Bucking the hum of the strum. Four minute killfest version."
+    },
+    {
+      "Alf": "stratocaster-hss-koth.alf",
+      "Name": "Stratocaster HSS [KOTH]",
+      "Message": "Bucking the hum of the strum. King of the hill version."
+    },
+    {
+      "Alf": "telecaster-4mkf.alf",
+      "Name": "Telecaster [4MKF]",
+      "Message": "A mash-up of Stratocaster and Tesla. Four minute killfest version."
+    },
+    {
+      "Alf": "telecaster-captures.alf",
+      "Name": "Telecaster [Captures]",
+      "Message": "A mash-up of Stratocaster and Tesla. Captures version."
+    },
+    {
       "Alf": "watery-keep.alf",
-      "Name": "Watery Keep",
+      "Name": "Watery Keep [CTF]",
       "Message": "Ancient legend has it, water was transported here via a tube. Updated for 2022."
     }
   ],
@@ -37,66 +133,42 @@
       "Loop Start": 0,
       "Loop End": 0,
       "Loop Count": 0,
-      "Data offset": 24,
-      "Base Rate": 1.0092774853131914,
-      "Sound": 0,
-      "Ogg": "3000.ogg",
-      "Wav": "3000.wav"
+      "Base Rate": 1.0092774853131914
     },
     "3001": {
       "Version": 2,
       "Loop Start": 0,
       "Loop End": 0,
       "Loop Count": 0,
-      "Data offset": 24,
-      "Base Rate": 1.0092774853131914,
-      "Sound": 0,
-      "Ogg": "3001.ogg",
-      "Wav": "3001.wav"
+      "Base Rate": 1.0092774853131914
     },
     "3002": {
       "Version": 2,
       "Loop Start": 0,
       "Loop End": 0,
       "Loop Count": 0,
-      "Data offset": 24,
-      "Base Rate": 1.0092774853131914,
-      "Sound": 0,
-      "Ogg": "3002.ogg",
-      "Wav": "3002.wav"
+      "Base Rate": 1.0092774853131914
     },
     "3003": {
       "Version": 2,
       "Loop Start": 0,
       "Loop End": 0,
       "Loop Count": 0,
-      "Data offset": 24,
-      "Base Rate": 1.0092774853131914,
-      "Sound": 0,
-      "Ogg": "3003.ogg",
-      "Wav": "3003.wav"
+      "Base Rate": 1.0092774853131914
     },
     "3004": {
       "Version": 2,
       "Loop Start": 0,
       "Loop End": 0,
       "Loop Count": 0,
-      "Data offset": 24,
-      "Base Rate": 1.0092774853131914,
-      "Sound": 0,
-      "Ogg": "3004.ogg",
-      "Wav": "3004.wav"
+      "Base Rate": 1.0092774853131914
     },
     "3005": {
       "Version": 2,
       "Loop Start": 0,
       "Loop End": 0,
       "Loop Count": 0,
-      "Data offset": 24,
-      "Base Rate": 1.0092774853131914,
-      "Sound": 0,
-      "Ogg": "3005.ogg",
-      "Wav": "3005.wav"
+      "Base Rate": 1.0092774853131914
     }
   },
   "HULL": {

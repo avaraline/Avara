@@ -1,0 +1,187 @@
+<SkyColor color="hsl(310, 100%, 80%)" color.1="hsl(250, 15%, 50%)" />
+<GroundColor color="hsl(220, 10%, 5%)" />
+<set
+  designer="$mSilvermalk"
+  information="This was beginning to be an uppercase PROBLEM. There simply wasn't enough room inside one head for all of these people: a computer programmer from New England, a Kansas midwife, and somebody with inner ear issues, to name a few."
+  ambient.i="0.3"
+  light.0.i="0.8"
+  light.0.a="30"
+  light.0.b="10"
+  light.1.i="0.5"
+  tierHeight="4.5"
+  incarnHeight="tierHeight * 4"
+/>
+
+<Sound y="100" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="100" cx="0" cz="0" angle="45" />
+
+<Teleporter activeRange="175" deadRange="125" cx="0" cz="0" destGroup="@recenter" group="-1" shape="0" spin="true" y="-30" />
+<Teleporter activeRange="2000" cx="0" cz="0" shape="0" start="@winTeam" win="1000" y="200" />
+<Teleporter cx="0" cz="0" group="@recenter" mask="0" shape="0" spin="true" y="incarnHeight" />
+
+<!-- TALL, FUCHSIA-LIKE STRUCTURES -->
+
+<set wallHeight="tierHeight * 2" />
+
+<Wall color="hsl(220, 30%, 50%)" color.1="#000000" x="-15" z="25" y="0" w="10" d="10" h="0" />
+<Ramp color="hsl(310, 100%, 90%)" color.1="#000000" x="-15" z="40" y="0" w="10" d="20" h="0" deltaY="tierHeight * 2" angle="180" />
+<Wall color="hsl(220, 30%, 50%)" color.1="#000000" x="25" z="15" y="0" w="10" d="10" h="0" />
+<Ramp color="hsl(310, 100%, 90%)" color.1="#000000" x="40" z="15" y="0" w="20" d="10" h="0" deltaY="tierHeight * 2" angle="90" />
+<Wall color="hsl(220, 30%, 50%)" color.1="#000000" x="15" z="-25" y="0" w="10" d="10" h="0" />
+<Ramp color="hsl(310, 100%, 90%)" color.1="#000000" x="15" z="-40" y="0" w="10" d="20" h="0" deltaY="tierHeight * 2" angle="0" />
+<Wall color="hsl(220, 30%, 50%)" color.1="#000000" x="-25" z="-15" y="0" w="10" d="10" h="0" />
+<Ramp color="hsl(310, 100%, 90%)" color.1="#000000" x="-40" z="-15" y="0" w="20" d="10" h="0" deltaY="tierHeight * 2" angle="270" />
+
+<Wall color="hsl(220, 30%, 50%)" color.1="#000000" x="35" z="35" y="0" w="10" d="10" h="0" />
+<Ramp color="hsl(310, 100%, 90%)" color.1="#000000" x="20" z="35" y="0" w="20" d="10" h="0" deltaY="tierHeight * 2" angle="270" />
+<Wall color="hsl(220, 30%, 50%)" color.1="#000000" x="35" z="-35" y="0" w="10" d="10" h="0" />
+<Ramp color="hsl(310, 100%, 90%)" color.1="#000000" x="35" z="-20" y="0" w="10" d="20" h="0" deltaY="tierHeight * 2" angle="180" />
+<Wall color="hsl(220, 30%, 50%)" color.1="#000000" x="-35" z="-35" y="0" w="10" d="10" h="0" />
+<Ramp color="hsl(310, 100%, 90%)" color.1="#000000" x="-20" z="-35" y="0" w="20" d="10" h="0" deltaY="tierHeight * 2" angle="90" />
+<Wall color="hsl(220, 30%, 50%)" color.1="#000000" x="-35" z="35" y="0" w="10" d="10" h="0" />
+<Ramp color="hsl(310, 100%, 90%)" color.1="#000000" x="-35" z="20" y="0" w="10" d="20" h="0" deltaY="tierHeight * 2" angle="0" />
+
+<!-- FILL IN THE "HOLES" UNDER RAMPS -->
+
+<set wallHeight="tierHeight" />
+
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="-15" z="40" y="0" w="10" d="0" h="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="40" z="15" y="0" w="0" d="10" h="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="15" z="-40" y="0" w="10" d="0" h="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="-40" z="-15" y="0" w="0" d="10" h="0" />
+
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="20" z="35" y="0" w="0" d="10" h="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="35" z="-20" y="0" w="10" d="0" h="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="-20" z="-35" y="0" w="0" d="10" h="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="-35" z="20" y="0" w="10" d="0" h="0" />
+
+<!-- COROMORAN-LIKE HILLS AND VALLEYS -->
+
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="-25" z="45" y="0" w="10" d="10" h="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="-5" z="45" y="0" w="10" d="10" h="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="15" z="45" y="0" w="10" d="10" h="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="5" z="55" y="0" w="10" d="10" h="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="-5" z="65" y="0" w="10" d="10" h="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="15" z="65" y="0" w="10" d="10" h="0" />
+<Ramp color="hsl(310, 100%, 90%)" color.1="#000000" x="-5" z="55" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="270" />
+<Ramp color="hsl(310, 100%, 90%)" color.1="#000000" x="15" z="55" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="90" />
+<Ramp color="hsl(310, 100%, 90%)" color.1="#000000" x="5" z="45" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="0" />
+<Ramp color="hsl(310, 100%, 90%)" color.1="#000000" x="5" z="65" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="180" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="15" z="25" y="0" w="10" d="10" h="0" />
+
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="45" z="25" y="0" w="10" d="10" h="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="45" z="5" y="0" w="10" d="10" h="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="45" z="-15" y="0" w="10" d="10" h="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="55" z="-5" y="0" w="10" d="10" h="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="65" z="5" y="0" w="10" d="10" h="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="65" z="-15" y="0" w="10" d="10" h="0" />
+<Ramp color="hsl(310, 100%, 90%)" color.1="#000000" x="55" z="5" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="180" />
+<Ramp color="hsl(310, 100%, 90%)" color.1="#000000" x="55" z="-15" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="0" />
+<Ramp color="hsl(310, 100%, 90%)" color.1="#000000" x="45" z="-5" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="270" />
+<Ramp color="hsl(310, 100%, 90%)" color.1="#000000" x="65" z="-5" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="90" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="25" z="-15" y="0" w="10" d="10" h="0" />
+
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="25" z="-45" y="0" w="10" d="10" h="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="5" z="-45" y="0" w="10" d="10" h="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="-15" z="-45" y="0" w="10" d="10" h="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="-5" z="-55" y="0" w="10" d="10" h="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="5" z="-65" y="0" w="10" d="10" h="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="-15" z="-65" y="0" w="10" d="10" h="0" />
+<Ramp color="hsl(310, 100%, 90%)" color.1="#000000" x="5" z="-55" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="90" />
+<Ramp color="hsl(310, 100%, 90%)" color.1="#000000" x="-15" z="-55" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="270" />
+<Ramp color="hsl(310, 100%, 90%)" color.1="#000000" x="-5" z="-45" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="180" />
+<Ramp color="hsl(310, 100%, 90%)" color.1="#000000" x="-5" z="-65" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="-15" z="-25" y="0" w="10" d="10" h="0" />
+
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="-45" z="-25" y="0" w="10" d="10" h="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="-45" z="-5" y="0" w="10" d="10" h="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="-45" z="15" y="0" w="10" d="10" h="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="-55" z="5" y="0" w="10" d="10" h="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="-65" z="-5" y="0" w="10" d="10" h="0" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="-65" z="15" y="0" w="10" d="10" h="0" />
+<Ramp color="hsl(310, 100%, 90%)" color.1="#000000" x="-55" z="-5" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="0" />
+<Ramp color="hsl(310, 100%, 90%)" color.1="#000000" x="-55" z="15" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="180" />
+<Ramp color="hsl(310, 100%, 90%)" color.1="#000000" x="-45" z="5" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="90" />
+<Ramp color="hsl(310, 100%, 90%)" color.1="#000000" x="-65" z="5" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="270" />
+<Wall color="hsl(210, 100%, 30%)" color.1="#000000" x="-25" z="15" y="0" w="10" d="10" h="0" />
+
+<!-- GOODIES -->
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="250" />
+<Goody y="tierHeight + mGoodyOffset" shape="bspMissile" missiles="mMdMissile" start="mShow" out="mTaken" speed="2" color="#000000" color.1="#000000" cx="5" cz="55" angle="315" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="250" />
+<Goody y="tierHeight + mGoodyOffset" shape="bspMissile" missiles="mMdMissile" start="mShow" out="mTaken" speed="2" color="#000000" color.1="#000000" cx="55" cz="-5" angle="315" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="250" />
+<Goody y="tierHeight + mGoodyOffset" shape="bspMissile" missiles="mMdMissile" start="mShow" out="mTaken" speed="2" color="#000000" color.1="#000000" cx="-5" cz="-55" angle="315" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="250" />
+<Goody y="tierHeight + mGoodyOffset" shape="bspMissile" missiles="mMdMissile" start="mShow" out="mTaken" speed="2" color="#000000" color.1="#000000" cx="-55" cz="5" angle="315" />
+
+<unique vars="mShow mTaken" />
+<And in="@start" out="mTaken" />
+<Timer in="mTaken" out="mShow" wait="400" />
+<Goody y="(tierHeight * 2) + mGoodyOffset" shape="bspMissile" missiles="mXLgMissile" start="mShow" out="mTaken" speed="2" color="#000000" color.1="#000000" cx="35" cz="35" angle="315" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mTaken" />
+<Timer in="mTaken" out="mShow" wait="400" />
+<Goody y="(tierHeight * 2) + mGoodyOffset" shape="bspMissile" missiles="mXLgMissile" start="mShow" out="mTaken" speed="2" color="#000000" color.1="#000000" cx="35" cz="-35" angle="315" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mTaken" />
+<Timer in="mTaken" out="mShow" wait="400" />
+<Goody y="(tierHeight * 2) + mGoodyOffset" shape="bspMissile" missiles="mXLgMissile" start="mShow" out="mTaken" speed="2" color="#000000" color.1="#000000" cx="-35" cz="-35" angle="315" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mTaken" />
+<Timer in="mTaken" out="mShow" wait="400" />
+<Goody y="(tierHeight * 2) + mGoodyOffset" shape="bspMissile" missiles="mXLgMissile" start="mShow" out="mTaken" speed="2" color="#000000" color.1="#000000" cx="-35" cz="35" angle="315" />
+
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="250" />
+<Goody y="mGoodyOffset" shape="bspGrenade" grenades="mMdGrenade" start="mShow" out="mTaken" speed="2" color="#000000" color.1="#000000" cx="-25" cz="30" angle="315" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="250" />
+<Goody y="mGoodyOffset" shape="bspGrenade" grenades="mMdGrenade" start="mShow" out="mTaken" speed="2" color="#000000" color.1="#000000" cx="30" cz="25" angle="315" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="250" />
+<Goody y="mGoodyOffset" shape="bspGrenade" grenades="mMdGrenade" start="mShow" out="mTaken" speed="2" color="#000000" color.1="#000000" cx="25" cz="-30" angle="315" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="250" />
+<Goody y="mGoodyOffset" shape="bspGrenade" grenades="mMdGrenade" start="mShow" out="mTaken" speed="2" color="#000000" color.1="#000000" cx="-30" cz="-25" angle="315" />
+
+<unique vars="mShow mTaken" />
+<And in="@start" out="mTaken" />
+<Timer in="mTaken" out="mShow" wait="400" />
+<Goody y="(tierHeight * 2) + mGoodyOffset" shape="bspGrenade" grenades="mXLgGrenade" start="mShow" out="mTaken" speed="2" color="#000000" color.1="#000000" cx="-15" cz="25" angle="315" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mTaken" />
+<Timer in="mTaken" out="mShow" wait="400" />
+<Goody y="(tierHeight * 2) + mGoodyOffset" shape="bspGrenade" grenades="mXLgGrenade" start="mShow" out="mTaken" speed="2" color="#000000" color.1="#000000" cx="25" cz="15" angle="315" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mTaken" />
+<Timer in="mTaken" out="mShow" wait="400" />
+<Goody y="(tierHeight * 2) + mGoodyOffset" shape="bspGrenade" grenades="mXLgGrenade" start="mShow" out="mTaken" speed="2" color="#000000" color.1="#000000" cx="15" cz="-25" angle="315" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mTaken" />
+<Timer in="mTaken" out="mShow" wait="400" />
+<Goody y="(tierHeight * 2) + mGoodyOffset" shape="bspGrenade" grenades="mXLgGrenade" start="mShow" out="mTaken" speed="2" color="#000000" color.1="#000000" cx="-25" cz="-15" angle="315" />
+
+<Incarnator cx="25" cz="55" y="incarnHeight" angle="0" />
+<Incarnator cx="-25" cz="-55" y="incarnHeight" angle="180" />
+<Incarnator cx="55" cz="-25" y="incarnHeight" angle="270" />
+<Incarnator cx="-55" cz="25" y="incarnHeight" angle="90" />
+<Incarnator cx="55" cz="15" y="incarnHeight" angle="270" />
+<Incarnator cx="-55" cz="-15" y="incarnHeight" angle="90" />
+<Incarnator cx="15" cz="-55" y="incarnHeight" angle="180" />
+<Incarnator cx="-15" cz="55" y="incarnHeight" angle="0" />
+<Incarnator cx="5" cz="15" y="incarnHeight" angle="180" stop="@start" />
+<Incarnator cx="-5" cz="-15" y="incarnHeight" angle="0" stop="@start" />
+<Incarnator cx="15" cz="-5" y="incarnHeight" angle="90" stop="@start" />
+<Incarnator cx="-15" cz="5" y="incarnHeight" angle="270" stop="@start" />

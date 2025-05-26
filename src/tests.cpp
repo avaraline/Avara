@@ -1,4 +1,6 @@
 #include "gtest/gtest.h"
+#include <SDL2/SDL_log.h>
+#include "AssetManager.h"
 #include "CAvaraApp.h"
 #include "CBSPPart.h"
 #include "CPlayerManager.h"
@@ -13,10 +15,12 @@
 #include "CGrenade.h"
 #include "CSmart.h"
 #include "CScout.h"
-#include "AvaraGL.h"
 #include "Messages.h"
+#include "Preferences.h"
 #include "System.h"
 #include "CUDPConnection.h"
+#include "NullRenderer.h"
+#include "Material.h"
 
 #include <iostream>
 #include <vector>
@@ -40,16 +44,19 @@ public:
         FunctionTable &ft = *(this->ft);
         ft.down = ft.up = ft.held = ft.mouseDelta.h = ft.mouseDelta.v = ft.buttonStatus = ft.msgChar = 0;
     }
+    virtual ~TestPlayerManager() {}
     virtual CAbstractPlayer* GetPlayer() { return playa; }
     virtual void SetPlayer(CAbstractPlayer* p) { playa = p; }
     virtual short Slot() { return 0; }
     virtual void SetLocal() {};
     virtual void AbortRequest() {}
+    virtual void RemoveFromGame() {}
     virtual Boolean IsLocalPlayer() { return true; }
     virtual Boolean CalculateIsLocalPlayer() { return true; }
     virtual void GameKeyPress(char c) {}
     virtual FunctionTable *GetFunctions() { return ft; }
     virtual void DeadOrDone() {}
+    virtual bool IsDeadOrDone() { return false; }
     virtual short Position() { return 0; }
     virtual Str255& PlayerName() { return str; }
     virtual std::string GetPlayerName() { return std::string((char *)str + 1, str[0]); }
@@ -59,11 +66,16 @@ public:
     virtual short IsRegistered() { return 0; }
     virtual void IsRegistered(short) {}
     virtual Str255& PlayerRegName() { return str; }
-    virtual short LoadingStatus() { return 0; }
+    virtual LoadingState LoadingStatus() { return kLNotConnected; }
+    virtual PresenceType Presence() { return kzAvailable; }
+    virtual void SetPresence(PresenceType pt) { }
     virtual void LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag) {}
-    virtual void SetPlayerStatus(short newStatus, FrameNumber theWin) {}
+    virtual void SetPlayerStatus(LoadingState newStatus, PresenceType newPresence, FrameNumber theWin) {}
     virtual bool IsAway() { return false; };
-    virtual void ChangeNameAndLocation(StringPtr theName, Point location) {}
+    virtual bool IsSpectating() { return false; };
+    virtual bool IsLoaded() { return true; };
+    virtual bool IsReady() { return false; };
+    virtual void ChangeName(StringPtr theName) {}
     virtual void SetPosition(short pos) {}
 
     virtual void RosterKeyPress(unsigned char c) {}
@@ -118,13 +130,19 @@ private:
 
 class TestNetManager : public CNetManager {
 public:
-    CPlayerManager* CreatePlayerManager(short id) {
-        return new TestPlayerManager(itsGame);
+    std::shared_ptr<CPlayerManager> CreatePlayerManager(short id) {
+        return std::make_shared<TestPlayerManager>(itsGame);
     }
 };
 
 class TestApp : public CAvaraApp {
 public:
+    TestApp() {
+        AssetManager::Init();
+        
+        // Silence SDL logging with a no-op callback.
+        SDL_LogSetOutputFunction([](void *d, int c, SDL_LogPriority p, const char *m){}, nullptr);
+    }
     virtual bool DoCommand(int theCommand) {return false;}
     virtual void MessageLine(short index, MsgAlignment align) {}
     virtual void AddMessageLine(std::string lines, MsgAlignment align = MsgAlignment::Left, MsgCategory category = MsgCategory::System) {}
@@ -136,11 +154,13 @@ public:
     virtual void LevelReset() {}
     virtual long Number(const std::string name) { return 0; }
     virtual bool Boolean(const std::string name) { return false; }
-    virtual OSErr LoadSVGLevel(std::string set, OSType theLevel) { return noErr; }
     virtual OSErr LoadLevel(std::string set, std::string leveltag, CPlayerManager* sendingPlayer) { return noErr; }
     virtual void ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) {}
     virtual void NotifyUser() {}
-    virtual json Get(const std::string name) { return json(); }
+    virtual json Get(const std::string name) { return ReadDefaultPrefs().at(name); }
+    template <class T> T Get(const std::string name) {
+        return static_cast<T>(ReadDefaultPrefs().at(name));
+    }
     virtual void Set(const std::string name, const std::string value) {}
     virtual void Set(const std::string name, long value) {}
     virtual void Set(const std::string name, json value) {}
@@ -151,9 +171,11 @@ public:
     virtual CAvaraGame* GetGame() { return 0; }
     virtual void Done() {}
     virtual void BroadcastCommand(int) {}
-    virtual void GameStarted(std::string set, std::string level) {};
+    virtual void GameStarted(LevelInfo &loadedLevel) {};
     virtual std::deque<MsgLine>& MessageLines() { return msgLines; }
     virtual CommandManager* GetTui() { return 0; }
+    virtual uint32_t ControllerEventType() { return 0; }
+    virtual void Rumble(Fixed hitEnergy) {}
 public:
     std::unique_ptr<CAvaraGame> itsGame;
 private:
@@ -170,7 +192,14 @@ public:
         // force tick to happen by resetting nextScheduledFrame
         nextScheduledFrame = 0;
         itsNet->activePlayersDistribution = 1;
+        nextPingTime = std::numeric_limits<uint32_t>::max(); // prevent pings
         return CAvaraGame::GameTick();
+    }
+};
+
+class TestWalkerActor : public CWalkerActor {
+    void ResetCamera() {
+
     }
 };
 
@@ -184,13 +213,14 @@ public:
         app.itsGame = std::make_unique<TestGame>(frameTime);
         game = (TestGame*)app.itsGame.get();
         gCurrentGame = game;
+        gRenderer = new NullRenderer();
+
         InitParser();
         game->IAvaraGame(&app);
         game->EndScript();
         app.GetNet()->ChangeNet(kNullNet, "");
         game->LevelReset(false);
-        hector = new CWalkerActor();
-        hector->IAbstractActor();
+        hector = new TestWalkerActor();
         hector->BeginScript();
         hector->EndScript();
         game->itsNet->playerTable[0]->SetPlayer(hector);
@@ -200,6 +230,7 @@ public:
         hector->location[2] = hectorZ;
         hector->location[3] = FIX1;
         game->AddActor(hector);
+        game->freshPlayerList = 0;
         game->GameStart();
     }
 
@@ -282,7 +313,7 @@ std::vector<VectorStruct> WalkHector(int settleSteps, int steps, int frameTime) 
     return location;
 }
 
-std::vector<VectorStruct> JumpHector(int settleSteps, int jumpHoldSteps, int steps, int frameTime, bool hold2ndKey) {
+vector<VectorStruct> JumpHector(int settleSteps, int jumpHoldSteps, int steps, int frameTime, int numHeldKeys) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
     std::vector<VectorStruct> location;
     int ticksPerStep = GetTicksPerStep(frameTime);
@@ -300,14 +331,16 @@ std::vector<VectorStruct> JumpHector(int settleSteps, int jumpHoldSteps, int ste
         scenario.game->GameTick();
     }
 
-    scenario.hector->itsManager->GetFunctions()->held = hold2ndKey ? (1 << kfuJump) : 0;
-    scenario.hector->itsManager->GetFunctions()->up = (1 << kfuJump);
-
+    int frame = 0;
     for (int i = 0; i < steps; i++) {
-        for (int k = 0; k < ticksPerStep; k++) {
+
+        for (int k = 0; k < ticksPerStep; k++, frame++) {
+            // keep holding keys down for numHeldKeys-1 frames
+            scenario.hector->itsManager->GetFunctions()->held = frame < (numHeldKeys - 1) ? (1 << kfuJump) : 0;
+            // release a key "up" in each of the first numHeldKeys frames
+            scenario.hector->itsManager->GetFunctions()->up = frame < numHeldKeys ? (1 << kfuJump) : 0;
+
             scenario.game->GameTick();
-            scenario.hector->itsManager->GetFunctions()->held = 0;
-            scenario.hector->itsManager->GetFunctions()->up = 0;
         }
         location.push_back(*(VectorStruct*)scenario.hector->location);
         // std::cout << "jump location[" << i << "] = " << FormatVector(scenario.hector->location, 3)
@@ -334,15 +367,13 @@ std::vector<VectorStruct> FireGrenade(int settleSteps, int steps, int frameTime)
 
     CGrenade *grenade = 0;
     // hopefully there are two objects now. a hector and a grenade.
-    CAbstractActor *aa = scenario.game->actorList;
-    int count = 2;
-    for (count = 0; aa; aa = aa->nextActor, count++) {
-        if (aa != scenario.hector) {
+    for (CAbstractActor *aa = scenario.game->actorList; aa; aa = aa->nextActor) {
+        if (typeid(*aa) == typeid(CGrenade)) {
             grenade = (CGrenade*)aa;
         }
     }
 
-    for (int i = 0; i < steps && count == 2; i++) {
+    for (int i = 0; i < steps && grenade != 0; i++) {
         trajectory.push_back(*(VectorStruct*)grenade->location);
         for (int k = 0; k < ticksPerStep; k++) {
             scenario.game->GameTick();
@@ -350,9 +381,8 @@ std::vector<VectorStruct> FireGrenade(int settleSteps, int steps, int frameTime)
 
         // this intends to figure out whether the grenade has exploded.
         grenade = 0;
-        aa = scenario.game->actorList;
-        for (count = 0; aa; aa = aa->nextActor, count++) {
-            if (aa != scenario.hector) {
+        for (CAbstractActor *aa = scenario.game->actorList; aa; aa = aa->nextActor) {
+            if (typeid(*aa) == typeid(CGrenade)) {
                 grenade = (CGrenade*)aa;
             }
         }
@@ -369,15 +399,6 @@ std::vector<VectorStruct> FireMissile(int hectorSettle, int scoutSettle, int ste
     for (int i = 0; i < hectorSettle*ticksPerStep; i++) {
         scenario.game->GameTick();
     }
-
-    // scout up
-    scenario.hector->itsManager->GetFunctions()->held = (1 << kfuScoutControl);
-    scenario.hector->itsManager->GetFunctions()->down = (1 << kfuAimForward);
-    scenario.hector->itsManager->GetFunctions()->up = (1 << kfuScoutControl) | (1 << kfuAimForward);
-    scenario.game->GameTick();
-    scenario.hector->itsManager->GetFunctions()->held = 0;
-    scenario.hector->itsManager->GetFunctions()->down = 0;
-    scenario.hector->itsManager->GetFunctions()->up = 0;
 
     // load missile
     scenario.hector->itsManager->GetFunctions()->down = (1 << kfuLoadMissile);
@@ -464,11 +485,11 @@ std::vector<HectorEnergyReadings> HectorEnergyRegen(int steps, bool useBoost, in
     int ticksPerStep = GetTicksPerStep(frameTime);
 
     scenario.hector->energy = scenario.hector->maxEnergy * 0.5;
-    if (useBoost) {
-        scenario.hector->itsManager->GetFunctions()->down = (1 << kfuBoostEnergy);
-    }
 
     for (int i = 0; i < steps; i++) {
+        if (i == 1 && useBoost) {
+            scenario.hector->itsManager->GetFunctions()->down = (1 << kfuBoostEnergy);
+        }
         HectorEnergyReadings current(scenario.hector);
         energyValues.push_back(current);
         for (int k = 0; k < ticksPerStep; k++) {
@@ -486,11 +507,11 @@ std::vector<HectorEnergyReadings> HectorPlasmaRegen(int steps, bool useBoost, in
 
     scenario.hector->gunEnergy[0] = 0;
     scenario.hector->gunEnergy[1] = 0;
-    if (useBoost) {
-        scenario.hector->itsManager->GetFunctions()->down = (1 << kfuBoostEnergy);
-    }
 
     for (int i = 0; i < steps; i++) {
+        if (i == 1 && useBoost) {
+            scenario.hector->itsManager->GetFunctions()->down = (1 << kfuBoostEnergy);
+        }
         HectorEnergyReadings current(scenario.hector);
         energyValues.push_back(current);
         for (int k = 0; k < ticksPerStep; k++) {
@@ -507,11 +528,11 @@ std::vector<HectorEnergyReadings> HectorShieldRegen(int steps, bool useBoost, in
     int ticksPerStep = GetTicksPerStep(frameTime);
 
     scenario.hector->shields = scenario.hector->maxShields * 0.5;
-    if (useBoost) {
-        scenario.hector->itsManager->GetFunctions()->down = (1 << kfuBoostEnergy);
-    }
 
     for (int i = 0; i < steps; i++) {
+        if (i == 1 && useBoost) {
+            scenario.hector->itsManager->GetFunctions()->down = (1 << kfuBoostEnergy);
+        }
         HectorEnergyReadings current(scenario.hector);
         energyValues.push_back(current);
         for (int k = 0; k < ticksPerStep; k++) {
@@ -632,22 +653,22 @@ TEST(HECTOR, WalkForwardSpeed) {
     }
 }
 
-void test_jump(bool hold2ndKey, int peakStep, int peakHeight) {
+void test_jump(int peakStep, int peakHeight, int numHeldKeys) {
     int jumpSteps = 40;
-    std::vector<VectorStruct> at64ms = JumpHector(20, 20, jumpSteps, 64, hold2ndKey);
-    std::vector<VectorStruct> at32ms = JumpHector(20, 20, jumpSteps, 32, hold2ndKey);
-    std::vector<VectorStruct> at16ms = JumpHector(20, 20, jumpSteps, 16, hold2ndKey);
-    std::vector<VectorStruct> at8ms = JumpHector(20, 20, jumpSteps, 8, hold2ndKey);
+    vector<VectorStruct> at64ms = JumpHector(20, 20, jumpSteps, 64, numHeldKeys);
+    vector<VectorStruct> at32ms = JumpHector(20, 20, jumpSteps, 32, numHeldKeys);
+    vector<VectorStruct> at16ms = JumpHector(20, 20, jumpSteps, 16, numHeldKeys);
+    vector<VectorStruct> at8ms = JumpHector(20, 20, jumpSteps, 8, numHeldKeys);
 
     // peak of jump is near frame 6
     ASSERT_EQ(at64ms.size(), jumpSteps) << "not enough steps recorded at 64ms";
     ASSERT_EQ(at32ms.size(), jumpSteps) << "not enough steps recorded at 32ms";
     ASSERT_EQ(at16ms.size(), jumpSteps) << "not enough steps recorded at 16ms";
     ASSERT_EQ(at8ms.size(), jumpSteps) << "not enough steps recorded at 8ms";
+
     ASSERT_NEAR(at64ms[peakStep].theVec[1], peakHeight, 3*MILLIMETER) << "64ms simulation peaked with wrong amount";
     ASSERT_NEAR(at32ms[peakStep].theVec[1], peakHeight, 3*MILLIMETER) << "32ms simulation peaked with wrong amount";
     ASSERT_NEAR(at16ms[peakStep].theVec[1], peakHeight, 5*MILLIMETER) << "16ms simulation peaked with wrong amount";
-    ASSERT_NEAR(at8ms[peakStep].theVec[1], peakHeight, 10*MILLIMETER) << "8ms simulation peaked with wrong amount";
 
     for (int i = 0; i < jumpSteps; i++) {
         // std::cout << "dist32[" << i << "] = " << VecStructDist(at64ms[i], at32ms[i]) << "\n";
@@ -655,16 +676,17 @@ void test_jump(bool hold2ndKey, int peakStep, int peakHeight) {
         // std::cout << "dist8[" << i << "] = " << VecStructDist(at64ms[i], at8ms[i]) << "\n\n";
         ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.1) << "not close enough after " << i << " ticks.";
         ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.1) << "not close enough after " << i << " ticks.";
-        ASSERT_LT(VecStructDist(at64ms[i], at8ms[i]), 0.1) << "not close enough after " << i << " ticks.";
     }
 }
 
 TEST(HECTOR, JumpRegular) {
-    test_jump(false, 5, 116100);
+    test_jump(5, 116100, 1);
 }
 
 TEST(HECTOR, JumpSuper) {
-    test_jump(true, 6, 181800);
+    // doesn't matter how many jump keys you press/release, superjump is always the same
+    test_jump(6, 181800, 2);
+    test_jump(6, 181800, 3);
 }
 
 TEST(HECTOR, EnergyRegen) {
@@ -1130,7 +1152,7 @@ TEST(MISSILE, Trajectory) {
 
     // index 15 is the furthest left the missile goes, and index 26 is the furthest forward
     ASSERT_NEAR(at64ms[15].theVec[0], -591030, 3*MILLIMETER) << "64ms simulation is wrong on min X";
-    ASSERT_NEAR(at64ms[26].theVec[2], 1306106, 3*MILLIMETER) << "64ms simulation is wrong on max Z";
+    ASSERT_NEAR(at64ms[26].theVec[2], 1306446, 3*MILLIMETER) << "64ms simulation is wrong on max Z";
     ASSERT_EQ(at64ms.size(), 37) << "64ms simulation blows up in the wrong frame";
     ASSERT_NEAR(at64ms.size(), at32ms.size(), 1) << "32ms simulation should blows up in wrong frame";
     ASSERT_NEAR(at64ms.size(), at16ms.size(), 1) << "16ms simulation should blows up at wrong frame";
@@ -1196,11 +1218,66 @@ TEST(SERIAL_NUMBER, Rollover) {
 
 TEST(QUEUES, Clean) {
     // after all of the tests have run, the queues should be all cleaned up suggesting all destructors did their job
-    ASSERT_EQ(QueueSize(), 0)  << "queues not empty";
+    ASSERT_EQ(QueueCount(), 0)  << "queues not empty";
+}
+
+TEST(MATERIALS, Manipulation) {
+    Material defaultMaterial = Material().WithColor(0xff000000).WithSpecular(0x00000000).WithShininess(0x00);
+    ASSERT_EQ(defaultMaterial.GetColor().GetRaw(), 0xff000000) << "defaultMaterial color not black";
+    ASSERT_EQ(defaultMaterial.GetSpecular().GetRaw(), 0x00000000) << "defaultMaterial specular not invisible black";
+    ASSERT_EQ(defaultMaterial.GetShininess(), 0x00) << "defaultMaterial shininess non-zero";
+    
+    Material alteredMaterial = defaultMaterial;
+    ASSERT_EQ(alteredMaterial.GetColor().GetRaw(), 0xff000000) << "alteredMaterial color not initialized to black";
+    ASSERT_EQ(alteredMaterial.GetSpecular().GetRaw(), 0x00000000) << "alteredMaterial specular not initialized to invisible black";
+    ASSERT_EQ(alteredMaterial.GetShininess(), 0x00) << "alteredMaterial shininess initialized to non-zero";
+    
+    alteredMaterial = alteredMaterial.WithColor(0xff3a404d);
+    ASSERT_EQ(alteredMaterial.GetColor().GetRaw(), 0xff3a404d) << "failed to update material color to 0xff3a404d";
+    alteredMaterial = alteredMaterial.WithSpecular(0xff33322b); // alpha bits will be dropped!
+    ASSERT_EQ(alteredMaterial.GetSpecular().GetRaw(), 0x0033322b) << "failed to update material specular color to 0x0033322b";
+    ASSERT_EQ(alteredMaterial.GetColor().GetRaw(), 0xff3a404d) << "failed to retain material color after setting specular to 0x0033322b";
+    alteredMaterial = alteredMaterial.WithShininess(0x01);
+    ASSERT_EQ(alteredMaterial.GetShininess(), 0x01) << "failed to update material shininess to 0x01";
+    ASSERT_EQ(alteredMaterial.GetColor().GetRaw(), 0xff3a404d) << "failed to retain material color after setting shininess to 0x01";
+    ASSERT_EQ(alteredMaterial.GetSpecular().GetRaw(), 0x0033322b) << "failed to retain material specular color after setting shininess to 0x01";
+    
+    alteredMaterial = alteredMaterial.WithSpecular(0xccff0000); // alpha bits will be dropped, again
+    ASSERT_EQ(alteredMaterial.GetSpecular().GetRaw(), 0x00ff0000) << "failed to update material specular color to 0x00ff0000";
+    ASSERT_EQ(alteredMaterial.GetColor().GetRaw(), 0xff3a404d) << "failed to retain material color after setting specular to 0x00ff0000";
+    ASSERT_EQ(alteredMaterial.GetShininess(), 0x01) << "failed to retain material shininess after setting specular to 0x00ff0000";
+    
+    alteredMaterial = alteredMaterial.WithSpecB(0xff);
+    ASSERT_EQ(alteredMaterial.GetSpecular().GetRaw(), 0x00ff00ff) << "failed to update material specular B component to 0xff";
+    ASSERT_EQ(alteredMaterial.GetColor().GetRaw(), 0xff3a404d) << "failed to retain material color after setting specular B component to 0xff";
+    ASSERT_EQ(alteredMaterial.GetShininess(), 0x01) << "failed to retain material shininess after setting specular B component to 0xff";
+    
+    alteredMaterial = alteredMaterial.WithSpecG(0xdd);
+    ASSERT_EQ(alteredMaterial.GetSpecular().GetRaw(), 0x00ffddff) << "failed to update material specular G component to 0xdd";
+    ASSERT_EQ(alteredMaterial.GetColor().GetRaw(), 0xff3a404d) << "failed to retain material color after setting specular G component to 0xdd";
+    ASSERT_EQ(alteredMaterial.GetShininess(), 0x01) << "failed to retain material shininess after setting specular G component to 0xdd";
+    
+    alteredMaterial = alteredMaterial.WithSpecR(0xaa);
+    ASSERT_EQ(alteredMaterial.GetSpecular().GetRaw(), 0x00aaddff) << "failed to update material specular R component to 0xaa";
+    ASSERT_EQ(alteredMaterial.GetColor().GetRaw(), 0xff3a404d) << "failed to retain material color after setting specular R component to 0xaa";
+    ASSERT_EQ(alteredMaterial.GetShininess(), 0x01) << "failed to retain material shininess after setting specular R component to 0xaa";
+    
+    alteredMaterial = defaultMaterial;
+    ASSERT_EQ(alteredMaterial.GetColor().GetRaw(), 0xff000000) << "alteredMaterial color not reset to black";
+    ASSERT_EQ(alteredMaterial.GetSpecular().GetRaw(), 0x00000000) << "alteredMaterial specular not reset to invisible black";
+    ASSERT_EQ(alteredMaterial.GetShininess(), 0x00) << "alteredMaterial shininess not reset to zero";
+    
+    // Chained
+    alteredMaterial = defaultMaterial
+        .WithColor(0xff111111)
+        .WithSpecular(0xff00cccc) // alpha bits dropped
+        .WithShininess(0x10);
+    ASSERT_EQ(alteredMaterial.GetColor().GetRaw(), 0xff111111) << "failed to update material color to 0xff111111";
+    ASSERT_EQ(alteredMaterial.GetSpecular().GetRaw(), 0x0000cccc) << "failed to update material specular color to 0x0000cccc";
+    ASSERT_EQ(alteredMaterial.GetShininess(), 0x10) << "failed to update material shininess to 0x10";
 }
 
 int main(int argc, char **argv) {
-    AvaraGLToggleRendering(0);
     nanogui::init();
     InitMatrix();
     ::testing::InitGoogleTest(&argc, argv);

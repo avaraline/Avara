@@ -22,7 +22,7 @@
 
 void CMineActor::BeginScript() {
     maskBits |= kTargetBit + kSolidBit;
-    shields = FIX(1);
+    shields = FIX1;
     hitScore = 5;
     destructScore = 20;
 
@@ -76,7 +76,10 @@ CAbstractActor *CMineActor::EndScript() {
 
     activateSound = ReadLongVar(iActivateSound);
     activateVolume = ReadFixedVar(iActivateVolume);
-    gHub->PreLoadSample(activateSound);
+
+    // Preload sounds.
+    auto _ = AssetManager::GetOgg(activateSound);
+    
     RegisterReceiver(&activator, ReadLongVar(iBoom));
 
     radius = ReadFixedVar(iRange);
@@ -93,8 +96,8 @@ CAbstractActor *CMineActor::EndScript() {
 
     partCount = 2;
 
-    LoadPartWithColors(0, primeShapeId);
-    LoadPartWithColors(1, altShapeId);
+    LoadPartWithMaterials(0, primeShapeId);
+    LoadPartWithMaterials(1, altShapeId);
 
     InitialRotatePartY(partList[0], heading);
     TranslatePart(partList[0], location[0], location[1], location[2]);
@@ -146,15 +149,13 @@ void CMineActor::Activate() {
     }
 }
 
-void CMineActor::Dispose() {
+CMineActor::~CMineActor() {
     itsGame->RemoveReceiver(&activator);
 
     if (itsSoundLink) {
         gHub->ReleaseLinkAndKillSounds(itsSoundLink);
         itsSoundLink = NULL;
     }
-
-    CGlowActors::Dispose();
 }
 
 void CMineActor::FrameAction() {
@@ -181,7 +182,7 @@ void CMineActor::FrameAction() {
         if (activated) {
             WasDestroyed();
             itsGame->scoreReason = ksiMineBlast;
-            SecondaryDamage(teamColor, -1);
+            SecondaryDamage(teamColor, -1, ksiMineBlast);
             return;
         } else {
             lookNextTime = phase + lookTime;

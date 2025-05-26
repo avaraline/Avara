@@ -14,11 +14,18 @@
 #include "ColorManager.h"
 #include "CViewParameters.h"
 #include "CWorldShader.h"
-
-#include <SDL.h>
+#include "ARGBColor.h"
+#include "csscolorparser.hpp"
+#include "Resource.h"
+#include <SDL2/SDL.h>
 #include <iostream>
 #include <string>
 #include <sstream>
+
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+extern "C" {
+    #include "stb_image_write.h"
+}
 
 class BSPViewer : public CApplication {
 public:
@@ -30,15 +37,38 @@ public:
     Vector location, orientation;
     int current_id;
     bool update = true;
+    bool skyToggle = true;
+    bool helpToggle = true;
+    ARGBColor marker1 = (*ColorManager::getMarkerColor(0)).WithA(0xff);
+    ARGBColor marker2 = (*ColorManager::getMarkerColor(1)).WithA(0xff);
+    ARGBColor marker3 = (*ColorManager::getMarkerColor(2)).WithA(0xff);
+    ARGBColor marker4 = (*ColorManager::getMarkerColor(3)).WithA(0xff);
+    std::string help_text;
 
     BSPViewer(int id) : CApplication("BSP Viewer") {
+        AvaraGLInitContext();
+        glClearColor(1, 0, 1, 1);
+        glEnable(GL_DEPTH_TEST);
+        glDepthFunc(GL_LEQUAL);
+        glBlendFunc(GL_ONE, GL_ZERO);
+
+        std::stringstream help;
+        help << "AWSD: rotate model to cardinal directions\n";
+        help << "Left click: move model on z axis\n";
+        help << "Right click: rotate model\n";
+        help << "R/T: previous/next shape\n";
+        help << "U: sky toggle\n";
+        help << "0: capture image\n";
+        help << "F1: show/hide this text";
+        help_text = help.str();
+
+        AvaraGLSetFOV(50);
+
         current_id = id;
-        itsWorld = new CBSPWorldImpl;
-        itsWorld->IBSPWorld(1);
+        itsWorld = new CBSPWorldImpl(1);
         newPart(current_id);
 
         itsView = new CViewParameters;
-        itsView->IViewParameters();
 
         itsView->yonBound = FIX(100);
         itsView->dirtyLook = true;
@@ -51,6 +81,13 @@ public:
         worldShader->IWorldShader();
         worldShader->skyShadeCount = 12;
 
+        AvaraGLSetLight(0, 1.0, 85, 165, 0xffffffff);
+        AvaraGLSetLight(1, 0, 45, 0, 0xffffffff);
+        AvaraGLSetAmbient(0.31, 0xffffffff);
+
+        skyToggle = true;
+        helpToggle = true;
+
 
         location[0] = FIX(0);
         location[1] = FIX(0);
@@ -61,16 +98,48 @@ public:
         orientation[2] = FIX(0);
     }
 
+    void updateClearColor(CSSColorParser::Color c) {
+        glClearColor(c.r, c.g, c.b, c.a);
+    }
+
+    void helpText() {
+        if (!helpToggle) return;
+
+        std::stringstream info;
+        info << help_text << "\n";
+        info << "Model: " << current_id << "\n";
+        info << "Translation: " << ToFloat(location[0]) << "," << ToFloat(location[1]) << "," << ToFloat(location[2]) << "\n";
+        info << "Rotation: " << ToFloat(orientation[0]) << "," << ToFloat(orientation[1]) << "," << ToFloat(orientation[2]);
+
+        nvgBeginFrame(mNVGContext, mFBSize[0], mFBSize[1], 1.0);
+        nvgFontSize(mNVGContext, 25);
+        nvgFontFace(mNVGContext, "mono");
+        nvgTextBox(mNVGContext, 10, 30, 500, info.str().c_str(), NULL);
+        nvgEndFrame(mNVGContext);
+    }
 
     bool newPart(int id) {
             if (itsWorld->GetPartCount() > 0) {
                 itsWorld->RemovePart(itsPart);
             }
-            itsPart = new CBSPPart;
-            itsPart->IBSPPart(id);
+            itsPart = CBSPPart::Create(id);
             if (itsPart->polyCount > 0) {
-                itsPart->ReplaceColor(*ColorManager::getMarkerColor(0), 0xffcccc00); // yellow
-                itsPart->ReplaceColor(*ColorManager::getMarkerColor(1), 0xfffe0000); // red
+                itsPart->ReplaceColor(
+                    *ColorManager::getMarkerColor(0),
+                    marker1
+                );
+                itsPart->ReplaceColor(
+                    *ColorManager::getMarkerColor(1),
+                    marker2
+                );
+                itsPart->ReplaceColor(
+                    *ColorManager::getMarkerColor(2),
+                    marker3
+                );
+                itsPart->ReplaceColor(
+                    *ColorManager::getMarkerColor(3),
+                    marker4
+                );
                 AvaraGLUpdateData(itsPart);
                 itsWorld->AddPart(itsPart);
                 SDL_Log("Loaded BSP %d", id);
@@ -82,44 +151,55 @@ public:
 
 
     bool HandleEvent(SDL_Event &event) {
+        Vector prevLocation;
+        memcpy(prevLocation, location, sizeof(Vector));
+        Vector prevOrientation;
+        memcpy(prevOrientation, orientation, sizeof(Vector));
         switch (event.type) {
             case SDL_MOUSEMOTION:
                 if (event.motion.state & SDL_BUTTON(SDL_BUTTON_LEFT)) {
                     location[2] += FIX((float)event.motion.yrel / 5.0);
-                    return true;
+                    update = true;
                 }
                 if (event.motion.state & SDL_BUTTON(SDL_BUTTON_RIGHT)) {
                     orientation[0] += FIX((float)event.motion.yrel / 5.0);
                     orientation[1] += FIX((float)event.motion.xrel / 5.0);
-                    return true;
+                    update = true;
                 }
                 break;
             case SDL_KEYDOWN:
                 switch (event.key.keysym.sym) {
                     case SDLK_LEFT:
                         orientation[1] -= FIX(5);
-                        return true;
+                        update = true;
+                        break;
                     case SDLK_RIGHT:
                         orientation[1] += FIX(5);
-                        return true;
+                        update = true;
+                        break;
                     case SDLK_DOWN:
                         orientation[0] -= FIX(5);
-                        return true;
+                        update = true;
+                        break;
                     case SDLK_UP:
                         orientation[0] += FIX(5);
-                        return true;
+                        update = true;
+                        break;
                     case SDLK_w:
                         orientation[0] = FIX(90);
                         orientation[1] = FIX(0);
-                        return true;
+                        update = true;
+                        break;
                     case SDLK_s:
                         orientation[0] = FIX(-90);
                         orientation[1] = FIX(0);
-                        return true;
+                        update = true;
+                        break;
                     case SDLK_d:
                         orientation[0] = FIX(0);
                         orientation[1] = FIX(90);
-                        return true;
+                        update = true;
+                        break;
                     case SDLK_a:
                         orientation[0] = FIX(0);
                         orientation[1] = FIX(-90);
@@ -127,7 +207,7 @@ public:
                     case SDLK_r:
                         do {
                             current_id++;
-                            if (current_id > 1500) {
+                            if (current_id > INT32_MAX) {
                                 current_id = 1;
                             }
                         } while (newPart(current_id) != true);
@@ -136,29 +216,65 @@ public:
                         do{
                             current_id--;
                             if (current_id < 1) {
-                                current_id = 1500;
+                                current_id = INT32_MAX;
                             }
                         } while(newPart(current_id) != true);
                         return true;
                     case SDLK_y:
                         newPart(current_id);
                         return true;
+                    case SDLK_u:
+                        skyToggle = !skyToggle;
+                        return true;
+                    case SDLK_F1:
+                        helpToggle = !helpToggle;
+                        return true;
+                    case SDLK_0:
+                        std::stringstream ss;
+                        ss << current_id << '-' << SDL_GetTicks() << ".png";
+                        capture(ss.str().c_str());
+                        return true;
                 }
                 break;
         }
-        return false;
+        if (update) {
+            if (prevLocation[0] != location[0] ||
+                prevLocation[1] != location[1] ||
+                prevLocation[2] != location[2] ||
+                prevOrientation[0] != orientation[0] ||
+                prevOrientation[1] != orientation[1] ||
+                prevOrientation[2] != orientation[2])
+            SDL_Log("-s %d --location %f %f %f --orientation %f %f %f", current_id, ToFloat(location[0]), ToFloat(location[1]), ToFloat(location[2]), ToFloat(orientation[0]), ToFloat(orientation[1]), ToFloat(orientation[2]));
+        }
+        return update;
+    }
+
+    int capture(const char* fn) {
+        drawContents();
+        //SDL_GL_SwapWindow(app->window);
+        int w = mFBSize[0];
+        int h = mFBSize[1];
+        int comp = 3;
+        std::vector<GLchar> pic(w * h * comp);
+
+        glReadPixels(0, 0, w, h, comp == 4 ? GL_RGBA : GL_RGB, GL_UNSIGNED_BYTE, pic.data());
+
+        for (int line = 0; line != h / 2; ++line) {
+            std::swap_ranges(
+                pic.begin() + comp * w * line,
+                pic.begin() + comp * w * (line + 1),
+                pic.begin() + comp * w * (h - line - 1));
+        }
+        SDL_Log("Writing %s", fn);
+        return stbi_write_png(fn, w, h, comp, pic.data(), w * comp);
     }
 
     void drawContents() {
-        // Maybe put this at the CApplication level?
-        glEnable(GL_DEPTH_TEST);
-        glDepthFunc(GL_LEQUAL);
-        glBlendFunc(GL_ONE, GL_ZERO);
-
-        AvaraGLViewport(mFBSize.x, mFBSize.y);
-        itsView->SetViewRect(mFBSize.x, mFBSize.y, mFBSize.x / 2, mFBSize.y / 2);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+        AvaraGLViewport(mFBSize[0], mFBSize[1]);
+        itsView->SetViewRect(mFBSize[0], mFBSize[1], mFBSize[0] / 2, mFBSize[1] / 2);
         itsView->viewPixelRatio = FIX(4.0/3.0);
-        itsView->CalculateViewPyramidCorners();
+            itsView->CalculateViewPyramidCorners();
         itsView->PointCamera();
 
         itsPart->Reset();
@@ -168,37 +284,134 @@ public:
         TranslatePart(itsPart, location[0], location[1], location[2]);
         itsPart->MoveDone();
 
+        if (skyToggle)
         worldShader->ShadeWorld(itsView);
 
         itsWorld->Render(itsView);
+
+        helpText();
     }
 
-    void idle() {
-        glClearColor(0, 0, 0, 1);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-        drawContents();
-        SDL_GL_SwapWindow(mSDLWindow);
-    }
 };
 
 int main(int argc, char *argv[]) {
+    // Init Avara stuff.
+    InitMatrix();
+    nanogui::init();
+    // The BSPViewer application itself.
+    BSPViewer *app = new BSPViewer(215);
+    for (int i = 1; i < argc; i++) {
+        std::string arg = argv[i];
+        if (arg == "-s" || arg == "--shape") {
+            u_int16_t id = atoi(argv[++i]);
+            app->current_id = id;
+            app->newPart(id);
+        }
 
+        if (arg == "--base") {
+            std::string lbase = std::string(argv[++i]);
+            UseBaseFolder(lbase);
+            app->newPart(app->current_id);
+        }
+
+        if (arg == "--set") {
+            std::string lset = std::string(argv[++i]);
+            UseLevelFolder(lset);
+            app->newPart(app->current_id);
+        }
+
+        if (arg == "--orientation") {
+            app->newPart(app->current_id);
+            app->orientation[0] = ToFixed(atof(argv[++i]));
+            app->orientation[1] = ToFixed(atof(argv[++i]));
+            app->orientation[2] = ToFixed(atof(argv[++i]));
+        }
+        if (arg == "--location") {
+            app->newPart(app->current_id);
+            app->location[0] = ToFixed(atof(argv[++i]));
+            app->location[1] = ToFixed(atof(argv[++i]));
+            app->location[2] = ToFixed(atof(argv[++i]));
+        }
+        else if (arg == "--marker-color1") {
+            std::string s = std::string(argv[++i]);
+            std::optional<ARGBColor> c = ARGBColor::Parse(s);
+            if (c.has_value()) {
+                app->marker1 = *c;
+                app->newPart(app->current_id);
+            }
+        }
+        else if (arg == "--marker-color2") {
+            std::string s = std::string(argv[++i]);
+            std::optional<ARGBColor> c = ARGBColor::Parse(s);
+            if (c.has_value()) {
+                app->marker2 = *c;
+                app->newPart(app->current_id);
+            }
+        }
+        else if (arg == "--marker-color3") {
+            std::string s = std::string(argv[++i]);
+            std::optional<ARGBColor> c = ARGBColor::Parse(s);
+            if (c.has_value()) {
+                app->marker3 = *c;
+                app->newPart(app->current_id);
+            }
+        }
+        else if (arg == "--marker-color4") {
+            std::string s = std::string(argv[++i]);
+            std::optional<ARGBColor> c = ARGBColor::Parse(s);
+            if (c.has_value()) {
+                app->marker4 = *c;
+                app->newPart(app->current_id);
+            }
+        }
+        else if (arg == "--background-color") {
+
+            app->skyToggle = false;
+            std::string s = std::string(argv[++i]);
+            std::optional<CSSColorParser::Color> c = CSSColorParser::parse(s);
+            if (c.has_value()) app->updateClearColor(*c);
+        }
+
+        else if (arg == "--output-file") {
+            exit(app->capture(argv[++i]));
+        }
+        else if (arg == "--ambient") {
+            AvaraGLSetAmbient(atof(argv[++i]), 0xffffffff);
+        }
+        else if (arg == "--hull-emotes") {
+
+            int hulls[3] = {215, 216, 217};
+            std::string hull_names[] = {"Light", "Medium", "Heavy"};
+            app->orientation[0] = ToFixed(14);
+            app->orientation[1] = ToFixed(25.2);
+            app->location[2] = ToFixed(-0.44007);
+
+            app->skyToggle = false;
+            std::stringstream ss;
+            int error = 0;
+            for (size_t i = 0; i < 3; i++) {
+                for (size_t j = 0; j < kMaxTeamColors; j++) {
+
+                    app->marker1 = *ColorManager::getTeamColor(j);
+                    app->newPart(hulls[i]);
+                    app->drawContents();
+                    ss.str("");
+                    ss << hull_names[i] << "-" << *ColorManager::getTeamColorName(j) << ".png";
+                    error += app->capture(ss.str().c_str());
+                }
+            }
+            SDL_Quit();
+            exit(error);
+        }
+    }
 
     // Init SDL and nanogui.
     nanogui::init();
 
     // Init Avara stuff.
     InitMatrix();
-
-    // The BSPViewer application itself.
-    if (argc > 1)
-        BSPViewer *app = new BSPViewer(atoi(argv[1]));
-    else
-        BSPViewer *app = new BSPViewer(215);
-
     // Wait at most 10ms for any event.
     nanogui::mainloop(10);
-
     // Shut it down!!
     nanogui::shutdown();
 

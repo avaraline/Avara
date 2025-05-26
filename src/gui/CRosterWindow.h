@@ -20,14 +20,17 @@ public:
     void SendRosterMessage(std::string& message);
     void SendRosterMessage(const char* message); // arg must be null-terminated
     void SendRosterMessage(size_t length, char *message);
-    void NewChatLine(Str255 playerName, std::string message);
+    void NewChatLine(Str255 playerName, short slot, std::string message);
     void ChatLineDelete();
     void ResetChatPrompt();
     std::string ChatPromptFor(std::string name);
+    virtual void PrefChanged(std::string name) override;
+    void UpdateTags(std::string tags);
 
     nanogui::Text *levelLoaded;
     nanogui::Text *levelDesigner;
     nanogui::Label *levelDescription;
+    nanogui::Text *levelTags;
     nanogui::Label *chatInput;
 
 private:

@@ -29,11 +29,12 @@ public:
     MaskType watchBits;
     short watchTeams;
 
-    virtual void BeginScript();
-    virtual CAbstractActor *EndScript();
-    virtual void Dispose();
+    virtual void BeginScript() override;
+    virtual CAbstractActor *EndScript() override;
+    virtual ~CGuardActor();
 
-    virtual void PlaceParts();
+    virtual void PlaceParts() override;
     virtual CSmartPart *FindClosestTarget();
-    virtual void FrameAction();
+    virtual void FrameAction() override;
+    virtual bool IsGeometryStatic() override;
 };

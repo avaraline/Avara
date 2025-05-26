@@ -23,7 +23,7 @@ void CDoor2Actor::PlaceParts() {
     CSmartPart *theDoor;
 
     if (stat >= midState) {
-        stat = FDivNZ(stat - FIX(1), FIX(1) - midState);
+        stat = FDivNZ(stat - FIX1, FIX1 - midState);
         endTrans = deltas;
         endTwist = twists;
         deltaTrans[0] = deltas[0] - midDeltas[0];
@@ -96,4 +96,53 @@ void CDoor2Actor::ReadDoorVariables() {
     midTwists[0] = ReadFixedVar(iMidPitch);
     midTwists[1] = ReadFixedVar(iMidYaw);
     midTwists[2] = ReadFixedVar(iMidRoll);
+}
+
+bool CDoor2Actor::IsGeometryStatic()
+{
+    if (!CGlowActors::IsGeometryStatic()) {
+        return false;
+    }
+    
+    if (doorStatus == kDoorClosed &&
+        openActivator.messageId > 0 &&
+        classicOpenSpeed != 0 && (
+            deltas[0] != 0 ||
+            deltas[1] != 0 ||
+            deltas[2] != 0 ||
+            twists[0] != 0 ||
+            twists[1] != 0 ||
+            twists[2] != 0 ||
+            midDeltas[0] != 0 ||
+            midDeltas[1] != 0 ||
+            midDeltas[2] != 0 ||
+            midTwists[0] != 0 ||
+            midTwists[1] != 0 ||
+            midTwists[2] != 0
+        )
+    ) {
+        return false;
+    }
+    
+    if (doorStatus == kDoorOpen &&
+        closeActivator.messageId > 0 &&
+        classicCloseSpeed != 0 && (
+            deltas[0] != 0 ||
+            deltas[1] != 0 ||
+            deltas[2] != 0 ||
+            twists[0] != 0 ||
+            twists[1] != 0 ||
+            twists[2] != 0 ||
+            midDeltas[0] != 0 ||
+            midDeltas[1] != 0 ||
+            midDeltas[2] != 0 ||
+            midTwists[0] != 0 ||
+            midTwists[1] != 0 ||
+            midTwists[2] != 0
+        )
+    ) {
+        return false;
+    }
+    
+    return true;
 }

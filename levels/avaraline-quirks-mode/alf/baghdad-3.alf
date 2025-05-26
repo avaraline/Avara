@@ -53,18 +53,18 @@
   <enum start="20+25.5*random" vars="missRadius" />
   <enum start="0.1+200*round(0.16+random)" vars="domeYon" />  <!-- border invisible about 33% of the time (for Seven) -->
 
-  <SkyColor fill="#fffc41" frame="#ff7c00" />
-  <!-- <GroundColor fill="#d6a800" />  214 168 0 original color, Dome floor below attempts to match this -->
-  <GroundColor fill="#cca000" />  <!-- 204 160 0 -->
+  <SkyColor color="#fffc41" color.1="#ff7c00" />
+  <!-- <GroundColor color="#d6a800" />  214 168 0 original color, Dome floor below attempts to match this -->
+  <GroundColor color="#cca000" />  <!-- 204 160 0 -->
   <Sound y="50" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="80" cx="30" cz="30" angle="225" />
 
   <Teleporter shape="0" win="1200" start="@winTeam"
      cx="0" cz="0" y="200" activeRange="500" />
   <Teleporter shape="0" group="@center" destGroup="@recenter"
      cx="0" cz="0" y="-startY" activeRange="500" deadRange="48" />
-  <Teleporter shape="bspGroundStar" fill="#000000" speed="0" mask="0" group="@recenter"
+  <Teleporter shape="bspGroundStar" color="#000000" speed="0" mask="0" group="@recenter"
      cx="0" cz="0" y="startY" angle="0" activeRange="0" spin="0" />
-  <Hologram shape="bspGroundStar" fill="#000000"
+  <Hologram shape="bspGroundStar" color="#000000"
      cx="0" cz="0" y="0.01" angle="0" />
 
    <!-- Disabled incarnators are used to define the minimum radius of the randomly generated incarnators  -->
@@ -74,16 +74,16 @@
   <!-- Small rotating stars -->
   <unique vars="mShow = @start" />
   <Base in="@start" out="mShow" />
-  <Goody shape="bspGroundStar" scale="0.618" yon="500" sound="0" y="0.001" speed="1.2" grenades="0" start="mShow" out="mShow" fill="#000000" frame="#000000" cx="0" cz="0" angle="0" />
-  <Goody shape="bspGroundStar" scale="0.618" yon="500" sound="0" y="startY+0.001" speed="-1.2" grenades="0" start="mShow" out="mShow" fill="#000000" frame="#000000" cx="0" cz="0" angle="45" />
+  <Goody shape="bspGroundStar" scale="0.618" yon="500" sound="0" y="0.001" speed="1.2" grenades="0" start="mShow" out="mShow" color="#000000" color.1="#000000" cx="0" cz="0" angle="0" />
+  <Goody shape="bspGroundStar" scale="0.618" yon="500" sound="0" y="startY+0.001" speed="-1.2" grenades="0" start="mShow" out="mShow" color="#000000" color.1="#000000" cx="0" cz="0" angle="45" />
 
   <!-- Upside down domes provides a floor that shows the extent of the level -->
-  <Dome hasFloor="true" fill="domeColor" cx="0" cz="0" y="-0.001" r="50" roll="180" yon="domeYon" angle="0" />
-  <Dome hasFloor="true" fill="domeColor" cx="0" cz="0" y="-0.003" r="50" roll="180" yon="domeYon" angle="7.5" />
-  <Dome hasFloor="true" fill="domeColor" cx="0" cz="0" y="-0.005" r="50" roll="180" yon="domeYon" angle="15" />
-  <Dome hasFloor="true" fill="domeColor" cx="0" cz="0" y="-0.006" r="50" roll="180" yon="domeYon" angle="22.5" />
-  <Dome hasFloor="true" fill="domeColor" cx="0" cz="0" y="-0.004" r="50" roll="180" yon="domeYon" angle="30" />
-  <Dome hasFloor="true" fill="domeColor" cx="0" cz="0" y="-0.002" r="50" roll="180" yon="domeYon" angle="37.5" />
+  <Dome hasFloor="true" color="$domeColor" cx="0" cz="0" y="-0.001" r="50" roll="180" yon="domeYon" angle="0" />
+  <Dome hasFloor="true" color="$domeColor" cx="0" cz="0" y="-0.003" r="50" roll="180" yon="domeYon" angle="7.5" />
+  <Dome hasFloor="true" color="$domeColor" cx="0" cz="0" y="-0.005" r="50" roll="180" yon="domeYon" angle="15" />
+  <Dome hasFloor="true" color="$domeColor" cx="0" cz="0" y="-0.006" r="50" roll="180" yon="domeYon" angle="22.5" />
+  <Dome hasFloor="true" color="$domeColor" cx="0" cz="0" y="-0.004" r="50" roll="180" yon="domeYon" angle="30" />
+  <Dome hasFloor="true" color="$domeColor" cx="0" cz="0" y="-0.002" r="50" roll="180" yon="domeYon" angle="37.5" />
 
   <!-- Grenades -->
   <unique vars="mShow mTaken" />
@@ -169,7 +169,7 @@
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="missDelay" />
-  <Goody shape="bspMissile" scale="missilePower" y="mGoodyOffset" missiles="numMiss" start="mShow" out="mTaken" fill="#0052ff" frame="#000000" cx="missRadius" cz="0" angle="270" speed="0" />
+  <Goody shape="bspMissile" scale="missilePower" y="mGoodyOffset" missiles="numMiss" start="mShow" out="mTaken" color="#0052ff" color.1="#000000" cx="missRadius" cz="0" angle="270" speed="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="missDelay" />
@@ -182,7 +182,7 @@
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="missDelay" />
-  <Goody shape="bspMissile" scale="missilePower" y="mGoodyOffset" missiles="numMiss" start="mShow" out="mTaken" fill="#0052ff" frame="#000000" cx="cos60*missRadius" cz="sin60*missRadius" angle="330" />
+  <Goody shape="bspMissile" scale="missilePower" y="mGoodyOffset" missiles="numMiss" start="mShow" out="mTaken" color="#0052ff" color.1="#000000" cx="cos60*missRadius" cz="sin60*missRadius" angle="330" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="missDelay" />
@@ -195,7 +195,7 @@
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="missDelay" />
-  <Goody shape="bspMissile" scale="missilePower" y="mGoodyOffset" missiles="numMiss" start="mShow" out="mTaken" fill="#012ce4" frame="#000000" cx="-cos60*missRadius" cz="sin60*missRadius" angle="30" />
+  <Goody shape="bspMissile" scale="missilePower" y="mGoodyOffset" missiles="numMiss" start="mShow" out="mTaken" color="#012ce4" color.1="#000000" cx="-cos60*missRadius" cz="sin60*missRadius" angle="30" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="missDelay" />
@@ -208,7 +208,7 @@
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="missDelay" />
-  <Goody shape="bspMissile" scale="missilePower" y="mGoodyOffset" missiles="numMiss" start="mShow" out="mTaken" fill="#0052ff" frame="#000000" cx="-missRadius" cz="0" angle="90" />
+  <Goody shape="bspMissile" scale="missilePower" y="mGoodyOffset" missiles="numMiss" start="mShow" out="mTaken" color="#0052ff" color.1="#000000" cx="-missRadius" cz="0" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="missDelay" />
@@ -221,7 +221,7 @@
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="missDelay" />
-  <Goody shape="bspMissile" scale="missilePower" y="mGoodyOffset" missiles="numMiss" start="mShow" out="mTaken" fill="#0052ff" frame="#000000" cx="-cos60*missRadius" cz="-sin60*missRadius" angle="150" />
+  <Goody shape="bspMissile" scale="missilePower" y="mGoodyOffset" missiles="numMiss" start="mShow" out="mTaken" color="#0052ff" color.1="#000000" cx="-cos60*missRadius" cz="-sin60*missRadius" angle="150" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="missDelay" />
@@ -234,7 +234,7 @@
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="missDelay" />
-  <Goody shape="bspMissile" scale="missilePower" y="mGoodyOffset" missiles="numMiss" start="mShow" out="mTaken" fill="#0052ff" frame="#000000" cx="cos60*missRadius" cz="-sin60*missRadius" angle="210" />
+  <Goody shape="bspMissile" scale="missilePower" y="mGoodyOffset" missiles="numMiss" start="mShow" out="mTaken" color="#0052ff" color.1="#000000" cx="cos60*missRadius" cz="-sin60*missRadius" angle="210" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="missDelay" />

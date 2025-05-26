@@ -1,0 +1,41 @@
+{
+  "LEDI": [
+    {
+      "Alf": "kalium.alf",
+      "Name": "Kalium",
+      "Message": "[ Potassium ]"
+    },
+    {
+      "Alf": "sirote.alf",
+      "Name": "Sirote",
+      "Message": "[ Powder ]"
+    },
+    {
+      "Alf": "pelko.alf",
+      "Name": "Pelko",
+      "Message": "[ Funk ]"
+    },
+    {
+      "Alf": "hermo.alf",
+      "Name": "Hermo",
+      "Message": "[ Nerve ]"
+    }
+  ],
+  "HSND": {
+    "1000": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0092774853131914,
+      "Sound": 0,
+      "Ogg": "1000.ogg",
+      "Wav": "1000.wav"
+    }
+  },
+  "BSPT": {
+    "1001": "levels/kalium/bsps/1001.json",
+    "1002": "levels/kalium/bsps/1002.json"
+  }
+}

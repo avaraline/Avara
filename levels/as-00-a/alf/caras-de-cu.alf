@@ -1,0 +1,62 @@
+<map>
+  <set designer="NightDog" information="the sky and ground colors represent the blood inocents lost" />
+  <Wall color="#160000" color.1="#000000" x="33.298611111111114" z="57.8125" w="5.069444444444446" d="18.81944444444445" h="0" />
+  <Wall color="#160000" color.1="#000000" x="43.298611111111114" z="45.9375" w="25.069444444444446" d="5.069444444444443" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="73.29861111111111" z="45.9375" w="25.06944444444445" d="5.069444444444443" h="0" />
+  <Wall color="#160000" color.1="#000000" x="83.29861111111111" z="34.0625" w="5.069444444444457" d="18.819444444444443" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="58.298611111111114" z="60.625" w="5.069444444444443" d="24.44444444444445" h="0" />
+  <Wall color="#686868" color.1="#000000" x="70.79861111111111" z="70.3125" w="20.06944444444445" d="5.069444444444443" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="58.298611111111114" z="31.25" w="5.069444444444443" d="24.444444444444443" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="45.798611111111114" z="21.5625" w="20.069444444444443" d="5.069444444444446" h="0" />
+  <Incarnator y="10" cx="69.58333333333334" cz="57.22222222222223" angle="315" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="8" power="1000" shield="1000" volume="0" yon=".001" start="rShow" out="rTaken" color="#ffd300" color.1="#000000" cx="69.58333333333334" cz="57.22222222222223" angle="315" />
+  <Incarnator y="10" cx="47.083333333333336" cz="57.22222222222223" angle="45" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="8" power="1000" shield="1000" volume="0" yon=".001" start="rShow" out="rTaken" color="#ffd300" color.1="#000000" cx="47.083333333333336" cz="57.22222222222223" angle="45" />
+  <And in="@start" out="rShow" />
+  <Incarnator y="10" cx="47.083333333333336" cz="34.72222222222223" angle="135" />
+  <unique vars="rShow rTaken" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="8" power="1000" shield="1000" volume="0" yon=".001" start="rShow" out="rTaken" color="#ffd300" color.1="#000000" cx="47.083333333333336" cz="34.72222222222223" angle="135" />
+  <Incarnator y="10" cx="69.58333333333334" cz="34.72222222222223" angle="225" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="8" power="1000" shield="1000" volume="0" yon=".001" start="rShow" out="rTaken" color="#ffd300" color.1="#000000" cx="69.58333333333334" cz="34.72222222222223" angle="225" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" />
+  <set out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="500" />
+  <Goody shape="bspKit" y="6" shield="1000" speed="5" start="rShow" out="rTaken" color="#ffffff" color.1="#e62100" cx="58.333333333333336" cz="45.97222222222223" angle="225" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="300" />
+  <Goody shape="bspClip" speed="5" sound="snReload" y="6" power="1000" start="rShow" out="rTaken" color="#002c00" color.1="#000000" cx="59.375" cz="20.34722222222222" angle="45" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="250" />
+  <Goody shape="bspGrenade" y="6" grenades="4" start="mShow" out="mTaken" color="#ffd300" color.1="#000000" cx="33.958333333333336" cz="44.93055555555556" angle="45" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="250" />
+  <Goody shape="bspMissile" y="6" missiles="3" start="mShow" out="mTaken" color="#ffd300" color.1="#000000" cx="84.58333333333334" cz="44.72222222222223" angle="45" />
+  <Teleporter group="@center" y="2 * startY" activeRange="2000" deadRange="48" destGroup="@recenter" shape="0" color="#8b0f00" color.1="#000000" cx="58.333333333333336" cz="45.97222222222223" angle="359.5" />
+  <Teleporter y="startY" group="@recenter" shape="bspGroundStar" speed="0" color="#8b0f00" color.1="#000000" cx="58.333333333333336" cz="45.97222222222223" angle="359.5" />
+  <Hologram color="#8b0f00" color.1="#000000" cx="58.333333333333336" cz="45.97222222222223" angle="359.5" />
+  <Wall color="#ffffff" color.1="#000000" x="60.486111111111114" z="45.9375" w="0.6944444444444429" d="5.069444444444443" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="56.111111111111114" z="45.9375" w="0.6944444444444429" d="5.069444444444443" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="58.298611111111114" z="43.75" w="3.819444444444443" d="0.6944444444444429" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="58.298611111111114" z="48.125" w="3.819444444444443" d="0.6944444444444429" h="0" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="300" />
+  <Goody shape="bspClip" speed="5" sound="snReload" y="6" power="1000" start="rShow" out="rTaken" color="#002c00" color.1="#000000" cx="59.583333333333336" cz="69.72222222222223" angle="45" />
+  <SkyColor color="#ff2600" color.1="#f42300" />
+  <GroundColor color="#ff7e79" />
+  <set defaultLives="5" />
+</map>

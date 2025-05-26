@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{E5E15B6D-B9DC-4552-A6D3-577BD71FB4D7}</ProjectGuid>
+    <RootNamespace>AvaraCore</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>AvaraCore</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(VCPKG_ROOT)\installed\x64-windows\debug\lib\manual-link</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(VCPKG_ROOT)\installed\x64-windows\lib\manual-link</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnableManifest>true</VcpkgEnableManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level2</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_WINSOCK_DEPRECATED_NO_WARNINGS;NOMINMAX;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_WARNINGS;_DEBUG;NANOGUI_GLAD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>..\src\audio;..\src\assets;..\src\base;..\src\bsp;..\src\compat;..\src\game;..\src\gui;..\src\level;..\src\net;..\src\render;..\src\tui;..\src\util;..\src\util\huffman;..\vendor\;..\vendor\nanogui;..\vendor\nanovg;..\vendor\pugixml;..\vendor\utf8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ShowIncludes>false</ShowIncludes>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>shell32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy /E /Y "$(SolutionDir)..\rsrc\" "$(TargetDir)rsrc\" &amp;&amp; xcopy /E /Y "$(SolutionDir)..\levels\" "$(TargetDir)levels\"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_WINSOCK_DEPRECATED_NO_WARNINGS;NOMINMAX;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_WARNINGS;NDEBUG;NANOGUI_GLAD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>..\src\audio;..\src\assets;..\src\base;..\src\bsp;..\src\compat;..\src\game;..\src\gui;..\src\level;..\src\net;..\src\render;..\src\tui;..\src\util;..\src\util\huffman;..\vendor\;..\vendor\nanogui;..\vendor\nanovg;..\vendor\pugixml;..\vendor\utf8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\platform\windows\resource.h" />
+    <ClInclude Include="..\src\assets\AssetManager.h" />
+    <ClInclude Include="..\src\assets\AssetRepository.h" />
+    <ClInclude Include="..\src\assets\AssetStorage.h" />
+    <ClInclude Include="..\src\assets\BaseAssetStorage.h" />
+    <ClInclude Include="..\src\assets\LocalAssetRepository.h" />
+    <ClInclude Include="..\src\assets\PackageManifest.h" />
+    <ClInclude Include="..\src\audio\CBasicSound.h" />
+    <ClInclude Include="..\src\audio\CRateSound.h" />
+    <ClInclude Include="..\src\audio\CSoundHub.h" />
+    <ClInclude Include="..\src\audio\CSoundMixer.h" />
+    <ClInclude Include="..\src\audio\OggFile.h" />
+    <ClInclude Include="..\src\audio\SoundSystemDefines.h" />
+    <ClInclude Include="..\src\base\CBaseObject.h" />
+    <ClInclude Include="..\src\base\CDirectObject.h" />
+    <ClInclude Include="..\src\base\CTagBase.h" />
+    <ClInclude Include="..\src\bsp\CBSPPart.h" />
+    <ClInclude Include="..\src\bsp\CBSPWorld.h" />
+    <ClInclude Include="..\src\bsp\CCompoundShape.h" />
+    <ClInclude Include="..\src\bsp\CScaledBSP.h" />
+    <ClInclude Include="..\src\bsp\CSmartBox.h" />
+    <ClInclude Include="..\src\bsp\CSmartPart.h" />
+    <ClInclude Include="..\src\bsp\CViewParameters.h" />
+    <ClInclude Include="..\src\compat\Memory.h" />
+    <ClInclude Include="..\src\compat\Resource.h" />
+    <ClInclude Include="..\src\compat\System.h" />
+    <ClInclude Include="..\src\compat\Types.h" />
+    <ClInclude Include="..\src\game\AvaraDefines.h" />
+    <ClInclude Include="..\src\game\AvaraScoreInterface.h" />
+    <ClInclude Include="..\src\game\AvaraTypes.h" />
+    <ClInclude Include="..\src\game\CAbstractActor.h" />
+    <ClInclude Include="..\src\game\CAbstractMissile.h" />
+    <ClInclude Include="..\src\game\CAbstractMovers.h" />
+    <ClInclude Include="..\src\game\CAbstractPlayer.h" />
+    <ClInclude Include="..\src\game\CAbstractYon.h" />
+    <ClInclude Include="..\src\game\CAreaActor.h" />
+    <ClInclude Include="..\src\game\CAvaraApp.h" />
+    <ClInclude Include="..\src\game\CAvaraGame.h" />
+    <ClInclude Include="..\src\game\CBall.h" />
+    <ClInclude Include="..\src\game\CDepot.h" />
+    <ClInclude Include="..\src\game\CDome.h" />
+    <ClInclude Include="..\src\game\CDoor2Actor.h" />
+    <ClInclude Include="..\src\game\CDoorActor.h" />
+    <ClInclude Include="..\src\game\CForceField.h" />
+    <ClInclude Include="..\src\game\CFreeCam.h" />
+    <ClInclude Include="..\src\game\CFreeSolid.h" />
+    <ClInclude Include="..\src\game\CGlowActors.h" />
+    <ClInclude Include="..\src\game\CGoal.h" />
+    <ClInclude Include="..\src\game\CGoody.h" />
+    <ClInclude Include="..\src\game\CGrenade.h" />
+    <ClInclude Include="..\src\game\CGroundColorAdjuster.h" />
+    <ClInclude Include="..\src\game\CGuardActor.h" />
+    <ClInclude Include="..\src\game\CHologramActor.h" />
+    <ClInclude Include="..\src\game\CHUD.h" />
+    <ClInclude Include="..\src\game\CIncarnator.h" />
+    <ClInclude Include="..\src\game\CLogic.h" />
+    <ClInclude Include="..\src\game\CLogicAnd.h" />
+    <ClInclude Include="..\src\game\CLogicBase.h" />
+    <ClInclude Include="..\src\game\CLogicCounter.h" />
+    <ClInclude Include="..\src\game\CLogicDelay.h" />
+    <ClInclude Include="..\src\game\CLogicDistributor.h" />
+    <ClInclude Include="..\src\game\CLogicTimer.h" />
+    <ClInclude Include="..\src\game\CMarkerActor.h" />
+    <ClInclude Include="..\src\game\CMineActor.h" />
+    <ClInclude Include="..\src\game\CMissile.h" />
+    <ClInclude Include="..\src\game\CNetManager.h" />
+    <ClInclude Include="..\src\game\ComputerVoice.h" />
+    <ClInclude Include="..\src\game\CParasite.h" />
+    <ClInclude Include="..\src\game\CPill.h" />
+    <ClInclude Include="..\src\game\CPlacedActors.h" />
+    <ClInclude Include="..\src\game\CPlayerActor.h" />
+    <ClInclude Include="..\src\game\CPlayerManager.h" />
+    <ClInclude Include="..\src\game\CPlayerMissile.h" />
+    <ClInclude Include="..\src\game\CRamp.h" />
+    <ClInclude Include="..\src\game\CRandomIncarnator.h" />
+    <ClInclude Include="..\src\game\CRealMovers.h" />
+    <ClInclude Include="..\src\game\CRealShooters.h" />
+    <ClInclude Include="..\src\game\CRUD.h" />
+    <ClInclude Include="..\src\game\CRUDsqlite.h" />
+    <ClInclude Include="..\src\game\CScoreKeeper.h" />
+    <ClInclude Include="..\src\game\CScout.h" />
+    <ClInclude Include="..\src\game\CShuriken.h" />
+    <ClInclude Include="..\src\game\CSkyColorAdjuster.h" />
+    <ClInclude Include="..\src\game\CSliverPart.h" />
+    <ClInclude Include="..\src\game\CSmart.h" />
+    <ClInclude Include="..\src\game\CSolidActor.h" />
+    <ClInclude Include="..\src\game\CSoundActor.h" />
+    <ClInclude Include="..\src\game\CSphereActor.h" />
+    <ClInclude Include="..\src\game\CSwitchActor.h" />
+    <ClInclude Include="..\src\game\CTeamColorAdjuster.h" />
+    <ClInclude Include="..\src\game\CTeleporter.h" />
+    <ClInclude Include="..\src\game\CTextActor.h" />
+    <ClInclude Include="..\src\game\CTriPyramidActor.h" />
+    <ClInclude Include="..\src\game\CUfo.h" />
+    <ClInclude Include="..\src\game\CWalkerActor.h" />
+    <ClInclude Include="..\src\game\CWallActor.h" />
+    <ClInclude Include="..\src\game\CWallDoor.h" />
+    <ClInclude Include="..\src\game\CWallSolid.h" />
+    <ClInclude Include="..\src\game\CWeapon.h" />
+    <ClInclude Include="..\src\game\CWorldShader.h" />
+    <ClInclude Include="..\src\game\CYonBox.h" />
+    <ClInclude Include="..\src\game\CYonSphere.h" />
+    <ClInclude Include="..\src\game\CZombieActor.h" />
+    <ClInclude Include="..\src\game\GoodyRecord.h" />
+    <ClInclude Include="..\src\game\InfoMessages.h" />
+    <ClInclude Include="..\src\game\KeyFuncs.h" />
+    <ClInclude Include="..\src\game\LevelInfo.h" />
+    <ClInclude Include="..\src\game\Messages.h" />
+    <ClInclude Include="..\src\game\PlayerConfig.h" />
+    <ClInclude Include="..\src\game\PlayerRatingsSimpleElo.h" />
+    <ClInclude Include="..\src\gui\CApplication.h" />
+    <ClInclude Include="..\src\gui\CLevelWindow.h" />
+    <ClInclude Include="..\src\gui\CNetworkWindow.h" />
+    <ClInclude Include="..\src\gui\ColorManager.h" />
+    <ClInclude Include="..\src\gui\CommandList.h" />
+    <ClInclude Include="..\src\gui\CPlayerWindow.h" />
+    <ClInclude Include="..\src\gui\CRosterWindow.h" />
+    <ClInclude Include="..\src\gui\CServerWindow.h" />
+    <ClInclude Include="..\src\gui\CTrackerWindow.h" />
+    <ClInclude Include="..\src\gui\CWindow.h" />
+    <ClInclude Include="..\src\gui\Preferences.h" />
+    <ClInclude Include="..\src\gui\Tags.h" />
+    <ClInclude Include="..\src\level\InternalVars.h" />
+    <ClInclude Include="..\src\level\LevelLoader.h" />
+    <ClInclude Include="..\src\level\LinkLoose.h" />
+    <ClInclude Include="..\src\level\Parser.h" />
+    <ClInclude Include="..\src\net\AvaraTCP.h" />
+    <ClInclude Include="..\src\net\CCommManager.h" />
+    <ClInclude Include="..\src\net\CommDefs.h" />
+    <ClInclude Include="..\src\net\CProtoControl.h" />
+    <ClInclude Include="..\src\net\CUDPComm.h" />
+    <ClInclude Include="..\src\net\CUDPConnection.h" />
+    <ClInclude Include="..\src\net\TrackerTags.h" />
+    <ClInclude Include="..\src\net\UDPTags.h" />
+    <ClInclude Include="..\src\render\AbstractRenderer.h" />
+    <ClInclude Include="..\src\render\LegacyOpenGLRenderer.h" />
+    <ClInclude Include="..\src\render\ModernOpenGLRenderer.h" />
+    <ClInclude Include="..\src\render\NullRenderer.h" />
+    <ClInclude Include="..\src\render\OpenGLShader.h" />
+    <ClInclude Include="..\src\render\OpenGLVertices.h" />
+    <ClInclude Include="..\src\render\VertexData.h" />
+    <ClInclude Include="..\src\tui\CommandManager.h" />
+    <ClInclude Include="..\src\tui\TextCommand.h" />
+    <ClInclude Include="..\src\util\ARGBColor.h" />
+    <ClInclude Include="..\src\util\Beeper.h" />
+    <ClInclude Include="..\src\util\CharWordLongPointer.h" />
+    <ClInclude Include="..\src\util\CRC.h" />
+    <ClInclude Include="..\src\util\CStringDictionary.h" />
+    <ClInclude Include="..\src\util\Debug.h" />
+    <ClInclude Include="..\src\util\FastMat.h" />
+    <ClInclude Include="..\src\util\huffman\CAbstractHuffPipe.h" />
+    <ClInclude Include="..\src\util\huffman\CAbstractPipe.h" />
+    <ClInclude Include="..\src\util\huffman\CHandlePipe.h" />
+    <ClInclude Include="..\src\util\huffman\CHuffProcessor.h" />
+    <ClInclude Include="..\src\util\JSONify.h" />
+    <ClInclude Include="..\src\util\PascalStrings.h" />
+    <ClInclude Include="..\src\util\RamFiles.h" />
+    <ClInclude Include="..\src\util\RayHit.h" />
+    <ClInclude Include="..\src\util\RolloverCounter.h" />
+    <ClInclude Include="..\src\util\SlidingHistogram.h" />
+    <ClInclude Include="..\vendor\AudioFile.h" />
+    <ClInclude Include="..\vendor\cute_files.h" />
+    <ClInclude Include="..\vendor\glm\glm.hpp" />
+    <ClInclude Include="..\vendor\httplib.h" />
+    <ClInclude Include="..\vendor\json.hpp" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\button.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\checkbox.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\colorcombobox.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\combobox.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\common.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\compat.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\desccombobox.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\entypo.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\formhelper.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\glcanvas.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\glutil.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\label.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\layout.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\messagedialog.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\nanogui.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\object.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\opengl.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\popup.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\popupbutton.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\progressbar.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\screen.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\slider.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\stackedwidget.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\tabheader.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\tabwidget.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\text.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\textbox.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\theme.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\toolbutton.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\vscrollpanel.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\widget.h" />
+    <ClInclude Include="..\vendor\nanogui\nanogui\window.h" />
+    <ClInclude Include="..\vendor\nanovg\fontstash.h" />
+    <ClInclude Include="..\vendor\nanovg\nanovg.h" />
+    <ClInclude Include="..\vendor\nanovg\nanovg_gl.h" />
+    <ClInclude Include="..\vendor\nanovg\nanovg_gl_utils.h" />
+    <ClInclude Include="..\vendor\nanovg\stb_image.h" />
+    <ClInclude Include="..\vendor\nanovg\stb_truetype.h" />
+    <ClInclude Include="..\vendor\pugixml\pugiconfig.hpp" />
+    <ClInclude Include="..\vendor\pugixml\pugixml.hpp" />
+    <ClInclude Include="..\vendor\stb_image_write.h" />
+    <ClInclude Include="..\vendor\stb_vorbis.h" />
+    <ClInclude Include="..\vendor\utf8.h" />
+    <ClInclude Include="..\vendor\utf8\checked.h" />
+    <ClInclude Include="..\vendor\utf8\core.h" />
+    <ClInclude Include="..\vendor\utf8\cpp17.h" />
+    <ClInclude Include="..\vendor\utf8\unchecked.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\assets\AssetManager.cpp" />
+    <ClCompile Include="..\src\assets\BaseAssetStorage.cpp" />
+    <ClCompile Include="..\src\assets\LocalAssetRepository.cpp" />
+    <ClCompile Include="..\src\assets\PackageManifest.cpp" />
+    <ClCompile Include="..\src\audio\CBasicSound.cpp" />
+    <ClCompile Include="..\src\audio\CRateSound.cpp" />
+    <ClCompile Include="..\src\audio\CSoundHub.cpp" />
+    <ClCompile Include="..\src\audio\CSoundMixer.cpp" />
+    <ClCompile Include="..\src\audio\DopplerPlug.cpp" />
+    <ClCompile Include="..\src\audio\OggFile.cpp" />
+    <ClCompile Include="..\src\base\CBaseObject.cpp" />
+    <ClCompile Include="..\src\base\CDirectObject.cpp" />
+    <ClCompile Include="..\src\base\CTagBase.cpp" />
+    <ClCompile Include="..\src\bsp\CBSPPart.cpp" />
+    <ClCompile Include="..\src\bsp\CBSPWorld.cpp" />
+    <ClCompile Include="..\src\bsp\CCompoundShape.cpp" />
+    <ClCompile Include="..\src\bsp\CScaledBSP.cpp" />
+    <ClCompile Include="..\src\bsp\CSmartBox.cpp" />
+    <ClCompile Include="..\src\bsp\CSmartPart.cpp" />
+    <ClCompile Include="..\src\bsp\CViewParameters.cpp" />
+    <ClCompile Include="..\src\compat\Memory.cpp" />
+    <ClCompile Include="..\src\compat\Resource.cpp" />
+    <ClCompile Include="..\src\compat\System.cpp" />
+    <ClCompile Include="..\src\game\CAbstractActor.cpp" />
+    <ClCompile Include="..\src\game\CAbstractMissile.cpp" />
+    <ClCompile Include="..\src\game\CAbstractMovers.cpp" />
+    <ClCompile Include="..\src\game\CAbstractPlayer.cpp" />
+    <ClCompile Include="..\src\game\CAbstractYon.cpp" />
+    <ClCompile Include="..\src\game\CAreaActor.cpp" />
+    <ClCompile Include="..\src\game\CAvaraApp.cpp" />
+    <ClCompile Include="..\src\game\CAvaraGame.cpp" />
+    <ClCompile Include="..\src\game\CBall.cpp" />
+    <ClCompile Include="..\src\game\CDepot.cpp" />
+    <ClCompile Include="..\src\game\CDome.cpp" />
+    <ClCompile Include="..\src\game\CDoor2Actor.cpp" />
+    <ClCompile Include="..\src\game\CDoorActor.cpp" />
+    <ClCompile Include="..\src\game\CForceField.cpp" />
+    <ClCompile Include="..\src\game\CFreeCam.cpp" />
+    <ClCompile Include="..\src\game\CFreeSolid.cpp" />
+    <ClCompile Include="..\src\game\CGlowActors.cpp" />
+    <ClCompile Include="..\src\game\CGoal.cpp" />
+    <ClCompile Include="..\src\game\CGoody.cpp" />
+    <ClCompile Include="..\src\game\CGrenade.cpp" />
+    <ClCompile Include="..\src\game\CGroundColorAdjuster.cpp" />
+    <ClCompile Include="..\src\game\CGuardActor.cpp" />
+    <ClCompile Include="..\src\game\CHologramActor.cpp" />
+    <ClCompile Include="..\src\game\CHUD.cpp" />
+    <ClCompile Include="..\src\game\CIncarnator.cpp" />
+    <ClCompile Include="..\src\game\CLogic.cpp" />
+    <ClCompile Include="..\src\game\CLogicAnd.cpp" />
+    <ClCompile Include="..\src\game\CLogicBase.cpp" />
+    <ClCompile Include="..\src\game\CLogicCounter.cpp" />
+    <ClCompile Include="..\src\game\CLogicDelay.cpp" />
+    <ClCompile Include="..\src\game\CLogicDistributor.cpp" />
+    <ClCompile Include="..\src\game\CLogicTimer.cpp" />
+    <ClCompile Include="..\src\game\CMarkerActor.cpp" />
+    <ClCompile Include="..\src\game\CMineActor.cpp" />
+    <ClCompile Include="..\src\game\CMissile.cpp" />
+    <ClCompile Include="..\src\game\CNetManager.cpp" />
+    <ClCompile Include="..\src\game\CParasite.cpp" />
+    <ClCompile Include="..\src\game\CPill.cpp" />
+    <ClCompile Include="..\src\game\CPlacedActors.cpp" />
+    <ClCompile Include="..\src\game\CPlayerActor.cpp" />
+    <ClCompile Include="..\src\game\CPlayerManager.cpp" />
+    <ClCompile Include="..\src\game\CPlayerMissile.cpp" />
+    <ClCompile Include="..\src\game\CRamp.cpp" />
+    <ClCompile Include="..\src\game\CRandomIncarnator.cpp" />
+    <ClCompile Include="..\src\game\CRealMovers.cpp" />
+    <ClCompile Include="..\src\game\CRealShooters.cpp" />
+    <ClCompile Include="..\src\game\CRUDsqlite.cpp" />
+    <ClCompile Include="..\src\game\CScoreKeeper.cpp" />
+    <ClCompile Include="..\src\game\CScout.cpp" />
+    <ClCompile Include="..\src\game\CShuriken.cpp" />
+    <ClCompile Include="..\src\game\CSkyColorAdjuster.cpp" />
+    <ClCompile Include="..\src\game\CSliverPart.cpp" />
+    <ClCompile Include="..\src\game\CSmart.cpp" />
+    <ClCompile Include="..\src\game\CSolidActor.cpp" />
+    <ClCompile Include="..\src\game\CSoundActor.cpp" />
+    <ClCompile Include="..\src\game\CSphereActor.cpp" />
+    <ClCompile Include="..\src\game\CSwitchActor.cpp" />
+    <ClCompile Include="..\src\game\CTeamColorAdjuster.cpp" />
+    <ClCompile Include="..\src\game\CTeleporter.cpp" />
+    <ClCompile Include="..\src\game\CTextActor.cpp" />
+    <ClCompile Include="..\src\game\CTriPyramidActor.cpp" />
+    <ClCompile Include="..\src\game\CUfo.cpp" />
+    <ClCompile Include="..\src\game\CWalkerActor.cpp" />
+    <ClCompile Include="..\src\game\CWallActor.cpp" />
+    <ClCompile Include="..\src\game\CWallDoor.cpp" />
+    <ClCompile Include="..\src\game\CWallSolid.cpp" />
+    <ClCompile Include="..\src\game\CWeapon.cpp" />
+    <ClCompile Include="..\src\game\CWorldShader.cpp" />
+    <ClCompile Include="..\src\game\CYonBox.cpp" />
+    <ClCompile Include="..\src\game\CYonSphere.cpp" />
+    <ClCompile Include="..\src\game\CZombieActor.cpp" />
+    <ClCompile Include="..\src\game\KeyFuncs.cpp" />
+    <ClCompile Include="..\src\game\LevelInfo.cpp" />
+    <ClCompile Include="..\src\game\PlayerRatingsSimpleElo.cpp" />
+    <ClCompile Include="..\src\gui\CApplication.cpp" />
+    <ClCompile Include="..\src\gui\CLevelWindow.cpp" />
+    <ClCompile Include="..\src\gui\CNetworkWindow.cpp" />
+    <ClCompile Include="..\src\gui\ColorManager.cpp" />
+    <ClCompile Include="..\src\gui\CPlayerWindow.cpp" />
+    <ClCompile Include="..\src\gui\CRosterWindow.cpp" />
+    <ClCompile Include="..\src\gui\CServerWindow.cpp" />
+    <ClCompile Include="..\src\gui\CTrackerWindow.cpp" />
+    <ClCompile Include="..\src\gui\CWindow.cpp" />
+    <ClCompile Include="..\src\gui\Tags.cpp" />
+    <ClCompile Include="..\src\level\LevelLoader.cpp" />
+    <ClCompile Include="..\src\level\LinkLoose.cpp" />
+    <ClCompile Include="..\src\level\Parser.cpp" />
+    <ClCompile Include="..\src\net\AvaraTCP.cpp" />
+    <ClCompile Include="..\src\net\CCommManager.cpp" />
+    <ClCompile Include="..\src\net\CProtoControl.cpp" />
+    <ClCompile Include="..\src\net\CUDPComm.cpp" />
+    <ClCompile Include="..\src\net\CUDPConnection.cpp" />
+    <ClCompile Include="..\src\render\AbstractRenderer.cpp" />
+    <ClCompile Include="..\src\render\LegacyOpenGLRenderer.cpp" />
+    <ClCompile Include="..\src\render\ModernOpenGLRenderer.cpp" />
+    <ClCompile Include="..\src\render\OpenGLShader.cpp" />
+    <ClCompile Include="..\src\render\OpenGLVertices.cpp" />
+    <ClCompile Include="..\src\tui\CommandManager.cpp" />
+    <ClCompile Include="..\src\tui\TextCommand.cpp" />
+    <ClCompile Include="..\src\util\ARGBColor.cpp" />
+    <ClCompile Include="..\src\util\Beeper.cpp" />
+    <ClCompile Include="..\src\util\CRC.cpp" />
+    <ClCompile Include="..\src\util\CStringDictionary.cpp" />
+    <ClCompile Include="..\src\util\Debug.cpp" />
+    <ClCompile Include="..\src\util\FastMat.cpp" />
+    <ClCompile Include="..\src\util\huffman\CAbstractHuffPipe.cpp" />
+    <ClCompile Include="..\src\util\huffman\CAbstractPipe.cpp" />
+    <ClCompile Include="..\src\util\huffman\CHandlePipe.cpp" />
+    <ClCompile Include="..\src\util\huffman\CHuffProcessor.cpp" />
+    <ClCompile Include="..\src\util\PascalStrings.cpp" />
+    <ClCompile Include="..\src\util\RamFiles.cpp" />
+    <ClCompile Include="..\vendor\csscolorparser.cpp" />
+    <ClCompile Include="..\vendor\nanogui\button.cpp" />
+    <ClCompile Include="..\vendor\nanogui\checkbox.cpp" />
+    <ClCompile Include="..\vendor\nanogui\colorcombobox.cpp" />
+    <ClCompile Include="..\vendor\nanogui\combobox.cpp" />
+    <ClCompile Include="..\vendor\nanogui\common.cpp" />
+    <ClCompile Include="..\vendor\nanogui\desccombobox.cpp" />
+    <ClCompile Include="..\vendor\nanogui\glcanvas.cpp" />
+    <ClCompile Include="..\vendor\nanogui\glutil.cpp" />
+    <ClCompile Include="..\vendor\nanogui\label.cpp" />
+    <ClCompile Include="..\vendor\nanogui\layout.cpp" />
+    <ClCompile Include="..\vendor\nanogui\messagedialog.cpp" />
+    <ClCompile Include="..\vendor\nanogui\nanogui_resources.cpp" />
+    <ClCompile Include="..\vendor\nanogui\popup.cpp" />
+    <ClCompile Include="..\vendor\nanogui\popupbutton.cpp" />
+    <ClCompile Include="..\vendor\nanogui\progressbar.cpp" />
+    <ClCompile Include="..\vendor\nanogui\screen.cpp" />
+    <ClCompile Include="..\vendor\nanogui\slider.cpp" />
+    <ClCompile Include="..\vendor\nanogui\stackedwidget.cpp" />
+    <ClCompile Include="..\vendor\nanogui\tabheader.cpp" />
+    <ClCompile Include="..\vendor\nanogui\tabwidget.cpp" />
+    <ClCompile Include="..\vendor\nanogui\text.cpp" />
+    <ClCompile Include="..\vendor\nanogui\textbox.cpp" />
+    <ClCompile Include="..\vendor\nanogui\theme.cpp" />
+    <ClCompile Include="..\vendor\nanogui\vscrollpanel.cpp" />
+    <ClCompile Include="..\vendor\nanogui\widget.cpp" />
+    <ClCompile Include="..\vendor\nanogui\window.cpp" />
+    <ClCompile Include="..\vendor\nanovg\nanovg.c" />
+    <ClCompile Include="..\vendor\pugixml\pugixml.cpp" />
+    <ClCompile Include="..\vendor\stb_vorbis.c" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

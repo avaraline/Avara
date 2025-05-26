@@ -15,6 +15,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <utility>
+#include <time.h>    // time()
 
 #define ARCUSTABLEBITS 9
 #define ARCUSTABLESIZE (1 + (1 << ARCUSTABLEBITS))
@@ -24,6 +25,16 @@ static uint16_t arcTanTable[ARCUSTABLESIZE] = {0};
 static uint16_t arcTanOneTable[ARCUSTABLESIZE] = {0};
 
 Fixed FRandSeed = 1;
+
+void UpdateFRandSeed(uint32_t value) {
+    if (value != 0) {
+        // Use an unsigned intermediate value to calculate the update to FRandSeed
+        // to make sure we don't do the signed overflow (which is undefined behavior)
+        uint32_t newseed = (uint32_t)FRandSeed + value;
+        // cast back to unsigned, but that's OK, as long as everyone is the same
+        FRandSeed = (Fixed) newseed;
+    }
+}
 
 /* FixMath */
 
@@ -70,9 +81,28 @@ Fixed NormalizeVector(long n, Fixed *v) {
     return l;
 }
 
+// because Windows is fussy about random/srandom, here's a quick version that's
+// good enough for the purposes of a starting game seed.  Here's the Wikipedia page that describe
+// Linear congruential generator algorithms (Juri's FRand() looks like a variation of mcg16807)
+//   https://en.wikipedia.org/wiki/Linear_congruential_generator
+uint32_t seedLCG = (uint32_t)time(nullptr);
+uint32_t randLCG() {
+    seedLCG = 1664525 * seedLCG + 1013904223;
+    return seedLCG;
+}
+
+Fixed NewFRandSeed() {
+    Fixed seed = 0;
+    // call randLCG() a "few" times for a good shuffle
+    for (short count = 2 + (randLCG() & 0x3); count > 0; count--) {
+        seed = (Fixed)randLCG();
+    }
+    return (seed ^ FRandSeed);  // XOR with FRandSeed to add even more randomness via actual game play
+}
+
 void InitMatrix() {
     InitTrigTables();
-    FRandSeed = (Fixed)TickCount();
+    FRandSeed = NewFRandSeed();
 }
 
 Fixed FSqroot(int *ab) {
@@ -376,7 +406,7 @@ void InverseTransform(Matrix *t, Matrix *i) {
     (*i)[2][2] = (*t)[2][2];
 
     (*i)[0][3] = (*i)[1][3] = (*i)[2][3] = 0;
-    (*i)[3][3] = FIX(1);
+    (*i)[3][3] = FIX1;
     (*i)[3][0] = (*i)[3][1] = (*i)[3][2] = 0;
 
     /*  Find translate part of matrix:
@@ -414,9 +444,9 @@ void QuaternionToMatrix(Quaternion *q, Matrix *m) {
     wz2 = FMul(z2, q->w);
     zz2 = FMul(z2, q->z);
 
-    (*m)[0][0] = FIX(1) - yy2 - zz2;
-    (*m)[1][1] = FIX(1) - xx2 - zz2;
-    (*m)[2][2] = FIX(1) - xx2 - yy2;
+    (*m)[0][0] = FIX1 - yy2 - zz2;
+    (*m)[1][1] = FIX1 - xx2 - zz2;
+    (*m)[2][2] = FIX1 - xx2 - yy2;
 
     (*m)[0][1] = yx2 + wz2;
     (*m)[0][2] = zx2 - wy2;
@@ -438,7 +468,7 @@ void QuaternionToMatrix(Quaternion *q, Matrix *m) {
 void MatrixToQuaternion(Matrix *m, Quaternion *q) {
     Fixed squared;
 
-    squared = 4 * (FIX(1) + (*m)[0][0] + (*m)[1][1] + (*m)[2][2]);
+    squared = 4 * (FIX1 + (*m)[0][0] + (*m)[1][1] + (*m)[2][2]);
 
     if (squared > EPSILON) {
         q->w = FSqrt(squared);
@@ -459,7 +489,7 @@ void MatrixToQuaternion(Matrix *m, Quaternion *q) {
             q->x /= 2;
         } else {
             q->x = 0;
-            squared = FIX(1) - (*m)[2][2];
+            squared = FIX1 - (*m)[2][2];
 
             if (squared > EPSILON) {
                 q->y = FSqrt(squared);
@@ -467,7 +497,7 @@ void MatrixToQuaternion(Matrix *m, Quaternion *q) {
                 q->y /= 2;
             } else {
                 q->y = 0;
-                q->z = FIX(1);
+                q->z = FIX1;
             }
         }
     }
@@ -624,7 +654,7 @@ void TransformMinMax(Matrix *m, Fixed *min, Fixed *max, Vector *dest) {
 
 void TransformBoundingBox(Matrix *m, Fixed *min, Fixed *max, Vector *dest) {
     Fixed *dp;
-    Fixed f1 = FIX(1);
+    Fixed f1 = FIX1;
     Fixed x, y, z;
     Vector comp[6];
 
@@ -730,4 +760,30 @@ std::string FormatVectorFloat(Fixed *v, int size) {
     }
     oss << "]";
     return oss.str();
+}
+
+void pidReset(PidMotion *p) {
+    p->previousError = 0.0f;
+    p->integralError = 0.0f;
+    p->fresh = true;
+}
+
+// Calculation for PID Motion to smoothly interpolate movement
+// from a current value to a target value
+// This algorithm came from http://ps3computing.blogspot.com/2013/03/proportional-integral-differential.html
+float pidUpdate(PidMotion *p, float dt, float current, float target) {
+    if (dt <= 0.0) return 0.0;
+    float error = current - target;
+    if (p->angular) {
+        // normalize angular error
+        error = ( error < -PI ) ? error + 2 * PI : error;
+        error = ( error > PI ) ? error - 2 * PI : error;
+    }
+    p->integralError = ( p->fresh ) ? error : p->integralError;
+    p->previousError = ( p->fresh ) ? error : p->previousError;
+    p->integralError = ( 1.0f - dt ) * p->integralError +  dt * error;
+    float derivativeError = ( error - p->previousError ) / dt;
+    p->previousError = error;
+    p->fresh = false;
+    return p->P * error + p->I * p->integralError + p->D * derivativeError;
 }

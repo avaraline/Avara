@@ -15,6 +15,7 @@
 #include "CWallActor.h"
 #include "GoodyRecord.h"
 #include "Preferences.h"
+#include "Debug.h"
 
 #define kGoodySound 250
 
@@ -46,7 +47,7 @@ void CGoody::BeginScript() {
     ProgramLongVar(iOutVar, 0);
 
     ProgramLongVar(iSound, kGoodySound);
-    ProgramFixedVar(iVolume, FIX(1));
+    ProgramFixedVar(iVolume, FIX1);
     ProgramLongVar(iOpenSound, 0);
     ProgramLongVar(iCloseSound, 0);
 
@@ -69,7 +70,7 @@ CAbstractActor *CGoody::EndScript() {
         altShapeId = ReadLongVar(iAltShape);
 
         partCount = 1;
-        LoadPartWithColors(0, shapeId);
+        LoadPartWithMaterials(0, shapeId);
         partList[0]->RotateZ(partRoll = ReadFixedVar(iRoll));
         partList[0]->RotateOneY(heading);
         TranslatePart(partList[0], location[0], location[1], location[2]);
@@ -78,7 +79,7 @@ CAbstractActor *CGoody::EndScript() {
         if (altShapeId) {
             partCount = 2;
             LoadPart(1, shapeId);
-            partList[1]->CopyTransform(&partList[0]->itsTransform);
+            partList[1]->CopyTransform(&partList[0]->modelTransform);
             partList[1]->MoveDone();
         }
 
@@ -102,9 +103,10 @@ CAbstractActor *CGoody::EndScript() {
         closeSoundId = ReadLongVar(iCloseSound);
         volume = ReadFixedVar(iVolume);
 
-        gHub->PreLoadSample(soundId);
-        gHub->PreLoadSample(openSoundId);
-        gHub->PreLoadSample(closeSoundId);
+        // Preload sounds.
+        auto _ = AssetManager::GetOgg(soundId);
+        _ = AssetManager::GetOgg(openSoundId);
+        _ = AssetManager::GetOgg(closeSoundId);
 
         isActive = kIsInactive;
         frequency = ReadLongVar(iFrequency);
@@ -132,13 +134,13 @@ void CGoody::FrameAction() {
 
         if (stopMsg.triggerCount) {
             stopMsg.triggerCount = 0;
-            DoSound(closeSoundId, location, volume, FIX(1));
+            DoSound(closeSoundId, location, volume, FIX1);
             enabled = false;
         }
 
         if (startMsg.triggerCount) {
             startMsg.triggerCount = 0;
-            DoSound(openSoundId, location, volume, FIX(1));
+            DoSound(openSoundId, location, volume, FIX1);
             enabled = true;
         }
     }
@@ -164,7 +166,7 @@ void CGoody::FrameAction() {
 
                 theActor = (CAbstractPlayer *)thePart->theOwner;
                 theActor->TakeGoody(&gr);
-                DoSound(soundId, location, volume, FIX(1));
+                DoSound(soundId, location, volume, FIX1);
 
                 itsGame->FlagMessage(outMsg);
                 enabled = false;
@@ -186,7 +188,7 @@ void CGoody::FrameAction() {
         partList[0]->MoveDone();
 
         if (partList[1]) {
-            partList[1]->CopyTransform(&partList[0]->itsTransform);
+            partList[1]->CopyTransform(&partList[0]->modelTransform);
             partList[1]->MoveDone();
         }
     }
@@ -199,7 +201,13 @@ void CGoody::FrameAction() {
         sleepTimer = frequency;
 
     // the goody heading can make a difference in determing a collision with a Hector
-    FRandSeed += heading;
-    // SDL_Log("fn = %ld, goody=%ld: heading = %8d, FRandSeed = %10d\n",
-    //         itsGame->frameNumber, ident, heading, (Fixed)FRandSeed);
+    // FRandSeed += heading;
+    UpdateFRandSeed((uint32_t)heading);
+    DBG_Log("frag", "fn=%d, FRandSeed=%11d, heading=%7d, goody=%ld, grenades=%d, missiles=%d\n",
+
+            itsGame->frameNumber, (Fixed)FRandSeed, heading, ident, grenades, missiles);
+}
+
+bool CGoody::UseForExtent() {
+    return (grenades > 0 || missiles > 0 || boosters > 0);
 }

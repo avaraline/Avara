@@ -9,6 +9,7 @@
 
 #include "CWallSolid.h"
 
+#include "AbstractRenderer.h"
 #include "CBSPWorld.h"
 #include "CSmartPart.h"
 #include "CWallActor.h"
@@ -21,17 +22,20 @@ void CWallSolid::LoadPart(short ind, short resId) {
 
         thePart = lastWallActor->partList[0];
         thePart->theOwner = this;
+        if (!IsGeometryStatic() && thePart->userFlags & CBSPUserFlags::kIsStatic) {
+            thePart->userFlags -= CBSPUserFlags::kIsStatic;
+        }
 
         partList[ind] = thePart;
 
         //TranslatePartY(thePart, ReadLongVar(iHeight));
-        VECTORCOPY(location, thePart->itsTransform[3]);
-        itsGame->itsWorld->RemovePart(thePart);
+        VECTORCOPY(location, thePart->modelTransform[3]);
+        gRenderer->RemovePart(thePart);
 
         heading = 0;
         lastWallActor->partList[0] = NULL;
         lastWallActor->partCount = 0;
-        lastWallActor->Dispose();
+        delete lastWallActor;
         lastWallActor = NULL;
     } else {
         CSolidActor::LoadPart(ind, resId);

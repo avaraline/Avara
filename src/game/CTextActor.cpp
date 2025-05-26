@@ -58,7 +58,9 @@ CAbstractActor *CTextActor::EndScript() {
 
         soundId = ReadLongVar(iSound);
         soundVol = ReadFixedVar(iVolume);
-        gHub->PreLoadSample(soundId);
+
+        // Preload sounds.
+        auto _ = AssetManager::GetOgg(soundId);
 
         return this;
     } else {
@@ -66,10 +68,8 @@ CAbstractActor *CTextActor::EndScript() {
     }
 }
 
-void CTextActor::Dispose() {
+CTextActor::~CTextActor() {
     itsGame->RemoveReceiver(&in);
-
-    CAbstractActor::Dispose();
 }
 
 void CTextActor::FrameAction() {

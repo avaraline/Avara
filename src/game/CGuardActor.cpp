@@ -59,7 +59,7 @@ CAbstractActor *CGuardActor::EndScript() {
     pitch = 0;
     fireCount = 0;
 
-    LoadPartWithColors(0, ReadLongVar(iShape));
+    LoadPartWithMaterials(0, ReadLongVar(iShape));
 
     PlaceParts();
     LinkPartSpheres();
@@ -70,12 +70,10 @@ CAbstractActor *CGuardActor::EndScript() {
     return this;
 }
 
-void CGuardActor::Dispose() {
+CGuardActor::~CGuardActor() {
     itsGame->RemoveReceiver(&fireActivator);
     itsGame->RemoveReceiver(&trackingActivator);
     itsGame->RemoveReceiver(&trackingDeactivator);
-
-    CGlowActors::Dispose();
 }
 
 void CGuardActor::PlaceParts() {
@@ -103,9 +101,9 @@ CSmartPart *CGuardActor::FindClosestTarget() {
         if (theActor->teamMask & watchTeams) {
             thePart = theActor->partList[0];
             if (thePart) {
-                current = FDistanceEstimate(location[0] - thePart->itsTransform[3][0],
-                    location[1] - thePart->itsTransform[3][1],
-                    location[2] - thePart->itsTransform[3][2]);
+                current = FDistanceEstimate(location[0] - thePart->modelTransform[3][0],
+                    location[1] - thePart->modelTransform[3][1],
+                    location[2] - thePart->modelTransform[3][2]);
                 if (current < closest) {
                     closest = current;
                     closestPart = thePart;
@@ -197,7 +195,7 @@ void CGuardActor::FrameAction() {
             CAbstractActor *theActor;
             Fixed groundDist;
 
-            gunMatrix = partList[0]->itsTransform;
+            gunMatrix = partList[0]->modelTransform;
             fireCount = fireFrequency;
 
             theHit.distance = STANDARDMISSILERANGE;
@@ -205,7 +203,7 @@ void CGuardActor::FrameAction() {
             theHit.origin[0] = gunMatrix[3][0];
             theHit.origin[1] = gunMatrix[3][1];
             theHit.origin[2] = gunMatrix[3][2];
-            theHit.origin[3] = FIX(1);
+            theHit.origin[3] = FIX1;
 
             theHit.direction[0] = gunMatrix[2][0];
             theHit.direction[1] = gunMatrix[2][1];
@@ -233,7 +231,7 @@ void CGuardActor::FrameAction() {
                     theHit.team = teamColor;
                     theHit.playerId = -1;
                     theMissile = itsGame->itsDepot->LaunchMissile(
-                        kmiFlat, &partList[0]->itsTransform, &theHit, this, shotPower, NULL);
+                        kmiFlat, &partList[0]->modelTransform, &theHit, this, shotPower, NULL);
                     if (theMissile)
                         theMissile->TransparentStep();
                 }
@@ -243,7 +241,7 @@ void CGuardActor::FrameAction() {
                 theHit.team = teamColor;
                 theHit.playerId = -1;
                 theMissile = itsGame->itsDepot->LaunchMissile(
-                    kmiFlat, &partList[0]->itsTransform, &theHit, this, shotPower, NULL);
+                    kmiFlat, &partList[0]->modelTransform, &theHit, this, shotPower, NULL);
                 if (theMissile)
                     theMissile->TransparentStep();
             }
@@ -251,4 +249,17 @@ void CGuardActor::FrameAction() {
 
         fireActivator.triggerCount = 0;
     }
+}
+
+bool CGuardActor::IsGeometryStatic()
+{
+    if (!CGlowActors::IsGeometryStatic()) {
+        return false;
+    }
+    
+    if (trackingActivator.messageId > 0 && rotSpeed != 0) {
+        return false;
+    }
+    
+    return true;
 }

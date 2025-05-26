@@ -7,6 +7,7 @@
     Modified: Wednesday, September 4, 1996, 00:06
 */
 
+#include "AssetManager.h"
 #include "CGoal.h"
 
 #include "CBall.h"
@@ -52,12 +53,15 @@ CAbstractActor *CGoal::EndScript() {
 
     goalSound = ReadLongVar(iSound);
     goalVolume = ReadFixedVar(iVolume);
-    gHub->PreLoadSample(goalSound);
+
+    // Preload sounds.
+    auto _ = AssetManager::GetOgg(goalSound);
 
     resId = ReadLongVar(iShape);
 
-    if (GetResource('BSPT', resId)) {
-        LoadPartWithColors(0, resId);
+    auto bsp = AssetManager::GetBsp(resId);
+    if (bsp) {
+        LoadPartWithMaterials(0, resId);
         partList[0]->Reset();
         partList[0]->RotateZ(ReadFixedVar(iRoll));
         partList[0]->RotateX(ReadFixedVar(iPitch));
@@ -88,7 +92,7 @@ short CGoal::GetBallSnapPoint(long theGroup,
         delta[2] = deltas[2];
 
         *hostPart = partList[0];
-        VectorMatrixProduct(1, (Vector *)delta, (Vector *)snapDest, &partList[0]->itsTransform);
+        VectorMatrixProduct(1, (Vector *)delta, (Vector *)snapDest, &partList[0]->modelTransform);
 
         globDelta[0] = ballLocation[0] - snapDest[0];
         globDelta[1] = ballLocation[1] - snapDest[1];
@@ -113,7 +117,7 @@ long CGoal::ReceiveSignal(long theSignal, void *miscData) {
     if (theSignal == kBallAttached) {
         theBall = (CBall *)miscData;
 
-        DoSound(goalSound, location, goalVolume, FIX(1));
+        DoSound(goalSound, location, goalVolume, FIX1);
         itsGame->FlagMessage(goalMsg);
 
         itsGame->scoreReason = ksiScoreGoal;

@@ -13,17 +13,16 @@
 
 // class CSliverPart;
 
-class CSliverPart : public CSmartPart {
+class CSliverPart final : public CSmartPart {
 public:
     CSliverPart *nextSliver;
     Vector speed;
     short lifeCount;
-    ColorRecord borrowedColors = 0;
-    ColorRecord *fakeMaster;
+    ARGBColor borrowedColors = 0;
+    ARGBColor *fakeMaster;
     Fixed friction, gravity;
     Fixed fpsScale, fpsFriction, fpsGravity;
-
-    virtual void ISliverPart(short partNum);
+    CSliverPart(short partNum);
     virtual void Activate(Fixed *origin,
         Fixed *direction,
         Fixed scale,
@@ -35,5 +34,6 @@ public:
 #if 0
     virtual	void		GenerateColorLookupTable();
 #endif
-    virtual void Dispose();
+private:
+    void Create() {}
 };

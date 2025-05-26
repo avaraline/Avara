@@ -2,9 +2,9 @@
 #pragma once
 
 class CAvaraAppImpl;
-class CPlayerManager;
 
 #include "TextCommand.h"
+#include "CPlayerManager.h"
 
 #include <deque>
 
@@ -30,18 +30,26 @@ public:
 
     // PlayerCommands
     bool GetSetPreference(VectorOfArgs);
+    bool DisplayRatings(VectorOfArgs);
+    bool SplitIntoTeams(VectorOfArgs);
 
     // RosterCommands
     bool GoodGame(VectorOfArgs);
 
     // ServerCommands
-    bool KickPlayer(VectorOfArgs);
-    bool ToggleAwayState(VectorOfArgs);
+    bool ForEachSlot(VectorOfArgs vargs, std::function<bool(int)> slotCallback);
+    bool KickPlayers(VectorOfArgs vargs);
+    bool KickPlayer(int slot);
+    bool ToggleAway(VectorOfArgs);
+    bool ToggleSpectator(VectorOfArgs);
+    bool TogglePresence(int slot, PresenceType, std::string);
 
     // LevelCommands
     bool LoadNamedLevel(VectorOfArgs);
     bool LoadRandomLevel(VectorOfArgs);
+    bool HandleTags(VectorOfArgs);
 
     // Coding helpers
     bool SetDebugFlag(VectorOfArgs);
+    std::string GetOsName();
 };

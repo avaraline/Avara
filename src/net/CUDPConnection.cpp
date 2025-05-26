@@ -14,7 +14,7 @@
 #include "CAvaraGame.h"  // gCurrentGame->fpsScale
 #include "CApplication.h"  // gApplication
 #include "Debug.h"
-#include <algorithm>
+#include "System.h"
 
 #include <SDL.h>
 
@@ -25,29 +25,33 @@
 #define kAckRetransmitBase (41 / MSEC_PER_GET_CLOCK)
 #define kULPTimeOut (120000 / MSEC_PER_GET_CLOCK) //	120 seconds
 #define kMaxTransmitQueueLength 128*8 //	128 packets going out... (times 8 for high FPS)
-#define kMaxReceiveQueueLength 32*8 //	32 packets...arbitrary guess
+#define kMaxReceiveQueueLength kMaxTransmitQueueLength   // receive as much as is sent
 
 #define RTTSMOOTHFACTOR_UP 100
-#define RTTSMOOTHFACTOR_DOWN 200
+#define RTTSMOOTHFACTOR_DOWN 100
 #define COUNTSMOOTHFACTOR 1000
 
 #define MAX_RESENDS_WITHOUT_RECEIVE 3
 
 #if PACKET_DEBUG || LATENCY_DEBUG
 void CUDPConnection::DebugPacket(char eType, UDPPacketInfo *p) {
-    SDL_Log("CUDPConnection::DebugPacket(%c) cn=%d rsn=%d sn=%d-%d cmd=%d p1=%d p2=%d p3=%d flags=0x%02x sndr=%d dist=0x%02x\n",
-        eType,
-        myId,
-        (uint16_t)receiveSerial,
-        (uint16_t)p->serialNumber,
-        p->sendCount,
-        p->packet.command,
-        p->packet.p1,
-        p->packet.p2,
-        p->packet.p3,
-        p->packet.flags,
-        p->packet.sender,
-        p->packet.distribution);
+    if (p) {
+        SDL_Log("CUDPConnection::DebugPacket(%c) cn=%d rsn=%d sn=%d-%d cmd=%d p1=%d p2=%d p3=%d flags=0x%02x sndr=%d dist=0x%02x\n",
+                eType,
+                myId,
+                (uint16_t)receiveSerial,
+                (uint16_t)p->serialNumber,
+                p->sendCount,
+                p->packet.command,
+                p->packet.p1,
+                p->packet.p2,
+                p->packet.p3,
+                p->packet.flags,
+                p->packet.sender,
+                p->packet.distribution);
+    } else {
+        SDL_Log("CUDPConnection::DebugPacket(%c) ----------NULL PACKET----------\n", eType);
+    }
 }
 #endif
 
@@ -62,7 +66,6 @@ void CUDPConnection::IUDPConnection(CUDPComm *theOwner) {
     port = 0;
 
     for (i = 0; i < kQueueCount; i++) {
-        queues[i].qFlags = 0;
         queues[i].qHead = 0;
         queues[i].qTail = 0;
     }
@@ -287,7 +290,10 @@ UDPPacketInfo *CUDPConnection::FindBestPacket(int32_t curTime, int32_t cramTime,
     }
 
     if (transmitQueueLength > kMaxTransmitQueueLength) {
-        SDL_Log("Transmit Queue Overflow\n");
+        DBG_Log("q", "Transmit Queue Overflow - myId = %d\n", myId);
+        for (int i = 0; i < kQueueCount; i++) {
+            DBG_Log("q", "   Queue[%d] size = %zu\n", i, QueueSize(&queues[i]));
+        }
         ErrorKill();
     }
 
@@ -322,7 +328,7 @@ UDPPacketInfo *CUDPConnection::GetOutPacket(int32_t curTime, int32_t cramTime, i
 
         if (thePacket == kPleaseSendAcknowledge) {
             #if PACKET_DEBUG
-                SDL_Log("CUDPConnection::DebugPacket(S) <ACK> cn=%d rsn=%d\n", myId, receiveSerial - kSerialNumberStepSize);
+                SDL_Log("CUDPConnection::DebugPacket(S) <ACK> cn=%d rsn=%hu\n", myId, uint16_t(receiveSerial - kSerialNumberStepSize));
             #endif
         } else {
             totalSent++;
@@ -333,7 +339,7 @@ UDPPacketInfo *CUDPConnection::GetOutPacket(int32_t curTime, int32_t cramTime, i
                 numResendsWithoutReceive++;
                 recentResendRate += RECENT_RESEND_SMOOTH;
                 #if PACKET_DEBUG | LATENCY_DEBUG
-                    SDL_Log("CUDPConnection::GetOutPacket   RESENDING cn=%d sn=%d age=%ld resend:count=%ld total=%.1f%% recent=%.1f%%\n",
+                    SDL_Log("CUDPConnection::GetOutPacket   RESENDING cn=%d sn=%d age=%d resend:count=%ld total=%.1f%% recent=%.1f%%\n",
                             myId, (uint16_t)thePacket->serialNumber, curTime - thePacket->birthDate,
                             numResendsWithoutReceive, 100.0*totalResent/totalSent, 100.0*recentResendRate);
                 #endif
@@ -347,19 +353,23 @@ UDPPacketInfo *CUDPConnection::GetOutPacket(int32_t curTime, int32_t cramTime, i
     return thePacket;
 }
 
-float CommandMultiplierForStats(long command) {
+float CommandMultiplierForStats(const PacketInfo& thePacketInfo) {
     float multiplier = 0;
     // only use faster commands for stats
     // keep multiplier value below RTTSMOOTHFACTOR_UP.
-    switch(command) {
+    switch(thePacketInfo.command) {
         case kpKeyAndMouse:
             // normal game play commands (multiply by fpsScale to make influence consistent across frame rates)
             multiplier = gCurrentGame->fpsScale;
             break;
-       case kpPing:
-           // ping times are an important influence on RTT (not affected by frame rate)
-           multiplier = (RTTSMOOTHFACTOR_UP) * 0.1;
-           break;
+        case kpPing:
+            // ping times are an important influence on RTT (not affected by frame rate)
+            if (thePacketInfo.p3 > 0) {
+                // the last ping time can be too big if there aren't other messages coming after it
+                // because the receiver may have no reason to respond in a timely manner so ignore p3==0
+                multiplier = CLASSICFRAMETIME * 0.4;  // smooth similarly to in-game rate
+            }
+            break;
     }
     return multiplier;
 }
@@ -372,7 +382,7 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, int32_t when) {
         long roundTrip;
 
         roundTrip = when - thePacket->birthDate;
-        float commandMultiplier = CommandMultiplierForStats(thePacket->packet.command);
+        float commandMultiplier = CommandMultiplierForStats(thePacket->packet);
 
         if (uint16_t(maxValid) <= 10) {
             // use best RTT of early message(s) to prime initial values of RTT mean/var
@@ -385,6 +395,12 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, int32_t when) {
                         myId, thePacket->packet.command, roundTrip, meanRoundTripTime, sqrt(varRoundTripTime), uint16_t(maxValid));
             #endif
         } else if (commandMultiplier > 0) {
+            if (thePacket->packet.command == kpPing) {
+                // decrease ping roundTrip because pings aren't as fast as urgent game packets and we
+                // want to start the game at about the right LT (which is based the average ping times)
+                roundTrip *= 0.82;
+            }
+
             // compute an exponential moving average & variance of the roundTrip time
             // see: https://fanf2.user.srcf.net/hermes/doc/antiforgery/stats.pdf
             float difference = roundTrip - meanRoundTripTime;
@@ -446,7 +462,7 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, int32_t when) {
             urgentRetransmitTime = std::min(urgentRetransmitTime, retransmitTime);
 
             #if PACKET_DEBUG || LATENCY_DEBUG
-                SDL_Log("                               cn=%d cmd=%d roundTrip=%ld mean=%.1f std = %.1f retransmitTime=%ld urgentRetransmit=%ld\n",
+            SDL_Log("                               cn=%d cmd=%d roundTrip=%ld mean=%.1f std = %.1f retransmitTime=%d urgentRetransmit=%d\n",
                         myId, thePacket->packet.command, roundTrip, meanRoundTripTime, stdevRoundTripTime, retransmitTime, urgentRetransmitTime);
             #endif
 
@@ -472,7 +488,7 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, int32_t when) {
 }
 
 void CUDPConnection::ValidateReceivedPacket(UDPPacketInfo *thePacket) {
-    float commandMultiplier = CommandMultiplierForStats(thePacket->packet.command);
+    float commandMultiplier = CommandMultiplierForStats(thePacket->packet);
     if (commandMultiplier > 0) {
         float alpha = commandMultiplier / COUNTSMOOTHFACTOR;
 
@@ -515,7 +531,7 @@ char *CUDPConnection::ValidatePackets(char *validateInfo, int32_t curTime) {
     validateInfo += sizeof(short);               // point to the AckMap field (if there is one)
 
     #if PACKET_DEBUG
-        SDL_Log("ValidatePackets transmittedSerial=%d, maxValid = %d\n", transmittedSerial, maxValid);
+        SDL_Log("ValidatePackets transmittedSerial=%hu, maxValid = %hu\n", uint16_t(transmittedSerial), uint16_t(maxValid));
     #endif
 
     if (transmittedSerial & 1) {
@@ -559,7 +575,7 @@ void CUDPConnection::Dispose() {
 
 static short receiveSerialStorage[512];
 
-void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
+size_t CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
     UDPPacketInfo *pack;
     Boolean changeInReceiveQueue = false;
 
@@ -571,7 +587,14 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
 
     haveToSendAck = true;
 
-    if (thePacket->serialNumber < receiveSerial) { //	We already got this one, so just release it.
+    if (thePacket == nullptr) {
+        // nullptr indicates we need to skip forward and process packets in the queue
+        DBG_Log("q", "CUDPConnection::ReceivedPacket: SKIPPING sn=%d", (int)receiveSerial);
+        receiveSerial += kSerialNumberStepSize;
+        // now go look for all the queued-up packets starting from the new receiveSerial
+        changeInReceiveQueue = ReceiveQueuedPackets();
+
+    } else if (thePacket->serialNumber < receiveSerial) { //	We already got this one, so just release it.
         // if the sender re-sent a packet we already have, that indicates they didn't get the ACK before
         // they sent the message
 
@@ -579,53 +602,26 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
     } else {
         if (thePacket->serialNumber ==
             receiveSerial) { //	Packet was next in line to arrive, so it may release others from the received queue
-            UDPPacketInfo *nextPack;
 
 #if PACKET_DEBUG > 1
             DebugPacket('%', thePacket);
 #endif
+            // receiveSerial = serial number of next serial number we're waiting for
             receiveSerial = thePacket->serialNumber + kSerialNumberStepSize;
 
+            // this will either handle the packet OR put it on a queue (inQ) for later handling
             ValidateReceivedPacket(thePacket);
 
-            for (pack = (UDPPacketInfo *)queues[kReceiveQ].qHead; pack; pack = nextPack) {
-                nextPack = (UDPPacketInfo *)pack->packet.qLink;
+            // see if any subsequent packets have already been queued up
+            changeInReceiveQueue = ReceiveQueuedPackets();
 
-                if (pack->serialNumber <= receiveSerial) {
-                    OSErr theErr;
-
-                    theErr = Dequeue((QElemPtr)pack, &queues[kReceiveQ]);
-                    if (theErr == noErr) {
-                        if (pack->serialNumber == receiveSerial) {
-#if PACKET_DEBUG
-                            DebugPacket('+', pack);
-#endif
-                            receiveSerial = pack->serialNumber + kSerialNumberStepSize;
-                            ValidateReceivedPacket(pack);
-                        } else {
-#if PACKET_DEBUG
-                            DebugPacket('-', pack);
-#endif
-                            itsOwner->ReleasePacket(&pack->packet);
-                        }
-
-                        changeInReceiveQueue = true;
-                        nextPack = (UDPPacketInfo *)queues[kReceiveQ].qHead;
-                    }
-#if PACKET_DEBUG
-                    else {
-                        SDL_Log("Dequeue failed for received packet.\n");
-                    }
-#endif
-                }
-            }
         } else { //	We're obviously missing a packet somewhere...queue this one for later.
-            short receiveQueueLength = 0;
+            // short receiveQueueLength = 0;
 
             for (pack = (UDPPacketInfo *)queues[kReceiveQ].qHead;
                  pack != NULL && pack->serialNumber != thePacket->serialNumber;
                  pack = (UDPPacketInfo *)pack->packet.qLink) {
-                receiveQueueLength++;
+                // receiveQueueLength++;
             }
 
             if (pack) { //	The queue already contains this packet.
@@ -637,8 +633,23 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
 #if PACKET_DEBUG
                 DebugPacket('Q', thePacket);
 #endif
+                // we have received a serial number greater than the one we're waiting for so queue this one
                 changeInReceiveQueue = true;
                 Enqueue((QElemPtr)thePacket, &queues[kReceiveQ]);
+
+                size_t qsize = QueueSize(&queues[kReceiveQ]);
+                if (Debug::IsEnabled("q")) {
+                    if (qsize % 5 == 0) {
+                        DBG_Log("q", "%d: rsn=%d, queued sn=%d to kReceivedQ.size = %zu\n", myId, (int)receiveSerial, (int)thePacket->serialNumber, qsize);
+                    }
+                }
+                // give up and forget about receiving sn=receiveSerial after awhile,
+                // players will request a frame resend and it could be coming in a later packet so skip this one
+                int PACKET_CLEANUP = 4.0/gCurrentGame->fpsScale;   // bigger is NOT better, don't go above 5-ish
+                if (qsize >= PACKET_CLEANUP) {  // LT of 8 would be 32 frame packets, plus a little for other packets
+                    // call self recursively to skip receiveSerial
+                    return ReceivedPacket(nullptr);
+                }
             }
         }
     }
@@ -648,6 +659,7 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
 
         offsetBufferBusy = &dummyShort;
         if (offsetBufferBusy == &dummyShort) {
+            // ackBase is last sequential serial number received (i.e. haven't received sn=receiveSerial yet)
             ackBase = receiveSerial - kSerialNumberStepSize;
 
             if (queues[kReceiveQ].qHead) {
@@ -673,6 +685,54 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
 
         *receiveSerials++ = -12345;
     }
+
+    return QueueSize(&queues[kReceiveQ]);
+}
+
+bool CUDPConnection::ReceiveQueuedPackets() {
+    bool changeInReceiveQueue = false;
+    UDPPacketInfo *nextPack;
+
+    for (UDPPacketInfo* pack = (UDPPacketInfo *)queues[kReceiveQ].qHead; pack; pack = nextPack) {
+        nextPack = (UDPPacketInfo *)pack->packet.qLink;
+
+        if (pack->serialNumber <= receiveSerial) {
+            OSErr theErr;
+
+            theErr = Dequeue((QElemPtr)pack, &queues[kReceiveQ]);
+            if (theErr == noErr) {
+                if (pack->serialNumber == receiveSerial) {
+#if PACKET_DEBUG
+                    DebugPacket('+', pack);
+#endif
+                    if (Debug::IsEnabled("q")) {
+                        size_t qsize = QueueSize(&queues[kReceiveQ]);
+                        if (qsize > 0 && qsize % 5 == 0) {
+                            DBG_Log("q", "%d: rsn=%d, dequeued sn=%d to kReceivedQ.size = %zu\n", myId, (int)receiveSerial, (int)pack->serialNumber, QueueSize(&queues[kReceiveQ]));
+                        }
+                    }
+
+                    receiveSerial = pack->serialNumber + kSerialNumberStepSize;
+                    ValidateReceivedPacket(pack);
+                } else {
+#if PACKET_DEBUG
+                    DebugPacket('-', pack);
+#endif
+                    itsOwner->ReleasePacket(&pack->packet);
+                }
+
+                changeInReceiveQueue = true;
+                nextPack = (UDPPacketInfo *)queues[kReceiveQ].qHead;
+            }
+#if PACKET_DEBUG
+            else {
+                SDL_Log("Dequeue failed for received packet.\n");
+            }
+#endif
+        }
+    }
+
+    return changeInReceiveQueue;
 }
 
 char *CUDPConnection::WriteAcks(char *dest) {
@@ -714,6 +774,7 @@ void CUDPConnection::MarkOpenConnections(CompleteAddress *table) {
             table++;
         }
 
+        DBG_Log("login", "%s no longer in connection table, marking as GONE", FormatHostPort(ipAddr, port).c_str());
         port = 0;
         ipAddr = 0;
         myId = -1;
@@ -796,13 +857,13 @@ void CUDPConnection::FreshClient(ip_addr remoteHost, port_num remotePort, uint16
     nextAckTime = validTime + kAckRetransmitBase;
     haveToSendAck = true;
 
-    ipAddr = remoteHost;
+    ipAddr = ipAddrExt = remoteHost;
     port = remotePort;
 
-    // Normal client-client Avara packets will do the hole-punching for us, so this is unnecessary.
-    // But maybe this could speed things up?
-    // IPaddress addr = { remoteHost, remotePort };
-    // Punch(addr);
+    // Normal client-client Avara packets will do the hole-punching for us, so this is unnecessary?
+    // Sometimes the hole needs to be punched between clients such as when they are both behind double-NAT.
+    IPaddress addr = { remoteHost, remotePort };
+    RequestPunch(addr);
 }
 
 Boolean CUDPConnection::AreYouDone() {

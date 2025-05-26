@@ -9,6 +9,7 @@
 
 #include "CForceField.h"
 
+#include "AbstractRenderer.h"
 #include "CBSPWorld.h"
 #include "CSmartPart.h"
 #include "CWallActor.h"
@@ -45,10 +46,11 @@ CAbstractActor *CForceField::EndScript() {
         shapeId = ReadLongVar(iShape);
         watchBits = ReadLongVar(iWatchMask);
         watchTeams = ReadLongVar(iMask);
+        spinSpeed = FDegToOne(ReadFixedVar(iSpeed));
 
         if (shapeId) {
             partCount = 1;
-            LoadPartWithColors(0, shapeId);
+            LoadPartWithMaterials(0, shapeId);
             partList[0]->RotateZ(ReadFixedVar(iRoll));
             partList[0]->RotateOneY(heading);
             TranslatePart(partList[0], location[0], location[1], location[2]);
@@ -58,25 +60,33 @@ CAbstractActor *CForceField::EndScript() {
 
             thePart = lastWallActor->partList[0];
             thePart->theOwner = this;
+            if (!IsGeometryStatic() && thePart->userFlags & CBSPUserFlags::kIsStatic) {
+                thePart->userFlags -= CBSPUserFlags::kIsStatic;
+            }
 
             partCount = 1;
             partList[0] = thePart;
 
             //TranslatePartY(thePart, ReadLongVar(iHeight));
-            VECTORCOPY(location, thePart->itsTransform[3]);
-            itsGame->itsWorld->RemovePart(thePart);
+            VECTORCOPY(location, thePart->modelTransform[3]);
+            gRenderer->RemovePart(thePart);
 
             heading = 0;
             lastWallActor->partList[0] = NULL;
             lastWallActor->partCount = 0;
-            lastWallActor->Dispose();
+            delete lastWallActor;
             lastWallActor = NULL;
         } else {
-            Dispose();
+            delete this;
             return NULL;
         }
 
         partList[0]->isTransparent = !ReadLongVar(iVisible);
+        if (!ReadLongVar(iVisible)) {
+            // Force yon when visible is false, to hide from level previews.
+            partList[0]->yon = FIX(0.001);
+            partList[0]->usesPrivateYon = true;
+        }
 
         exitMsg = ReadLongVar(iExit);
         enterMsg = ReadLongVar(iEnter);
@@ -87,8 +97,6 @@ CAbstractActor *CForceField::EndScript() {
         force[0] = ReadFixedVar(iDeltaX);
         force[1] = ReadFixedVar(iDeltaY);
         force[2] = ReadFixedVar(iDeltaZ);
-
-        spinSpeed = FDegToOne(ReadFixedVar(iSpeed));
 
         return this;
     } else {
@@ -148,4 +156,9 @@ void CForceField::FrameAction() {
             partList[0]->MoveDone();
         }
     }
+}
+
+bool CForceField::IsGeometryStatic()
+{
+    return (spinSpeed == 0);
 }

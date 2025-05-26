@@ -20,7 +20,7 @@ CWallActor *lastWallActor = 0;
 #define kEastWall 4
 #define kWestWall 8
 
-void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWalls, Boolean isOrigWall) {
+void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, Fixed y_alt, short decimateWalls, Boolean isOrigWall) {
     Boolean tooBig;
     Fixed centerX, centerZ;
     Vector dim;
@@ -33,16 +33,20 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
     if (isOrigWall)
         FreshCalc();
 
-    addAlt = ReadFixedVar(iBaseHeight) + ReadFixedVar(iWallAltitude);
-    partYon = ReadFixedVar(iWallYon);
+    addAlt = ReadFixedVar(iBaseHeight) + ReadFixedVar(iWallAltitude) + y_alt;
+    Fixed defaultYon = ReadFixedVar(iDefaultYon);
+    Fixed activeYon = ReadFixedVar(iWallYon);
+    partYon = (activeYon != defaultYon)
+        ? activeYon
+        : 0;
 
     do {
-        dim[0] = FDivNZ(theRect->right - theRect->left, 72);
+        dim[0] = theRect->right - theRect->left;
         dim[1] = 0;
-        dim[2] = FDivNZ(theRect->bottom - theRect->top, 72);
+        dim[2] = theRect->bottom - theRect->top;
 
         tooBig =
-            dim[0] > LOCATORRECTSIZE / 5 || dim[2] > LOCATORRECTSIZE / 5; // VectorLength(3, dim) > LOCATORRECTSIZE/5;
+            dim[0] > LOCATORRECTSIZE || dim[2] > LOCATORRECTSIZE; // VectorLength(3, dim) > LOCATORRECTSIZE/5;
         if (tooBig) {
             CWallActor *otherWall;
             Rect smallRect;
@@ -62,16 +66,15 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
             }
 
             otherWall = new CWallActor;
-            otherWall->IAbstractActor();
-            otherWall->MakeWallFromRect(&smallRect, height, newDecim, false);
+            otherWall->MakeWallFromRect(&smallRect, height, y_alt, newDecim, false);
         }
     } while (tooBig);
 
-    centerX = FMulDivNZ(theRect->right + theRect->left, FIX(5), 144);
-    centerZ = FMulDivNZ(theRect->bottom + theRect->top, FIX(5), 144);
+    centerX = (theRect->right + theRect->left) / 2;
+    centerZ = (theRect->bottom + theRect->top) / 2;
 
-    dim[0] = dim[0] * 5 / 2;
-    dim[2] = dim[2] * 5 / 2;
+    dim[0] = dim[0] / 2;
+    dim[2] = dim[2] / 2;
     if (height) {
         dim[1] = (1 + height) >> 1;
         //dim[1] = (1 + height * ReadFixedVar(iPixelToThickness)) >> 1;
@@ -82,14 +85,16 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
     resId = ReadLongVar(dim[1] == 0 ? iFloorTemplateResource : iWallTemplateResource);
 
     partCount = 1;
-    box = new CSmartBox;
-    box->ISmartBox(resId, dim, GetPixelColor(), GetOtherPixelColor(), this, 0);
+    box = new CSmartBox(resId, dim, GetPixelMaterial(), GetOtherPixelMaterial(), this, 0);
     box->Reset();
     TranslatePart(box, centerX, addAlt + dim[1], centerZ);
     box->MoveDone();
     if (partYon) {
         box->yon = partYon;
         box->usesPrivateYon = true;
+    }
+    if (IsGeometryStatic()) {
+        box->userFlags |= CBSPUserFlags::kIsStatic;
     }
 
     partList[0] = box;
@@ -114,7 +119,9 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
         itsGame->AddActor(this);
 
         stepSound = ReadLongVar(iStepSound);
-        gHub->LoadSample(stepSound);
+
+        // Preload sounds.
+        auto _ = AssetManager::GetOgg(stepSound);
 
         lastWallActor = this;
 
@@ -144,6 +151,6 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
         }
         */
     } else {
-        Dispose();
+        delete this;
     }
 }

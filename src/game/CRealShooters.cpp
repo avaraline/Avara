@@ -13,9 +13,7 @@
 #include "CShuriken.h"
 #include "CSmartPart.h"
 
-void CRealShooters::IAbstractActor() {
-    CRealMovers::IAbstractActor();
-
+CRealShooters::CRealShooters() {
     visionRange = FIX(100);
     shotPower = FIX3(500);
     burstLength = 2;
@@ -25,6 +23,7 @@ void CRealShooters::IAbstractActor() {
     watchTeams = -2;
     watchMask = kPlayerBit;
 }
+
 void CRealShooters::BeginScript() {
     CRealMovers::BeginScript();
 
@@ -73,7 +72,7 @@ Fixed EstimateTravelTime(Fixed *delta, Fixed *targSpeed, Fixed missileSpeed, Fix
     Fixed ft, fdt;
     short i;//, j;
 
-    divMS = FDivNZ(FIX(1), missileSpeed);
+    divMS = FDivNZ(FIX1, missileSpeed);
     for (i = 0; i < 3; i++) {
         s[i] = FMul(delta[i], divMS);
         v[i] = FMul(targSpeed[i], divMS);
@@ -115,7 +114,7 @@ Boolean CRealShooters::Shoot() {
     theTarget = proximityList.a;
     while (theTarget) {
         if (theTarget->teamMask & watchTeams) {
-            ploc = theTarget->partList[0]->itsTransform[3];
+            ploc = theTarget->partList[0]->modelTransform[3];
             rayHit.direction[0] = ploc[0] - rayHit.origin[0];
             rayHit.direction[1] = ploc[1] - rayHit.origin[1];
             rayHit.direction[2] = ploc[2] - rayHit.origin[2];
@@ -141,7 +140,7 @@ Boolean CRealShooters::Shoot() {
         CAbstractMissile *theMissile;
 
         theTarget = closestVisible.closestHit->theOwner;
-        ploc = theTarget->partList[0]->itsTransform[3];
+        ploc = theTarget->partList[0]->modelTransform[3];
         delta[0] = ploc[0] - location[0];
         delta[1] = ploc[1] - location[1];
         delta[2] = ploc[2] - location[2];
@@ -151,7 +150,7 @@ Boolean CRealShooters::Shoot() {
         frameEstimate = EstimateTravelTime(delta, estimate, SHURIKENSPEED, frameEstimate);
         frameEstimate = (frameEstimate + 0x8000) & 0xFFFF0000;
 
-        ploc = theTarget->partList[0]->itsTransform[3];
+        ploc = theTarget->partList[0]->modelTransform[3];
         closestVisible.direction[0] = delta[0] + FMul(frameEstimate, estimate[0]);
         closestVisible.direction[1] = delta[1] + FMul(frameEstimate, estimate[1]);
         closestVisible.direction[2] = delta[2] + FMul(frameEstimate, estimate[2]);
@@ -165,7 +164,7 @@ Boolean CRealShooters::Shoot() {
         closestVisible.team = teamColor;
         closestVisible.playerId = GetShooterId();
         theMissile = itsGame->itsDepot->LaunchMissile(
-            kmiShuriken, &partList[0]->itsTransform, &closestVisible, this, shotPower, NULL);
+            kmiShuriken, &partList[0]->modelTransform, &closestVisible, this, shotPower, NULL);
         if (theMissile)
             theMissile->TransparentStep();
 

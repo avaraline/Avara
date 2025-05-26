@@ -15,13 +15,13 @@
 void CRateSound::Reset() {
     CBasicSound::Reset();
 
-    midRate = FIX(1);
-    masterRate = FIX(1);
+    midRate = FIX1;
+    masterRate = FIX1;
 }
 
-void CRateSound::UseSamplePtr(Sample *samples, int numSamples) {
-    CBasicSound::UseSamplePtr(samples, numSamples);
-    SetRate(FIX(1));
+void CRateSound::UseSamples(std::shared_ptr<OggFile> theSample) {
+    CBasicSound::UseSamples(theSample);
+    SetRate(FIX1);
 }
 
 #define MINIMUMRATE (65536L >> (16 - BASESOUNDBUFFERBITS))
@@ -29,10 +29,11 @@ void CRateSound::UseSamplePtr(Sample *samples, int numSamples) {
 void CRateSound::SetRate(Fixed aRate) {
     Fixed adjustedRate;
 
-    if (itsSamples)
-        adjustedRate = FMul((*itsSamples)->baseRate, aRate);
-    else
+    if (itsSamples != nullptr) {
+        adjustedRate = FMul(itsSamples->hsnd.baseRate, aRate);
+    } else {
         adjustedRate = aRate;
+    }
 
     adjustedRate = FMul(adjustedRate, itsMixer->standardRate);
 
@@ -107,7 +108,7 @@ short CRateSound::CalcVolume(int16_t theChannel) {
             distance = FSqroot(squareAcc);
             dopplerShift = FMul(m->distanceToSamples, startDistance - distance);
 
-            rateMultip = FIX(1) + (dopplerShift << (16 - itsMixer->soundBufferBits)); //	‚Ä¢‚Ä¢‚Ä¢
+            rateMultip = FIX1 + (dopplerShift << (16 - itsMixer->soundBufferBits)); //	‚Ä¢‚Ä¢‚Ä¢
 
             if (rateMultip > FIX(4))
                 midRate = masterRate * 4;
@@ -169,7 +170,7 @@ void CRateSound::WriteFrame(int16_t theChannel, int16_t volumeAllowed) {
 
     while (thisCount > 0) {
         if (loopCopy) {
-            didCount = RateMixer(sampleData, d, converter, thisCount, loopEnd, &ind, rateCopy);
+            didCount = RateMixer(itsSamples, d, converter, thisCount, loopEnd, &ind, rateCopy);
             d += didCount;
             thisCount -= didCount;
 
@@ -179,7 +180,7 @@ void CRateSound::WriteFrame(int16_t theChannel, int16_t volumeAllowed) {
                 ind.i += loopStart - loopEnd;
             }
         } else {
-            RateMixer(sampleData, d, converter, thisCount, sampleLen, &ind, rateCopy);
+            RateMixer(itsSamples, d, converter, thisCount, sampleLen, &ind, rateCopy);
             thisCount = 0;
         }
     }

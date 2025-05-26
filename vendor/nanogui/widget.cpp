@@ -160,8 +160,19 @@ void Widget::removeChild(const Widget *widget) {
 
 void Widget::removeChild(int index) {
     Widget *widget = mChildren[index];
+    removeNotifyParent(widget);
     mChildren.erase(mChildren.begin() + index);
     widget->decRef();
+}
+
+// climb the tree and let everyone (Screen) know this object is being removed.
+// ideally we would change everything to use shared_ptr<Widget> and maybe some weak_ptr references...
+// but, i'm lazy and this code should all get replaced soon (right?)
+void Widget::removeNotifyParent(const Widget *w) {
+    if (mParent) {
+        mParent->removeNotifyParent(w);
+    }
+    return;
 }
 
 int Widget::childIndex(Widget *widget) const {

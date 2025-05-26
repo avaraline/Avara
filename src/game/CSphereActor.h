@@ -15,7 +15,7 @@
 
 class CSphereActor : public CGlowActors {
 public:
-    virtual void IAbstractActor();
+    CSphereActor();
     virtual CAbstractActor *EndScript();
     virtual void WasHit(RayHitRecord *theHit, Fixed hitEnergy);
 };

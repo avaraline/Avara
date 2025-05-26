@@ -10,6 +10,7 @@
 
 #include "CScout.h"
 
+#include "AbstractRenderer.h"
 #include "CAbstractPlayer.h"
 #include "CSmartPart.h"
 #include "CViewParameters.h"
@@ -27,9 +28,7 @@
 
 #define FOLLOWRADIUS 10
 
-void CScout::IScout(CAbstractPlayer *thePlayer, short theTeam, ARGBColor longTeamColor) {
-    IAbstractActor();
-
+CScout::CScout(CAbstractPlayer *thePlayer, short theTeam, ARGBColor longTeamColor) {
     mass = FIX(20);
     baseMass = FIX(40);
     teamColor = theTeam;
@@ -48,7 +47,9 @@ void CScout::IScout(CAbstractPlayer *thePlayer, short theTeam, ARGBColor longTea
     partList[0]->ReplaceColor(*ColorManager::getMarkerColor(0), longTeamColor);
 
     hitSoundId = 220;
-    gHub->PreLoadSample(hitSoundId);
+
+    // Preload sounds.
+    auto _ = AssetManager::GetOgg(hitSoundId);
 
     glow = 0;
 }
@@ -242,10 +243,8 @@ void CScout::ToggleState(short command) {
 }
 
 void CScout::ControlViewPoint() {
-    CViewParameters *theView;
-
-    theView = itsGame->itsView;
-    theView->LookFrom(location[0] + FIX3(100), location[1] + FIX3(100), location[2]);
-    theView->LookAtPart(itsPlayer->viewPortPart);
-    theView->PointCamera();
+    auto vp = gRenderer->viewParams;
+    vp->LookFrom(location[0] + FIX3(100), location[1] + FIX3(100), location[2]);
+    vp->LookAtPart(itsPlayer->viewPortPart);
+    vp->PointCamera();
 }

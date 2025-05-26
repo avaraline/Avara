@@ -21,10 +21,11 @@ using namespace nanogui;
 
 std::vector<Text *> statuses;
 std::vector<Text *> chats;
+typedef std::pair<Widget*,Label*> ChatLine;
+static std::deque<ChatLine> chatLines;
 std::vector<ColorComboBox *> colors;
 std::string currentLevel;
 TabWidget *tabWidget;
-
 
 std::vector<Text *> scoreTeams;
 std::vector<Text *> scoreNames;
@@ -37,12 +38,31 @@ const int CHAT_CHARS = 57;
 const int ROSTER_FONT_SIZE = 15;
 const int ROSTER_WINDOW_WIDTH = 470;
 const int SCORE_FONT_SIZE = 16;
+const int VISIBLE_CHAT_LINES = 21;
+const int CHAT_FONT_SIZE = 17;
+const int CHAT_LINE_WIDTH = ROSTER_WINDOW_WIDTH - 20;
+const int CHAT_NAME_WIDTH = 105;
+const int CHAT_SPACING = 8;
+const int CHAT_TEXT_WIDTH = CHAT_LINE_WIDTH - CHAT_NAME_WIDTH - CHAT_SPACING;
+const std::string CHAT_FONT = "mono";
+const std::string CHAT_PROMPT = "  > ";
+
 char backspace[1] = {'\b'};
 char clearline[1] = {'\x1B'};
 char endline[1] = {13};
 char bellline[1] = {7};
 char checkline[1] = {6};
 Widget *chatPanel;
+
+
+// quick & dirty color converter
+inline nanogui::Color ToNanoguiColor(const ARGBColor &argbColor) {
+    return nanogui::Color(argbColor.GetR(),
+                          argbColor.GetG(),
+                          argbColor.GetB(),
+                          argbColor.GetA());
+}
+
 
 CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     setFixedWidth(470);
@@ -60,7 +80,7 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     auto panel = playersLayer->add<Widget>();
     panel->setLayout(layout);
     theNet = ((CAvaraAppImpl *)gApplication)->GetNet();
-    std::vector<long> player_colors = {
+    std::vector<long> colorOptions = {
         static_cast<long>(ColorManager::getTeamColor(1).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
         static_cast<long>(ColorManager::getTeamColor(2).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
         static_cast<long>(ColorManager::getTeamColor(3).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
@@ -74,14 +94,14 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
         layout->appendRow(1, 1);
         layout->appendCol(1, 1);
-        ColorComboBox *color = panel->add<ColorComboBox>(player_colors);
+        ColorComboBox *color = panel->add<ColorComboBox>(colorOptions);
         //color->setFixedHeight(23);
         color->setSelectedIndex(theNet->teamColors[i]);
         color->setCallback([this, i](int selectedIdx) {
             theNet->teamColors[i] = selectedIdx;
             theNet->SendColorChange();
         });
-        color->popup()->setSize(nanogui::Vector2i(50, 38 * player_colors.size()));
+        color->popup()->setSize(nanogui::Vector2i(50, 38 * colorOptions.size()));
         layout->setAnchor(color, AdvancedGridLayout::Anchor(0, i * 2));
         Text *status = panel->add<Text>("", false, ROSTER_FONT_SIZE + 2);
         layout->setAnchor(status, AdvancedGridLayout::Anchor(1, i * 2));
@@ -106,11 +126,18 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
         colors.push_back(color);
     }
 
-    levelLoaded = playersLayer->add<Text>("", false, 16);
+    // LevelName  <---------------> tags: {list of tags}
+    auto levelNamePanel = playersLayer->add<Widget>();
+    levelNamePanel->setLayout(new GridLayout(Orientation::Horizontal, 2, Alignment::Fill));
+
+    levelLoaded = levelNamePanel->add<Text>("", false, 16);
+    levelLoaded->setAlignment(Text::Alignment::Left);
+    levelTags = levelNamePanel->add<Text>("", false, 16);
+    levelTags->setAlignment(Text::Alignment::Right);
+
     levelDesigner = playersLayer->add<Text>("", false, 16);
     levelDescription = playersLayer->add<Label>("No level loaded");
 
-    levelLoaded->setAlignment(Text::Alignment::Left);
     levelDesigner->setAlignment(Text::Alignment::Left);
     //levelDescription->setAlignment(Text::Alignment::Left);
     levelDescription->setFixedHeight(90);
@@ -122,33 +149,28 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
 
     VScrollPanel *scrollPanel = new VScrollPanel(chatTab);
     scrollPanel->setFixedWidth(ROSTER_WINDOW_WIDTH);
-    scrollPanel->setFixedHeight(500);
 
     chatPanel = new Widget(scrollPanel);
-    AdvancedGridLayout *chatLayout = new AdvancedGridLayout();
+    GridLayout *chatLayout = new GridLayout(Orientation::Horizontal, 2, Alignment::Fill);
+    chatLayout->setSpacing(0, CHAT_SPACING);
     chatPanel->setLayout(chatLayout);
 
-    //placeholder lines for now
-    for (int i = 0; i < 20; i++) {
-        chatLayout->appendRow(1, 0.1);
-        chatLayout->appendCol(1, 1);
-
-        auto chatLine = chatPanel->add<Label>("");
-        chatLine->setFontSize(ROSTER_FONT_SIZE + 2);
-        chatLine->setFont("mono");
-        chatLine->setFixedWidth(ROSTER_WINDOW_WIDTH - 20);
-        chatLine->setFixedHeight(20);
-
-        chatLayout->setAnchor(chatLine, AdvancedGridLayout::Anchor(0, i));
+    //placeholder lines to set the initial height & spacing
+    for (int i = 0; i < VISIBLE_CHAT_LINES; i++) {
+        auto chatPlayer = chatPanel->add<Label>("");
+        chatPlayer->setFixedWidth(CHAT_NAME_WIDTH);
+        chatPlayer->setFixedHeight(CHAT_FONT_SIZE + 10); // name-button height
+        auto chatText = chatPanel->add<Label>("");
+        chatText->setFixedWidth(CHAT_TEXT_WIDTH);
+        chatLines.push_back(ChatLine(chatPlayer, chatText));
     }
 
     //chat input
     std::string theName = ((CAvaraAppImpl *)gApplication)->String(kPlayerNameTag);
-    chatInput = chatTab->add<Label>(theName + ": ");
-    chatInput->setFontSize(ROSTER_FONT_SIZE + 2);
+    chatInput = chatTab->add<Label>(CHAT_PROMPT);
+    chatInput->setFontSize(CHAT_FONT_SIZE);
     chatInput->setFont("mono");
-    chatInput->setFixedWidth(ROSTER_WINDOW_WIDTH - 20);
-    chatInput->setFixedHeight(70);
+    chatInput->setFixedWidth(CHAT_LINE_WIDTH);
 
     //scores tab
     Widget *scoreLayer = tabWidget->createTab("Scores");
@@ -181,7 +203,7 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     }
 
     tabWidget->setActiveTab(0);
-    currentLevel = ((CAvaraAppImpl *)gApplication)->GetGame()->loadedTag;
+    currentLevel = ((CAvaraAppImpl *)gApplication)->GetGame()->loadedLevelInfo->URL();
 
     UpdateRoster();
 
@@ -195,7 +217,7 @@ void CRosterWindow::UpdateRoster() {
     if (tabWidget->activeTab() == 0) {
         long maxRtt = 0;
         for (int i = 0; i < kMaxAvaraPlayers; i++) {
-            CPlayerManager *thisPlayer = ((CAvaraAppImpl *)gApplication)->GetNet()->playerTable[i];
+            CPlayerManager *thisPlayer = ((CAvaraAppImpl *)gApplication)->GetNet()->playerTable[i].get();
 
             std::string theName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
             if (i != theNet->itsCommManager->myId && theName.length() > 0) {
@@ -217,44 +239,41 @@ void CRosterWindow::UpdateRoster() {
             statuses[i]->setValue(theStatus.c_str());
             chats[i]->setValue(theChat.c_str());
             colors[i]->setSelectedIndex(theNet->teamColors[i]);
-            colors[i]->setTextColor(nanogui::Color(
-                (*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)).GetR(),
-                (*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)).GetG(),
-                (*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)).GetB(),
-                (*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)).GetA()
-            ));
+            colors[i]->setTextColor(ToNanoguiColor(*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)));
             colors[i]->setCaption(theName.c_str());
             colors[i]->popup()->setAnchorPos(nanogui::Vector2i(235, 68 + 60 * i));
         }
 
         if (maxRtt > 0 && theNet->IsAutoLatencyEnabled() && !theGame->IsPlaying()) {
             // set initial frame latency from client ping/RTT times
-            maxRtt = std::min(maxRtt+CLASSICFRAMETIME, long(CLASSICFRAMETIME*2*4));  // max of 4 LT on the UI
-            theGame->SetFrameLatency(theGame->RoundTripToFrameLatency(maxRtt), -1);
+            maxRtt = std::min(maxRtt, long(CLASSICFRAMETIME*2*2.5));  // max of 2.5 LT
+            theGame->initialFrameLatency = theGame->RoundTripToFrameLatency(maxRtt);
         }
 
-        if (theGame->loadedTag.compare(currentLevel) != 0) {
-            std::string theLevel = theGame->loadedLevel;
-            std::string theDesigner = theGame->loadedDesigner;
+        if (theGame->loadedLevelInfo->URL().compare(currentLevel) != 0) {
+            auto theLevel = theGame->loadedLevelInfo->levelName;
+            auto theDesigner = theGame->loadedLevelInfo->designer;
 
             if (theLevel.length() > 0) levelLoaded->setValue(theLevel);
             else levelLoaded->setValue("");
             if (theDesigner.length() > 0) levelDesigner->setValue(theDesigner);
             else levelDesigner->setValue("");
 
-            if (theGame->loadedInfo.length() > 0) levelDescription->setCaption(theGame->loadedInfo);
+            if (theGame->loadedLevelInfo->information.length() > 0) {
+                levelDescription->setCaption(theGame->loadedLevelInfo->information);
+            }
             else levelDescription->setCaption("No additional information about this mission is available.");
-            currentLevel = theGame->loadedTag;
+            currentLevel = theGame->loadedLevelInfo->URL();
+
+            UpdateTags(theGame->loadedLevelInfo->TagsString());
         }
     }
     else if (tabWidget->activeTab() == 2) {
         for (int i = 0; i < kMaxAvaraPlayers; i++) {
-            CPlayerManager *thisPlayer = theNet->playerTable[i];
-            const std::string theName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
             AvaraScoreRecord theScores = theGame->scoreKeeper->netScores;
-            if(theName.size() > 0) {
+            scoreNames[i]->setValue(theGame->scoreKeeper->playerNames[i]);
+            if(theScores.player[i].lives >= 0) {
                 scoreTeams[i]->setValue(std::to_string(theNet->teamColors[i]));
-                scoreNames[i]->setValue(theName.c_str());
                 scoreExitRanks[i]->setValue(std::to_string(theScores.player[i].exitRank));
                 scoreScores[i]->setValue(std::to_string(theScores.player[i].points));
                 scoreKills[i]->setValue(std::to_string(theScores.player[i].kills));
@@ -262,7 +281,6 @@ void CRosterWindow::UpdateRoster() {
             }
             else {
                 scoreTeams[i]->setValue("");
-                scoreNames[i]->setValue("");
                 scoreExitRanks[i]->setValue("");
                 scoreScores[i]->setValue("");
                 scoreKills[i]->setValue("");
@@ -277,7 +295,6 @@ bool CRosterWindow::DoCommand(int theCommand) {
 }
 
 std::string CRosterWindow::GetStringStatus(CPlayerManager *player) {
-    short status = player->LoadingStatus();
     std::string strStatus;
     if (player->WinFrame() >= 0) {
         long timeTemp = FMulDiv(player->WinFrame(), ((CAvaraAppImpl *)gApplication)->GetGame()->frameTime, 10);
@@ -297,30 +314,41 @@ std::string CRosterWindow::GetStringStatus(CPlayerManager *player) {
         return strStatus;
     }
 
-    if(status == kLAway) {
-        strStatus = "not playing";
-    } else if (status == kLConnected) {
-        strStatus = "connected";
-    } else if (status == kLLoaded) {
-        strStatus = "loaded";
-    } else if (status == kLReady) {
-        strStatus = "ready";
-    } else if (status == kLWaiting) {
-        strStatus = "waiting";
-    } else if (status == kLTrying) {
-        strStatus = "loading";
-    } else if (status == kLMismatch) {
-        strStatus = "version mismatch";
-    } else if (status == kLNotFound) {
-        strStatus = "level not found";
-    } else if (status == kLPaused) {
-        strStatus = "paused";
-    } else if (status == kLActive) {
-        strStatus = "active";
-    } else if (status == kLNoVehicle) {
-        strStatus = "HECTOR not available";
-    } else {
-        strStatus = "";
+    LoadingState status = player->LoadingStatus();
+    PresenceType presence = player->Presence();
+    if (presence != kzAway) {
+        if (status == kLConnected) {
+            strStatus = "connected";
+        } else if (status == kLLoaded) {
+            strStatus = "loaded";
+        } else if (status == kLReady) {
+            strStatus = "ready";
+        } else if (status == kLWaiting) {
+            strStatus = "waiting";
+        } else if (status == kLTrying) {
+            strStatus = "loading";
+        } else if (status == kLMismatch) {
+            strStatus = "version mismatch";
+        } else if (status == kLNotFound) {
+            strStatus = "level not found";
+        } else if (status == kLPaused) {
+            strStatus = "paused";
+        } else if (status == kLActive) {
+            strStatus = "active";
+        } else if (status == kLNoVehicle) {
+            strStatus = "HECTOR not available";
+        } else {
+            strStatus = "";
+        }
+    } else if (status != kLNotConnected) {
+        strStatus = "away";
+    }
+    if (presence == kzSpectating) {
+        if (player->LoadingStatusIsIn(kLConnected, kLActive, kLReady, kLLoaded, kLPaused)) {
+            strStatus = "spectator";
+        } else if (strStatus.length() > 0) {
+            strStatus += "*";   // make this into an eyeball char?
+        }
     }
     return strStatus;
 }
@@ -346,36 +374,47 @@ void CRosterWindow::ChatLineDelete() {
 }
 
 void CRosterWindow::ResetChatPrompt() {
-    std::string theName = ((CAvaraAppImpl *)gApplication)->String(kPlayerNameTag);
-    chatInput->setCaption(ChatPromptFor(theName));
+    chatInput->setCaption(CHAT_PROMPT);
 }
-std::string CRosterWindow::ChatPromptFor(std::string theName) {
-    int len = 9;
-    std::string paddedName = theName + "        ";
-    return paddedName.substr(0, len) + ": ";
-}
-void CRosterWindow::NewChatLine(Str255 playerName, std::string message) {
-    std::string name = std::string((char *)playerName + 1, playerName[0]);
-    std::string chatLine = ChatPromptFor(name) + message;
-    
-    AdvancedGridLayout *gridLayout = (AdvancedGridLayout*) chatPanel->layout();
-    gridLayout->appendRow(1, 0.1);
-    gridLayout->appendCol(1, 1);
 
-    auto chatLabel = chatPanel->add<Label>(chatLine);
-    chatLabel->setFontSize(ROSTER_FONT_SIZE + 2);
-    chatLabel->setFont("mono");
-    chatLabel->setFixedWidth(ROSTER_WINDOW_WIDTH - 20);
+void CRosterWindow::NewChatLine(Str255 playerName, short slot, std::string message) {
+    std::string name = ToString(playerName);
 
-    gridLayout->setAnchor(chatLabel, AdvancedGridLayout::Anchor(0, gridLayout->rowCount() - 1));
+    static int CHAT_LIMIT = 256;
+    if (Debug::IsEnabled("chat")) {
+        CHAT_LIMIT = Debug::GetValue("chat");
+    }
+
+    auto chatPlayer = chatPanel->add<Button>(name);
+    chatPlayer->setFontSize(CHAT_FONT_SIZE);
+    chatPlayer->setFont(CHAT_FONT);
+    chatPlayer->setFixedWidth(CHAT_NAME_WIDTH);
+    int i1 = theNet->teamColors[slot] + 1;
+    // using Base colors in chat, not level-specific overridden colors
+    chatPlayer->setBackgroundColor(ToNanoguiColor(*ColorManager::getTeamBaseColor(i1)));
+    chatPlayer->setTextColor(ToNanoguiColor(*ColorManager::getTeamTextBaseColor(i1)));
+
+    auto chatText = chatPanel->add<Label>(message);
+    chatText->setFontSize(CHAT_FONT_SIZE);
+    chatText->setFont(CHAT_FONT);
+    chatText->setFixedWidth(CHAT_TEXT_WIDTH);
+
+    // above limit OR still has initial placeholders
+    if (chatLines.size() >= CHAT_LIMIT || chatLines.front().second->caption().length() == 0) {
+        chatPanel->removeChild(chatLines.front().first);  // this also deletes the Widget
+        chatPanel->removeChild(chatLines.front().second);
+        chatLines.pop_front();
+    }
+    chatLines.push_back(ChatLine(chatPlayer, chatText));
+
     ResetChatPrompt();
 
-    Screen* screen = chatLabel->screen();
-    NVGcontext* context = screen->nvgContext();
-    chatLabel->parent()->performLayout(context);
-
-    VScrollPanel *scroll = (VScrollPanel*)chatPanel->parent();
-    scroll->setScroll(1);
+    NVGcontext* context = chatPanel->screen()->nvgContext();
+    if (context) {
+        VScrollPanel *scroll = (VScrollPanel*)chatPanel->parent();
+        scroll->performLayout(context);
+        scroll->setScroll(1);
+    }
 }
 
 bool CRosterWindow::handleSDLEvent(SDL_Event &event) {
@@ -440,3 +479,32 @@ bool CRosterWindow::handleSDLEvent(SDL_Event &event) {
         return false;
     }
 }
+
+void CRosterWindow::PrefChanged(std::string name) {
+    std::vector<long> colorOptions = {
+        static_cast<long>(ColorManager::getTeamColor(1).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(2).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(3).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(4).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(5).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(6).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(7).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(8).value_or(ColorManager::getDefaultTeamColor()).GetRaw())
+    };
+    for (int i = 0; i < colors.size(); i++) {
+        auto current = colors[i]->selectedIndex();
+        colors[i]->setItems(colorOptions);
+        colors[i]->setSelectedIndex(current);
+        colors[i]->setNeedsLayout();
+    }
+}
+
+
+void CRosterWindow::UpdateTags(std::string tags) {
+    if (tags.length() > 0) {
+        levelTags->setValue("tags:" + tags);
+    } else {
+        levelTags->setValue("tags: <none>");
+    }
+}
+

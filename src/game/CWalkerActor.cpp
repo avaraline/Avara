@@ -11,6 +11,8 @@
 
 #include "CWalkerActor.h"
 
+#include "AbstractRenderer.h"
+#include "AssetManager.h"
 #include "AvaraDefines.h"
 #include "CBSPWorld.h"
 #include "CDepot.h"
@@ -18,6 +20,7 @@
 #include "CSmartPart.h"
 #include "CViewParameters.h"
 #include "KeyFuncs.h"
+#include "Preferences.h"
 
 #define SCOUTPLATFORM FIX3(1500)
 #define MAXHEADHEIGHT FIX3(1750)
@@ -41,8 +44,7 @@ void CWalkerActor::LoadParts() {
     viewPortPart = partList[0];
 
 #ifdef MARKERCUBE
-    markerCube = new CBSPPart;
-    markerCube->IBSPPart(213);
+    markerCube = CBSPPart::Create(213);
     itsGame->itsWorld->AddPart(markerCube);
 #endif
 
@@ -97,12 +99,11 @@ void CWalkerActor::StartSystems() {
     viewPortHeight = FIX3(350);
 }
 
-void CWalkerActor::Dispose() {
+CWalkerActor::~CWalkerActor() {
 #ifdef MARKERCUBE
     itsGame->itsWorld->RemovePart(markerCube);
-    markerCube->Dispose();
+    delete markerCube;
 #endif
-    CAbstractPlayer::Dispose();
 }
 
 void CWalkerActor::PlaceParts() {
@@ -145,7 +146,9 @@ void CWalkerActor::PlaceParts() {
     aPart->RotateOneX(legs[1].highAngle);
     TranslatePartX(aPart, LEGSPACE);
 
+    dElevation = oldElevation - (location[1] + headHeight);
     deltaY = location[1] + headHeight;
+    oldElevation = deltaY;
 
     for (i = 0; i < partCount; i++) {
         aPart = partList[i];
@@ -433,12 +436,12 @@ void CWalkerActor::DoLegTouches() {
             }
 
             if (power[0] > FIX3(10) && soundId[0]) {
-                DoSound(soundId[0], spot, power[0], FIX(1));
+                DoSound(soundId[0], spot, power[0], FIX1);
             }
         } else {
             for (i = 0; i < 2; i++) {
                 if (power[i] > FpsCoefficient2(FIX3(10)) && soundId[i]) {
-                    DoSound(soundId[i], legs[i].where, power[i], FIX(1));
+                    DoSound(soundId[i], legs[i].where, power[i], FIX1);
                 }
             }
         }
@@ -718,7 +721,7 @@ void CWalkerActor::KeyboardControl(FunctionTable *ft) {
             }
         }
 
-        if (TESTFUNC(kfuJump, ft->up) && tractionFlag) {
+        if (TESTFUNC(kfuJump, ft->up) && tractionFlag && !jumpFlag) {
             FPS_DEBUG("*** kfuJump UP!!, fn=" << itsGame->frameNumber << ", crouch = " << crouch << ", initial speed = " << speed[1] << std::endl);
             speed[1] >>= 1;
             // it's an impulse power up so don't scale the jump
@@ -760,57 +763,81 @@ void CWalkerActor::UndoLegs() {
 void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
     if (itsGame->frameNumber == 0) {
         short hullRes;
-        HullConfigRecord hull;
 
         hullRes = config->hullType;
-        if (hullRes < 0 || hullRes > 2)
+        if (hullRes < 0 || hullRes > 9)
             hullRes = 1;
 
-        hullRes = ReadLongVar(iFirstHull + hullRes);
+        hullRes = ReadLongVar(iHull01 + hullRes);
 
-        LoadHullFromSetJSON(&hull, hullRes);
+        hullConfig = **AssetManager::GetHull(hullRes);
 
-        hullRes = hull.hullBSP;
-        itsGame->itsWorld->RemovePart(viewPortPart);
-        viewPortPart->Dispose();
+        hullRes = hullConfig.hullBSP;
+        gRenderer->RemovePart(viewPortPart);
+        delete viewPortPart;
         LoadPart(0, hullRes);
 
         viewPortPart = partList[0];
         viewPortPart->ReplaceColor(*ColorManager::getMarkerColor(0), longTeamColor);
+        if (!itsGame->itsApp->Get(kIgnoreCustomColorsTag)) {
+            viewPortPart->ReplaceColor(
+                *ColorManager::getMarkerColor(1),
+                config->trimColor.WithA(0xff)
+            );
+            viewPortPart->ReplaceColor(
+                *ColorManager::getMarkerColor(2),
+                config->cockpitColor.WithA(0xff)
+            );
+            viewPortPart->ReplaceColor(
+                *ColorManager::getMarkerColor(3),
+                config->gunColor.WithA(0xff)
+            );
+        }
+        
+        for (CSmartPart **thePart = partList; *thePart; thePart++) {
+            (*thePart)->ReplaceSpecularForColor(*ColorManager::getMarkerColor(0), ARGBColor(0x333333));
+            (*thePart)->ReplaceShininessForColor(*ColorManager::getMarkerColor(0), 4);
+            (*thePart)->ReplaceSpecularForColor(*ColorManager::getMarkerColor(1), ARGBColor(0x454545));
+            (*thePart)->ReplaceShininessForColor(*ColorManager::getMarkerColor(1), 8);
+            (*thePart)->ReplaceSpecularForColor(*ColorManager::getMarkerColor(2), ARGBColor(0xa6a6a6));
+            (*thePart)->ReplaceShininessForColor(*ColorManager::getMarkerColor(2), 48);
+            (*thePart)->ReplaceSpecularForColor(*ColorManager::getMarkerColor(3), ARGBColor(0x808080));
+            (*thePart)->ReplaceShininessForColor(*ColorManager::getMarkerColor(3), 24);
+        }
 
         proximityRadius = viewPortPart->enclosureRadius << 2;
 
-        itsGame->itsWorld->AddPart(viewPortPart);
+        gRenderer->AddPart(viewPortPart);
 
-        viewPortHeight = hull.rideHeight;
+        viewPortHeight = hullConfig.rideHeight;
 
         PlaceParts();
 
-        mass = hull.mass;
+        mass = hullConfig.mass;
 
-        if (hull.maxBoosters < boosterLimit)
-            boosterLimit = hull.maxBoosters;
+        if (hullConfig.maxBoosters < boosterLimit)
+            boosterLimit = hullConfig.maxBoosters;
 
-        if (hull.maxMissiles < missileLimit)
-            missileLimit = hull.maxMissiles;
+        if (hullConfig.maxMissiles < missileLimit)
+            missileLimit = hullConfig.maxMissiles;
 
-        if (hull.maxGrenades < grenadeLimit)
-            grenadeLimit = hull.maxGrenades;
+        if (hullConfig.maxGrenades < grenadeLimit)
+            grenadeLimit = hullConfig.maxGrenades;
 
-        maxShields = FMul(maxShields, hull.shieldsRatio);
-        classicShieldRegen = FMul(classicShieldRegen, hull.shieldsChargeRatio);
+        maxShields = FMul(maxShields, hullConfig.shieldsRatio);
+        classicShieldRegen = FMul(classicShieldRegen, hullConfig.shieldsChargeRatio);
         shields = maxShields;
 
-        maxEnergy = FMul(maxEnergy, hull.energyRatio);
+        maxEnergy = FMul(maxEnergy, hullConfig.energyRatio);
         energy = maxEnergy;
-        classicGeneratorPower = FMul(classicGeneratorPower, hull.energyChargeRatio);
+        classicGeneratorPower = FMul(classicGeneratorPower, hullConfig.energyChargeRatio);
 
-        classicChargeGunPerFrame = FMul(classicChargeGunPerFrame, hull.shotChargeRatio);
-        activeGunEnergy = FMul(activeGunEnergy, hull.minShotRatio);
-        fullGunEnergy = FMul(fullGunEnergy, hull.maxShotRatio);
+        classicChargeGunPerFrame = FMul(classicChargeGunPerFrame, hullConfig.shotChargeRatio);
+        activeGunEnergy = FMul(activeGunEnergy, hullConfig.minShotRatio);
+        fullGunEnergy = FMul(fullGunEnergy, hullConfig.maxShotRatio);
 
-        maxAcceleration = FMul(maxAcceleration, hull.accelerationRatio);
-        jumpBasePower = FMul(jumpBasePower, hull.jumpPowerRatio);
+        maxAcceleration = FMul(maxAcceleration, hullConfig.accelerationRatio);
+        jumpBasePower = FMul(jumpBasePower, hullConfig.jumpPowerRatio);
 
         gunEnergy[0] = fullGunEnergy;
         gunEnergy[1] = fullGunEnergy;

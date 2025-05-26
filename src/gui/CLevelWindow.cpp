@@ -1,36 +1,21 @@
 #include "CLevelWindow.h"
 
+#include "AssetManager.h"
 #include "CAvaraApp.h"
 #include "CAvaraGame.h"
 #include "CNetManager.h"
 #include "Preferences.h"
-#include "Resource.h"
+#include "CRUD.h"
 
-#include <cute_files.h>
+static int MAX_RECENTS = 50;
 
 CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     // Searches "levels/" directory alongside application.
     // will eventually use level search API
-    levelSets = LevelDirNameListing();
 
-    json sets = app->Get(kRecentSets);
-    json levels = app->Get(kRecentLevels);
-    if (sets.size() == levels.size()) {
-        for (unsigned i = 0; i < sets.size(); ++i) {
-            std::string set = sets.at(i);
-            std::stringstream subDir;
-            subDir << LEVELDIR << PATHSEP << set;
-            char subDirPath[PATH_MAX];
-            BundlePath(subDir, subDirPath);
-            if (cf_file_exists(subDirPath)) {
-                recentSets.push_back(set);
-                recentLevels.push_back(levels.at(i));
-            }
-        }
-    }
+    levelSets = AssetManager::GetAvailablePackages();
 
-    app->Set(kRecentSets, recentSets);
-    app->Set(kRecentLevels, recentLevels);
+    FetchRecents();
 
     setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 10, 10));
 
@@ -57,9 +42,16 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     loadBtn = new nanogui::Button(this, "Load Level");
     loadBtn->setCallback([this] { this->SendLoad(); });
 
-    startBtn = new nanogui::Button(this, "Start Game");
-    startBtn->setCallback([app] { ((CAvaraAppImpl *)app)->GetGame()->SendStartCommand(); });
-
+    startBtn = new nanogui::Button(this, "Start/Ready");
+    startBtn->setCallback([app] {
+        if (SDL_GetModState() & KMOD_ALT) {
+            // if ALT key pressed, start right away
+            ((CAvaraAppImpl *)app)->GetGame()->SendStartCommand();
+        } else {
+            // send the "ready" checkmark √
+            ((CAvaraAppImpl *)app)->GetNet()->SendRosterMessage(checkMark_utf8);
+        }
+    });
     SelectSet(0);
     levelBox->setSelectedIndex(0);
 }
@@ -70,34 +62,21 @@ bool CLevelWindow::DoCommand(int theCommand) {
     return false;
 }
 
-void CLevelWindow::AddRecent(std::string set, std::string levelName) {
-    if (json::accept("[\"" + set + "\", \"" + levelName + "\"]")) {
-        // remove level if it is already in recents
-        for (unsigned i = 0; i < recentSets.size(); i++) {
-            if (recentSets[i].compare(set) == 0 && recentLevels[i].compare(levelName) == 0) {
-                recentSets.erase(recentSets.begin() + i);
-                recentLevels.erase(recentLevels.begin() + i);
-                break;
-            }
-        }
-
-        recentSets.insert(recentSets.begin(), set);
-        recentLevels.insert(recentLevels.begin(), levelName);
-
-        if (recentSets.size() > 64) {
-            recentSets.pop_back();
-            recentLevels.pop_back();
-        }
-
-        recentsBox->setItems(recentLevels, recentSets);
-        recentsBox->setCaption("Recents");
-        recentsBox->setNeedsLayout();
-
-        mApplication->Set(kRecentSets, recentSets);
-        mApplication->Set(kRecentLevels, recentLevels);
-    } else {
-        SDL_Log("AddRecent ignoring bad set/level name.");
+void CLevelWindow::FetchRecents() {
+    recentSets.clear();
+    recentLevels.clear();
+    CRUD::RecentLevelsList recents = static_cast<CAvaraAppImpl *>(mApplication)->itsAPI->GetRecentLevels(MAX_RECENTS);
+    for (auto recent : recents) {
+        recentSets.push_back(recent.setTag);
+        recentLevels.push_back(recent.levelName);
     }
+}
+
+void CLevelWindow::UpdateRecents() {
+    FetchRecents();
+    recentsBox->setItems(recentLevels, recentSets);
+    recentsBox->setCaption("Recents");
+    recentsBox->setNeedsLayout();
 }
 
 void CLevelWindow::SelectLevel(std::string set, std::string levelName) {
@@ -129,11 +108,11 @@ void CLevelWindow::SelectSet(std::string set) {
     levelIntros.clear();
     levelTags.clear();
 
-    nlohmann::json ledis = LoadLevelListFromJSON(set);
-    for (auto &ld : ledis.items()) {
-        levelNames.push_back(ld.value()["Name"]);
-        levelIntros.push_back(ld.value()["Message"]);
-        levelTags.push_back(ld.value()["Alf"]);
+    auto manifest = *AssetManager::GetManifest(set);
+    for (auto const &ledi : manifest->levelDirectory) {
+        levelNames.push_back(ledi.levelName);
+        levelIntros.push_back(ledi.levelInfo);
+        levelTags.push_back(ledi.alfPath);
     }
     levelBox->setItems(levelNames, levelIntros);
     levelBox->setEnabled(true);

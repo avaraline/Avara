@@ -13,7 +13,7 @@
 
 class CDepot;
 
-class CSmart : public CWeapon {
+class CSmart final : public CWeapon {
 public:
     Fixed goodYaw;
     Fixed goodPitch;
@@ -26,7 +26,7 @@ public:
     short inSight;
     FrameNumber fireFrame;
 
-    virtual void IWeapon(CDepot *theDepot);
+    CSmart(CDepot *theDepot);
     virtual void ResetWeapon();
 
     virtual void PlaceParts();

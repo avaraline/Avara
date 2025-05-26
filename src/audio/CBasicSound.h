@@ -9,7 +9,10 @@
 
 #pragma once
 #include "CDirectObject.h"
+#include "OggFile.h"
 #include "SoundSystemDefines.h"
+
+#include <memory>
 
 class CSoundMixer;
 class CSoundHub;
@@ -22,7 +25,7 @@ public:
 
     int16_t hubId;
     CSoundHub *itsHub;
-    SampleHeaderHandle itsSamples;
+    std::shared_ptr<OggFile> itsSamples;
     CBasicSound *nextSound;
 
     CSoundMixer *itsMixer;
@@ -31,13 +34,12 @@ public:
     int32_t loopStart;
     int32_t loopEnd;
     int32_t loopCount[2];
-    Sample *sampleData;
 
-    int32_t squareAcc[2]; //	Distance squared
-    Fixed dSquare; //	Distance squared as a Fixed.
-    Fixed distance; //	Distance (square root of squareAcc).
-    Fixed relPos[3]; //	Distance as a vector
-    Fixed balance;
+    int32_t squareAcc[2] = {0, 0};//	Distance squared
+    Fixed dSquare = 0; //	Distance squared as a Fixed.
+    Fixed distance = 0; //	Distance (square root of squareAcc).
+    Fixed relPos[3] = {0, 0, 0}; //	Distance as a vector
+    Fixed balance = 0;
 
     SoundLink *motionLink; //	Location information.
     SoundLink *controlLink; //	For control, when motionLink is not good enough.
@@ -58,8 +60,7 @@ public:
     virtual void Start();
 
     virtual void Reset();
-    virtual void UseSamplePtr(Sample *samples, int numSamples);
-    virtual void UseSamples(SampleHeaderHandle theSample);
+    virtual void UseSamples(std::shared_ptr<OggFile> theSample);
 
     virtual void Release();
     virtual void SetVolume(Fixed vol);

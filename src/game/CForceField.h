@@ -24,7 +24,8 @@ public:
     Fixed force[3];
     Boolean isWorking;
 
-    virtual void BeginScript();
-    virtual CAbstractActor *EndScript();
-    virtual void FrameAction();
+    virtual void BeginScript() override;
+    virtual CAbstractActor *EndScript() override;
+    virtual void FrameAction() override;
+    virtual bool IsGeometryStatic() override;
 };

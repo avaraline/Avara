@@ -8,6 +8,7 @@
 */
 // #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
 
+#include "AssetManager.h"
 #include "CDoorActor.h"
 
 #include "CSmartPart.h"
@@ -91,7 +92,7 @@ void CDoorActor::TouchDamage() {
         searchCount = ++itsGame->searchCount;
 
         theBlast.blastPower = hitPower;
-        VECTORCOPY(theBlast.blastPoint, partList[0]->itsTransform[3]);
+        VECTORCOPY(theBlast.blastPoint, partList[0]->modelTransform[3]);
         theBlast.team = teamColor;
         theBlast.playerId = -1;
 
@@ -105,7 +106,7 @@ void CDoorActor::TouchDamage() {
             }
         }
 
-        SecondaryDamage(teamColor, -1);
+        SecondaryDamage(teamColor, -1, ksiObjectCollision);
     }
 }
 
@@ -150,7 +151,8 @@ CAbstractActor *CDoorActor::EndScript() {
 
     resId = ReadLongVar(iShape);
 
-    if (GetResource('BSPT', resId)) {
+    auto bsp = AssetManager::GetBsp(resId);
+    if (bsp) {
         //CBSPWorld *theWorld;
 
         RegisterReceiver(&openActivator, ReadLongVar(iOpenMsg));
@@ -164,9 +166,10 @@ CAbstractActor *CDoorActor::EndScript() {
         closeSoundId = ReadLongVar(iCloseSound);
         stopSoundId = ReadLongVar(iStopSound);
 
-        gHub->PreLoadSample(openSoundId);
-        gHub->PreLoadSample(closeSoundId);
-        gHub->PreLoadSample(stopSoundId);
+        // Preload sounds.
+        auto _ = AssetManager::GetOgg(openSoundId);
+        _ = AssetManager::GetOgg(closeSoundId);
+        _ = AssetManager::GetOgg(stopSoundId);
 
         openCounter = 0;
         closeCounter = 0;
@@ -177,10 +180,16 @@ CAbstractActor *CDoorActor::EndScript() {
         //		location[2] = (location[2] + FIX3(125)) & ~(FIX3(250)-1);
 
         hitPower = ReadFixedVar(iShotPower);
+        
+        classicOpenDelay = FrameNumber(ReadLongVar(iOpenDelay));
+        classicCloseDelay = FrameNumber(ReadLongVar(iCloseDelay));
+        classicGuardDelay = FrameNumber(ReadLongVar(iGuardDelay));
+        classicOpenSpeed = ReadFixedVar(iOpenSpeed);
+        classicCloseSpeed = ReadFixedVar(iCloseSpeed);
 
         ReadDoorVariables();
 
-        LoadPartWithColors(0, resId);
+        LoadPartWithMaterials(0, resId);
 
         PlaceParts();
         LinkPartSpheres();
@@ -192,12 +201,6 @@ CAbstractActor *CDoorActor::EndScript() {
         partCount = 1;
         action = kDoorStopped;
         isActive = kIsActive;
-
-        classicOpenDelay = FrameNumber(ReadLongVar(iOpenDelay));
-        classicCloseDelay = FrameNumber(ReadLongVar(iCloseDelay));
-        classicGuardDelay = FrameNumber(ReadLongVar(iGuardDelay));
-        classicOpenSpeed = ReadFixedVar(iOpenSpeed);
-        classicCloseSpeed = ReadFixedVar(iCloseSpeed);
     }
 
     return this;
@@ -223,11 +226,9 @@ void CDoorActor::AdaptableSettings() {
     FPS_DEBUG("openSpeed = " << openSpeed << ", closeSpeed = " << closeSpeed << "\n");
 }
 
-void CDoorActor::Dispose() {
+CDoorActor::~CDoorActor() {
     itsGame->RemoveReceiver(&openActivator);
     itsGame->RemoveReceiver(&closeActivator);
-
-    CGlowActors::Dispose();
 }
 
 void CDoorActor::DoorSound() {
@@ -253,7 +254,7 @@ void CDoorActor::DoorSound() {
 
     if (theId) {
         itsSoundLink = gHub->GetSoundLink();
-        PlaceSoundLink(itsSoundLink, partList[0]->itsTransform[3]);
+        PlaceSoundLink(itsSoundLink, partList[0]->modelTransform[3]);
         theSound = gHub->GetSoundSampler(hubRate, theId);
         theSound->SetVolume(doorSoundVolume);
         theSound->SetLoopCount(soundLoop);
@@ -301,9 +302,9 @@ void CDoorActor::FrameAction() {
         FPS_DEBUG("\n frameNumber = " << itsGame->frameNumber << "\n");
         Vector oldOrigin;
 
-        oldOrigin[0] = partList[0]->itsTransform[3][0];
-        oldOrigin[1] = partList[0]->itsTransform[3][1];
-        oldOrigin[2] = partList[0]->itsTransform[3][2];
+        oldOrigin[0] = partList[0]->modelTransform[3][0];
+        oldOrigin[1] = partList[0]->modelTransform[3][1];
+        oldOrigin[2] = partList[0]->modelTransform[3][2];
 
         FPS_DEBUG("oldOrigin = " << FormatVector(oldOrigin, 3) << "\n");
 
@@ -349,14 +350,14 @@ void CDoorActor::FrameAction() {
         }
 
         // lastMovement is for external interfaces (sound, slide), so it belongs in classic units
-        lastMovement[0] = ClassicCoefficient2(partList[0]->itsTransform[3][0] - oldOrigin[0]);
-        lastMovement[1] = ClassicCoefficient2(partList[0]->itsTransform[3][1] - oldOrigin[1]);
-        lastMovement[2] = ClassicCoefficient2(partList[0]->itsTransform[3][2] - oldOrigin[2]);
+        lastMovement[0] = ClassicCoefficient2(partList[0]->modelTransform[3][0] - oldOrigin[0]);
+        lastMovement[1] = ClassicCoefficient2(partList[0]->modelTransform[3][1] - oldOrigin[1]);
+        lastMovement[2] = ClassicCoefficient2(partList[0]->modelTransform[3][2] - oldOrigin[2]);
 
         FPS_DEBUG("lastMovement = " << FormatVector(lastMovement, 3) << "\n");
 
         if (itsSoundLink) {
-            UpdateSoundLink(itsSoundLink, partList[0]->itsTransform[3], lastMovement, itsGame->soundTime);
+            UpdateSoundLink(itsSoundLink, partList[0]->modelTransform[3], lastMovement, itsGame->soundTime);
         }
     }
 }
@@ -370,4 +371,41 @@ void CDoorActor::StandingOn(CAbstractActor *who, //	Who is touching me?
     if (firstLeg && action != kDoorStopped) {
         who->Slide(lastMovement);
     }
+}
+
+bool CDoorActor::IsGeometryStatic()
+{
+    if (!CGlowActors::IsGeometryStatic()) {
+        return false;
+    }
+    
+    if (doorStatus == kDoorClosed &&
+        openActivator.messageId > 0 &&
+        classicOpenSpeed != 0 && (
+            deltas[0] != 0 ||
+            deltas[1] != 0 ||
+            deltas[2] != 0 ||
+            twists[0] != 0 ||
+            twists[1] != 0 ||
+            twists[2] != 0
+        )
+    ) {
+        return false;
+    }
+    
+    if (doorStatus == kDoorOpen &&
+        closeActivator.messageId > 0 &&
+        classicCloseSpeed != 0 && (
+            deltas[0] != 0 ||
+            deltas[1] != 0 ||
+            deltas[2] != 0 ||
+            twists[0] != 0 ||
+            twists[1] != 0 ||
+            twists[2] != 0
+        )
+    ) {
+        return false;
+    }
+    
+    return true;
 }

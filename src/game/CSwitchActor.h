@@ -28,12 +28,13 @@ public:
     Boolean restart;
     Boolean enabled;
 
-    virtual void BeginScript();
-    virtual CAbstractActor *EndScript();
-    virtual void PlaceParts();
+    virtual void BeginScript() override;
+    virtual CAbstractActor *EndScript() override;
+    virtual void PlaceParts() override;
     virtual CSmartPart *CollisionTest();
-    virtual void FrameAction();
-    virtual void WasHit(RayHitRecord *theHit, Fixed hitEnergy);
-    virtual void BlastHit(BlastHitRecord *theHit);
-    virtual void Dispose();
+    virtual void FrameAction() override;
+    virtual void WasHit(RayHitRecord *theHit, Fixed hitEnergy) override;
+    virtual void BlastHit(BlastHitRecord *theHit) override;
+    virtual ~CSwitchActor();
+    virtual bool IsGeometryStatic() override { return false; }
 };

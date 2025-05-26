@@ -33,7 +33,7 @@ enum { udpCramInfo }; //	Selectors for kpPacketProtocolControl packer p1 params.
 class CUDPComm : public CCommManager {
 public:
     int32_t seed;
-    short softwareVersion;
+    uint16_t softwareVersion;
     short maxClients;
     short clientLimit;
     Str255 password;
@@ -57,7 +57,7 @@ public:
     // OSErr				writeErr;
     // OSErr				readErr;
 
-    class CTagBase *prefs;
+    // class CTagBase *prefs;
     class CUDPConnection *connections;
     class CUDPConnection *nextSender;
     /*
@@ -96,8 +96,8 @@ public:
     Boolean specialWakeup;
     Str255 inviteString;
 
-    virtual void IUDPComm(short clientCount, short bufferCount, short version, ClockTick urgentTimePeriod);
-    virtual OSErr AllocatePacketBuffers(short numPackets);
+    virtual void IUDPComm(short clientCount, short bufferCount, uint16_t version, ClockTick urgentTimePeriod);
+
     virtual void Disconnect();
     virtual void WritePrefs();
     virtual void Dispose();
@@ -116,7 +116,9 @@ public:
     virtual void ProcessQueue();
 
     virtual std::string FormatConnectionTable(CompleteAddress *table);
+    virtual bool IsDoubleNAT(uint32_t host);
     virtual void SendConnectionTable();
+    virtual void ReplaceMatchingNAT(const IPaddress &addr);
     virtual void ReadFromTOC(PacketInfo *thePacket);
 
     virtual void SendRejectPacket(ip_addr remoteHost, port_num remotePort, OSErr loginErr);
@@ -129,6 +131,7 @@ public:
     virtual Boolean AsyncWrite();
 
     virtual void ReceivedGoodPacket(PacketInfo *thePacket);
+    virtual size_t SkipLostPackets(int16_t dist);
 
     virtual OSErr CreateStream(port_num streamPort);
 
@@ -149,7 +152,7 @@ public:
 
     virtual Boolean ReconfigureAvailable();
     virtual void Reconfigure();
-    virtual long GetMaxRoundTrip(short distribution, short *slowPlayerId = nullptr);
+    virtual long GetMaxRoundTrip(short distribution, float multiplier = 0.0, short *slowPlayerId = nullptr);
     virtual float GetMaxMeanSendCount(short distribution);
     virtual float GetMaxMeanReceiveCount(short distribution);
 

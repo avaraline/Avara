@@ -9,8 +9,8 @@
 
 #pragma once
 #include "ARGBColor.h"
-#include "AvaraGL.h"
 #include "CDirectObject.h"
+#include "Material.h"
 #include "Types.h"
 
 #define MAXTOTALSHADES 64
@@ -32,23 +32,20 @@ class CViewParameters;
 
 class CWorldShader : public CDirectObject {
 public:
-    CAvaraGame *itsGame;
-
     ARGBColor lowSkyColor = DEFAULT_LOW_SKY_COLOR;
     ARGBColor highSkyColor = DEFAULT_HIGH_SKY_COLOR;
-    ARGBColor groundColor = DEFAULT_GROUND_COLOR;
+    Material groundMaterial = Material(DEFAULT_GROUND_COLOR);
     short skyShadeCount = DEFAULT_SKY_SHADE_COUNT;
     Fixed lowSkyAltitude;
     Fixed highSkyAltitude;
+    float hazeDensity;
 
     short numShades;
     short shadeColors[MAXTOTALSHADES];
     Fixed altitudes[MAXTOTALSHADES];
 
 
-    virtual void IWorldShader(CAvaraGame *theGame);
-    virtual void IWorldShader();
+    CWorldShader();
     virtual void Reset();
     virtual void Apply();
-    virtual void ShadeWorld(CViewParameters *theView);
 };
