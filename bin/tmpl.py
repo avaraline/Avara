@@ -153,9 +153,6 @@ def get_value(the_data, dtype):
 
     # DWRD: Decimal word (two bytes)
     if dtype == "DWRD":
-        if len(the_data) < 2:
-            print("NOT ENOUGH DATA FOR DWRD")
-            return (b"", 0)
         value = bytes_to_short(the_data[:2])
         return (the_data[2:], value)
 

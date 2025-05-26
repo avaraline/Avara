@@ -3,6 +3,7 @@
 import json
 import os
 import re
+import struct
 import subprocess
 import sys
 import unicodedata
@@ -216,7 +217,10 @@ def convert_to_files(datafile, thedir):
                 pass
 
     if "BSPS" in forks:
-        result["BSPS"] = get_tmpl(forks, "BSPS")
+        try:
+            result["BSPS"] = get_tmpl(forks, "BSPS")
+        except struct.error:
+            print("Bad BSPS data")
 
     dumpdirs = [os.path.join(thedir, SETFILE)]
     if datafile == "levels/single-player.r":
