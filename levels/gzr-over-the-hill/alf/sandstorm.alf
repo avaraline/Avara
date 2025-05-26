@@ -28,9 +28,9 @@
   <Counter in="@add1Yellow" n="kTeamScore1" out="@yellowWins" />
   <Counter in="@add1Blue" n="kTeamScore1" out="@blueWins" />
   <Counter in="@add1Red" n="kTeamScore1" out="@redWins" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowWins" showEveryone="true" text="Yellow team wins!" cx="47.56944444444444" cz="397.22222222222223" r="2.569444444444457" />
-  <Text sound="kSnText" volume="kTextVolume" in="@blueWins" showEveryone="true" text="Blue team wins!" cx="47.56944444444444" cz="397.22222222222223" r="2.569444444444457" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redWins" showEveryone="true" text="Red team wins!" cx="47.56944444444444" cz="397.22222222222223" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowWins" showEveryone="true" text="Yellow team wins!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueWins" showEveryone="true" text="Blue team wins!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redWins" showEveryone="true" text="Red team wins!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
   <Counter in="@add1Yellow" n="10" out="@yellowAt10" restart="false" />
   <Counter in="@add1Yellow" n="20" out="@yellowAt20" restart="false" />
   <Counter in="@add1Yellow" n="30" out="@yellowAt30" restart="false" />
@@ -40,17 +40,17 @@
   <Counter in="@add1Yellow" n="70" out="@yellowAt70" restart="false" />
   <Counter in="@add1Yellow" n="80" out="@yellowAt80" restart="false" />
   <Counter in="@add1Yellow" n="90" out="@yellowAt90" restart="false" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt10" showEveryone="true" mask="T2" text="Yellow team has 10 seconds!" cx="47.56944444444444" cz="397.22222222222223" r="2.569444444444457" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt20" showEveryone="true" mask="T2" text="Yellow team has 20 seconds!" cx="47.56944444444444" cz="397.22222222222223" r="2.569444444444457" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt30" showEveryone="true" mask="T2" text="Yellow team has 30 seconds!" cx="47.56944444444444" cz="397.22222222222223" r="2.569444444444457" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt40" showEveryone="true" mask="T2" text="Yellow team has 40 seconds!" cx="47.56944444444444" cz="397.22222222222223" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt10" showEveryone="true" mask="T2" text="Yellow team has 10 seconds!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt20" showEveryone="true" mask="T2" text="Yellow team has 20 seconds!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt30" showEveryone="true" mask="T2" text="Yellow team has 30 seconds!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt40" showEveryone="true" mask="T2" text="Yellow team has 40 seconds!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
   <Text sound="kSnText" volume="kTextVolume" in="@yellowAt50" showEveryone="true" text="Yellow team has reached the 
-halfway mark!" cx="47.56944444444444" cz="397.22222222222223" r="2.569444444444457" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt60" showEveryone="true" mask="T2" text="Yellow team has 60 seconds!" cx="47.56944444444444" cz="397.22222222222223" r="2.569444444444457" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt70" showEveryone="true" mask="T2" text="Yellow team has 70 seconds!" cx="47.56944444444444" cz="397.22222222222223" r="2.569444444444457" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt80" showEveryone="true" mask="T2" text="Yellow team has 80 seconds!" cx="47.56944444444444" cz="397.22222222222223" r="2.569444444444457" />
+halfway mark!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt60" showEveryone="true" mask="T2" text="Yellow team has 60 seconds!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt70" showEveryone="true" mask="T2" text="Yellow team has 70 seconds!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt80" showEveryone="true" mask="T2" text="Yellow team has 80 seconds!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
   <Text sound="kSnText" volume="kTextVolume" in="@yellowAt90" showEveryone="true" text="Yellow team has only 10 seconds 
-to go!" cx="47.56944444444444" cz="397.22222222222223" r="2.569444444444457" />
+to go!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
   <Counter in="@add1Blue" n="10" out="@blueAt10" restart="false" />
   <Counter in="@add1Blue" n="20" out="@blueAt20" restart="false" />
   <Counter in="@add1Blue" n="30" out="@blueAt30" restart="false" />
@@ -60,17 +60,17 @@ to go!" cx="47.56944444444444" cz="397.22222222222223" r="2.569444444444457" />
   <Counter in="@add1Blue" n="70" out="@blueAt70" restart="false" />
   <Counter in="@add1Blue" n="80" out="@blueAt80" restart="false" />
   <Counter in="@add1Blue" n="90" out="@blueAt90" restart="false" />
-  <Text sound="kSnText" volume="kTextVolume" in="@blueAt10" showEveryone="true" mask="T6" text="Blue team has 10 seconds!" cx="30.138888888888893" cz="397.84722222222223" r="2.569444444444457" />
-  <Text sound="kSnText" volume="kTextVolume" in="@blueAt20" showEveryone="true" mask="T6" text="Blue team has 20 seconds!" cx="30.138888888888893" cz="397.84722222222223" r="2.569444444444457" />
-  <Text sound="kSnText" volume="kTextVolume" in="@blueAt30" showEveryone="true" mask="T6" text="Blue team has 30 seconds!" cx="30.138888888888893" cz="397.84722222222223" r="2.569444444444457" />
-  <Text sound="kSnText" volume="kTextVolume" in="@blueAt40" showEveryone="true" mask="T6" text="Blue team has 40 seconds!" cx="30.138888888888893" cz="397.84722222222223" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt10" showEveryone="true" mask="T6" text="Blue team has 10 seconds!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt20" showEveryone="true" mask="T6" text="Blue team has 20 seconds!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt30" showEveryone="true" mask="T6" text="Blue team has 30 seconds!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt40" showEveryone="true" mask="T6" text="Blue team has 40 seconds!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
   <Text sound="kSnText" volume="kTextVolume" in="@blueAt50" showEveryone="true" text="Blue team has reached the halfway 
-mark!" cx="30.138888888888893" cz="397.84722222222223" r="2.569444444444457" />
-  <Text sound="kSnText" volume="kTextVolume" in="@blueAt60" showEveryone="true" mask="T6" text="Blue team has 60 seconds!" cx="30.138888888888893" cz="397.84722222222223" r="2.569444444444457" />
-  <Text sound="kSnText" volume="kTextVolume" in="@blueAt70" showEveryone="true" mask="T6" text="Blue team has 70 seconds!" cx="30.138888888888893" cz="397.84722222222223" r="2.569444444444457" />
-  <Text sound="kSnText" volume="kTextVolume" in="@blueAt80" showEveryone="true" mask="T6" text="Blue team has 80 seconds!" cx="30.138888888888893" cz="397.84722222222223" r="2.569444444444457" />
+mark!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt60" showEveryone="true" mask="T6" text="Blue team has 60 seconds!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt70" showEveryone="true" mask="T6" text="Blue team has 70 seconds!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt80" showEveryone="true" mask="T6" text="Blue team has 80 seconds!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
   <Text sound="kSnText" volume="kTextVolume" in="@blueAt90" showEveryone="true" text="Blue team has only 10 seconds to 
-go!" cx="30.138888888888893" cz="397.84722222222223" r="2.569444444444457" />
+go!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
   <Counter in="@add1Red" n="10" out="@redAt10" restart="false" />
   <Counter in="@add1Red" n="20" out="@redAt20" restart="false" />
   <Counter in="@add1Red" n="30" out="@redAt30" restart="false" />
@@ -80,17 +80,17 @@ go!" cx="30.138888888888893" cz="397.84722222222223" r="2.569444444444457" />
   <Counter in="@add1Red" n="70" out="@redAt70" restart="false" />
   <Counter in="@add1Red" n="80" out="@redAt80" restart="false" />
   <Counter in="@add1Red" n="90" out="@redAt90" restart="false" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt10" showEveryone="true" mask="T3" text="Red team has 10 seconds!" cx="12.291666666666668" cz="397.36111111111114" r="2.569444444444457" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt20" showEveryone="true" mask="T3" text="Red team has 20 seconds!" cx="12.291666666666668" cz="397.36111111111114" r="2.569444444444457" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt30" showEveryone="true" mask="T3" text="Red team has 30 seconds!" cx="12.291666666666668" cz="397.36111111111114" r="2.569444444444457" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt40" showEveryone="true" mask="T3" text="Red team has 40 seconds!" cx="12.291666666666668" cz="397.36111111111114" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt10" showEveryone="true" mask="T3" text="Red team has 10 seconds!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt20" showEveryone="true" mask="T3" text="Red team has 20 seconds!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt30" showEveryone="true" mask="T3" text="Red team has 30 seconds!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt40" showEveryone="true" mask="T3" text="Red team has 40 seconds!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
   <Text sound="kSnText" volume="kTextVolume" in="@redAt50" showEveryone="true" text="Red team has reached the 
-halfway mark!" cx="12.291666666666668" cz="397.36111111111114" r="2.569444444444457" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt60" showEveryone="true" mask="T3" text="Red team has 60 seconds!" cx="12.291666666666668" cz="397.36111111111114" r="2.569444444444457" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt70" showEveryone="true" mask="T3" text="Red team has 70 seconds!" cx="12.291666666666668" cz="397.36111111111114" r="2.569444444444457" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt80" showEveryone="true" mask="T3" text="Red team has 80 seconds!" cx="12.291666666666668" cz="397.36111111111114" r="2.569444444444457" />
+halfway mark!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt60" showEveryone="true" mask="T3" text="Red team has 60 seconds!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt70" showEveryone="true" mask="T3" text="Red team has 70 seconds!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt80" showEveryone="true" mask="T3" text="Red team has 80 seconds!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
   <Text sound="kSnText" volume="kTextVolume" in="@redAt90" showEveryone="true" text="Red team has only 10 seconds to 
-go!" cx="12.291666666666668" cz="397.36111111111114" r="2.569444444444457" />
+go!" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
   <Teleporter sound="0" shape="0" yon="0.01" status="false" start="@timesUp" win="0" activeRange="kInfinity" y="20" out="@gameEnds" color="#ff2600" color.1="#000000" cx="80.83333333333334" cz="396.80555555555554" angle="45" />
   <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" color="#ff2600" color.1="#000000" cx="80.83333333333334" cz="396.80555555555554" angle="45" />
   <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" color="#ff2600" color.1="#000000" cx="80.83333333333334" cz="396.80555555555554" angle="45" />
@@ -100,7 +100,7 @@ go!" cx="12.291666666666668" cz="397.36111111111114" r="2.569444444444457" />
   <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" color="#ff2600" color.1="#000000" cx="80.83333333333334" cz="396.80555555555554" angle="45" />
   <Timer in.0="@yellowWins" in.1="@blueWins" in.2="@redWins" in.3="@pinkWIns" in.4="@purpleWins" in.5="@cyanWins" wait="1" out="@teleportTheRest" />
   <Base in="@badHectors" out="@teleportTheRest" cx="61.59722222222223" cz="396.31944444444446" />
-  <Text in="@badHectors" showEveryone="true" text="HECTORS must be red, yellow or blue." sound="0" cx="61.59722222222223" cz="396.31944444444446" r="2.569444444444457" />
+  <Text in="@badHectors" showEveryone="true" text="HECTORS must be red, yellow or blue." sound="0" cx="78.75" cz="58.958333333333336" r="2.569444444444457" />
   <Goody out="@badHectors" shape="bspW3x3" color="#ff2600" color.1="#000000" cx="61.59722222222223" cz="396.31944444444446" angle="45" />
   <Walker team="4" defaultLives="0" cx="61.59722222222223" cz="396.31944444444446" angle="45" />
   <Walker team="4" defaultLives="0" cx="61.59722222222223" cz="396.31944444444446" angle="45" />

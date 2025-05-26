@@ -217,6 +217,8 @@ def fix_quirks(text):
     text = text.replace(' "Seven" ', ' ""Seven"" ')
     # Stranded
     text = text.replace('de;taY', 'deltaY')
+    # Fortifications
+    text = text.replace('wallHwe', '')
     # Disk-o-tech -- not sure how this worked before?
     text = text.replace("snDoory =", "snDoor y =")
     text = text.replace("= 0speed =", "= 0 speed =")
