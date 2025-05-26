@@ -2174,4 +2174,3 @@ int gladLoadGLES2Loader(GLADloadproc load) {
 	if (!find_extensionsGLES2()) return 0;
 	return GLVersion.major != 0 || GLVersion.minor != 0;
 }
-

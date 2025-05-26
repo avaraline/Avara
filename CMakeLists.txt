@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
-set(CMAKE_OSX_ARCHITECTURES "x86_64")
-project(Avara VERSION 0.7.5)
+project(Avara VERSION 0.7.6)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -8,17 +7,21 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 set(VERBOSE True)
 set(OpenGL_GL_PREFERENCE GLVND)
 
-set(CMAKE_CXX_FLAGS "-MMD -MP -g -Wno-multichar -DNANOGUI_GLAD")
+set(CMAKE_CXX_FLAGS "-MP -g -Wno-multichar -DNANOGUI_GLAD")
 
 if (POLICY CMP0074)
   cmake_policy(SET CMP0074 NEW)
 endif()
 
-find_package(SDL2 CONFIG REQUIRED)
-
-find_package(glad CONFIG REQUIRED)
-
+# SDL2
+find_package(SDL2 REQUIRED)
+include_directories(${SDL2_INCLUDE_DIRS})
+# glad
+include_directories("${CMAKE_SOURCE_DIR}/vendor/glad/glad")
+# gtest
 find_package(GTest CONFIG REQUIRED)
+# sqlite3
+find_package(SQLite3 REQUIRED)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}$<0:>")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}$<0:>")
@@ -49,18 +52,22 @@ endif()
 
 
 file(GLOB_RECURSE CORE_SOURCE RELATIVE ${CMAKE_SOURCE_DIR} 
+    "src/assets/*.cpp"
     "src/audio/*.cpp" 
     "src/base/*.cpp" 
     "src/bsp/*.cpp" 
     "src/compat/*.cpp"
     "src/game/*.cpp"
+    "src/gui/*.cpp" 
     "src/level/*.cpp"
     "src/net/*.cpp"
-    "src/util/*.cpp"
-    "src/gui/*.cpp" 
+    "src/render/*.cpp"
     "src/tui/*.cpp"
-    "vendor/nanogui/*.cpp"
+    "src/util/*.cpp"
+    "src/util/huffman/*.cpp"
+    "vendor/glad/glad.c"
     "vendor/glm/detail/glm.cpp"
+    "vendor/nanogui/*.cpp"
     "vendor/nanovg/nanovg.c"
     "vendor/pugixml/pugixml.cpp"
     "vendor/csscolorparser.cpp"
@@ -76,7 +83,6 @@ if(WIN32 OR MSVC)
 endif()
 
 if(APPLE)
-	list(APPEND CORE_SOURCE "vendor/nanogui/darwin.mm")
 	set(MACOSX_BUNDLE_GUI_IDENTIFIER com.avaraline.avara)
 	set(MACOSX_BUNDLE_BUNDLE_NAME Avara)
 	set(MACOSX_BUNDLE_INFO_PLIST "platform/macos/Info.plist")
@@ -87,11 +93,11 @@ add_library(AvaraCore OBJECT ${CORE_SOURCE})
 
 set(CORE_INCLUDES
     "${SDL2_INCLUDE_DIR}"
-    ${SDL2main_INCLUDE_DIRS} 
-    ${MINIUPNPC_INCLUDE_DIRS}
+    ${SDL2main_INCLUDE_DIRS}
     ${OPENGL_INCLUDE_DIR} 
     ${CMAKE_BINARY_DIR}
     src
+    src/assets
     src/audio
     src/base
     src/bsp
@@ -101,6 +107,8 @@ set(CORE_INCLUDES
     src/tui
     src/level
     src/net
+    src/render
+    src/tui
     src/util
     src/util/huffman
     vendor 
@@ -143,10 +151,10 @@ target_include_directories(tests PUBLIC
     ${CORE_INCLUDES}
 )
 
-set(AVARA_LIBS SDL2::SDL2 SDL2::SDL2main {OPENGL_LIBRARIES} dl pthread)
+set(AVARA_LIBS SDL2::SDL2 SDL2::SDL2main ${OPENGL_LIBRARIES} ${SQLite3_LIBRARIES} dl pthread)
 
 if(WIN32)
-set(AVARA_LIBS SDL2::SDL2 SDL2::SDL2main glad::glad ${OPENGL_LIBRARIES})
+set(AVARA_LIBS SDL2::SDL2 SDL2::SDL2main glad::glad ${OPENGL_LIBRARIES} ${SQLite3_LIBRARIES})
 add_custom_command(TARGET Avara POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:Avara> $<TARGET_FILE_DIR:Avara>
   COMMAND_EXPAND_LISTS

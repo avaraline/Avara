@@ -23,7 +23,7 @@
 #include "Material.h"
 
 #include <iostream>
-#include <vector>
+using namespace std;
 
 // assuming 1 unit in Avara is roughly 1 meter (hector is 1.75 tall)
 #define MILLIMETER (FIX1/1000)
@@ -233,28 +233,6 @@ public:
         game->freshPlayerList = 0;
         game->GameStart();
     }
-
-    void Settle(int steps, int ticksPerStep) {
-        for (int i = 0; i < steps; i++) {
-            game->nextScheduledFrame = 0;
-            game->itsNet->activePlayersDistribution = 1;
-            for (int k = 0; k < ticksPerStep; k++) {
-                game->GameTick();
-            }
-        }
-    }
-
-    void KeyDown(int key) {
-        hector->itsManager->GetFunctions()->down = (1 << key);
-    }
-
-    void KeyHeld(int key) {
-        hector->itsManager->GetFunctions()->held = (1 << key);
-    }
-
-    void KeyUp(int key) {
-        hector->itsManager->GetFunctions()->up = (1 << key);
-    }
 };
 
 class HectorEnergyReadings {
@@ -276,9 +254,9 @@ inline int GetTicksPerStep(int frameTime) {
     return CLASSICFRAMETIME / frameTime;
 }
 
-std::vector<Fixed> DropHector(int steps, Fixed fromHeight, int frameTime) {
+vector<Fixed> DropHector(int steps, Fixed fromHeight, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, fromHeight, 0);
-    std::vector<Fixed> altitudes;
+    vector<Fixed> altitudes;
     int ticksPerStep = GetTicksPerStep(frameTime);
 
     for (int i = 0; i < steps; i++) {
@@ -290,14 +268,13 @@ std::vector<Fixed> DropHector(int steps, Fixed fromHeight, int frameTime) {
     return altitudes;
 }
 
-std::vector<VectorStruct> WalkHector(int settleSteps, int steps, int frameTime) {
+vector<VectorStruct> WalkHector(int settleSteps, int steps, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
-    std::vector<VectorStruct> location;
+    vector<VectorStruct> location;
     int ticksPerStep = GetTicksPerStep(frameTime);
 
     for (int i = 0; i < settleSteps; i++) {
         for (int k = 0; k < ticksPerStep; k++) {
-            scenario.KeyHeld(kfuJump);
             scenario.game->GameTick();
         }
     }
@@ -315,7 +292,7 @@ std::vector<VectorStruct> WalkHector(int settleSteps, int steps, int frameTime) 
 
 vector<VectorStruct> JumpHector(int settleSteps, int jumpHoldSteps, int steps, int frameTime, int numHeldKeys) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
-    std::vector<VectorStruct> location;
+    vector<VectorStruct> location;
     int ticksPerStep = GetTicksPerStep(frameTime);
 
     for (int i = 0; i < settleSteps * ticksPerStep; i++) {
@@ -350,9 +327,9 @@ vector<VectorStruct> JumpHector(int settleSteps, int jumpHoldSteps, int steps, i
     return location;
 }
 
-std::vector<VectorStruct> FireGrenade(int settleSteps, int steps, int frameTime) {
+vector<VectorStruct> FireGrenade(int settleSteps, int steps, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
-    std::vector<VectorStruct> trajectory;
+    vector<VectorStruct> trajectory;
     int ticksPerStep = GetTicksPerStep(frameTime);
 
     for (int i = 0; i < settleSteps; i++) {
@@ -391,9 +368,9 @@ std::vector<VectorStruct> FireGrenade(int settleSteps, int steps, int frameTime)
     return trajectory;
 }
 
-std::vector<VectorStruct> FireMissile(int hectorSettle, int scoutSettle, int steps, int frameTime) {
+vector<VectorStruct> FireMissile(int hectorSettle, int scoutSettle, int steps, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
-    std::vector<VectorStruct> trajectory;
+    vector<VectorStruct> trajectory;
     int ticksPerStep = GetTicksPerStep(frameTime);
 
     for (int i = 0; i < hectorSettle*ticksPerStep; i++) {
@@ -463,9 +440,9 @@ std::vector<VectorStruct> FireMissile(int hectorSettle, int scoutSettle, int ste
     return trajectory;
 }
 
-std::vector<Fixed> TurnHector(int steps, int frameTime) {
+vector<Fixed> TurnHector(int steps, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
-    std::vector<Fixed> headings;
+    vector<Fixed> headings;
     int ticksPerStep = GetTicksPerStep(frameTime);
 
     for (int i = 0; i < steps; i++) {
@@ -479,9 +456,9 @@ std::vector<Fixed> TurnHector(int steps, int frameTime) {
     return headings;
 }
 
-std::vector<HectorEnergyReadings> HectorEnergyRegen(int steps, bool useBoost, int frameTime) {
+vector<HectorEnergyReadings> HectorEnergyRegen(int steps, bool useBoost, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
-    std::vector<HectorEnergyReadings> energyValues;
+    vector<HectorEnergyReadings> energyValues;
     int ticksPerStep = GetTicksPerStep(frameTime);
 
     scenario.hector->energy = scenario.hector->maxEnergy * 0.5;
@@ -500,9 +477,9 @@ std::vector<HectorEnergyReadings> HectorEnergyRegen(int steps, bool useBoost, in
     return energyValues;
 }
 
-std::vector<HectorEnergyReadings> HectorPlasmaRegen(int steps, bool useBoost, int frameTime) {
+vector<HectorEnergyReadings> HectorPlasmaRegen(int steps, bool useBoost, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
-    std::vector<HectorEnergyReadings> energyValues;
+    vector<HectorEnergyReadings> energyValues;
     int ticksPerStep = GetTicksPerStep(frameTime);
 
     scenario.hector->gunEnergy[0] = 0;
@@ -522,9 +499,9 @@ std::vector<HectorEnergyReadings> HectorPlasmaRegen(int steps, bool useBoost, in
     return energyValues;
 }
 
-std::vector<HectorEnergyReadings> HectorShieldRegen(int steps, bool useBoost, int frameTime) {
+vector<HectorEnergyReadings> HectorShieldRegen(int steps, bool useBoost, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
-    std::vector<HectorEnergyReadings> energyValues;
+    vector<HectorEnergyReadings> energyValues;
     int ticksPerStep = GetTicksPerStep(frameTime);
 
     scenario.hector->shields = scenario.hector->maxShields * 0.5;
@@ -543,9 +520,9 @@ std::vector<HectorEnergyReadings> HectorShieldRegen(int steps, bool useBoost, in
     return energyValues;
 }
 
-std::vector<HectorEnergyReadings> HectorComplexRegen(int steps, bool useBoost, int frameTime) {
+vector<HectorEnergyReadings> HectorComplexRegen(int steps, bool useBoost, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
-    std::vector<HectorEnergyReadings> energyValues;
+    vector<HectorEnergyReadings> energyValues;
     int ticksPerStep = GetTicksPerStep(frameTime);
 
     scenario.hector->energy = scenario.hector->maxEnergy * 0.5;
@@ -569,10 +546,10 @@ std::vector<HectorEnergyReadings> HectorComplexRegen(int steps, bool useBoost, i
 
 TEST(HECTOR, Gravity) {
     int dropSteps = 50;
-    std::vector<Fixed> at64ms = DropHector(dropSteps, FIX(200), 64);
-    std::vector<Fixed> at32ms = DropHector(dropSteps, FIX(200), 32);
-    std::vector<Fixed> at16ms = DropHector(dropSteps, FIX(200), 16);
-    std::vector<Fixed> at8ms = DropHector(dropSteps, FIX(200), 8);
+    vector<Fixed> at64ms = DropHector(dropSteps, FIX(200), 64);
+    vector<Fixed> at32ms = DropHector(dropSteps, FIX(200), 32);
+    vector<Fixed> at16ms = DropHector(dropSteps, FIX(200), 16);
+    vector<Fixed> at8ms = DropHector(dropSteps, FIX(200), 8);
 
     ASSERT_EQ(at64ms.size(), dropSteps) << "not enough steps recorded at 64ms";
     ASSERT_EQ(at32ms.size(), dropSteps) << "not enough steps recorded at 32ms";
@@ -604,10 +581,10 @@ double VecStructDist(const VectorStruct &one, const VectorStruct &two) {
 
 TEST(HECTOR, TurnSpeed) {
     int turnSteps = 50;
-    std::vector<Fixed> at64ms = TurnHector(turnSteps, 64);
-    std::vector<Fixed> at32ms = TurnHector(turnSteps, 32);
-    std::vector<Fixed> at16ms = TurnHector(turnSteps, 16);
-    std::vector<Fixed> at8ms = TurnHector(turnSteps, 8);
+    vector<Fixed> at64ms = TurnHector(turnSteps, 64);
+    vector<Fixed> at32ms = TurnHector(turnSteps, 32);
+    vector<Fixed> at16ms = TurnHector(turnSteps, 16);
+    vector<Fixed> at8ms = TurnHector(turnSteps, 8);
 
     // TurnHector adds an additional step!
     turnSteps += 1;
@@ -628,10 +605,10 @@ TEST(HECTOR, TurnSpeed) {
 
 TEST(HECTOR, WalkForwardSpeed) {
     int walkSteps = 50;
-    std::vector<VectorStruct> at64ms = WalkHector(20, walkSteps, 64);
-    std::vector<VectorStruct> at32ms = WalkHector(20, walkSteps, 32);
-    std::vector<VectorStruct> at16ms = WalkHector(20, walkSteps, 16);
-    std::vector<VectorStruct> at8ms = WalkHector(20, walkSteps, 8);
+    vector<VectorStruct> at64ms = WalkHector(20, walkSteps, 64);
+    vector<VectorStruct> at32ms = WalkHector(20, walkSteps, 32);
+    vector<VectorStruct> at16ms = WalkHector(20, walkSteps, 16);
+    vector<VectorStruct> at8ms = WalkHector(20, walkSteps, 8);
 
     // WalkHector adds an additional step!
     walkSteps += 1;
@@ -691,10 +668,10 @@ TEST(HECTOR, JumpSuper) {
 
 TEST(HECTOR, EnergyRegen) {
     int regenSteps = 85;
-    std::vector<HectorEnergyReadings> at64ms = HectorEnergyRegen(regenSteps, false, 64);
-    std::vector<HectorEnergyReadings> at32ms = HectorEnergyRegen(regenSteps, false, 32);
-    std::vector<HectorEnergyReadings> at16ms = HectorEnergyRegen(regenSteps, false, 16);
-    std::vector<HectorEnergyReadings> at8ms = HectorEnergyRegen(regenSteps, false, 8);
+    vector<HectorEnergyReadings> at64ms = HectorEnergyRegen(regenSteps, false, 64);
+    vector<HectorEnergyReadings> at32ms = HectorEnergyRegen(regenSteps, false, 32);
+    vector<HectorEnergyReadings> at16ms = HectorEnergyRegen(regenSteps, false, 16);
+    vector<HectorEnergyReadings> at8ms = HectorEnergyRegen(regenSteps, false, 8);
 
     ASSERT_EQ(at64ms.size(), regenSteps) << "not enough steps recorded at 64ms";
     ASSERT_EQ(at32ms.size(), regenSteps) << "not enough steps recorded at 32ms";
@@ -735,10 +712,10 @@ TEST(HECTOR, EnergyRegen) {
 
 TEST(HECTOR, BoostedEnergyRegen) {
     int regenSteps = 19;
-    std::vector<HectorEnergyReadings> at64ms = HectorEnergyRegen(regenSteps, true, 64);
-    std::vector<HectorEnergyReadings> at32ms = HectorEnergyRegen(regenSteps, true, 32);
-    std::vector<HectorEnergyReadings> at16ms = HectorEnergyRegen(regenSteps, true, 16);
-    std::vector<HectorEnergyReadings> at8ms = HectorEnergyRegen(regenSteps, true, 8);
+    vector<HectorEnergyReadings> at64ms = HectorEnergyRegen(regenSteps, true, 64);
+    vector<HectorEnergyReadings> at32ms = HectorEnergyRegen(regenSteps, true, 32);
+    vector<HectorEnergyReadings> at16ms = HectorEnergyRegen(regenSteps, true, 16);
+    vector<HectorEnergyReadings> at8ms = HectorEnergyRegen(regenSteps, true, 8);
 
     ASSERT_EQ(at64ms.size(), regenSteps) << "not enough steps recorded at 64ms";
     ASSERT_EQ(at32ms.size(), regenSteps) << "not enough steps recorded at 32ms";
@@ -779,10 +756,10 @@ TEST(HECTOR, BoostedEnergyRegen) {
 
 TEST(HECTOR, PlasmaRegen) {
     int chargeSteps = 30;
-    std::vector<HectorEnergyReadings> at64ms = HectorPlasmaRegen(chargeSteps, false, 64);
-    std::vector<HectorEnergyReadings> at32ms = HectorPlasmaRegen(chargeSteps, false, 32);
-    std::vector<HectorEnergyReadings> at16ms = HectorPlasmaRegen(chargeSteps, false, 16);
-    std::vector<HectorEnergyReadings> at8ms = HectorPlasmaRegen(chargeSteps, false, 8);
+    vector<HectorEnergyReadings> at64ms = HectorPlasmaRegen(chargeSteps, false, 64);
+    vector<HectorEnergyReadings> at32ms = HectorPlasmaRegen(chargeSteps, false, 32);
+    vector<HectorEnergyReadings> at16ms = HectorPlasmaRegen(chargeSteps, false, 16);
+    vector<HectorEnergyReadings> at8ms = HectorPlasmaRegen(chargeSteps, false, 8);
 
     ASSERT_EQ(at64ms.size(), chargeSteps) << "not enough steps recorded at 64ms";
     ASSERT_EQ(at32ms.size(), chargeSteps) << "not enough steps recorded at 32ms";
@@ -843,10 +820,10 @@ TEST(HECTOR, PlasmaRegen) {
 
 TEST(HECTOR, BoostedPlasmaRegen) {
     int chargeSteps = 27;
-    std::vector<HectorEnergyReadings> at64ms = HectorPlasmaRegen(chargeSteps, true, 64);
-    std::vector<HectorEnergyReadings> at32ms = HectorPlasmaRegen(chargeSteps, true, 32);
-    std::vector<HectorEnergyReadings> at16ms = HectorPlasmaRegen(chargeSteps, true, 16);
-    std::vector<HectorEnergyReadings> at8ms = HectorPlasmaRegen(chargeSteps, true, 8);
+    vector<HectorEnergyReadings> at64ms = HectorPlasmaRegen(chargeSteps, true, 64);
+    vector<HectorEnergyReadings> at32ms = HectorPlasmaRegen(chargeSteps, true, 32);
+    vector<HectorEnergyReadings> at16ms = HectorPlasmaRegen(chargeSteps, true, 16);
+    vector<HectorEnergyReadings> at8ms = HectorPlasmaRegen(chargeSteps, true, 8);
 
     ASSERT_EQ(at64ms.size(), chargeSteps) << "not enough steps recorded at 64ms";
     ASSERT_EQ(at32ms.size(), chargeSteps) << "not enough steps recorded at 32ms";
@@ -911,10 +888,10 @@ TEST(HECTOR, BoostedPlasmaRegen) {
 
 TEST(HECTOR, ShieldRegen) {
     int regenSteps = 411;
-    std::vector<HectorEnergyReadings> at64ms = HectorShieldRegen(regenSteps, false, 64);
-    std::vector<HectorEnergyReadings> at32ms = HectorShieldRegen(regenSteps, false, 32);
-    std::vector<HectorEnergyReadings> at16ms = HectorShieldRegen(regenSteps, false, 16);
-    std::vector<HectorEnergyReadings> at8ms = HectorShieldRegen(regenSteps, false, 8);
+    vector<HectorEnergyReadings> at64ms = HectorShieldRegen(regenSteps, false, 64);
+    vector<HectorEnergyReadings> at32ms = HectorShieldRegen(regenSteps, false, 32);
+    vector<HectorEnergyReadings> at16ms = HectorShieldRegen(regenSteps, false, 16);
+    vector<HectorEnergyReadings> at8ms = HectorShieldRegen(regenSteps, false, 8);
 
     ASSERT_EQ(at64ms.size(), regenSteps) << "not enough steps recorded at 64ms";
     ASSERT_EQ(at32ms.size(), regenSteps) << "not enough steps recorded at 32ms";
@@ -959,10 +936,10 @@ TEST(HECTOR, ShieldRegen) {
 
 TEST(HECTOR, BoostedShieldRegen) {
     int regenSteps = 47;
-    std::vector<HectorEnergyReadings> at64ms = HectorShieldRegen(regenSteps, true, 64);
-    std::vector<HectorEnergyReadings> at32ms = HectorShieldRegen(regenSteps, true, 32);
-    std::vector<HectorEnergyReadings> at16ms = HectorShieldRegen(regenSteps, true, 16);
-    std::vector<HectorEnergyReadings> at8ms = HectorShieldRegen(regenSteps, true, 8);
+    vector<HectorEnergyReadings> at64ms = HectorShieldRegen(regenSteps, true, 64);
+    vector<HectorEnergyReadings> at32ms = HectorShieldRegen(regenSteps, true, 32);
+    vector<HectorEnergyReadings> at16ms = HectorShieldRegen(regenSteps, true, 16);
+    vector<HectorEnergyReadings> at8ms = HectorShieldRegen(regenSteps, true, 8);
 
     ASSERT_EQ(at64ms.size(), regenSteps) << "not enough steps recorded at 64ms";
     ASSERT_EQ(at32ms.size(), regenSteps) << "not enough steps recorded at 32ms";
@@ -1003,10 +980,10 @@ TEST(HECTOR, BoostedShieldRegen) {
 
 TEST(HECTOR, ComplexRegen) {
     int regenSteps = 784;
-    std::vector<HectorEnergyReadings> at64ms = HectorComplexRegen(regenSteps, false, 64);
-    std::vector<HectorEnergyReadings> at32ms = HectorComplexRegen(regenSteps, false, 32);
-    std::vector<HectorEnergyReadings> at16ms = HectorComplexRegen(regenSteps, false, 16);
-    std::vector<HectorEnergyReadings> at8ms = HectorComplexRegen(regenSteps, false, 8);
+    vector<HectorEnergyReadings> at64ms = HectorComplexRegen(regenSteps, false, 64);
+    vector<HectorEnergyReadings> at32ms = HectorComplexRegen(regenSteps, false, 32);
+    vector<HectorEnergyReadings> at16ms = HectorComplexRegen(regenSteps, false, 16);
+    vector<HectorEnergyReadings> at8ms = HectorComplexRegen(regenSteps, false, 8);
 
     ASSERT_EQ(at64ms.size(), regenSteps) << "not enough steps recorded at 64ms";
     ASSERT_EQ(at32ms.size(), regenSteps) << "not enough steps recorded at 32ms";
@@ -1097,26 +1074,26 @@ TEST(HECTOR, ComplexRegen) {
 }
 
 TEST(GRENADE, Trajectory) {
-    std::vector<VectorStruct> at64ms = FireGrenade(20, 50, 64);
-    std::vector<VectorStruct> at32ms = FireGrenade(20, 50, 32);
-    std::vector<VectorStruct> at16ms = FireGrenade(20, 50, 16);
-    std::vector<VectorStruct> at8ms = FireGrenade(20, 50, 8);
+    vector<VectorStruct> at64ms = FireGrenade(20, 50, 64);
+    vector<VectorStruct> at32ms = FireGrenade(20, 50, 32);
+    vector<VectorStruct> at16ms = FireGrenade(20, 50, 16);
+    vector<VectorStruct> at8ms = FireGrenade(20, 50, 8);
 
     ASSERT_NEAR(at64ms.back().theVec[1], 59384, 3*MILLIMETER) << "64ms simulation is wrong";
 
-    for (int i = 0; i < std::min(at32ms.size(), at64ms.size()); i++) {
+    for (int i = 0; i < min(at32ms.size(), at64ms.size()); i++) {
         // std::cout << "delY32[" << i << "] = " << ToFloat(at32ms[i].theVec[1] - at64ms[i].theVec[1]) << std::endl;
         // std::cout << "dist32[" << i << "] = " << VecStructDist(at64ms[i], at32ms[i]) << std::endl;
         ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.2) << "not close enough after " << i << " ticks.";
     }
-    for (int i = 0; i < std::min(at16ms.size(), at64ms.size()); i++) {
+    for (int i = 0; i < min(at16ms.size(), at64ms.size()); i++) {
         // std::cout << "delY16[" << i << "] = " << ToFloat(at16ms[i].theVec[1] - at64ms[i].theVec[1]) << std::endl;
         // std::cout << "dist16[" << i << "] = " << VecStructDist(at64ms[i], at16ms[i]) << std::endl;
         // std::cout << "loc64[" << i << "] = " << FormatVector(at64ms[i].theVec, 3) << std::endl;
         // std::cout << "loc16[" << i << "] = " << FormatVector(at16ms[i].theVec, 3) << std::endl;
         ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.2) << "not close enough after " << i << " ticks.";
     }
-    for (int i = 0; i < std::min(at8ms.size(), at64ms.size()); i++) {
+    for (int i = 0; i < min(at8ms.size(), at64ms.size()); i++) {
         // std::cout << "delY8[" << i << "] = " << ToFloat(at8ms[i].theVec[1] - at64ms[i].theVec[1]) << std::endl;
         // std::cout << "dist8[" << i << "] = " << VecStructDist(at64ms[i], at8ms[i]) << std::endl;
         // std::cout << "loc64[" << i << "] = " << FormatVector(at64ms[i].theVec, 3) << std::endl;
@@ -1125,30 +1102,11 @@ TEST(GRENADE, Trajectory) {
     }
 }
 
-/* TODO: Fix 
-TEST(HECTOR, CrouchSpeed) {
-    std::std::vector<Fixed> at64ms = CrouchHector(20, 80, 1, 64);
-    std::std::vector<Fixed> at32ms = CrouchHector(20, 80, 2, 32);
-    std::std::vector<Fixed> at16ms = CrouchHector(20, 80, 4, 16);
-
-    ASSERT_EQ(at64ms.back(), 52422) << "64ms simulation crouched wrong amount";
-    ASSERT_EQ(at64ms.size(), at32ms.size()) << "CrouchHector didn't do ticks right";
-    for (int i = 0; i < at64ms.size(); i++) {
-        ASSERT_LE(at64ms[i] > at32ms[i] ? at64ms[i] - at32ms[i] : at32ms[i] - at64ms[i], 170)
-            << "not close enough after " << i << " ticks.";
-    }
-    for (int i = 0; i < at64ms.size(); i++) {
-        ASSERT_LE(at64ms[i] > at16ms[i] ? at64ms[i] - at16ms[i] : at16ms[i] - at64ms[i], 210)
-            << "not close enough after " << i << " ticks.";
-    }
-}
-*/
-
 TEST(MISSILE, Trajectory) {
-    std::vector<VectorStruct> at64ms = FireMissile(20, 60, 50, 64);
-    std::vector<VectorStruct> at32ms = FireMissile(20, 60, 50, 32);
-    std::vector<VectorStruct> at16ms = FireMissile(20, 60, 50, 16);
-    std::vector<VectorStruct> at8ms = FireMissile(20, 60, 50, 8);
+    vector<VectorStruct> at64ms = FireMissile(20, 60, 50, 64);
+    vector<VectorStruct> at32ms = FireMissile(20, 60, 50, 32);
+    vector<VectorStruct> at16ms = FireMissile(20, 60, 50, 16);
+    vector<VectorStruct> at8ms = FireMissile(20, 60, 50, 8);
 
     // index 15 is the furthest left the missile goes, and index 26 is the furthest forward
     ASSERT_NEAR(at64ms[15].theVec[0], -591030, 3*MILLIMETER) << "64ms simulation is wrong on min X";
@@ -1158,19 +1116,19 @@ TEST(MISSILE, Trajectory) {
     ASSERT_NEAR(at64ms.size(), at16ms.size(), 1) << "16ms simulation should blows up at wrong frame";
     ASSERT_NEAR(at64ms.size(), at8ms.size(), 1) << "8ms simulation should blows up at wrong frame";
 
-    for (int i = 0; i < std::min(at32ms.size(), at64ms.size()); i++) {
+    for (int i = 0; i < min(at32ms.size(), at64ms.size()); i++) {
         // std::cout << "loc32[" << i << "] = " << FormatVector(at32ms[i].theVec, 3) << std::endl;
         // std::cout << "loc64[" << i << "] = " << FormatVector(at64ms[i].theVec, 3) << std::endl;
         // std::cout << "dist32[" << i << "] = " << VecStructDist(at64ms[i], at32ms[i]) << std::endl;
         ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.1) << "not close enough after " << i << " ticks.";
     }
-    for (int i = 0; i < std::min(at16ms.size(), at64ms.size()); i++) {
+    for (int i = 0; i < min(at16ms.size(), at64ms.size()); i++) {
         // std::cout << "loc16[" << i << "] = " << FormatVector(at16ms[i].theVec, 3) << std::endl;
         // std::cout << "loc64[" << i << "] = " << FormatVector(at64ms[i].theVec, 3) << std::endl;
         // std::cout << "dist16[" << i << "] = " << VecStructDist(at64ms[i], at16ms[i]) << std::endl;
         ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.1) << "not close enough after " << i << " ticks.";
     }
-    for (int i = 0; i < std::min(at8ms.size(), at64ms.size()); i++) {
+    for (int i = 0; i < min(at8ms.size(), at64ms.size()); i++) {
         // std::cout << "loc8[" << i << "] = " << FormatVector(at8ms[i].theVec, 3) << std::endl;
         // std::cout << "loc64[" << i << "] = " << FormatVector(at64ms[i].theVec, 3) << std::endl;
         // std::cout << "dist8[" << i << "] = " << VecStructDist(at64ms[i], at8ms[i]) << std::endl;
@@ -1179,7 +1137,7 @@ TEST(MISSILE, Trajectory) {
 }
 
 template<typename T, typename TMember>
-void test_rollover(std::string counterName, T x, T y, TMember counter) {
+void test_rollover(string counterName, T x, T y, TMember counter) {
     // quick test using signed int16_t max value in case somebody changes the type...
     x.*counter = std::numeric_limits<int16_t>::max();
     y.*counter = x.*counter + 2;
