@@ -48,6 +48,7 @@ jobs:
           buildPreset: 'avara-exe'
       - name: Run headless test
         run: |
+          ls
           cp build\tests.exe .\tests.exe 
           .\tests.exe
         shell: pwsh
