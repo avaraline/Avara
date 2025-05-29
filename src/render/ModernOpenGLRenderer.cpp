@@ -266,6 +266,10 @@ void ModernOpenGLRenderer::ApplyLights()
 
 void ModernOpenGLRenderer::ApplyPrefs(std::optional<std::string> name) {
     if (gApplication) {
+        if (!name || *name == kFOV) {
+            SetFOV(gApplication->Get<float>(kFOV));
+        }
+        
         if (!name || *name == kDither) {
             dither = gApplication->Get<bool>(kDither);
             
