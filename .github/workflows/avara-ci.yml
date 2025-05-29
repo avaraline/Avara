@@ -25,7 +25,7 @@ jobs:
       uses: GabrielBB/xvfb-action@v1.7
       with:
         run: |
-          cp build/default/tests ./tests
+          cp build/tests ./tests
           ./tests
   Windows:
     name: Windows
@@ -77,7 +77,7 @@ jobs:
       - name: run tests
         run: cp build/tests ./tests; ./tests
       - name: make macdist
-        run: zip -rq MacAvara.zip ./build/Avara.app; ls -laH; ls -laH build
+        run: zip -rq MacAvara.zip ./build/Avara.apps
       - name: deploy main nightly
         if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'main')
         uses: WebFreak001/deploy-nightly@v1.0.1
@@ -86,7 +86,7 @@ jobs:
         with:
           upload_url: https://uploads.github.com/repos/avaraline/Avara/releases/28954246/assets{?name,label}
           release_id: 28954246
-          asset_path: ./build/MacAvara.zip
+          asset_path: ./MacAvara.zip
           asset_name: Avara-macOS-Nightly-$$.zip
           asset_content_type: application/zip
           max_releases: 1

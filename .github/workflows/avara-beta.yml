@@ -38,7 +38,7 @@ jobs:
           configurePreset: 'avara-app'
           buildPreset: 'avara-app'
       - name: make macdist
-        run: make -j4 clean macdist
+        run: zip -rq MacAvara.zip ./build/Avara.app
       - name: Deploy beta
         if: startsWith(github.repository_owner, 'avaraline') && (github.ref != 'main')
         uses: WebFreak001/deploy-nightly@v1.0.1
@@ -47,7 +47,7 @@ jobs:
         with:
           upload_url: https://uploads.github.com/repos/avaraline/Avara/releases/28954246/assets{?name,label}
           release_id: 28954246
-          asset_path: ./build/MacAvara.zip
+          asset_path: ./MacAvara.zip
           asset_name: Avara-MacOS-BETA-$$.zip
           asset_content_type: application/zip
           max_releases: 1

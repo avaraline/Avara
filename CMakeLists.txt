@@ -21,7 +21,7 @@ endif()
 find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS})
 # glad
-include_directories("${CMAKE_SOURCE_DIR}/vendor/glad/glad")
+find_package(glad CONFIG REQUIRED)
 # gtest
 find_package(GTest CONFIG REQUIRED)
 # sqlite3
@@ -109,7 +109,6 @@ set(CORE_INCLUDES
     src/util
     src/util/huffman
     vendor 
-    vendor/glad
     vendor/glm
     vendor/glm/detail
     vendor/glm/ext
@@ -160,7 +159,6 @@ endif()
 add_executable(tests
     src/tests.cpp
     $<TARGET_OBJECTS:AvaraCore>
-    ${ALL_RES_FILES}
 )
 
 target_compile_options(${EXEC_NAME} PRIVATE ${AVARA_COMPILE_OPTIONS})

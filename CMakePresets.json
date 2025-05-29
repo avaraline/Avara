@@ -9,9 +9,11 @@
         {
             "name": "default",
             "displayName": "Default Config",
-            "generator": "Ninja",
-            "binaryDir": "${sourceDir}/build/default",
+            "generator": "Unix Makefiles",
+            "binaryDir": "${sourceDir}/build",
             "cacheVariables": {
+                "CMAKE_C_COMPILER": "clang",
+                "CMAKE_CXX_COMPILER": "clang++",
                 "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake"
             }
         },
