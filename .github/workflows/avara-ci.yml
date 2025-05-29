@@ -11,6 +11,11 @@ jobs:
     name: Ubuntu Latest
     runs-on: ubuntu-latest
     steps:
+    - name: install dependencies
+      run: |
+        sudo add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu `lsb_release -sc` main universe restricted multiverse"
+        sudo apt-get update -y -qq
+        sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libegl1-mesa-dev libgles2-mesa-dev libdirectfb-dev libgtest-dev libsqlite3-dev
     - uses: actions/checkout@v4
       with:
           submodules: true
