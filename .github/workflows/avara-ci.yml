@@ -48,7 +48,7 @@ jobs:
           buildPreset: 'avara-exe'
       - name: Run headless test
         run: |
-          Move-Item -Path build\tests.exe -Destination tests.exe 
+          cp build\tests.exe .\tests.exe 
           .\tests.exe
         shell: pwsh
       - name: WinAvara Zip
@@ -82,7 +82,7 @@ jobs:
       - name: run tests
         run: cp build/tests ./tests; ./tests
       - name: make macdist
-        run: zip -rq MacAvara.zip ./build/Avara.apps
+        run: zip -rq MacAvara.zip ./build/Avara.app
       - name: deploy main nightly
         if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'main')
         uses: WebFreak001/deploy-nightly@v1.0.1
