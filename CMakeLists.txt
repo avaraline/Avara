@@ -7,6 +7,10 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 set(VERBOSE True)
 set(OpenGL_GL_PREFERENCE GLVND)
 
+set(EXEC_NAME Avara)
+
+set(CMAKE_INSTALL_PREFIX ${PROJECT_BINARY_DIR}/bin)
+
 set(CMAKE_CXX_FLAGS "-MP -g -Wno-multichar -DNANOGUI_GLAD")
 
 if (POLICY CMP0074)
@@ -40,12 +44,6 @@ execute_process (
 
 add_compile_definitions(GIT_VERSION="${GIT_HASH}")
 
-add_custom_target(copy_assets
-    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_LIST_DIR}/rsrc ${PROJECT_BINARY_DIR}/rsrc
-    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_LIST_DIR}/levels ${PROJECT_BINARY_DIR}/levels
-)
-
-
 if(NOT WIN32)
    find_package(OpenGL REQUIRED)
 endif()
@@ -74,19 +72,18 @@ file(GLOB_RECURSE CORE_SOURCE RELATIVE ${CMAKE_SOURCE_DIR}
     "vendor/stb_vorbis.c"
 )
 
+file(GLOB_RECURSE ALL_RES_FILES 
+    "rsrc/*"
+    "levels/*"
+)
+list(FILTER ALL_RES_FILES EXCLUDE REGEX ".*\.r$")
+
 if(WIN32 OR MSVC)
     set(CMAKE_CXX_FLAGS "/EHsc /std:c++17 /DNANOGUI_GLAD")
     set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/platform/windows/appicon.rc")
     list(APPEND EXTRA_LIBS user32 gdi32 winmm imm32 ole32 oleaut32 version uuid advapi32 shell32 opengl32 glu32 wsock32 ws2_32)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:CONSOLE /ENTRY:mainCRTStartup")
     add_compile_definitions(NOMINMAX)
-endif()
-
-if(APPLE)
-	set(MACOSX_BUNDLE_GUI_IDENTIFIER com.avaraline.avara)
-	set(MACOSX_BUNDLE_BUNDLE_NAME Avara)
-	set(MACOSX_BUNDLE_INFO_PLIST "platform/macos/Info.plist")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mmacosx-version-min=10.9")
 endif()
 
 add_library(AvaraCore OBJECT ${CORE_SOURCE})
@@ -129,39 +126,61 @@ if (NOT APPLE AND NOT MSVC AND NOT WIN32)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lstdc++ -lm -lpthread")
 endif()
 
-add_executable(Avara 
+add_executable(${EXEC_NAME}
     src/Avara.cpp
     $<TARGET_OBJECTS:AvaraCore>
 )
 
+if (APPLE)
+    set(AssetLib ${CMAKE_CURRENT_SOURCE_DIR}/platform/macos/Assets.xcassets)
+    target_sources(${EXEC_NAME} PUBLIC ${AssetLib})
+    set_source_files_properties(${AssetLib} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+
+    target_sources(${EXEC_NAME} PUBLIC ${ALL_RES_FILES})
+    foreach(FILE ${ALL_RES_FILES})
+        file(RELATIVE_PATH NEW_FILE "${CMAKE_CURRENT_SOURCE_DIR}" ${FILE})
+        get_filename_component(NEW_FILE_PATH ${NEW_FILE} DIRECTORY)
+        set_property(SOURCE ${FILE} PROPERTY MACOSX_PACKAGE_LOCATION "Resources/${NEW_FILE_PATH}")
+        source_group("Resources/${NEW_FILE_PATH}" FILES "${FILE}")
+    endforeach()
+    set_target_properties(${EXEC_NAME} PROPERTIES 
+        MACOSX_BUNDLE TRUE
+        BUILD_WITH_INSTALL_RPATH YES 
+        XCODE_ATTRIBUTE_CLANG_LINK_OBJC_RUNTIME NO
+        XCODE_ATTRIBUTE_CODE_SIGNING_REQUIRED NO
+        MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/platform/macos/Info.plist"
+        MACOSX_BUNDLE_GUI_IDENTIFIER com.avaraline.avara
+        MACOSX_BUNDLE_VERSION_STRING "${CMAKE_PROJECT_VERSION}"
+        MACOSX_BUNDLE_SHORT_VERSION_STRING "${CMAKE_PROJECT_VERSION}"
+        MACOSX_BUNDLE_ICON_FILE "AppIcon"
+        XCODE_ATTRIBUTE_ASSETCATALOG_COMPILER_APPICON_NAME "AppIcon"
+    )
+endif()
+
 add_executable(tests
     src/tests.cpp
     $<TARGET_OBJECTS:AvaraCore>
+    ${ALL_RES_FILES}
 )
 
-add_dependencies(Avara copy_assets)
-add_dependencies(tests copy_assets)
-
-target_compile_options(Avara PRIVATE ${AVARA_COMPILE_OPTIONS})
+target_compile_options(${EXEC_NAME} PRIVATE ${AVARA_COMPILE_OPTIONS})
 target_compile_options(tests PRIVATE ${AVARA_COMPILE_OPTIONS})
 
 target_include_directories(AvaraCore PUBLIC ${CORE_INCLUDES})
-target_include_directories(Avara PUBLIC ${CORE_INCLUDES})
-target_include_directories(tests PUBLIC 
-    ${CORE_INCLUDES}
-)
+target_include_directories(${EXEC_NAME} PUBLIC ${CORE_INCLUDES})
+target_include_directories(tests PUBLIC ${CORE_INCLUDES} )
 
 set(AVARA_LIBS SDL2::SDL2 SDL2::SDL2main ${OPENGL_LIBRARIES} ${SQLite3_LIBRARIES} dl pthread)
 
 if(WIN32)
 set(AVARA_LIBS SDL2::SDL2 SDL2::SDL2main glad::glad ${OPENGL_LIBRARIES} ${SQLite3_LIBRARIES})
-add_custom_command(TARGET Avara POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:Avara> $<TARGET_FILE_DIR:Avara>
+add_custom_command(TARGET ${EXEC_NAME} POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:${EXEC_NAME}> $<TARGET_FILE_DIR:${EXEC_NAME}>
   COMMAND_EXPAND_LISTS
   )
 endif()
 
-target_link_libraries(Avara ${AVARA_LIBS})
+target_link_libraries(${EXEC_NAME} ${AVARA_LIBS})
 
 target_link_libraries(tests ${AVARA_LIBS} ${EXTRA_LIBS} GTest::gtest GTest::gtest_main)
 
@@ -169,20 +188,14 @@ target_link_libraries(tests ${AVARA_LIBS} ${EXTRA_LIBS} GTest::gtest GTest::gtes
 
 
 if(WIN32)
-    target_link_libraries(Avara wsock32 ws2_32)
+    target_link_libraries(${EXEC_NAME} wsock32 ws2_32)
 endif()
 
+include(InstallRequiredSystemLibraries)
 
-install(TARGETS Avara
-    RUNTIME DESTINATION "."
-    LIBRARY DESTINATION "."
-    ARCHIVE DESTINATION "."
-)
 
-install(DIRECTORY rsrc/ DESTINATION rsrc)
-install(DIRECTORY levels/ DESTINATION levels)
 if(WIN32)
-install(FILES $<TARGET_RUNTIME_DLLS:Avara> DESTINATION ".")
+install(FILES $<TARGET_RUNTIME_DLLS:Avara> DESTINATION "${PROJECT_BINARY_DIR}")
 endif()
 
 
@@ -192,7 +205,7 @@ set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE.txt")
 set(CPACK_PACKAGE_VERSION_MAJOR "0")
 set(CPACK_PACKAGE_VERSION_MINOR "7")
-set(CPACK_PACKAGE_VERSION_PATCH "1")
+set(CPACK_PACKAGE_VERSION_PATCH "6")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY "Avara")
 if(WIN32 AND NOT UNIX)
 	set(CPACK_PACKAGE_ICON "${CMAKE_CURRENT_SOURCE_DIR}\\\\platform\\\\windows\\\\avara.ico")
@@ -206,13 +219,13 @@ if(WIN32 AND NOT UNIX)
 	set(CPACK_NSIS_DISPLAY_NAME "Avara")
     set(CPACK_NSIS_PACKAGE_NAME "Avara")
 	set(CPACK_NSIS_HELP_LINK "http:\\\\\\\\www.github.com\\\\avaraline\\\\avara")
-	set(CPACK_NSIS_URL_INFO_ABOUT "http:\\\\\\\\avara.io")
+	set(CPACK_NSIS_URL_INFO_ABOUT "http:\\\\\\\\avara.gg")
 	set(CPACK_NSIS_CONTACT "#avaraline@avaraline.net")
 	set(CPACK_NSIS_MODIFY_PATH OFF)
     set(CPACK_NSIS_MUI_FINISHPAGE_RUN "Avara.exe")
 else()
 	set(CPACK_STRIP_FILES "Avara")
-	set(CPACK_SOURCE_STRIP_FILES "")
+	# set(CPACK_SOURCE_STRIP_FILES "")
 endif()
 set(CPACK_PACKAGE_EXECUTABLES "Avara" "Avara")
 include(CPack)
