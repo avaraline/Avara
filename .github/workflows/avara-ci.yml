@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+          submodules: true
     - uses: lukka/get-cmake@latest
     - uses: lukka/run-vcpkg@v11
     - uses: lukka/run-cmake@v10
@@ -29,6 +31,8 @@ jobs:
     runs-on: windows-2022
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true
       - uses: lukka/get-cmake@latest
       - uses: lukka/run-vcpkg@v11
       - uses: lukka/run-cmake@v10
@@ -59,6 +63,8 @@ jobs:
     runs-on: macos-13
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true
       - uses: lukka/get-cmake@latest
       - uses: lukka/run-vcpkg@v11
       - uses: lukka/run-cmake@v10
