@@ -2,7 +2,6 @@
 #include "Debug.h"
 
 #include <SDL2/SDL.h>
-#include <deque>
 #include <iterator>
 #include <map>
 #include <string>
@@ -14,68 +13,60 @@ uint64_t TickCount() {
     return MSEC_TO_TICK_COUNT(SDL_GetTicks());
 }
 
-static std::map<QHdrPtr, std::deque<QElemPtr>> gQueues;
+void InitQueue(QHdrPtr qHeader) {
+    qHeader->qHead = NULL;
+    qHeader->qTail = NULL;
+    qHeader->qSize = 0;
+}
 
 void Enqueue(QElemPtr qElement, QHdrPtr qHeader) {
-    // SDL_Log("Enqueue(%x, %x)\n", qElement, qHeader);
-    if (gQueues.count(qHeader) == 1) {
-        std::deque<QElemPtr> &q = gQueues.at(qHeader);
-        if (!q.empty()) {
-            // Point the previous back of the queue to the new element
-            q.back()->qLink = qElement;
-        }
-        q.push_back(qElement);
-        qHeader->qHead = q.front();
+    if (!qElement || !qHeader) return;
+
+    if (qHeader->qTail) {
+        qHeader->qTail->qLink = qElement;
         qHeader->qTail = qElement;
-        // SDL_Log("  - new element (%x, front=%x)\n", qElement, q.front());
-    } else {
-        std::deque<QElemPtr> newQueue = {qElement};
-        gQueues.insert(std::make_pair(qHeader, newQueue));
-        qHeader->qHead = qHeader->qTail = qElement;
-        // SDL_Log("  - inserting into gQueues with key %lx\n", qHeader);
-        DBG_Log("q", "Enqueue: gQueues has %zu elements\n", gQueues.size());
     }
-    // New element has no next link
+    else {
+        qHeader->qHead = qHeader->qTail = qElement;
+    }
     qElement->qLink = NULL;
+    qHeader->qSize += 1;
 }
 
 OSErr Dequeue(QElemPtr qElement, QHdrPtr qHeader) {
-    // SDL_Log("Dequeue(%x, %x)\n", qElement, qHeader);
-    QElemPtr lastElement = NULL;
-    if (gQueues.count(qHeader) == 1) {
-        std::deque<QElemPtr> &q = gQueues.at(qHeader);
-        if (q.empty()) {
-            return qErr;
-        }
-        for (size_t i = 0; i < q.size(); i++) {
-            QElemPtr curElement = q.at(i);
-            if (curElement == qElement) {
-                if (lastElement) {
-                    lastElement->qLink = curElement->qLink;
-                }
-                // SDL_Log("  - old size = %d\n", q.size());
-                q.erase(q.begin() + i);
-                // SDL_Log("  - new size = %d\n", q.size());
-                qHeader->qHead = q.empty() ? NULL : q.front();
-                qHeader->qTail = q.empty() ? NULL : q.back();
-                // SDL_Log("  - found it\n", qElement);
-                return noErr;
-            }
-            lastElement = curElement;
-        }
+    if (!qElement || !qHeader) return qErr;
+
+    if (qElement == qHeader->qHead && qElement == qHeader->qTail) {
+        // Special case for when there is only one item in the queue.
+        qHeader->qHead = qHeader->qTail = NULL;
+        qHeader->qSize = 0;
+        return noErr;
     }
+
+    QElemPtr remove = qHeader->qHead, last = NULL;
+    while (remove) {
+        if (remove == qElement) break;
+        last = remove;
+        remove = remove->qLink;
+    }
+
+    if (remove) {
+        if (remove == qHeader->qHead) {
+            // Removing the head; all we need to do is advance the head pointer.
+            qHeader->qHead = qHeader->qHead->qLink;
+        }
+        else if (remove == qHeader->qTail) {
+            // Removing the tail; the last element becomes the tail (and points to NULL).
+            last->qLink = NULL;
+            qHeader->qTail = last;
+        }
+        else {
+            // Otherwise, the last element points to the element following the one removed.
+            last->qLink = remove->qLink;
+        }
+        qHeader->qSize -= 1;
+        return noErr;
+    }
+
     return qErr;
-}
-
-void DisposeQueue(QHdrPtr qHeader) {
-    gQueues.erase(qHeader);
-    DBG_Log("q", "DisposeQueues: gQueues now has %zu elements\n", gQueues.size());
-}
-
-size_t QueueCount() {
-    return gQueues.size();
-}
-
-size_t QueueSize(QHdrPtr qHeader) {
-    return gQueues.count(qHeader) ? gQueues.at(qHeader).size() : 0;
 }

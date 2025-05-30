@@ -1174,11 +1174,6 @@ TEST(SERIAL_NUMBER, Rollover) {
     test_rollover("CUDPConnection::ackBase", conn1, conn2, &CUDPConnection::ackBase);
 }
 
-TEST(QUEUES, Clean) {
-    // after all of the tests have run, the queues should be all cleaned up suggesting all destructors did their job
-    ASSERT_EQ(QueueCount(), 0)  << "queues not empty";
-}
-
 TEST(MATERIALS, Manipulation) {
     Material defaultMaterial = Material().WithColor(0xff000000).WithSpecular(0x00000000).WithShininess(0x00);
     ASSERT_EQ(defaultMaterial.GetColor().GetRaw(), 0xff000000) << "defaultMaterial color not black";
