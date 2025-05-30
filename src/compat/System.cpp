@@ -2,7 +2,6 @@
 #include "Debug.h"
 
 #include <SDL2/SDL.h>
-#include <deque>
 #include <iterator>
 #include <map>
 #include <string>

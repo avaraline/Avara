@@ -77,11 +77,6 @@ struct QHdr {
 typedef struct QHdr QHdr;
 typedef QHdr *QHdrPtr;
 
-// From QuickDraw
-enum { kQDGrafVerbFrame = 0, kQDGrafVerbPaint = 1, kQDGrafVerbErase = 2, kQDGrafVerbInvert = 3, kQDGrafVerbFill = 4 };
-
-typedef uint8_t GrafVerb;
-
 #ifdef _WIN32
 #include <winsock2.h>
 #include <Windows.h>
