@@ -66,8 +66,7 @@ void CUDPConnection::IUDPConnection(CUDPComm *theOwner) {
     port = 0;
 
     for (i = 0; i < kQueueCount; i++) {
-        queues[i].qHead = 0;
-        queues[i].qTail = 0;
+        InitQueue(&queues[i]);
     }
 
     serialNumber = INITIAL_SERIAL_NUMBER;
@@ -292,7 +291,7 @@ UDPPacketInfo *CUDPConnection::FindBestPacket(int32_t curTime, int32_t cramTime,
     if (transmitQueueLength > kMaxTransmitQueueLength) {
         DBG_Log("q", "Transmit Queue Overflow - myId = %d\n", myId);
         for (int i = 0; i < kQueueCount; i++) {
-            DBG_Log("q", "   Queue[%d] size = %zu\n", i, QueueSize(&queues[i]));
+            DBG_Log("q", "   Queue[%d] size = %zu\n", i, queues[i].qSize);
         }
         ErrorKill();
     }
@@ -637,7 +636,7 @@ size_t CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
                 changeInReceiveQueue = true;
                 Enqueue((QElemPtr)thePacket, &queues[kReceiveQ]);
 
-                size_t qsize = QueueSize(&queues[kReceiveQ]);
+                size_t qsize = queues[kReceiveQ].qSize;
                 if (Debug::IsEnabled("q")) {
                     if (qsize % 5 == 0) {
                         DBG_Log("q", "%d: rsn=%d, queued sn=%d to kReceivedQ.size = %zu\n", myId, (int)receiveSerial, (int)thePacket->serialNumber, qsize);
@@ -686,7 +685,7 @@ size_t CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
         *receiveSerials++ = -12345;
     }
 
-    return QueueSize(&queues[kReceiveQ]);
+    return queues[kReceiveQ].qSize;
 }
 
 bool CUDPConnection::ReceiveQueuedPackets() {
@@ -706,9 +705,9 @@ bool CUDPConnection::ReceiveQueuedPackets() {
                     DebugPacket('+', pack);
 #endif
                     if (Debug::IsEnabled("q")) {
-                        size_t qsize = QueueSize(&queues[kReceiveQ]);
+                        size_t qsize = queues[kReceiveQ].qSize;
                         if (qsize > 0 && qsize % 5 == 0) {
-                            DBG_Log("q", "%d: rsn=%d, dequeued sn=%d to kReceivedQ.size = %zu\n", myId, (int)receiveSerial, (int)pack->serialNumber, QueueSize(&queues[kReceiveQ]));
+                            DBG_Log("q", "%d: rsn=%d, dequeued sn=%d to kReceivedQ.size = %zu\n", myId, (int)receiveSerial, (int)pack->serialNumber, qsize);
                         }
                     }
 
