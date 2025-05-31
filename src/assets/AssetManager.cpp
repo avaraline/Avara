@@ -1,7 +1,7 @@
 #include "AssetManager.h"
 #include "BaseAssetStorage.h"
 #include "LocalAssetRepository.h"
-
+#include "BasePath.h"
 #include "LevelLoader.h"
 
 #include <algorithm>
