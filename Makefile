@@ -99,7 +99,7 @@ SIGNING_ID := NONE
 avara: set-version $(BUILD_DIR)/Avara
 
 tests: set-version $(BUILD_DIR)/tests
-	$(BUILD_DIR)/tests
+	AVARA_RSRC_PATH=$(shell pwd)/ $(BUILD_DIR)/tests
 
 bspviewer: $(BUILD_DIR)/BSPViewer
 
