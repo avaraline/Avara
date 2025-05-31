@@ -23,8 +23,6 @@ jobs:
       uses: GabrielBB/xvfb-action@v1.7
       with:
         run: make tests
-      env:
-         AVARA_RSRC_PATH: ${GITHUB_WORKSPACE}
   Windows:
     name: Windows
     runs-on: windows-latest
@@ -73,8 +71,6 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run headless tests
         run: make tests
-        env:
-          AVARA_RSRC_PATH: ${GITHUB_WORKSPACE}
       - name: make macdist
         run: make -j4 clean macdist
       - name: deploy main nightly
