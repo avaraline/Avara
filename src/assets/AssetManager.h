@@ -25,13 +25,6 @@
 #  endif
 #endif
 
-// Path separator
-#if defined(_WIN32)
-#define PATHSEP "\\"
-#else
-#define PATHSEP "/"
-#endif
-
 // Package structure
 #define MANIFESTFILE "set.json"
 

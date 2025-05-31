@@ -159,6 +159,7 @@
     <ClInclude Include="..\src\assets\AssetRepository.h" />
     <ClInclude Include="..\src\assets\AssetStorage.h" />
     <ClInclude Include="..\src\assets\BaseAssetStorage.h" />
+    <ClInclude Include="..\src\assets\BasePath.h" />
     <ClInclude Include="..\src\assets\LocalAssetRepository.h" />
     <ClInclude Include="..\src\assets\PackageManifest.h" />
     <ClInclude Include="..\src\audio\CBasicSound.h" />
@@ -369,6 +370,7 @@
   <ItemGroup>
     <ClCompile Include="..\src\assets\AssetManager.cpp" />
     <ClCompile Include="..\src\assets\BaseAssetStorage.cpp" />
+    <ClCompile Include="..\src\assets\BasePath.cpp" />
     <ClCompile Include="..\src\assets\LocalAssetRepository.cpp" />
     <ClCompile Include="..\src\assets\PackageManifest.cpp" />
     <ClCompile Include="..\src\audio\CBasicSound.cpp" />

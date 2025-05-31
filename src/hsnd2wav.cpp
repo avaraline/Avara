@@ -4,6 +4,7 @@
 #include "FastMat.h"
 #include "SDL2/SDL.h"
 #include "SoundSystemDefines.h"
+#include "BasePath.h"
 
 #include <cstdio>
 
@@ -37,7 +38,7 @@ typedef SampleHeaderPtr *SampleHeaderHandle;
 static SampleHeaderHandle sampleList = NULL;
 static CHuffProcessor *itsCompressor = new CHuffProcessor;
 
-static std::string defaultResource(std::string(SDL_GetBasePath()) + "rsrc/Avara.r");
+static std::string defaultResource(GetBasePath() + "rsrc/Avara.r");
 
 static std::string currentResource("");
 
@@ -50,7 +51,7 @@ bool IsEquals(const std::string& str1, const std::string& str2) {
 }
 
 void UseResFile(std::string filename) {
-    currentResource.assign(std::string(SDL_GetBasePath()) + filename);
+    currentResource.assign(GetBasePath() + filename);
 }
 
 Handle FindResource(SDL_RWops *file, OSType theType, short theID, std::string name) {
