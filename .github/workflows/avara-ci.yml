@@ -42,7 +42,7 @@ jobs:
         run: .\Avara.msvc\x64\Release\Tests.exe
         shell: pwsh
         env:
-          AVARA_RSRC_PATH: ${{ github.workspace }}
+          AVARA_RSRC_PATH: ${{ github.workspace }}\
       - name: WinAvara archive
         run: .\bin\winavarazip.ps1
         shell: pwsh
