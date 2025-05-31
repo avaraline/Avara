@@ -3,7 +3,7 @@ project(
   ['c', 'cpp'],
   version : '0.7.6',
   meson_version : '>= 1.3.0',
-  default_options : ['c_std=c99', 'warning_level=3', 'cpp_std=c++17'],
+  default_options : ['c_std=c17', 'warning_level=3', 'cpp_std=c++17'],
 )
 cxx = meson.get_compiler('cpp')
 
@@ -14,7 +14,6 @@ sdl2_dep = dependency('sdl2')
 sqlite3_dep = dependency('sqlite3')
 gtest_dep = dependency('gtest')
 
-
 avara_deps = [
   m_dep,
   thread_dep,
@@ -22,6 +21,7 @@ avara_deps = [
   sdl2_dep,
   sqlite3_dep
 ]
+
 test_deps = avara_deps
 test_deps += gtest_dep
 
