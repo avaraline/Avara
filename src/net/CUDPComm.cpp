@@ -412,7 +412,6 @@ void CUDPComm::SendConnectionTable() {
     PacketInfo *theDuplicate;
     CUDPConnection *conn;
     CompleteAddress *table;
-    bool allLAN = isServing || IsLAN(connections->ipAddr);  // if I am serving OR the server (first connection) is connected via LAN
 
     tablePack = GetPacket();
     if (tablePack) {
@@ -425,8 +424,6 @@ void CUDPComm::SendConnectionTable() {
                 // server sends external host/IP because we don't want to mess with our already connected IP (which might be a LAN address)
                 table->host = conn->ipAddrExt;
                 table->port = conn->port;
-                // if all clients on the LAN, don't need to punch holes(?)
-                allLAN &= IsLAN(conn->ipAddrExt);
             } else {
                 table->host = 0;
                 table->port = 0;
@@ -457,8 +454,8 @@ void CUDPComm::SendConnectionTable() {
         }
         SendPacket(kdEveryone, kpPacketProtocolControl, udpCramInfo, cramData, 0, 0, NULL);
 
-        if (Boolean(kPunchHoles) && !allLAN) {
-            DBG_Log("login", "waiting for hole-punch because at least 1 client is outside of the LAN\n");
+        if (Boolean(kPunchHoles)) {
+            DBG_Log("login", "waiting for hole-punch\n");
             // this lambda will be called after the punch server returns the external IP address
             SetPunchAddressHandler([this](const IPaddress &addr) -> void {
                 DBG_Log("login", "punch server returned address of %s\n", FormatAddr(addr).c_str());
