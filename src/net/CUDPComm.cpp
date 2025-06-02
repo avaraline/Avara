@@ -454,7 +454,7 @@ void CUDPComm::SendConnectionTable() {
         }
         SendPacket(kdEveryone, kpPacketProtocolControl, udpCramInfo, cramData, 0, 0, NULL);
 
-        if (Boolean(kPunchHoles)) {
+        if (gApplication->Boolean(kPunchHoles)) {
             DBG_Log("login", "waiting for hole-punch\n");
             // this lambda will be called after the punch server returns the external IP address
             SetPunchAddressHandler([this](const IPaddress &addr) -> void {
@@ -1821,7 +1821,7 @@ OSErr CUDPComm::CreateStream(port_num streamPort) {
     localIP = addr.host;
 
     // Register servers AND clients with punch server
-    if (Boolean(kPunchHoles)) {
+    if (gApplication->Boolean(kPunchHoles)) {
         IPaddress localAddr = {htonl(localIP), htons(localPort)};
         RegisterPunchServer(localAddr);
     }
