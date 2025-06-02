@@ -78,22 +78,29 @@ OSErr OpenAvaraTCP() {
     return noErr;
 }
 
-int CreateSocket(uint16_t port) {
+int CreateSocket(uint16_t &port) {
     int sock = socket(AF_INET, SOCK_DGRAM, 0);
     if (sock != -1) {
         //int reuseAddrValue = 1;
         //setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &reuseAddrValue, sizeof(int));
 
         struct sockaddr_in sock_addr;
-        memset(&sock_addr, 0, sizeof(sock_addr));
+        socklen_t len = sizeof(sock_addr);
+        memset(&sock_addr, 0, len);
         sock_addr.sin_family = AF_INET;
         sock_addr.sin_addr.s_addr = INADDR_ANY;
         sock_addr.sin_port = htons(port);
 
-        if (bind(sock, (struct sockaddr *)&sock_addr, sizeof(sock_addr)) == -1) {
+        if (bind(sock, (struct sockaddr *)&sock_addr, len) == -1) {
             SDL_Log("Failed to bind socket to port %d", port);
             DestroySocket(sock);
             return -1;
+        }
+
+        if (port == 0) {
+            // get/return the actual port number
+            getsockname(sock, (struct sockaddr *)&sock_addr, &len);
+            port = ntohs(sock_addr.sin_port);
         }
 
         // This is taking advantage of the fact that Avara only ever creates one socket at a time.
@@ -184,7 +191,7 @@ void PingPunchServer() {
 void RegisterPunchServer(IPaddress &localAddr) {
     if (gAvaraSocket == -1 || punchServer.port == 0) return;
 
-    SDL_Log("Registering server at %s", FormatAddress(localAddr).c_str());
+    SDL_Log("Registering with punch server: %s", FormatAddress(localAddr).c_str());
     memcpy(&punchLocal, &localAddr, sizeof(IPaddress));
     PingPunchServer();
 }
@@ -199,7 +206,7 @@ void RequestPunch(IPaddress &addr) {
 void Punch(IPaddress &addr) {
     if (gAvaraSocket == -1) return;
 
-    SDL_Log("Punching a hole for %s", FormatAddress(addr).c_str());
+    SDL_Log("Punching back to %s", FormatAddress(addr).c_str());
 
     struct sockaddr_in sock_addr;
     memset(&sock_addr, 0, sizeof(sock_addr));

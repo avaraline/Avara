@@ -116,7 +116,7 @@ public:
     virtual void ProcessQueue();
 
     virtual std::string FormatConnectionTable(CompleteAddress *table);
-    virtual bool IsDoubleNAT(uint32_t host);
+    static bool IsLAN(uint32_t host);
     virtual void SendConnectionTable();
     virtual void ReplaceMatchingNAT(const IPaddress &addr);
     virtual void ReadFromTOC(PacketInfo *thePacket);
