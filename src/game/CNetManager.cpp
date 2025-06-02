@@ -256,6 +256,7 @@ void CNetManager::NameChange(StringPtr newName) {
 
     std::string nameStr = ToString(newName);
     auto rating = itsGame->scoreKeeper->playerRatings->GetRating(nameStr);
+    DBG_Log("login+", "sending kpNameChange from %d with name='%s' to kdEveryone\n", itsCommManager->myId, nameStr.c_str());
     itsCommManager->SendPacket(kdEveryone, kpNameChange, presence, status, rating.second.rating*4, newName[0] + 1, (Ptr)newName);
 }
 
