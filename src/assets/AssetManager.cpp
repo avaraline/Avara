@@ -33,18 +33,12 @@ void AssetCache<T>::RemoveAll(std::vector<MaybePackage> &packageList)
     }
 };
 
-std::shared_ptr<AssetStorage> _baseStorage = BaseAssetStorage::GetInstance();
-std::shared_ptr<AssetStorage> _localStorage = LocalAssetRepository::GetInstance();
-std::shared_ptr<AssetRepository> _localRepo = LocalAssetRepository::GetInstance();
-
 // Initialize static variables.
 BasePackage AssetManager::basePackage = BasePackage::Avara;
 std::vector<std::string> AssetManager::externalPackages = {};
-std::shared_ptr<AssetStorage> AssetManager::baseStorage = _baseStorage;
-std::shared_ptr<AssetStorage> AssetManager::assetStorage = _localStorage;
-std::vector<std::shared_ptr<AssetRepository>> AssetManager::repositoryStack = {
-    _localRepo
-};
+std::shared_ptr<AssetStorage> AssetManager::baseStorage = {};
+std::shared_ptr<AssetStorage> AssetManager::assetStorage = {};
+std::vector<std::shared_ptr<AssetRepository>> AssetManager::repositoryStack = {};
 std::shared_ptr<nlohmann::json> AssetManager::objectTypes = nullptr;
 SimpleAssetCache<PackageManifest> AssetManager::manifestCache = {};
 SimpleAssetCache<std::string> AssetManager::avarascriptCache = {};
@@ -206,6 +200,16 @@ std::optional<std::shared_ptr<HullConfigRecord>> AssetManager::GetHull(int16_t i
 
 void AssetManager::Init()
 {
+    std::shared_ptr<AssetStorage> _baseStorage = BaseAssetStorage::GetInstance();
+    std::shared_ptr<AssetStorage> _localStorage = LocalAssetRepository::GetInstance();
+    std::shared_ptr<AssetRepository> _localRepo = LocalAssetRepository::GetInstance();
+    
+    baseStorage = _baseStorage;
+    assetStorage = _localStorage;
+    repositoryStack = {
+        _localRepo
+    };
+    
     LoadManifest(NoPackage);
     LoadScript(NoPackage);
     LoadEnumeratedObjectTypes();

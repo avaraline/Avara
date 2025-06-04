@@ -177,6 +177,7 @@ public:
 private:
     AssetManager() {}
     
+    
     static BasePackage basePackage;
     static std::vector<std::string> externalPackages;
     static std::shared_ptr<AssetStorage> baseStorage;
