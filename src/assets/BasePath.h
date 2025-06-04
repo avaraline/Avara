@@ -9,6 +9,7 @@
 #define PATHSEP "/"
 #endif
 
+void SetBasePath(char* bp);
 std::string GetBasePath();
 
 #endif

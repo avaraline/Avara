@@ -14,6 +14,7 @@
 #include "CBSPPart.h"
 #include "FastMat.h"
 #include "Preferences.h"
+#include "BasePath.h"
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -82,6 +83,12 @@ std::vector<std::string> combinedArgs(std::string defaultArgs, int argc, char* a
 }
 
 int main(int argc, char *argv[]) {
+    // Check basepath override.
+    for (int i = 0; i < argc; i++) {
+        if (strcmp(argv[i], "--basepath") == 0) {
+            SetBasePath(argv[++i]);
+        }
+    }
     // Allow Windows to run in HiDPI mode.
     SetHiDPI();
 
