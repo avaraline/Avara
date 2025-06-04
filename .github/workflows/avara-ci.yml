@@ -29,7 +29,7 @@ jobs:
     - name: Run headless test
       uses: GabrielBB/xvfb-action@v1.7
       with:
-        run: make tests
+        run: build/tests --basepath $(pwd)/
   Windows:
     name: Windows
     runs-on: windows-2022
@@ -45,10 +45,8 @@ jobs:
           configurePreset: 'avara-exe'
           buildPreset: 'avara-exe'
       - name: Run headless test
-        run: build\tests.exe
+        run: build\tests.exe --basepath ${{ github.workspace }}\
         shell: pwsh
-        env:
-          AVARA_RSRC_PATH: ${{ github.workspace }}
       - name: WinAvara Zip
         run: bin\winavarazip.ps1
       - name: deploy main nightly
