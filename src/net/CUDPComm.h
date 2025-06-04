@@ -22,7 +22,7 @@
 
 #define CRAMTIME 5000 //	About 20 seconds.
 #define CRAMPACKSIZE 64
-#define kClientConnectTimeoutTicks 600 //(60*30)
+#define kClientConnectTimeoutMsec 3000
 
 // Should be at most half of the lowest frameTime.  In classic game this was 4.096 ms.
 #define MSEC_PER_GET_CLOCK (1)
@@ -118,8 +118,9 @@ public:
     virtual std::string FormatConnectionTable(CompleteAddress *table);
     static bool IsLAN(uint32_t host);
     virtual void SendConnectionTable();
-    virtual void ReplaceMatchingNAT(const IPaddress &addr);
     virtual void ReadFromTOC(PacketInfo *thePacket);
+    virtual void ReplaceMatchingNAT(const IPaddress &addr);
+    virtual void PunchHandler(PunchType ptype, const IPaddress &addr);
 
     virtual void SendRejectPacket(ip_addr remoteHost, port_num remotePort, OSErr loginErr);
 

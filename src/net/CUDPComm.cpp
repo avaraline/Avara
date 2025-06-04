@@ -454,16 +454,6 @@ void CUDPComm::SendConnectionTable() {
         }
         SendPacket(kdEveryone, kpPacketProtocolControl, udpCramInfo, cramData, 0, 0, NULL);
 
-        if (gApplication->Boolean(kPunchHoles)) {
-            DBG_Log("login", "waiting for hole-punch\n");
-            // this lambda will be called after the punch server returns the external IP address
-            SetPunchAddressHandler([this](const IPaddress &addr) -> void {
-                DBG_Log("login", "punch server returned address of %s\n", FormatAddr(addr).c_str());
-                ReplaceMatchingNAT(addr);
-            });
-        } else {
-            SetPunchAddressHandler({});
-        }
     }
 }
 
@@ -484,6 +474,19 @@ void CUDPComm::ReplaceMatchingNAT(const IPaddress &addr) {
     }
     return;
 }
+
+void CUDPComm::PunchHandler(PunchType ptype, const IPaddress &addr) {
+    DBG_Log("punch", "CUDPComm::PunchHandler(%d, %s)\n", ptype, FormatAddr(addr).c_str());
+    if (isServing) {
+        DBG_Log("punch", "  > SERVER Punched\n");
+        ReplaceMatchingNAT(addr);
+    } else if (clientReady) {
+        DBG_Log("punch", "  > CLIENT Punched\n");
+    } else {
+        DBG_Log("punch", "  > OTHER  Punch (will we get here?)\n");
+    }
+}
+
 
 void CUDPComm::SendRejectPacket(ip_addr remoteHost, port_num remotePort, OSErr loginErr) {
     SDL_Log("CUDPComm::SendRejectPacket\n");
@@ -1262,6 +1265,16 @@ void CUDPComm::IUDPComm(short clientCount, short bufferCount, uint16_t version, 
     receiverRecord.userData = (Ptr)this;
     AddReceiver(&receiverRecord, kUDPProtoHandlerIsAsync);
 
+    if (gApplication->Boolean(kPunchHoles)) {
+        // this lambda will be called after a punch message (kPunch or kJab) is received
+        SetPunchMessageHandler([this](PunchType ptype, const IPaddress &addr) -> void {
+            this->PunchHandler(ptype, addr);
+        });
+    } else {
+        SetPunchMessageHandler({});
+    }
+
+
     // rejectPB.ioResult = noErr;
     rejectReason = noErr;
 
@@ -1418,7 +1431,7 @@ OSErr CUDPComm::ContactServer(IPaddress &serverAddr) {
         AsyncRead();
         SendPacket(kdServerOnly, kpPacketProtocolLogin, 0, 0, seed, password[0] + 1, (Ptr)password);
 
-        startTime = TickCount();
+        startTime = SDL_GetTicks();
 
         /* TODO: connecting to server dialog
         gApplication->SetCommandParams(kUDPPopStrings, kBusyContactingServer, true, 0);
@@ -1441,7 +1454,7 @@ OSErr CUDPComm::ContactServer(IPaddress &serverAddr) {
                 }
             }
 
-            if ((TickCount() - startTime) > kClientConnectTimeoutTicks) {
+            if ((SDL_GetTicks() - startTime) > kClientConnectTimeoutMsec) {
                 rejectReason = 2;
             }
 
