@@ -141,6 +141,9 @@ int main(int argc, char *argv[]) {
                 textCommand.insert(0, "/");
             }
             textCommands.push_back(textCommand);
+        } else if (arg == "--basepath") {
+            // skip, it was handled earlier in main()
+            i = i + 2;
         } else {
             SDL_Log("Unknown command-line argument '%s'\n", args[i].c_str());
             exit(1);
