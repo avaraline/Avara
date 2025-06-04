@@ -200,14 +200,10 @@ std::optional<std::shared_ptr<HullConfigRecord>> AssetManager::GetHull(int16_t i
 
 void AssetManager::Init()
 {
-    std::shared_ptr<AssetStorage> _baseStorage = BaseAssetStorage::GetInstance();
-    std::shared_ptr<AssetStorage> _localStorage = LocalAssetRepository::GetInstance();
-    std::shared_ptr<AssetRepository> _localRepo = LocalAssetRepository::GetInstance();
-    
-    baseStorage = _baseStorage;
-    assetStorage = _localStorage;
+    baseStorage = BaseAssetStorage::GetInstance();
+    assetStorage = LocalAssetRepository::GetInstance();
     repositoryStack = {
-        _localRepo
+        LocalAssetRepository::GetInstance()
     };
     
     LoadManifest(NoPackage);
