@@ -25,13 +25,6 @@
 #  endif
 #endif
 
-// Path separator
-#if defined(_WIN32)
-#define PATHSEP "\\"
-#else
-#define PATHSEP "/"
-#endif
-
 // Package structure
 #define MANIFESTFILE "set.json"
 
@@ -183,7 +176,7 @@ public:
     static bool PackageInStorage(std::string packageName);
 private:
     AssetManager() {}
-    
+
     static BasePackage basePackage;
     static std::vector<std::string> externalPackages;
     static std::shared_ptr<AssetStorage> baseStorage;

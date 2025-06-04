@@ -1,5 +1,5 @@
 #include "Beeper.h"
-
+#include "BasePath.h"
 #include <SDL2/SDL.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -14,7 +14,7 @@ void Beep() {
     if (!beepLoaded) {
         // TODO: backslash on Windows
         char wavPath[256];
-        snprintf(wavPath, 256, "%srsrc/%s", SDL_GetBasePath(), "sosumi.wav");
+        snprintf(wavPath, 256, "%srsrc/%s", GetBasePath().c_str(), "sosumi.wav");
         SDL_memset(&wavSpec, 0, sizeof(wavSpec));
         if (SDL_LoadWAV(wavPath, &wavSpec, &wavBuffer, &wavLength)) {
             beepLoaded = true;
