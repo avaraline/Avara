@@ -11,22 +11,10 @@
 #include "ColorManager.h"
 
 #include "Memory.h"
-#include "Resource.h"
+#include "AssetManager.h"
 
 #define DIMEPSILON 16
 
-typedef struct {
-    Fixed baseSize;
-    short scaleStyle;
-} bspsResource;
-
-/*
-{
-"400": {"1:1 size": 1.0,"Stretch/Scale (0/1)": 0},
-"401": {"1:1 size": 1.0,"Stretch/Scale (0/1)": 0},
-"722": {"1:1 size": 5.0,"Stretch/Scale (0/1)": 0}
-}
-*/
 
 void CSmartBox::ScaleTemplate(Fixed *dimensions, Fixed baseSize) {
     Fixed x, y, z;
@@ -115,30 +103,22 @@ CSmartBox::CSmartBox(
     CAbstractActor *anActor,
     short aPartCode
 ) {
-    bspsResource **config;
-    Fixed baseSize;
-    Boolean stretchFlag;
+    Fixed baseSize = FIX1;
+    Boolean stretchFlag = false;
 
-    Handle res = GetResource(BSPTEMPLATETYPE, resId);
-    if (res == NULL) {
+    auto boxTmpl = AssetManager::GetBsp(resId);
+    if (!boxTmpl) {
         resId = dimensions[1] ? BOXTEMPLATERESOURCE : PLATETEMPLATERESOURCE;
-    } else {
-        ReleaseResource(res);
     }
 
     CSmartPart::ISmartPart(resId, anActor, aPartCode);
 
-    auto scalingRes = GetResource(BSPSCALETYPE, resId);
-    config = (bspsResource **)scalingRes;
-    if (config) {
-        stretchFlag = ntohs((*config)->scaleStyle);
-        baseSize = ntohl((*config)->baseSize);
-    } else {
-        stretchFlag = false;
-        baseSize = FIX1;
+    auto bsps = AssetManager::GetBspScale(resId);
+    if (bsps) {
+        baseSize = (**bsps).baseSize;
+        stretchFlag = (**bsps).scaleStyle;
     }
-    ReleaseResource(scalingRes);
-
+    
     if (stretchFlag) {
         ScaleTemplate(dimensions, baseSize);
     } else {

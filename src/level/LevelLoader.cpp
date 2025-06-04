@@ -11,6 +11,7 @@
 
 #include "AbstractRenderer.h"
 #include "AssetManager.h"
+#include "BasePath.h"
 #include "CAvaraGame.h"
 #include "CWallActor.h"
 #include "FastMat.h"

@@ -29,9 +29,7 @@ jobs:
     - name: Run headless test
       uses: GabrielBB/xvfb-action@v1.7
       with:
-        run: |
-          cp build/tests ./tests
-          ./tests
+        run: make tests
   Windows:
     name: Windows
     runs-on: windows-2022
@@ -47,11 +45,10 @@ jobs:
           configurePreset: 'avara-exe'
           buildPreset: 'avara-exe'
       - name: Run headless test
-        run: |
-          ls
-          cp build\tests.exe .\tests.exe 
-          .\tests.exe
+        run: build\tests.exe
         shell: pwsh
+        env:
+          AVARA_RSRC_PATH: ${{ github.workspace }}
       - name: WinAvara Zip
         run: bin\winavarazip.ps1
       - name: deploy main nightly
@@ -81,7 +78,7 @@ jobs:
           configurePreset: 'avara-app'
           buildPreset: 'avara-app'
       - name: run tests
-        run: cp build/tests ./tests; ./tests
+        run: build/tests --basepath $(pwd)/
       - name: make macdist
         run: zip -rq MacAvara.zip ./build/Avara.app
       - name: deploy main nightly

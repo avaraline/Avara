@@ -1,19 +1,16 @@
 #include "LocalAssetRepository.h"
 #include "AssetManager.h"
+#include "BasePath.h"
 
 #define CUTE_FILES_IMPLEMENTATION
 #include <cute_files.h>
-
-#include <SDL2/SDL.h>
 
 #include <fstream>
 #include <sstream>
 
 LocalAssetRepository::LocalAssetRepository()
 {
-    char *sdlPathTmp = SDL_GetBasePath();
-    basePath = std::string(sdlPathTmp);
-    SDL_free(sdlPathTmp);
+    basePath = GetBasePath();
 }
 
 std::shared_ptr<LocalAssetRepository> LocalAssetRepository::GetInstance()
