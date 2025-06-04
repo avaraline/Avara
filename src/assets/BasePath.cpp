@@ -7,6 +7,13 @@
 bool basepathLookupDone = false;
 std::string basepath = "";
 
+void SetBasePath(char* bp) {
+    // if set from a command line argument, override env var
+    basepath.assign(bp);
+    basepathLookupDone = true;
+    SDL_Log("Asset base path set by --basepath to %s", basepath.c_str());
+}
+
 std::string GetBasePath() {
     if (!basepathLookupDone) {
         // look at environment variable
@@ -19,6 +26,7 @@ std::string GetBasePath() {
         if (basepath.length() < 1)
             basepath.assign(SDL_GetBasePath());
         basepathLookupDone = true;
+        SDL_Log("Asset base path set to %s", basepath.c_str());
     }
     return basepath;
 }
