@@ -245,4 +245,4 @@ tests = executable(
   cpp_args: '-DNANOGUI_GLAD'
 )
 
-test('avara tests', tests, env: ['AVARA_RSRC_PATH=' + (meson.current_source_dir() / '')])
+test('avara tests', tests, args: ['--basepath', (meson.current_source_dir() / '')])
