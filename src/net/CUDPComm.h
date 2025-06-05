@@ -116,6 +116,7 @@ public:
     virtual void ProcessQueue();
 
     virtual std::string FormatConnectionTable(CompleteAddress *table);
+    virtual std::string FormatConnectionsList();
     static bool IsLAN(uint32_t host);
     virtual void SendConnectionTable();
     virtual void ReadFromTOC(PacketInfo *thePacket);

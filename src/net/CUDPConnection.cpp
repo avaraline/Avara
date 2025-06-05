@@ -763,26 +763,30 @@ char *CUDPConnection::WriteAcks(char *dest) {
 }
 
 void CUDPConnection::MarkOpenConnections(CompleteAddress *table) {
-    if (next)  // recurse down the chain of connections
-        next->MarkOpenConnections(table);
-
-    if (port && myId != 0) {
-        for (int i = 0; i < itsOwner->maxClients; i++) {
-            if (table->host == ipAddr && table->port == port) {
-                table->host = 0; // this connection is being used
-                table->port = 0;
-                return;
+    // loop thru the passed connection table looking for the table index matching conn->myId
+    // (`this` assumed to be front of the connection list, but skip the first/server connection)
+    for (auto conn = this->next; conn; conn = conn->next) {
+        for (int idx = 1; idx < itsOwner->maxClients; idx++) {
+            if (conn->myId == idx && conn->port) {
+                // if port is set in both places it's assumed to be in use (can't rely on host or port being equal tho)
+                if (table[idx].port) {
+                    // remove the connection from the connection table
+                    table[idx].host = 0;
+                    table[idx].port = 0;
+                } else {
+                    DBG_Log("login", "myId=%d (%s) no longer in connection table, marking as GONE",
+                            conn->myId, FormatHostPort(conn->ipAddr, conn->port).c_str());
+                    conn->port = 0;
+                    conn->ipAddr = 0;
+                    conn->myId = -1;
+                    conn->FlushQueues();
+                }
+                break;
             }
-
-            table++;
         }
-
-        DBG_Log("login", "%s no longer in connection table, marking as GONE", FormatHostPort(ipAddr, port).c_str());
-        port = 0;
-        ipAddr = 0;
-        myId = -1;
-        FlushQueues();
     }
+
+    // in the end we will have a list of connections that need to be opened (host and port still set)
 }
 
 void CUDPConnection::RewriteConnections(CompleteAddress *table, const CompleteAddress &myAddressInTOC) {

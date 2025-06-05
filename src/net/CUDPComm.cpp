@@ -374,12 +374,23 @@ void CUDPComm::ProcessQueue() {
 
 std::string CUDPComm::FormatConnectionTable(CompleteAddress *table) {
     std::ostringstream oss;
-    oss << " Slot   myId   Host:Port\n";
-    oss << "------+------+---------------\n";
-    // oss << "   1   | " << FormatHostPort(table->host, table->port) << "\n";
-    int slot = 2;
-    for (CUDPConnection *conn = connections; conn; conn = conn->next, table++, slot++) {
-        oss << "   " << slot << "  |   " << conn->myId << "  | " << FormatHostPort(table->host, table->port) << "\n";
+    oss << " myId | Host:Port\n";
+    oss << "------+---------------\n";
+    for (int id = 1; id <= maxClients; id++, table++) {
+        oss << "   " << id << "  | " << FormatHostPort(table->host, table->port) << "\n";
+    }
+    return oss.str();
+}
+
+std::string CUDPComm::FormatConnectionsList() {
+    std::ostringstream oss;
+    oss << " myId | Host:Port             | SN       | RSN\n";
+    oss << "------+-----------------------+----------+----------\n";
+    for (auto conn = connections; conn; conn = conn->next) {
+        oss << "   " << ((conn->myId < 0) ? " " : std::to_string(conn->myId)) << "  | "
+            << std::setw(21) << FormatHostPort(conn->ipAddr, conn->port) << " | "
+            << std::setw(8) << conn->serialNumber << " | "
+            << conn->receiveSerial << "\n";
     }
     return oss.str();
 }
@@ -610,10 +621,12 @@ void CUDPComm::ReadFromTOC(PacketInfo *thePacket) {
     // DBG_Log("login", "After removing open connections ...\n%s", FormatConnectionTable(table).c_str());
 
     connections->RewriteConnections(table, myAddressFromTOC);
-    DBG_Log("login", "Connection Table after rewriting addresses ...\n%s", FormatConnectionTable(table).c_str());
+    DBG_Log("login", "Final Connection Table, opening remaining connections:\n%s", FormatConnectionTable(table).c_str());
 
     connections->OpenNewConnections(table);
     // DBG_Log("login", "After opening connections ...\n%s", FormatConnectionTable(table).c_str());
+
+    DBG_Log("login", "After opening, connections list:\n%s", FormatConnectionsList().c_str());
 }
 
 Boolean CUDPComm::PacketHandler(PacketInfo *thePacket) {
@@ -840,23 +853,27 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                         } else {
                             if (thePacket->serialNumber == INITIAL_SERIAL_NUMBER) {
                                 if (isServing && thePacket->packet.command == kpPacketProtocolLogin) {
+                                    // received a Login packet
                                     conn = DoLogin((PacketInfo *)thePacket, packet);
                                 } else if (p->sender) {
-                                    // first packet should include sender which helps us figure out which connection to use
-                                    int i = 0;
+                                    // unmatched first packet will include sender which helps us figure out which connection to match with
                                     for (conn = connections; conn; conn = conn->next) {
-                                        if (p->sender == i++) break;
+                                        // is this the matching connection number?
+                                        if (p->sender == conn->myId) break;
                                     }
                                     if (conn && conn->receiveSerial == INITIAL_SERIAL_NUMBER) {
                                         SDL_Log("Setting connection[%d] address from the first received packet: %s\n", p->sender, FormatAddr(packet->address).c_str());
-                                        // we found the likely connection, reset its IP address from the packet
+                                        // we found the connection, reset its IP address from the packet
                                         conn->ipAddr = packet->address.host;
                                         conn->port = packet->address.port;
                                         // and... keep this packet!
                                         conn->ReceivedPacket(thePacket);
+                                    } else {
+                                        SDL_Log("COULD NOT FIND CONNECTION [%d] for packet coming from: %s\n", p->sender, FormatAddr(packet->address).c_str());
                                     }
                                 } else {
-                                    SDL_Log("Got a packet, sn=%d cmd=%d, from UNIDENTIFIED address: %s", uint16_t(thePacket->serialNumber), thePacket->packet.command, FormatAddr(packet->address).c_str());
+                                    SDL_Log("Got a packet, sender=%d, cmd=%d, from UNIDENTIFIED address: %s",
+                                            uint16_t(p->sender), thePacket->packet.command, FormatAddr(packet->address).c_str());
                                 }
                             }
 
