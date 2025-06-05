@@ -12,6 +12,8 @@
 #include "CBSPPart.h"
 #include "FastMat.h"
 
+#include <algorithm>
+
 #define PYRAMIDSCALE >> 2
 
 void CViewParameters::CalculateViewPyramidCorners() {
@@ -124,7 +126,7 @@ CViewParameters::CViewParameters() {
 
     ambientLight = 32768L;
 
-    SetLight(0, 0, FIX(45), FIX3(900) - ambientLight, DEFAULT_LIGHT_COLOR, kLightGlobalCoordinates);
+    SetLight(0, 0, FIX(45), FIX3(900) - ambientLight, DEFAULT_LIGHT_COLOR, FIX(0), false, kLightGlobalCoordinates);
 
     hitherBound = FIX3(1000); //	0.5 m
     yonBound = FIX(500); //	500 m
@@ -164,14 +166,14 @@ void CViewParameters::LookAt(Fixed x, Fixed y, Fixed z) {
 void CViewParameters::LookAtPart(CBSPPart *thePart) {
     Fixed *v;
 
-    v = thePart->itsTransform[3];
+    v = thePart->modelTransform[3];
     LookAt(v[0], v[1], v[2]);
 }
 
 void CViewParameters::LookFromPart(CBSPPart *thePart) {
     Fixed *v;
 
-    v = thePart->itsTransform[3];
+    v = thePart->modelTransform[3];
     LookFrom(v[0], v[1], v[2]);
 }
 
@@ -239,7 +241,7 @@ void CViewParameters::SetLightValues(short n, Fixed dx, Fixed dy, Fixed dz, shor
     }
 }
 
-void CViewParameters::SetLight(short n, Fixed angle1, Fixed angle2, Fixed intensity, ARGBColor color, short mode) {
+void CViewParameters::SetLight(short n, Fixed angle1, Fixed angle2, Fixed intensity, ARGBColor color, Fixed celestialRadius, bool applySpecular, short mode) {
     Fixed x, y, z;
 
     if (n >= 0 && n < MAXLIGHTS) {
@@ -247,6 +249,8 @@ void CViewParameters::SetLight(short n, Fixed angle1, Fixed angle2, Fixed intens
         dirLightSettings[n].angle1 = angle1;
         dirLightSettings[n].angle2 = angle2;
         dirLightSettings[n].color = color;
+        dirLightSettings[n].celestialRadius = celestialRadius;
+        dirLightSettings[n].applySpecular = applySpecular;
 
         x = FMul(FDegCos(angle1), intensity);
         y = FMul(FDegSin(-angle1), intensity);
@@ -254,6 +258,28 @@ void CViewParameters::SetLight(short n, Fixed angle1, Fixed angle2, Fixed intens
         x = FMul(FDegSin(-angle2), x);
 
         SetLightValues(n, x, y, z, mode);
+        
+        // Precalculate relative light location.
+        float intensityF = ToFloat(intensity);
+        float elevation = ToFloat(angle1);
+        float azimuth = ToFloat(angle2);
+        float xF = sin(Deg2Rad(-azimuth));
+        float yF = sin(Deg2Rad(-elevation));
+        float zF = cos(Deg2Rad(azimuth));
+        float magnitude = sqrt(pow(xF, 2.0) + pow(yF, 2.0) + pow(zF, 2.0));
+        dirLightSettings[n].direction[0] = xF * -intensityF;
+        dirLightSettings[n].direction[1] = yF * -intensityF;
+        dirLightSettings[n].direction[2] = zF * -intensityF;
+        dirLightSettings[n].position[0] = xF / magnitude * -DIR_LIGHT_DISTANCE;
+        dirLightSettings[n].position[1] = yF / magnitude * -DIR_LIGHT_DISTANCE;
+        dirLightSettings[n].position[2] = zF / magnitude * -DIR_LIGHT_DISTANCE;
+        
+        // Precalculate how much of the light source should "bleed" into fog.
+        float radiusComponent = 524288.0f * pow(ToFloat(celestialRadius), -1.9f);
+        dirLightSettings[n].celestialFogSpread = std::max(
+            radiusComponent - (std::min(0.999f, intensityF) * radiusComponent),
+            1.0f
+        );
     }
 
 }

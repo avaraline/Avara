@@ -16,14 +16,14 @@
     0.0,
     0.0015106431677729459
   ],
-  "colors": [
-    "marker(0)"
+  "materials": [
+    {"base": "marker(0)"}
   ],
   "normals": [
     [
       0.0,
       0.0,
-      1.0
+      -1.0
     ]
   ],
   "points": [
@@ -71,7 +71,7 @@
   "polys": [
     {
       "back": 65535,
-      "color": 0,
+      "mat": 0,
       "front": 65535,
       "normal": 0,
       "tris": [

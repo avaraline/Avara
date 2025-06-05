@@ -7,6 +7,16 @@
 
 #include <memory>
 
+#ifdef __has_include
+#  if __has_include(<optional>)                // Check for a standard library
+#    include <optional>
+#  elif __has_include(<experimental/optional>) // Check for an experimental version
+#    include <experimental/optional>           // Check if __has_include is present
+#  else                                        // Not found at all
+#     error "Missing <optional>"
+#  endif
+#endif
+
 class AbstractRenderer {
 public:
     CViewParameters *viewParams;
@@ -33,11 +43,21 @@ public:
      * Update lights in the scene with the currently configured lighting.
      */
     virtual void ApplyLights() = 0;
+    
+    /**
+     * Sent when a preference value is updated. Can be used to alter render settings without checking every frame.
+     */
+    virtual void ApplyPrefs(std::optional<std::string> name = std::optional<std::string>{}) {}
 
     /**
      * Update the camera with the currently configured resolution and FOV.
      */
     virtual void ApplyProjection() = 0;
+    
+    /**
+     * Update the sky in the scene with the currently configured parameters.
+     */
+    virtual void ApplySky() = 0;
 
     /**
      * Reset the renderer's state back to its defaults.
@@ -50,15 +70,11 @@ public:
      * @return a new, empty VertexData instance
      */
     virtual std::unique_ptr<VertexData> NewVertexDataInstance() = 0;
-
+    
     /**
-     * Populate the provided Fixed arrays with 1) the center point of the level and 2) how far the
-     * level extends.
-     *
-     * @param pt The array of Fixed values (x, y, and z coordinates) to populate with the "center" point of a level.
-     * @param extent The array of Fixed values (min X, max X, min Y, max Y, min Z, max Z) to populate with coordinates that represent the "extent" of a level's boundaries.
+     * Perform desired actions after level load.
      */
-    virtual void OverheadPoint(Fixed *pt, Fixed *extent) = 0;
+    virtual void PostLevelLoad() {};
 
     /**
      * Update the game window with the latest rendered frame.
@@ -111,6 +127,7 @@ public:
      * @param ss_vec The screenspace vector
      */
     virtual glm::vec3 ScreenSpaceToWorldSpace(glm::vec4 *ss_vec);
+
 protected:
     float fov = 50.0f;
     glm::mat4 proj;

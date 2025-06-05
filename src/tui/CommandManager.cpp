@@ -113,11 +113,9 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
     
     cmd = new TextCommand("/info           <- show build info",
                           [this](VectorOfArgs vargs) -> bool {
-        std::string infoString(GetOsName());
-        infoString += " ";
-        // TODO: hook this up again
+        //TODO: fix this
+        std::string infoString(GetOsName() + " " + GIT_VERSION + "\r");
         //itsApp->rosterWindow->SendRosterMessage(infoString);
-        //itsApp->rosterWindow->SendRosterMessage(GIT_VERSION);
 
         return false;
     });
@@ -295,9 +293,11 @@ bool CommandManager::KickPlayer(int slot) {
 
     std::string slotString(std::to_string(slot));
 
-    if(CPlayerManagerImpl::LocalPlayer()->Slot() != 0) {
+    if(CPlayerManagerImpl::LocalPlayer() != CPlayerManagerImpl::ServerPlayer() &&
+       !CPlayerManagerImpl::ServerPlayer()->IsAway() &&
+       !CPlayerManagerImpl::ServerPlayer()->IsSpectating()) {
         itsApp->AddMessageLine(
-            "Only the host can issue kick commands.",
+            "You can only kick players if the host is away/spectating.",
             MsgAlignment::Left,
             MsgCategory::Error
         );
@@ -624,8 +624,8 @@ bool CommandManager::SplitIntoTeams(VectorOfArgs vargs) {
 
 
 bool CommandManager::HandleTags(VectorOfArgs vargs) {
-    Tags::LevelURL curLevel(itsApp->GetGame()->loadedSet,
-                            itsApp->GetGame()->loadedLevel);
+    Tags::LevelURL curLevel(itsApp->GetGame()->loadedLevelInfo->setTag,
+                            itsApp->GetGame()->loadedLevelInfo->levelName);
 
     if (vargs.size() > 0) {
         for (auto tag: vargs) {
@@ -641,11 +641,13 @@ bool CommandManager::HandleTags(VectorOfArgs vargs) {
         }
     }
 
-    std::string msg = "tags for \"" + curLevel.first + "/" + curLevel.second + "\":";
-    for (auto tag: Tags::GetTagsForLevel(curLevel)) {
-        msg +=  " " + tag;
+    auto tagsStr = Tags::TagsStringForLevel(curLevel);
+    //itsApp->rosterWindow->UpdateTags(tagsStr);
+
+    if (vargs.size() == 0) {
+        std::string msg = "tags for \"" + curLevel.first + "/" + curLevel.second + "\": " + tagsStr;
+        itsApp->AddMessageLine(msg);
     }
-    itsApp->AddMessageLine(msg);
 
     return true;
 }

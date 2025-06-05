@@ -12,9 +12,12 @@
 #include "CDirectObject.h"
 #include "ColorManager.h"
 #include "FastMat.h"
+#include "Material.h"
 #include "VertexData.h"
 
 #include <memory>
+#include <sstream>
+#include <vector>
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -34,25 +37,58 @@ class CViewParameters;
 
 enum { noLineClip = 0, touchFrontClip = 1, touchBackClip = 2, lineVisibleClip = 4, edgeExitsFlag = 0x8000 };
 
-typedef struct {
-    Fixed x;
-    Fixed y;
-    Fixed z;
-    Fixed w;
-} FixedPoint;
+struct FixedPoint {
+    Fixed x = 0;
+    Fixed y = 0;
+    Fixed z = 0;
+    Fixed w = 0;
+    FixedPoint() {};
+    FixedPoint(Fixed x, Fixed y, Fixed z, Fixed w) : x(x), y(y), z(z), w(w) {}
+    std::string Format() {
+        std::ostringstream oss;
+        oss << "[" << x << ", " << y << ", " << z << ", " << w << "]";
+        return oss.str();
+    }
+};
 
-typedef struct {
-    float normal[3];
-    uint16_t triCount;
-    std::unique_ptr<uint16_t[]> triPoints;
-    uint16_t front;
-    uint16_t back;
-    uint16_t colorIdx;
+struct FloatNormal {
+    float x = 0.0;
+    float y = 0.0;
+    float z = 0.0;
+    FloatNormal() {};
+    FloatNormal(float x, float y, float z) : x(x), y(y), z(z) {}
+    void ApplyTransform(Matrix &m) {
+        Vector v, dest;
+        v[0] = ToFixed(x);
+        v[1] = ToFixed(y);
+        v[2] = ToFixed(z);
+        v[3] = FIX(0);
+        VectorMatrixProduct(1, &v, &dest, &m);
+        x = ToFloat(dest[0]);
+        y = ToFloat(dest[1]);
+        z = ToFloat(dest[2]);
+    }
+};
+
+struct MaterialRecord {
+    Material original;
+    Material current;
+    MaterialRecord(Material original, Material current) : original(original), current(current) {}
+};
+
+struct PolyRecord {
+    FloatNormal normal;
+    uint32_t triCount;
+    std::unique_ptr<uint32_t[]> triPoints;
+    uint32_t front;
+    uint32_t back;
+    uint16_t materialIdx;
     uint8_t vis;
-} PolyRecord;
+};
 
 namespace CBSPUserFlags {
     constexpr short kIsAmbient = 1;
+    constexpr short kIsStatic = 2;
 }
 
 /*
@@ -60,44 +96,44 @@ namespace CBSPUserFlags {
 */
 
 #define PlacePart(part, x, y, z) \
-    part->itsTransform[3][0] = x; \
-    part->itsTransform[3][1] = y; \
-    part->itsTransform[3][2] = z
+    part->modelTransform[3][0] = x; \
+    part->modelTransform[3][1] = y; \
+    part->modelTransform[3][2] = z
 
 #define TranslatePart(part, dx, dy, dz) \
-    part->itsTransform[3][0] += dx; \
-    part->itsTransform[3][1] += dy; \
-    part->itsTransform[3][2] += dz
+    part->modelTransform[3][0] += dx; \
+    part->modelTransform[3][1] += dy; \
+    part->modelTransform[3][2] += dz
 
-#define TranslatePartX(part, delta) part->itsTransform[3][0] += delta
-#define TranslatePartY(part, delta) part->itsTransform[3][1] += delta
-#define TranslatePartZ(part, delta) part->itsTransform[3][2] += delta
+#define TranslatePartX(part, delta) part->modelTransform[3][0] += delta
+#define TranslatePartY(part, delta) part->modelTransform[3][1] += delta
+#define TranslatePartZ(part, delta) part->modelTransform[3][2] += delta
 
 #define InitialRotatePartZ(part, angle) \
     { \
         Fixed tempAngle = angle; \
-        part->itsTransform[0][0] = part->itsTransform[1][1] = FOneCos(tempAngle); \
-        part->itsTransform[1][0] = -(part->itsTransform[0][1] = FOneSin(tempAngle)); \
+        part->modelTransform[0][0] = part->modelTransform[1][1] = FOneCos(tempAngle); \
+        part->modelTransform[1][0] = -(part->modelTransform[0][1] = FOneSin(tempAngle)); \
     }
 
 #define InitialRotatePartY(part, angle) \
     { \
         Fixed tempAngle = angle; \
-        part->itsTransform[0][0] = part->itsTransform[2][2] = FOneCos(tempAngle); \
-        part->itsTransform[0][2] = -(part->itsTransform[2][0] = FOneSin(tempAngle)); \
+        part->modelTransform[0][0] = part->modelTransform[2][2] = FOneCos(tempAngle); \
+        part->modelTransform[0][2] = -(part->modelTransform[2][0] = FOneSin(tempAngle)); \
     }
 
 #define InitialRotatePartX(part, angle) \
     { \
         Fixed tempAngle = angle; \
-        part->itsTransform[1][1] = part->itsTransform[2][2] = FOneCos(tempAngle); \
-        part->itsTransform[2][1] = -(part->itsTransform[1][2] = FOneSin(tempAngle)); \
+        part->modelTransform[1][1] = part->modelTransform[2][2] = FOneCos(tempAngle); \
+        part->modelTransform[2][1] = -(part->modelTransform[1][2] = FOneSin(tempAngle)); \
     }
 
 #define NegateTransformRow(part, row) \
-    part->itsTransform[row][0] = -part->itsTransform[row][0]; \
-    part->itsTransform[row][1] = -part->itsTransform[row][1]; \
-    part->itsTransform[row][2] = -part->itsTransform[row][2];
+    part->modelTransform[row][0] = -part->modelTransform[row][0]; \
+    part->modelTransform[row][1] = -part->modelTransform[row][1]; \
+    part->modelTransform[row][2] = -part->modelTransform[row][2];
 
 #define PreFlipX(part) \
     NegateTransformRow(part, 1); \
@@ -106,7 +142,7 @@ namespace CBSPUserFlags {
     NegateTransformRow(part, 0); \
     NegateTransformRow(part, 2);
 #define PreFlipZ(part) \
-    NegateTransformRow(part, 0); \
+    NegateTransformRow( part, 0); \
     NegateTransformRow(part, 1);
 
 class CBSPPart {
@@ -125,16 +161,16 @@ public:
 
     // Handle				colorReplacements;	//	Table of colors that replace defaults.
 
-    Matrix itsTransform = {{0}}; //	Transforms to world coordinates. (model)
-    Matrix invGlobTransform = {{0}}; // (inverse model)
+    Matrix modelTransform = {{0}}; //	Transforms to world coordinates. (model)
+    Matrix invModelTransform = {{0}}; // (inverse model)
 
-    Matrix fullTransform = {{0}}; // modelview
-    Matrix invFullTransform = {{0}}; // inverse modelview
+    Matrix modelViewTransform = {{0}}; // modelview
+    Matrix invModelViewTransform = {{0}}; // inverse modelview
 
-    Fixed hither = 0;
-    Fixed yon = 0;
+    Fixed hither = FIX3(500); // 50 cm
+    Fixed yon = FIX(500);     // 500 m
     Fixed extraAmbient = 0;
-    Fixed privateAmbient = 0;
+    Fixed privateAmbient = -1;
 
     //	Bounding volumes:
     Vector sphereCenter = {0}; //	In view coordinates.
@@ -153,14 +189,9 @@ public:
     Fixed maxY = 0;
 
     //	members used during rendering:
-    uint16_t colorCount = 0;
-    uint32_t pointCount = 0;
-    uint32_t polyCount = 0;
-    int totalPoints = 0;
-    std::unique_ptr<ARGBColor[]> origColorTable;
-    std::unique_ptr<ARGBColor[]> currColorTable;
-    std::unique_ptr<Vector[]> pointTable;
-    std::unique_ptr<PolyRecord[]> polyTable;
+    std::vector<MaterialRecord> materialTable;
+    std::vector<FixedPoint> pointTable;
+    std::vector<PolyRecord> polyTable;
     std::unique_ptr<VertexData> vData;
 
     //	Lighting vectors in object space
@@ -170,14 +201,14 @@ public:
     //	Used by a CBSPWorld to score and sort objects:
     short worldIndex = 0;
     Boolean worldFlag = 0;
-    CBSPPart *nextTemp = 0; //	Used temporarily for linked lists.
+    CBSPPart *nextTemp = nullptr; //	Used temporarily for linked lists.
 
     Boolean invGlobDone = 0;
-    Boolean usesPrivateHither = 0;
-    Boolean usesPrivateYon = 0;
-    Boolean isTransparent = 0;
+    Boolean usesPrivateHither = false;
+    Boolean usesPrivateYon = false;
+    Boolean isTransparent = false;
     Boolean ignoreDepthTesting = false;
-    Boolean ignoreDirectionalLights = 0;
+    Boolean ignoreDirectionalLights = false;
     short userFlags = 0; //	Can be used for various flags by user.
 
     static CBSPPart *Create(short resId);
@@ -186,6 +217,11 @@ public:
 
     virtual void ReplaceColor(ARGBColor origColor, ARGBColor newColor);
     virtual void ReplaceAllColors(ARGBColor newColor);
+    virtual void ReplaceMaterialForColor(ARGBColor origColor, Material newMaterial);
+    virtual void ReplaceSpecularForColor(ARGBColor origColor, ARGBColor newSpecular);
+    virtual void ReplaceShininessForColor(ARGBColor origColor, uint8_t newShininess);
+    virtual void ReplaceMaterial(Material origMaterial, Material newMaterial);
+    virtual void ReplaceAllMaterials(Material newMaterial);
 
     virtual Boolean PrepareForRender();
 
@@ -208,11 +244,12 @@ public:
     virtual void RotateOneY(Fixed angle);
     virtual void RotateOneZ(Fixed angle);
 
-    virtual void CopyTransform(Matrix *m); //	itsTransform = m
-    virtual void ApplyMatrix(Matrix *m); //	itsTransform = itsTransform * m
-    virtual void PrependMatrix(Matrix *m); //	itsTransform = m * itsTransform
+    virtual void CopyTransform(Matrix *m); //	modelTransform = m
+    virtual void ApplyMatrix(Matrix *m); //	modelTransform = modelTransform * m
+    virtual void PrependMatrix(Matrix *m); //	modelTransform = m * modelTransform
     virtual Matrix *GetInverseTransform();
 
+    virtual bool Has3D() const;
     virtual bool HasAlpha() const;
     virtual void SetScale(Fixed x, Fixed y, Fixed z);
     virtual void ResetScale();

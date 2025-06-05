@@ -385,12 +385,12 @@ std::string CUDPComm::FormatConnectionTable(CompleteAddress *table) {
 }
 
 
-// the first part of the IP address "non-routable" (probably a double-NAT situation)
+// Is the first part of the IP address "non-routable" (maybe a double-NAT or a LAN)?
 // https://www.geeksforgeeks.org/non-routable-address-space/
 //   10.0.0.0/8 ( Range: 10.0.0.0 – 10.255.255.255 )
 //   172.16.0.0/12 ( Range: 172.16.0.0 – 172.31.255.255 )
 //   192.168.0.0/16 ( Range: 192.168.0.0 – 192.168.255.255 )
-bool CUDPComm::IsDoubleNAT(uint32_t host) {
+bool CUDPComm::IsLAN(uint32_t host) {
     ip_addr ipaddr = SDL_SwapBE32(host);
     uint8_t ip1 = (ipaddr >> 24);
     uint8_t ip2 = ((ipaddr >> 16) & 0xff);
@@ -412,7 +412,6 @@ void CUDPComm::SendConnectionTable() {
     PacketInfo *theDuplicate;
     CUDPConnection *conn;
     CompleteAddress *table;
-    bool sendConnTable = true;
 
     tablePack = GetPacket();
     if (tablePack) {
@@ -420,12 +419,10 @@ void CUDPComm::SendConnectionTable() {
         tablePack->command = kpPacketProtocolTOC;
 
         //	Fill in the table first:
-        // int i=0;
         for (conn = connections; conn; conn = conn->next) {
             if (conn->port && !conn->killed) {
-                // send external host/IP because we don't want to mess with our already connected IP (which might be the NAT)
+                // server sends external host/IP because we don't want to mess with our already connected IP (which might be a LAN address)
                 table->host = conn->ipAddrExt;
-                sendConnTable = sendConnTable && !IsDoubleNAT(conn->ipAddrExt);
                 table->port = conn->port;
             } else {
                 table->host = 0;
@@ -434,35 +431,40 @@ void CUDPComm::SendConnectionTable() {
             table++;
         }
 
-        if (sendConnTable) {
-            DBG_Log("login", "Sending Connection Table ...\n%s", FormatConnectionTable((CompleteAddress *)tablePack->dataBuffer).c_str());
+        DBG_Log("login", "Sending Connection Table ...\n%s", FormatConnectionTable((CompleteAddress *)tablePack->dataBuffer).c_str());
+        tablePack->dataLen = ((Ptr)table) - tablePack->dataBuffer;
 
-            tablePack->dataLen = ((Ptr)table) - tablePack->dataBuffer;
-
-            for (conn = connections; conn; conn = conn->next) {
-                if (conn->port && !conn->killed) {
-                    tablePack->p1 = conn->myId;
-                    tablePack->p2 = 0;
-                    tablePack->p3 = conn->seed;
-                    tablePack->distribution = 1 << (conn->myId);
-                    theDuplicate = DuplicatePacket(tablePack);
-                    WriteAndSignPacket(theDuplicate);
-                }
-            }
-
-            ReleasePacket(tablePack);
-
-            SendPacket(kdEveryone, kpPacketProtocolControl, udpCramInfo, cramData, 0, 0, NULL);
-
-        } else {
-                DBG_Log("login", "NOT sending connection table because server might be double-NAT (waiting for punch IP)\n");
-                // this lambda will be called after the punch server returns the external IP address
-                SetPunchAddressHandler([this](const IPaddress &addr) -> void {
-                    DBG_Log("login", "punch server returned address of %s\n", FormatAddr(addr).c_str());
-                    ReplaceMatchingNAT(addr);
-                });
+        for (conn = connections; conn; conn = conn->next) {
+            if (conn->port && !conn->killed) {
+                tablePack->p1 = conn->myId;
+                tablePack->p2 = 0;
+                tablePack->p3 = conn->seed;
+                tablePack->distribution = 1 << (conn->myId);
+                theDuplicate = DuplicatePacket(tablePack);
+                WriteAndSignPacket(theDuplicate);
             }
         }
+        ReleasePacket(tablePack);
+
+        DBG_Log("login+", "sending  kpPacketProtocolControl from %d with cramData = %d to kdEveryone\n", myId, cramData);
+        for (auto conn = connections; conn; conn = conn->next) {
+            if (conn->port && !conn->killed) {
+                DBG_Log("login+", "   kdEveryone includes %d (%s)\n", conn->myId, FormatHostPort(conn->ipAddrExt, conn->port).c_str());
+            }
+        }
+        SendPacket(kdEveryone, kpPacketProtocolControl, udpCramInfo, cramData, 0, 0, NULL);
+
+        if (gApplication->Boolean(kPunchHoles)) {
+            DBG_Log("login", "waiting for hole-punch\n");
+            // this lambda will be called after the punch server returns the external IP address
+            SetPunchAddressHandler([this](const IPaddress &addr) -> void {
+                DBG_Log("login", "punch server returned address of %s\n", FormatAddr(addr).c_str());
+                ReplaceMatchingNAT(addr);
+            });
+        } else {
+            SetPunchAddressHandler({});
+        }
+    }
 }
 
 // if a double NAT situation, replace IP address (192.x.x.x:PORT) in the connection table with
@@ -470,7 +472,7 @@ void CUDPComm::SendConnectionTable() {
 void CUDPComm::ReplaceMatchingNAT(const IPaddress &addr) {
     CUDPConnection *conn;
     for (conn = connections; conn; conn = conn->next) {
-        if (conn->port == addr.port && IsDoubleNAT(conn->ipAddrExt) && conn->ipAddrExt != addr.host) {
+        if (conn->port == addr.port && IsLAN(conn->ipAddrExt) && conn->ipAddrExt != addr.host) {
             // set external host to the host returned by punch and try sending the connection table again
             DBG_Log("login", "replacing NAT'd %s with punch server value %s\n",
                     FormatHostPort(conn->ipAddr, conn->port).c_str(),
@@ -626,7 +628,13 @@ Boolean CUDPComm::PacketHandler(PacketInfo *thePacket) {
         case kpPacketProtocolTOC:
             if (!isServing && thePacket->p3 == seed) {
                 ReadFromTOC(thePacket);
-                DBG_Log("login+", "sending kpPacketProtocolControl to kdEveryone with cramData = %d\n", cramData);
+                DBG_Log("login+", "sending  kpPacketProtocolControl from %d with cramData = %d to kdEveryone\n", myId, cramData);
+                for (auto conn = connections; conn; conn = conn->next) {
+                    if (conn->port && !conn->killed) {
+                        DBG_Log("login+", "   kdEveryone includes %d (%s)\n", conn->myId, FormatHostPort(conn->ipAddrExt, conn->port).c_str());
+                    }
+                }
+
                 SendPacket(kdEveryone, kpPacketProtocolControl, udpCramInfo, cramData, 0, 0, NULL);
             }
             break;
@@ -1004,6 +1012,9 @@ Boolean CUDPComm::AsyncWrite() {
             char *fp;
             uint8_t flags = 0;
 
+            // increment global packet counter
+            totalPacketsSent++;
+
             p = &thePacket->packet;
 
             *outData.uw++ = thePacket->serialNumber;
@@ -1371,9 +1382,6 @@ void CUDPComm::CreateServer() {
     OpenAvaraTCP();
 
     if (noErr == CreateStream(localPort)) {
-        IPaddress localAddr = {htonl(localIP), htons(localPort)};
-        RegisterPunchServer(localAddr);
-
         isConnected = true;
         isServing = true;
         myId = 0;
@@ -1396,7 +1404,9 @@ OSErr CUDPComm::ContactServer(IPaddress &serverAddr) {
         SDL_Event theEvent;
 
         // Before we "connect", notify the punch server so it can tell the host to open a hole to us
-        RequestPunch(serverAddr);
+        if (!CUDPComm::IsLAN(serverAddr.host)) {
+            RequestPunch(serverAddr);
+        }
 
         seed = static_cast<int32_t>(TickCount());
         connections->myId = 0;
@@ -1810,6 +1820,12 @@ OSErr CUDPComm::CreateStream(port_num streamPort) {
     ResolveHost(&addr, NULL, localPort);
     localIP = addr.host;
 
+    // Register servers AND clients with punch server
+    if (gApplication->Boolean(kPunchHoles)) {
+        IPaddress localAddr = {htonl(localIP), htons(localPort)};
+        RegisterPunchServer(localAddr);
+    }
+
     return noErr;
 }
 
@@ -1947,13 +1963,12 @@ void CUDPComm::Reconfigure() {
     */
 }
 
-long CUDPComm::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
+long CUDPComm::GetMaxRoundTrip(short distribution, float mult, short *slowPlayerId) {
     float maxTrip = 0;
     CUDPConnection *conn;
     // 1.3*stdev = 90.3% prob, 1.4=91.9%, 1.5=93.3%, 1.6=94.5
-    float mult = 1.5;
-    if (Debug::IsEnabled("rttx")) {
-        mult = Debug::GetValue("rttx") / 10.0;  // rttx=25 --> mult=2.5
+    if (mult < 0) {
+        mult = 1.5;  // default
     }
 
     for (conn = connections; conn; conn = conn->next) {
@@ -1962,19 +1977,21 @@ long CUDPComm::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
             // add in mult*stdev but max it at CLASSICFRAMETIME (so we don't add more than 0.5 to LT)
             // note: is this really a erlang distribution?  if so, what's the proper equation?
             float rtt = conn->meanRoundTripTime + std::min<float>(mult*stdev, (1.0*CLASSICFRAMECLOCK));
+            if (slowPlayerId != nullptr) {
+                DBG_Log("rtt", "RTT[%d] = %.1f(%.2f) + min(%.1f * %.1f(%.2f), 64(0.5)) = %.1f(%.2fLT)\n",
+                        conn->myId,
+                        conn->meanRoundTripTime*MSEC_PER_GET_CLOCK,
+                        conn->meanRoundTripTime*MSEC_PER_GET_CLOCK / (2*CLASSICFRAMETIME),
+                        mult,
+                        stdev*MSEC_PER_GET_CLOCK,
+                        stdev*MSEC_PER_GET_CLOCK / (2*CLASSICFRAMETIME),
+                        rtt*MSEC_PER_GET_CLOCK,
+                        rtt*MSEC_PER_GET_CLOCK / (2*CLASSICFRAMETIME));
+            }
             if (rtt > maxTrip) {
                 maxTrip = rtt;
                 if (slowPlayerId != nullptr) {
                     *slowPlayerId = conn->myId;
-                    DBG_Log("rtt", "RTT[%d] = %.1f(%.2f) + min(%.1f * %.1f(%.2f), 64(0.5)) = %.1f(%.2fLT)\n",
-                            conn->myId,
-                            conn->meanRoundTripTime*MSEC_PER_GET_CLOCK,
-                            conn->meanRoundTripTime*MSEC_PER_GET_CLOCK / (2*CLASSICFRAMETIME),
-                            mult,
-                            stdev*MSEC_PER_GET_CLOCK,
-                            stdev*MSEC_PER_GET_CLOCK / (2*CLASSICFRAMETIME),
-                            rtt*MSEC_PER_GET_CLOCK,
-                            rtt*MSEC_PER_GET_CLOCK / (2*CLASSICFRAMETIME));
                 }
             }
         }

@@ -22,6 +22,7 @@ class Tags {
 public:
     typedef std::pair<std::string, std::string> LevelURL;
     static const std::set<std::string>& GetTagsForLevel(LevelURL level);
+    static std::string TagsStringForLevel(LevelURL level);
     static std::string NormalizeTagName(std::string);
     static void AddTagToLevel(LevelURL level, std::string tag);
     static void DeleteTagFromLevel(LevelURL level, std::string tag);

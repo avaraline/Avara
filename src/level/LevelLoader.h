@@ -15,7 +15,10 @@
 
 #include "ARGBColor.h"
 #include "ColorManager.h"
+#include "Material.h"
 #include "Parser.h"
+
+class Material;
 
 enum {
     iDesignerName,
@@ -28,6 +31,7 @@ enum {
     iShape,
     iAltShape,
     iScale,
+    iDefaultYon,
     iYon,
     iWallYon,
     iHasFloor,
@@ -265,7 +269,13 @@ enum {
     iAmbient,
     iAmbientColor,
     iLightsTable,
-    iLightsTableEnd = iLightsTable + 15, //	a 4 x 4 table
+    iLightsTableEnd = iLightsTable + 23, //	a 4 x 6 table
+
+    //  Materials
+    iDefaultMaterialSpecular,
+    iDefaultMaterialShininess,
+    iBaseMaterialSpecular,
+    iBaseMaterialShininess,
 
     // Advanced weapons
     iGrenadePower,
@@ -328,8 +338,10 @@ bool LoadALF(std::string levelPath);
 void GetLastArcLocation(Fixed *theLoc);
 Fixed GetLastArcDirection();
 Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle);
-ARGBColor GetPixelColor();
-ARGBColor GetOtherPixelColor();
-ARGBColor GetTertiaryColor();
-ARGBColor GetQuaternaryColor();
+Material GetDefaultMaterial();
+Material GetBaseMaterial();
+Material GetPixelMaterial();
+Material GetOtherPixelMaterial();
+Material GetTertiaryMaterial();
+Material GetQuaternaryMaterial();
 Fixed GetLastOval(Fixed *theLoc);

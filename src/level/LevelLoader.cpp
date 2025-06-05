@@ -26,6 +26,16 @@
 #include <streambuf>
 #include <regex>
 
+#ifdef __has_include
+#  if __has_include(<optional>)                // Check for a standard library
+#    include <optional>
+#  elif __has_include(<experimental/optional>) // Check for an experimental version
+#    include <experimental/optional>           // Check if __has_include is present
+#  else                                        // Not found at all
+#     error "Missing <optional>"
+#  endif
+#endif
+
 #define POINTTOUNIT(pt) (pt * 20480 / 9)
 
 typedef struct {
@@ -47,13 +57,7 @@ static short lastDomeAngle;
 static short lastDomeSpan;
 static Fixed lastDomeRadius;
 
-static ARGBColor palette[4] = {
-    0,
-    0,
-    (*ColorManager::getMarkerColor(2)).WithA(0xff),
-    (*ColorManager::getMarkerColor(3)).WithA(0xff)
-};
-
+static Material palette[4];
 
 Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle) {
     theLoc[0] = lastDomeCenter.h;
@@ -65,19 +69,39 @@ Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle) {
     return lastDomeRadius;
 }
 
-ARGBColor GetPixelColor() {
+Material GetDefaultMaterial() {
+    Material defaultMaterial = Material();
+    std::optional<ARGBColor> specular = ReadColorVar(iDefaultMaterialSpecular);
+    if (specular) {
+        defaultMaterial = defaultMaterial.WithSpecular(*specular);
+    }
+    defaultMaterial = defaultMaterial.WithShininessVar(iDefaultMaterialShininess);
+    return defaultMaterial;
+}
+
+Material GetBaseMaterial() {
+    Material baseMaterial = Material();
+    std::optional<ARGBColor> specular = ReadColorVar(iBaseMaterialSpecular);
+    if (specular) {
+        baseMaterial = baseMaterial.WithSpecular(*specular);
+    }
+    baseMaterial = baseMaterial.WithShininessVar(iBaseMaterialShininess);
+    return baseMaterial;
+}
+
+Material GetPixelMaterial() {
     return palette[0];
 }
 
-ARGBColor GetOtherPixelColor() {
+Material GetOtherPixelMaterial() {
     return palette[1];
 }
 
-ARGBColor GetTertiaryColor() {
+Material GetTertiaryMaterial() {
     return palette[2];
 }
 
-ARGBColor GetQuaternaryColor() {
+Material GetQuaternaryMaterial() {
     return palette[3];
 }
 
@@ -124,6 +148,10 @@ struct ALFWalker: pugi::xml_tree_walker {
     std::string fix_attr(std::string attr) {
         if (attr.compare("color") == 0) {
             attr = "color.0";
+        } else if (attr.compare("material.specular") == 0) {
+            attr = "material.0.specular";
+        } else if (attr.compare("material.shininess") == 0) {
+            attr = "material.0.shininess";
         }
         // XML attributes can't have brackets, so we turn light.0.i into light[0].i
         std::regex subscript("\\.(\\d+)");
@@ -140,7 +168,8 @@ struct ALFWalker: pugi::xml_tree_walker {
             attr.compare("color[1]") == 0 ||
             attr.compare("color[2]") == 0 ||
             attr.compare("color[3]") == 0 ||
-            (attr.size() > 2 && attr.compare(attr.size() - 2, 2, ".c") == 0)
+            (attr.size() > 2 && attr.compare(attr.size() - 2, 2, ".c") == 0) ||
+            (attr.size() > 9 && attr.compare(attr.size() - 9, 9, ".specular") == 0)
         ) {
             if (value[0] == '$') {
                 return value.substr(1);
@@ -193,36 +222,110 @@ struct ALFWalker: pugi::xml_tree_walker {
         if (!node.attribute("color").empty()) {
             const std::optional<ARGBColor> color = ReadColorVar("color[0]");
             if (color) {
-                palette[0] = *color;
+                palette[0] = palette[0].WithColor(*color);
             }
         }
 
         if (!node.attribute("color.0").empty()) {
             const std::optional<ARGBColor> color = ReadColorVar("color[0]");
             if (color) {
-                palette[0] = *color;
+                palette[0] = palette[0].WithColor(*color);
             }
         }
 
         if (!node.attribute("color.1").empty()) {
             const std::optional<ARGBColor> color = ReadColorVar("color[1]");
             if (color) {
-                palette[1] = *color;
+                palette[1] = palette[1].WithColor(*color);
             }
         }
 
         if (!node.attribute("color.2").empty()) {
             const std::optional<ARGBColor> color = ReadColorVar("color[2]");
             if (color) {
-                palette[2] = *color;
+                palette[2] = palette[2].WithColor(*color);
             }
         }
 
         if (!node.attribute("color.3").empty()) {
             const std::optional<ARGBColor> color = ReadColorVar("color[3]");
             if (color) {
-                palette[3] = *color;
+                palette[3] = palette[3].WithColor(*color);
             }
+        }
+        
+        if (!node.attribute("baseMaterial.specular").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar(iBaseMaterialSpecular);
+            if (color) {
+                // When baseMaterial properties are set, apply it to all mats.
+                palette[0] = palette[0].WithSpecular(*color);
+                palette[1] = palette[1].WithSpecular(*color);
+                palette[2] = palette[2].WithSpecular(*color);
+                palette[3] = palette[3].WithSpecular(*color);
+            }
+        }
+        
+        if (!node.attribute("baseMaterial.shininess").empty()) {
+            // When baseMaterial properties are set, apply it to all mats.
+            palette[0] = palette[0].WithShininessVar(iBaseMaterialShininess);
+            palette[1] = palette[1].WithShininessVar(iBaseMaterialShininess);
+            palette[2] = palette[2].WithShininessVar(iBaseMaterialShininess);
+            palette[3] = palette[3].WithShininessVar(iBaseMaterialShininess);
+        }
+        
+        if (!node.attribute("material.specular").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar("material[0].specular");
+            if (color) {
+                palette[0] = palette[0].WithSpecular(*color);
+            }
+        }
+
+        if (!node.attribute("material.0.specular").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar("material[0].specular");
+            if (color) {
+                palette[0] = palette[0].WithSpecular(*color);
+            }
+        }
+
+        if (!node.attribute("material.1.specular").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar("material[1].specular");
+            if (color) {
+                palette[1] = palette[1].WithSpecular(*color);
+            }
+        }
+
+        if (!node.attribute("material.2.specular").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar("material[2].specular");
+            if (color) {
+                palette[2] = palette[2].WithSpecular(*color);
+            }
+        }
+
+        if (!node.attribute("material.3.specular").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar("material[3].specular");
+            if (color) {
+                palette[3] = palette[3].WithSpecular(*color);
+            }
+        }
+        
+        if (!node.attribute("material.shininess").empty()) {
+            palette[0] = palette[0].WithShininessVar("material[0].shininess");
+        }
+        
+        if (!node.attribute("material.0.shininess").empty()) {
+            palette[0] = palette[0].WithShininessVar("material[0].shininess");
+        }
+        
+        if (!node.attribute("material.1.shininess").empty()) {
+            palette[1] = palette[1].WithShininessVar("material[1].shininess");
+        }
+        
+        if (!node.attribute("material.2.shininess").empty()) {
+            palette[2] = palette[2].WithShininessVar("material[2].shininess");
+        }
+        
+        if (!node.attribute("material.3.shininess").empty()) {
+            palette[3] = palette[3].WithShininessVar("material[3].shininess");
         }
 
         if (!node.attribute("x").empty() && !node.attribute("z").empty() &&
@@ -311,7 +414,7 @@ struct ALFWalker: pugi::xml_tree_walker {
         }
         std::string result = script.str();
         if (wrote && result.length() > 0)
-        RunThis(result);
+            RunThis(result);
     }
 
     void handle_script(pugi::xml_node& node) {
@@ -319,14 +422,27 @@ struct ALFWalker: pugi::xml_tree_walker {
     }
 
     void handle_wall(pugi::xml_node& node) {
+        Fixed y_alt = 0;
         std::string y = node.attribute("y").value();
         if (!y.empty()) {
-            std::stringstream script;
-            script << "wa = " << y << "\n";
-            RunThis(script.str());
+            try {
+                double yvalue = std::stod(y);
+                y_alt = ToFixed(yvalue);
+            }
+            catch (const std::invalid_argument& e) {
+                // temporary script to evaluate expression
+                std::stringstream script;
+                std::string key = "privateAlf.tmpY";
+                script << key << " = " << y << "\n";
+                RunThis(script.str());
+                auto index = IndexForEntry(key.c_str());
+                // immediately evaluate temporary variable
+                y_alt = ToFixed(EvalVariable(index + firstVariable, true));
+            }
+            catch (const std::out_of_range& e) { }
         }
         CWallActor *theWall = new CWallActor;
-        theWall->MakeWallFromRect(&gLastBoxRect, gLastBoxRounding, 0, true);
+        theWall->MakeWallFromRect(&gLastBoxRect, gLastBoxRounding, y_alt, 0, true);
     }
 
     void handle_include(pugi::xml_node& node) {
@@ -374,6 +490,10 @@ private:
 bool LoadALF(std::string levelPath) {
     gRenderer->ResetLights();
     InitParser();
+    palette[0] = GetDefaultMaterial();
+    palette[1] = GetDefaultMaterial();
+    palette[2] = Material((*ColorManager::getMarkerColor(2)).WithA(0xff));
+    palette[3] = Material((*ColorManager::getMarkerColor(3)).WithA(0xff));
 
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file(levelPath.c_str());

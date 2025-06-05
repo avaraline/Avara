@@ -28,12 +28,9 @@ void CCommManager::InitializePacketQueues(int numPackets, std::size_t pSize) {
     packetSize = pSize;
     myId = 0; //	Default to server.
 
-    freeQ.qHead = 0;
-    freeQ.qTail = 0;
-
-    inQ.qHead = 0;
-    inQ.qTail = 0;
-
+    InitQueue(&freeQ);
+    InitQueue(&inQ);
+    
     firstReceivers[0] = NULL;
     firstReceivers[1] = NULL;
 
@@ -56,9 +53,6 @@ void CCommManager::AllocatePacketBuffers(int numPackets) {
 **	Release allocated packet buffer storage and then dispose of self.
 */
 void CCommManager::Dispose() {
-    // SDL_Log("  - called Dispose with &inQ = %lx, &freeQ = %lx\n", &inQ, &freeQ);
-    DisposeQueue(&freeQ);
-    DisposeQueue(&inQ);
 }
 
 /*
@@ -183,7 +177,7 @@ PacketInfo* CCommManager::GetPacket() {
             Dequeue((QElemPtr)thePacket, &freeQ);
             break;
         } else {
-            DBG_Log("q", "CCommManager::GetPacket myId=%d, allocating %d more packets, inQ size = %zu\n", myId, FRESHALLOCSIZE, QueueSize(&inQ));
+            DBG_Log("q", "CCommManager::GetPacket myId=%d, allocating %d more packets, inQ size = %zu\n", myId, FRESHALLOCSIZE, inQ.qSize);
             // no packets left? dynamically increase the freeQ then try again
             AllocatePacketBuffers(FRESHALLOCSIZE);
         }
@@ -331,7 +325,7 @@ Boolean CCommManager::ReconfigureAvailable() {
 
 void CCommManager::Reconfigure() {}
 
-long CCommManager::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
+long CCommManager::GetMaxRoundTrip(short distribution, float stdMult, short *slowPlayerId) {
     return 0; //	Local net.
 }
 float CCommManager::GetMaxMeanSendCount(short distribution) {
@@ -339,4 +333,8 @@ float CCommManager::GetMaxMeanSendCount(short distribution) {
 }
 float CCommManager::GetMaxMeanReceiveCount(short distribution) {
     return 0; //	Local net.
+}
+
+const RolloverCounter<uint32_t>& CCommManager::TotalPacketsSent() {
+    return totalPacketsSent;
 }

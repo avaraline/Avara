@@ -3,8 +3,6 @@
 
 #include "ColorManager.h"
 #include "Preferences.h"
-#include "Resource.h"
-#include "Preferences.h"
 #include "Types.h"
 #include "AvaraFonts.h"
 
@@ -30,19 +28,24 @@ static float get_pixel_ratio(SDL_Window *window) {
 json CApplication::_prefs = ReadPrefs();
 json CApplication::_defaultPrefs = ReadDefaultPrefs();
 
+#if defined(AVARA_GLES)
+    #define AVARA_GL_MAJOR 3
+    #define AVARA_GL_MINOR 0
+#else
+    #define AVARA_GL_MAJOR 3
+    #define AVARA_GL_MINOR 3
+#endif
+
 CApplication::CApplication(std::string the_title) {
     window_title = the_title;
     gApplication = this;
-
-    auto glMajor = 3;
-    auto glMinor = 3;
 
     auto colorBits = 8;
     auto depthBits = 24;
     auto stencilBits = 8;
 
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, glMajor);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, glMinor);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, AVARA_GL_MAJOR);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, AVARA_GL_MINOR);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
     SDL_GL_SetAttribute(SDL_GL_RED_SIZE, colorBits);
@@ -74,8 +77,8 @@ CApplication::CApplication(std::string the_title) {
     gl_context = SDL_GL_CreateContext(window);
     if (!window || !gl_context) {
         SDL_Log("Could not create an OpenGL %s.%s context", 
-            std::to_string(glMajor).c_str(),
-            std::to_string(glMinor).c_str());
+            std::to_string(AVARA_GL_MAJOR).c_str(),
+            std::to_string(AVARA_GL_MINOR).c_str());
         return;
     }
 
@@ -281,6 +284,7 @@ bool CApplication::Update(const std::string name, std::string &value) {
         // this will easily cause a crash when reading the json
         if (_prefs[name].type_name() == updatePref[name].type_name()) {
             _prefs.update(updatePref);
+            PrefChanged(name);
             WritePrefs(_prefs);
         } else {
             SDL_Log("Type mismatch. User added type '%s' did not match existing type '%s'. Prefs were not updated.", _prefs[name].type_name(), updatePref[name].type_name());

@@ -90,7 +90,7 @@
   <Teleporter y="5" status="true" start="@Orange" stop="@Blue" group="@Rgroup" color="#ff4c00" color.1="#000000" cx="48.81944444444445" cz="72.5" angle="0" />
   <set designer="Jason &quot;&quot;DuKK&quot;&quot; Fowler &lt;joebob@a.crl.com&gt;" information="You have discovered a secret military &#10;testing site.  Unfortunately, your Hector &#10;cannot carry any kind of weaponry powerful &#10;enough to do any good here.  Leave this &#10;area immediately." hull.0="mediumHull" hull.2="mediumHull" />
   <Text in="@start" showEveryone="true" text="Light and heavy hulls are not available for this 
-mission." cx="48.81944444444445" cz="72.5" r="1.875" />
+mission." cx="128.75" cz="132.5" r="1.875" />
   <Incarnator stop="@start" y="0" cx="128.75" cz="112.5" angle="180" />
   <Incarnator stop="@start" y="3" cx="128.75" cz="112.5" angle="180" />
   <Incarnator stop="@start" y="6" cx="128.75" cz="112.5" angle="180" />

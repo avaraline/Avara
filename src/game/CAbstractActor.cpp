@@ -28,14 +28,22 @@ void CAbstractActor::LoadPart(short ind, short resId) {
         partList[ind]->usesPrivateYon = true;
         partList[ind]->yon = partYon;
     }
+    
+    if (IsGeometryStatic()) {
+        partList[ind]->userFlags |= CBSPUserFlags::kIsStatic;
+    }
 }
 
-void CAbstractActor::LoadPartWithColors(short ind, short resId) {
+void CAbstractActor::LoadPartWithMaterials(short ind, short resId) {
     LoadPart(ind, resId);
-    partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(0), GetPixelColor());
-    partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(1), GetOtherPixelColor());
-    partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(2), GetTertiaryColor());
-    partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(3), GetQuaternaryColor());
+    partList[ind]->ReplaceMaterialForColor(*ColorManager::getMarkerColor(0), GetPixelMaterial());
+    partList[ind]->ReplaceMaterialForColor(*ColorManager::getMarkerColor(1), GetOtherPixelMaterial());
+    partList[ind]->ReplaceMaterialForColor(*ColorManager::getMarkerColor(2), GetTertiaryMaterial());
+    partList[ind]->ReplaceMaterialForColor(*ColorManager::getMarkerColor(3), GetQuaternaryMaterial());
+}
+
+bool CAbstractActor::IsGeometryStatic() {
+    return false;
 }
 
 void CAbstractActor::InitLocationLinks() {
@@ -297,7 +305,7 @@ void CAbstractActor::Shatter(short firstSliverType,
 
     while ((thePart = *partInd++)) {
         if (!thePart->isTransparent)
-            totalPolys += thePart->polyCount;
+            totalPolys += thePart->polyTable.size();
     }
 
     if (totalPolys) {
@@ -318,7 +326,7 @@ void CAbstractActor::Shatter(short firstSliverType,
             // FSqrt(thePart->enclosureRadius));
 
             if (!thePart->isTransparent) {
-                counter += thePart->polyCount;
+                counter += thePart->polyTable.size();
                 for (i = 0; i < sizesCount; i++) {
                     if (sCounts[i] && sLives[i]) {
                         short share;
@@ -353,8 +361,8 @@ void CAbstractActor::Blast() {
 
         for (i = 0; i < partCount; i++) {
             thePart = partList[i];
-            if ((!thePart->isTransparent) && thePart->polyCount > maxCount) {
-                maxCount = thePart->polyCount;
+            if ((!thePart->isTransparent) && thePart->polyTable.size() > maxCount) {
+                maxCount = thePart->polyTable.size();
                 maxPart = thePart;
             }
         }
@@ -431,7 +439,12 @@ CAbstractActor *CAbstractActor::EndScript() {
     teamMask = 1 << teamColor;
 
     partScale = ReadFixedVar(iScale);
-    partYon = ReadFixedVar(iYon);
+    
+    Fixed defaultYon = ReadFixedVar(iDefaultYon);
+    Fixed activeYon = ReadFixedVar(iYon);
+    partYon = (activeYon != defaultYon)
+        ? activeYon
+        : 0;
 
     traction = ReadFixedVar(iTraction);
     friction = ReadFixedVar(iFriction);
@@ -495,7 +508,8 @@ void CAbstractActor::BuildPartProximityList(Fixed *origin, Fixed range, MaskType
 
             while (head->next) {
                 anActor = head->me;
-                if (anActor->searchCount != searchCount) {
+                if (anActor->isInGame &&
+                    anActor->searchCount != searchCount) {
                     anActor->searchCount = searchCount;
                     if (anActor->maskBits & filterMask) {
                         for (thePart = anActor->partList; *thePart; thePart++) {

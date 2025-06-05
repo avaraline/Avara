@@ -21,11 +21,12 @@ CWorldShader::CWorldShader() {
 void CWorldShader::Reset() {
     lowSkyColor = DEFAULT_LOW_SKY_COLOR;
     highSkyColor = DEFAULT_HIGH_SKY_COLOR;
-    groundColor = DEFAULT_GROUND_COLOR;
+    groundMaterial = Material(DEFAULT_GROUND_COLOR);
     skyShadeCount = DEFAULT_SKY_SHADE_COUNT;
 
     lowSkyAltitude = FIX(0);
-    highSkyAltitude = FIX(500);
+    highSkyAltitude = FIX(1000);
+    hazeDensity = 0.0f;
 }
 
 #define GROUNDOFFSET FIX(-2)
@@ -60,7 +61,7 @@ void CWorldShader::Apply() {
 
     SetPolyWorld(&gCurrentGame->itsPolyWorld);
     if(numShades == 0)
-    {	SetPolyWorldBackground(FindPolyColor(groundColor));
+    {	SetPolyWorldBackground(FindPolyColor(groundMaterial.GetColor()));
     }
     else
     if(numShades > 1)
@@ -73,7 +74,7 @@ void CWorldShader::Apply() {
     colors = shadeColors;
     alts = altitudes;
 
-    *colors++ = FindPolyColor(groundColor);
+    *colors++ = FindPolyColor(groundMaterial.GetColor());
     *alts++ = GROUNDOFFSET;
 
     tot = numShades - 1;

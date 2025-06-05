@@ -73,31 +73,6 @@ CBSPPart **CBSPWorldImpl::GetVisiblePartListPointer() {
     return visibleP;
 }
 
-void CBSPWorldImpl::OverheadPoint(Fixed *c, Fixed *e) {
-    Fixed minX = FIX(9999),
-          maxX = FIX(-9999),
-          minZ = FIX(9999),
-          maxZ = FIX(-9999),
-          maxY = 0;
-    for (int i = 0; i < partCount; i++) {
-        Fixed *t = (*partList)[i]->itsTransform[3];
-        minX = t[0] < minX ? t[0] : minX;
-        maxX = t[0] > maxX ? t[0] : maxX;
-        minZ = t[2] < minZ ? t[2] : minZ;
-        maxZ = t[2] > maxZ ? t[2] : maxZ;
-        maxY = t[1] > maxY ? t[1] : maxY;
-    }
-    c[0] = FDiv(minX + maxX, FIX(2));
-    c[1] = maxY;
-    c[2] = FDiv(minZ + maxZ, FIX(2));
-    e[0] = minX;
-    e[1] = maxX;
-    e[2] = 0;
-    e[3] = maxY;
-    e[4] = minZ;
-    e[5] = maxZ;
-}
-
 void CBSPWorldImpl::PrepareForRender() {
     int i;
     CBSPPart **sp, **sd;
@@ -302,4 +277,14 @@ void CBSPWorldImpl::VisibilitySort(CBSPPart **parts, short overlapCount) {
         *--parts = listStart;
         listStart = listStart->nextTemp;
     } while (listStart);
+}
+
+std::unique_ptr<CCompoundShape> CBSPWorldImpl::Squash()
+{
+    auto compoundShape = std::make_unique<CCompoundShape>();
+    compoundShape->Reserve(*this);
+    for (size_t i = 0; i < partCount; i++) {
+        compoundShape->Append(*(*partList)[i]);
+    }
+    return compoundShape;
 }

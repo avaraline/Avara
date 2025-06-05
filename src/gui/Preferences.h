@@ -13,6 +13,7 @@ using json = nlohmann::json;
 // #define kJoystickModeTag "joystickMode"
 #define kInvertYAxisTag "invertYAxis"
 #define kLatencyToleranceTag "latencyTolerance"
+#define kLatencyToleranceMinTag "latencyToleranceMin"
 #define kHullTypeTag "hull"
 #define kFrameTimeTag "frameTime"
 #define kThrottle "throttle"
@@ -43,6 +44,8 @@ using json = nlohmann::json;
 #define kFullScreenTag "fullscreen"
 #define kFOV "fov"
 #define kFXAA "fxaa"
+#define kDither "dither"
+#define kSpecular "showSpecular"
 #define kUseLegacyRenderer "useLegacyRenderer"
 
 // Other graphics settings
@@ -87,13 +90,19 @@ using json = nlohmann::json;
 #define kPunchServerPort "udpPunchServerPort"
 #define kPunchHoles "udpHolePunch"
 
-// Levels
-#define kRecentSets "recentSets"
-#define kRecentLevels "recentLevels"
-
 // Sound
 #define kIgnoreCustomGoodySound "ignoreCustomGoodySound"
 #define kSoundVolume "soundVolume"
+
+// Controller
+#define kControllerExponent "controllerExponent"
+#define kControllerMax "controllerMax"
+#define kControllerPollRate "controllerPollRate"
+#define kControllerX "controllerX"
+#define kControllerY "controllerY"
+#define kControllerStickThreshold "controllerStickThreshold"
+#define kControllerTriggerThreshold "controllerTriggerThreshold"
+#define kControllerDamperMillis "controllerDamperMillis"
 
 // other
 #define kGoodGamePhrases "ggs"
@@ -106,7 +115,8 @@ static json defaultPrefs = {
     // {kJoystickModeTag, false},
     {kInvertYAxisTag, false},
     {kMouseSensitivityTag, 0},
-    {kLatencyToleranceTag, 2.5},  // 2.5 = max for auto latency
+    {kLatencyToleranceTag, 2.5},     // default max for auto latency
+    {kLatencyToleranceMinTag, 0.5},  // default min for auto latency
     {kHullTypeTag, 0}, // 0 = light, 1 = medium, 2 = heavy
     {kServerOptionsTag, 129}, // 1 = allow load, 128 = auto latency
     {kDefaultUDPPort, 19567},
@@ -152,6 +162,8 @@ static json defaultPrefs = {
     {kFullScreenTag, false},
     {kFOV, 50.0},
     {kFXAA, true},
+    {kDither, true},
+    {kSpecular, true},
     {kColorBlindMode, 0},
     {kHUDColor, "#03f5f5"},
     {kHUDPositiveColor, "#51e87e"},
@@ -190,8 +202,6 @@ static json defaultPrefs = {
     {kPunchServerAddress, "tracker.avara.gg"},
     {kPunchServerPort, 19555},
     {kPunchHoles, true},
-    {kRecentSets, {}},
-    {kRecentLevels, {}},
     {kSoundVolume, 100},
     {kIgnoreCustomColorsTag, false},
     {kIgnoreLevelCustomColorsTag, false},
@@ -200,7 +210,15 @@ static json defaultPrefs = {
     {kGoodGamePhrases, {}},
     {kShowElo, false},
     {kUseLegacyRenderer, false},
-    {kDefaultArgs, "-/ '/rand avara aa emo ex #fav -#bad'"}
+    {kDefaultArgs, "-/ '/rand avara aa emo ex crook #fav -#bad'"},
+    {kControllerPollRate, 60},
+    {kControllerExponent, 2.0},
+    {kControllerMax, 40},
+    {kControllerX, 1.0},
+    {kControllerY, 1.0},
+    {kControllerStickThreshold, 0.6},
+    {kControllerTriggerThreshold, 0.5},
+    {kControllerDamperMillis, 500.0}
 };
 
 

@@ -78,3 +78,8 @@ void CGlowActors::FrameAction() {
     DBG_Log("frag", "fn=%u, FRandSeed=%11d, locsum=%8d, Actor=%s",
             gCurrentGame->frameNumber, (Fixed)FRandSeed, locsum, typeid(*this).name());
 }
+
+bool CGlowActors::IsGeometryStatic()
+{
+    return !canGlow && shields < 0;
+}

@@ -34,6 +34,7 @@
 #include <utf8.h>
 
 CPlayerManager* CPlayerManager::theLocalPlayer;
+CPlayerManager* CPlayerManager::theServerPlayer;
 
 void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManager *aNetManager) {
     // Rect	*mainScreenRect;
@@ -112,6 +113,20 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
     }
     itsGame->itsApp->Set(kKeyboardMappingTag, newMap);
 
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_DPAD_UP] = (1 << kfuScoutControl) | (1 << kfuForward);
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_DPAD_DOWN] = (1 << kfuScoutControl) | (1 << kfuReverse);
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_DPAD_LEFT] = (1 << kfuScoutControl) | (1 << kfuLeft);
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_DPAD_RIGHT] = (1 << kfuScoutControl) | (1 << kfuRight);
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_A] = 1 << kfuJump;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_B] = (1 << kfuScoutControl) | (1 << kfuAimForward);
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_X] = 1 << kfuBoostEnergy;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_Y] = 1 << kfuScoutView;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_RIGHTSTICK] = 1 << kfuAimForward;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_LEFTSHOULDER] = 1 << kfuLoadMissile;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] = 1 << kfuLoadGrenade;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_BACK] = 1 << kfuAbortGame;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_START] = 1 << kfuPauseGame;
+
     // mainScreenRect = &(*GetMainDevice())->gdRect;
     // mouseCenterPosition.h = (mainScreenRect->left + mainScreenRect->right) / 2;
     // mouseCenterPosition.v = (mainScreenRect->top + mainScreenRect->bottom) / 2;
@@ -129,6 +144,9 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
 
     NetDisconnect();
     SetLocal();
+    if (slot == 0) {
+        CPlayerManagerImpl::theServerPlayer = this;
+    }
 
     prevKeyboardActive = keyboardActive;
 }
@@ -210,9 +228,55 @@ uint32_t CPlayerManagerImpl::GetKeyBits() {
     return keys;
 }
 
+short AxisMovement(ControllerAxis &axis, float exp, float max, float mult) {
+    return axis.value * abs(pow(axis.value, exp - 1.0f)) * max * mult;
+}
+
+void CPlayerManagerImpl::HandleAxis(float value, float threshold, int bit) {
+    bool down = (threshold < 0) ? (value <= threshold) : (value >= threshold);
+    if (down) {
+        if (!TESTFUNC(bit, keysHeld) && !TESTFUNC(bit, keysDown)) HandleKeyDown(1 << bit);
+    }
+    else {
+        if (TESTFUNC(bit, keysHeld) || TESTFUNC(bit, keysDown) || TESTFUNC(bit, dupKeysHeld)) HandleKeyUp(1 << bit);
+    }
+}
+
 void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
     // Events coming in are for the next frame to be sent.
     // FrameFunction *ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & (itsGame->frameNumber + 1)];
+
+    if (event.type == itsGame->itsApp->ControllerEventType()) {
+        ControllerSticks *sticks = (ControllerSticks *)event.user.data1;
+        ControllerTriggers *triggers = (ControllerTriggers *)event.user.data2;
+
+        float damper = controllerDamper > 0 ? std::clamp(float(sticks->right.elapsed) / controllerDamper, 0.0f, 1.0f) : 1.0f;
+        mouseX += AxisMovement(sticks->right.x,
+                               controllerCurveExp,
+                               controllerMaxMove,
+                               controllerMultiplyX * damper);
+        mouseY += AxisMovement(sticks->right.y,
+                               controllerCurveExp,
+                               controllerMaxMove,
+                               controllerMultiplyY * damper);
+
+        HandleAxis(sticks->left.x.value, -controllerStickThreshold, kfuLeft);
+        HandleAxis(sticks->left.x.value, controllerStickThreshold, kfuRight);
+        HandleAxis(sticks->left.y.value, -controllerStickThreshold, kfuForward);
+        HandleAxis(sticks->left.y.value, controllerStickThreshold, kfuReverse);
+
+        if (triggers->right.t.value >= controllerTriggerThreshold) {
+            if (triggers->right.t.last < controllerTriggerThreshold) buttonStatus |= kbuWentDown;
+            buttonStatus |= kbuIsDown;
+        }
+        else {
+            if (triggers->right.t.last >= controllerTriggerThreshold) buttonStatus |= kbuWentUp;
+            buttonStatus &= ~kbuIsDown;
+        }
+
+        HandleAxis(triggers->left.t.value, controllerTriggerThreshold, kfuLoadGrenade);
+        HandleAxis(triggers->left.t.value, controllerTriggerThreshold, kfuFireWeapon);
+    }
 
     switch (event.type) {
         case SDL_KEYDOWN:
@@ -254,6 +318,12 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
             break;
         case SDL_KEYUP:
             HandleKeyUp(keyMap[event.key.keysym.scancode]);
+            break;
+        case SDL_CONTROLLERBUTTONDOWN:
+            HandleKeyDown(controllerButtonMap[event.cbutton.button]);
+            break;
+        case SDL_CONTROLLERBUTTONUP:
+            HandleKeyUp(controllerButtonMap[event.cbutton.button]);
             break;
         case SDL_MOUSEBUTTONDOWN:
             if(event.button.button == SDL_BUTTON_RIGHT) {
@@ -455,24 +525,32 @@ void CPlayerManagerImpl::ResendFrame(FrameNumber theFrame, short requesterId, sh
 
 void CPlayerManagerImpl::ResumeGame() {
     short i;
-
+    
     for (i = 0; i < FUNCTIONBUFFERS; i++) {
         SDL_memset(&frameFuncs[i], 0, sizeof(FrameFunction));
         frameFuncs[i].validFrame = -1;
     }
-
+    
     bufferStart = 0;
     bufferEnd = 0;
     keyboardActive = false;
-
+    
     oldHeld = 0;
     oldModifiers = 0;
     oldButton = 0;
     SetLocal();
-
+    
     keysDown = keysUp = keysHeld = dupKeysHeld = 0;
     mouseX = mouseY = 0;
     buttonStatus = 0;
+    
+    controllerCurveExp = itsGame->itsApp->Number(kControllerExponent);
+    controllerMaxMove = float(itsGame->itsApp->Number(kControllerMax));
+    controllerMultiplyX = itsGame->itsApp->Get(kControllerX);
+    controllerMultiplyY = itsGame->itsApp->Get(kControllerY);
+    controllerStickThreshold = itsGame->itsApp->Get(kControllerStickThreshold);
+    controllerTriggerThreshold = itsGame->itsApp->Get(kControllerTriggerThreshold);
+    controllerDamper = itsGame->itsApp->Get(kControllerDamperMillis);
 }
 
 void CPlayerManagerImpl::ProtocolHandler(struct PacketInfo *thePacket) {
@@ -532,6 +610,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
         long firstTime = askAgainTime = TickCount();
         long quickTick = firstTime;
         long giveUpTime = firstTime + MSEC_TO_TICK_COUNT(15000);
+        uint32_t time0 = SDL_GetTicks();
 
         short askCount = 0;
         LoadingState oldStatus = loadingStatus;
@@ -552,10 +631,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                 theNetManager->HandleEvent(event);
             }
 
-            if (itsGame->canPreSend && (long)(SDL_GetTicks() - itsGame->nextScheduledFrame) >= 0) {
-                itsGame->canPreSend = false;
-                theNetManager->FrameAction();
-            }
+            itsGame->PreSendFrameActions();
 
             quickTick = TickCount();
 
@@ -563,7 +639,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                 SendResendRequest(askCount++);
                 // if we get the packet from the Resend above, it might be stuck on the end of the readQ waiting for
                 // a lost packet, so skip 1 lost packet every other time until it frees up the queue again
-                if (askCount % 2 == 1) {
+                if (askCount % 2 == 0) {
                     theNetManager->SkipLostPackets(1 << slot);
                 }
 
@@ -573,7 +649,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                     DBG_Log("resend", "Waiting for '%s' to resend frame #%u\n", GetPlayerName().c_str(), itsGame->frameNumber);
                     loadingStatus = kLNetDelayed;
                     itsGame->itsApp->ParamLine(kmWaitingForPlayer, MsgAlignment::Center, playerName);
-                    itsGame->itsApp->drawContents();  // force render now so message shows up
+                    itsGame->itsApp->RenderContents();  // force render now so message shows up
                     // TODO: waiting for player dialog
                     // InitCursor();
                     // gApplication->SetCommandParams(STATUSSTRINGSLISTID, kmWaitingPlayers, true, 0);
@@ -589,6 +665,9 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                 itsGame->statusRequest = kAbortStatus;
                 break;
             }
+
+            // sleep 1% of frameTime (0.16msec) to reduce CPU load while we wait
+            std::this_thread::sleep_for(std::chrono::microseconds(itsGame->frameTime*10));
         }
 
         // give up after newer frames appear in the frameFuncs buffer because that
@@ -608,13 +687,20 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
             // HideCursor();
         }
 
-        if (quickTick != firstTime) {
-            if (quickTick > firstTime + 3 || itsGame->longWait) {
+        uint32_t waitTime = SDL_GetTicks() - time0;
+        if (waitTime >= itsGame->frameTime) {
+            if (waitTime > 3*itsGame->frameTime || itsGame->longWait) {
                 itsGame->veryLongWait = true;
             }
-
+//            SDL_Log("fn=%d, waitTime = %u\n", itsGame->frameNumber, waitTime);
             itsGame->longWait = true;
         }
+
+        if (frameFuncs[i].validFrame == itsGame->frameNumber) {
+            DBG_Log("presend", "fn=%d, <-GOT pkt, ts=#%d, N=%d, ahead=%d, start=%d time=%d nSF=%d\n", itsGame->frameNumber, itsGame->topSentFrame, itsGame->preSendCount, itsGame->topSentFrame - itsGame->frameNumber, itsGame->frameStart, SDL_GetTicks(), itsGame->nextScheduledFrame);
+        }
+    } else if (!IsLocalPlayer()) {
+        DBG_Log("presend+", "fn=%d, NO waiting    #%d, N=%d, ahead=%d, start=%d time=%d nSF=%d\n", itsGame->frameNumber, itsGame->topSentFrame, itsGame->preSendCount, itsGame->topSentFrame - itsGame->frameNumber, itsGame->frameStart, SDL_GetTicks(), itsGame->nextScheduledFrame);
     }
 
     return &frameFuncs[i].ft;
@@ -812,9 +898,7 @@ void CPlayerManagerImpl::RosterMessageText(short len, const char *c) {
                 break;
             case 13:
                 // ¬
-
-                // TODO: is this necessary post nanogui?
-                //((CAvaraAppImpl*)itsGame->itsApp)->rosterWindow->NewChatLine(playerName, GetChatLine());
+                //((CAvaraAppImpl*)itsGame->itsApp)->rosterWindow->NewChatLine(playerName, slot, chatText);
 
                 lineBuffer.insert(lineBuffer.end(), lThing_utf8, lThing_utf8 + strlen(lThing_utf8));
                 // FlushMessageText(true);
@@ -850,13 +934,16 @@ void CPlayerManagerImpl::RosterMessageText(short len, const char *c) {
 
 std::string CPlayerManagerImpl::GetChatLine() {
     std::string theChat(lineBuffer.begin(), lineBuffer.end());
-    std::size_t found = theChat.find_last_of("\xC2\xAC", theChat.length() - 2);
+    std::size_t found = theChat.rfind("\xC2\xAC", theChat.length() - 3);
     if(found == std::string::npos)
         found = 0;
     else
         found += 2;
 
-    return theChat.substr(found);
+    auto line = theChat.substr(found);
+    // usually there's a leading space character because --> "¬ ", so strip that
+    if (line[0] == ' ') line.erase(0, 1);
+    return line;
 }
 
 std::string CPlayerManagerImpl::GetChatString(int maxChars) {
@@ -961,7 +1048,7 @@ void CPlayerManagerImpl::SetPosition(short pos) {
 void CPlayerManagerImpl::LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag) {
     short oldStatus;
 
-    if (loadingStatus != kLNotConnected && loadingStatus != kLActive && presence != kzAway)
+    if (loadingStatus != kLNotConnected && loadingStatus != kLActive)
     {
         oldStatus = loadingStatus;
 
@@ -1113,12 +1200,13 @@ void CPlayerManagerImpl::SetPlayerStatus(LoadingState newStatus, PresenceType ne
 }
 
 void CPlayerManagerImpl::SetPlayerReady(bool isReady) {
-    // toggle between kLLoaded and kLReady but not to/from other states
-    if (loadingStatus == kLLoaded && isReady) {
+    // toggle between kLLoaded/kLPaused and kLReady but not to/from other states
+    if (IsLoaded() && isReady) {
+        prevState = loadingStatus;
         loadingStatus = kLReady;
         itsGame->StartIfReady();
     } else if (loadingStatus == kLReady && !isReady) {
-        loadingStatus = kLLoaded;
+        loadingStatus = prevState;
     }
 }
 
@@ -1126,8 +1214,21 @@ bool CPlayerManagerImpl::IsAway() {
     return (presence == kzAway);
 }
 
+bool CPlayerManagerImpl::IsSpectating() {
+    return (presence == kzSpectating);
+}
+
+bool CPlayerManagerImpl::IsLoaded() {
+    return LoadingStatusIsIn(kLLoaded, kLPaused);
+}
+
+bool CPlayerManagerImpl::IsReady() {
+    return loadingStatus == kLReady;
+}
+
 void CPlayerManagerImpl::AbortRequest() {
     theNetManager->activePlayersDistribution &= ~(1 << slot);
+    DeadOrDone();
     if (isLocalPlayer) {
         itsGame->statusRequest = kAbortStatus;
     }
@@ -1277,7 +1378,7 @@ Str255& CPlayerManagerImpl::PlayerName() {
     return playerName;
 }
 std::string CPlayerManagerImpl::GetPlayerName() {
-    return std::string((char *)playerName + 1, playerName[0]);
+    return ToString(playerName);
 }
 std::deque<char>& CPlayerManagerImpl::LineBuffer() {
     return lineBuffer;

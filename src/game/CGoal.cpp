@@ -61,7 +61,7 @@ CAbstractActor *CGoal::EndScript() {
 
     auto bsp = AssetManager::GetBsp(resId);
     if (bsp) {
-        LoadPartWithColors(0, resId);
+        LoadPartWithMaterials(0, resId);
         partList[0]->Reset();
         partList[0]->RotateZ(ReadFixedVar(iRoll));
         partList[0]->RotateX(ReadFixedVar(iPitch));
@@ -92,7 +92,7 @@ short CGoal::GetBallSnapPoint(long theGroup,
         delta[2] = deltas[2];
 
         *hostPart = partList[0];
-        VectorMatrixProduct(1, (Vector *)delta, (Vector *)snapDest, &partList[0]->itsTransform);
+        VectorMatrixProduct(1, (Vector *)delta, (Vector *)snapDest, &partList[0]->modelTransform);
 
         globDelta[0] = ballLocation[0] - snapDest[0];
         globDelta[1] = ballLocation[1] - snapDest[1];

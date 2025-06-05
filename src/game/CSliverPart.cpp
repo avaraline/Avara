@@ -38,10 +38,10 @@ void CSliverPart::Activate(Fixed *origin,
     short age,
     CBSPPart *fromObject) {
     PolyRecord *borrowPoly;
-    int offset = FSysRandom() % (fromObject->polyCount);
+    int offset = FSysRandom() % (fromObject->polyTable.size());
     borrowPoly = &fromObject->polyTable[offset];
 
-    ARGBColor c = fromObject->currColorTable[borrowPoly->colorIdx];
+    ARGBColor c = fromObject->materialTable[borrowPoly->materialIdx].current.GetColor();
 
     ReplaceColor(*ColorManager::getMarkerColor(0), c);
 
@@ -78,14 +78,14 @@ void CSliverPart::Activate(Fixed *origin,
 
     if (vLen > 4) //	Some small number to avoid funny division results.
     {
-        MRotateY(FDivNZ(direction[0], vLen), FDivNZ(direction[2], vLen), &itsTransform);
+        MRotateY(FDivNZ(direction[0], vLen), FDivNZ(direction[2], vLen), &modelTransform);
     }
 
-    MRotateX(direction[1], vLen, &itsTransform);
+    MRotateX(direction[1], vLen, &modelTransform);
 
-    speed[0] = FMul(speedFactor, itsTransform[3][0]);
-    speed[1] = FMul(speedFactor, itsTransform[3][1]);
-    speed[2] = FMul(speedFactor, itsTransform[3][2]);
+    speed[0] = FMul(speedFactor, modelTransform[3][0]);
+    speed[1] = FMul(speedFactor, modelTransform[3][1]);
+    speed[2] = FMul(speedFactor, modelTransform[3][2]);
 
     TranslatePart(this, origin[0], origin[1], origin[2]);
     MoveDone();
@@ -108,8 +108,8 @@ Boolean CSliverPart::SliverAction() {
         locOffset[2] = FMul(speed[2], fpsScale);
         OffsetPart(locOffset);
 
-        if (itsTransform[3][1] < 0) {
-            itsTransform[3][1] = -itsTransform[3][1];
+        if (modelTransform[3][1] < 0) {
+            modelTransform[3][1] = -modelTransform[3][1];
             speed[1] = FMul(speed[1], FIX3(-600));
         }
 

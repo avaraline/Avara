@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CBSPPart.h"
+#include "Material.h"
 #include "ModernOpenGLRenderer.h"
 #include "VertexData.h"
 
@@ -10,10 +11,14 @@ struct GLData {
     float x = 0.0f;
     float y = 0.0f;
     float z = 0.0f;
-    float r = 0.0f;
-    float g = 0.0f;
-    float b = 0.0f;
-    float a = 0.0f;
+    uint8_t r = 0;
+    uint8_t g = 0;
+    uint8_t b = 0;
+    uint8_t a = 255;
+    uint8_t specR = 0;
+    uint8_t specG = 0;
+    uint8_t specB = 0;
+    uint8_t specS = 0;
     float nx = 0.0f;
     float ny = 0.0f;
     float nz = 0.0f;
@@ -26,7 +31,7 @@ struct GLVertexCollection {
 public:
     GLuint vertexBuffer = 0;
     GLuint vertexArray = 0;
-    uint16_t pointCount = 0;
+    uint32_t pointCount = 0;
     std::vector<GLData> glData = {};
     GLsizeiptr glDataSize = 0;
 

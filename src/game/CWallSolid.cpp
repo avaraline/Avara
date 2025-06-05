@@ -22,11 +22,14 @@ void CWallSolid::LoadPart(short ind, short resId) {
 
         thePart = lastWallActor->partList[0];
         thePart->theOwner = this;
+        if (!IsGeometryStatic() && thePart->userFlags & CBSPUserFlags::kIsStatic) {
+            thePart->userFlags -= CBSPUserFlags::kIsStatic;
+        }
 
         partList[ind] = thePart;
 
         //TranslatePartY(thePart, ReadLongVar(iHeight));
-        VECTORCOPY(location, thePart->itsTransform[3]);
+        VECTORCOPY(location, thePart->modelTransform[3]);
         gRenderer->RemovePart(thePart);
 
         heading = 0;

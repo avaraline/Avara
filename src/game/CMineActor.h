@@ -36,10 +36,11 @@ public:
     Boolean enabled;
     Boolean activated;
 
-    virtual void BeginScript();
-    virtual CAbstractActor *EndScript();
+    virtual void BeginScript() override;
+    virtual CAbstractActor *EndScript() override;
     virtual void Activate();
     virtual ~CMineActor();
-    virtual void FrameAction();
-    virtual void WasHit(RayHitRecord *theHit, Fixed hitEnergy);
+    virtual void FrameAction() override;
+    virtual void WasHit(RayHitRecord *theHit, Fixed hitEnergy) override;
+    virtual bool IsGeometryStatic() override { return false; }
 };

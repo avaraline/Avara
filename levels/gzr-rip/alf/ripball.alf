@@ -90,10 +90,10 @@
   <Counter in="@newRand" n="33" rand33="int ( 11 + ( random * 4 ) )" out="rand33" restart="false" />
   <Counter in="@newRand" n="34" rand34="int ( 11 + ( random * 4 ) )" out="rand34" restart="false" />
   <Counter in="@newRand" n="35" rand35="int ( 11 + ( random * 4 ) )" out="rand35" restart="false" />
-  <Text in="11" sound="snTextBlip" volume=".5" showEveryone="true" text="Blue Basket Active!" cx="163.02083333333334" cz="67.11805555555557" r="2.5347222222222285" />
-  <Text in="12" sound="snTextBlip" volume=".5" showEveryone="true" text="Grey Basket Active!" cx="163.02083333333334" cz="67.11805555555557" r="2.5347222222222285" />
-  <Text in="13" sound="snTextBlip" volume=".5" showEveryone="true" text="Red Basket Active!" cx="163.02083333333334" cz="67.11805555555557" r="2.5347222222222285" />
-  <Text in="14" sound="snTextBlip" volume=".5" showEveryone="true" text="Green Basket Active!" cx="163.02083333333334" cz="67.11805555555557" r="2.5347222222222285" />
+  <Text in="11" sound="snTextBlip" volume=".5" showEveryone="true" text="Blue Basket Active!" cx="93.68055555555557" cz="94.13194444444446" r="2.5347222222222285" />
+  <Text in="12" sound="snTextBlip" volume=".5" showEveryone="true" text="Grey Basket Active!" cx="93.68055555555557" cz="94.13194444444446" r="2.5347222222222285" />
+  <Text in="13" sound="snTextBlip" volume=".5" showEveryone="true" text="Red Basket Active!" cx="93.68055555555557" cz="94.13194444444446" r="2.5347222222222285" />
+  <Text in="14" sound="snTextBlip" volume=".5" showEveryone="true" text="Green Basket Active!" cx="93.68055555555557" cz="94.13194444444446" r="2.5347222222222285" />
   <set randStart="int ( 11 + ( random * 4 ) )" />
   <Timer in="@start" wait="78" out="randStart" />
   <Base in="@start" out="@offGoal" cx="216.5277777777778" cz="47.43055555555556" />
@@ -107,7 +107,7 @@
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" color="#00acff" color.1="#000000" cx="3.680555555555556" cz="112.0138888888889" angle="270" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" color="#00acff" color.1="#000000" cx="3.680555555555556" cz="112.0138888888889" angle="270" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" color="#00acff" color.1="#000000" cx="3.680555555555556" cz="112.0138888888889" angle="270" />
-  <Text sound="kSnText" volume="kTextVolume" in="@add1Score" showEveryone="true" text="A Score!" cx="193.61111111111111" cz="85.27777777777779" r="3.75" />
+  <Text sound="kSnText" volume="kTextVolume" in="@add1Score" showEveryone="true" text="A Score!" cx="93.68055555555557" cz="94.13194444444446" r="3.75" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
   <And in="@start" out="mShow2" />
   <Timer in="mTaken1" out="mShow1" wait="150" />

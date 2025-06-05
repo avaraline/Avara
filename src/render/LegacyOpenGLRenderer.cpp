@@ -12,7 +12,6 @@
 
 #define SKY_VERT "sky_vert.glsl"
 #define SKY_FRAG "sky_frag.glsl"
-
 #define OBJ_VERT "world_vert.glsl"
 #define OBJ_FRAG "world_frag.glsl"
 
@@ -103,13 +102,18 @@ LegacyOpenGLRenderer::LegacyOpenGLRenderer(SDL_Window *window) : AbstractRendere
     viewParams->viewPixelDimensions.h = w;
     viewParams->viewPixelDimensions.v = h;
 
+    staticWorld = new CBSPWorldImpl(100);
     dynamicWorld = new CBSPWorldImpl(100);
+    hudWorld = new CBSPWorldImpl(30);
 
     // Initialize shaders.
     skyShader = LoadShader(SKY_VERT, SKY_FRAG);
     worldShader = LoadShader(OBJ_VERT, OBJ_FRAG);
     ApplyLights();
+    ApplyPrefs();
     ApplyProjection();
+    
+    alphaParts = {};
 
     // Create a separate VBO and VAO for the skybox, and upload its geometry to the GPU.
     glGenVertexArrays(1, &skyVertArray);
@@ -121,25 +125,45 @@ LegacyOpenGLRenderer::LegacyOpenGLRenderer(SDL_Window *window) : AbstractRendere
     glBufferData(GL_ARRAY_BUFFER, sizeof(legacySkyboxVertices), legacySkyboxVertices, GL_STATIC_DRAW);
 
     __glCheckErrors();
+    
     // Rebind to default VBO/VAO.
     glBindVertexArray(0);
     __glCheckErrors();
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    glEnable(GL_BLEND);
-    glBlendFuncSeparate(GL_SRC_ALPHA, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE);
-    __glCheckErrors();
-
 }
 
-LegacyOpenGLRenderer::~LegacyOpenGLRenderer() {
+LegacyOpenGLRenderer::~LegacyOpenGLRenderer()
+{
+    delete staticWorld;
     delete dynamicWorld;
-    AbstractRenderer::~AbstractRenderer();
+    delete hudWorld;
+}
+
+void LegacyOpenGLRenderer::AddHUDPart(CBSPPart *part)
+{
+    part->ignoreDirectionalLights = true;
+    part->ignoreDepthTesting = true;
+    if (part->vData == nullptr) {
+        part->vData = NewVertexDataInstance();
+        part->vData->Replace(*part);
+    }
+    hudWorld->AddPart(part);
 }
 
 void LegacyOpenGLRenderer::AddPart(CBSPPart *part)
 {
-    dynamicWorld->AddPart(part);
+    if (part->usesPrivateYon && part->yon < FIX3(100)) {
+        // Don't add the part to anything! It's (effectively) invisible and
+        // will never be rendered.
+    } else if (!part->usesPrivateYon && part->userFlags & CBSPUserFlags::kIsStatic) {
+        staticWorld->AddPart(part);
+    } else {
+        if (part->vData == nullptr) {
+            part->vData = NewVertexDataInstance();
+            part->vData->Replace(*part);
+        }
+        dynamicWorld->AddPart(part);
+    }
 }
 
 void LegacyOpenGLRenderer::ApplyLights()
@@ -147,44 +171,69 @@ void LegacyOpenGLRenderer::ApplyLights()
     float ambientIntensity = ToFloat(viewParams->ambientLight);
     float ambientRGB[3];
     viewParams->ambientLightColor.ExportGLFloats(ambientRGB, 3);
-
-    //hudShader->Use();
-    //AdjustAmbient(*hudShader, HUD_AMBIENT);
-
+    
     worldShader->Use();
     AdjustAmbient(*worldShader, ambientIntensity);
     worldShader->SetFloat3("ambientColor", ambientRGB);
+    worldShader->SetFloat("maxShininess", MAX_SHININESS_EXP);
+    worldShader->SetBool("lightsActive", true);
 
-    for (int i = 0; i < 4; i++) {
-        float intensity = ToFloat(viewParams->dirLightSettings[i].intensity);
-        float elevation = ToFloat(viewParams->dirLightSettings[i].angle1);
-        float azimuth = ToFloat(viewParams->dirLightSettings[i].angle2);
+    skyShader->Use();
+    skyShader->SetFloat("celestialDistance", DIR_LIGHT_DISTANCE);
+
+    for (int i = 0; i < MAXLIGHTS; i++) {
         float rgb[3];
         viewParams->dirLightSettings[i].color.ExportGLFloats(rgb, 3);
+        bool applySpecular = viewParams->dirLightSettings[i].applySpecular;
+        
+        const std::string dirUniform = "lightDir[" + std::to_string(i) + "]";
+        const std::string posUniform = "lightPos[" + std::to_string(i) + "]";
+        const std::string colorUniform = "lightColor[" + std::to_string(i) + "]";
+        const std::string radUniform = "lightCelestialRadius[" + std::to_string(i) + "]";
+        const std::string fogUniform = "lightCelestialFogSpread[" + std::to_string(i) + "]";
+        const std::string specUniform = "lightApplySpecular[" + std::to_string(i) + "]";
 
-        float xyz[3] = {
-            sin(Deg2Rad(-azimuth)) * intensity,
-            sin(Deg2Rad(-elevation)) * intensity,
-            cos(Deg2Rad(azimuth)) * intensity
-        };
+        worldShader->Use();
+        worldShader->SetFloat3(dirUniform, viewParams->dirLightSettings[i].direction);
+        worldShader->SetFloat3(posUniform, viewParams->dirLightSettings[i].position);
+        worldShader->SetFloat3(colorUniform, rgb);
+        worldShader->SetFloat(radUniform, ToFloat(viewParams->dirLightSettings[i].celestialRadius));
+        worldShader->SetBool(specUniform, applySpecular);
+        
+        skyShader->Use();
+        skyShader->SetFloat3(dirUniform, viewParams->dirLightSettings[i].direction);
+        skyShader->SetFloat3(posUniform, viewParams->dirLightSettings[i].position);
+        skyShader->SetFloat3(colorUniform, rgb);
+        skyShader->SetFloat(radUniform, ToFloat(viewParams->dirLightSettings[i].celestialRadius));
+        skyShader->SetFloat(fogUniform, viewParams->dirLightSettings[i].celestialFogSpread);
+        skyShader->SetBool(specUniform, applySpecular);
+    }
+}
 
-        switch (i) {
-            case 0:
-                worldShader->SetFloat3("light0", xyz);
-                worldShader->SetFloat3("light0Color", rgb);
-                break;
-            case 1:
-                worldShader->SetFloat3("light1", xyz);
-                worldShader->SetFloat3("light1Color", rgb);
-                break;
-            case 2:
-                worldShader->SetFloat3("light2", xyz);
-                worldShader->SetFloat3("light2Color", rgb);
-                break;
-            case 3:
-                worldShader->SetFloat3("light3", xyz);
-                worldShader->SetFloat3("light3Color", rgb);
-                break;
+void LegacyOpenGLRenderer::ApplyPrefs(std::optional<std::string> name) {
+    if (gApplication) {
+        if (!name || *name == kFOV) {
+            SetFOV(gApplication->Get<float>(kFOV));
+        }
+        
+        if (!name || *name == kDither) {
+            dither = gApplication->Get<bool>(kDither);
+            
+            worldShader->Use();
+            worldShader->SetBool("dither", dither);
+            
+            skyShader->Use();
+            skyShader->SetBool("dither", dither);
+        }
+        
+        if (!name || *name == kSpecular) {
+            showSpecular = gApplication->Get<bool>(kSpecular);
+            
+            worldShader->Use();
+            worldShader->SetBool("showSpecular", showSpecular);
+            
+            skyShader->Use();
+            skyShader->SetBool("showSpecular", showSpecular);
         }
     }
 }
@@ -210,10 +259,40 @@ void LegacyOpenGLRenderer::ApplyProjection()
     worldShader->Use();
     worldShader->SetMat4("proj", proj);
     __glCheckErrors();
+}
 
-    //hudShader->Use();
-    //hudShader->SetMat4("proj", proj);
-    //glCheckErrors();
+void LegacyOpenGLRenderer::ApplySky()
+{
+    float highSkyColorRGB[3];
+    float lowSkyColorRGB[3];
+    float groundColorRGB[3];
+    float groundSpecRGB[3];
+    float groundShininess;
+    skyParams->highSkyColor.ExportGLFloats(highSkyColorRGB, 3);
+    skyParams->lowSkyColor.ExportGLFloats(lowSkyColorRGB, 3);
+    skyParams->groundMaterial.GetColor().ExportGLFloats(groundColorRGB, 3);
+    skyParams->groundMaterial.GetSpecular().ExportGLFloats(groundSpecRGB, 3);
+    groundShininess = skyParams->groundMaterial.GetShininess() / 255.0f * MAX_SHININESS_EXP;
+    
+    float lowAlt = ToFloat(skyParams->lowSkyAltitude) / 20000.0f;
+    float highAlt = ToFloat(skyParams->highSkyAltitude) / 20000.0f;
+    float hazeDensity = skyParams->hazeDensity;
+    
+    skyShader->Use();
+    skyShader->SetFloat3("skyColor", highSkyColorRGB);
+    skyShader->SetFloat3("horizonColor", lowSkyColorRGB);
+    skyShader->SetFloat3("groundColor", groundColorRGB);
+    skyShader->SetFloat3("groundSpec", groundSpecRGB);
+    skyShader->SetFloat("groundShininess", groundShininess);
+    skyShader->SetFloat("lowAlt", lowAlt);
+    skyShader->SetFloat("highAlt", highAlt);
+    skyShader->SetFloat("hazeDensity", hazeDensity);
+    
+    worldShader->Use();
+    worldShader->SetFloat3("skyColor", highSkyColorRGB);
+    worldShader->SetFloat3("horizonColor", lowSkyColorRGB);
+    worldShader->SetFloat("highAlt", highAlt);
+    worldShader->SetFloat("hazeDensity", hazeDensity);
 }
 
 void LegacyOpenGLRenderer::UpdateViewRect(int width, int height, float pixelRatio)
@@ -224,7 +303,12 @@ void LegacyOpenGLRenderer::UpdateViewRect(int width, int height, float pixelRati
 
 void LegacyOpenGLRenderer::LevelReset()
 {
+    if (staticGeometry) {
+        staticGeometry.reset();
+    }
+    staticWorld->DisposeParts();
     dynamicWorld->DisposeParts();
+    hudWorld->DisposeParts();
     AbstractRenderer::LevelReset();
 }
 
@@ -233,9 +317,11 @@ std::unique_ptr<VertexData> LegacyOpenGLRenderer::NewVertexDataInstance()
     return std::make_unique<OpenGLVertices>();
 }
 
-void LegacyOpenGLRenderer::OverheadPoint(Fixed *pt, Fixed *extent)
+void LegacyOpenGLRenderer::PostLevelLoad()
 {
-    dynamicWorld->OverheadPoint(pt, extent);
+    staticGeometry = staticWorld->Squash();
+    staticGeometry->vData = NewVertexDataInstance();
+    staticGeometry->vData->Replace(*staticGeometry);
 }
 
 void LegacyOpenGLRenderer::RefreshWindow()
@@ -243,8 +329,14 @@ void LegacyOpenGLRenderer::RefreshWindow()
     SDL_GL_SwapWindow(window);
 }
 
+void LegacyOpenGLRenderer::RemoveHUDPart(CBSPPart *part)
+{
+    hudWorld->RemovePart(part);
+}
+
 void LegacyOpenGLRenderer::RemovePart(CBSPPart *part)
 {
+    staticWorld->RemovePart(part);
     dynamicWorld->RemovePart(part);
 }
 
@@ -255,21 +347,6 @@ void LegacyOpenGLRenderer::RenderFrame()
 
     // RENDER SKYBOX ///////////////////////////////////////////////////////////////////////////////
 
-    Matrix *trans = &(viewParams->viewMatrix);
-
-    // Get rid of the view translation.
-    glm::mat4 glMatrix = ToFloatMat(*trans);
-    glMatrix[3][0] = glMatrix[3][1] = glMatrix[3][2] = 0;
-
-    float groundColorRGB[3];
-    float lowSkyColorRGB[3];
-    float highSkyColorRGB[3];
-    skyParams->groundColor.ExportGLFloats(groundColorRGB, 3);
-    skyParams->lowSkyColor.ExportGLFloats(lowSkyColorRGB, 3);
-    skyParams->highSkyColor.ExportGLFloats(highSkyColorRGB, 3);
-
-    // Switch to first offscreen FBO.
-    //glBindFramebuffer(GL_FRAMEBUFFER, fbo[0]);
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -282,10 +359,6 @@ void LegacyOpenGLRenderer::RenderFrame()
     glEnableVertexAttribArray(0);
 
     skyShader->Use();
-    skyShader->SetMat4("view", glMatrix);
-    skyShader->SetFloat3("groundColor", groundColorRGB);
-    skyShader->SetFloat3("horizonColor", lowSkyColorRGB);
-    skyShader->SetFloat3("skyColor", highSkyColorRGB);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -293,6 +366,7 @@ void LegacyOpenGLRenderer::RenderFrame()
     glDisableVertexAttribArray(0);
 
     __glCheckErrors();
+    
     // RENDER WORLD ////////////////////////////////////////////////////////////////////////
 
     glEnable(GL_CULL_FACE);
@@ -307,12 +381,40 @@ void LegacyOpenGLRenderer::RenderFrame()
     __glCheckErrors();
     float defaultAmbient = ToFloat(viewParams->ambientLight);
 
+    // Draw opaque geometry.
+    BlendingOn();
+    if (staticGeometry) {
+        staticGeometry->PrepareForRender();
+        Draw(*worldShader, *staticGeometry, defaultAmbient, false);
+    }
     auto partList = dynamicWorld->GetVisiblePartListPointer();
     auto partCount = dynamicWorld->GetVisiblePartCount();
-    for (uint16_t i = 0; i < partCount; i++) {
-        Draw(*worldShader, **partList, defaultAmbient);
+    alphaParts.clear();
+    for (uint32_t i = 0; i < partCount; i++) {
+        Draw(*worldShader, **partList, defaultAmbient, false);
+        if ((*partList)->HasAlpha()) {
+            alphaParts.push_back(*partList);
+        }
         partList++;
     }
+    
+    // Draw translucent geometry.
+    if (staticGeometry) {
+        Draw(*worldShader, *staticGeometry, defaultAmbient, true);
+    }
+    for (auto it = alphaParts.begin(); it != alphaParts.end(); ++it) {
+        Draw(*worldShader, **it, defaultAmbient, true);
+    }
+    
+    // RENDER HUD //////////////////////////////////////////////////////////////////////////////////
+    hudWorld->PrepareForRender();
+    partList = hudWorld->GetVisiblePartListPointer();
+    partCount = hudWorld->GetVisiblePartCount();
+    for (uint32_t i = 0; i < partCount; i++) {
+        Draw(*worldShader, **partList, defaultAmbient, false);
+        partList++;
+    }
+    BlendingOff();
 }
 
 void LegacyOpenGLRenderer::AdjustAmbient(OpenGLShader &shader, float intensity)
@@ -323,10 +425,34 @@ void LegacyOpenGLRenderer::AdjustAmbient(OpenGLShader &shader, float intensity)
 void LegacyOpenGLRenderer::ApplyView()
 {
     glm::mat4 glMatrix = ToFloatMat(viewParams->viewMatrix);
+    
+    // Get rid of the view translation for the sky.
+    glm::mat4 glSkyMatrix = ToFloatMat(viewParams->viewMatrix);
+    glSkyMatrix[3][0] = glSkyMatrix[3][1] = glSkyMatrix[3][2] = 0;
+    
+    skyShader->Use();
+    skyShader->SetMat4("view", glSkyMatrix);
+    skyShader->SetFloat("maxHazeDist", ToFloat(viewParams->yonBound));
+    SetPositions(*skyShader);
 
     worldShader->Use();
-    worldShader->SetMat4("view", glMatrix);
+    worldShader->SetTransposedMat4("view", glMatrix);
+    worldShader->SetFloat("worldYon", ToFloat(viewParams->yonBound));
+    worldShader->SetFloat("objectYon", ToFloat(viewParams->yonBound));
+    SetPositions(*worldShader);
     __glCheckErrors();
+}
+
+void LegacyOpenGLRenderer::BlendingOff()
+{
+    glDisable(GL_BLEND);
+}
+
+void LegacyOpenGLRenderer::BlendingOn()
+{
+    glEnable(GL_BLEND);
+    glBlendEquation(GL_FUNC_ADD);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void LegacyOpenGLRenderer::Clear()
@@ -335,30 +461,49 @@ void LegacyOpenGLRenderer::Clear()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 
-void LegacyOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, float defaultAmbient)
+void LegacyOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, float defaultAmbient, bool useAlphaBuffer)
 {
     OpenGLVertices *glData = dynamic_cast<OpenGLVertices*>(part.vData.get());
 
     if (glData == nullptr) return;
 
-    glBindVertexArray(glData->opaque.vertexArray);
-    glBindBuffer(GL_ARRAY_BUFFER, glData->opaque.vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, glData->opaque.glDataSize, glData->opaque.glData.data(), GL_STREAM_DRAW);
+    if (!useAlphaBuffer) {
+        if (glData->opaque.glDataSize == 0) return;
+        glBindVertexArray(glData->opaque.vertexArray);
+        glBindBuffer(GL_ARRAY_BUFFER, glData->opaque.vertexBuffer);
+    } else {
+        if (glData->alpha.glDataSize == 0) return;
+        glData->alpha.SortFromCamera(
+            ToFloat(part.invModelViewTransform[3][0]),
+            ToFloat(part.invModelViewTransform[3][1]),
+            ToFloat(part.invModelViewTransform[3][2])
+        );
+        glBindVertexArray(glData->alpha.vertexArray);
+        glBindBuffer(GL_ARRAY_BUFFER, glData->alpha.vertexBuffer);
+        
+        // Reupload sorted tris to GPU.
+        glBufferData(GL_ARRAY_BUFFER, glData->alpha.glDataSize, glData->alpha.glData.data(), GL_STREAM_DRAW);
+    }
 
     // Position!
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), 0);
     glEnableVertexAttribArray(0);
 
     // RGBAColor!
-    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(3 * sizeof(float)));
+    glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(GLData), (void *)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
+    
+    // Specular!
+    glVertexAttribPointer(2, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(GLData), (void *)((3 * sizeof(float)) + (4 * sizeof(uint8_t))));
+    glEnableVertexAttribArray(2);
 
     // Normal!
-    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(7 * sizeof(float)));
-    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)((3 * sizeof(float)) + (8 * sizeof(uint8_t))));
+    glEnableVertexAttribArray(3);
 
     // Custom, per-object lighting and depth testing!
     float extraAmbient = ToFloat(part.extraAmbient);
+    float currentYon = ToFloat(gRenderer->viewParams->yonBound);
     if (part.privateAmbient != -1) {
         AdjustAmbient(shader, ToFloat(part.privateAmbient));
     }
@@ -372,29 +517,19 @@ void LegacyOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
         IgnoreDirectionalLights(shader, true);
         __glCheckErrors();
     }
+    if (part.usesPrivateYon) {
+        shader.SetFloat("objectYon", ToFloat(part.yon));
+    }
 
     SetTransforms(part);
     shader.Use();
     __glCheckErrors();
 
-    glDrawArrays(GL_TRIANGLES, 0, glData->opaque.pointCount);
-
-    glBindVertexArray(glData->alpha.vertexArray);
-    glBindBuffer(GL_ARRAY_BUFFER, glData->alpha.vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, glData->alpha.glDataSize, glData->alpha.glData.data(), GL_STREAM_DRAW);
-
-    // Position!
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), 0);
-    glEnableVertexAttribArray(0);
-
-    // RGBAColor!
-    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(3 * sizeof(float)));
-    glEnableVertexAttribArray(1);
-
-    // Normal!
-    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(7 * sizeof(float)));
-    glEnableVertexAttribArray(2);
-    glDrawArrays(GL_TRIANGLES, 0, glData->alpha.pointCount);
+    if (!useAlphaBuffer) {
+        glDrawArrays(GL_TRIANGLES, 0, glData->opaque.pointCount);
+    } else {
+        glDrawArrays(GL_TRIANGLES, 0, glData->alpha.pointCount);
+    }
 
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
@@ -413,6 +548,9 @@ void LegacyOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
         IgnoreDirectionalLights(shader, false);
         __glCheckErrors();
     }
+    if (part.usesPrivateYon) {
+        shader.SetFloat("objectYon", currentYon);
+    }
 
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -421,7 +559,7 @@ void LegacyOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
 
 void LegacyOpenGLRenderer::IgnoreDirectionalLights(OpenGLShader &shader, bool yn)
 {
-    shader.SetFloat("lightsActive", (yn) ? 0.0f : 1.0f);
+    shader.SetBool("lightsActive", !yn);
 }
 
 std::unique_ptr<OpenGLShader> LegacyOpenGLRenderer::LoadShader(const std::string &vertFile,
@@ -440,25 +578,45 @@ std::unique_ptr<OpenGLShader> LegacyOpenGLRenderer::LoadShader(const std::string
     return std::make_unique<OpenGLShader>(*vertPath, *fragPath);
 }
 
-void LegacyOpenGLRenderer::SetTransforms(const CBSPPart &part) {
-    glm::mat4 mv = ToFloatMat(part.fullTransform);
+void LegacyOpenGLRenderer::SetPositions(OpenGLShader &shader)
+{
+    glm::mat4 glInvMatrix = ToFloatMat(*viewParams->GetInverseMatrix());
+    float camPos[3] = {glInvMatrix[3][0], glInvMatrix[3][1], glInvMatrix[3][2]};
+    
+    shader.Use();
+    shader.SetFloat3("camPos", camPos);
+    for (int i = 0; i < MAXLIGHTS; i++) {
+        glm::vec3 adjLightPos = {
+            viewParams->dirLightSettings[i].position[0] + camPos[0],
+            viewParams->dirLightSettings[i].position[1] + camPos[1],
+            viewParams->dirLightSettings[i].position[2] + camPos[2]
+        };
+        
+        const std::string adjPosUniform = "adjustedLightPos[" + std::to_string(i) + "]";
+        shader.SetVec3(adjPosUniform, adjLightPos);
+    }
+}
+
+void LegacyOpenGLRenderer::SetTransforms(const CBSPPart &part)
+{
+    glm::mat4 m = ToFloatMat(part.modelTransform);
     if (part.hasScale) {
         glm::vec3 sc = glm::vec3(
             ToFloat(part.scale[0]),
             ToFloat(part.scale[1]),
             ToFloat(part.scale[2])
         );
-        mv = glm::scale(mv, sc);
+        m = glm::scale(m, sc);
     }
-
+    
     glm::mat3 normalMat = glm::mat3(1.0f);
     for (int i = 0; i < 3; i ++) {
-        normalMat[0][i] = ToFloat((part.itsTransform)[0][i]);
-        normalMat[1][i] = ToFloat((part.itsTransform)[1][i]);
-        normalMat[2][i] = ToFloat((part.itsTransform)[2][i]);
+        normalMat[0][i] = ToFloat((part.modelTransform)[0][i]);
+        normalMat[1][i] = ToFloat((part.modelTransform)[1][i]);
+        normalMat[2][i] = ToFloat((part.modelTransform)[2][i]);
     }
 
     worldShader->Use();
-    worldShader->SetMat4("modelview", mv);
-    worldShader->SetMat3("normalTransform", normalMat, true);
+    worldShader->SetTransposedMat4("model", m);
+    worldShader->SetTransposedMat3("normalTransform", normalMat);
 }

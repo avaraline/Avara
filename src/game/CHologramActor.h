@@ -12,6 +12,7 @@
 
 class CHologramActor : public CPlacedActors {
 public:
-    virtual void BeginScript();
-    virtual CAbstractActor *EndScript();
+    virtual void BeginScript() override;
+    virtual CAbstractActor *EndScript() override;
+    virtual bool IsGeometryStatic() override { return true; };
 };

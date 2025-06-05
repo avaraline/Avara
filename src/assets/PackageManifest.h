@@ -1,6 +1,7 @@
 #pragma once
 #include "OggFile.h"
 #include "PlayerConfig.h"
+#include "CSmartBox.h"
 
 #include <json.hpp>
 
@@ -27,4 +28,5 @@ public:
     std::vector<LevelDirectoryEntry> levelDirectory = {};
     std::map<int16_t, HSNDRecord> hsndResources = {};
     std::map<int16_t, HullConfigRecord> hullResources = {};
+    std::map<int16_t, BSPSRecord> bspsResources = {};
 };

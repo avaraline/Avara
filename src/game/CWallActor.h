@@ -13,7 +13,8 @@
 
 class CWallActor : public CAbstractActor {
 public:
-    virtual void MakeWallFromRect(Rect *theRect, Fixed height, short decimateWalls, Boolean isOrigWall);
     virtual void MakeWallFromDims(Vector dims, Fixed x, Fixed y, Fixed z);
     virtual bool HandlesFastFPS() { return true; }
+    virtual bool IsGeometryStatic() override { return true; };
+    virtual void MakeWallFromRect(Rect *theRect, Fixed height, Fixed alt, short decimateWalls, Boolean isOrigWall);
 };

@@ -43,10 +43,12 @@ public:
 
     Vector attraction;
 
-    virtual void BeginScript();
-    virtual CAbstractActor *EndScript();
-    virtual void FrameAction();
+    virtual void BeginScript() override;
+    virtual CAbstractActor *EndScript() override;
+    virtual void FrameAction() override;
     virtual void TeleportPlayer(CAbstractPlayer *thePlayer);
     virtual Boolean ReceivePlayer(CAbstractPlayer *thePlayer);
-    virtual bool HandlesFastFPS() { return true; }
+    virtual bool HandlesFastFPS() override { return true; }
+    virtual bool UseForExtent() override;
+
 };

@@ -88,9 +88,7 @@ void PlayerRatingsSimpleElo::UpdateRatings(std::vector<PlayerResult> &playerResu
             ratingsMap.insert(std::move(rating));
         }
 
-        ratingsMap[playerId].rating += adjustments[playerId].rating;
-        ratingsMap[playerId].count += adjustments[playerId].count > 0 ? 1 : 0;  // don't count game more than once
-        ratingsMap[playerId].rating = std::roundf(ratingsMap[playerId].rating*4)/4;
+        UpdateRating(playerId, ratingsMap[playerId].rating + adjustments[playerId].rating, adjustments[playerId].count > 0);
 
         // output updated Elo ratings if "showElow" pref set to true
         if (Debug::IsEnabled("elo") || gApplication->Boolean(kShowElo)) {
@@ -122,24 +120,35 @@ void PlayerRatingsSimpleElo::UpdateRatings(std::vector<PlayerResult> &playerResu
 }
 
 
+void PlayerRatingsSimpleElo::UpdateRating(const std::string& playerId, float newRating, bool incrementCount) {
+    if (incrementCount) {
+        ratingsMap[playerId].count += 1;
+    }
+    ratingsMap[playerId].rating = std::roundf(newRating*4)/4;
+}
+
+
 // return player ratings ordered from highest to lowest
 std::vector<std::pair<std::string,Rating>> PlayerRatingsSimpleElo::GetRatings(std::vector<std::string> playerIds) {
     std::vector<std::pair<std::string,Rating>> ratings;
     for (auto player: playerIds) {
-        auto iter = ratingsMap.find(player);
-        if (iter == ratingsMap.end()) {
-            // don't add it to ratingsMap just yet, return the default initial rating (1500) for this named player
-            ratings.push_back({player, {}});
-        } else {
-            // use the actual key/value in the map to match the case
-            ratings.push_back(*iter);
-        }
+        ratings.push_back(GetRating(player));
     }
     // sort players by their ratings, best to worst
     std::sort(ratings.begin(), ratings.end(), [&](std::pair<std::string,Rating> const &lhs, std::pair<std::string,Rating> const &rhs) {
         return rhs.second.rating < lhs.second.rating;
     });
     return ratings;
+}
+
+std::pair<std::string,Rating> PlayerRatingsSimpleElo::GetRating(const std::string& playerId) {
+    auto iter = ratingsMap.find(playerId);
+    if (iter == ratingsMap.end()) {
+        // don't add it to ratingsMap just yet, return the default initial rating (1500) for this named player
+        return {playerId, {}};
+    }
+    // use the actual key/value in the map to match the case
+    return *iter;
 }
 
 std::map<int, std::vector<std::string>> PlayerRatingsSimpleElo::SplitIntoTeams(std::vector<int> colors, std::vector<std::string> playerIds) {

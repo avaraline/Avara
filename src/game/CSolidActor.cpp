@@ -31,7 +31,7 @@ CAbstractActor *CSolidActor::EndScript() {
 
     auto bsp = AssetManager::GetBsp(resId);
     if (bsp) {
-        LoadPartWithColors(0, resId);
+        LoadPartWithMaterials(0, resId);
         partList[0]->Reset();
         partList[0]->RotateZ(ReadFixedVar(iRoll));
         partList[0]->RotateX(ReadFixedVar(iPitch));

@@ -38,7 +38,7 @@
 
 #define AUTOLATENCYPERIOD 3840  // msec (divisible by 64)
 #define AUTOLATENCYDELAY  448   // msec (divisible by 64)
-#define LOWERLATENCYCOUNT   (0.025 * AUTOLATENCYPERIOD / itsGame->frameTime)      // waited on >2.5% of frames
+#define LOWERLATENCYCOUNT   (0.03 * AUTOLATENCYPERIOD / itsGame->frameTime)       // waited on >3% of frames
 #define HIGHERLATENCYCOUNT  (0.20 * AUTOLATENCYPERIOD / itsGame->frameTime)       // waited on >20% of frames
 
 #define kMessageBufferMaxAge 90
@@ -46,6 +46,7 @@
 #define kMessageWaitTime 12
 
 extern Fixed FRandSeed;
+extern Fixed NewFRandSeed();
 
 void CNetManager::INetManager(CAvaraGame *theGame) {
     short i;
@@ -175,7 +176,7 @@ void CNetManager::ChangeNet(short netKind, std::string address, std::string pass
             totalDistribution = 0;
             DBG_Log("login", "sending kpLogin to server with presence=%d\n", keepPresence);
             itsCommManager->SendPacket(kdServerOnly, kpLogin, 0, keepPresence, 0, 0L, NULL);
-            if (itsGame->loadedFilename.length() > 0) {
+            if (itsGame->loadedLevelInfo->levelName.length() > 0) {
                 itsGame->LevelReset(true);
                 // theRoster->InvalidateArea(kBottomBox, 0);
             }
@@ -252,7 +253,11 @@ void CNetManager::NameChange(StringPtr newName) {
     */
     LoadingState status = playerTable[itsCommManager->myId]->LoadingStatus();
     PresenceType presence = playerTable[itsCommManager->myId]->Presence();
-    itsCommManager->SendPacket(kdEveryone, kpNameChange, 0, status, presence, newName[0] + 1, (Ptr)newName);
+
+    std::string nameStr = ToString(newName);
+    auto rating = itsGame->scoreKeeper->playerRatings->GetRating(nameStr);
+    DBG_Log("login+", "sending kpNameChange from %d with name='%s' to kdEveryone\n", itsCommManager->myId, nameStr.c_str());
+    itsCommManager->SendPacket(kdEveryone, kpNameChange, presence, status, rating.second.rating*4, newName[0] + 1, (Ptr)newName);
 }
 
 void CNetManager::ValueChange(short slot, std::string attributeName, bool value) {
@@ -262,13 +267,21 @@ void CNetManager::ValueChange(short slot, std::string attributeName, bool value)
     itsCommManager->SendPacket(kdEveryone, kpJSON, slot, 0, 0, strlen(c), c);
 }
 
-void CNetManager::RecordNameAndState(short theId, StringPtr theName, LoadingState status, PresenceType presence) {
+void CNetManager::RecordNameAndState(short theId, StringPtr theName, LoadingState status, PresenceType presence, float elo) {
     if (theId >= 0 && theId < kMaxAvaraPlayers) {
         totalDistribution |= 1 << theId;
         if (status != 0)
             playerTable[theId]->SetPlayerStatus(status, presence, -1);
 
         playerTable[theId]->ChangeName(theName);
+
+        // Trust each user to have the most accurate value for their Elo since they record all the games they have played.
+        // BUT, don't update if more than 200 higher than current local value (to ward off cheaters - probably need a better mechanism)
+        std::pair<std::string,Rating> ratingPair = itsGame->scoreKeeper->playerRatings->GetRating(playerTable[theId]->GetPlayerName());
+        if (elo != ratingPair.second.rating && elo < ratingPair.second.rating + 200) {
+            SDL_Log("Updating Elo value for '%s' from %.2f to %.2f", ratingPair.first.c_str(), ratingPair.second.rating, elo);
+            itsGame->scoreKeeper->playerRatings->UpdateRating(ratingPair.first, elo);
+        }
     }
 }
 
@@ -345,6 +358,10 @@ void CNetManager::SendRosterMessage(size_t len, char *c) {
     }
 }
 
+void CNetManager::SendRosterMessage(const std::string msg) {
+    SendRosterMessage(msg.length(), (char*)msg.c_str());
+}
+
 void CNetManager::ReceiveRosterMessage(short slotId, short len, char *c) {
     CPlayerManager *thePlayer;
 
@@ -415,7 +432,7 @@ void CNetManager::SendLoadLevel(std::string theSet, std::string levelTag, int16_
     aPacket->command = kpLoadLevel;
     aPacket->p1 = 0;
     aPacket->p2 = originalSender;
-    aPacket->p3 = FRandSeed;
+    aPacket->p3 = NewFRandSeed();
     if (itsCommManager->myId == 0) {
         // to avoid multiple simultaneous loads, only the server sends the kpLoadLevel requests to everyone
         SDL_Log("  server sending to everyone\n");
@@ -466,7 +483,7 @@ void CNetManager::ReceiveLoadLevel(short senderSlot, int16_t originalSender, cha
                     theSetAndTag, playerTable[senderSlot]->GetPlayerName().c_str());
             SendLoadLevel(set, tag, senderSlot);
         }
-    } else if (isPlaying) {
+    } else if (isPlaying && originalSender != itsCommManager->myId) {
         // save off the player that originally loaded this level to help loading side games
         loaderSlot = originalSender;
     } else {
@@ -670,20 +687,8 @@ void CNetManager::ResumeGame() {
     if (thePlayerManager->GetPlayer()) {
         thePlayerManager->DoMouseControl(&tempPoint, !(itsGame->moJoOptions & kJoystickMode));
 
-        PlayerConfigRecord copy {};
-        BlockMoveData(&config, &copy, sizeof(PlayerConfigRecord));
-        copy.numGrenades = ntohs(config.numGrenades);
-        copy.numMissiles = ntohs(config.numMissiles);
-        copy.numBoosters = ntohs(config.numBoosters);
-        copy.hullType = ntohs(config.hullType);
-        copy.frameLatency = ntohs(config.frameLatency);
-        copy.frameTime = ntohs(config.frameTime);
-        copy.spawnOrder = ntohs(config.spawnOrder);
-
-        copy.hullColor = ntohl(config.hullColor.GetRaw());
-        copy.trimColor = ntohl(config.trimColor.GetRaw());
-        copy.cockpitColor = ntohl(config.cockpitColor.GetRaw());
-        copy.gunColor = ntohl(config.gunColor.GetRaw());
+        PlayerConfigRecord copy = config;
+        ConfigByteSwap(&copy);
 
         // everyone sends this packet which eventually sets the LoadingStatus() to kLActive
         itsCommManager->SendUrgentPacket(
@@ -730,6 +735,7 @@ void CNetManager::ResumeGame() {
                 }
             }
         }
+        DoServerConfig();
 
         ProcessQueue();
         if (notReady) { // SysBeep(10);
@@ -772,18 +778,20 @@ void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
             if (IAmAlive()) {
 
                 latencyVoteFrame = frameNumber;  // record the actual frame where the vote is initiated
-                maxRoundLatency = itsCommManager->GetMaxRoundTrip(AlivePlayersDistribution(), &maxId);
+                // only use the "alive" players for the maxRTT calculation
+                maxRoundLatency = itsCommManager->GetMaxRoundTrip(AlivePlayersDistribution(), -1, &maxId);
                 maxPlayer = playerTable[maxId].get();
                 uint8_t llv = std::min(long(UINT8_MAX), localLatencyVote);  // just in case, p1 can only accept a max of 256
 
+                // send to all "active" players ("alive" plus spectators)
                 itsCommManager->SendUrgentPacket(
                     activePlayersDistribution, kpLatencyVote, llv, maxRoundLatency, FRandSeed, 0, NULL);
-                DBG_Log("lt+", "*** fn=%d Sending kpLatencyVote to 0x%2hx, localLatencyVote=%ld, maxRoundLatency=%ld FRandSeed=%d\n",
+                DBG_Log("lt+", "*** fn=%d Sending kpLatencyVote to 0x%02hx, localLatencyVote=%ld, maxRoundLatency=%ld FRandSeed=%d\n",
                         frameNumber, activePlayersDistribution, localLatencyVote, maxRoundLatency, FRandSeed);
             } else {
                 // spectator just sends FRandSeed to self for fragmentation check
                 itsCommManager->SendUrgentPacket(
-                    SelfDistribution(), kpLatencyVote, 0, 0, FRandSeed, 0, NULL);
+                    SelfDistribution(), kpLatencyVote, 0, -1, FRandSeed, 0, NULL);
             }
             localLatencyVote = 0;
             latencyVoteOpen = true;
@@ -794,9 +802,10 @@ void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
                 itsGame->itsApp->AddMessageLine(FragmentMapToString(), MsgAlignment::Left, MsgCategory::Error);
             }
 
+            if (autoLatencyVoteCount)
+                DBG_Log("lt+", "====autoLatencyVote = %ld\n", autoLatencyVote/autoLatencyVoteCount);
             if (IsAutoLatencyEnabled() && autoLatencyVoteCount) {
                 autoLatencyVote /= autoLatencyVoteCount;
-                DBG_Log("lt+", "====autoLatencyVote = %ld\n", autoLatencyVote);
 
                 short curFrameLatency = itsGame->FrameLatency();
                 short rttFrameLatency = itsGame->RoundTripToFrameLatency(maxRoundTripLatency);
@@ -806,7 +815,7 @@ void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
                 // how often clients had to wait for packets to arrive (autoLatencyVote)
                 short addOneLimit = (1.0/itsGame->fpsScale);
                 short deltaFrameLatency = curFrameLatency - rttFrameLatency;   // how far below LT is the current RTT(in frames)
-                if (autoLatencyVote >= HIGHERLATENCYCOUNT) {
+                if (autoLatencyVote > HIGHERLATENCYCOUNT) {                                // wait count is too high
                     // players had to wait too much, LT needs to go up, either via RTT or addOneLatency
                     // Examples:
                     //    LT=2.25 , rtt = 1.75, add1 = 0.25 --> add1 = 0.75 (LT -> 2.50)   [increase add1]
@@ -816,10 +825,9 @@ void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
                     //  * = previous value of rtt
                     addOneLatency = std::max<short>(addOneLatency, deltaFrameLatency + 1);
                     addOneLatency = std::min<short>(addOneLatency, addOneLimit);
-                    DBG_Log("lt+", "  ++addOneLatency = %hd\n", addOneLatency);
+                    DBG_Log("lt+", "  >>addOneLatency = %hd\n", addOneLatency);
                     reduceLatencyCounter = 0;
-                } else if (autoLatencyVote > LOWERLATENCYCOUNT ||                          // count between higher/lower
-                           addOneLatency > deltaFrameLatency || deltaFrameLatency == 0) {  // count lower but LT would NOT decrease
+                } else if (autoLatencyVote > LOWERLATENCYCOUNT) {                          // count between higher/lower limits
                     // try to keep LT where it is (unless RTT goes above LT)
                     // Examples:
                     //    LT=2.25 , rtt = 1.25, add1 = 0.25 --> add1 = 1.00 (LT -> 2.25)   [adjust add1 over full range]
@@ -830,37 +838,49 @@ void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
                     addOneLatency = std::max<short>(0, deltaFrameLatency);
                     addOneLatency = std::min<short>(addOneLatency, addOneLimit);
                     reduceLatencyCounter = 0;
-                    DBG_Log("lt+", "  ==addOneLatency = %hd\n", addOneLatency);
-                } else if (++reduceLatencyCounter >= 2) {                                  // is it time to reduce LT?
-                    // LT will decrease, either from RTT or add1
-                    // Examples:
-                    //    LT=2.25 , rtt = 1.00, add1 = 0.50 --> add1 = 0.50 (LT -> 1.50)   [don't increase add1 when RTT improves alot]
-                    //    LT=2.25 , rtt = 1.50, add1 = 0.50 --> add1 = 0.50 (LT -> 2.00)   [don't change add1]
-                    //  * LT=2.25 , rtt = 1.75, add1 = 0.50 --> add1 = 0.25 (LT -> 2.00)   [decrease add1]
-                    //    LT=2.25 , rtt = 2.00, add1 = 0.25 --> add1 = 0.00 (LT -> 2.00)   [decrease add1]
-                    //    LT=2.25 , rtt = 2.00, add1 = 0.00 --> add1 = 0.00 (LT -> 2.00)
-                    //    LT=2.25 , rtt = 2.00, add1 = 0.50                                [shouldn't get here]
-                    //    LT=2.25 , rtt = 2.25, add1 = 0.00                                [shouldn't get here]
-                    // bottom line: if RTT goes down MORE than 1 frame (0.25), don't change addOneLatency and let RTT alone reduce LT,
-                    //              otherwise decrement addOneLatency
-                    if (addOneLatency == deltaFrameLatency && addOneLatency > 0) {
-                        --addOneLatency;
+                    DBG_Log("lt+", "  <>addOneLatency = %hd\n", addOneLatency);
+                } else /* (autoLatencyVote <= LOWERLATENCYCOUNT) */ {
+                    // the "wait" counts are nice and low, keep it here for at least 2 consecutive low votes then consider decreasing LT
+                    bool rttCouldReduceLT = (addOneLatency < deltaFrameLatency);
+                    bool add1CouldReduceLT = (addOneLatency == deltaFrameLatency && addOneLatency > 0);
+                    // note: only increase counter if the LT could be reduced
+                    if ((rttCouldReduceLT || add1CouldReduceLT) && ++reduceLatencyCounter >= 2) {
+                        // LT will decrease, either from RTT or add1
+                        // Examples:
+                        //    LT=2.25 , rtt = 1.00, add1 = 0.50 --> add1 = 0.50 (LT -> 1.50)   [don't increase add1 when RTT improves alot]
+                        //    LT=2.25 , rtt = 1.50, add1 = 0.50 --> add1 = 0.50 (LT -> 2.00)   [don't change add1]
+                        //  * LT=2.25 , rtt = 1.75, add1 = 0.50 --> add1 = 0.25 (LT -> 2.00)   [decrease add1]
+                        //    LT=2.25 , rtt = 2.00, add1 = 0.25 --> add1 = 0.00 (LT -> 2.00)   [decrease add1]
+                        //    LT=2.25 , rtt = 2.00, add1 = 0.00 --> add1 = 0.00 (LT -> 2.00)
+                        //    LT=2.25 , rtt = 2.00, add1 = 0.50                                [shouldn't get here]
+                        //    LT=2.25 , rtt = 2.25, add1 = 0.00                                [shouldn't get here]
+                        // bottom line: if RTT goes down MORE than 1 frame (0.25), don't change addOneLatency and let RTT alone reduce LT,
+                        //              otherwise decrement addOneLatency
+                        if (rttCouldReduceLT) {
+                            // RTT will be small enough to reduce LT, don't change addOneLatency
+                            DBG_Log("lt+", "  <<addOneLatency = %hd\n", addOneLatency);
+                        } else /* add1WillReduce */ {
+                            // decreasing addOneLatency by 1 frame will reduce LT
+                            --addOneLatency;
+                            DBG_Log("lt+", "  --addOneLatency = %hd\n", addOneLatency);
+                        }
+                        reduceLatencyCounter = 0;
+                    } else {
+                        // wait counts are low so try to keep LT where it is, even if add1 goes a little negative
+                        addOneLatency = std::min(std::max<short>(-1, deltaFrameLatency), addOneLimit);
+                        if (!rttCouldReduceLT && !add1CouldReduceLT) {
+                            // we wouldn't have reduced LT in either case, so reset the counter
+                            reduceLatencyCounter = 0;
+                        }
+                        DBG_Log("lt+", "  ==addOneLatency = %hd, reduceLatencyCounter = %d\n", addOneLatency, reduceLatencyCounter);
                     }
-                    DBG_Log("lt+", "  --addOneLatency = %hd\n", addOneLatency);
-                    reduceLatencyCounter = 0;
-                } else {
-                    // try to keep LT where it is until the counter says we can change it
-                    // ... same logic as (autoLatencyVote > LOWERLATENCYCOUNT...) BUT don't reset reduceLatencyCounter
-                    addOneLatency = std::max<short>(0, deltaFrameLatency);
-                    addOneLatency = std::min<short>(addOneLatency, addOneLimit);
-                    DBG_Log("lt+", "  <<addOneLatency = %hd, reduceLatencyCounter = %d\n", addOneLatency, reduceLatencyCounter);
                 }
 
-                short newFrameLatency = rttFrameLatency + addOneLatency;
+                uint8_t newFrameLatency = rttFrameLatency + addOneLatency;
 
-                // limit LT unless it's set to zero
+                // limit LT unless max set to zero
                 if (maxAutoLatency > 0) {
-                    newFrameLatency = std::min<short>(newFrameLatency, maxAutoLatency);
+                    newFrameLatency = std::max(std::min(newFrameLatency, maxAutoLatency), minAutoLatency);
                 }
 
                 DBG_Log("lt", "  fn=%d RTT=%d, Classic LT=%.2lf, add=%.2lf --> FL=%d\n",
@@ -914,10 +934,12 @@ void CNetManager::ReceiveLatencyVote(int16_t sender,
                                      int32_t p3) {      // FRandSeed
 
     DBG_Log("lt+", "CNetManager::ReceiveLatencyVote(%d, %d, %hd, %d)\n", sender, p1, p2, p3);
-    autoLatencyVoteCount++;
-    autoLatencyVote += p1;
-
-    maxRoundTripLatency = std::max(maxRoundTripLatency, p2);
+    // ignore my own latency votes if I'm dead/spectating
+    if (p2 >= 0) {
+        autoLatencyVoteCount++;
+        autoLatencyVote += p1;
+        maxRoundTripLatency = std::max(maxRoundTripLatency, p2);
+    }
 
     playerTable[sender]->RandomKey(p3);
 
@@ -1005,113 +1027,115 @@ bool CNetManager::CanPlay() {
    return (!isPlaying && !playerTable[itsCommManager->myId]->IsAway());
 }
 
-void CNetManager::SendStartCommand(int16_t originalSender) {
-    SDL_Log("CNetManager::SendStartCommand(%d)\n", originalSender);
+void CNetManager::SendStartCommand() {
+    SDL_Log("CNetManager::SendStartCommand()\n");
 
-    activePlayersDistribution = 0;
-    startPlayersDistribution = 0;
-    // set readyPlayers partly as an indicator that a start command is being processed
-    readyPlayers = 0;
-    readyPlayersConsensus = 0;
-
-    if (itsCommManager->myId == 0) {
-        // to avoid multiple simultaneous starts, only the server sends the kpStartLevel requests to everyone
-        for (int i = 0; i < kMaxAvaraPlayers; i++) {
-            SDL_Log("  loadingStatus[%d] = %d\n", i, playerTable[i]->LoadingStatus());
-            if ((playerTable[i]->LoadingStatus() == kLLoaded ||
-                 playerTable[i]->LoadingStatus() == kLReady) &&
-                playerTable[i]->Presence() != kzAway)
-            {
-                activePlayersDistribution |= 1 << i;
-            }
+    uint16_t dist = 0;
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        if ((playerTable[i]->LoadingStatus() == kLLoaded ||
+             playerTable[i]->LoadingStatus() == kLReady) &&
+            playerTable[i]->Presence() != kzAway)
+        {
+            dist |= 1 << i;
         }
-        SDL_Log("  server sending kpStartLevel to everyone = 0x%02x\n", activePlayersDistribution);
-        startingGame = true;
-    } else {
-        // clients ask the server to forward the kpStartLevel request to everyone
-        SDL_Log("  client sending kpStartLevel to server only = 0x01\n");
-        activePlayersDistribution = kdServerOnly;
-        startingGame = false;
     }
+    // estimate initial frameLatency from RTT amongst players in dist
+    int8_t rttFL = itsGame->RoundTripToFrameLatency(itsCommManager->GetMaxRoundTrip(dist, -1));
 
-    itsCommManager->SendPacket(activePlayersDistribution, kpStartLevel, originalSender, activePlayersDistribution, 0, 0, 0);
+    itsCommManager->SendPacket(kdServerOnly, kpStartRequest, rttFL, dist, 0, 0, 0);
 }
 
-void CNetManager::ReceiveStartCommand(short activeDistribution, int16_t senderSlot, int16_t originalSender) {
-    SDL_Log("CNetManager::ReceiveStartCommand(0x%02x, %d, %d)\n", activeDistribution, senderSlot, originalSender);
-
-    if (senderSlot != 0) {
-        // The server will forward clients' kpStartLevel message to kdEveryone,
-        // iff readyPlayers hasn't been set, to make sure we aren't sending multiple start commands.
-        if (itsCommManager->myId == 0) {
-            if (!startingGame) {
-                SDL_Log("  server sending kpStartLevel on behalf of %s\n",
-                        playerTable[senderSlot]->GetPlayerName().c_str());
-                SendStartCommand(senderSlot);
-            } else {
-                SDL_Log("  server NOT sending kpStartLevel on behalf of %s because it's already trying to start a game\n",
-                        playerTable[senderSlot]->GetPlayerName().c_str());
-            }
+void CNetManager::ReceiveStartRequest(uint16_t activeDistribution, uint8_t initialFL, int16_t senderSlot) {
+    // called by the server in response to a client asking the server to send the kpStartLevel to everyone
+    SDL_Log("CNetManager::ReceiveStartRequest(0x%02x, %d, %d)\n", activeDistribution, initialFL, senderSlot);
+    // The server will forward clients' kpStartLevel message to activeDistribution,
+    // iff startingGame hasn't been set (to make sure we aren't sending multiple start commands).
+    if (!startingGame) {
+        // flag only set if server will be playing
+        startingGame = (activeDistribution & kdServerOnly);
+        SDL_Log("  server sending kpStartLevel on behalf of %s to 0x%02x\n",
+                playerTable[senderSlot]->GetPlayerName().c_str(), activeDistribution);
+        // if server isn't playing, need to send the server's config
+        if (!(activeDistribution & kdServerOnly)) {
+            UpdateLocalConfig();
+            PlayerConfigRecord copy = config;
+            ConfigByteSwap(&copy);
+            itsCommManager->SendUrgentPacket(activeDistribution, kpSendConfig, 0, 0, 0, sizeof(copy), (Ptr)&copy);
         }
+        itsCommManager->SendPacket(activeDistribution, kpStartLevel, initialFL, activeDistribution, 0, 0, 0);
     } else {
-        if (CanPlay()) {
-            deadOrDonePlayers = 0;
-            activePlayersDistribution = activeDistribution;
-            startPlayersDistribution = activeDistribution;
-            itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
-            isPlaying = true;
-            itsGame->ResumeGame();
-        }
+        SDL_Log("  server NOT sending kpStartLevel on behalf of %s because it's already trying to start a game\n",
+                playerTable[senderSlot]->GetPlayerName().c_str());
     }
 }
 
-void CNetManager::SendResumeCommand(int16_t originalSender) {
-    SDL_Log("CNetManager::SendResumeCommand(%d)\n", originalSender);
-
-    activePlayersDistribution = 0;
-
-    if (itsCommManager->myId == 0) {
-        // to avoid multiple simultaneous starts, only the server sends the kpResumeLevel requests to everyone
-        for (int i = 0; i < kMaxAvaraPlayers; i++) {
-            if (playerTable[i]->GetPlayer() && !playerTable[i]->GetPlayer()->isOut) {
-                activePlayersDistribution |= 1 << i;
-            }
-        }
-        startingGame = true;
-        SDL_Log("  server sending kpResumeLevel to everyone = 0x%02x\n", activePlayersDistribution);
+void CNetManager::SetLT(uint8_t frameLatency) {
+    // set LT based on passed frameLatency and server's config/limits
+    if (IsAutoLatencyEnabled()) {
+        frameLatency = std::min(std::max(minAutoLatency, frameLatency), maxAutoLatency);
     } else {
-        // clients ask the server to forward the kpStartLevel request to everyone
-        activePlayersDistribution = kdServerOnly;
-        startingGame = false;
-        SDL_Log("  client sending kpResumeLevel to server only = 0x01\n");
+        // fix LT to kLatencyToleranceTag value
+        frameLatency = maxAutoLatency;
     }
-
-    itsCommManager->SendPacket(activePlayersDistribution, kpResumeLevel, originalSender, activePlayersDistribution, FRandSeed, 0, 0);
+    itsGame->latencyTolerance = -1; // forces SetFrameLatency() to output the message
+    itsGame->SetFrameLatency(frameLatency);
 }
 
-void CNetManager::ReceiveResumeCommand(short activeDistribution, short senderSlot, Fixed randomKey, int16_t originalSender) {
-    SDL_Log("CNetManager::ReceiveResumeCommand(0x%02x, %d, 0x%08x, %d)\n", activeDistribution, senderSlot, randomKey, originalSender);
+void CNetManager::ReceiveStartLevel(uint16_t activeDistribution, uint8_t initialFL) {
+    // called by everyone in response to the server sending the kpStartLevel message
+    SDL_Log("CNetManager::ReceiveStartLevel(0x%02x, %d)\n", activeDistribution, initialFL);
 
-    if (senderSlot != 0) {
-        // The server will forward clients' kpStartLevel message to kdEveryone,
-        // iff readyPlayers hasn't been set, to make sure we aren't sending multiple start commands.
-        if (itsCommManager->myId == 0) {
-            if (!startingGame) {
-                SDL_Log("  server sending kpResumeLevel on behalf of %s\n",
-                        playerTable[senderSlot]->GetPlayerName().c_str());
-                SendResumeCommand(senderSlot);
-            } else {
-                SDL_Log("  server NOT sending kpResumeLevel on behalf of %s because it's already trying to resume a game\n",
-                        playerTable[senderSlot]->GetPlayerName().c_str());
-            }
-        }
-    } else {
+    if (CanPlay()) {
+        deadOrDonePlayers = 0;
         activePlayersDistribution = activeDistribution;
-        if (CanPlay() && randomKey == FRandSeed) {
-            itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
-            isPlaying = true;
-            itsGame->ResumeGame();
-        }
+        startPlayersDistribution = activeDistribution;
+        // set readyPlayers partly as an indicator that a start command is being processed
+        readyPlayers = 0;
+        readyPlayersConsensus = 0;
+
+        itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
+        isPlaying = true;
+        itsGame->ResumeGame();
+
+        SetLT(initialFL);
+        SDL_Log("Start with LT = %.2lf\n", itsGame->latencyTolerance);
+    }
+}
+
+void CNetManager::SendResumeCommand() {
+    SDL_Log("CNetManager::SendResumeCommand(): dist=0x%02x\n", activePlayersDistribution);
+
+    itsCommManager->SendPacket(kdServerOnly, kpResumeRequest, 0, activePlayersDistribution, FRandSeed, 0, 0);
+}
+
+void CNetManager::ReceiveResumeRequest(uint16_t activeDistribution, Fixed randomKey, int16_t senderSlot) {
+    SDL_Log("CNetManager::ReceiveResumeRequest(0x%02x, 0x%08x, %d)\n", activeDistribution, randomKey, senderSlot);
+
+    // The server will forward clients' kpStartLevel message to activeDistribution,
+    // iff startingGame hasn't been set, to make sure we aren't sending multiple start commands.
+    if (!startingGame) {
+        startingGame = (activeDistribution & kdServerOnly);
+        SDL_Log("  server sending kpResumeLevel on behalf of %s to 0x%02x\n",
+                playerTable[senderSlot]->GetPlayerName().c_str(), activeDistribution);
+        itsCommManager->SendPacket(activeDistribution, kpResumeLevel, 0, activeDistribution, randomKey, 0, 0);
+    } else {
+        SDL_Log("  server NOT sending kpResumeLevel on behalf of %s because it's already trying to resume a game\n",
+                playerTable[senderSlot]->GetPlayerName().c_str());
+    }
+}
+
+void CNetManager::ReceiveResumeLevel(uint16_t activeDistribution, Fixed randomKey) {
+    SDL_Log("CNetManager::ReceiveResumeCommand(0x%02x, 0x%08x)\n", activeDistribution, randomKey);
+
+    activePlayersDistribution = activeDistribution;
+    if (CanPlay() && randomKey == FRandSeed) {
+        itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
+        isPlaying = true;
+        itsGame->ResumeGame();
+
+        // if the server changes LT or AutoLT mode, this makes sure we use the correct LT
+        SetLT(itsGame->FrameLatency());
+        SDL_Log("Resume with LT = %.2lf\n", itsGame->latencyTolerance);
     }
 }
 
@@ -1322,19 +1346,24 @@ void CNetManager::AttachPlayers(CAbstractPlayer *playerActorList) {
     }
 }
 
-void CNetManager::ConfigPlayer(short senderSlot, Ptr configData) {
-    PlayerConfigRecord *config = (PlayerConfigRecord *)configData;
+void CNetManager::ConfigByteSwap(PlayerConfigRecord *config) {
     config->numGrenades = ntohs(config->numGrenades);
     config->numMissiles = ntohs(config->numMissiles);
     config->numBoosters = ntohs(config->numBoosters);
     config->hullType = ntohs(config->hullType);
-    config->frameLatency = ntohs(config->frameLatency);
+    config->frameLatencyMin = ntohs(config->frameLatencyMin);
+    config->frameLatencyMax= ntohs(config->frameLatencyMax);
     config->frameTime = ntohs(config->frameTime);
     config->spawnOrder = ntohs(config->spawnOrder);
     config->hullColor = ntohl(config->hullColor.GetRaw());
     config->trimColor = ntohl(config->trimColor.GetRaw());
     config->cockpitColor = ntohl(config->cockpitColor.GetRaw());
     config->gunColor = ntohl(config->gunColor.GetRaw());
+}
+
+void CNetManager::ConfigPlayer(short senderSlot, Ptr configData) {
+    PlayerConfigRecord *config = (PlayerConfigRecord *)configData;
+    ConfigByteSwap(config);
     playerTable[senderSlot]->TheConfiguration() = *config;
 }
 
@@ -1344,37 +1373,32 @@ void CNetManager::DoConfig(short senderSlot) {
     if (playerTable[senderSlot]->GetPlayer()) {
         playerTable[senderSlot]->GetPlayer()->ReceiveConfig(theConfig);
     }
+}
 
-    // gets the frame info from the server (senderSlot==0) if server is playing OR anyone else if server not playing (seems bad)
-    // ... but what about the kAllowLatencyBit?
-    if (PermissionQuery(kAllowLatencyBit, 0) || !(activePlayersDistribution & kdServerOnly) || senderSlot == 0) {
-        // save the frameTime, latency, maxLatency sent by the server (normally)
+void CNetManager::DoServerConfig() {
+    // gets the frame info from the server (senderSlot==0)
+    PlayerConfigRecord *theConfig = &playerTable[0]->TheConfiguration();
+    // save the frameTime, latency, maxLatency sent by the server
 
-        // transmitting latencyTolerance in terms of frameLatency to keep it as a short value on transmission
-        itsGame->SetFrameTime(theConfig->frameTime);
-        maxAutoLatency = theConfig->maxFrameLatency;
-        itsGame->SetFrameLatency(theConfig->frameLatency);
-        SDL_Log("DoConfig LT = %lf, maxFL = %d\n", itsGame->latencyTolerance, maxAutoLatency);
-        itsGame->SetSpawnOrder((SpawnOrder)theConfig->spawnOrder);
-        latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD);
-    }
+    // (transmitting latencyTolerance in terms of frameLatency to keep it as a short value on transmission)
+    itsGame->SetFrameTime(theConfig->frameTime);
+    minAutoLatency = theConfig->frameLatencyMin;
+    maxAutoLatency = theConfig->frameLatencyMax;
+    SDL_Log("DoServerConfig(): frameTime = %d, FL = [%d, %d]\n", theConfig->frameTime, minAutoLatency, maxAutoLatency);
+
+    itsGame->SetSpawnOrder((SpawnOrder)theConfig->spawnOrder);
+    latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD);
 }
 
 void CNetManager::UpdateLocalConfig() {
     CPlayerManager *thePlayerManager = playerTable[itsCommManager->myId].get();
 
-    config.maxFrameLatency = gApplication
-        ? gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale : 0;
-    if (IsAutoLatencyEnabled()) {
-        // start with the max RTT value
-        config.frameLatency = itsGame->RoundTripToFrameLatency(itsCommManager->GetMaxRoundTrip(AlivePlayersDistribution()));
-        config.frameLatency += 0.25/itsGame->fpsScale;  // a wee buffer on startup LT (adds 0.25LT for 62.5 fps)
-        config.frameLatency = std::min(config.frameLatency, config.maxFrameLatency);
-    } else {
-        // fix LT to kLatencyToleranceTag
-        config.frameLatency = config.maxFrameLatency;
-    }
     config.frameTime = itsGame->frameTime;
+    config.frameLatencyMin = gApplication
+        ? gApplication->Get<float>(kLatencyToleranceMinTag) / itsGame->fpsScale : 0;
+    config.frameLatencyMax = gApplication
+        ? gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale : 0;
+
     config.spawnOrder = gApplication ? gApplication->Get<short>(kSpawnOrder) : ksHybrid;
     config.hullType = gApplication ? gApplication->Number(kHullTypeTag) : 0;
     config.hullColor = gApplication

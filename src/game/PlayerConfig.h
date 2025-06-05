@@ -13,14 +13,17 @@
 #include "FastMat.h"
 
 struct PlayerConfigRecord {
+    // hull config
     short numGrenades {};
     short numMissiles {};
     short numBoosters {};
     short hullType {};
-    short frameLatency {};
-    short maxFrameLatency {};
+    // server config
+    uint16_t frameLatencyMin {};
+    uint16_t frameLatencyMax {};
     short frameTime {};
     short spawnOrder {};
+    // hull colors
     ARGBColor hullColor { (*ColorManager::getMarkerColor(0)).WithA(0xff) };
     ARGBColor trimColor { (*ColorManager::getMarkerColor(1)).WithA(0xff) };
     ARGBColor cockpitColor { (*ColorManager::getMarkerColor(2)).WithA(0xff) };

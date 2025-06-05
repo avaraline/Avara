@@ -64,9 +64,11 @@ static const char* eyeballs_utf8  = "\xF0\x9F\x91\x80";
 class CPlayerManager {
 protected:
     static CPlayerManager* theLocalPlayer;
+    static CPlayerManager* theServerPlayer;
 public:
     static CPlayerManager* LocalPlayer() { return theLocalPlayer; };  // the current/local player
-
+    static CPlayerManager* ServerPlayer() { return theServerPlayer; };  // the serving player
+    
     virtual std::string GetChatString(int maxChars) = 0;
     virtual std::string GetChatLine() = 0;
     virtual CAbstractPlayer* GetPlayer() = 0;
@@ -99,6 +101,9 @@ public:
     virtual void SetPresence(PresenceType) = 0;
     virtual void SetPlayerStatus(LoadingState newStatus, PresenceType newPresence, FrameNumber theWin) = 0;
     virtual bool IsAway() = 0;
+    virtual bool IsSpectating() = 0;
+    virtual bool IsLoaded() = 0;
+    virtual bool IsReady() = 0;
 
     virtual void ChangeName(StringPtr theName) = 0;
     virtual void SetPosition(short pos) = 0;
@@ -188,7 +193,7 @@ private:
     std::deque<char> lineBuffer;
 
     FrameNumber winFrame;
-    LoadingState loadingStatus;
+    LoadingState loadingStatus, prevState;
     PresenceType presence;
     short slot;
     short playerColor;
@@ -207,13 +212,16 @@ private:
         .numMissiles = 0,
         .numBoosters = 0,
         .hullType = 0,
-        .frameLatency = 0,
+        .frameLatencyMax = 0,
+        .frameLatencyMin = 0,
         .frameTime = 0,
         .cockpitColor = (*ColorManager::getMarkerColor(2)).WithA(0xff),
         .gunColor = (*ColorManager::getMarkerColor(3)).WithA(0xff)
     };
     std::unordered_map<SDL_Scancode, uint32_t> keyMap; // maps keyboard key to keyFunc
-
+    
+    std::unordered_map<uint8_t, uint32_t> controllerButtonMap;
+    float controllerCurveExp, controllerMaxMove, controllerMultiplyX, controllerMultiplyY, controllerStickThreshold, controllerTriggerThreshold, controllerDamper;
 public:
 
     virtual void IPlayerManager(CAvaraGame *theGame, short id, CNetManager *aNetManager);
@@ -226,6 +234,7 @@ public:
     virtual void HandleEvent(SDL_Event &event);
     virtual void HandleKeyDown(uint32_t keyFunc);
     virtual void HandleKeyUp(uint32_t keyFunc);
+    virtual void HandleAxis(float value, float threshold, int bit);
     virtual void SendFrame();
     virtual void ResumeGame();
 
@@ -253,6 +262,9 @@ public:
     virtual void SetPlayerStatus(LoadingState newStatus, PresenceType newPresence, FrameNumber theWin);
     virtual void SetPlayerReady(bool isReady);
     virtual bool IsAway();
+    virtual bool IsSpectating();
+    virtual bool IsLoaded();
+    virtual bool IsReady();
 
     virtual void ResendFrame(FrameNumber theFrame, short requesterId, short commandCode);
 

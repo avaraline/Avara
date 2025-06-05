@@ -179,7 +179,7 @@ int main(int argc, char *argv[]) {
             app->handleSDLEvent(event);
         }
         if(SDL_GetTicks() - last_tick < app->throttle) continue;
-        app->drawContents();
+        app->RenderContents();
         SDL_GL_SwapWindow(app->window);
         SDL_PollEvent(&event);
     }
@@ -191,3 +191,18 @@ int main(int argc, char *argv[]) {
 
     return 0;
 }
+
+#if defined(__IPHONEOS__) || defined(__TVOS__)
+
+#ifndef SDL_MAIN_HANDLED
+#ifdef main
+#undef main
+#endif
+
+int main(int argc, char *argv[])
+{
+    return SDL_UIKitRunApp(argc, argv, SDL_main);
+}
+#endif /* !SDL_MAIN_HANDLED */
+
+#endif /* __IPHONEOS__ || __TVOS__ */

@@ -9,10 +9,14 @@
 
 #pragma once
 
+#include "CCompoundShape.h"
 #include "CDirectObject.h"
 #include "Types.h"
 
+#include <memory>
+
 class CBSPPart;
+class CCompoundShape;
 class CViewParameters;
 
 class CBSPWorld {
@@ -21,7 +25,6 @@ public:
 
     virtual void AddPart(CBSPPart *thePart) {};
     virtual void DisposeParts() {};
-    virtual void OverheadPoint(Fixed *pt, Fixed *extent) {};
     virtual void PrepareForRender() {};
     virtual void RemovePart(CBSPPart *thePart) {};
 };
@@ -44,11 +47,15 @@ public:
     virtual uint16_t GetPartCount();
     virtual uint16_t GetVisiblePartCount();
     virtual CBSPPart **GetVisiblePartListPointer();
-    virtual void OverheadPoint(Fixed *pt, Fixed *extent);
     virtual void PrepareForRender();
     virtual void RemovePart(CBSPPart *thePart);
     virtual void ScoreAndSort(CBSPPart **firstPart, short overlapCount);
     virtual void SortByZ();
     virtual void SortVisibleParts();
     virtual void VisibilitySort(CBSPPart **firstPart, short overlapCount);
+    
+    /**
+     * Collapse contained parts into a `CCompoundShape` and return the result.
+     */
+    virtual std::unique_ptr<CCompoundShape> Squash();
 };

@@ -34,7 +34,7 @@
 
 #define kMaxLatencyTolerance 8
 
-#define kAvaraNetVersion 15
+#define kAvaraNetVersion 18
 
 
 enum { kNullNet, kServerNet, kClientNet };
@@ -96,14 +96,16 @@ public:
 
     short serverOptions;
     short loaderSlot;
-    short maxAutoLatency;  // max frame latency for auto-LT
+    uint8_t minAutoLatency;  // min frame latency for auto-LT
+    uint8_t maxAutoLatency;  // max frame latency for auto-LT
 
     PlayerConfigRecord config = {        
         .numGrenades = 0,
         .numMissiles = 0,
         .numBoosters = 0,
         .hullType = 0,
-        .frameLatency = 0,
+        .frameLatencyMin = 0,
+        .frameLatencyMax = 0,
         .frameTime = 0,
         .cockpitColor = (*ColorManager::getMarkerColor(2)).WithA(0xff),
         .gunColor = (*ColorManager::getMarkerColor(3)).WithA(0xff)
@@ -147,7 +149,7 @@ public:
     virtual void SendRealName(short toSlot);
     virtual void RealNameReport(short slot, short regStatus, StringPtr realName);
     virtual void NameChange(StringPtr newName);
-    virtual void RecordNameAndState(short slotId, StringPtr theName, LoadingState status, PresenceType presence);
+    virtual void RecordNameAndState(short slotId, StringPtr theName, LoadingState status, PresenceType presence, float elo);
     virtual void ValueChange(short slot, std::string attributeName, bool value);
 
     virtual void SwapPositions(short ind1, short ind2);
@@ -156,6 +158,7 @@ public:
     virtual void FlushMessageBuffer();
     virtual void BufferMessage(size_t len, char *c);
     virtual void SendRosterMessage(size_t len, char *c);
+    virtual void SendRosterMessage(const std::string msg);
     virtual void ReceiveRosterMessage(short slotId, short len, char *c);
 
     // Color here refers to the team color, not custom color(s)!
@@ -172,11 +175,16 @@ public:
     virtual void SendPingCommand(int trips);
     virtual Boolean ResumeEnabled();
     virtual bool CanPlay();
-    virtual void SendStartCommand(int16_t originalSender = 0);
-    virtual void ReceiveStartCommand(short activeDistribution, int16_t senderSlot, int16_t originalSender);
 
-    virtual void SendResumeCommand(int16_t originalSender = 0);
-    virtual void ReceiveResumeCommand(short activeDistribution, short fromSlot, Fixed randomKey, int16_t originalSender);
+    virtual void SendStartCommand();
+    virtual void ReceiveStartRequest(uint16_t activeDistribution, uint8_t initialLT, int16_t senderSlot);
+    virtual void SetLT(uint8_t frameLatency);
+    virtual void ReceiveStartLevel(uint16_t activeDistribution, uint8_t initialLT);
+
+    virtual void SendResumeCommand();
+    virtual void ReceiveResumeRequest(uint16_t activeDistribution, Fixed randomKey, int16_t fromSlot);
+    virtual void ReceiveResumeLevel(uint16_t activeDistribution, Fixed randomKey);
+
     virtual void ReceiveReady(short slot, uint32_t readyPlayers);
 
     virtual void ReceivePlayerStatus(short slotId, LoadingState newStatus, PresenceType newPresence, Fixed randomKey, FrameNumber winFrame);
@@ -217,8 +225,10 @@ public:
 
     virtual void StopGame(short newStatus);
 
+    virtual void ConfigByteSwap(PlayerConfigRecord *config);
     virtual void ConfigPlayer(short senderSlot, Ptr configData);
     virtual void DoConfig(short senderSlot);
+    virtual void DoServerConfig();
     virtual void UpdateLocalConfig();
 
     virtual void StoreMugShot(Handle mugPict);

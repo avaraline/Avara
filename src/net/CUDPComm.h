@@ -117,7 +117,7 @@ public:
     virtual void ProcessQueue();
 
     virtual std::string FormatConnectionTable(CompleteAddress *table);
-    virtual bool IsDoubleNAT(uint32_t host);
+    static bool IsLAN(uint32_t host);
     virtual void SendConnectionTable();
     virtual void ReplaceMatchingNAT(const IPaddress &addr);
     virtual void ReadFromTOC(PacketInfo *thePacket);
@@ -153,7 +153,7 @@ public:
 
     virtual Boolean ReconfigureAvailable();
     virtual void Reconfigure();
-    virtual long GetMaxRoundTrip(short distribution, short *slowPlayerId = nullptr);
+    virtual long GetMaxRoundTrip(short distribution, float multiplier = 0.0, short *slowPlayerId = nullptr);
     virtual float GetMaxMeanSendCount(short distribution);
     virtual float GetMaxMeanReceiveCount(short distribution);
 

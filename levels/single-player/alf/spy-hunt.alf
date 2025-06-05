@@ -86,15 +86,15 @@ against evasive flying enemies." cx="120.03472222222223" cz="113.8888888888889" 
   <Ufo shotPower="0.3" attack="0" accel="spyAccel" verticalRangeMax="10" motionRange="40" checkPeriod="12" homeBase="@ufoHome" killMsg="@ufoKill" homeRange="50" shield="spyShield" color="#431579" color.1="#f42300" cx="182.67361111111111" cz="127.08333333333334" angle="135" />
   <Base in="@timeToGoHome" out="@ufoHome" verticalRangeMax="500" y="500" cx="119.96527777777777" cz="144.16666666666669" />
   <Timer stop="@missionComplete" in="@start" out="@timeToGoHome" wait="escapeTime" />
-  <Text in="@timeToGoHome" showEveryone="true" text="Spy transport detected on planetary orbit." cx="119.96527777777777" cz="144.16666666666669" r="2.5" />
-  <Area y="800" activeRange="500" watch="robotMask" enter="@gameLost" cx="119.96527777777777" cz="144.16666666666669" r="2.5" />
-  <Text in="@gameLost" showEveryone="true" text="A spy has escaped. Mission failed." restart="10000" cx="119.96527777777777" cz="144.16666666666669" r="2.5" />
+  <Text in="@timeToGoHome" showEveryone="true" text="Spy transport detected on planetary orbit." cx="117.8125" cz="141.90972222222223" r="2.5" />
+  <Area y="800" activeRange="500" watch="robotMask" enter="@gameLost" cx="117.8125" cz="141.90972222222223" r="2.5" />
+  <Text in="@gameLost" showEveryone="true" text="A spy has escaped. Mission failed." restart="10000" cx="117.8125" cz="141.90972222222223" r="2.5" />
   <unique vars="kill1 kill2 showMissionComplete" />
   <Distributor in="@ufoKill" out.0="kill1" out.1="kill2" out.2="@missionComplete" />
-  <Text in="kill1" showEveryone="true" text="One down, two to go." cx="119.96527777777777" cz="119.16666666666667" r="2.5" />
-  <Text in="kill2" showEveryone="true" text="One more kill before we are safe." cx="119.96527777777777" cz="119.16666666666667" r="2.5" />
+  <Text in="kill1" showEveryone="true" text="One down, two to go." cx="117.8125" cz="141.90972222222223" r="2.5" />
+  <Text in="kill2" showEveryone="true" text="One more kill before we are safe." cx="117.8125" cz="141.90972222222223" r="2.5" />
   <Text in="@missionComplete" showEveryone="true" text="Objectives reached.
-Return to base to complete mission." cx="119.96527777777777" cz="119.16666666666667" r="2.5" />
+Return to base to complete mission." cx="117.8125" cz="141.90972222222223" r="2.5" />
   <Teleporter win="1000" group="-1" start="@missionComplete" stop="showMissionComplete" out="showMissionComplete" color="#f42300" color.1="#000000" cx="119.96527777777777" cz="119.16666666666667" angle="135" />
   <Goody shape="bspMissionComplete" scale="3" speed="4.5" start="showMissionComplete" status="false" out="@missionComplete" color="#f42300" color.1="#000000" cx="119.96527777777777" cz="119.16666666666667" angle="135" />
   <Sound sound="snBubbles" y="80" rate="0.5" volume="250" start="@start" loopCount="-1" isAmbient="true" cx="119.96527777777777" cz="119.16666666666667" angle="135" />

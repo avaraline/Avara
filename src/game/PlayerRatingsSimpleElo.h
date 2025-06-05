@@ -54,14 +54,16 @@ struct CaseInsensitiveCompare {
 };
 
 class PlayerRatingsSimpleElo {
-    typedef std::map<std::string, Rating, CaseInsensitiveCompare> RatingsMap;  // set->[level->[tags]]
+    typedef std::map<std::string, Rating, CaseInsensitiveCompare> RatingsMap;
     JSONify<RatingsMap> ratingsMap;
 
 public:
     PlayerRatingsSimpleElo();
 
     std::vector<std::pair<std::string,Rating>> GetRatings(std::vector<std::string> playerIds);
+    std::pair<std::string,Rating> GetRating(const std::string& playerId);
     void UpdateRatings(std::vector<PlayerResult> &playerResults);
+    void UpdateRating(const std::string& playerId, float newRating, bool incrementCount = false);
 
     std::map<int, std::vector<std::string>> SplitIntoTeams(std::vector<int>, std::vector<std::string> playerIds);
     std::map<int, std::vector<std::string>> SplitIntoBestTeams(std::vector<int>, std::vector<std::string> playerIds);

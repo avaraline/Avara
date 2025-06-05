@@ -56,7 +56,7 @@ CAbstractActor *CParasite::EndScript() {
         range = ReadFixedVar(iRange);
 
         partCount = 1;
-        LoadPartWithColors(0, ReadLongVar(iShape));
+        LoadPartWithMaterials(0, ReadLongVar(iShape));
         location[1] -= partList[0]->minBounds.x;
 
         acceleration = ReadFixedVar(iAccelerate);
@@ -85,9 +85,9 @@ void CParasite::ReleaseAttachment() {
             host->Detach(&clamp);
             hostIdent = 0;
             hostPart = NULL;
-            location[0] = partList[0]->itsTransform[3][0];
-            location[1] = partList[0]->itsTransform[3][1];
-            location[2] = partList[0]->itsTransform[3][2];
+            location[0] = partList[0]->modelTransform[3][0];
+            location[1] = partList[0]->modelTransform[3][1];
+            location[2] = partList[0]->modelTransform[3][2];
         }
     }
 }
@@ -98,7 +98,7 @@ CParasite::~CParasite() {
 void CParasite::PlaceParts() {
     if (hostPart) {
         partList[0]->CopyTransform(&relation);
-        partList[0]->ApplyMatrix(&hostPart->itsTransform);
+        partList[0]->ApplyMatrix(&hostPart->modelTransform);
     } else {
         partList[0]->Reset();
         InitialRotatePartX(partList[0], pitch);
@@ -107,7 +107,7 @@ void CParasite::PlaceParts() {
     }
 
     partList[0]->MoveDone();
-    LinkSphere(partList[0]->itsTransform[3], partList[0]->bigRadius);
+    LinkSphere(partList[0]->modelTransform[3], partList[0]->bigRadius);
 
     CRealMovers::PlaceParts();
 }
@@ -120,7 +120,7 @@ void CParasite::ClampOn(CSmartPart *clampTo) {
     host = (CAbstractPlayer *)hostPart->theOwner;
     invHost = hostPart->GetInverseTransform();
 
-    CombineTransforms(&partList[0]->itsTransform, &relation, invHost);
+    CombineTransforms(&partList[0]->modelTransform, &relation, invHost);
     DoSound(clampSound, location, clampVolume, FIX1);
 
     clamp.me = this;
@@ -145,7 +145,7 @@ void CParasite::CourseCheck() {
         Fixed *ploc;
         Vector delta;
 
-        ploc = aPlayer->partList[0]->itsTransform[3];
+        ploc = aPlayer->partList[0]->modelTransform[3];
 
         ray.direction[0] = delta[0] = ploc[0] - location[0];
         ray.direction[1] = delta[1] = ploc[1] - location[1];

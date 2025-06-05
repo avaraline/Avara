@@ -61,19 +61,22 @@ CAbstractActor *CFreeSolid::EndScript() {
         shapeId = ReadLongVar(iShape); //	Read our shape resource ID
         if (shapeId) {
             partCount = 1;
-            LoadPartWithColors(0, shapeId); //	Create our shape
+            LoadPartWithMaterials(0, shapeId); //	Create our shape
         } else if (lastWallActor) //	Use the last wall brick as our shape
         {
             CSmartPart *thePart;
 
             thePart = lastWallActor->partList[0];
             thePart->theOwner = this;
+            if (!IsGeometryStatic() && thePart->userFlags & CBSPUserFlags::kIsStatic) {
+                thePart->userFlags -= CBSPUserFlags::kIsStatic;
+            }
 
             partCount = 1;
             partList[0] = thePart;
 
             //TranslatePartY(thePart, ReadLongVar(iHeight));
-            VECTORCOPY(location, thePart->itsTransform[3]);
+            VECTORCOPY(location, thePart->modelTransform[3]);
             gRenderer->RemovePart(thePart);
 
             heading = 0;
@@ -211,7 +214,7 @@ void CFreeSolid::FrameAction() {
                     searchCount = ++itsGame->searchCount;
 
                     theBlast.blastPower = hitPower;
-                    VECTORCOPY(theBlast.blastPoint, partList[0]->itsTransform[3]);
+                    VECTORCOPY(theBlast.blastPoint, partList[0]->modelTransform[3]);
                     theBlast.team = teamColor;
                     theBlast.playerId = -1;
 

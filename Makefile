@@ -55,7 +55,7 @@ else
 	FRAMEWORK_PATH = /Library/Frameworks
 endif
 	CPPFLAGS += -F$(FRAMEWORK_PATH)
-	LDFLAGS += -F$(FRAMEWORK_PATH) -rpath $(FRAMEWORK_PATH) -L/opt/homebrew/lib -L/usr/local/lib -lstdc++ -lm -lpthread -framework SDL2 -framework OpenGL -framework AppKit
+	LDFLAGS += -F$(FRAMEWORK_PATH) -rpath $(FRAMEWORK_PATH) -L/opt/homebrew/lib -L/usr/local/lib -lstdc++ -lm -lpthread -lsqlite3 -framework SDL2 -framework OpenGL -framework AppKit
 	POST_PROCESS ?= dsymutil
 
 	JOBS := $(shell sysctl -n hw.ncpu)
@@ -73,14 +73,14 @@ else ifneq (,$(findstring NT-10.0,$(UNAME)))
 	PRE_PROCESS += $(WINDRES) $(PLATFORM)/appicon.rc -O coff $(BUILD_DIR)/appicon.o;
 	PRE_PROCESS += $(WINDRES) $(PLATFORM)/version.rc -O coff $(BUILD_DIR)/version.o;
 	EXTRA_OBJS += $(BUILD_DIR)/appicon.o $(BUILD_DIR)/version.o
-	LDFLAGS += -lstdc++ -lm -lpthread -lmingw32 -lSDL2main -lSDL2 -lglu32 -lopengl32 -lws2_32 -lcomdlg32
+	LDFLAGS += -lstdc++ -lm -lpthread -lmingw32 -lSDL2main -lSDL2 -lglu32 -lopengl32 -lws2_32 -lcomdlg32 -lsqlite3
 	CPPFLAGS += -Wno-unknown-pragmas
 	CFLAGS += -D_WIN32_WINNT=0x501
 	POST_PROCESS ?= ls -lh
 else
 	# Linux
 	PKG_CONFIG ?= pkg-config
-	LDFLAGS += -lstdc++ -lm -lpthread -ldl
+	LDFLAGS += -lstdc++ -lm -lpthread -ldl -lsqlite3
 	LDFLAGS += $(shell ${PKG_CONFIG} --libs-only-l glu)
 	LDFLAGS += $(shell ${PKG_CONFIG} --libs-only-l sdl2)
 	CPPFLAGS += $(shell ${PKG_CONFIG} --cflags-only-I directfb)
@@ -105,7 +105,7 @@ bspviewer: $(BUILD_DIR)/BSPViewer resources
 
 levelviewer: $(BUILD_DIR)/AvaraLevelViewer resources
 
-hsnd2wav: $(BUILD_DIR)/hsnd2wav resources
+hsnd2wav: set-version $(BUILD_DIR)/hsnd2wav resources
 
 frandom: $(BUILD_DIR)/frandom
 

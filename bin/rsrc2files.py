@@ -215,6 +215,9 @@ def convert_to_files(datafile, thedir):
             except FileNotFoundError:
                 pass
 
+    if "BSPS" in forks:
+        result["BSPS"] = get_tmpl(forks, "BSPS")
+
     dumpdirs = [os.path.join(thedir, SETFILE)]
     if datafile == "levels/single-player.r":
         dumpdirs.append(os.path.join("rsrc", SETFILE))

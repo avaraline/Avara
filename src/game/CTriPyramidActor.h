@@ -14,5 +14,6 @@
 
 class CTriPyramidActor : public CPlacedActors {
 public:
-    virtual CAbstractActor *EndScript();
+    virtual CAbstractActor *EndScript() override;
+    virtual bool IsGeometryStatic() override { return true; };
 };

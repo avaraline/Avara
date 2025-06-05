@@ -13,6 +13,7 @@
 #include "AssetManager.h"
 #include "AvaraDefines.h"
 #include "CViewParameters.h"
+#include "LevelLoader.h"
 #include "Memory.h"
 #include "Debug.h"
 
@@ -40,27 +41,13 @@ CBSPPart *CBSPPart::Create(short resId) {
 
 void CBSPPart::IBSPPart(short resId) {
     DBG_Log("bsp", "Loading BSP: %d\n", resId);
-    lightSeed = 0;
-    nextTemp = NULL;
-    // colorReplacements = NULL;    //  Use default colors.
-    isTransparent = false;
-    ignoreDirectionalLights = false;
-
-    usesPrivateHither = false;
-    usesPrivateYon = false;
-
-    extraAmbient = 0;
-    privateAmbient = -1;
-
-    hither = FIX3(500); //  50 cm   I set these variables just in case some bozo
-    yon = FIX(500); //  500 m   sets the flags above and forgets to set the values.
-    userFlags = 0;
+    
+    uint16_t materialCount = 0;
+    uint32_t pointCount = 0;
+    uint32_t polyCount = 0;
 
     auto json = AssetManager::GetBsp(resId);
     if (!json) {
-        colorCount = 0;
-        polyCount = 0;
-        pointCount = 0;
         return;
     }
 
@@ -72,9 +59,9 @@ void CBSPPart::IBSPPart(short resId) {
     doc["bounds"].emplace("min", json::array({0.0, 0.0, 0.0}));
     doc["bounds"].emplace("max", json::array({0.0, 0.0, 0.0}));
 
-    colorCount = static_cast<uint16_t>(doc["colors"].size());
-    polyCount = static_cast<uint32_t>(doc["polys"].size());
+    materialCount = static_cast<uint16_t>(doc["materials"].size());
     pointCount = static_cast<uint32_t>(doc["points"].size());
+    polyCount = static_cast<uint32_t>(doc["polys"].size());
 
     enclosureRadius = ToFixed(doc["radius1"]);
     bigRadius = ToFixed(doc["radius2"]);
@@ -106,24 +93,51 @@ void CBSPPart::IBSPPart(short resId) {
     DBG_Log("bsp", "  bounds.y = [%d, %d]\n", minBounds.y, maxBounds.y);
     DBG_Log("bsp", "  bounds.z = [%d, %d]\n", minBounds.z, maxBounds.z);
 
-    origColorTable = std::make_unique<ARGBColor[]>(colorCount);
-    currColorTable = std::make_unique<ARGBColor[]>(colorCount);
-    pointTable = std::make_unique<Vector[]>(pointCount);
-    polyTable = std::make_unique<PolyRecord[]>(polyCount);
+    materialTable = std::vector<MaterialRecord>();
+    pointTable = std::vector<FixedPoint>();
+    polyTable = std::vector<PolyRecord>();
+    
+    materialTable.reserve(materialCount);
+    pointTable.reserve(pointCount);
+    polyTable.reserve(polyCount);
 
-    for (uint16_t i = 0; i < colorCount; i++) {
-        nlohmann::json value = doc["colors"][i];
-        ARGBColor color = ARGBColor::Parse(value)
-            .value_or(ARGBColor(0x00ffffff)); // Fallback to invisible "white."
-        origColorTable[i] = color;
+    Material defaultMaterial, baseMaterial, original, current;
+    defaultMaterial = GetDefaultMaterial();
+    baseMaterial = GetBaseMaterial();
+    for (uint16_t i = 0; i < materialCount; i++) {
+        original = baseMaterial;
+        current = baseMaterial;
+        nlohmann::json mat = doc["materials"][i];
+        ARGBColor color = ARGBColor(0x00ffffff); // Default to invisible "white."
+        ARGBColor spec = defaultMaterial.GetSpecular().WithA(defaultMaterial.GetShininess());
+        
+        if (mat.find("base") != mat.end()) {
+            color = ARGBColor::Parse(mat["base"])
+                .value_or(color);
+        }
+        original = original.WithColor(color);
         if (color == *ColorManager::getMarkerColor(0) ||
             color == *ColorManager::getMarkerColor(1) ||
             color == *ColorManager::getMarkerColor(2) ||
             color == *ColorManager::getMarkerColor(3)) {
-            currColorTable[i] = color.WithA(0xff);
+            current = current.WithColor(color.WithA(0xff));
         } else {
-            currColorTable[i] = color;
+            current = current.WithColor(color);
         }
+        
+        if (mat.find("spec") != mat.end()) {
+            spec = ARGBColor::Parse(mat["spec"])
+                .value_or(spec);
+        }
+        original = original.WithSpecular(spec).WithShininess(spec.GetA());
+        if (spec.GetR() == defaultMaterial.GetSpecR() &&
+            spec.GetG() == defaultMaterial.GetSpecG() &&
+            spec.GetB() == defaultMaterial.GetSpecB() &&
+            spec.GetA() == defaultMaterial.GetShininess()) {
+            spec = baseMaterial.GetSpecular().WithA(baseMaterial.GetShininess());
+        }
+        current = current.WithSpecular(spec).WithShininess(spec.GetA());
+        materialTable.push_back(MaterialRecord(original, current));
     }
     
     CheckForAlpha();
@@ -133,54 +147,50 @@ void CBSPPart::IBSPPart(short resId) {
     if (showPoints) { DBG_Log("bsp", "  points:\n"); }
     for (uint32_t i = 0; i < pointCount; i++) {
         nlohmann::json pt = doc["points"][i];
-        pointTable[i][0] = ToFixed(pt[0]);
-        pointTable[i][1] = ToFixed(pt[1]);
-        pointTable[i][2] = ToFixed(pt[2]);
-        pointTable[i][3] = FIX1;
-        if (showPoints) { DBG_Log("bsp", "    %s\n", FormatVector(pointTable[i]).c_str()); }
+        FixedPoint v = FixedPoint(ToFixed(pt[0]), ToFixed(pt[1]), ToFixed(pt[2]), FIX1);
+        pointTable.push_back(v);
+        if (showPoints) { DBG_Log("bsp", "    %s\n", pointTable[i].Format().c_str()); }
     }
-
-    totalPoints = 0;
 
     for (uint32_t i = 0; i < polyCount; i++) {
         nlohmann::json poly = doc["polys"][i];
         nlohmann::json pt;
-        // Color
-        polyTable[i].colorIdx = static_cast<uint16_t>(poly["color"]);
+        PolyRecord r = PolyRecord();
+        // Material
+        r.materialIdx = static_cast<uint16_t>(poly["mat"]);
         // Normal
         nlohmann::json norms = doc["normals"];
         int idx = poly["normal"];
         nlohmann::json norm = norms[idx];
-        polyTable[i].normal[0] = norm[0];
-        polyTable[i].normal[1] = norm[1];
-        polyTable[i].normal[2] = norm[2];
+        r.normal.x = norm[0];
+        r.normal.y = norm[1];
+        r.normal.z = norm[2];
         // Triangle points
-        polyTable[i].vis = static_cast<uint8_t>(poly["vis"]);
-        polyTable[i].triCount = poly["tris"].size() / 3;
-        polyTable[i].triPoints = std::make_unique<uint16_t[]>(poly["tris"].size());
+        r.vis = static_cast<uint8_t>(poly["vis"]);
+        r.triCount = static_cast<uint32_t>(poly["tris"].size()) / 3;
+        r.triPoints = std::make_unique<uint32_t[]>(poly["tris"].size());
         for (size_t j = 0; j < poly["tris"].size(); j += 3) {
             for (size_t k = 0; k < 3; k++) {
                 pt = poly["tris"][j + k];
-                polyTable[i].triPoints[j + k] = (uint16_t)pt;
-                totalPoints += 1;
+                r.triPoints[j + k] = (uint32_t)pt;
             }
         }
         if (poly.contains("front")) {
-            polyTable[i].front = poly["front"];
+            r.front = poly["front"];
+        } else {
+            r.front = uint32_t(-1);
         }
-        else polyTable[i].front = uint16_t(-1);
 
         if (poly.contains("back")) {
-            polyTable[i].back = poly["back"];
+            r.back = poly["back"];
+        } else {
+            r.back = uint32_t(-1);
         }
-        else polyTable[i].back = uint16_t(-1);
+        polyTable.push_back(std::move(r));
     }
 
     BuildBoundingVolumes();
     Reset();
-
-    vData = gRenderer->NewVertexDataInstance();
-    if (vData) vData->Replace(*this);
 }
 
 void CBSPPart::PostRender() {}
@@ -191,13 +201,13 @@ void CBSPPart::TransformLights() {
         if (lightSeed != vp->lightSeed) {
             lightSeed = vp->lightSeed;
 
-            VectorMatrixProduct(vp->lightSourceCount, vp->lightSources, objLights, &invGlobTransform);
+            VectorMatrixProduct(vp->lightSourceCount, vp->lightSources, objLights, &invModelTransform);
         }
     }
 
-    localViewOrigin[0] = invFullTransform[3][0];
-    localViewOrigin[1] = invFullTransform[3][1];
-    localViewOrigin[2] = invFullTransform[3][2];
+    localViewOrigin[0] = invModelViewTransform[3][0];
+    localViewOrigin[1] = invModelViewTransform[3][1];
+    localViewOrigin[2] = invModelViewTransform[3][2];
 }
 
 Boolean CBSPPart::InViewPyramid() {
@@ -284,26 +294,26 @@ Boolean CBSPPart::PrepareForRender() {
         inPyramid = InViewPyramid();
 
         if (inPyramid) {
-            // SDL_Log("itsTransform:\n");
-            // PrintMatrix(&itsTransform);
+            // SDL_Log("modelTransform:\n");
+            // PrintMatrix(&modelTransform);
 
-            CombineTransforms(&itsTransform, &fullTransform, &vp->viewMatrix);
+            CombineTransforms(&modelTransform, &modelViewTransform, &vp->viewMatrix);
 
-            InverseTransform(&fullTransform, &invFullTransform);
+            InverseTransform(&modelViewTransform, &invModelViewTransform);
 
-            // SDL_Log("fullTransform:\n");
-            // PrintMatrix(&fullTransform);
-            // PrintMatrix(invFullTransform);
+            // SDL_Log("modelViewTransform:\n");
+            // PrintMatrix(&modelViewTransform);
+            // PrintMatrix(invModelViewTransform);
 
             if (!invGlobDone) {
-                InverseTransform(&itsTransform, &invGlobTransform);
+                InverseTransform(&modelTransform, &invModelTransform);
                 invGlobDone = true;
             }
 
             TransformLights();
 
             // transform all the points before rendering
-            //VectorMatrixProduct(pointCount, pointTable, transformedPoints, &fullTransform);
+            //VectorMatrixProduct(pointCount, pointTable, transformedPoints, &modelViewTransform);
         }
     }
 
@@ -316,12 +326,12 @@ Boolean CBSPPart::PrepareForRender() {
 */
 void CBSPPart::Reset() {
     lightSeed = 0;
-    OneMatrix(&itsTransform);
+    OneMatrix(&modelTransform);
 }
 
 //  invalidates data & calcs sphereGlobCenter
 void CBSPPart::MoveDone() {
-    VectorMatrixProduct(1, (Vector *)&enclosurePoint, &sphereGlobCenter, &itsTransform);
+    VectorMatrixProduct(1, (Vector *)&enclosurePoint, &sphereGlobCenter, &modelTransform);
     invGlobDone = false;
     lightSeed = 0;
 }
@@ -331,87 +341,87 @@ void CBSPPart::MoveDone() {
 **  Move by xt, yt, zt
 */
 void CBSPPart::Translate(Fixed xt, Fixed yt, Fixed zt) {
-    itsTransform[3][0] += xt;
-    itsTransform[3][1] += yt;
-    itsTransform[3][2] += zt;
+    modelTransform[3][0] += xt;
+    modelTransform[3][1] += yt;
+    modelTransform[3][2] += zt;
 }
 #endif
 
 void CBSPPart::RotateX(Fixed angle) {
     angle = FDegToOne(angle);
-    MRotateX(FOneSin(angle), FOneCos(angle), &itsTransform);
+    MRotateX(FOneSin(angle), FOneCos(angle), &modelTransform);
 }
 
 void CBSPPart::RotateY(Fixed angle) {
     angle = FDegToOne(angle);
-    MRotateY(FOneSin(angle), FOneCos(angle), &itsTransform);
+    MRotateY(FOneSin(angle), FOneCos(angle), &modelTransform);
 }
 
 void CBSPPart::RotateZ(Fixed angle) {
     angle = FDegToOne(angle);
-    MRotateZ(FOneSin(angle), FOneCos(angle), &itsTransform);
+    MRotateZ(FOneSin(angle), FOneCos(angle), &modelTransform);
 }
 
 void CBSPPart::RotateRadX(Fixed angle) {
     angle = FRadToOne(angle);
-    MRotateX(FOneSin(angle), FOneCos(angle), &itsTransform);
+    MRotateX(FOneSin(angle), FOneCos(angle), &modelTransform);
 }
 
 void CBSPPart::RotateRadY(Fixed angle) {
     angle = FRadToOne(angle);
-    MRotateY(FOneSin(angle), FOneCos(angle), &itsTransform);
+    MRotateY(FOneSin(angle), FOneCos(angle), &modelTransform);
 }
 
 void CBSPPart::RotateRadZ(Fixed angle) {
     angle = FRadToOne(angle);
-    MRotateZ(FOneSin(angle), FOneCos(angle), &itsTransform);
+    MRotateZ(FOneSin(angle), FOneCos(angle), &modelTransform);
 }
 
 void CBSPPart::RotateOneX(Fixed angle) {
-    MRotateX(FOneSin(angle), FOneCos(angle), &itsTransform);
+    MRotateX(FOneSin(angle), FOneCos(angle), &modelTransform);
 }
 
 void CBSPPart::RotateOneY(Fixed angle) {
-    MRotateY(FOneSin(angle), FOneCos(angle), &itsTransform);
+    MRotateY(FOneSin(angle), FOneCos(angle), &modelTransform);
 }
 void CBSPPart::RotateOneZ(Fixed angle) {
-    MRotateZ(FOneSin(angle), FOneCos(angle), &itsTransform);
+    MRotateZ(FOneSin(angle), FOneCos(angle), &modelTransform);
 }
 
 void CBSPPart::CopyTransform(Matrix *m) {
     invGlobDone = false;
-    *(MatrixStruct *)&itsTransform = *(MatrixStruct *)m;
+    *(MatrixStruct *)&modelTransform = *(MatrixStruct *)m;
 }
 
 void CBSPPart::ApplyMatrix(Matrix *m) {
     Matrix fullMatrix;
 
-    CombineTransforms(&itsTransform, &fullMatrix, m);
+    CombineTransforms(&modelTransform, &fullMatrix, m);
 
-    *((MatrixStruct *)&itsTransform) = *(MatrixStruct *)&fullMatrix;
+    *((MatrixStruct *)&modelTransform) = *(MatrixStruct *)&fullMatrix;
 }
 void CBSPPart::PrependMatrix(Matrix *m) {
     Matrix fullMatrix;
 
-    CombineTransforms(m, &fullMatrix, &itsTransform);
+    CombineTransforms(m, &fullMatrix, &modelTransform);
 
-    *((MatrixStruct *)&itsTransform) = *(MatrixStruct *)&fullMatrix;
+    *((MatrixStruct *)&modelTransform) = *(MatrixStruct *)&fullMatrix;
 }
 
 Matrix *CBSPPart::GetInverseTransform() {
     if (!invGlobDone) {
         invGlobDone = true;
-        InverseTransform(&itsTransform, &invGlobTransform);
+        InverseTransform(&modelTransform, &invModelTransform);
     }
 
-    return &invGlobTransform;
+    return &invModelTransform;
 }
 
 void CBSPPart::ReplaceColor(ARGBColor origColor, ARGBColor newColor) {
     bool colorReplaced = false;
-    for (int i = 0; i < colorCount; i++) {
-        if (origColorTable[i] == origColor) {
-            currColorTable[i] = newColor;
+    for (auto &material : materialTable) {
+        if (material.original.GetColor() == origColor) {
+            material.current = material.current.WithColor(newColor);
             colorReplaced = true;
         }
     }
@@ -421,14 +431,74 @@ void CBSPPart::ReplaceColor(ARGBColor origColor, ARGBColor newColor) {
 
 void CBSPPart::ReplaceAllColors(ARGBColor newColor) {
     bool colorReplaced = false;
-    for (int i = 0; i < colorCount; i++) {
-        if (currColorTable[i] != newColor) {
+    for (auto &material : materialTable) {
+        if (material.current.GetColor() != newColor) {
             colorReplaced = true;
         }
-        currColorTable[i] = newColor;
+        material.current = material.current.WithColor(newColor);
     }
     hasAlpha = (newColor.GetA() != 0xff);
     if (colorReplaced && vData) vData->Replace(*this);
+}
+
+void CBSPPart::ReplaceMaterialForColor(ARGBColor origColor, Material newMaterial) {
+    bool materialReplaced = false;
+    for (auto &material : materialTable) {
+        if (material.original.GetColor() == origColor) {
+            material.current = newMaterial;
+            materialReplaced = true;
+        }
+    }
+    CheckForAlpha();
+    if (materialReplaced && vData) vData->Replace(*this);
+}
+
+void CBSPPart::ReplaceSpecularForColor(ARGBColor origColor, ARGBColor newSpecular) {
+    bool specularReplaced = false;
+    for (auto &material : materialTable) {
+        if (material.original.GetColor() == origColor) {
+            material.current = material.current.WithSpecular(newSpecular);
+            specularReplaced = true;
+        }
+    }
+    // (No need to check for alpha here.)
+    if (specularReplaced && vData) vData->Replace(*this);
+}
+
+void CBSPPart::ReplaceShininessForColor(ARGBColor origColor, uint8_t newShininess) {
+    bool shininessReplaced = false;
+    for (auto &material : materialTable) {
+        if (material.original.GetColor() == origColor) {
+            material.current = material.current.WithShininess(newShininess);
+            shininessReplaced = true;
+        }
+    }
+    // (No need to check for alpha here.)
+    if (shininessReplaced && vData) vData->Replace(*this);
+}
+
+void CBSPPart::ReplaceMaterial(Material origMaterial, Material newMaterial) {
+    bool materialReplaced = false;
+    for (auto &material : materialTable) {
+        if (material.original == origMaterial) {
+            material.current = newMaterial;
+            materialReplaced = true;
+        }
+    }
+    CheckForAlpha();
+    if (materialReplaced && vData) vData->Replace(*this);
+}
+
+void CBSPPart::ReplaceAllMaterials(Material newMaterial) {
+    bool materialReplaced = false;
+    for (auto &material : materialTable) {
+        if (material.current != newMaterial) {
+            materialReplaced = true;
+        }
+        material.current = newMaterial;
+    }
+    hasAlpha = (newMaterial.GetA() != 0xff);
+    if (materialReplaced && vData) vData->Replace(*this);
 }
 
 void CBSPPart::BuildBoundingVolumes() {
@@ -453,12 +523,18 @@ CBSPPart::~CBSPPart() {}
 
 void CBSPPart::CheckForAlpha() {
     hasAlpha = false;
-    for (uint16_t i = 0; i < colorCount; i++) {
-        if (currColorTable[i].GetA() != 0xff) {
+    for (auto &material : materialTable) {
+        if (material.current.HasAlpha()) {
             hasAlpha = true;
             return;
         }
     }
+}
+
+bool CBSPPart::Has3D() const {
+    return !(maxBounds.x == minBounds.x ||
+             maxBounds.y == minBounds.y ||
+             maxBounds.z == minBounds.z);
 }
 
 bool CBSPPart::HasAlpha() const {
@@ -604,7 +680,7 @@ Boolean CBSPPart::Obscures(CBSPPart *other) {
         return false;
     }
 
-    VectorMatrixProduct(1, &other->sphereGlobCenter, &center, &invGlobTransform);
+    VectorMatrixProduct(1, &other->sphereGlobCenter, &center, &invModelTransform);
     r = other->enclosureRadius - tolerance;
 
     if ((localViewOrigin[0] < minBounds.x && center[0] <= minBounds.x - r) ||
@@ -617,7 +693,7 @@ Boolean CBSPPart::Obscures(CBSPPart *other) {
         return false;
     }
 
-    VectorMatrixProduct(1, &sphereGlobCenter, &center, &other->invGlobTransform);
+    VectorMatrixProduct(1, &sphereGlobCenter, &center, &other->invModelTransform);
     r = enclosureRadius - other->tolerance;
 
     if ((other->localViewOrigin[0] > other->minBounds.x && center[0] <= other->minBounds.x - r) ||
@@ -635,7 +711,7 @@ Boolean CBSPPart::Obscures(CBSPPart *other) {
         (localViewOrigin[2] < minBounds.z) || (localViewOrigin[2] > maxBounds.z)) {
         didTests = 1;
 
-        CombineTransforms(&itsTransform, &combinedTransform, &other->invGlobTransform);
+        CombineTransforms(&modelTransform, &combinedTransform, &other->invModelTransform);
 
         TransformBoundingBox(&combinedTransform, &minBounds.x, &maxBounds.x, myCorners);
         if (!other->HopeDoesObscure(this, myCorners)) {
@@ -648,7 +724,7 @@ Boolean CBSPPart::Obscures(CBSPPart *other) {
         (other->localViewOrigin[1] > other->minBounds.y) || (other->localViewOrigin[1] < other->maxBounds.y) ||
         (other->localViewOrigin[2] > other->minBounds.z) || (other->localViewOrigin[2] < other->maxBounds.z)) {
         didTests |= 2;
-        CombineTransforms(&other->itsTransform, &combinedTransform, &invGlobTransform);
+        CombineTransforms(&other->modelTransform, &combinedTransform, &invModelTransform);
 
         TransformBoundingBox(&combinedTransform, &other->minBounds.x, &other->maxBounds.x, otherCorners);
 

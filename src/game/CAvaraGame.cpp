@@ -80,7 +80,8 @@ void CAvaraGame::InitLocatorTable() {
 }
 
 void CAvaraGame::IncrementGameCounter() {
-    currentGameId++;
+    extern Fixed FRandSeed;
+    currentGameId = int(FRandSeed);
 }
 
 std::unique_ptr<CNetManager> CAvaraGame::CreateNetManager() {
@@ -129,10 +130,6 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     allowBackgroundProcessing = false;
 
-    loadedFilename = "";
-    loadedLevel = "";
-    loadedDesigner = "";
-    loadedInfo = "";
     loadedTimeLimit = 600;
     timeInSeconds = 0;
     simpleExplosions = false;
@@ -303,6 +300,47 @@ void CAvaraGame::RemoveActor(CAbstractActor *theActor) {
     RemoveIdent(theActor->ident);
 }
 
+// extent of all visible actors, this drives the level previews and random incarnators
+void CAvaraGame::CalculateExtent() {
+    int foundLocations = 0;
+    extentMin[0] = extentMin[1] = extentMin[2] = std::numeric_limits<Fixed>::max();
+    extentMax[0] = extentMax[1] = extentMax[2] = std::numeric_limits<Fixed>::min();
+
+    // get the extent of all the CPlacedActors
+    for (CAbstractActor* actor = actorList;
+         actor != nullptr;
+         actor = actor->nextActor) {
+        // check CPlacedActors that set UseForExtent() which includes incarnators, goodies, ramps
+        CPlacedActors* placedActor = dynamic_cast<CPlacedActors*>(actor);
+        if (placedActor != nullptr && placedActor->UseForExtent()) {
+            extentMin[0] = std::min(extentMin[0], placedActor->location[0]);
+            extentMin[1] = std::min(extentMin[1], placedActor->location[1]);
+            extentMin[2] = std::min(extentMin[2], placedActor->location[2]);
+            extentMax[0] = std::max(extentMax[0], placedActor->location[0]);
+            extentMax[1] = std::max(extentMax[1], placedActor->location[1]);
+            extentMax[2] = std::max(extentMax[2], placedActor->location[2]);
+            foundLocations++;
+        }
+    }
+
+    // use "reasonable" defaults if there aren't enough actor locations to calculate the extent
+    const Fixed DEFAULT_OFFSET = FIX(9);
+    if (foundLocations == 0) {
+        extentMin[0] = extentMin[2] = -DEFAULT_OFFSET;
+        extentMax[0] = extentMax[2] = +DEFAULT_OFFSET;
+        extentMin[1] = 0;
+        extentMax[1] = DEFAULT_OFFSET;
+    } else if (foundLocations == 1) {
+        extentMin[0] -= DEFAULT_OFFSET; extentMin[1] -= 0;              extentMin[0] -= DEFAULT_OFFSET;
+        extentMax[0] += DEFAULT_OFFSET; extentMax[1] += DEFAULT_OFFSET; extentMax[0] += DEFAULT_OFFSET;
+    }
+
+    extentCenter[0] = (extentMax[0] + extentMin[0]) / 2;
+    extentCenter[1] = (extentMax[1] + extentMin[1]) / 2;
+    extentCenter[2] = (extentMax[2] + extentMin[2]) / 2;
+    extentRadius = std::max(extentMax[0] - extentMin[0], extentMax[2] - extentMin[2]) / 2;
+}
+
 void CAvaraGame::RegisterReceiver(MessageRecord *theMsg, MsgType messageNum) {
     MessageRecord **head;
 
@@ -448,10 +486,9 @@ void CAvaraGame::RunFrameActions() {
     RunActorFrameActions();
 
     itsNet->ProcessQueue();
-    if (!latencyTolerance) {
-        while (frameNumber > topSentFrame) {
-            itsNet->FrameAction();
-        }
+
+    while (topSentFrame <= FramesFromNow(latencyTolerance)) {
+        itsNet->FrameAction();   // increments topSentFrame while sending frame packet
     }
 
     thePlayer = playerList;
@@ -464,7 +501,7 @@ void CAvaraGame::RunFrameActions() {
     // Time out old score events
     if (!scoreEventList.empty()) {
         ScoreInterfaceEvent event = scoreEventList.front();
-        if (event.frameNumber + 480 < frameNumber || event.gameId < currentGameId) {
+        if (event.frameNumber < FramesFromNow(-120) || event.gameId != currentGameId) {
             scoreEventList.pop_front();
         }
     }
@@ -485,6 +522,21 @@ void CAvaraGame::RunActorFrameActions() {
     }
 }
 
+void CAvaraGame::PreSendFrameActions() {
+    // When called, send up to preSendCount frames early based on whether the clock is "behind".
+    // "behind" is defined as our current time being beyond the projected time of topSentFrame minus an offset.
+    // This allows us to increase the effective LT by as many as FRAME_OFFSET frames during a wait loop.
+    const float FRAME_OFFSET = 2.0;
+    const int MAX_DYNAMIC_LT = 4;  // don't send anything extra above this LT
+    while (preSendCount > 0 &&
+           topSentFrame - frameNumber < MAX_DYNAMIC_LT / fpsScale &&
+           SDL_GetTicks() >= nextScheduledFrame + frameTime*(topSentFrame-frameNumber-FRAME_OFFSET)) {
+        itsNet->FrameAction();
+        DBG_Log("presend", "fn=%d, preSent frame #%d, N=%d, ahead=%d, start=%d time=%d nSF=%d\n", frameNumber, topSentFrame, preSendCount, topSentFrame - frameNumber, frameStart, SDL_GetTicks(), nextScheduledFrame);
+        preSendCount--;
+    }
+}
+
 void CAvaraGame::ChangeDirectoryFile() {
     // No-op.
 }
@@ -495,9 +547,6 @@ void CAvaraGame::LevelReset(Boolean clearReset) {
 
     gameStatus = kAbortStatus;
 
-    loadedLevel = "";
-    loadedDesigner = "";
-    loadedInfo = "";
     loadedTimeLimit = 600;
     timeInSeconds = 0;
 
@@ -558,7 +607,9 @@ void CAvaraGame::LevelReset(Boolean clearReset) {
 void CAvaraGame::EndScript() {
     short i;
     ARGBColor color = 0;
-    Fixed intensity, angle1, angle2;
+    Fixed intensity, angle1, angle2, celestialRadius;
+    bool applySpecular;
+    short mode;
     auto vp = gRenderer->viewParams;
 
     gameStatus = kReadyStatus;
@@ -569,24 +620,23 @@ void CAvaraGame::EndScript() {
         .value_or(DEFAULT_LIGHT_COLOR);
 
     for (i = 0; i < 4; i++) {
-        intensity = ReadFixedVar(iLightsTable + 4 * i);
+        intensity = ReadFixedVar(iLightsTable + 6 * i);
+        angle1 = ReadFixedVar(iLightsTable + 1 + 6 * i);
+        angle2 = ReadFixedVar(iLightsTable + 2 + 6 * i);
+        color = ARGBColor::Parse(ReadStringVar(iLightsTable + 3 + 6 * i))
+            .value_or(DEFAULT_LIGHT_COLOR);
+        celestialRadius = ReadFixedVar(iLightsTable + 4 + 6 * i);
+        applySpecular = ReadLongVar(iLightsTable + 5 + 6 * i);
+        mode = (intensity >= 2048) ? kLightGlobalCoordinates : kLightOff;
 
-        if (intensity >= 2048) {
-            angle1 = ReadFixedVar(iLightsTable + 1 + 4 * i);
-            angle2 = ReadFixedVar(iLightsTable + 2 + 4 * i);
-            color = ARGBColor::Parse(ReadStringVar(iLightsTable + 3 + 4 * i))
-                .value_or(DEFAULT_LIGHT_COLOR);
+        // SDL_Log("Light from light table - idx: %d i: %f a: %f b: %f c: %x",
+        //        i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), color);
 
-            vp->SetLight(i, angle1, angle2, intensity, color, kLightGlobalCoordinates);
-            // SDL_Log("Light from light table - idx: %d i: %f a: %f b: %f c: %x",
-            //        i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), color);
-
-            //The b angle is the compass reading and the a angle is the angle from the horizon.
-        } else {
-            vp->SetLight(i, 0, 0, 0, DEFAULT_LIGHT_COLOR, kLightOff);
-        }
+        //The b angle is the compass reading and the a angle is the angle from the horizon.
+        vp->SetLight(i, angle1, angle2, intensity, color, celestialRadius, applySpecular, mode);
     }
     gRenderer->ApplyLights();
+    gRenderer->ApplySky();
 
     color = *ARGBColor::Parse(ReadStringVar(iMissileArmedColor));
     ColorManager::setMissileArmedColor(color);
@@ -595,8 +645,9 @@ void CAvaraGame::EndScript() {
 
     friendlyHitMultiplier = ReadFixedVar(iFriendlyHitMultiplier);
 
-    loadedDesigner = ReadStringVar(iDesignerName);
-    loadedInfo = ReadStringVar(iLevelInformation);
+    loadedLevelInfo->designer    = ReadStringVar(iDesignerName);
+    loadedLevelInfo->information = ReadStringVar(iLevelInformation);
+
     loadedTimeLimit = ReadLongVar(iTimeLimit);
 
     groundTraction = ReadFixedVar(iDefaultTraction);
@@ -610,6 +661,8 @@ void CAvaraGame::EndScript() {
     itsDepot->EndScript();
 
     scoreKeeper->EndScript();
+    
+    gRenderer->PostLevelLoad();
 }
 
 void CAvaraGame::ResumeActors() {
@@ -657,19 +710,23 @@ void CAvaraGame::SendStartCommand() {
 }
 
 void CAvaraGame::StartIfReady() {
-    // server sends the start command if everyone is "ready"
-    if (itsNet->itsCommManager->myId == 0) {
-        bool allReady = true;
-        for (int i = 0; i < kMaxAvaraPlayers; i++) {
-            CPlayerManager *mgr = itsNet->playerTable[i].get();
-            if (mgr && mgr->LoadingStatus() == kLLoaded && mgr->Presence() == kzAvailable) {
+    // if the server is not playing, we want initial LT to be calculated by a player who IS playing
+    int firstReady = kMaxAvaraPlayers;
+    bool allReady = true;
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        CPlayerManager *mgr = itsNet->playerTable[i].get();
+        if (mgr) {
+            if (mgr->IsLoaded() && mgr->Presence() == kzAvailable) {
                 allReady = false;
                 break;
+            } else if (mgr->IsReady() && i < firstReady) {
+                firstReady = i;
             }
         }
-        if (allReady) {
-            SendStartCommand();
-        }
+    }
+    if (allReady && firstReady == itsNet->itsCommManager->myId) {
+        // to avoid race conditions, only the first active player sends the start request
+        SendStartCommand();
     }
 }
 
@@ -686,7 +743,8 @@ void CAvaraGame::ReadGamePrefs() {
         moJoOptions += kFlipAxis;
     }
     sensitivity = pow(2.0, gApplication->Get<double>(kMouseSensitivityTag));
-    SDL_Log("mouse sensitivity multiplier = %.2lf\n", sensitivity);
+    //SDL_Log("mouse sensitivity multiplier = %.2lf\n", sensitivity);
+    showNewHUD = gApplication->Get<bool>(kShowNewHUD);
 }
 
 void CAvaraGame::ResumeGame() {
@@ -703,9 +761,8 @@ void CAvaraGame::ResumeGame() {
 
     if (doStart) {
         if (freshMission) {
-            itsApp->GameStarted(loadedSet,
-                                loadedLevel);
             itsNet->AttachPlayers((CAbstractPlayer *)freshPlayerList);
+            itsApp->GameStarted(*loadedLevelInfo);
             freshPlayerList = NULL;
             InitMixer(false);
         } else {
@@ -716,12 +773,11 @@ void CAvaraGame::ResumeGame() {
         // TODO: syncing start dialog
         scoreKeeper->StartResume(gameStatus == kReadyStatus);
 
-        // SetPort(itsWindow);
-        // SetPolyWorld(&itsPolyWorld);
-        // ClearRegions();
-        // CalcGameRect();
-        // ResizeRenderingArea(&gameRect);
-        // ResetView();
+        // init time-based stat vars
+        lastFrameTime = SDL_GetTicks() - frameTime;
+        lastFramePackets = itsNet->itsCommManager->TotalPacketsSent();
+        nextStatTime = SDL_GetTicks();
+        SDL_Log("lastFrameTime = %ld, lastFramePackets = %u\n", lastFrameTime, uint32_t(lastFramePackets));
 
         // Start the game, run the first tick
         GameStart();
@@ -742,7 +798,6 @@ bool CAvaraGame::IsPlaying() {
 // Run when the game is started or resumed
 void CAvaraGame::GameStart() {
     SDL_Log("CAvaraGame::GameStart\n");
-    latencyTolerance = 0;
     didWait = false;
     longWait = false;
 
@@ -759,6 +814,10 @@ void CAvaraGame::GameStart() {
 
     if (frameNumber == 0) {
         FlagMessage(iStartMsg + firstVariable);
+        // init stat vars
+        msecPerFrame = frameTime;
+        packetsPerFrame = 1.0;
+        effectiveLT = latencyTolerance + 1;
     }
 
     playersStanding = 0;
@@ -767,7 +826,7 @@ void CAvaraGame::GameStart() {
 
     // frameAdvance = INIT_ADVANCE;
     // frameCredit = frameAdvance << 16;
-    canPreSend = false;
+    preSendCount = 0;
 
     // The difference between the last frame's time and frameTime
     frameAdjust = 0;
@@ -794,6 +853,10 @@ void CAvaraGame::GameStart() {
         gApplication->throttle = 0;   // let 'er rip
 #else
         gApplication->throttle = std::min(static_cast<FrameTime>(itsApp->Number(kThrottle)), frameTime);
+        if (Debug::IsEnabled("cpu")) {
+            // when measuring "cpu", disable throttle so it doesn't thow off the cpu usage calculation
+            gApplication->throttle = 0;
+        }
 #endif
         SDL_Log("CAvaraGame::GameStart, throttle = %d\n", gApplication->throttle);
     }
@@ -825,7 +888,7 @@ void CAvaraGame::GameStop() {
 
     // event wait timeout used by mainloop()
     gApplication->throttle = INACTIVE_LOOP_REFRESH;
-    SDL_Log("CAvaraGame::GameStop, throttle = %d\n", gApplication->throttle);
+    SDL_Log("CAvaraGame::GameStop, throttle = %d\n, frameNumber = %d", gApplication->throttle, frameNumber);
 }
 
 void CAvaraGame::HandleEvent(SDL_Event &event) {
@@ -835,26 +898,16 @@ void CAvaraGame::HandleEvent(SDL_Event &event) {
 }
 
 bool CAvaraGame::GameTick() {
-    uint32_t startTime = SDL_GetTicks();
+    frameStart = SDL_GetTicks();
 
     // No matter what, process any pending network packets
     itsNet->ProcessQueue();
 
-    if (startTime > nextPingTime) {
+    if (frameStart > nextPingTime) {
         // 3 pings every second, 1 ping used by each client for RTT calc (last ping not used)
         static uint32_t pingInterval = 1000; // msec
-        itsNet->SendPingCommand(3);
-        nextPingTime = startTime + pingInterval;
-    }
-
-    int randLoadPeriod = Debug::GetValue("rload"); // randomly load a level every `rload` seconds
-    if (randLoadPeriod > 0) {
-        if (startTime > nextLoadTime) {
-            auto p = CPlayerManagerImpl::LocalPlayer();
-            auto *tui = itsApp->GetTui();
-            tui->ExecuteMatchingCommand("/rand", p);
-            nextLoadTime = startTime + 1000*randLoadPeriod;
-        }
+        itsNet->SendPingCommand(4);
+        nextPingTime = frameStart + pingInterval;
     }
 
     // Not playing? Nothing to do!
@@ -862,11 +915,15 @@ bool CAvaraGame::GameTick() {
         return false;
 
     // Not time to process the next frame yet
-    if (startTime < nextScheduledFrame)
+    if (frameStart < nextScheduledFrame)
         return false;
 
     // SDL_Log("CAvaraGame::GameTick frame=%d dt=%d start=%d end=%d\n", frameNumber, SDL_GetTicks() - lastFrameTime,
-    // startTime, endTime); lastFrameTime = SDL_GetTicks();
+    // frameStart, endTime); lastFrameTime = SDL_GetTicks();
+
+    if (Debug::IsEnabled("stats")) {
+        DoStats(SDL_GetTicks(), Debug::GetValue("stats"));
+    }
 
     oldPlayersStanding = playersStanding;
     oldTeamsStanding = teamsStanding;
@@ -877,6 +934,7 @@ bool CAvaraGame::GameTick() {
     playersStanding = 0;
     teamsStanding = 0;
     teamsStandingMask = 0;
+    preSendCount = 2;
 
     ViewControl(); // This was called by itsApp->theGameWind->DoUpdate() calling RefreshWindow
 
@@ -905,15 +963,17 @@ bool CAvaraGame::GameTick() {
 
     timeInSeconds = frameNumber * frameTime / 1000;
 
-    if (latencyTolerance)
-        while (FramesFromNow(latencyTolerance) > topSentFrame)
-            itsNet->FrameAction();
-
-    canPreSend = true;
-
     // if the game hasn't kept up with the frame schedule, reset the next frame time (prevents chipmunk mode, unless player is dead)
-    if (nextScheduledFrame < startTime && itsNet->IAmAlive()) {
-        nextScheduledFrame = startTime + frameTime;
+    if (nextScheduledFrame < frameStart && itsNet->IAmAlive()) {
+        // at the start of this frame we were ALREADY a full frame or more behind...
+        // the further back we can stay, the closer we are to original frame rate, the better it is for
+        // smoothness.  But that has to be weighed against micro-jitter.  Ideally we want to minimze the
+        // percentage of time the frame boundary is adjusted because that is perceived as jitter.  That
+        // is traded off with reducing overall wait time.  Sometimes it's better to wait longer if we
+        // have fewer interruptions.
+        uint32_t prevNSF = nextScheduledFrame;
+        nextScheduledFrame = frameStart + 0.25*frameTime;
+        DBG_Log("presend", "fn=%d, frame reset %u --> %u = +%d\n", frameNumber, prevNSF, nextScheduledFrame, nextScheduledFrame - prevNSF);
     }
 
     itsDepot->RunSliverActions();
@@ -1035,7 +1095,6 @@ void CAvaraGame::StopGame() {
 
 void CAvaraGame::Render() {
     //if (gameStatus == kPlayingStatus || gameStatus == kPauseStatus || gameStatus == kWinStatus || gameStatus == kLoseStatus) {
-    showNewHUD = gApplication ? gApplication->Get<bool>(kShowNewHUD) : false;
     ViewControl();
     gRenderer->RenderFrame();
 }
@@ -1054,9 +1113,9 @@ CPlayerManager *CAvaraGame::GetPlayerManager(CAbstractPlayer *thePlayer) {
 
 // FrameLatency is slightly different than LatencyTolerance.  It is in terms of integer frames
 // at the current frame rate.
-long CAvaraGame::RoundTripToFrameLatency(long roundTrip) {
+short CAvaraGame::RoundTripToFrameLatency(long roundTrip) {
     // half of the roundTripTime in units of frameTime, rounded up (ceil)
-    return std::ceil(roundTrip/2.0/frameTime);
+    return std::max(0.0, std::ceil(roundTrip/2.0/frameTime) - 1);
 }
 
 // "frameLatency" is the integer number of frames to delay;
@@ -1140,9 +1199,46 @@ void CAvaraGame::SetSpawnOrder(SpawnOrder order) {
     std::string types[] = {"Random", "Usage", "Distance", "Hybrid"};
     spawnOrder = SpawnOrder(order % ksNumSpawnOrders); // guard bad inputs
     std::ostringstream oss;
-    oss << kSpawnOrder << " = " << spawnOrder << " [" << types[spawnOrder] << "]";
-    itsApp->AddMessageLine(oss.str(), MsgAlignment::Left, MsgCategory::System);
+    SDL_Log("spawnOrder = %d [%s]\n", spawnOrder, types[spawnOrder].c_str());
     if (gApplication) {
         gApplication->Set(kSpawnOrder, spawnOrder);
     }
+}
+
+void CAvaraGame::DoStats(uint32_t startTime, int interval) {
+    static float ALPHA = 0.01;
+
+    if (interval <= 0) {
+        interval = 5000;
+    } else if (interval < 100) {
+        // assume seconds if a small number
+        interval *= 1000;
+    }
+
+    float deltaT = (startTime - lastFrameTime);
+    msecPerFrame = msecPerFrame*(1-ALPHA) + ALPHA*deltaT;
+
+    RolloverCounter<uint32_t> curPackets = itsNet->itsCommManager->TotalPacketsSent();
+    packetsPerFrame = packetsPerFrame*(1-ALPHA) + ALPHA*(curPackets - lastFramePackets);
+
+    effectiveLT = effectiveLT*(1-ALPHA) + ALPHA*(fpsScale * (topSentFrame - frameNumber));
+
+    lastFrameTime = startTime;
+    lastFramePackets = curPackets;
+
+    if (startTime > nextStatTime) {
+        char statBuf[64];
+        std::snprintf(statBuf, sizeof(statBuf), "fps=%.1lf ppf=%.1lf rtt=%d lt=%.2lf",
+                      1000.0 / msecPerFrame,
+                      packetsPerFrame,
+                      (int)itsNet->itsCommManager->GetMaxRoundTrip(itsNet->activePlayersDistribution),
+                      effectiveLT);
+        itsApp->AddMessageLine(statBuf);
+
+        nextStatTime = startTime + interval;
+    }
+}
+
+ARGBColor CAvaraGame::GetLocalTeamColor() {
+    return GetLocalPlayer()->GetTeamColorOr(ColorManager::getDefaultTeamColor());
 }

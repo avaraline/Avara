@@ -47,7 +47,7 @@ void RegisterPunchServer(IPaddress &localAddr);
 void RequestPunch(IPaddress &addr);
 void Punch(IPaddress &addr);
 
-int CreateSocket(uint16_t port);
+int CreateSocket(uint16_t &port /* value changed when port==0 */);
 void DestroySocket(int sock);
 void CheckSockets();
 

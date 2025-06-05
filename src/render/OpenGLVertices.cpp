@@ -101,8 +101,7 @@ OpenGLVertices::~OpenGLVertices()
 
 void OpenGLVertices::Append(const CBSPPart &part)
 {
-    PolyRecord *poly;
-    ARGBColor *color;
+    Material material;
     uint8_t vis;
     int tris, points;
 
@@ -112,25 +111,24 @@ void OpenGLVertices::Append(const CBSPPart &part)
     // back side
     int tmpOpaquePointCount = 0;
     int tmpAlphaPointCount = 0;
-    for (size_t i = 0; i < part.polyCount; i++)
+    for (auto &poly : part.polyTable)
     {
-        poly = &part.polyTable[i];
-        color = &part.currColorTable[poly->colorIdx];
-        vis = (part.HasAlpha() && poly->vis != 0) ? 3 : poly->vis;
+        material = part.materialTable[poly.materialIdx].current;
+        vis = (part.HasAlpha() && poly.vis != 0 && part.Has3D()) ? 3 : poly.vis;
         if (!vis) vis = 0;
         switch (vis) {
             case 0:
                 tris = 0;
                 break;
             case 3:
-                tris = poly->triCount * 2;
+                tris = poly.triCount * 2;
                 break;
             default:
-                tris = poly->triCount;
+                tris = poly.triCount;
                 break;
         }
         points = tris * 3;
-        if (color->HasAlpha()) {
+        if (material.HasAlpha()) {
             alpha.pointCount += points;
             tmpAlphaPointCount += points;
         } else {
@@ -145,12 +143,12 @@ void OpenGLVertices::Append(const CBSPPart &part)
     alpha.glData.reserve(alpha.glData.size() + tmpAlphaPointCount);
 
     // Count all the points we output so that we can make sure it matches what we just calculated.
+    const FixedPoint *pt;
     int pOpaque = 0;
     int pAlpha = 0;
-    for (int i = 0; i < part.polyCount; i++) {
-        poly = &part.polyTable[i];
-        color = &part.currColorTable[poly->colorIdx];
-        uint8_t vis = (part.HasAlpha() && poly->vis != 0) ? 3 : poly->vis;
+    for (auto &poly : part.polyTable) {
+        material = part.materialTable[poly.materialIdx].current;
+        uint8_t vis = (part.HasAlpha() && poly.vis != 0 && part.Has3D()) ? 3 : poly.vis;
         if (!vis) vis = 0; // default to 0 (none) if vis is empty
 
         // vis can ONLY be 0 for None, 1 for Front, 2 for Back, or 3 for Both
@@ -158,17 +156,24 @@ void OpenGLVertices::Append(const CBSPPart &part)
 
         // Wrap forwards (front side).
         if (vis == 1 || vis == 3) {
-            for (int v = 0; v < poly->triCount * 3; v++) {
-                Vector *pt = &part.pointTable[poly->triPoints[v]];
+            for (int v = 0; v < poly.triCount * 3; v++) {
+                pt = &part.pointTable[poly.triPoints[v]];
                 GLData vertex = GLData();
-                vertex.x = ToFloat((*pt)[0]);
-                vertex.y = ToFloat((*pt)[1]);
-                vertex.z = ToFloat((*pt)[2]);
-                color->ExportGLFloats(&vertex.r, 4);
-                vertex.nx = poly->normal[0];
-                vertex.ny = poly->normal[1];
-                vertex.nz = poly->normal[2];
-                if (color->HasAlpha()) {
+                vertex.x = ToFloat(pt->x);
+                vertex.y = ToFloat(pt->y);
+                vertex.z = ToFloat(pt->z);
+                vertex.r = material.GetR();
+                vertex.g = material.GetG();
+                vertex.b = material.GetB();
+                vertex.a = material.GetA();
+                vertex.specR = material.GetSpecR();
+                vertex.specG = material.GetSpecG();
+                vertex.specB = material.GetSpecB();
+                vertex.specS = material.GetShininess();
+                vertex.nx = poly.normal.x;
+                vertex.ny = poly.normal.y;
+                vertex.nz = poly.normal.z;
+                if (material.HasAlpha()) {
                     alpha.glData.push_back(vertex);
                     pAlpha++;
                 } else {
@@ -180,17 +185,24 @@ void OpenGLVertices::Append(const CBSPPart &part)
 
         // Wrap backwards (back side).
         if (vis == 2 || vis == 3) {
-            for (int v = (poly->triCount * 3) - 1; v >= 0; v--) {
-                Vector *pt = &part.pointTable[poly->triPoints[v]];
+            for (int v = (poly.triCount * 3) - 1; v >= 0; v--) {
+                pt = &part.pointTable[poly.triPoints[v]];
                 GLData vertex = GLData();
-                vertex.x = ToFloat((*pt)[0]);
-                vertex.y = ToFloat((*pt)[1]);
-                vertex.z = ToFloat((*pt)[2]);
-                color->ExportGLFloats(&vertex.r, 4);
-                vertex.nx = -poly->normal[0];
-                vertex.ny = -poly->normal[1];
-                vertex.nz = -poly->normal[2];
-                if (color->HasAlpha()) {
+                vertex.x = ToFloat(pt->x);
+                vertex.y = ToFloat(pt->y);
+                vertex.z = ToFloat(pt->z);
+                vertex.r = material.GetR();
+                vertex.g = material.GetG();
+                vertex.b = material.GetB();
+                vertex.a = material.GetA();
+                vertex.specR = material.GetSpecR();
+                vertex.specG = material.GetSpecG();
+                vertex.specB = material.GetSpecB();
+                vertex.specS = material.GetShininess();
+                vertex.nx = -poly.normal.x;
+                vertex.ny = -poly.normal.y;
+                vertex.nz = -poly.normal.z;
+                if (material.HasAlpha()) {
                     alpha.glData.push_back(vertex);
                     pAlpha++;
                 } else {
@@ -204,6 +216,15 @@ void OpenGLVertices::Append(const CBSPPart &part)
     // Make sure we filled in the arrays correctly.
     assert(pOpaque == tmpOpaquePointCount);
     assert(pAlpha == tmpAlphaPointCount);
+    
+    // Upload to GPU.
+    GLint currBuffer;
+    glGetIntegerv(GL_ARRAY_BUFFER_BINDING, &currBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, opaque.vertexBuffer);
+    glBufferData(GL_ARRAY_BUFFER, opaque.glDataSize, opaque.glData.data(), GL_STREAM_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, alpha.vertexBuffer);
+    glBufferData(GL_ARRAY_BUFFER, alpha.glDataSize, alpha.glData.data(), GL_STREAM_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, currBuffer);
 }
 
 void OpenGLVertices::Replace(const CBSPPart &part)

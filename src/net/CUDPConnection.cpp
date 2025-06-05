@@ -35,19 +35,23 @@
 
 #if PACKET_DEBUG || LATENCY_DEBUG
 void CUDPConnection::DebugPacket(char eType, UDPPacketInfo *p) {
-    SDL_Log("CUDPConnection::DebugPacket(%c) cn=%d rsn=%d sn=%d-%d cmd=%d p1=%d p2=%d p3=%d flags=0x%02x sndr=%d dist=0x%02x\n",
-        eType,
-        myId,
-        (uint16_t)receiveSerial,
-        (uint16_t)p->serialNumber,
-        p->sendCount,
-        p->packet.command,
-        p->packet.p1,
-        p->packet.p2,
-        p->packet.p3,
-        p->packet.flags,
-        p->packet.sender,
-        p->packet.distribution);
+    if (p) {
+        SDL_Log("CUDPConnection::DebugPacket(%c) cn=%d rsn=%d sn=%d-%d cmd=%d p1=%d p2=%d p3=%d flags=0x%02x sndr=%d dist=0x%02x\n",
+                eType,
+                myId,
+                (uint16_t)receiveSerial,
+                (uint16_t)p->serialNumber,
+                p->sendCount,
+                p->packet.command,
+                p->packet.p1,
+                p->packet.p2,
+                p->packet.p3,
+                p->packet.flags,
+                p->packet.sender,
+                p->packet.distribution);
+    } else {
+        SDL_Log("CUDPConnection::DebugPacket(%c) ----------NULL PACKET----------\n", eType);
+    }
 }
 #endif
 
@@ -62,8 +66,7 @@ void CUDPConnection::IUDPConnection(CUDPComm *theOwner) {
     port = 0;
 
     for (i = 0; i < kQueueCount; i++) {
-        queues[i].qHead = 0;
-        queues[i].qTail = 0;
+        InitQueue(&queues[i]);
     }
 
     serialNumber = INITIAL_SERIAL_NUMBER;
@@ -288,7 +291,7 @@ UDPPacketInfo *CUDPConnection::FindBestPacket(int32_t curTime, int32_t cramTime,
     if (transmitQueueLength > kMaxTransmitQueueLength) {
         DBG_Log("q", "Transmit Queue Overflow - myId = %d\n", myId);
         for (int i = 0; i < kQueueCount; i++) {
-            DBG_Log("q", "   Queue[%d] size = %zu\n", i, QueueSize(&queues[i]));
+            DBG_Log("q", "   Queue[%d] size = %zu\n", i, queues[i].qSize);
         }
         ErrorKill();
     }
@@ -324,7 +327,7 @@ UDPPacketInfo *CUDPConnection::GetOutPacket(int32_t curTime, int32_t cramTime, i
 
         if (thePacket == kPleaseSendAcknowledge) {
             #if PACKET_DEBUG
-                SDL_Log("CUDPConnection::DebugPacket(S) <ACK> cn=%d rsn=%d\n", myId, receiveSerial - kSerialNumberStepSize);
+                SDL_Log("CUDPConnection::DebugPacket(S) <ACK> cn=%d rsn=%hu\n", myId, uint16_t(receiveSerial - kSerialNumberStepSize));
             #endif
         } else {
             totalSent++;
@@ -335,7 +338,7 @@ UDPPacketInfo *CUDPConnection::GetOutPacket(int32_t curTime, int32_t cramTime, i
                 numResendsWithoutReceive++;
                 recentResendRate += RECENT_RESEND_SMOOTH;
                 #if PACKET_DEBUG | LATENCY_DEBUG
-                    SDL_Log("CUDPConnection::GetOutPacket   RESENDING cn=%d sn=%d age=%ld resend:count=%ld total=%.1f%% recent=%.1f%%\n",
+                    SDL_Log("CUDPConnection::GetOutPacket   RESENDING cn=%d sn=%d age=%d resend:count=%ld total=%.1f%% recent=%.1f%%\n",
                             myId, (uint16_t)thePacket->serialNumber, curTime - thePacket->birthDate,
                             numResendsWithoutReceive, 100.0*totalResent/totalSent, 100.0*recentResendRate);
                 #endif
@@ -363,7 +366,7 @@ float CommandMultiplierForStats(const PacketInfo& thePacketInfo) {
             if (thePacketInfo.p3 > 0) {
                 // the last ping time can be too big if there aren't other messages coming after it
                 // because the receiver may have no reason to respond in a timely manner so ignore p3==0
-                multiplier = (RTTSMOOTHFACTOR_UP) * 0.3;
+                multiplier = CLASSICFRAMETIME * 0.4;  // smooth similarly to in-game rate
             }
             break;
     }
@@ -394,7 +397,7 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, int32_t when) {
             if (thePacket->packet.command == kpPing) {
                 // decrease ping roundTrip because pings aren't as fast as urgent game packets and we
                 // want to start the game at about the right LT (which is based the average ping times)
-                roundTrip *= 0.9;
+                roundTrip *= 0.82;
             }
 
             // compute an exponential moving average & variance of the roundTrip time
@@ -458,7 +461,7 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, int32_t when) {
             urgentRetransmitTime = std::min(urgentRetransmitTime, retransmitTime);
 
             #if PACKET_DEBUG || LATENCY_DEBUG
-                SDL_Log("                               cn=%d cmd=%d roundTrip=%ld mean=%.1f std = %.1f retransmitTime=%ld urgentRetransmit=%ld\n",
+            SDL_Log("                               cn=%d cmd=%d roundTrip=%ld mean=%.1f std = %.1f retransmitTime=%d urgentRetransmit=%d\n",
                         myId, thePacket->packet.command, roundTrip, meanRoundTripTime, stdevRoundTripTime, retransmitTime, urgentRetransmitTime);
             #endif
 
@@ -527,7 +530,7 @@ char *CUDPConnection::ValidatePackets(char *validateInfo, int32_t curTime) {
     validateInfo += sizeof(short);               // point to the AckMap field (if there is one)
 
     #if PACKET_DEBUG
-        SDL_Log("ValidatePackets transmittedSerial=%d, maxValid = %d\n", transmittedSerial, maxValid);
+        SDL_Log("ValidatePackets transmittedSerial=%hu, maxValid = %hu\n", uint16_t(transmittedSerial), uint16_t(maxValid));
     #endif
 
     if (transmittedSerial & 1) {
@@ -633,7 +636,7 @@ size_t CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
                 changeInReceiveQueue = true;
                 Enqueue((QElemPtr)thePacket, &queues[kReceiveQ]);
 
-                size_t qsize = QueueSize(&queues[kReceiveQ]);
+                size_t qsize = queues[kReceiveQ].qSize;
                 if (Debug::IsEnabled("q")) {
                     if (qsize % 5 == 0) {
                         DBG_Log("q", "%d: rsn=%d, queued sn=%d to kReceivedQ.size = %zu\n", myId, (int)receiveSerial, (int)thePacket->serialNumber, qsize);
@@ -682,7 +685,7 @@ size_t CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
         *receiveSerials++ = -12345;
     }
 
-    return QueueSize(&queues[kReceiveQ]);
+    return queues[kReceiveQ].qSize;
 }
 
 bool CUDPConnection::ReceiveQueuedPackets() {
@@ -702,9 +705,9 @@ bool CUDPConnection::ReceiveQueuedPackets() {
                     DebugPacket('+', pack);
 #endif
                     if (Debug::IsEnabled("q")) {
-                        size_t qsize = QueueSize(&queues[kReceiveQ]);
+                        size_t qsize = queues[kReceiveQ].qSize;
                         if (qsize > 0 && qsize % 5 == 0) {
-                            DBG_Log("q", "%d: rsn=%d, dequeued sn=%d to kReceivedQ.size = %zu\n", myId, (int)receiveSerial, (int)pack->serialNumber, QueueSize(&queues[kReceiveQ]));
+                            DBG_Log("q", "%d: rsn=%d, dequeued sn=%d to kReceivedQ.size = %zu\n", myId, (int)receiveSerial, (int)pack->serialNumber, qsize);
                         }
                     }
 
@@ -856,10 +859,12 @@ void CUDPConnection::FreshClient(ip_addr remoteHost, port_num remotePort, uint16
     ipAddr = ipAddrExt = remoteHost;
     port = remotePort;
 
-    // Normal client-client Avara packets will do the hole-punching for us, so this is unnecessary?
-    // Sometimes the hole needs to be punched between clients such as when they are both behind double-NAT.
-    IPaddress addr = { remoteHost, remotePort };
-    RequestPunch(addr);
+    // Sometimes the hole needs to be punched between clients such as when they are behind double-NAT.
+    if (!CUDPComm::IsLAN(remoteHost)) {
+        IPaddress addr = { remoteHost, remotePort };
+        // ask the punch server to have this newly connected client punch back to us
+        RequestPunch(addr);
+    }
 }
 
 Boolean CUDPConnection::AreYouDone() {
