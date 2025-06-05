@@ -794,11 +794,6 @@ void CUDPConnection::RewriteConnections(CompleteAddress *table, const CompleteAd
             // if the server sees the connection coming from localhost, change the host to whatever host we connected to server with (which could ALSO be localhost)
             table->host = serverHost;
         }
-        else if (table->host == myAddressInTOC.host && table->port != myAddressInTOC.port) {
-            // if I have the same host IP as the client in the connection table, and a diff port, assume we're on the same machine
-            // (this helps with the case of connecting a couple of clients/bots out to an external server)
-            table->host = LOCALHOST;
-        }
         // TODO: what if host is the IP of the router?  e.g. someone connects to a LAN game using the WAN address...
         // the workaround for this is to have everyone in the LAN game use the LAN address but it would be nice to make it automatic
         // else if (IsWanRouter(table->host)) { /* do something, might have to send local IP address to the server??? */ }

@@ -394,7 +394,8 @@ bool CUDPComm::IsLAN(uint32_t host) {
     ip_addr ipaddr = SDL_SwapBE32(host);
     uint8_t ip1 = (ipaddr >> 24);
     uint8_t ip2 = ((ipaddr >> 16) & 0xff);
-    return ((ip1 == 10) ||
+    return ((ip1 == 127) ||  // localhost loopback
+            (ip1 == 10) ||
             (ip1 == 172 && ip2 >= 16 && ip2 <= 31) ||
             (ip1 == 192 && ip2 == 168));
 }
@@ -837,9 +838,26 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                             #endif
 
                         } else {
-                            if (isServing && thePacket->serialNumber == INITIAL_SERIAL_NUMBER &&
-                                thePacket->packet.command == kpPacketProtocolLogin) {
-                                conn = DoLogin((PacketInfo *)thePacket, packet);
+                            if (thePacket->serialNumber == INITIAL_SERIAL_NUMBER) {
+                                if (isServing && thePacket->packet.command == kpPacketProtocolLogin) {
+                                    conn = DoLogin((PacketInfo *)thePacket, packet);
+                                } else if (p->sender) {
+                                    // first packet should include sender which helps us figure out which connection to use
+                                    int i = 0;
+                                    for (conn = connections; conn; conn = conn->next) {
+                                        if (p->sender == i++) break;
+                                    }
+                                    if (conn && conn->receiveSerial == INITIAL_SERIAL_NUMBER) {
+                                        SDL_Log("Setting connection[%d] address from the first received packet: %s\n", p->sender, FormatAddr(packet->address).c_str());
+                                        // we found the likely connection, reset its IP address from the packet
+                                        conn->ipAddr = packet->address.host;
+                                        conn->port = packet->address.port;
+                                        // and... keep this packet!
+                                        conn->ReceivedPacket(thePacket);
+                                    }
+                                } else {
+                                    SDL_Log("Got a packet, sn=%d cmd=%d, from UNIDENTIFIED address: %s", uint16_t(thePacket->serialNumber), thePacket->packet.command, FormatAddr(packet->address).c_str());
+                                }
                             }
 
                             ReleasePacket((PacketInfo *)thePacket);
@@ -1071,7 +1089,8 @@ Boolean CUDPComm::AsyncWrite() {
                     flags |= 128;
                 }
             #else
-                if (p->sender != myId) {
+                // transmit sender ID on initial packet in case they need that info to match up the connection
+                if (p->sender != myId || thePacket->serialNumber == INITIAL_SERIAL_NUMBER) {
                     *outData.c++ = p->sender;
                     flags |= 128;
                 }
