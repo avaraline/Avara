@@ -379,7 +379,7 @@ std::string CUDPComm::FormatConnectionTable(CompleteAddress *table) {
     // oss << "   1   | " << FormatHostPort(table->host, table->port) << "\n";
     int slot = 2;
     for (CUDPConnection *conn = connections; conn; conn = conn->next, table++, slot++) {
-        oss << "   " << slot << "  |   " << conn->myId + 1 << "  | " << FormatHostPort(table->host, table->port) << "\n";
+        oss << "   " << slot << "  |   " << conn->myId << "  | " << FormatHostPort(table->host, table->port) << "\n";
     }
     return oss.str();
 }
