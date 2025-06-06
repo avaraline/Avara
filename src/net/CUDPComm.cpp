@@ -850,7 +850,10 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                                 conn->ReceivedPacket(thePacket);
                             #endif
 
-                        } else {
+                        }
+                        // if we didn't find a connection OR the connection we found doesn't match the sender
+                        if (!conn || (p->sender && p->sender != conn->myId)) {
+                            bool keepPacket = false;
                             if (thePacket->serialNumber == INITIAL_SERIAL_NUMBER &&
                                 isServing && thePacket->packet.command == kpPacketProtocolLogin) {
                                 // received a Login packet
@@ -871,18 +874,22 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                                         conn->port = packet->address.port;
                                     }
                                     // and... keep this packet!
-                                    conn->ReceivedPacket(thePacket);
+                                    keepPacket = true;
                                 } else {
                                     SDL_Log("Got an EARLY packet, sender=%d cmd=%d, from UNKNOWN address: %s",
                                             p->sender, thePacket->packet.command, FormatAddr(packet->address).c_str());
                                 }
                                 DBG_Log("login+", "Updated connections list: \n%s\n", FormatConnectionsList().c_str());
-                            } else {
+                            } else { 
                                 SDL_Log("Got a packet, sender=%d, cmd=%d, sn=%d, from UNKNOWN address: %s",
                                         p->sender, thePacket->packet.command, uint16_t(thePacket->serialNumber), FormatAddr(packet->address).c_str());
                             }
 
-                            ReleasePacket((PacketInfo *)thePacket);
+                            if (keepPacket) {
+                                conn->ReceivedPacket(thePacket);
+                            } else {
+                                ReleasePacket((PacketInfo *)thePacket);
+                            }
                         }
                     } else {
                         inData.c = inEnd;
