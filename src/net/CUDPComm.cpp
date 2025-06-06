@@ -626,7 +626,7 @@ void CUDPComm::ReadFromTOC(PacketInfo *thePacket) {
     connections->OpenNewConnections(table);
     // DBG_Log("login", "After opening connections ...\n%s", FormatConnectionTable(table).c_str());
 
-    DBG_Log("login+", "After opening, connections list:\n%s", FormatConnectionsList().c_str());
+    DBG_Log("login+", "After processing, connections list:\n%s", FormatConnectionsList().c_str());
 }
 
 Boolean CUDPComm::PacketHandler(PacketInfo *thePacket) {
@@ -856,31 +856,30 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                                 // received a Login packet
                                 conn = DoLogin((PacketInfo *)thePacket, packet);
                             } else if (thePacket->serialNumber < SERIAL_NUMBER_UDP_SETTLE) {
-                                if (p->sender) {
-                                    // unmatched early packets will include sender which helps us figure out which connection to match with
-                                    for (conn = connections; conn; conn = conn->next) {
-                                        // is this the matching connection number?
-                                        if (p->sender == conn->myId) break;
-                                    }
-                                    if (conn) {
-                                        SDL_Log("Setting connection[%d] address from the early (sn=%d) received packet: %s\n", p->sender,
-                                                uint16_t(thePacket->serialNumber), FormatAddr(packet->address).c_str());
+                                // unmatched early packets will include sender which helps us figure out which connection to match with
+                                for (conn = connections; conn; conn = conn->next) {
+                                    // is this the matching connection number?
+                                    if (p->sender == conn->myId) break;
+                                }
+                                if (conn) {
+                                    // don't change the connection again if we've already received more recent packets (ignore old resends)
+                                    if (thePacket->serialNumber >= conn->receiveSerial) {
+                                        SDL_Log("Setting connection address from the early packet sndr=%d cmd=%d sn=%d addr: %s\n",
+                                                p->sender, thePacket->packet.command, uint16_t(thePacket->serialNumber), FormatAddr(packet->address).c_str());
                                         // we found the connection, reset its IP address from the packet
                                         conn->ipAddr = packet->address.host;
                                         conn->port = packet->address.port;
-                                        // and... keep this packet!
-                                        conn->ReceivedPacket(thePacket);
-                                    } else {
-                                        SDL_Log("COULD NOT FIND CONNECTION [%d] for packet coming from: %s\n", p->sender, FormatAddr(packet->address).c_str());
                                     }
-                                    DBG_Log("login+", "Updated (maybe) connections list: \n%s\n", FormatConnectionsList().c_str());
+                                    // and... keep this packet!
+                                    conn->ReceivedPacket(thePacket);
                                 } else {
-                                    SDL_Log("Got an EARLY packet, cmd=%d, from UNKNOWN address: %s",
-                                            thePacket->packet.command, FormatAddr(packet->address).c_str());
+                                    SDL_Log("Got an EARLY packet, sender=%d cmd=%d, from UNKNOWN address: %s",
+                                            p->sender, thePacket->packet.command, FormatAddr(packet->address).c_str());
                                 }
+                                DBG_Log("login+", "Updated connections list: \n%s\n", FormatConnectionsList().c_str());
                             } else {
                                 SDL_Log("Got a packet, sender=%d, cmd=%d, sn=%d, from UNKNOWN address: %s",
-                                        uint16_t(p->sender), thePacket->serialNumber, thePacket->packet.command, FormatAddr(packet->address).c_str());
+                                        p->sender, thePacket->packet.command, uint16_t(thePacket->serialNumber), FormatAddr(packet->address).c_str());
                             }
 
                             ReleasePacket((PacketInfo *)thePacket);
