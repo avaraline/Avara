@@ -626,7 +626,7 @@ void CUDPComm::ReadFromTOC(PacketInfo *thePacket) {
     connections->OpenNewConnections(table);
     // DBG_Log("login", "After opening connections ...\n%s", FormatConnectionTable(table).c_str());
 
-    DBG_Log("login", "After opening, connections list:\n%s", FormatConnectionsList().c_str());
+    DBG_Log("login+", "After opening, connections list:\n%s", FormatConnectionsList().c_str());
 }
 
 Boolean CUDPComm::PacketHandler(PacketInfo *thePacket) {
@@ -851,18 +851,20 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                             #endif
 
                         } else {
-                            if (thePacket->serialNumber == INITIAL_SERIAL_NUMBER) {
-                                if (isServing && thePacket->packet.command == kpPacketProtocolLogin) {
-                                    // received a Login packet
-                                    conn = DoLogin((PacketInfo *)thePacket, packet);
-                                } else if (p->sender) {
-                                    // unmatched first packet will include sender which helps us figure out which connection to match with
+                            if (thePacket->serialNumber == INITIAL_SERIAL_NUMBER &&
+                                isServing && thePacket->packet.command == kpPacketProtocolLogin) {
+                                // received a Login packet
+                                conn = DoLogin((PacketInfo *)thePacket, packet);
+                            } else if (thePacket->serialNumber < SERIAL_NUMBER_UDP_SETTLE) {
+                                if (p->sender) {
+                                    // unmatched early packets will include sender which helps us figure out which connection to match with
                                     for (conn = connections; conn; conn = conn->next) {
                                         // is this the matching connection number?
                                         if (p->sender == conn->myId) break;
                                     }
-                                    if (conn && conn->receiveSerial == INITIAL_SERIAL_NUMBER) {
-                                        SDL_Log("Setting connection[%d] address from the first received packet: %s\n", p->sender, FormatAddr(packet->address).c_str());
+                                    if (conn) {
+                                        SDL_Log("Setting connection[%d] address from the early (sn=%d) received packet: %s\n", p->sender,
+                                                uint16_t(thePacket->serialNumber), FormatAddr(packet->address).c_str());
                                         // we found the connection, reset its IP address from the packet
                                         conn->ipAddr = packet->address.host;
                                         conn->port = packet->address.port;
@@ -871,10 +873,14 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                                     } else {
                                         SDL_Log("COULD NOT FIND CONNECTION [%d] for packet coming from: %s\n", p->sender, FormatAddr(packet->address).c_str());
                                     }
+                                    DBG_Log("login+", "Updated (maybe) connections list: \n%s\n", FormatConnectionsList().c_str());
                                 } else {
-                                    SDL_Log("Got a packet, sender=%d, cmd=%d, from UNIDENTIFIED address: %s",
-                                            uint16_t(p->sender), thePacket->packet.command, FormatAddr(packet->address).c_str());
+                                    SDL_Log("Got an EARLY packet, cmd=%d, from UNKNOWN address: %s",
+                                            thePacket->packet.command, FormatAddr(packet->address).c_str());
                                 }
+                            } else {
+                                SDL_Log("Got a packet, sender=%d, cmd=%d, sn=%d, from UNKNOWN address: %s",
+                                        uint16_t(p->sender), thePacket->serialNumber, thePacket->packet.command, FormatAddr(packet->address).c_str());
                             }
 
                             ReleasePacket((PacketInfo *)thePacket);
@@ -1107,7 +1113,7 @@ Boolean CUDPComm::AsyncWrite() {
                 }
             #else
                 // transmit sender ID on initial packet in case they need that info to match up the connection
-                if (p->sender != myId || thePacket->serialNumber == INITIAL_SERIAL_NUMBER) {
+                if (p->sender != myId || thePacket->serialNumber <= SERIAL_NUMBER_UDP_SETTLE) {
                     *outData.c++ = p->sender;
                     flags |= 128;
                 }

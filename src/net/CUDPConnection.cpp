@@ -18,9 +18,6 @@
 
 #include <SDL2/SDL.h>
 
-#include <thread>   // this_thread::sleep_for
-#include <chrono>   // chrono::miliseconds
-
 
 #define kInitialRetransmitTime    (2000 / MSEC_PER_GET_CLOCK)  // 2 seconds
 #define kInitialRoundTripTime     (500 / MSEC_PER_GET_CLOCK)   // 0.5 second
@@ -867,7 +864,6 @@ void CUDPConnection::FreshClient(ip_addr remoteHost, port_num remotePort, uint16
         IPaddress addr = { remoteHost, remotePort };
         // ask the punch server to have this newly connected client punch back to us
         RequestPunch(addr);
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000));  // experiment, wait after punch before sending out commands
     }
 }
 

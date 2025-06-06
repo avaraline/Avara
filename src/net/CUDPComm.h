@@ -17,6 +17,7 @@
 #include <string>
 
 #define INITIAL_SERIAL_NUMBER     SerialNumber(0)  // must be even
+#define SERIAL_NUMBER_UDP_SETTLE  SerialNumber(100)
 
 #define ROUTE_THRU_SERVER 0  // non-zero to route all messages through the server
 
