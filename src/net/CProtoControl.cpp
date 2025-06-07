@@ -82,7 +82,7 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             theNet->SendRealName(thePacket->p1);
             break;
         case kpNameChange:
-            DBG_Log("login+", "received kpNameChange from %d with name='%s'\n", thePacket->sender, &thePacket->dataBuffer[1]);
+            DBG_Log("login+", "received kpNameChange from %d with name='%s'\n", thePacket->sender, ToString(StringPtr(thePacket->dataBuffer)).c_str());
             theNet->RecordNameAndState(
                 thePacket->sender, (StringPtr)thePacket->dataBuffer,
                 (LoadingState)thePacket->p2,

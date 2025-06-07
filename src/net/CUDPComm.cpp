@@ -374,12 +374,23 @@ void CUDPComm::ProcessQueue() {
 
 std::string CUDPComm::FormatConnectionTable(CompleteAddress *table) {
     std::ostringstream oss;
-    oss << " Slot   myId   Host:Port\n";
-    oss << "------+------+---------------\n";
-    // oss << "   1   | " << FormatHostPort(table->host, table->port) << "\n";
-    int slot = 2;
-    for (CUDPConnection *conn = connections; conn; conn = conn->next, table++, slot++) {
-        oss << "   " << slot << "  |   " << conn->myId + 1 << "  | " << FormatHostPort(table->host, table->port) << "\n";
+    oss << " myId | Host:Port\n";
+    oss << "------+---------------\n";
+    for (int id = 1; id <= maxClients; id++, table++) {
+        oss << "   " << id << "  | " << FormatHostPort(table->host, table->port) << "\n";
+    }
+    return oss.str();
+}
+
+std::string CUDPComm::FormatConnectionsList() {
+    std::ostringstream oss;
+    oss << " myId | Host:Port             | SN       | RSN\n";
+    oss << "------+-----------------------+----------+----------\n";
+    for (auto conn = connections; conn; conn = conn->next) {
+        oss << "   " << ((conn->myId < 0) ? " " : std::to_string(conn->myId)) << "  | "
+            << std::setw(21) << FormatHostPort(conn->ipAddr, conn->port) << " | "
+            << std::setw(8) << conn->serialNumber << " | "
+            << conn->receiveSerial << "\n";
     }
     return oss.str();
 }
@@ -394,7 +405,8 @@ bool CUDPComm::IsLAN(uint32_t host) {
     ip_addr ipaddr = SDL_SwapBE32(host);
     uint8_t ip1 = (ipaddr >> 24);
     uint8_t ip2 = ((ipaddr >> 16) & 0xff);
-    return ((ip1 == 10) ||
+    return ((ip1 == 127) ||  // localhost loopback
+            (ip1 == 10) ||
             (ip1 == 172 && ip2 >= 16 && ip2 <= 31) ||
             (ip1 == 192 && ip2 == 168));
 }
@@ -454,16 +466,6 @@ void CUDPComm::SendConnectionTable() {
         }
         SendPacket(kdEveryone, kpPacketProtocolControl, udpCramInfo, cramData, 0, 0, NULL);
 
-        if (gApplication->Boolean(kPunchHoles)) {
-            DBG_Log("login", "waiting for hole-punch\n");
-            // this lambda will be called after the punch server returns the external IP address
-            SetPunchAddressHandler([this](const IPaddress &addr) -> void {
-                DBG_Log("login", "punch server returned address of %s\n", FormatAddr(addr).c_str());
-                ReplaceMatchingNAT(addr);
-            });
-        } else {
-            SetPunchAddressHandler({});
-        }
     }
 }
 
@@ -484,6 +486,19 @@ void CUDPComm::ReplaceMatchingNAT(const IPaddress &addr) {
     }
     return;
 }
+
+void CUDPComm::PunchHandler(PunchType ptype, const IPaddress &addr) {
+    DBG_Log("punch", "CUDPComm::PunchHandler(%d, %s)\n", ptype, FormatAddr(addr).c_str());
+    if (isServing) {
+        DBG_Log("punch", "  > SERVER Punched\n");
+        ReplaceMatchingNAT(addr);
+    } else if (clientReady) {
+        DBG_Log("punch", "  > CLIENT Punched\n");
+    } else {
+        DBG_Log("punch", "  > OTHER  Punch (will we get here?)\n");
+    }
+}
+
 
 void CUDPComm::SendRejectPacket(ip_addr remoteHost, port_num remotePort, OSErr loginErr) {
     SDL_Log("CUDPComm::SendRejectPacket\n");
@@ -606,10 +621,12 @@ void CUDPComm::ReadFromTOC(PacketInfo *thePacket) {
     // DBG_Log("login", "After removing open connections ...\n%s", FormatConnectionTable(table).c_str());
 
     connections->RewriteConnections(table, myAddressFromTOC);
-    DBG_Log("login", "Connection Table after rewriting addresses ...\n%s", FormatConnectionTable(table).c_str());
+    DBG_Log("login", "Final Connection Table, opening remaining connections:\n%s", FormatConnectionTable(table).c_str());
 
     connections->OpenNewConnections(table);
     // DBG_Log("login", "After opening connections ...\n%s", FormatConnectionTable(table).c_str());
+
+    DBG_Log("login+", "After processing, connections list:\n%s", FormatConnectionsList().c_str());
 }
 
 Boolean CUDPComm::PacketHandler(PacketInfo *thePacket) {
@@ -777,10 +794,13 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                         p->dataLen = (flags & 8) ? *inData.w++ : (flags & 16) ? *inData.uc++ : 0;
                         p->p1 = (flags & 1) ? *inData.c++ : 0;
 
-                        if (flags & 128)
+                        bool gotSender = false;
+                        if (flags & 128) {
                             p->sender = *inData.c++;
-                        else
-                            p->sender = conn != NULL ? conn->myId : 0;
+                            gotSender = true;
+                        } else {
+                            p->sender = conn != nullptr ? conn->myId : 0;
+                        }
 
                         #if PACKET_DEBUG > 1
                             SDL_Log("        CUDPComm::ReadComplete sn=%d-%hd cmd=%d flags=0x%02x sndr=%d dist=0x%02x\n",
@@ -802,7 +822,7 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                         //         thePacket->serialNumber, p->command, p->p1, p->p2, p->p3, p->flags, p->sender, p->distribution,
                         //         FormatAddr(packet->address).c_str());
 
-                        if (conn) {
+                        if (conn && (!gotSender || p->sender == conn->myId)) {
                             #if ROUTE_THRU_SERVER
                                 if (isServing) {
                                     if (p->distribution & (1 << myId)) {
@@ -833,13 +853,45 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                                 conn->ReceivedPacket(thePacket);
                             #endif
 
-                        } else {
-                            if (isServing && thePacket->serialNumber == INITIAL_SERIAL_NUMBER &&
-                                thePacket->packet.command == kpPacketProtocolLogin) {
+                        } else {  // if we didn't find a connection OR the connection we found doesn't match the sender
+
+                            bool keepPacket = false;
+                            if (thePacket->serialNumber == INITIAL_SERIAL_NUMBER &&
+                                isServing && thePacket->packet.command == kpPacketProtocolLogin) {
+                                // received a Login packet
                                 conn = DoLogin((PacketInfo *)thePacket, packet);
+                            } else if (thePacket->serialNumber < SERIAL_NUMBER_UDP_SETTLE) {
+                                // unmatched early packets will include sender which helps us figure out which connection to match with
+                                for (conn = connections; conn; conn = conn->next) {
+                                    // is this the matching connection number?
+                                    if (p->sender == conn->myId) break;
+                                }
+                                if (conn) {
+                                    // don't change the connection again if we've already received more recent packets (ignore old resends)
+                                    if (thePacket->serialNumber >= conn->receiveSerial) {
+                                        SDL_Log("Setting connection address from the early packet sndr=%d cmd=%d sn=%d addr: %s\n",
+                                                p->sender, thePacket->packet.command, uint16_t(thePacket->serialNumber), FormatAddr(packet->address).c_str());
+                                        // we found the connection, reset its IP address from the packet
+                                        conn->ipAddr = packet->address.host;
+                                        conn->port = packet->address.port;
+                                    }
+                                    // and... keep this packet!
+                                    keepPacket = true;
+                                } else {
+                                    SDL_Log("Got an EARLY packet, sender=%d cmd=%d, from UNKNOWN address: %s",
+                                            p->sender, thePacket->packet.command, FormatAddr(packet->address).c_str());
+                                }
+                                DBG_Log("login+", "Updated connections list: \n%s\n", FormatConnectionsList().c_str());
+                            } else {
+                                SDL_Log("Got a packet, sender=%d, cmd=%d, sn=%d, from UNKNOWN address: %s",
+                                        p->sender, thePacket->packet.command, uint16_t(thePacket->serialNumber), FormatAddr(packet->address).c_str());
                             }
 
-                            ReleasePacket((PacketInfo *)thePacket);
+                            if (keepPacket) {
+                                conn->ReceivedPacket(thePacket);
+                            } else {
+                                ReleasePacket((PacketInfo *)thePacket);
+                            }
                         }
                     } else {
                         inData.c = inEnd;
@@ -1068,7 +1120,8 @@ Boolean CUDPComm::AsyncWrite() {
                     flags |= 128;
                 }
             #else
-                if (p->sender != myId) {
+                // transmit sender ID on initial packet in case they need that info to match up the connection
+                if (p->sender != myId || thePacket->serialNumber <= SERIAL_NUMBER_UDP_SETTLE) {
                     *outData.c++ = p->sender;
                     flags |= 128;
                 }
@@ -1262,6 +1315,16 @@ void CUDPComm::IUDPComm(short clientCount, short bufferCount, uint16_t version, 
     receiverRecord.userData = (Ptr)this;
     AddReceiver(&receiverRecord, kUDPProtoHandlerIsAsync);
 
+    if (gApplication->Boolean(kPunchHoles)) {
+        // this lambda will be called after a punch message (kPunch or kJab) is received
+        SetPunchMessageHandler([this](PunchType ptype, const IPaddress &addr) -> void {
+            this->PunchHandler(ptype, addr);
+        });
+    } else {
+        SetPunchMessageHandler({});
+    }
+
+
     // rejectPB.ioResult = noErr;
     rejectReason = noErr;
 
@@ -1418,7 +1481,7 @@ OSErr CUDPComm::ContactServer(IPaddress &serverAddr) {
         AsyncRead();
         SendPacket(kdServerOnly, kpPacketProtocolLogin, 0, 0, seed, password[0] + 1, (Ptr)password);
 
-        startTime = TickCount();
+        startTime = SDL_GetTicks();
 
         /* TODO: connecting to server dialog
         gApplication->SetCommandParams(kUDPPopStrings, kBusyContactingServer, true, 0);
@@ -1441,7 +1504,7 @@ OSErr CUDPComm::ContactServer(IPaddress &serverAddr) {
                 }
             }
 
-            if ((TickCount() - startTime) > kClientConnectTimeoutTicks) {
+            if ((SDL_GetTicks() - startTime) > kClientConnectTimeoutMsec) {
                 rejectReason = 2;
             }
 

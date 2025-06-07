@@ -29,6 +29,13 @@ typedef struct {
     IPaddress address;
 } UDPpacket;
 
+enum PunchType {
+    kPunchPing = 1,     // ping the punch server to keep connection open
+    kPunchRequest = 2,  // request the punch server send a Punch to another client
+    kPunch = 3,         // the message sent by punch server in response to kPunchRequest
+    kJab = 4            // simple zero-size packet sent directly between clients after getting kPunch'ed
+};
+
 OSErr PascalStringToAddress(StringPtr name, ip_addr *addr);
 OSErr AddressToPascalString(ip_addr addr, StringPtr name);
 
@@ -58,5 +65,5 @@ std::string FormatHostPort(uint32_t host, uint16_t port);
 std::string FormatAddress(IPaddress &addr);
 
 // call this handler when IP address received from punch server
-typedef std::function<void(const IPaddress &)> PunchAddressHandler;
-void SetPunchAddressHandler(PunchAddressHandler handler);
+typedef std::function<void(PunchType, const IPaddress &)> PunchAddressHandler;
+void SetPunchMessageHandler(PunchAddressHandler handler);

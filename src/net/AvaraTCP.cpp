@@ -49,8 +49,6 @@ typedef struct {
 } PunchPacket;
 #pragma pack()
 
-enum { kPunchPing = 1, kPunchRequest = 2, kPunch = 3 };
-
 static Boolean gAvaraTCPOpen = false;
 static int gAvaraSocket = -1;
 UDPReadData gReadCallback;
@@ -203,10 +201,12 @@ void RequestPunch(IPaddress &addr) {
     PunchSend(kPunchRequest, addr);
 }
 
+// this is an empty packet, or kJab sent in response to receiving kPunch from the Punch server
+// just to let the requester know we got the kPunch
 void Punch(IPaddress &addr) {
     if (gAvaraSocket == -1) return;
 
-    SDL_Log("Punching back to %s", FormatAddress(addr).c_str());
+    SDL_Log("Punching back directly (no-data) to %s", FormatAddress(addr).c_str());
 
     struct sockaddr_in sock_addr;
     memset(&sock_addr, 0, sizeof(sock_addr));
@@ -232,7 +232,7 @@ void HandlePunchPacket(UDPpacket *packet) {
     SDL_Log("Got packet from punch server - (%d) %s", pp->command, FormatAddress(pp->address).c_str());
 
     if (gPunchAddressHandler) {
-        gPunchAddressHandler(pp->address);
+        gPunchAddressHandler(PunchType(pp->command), pp->address);
     }
 
     if (pp->command == kPunch) {
@@ -288,7 +288,9 @@ void CheckSockets() {
                 }
             }
             else {
-                SDL_Log("Read 0 bytes from %s - PUNCH", FormatAddress(packet->address).c_str());
+                SDL_Log("Read 0 bytes from %s - JAB", FormatAddress(packet->address).c_str());
+                // probably a Jab but the handler should check the sender address
+                gPunchAddressHandler(PunchType(kJab), packet->address);
             }
             FreePacket(packet);
         }
@@ -340,6 +342,6 @@ std::string FormatAddress(IPaddress &addr) {
     return FormatHostPort(addr.host, addr.port);
 }
 
-void SetPunchAddressHandler(PunchAddressHandler handler) {
+void SetPunchMessageHandler(PunchAddressHandler handler) {
     gPunchAddressHandler = handler;
 }
