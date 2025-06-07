@@ -604,6 +604,44 @@ CUDPConnection *CUDPComm::DoLogin(PacketInfo *thePacket, UDPpacket *udp) {
     return newConn;
 }
 
+CUDPConnection *CUDPComm::UpdateConnectionMatchingSender(const UDPPacketInfo &thePacket, const IPaddress &newAddress) {
+    CUDPConnection *conn = nullptr;
+    const PacketInfo &pp = thePacket.packet;
+    const uint16_t pSerial = uint16_t(thePacket.serialNumber);
+    std::string formattedAddr = FormatAddr(newAddress);
+    const char *addrStr = formattedAddr.c_str();
+
+    // for now, only update for the first "several" packets (let the UDP connection settle)
+    if (pSerial < SERIAL_NUMBER_UDP_SETTLE) {
+        // unmatched early packets will include sender which helps us figure out which connection to match with
+        for (conn = connections; conn; conn = conn->next) {
+            // is this the matching connection number?
+            if (pp.sender == conn->myId) break;
+        }
+        if (conn) {
+            // don't change the connection address if we've received newer packets than this one (ignore old resends)
+            if (pSerial >= conn->receiveSerial) {
+                SDL_Log("Setting connection address from an early packet, sndr=%d cmd=%d sn=%d addr: %s\n",
+                        pp.sender, pp.command, pSerial, addrStr);
+                // we found the connection, reset its IP address from the received packet
+                conn->ipAddr = newAddress.host;
+                conn->port = newAddress.port;
+            }
+        } else {
+            SDL_Log("Got an EARLY packet with UNKNOWN SENDER, sndr=%d cmd=%d sn=%d addr: %s",
+                    pp.sender, pp.command, pSerial, addrStr);
+        }
+        DBG_Log("login+", "Current connections list: \n%s\n", FormatConnectionsList().c_str());
+    } else {
+        SDL_Log("Got a packet from UNMATCHED ADDRESS, sndr=%d, cmd=%d, sn=%d addr: %s",
+                pp.sender, pp.command, pSerial, addrStr);
+    }
+
+    return conn;
+}
+
+
+
 void CUDPComm::ReadFromTOC(PacketInfo *thePacket) {
     // SDL_Log("CUDPComm::ReadFromTOC\n");
     CompleteAddress *table;
@@ -853,45 +891,25 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                                 conn->ReceivedPacket(thePacket);
                             #endif
 
-                        } else {  // if we didn't find a connection OR the connection we found doesn't match the sender
-
-                            bool keepPacket = false;
-                            if (thePacket->serialNumber == INITIAL_SERIAL_NUMBER &&
-                                isServing && thePacket->packet.command == kpPacketProtocolLogin) {
-                                // received a Login packet
+                        } else {
+                            // if we didn't find a connection OR the connection we found doesn't match the sender
+                            if (isServing && thePacket->serialNumber == INITIAL_SERIAL_NUMBER &&
+                                thePacket->packet.command == kpPacketProtocolLogin) {
+                                // process a client Login packet
                                 conn = DoLogin((PacketInfo *)thePacket, packet);
-                            } else if (thePacket->serialNumber < SERIAL_NUMBER_UDP_SETTLE) {
-                                // unmatched early packets will include sender which helps us figure out which connection to match with
-                                for (conn = connections; conn; conn = conn->next) {
-                                    // is this the matching connection number?
-                                    if (p->sender == conn->myId) break;
-                                }
-                                if (conn) {
-                                    // don't change the connection again if we've already received more recent packets (ignore old resends)
-                                    if (thePacket->serialNumber >= conn->receiveSerial) {
-                                        SDL_Log("Setting connection address from the early packet sndr=%d cmd=%d sn=%d addr: %s\n",
-                                                p->sender, thePacket->packet.command, uint16_t(thePacket->serialNumber), FormatAddr(packet->address).c_str());
-                                        // we found the connection, reset its IP address from the packet
-                                        conn->ipAddr = packet->address.host;
-                                        conn->port = packet->address.port;
-                                    }
-                                    // and... keep this packet!
-                                    keepPacket = true;
-                                } else {
-                                    SDL_Log("Got an EARLY packet, sender=%d cmd=%d, from UNKNOWN address: %s",
-                                            p->sender, thePacket->packet.command, FormatAddr(packet->address).c_str());
-                                }
-                                DBG_Log("login+", "Updated connections list: \n%s\n", FormatConnectionsList().c_str());
+
+                                ReleasePacket((PacketInfo *)thePacket);
                             } else {
-                                SDL_Log("Got a packet, sender=%d, cmd=%d, sn=%d, from UNKNOWN address: %s",
-                                        p->sender, thePacket->packet.command, uint16_t(thePacket->serialNumber), FormatAddr(packet->address).c_str());
+                                // look for a connection with myId==p->sender and update it to the packet's address
+                                conn = UpdateConnectionMatchingSender(*thePacket, packet->address);
+
+                                if (conn) {
+                                    conn->ReceivedPacket(thePacket);
+                                } else {
+                                    ReleasePacket((PacketInfo *)thePacket);
+                                }
                             }
 
-                            if (keepPacket) {
-                                conn->ReceivedPacket(thePacket);
-                            } else {
-                                ReleasePacket((PacketInfo *)thePacket);
-                            }
                         }
                     } else {
                         inData.c = inEnd;

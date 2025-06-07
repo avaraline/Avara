@@ -127,6 +127,7 @@ public:
     virtual void SendRejectPacket(ip_addr remoteHost, port_num remotePort, OSErr loginErr);
 
     virtual CUDPConnection *DoLogin(PacketInfo *thePacket, UDPpacket *udp);
+    virtual CUDPConnection *UpdateConnectionMatchingSender(const UDPPacketInfo &thePacket, const IPaddress &newAddress);
 
     virtual Boolean PacketHandler(PacketInfo *thePacket);
 
