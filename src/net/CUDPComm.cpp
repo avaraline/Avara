@@ -794,10 +794,13 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                         p->dataLen = (flags & 8) ? *inData.w++ : (flags & 16) ? *inData.uc++ : 0;
                         p->p1 = (flags & 1) ? *inData.c++ : 0;
 
-                        if (flags & 128)
+                        bool gotSender = false;
+                        if (flags & 128) {
                             p->sender = *inData.c++;
-                        else
-                            p->sender = conn != NULL ? conn->myId : 0;
+                            gotSender = true;
+                        } else {
+                            p->sender = conn != nullptr ? conn->myId : 0;
+                        }
 
                         #if PACKET_DEBUG > 1
                             SDL_Log("        CUDPComm::ReadComplete sn=%d-%hd cmd=%d flags=0x%02x sndr=%d dist=0x%02x\n",
@@ -819,7 +822,7 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                         //         thePacket->serialNumber, p->command, p->p1, p->p2, p->p3, p->flags, p->sender, p->distribution,
                         //         FormatAddr(packet->address).c_str());
 
-                        if (conn) {
+                        if (conn && (!gotSender || p->sender == conn->myId)) {
                             #if ROUTE_THRU_SERVER
                                 if (isServing) {
                                     if (p->distribution & (1 << myId)) {
@@ -850,9 +853,8 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                                 conn->ReceivedPacket(thePacket);
                             #endif
 
-                        }
-                        // if we didn't find a connection OR the connection we found doesn't match the sender
-                        if (!conn || (p->sender && p->sender != conn->myId)) {
+                        } else {  // if we didn't find a connection OR the connection we found doesn't match the sender
+
                             bool keepPacket = false;
                             if (thePacket->serialNumber == INITIAL_SERIAL_NUMBER &&
                                 isServing && thePacket->packet.command == kpPacketProtocolLogin) {
@@ -880,7 +882,7 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                                             p->sender, thePacket->packet.command, FormatAddr(packet->address).c_str());
                                 }
                                 DBG_Log("login+", "Updated connections list: \n%s\n", FormatConnectionsList().c_str());
-                            } else { 
+                            } else {
                                 SDL_Log("Got a packet, sender=%d, cmd=%d, sn=%d, from UNKNOWN address: %s",
                                         p->sender, thePacket->packet.command, uint16_t(thePacket->serialNumber), FormatAddr(packet->address).c_str());
                             }
