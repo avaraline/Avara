@@ -1619,8 +1619,10 @@ void CAbstractPlayer::PlayerAction() {
         ResetDashboard();
 
         if (isInLimbo) {
-            if (!netDestruct)
-                KeyboardControl(itsManager->GetFunctions());
+            if (!netDestruct) {
+                auto ff = itsManager->GetFunctions();
+                KeyboardControl(ff);
+            }
 
             if (winFrame < 0) {
                 if (limboCount-- <= 0) {

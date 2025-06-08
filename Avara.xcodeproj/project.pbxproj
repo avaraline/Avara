@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		6025AE4E2C255E6A00A57EFB /* LegacyOpenGLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60C274E22C23EBE9005B67A9 /* LegacyOpenGLRenderer.cpp */; };
+		60A3DBEF2DF4284F007EF706 /* GameFilm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60A3DBEE2DF4284F007EF706 /* GameFilm.cpp */; };
+		60A3DBF02DF4284F007EF706 /* GameFilm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60A3DBEE2DF4284F007EF706 /* GameFilm.cpp */; };
+		60A3DBF12DF4284F007EF706 /* GameFilm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60A3DBEE2DF4284F007EF706 /* GameFilm.cpp */; };
 		940541ED2B5875B200E32241 /* OpenGLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940541EC2B5875B200E32241 /* OpenGLShader.cpp */; };
 		940541EE2B5875B200E32241 /* OpenGLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940541EC2B5875B200E32241 /* OpenGLShader.cpp */; };
 		9419E8472B49ECB1007C50D0 /* CTeamColorAdjuster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9419E8462B49ECB1007C50D0 /* CTeamColorAdjuster.cpp */; };
@@ -577,6 +580,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		60A3DBED2DF42791007EF706 /* GameFilm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameFilm.h; sourceTree = "<group>"; };
+		60A3DBEE2DF4284F007EF706 /* GameFilm.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameFilm.cpp; sourceTree = "<group>"; };
 		60C274E22C23EBE9005B67A9 /* LegacyOpenGLRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LegacyOpenGLRenderer.cpp; sourceTree = "<group>"; };
 		60C274E32C23EBE9005B67A9 /* LegacyOpenGLRenderer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = LegacyOpenGLRenderer.h; sourceTree = "<group>"; };
 		940541EB2B58744500E32241 /* OpenGLShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLShader.h; sourceTree = "<group>"; };
@@ -1462,6 +1467,8 @@
 		E5890BCC29895118007A875D /* game */ = {
 			isa = PBXGroup;
 			children = (
+				60A3DBED2DF42791007EF706 /* GameFilm.h */,
+				60A3DBEE2DF4284F007EF706 /* GameFilm.cpp */,
 				E20A3C552991CC72005741F7 /* KeyFuncs.cpp */,
 				E5890C0429895118007A875D /* AvaraDefines.h */,
 				E5890C0A29895118007A875D /* AvaraScoreInterface.h */,
@@ -2537,6 +2544,7 @@
 				E517F0DC299713DB0036B206 /* screen.cpp in Sources */,
 				E517F0DD299713DB0036B206 /* slider.cpp in Sources */,
 				E517F0DE299713DB0036B206 /* stackedwidget.cpp in Sources */,
+				60A3DBEF2DF4284F007EF706 /* GameFilm.cpp in Sources */,
 				E517F0DF299713DB0036B206 /* tabheader.cpp in Sources */,
 				948DF4172DA365CF007FEFDE /* CCompoundShape.cpp in Sources */,
 				E517F0E0299713DB0036B206 /* tabwidget.cpp in Sources */,
@@ -2710,6 +2718,7 @@
 				E5890CD629895118007A875D /* CAbstractYon.cpp in Sources */,
 				E5890D0C29895118007A875D /* CPlayerWindow.cpp in Sources */,
 				E5890CE029895118007A875D /* CLogicDelay.cpp in Sources */,
+				60A3DBF02DF4284F007EF706 /* GameFilm.cpp in Sources */,
 				E5890CEB29895118007A875D /* CPlayerActor.cpp in Sources */,
 				E5890F0029895124007A875D /* label.cpp in Sources */,
 				E5890EEC29895124007A875D /* widget.cpp in Sources */,
@@ -2761,6 +2770,7 @@
 				E5A219D52DC59135007D54FF /* CAbstractMissile.cpp in Sources */,
 				E5A219D62DC59135007D54FF /* CAbstractMovers.cpp in Sources */,
 				E5A219D72DC59135007D54FF /* CAbstractPlayer.cpp in Sources */,
+				60A3DBF12DF4284F007EF706 /* GameFilm.cpp in Sources */,
 				E5A219D82DC59135007D54FF /* CAbstractYon.cpp in Sources */,
 				E5A219D92DC59135007D54FF /* CAreaActor.cpp in Sources */,
 				E5A219DA2DC59135007D54FF /* CAvaraApp.cpp in Sources */,

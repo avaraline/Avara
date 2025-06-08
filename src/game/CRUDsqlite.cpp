@@ -53,12 +53,31 @@ static std::vector<std::vector<std::string>> migrations = {
                                      "author_id INTEGER NOT NULL, "
                                      "UNIQUE(level_id, author_id), "
                                      "FOREIGN KEY(level_id) REFERENCES levels(id), "
-                                     "FOREIGN KEY(author_id) REFERENCES authors(id))",
+                                     "FOREIGN KEY(author_id) REFERENCES authors(id))"
         "CREATE TABLE games          (created timestamp default current_timestamp, "
                                      "id INTEGER PRIMARY KEY, "
                                      "level_id INTEGER NOT NULL, "
-                                     "FOREIGN KEY(level_id) REFERENCES levels(id))",
+                                     "FOREIGN KEY(level_id) REFERENCES levels(id))"
     },
+    {
+        "CREATE TABLE films          (id INTEGER PRIMARY KEY, "
+                                     "total_frames INTEGER, "
+                                     "player_table TEXT NOT NULL, "
+                                     "game_id INTEGER NOT NULL, "
+                                     "FOREIGN KEY(game_id) REFERENCES games(id))"
+                                     
+        "CREATE TABLE framefuncs     (film_id INTEGER NOT NULL, "
+                                     "frame_number INTEGER NOT NULL, "
+                                     "slot INTEGER NOT NULL, "
+                                     "down INTEGER, "
+                                     "up INTEGER, "
+                                     "held INTEGER, "
+                                     "mouse_delta_h INTEGER, "
+                                     "mouse_delta_v INTEGER, "
+                                     "button_status INTEGER, "
+                                     "msg_char TEXT, "
+                                     "FOREIGN KEY(film_id) REFERENCES films(id))"
+    }
     // all subsequent migrations look something like this (DO NOT CHANGE PREVIOUS MIGRATIONS)
     //        {
     //            "CREATE TABLE new_table (...);",

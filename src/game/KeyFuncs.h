@@ -28,7 +28,7 @@ struct FunctionTable {
 };
 
 typedef struct {
-    FunctionTable ft;
+    FunctionTable* ft;
     FrameNumber validFrame;
 } FrameFunction;
 
