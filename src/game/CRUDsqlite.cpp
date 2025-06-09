@@ -60,13 +60,23 @@ static std::vector<std::vector<std::string>> migrations = {
                                      "FOREIGN KEY(level_id) REFERENCES levels(id))"
     },
     {
-        "CREATE TABLE films          (id INTEGER PRIMARY KEY, "
-                                     "total_frames INTEGER, "
-                                     "player_table TEXT NOT NULL, "
+        "CREATE TABLE players        (created timestamp default current_timestamp, "
+                                     "id INTEGER PRIMARY KEY ASC, "
+                                     "name TEXT, "
+                                     "last_seen TIMESTAMP DEFAULT CURRENT_TIMESTAMP, "
+                                     "elo INTEGER, "
+                                     "friend INTEGER, "
+                                     "properties TEXT)"
+
+        "ALTER TABLE games ADD COLUMN total_frames INTEGER "
+        "ALTER TABLE games ADD COLUMN properties TEXT "
+
+        "CREATE TABLE games_players  (player_id INTEGER NOT NULL, "
                                      "game_id INTEGER NOT NULL, "
+                                     "FOREIGN KEY(player_id) REFERENCES players(id), "
                                      "FOREIGN KEY(game_id) REFERENCES games(id))"
-                                     
-        "CREATE TABLE framefuncs     (film_id INTEGER NOT NULL, "
+
+        "CREATE TABLE framefuncs     (game_id INTEGER NOT NULL, "
                                      "frame_number INTEGER NOT NULL, "
                                      "slot INTEGER NOT NULL, "
                                      "down INTEGER, "
@@ -76,7 +86,7 @@ static std::vector<std::vector<std::string>> migrations = {
                                      "mouse_delta_v INTEGER, "
                                      "button_status INTEGER, "
                                      "msg_char TEXT, "
-                                     "FOREIGN KEY(film_id) REFERENCES films(id))"
+                                     "FOREIGN KEY(game_id) REFERENCES games(id))"
     }
     // all subsequent migrations look something like this (DO NOT CHANGE PREVIOUS MIGRATIONS)
     //        {
