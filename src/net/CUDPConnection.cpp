@@ -766,10 +766,10 @@ void CUDPConnection::MarkOpenConnections(CompleteAddress *table) {
         for (int idx = 1; idx < itsOwner->maxClients; idx++) {
             if (conn->myId == idx && conn->port) {
                 // if port is set in both places it's assumed to be in use (can't rely on host or port being equal tho)
-                if (table[idx].port) {
+                if (table[idx-1].port) {
                     // remove the connection from the connection table
-                    table[idx].host = 0;
-                    table[idx].port = 0;
+                    table[idx-1].host = 0;
+                    table[idx-1].port = 0;
                 } else {
                     DBG_Log("login", "myId=%d (%s) no longer in connection table, marking as GONE",
                             conn->myId, FormatHostPort(conn->ipAddr, conn->port).c_str());
