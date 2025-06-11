@@ -206,7 +206,7 @@ void PunchSend(const PunchPacket pp, const IPaddress &dest) {
 void PingPunchServer() {
     if (gAvaraSocket == -1 || punchLocal.port == 0 || punchServer.port == 0) return;
 
-    PunchSend({kPunchPing, .address = punchLocal}, punchServer);
+    PunchSend({kPunchPing, {punchLocal}}, punchServer);
 }
 
 void RegisterPunchServer(IPaddress &localAddr) {
@@ -221,17 +221,17 @@ void RequestPunch(IPaddress &addr) {
     if (gAvaraSocket == -1 || punchServer.port == 0) return;
 
     SDL_Log("Requesting that %s punch a hole", FormatAddress(addr).c_str());
-    PunchSend({kPunchRequest, .address = addr}, punchServer);
+    PunchSend({kPunchRequest, {addr}}, punchServer);
 }
 
 // this is a simple packet sent in response to receiving kPunch from the Punch server
 // just to let the requester know we got the kPunch and tell them what our connectionId is
-void PunchHole(const IPaddress &addr, int8_t connId) {
+void PunchHole(const IPaddress &addr, const int8_t connId) {
     if (gAvaraSocket == -1) return;
 
     SDL_Log("Sending a HolePunch to %s", FormatAddress(addr).c_str());
-    PunchPacket pp = {};  // just to clear out the un-used bytes
-    pp = {kHolePunch, .connectionId = connId};
+    PunchPacket pp = {kHolePunch};   // with C++20 can initialize using designators: {kHolePunch, .connectionId=connId}
+    pp.connectionId = connId;
     PunchSend(pp, addr);
 }
 
