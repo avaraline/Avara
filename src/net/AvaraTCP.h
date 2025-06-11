@@ -33,7 +33,7 @@ enum PunchType {
     kPunchPing = 1,     // ping the punch server to keep connection open
     kPunchRequest = 2,  // request the punch server send a Punch to another client
     kPunch = 3,         // the message sent by punch server in response to kPunchRequest
-    kJab = 4            // simple zero-size packet sent directly between clients after getting kPunch'ed
+    kHolePunch = 4      // simple packet sent directly between clients with the sender's connection ID
 };
 
 OSErr PascalStringToAddress(StringPtr name, ip_addr *addr);
@@ -52,7 +52,7 @@ int ResolveHost(IPaddress *address, const char *host, uint16_t port);
 void PunchSetup(const char *host, uint16_t port);
 void RegisterPunchServer(IPaddress &localAddr);
 void RequestPunch(IPaddress &addr);
-void Punch(IPaddress &addr);
+void PunchHole(const IPaddress &addr, const int8_t connectionId);
 
 int CreateSocket(uint16_t &port /* value changed when port==0 */);
 void DestroySocket(int sock);
@@ -62,8 +62,8 @@ void UDPRead(int sock, ReadCompleteProc callback, void *userData);
 void UDPWrite(int sock, UDPpacket *packet, WriteCompleteProc callback, void *userData);
 
 std::string FormatHostPort(uint32_t host, uint16_t port);
-std::string FormatAddress(IPaddress &addr);
+std::string FormatAddress(const IPaddress &addr);
 
-// call this handler when IP address received from punch server
-typedef std::function<void(PunchType, const IPaddress &)> PunchAddressHandler;
-void SetPunchMessageHandler(PunchAddressHandler handler);
+// call this handler when any PunchPacket received
+typedef std::function<void(PunchType cmd, const IPaddress &addr, int8_t connId)> PunchHandler;
+void SetPunchMessageHandler(PunchHandler handler);

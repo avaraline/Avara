@@ -567,6 +567,22 @@ char *CUDPConnection::ValidatePackets(char *validateInfo, int32_t curTime) {
     return validateInfo;
 }
 
+void CUDPConnection::ResendNonValidatedPackets() {
+    uint16_t serialBegin = maxValid + kSerialNumberStepSize;
+    uint16_t serialEnd = serialNumber - kSerialNumberStepSize;
+    DBG_Log("punch", "   resending serial numbers (%hu-%hu)", serialBegin, serialEnd);
+
+    ClockTick curTime = itsOwner->GetClock();
+
+    UDPPacketInfo *pp = (UDPPacketInfo *)queues[kTransmitQ].qHead;
+    while (pp) {
+        if (serialBegin <= pp->serialNumber && pp->serialNumber <= serialEnd) {
+            pp->nextSendTime = curTime;
+        }
+        pp = (UDPPacketInfo *)pp->packet.qLink;
+     }
+}
+
 void CUDPConnection::Dispose() {
     FlushQueues();
     delete latencyHistogram;

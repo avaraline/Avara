@@ -487,15 +487,33 @@ void CUDPComm::ReplaceMatchingNAT(const IPaddress &addr) {
     return;
 }
 
-void CUDPComm::PunchHandler(PunchType ptype, const IPaddress &addr) {
-    DBG_Log("punch", "CUDPComm::PunchHandler(%d, %s)\n", ptype, FormatAddr(addr).c_str());
-    if (isServing) {
-        DBG_Log("punch", "  > SERVER Punched\n");
-        ReplaceMatchingNAT(addr);
-    } else if (clientReady) {
-        DBG_Log("punch", "  > CLIENT Punched\n");
-    } else {
-        DBG_Log("punch", "  > OTHER  Punch (will we get here?)\n");
+void CUDPComm::PunchHandler(const PunchType cmd, const IPaddress &addr, const int8_t connId) {
+    DBG_Log("punch", "CUDPComm::PunchHandler(%u, %s, %d})\n", cmd, FormatAddr(addr).c_str(), connId);
+    switch (cmd) {
+        case kPunch:
+            PunchHole(addr, myId);
+            if (isServing) {
+                ReplaceMatchingNAT(addr);
+            }
+            break;
+        case kHolePunch:
+            // reset connection address for matching ID if different, then resend all messages
+            for (CUDPConnection *conn = connections; conn; conn = conn->next) {
+                if (conn->myId == connId) {
+                    if (addr.host != conn->ipAddr || addr.port != conn->port) {
+                        DBG_Log("punch", "   incoming address is different, updating connection from %s to %s\n",
+                                FormatAddr(conn).c_str(), FormatAddr(addr).c_str());
+                        conn->ipAddr = addr.host;
+                        conn->port = addr.port;
+                        conn->ResendNonValidatedPackets();
+                        AsyncWrite();
+                    }
+                    break;
+                }
+            }
+            break;
+        default:
+            break;
     }
 }
 
@@ -621,7 +639,7 @@ CUDPConnection *CUDPComm::UpdateConnectionMatchingSender(const UDPPacketInfo &th
         if (conn) {
             // don't change the connection address if we've received newer packets than this one (ignore old resends)
             if (pSerial >= conn->receiveSerial) {
-                SDL_Log("Setting connection address from an early packet, sndr=%d cmd=%d sn=%d addr: %s\n",
+                DBG_Log("login", "Setting connection address from an early packet, sndr=%d cmd=%d sn=%d addr: %s\n",
                         pp.sender, pp.command, pSerial, addrStr);
                 // we found the connection, reset its IP address from the received packet
                 conn->ipAddr = newAddress.host;
@@ -1335,8 +1353,8 @@ void CUDPComm::IUDPComm(short clientCount, short bufferCount, uint16_t version, 
 
     if (gApplication->Boolean(kPunchHoles)) {
         // this lambda will be called after a punch message (kPunch or kJab) is received
-        SetPunchMessageHandler([this](PunchType ptype, const IPaddress &addr) -> void {
-            this->PunchHandler(ptype, addr);
+        SetPunchMessageHandler([this](PunchType cmd, const IPaddress &addr, int8_t connId) -> void {
+            this->PunchHandler(cmd, addr, connId);
         });
     } else {
         SetPunchMessageHandler({});

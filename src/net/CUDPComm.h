@@ -122,7 +122,7 @@ public:
     virtual void SendConnectionTable();
     virtual void ReadFromTOC(PacketInfo *thePacket);
     virtual void ReplaceMatchingNAT(const IPaddress &addr);
-    virtual void PunchHandler(PunchType ptype, const IPaddress &addr);
+    virtual void PunchHandler(PunchType cmd, const IPaddress &addr, int8_t connId);
 
     virtual void SendRejectPacket(ip_addr remoteHost, port_num remotePort, OSErr loginErr);
 
