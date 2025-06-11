@@ -393,7 +393,7 @@ void CAvaraAppImpl::GameStarted(LevelInfo &loadedLevel) {
     vp->showTransparent = false;
     itsGame->IncrementGameCounter();
     MessageLine(kmStarted, MsgAlignment::Center);
-    itsAPI->RecordGameStart(itsGame->currentGameId, loadedLevel);
+    itsAPI->RecordGameStart(itsGame);
     levelWindow->UpdateRecents();
     if (controller) {
         auto color = itsGame->GetLocalTeamColor();

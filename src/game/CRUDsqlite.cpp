@@ -6,7 +6,7 @@
 //
 
 #include "CRUDsqlite.h"
-
+#include "CAbstractPlayer.h"
 #include <SDL2/SDL.h>
 #include <stdexcept>   // runtime_error
 #include "Debug.h"
@@ -64,15 +64,21 @@ static std::vector<std::vector<std::string>> migrations = {
                                      "id INTEGER PRIMARY KEY ASC, "
                                      "name TEXT, "
                                      "last_seen TIMESTAMP DEFAULT CURRENT_TIMESTAMP, "
+                                     "last_played TIMESTAMP, "
                                      "elo INTEGER, "
+                                     "colors TEXT, "
                                      "friend INTEGER, "
                                      "properties TEXT)"
 
         "ALTER TABLE games ADD COLUMN total_frames INTEGER "
         "ALTER TABLE games ADD COLUMN properties TEXT "
-
+        "ALTER TABLE games ADD COLUMN filmed INTEGER "
+        
         "CREATE TABLE games_players  (player_id INTEGER NOT NULL, "
                                      "game_id INTEGER NOT NULL, "
+                                     "slot INTEGER NOT NULL, "
+                                     "team INTEGER NOT NULL, "
+                                     "hull_rsrc_id INTEGER NOT NULL, "
                                      "FOREIGN KEY(player_id) REFERENCES players(id), "
                                      "FOREIGN KEY(game_id) REFERENCES games(id))"
 
@@ -85,7 +91,7 @@ static std::vector<std::vector<std::string>> migrations = {
                                      "mouse_delta_h INTEGER, "
                                      "mouse_delta_v INTEGER, "
                                      "button_status INTEGER, "
-                                     "msg_char TEXT, "
+                                     "msg_char VARCHAR(8), "
                                      "FOREIGN KEY(game_id) REFERENCES games(id))"
     }
     // all subsequent migrations look something like this (DO NOT CHANGE PREVIOUS MIGRATIONS)
@@ -236,11 +242,27 @@ std::string CRUDsqlite::RecentsView() {
 
 // public/interface methods
 
-void CRUDsqlite::RecordGameStart(int gameId, const LevelInfo& info) {
-    DBG_Log("sql", "CRUDsqlite::RecordGameStart(%0xd, %s)\n", gameId, info.URL().c_str());
+void CRUDsqlite::RecordGameStart(GamePointer &game) {
+    auto url = game->loadedLevelInfo->URL();
+    auto gameId = game->currentGameId;
+    
+    DBG_Log("sql", "CRUDsqlite::RecordGameStart({%0xd, %s})\n", gameId, url.c_str());
+    int levelId = RecordLevelInfo(*game->loadedLevelInfo);
+    
+    CAbstractPlayer* thePlayer;
+    CAbstractPlayer* nextPlayer;
+    
+    thePlayer = game->playerList;
+    while (thePlayer) {
+        nextPlayer = thePlayer->nextPlayer;
+        auto manager = game->FindPlayerManager(thePlayer);
+        auto name = manager->GetPlayerName();
+        auto slot = manager->Slot();
+        // TODO: finish
+        thePlayer = nextPlayer;
+    }
 
-    int levelId = RecordLevelInfo(info);
-
+    
     InsertInto("games(id, level_id) VALUES (?, ?)", { gameId, levelId });
 }
 

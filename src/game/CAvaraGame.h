@@ -290,6 +290,8 @@ public:
     virtual ARGBColor GetLocalTeamColor();
 };
 
+typedef std::unique_ptr<CAvaraGame> GamePointer;
+
 #ifndef MAINAVARAGAME
 extern CAvaraGame *gCurrentGame;
 extern CSoundHub *gHub;
