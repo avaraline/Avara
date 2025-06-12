@@ -1,4 +1,4 @@
-// Ogg Vorbis audio decoder - v1.20 - public domain
+// Ogg Vorbis audio decoder - v1.22 - public domain
 // http://nothings.org/stb_vorbis/
 //
 // Original version written by Sean Barrett in 2007.
@@ -29,12 +29,15 @@
 //    Bernhard Wodo      Evan Balster        github:alxprd
 //    Tom Beaumont       Ingo Leitgeb        Nicolas Guillemot
 //    Phillip Bennefall  Rohit               Thiago Goulart
-//    github:manxorist   saga musix          github:infatum
+//    github:manxorist   Saga Musix          github:infatum
 //    Timur Gagiev       Maxwell Koo         Peter Waller
 //    github:audinowho   Dougall Johnson     David Reid
 //    github:Clownacy    Pedro J. Estebanez  Remi Verschelde
+//    AnthoFoxo          github:morlat       Gabriel Ravier
 //
 // Partial history:
+//    1.22    - 2021-07-11 - various small fixes
+//    1.21    - 2021-07-02 - fix bug for files with no comments
 //    1.20    - 2020-07-11 - several small fixes
 //    1.19    - 2020-02-05 - warnings
 //    1.18    - 2020-02-02 - fix seek bugs; parse header comments; misc warnings etc.
@@ -220,6 +223,12 @@ extern int stb_vorbis_decode_frame_pushdata(
 // channel. In other words, (*output)[0][0] contains the first sample from
 // the first channel, and (*output)[1][0] contains the first sample from
 // the second channel.
+//
+// *output points into stb_vorbis's internal output buffer storage; these
+// buffers are owned by stb_vorbis and application code should not free
+// them or modify their contents. They are transient and will be overwritten
+// once you ask for more data to get decoded, so be sure to grab any data
+// you need before then.
 
 extern void stb_vorbis_flush_pushdata(stb_vorbis *f);
 // inform stb_vorbis that your next datablock will not be contiguous with
