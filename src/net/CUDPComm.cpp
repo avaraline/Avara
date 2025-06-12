@@ -650,9 +650,9 @@ CUDPConnection *CUDPComm::UpdateConnectionMatchingSender(const UDPPacketInfo &th
                     pp.sender, pp.command, pSerial, addrStr);
         }
         DBG_Log("login+", "Current connections list: \n%s\n", FormatConnectionsList().c_str());
-    } else {
-        SDL_Log("Got a packet from UNMATCHED ADDRESS, sndr=%d, cmd=%d, sn=%d addr: %s",
-                pp.sender, pp.command, pSerial, addrStr);
+//    } else {
+//        SDL_Log("Got a packet from UNMATCHED ADDRESS, sndr=%d, cmd=%d, sn=%d addr: %s",
+//                pp.sender, pp.command, pSerial, addrStr);
     }
 
     return conn;

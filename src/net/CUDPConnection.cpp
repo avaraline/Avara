@@ -568,6 +568,9 @@ char *CUDPConnection::ValidatePackets(char *validateInfo, int32_t curTime) {
 }
 
 void CUDPConnection::ResendNonValidatedPackets() {
+    if (serialNumber == INITIAL_SERIAL_NUMBER) {
+        return;
+    }
     uint16_t serialBegin = maxValid + kSerialNumberStepSize;
     uint16_t serialEnd = serialNumber - kSerialNumberStepSize;
     DBG_Log("punch", "   resending serial numbers (%hu-%hu)", serialBegin, serialEnd);
@@ -580,7 +583,7 @@ void CUDPConnection::ResendNonValidatedPackets() {
             pp->nextSendTime = curTime;
         }
         pp = (UDPPacketInfo *)pp->packet.qLink;
-     }
+    }
 }
 
 void CUDPConnection::Dispose() {
