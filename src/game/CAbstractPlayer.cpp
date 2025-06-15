@@ -90,7 +90,7 @@ void CAbstractPlayer::LoadHUDParts() {
     gRenderer->AddHUDPart(dirArrow);
 
     showHud = itsGame->showNewHUD;
-    hudPreset = itsGame->itsApp->Get(kHUDPreset);
+    hudPreset = itsGame->hudLayout;
     LoadDashboardParts();
 }
 
@@ -563,7 +563,7 @@ void CAbstractPlayer::LoadDashboardParts() {
     dashboardSpinSpeed = ToFixed(100);
     dashboardSpinHeading = 0;
 
-    layout = itsGame->itsApp->Get(kHUDPreset);
+    layout = itsGame->hudLayout;
     //float alpha = itsGame->itsApp->Get(kHUDAlpha);
     //Fixed hudAlpha = FIX1 * alpha;
 
@@ -691,10 +691,10 @@ void CAbstractPlayer::DashboardReloadCheck() {
     }
 
     // User changed the hud layout
-    if (hudPreset != itsGame->itsApp->Get(kHUDPreset)) {
+    if (hudPreset != itsGame->hudLayout) {
         DisposeDashboard();
         LoadDashboardParts();
-        hudPreset = itsGame->itsApp->Get(kHUDPreset);
+        hudPreset = itsGame->hudLayout;
     }
 }
 
