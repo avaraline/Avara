@@ -49,6 +49,7 @@ public:
     virtual void MixerDispose() = 0;
     virtual void HushFlag(bool) = 0;
     virtual bool Stereo() = 0;
+    virtual bool OpenAudioDevice() { return true; };
 };
 class CSoundHubImpl : public CDirectObject, public CSoundHub {
 public:

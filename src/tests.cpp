@@ -31,6 +31,7 @@ using namespace std;
 class TestSoundHub : public CSoundHubImpl {
 public:
     virtual Fixed* EarLocation() { return ear; }
+    virtual bool OpenAudioDevice() { return false; }
 private:
     Fixed ear[3];
 
