@@ -107,7 +107,7 @@ void CBSPPart::IBSPPart(short resId) {
     for (uint16_t i = 0; i < materialCount; i++) {
         original = baseMaterial;
         current = baseMaterial;
-        nlohmann::json &mat = doc["materials"][i];
+        nlohmann::json const &mat = doc["materials"][i];
         ARGBColor color = ARGBColor(0x00ffffff); // Default to invisible "white."
         ARGBColor spec = defaultMaterial.GetSpecular().WithA(defaultMaterial.GetShininess());
         
@@ -146,21 +146,21 @@ void CBSPPart::IBSPPart(short resId) {
     bool showPoints = (Debug::GetValue("bsp") == resId);
     if (showPoints) { DBG_Log("bsp", "  points:\n"); }
     for (uint32_t i = 0; i < pointCount; i++) {
-        nlohmann::json &pt = doc["points"][i];
+        nlohmann::json const &pt = doc["points"][i];
         FixedPoint v = FixedPoint(ToFixed(pt[0]), ToFixed(pt[1]), ToFixed(pt[2]), FIX1);
         pointTable.push_back(v);
         if (showPoints) { DBG_Log("bsp", "    %s\n", pointTable[i].Format().c_str()); }
     }
 
     for (uint32_t i = 0; i < polyCount; i++) {
-        nlohmann::json &poly = doc["polys"][i];
+        nlohmann::json const &poly = doc["polys"][i];
         PolyRecord r = PolyRecord();
         // Material
         r.materialIdx = static_cast<uint16_t>(poly["mat"]);
         // Normal
-        nlohmann::json &norms = doc["normals"];
+        nlohmann::json const &norms = doc["normals"];
         int idx = poly["normal"];
-        nlohmann::json &norm = norms[idx];
+        nlohmann::json const &norm = norms[idx];
         r.normal.x = norm[0];
         r.normal.y = norm[1];
         r.normal.z = norm[2];
@@ -170,7 +170,7 @@ void CBSPPart::IBSPPart(short resId) {
         r.triPoints = std::make_unique<uint32_t[]>(poly["tris"].size());
         for (size_t j = 0; j < poly["tris"].size(); j += 3) {
             for (size_t k = 0; k < 3; k++) {
-                nlohmann::json &pt = poly["tris"][j + k];
+                nlohmann::json const &pt = poly["tris"][j + k];
                 r.triPoints[j + k] = (uint32_t)pt;
             }
         }
