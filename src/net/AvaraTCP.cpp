@@ -80,14 +80,6 @@ static IPaddress punchServer = {0, 0};
 static IPaddress punchLocal = {0, 0};
 static uint32_t lastPunchPing = 0;
 
-OSErr PascalStringToAddress(StringPtr name, ip_addr *addr) {
-    return noErr;
-}
-
-OSErr AddressToPascalString(ip_addr addr, StringPtr name) {
-    return noErr;
-}
-
 OSErr OpenAvaraTCP() {
     if (gAvaraTCPOpen) {
         return noErr;

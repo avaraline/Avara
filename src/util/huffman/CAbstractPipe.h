@@ -1,7 +1,8 @@
 #pragma once
-#include "CBaseObject.h"
 
-class CAbstractPipe : public CBaseObject {
+#include "Types.h"
+
+class CAbstractPipe {
 public:
     class CAbstractPipe *outputStream;
 

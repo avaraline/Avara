@@ -167,7 +167,6 @@
     <ClInclude Include="..\src\audio\CSoundMixer.h" />
     <ClInclude Include="..\src\audio\OggFile.h" />
     <ClInclude Include="..\src\audio\SoundSystemDefines.h" />
-    <ClInclude Include="..\src\base\CBaseObject.h" />
     <ClInclude Include="..\src\base\CDirectObject.h" />
     <ClInclude Include="..\src\base\CTagBase.h" />
     <ClInclude Include="..\src\bsp\CBSPPart.h" />
@@ -305,10 +304,8 @@
     <ClInclude Include="..\src\util\FastMat.h" />
     <ClInclude Include="..\src\util\huffman\CAbstractHuffPipe.h" />
     <ClInclude Include="..\src\util\huffman\CAbstractPipe.h" />
-    <ClInclude Include="..\src\util\huffman\CHandlePipe.h" />
     <ClInclude Include="..\src\util\huffman\CHuffProcessor.h" />
     <ClInclude Include="..\src\util\JSONify.h" />
-    <ClInclude Include="..\src\util\PascalStrings.h" />
     <ClInclude Include="..\src\util\RamFiles.h" />
     <ClInclude Include="..\src\util\RayHit.h" />
     <ClInclude Include="..\src\util\RolloverCounter.h" />
@@ -377,7 +374,6 @@
     <ClCompile Include="..\src\audio\CSoundMixer.cpp" />
     <ClCompile Include="..\src\audio\DopplerPlug.cpp" />
     <ClCompile Include="..\src\audio\OggFile.cpp" />
-    <ClCompile Include="..\src\base\CBaseObject.cpp" />
     <ClCompile Include="..\src\base\CDirectObject.cpp" />
     <ClCompile Include="..\src\base\CTagBase.cpp" />
     <ClCompile Include="..\src\bsp\CBSPPart.cpp" />
@@ -496,9 +492,7 @@
     <ClCompile Include="..\src\util\FastMat.cpp" />
     <ClCompile Include="..\src\util\huffman\CAbstractHuffPipe.cpp" />
     <ClCompile Include="..\src\util\huffman\CAbstractPipe.cpp" />
-    <ClCompile Include="..\src\util\huffman\CHandlePipe.cpp" />
     <ClCompile Include="..\src\util\huffman\CHuffProcessor.cpp" />
-    <ClCompile Include="..\src\util\PascalStrings.cpp" />
     <ClCompile Include="..\src\util\RamFiles.cpp" />
     <ClCompile Include="..\vendor\csscolorparser.cpp" />
     <ClCompile Include="..\vendor\nanogui\button.cpp" />
