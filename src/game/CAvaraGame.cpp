@@ -56,7 +56,7 @@ void CAvaraGame::InitMixer(Boolean silentFlag) {
     soundHub->MixerDispose();
 
     aMixer = new CSoundMixer;
-    aMixer->ISoundMixer(rate22khz, 64, 8, true, true, false, soundHub->OpenAudioDevice());
+    aMixer->ISoundMixer(rate22khz, 64, 8, true, true, false, soundHub->AudioEnabled());
     aMixer->SetStereoSeparation(true);
     aMixer->SetSoundEnvironment(FIX(400), FIX(5), CLASSICFRAMETIME);
     aMixer->SetVolume(gApplication ? gApplication->Get<uint8_t>(kSoundVolume) : 0);
