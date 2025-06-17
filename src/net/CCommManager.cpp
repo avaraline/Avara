@@ -305,26 +305,6 @@ void CCommManager::DisconnectSlot(short slotId) {}
 
 void CCommManager::OptionCommand(long theCommand) {}
 
-short CCommManager::GetStatusInfo(short slot, Handle leftColumn, Handle rightColumn) {
-    /*
-    Handle		genericInfo;
-
-    genericInfo = GetResource('TEXT', genericInfoTextRes);
-    HLock(genericInfo);
-
-    PtrToXHand(*genericInfo, leftColumn, GetHandleSize(genericInfo));
-
-    HUnlock(genericInfo);
-    */
-    return 0;
-}
-
-Boolean CCommManager::ReconfigureAvailable() {
-    return false;
-}
-
-void CCommManager::Reconfigure() {}
-
 long CCommManager::GetMaxRoundTrip(short distribution, float stdMult, short *slowPlayerId) {
     return 0; //	Local net.
 }

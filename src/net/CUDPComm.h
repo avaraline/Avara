@@ -39,20 +39,6 @@ public:
     short clientLimit;
     Str255 password;
 
-    /*
-    UDPiopb				sendPB;
-    UDPiopb				receivePB;
-    UDPiopb				rejectPB;
-    char				rejectData[32];
-    wdsEntry			rejectDataTable[2];
-
-    wdsEntry            writeDataTable[2];
-
-    UDPIOCompletionUPP	readComplete;
-    UDPIOCompletionUPP	writeComplete;
-    UDPIOCompletionUPP	bufferReturnComplete;
-    */
-
     ReceiverRecord receiverRecord;
 
     // OSErr				writeErr;
@@ -100,7 +86,6 @@ public:
     virtual void IUDPComm(short clientCount, short bufferCount, uint16_t version, ClockTick urgentTimePeriod);
 
     virtual void Disconnect();
-    virtual void WritePrefs();
     virtual void Dispose();
 
     ClockTick GetClock();
@@ -142,8 +127,6 @@ public:
     virtual void CreateServer();
     virtual OSErr ContactServer(IPaddress &serverAddr);
 
-    virtual Boolean ServerSetupDialog(Boolean disableSome);
-
     virtual void Connect(std::string address); //	Client
     virtual void Connect(std::string address, std::string passwordStr);
 
@@ -152,13 +135,7 @@ public:
     virtual void OptionCommand(long theCommand);
     virtual void DisconnectSlot(short slotId);
 
-    virtual short GetStatusInfo(short slotId, Handle leftColumn, Handle rightColumn);
-
-    virtual Boolean ReconfigureAvailable();
-    virtual void Reconfigure();
     virtual long GetMaxRoundTrip(short distribution, float multiplier = 0.0, short *slowPlayerId = nullptr);
     virtual float GetMaxMeanSendCount(short distribution);
     virtual float GetMaxMeanReceiveCount(short distribution);
-
-    virtual void BuildServerTags();
 };
