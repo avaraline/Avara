@@ -109,7 +109,7 @@ void CSoundHubImpl::Dispose() {
         }
     }
 
-    itsCompressor->Dispose();
+    delete itsCompressor;
     DisposeSoundLinks();
     CDirectObject::Dispose();
 }

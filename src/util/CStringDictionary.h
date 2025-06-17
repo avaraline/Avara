@@ -23,7 +23,7 @@
 #include <string>
 #include <vector>
 
-#include "CBaseObject.h"
+#include "Memory.h"
 #include "Types.h"
 
 using namespace std;
@@ -51,7 +51,7 @@ typedef struct {
     short hashLink;
 } DictEntry;
 
-class CStringDictionary : public CBaseObject {
+class CStringDictionary {
 public:
     /*	Methods:			*/
     virtual void IStringDictionary();

@@ -34,7 +34,6 @@ short HashString(char *string, short len) {
 **	Initialize a CStringDictionary. The directory will be empty.
 */
 void CStringDictionary::IStringDictionary() {
-    IBaseObject();
 }
 
 /*
@@ -155,20 +154,17 @@ tokentype CStringDictionary::FindEntry(const unsigned char *entry, short len) {
 **	Unlock and dispose storage.
 */
 void CStringDictionary::Dispose() {
-    CBaseObject::Dispose();
 }
 
 /*
 **	Lock everything.
 */
 void CStringDictionary::Lock() {
-    CBaseObject::Lock();
 }
 /*
 **	Unlock everything.
 */
 void CStringDictionary::Unlock() {
-    CBaseObject::Unlock();
 }
 
 Handle CStringDictionary::WriteToHandle() {

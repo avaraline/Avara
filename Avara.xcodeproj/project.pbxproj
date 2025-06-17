@@ -52,7 +52,6 @@
 		E517F056299713DB0036B206 /* CSoundHub.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7329895118007A875D /* CSoundHub.cpp */; };
 		E517F057299713DB0036B206 /* CSoundMixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7729895118007A875D /* CSoundMixer.cpp */; };
 		E517F058299713DB0036B206 /* DopplerPlug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7429895118007A875D /* DopplerPlug.cpp */; };
-		E517F059299713DB0036B206 /* CBaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9929895118007A875D /* CBaseObject.cpp */; };
 		E517F05A299713DB0036B206 /* CDirectObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9D29895118007A875D /* CDirectObject.cpp */; };
 		E517F05B299713DB0036B206 /* CTagBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9A29895118007A875D /* CTagBase.cpp */; };
 		E517F05C299713DB0036B206 /* CBSPPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C6829895118007A875D /* CBSPPart.cpp */; };
@@ -160,7 +159,6 @@
 		E517F0C5299713DB0036B206 /* CHuffProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BB529895118007A875D /* CHuffProcessor.cpp */; };
 		E517F0C6299713DB0036B206 /* CAbstractPipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BB629895118007A875D /* CAbstractPipe.cpp */; };
 		E517F0C7299713DB0036B206 /* CAbstractHuffPipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BB729895118007A875D /* CAbstractHuffPipe.cpp */; };
-		E517F0C8299713DB0036B206 /* CHandlePipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BB929895118007A875D /* CHandlePipe.cpp */; };
 		E517F0C9299713DB0036B206 /* PascalStrings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5253ED82996DD2200F8C1E8 /* PascalStrings.cpp */; };
 		E517F0CA299713DB0036B206 /* RamFiles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BC129895118007A875D /* RamFiles.cpp */; };
 		E517F0CB299713DB0036B206 /* csscolorparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D3F29895123007A875D /* csscolorparser.cpp */; };
@@ -214,7 +212,6 @@
 		E5890CA929895118007A875D /* CHuffProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BB529895118007A875D /* CHuffProcessor.cpp */; };
 		E5890CAA29895118007A875D /* CAbstractPipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BB629895118007A875D /* CAbstractPipe.cpp */; };
 		E5890CAB29895118007A875D /* CAbstractHuffPipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BB729895118007A875D /* CAbstractHuffPipe.cpp */; };
-		E5890CAC29895118007A875D /* CHandlePipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BB929895118007A875D /* CHandlePipe.cpp */; };
 		E5890CAD29895118007A875D /* FastMat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BBD29895118007A875D /* FastMat.cpp */; };
 		E5890CAE29895118007A875D /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BBF29895118007A875D /* Debug.cpp */; };
 		E5890CAF29895118007A875D /* CStringDictionary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BC029895118007A875D /* CStringDictionary.cpp */; };
@@ -313,7 +310,6 @@
 		E5890D1029895118007A875D /* CApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C8D29895118007A875D /* CApplication.cpp */; };
 		E5890D1129895118007A875D /* LevelLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9329895118007A875D /* LevelLoader.cpp */; };
 		E5890D1229895118007A875D /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9629895118007A875D /* Parser.cpp */; };
-		E5890D1329895118007A875D /* CBaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9929895118007A875D /* CBaseObject.cpp */; };
 		E5890D1429895118007A875D /* CTagBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9A29895118007A875D /* CTagBase.cpp */; };
 		E5890D1529895118007A875D /* CDirectObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9D29895118007A875D /* CDirectObject.cpp */; };
 		E5890EEB29895124007A875D /* csscolorparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D3F29895123007A875D /* csscolorparser.cpp */; };
@@ -366,7 +362,6 @@
 		E5A219C32DC59135007D54FF /* CSoundMixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7729895118007A875D /* CSoundMixer.cpp */; };
 		E5A219C42DC59135007D54FF /* DopplerPlug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7429895118007A875D /* DopplerPlug.cpp */; };
 		E5A219C52DC59135007D54FF /* OggFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94924EAE2B3A894900197378 /* OggFile.cpp */; };
-		E5A219C62DC59135007D54FF /* CBaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9929895118007A875D /* CBaseObject.cpp */; };
 		E5A219C72DC59135007D54FF /* CDirectObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9D29895118007A875D /* CDirectObject.cpp */; };
 		E5A219C82DC59135007D54FF /* CTagBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9A29895118007A875D /* CTagBase.cpp */; };
 		E5A219C92DC59135007D54FF /* CCompoundShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948DF4152DA365CB007FEFDE /* CCompoundShape.cpp */; };
@@ -484,7 +479,6 @@
 		E5A21A3A2DC59135007D54FF /* CHuffProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BB529895118007A875D /* CHuffProcessor.cpp */; };
 		E5A21A3B2DC59135007D54FF /* CAbstractPipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BB629895118007A875D /* CAbstractPipe.cpp */; };
 		E5A21A3C2DC59135007D54FF /* CAbstractHuffPipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BB729895118007A875D /* CAbstractHuffPipe.cpp */; };
-		E5A21A3D2DC59135007D54FF /* CHandlePipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BB929895118007A875D /* CHandlePipe.cpp */; };
 		E5A21A3E2DC59135007D54FF /* PascalStrings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5253ED82996DD2200F8C1E8 /* PascalStrings.cpp */; };
 		E5A21A3F2DC59135007D54FF /* RamFiles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BC129895118007A875D /* RamFiles.cpp */; };
 		E5A21A402DC59135007D54FF /* csscolorparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D3F29895123007A875D /* csscolorparser.cpp */; };
@@ -660,9 +654,7 @@
 		E5890BB629895118007A875D /* CAbstractPipe.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAbstractPipe.cpp; sourceTree = "<group>"; };
 		E5890BB729895118007A875D /* CAbstractHuffPipe.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAbstractHuffPipe.cpp; sourceTree = "<group>"; };
 		E5890BB829895118007A875D /* CHuffProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHuffProcessor.h; sourceTree = "<group>"; };
-		E5890BB929895118007A875D /* CHandlePipe.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CHandlePipe.cpp; sourceTree = "<group>"; };
 		E5890BBA29895118007A875D /* CAbstractPipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAbstractPipe.h; sourceTree = "<group>"; };
-		E5890BBB29895118007A875D /* CHandlePipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHandlePipe.h; sourceTree = "<group>"; };
 		E5890BBC29895118007A875D /* CAbstractHuffPipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAbstractHuffPipe.h; sourceTree = "<group>"; };
 		E5890BBD29895118007A875D /* FastMat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FastMat.cpp; sourceTree = "<group>"; };
 		E5890BBF29895118007A875D /* Debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Debug.cpp; sourceTree = "<group>"; };
@@ -872,10 +864,8 @@
 		E5890C9529895118007A875D /* LevelLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelLoader.h; sourceTree = "<group>"; };
 		E5890C9629895118007A875D /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Parser.cpp; sourceTree = "<group>"; };
 		E5890C9829895118007A875D /* CDirectObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDirectObject.h; sourceTree = "<group>"; };
-		E5890C9929895118007A875D /* CBaseObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CBaseObject.cpp; sourceTree = "<group>"; };
 		E5890C9A29895118007A875D /* CTagBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CTagBase.cpp; sourceTree = "<group>"; };
 		E5890C9B29895118007A875D /* CTagBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTagBase.h; sourceTree = "<group>"; };
-		E5890C9C29895118007A875D /* CBaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBaseObject.h; sourceTree = "<group>"; };
 		E5890C9D29895118007A875D /* CDirectObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CDirectObject.cpp; sourceTree = "<group>"; };
 		E5890D1729895123007A875D /* httplib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = httplib.h; sourceTree = "<group>"; };
 		E5890D1829895123007A875D /* cute_files.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cute_files.h; sourceTree = "<group>"; };
@@ -1436,14 +1426,12 @@
 		E5890BB429895118007A875D /* huffman */ = {
 			isa = PBXGroup;
 			children = (
-				E5890BB529895118007A875D /* CHuffProcessor.cpp */,
-				E5890BB629895118007A875D /* CAbstractPipe.cpp */,
-				E5890BB729895118007A875D /* CAbstractHuffPipe.cpp */,
-				E5890BB829895118007A875D /* CHuffProcessor.h */,
-				E5890BB929895118007A875D /* CHandlePipe.cpp */,
-				E5890BBA29895118007A875D /* CAbstractPipe.h */,
-				E5890BBB29895118007A875D /* CHandlePipe.h */,
 				E5890BBC29895118007A875D /* CAbstractHuffPipe.h */,
+				E5890BB729895118007A875D /* CAbstractHuffPipe.cpp */,
+				E5890BBA29895118007A875D /* CAbstractPipe.h */,
+				E5890BB629895118007A875D /* CAbstractPipe.cpp */,
+				E5890BB829895118007A875D /* CHuffProcessor.h */,
+				E5890BB529895118007A875D /* CHuffProcessor.cpp */,
 			);
 			path = huffman;
 			sourceTree = "<group>";
@@ -1709,8 +1697,6 @@
 		E5890C9729895118007A875D /* base */ = {
 			isa = PBXGroup;
 			children = (
-				E5890C9929895118007A875D /* CBaseObject.cpp */,
-				E5890C9C29895118007A875D /* CBaseObject.h */,
 				E5890C9D29895118007A875D /* CDirectObject.cpp */,
 				E5890C9829895118007A875D /* CDirectObject.h */,
 				E5890C9A29895118007A875D /* CTagBase.cpp */,
@@ -2391,7 +2377,6 @@
 				E517F056299713DB0036B206 /* CSoundHub.cpp in Sources */,
 				E517F057299713DB0036B206 /* CSoundMixer.cpp in Sources */,
 				E517F058299713DB0036B206 /* DopplerPlug.cpp in Sources */,
-				E517F059299713DB0036B206 /* CBaseObject.cpp in Sources */,
 				948CBF152B335A1400147E80 /* BaseAssetStorage.cpp in Sources */,
 				E517F05A299713DB0036B206 /* CDirectObject.cpp in Sources */,
 				E517F05B299713DB0036B206 /* CTagBase.cpp in Sources */,
@@ -2513,7 +2498,6 @@
 				E517F0C6299713DB0036B206 /* CAbstractPipe.cpp in Sources */,
 				E517F0C7299713DB0036B206 /* CAbstractHuffPipe.cpp in Sources */,
 				E2CF30032DA88F4D002DD786 /* LegacyOpenGLRenderer.cpp in Sources */,
-				E517F0C8299713DB0036B206 /* CHandlePipe.cpp in Sources */,
 				E517F0C9299713DB0036B206 /* PascalStrings.cpp in Sources */,
 				E517F0CA299713DB0036B206 /* RamFiles.cpp in Sources */,
 				E517F0CB299713DB0036B206 /* csscolorparser.cpp in Sources */,
@@ -2578,7 +2562,6 @@
 				E5890CFA29895118007A875D /* CSmartBox.cpp in Sources */,
 				E5890D1529895118007A875D /* CDirectObject.cpp in Sources */,
 				E2CD7FAC2DB5BE1D00C3665F /* LevelInfo.cpp in Sources */,
-				E5890CAC29895118007A875D /* CHandlePipe.cpp in Sources */,
 				E5890CC729895118007A875D /* LinkLoose.cpp in Sources */,
 				E5890F0329895124007A875D /* textbox.cpp in Sources */,
 				E5253ED92996DD2200F8C1E8 /* PascalStrings.cpp in Sources */,
@@ -2603,7 +2586,6 @@
 				E5890CCA29895118007A875D /* CWorldShader.cpp in Sources */,
 				E5890CA629895118007A875D /* CProtoControl.cpp in Sources */,
 				948DF4162DA365CF007FEFDE /* CCompoundShape.cpp in Sources */,
-				E5890D1329895118007A875D /* CBaseObject.cpp in Sources */,
 				E5890F0129895124007A875D /* messagedialog.cpp in Sources */,
 				94F17DDD29920D90001F5950 /* ARGBColor.cpp in Sources */,
 				E5890CF429895118007A875D /* CSolidActor.cpp in Sources */,
@@ -2744,7 +2726,6 @@
 				E5A219C32DC59135007D54FF /* CSoundMixer.cpp in Sources */,
 				E5A219C42DC59135007D54FF /* DopplerPlug.cpp in Sources */,
 				E5A219C52DC59135007D54FF /* OggFile.cpp in Sources */,
-				E5A219C62DC59135007D54FF /* CBaseObject.cpp in Sources */,
 				E5A219C72DC59135007D54FF /* CDirectObject.cpp in Sources */,
 				E5A219C82DC59135007D54FF /* CTagBase.cpp in Sources */,
 				E5A219C92DC59135007D54FF /* CCompoundShape.cpp in Sources */,
@@ -2862,7 +2843,6 @@
 				E5A21A3A2DC59135007D54FF /* CHuffProcessor.cpp in Sources */,
 				E5A21A3B2DC59135007D54FF /* CAbstractPipe.cpp in Sources */,
 				E5A21A3C2DC59135007D54FF /* CAbstractHuffPipe.cpp in Sources */,
-				E5A21A3D2DC59135007D54FF /* CHandlePipe.cpp in Sources */,
 				E5A21A3E2DC59135007D54FF /* PascalStrings.cpp in Sources */,
 				E5A21A3F2DC59135007D54FF /* RamFiles.cpp in Sources */,
 				E5A21A402DC59135007D54FF /* csscolorparser.cpp in Sources */,
