@@ -355,7 +355,6 @@ void SkipOneLineComment() {
     }
 }
 
-tokentype LexStringConstant();
 #define STRINGSTARTQUOTE '"'
 #define STRINGENDQUOTE '"'
 
@@ -373,6 +372,9 @@ tokentype LexStringConstant() {
             theChar = *input++;
             if (theChar != STRINGENDQUOTE) {
                 theChar = 0;
+            }
+            else {
+                len += 2;
             }
         }
         else {
