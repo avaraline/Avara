@@ -28,10 +28,6 @@
 
 using namespace std;
 
-#define DICTIONARYCLUMPSIZE (16 * sizeof(DictEntry))
-#define WORDCLUMPSIZE 256
-#define HASHTABLESIZE 128 /* Must be a power of 2	*/
-
 /*
 **	The amount of storage required for a single item is
 **	determined by the token type. A tokentype of "short"
@@ -41,41 +37,15 @@ using namespace std;
 */
 typedef short tokentype;
 
-/*
-**	Dictionary entries are stored into two separate handles.
-**	The other one is the list of words and the other one
-**	a list of hash table links and offsets to the words.
-*/
-typedef struct {
-    long nameOffset;
-    short hashLink;
-} DictEntry;
 
 class CStringDictionary {
 public:
-    /*	Methods:			*/
-    virtual void IStringDictionary();
-    virtual tokentype AddDictEntry(const unsigned char *entry, short len);
-    virtual tokentype AddDictEntry(const char *entry, short len);
-    virtual tokentype FindEntry(const unsigned char *entry, short len);
-    virtual tokentype SearchForEntry(const unsigned char *entry, short len);
-    virtual tokentype SearchForEntry(const char *entry, short len);
-
-    virtual short GetDictionarySize();
-    virtual std::string GetIndEntry(short index);
-    virtual void GetIndEntry(short index, StringPtr theEntry);
-    virtual void GetIndEntry(short index, char *theEntry);
-
-    virtual void Dispose();
-    virtual void Lock();
-    virtual void Unlock();
-
-    virtual short GetIndEntrySize(short index);
-    virtual Handle WriteToHandle();
-    virtual void ReadFromHandle(Handle source);
+    tokentype AddDictEntry(std::string s);
+    tokentype FindEntry(std::string s);
+    tokentype SearchForEntry(std::string s);
+    std::string GetIndEntry(short index);
 
 private:
-    /*	Variables:			*/
     std::vector<std::string> wordList;
     std::map<std::string, size_t> index;
 };

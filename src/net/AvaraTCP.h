@@ -36,9 +36,6 @@ enum PunchType {
     kHolePunch = 4      // simple packet sent directly between clients with the sender's connection ID
 };
 
-OSErr PascalStringToAddress(StringPtr name, ip_addr *addr);
-OSErr AddressToPascalString(ip_addr addr, StringPtr name);
-
 OSErr OpenAvaraTCP();
 
 typedef void ReadCompleteProc(UDPpacket *packet, void *userData);

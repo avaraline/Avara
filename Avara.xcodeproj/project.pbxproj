@@ -159,7 +159,6 @@
 		E517F0C5299713DB0036B206 /* CHuffProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BB529895118007A875D /* CHuffProcessor.cpp */; };
 		E517F0C6299713DB0036B206 /* CAbstractPipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BB629895118007A875D /* CAbstractPipe.cpp */; };
 		E517F0C7299713DB0036B206 /* CAbstractHuffPipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BB729895118007A875D /* CAbstractHuffPipe.cpp */; };
-		E517F0C9299713DB0036B206 /* PascalStrings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5253ED82996DD2200F8C1E8 /* PascalStrings.cpp */; };
 		E517F0CA299713DB0036B206 /* RamFiles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BC129895118007A875D /* RamFiles.cpp */; };
 		E517F0CB299713DB0036B206 /* csscolorparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D3F29895123007A875D /* csscolorparser.cpp */; };
 		E517F0CC299713DB0036B206 /* glm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890E0D29895123007A875D /* glm.cpp */; };
@@ -198,7 +197,6 @@
 		E517F0F0299715A00036B206 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5890F9B298952A1007A875D /* OpenGL.framework */; };
 		E517F0F3299726F30036B206 /* levels in CopyFiles */ = {isa = PBXBuildFile; fileRef = E5890FA2298958C7007A875D /* levels */; };
 		E517F0F4299726F30036B206 /* rsrc in CopyFiles */ = {isa = PBXBuildFile; fileRef = E5890FA1298958BC007A875D /* rsrc */; };
-		E5253ED92996DD2200F8C1E8 /* PascalStrings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5253ED82996DD2200F8C1E8 /* PascalStrings.cpp */; };
 		E5890B8D29895078007A875D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5890B8A29895078007A875D /* Assets.xcassets */; };
 		E5890C9E29895118007A875D /* Memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9129895118007A875D /* Memory.cpp */; };
 		E5890CA129895118007A875D /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9529895118007A875D /* System.cpp */; };
@@ -479,7 +477,6 @@
 		E5A21A3A2DC59135007D54FF /* CHuffProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BB529895118007A875D /* CHuffProcessor.cpp */; };
 		E5A21A3B2DC59135007D54FF /* CAbstractPipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BB629895118007A875D /* CAbstractPipe.cpp */; };
 		E5A21A3C2DC59135007D54FF /* CAbstractHuffPipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BB729895118007A875D /* CAbstractHuffPipe.cpp */; };
-		E5A21A3E2DC59135007D54FF /* PascalStrings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5253ED82996DD2200F8C1E8 /* PascalStrings.cpp */; };
 		E5A21A3F2DC59135007D54FF /* RamFiles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BC129895118007A875D /* RamFiles.cpp */; };
 		E5A21A402DC59135007D54FF /* csscolorparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D3F29895123007A875D /* csscolorparser.cpp */; };
 		E5A21A412DC59135007D54FF /* button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D4C29895123007A875D /* button.cpp */; };
@@ -619,7 +616,6 @@
 		E2CD7FAD2DB5BEB100C3665F /* LevelInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LevelInfo.h; sourceTree = "<group>"; };
 		E2D76F732A1680FD000D24B3 /* JSONify.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONify.h; sourceTree = "<group>"; };
 		E517F04C299713990036B206 /* AvaraTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AvaraTests; sourceTree = BUILT_PRODUCTS_DIR; };
-		E5253ED82996DD2200F8C1E8 /* PascalStrings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PascalStrings.cpp; sourceTree = "<group>"; };
 		E5890B2429894DB3007A875D /* Avara.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Avara.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5890B8A29895078007A875D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E5890B9129895118007A875D /* Memory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Memory.cpp; sourceTree = "<group>"; };
@@ -662,7 +658,6 @@
 		E5890BC129895118007A875D /* RamFiles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RamFiles.cpp; sourceTree = "<group>"; };
 		E5890BC229895118007A875D /* RayHit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RayHit.h; sourceTree = "<group>"; };
 		E5890BC329895118007A875D /* CharWordLongPointer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharWordLongPointer.h; sourceTree = "<group>"; };
-		E5890BC529895118007A875D /* PascalStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PascalStrings.h; sourceTree = "<group>"; };
 		E5890BC629895118007A875D /* Beeper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Beeper.h; sourceTree = "<group>"; };
 		E5890BC829895118007A875D /* TextCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextCommand.h; sourceTree = "<group>"; };
 		E5890BC929895118007A875D /* CommandManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CommandManager.cpp; sourceTree = "<group>"; };
@@ -1411,8 +1406,6 @@
 				E5890BAF29895118007A875D /* FastMat.h */,
 				E5890BAE29895118007A875D /* GitVersion.h */,
 				E5890BB429895118007A875D /* huffman */,
-				E5253ED82996DD2200F8C1E8 /* PascalStrings.cpp */,
-				E5890BC529895118007A875D /* PascalStrings.h */,
 				E5890BC129895118007A875D /* RamFiles.cpp */,
 				E5890BAD29895118007A875D /* RamFiles.h */,
 				E5890BC229895118007A875D /* RayHit.h */,
@@ -2498,7 +2491,6 @@
 				E517F0C6299713DB0036B206 /* CAbstractPipe.cpp in Sources */,
 				E517F0C7299713DB0036B206 /* CAbstractHuffPipe.cpp in Sources */,
 				E2CF30032DA88F4D002DD786 /* LegacyOpenGLRenderer.cpp in Sources */,
-				E517F0C9299713DB0036B206 /* PascalStrings.cpp in Sources */,
 				E517F0CA299713DB0036B206 /* RamFiles.cpp in Sources */,
 				E517F0CB299713DB0036B206 /* csscolorparser.cpp in Sources */,
 				E517F0CC299713DB0036B206 /* glm.cpp in Sources */,
@@ -2564,7 +2556,6 @@
 				E2CD7FAC2DB5BE1D00C3665F /* LevelInfo.cpp in Sources */,
 				E5890CC729895118007A875D /* LinkLoose.cpp in Sources */,
 				E5890F0329895124007A875D /* textbox.cpp in Sources */,
-				E5253ED92996DD2200F8C1E8 /* PascalStrings.cpp in Sources */,
 				E5890CE129895118007A875D /* CAbstractMovers.cpp in Sources */,
 				E5890EF529895124007A875D /* window.cpp in Sources */,
 				E5890CB229895118007A875D /* CommandManager.cpp in Sources */,
@@ -2843,7 +2834,6 @@
 				E5A21A3A2DC59135007D54FF /* CHuffProcessor.cpp in Sources */,
 				E5A21A3B2DC59135007D54FF /* CAbstractPipe.cpp in Sources */,
 				E5A21A3C2DC59135007D54FF /* CAbstractHuffPipe.cpp in Sources */,
-				E5A21A3E2DC59135007D54FF /* PascalStrings.cpp in Sources */,
 				E5A21A3F2DC59135007D54FF /* RamFiles.cpp in Sources */,
 				E5A21A402DC59135007D54FF /* csscolorparser.cpp in Sources */,
 				E5A21A412DC59135007D54FF /* button.cpp in Sources */,
