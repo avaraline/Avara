@@ -9,7 +9,6 @@
 
 #pragma once
 #include "CBasicSound.h"
-#include "CDirectObject.h"
 #include "OggFile.h"
 #include "SoundSystemDefines.h"
 
@@ -24,6 +23,8 @@ class CHuffProcessor;
 
 class CSoundHub {
 public:
+    virtual ~CSoundHub() {};
+    
     virtual Fixed* EarLocation() = 0;
     virtual Fixed DistanceToLevelOne() = 0;
     virtual void MuteFlag(Boolean) = 0;
@@ -45,13 +46,12 @@ public:
     virtual int ReadTime() = 0;
     virtual void HouseKeep() = 0;
 
-    virtual void Dispose() = 0;
     virtual void MixerDispose() = 0;
     virtual void HushFlag(bool) = 0;
     virtual bool Stereo() = 0;
     virtual bool AudioEnabled() { return true; };
 };
-class CSoundHubImpl : public CDirectObject, public CSoundHub {
+class CSoundHubImpl : public CSoundHub {
 public:
     CHuffProcessor *itsCompressor;
     CSoundMixer *itsMixer;
@@ -61,7 +61,9 @@ public:
     SoundLink *firstFreeLink;
     Boolean muteFlag;
 
-    virtual void ISoundHub(short numOfEachKind, short initialLinks);
+    CSoundHubImpl(short numOfEachKind, short initialLinks);
+    virtual ~CSoundHubImpl();
+
     virtual void AttachMixer(CSoundMixer *aMixer);
     virtual void CreateSound(short kind);
 
@@ -81,7 +83,6 @@ public:
     virtual void HouseKeep();
 
     virtual void MuteFlag(Boolean);
-    virtual void Dispose();
     virtual Fixed* EarLocation();
     virtual Fixed DistanceToLevelOne();
     virtual void MixerDispose();

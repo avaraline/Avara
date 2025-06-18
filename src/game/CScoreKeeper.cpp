@@ -45,7 +45,7 @@ enum { //	For personal pages:
     kTeamNames
 };
 
-void CScoreKeeper::IScoreKeeper(CAvaraGame *theGame) {
+CScoreKeeper::CScoreKeeper(CAvaraGame *theGame) {
     itsGame = theGame;
     // resRefNum = 0;
     // appResRefNum = CurResFile();
@@ -53,16 +53,16 @@ void CScoreKeeper::IScoreKeeper(CAvaraGame *theGame) {
     iface.command = 0;
     iface.result = 0;
     iface.capabilities = 0;
-    iface.plugIn = NULL;
+    // iface.plugIn = NULL;
     iface.maxPlayers = kMaxAvaraPlayers;
     iface.maxTeams = kMaxTeamColors;
     iface.frameTime = itsGame->frameTime;
     iface.frameNumber = -1;
 
-    iface.resultsHandle = NULL; //GetResource('TEXT', 300);
+    // iface.resultsHandle = NULL; //GetResource('TEXT', 300);
     // DetachResource(iface.resultsHandle);
 
-    iface.resultsChanged = false;
+    // iface.resultsChanged = false;
     // iface.resultsWindow = ((CAvaraApp *)gApplication)->theRosterWind->itsWindow;
     // SetRect(&iface.resultsRect, 0,0, 0,0);
     // iface.theEvent = NULL;
@@ -95,11 +95,9 @@ void CScoreKeeper::IScoreKeeper(CAvaraGame *theGame) {
     playerRatings = std::make_unique<PlayerRatingsSimpleElo>();
 }
 
-void CScoreKeeper::Dispose() {
-    DisposeHandle(iface.resultsHandle);
-    iface.resultsHandle = NULL;
-
-    CDirectObject::Dispose();
+CScoreKeeper::~CScoreKeeper() {
+    //DisposeHandle(iface.resultsHandle);
+    //iface.resultsHandle = NULL;
 }
 
 void CScoreKeeper::EndScript() {

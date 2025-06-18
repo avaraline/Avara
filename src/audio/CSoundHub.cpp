@@ -62,7 +62,7 @@ CBasicSound *CSoundHubImpl::Acquire(short kind) {
     return aSound;
 }
 
-void CSoundHubImpl::ISoundHub(short numOfEachKind, short initialLinks) {
+CSoundHubImpl::CSoundHubImpl(short numOfEachKind, short initialLinks) {
     short i, j;
 
     itsMixer = NULL;
@@ -87,31 +87,31 @@ void CSoundHubImpl::ISoundHub(short numOfEachKind, short initialLinks) {
         CreateSoundLinks(initialLinks);
 }
 
-void CSoundHubImpl::AttachMixer(CSoundMixer *aMixer) {
-    itsMixer = aMixer;
-    muteFlag = itsMixer->maxChannels == 0;
-}
-
-void CSoundHubImpl::Dispose() {
+CSoundHubImpl::~CSoundHubImpl() {
     CBasicSound *aSound, *nextSound;
     short i;
 
     if (itsMixer) {
-        itsMixer->Dispose();
+        delete itsMixer;
+        itsMixer = nullptr;
     }
 
     for (i = 0; i < hubSoundKinds; i++) {
         aSound = soundList[i];
         while (aSound) {
             nextSound = aSound->nextSound;
-            aSound->Dispose();
+            delete aSound;
             aSound = nextSound;
         }
     }
 
     delete itsCompressor;
     DisposeSoundLinks();
-    CDirectObject::Dispose();
+}
+
+void CSoundHubImpl::AttachMixer(CSoundMixer *aMixer) {
+    itsMixer = aMixer;
+    muteFlag = itsMixer->maxChannels == 0;
 }
 
 CBasicSound *CSoundHubImpl::GetSoundSampler(short kind, short resId) {
@@ -243,7 +243,8 @@ Fixed* CSoundHubImpl::EarLocation() {
 }
 void CSoundHubImpl::MixerDispose() {
     if (itsMixer) {
-        itsMixer->Dispose();
+        delete itsMixer;
+        itsMixer = nullptr;
     }
 }
 

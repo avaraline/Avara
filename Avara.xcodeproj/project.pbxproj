@@ -52,7 +52,6 @@
 		E517F056299713DB0036B206 /* CSoundHub.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7329895118007A875D /* CSoundHub.cpp */; };
 		E517F057299713DB0036B206 /* CSoundMixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7729895118007A875D /* CSoundMixer.cpp */; };
 		E517F058299713DB0036B206 /* DopplerPlug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7429895118007A875D /* DopplerPlug.cpp */; };
-		E517F05A299713DB0036B206 /* CDirectObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9D29895118007A875D /* CDirectObject.cpp */; };
 		E517F05B299713DB0036B206 /* CTagBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9A29895118007A875D /* CTagBase.cpp */; };
 		E517F05C299713DB0036B206 /* CBSPPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C6829895118007A875D /* CBSPPart.cpp */; };
 		E517F05D299713DB0036B206 /* CBSPWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C6129895118007A875D /* CBSPWorld.cpp */; };
@@ -309,7 +308,6 @@
 		E5890D1129895118007A875D /* LevelLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9329895118007A875D /* LevelLoader.cpp */; };
 		E5890D1229895118007A875D /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9629895118007A875D /* Parser.cpp */; };
 		E5890D1429895118007A875D /* CTagBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9A29895118007A875D /* CTagBase.cpp */; };
-		E5890D1529895118007A875D /* CDirectObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9D29895118007A875D /* CDirectObject.cpp */; };
 		E5890EEB29895124007A875D /* csscolorparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D3F29895123007A875D /* csscolorparser.cpp */; };
 		E5890EEC29895124007A875D /* widget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D4729895123007A875D /* widget.cpp */; };
 		E5890EED29895124007A875D /* colorcombobox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D4829895123007A875D /* colorcombobox.cpp */; };
@@ -360,7 +358,6 @@
 		E5A219C32DC59135007D54FF /* CSoundMixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7729895118007A875D /* CSoundMixer.cpp */; };
 		E5A219C42DC59135007D54FF /* DopplerPlug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7429895118007A875D /* DopplerPlug.cpp */; };
 		E5A219C52DC59135007D54FF /* OggFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94924EAE2B3A894900197378 /* OggFile.cpp */; };
-		E5A219C72DC59135007D54FF /* CDirectObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9D29895118007A875D /* CDirectObject.cpp */; };
 		E5A219C82DC59135007D54FF /* CTagBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9A29895118007A875D /* CTagBase.cpp */; };
 		E5A219C92DC59135007D54FF /* CCompoundShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948DF4152DA365CB007FEFDE /* CCompoundShape.cpp */; };
 		E5A219CA2DC59135007D54FF /* CBSPPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C6829895118007A875D /* CBSPPart.cpp */; };
@@ -858,10 +855,8 @@
 		E5890C9429895118007A875D /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parser.h; sourceTree = "<group>"; };
 		E5890C9529895118007A875D /* LevelLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelLoader.h; sourceTree = "<group>"; };
 		E5890C9629895118007A875D /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Parser.cpp; sourceTree = "<group>"; };
-		E5890C9829895118007A875D /* CDirectObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDirectObject.h; sourceTree = "<group>"; };
 		E5890C9A29895118007A875D /* CTagBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CTagBase.cpp; sourceTree = "<group>"; };
 		E5890C9B29895118007A875D /* CTagBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTagBase.h; sourceTree = "<group>"; };
-		E5890C9D29895118007A875D /* CDirectObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CDirectObject.cpp; sourceTree = "<group>"; };
 		E5890D1729895123007A875D /* httplib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = httplib.h; sourceTree = "<group>"; };
 		E5890D1829895123007A875D /* cute_files.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cute_files.h; sourceTree = "<group>"; };
 		E5890D1929895123007A875D /* json.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = json.hpp; sourceTree = "<group>"; };
@@ -1690,8 +1685,6 @@
 		E5890C9729895118007A875D /* base */ = {
 			isa = PBXGroup;
 			children = (
-				E5890C9D29895118007A875D /* CDirectObject.cpp */,
-				E5890C9829895118007A875D /* CDirectObject.h */,
 				E5890C9A29895118007A875D /* CTagBase.cpp */,
 				E5890C9B29895118007A875D /* CTagBase.h */,
 			);
@@ -2371,7 +2364,6 @@
 				E517F057299713DB0036B206 /* CSoundMixer.cpp in Sources */,
 				E517F058299713DB0036B206 /* DopplerPlug.cpp in Sources */,
 				948CBF152B335A1400147E80 /* BaseAssetStorage.cpp in Sources */,
-				E517F05A299713DB0036B206 /* CDirectObject.cpp in Sources */,
 				E517F05B299713DB0036B206 /* CTagBase.cpp in Sources */,
 				E517F05C299713DB0036B206 /* CBSPPart.cpp in Sources */,
 				E517F05D299713DB0036B206 /* CBSPWorld.cpp in Sources */,
@@ -2552,7 +2544,6 @@
 				E5890CBB29895118007A875D /* CDome.cpp in Sources */,
 				E5890F1929895124007A875D /* glad.c in Sources */,
 				E5890CFA29895118007A875D /* CSmartBox.cpp in Sources */,
-				E5890D1529895118007A875D /* CDirectObject.cpp in Sources */,
 				E2CD7FAC2DB5BE1D00C3665F /* LevelInfo.cpp in Sources */,
 				E5890CC729895118007A875D /* LinkLoose.cpp in Sources */,
 				E5890F0329895124007A875D /* textbox.cpp in Sources */,
@@ -2717,7 +2708,6 @@
 				E5A219C32DC59135007D54FF /* CSoundMixer.cpp in Sources */,
 				E5A219C42DC59135007D54FF /* DopplerPlug.cpp in Sources */,
 				E5A219C52DC59135007D54FF /* OggFile.cpp in Sources */,
-				E5A219C72DC59135007D54FF /* CDirectObject.cpp in Sources */,
 				E5A219C82DC59135007D54FF /* CTagBase.cpp in Sources */,
 				E5A219C92DC59135007D54FF /* CCompoundShape.cpp in Sources */,
 				E5A219CA2DC59135007D54FF /* CBSPPart.cpp in Sources */,

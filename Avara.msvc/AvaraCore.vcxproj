@@ -167,7 +167,6 @@
     <ClInclude Include="..\src\audio\CSoundMixer.h" />
     <ClInclude Include="..\src\audio\OggFile.h" />
     <ClInclude Include="..\src\audio\SoundSystemDefines.h" />
-    <ClInclude Include="..\src\base\CDirectObject.h" />
     <ClInclude Include="..\src\base\CTagBase.h" />
     <ClInclude Include="..\src\bsp\CBSPPart.h" />
     <ClInclude Include="..\src\bsp\CBSPWorld.h" />
@@ -374,7 +373,6 @@
     <ClCompile Include="..\src\audio\CSoundMixer.cpp" />
     <ClCompile Include="..\src\audio\DopplerPlug.cpp" />
     <ClCompile Include="..\src\audio\OggFile.cpp" />
-    <ClCompile Include="..\src\base\CDirectObject.cpp" />
     <ClCompile Include="..\src\base\CTagBase.cpp" />
     <ClCompile Include="..\src\bsp\CBSPPart.cpp" />
     <ClCompile Include="..\src\bsp\CBSPWorld.cpp" />

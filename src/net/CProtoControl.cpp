@@ -40,7 +40,7 @@ static Boolean DelayedProtoHandler(PacketInfo *thePacket, Ptr userData) {
     return theControl->DelayedPacketHandler(thePacket);
 }
 
-void CProtoControl::IProtoControl(CCommManager *aManager, CAvaraGame *aGame) {
+CProtoControl::CProtoControl(CCommManager *aManager, CAvaraGame *aGame) {
     theGame = aGame;
 
     immedReceiverRecord.handler = ImmedProtoHandler;
@@ -263,8 +263,4 @@ void CProtoControl::Detach() {
         itsManager->RemoveReceiver(&delayedReceiverRecord, false);
         itsManager = NULL;
     }
-}
-
-void CProtoControl::Dispose() {
-    CDirectObject::Dispose();
 }

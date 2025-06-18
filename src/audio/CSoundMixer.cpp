@@ -93,7 +93,7 @@ void CSoundMixer::UpdateRightVector(Fixed *right) {
     newRightMeta = true;
 }
 
-void CSoundMixer::ISoundMixer(Fixed sampRate,
+CSoundMixer::CSoundMixer(Fixed sampRate,
     short maxChannelCount,
     short maxMixCount,
     Boolean stereoEnable,
@@ -221,6 +221,52 @@ void CSoundMixer::ISoundMixer(Fixed sampRate,
     SDL_PauseAudioDevice(outputDevice, 0);
 }
 
+CSoundMixer::~CSoundMixer() {
+    //OSErr iErr;
+    short i;
+    MixerInfo *mix;
+
+    SDL_PauseAudioDevice(outputDevice, 1);
+    SDL_CloseAudioDevice(outputDevice);
+
+    if (motionLink) {
+        altLink = NULL;
+        useAltLink = true;
+        motionHub->ReleaseLink(motionLink);
+        motionLink = NULL;
+    }
+
+    mix = infoTable;
+    for (i = 0; i < maxChannels; i++) {
+        if (mix->active)
+            mix->active->Release();
+        else if (mix->release)
+            mix->release->Release();
+        else if (mix->intro)
+            mix->intro->Release();
+
+        mix++;
+    }
+
+    if (mixBuffers[0]) {
+        DisposePtr((Ptr)mixBuffers[0]);
+        mixBuffers[0] = NULL;
+    }
+
+#define OBLITERATE(pointer) \
+    if (pointer) { \
+        DisposePtr((Ptr)pointer); \
+        pointer = NULL; \
+    }
+
+    OBLITERATE(doubleBuffers[0])
+    OBLITERATE(doubleBuffers[1])
+    OBLITERATE(infoTable)
+    OBLITERATE(volumeLookup)
+    OBLITERATE(scaleLookup)
+    OBLITERATE(sortSpace[0])
+}
+
 void CSoundMixer::PrepareScaleLookup() {
     int i;
     int value;
@@ -275,52 +321,6 @@ void CSoundMixer::SilenceBuffers() {
         size_t numChannels = 2;
         memset(doubleBuffers[j], 0, numChannels * soundBufferSize);
     }
-}
-
-void CSoundMixer::Dispose() {
-    //OSErr iErr;
-    short i;
-    MixerInfo *mix;
-
-    SDL_PauseAudioDevice(outputDevice, 1);
-    SDL_CloseAudioDevice(outputDevice);
-
-    if (motionLink) {
-        altLink = NULL;
-        useAltLink = true;
-        motionHub->ReleaseLink(motionLink);
-        motionLink = NULL;
-    }
-
-    mix = infoTable;
-    for (i = 0; i < maxChannels; i++) {
-        if (mix->active)
-            mix->active->Release();
-        else if (mix->release)
-            mix->release->Release();
-        else if (mix->intro)
-            mix->intro->Release();
-
-        mix++;
-    }
-
-    if (mixBuffers[0]) {
-        DisposePtr((Ptr)mixBuffers[0]);
-        mixBuffers[0] = NULL;
-    }
-
-#define OBLITERATE(pointer) \
-    if (pointer) { \
-        DisposePtr((Ptr)pointer); \
-        pointer = NULL; \
-    }
-
-    OBLITERATE(doubleBuffers[0])
-    OBLITERATE(doubleBuffers[1])
-    OBLITERATE(infoTable)
-    OBLITERATE(volumeLookup)
-    OBLITERATE(scaleLookup)
-    OBLITERATE(sortSpace[0])
 }
 
 void CSoundMixer::HouseKeep() {

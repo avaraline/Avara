@@ -11,7 +11,6 @@
 #include "AvaraDefines.h"
 #include "AvaraScoreInterface.h"
 #include "AvaraTypes.h"
-#include "CDirectObject.h"
 #include "Types.h"
 #include "CNetManager.h"
 #include "LevelInfo.h"

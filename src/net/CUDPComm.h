@@ -44,12 +44,8 @@ public:
     // OSErr				writeErr;
     // OSErr				readErr;
 
-    // class CTagBase *prefs;
     class CUDPConnection *connections;
     class CUDPConnection *nextSender;
-    /*
-    class	CTracker			*tracker;
-    */
 
     long retransmitToRoundTripRatio; //	In fixed point 24.8 format
 
@@ -62,8 +58,6 @@ public:
     ip_addr localIP; //	Just a guess, but that's all we need for the tracker.
     port_num localPort;
     int stream;
-    // char				streamBuffer[UDPSTREAMBUFFERSIZE];
-    // char				sendBuffer[UDPSENDBUFFERSIZE];
 
     short cramData;
 
@@ -76,17 +70,13 @@ public:
     Boolean turboMode;
     long turboCount;
 
-    // Boolean				readIsComplete;
-    // Boolean				writeIsComplete;
-    // Boolean				blockReadComplete;
-    // Boolean				blockWriteComplete;
     Boolean specialWakeup;
     Str255 inviteString;
 
-    virtual void IUDPComm(short clientCount, short bufferCount, uint16_t version, ClockTick urgentTimePeriod);
+    CUDPComm(short clientCount, short bufferCount, uint16_t version, ClockTick urgentTimePeriod);
+    virtual ~CUDPComm();
 
     virtual void Disconnect();
-    virtual void Dispose();
 
     ClockTick GetClock();
 

@@ -48,7 +48,7 @@
 extern Fixed FRandSeed;
 extern Fixed NewFRandSeed();
 
-void CNetManager::INetManager(CAvaraGame *theGame) {
+CNetManager::CNetManager(CAvaraGame *theGame) {
     short i;
 
     itsGame = theGame;
@@ -56,12 +56,8 @@ void CNetManager::INetManager(CAvaraGame *theGame) {
 
     netStatus = kNullNet;
     itsCommManager = std::make_unique<CCommManager>();
-    itsCommManager->ICommManager(NULLNETPACKETS);
 
-    itsProtoControl = new CProtoControl;
-    itsProtoControl->IProtoControl(itsCommManager.get(), itsGame);
-
-    // theRoster = ((CAvaraApp *)gApplication)->theRosterWind;
+    itsProtoControl = new CProtoControl(itsCommManager.get(), itsGame);
 
     for (i = 0; i < kMaxAvaraPlayers; i++) {
         playerTable[i] = CreatePlayerManager(i);
@@ -76,7 +72,6 @@ void CNetManager::INetManager(CAvaraGame *theGame) {
     isPlaying = false;
     startingGame = false;
 
-    netOwner = NULL;
     loaderSlot = 0;
 
     serverOptions = theGame->itsApp->Number(kServerOptionsTag);
@@ -89,38 +84,23 @@ void CNetManager::INetManager(CAvaraGame *theGame) {
     lastLoginRefusal = 0;
 }
 
+CNetManager::~CNetManager() {
+    short i;
+
+    for (i = 0; i < kMaxAvaraPlayers; i++) {
+        playerTable[i] = nullptr;
+    }
+
+    delete itsProtoControl;
+    itsCommManager = nullptr;
+}
+
 std::shared_ptr<CPlayerManager> CNetManager::CreatePlayerManager(short id) {
-    std::shared_ptr<CPlayerManagerImpl> pm = std::make_shared<CPlayerManagerImpl>();
-    pm->IPlayerManager(itsGame, id, this);
-    return pm;
+    return std::make_shared<CPlayerManagerImpl>(itsGame, id, this);
 }
 
 void CNetManager::LevelReset() {
     playerCount = 0;
-}
-void CNetManager::Dispose() {
-    short i;
-
-    for (i = 0; i < kMaxAvaraPlayers; i++) {
-        playerTable[i]->Dispose();
-    }
-
-    itsProtoControl->Dispose();
-    itsCommManager->Dispose();
-}
-
-Boolean CNetManager::ConfirmNetChange() {
-    /*
-    CCommander	*theActive;
-    short		dItem;
-
-    theActive = gApplication->BeginDialog();
-    dItem = CautionAlert(402, NULL);
-    gApplication->EndDialog(theActive);
-
-    return dItem == 1;
-    */
-    return true;
 }
 
 void CNetManager::ChangeNet(short netKind, std::string address) {
@@ -133,38 +113,26 @@ void CNetManager::ChangeNet(short netKind, std::string address, std::string pass
     //CAvaraApp *theApp = itsGame->itsApp;
 
     if (netKind != netStatus || !isConnected) {
-        if (netStatus != kNullNet || !isConnected) {
-            if (isConnected) {
-                confirm = ConfirmNetChange();
-            }
-        }
-
-        if (confirm) {
-            switch (netKind) {
-                case kNullNet:
-                    newManager = std::make_unique<CCommManager>();
-                    newManager->ICommManager(NULLNETPACKETS);
-                    break;
-                case kServerNet: {
-                    newManager = std::make_unique<CUDPComm>();
-                    CUDPComm *theServer = (CUDPComm*)(newManager.get());
-                    theServer->IUDPComm(kMaxAvaraPlayers - 1, TCPNETPACKETS, kAvaraNetVersion, itsGame->frameTime);
-                    theServer->StartServing();
-                    confirm = theServer->isConnected;
-                }   break;
-                case kClientNet:
-                    newManager = std::make_unique<CUDPComm>();
-                    CUDPComm *theClient = (CUDPComm *)(newManager.get());
-                    theClient->IUDPComm(kMaxAvaraPlayers - 1, TCPNETPACKETS, kAvaraNetVersion, itsGame->frameTime);
-                    theClient->Connect(address, password);
-                    confirm = theClient->isConnected;
-                    break;
-            }
+        switch (netKind) {
+            case kNullNet:
+                newManager = std::make_unique<CCommManager>();
+                break;
+            case kServerNet: {
+                newManager = std::make_unique<CUDPComm>(kMaxAvaraPlayers - 1, TCPNETPACKETS, kAvaraNetVersion, itsGame->frameTime);
+                CUDPComm *theServer = (CUDPComm*)(newManager.get());
+                theServer->StartServing();
+                confirm = theServer->isConnected;
+            }   break;
+            case kClientNet:
+                newManager = std::make_unique<CUDPComm>(kMaxAvaraPlayers - 1, TCPNETPACKETS, kAvaraNetVersion, itsGame->frameTime);
+                CUDPComm *theClient = (CUDPComm *)(newManager.get());
+                theClient->Connect(address, password);
+                confirm = theClient->isConnected;
+                break;
         }
 
         if (confirm && newManager) {
             PresenceType keepPresence = playerTable[itsCommManager->myId]->Presence();
-            itsCommManager->Dispose();        // send kpPacketProtocolLogout message before being destroyed
             itsProtoControl->Detach();
             itsCommManager.swap(newManager);  // newManager takes place existing CCommManager which gets deleted when out of scope
             playerTable[itsCommManager->myId]->SetPresence(keepPresence);
@@ -412,7 +380,6 @@ void CNetManager::HandleDisconnect(short slotId, short why) {
 
     if (slotId == itsCommManager->myId) {
         isConnected = false;
-        netOwner = NULL;
         DisconnectSome(kdEveryone);
         itsCommManager->SendPacket(1 << slotId, kpKillNet, 0, 0, 0, 0, 0);
     } else {

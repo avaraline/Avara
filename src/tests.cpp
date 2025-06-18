@@ -187,7 +187,7 @@ private:
 class TestGame : public CAvaraGame {
 public:
     TestGame(int frameTime) : CAvaraGame(frameTime) {}
-    virtual std::unique_ptr<CNetManager> CreateNetManager() { return std::make_unique<TestNetManager>(); }
+    virtual std::unique_ptr<CNetManager> CreateNetManager() { return std::make_unique<TestNetManager>(this); }
     virtual CSoundHub* CreateSoundHub() { TestSoundHub *t = new TestSoundHub(); t->ISoundHub(64,64); return t;}
     bool GameTick() {
         // force tick to happen by resetting nextScheduledFrame
