@@ -1,3 +1,4 @@
+#define GROUND_PHI -0.0075
 #define MAX_LIGHTS 4
 
 in vec3 tex_coord;
@@ -45,8 +46,10 @@ vec3 apply_fog(vec3 color, vec3 viewDir, float dist) {
 }
 
 vec3 draw_celestial(vec3 inColor, float phi, float gradientHeight, vec3 offsetFragPos, int i) {
-    if (lightCelestialRadius[i] == 0.0 || phi <= 0.0) return inColor;
+    if (lightCelestialRadius[i] == 0.0 || phi <= GROUND_PHI) return inColor;
     float dist = distance(offsetFragPos, lightPos[i]);
+    float coronaRadius = lightCelestialRadius[i] * (1 + length(lightDir[i]));
+    //float horizonRadius = coronaRadius * (1 - clamp(phi, 0.0, 1.0));
     return mix(
         inColor,
         mix(
@@ -54,7 +57,9 @@ vec3 draw_celestial(vec3 inColor, float phi, float gradientHeight, vec3 offsetFr
             lightColor[i] * gradientHeight + horizonColor * (1.0 - gradientHeight),
             float(phi < highAlt)
         ),
-        float(dist <= lightCelestialRadius[i])
+        pow(clamp(1 - ((dist - lightCelestialRadius[i]) / (coronaRadius - lightCelestialRadius[i])), 0.0, 1.0), 4)
+        //clamp(1 - (lightCelestialRadius[i] / coronaRadius), 0.0, 1.0)
+        //float(dist <= lightCelestialRadius[i])
     );
 }
 
@@ -105,7 +110,7 @@ void main()
                 float(phi > highAlt)
             ),
             groundColor + spec(viewDir),
-            float(phi <= 0.0)
+            float(phi <= GROUND_PHI)
         ),
         1.0
     );
@@ -119,7 +124,7 @@ void main()
             mix(
                 -dot(camPos, vec3(0, 1, 0)) / dot(-viewDir, vec3(0, 1, 0)),
                 maxHazeDist,
-                float(phi >= 0.0)
+                float(phi >= GROUND_PHI)
             ),
             maxHazeDist
         );
