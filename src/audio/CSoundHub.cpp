@@ -11,7 +11,6 @@
 
 #include "AssetManager.h"
 #include "CBasicSound.h"
-#include "CHuffProcessor.h"
 #include "CRateSound.h"
 #include "CSoundMixer.h"
 #include "Memory.h"
@@ -77,9 +76,6 @@ CSoundHubImpl::CSoundHubImpl(short numOfEachKind, short initialLinks) {
 
     muteFlag = false;
 
-    itsCompressor = new CHuffProcessor;
-    itsCompressor->Open();
-
     soundLinkStorage = NULL;
     firstFreeLink = NULL;
 
@@ -105,7 +101,6 @@ CSoundHubImpl::~CSoundHubImpl() {
         }
     }
 
-    delete itsCompressor;
     DisposeSoundLinks();
 }
 

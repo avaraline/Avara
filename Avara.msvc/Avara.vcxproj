@@ -115,7 +115,7 @@
       <PreprocessorDefinitions>_WINSOCK_DEPRECATED_NO_WARNINGS;NOMINMAX;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_WARNINGS;NANOGUI_GLAD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>..\src\audio;..\src\assets;..\src\base;..\src\bsp;..\src\compat;..\src\game;..\src\gui;..\src\level;..\src\net;..\src\render;..\src\tui;..\src\util;..\src\util\huffman;..\vendor\;..\vendor\nanogui;..\vendor\nanovg;..\vendor\pugixml;..\vendor\utf8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\src\audio;..\src\assets;..\src\base;..\src\bsp;..\src\compat;..\src\game;..\src\gui;..\src\level;..\src\net;..\src\render;..\src\tui;..\src\util;..\vendor\;..\vendor\nanogui;..\vendor\nanovg;..\vendor\pugixml;..\vendor\utf8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ShowIncludes>false</ShowIncludes>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
@@ -141,7 +141,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINSOCK_DEPRECATED_NO_WARNINGS;NOMINMAX;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_WARNINGS;NANOGUI_GLAD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\src\audio;..\src\assets;..\src\base;..\src\bsp;..\src\compat;..\src\game;..\src\gui;..\src\level;..\src\net;..\src\render;..\src\tui;..\src\util;..\src\util\huffman;..\vendor\;..\vendor\nanogui;..\vendor\nanovg;..\vendor\pugixml;..\vendor\utf8;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\src\audio;..\src\assets;..\src\base;..\src\bsp;..\src\compat;..\src\game;..\src\gui;..\src\level;..\src\net;..\src\render;..\src\tui;..\src\util;..\vendor\;..\vendor\nanogui;..\vendor\nanovg;..\vendor\pugixml;..\vendor\utf8;</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>

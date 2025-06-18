@@ -19,7 +19,6 @@
 enum { hubBasic, hubRate, hubSoundKinds };
 
 class CSoundMixer;
-class CHuffProcessor;
 
 class CSoundHub {
 public:
@@ -53,7 +52,6 @@ public:
 };
 class CSoundHubImpl : public CSoundHub {
 public:
-    CHuffProcessor *itsCompressor;
     CSoundMixer *itsMixer;
     CBasicSound *soundList[hubSoundKinds];
 

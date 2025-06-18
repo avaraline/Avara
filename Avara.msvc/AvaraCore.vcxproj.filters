@@ -153,16 +153,7 @@
     <ClInclude Include="..\src\util\Beeper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\util\huffman\CAbstractHuffPipe.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\util\huffman\CAbstractPipe.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\util\CharWordLongPointer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\util\huffman\CHuffProcessor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\util\CRC.h">
@@ -981,15 +972,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\vendor\nanovg\nanovg.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\util\huffman\CAbstractPipe.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\util\huffman\CHuffProcessor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\util\huffman\CAbstractHuffPipe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\gui\ColorManager.cpp">
