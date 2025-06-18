@@ -73,6 +73,8 @@ public:
     CCommManager(short packetSpace, size_t pSize);
     virtual ~CCommManager() {}
 
+    virtual void Finalize() {}
+
     void AllocatePacketBuffers(int numPackets);
     virtual void AddReceiver(ReceiverRecord *aReceiver, Boolean delayed);
     virtual void RemoveReceiver(ReceiverRecord *aReceiver, Boolean delayed);

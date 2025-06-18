@@ -127,6 +127,7 @@ public:
     virtual ~CNetManager();
 
     virtual std::shared_ptr<CPlayerManager> CreatePlayerManager(short);
+    virtual void InitializePlayers();
     virtual void LevelReset();
     virtual void ChangeNet(short netKind, std::string address);
     virtual void ChangeNet(short netKind, std::string address, std::string password);

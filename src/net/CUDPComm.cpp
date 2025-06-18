@@ -1328,6 +1328,17 @@ CUDPComm::CUDPComm(short clientCount, short bufferCount, uint16_t version, Clock
 CUDPComm::~CUDPComm() {
     CUDPConnection *nextConn;
 
+    Finalize();
+
+    while (connections) {
+        nextConn = connections->next;
+
+        delete connections;
+        connections = nextConn;
+    }
+}
+
+void CUDPComm::Finalize() {
     if (isConnected && !isClosed) {
         if (myId == 0)
             SendPacket(kdEveryone, kpPacketProtocolLogout, 0, 0, 0, 0, 0);
@@ -1338,13 +1349,6 @@ CUDPComm::~CUDPComm() {
     }
 
     RemoveReceiver(&receiverRecord, kUDPProtoHandlerIsAsync);
-
-    while (connections) {
-        nextConn = connections->next;
-
-        delete connections;
-        connections = nextConn;
-    }
 }
 
 void CUDPComm::Disconnect() {

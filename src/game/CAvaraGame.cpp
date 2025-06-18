@@ -95,6 +95,7 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     itsApp = theApp;
 
     itsNet = CreateNetManager();
+    itsNet->InitializePlayers();
     itsApp->SetNet(itsNet.get());
 
     searchCount = 0;

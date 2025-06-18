@@ -49,8 +49,6 @@ extern Fixed FRandSeed;
 extern Fixed NewFRandSeed();
 
 CNetManager::CNetManager(CAvaraGame *theGame) {
-    short i;
-
     itsGame = theGame;
     readyPlayers = 0;
 
@@ -59,13 +57,7 @@ CNetManager::CNetManager(CAvaraGame *theGame) {
 
     itsProtoControl = new CProtoControl(itsCommManager.get(), itsGame);
 
-    for (i = 0; i < kMaxAvaraPlayers; i++) {
-        playerTable[i] = CreatePlayerManager(i);
-        slotToPosition[i] = i;
-        positionToSlot[i] = i;
-        teamColors[i] = i; //(i/3) * 2;
-    }
-
+    activePlayersDistribution = 0;
     totalDistribution = 0;
     playerCount = 0;
     isConnected = false;
@@ -97,6 +89,17 @@ CNetManager::~CNetManager() {
 
 std::shared_ptr<CPlayerManager> CNetManager::CreatePlayerManager(short id) {
     return std::make_shared<CPlayerManagerImpl>(itsGame, id, this);
+}
+
+// This cannot be called from the constructor because CreatePlayerManager is virtual; the test
+// implementation ends up calling the CNetManager instead.
+void CNetManager::InitializePlayers() {
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        playerTable[i] = CreatePlayerManager(i);
+        slotToPosition[i] = i;
+        positionToSlot[i] = i;
+        teamColors[i] = i; //(i/3) * 2;
+    }
 }
 
 void CNetManager::LevelReset() {
@@ -133,6 +136,7 @@ void CNetManager::ChangeNet(short netKind, std::string address, std::string pass
 
         if (confirm && newManager) {
             PresenceType keepPresence = playerTable[itsCommManager->myId]->Presence();
+            itsCommManager->Finalize(); // send kpPacketProtocolLogout message before being destroyed
             itsProtoControl->Detach();
             itsCommManager.swap(newManager);  // newManager takes place existing CCommManager which gets deleted when out of scope
             playerTable[itsCommManager->myId]->SetPresence(keepPresence);
@@ -682,6 +686,7 @@ void CNetManager::ResumeGame() {
 
             // process packets until we receive all the kpStartSynch messages (with kLActive status)
             ProcessQueue();
+
             // Do we need this?
             // itsGame->itsApp->DoUpdate();
 

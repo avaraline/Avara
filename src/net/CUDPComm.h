@@ -76,6 +76,7 @@ public:
     CUDPComm(short clientCount, short bufferCount, uint16_t version, ClockTick urgentTimePeriod);
     virtual ~CUDPComm();
 
+    virtual void Finalize();
     virtual void Disconnect();
 
     ClockTick GetClock();
