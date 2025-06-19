@@ -234,6 +234,7 @@ public:
         hector->location[1] = hectorY;
         hector->location[2] = hectorZ;
         hector->location[3] = FIX1;
+        ((CWalkerActor*)hector)->AdaptableSettings();
         game->AddActor(hector);
         game->freshPlayerList = 0;
         game->GameStart();
