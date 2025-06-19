@@ -300,7 +300,10 @@ void CSoundMixer::PrepareVolumeLookup(uint8_t mixerVolume /* 0-100 */) {
     if (sample16flag) {
         for (vol = 1; vol <= VOLUMERANGE; vol++) {
             for (samp = -SAMPLERANGE / 2; samp < SAMPLERANGE / 2; samp++) {
-                *dest++ = (samp * vol * mixerVolume / 100) << (16 - BITSPERSAMPLE - VOLUMEBITS);
+                // the below line was causing problems when samp is negative.
+                // each left shift is a multiplication by two. This might have saved cpu time on 68k.
+                //*dest++ = (samp * vol * mixerVolume / 100) << (16 - BITSPERSAMPLE - VOLUMEBITS);
+                *dest++ = (samp * vol * mixerVolume / 100) * (2 * (16 - BITSPERSAMPLE - VOLUMEBITS));
             }
         }
     } else {
