@@ -9,19 +9,19 @@
 
 #pragma once
 #include "CCommManager.h"
-#include "CDirectObject.h"
 
-class CProtoControl : public CDirectObject {
+class CProtoControl {
 public:
     CCommManager *itsManager;
     class CAvaraGame *theGame;
     ReceiverRecord immedReceiverRecord;
     ReceiverRecord delayedReceiverRecord;
 
-    virtual void IProtoControl(CCommManager *aManager, CAvaraGame *aGame);
+    CProtoControl(CCommManager *aManager, CAvaraGame *aGame);
+    virtual ~CProtoControl() {}
+    
     virtual Boolean PacketHandler(PacketInfo *thePacket);
     virtual Boolean DelayedPacketHandler(PacketInfo *thePacket);
-    virtual void Dispose();
 
     virtual void Attach(CCommManager *aManager);
     virtual void Detach();
