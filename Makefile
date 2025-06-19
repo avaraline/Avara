@@ -46,9 +46,9 @@ ifeq ($(UNAME), Darwin)
 	# MacOS
 	SRCS += $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.mm')
 	INC_EXTRA := -I/opt/homebrew/include -I/usr/local/include
-	CXXFLAGS += $(INC_EXTRA)
-	CPPFLAGS += $(INC_EXTRA)
-	CFLAGS += $(INC_EXTRA)
+	CXXFLAGS += -mmacosx-version-min=10.9 $(INC_EXTRA)
+	CPPFLAGS += -mmacosx-version-min=10.9 $(INC_EXTRA)
+	CFLAGS += -mmacosx-version-min=10.9 $(INC_EXTRA)
 ifneq ("$(wildcard $(HOME)/Library/Frameworks/SDL2.framework)", "")
 	FRAMEWORK_PATH = $(HOME)/Library/Frameworks
 else
