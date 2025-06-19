@@ -18,6 +18,7 @@
 
 #include <SDL2/SDL.h>
 
+
 #define kInitialRetransmitTime    (2000 / MSEC_PER_GET_CLOCK)  // 2 seconds
 #define kInitialRoundTripTime     (500 / MSEC_PER_GET_CLOCK)   // 0.5 second
 #define kInitialRoundTripVar      long(CLASSICFRAMECLOCK*CLASSICFRAMECLOCK)
@@ -66,8 +67,7 @@ void CUDPConnection::IUDPConnection(CUDPComm *theOwner) {
     port = 0;
 
     for (i = 0; i < kQueueCount; i++) {
-        queues[i].qHead = 0;
-        queues[i].qTail = 0;
+        InitQueue(&queues[i]);
     }
 
     serialNumber = INITIAL_SERIAL_NUMBER;
@@ -292,7 +292,7 @@ UDPPacketInfo *CUDPConnection::FindBestPacket(int32_t curTime, int32_t cramTime,
     if (transmitQueueLength > kMaxTransmitQueueLength) {
         DBG_Log("q", "Transmit Queue Overflow - myId = %d\n", myId);
         for (int i = 0; i < kQueueCount; i++) {
-            DBG_Log("q", "   Queue[%d] size = %zu\n", i, QueueSize(&queues[i]));
+            DBG_Log("q", "   Queue[%d] size = %zu\n", i, queues[i].qSize);
         }
         ErrorKill();
     }
@@ -567,6 +567,25 @@ char *CUDPConnection::ValidatePackets(char *validateInfo, int32_t curTime) {
     return validateInfo;
 }
 
+void CUDPConnection::ResendNonValidatedPackets() {
+    if (serialNumber == INITIAL_SERIAL_NUMBER) {
+        return;
+    }
+    uint16_t serialBegin = maxValid + kSerialNumberStepSize;
+    uint16_t serialEnd = serialNumber - kSerialNumberStepSize;
+    DBG_Log("punch", "   resending serial numbers (%hu-%hu)", serialBegin, serialEnd);
+
+    ClockTick curTime = itsOwner->GetClock();
+
+    UDPPacketInfo *pp = (UDPPacketInfo *)queues[kTransmitQ].qHead;
+    while (pp) {
+        if (serialBegin <= pp->serialNumber && pp->serialNumber <= serialEnd) {
+            pp->nextSendTime = curTime;
+        }
+        pp = (UDPPacketInfo *)pp->packet.qLink;
+    }
+}
+
 void CUDPConnection::Dispose() {
     FlushQueues();
     delete latencyHistogram;
@@ -637,7 +656,7 @@ size_t CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
                 changeInReceiveQueue = true;
                 Enqueue((QElemPtr)thePacket, &queues[kReceiveQ]);
 
-                size_t qsize = QueueSize(&queues[kReceiveQ]);
+                size_t qsize = queues[kReceiveQ].qSize;
                 if (Debug::IsEnabled("q")) {
                     if (qsize % 5 == 0) {
                         DBG_Log("q", "%d: rsn=%d, queued sn=%d to kReceivedQ.size = %zu\n", myId, (int)receiveSerial, (int)thePacket->serialNumber, qsize);
@@ -686,7 +705,7 @@ size_t CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
         *receiveSerials++ = -12345;
     }
 
-    return QueueSize(&queues[kReceiveQ]);
+    return queues[kReceiveQ].qSize;
 }
 
 bool CUDPConnection::ReceiveQueuedPackets() {
@@ -706,9 +725,9 @@ bool CUDPConnection::ReceiveQueuedPackets() {
                     DebugPacket('+', pack);
 #endif
                     if (Debug::IsEnabled("q")) {
-                        size_t qsize = QueueSize(&queues[kReceiveQ]);
+                        size_t qsize = queues[kReceiveQ].qSize;
                         if (qsize > 0 && qsize % 5 == 0) {
-                            DBG_Log("q", "%d: rsn=%d, dequeued sn=%d to kReceivedQ.size = %zu\n", myId, (int)receiveSerial, (int)pack->serialNumber, QueueSize(&queues[kReceiveQ]));
+                            DBG_Log("q", "%d: rsn=%d, dequeued sn=%d to kReceivedQ.size = %zu\n", myId, (int)receiveSerial, (int)pack->serialNumber, qsize);
                         }
                     }
 
@@ -760,26 +779,30 @@ char *CUDPConnection::WriteAcks(char *dest) {
 }
 
 void CUDPConnection::MarkOpenConnections(CompleteAddress *table) {
-    if (next)  // recurse down the chain of connections
-        next->MarkOpenConnections(table);
-
-    if (port && myId != 0) {
-        for (int i = 0; i < itsOwner->maxClients; i++) {
-            if (table->host == ipAddr && table->port == port) {
-                table->host = 0; // this connection is being used
-                table->port = 0;
-                return;
+    // loop thru the passed connection table looking for the table index matching conn->myId
+    // (`this` assumed to be front of the connection list, but skip the first/server connection)
+    for (auto conn = this->next; conn; conn = conn->next) {
+        for (int idx = 1; idx < itsOwner->maxClients; idx++) {
+            if (conn->myId == idx && conn->port) {
+                // if port is set in both places it's assumed to be in use (can't rely on host or port being equal tho)
+                if (table[idx-1].port) {
+                    // remove the connection from the connection table
+                    table[idx-1].host = 0;
+                    table[idx-1].port = 0;
+                } else {
+                    DBG_Log("login", "myId=%d (%s) no longer in connection table, marking as GONE",
+                            conn->myId, FormatHostPort(conn->ipAddr, conn->port).c_str());
+                    conn->port = 0;
+                    conn->ipAddr = 0;
+                    conn->myId = -1;
+                    conn->FlushQueues();
+                }
+                break;
             }
-
-            table++;
         }
-
-        DBG_Log("login", "%s no longer in connection table, marking as GONE", FormatHostPort(ipAddr, port).c_str());
-        port = 0;
-        ipAddr = 0;
-        myId = -1;
-        FlushQueues();
     }
+
+    // in the end we will have a list of connections that need to be opened (host and port still set)
 }
 
 void CUDPConnection::RewriteConnections(CompleteAddress *table, const CompleteAddress &myAddressInTOC) {
@@ -794,11 +817,6 @@ void CUDPConnection::RewriteConnections(CompleteAddress *table, const CompleteAd
         if (table->host == LOCALHOST) {
             // if the server sees the connection coming from localhost, change the host to whatever host we connected to server with (which could ALSO be localhost)
             table->host = serverHost;
-        }
-        else if (table->host == myAddressInTOC.host && table->port != myAddressInTOC.port) {
-            // if I have the same host IP as the client in the connection table, and a diff port, assume we're on the same machine
-            // (this helps with the case of connecting a couple of clients/bots out to an external server)
-            table->host = LOCALHOST;
         }
         // TODO: what if host is the IP of the router?  e.g. someone connects to a LAN game using the WAN address...
         // the workaround for this is to have everyone in the LAN game use the LAN address but it would be nice to make it automatic
@@ -860,10 +878,12 @@ void CUDPConnection::FreshClient(ip_addr remoteHost, port_num remotePort, uint16
     ipAddr = ipAddrExt = remoteHost;
     port = remotePort;
 
-    // Normal client-client Avara packets will do the hole-punching for us, so this is unnecessary?
-    // Sometimes the hole needs to be punched between clients such as when they are both behind double-NAT.
-    IPaddress addr = { remoteHost, remotePort };
-    RequestPunch(addr);
+    // Sometimes the hole needs to be punched between clients such as when they are behind double-NAT.
+    if (!CUDPComm::IsLAN(remoteHost)) {
+        IPaddress addr = { remoteHost, remotePort };
+        // ask the punch server to have this newly connected client punch back to us
+        RequestPunch(addr);
+    }
 }
 
 Boolean CUDPConnection::AreYouDone() {

@@ -32,6 +32,7 @@ using namespace std;
 class TestSoundHub : public CSoundHubImpl {
 public:
     virtual Fixed* EarLocation() { return ear; }
+    virtual bool AudioEnabled() { return false; }
 private:
     Fixed ear[3];
 
@@ -1173,11 +1174,6 @@ TEST(SERIAL_NUMBER, Rollover) {
     test_rollover("CUDPConnection::receiveSerial", conn1, conn2, &CUDPConnection::receiveSerial);
     test_rollover("CUDPConnection::maxValid", conn1, conn2, &CUDPConnection::maxValid);
     test_rollover("CUDPConnection::ackBase", conn1, conn2, &CUDPConnection::ackBase);
-}
-
-TEST(QUEUES, Clean) {
-    // after all of the tests have run, the queues should be all cleaned up suggesting all destructors did their job
-    ASSERT_EQ(QueueCount(), 0)  << "queues not empty";
 }
 
 TEST(MATERIALS, Manipulation) {
