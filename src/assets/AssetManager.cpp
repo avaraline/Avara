@@ -4,6 +4,7 @@
 #include "BasePath.h"
 #include "LevelLoader.h"
 
+#include <filesystem>
 #include <algorithm>
 #include <fstream>
 #include <regex>
@@ -92,12 +93,10 @@ std::optional<std::string> AssetManager::GetResolvedAlfPath(std::string relative
 
 std::optional<std::string> AssetManager::GetShaderPath(std::string relativePath)
 {
-    std::stringstream path;
-    path << baseStorage->GetRootPath() << PATHSEP << "shaders" << PATHSEP << relativePath;
-
-    std::ifstream file(path.str());
+    auto path = std::filesystem::path(baseStorage->GetRootPath()) / "shaders" / relativePath;
+    std::ifstream file(path);
     if (file.good()) {
-        return path.str();
+        return path.string();
     }
 
     return std::optional<std::string>{};
@@ -261,50 +260,43 @@ bool AssetManager::PackageInStorage(std::string packageName)
 
 std::string AssetManager::GetBasePackagePath(BasePackage basePackage)
 {
-    std::stringstream path;
-    path << baseStorage->GetRootPath();
+    std::filesystem::path path(baseStorage->GetRootPath());
     switch (basePackage) {
         case BasePackage::Avara:
             // No-op.
             break;
         case BasePackage::Aftershock:
-            path << PATHSEP << "aftershock";
+            path = path / "aftershock";
             break;
         default:
             throw std::invalid_argument("No defined path for base package");
     }
-    return path.str();
+    return path.string();
 }
 
 std::optional<std::string> AssetManager::GetPackagePath(std::string packageName)
 {
-    std::stringstream path;
-    path << assetStorage->GetRootPath() << PATHSEP << packageName;
+    auto path = std::filesystem::path(assetStorage->GetRootPath()) / packageName;
 
-    std::stringstream manifestPath;
-    manifestPath << path.str() << PATHSEP << MANIFESTFILE;
+    auto manifestPath = std::filesystem::path(path) / MANIFESTFILE;
 
-    std::ifstream testFile(manifestPath.str());
+    std::ifstream testFile(manifestPath);
     return testFile.good()
-        ? path.str()
+        ? path.string()
         : std::optional<std::string>{};
 }
 
 std::string AssetManager::GetFullPath(MaybePackage package, std::string relativePath)
 {
-#ifdef _WIN32
-    // Ensure path separators are appropriate for Windows.
-    std::regex pattern("/");
-    relativePath = std::regex_replace(relativePath, pattern, PATHSEP);
-#endif
-    std::stringstream path;
+    std::filesystem::path path;
     if (package) {
-        path << assetStorage->GetRootPath() << PATHSEP;
-        path << *package << PATHSEP << relativePath;
+        path = assetStorage->GetRootPath();
+        path = path / *package / relativePath;
     } else {
-        path << GetBasePackagePath(basePackage) << PATHSEP << relativePath;
+        path = GetBasePackagePath(basePackage);
+        path = path / relativePath;
     }
-    return path.str();
+    return path.string();
 }
 
 std::string AssetManager::GetManifestPath(MaybePackage package)
@@ -319,36 +311,42 @@ std::string AssetManager::GetScriptPath(MaybePackage package)
 
 std::string AssetManager::GetAlfPath(MaybePackage package, std::string relativePath)
 {
-    std::stringstream path;
-    path << "alf" << PATHSEP << relativePath;
-    return GetFullPath(package, path.str());
+    std::filesystem::path path;
+    path = "alf";
+    path = path / relativePath;
+    return GetFullPath(package, path.string());
 }
 
 std::string AssetManager::GetBspPath(MaybePackage package, int16_t id)
 {
-    std::stringstream relativePath;
-    relativePath << "bsps" << PATHSEP << id << ".json";
-    return GetFullPath(package, relativePath.str());
+    std::stringstream fn;
+    fn << id << ".json";
+    
+    std::filesystem::path relativePath = "bsps";
+    relativePath = relativePath / fn.str();
+    return GetFullPath(package, relativePath.string());
 }
 
 std::string AssetManager::GetOggPath(MaybePackage package, int16_t id)
 {
-    std::stringstream relativePath;
-    relativePath << "ogg" << PATHSEP << id << ".ogg";
-    return GetFullPath(package, relativePath.str());
+    std::stringstream fn;
+    fn << id << ".ogg";
+    std::filesystem::path relativePath = "ogg";
+    relativePath = relativePath / fn.str();
+    return GetFullPath(package, relativePath.string());
 }
 
 std::string AssetManager::GetImagePath(MaybePackage package, std::string fileName) {
-    std::stringstream relativePath;
-    relativePath << "img" << PATHSEP << fileName;
-    return GetFullPath(package, relativePath.str());
+    auto relativePath = std::filesystem::path("img");
+    relativePath = relativePath / fileName;
+    return GetFullPath(package, relativePath.string());
 }
 
 void AssetManager::LoadEnumeratedObjectTypes()
 {
-    std::stringstream path;
-    path << baseStorage->GetRootPath() << PATHSEP << "objects.json";
-    std::ifstream file(path.str());
+    auto path = std::filesystem::path(baseStorage->GetRootPath());
+    path = path / "objects.json";
+    std::ifstream file(path);
     if (file.fail()) {
         throw std::runtime_error("Failed to load objects.json");
     } else {

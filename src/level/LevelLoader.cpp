@@ -21,6 +21,7 @@
 
 #include <SDL2/SDL.h>
 
+#include <filesystem>
 #include <algorithm>
 #include <sstream>
 #include <fstream>
@@ -457,10 +458,10 @@ struct ALFWalker: pugi::xml_tree_walker {
             path.rfind("\\", 0) != 0 &&
             path.rfind(".\\", 1) != 0) {
             // Ensure path separators are appropriate for the current platform.
-            std::regex pattern("\\\\|/");
-            path = std::regex_replace(path, pattern, PATHSEP);
+            auto ppath = std::filesystem::path(path);
+            ppath = ppath.make_preferred();
 
-            std::optional<std::string> maybePath = AssetManager::GetResolvedAlfPath(path);
+            std::optional<std::string> maybePath = AssetManager::GetResolvedAlfPath(ppath.string());
             if (maybePath) {
                 pugi::xml_document shard;
                 pugi::xml_parse_result result = shard.load_file(maybePath->c_str());

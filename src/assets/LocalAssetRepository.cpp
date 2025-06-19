@@ -4,7 +4,7 @@
 
 #define CUTE_FILES_IMPLEMENTATION
 #include <cute_files.h>
-
+#include <filesystem>
 #include <fstream>
 #include <sstream>
 
@@ -56,10 +56,8 @@ void LocalAssetRepository::BuildPackageList()
             filename.compare(0, 1, ".") != 0 &&
             filename.compare(0, 2, "..") != 0) {
             // This is a directory, check to see if there's a manifest inside.
-            std::stringstream manifestPath;
-            manifestPath << rootPath << PATHSEP << filename << PATHSEP << MANIFESTFILE;
-
-            std::ifstream testFile(manifestPath.str());
+            auto p = std::filesystem::path(rootPath) / filename / MANIFESTFILE;
+            std::ifstream testFile(p);
             if (testFile.good()) {
                 packageList->push_back(filename);
             }
