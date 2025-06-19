@@ -2115,8 +2115,8 @@ Boolean CAbstractPlayer::TryTransport(Fixed *where, short soundId, Fixed volume,
 }
 
 void CAbstractPlayer::ResumeLevel() {
-    CRealMovers::ResumeLevel();  // will ultimately call AdaptableSettings above
-
+    //CRealMovers::ResumeLevel();  // will ultimately call AdaptableSettings above
+    AdaptableSettings();
     nextPlayer = itsGame->playerList;
     itsGame->playerList = this;
 
