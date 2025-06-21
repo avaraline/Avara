@@ -9,6 +9,7 @@
 #define GAMEFILM_H
 #include "KeyFuncs.h"
 #include "LevelInfo.h"
+#include <memory>
 
 struct PlayerFrameFunc {
     short slot;
