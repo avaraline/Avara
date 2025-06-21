@@ -255,6 +255,7 @@
     <ClInclude Include="..\src\game\CYonBox.h" />
     <ClInclude Include="..\src\game\CYonSphere.h" />
     <ClInclude Include="..\src\game\CZombieActor.h" />
+    <ClInclude Include="..\src\game\GameFilm.h" />
     <ClInclude Include="..\src\game\GoodyRecord.h" />
     <ClInclude Include="..\src\game\InfoMessages.h" />
     <ClInclude Include="..\src\game\KeyFuncs.h" />
@@ -456,6 +457,7 @@
     <ClCompile Include="..\src\game\CYonBox.cpp" />
     <ClCompile Include="..\src\game\CYonSphere.cpp" />
     <ClCompile Include="..\src\game\CZombieActor.cpp" />
+    <ClCompile Include="..\src\game\GameFilm.cpp" />
     <ClCompile Include="..\src\game\KeyFuncs.cpp" />
     <ClCompile Include="..\src\game\LevelInfo.cpp" />
     <ClCompile Include="..\src\game\PlayerRatingsSimpleElo.cpp" />

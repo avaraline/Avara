@@ -13,13 +13,18 @@
 #include <string>
 #include <vector>
 
+#include "CAvaraGame.h"
 #include "LevelInfo.h"
+
+#include "KeyFuncs.h"
+#include "GameFilm.h"
 
 class CRUD {
 public:
     virtual ~CRUD() {};
-    virtual void RecordGameStart(int gameId, const LevelInfo &info) = 0;
-
+    virtual void RecordGameStart(GamePointer &game) = 0;
+    virtual void RecordFrames(GamePointer &game) = 0;
+    
     typedef std::vector<LevelInfo> RecentLevelsList;
     virtual RecentLevelsList GetRecentLevels(int limit = 50) = 0;
 };

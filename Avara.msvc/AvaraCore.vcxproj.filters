@@ -489,6 +489,9 @@
     <ClInclude Include="..\src\game\CZombieActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\game\GameFilm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\game\GoodyRecord.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -711,6 +714,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\game\CZombieActor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\game\GameFilm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\game\KeyFuncs.cpp">

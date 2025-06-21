@@ -88,6 +88,10 @@ std::unique_ptr<CNetManager> CAvaraGame::CreateNetManager() {
     return std::make_unique<CNetManager>();
 }
 
+std::unique_ptr<GameFilm> CAvaraGame::CreateGameFilm() {
+    return std::make_unique<GameFilm>();
+}
+
 CAvaraGame::CAvaraGame(FrameTime frameTime) {
     SetFrameTime(frameTime);
     latencyTolerance = 0.0;
@@ -128,6 +132,8 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     // mapRes = GetResource(FUNMAPTYPE, FUNMAPID);
 
     // IGameTimer(frameTime/TIMING_GRAIN);
+    
+    itsFilm = CreateGameFilm();
 
     allowBackgroundProcessing = false;
 
@@ -496,6 +502,12 @@ void CAvaraGame::RunFrameActions() {
     while (thePlayer) {
         nextPlayer = thePlayer->nextPlayer;
         thePlayer->PlayerAction();
+
+        auto mgr = thePlayer->itsManager;
+        auto slot = mgr->Slot();
+        auto ft = mgr->GetFunctions();
+        itsFilm->RecordFrame(slot, ft);
+
         thePlayer = nextPlayer;
     }
 
@@ -764,7 +776,6 @@ void CAvaraGame::ResumeGame() {
     if (doStart) {
         if (freshMission) {
             itsNet->AttachPlayers((CAbstractPlayer *)freshPlayerList);
-            itsApp->GameStarted(*loadedLevelInfo);
             freshPlayerList = NULL;
             InitMixer(false);
         } else {
@@ -783,6 +794,7 @@ void CAvaraGame::ResumeGame() {
 
         // Start the game, run the first tick
         GameStart();
+        if (freshMission) itsApp->GameStarted(*loadedLevelInfo);
         GameTick();
 
         // while(statusRequest == kPlayingStatus)
