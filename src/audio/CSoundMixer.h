@@ -111,7 +111,8 @@ public:
         int16_t maxMixCount,
         Boolean stereoEnable,
         Boolean sample16Enable,
-        Boolean interpolateEnable);
+        Boolean interpolateEnable,
+        Boolean openAudioDevice);
 
     void SetSoundEnvironment(Fixed speedOfSound, Fixed distanceToLevelOne, int timeUnit);
     void SetStereoSeparation(Boolean strongFlag);
