@@ -7,6 +7,9 @@
 
 #include "CRUDsqlite.h"
 #include "CAbstractPlayer.h"
+#include "GitVersion.h"
+#include "CWalkerActor.h"
+#include "CNetManager.h"
 #include <SDL2/SDL.h>
 #include <stdexcept>   // runtime_error
 #include "Debug.h"
@@ -53,7 +56,7 @@ static std::vector<std::vector<std::string>> migrations = {
                                      "author_id INTEGER NOT NULL, "
                                      "UNIQUE(level_id, author_id), "
                                      "FOREIGN KEY(level_id) REFERENCES levels(id), "
-                                     "FOREIGN KEY(author_id) REFERENCES authors(id))"
+                                     "FOREIGN KEY(author_id) REFERENCES authors(id))",
         "CREATE TABLE games          (created timestamp default current_timestamp, "
                                      "id INTEGER PRIMARY KEY, "
                                      "level_id INTEGER NOT NULL, "
@@ -62,27 +65,34 @@ static std::vector<std::vector<std::string>> migrations = {
     {
         "CREATE TABLE players        (created timestamp default current_timestamp, "
                                      "id INTEGER PRIMARY KEY ASC, "
-                                     "name TEXT, "
+                                     "name TEXT NOT NULL, "
                                      "last_seen TIMESTAMP DEFAULT CURRENT_TIMESTAMP, "
-                                     "last_played TIMESTAMP, "
                                      "elo INTEGER, "
                                      "colors TEXT, "
-                                     "friend INTEGER, "
-                                     "properties TEXT)"
+                                     "properties TEXT, "
+                                     "UNIQUE(name))",
 
-        "ALTER TABLE games ADD COLUMN total_frames INTEGER "
-        "ALTER TABLE games ADD COLUMN properties TEXT "
-        "ALTER TABLE games ADD COLUMN filmed INTEGER "
+        "ALTER TABLE games ADD COLUMN total_frames INTEGER ",
+        "ALTER TABLE games ADD COLUMN properties TEXT ",
+        "ALTER TABLE games ADD COLUMN spawn_order INTEGER ",
+        "ALTER TABLE games ADD COLUMN frame_time INTEGER ",
+        "ALTER TABLE games ADD COLUMN game_version TEXT ",
+        "ALTER TABLE games ADD COLUMN network_version INTEGER ",
+        "ALTER TABLE games ADD COLUMN filmed INTEGER ",
         
         "CREATE TABLE games_players  (player_id INTEGER NOT NULL, "
                                      "game_id INTEGER NOT NULL, "
                                      "slot INTEGER NOT NULL, "
                                      "team INTEGER NOT NULL, "
+                                     "grenades INTEGER NOT NULL DEFAULT 0, "
+                                     "missiles INTEGER NOT NULL DEFAULT 0, "
+                                     "boosters INTEGER NOT NULL DEFAULT 0, "
                                      "hull_rsrc_id INTEGER NOT NULL, "
+                                     "UNIQUE(player_id, game_id), "
                                      "FOREIGN KEY(player_id) REFERENCES players(id), "
-                                     "FOREIGN KEY(game_id) REFERENCES games(id))"
+                                     "FOREIGN KEY(game_id) REFERENCES games(id))",
 
-        "CREATE TABLE framefuncs     (game_id INTEGER NOT NULL, "
+        "CREATE TABLE frame_funcs    (game_id INTEGER NOT NULL, "
                                      "frame_number INTEGER NOT NULL, "
                                      "slot INTEGER NOT NULL, "
                                      "down INTEGER, "
@@ -249,21 +259,90 @@ void CRUDsqlite::RecordGameStart(GamePointer &game) {
     DBG_Log("sql", "CRUDsqlite::RecordGameStart({%0xd, %s})\n", gameId, url.c_str());
     int levelId = RecordLevelInfo(*game->loadedLevelInfo);
     
-    CAbstractPlayer* thePlayer;
-    CAbstractPlayer* nextPlayer;
+    int frameTime = -1;
+    int spawnOrder = -1;
+    bool wroteGame = false;
     
-    thePlayer = game->playerList;
-    while (thePlayer) {
-        nextPlayer = thePlayer->nextPlayer;
-        auto manager = game->FindPlayerManager(thePlayer);
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        auto manager = (&game->itsNet->playerTable[i])->get();
+        if (!manager) continue;
+        auto thePlayer = manager->GetPlayer();
+        if (!thePlayer) continue;
+        //auto manager = thePlayer->itsManager.get();
+        if (!wroteGame) {
+            CPlayerManager* host = manager->ServerPlayer();
+            auto hostConfig = host->TheConfiguration();
+            frameTime = hostConfig.frameTime;
+            spawnOrder = hostConfig.spawnOrder;
+            DBG_Log("sql", "CRUDsqlite::RecordGameStart(%0xd) params %i %i %i %s %i",
+                    gameId, levelId, frameTime, spawnOrder, GIT_VERSION, kAvaraNetVersion);
+            InsertInto("games(id, level_id, frame_time, spawn_order, game_version, network_version) VALUES (?, ?, ?, ?, ?, ?)", "id", [&](sqlite3_stmt * stmt) {
+                sqlite3_bind_int(stmt, 1, gameId);
+                sqlite3_bind_int(stmt, 2, levelId);
+                sqlite3_bind_int(stmt, 3, frameTime);
+                sqlite3_bind_int(stmt, 4, spawnOrder);
+                sqlite3_bind_text(stmt, 5, GIT_VERSION, -1, SQLITE_STATIC);
+                sqlite3_bind_int(stmt, 6, kAvaraNetVersion);
+            });
+            wroteGame = true;
+        }
         auto name = manager->GetPlayerName();
         auto slot = manager->Slot();
-        // TODO: finish
-        thePlayer = nextPlayer;
+        auto team = thePlayer->teamColor;
+        auto walker = (CWalkerActor*) thePlayer;
+        int hull = walker->hullRes;
+        int grenades = thePlayer->grenadeCount;
+        int missiles = thePlayer->missileCount;
+        int boosters = (int)thePlayer->boostsRemaining;
+        int playerId = InsertInto("players(name) VALUES (?)", { name }, "id");
+        DBG_Log("sql", "CRUDsqlite::RecordGameStart(%0xd) games_players params %i %i %i %i %i %i %i",
+                gameId, playerId, slot, team, hull, grenades, missiles, boosters);
+        InsertInto("games_players(game_id, player_id, slot, team, hull_rsrc_id, grenades, missiles, boosters) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", {gameId, playerId, slot, team, hull, grenades, missiles, boosters});
     }
 
     
-    InsertInto("games(id, level_id) VALUES (?, ?)", { gameId, levelId });
+}
+
+void CRUDsqlite::RecordFrames(GamePointer &game) {
+    auto gameId = game->currentGameId;
+    auto &film = game->itsFilm;
+    size_t frameCount = film->Written();
+    
+    sqlite3_exec(myDb, "BEGIN TRANSACTION", 0, 0, 0);
+    auto reel = film->GetReelRef();
+    DBG_Log("sql", "CRUDsqlite::RecordFrames({%0xd, %i frames})\n", gameId, (int)reel->size());
+    for(auto pff = reel->begin() + frameCount; pff != reel->end(); ++pff, ++frameCount) {
+        //DBG_Log("sql", "CRUDsqlite::RecordFrames(): ff %i for slot %i", (int)frameCount, pff->slot);
+        InsertInto("frame_funcs(game_id, frame_number, slot, down, up, held, mouse_delta_h, mouse_delta_v, button_status, msg_char) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", nullptr, [&](sqlite3_stmt * stmt) {
+            sqlite3_bind_int(stmt, 1, gameId);
+            sqlite3_bind_int(stmt, 2, (int)frameCount);
+            sqlite3_bind_int(stmt, 3, pff->slot);
+            sqlite3_bind_int(stmt, 4, pff->ft.down);
+            sqlite3_bind_int(stmt, 5, pff->ft.up);
+            sqlite3_bind_int(stmt, 6, pff->ft.held);
+            sqlite3_bind_int(stmt, 7, pff->ft.mouseDelta.h);
+            sqlite3_bind_int(stmt, 8, pff->ft.mouseDelta.v);
+            sqlite3_bind_int(stmt, 9, pff->ft.buttonStatus);
+            sqlite3_bind_text(stmt, 10, &pff->ft.msgChar, -1, SQLITE_TRANSIENT);
+        });
+    }
+    film->UpdateWritten(frameCount);
+    // mark game as recorded
+    sqlite3_stmt * updateGameStmt;
+    const char * updateGameSql = "UPDATE games SET total_frames = ?, filmed = 1 WHERE id = ?;";
+    if (sqlite3_prepare_v2(myDb, updateGameSql, -1, &updateGameStmt, NULL) == SQLITE_OK) {
+        sqlite3_bind_int(updateGameStmt, 1, (int)frameCount);
+        sqlite3_bind_int(updateGameStmt, 2, gameId);
+        if (sqlite3_step(updateGameStmt) != SQLITE_DONE) {
+            SDL_Log("ERROR updating game %0xd %s\n", gameId, sqlite3_errmsg(myDb));
+        }
+        sqlite3_finalize(updateGameStmt);
+    }
+    else {
+        SDL_Log("ERROR updating game %0xd %s\n", gameId, sqlite3_errmsg(myDb));
+    }
+    
+    sqlite3_exec(myDb, "COMMIT", 0, 0, 0);
 }
 
 CRUD::RecentLevelsList CRUDsqlite::GetRecentLevels(int limit) {

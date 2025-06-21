@@ -8,22 +8,20 @@
 #include "GameFilm.h"
 
 GameFilm::GameFilm() {
-    frames = new std::vector<PlayerFrameFunc>();
-    playerTable = new std::vector<std::string>();
+    frames = std::make_unique<FilmReel>();
+    written = 0;
 }
 
-void GameFilm::SetFinalPlayerTable() {
-    
-}
-
-void GameFilm::SetLevel(LevelInfo li) {
-    
-}
-
-void GameFilm::RecordFrame(CPlayerManager *manager) {
-    auto ff = manager->GetFunctions();
-    auto id = manager->Slot();
-    PlayerFrameFunc pff = { id, {ff} };
+void GameFilm::RecordFrame(short slot, FunctionTable *ft) {
+    FunctionTable ftc(*ft);
+    PlayerFrameFunc pff = {slot, ftc};
     frames->push_back(pff);
 }
 
+FilmReel *GameFilm::GetReelRef() {
+    return frames.get();
+}
+
+bool GameFilm::HasUnflushedFrames() {
+    return frames->size() > written;
+}

@@ -23,12 +23,10 @@ class CRUD {
 public:
     virtual ~CRUD() {};
     virtual void RecordGameStart(GamePointer &game) = 0;
-    virtual void RecordFrames(GameFilm* gf) = 0;
+    virtual void RecordFrames(GamePointer &game) = 0;
     
     typedef std::vector<LevelInfo> RecentLevelsList;
     virtual RecentLevelsList GetRecentLevels(int limit = 50) = 0;
-    
-    virtual void FramesForGamePlayer(int gameId, int slot, FrameFunction* ff) = 0;
 };
 
 #endif /* CRUD_h */

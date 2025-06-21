@@ -15,6 +15,7 @@
 #include "Types.h"
 #include "CNetManager.h"
 #include "LevelInfo.h"
+#include "GameFilm.h"
 
 #include <SDL2/SDL.h>
 #include <string>
@@ -154,6 +155,7 @@ public:
     CSoundHub *soundHub; //	Sound playback and control hub
     std::unique_ptr<CNetManager> itsNet; //	Networking management
     CScoreKeeper *scoreKeeper;
+    std::unique_ptr<GameFilm> itsFilm; // game recording
 
     //	Sound related variables:
     int soundTime;
@@ -213,6 +215,7 @@ public:
     virtual void IAvaraGame(CAvaraApp *theApp);
     virtual CSoundHub* CreateSoundHub();
     virtual std::unique_ptr<CNetManager> CreateNetManager();
+    virtual std::unique_ptr<GameFilm> CreateGameFilm();
 
     virtual void InitLocatorTable();
     virtual void IncrementGameCounter();

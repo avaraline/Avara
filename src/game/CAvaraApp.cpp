@@ -393,12 +393,12 @@ void CAvaraAppImpl::GameStarted(LevelInfo &loadedLevel) {
     vp->showTransparent = false;
     itsGame->IncrementGameCounter();
     MessageLine(kmStarted, MsgAlignment::Center);
-    itsAPI->RecordGameStart(itsGame);
     levelWindow->UpdateRecents();
     if (controller) {
         auto color = itsGame->GetLocalTeamColor();
         SDL_GameControllerSetLED(controller, color.GetR(), color.GetG(), color.GetB());
     }
+    itsAPI->RecordGameStart(itsGame);
 }
 
 void CAvaraAppImpl::Rumble(Fixed hitEnergy) {
@@ -460,6 +460,7 @@ bool CAvaraAppImpl::DoCommand(int theCommand) {
 
 OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerManager *sendingPlayer) {
     SDL_Log("LOADING LEVEL %s FROM %s\n", levelTag.c_str(), set.c_str());
+    if (itsGame->itsFilm->HasUnflushedFrames()) itsAPI->RecordFrames(itsGame);
     itsGame->LevelReset(false);
     gCurrentGame = itsGame.get();
 

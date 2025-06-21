@@ -1658,8 +1658,10 @@ void CAbstractPlayer::PlayerAction() {
 
             fireGun = false;
 
-            if (!netDestruct)
-                KeyboardControl(itsManager->GetFunctions());
+            if (!netDestruct) {
+                auto ff = itsManager->GetFunctions();
+                KeyboardControl(ff);
+            }
 
             UnlinkLocation();
             radius = proximityRadius + FDistanceOverEstimate(speed[0], speed[1], speed[2]);

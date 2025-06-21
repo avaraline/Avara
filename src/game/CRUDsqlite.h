@@ -33,9 +33,8 @@ public:
     ~CRUDsqlite();
 
     virtual void RecordGameStart(GamePointer &game) override;
-
+    virtual void RecordFrames(GamePointer &game) override;
     virtual RecentLevelsList GetRecentLevels(int limit) override;
-    virtual void FramesForGamePlayer(int gameId, int slot, FrameFunction *ff) override;
 };
 
 #endif /* CRUDsqlite_h */
