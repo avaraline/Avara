@@ -31,8 +31,8 @@ public:
     LegInfo legUndo[2] = {};
     Fixed legSpeeds[2] = {};
     
-    short hullRes = 0;
-    short hullBSP = 0;
+    uint16_t hullRes = 0;
+    uint16_t hullBSP = 0;
 
     Fixed viewPortHeight;
 

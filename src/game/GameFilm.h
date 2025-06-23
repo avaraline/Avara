@@ -18,15 +18,19 @@ struct PlayerFrameFunc {
 
 typedef std::vector<PlayerFrameFunc> FilmReel;
 typedef std::unique_ptr<FilmReel> FilmReelPointer;
+class CAvaraGame;
+typedef std::unique_ptr<CAvaraGame> GamePointer;
 
 class GameFilm {
 public:
     GameFilm();
     void RecordFrame(short slot, FunctionTable *ft);
     bool HasUnflushedFrames();
-    size_t Written() { return written; };
-    void UpdateWritten(size_t count) { written = count; };
-    FilmReel *GetReelRef();
+    const size_t GetWritten() { return written; };
+    void SetWritten(size_t count) { written = count; };
+    std::unique_ptr<FilmReel> *GetReelRef();
+    void Serialize(std::ostream &os, GamePointer &game);
+    void DeserializeTest(std::istream &is, GamePointer &game);
     ~GameFilm() {};
 
 private:

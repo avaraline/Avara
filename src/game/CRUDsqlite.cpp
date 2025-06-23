@@ -88,6 +88,10 @@ static std::vector<std::vector<std::string>> migrations = {
                                      "missiles INTEGER NOT NULL DEFAULT 0, "
                                      "boosters INTEGER NOT NULL DEFAULT 0, "
                                      "hull_rsrc_id INTEGER NOT NULL, "
+                                     "hull_color INTEGER, "
+                                     "gun_color INTEGER, "
+                                     "cockpit_color INTEGER, "
+                                     "trim_color INTEGER, "
                                      "UNIQUE(player_id, game_id), "
                                      "FOREIGN KEY(player_id) REFERENCES players(id), "
                                      "FOREIGN KEY(game_id) REFERENCES games(id))",
@@ -276,13 +280,13 @@ void CRUDsqlite::RecordGameStart(GamePointer &game) {
             spawnOrder = hostConfig.spawnOrder;
             DBG_Log("sql", "CRUDsqlite::RecordGameStart(%0xd) params %i %i %i %s %i",
                     gameId, levelId, frameTime, spawnOrder, GIT_VERSION, kAvaraNetVersion);
-            InsertInto("games(id, level_id, frame_time, spawn_order, game_version, network_version) VALUES (?, ?, ?, ?, ?, ?)", "id", [&](sqlite3_stmt * stmt) {
+            InsertInto("games(id, level_id, frame_time, spawn_order, network_version, game_version) VALUES (?, ?, ?, ?, ?, ?)", "id", [&](sqlite3_stmt * stmt) {
                 sqlite3_bind_int(stmt, 1, gameId);
                 sqlite3_bind_int(stmt, 2, levelId);
                 sqlite3_bind_int(stmt, 3, frameTime);
                 sqlite3_bind_int(stmt, 4, spawnOrder);
-                sqlite3_bind_text(stmt, 5, GIT_VERSION, -1, SQLITE_STATIC);
                 sqlite3_bind_int(stmt, 6, kAvaraNetVersion);
+                sqlite3_bind_text(stmt, 5, GIT_VERSION, -1, SQLITE_STATIC);
             });
             wroteGame = true;
         }
@@ -294,10 +298,16 @@ void CRUDsqlite::RecordGameStart(GamePointer &game) {
         int grenades = thePlayer->grenadeCount;
         int missiles = thePlayer->missileCount;
         int boosters = (int)thePlayer->boostsRemaining;
+        
+        auto playerConfig = manager->TheConfiguration();
+        int hullColor = playerConfig.hullColor.GetRaw();
+        int gunColor = playerConfig.gunColor.GetRaw();
+        int cockpitColor = playerConfig.cockpitColor.GetRaw();
+        int trimColor = playerConfig.trimColor.GetRaw();
         int playerId = InsertInto("players(name) VALUES (?)", { name }, "id");
-        DBG_Log("sql", "CRUDsqlite::RecordGameStart(%0xd) games_players params %i %i %i %i %i %i %i",
-                gameId, playerId, slot, team, hull, grenades, missiles, boosters);
-        InsertInto("games_players(game_id, player_id, slot, team, hull_rsrc_id, grenades, missiles, boosters) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", {gameId, playerId, slot, team, hull, grenades, missiles, boosters});
+        DBG_Log("sql", "CRUDsqlite::RecordGameStart(%0xd) games_players params %i %i %i %i %i %i %i %i %i %i %i",
+                gameId, playerId, slot, team, hull, grenades, missiles, boosters, hullColor, gunColor, cockpitColor, trimColor);
+        InsertInto("games_players(game_id, player_id, slot, team, hull_rsrc_id, grenades, missiles, boosters, hull_color, gun_color, cockpit_color, trim_color) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", {gameId, playerId, slot, team, hull, grenades, missiles, boosters, hullColor, gunColor, cockpitColor, trimColor});
     }
 
     
@@ -306,10 +316,10 @@ void CRUDsqlite::RecordGameStart(GamePointer &game) {
 void CRUDsqlite::RecordFrames(GamePointer &game) {
     auto gameId = game->currentGameId;
     auto &film = game->itsFilm;
-    size_t frameCount = film->Written();
+    size_t frameCount = film->GetWritten();
     
     sqlite3_exec(myDb, "BEGIN TRANSACTION", 0, 0, 0);
-    auto reel = film->GetReelRef();
+    auto reel = film->GetReelRef()->get();
     DBG_Log("sql", "CRUDsqlite::RecordFrames({%0xd, %i frames})\n", gameId, (int)reel->size());
     for(auto pff = reel->begin() + frameCount; pff != reel->end(); ++pff, ++frameCount) {
         //DBG_Log("sql", "CRUDsqlite::RecordFrames(): ff %i for slot %i", (int)frameCount, pff->slot);
@@ -326,7 +336,7 @@ void CRUDsqlite::RecordFrames(GamePointer &game) {
             sqlite3_bind_text(stmt, 10, &pff->ft.msgChar, -1, SQLITE_TRANSIENT);
         });
     }
-    film->UpdateWritten(frameCount);
+    film->SetWritten(frameCount);
     // mark game as recorded
     sqlite3_stmt * updateGameStmt;
     const char * updateGameSql = "UPDATE games SET total_frames = ?, filmed = 1 WHERE id = ?;";

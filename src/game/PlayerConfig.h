@@ -14,15 +14,15 @@
 
 struct PlayerConfigRecord {
     // hull config
-    short numGrenades {};
-    short numMissiles {};
-    short numBoosters {};
-    short hullType {};
+    uint16_t numGrenades {};
+    uint16_t numMissiles {};
+    uint16_t numBoosters {};
+    uint16_t hullType {};
     // server config
     uint16_t frameLatencyMin {};
     uint16_t frameLatencyMax {};
-    short frameTime {};
-    short spawnOrder {};
+    uint16_t frameTime {};
+    uint16_t spawnOrder {};
     // hull colors
     ARGBColor hullColor { (*ColorManager::getMarkerColor(0)).WithA(0xff) };
     ARGBColor trimColor { (*ColorManager::getMarkerColor(1)).WithA(0xff) };
@@ -31,9 +31,9 @@ struct PlayerConfigRecord {
 };
 
 typedef struct {
-    short hullBSP;
-    short maxMissiles;
-    short maxGrenades;
+    uint16_t hullBSP;
+    uint16_t maxMissiles;
+    uint16_t maxGrenades;
     short maxBoosters;
 
     Fixed mass;

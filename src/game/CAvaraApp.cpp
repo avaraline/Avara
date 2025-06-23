@@ -460,7 +460,24 @@ bool CAvaraAppImpl::DoCommand(int theCommand) {
 
 OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerManager *sendingPlayer) {
     SDL_Log("LOADING LEVEL %s FROM %s\n", levelTag.c_str(), set.c_str());
-    if (itsGame->itsFilm->HasUnflushedFrames()) itsAPI->RecordFrames(itsGame);
+    if (itsGame->itsFilm->HasUnflushedFrames()) {
+        // film sql
+        itsAPI->RecordFrames(itsGame);
+        
+        // film file test
+        char *ppath = SDL_GetPrefPath("Avaraline", "Avara");
+        const auto ts(std::chrono::steady_clock::now());
+        const size_t ms = std::chrono::duration_cast<std::chrono::milliseconds>(ts.time_since_epoch()).count();
+        auto path = std::string(ppath) + std::to_string(ms) + "-film.bin";
+        std::ofstream filmFile(path, std::ios::out | std::ios::binary);
+        itsGame->itsFilm->Serialize(filmFile, itsGame);
+        filmFile.close();
+        
+        std::ifstream testInputFilm(path, std::ios::in | std::ios::binary);
+        itsGame->itsFilm->DeserializeTest(testInputFilm, itsGame);
+        testInputFilm.close();
+    }
+    
     itsGame->LevelReset(false);
     gCurrentGame = itsGame.get();
 
