@@ -35,6 +35,21 @@ const char FilmHeader[9] = {'A', 'V', 'A', 'R', 'A', 'F', 'I', 'L', 'M'};
 #define oswrite(x) os.write(reinterpret_cast<const char *>(&x), sizeof(x))
 #define isread(x) is.read(reinterpret_cast<char *>(&x), sizeof(x))
 
+#ifndef htonll
+unsigned long long htonll(unsigned long long v) {
+    union { unsigned long lv[2]; unsigned long long llv; } u;
+    u.lv[0] = htonl(v >> 32);
+    u.lv[1] = htonl(v & 0xFFFFFFFFULL);
+    return u.llv;
+}
+
+unsigned long long ntohll(unsigned long long v) {
+    union { unsigned long lv[2]; unsigned long long llv; } u;
+    u.llv = v;
+    return ((unsigned long long)ntohl(u.lv[0]) << 32) | (unsigned long long)ntohl(u.lv[1]);
+}
+#endif
+
 void GameFilm::Serialize(std::ostream &os, GamePointer &game) {
     auto linfo = game->loadedLevelInfo.get();
     uint64_t gameId = htonll(game->currentGameId);
