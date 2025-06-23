@@ -35,7 +35,7 @@ const char FilmHeader[9] = {'A', 'V', 'A', 'R', 'A', 'F', 'I', 'L', 'M'};
 #define oswrite(x) os.write(reinterpret_cast<const char *>(&x), sizeof(x))
 #define isread(x) is.read(reinterpret_cast<char *>(&x), sizeof(x))
 
-#ifndef htonll
+#if !defined(_WIN32) && !defined(__APPLE__)
 unsigned long long htonll(unsigned long long v) {
     union { unsigned long lv[2]; unsigned long long llv; } u;
     u.lv[0] = htonl(v >> 32);
