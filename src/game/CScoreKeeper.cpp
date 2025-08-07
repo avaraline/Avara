@@ -338,9 +338,11 @@ void CScoreKeeper::ResetScores() {
 
 void CScoreKeeper::ReceiveResults(int32_t *newResults) {
     short i, offset;
-    bool gameIsFinal = false;
-    int sumPoints = 0;
-    static int sumPointsCheck = 0;
+    int teamsAliveMask = 0;
+    int teamsAliveCount = 0;
+    static int gameIdCheck = -1;
+
+    SDL_Log("scoreKeeper results received in frame %d", itsGame->frameNumber);
 
     for (i = 0; i < kMaxAvaraPlayers; i++) {
         offset = i * PLAYER_SCORE_FIELD_COUNT;
@@ -355,9 +357,15 @@ void CScoreKeeper::ReceiveResults(int32_t *newResults) {
         netScores.player[i].kills = (int16_t) ntohl(newResults[offset + 4]);
         netScores.player[i].serverWins = (int16_t) ntohl(newResults[offset + 5]);
 
-        // if any exitRank is set, the game is over
-        gameIsFinal = gameIsFinal || (netScores.player[i].exitRank > 0);
-        sumPoints += netScores.player[i].points;
+        // see which teams are still alive
+        if (netScores.player[i].lives > 0) {
+            int teamBit = (1 << netScores.player[i].team);
+            if (!(teamsAliveMask & teamBit)) {
+                // count each team only once
+                teamsAliveCount++;
+                teamsAliveMask |= teamBit;
+            }
+        }
 
         //copy serverWins to localScores
         localScores.player[i].serverWins = (int16_t) ntohl(newResults[offset + 5]);
@@ -377,9 +385,10 @@ void CScoreKeeper::ReceiveResults(int32_t *newResults) {
         netScores.teamPoints[i] = ntohl(newResults[offset + i]);
     }
 
-    // the sumPointsCheck helps to ensure we only execute this code block once (maybe better if we added a gameId?)
-    if (gameIsFinal && sumPoints != sumPointsCheck) {
-        sumPointsCheck = sumPoints;
+    // the gameIdCheck ensures we only execute this code block once per game
+    bool gameIsFinal = (teamsAliveCount <= 1);  // count can be zero if 2 players kill each other on last frame
+    if (gameIsFinal && gameIdCheck != itsGame->currentGameId) {
+        gameIdCheck = itsGame->currentGameId;
         std::vector<FinishRecord> rankings = DetermineFinishOrder();
         UpdatePlayerRatings(rankings);
     }
