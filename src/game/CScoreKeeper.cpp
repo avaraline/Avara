@@ -415,8 +415,11 @@ std::vector<FinishRecord> CScoreKeeper::DetermineFinishOrder() {
 void CScoreKeeper::UpdatePlayerRatings(std::vector<FinishRecord> finishOrder) {
     // send the final results to playerRatings
     std::vector<PlayerResult> playerResults = {};
+    long prevScore = std::numeric_limits<long>::max();
     for (auto finRec: finishOrder) {
-        playerResults.push_back({finRec.playerName, finRec.teamColor});
+        bool isTied = (finRec.score == prevScore);
+        playerResults.push_back({finRec.playerName, finRec.teamColor, isTied});
+        prevScore = finRec.score;
     }
     // must pass in the results ordered last to first
     playerRatings->UpdateRatings(playerResults);
