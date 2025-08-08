@@ -340,6 +340,7 @@ void CScoreKeeper::ReceiveResults(int32_t *newResults) {
     short i, offset;
     int teamsAliveMask = 0;
     int teamsAliveCount = 0;
+    int playerCount = 0;
     static int gameIdCheck = -1;
 
     SDL_Log("scoreKeeper results received in frame %d", itsGame->frameNumber);
@@ -367,6 +368,11 @@ void CScoreKeeper::ReceiveResults(int32_t *newResults) {
             }
         }
 
+        // count active players
+        if (netScores.player[i].lives >= 0) {
+            playerCount++;
+        }
+
         //copy serverWins to localScores
         localScores.player[i].serverWins = (int16_t) ntohl(newResults[offset + 5]);
 
@@ -386,7 +392,7 @@ void CScoreKeeper::ReceiveResults(int32_t *newResults) {
     }
 
     // the gameIdCheck ensures we only execute this code block once per game
-    bool gameIsFinal = (teamsAliveCount <= 1);  // count can be zero if 2 players kill each other on last frame
+    bool gameIsFinal = (playerCount > 1 && teamsAliveCount <= 1);  // count can be zero if 2 players kill each other on last frame
     if (gameIsFinal && gameIdCheck != itsGame->currentGameId) {
         gameIdCheck = itsGame->currentGameId;
         std::vector<FinishRecord> rankings = DetermineFinishOrder();
