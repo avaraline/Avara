@@ -1095,10 +1095,11 @@ const std::optional<ARGBColor> ReadColorVar(const char *s) {
     return ReadColorVar(IndexForEntry(s));
 }
 
-const Fixed ReadFixedMaterialVar(short index) {
+Fixed ReadFixedMaterialVar(short index) {
     return ToFixed(EvalVariable(index + firstVariable, true)); // eager evaluation!
 }
-const Fixed ReadFixedMaterialVar(const char *s) {
+
+Fixed ReadFixedMaterialVar(const char *s) {
     return ReadFixedMaterialVar(IndexForEntry(s));
 }
 

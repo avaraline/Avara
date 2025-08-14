@@ -23,7 +23,7 @@
 #include "CSmartPart.h"
 #include "CViewParameters.h"
 
-void CDepot::IDepot(CAvaraGame *theGame) {
+CDepot::CDepot(CAvaraGame *theGame) {
     itsGame = theGame;
 
     ReloadParts();
@@ -35,7 +35,7 @@ void CDepot::IDepot(CAvaraGame *theGame) {
     CreateSlivers();
 }
 
-void CDepot::Dispose() {
+CDepot::~CDepot() {
     short i;
     CSliverPart *nextSliver, *slivers;
 
@@ -55,8 +55,6 @@ void CDepot::Dispose() {
     delete smartSight;
     delete grenadeSight;
     delete grenadeTop;
-
-    CDirectObject::Dispose();
 }
 
 void CDepot::EndScript() {
