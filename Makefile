@@ -101,6 +101,9 @@ avara: set-version $(BUILD_DIR)/Avara
 tests: set-version $(BUILD_DIR)/tests
 	AVARA_RSRC_PATH=$(shell pwd)/ $(BUILD_DIR)/tests
 
+run: avara
+	AVARA_RSRC_PATH=$(shell pwd)/ $(BUILD_DIR)/Avara
+
 bspviewer: $(BUILD_DIR)/BSPViewer
 
 levelviewer: $(BUILD_DIR)/AvaraLevelViewer
