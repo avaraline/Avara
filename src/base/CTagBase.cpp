@@ -21,8 +21,6 @@ int HashLongTag(long theTag) {
 void CTagBase::ITagBase() {
     int i;
 
-    IBaseObject();
-
     for (i = 0; i < TAGBASEHASHSIZE; i++) {
         hashTable[i] = -1;
     }
@@ -47,8 +45,6 @@ short CTagBase::CreateMoreMasters() {
     TagMasterBlock *blockP;
     int result = memFullErr;
 
-    LockThis();
-
     if (IncreaseRamFile(
             (Handle)masterBlocks, &realMasterSize, &logicalMasterSize, sizeof(TagMasterBlock) * TAGMASTERCLUMP) ==
         noErr) {
@@ -65,7 +61,6 @@ short CTagBase::CreateMoreMasters() {
         result = noErr;
     }
 
-    UnlockThis();
     return result;
 }
 
@@ -77,7 +72,6 @@ long CTagBase::AllocateSpace(long len, void *theData) {
     if (wastedSpace > TAGMAXWASTE)
         GarbageCollect();
 
-    LockThis();
     offset = logicalTagBaseSize;
     if (IncreaseByClump(
             tagBaseBlocks, &realTagBaseSize, &logicalTagBaseSize, sizeof(TagDataBlock) + len, TAGBASECLUMP) == noErr) {
@@ -87,7 +81,6 @@ long CTagBase::AllocateSpace(long len, void *theData) {
         dataP->dataLen = len;
     }
 
-    UnlockThis();
     return result;
 }
 
@@ -473,8 +466,6 @@ void CTagBase::Dispose() {
     DisposeHandle(tagBaseBlocks);
     masterBlocks = 0;
     DisposeHandle(masterBlocksHandle);
-
-    CBaseObject::Dispose();
 }
 
 void CTagBase::WriteString(long tag, StringPtr theString) {
@@ -587,17 +578,7 @@ OSErr CTagBase::ReadOldHandle(long tag, Handle oldHandle) {
 }
 
 void CTagBase::Lock() {
-    if (!lockCounter) {
-        HLock((Handle)masterBlocks);
-        HLock(tagBaseBlocks);
-    }
-    CBaseObject::Lock();
 }
 
 void CTagBase::Unlock() {
-    if (lockCounter == 1) {
-        HUnlock((Handle)masterBlocks);
-        HUnlock(tagBaseBlocks);
-    }
-    CBaseObject::Unlock();
 }

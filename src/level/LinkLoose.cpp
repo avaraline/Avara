@@ -192,10 +192,9 @@ void *CreateObjectByIndex(short objectId) {
     }
 }
 
-void *CreateNamedObject(StringPtr theName) {
+void *CreateNamedObject(std::string objectName) {
     static auto objectDescriptor = AssetManager::GetEnumeratedObjectTypes();
 
-    std::string objectName((char *)theName + 1, theName[0]);
     if (objectDescriptor->value<nlohmann::json>("objects", {}).count(objectName) == 0) {
         SDL_Log("UNKNOWN OBJECT TYPE in CreateNamedObject(%s)\n", objectName.c_str());
         return NULL;

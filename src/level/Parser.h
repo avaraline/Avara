@@ -85,7 +85,7 @@ typedef struct {
 } LexSymbol;
 
 typedef struct {
-    StringPtr input;
+    unsigned char *input;
     Handle output;
     long realSize;
     long logicalSize;

@@ -12,7 +12,6 @@
 #include "AssetManager.h"
 #include "CAbstractActor.h"
 #include "CStringDictionary.h"
-#include "PascalStrings.h"
 #include "CTagBase.h"
 #include "InternalVars.h"
 #include "LinkLoose.h"
@@ -63,15 +62,13 @@ void FreshCalc() {
 }
 
 void CreateTheObject() {
-    Str255 nameBuf;
-
     if (currentActor) {
         delete currentActor;
     }
 
-    symTable->GetIndEntry(parserVar.lookahead.value.token, nameBuf);
+    std::string name = symTable->GetIndEntry(parserVar.lookahead.value.token);
 
-    currentActor = (CAbstractActor *)CreateNamedObject(nameBuf);
+    currentActor = (CAbstractActor *)CreateNamedObject(name);
     if (currentActor) {
         currentActor->BeginScript();
         currentLevel++;
@@ -79,15 +76,13 @@ void CreateTheObject() {
 }
 
 void CreateTheAdjuster() {
-    Str255 nameBuf;
-
     if (currentActor) {
         delete currentActor;
     }
 
-    symTable->GetIndEntry(parserVar.lookahead.value.token, nameBuf);
+    std::string name = symTable->GetIndEntry(parserVar.lookahead.value.token);
 
-    currentActor = (CAbstractActor *)CreateNamedObject(nameBuf);
+    currentActor = (CAbstractActor *)CreateNamedObject(name);
     if (currentActor) {
         currentActor->BeginScript();
         currentLevel++;
@@ -98,20 +93,14 @@ void CreateTheAdjuster() {
 
 void InitSymbols() {
     symTable = new CStringDictionary;
-    symTable->IStringDictionary();
-    unsigned char * tempPString;
 
     const char* symbols[] = {"min", "max", "random", "sin", "cos", "int", "round", "enum", "unique", "end", "adjust"};
 
     for (size_t i = 0; i <= 10; i++) {
-        tempPString = CStringtoPascalString(symbols[i]);
-        symTable->AddDictEntry(tempPString, -1);
-        delete [] tempPString;
+        symTable->AddDictEntry(symbols[i]);
     }
-    tempPString = CStringtoPascalString("object");
-    lastKeyword = symTable->AddDictEntry(tempPString, -1);
+    lastKeyword = symTable->AddDictEntry("object");
     lastVariable = lastKeyword;
-    delete [] tempPString;
 
     variableBase = new CTagBase;
     variableBase->ITagBase();
@@ -125,7 +114,7 @@ void InitSymbols() {
 void ResetVariables() {
     variableBase->Dispose();
     programBase->Dispose();
-    symTable->Dispose();
+    delete symTable;
     InitSymbols();
     uniqueBase = 0;
 }
@@ -172,7 +161,7 @@ void VariableToKeyword(LexSymbol *theSymbol) {
     }
 }
 
-short MatchVariable(StringPtr theString) {
+short MatchVariable(unsigned char *theString) {
     unsigned char theChar;
     short matchCount = 0;
     short state = 1;
@@ -202,11 +191,11 @@ short MatchVariable(StringPtr theString) {
 **	tells how many characters could belong to the exponent
 **	of a floating point number.
 */
-short MatchExponent(StringPtr theString) {
+short MatchExponent(unsigned char *theString) {
     enum { initialState, integerState, endState };
 
     short matchCount = 0;
-    char theChar;
+    unsigned char theChar;
     short state = initialState;
 
     while (state != endState) {
@@ -242,9 +231,9 @@ short MatchExponent(StringPtr theString) {
 **	index of a row specifier. Row specifiers are of the
 **	format @n, where n is an integer. (@1, @2, @3, ...)
 */
-short MatchRowIndex(StringPtr theString) {
+short MatchRowIndex(unsigned char *theString) {
     short matchCount = 0;
-    char theChar;
+    unsigned char theChar;
 
     theChar = *theString++;
 
@@ -262,11 +251,11 @@ short MatchRowIndex(StringPtr theString) {
 **	tells how many characters could belong to a floating
 **	point number.
 */
-short MatchFloat(StringPtr theString) {
+short MatchFloat(unsigned char *theString) {
     enum { initialState, integerPartState, decimalPartState, exponentMatchState, endState };
 
     short matchCount = 0;
-    char theChar;
+    unsigned char theChar;
     short state = initialState;
 
     while (state != endState) {
@@ -366,18 +355,16 @@ void SkipOneLineComment() {
     }
 }
 
-tokentype LexStringConstant();
 #define STRINGSTARTQUOTE '"'
 #define STRINGENDQUOTE '"'
 
 tokentype LexStringConstant() {
     unsigned char theChar;
-    unsigned char *input, *output;
+    unsigned char *input;
     tokentype theResult;
-    long len;
+    long len = 0;
 
     input = parserVar.input + 1;
-    output = input;
 
     do {
         theChar = *input++;
@@ -386,16 +373,18 @@ tokentype LexStringConstant() {
             if (theChar != STRINGENDQUOTE) {
                 theChar = 0;
             }
+            else {
+                len += 2;
+            }
         }
-        *output++ = theChar;
+        else {
+            len++;
+        }
     } while (theChar);
 
-    len = output - parserVar.input - 2;
-
-    if (len > 255)
-        len = 255;
-    theResult = symTable->FindEntry(parserVar.input, len);
-    parserVar.input = input - 1;
+    // SDL_Log("LexStringConstant -> %s", std::string((char *)parserVar.input + 1, len).c_str());
+    theResult = symTable->FindEntry(std::string((char *)parserVar.input + 1, len));
+    parserVar.input = input;
 
     return theResult;
 }
@@ -511,7 +500,7 @@ void LexRead(LexSymbol *theSymbol) {
         default:
             matchCount = MatchVariable(parserVar.input);  // matchCount == string length of matched thing
             if (matchCount > 0) {
-                theSymbol->value.token = symTable->FindEntry(parserVar.input - 1, matchCount);
+                theSymbol->value.token = symTable->FindEntry(std::string((char *)parserVar.input, matchCount));
                 if (theSymbol->value.token > lastVariable) {
                     lastVariable = theSymbol->value.token;
                     CreateVariable(lastVariable);
@@ -524,17 +513,11 @@ void LexRead(LexSymbol *theSymbol) {
             } else {
                 matchCount = MatchFloat(parserVar.input);
                 if (matchCount > 0) {
-                    char *tempString = new char[matchCount + 1];
-                    strncpy(tempString, (char *)parserVar.input, matchCount);
-                    tempString[matchCount] = 0;
-                    // auto len = my_strnlen_s(tempString, UCHAR_MAX);
+                    std::string s((char *)parserVar.input, matchCount);
                     theSymbol->kind = kLexConstant;
-                    // theSymbol->value.floating = StringToLongDouble(parserVar.input-1);
-                    theSymbol->value.floating = atof(tempString);
+                    theSymbol->value.floating = std::stod(s);
                     // SDL_Log("\natof(%s) --> %f\n", tempString, theSymbol->value.floating);
-                    // parserVar.input[-1] = temp;
                     parserVar.input += matchCount;
-                    delete [] tempString;
                 }
             }
 
@@ -842,7 +825,7 @@ void ParseStatement(LexSymbol *statement) {
     }
 }
 
-void SetupCompiler(StringPtr theInput) {
+void SetupCompiler(unsigned char *theInput) {
     parserVar.input = theInput;
     parserVar.output = NewHandle(1024);
     parserVar.realSize = 128;
@@ -989,7 +972,7 @@ char *fixedString(unsigned char *s) {
 void RunThis(std::string script) {
     LexSymbol statement;
 
-    StringPtr scriptPtr = (StringPtr)script.c_str();
+    //char *scriptPtr = (StringPtr)script.c_str();
 
 #ifdef DEBUGPARSER
     char *formattedScript = fixedString(scriptPtr);
@@ -997,24 +980,7 @@ void RunThis(std::string script) {
     std::free(formattedScript);
 #endif
 
-    /*
-    newTicks = TickCount();
-    if(newTicks - oldTicks > 10)
-    {
-        GDHandle	savedGD;
-        CGrafPtr	savedGrafPtr;
-
-        GetGWorld(&savedGrafPtr, &savedGD);
-        SetGWorld((CGrafPtr)FrontWindow(), GetMainDevice());
-
-        oldTicks = newTicks;
-        gApplication->BroadcastCommand(kBusyTimeCmd);
-
-        SetGWorld(savedGrafPtr, savedGD);
-    }
-    */
-
-    SetupCompiler(scriptPtr);
+    SetupCompiler((unsigned char *)script.c_str());
     LexRead(&parserVar.lookahead);
 
     do {
@@ -1065,7 +1031,7 @@ void AllocParser() {
 
 void DeallocParser() {
     if (symTable)
-        symTable->Dispose();
+        delete symTable;
     if (variableBase)
         variableBase->Dispose();
     if (programBase)
@@ -1082,20 +1048,18 @@ void DeallocParser() {
     }
 }
 
-
 short IndexForEntry(const char* entry) {
-    unsigned char* tempPString = CStringtoPascalString(entry);
-    short t = symTable->SearchForEntry(tempPString, -1) - firstVariable;
-    delete [] tempPString;
-    return t;
+    return symTable->SearchForEntry(entry) - firstVariable;
 }
 
 double ReadVariable(short index) {
     return EvalVariable(index + firstVariable, false);
 }
+
 double ReadVariable(const char *s) {
     return ReadDoubleVar(s);
 }
+
 double ReadDoubleVar(const char *s) {
     return ReadVariable(IndexForEntry(s));
 }

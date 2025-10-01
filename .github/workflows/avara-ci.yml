@@ -25,7 +25,7 @@ jobs:
         run: make tests
   Windows:
     name: Windows
-    runs-on: windows-latest
+    runs-on: windows-2025
     steps:
       - uses: actions/checkout@v4
       - name: Add MSBuild to PATH
@@ -41,6 +41,8 @@ jobs:
       - name: Run headless test
         run: .\Avara.msvc\x64\Release\Tests.exe
         shell: pwsh
+        env:
+          AVARA_RSRC_PATH: ${{ github.workspace }}\
       - name: WinAvara archive
         run: .\bin\winavarazip.ps1
         shell: pwsh
@@ -68,7 +70,7 @@ jobs:
           brew install googletest
       - uses: actions/checkout@v4
       - name: Run headless tests
-        run: make -j4 tests
+        run: make tests
       - name: make macdist
         run: make -j4 clean macdist
       - name: deploy main nightly

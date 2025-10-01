@@ -9,7 +9,6 @@
 
 #pragma once
 #include "ARGBColor.h"
-#include "CDirectObject.h"
 #include "Material.h"
 #include "Types.h"
 
@@ -30,7 +29,7 @@
 class CAvaraGame;
 class CViewParameters;
 
-class CWorldShader : public CDirectObject {
+class CWorldShader {
 public:
     ARGBColor lowSkyColor = DEFAULT_LOW_SKY_COLOR;
     ARGBColor highSkyColor = DEFAULT_HIGH_SKY_COLOR;
@@ -47,5 +46,4 @@ public:
 
     CWorldShader();
     virtual void Reset();
-    virtual void Apply();
 };

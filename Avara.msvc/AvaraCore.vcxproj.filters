@@ -57,13 +57,13 @@
     <ClInclude Include="..\src\assets\BaseAssetStorage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\assets\BasePath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\assets\LocalAssetRepository.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\base\CTagBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\base\CBaseObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\base\CDirectObject.h">
@@ -165,9 +165,6 @@
     <ClInclude Include="..\src\util\huffman\CAbstractPipe.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\util\huffman\CHandlePipe.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\util\CharWordLongPointer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -187,9 +184,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\util\JSONify.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\util\PascalStrings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\util\RamFiles.h">
@@ -668,9 +662,6 @@
     <ClCompile Include="..\src\util\FastMat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\util\PascalStrings.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\util\RamFiles.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -956,9 +947,6 @@
     <ClCompile Include="..\src\bsp\CBSPPart.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\base\CBaseObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\base\CDirectObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -995,6 +983,9 @@
     <ClCompile Include="..\src\assets\BaseAssetStorage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\assets\BasePath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\vendor\csscolorparser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1005,9 +996,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\util\huffman\CAbstractPipe.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\util\huffman\CHandlePipe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\util\huffman\CHuffProcessor.cpp">
