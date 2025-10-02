@@ -1,9 +1,11 @@
 layout(location = 0) in vec3 vertexPosition_modelspace;
 layout(location = 1) in vec4 vertexColor;
 layout(location = 2) in vec4 vertexSpecular;
-layout(location = 3) in vec3 vertexNormal;
+layout(location = 3) in float vertexGlow;
+layout(location = 4) in vec3 vertexNormal;
 
 uniform float maxShininess;
+uniform float maxGlow;
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 proj;
@@ -12,6 +14,7 @@ uniform mat3 normalTransform;
 out vec4 fragmentColor;
 out vec3 fragmentSpecular;
 out float fragmentShininess;
+out float fragmentGlow;
 out vec3 fragmentNormal;
 out vec3 fragPos;
 
@@ -21,6 +24,7 @@ void main() {
     fragmentColor = vertexColor;
     fragmentSpecular = vertexSpecular.rgb;
     fragmentShininess = vertexSpecular.a * maxShininess;
+    fragmentGlow = vertexGlow * maxGlow;
     fragmentNormal = vertexNormal * normalTransform;
     fragPos = (pos * model).xyz;
 }

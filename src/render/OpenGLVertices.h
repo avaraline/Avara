@@ -19,6 +19,7 @@ struct GLData {
     uint8_t specG = 0;
     uint8_t specB = 0;
     uint8_t specS = 0;
+    float glow = 0;
     float nx = 0.0f;
     float ny = 0.0f;
     float nz = 0.0f;

@@ -77,6 +77,7 @@ Material GetDefaultMaterial() {
         defaultMaterial = defaultMaterial.WithSpecular(*specular);
     }
     defaultMaterial = defaultMaterial.WithShininessVar(iDefaultMaterialShininess);
+    defaultMaterial = defaultMaterial.WithGlowVar(iDefaultMaterialGlow);
     return defaultMaterial;
 }
 
@@ -87,6 +88,7 @@ Material GetBaseMaterial() {
         baseMaterial = baseMaterial.WithSpecular(*specular);
     }
     baseMaterial = baseMaterial.WithShininessVar(iBaseMaterialShininess);
+    baseMaterial = baseMaterial.WithGlowVar(iBaseMaterialGlow);
     return baseMaterial;
 }
 
@@ -153,6 +155,8 @@ struct ALFWalker: pugi::xml_tree_walker {
             attr = "material.0.specular";
         } else if (attr.compare("material.shininess") == 0) {
             attr = "material.0.shininess";
+        } else if (attr.compare("material.glow") == 0) {
+            attr = "material.0.glow";
         }
         // XML attributes can't have brackets, so we turn light.0.i into light[0].i
         std::regex subscript("\\.(\\d+)");
@@ -274,6 +278,14 @@ struct ALFWalker: pugi::xml_tree_walker {
             palette[3] = palette[3].WithShininessVar(iBaseMaterialShininess);
         }
         
+        if (!node.attribute("baseMaterial.glow").empty()) {
+            // When baseMaterial properties are set, apply it to all mats.
+            palette[0] = palette[0].WithGlowVar(iBaseMaterialGlow);
+            palette[1] = palette[1].WithGlowVar(iBaseMaterialGlow);
+            palette[2] = palette[2].WithGlowVar(iBaseMaterialGlow);
+            palette[3] = palette[3].WithGlowVar(iBaseMaterialGlow);
+        }
+        
         if (!node.attribute("material.specular").empty()) {
             const std::optional<ARGBColor> color = ReadColorVar("material[0].specular");
             if (color) {
@@ -327,6 +339,26 @@ struct ALFWalker: pugi::xml_tree_walker {
         
         if (!node.attribute("material.3.shininess").empty()) {
             palette[3] = palette[3].WithShininessVar("material[3].shininess");
+        }
+        
+        if (!node.attribute("material.glow").empty()) {
+            palette[0] = palette[0].WithGlowVar("material[0].glow");
+        }
+        
+        if (!node.attribute("material.0.glow").empty()) {
+            palette[0] = palette[0].WithGlowVar("material[0].glow");
+        }
+        
+        if (!node.attribute("material.1.glow").empty()) {
+            palette[1] = palette[1].WithGlowVar("material[1].glow");
+        }
+        
+        if (!node.attribute("material.2.glow").empty()) {
+            palette[2] = palette[2].WithGlowVar("material[2].glow");
+        }
+        
+        if (!node.attribute("material.3.glow").empty()) {
+            palette[3] = palette[3].WithGlowVar("material[3].glow");
         }
 
         if (!node.attribute("x").empty() && !node.attribute("z").empty() &&

@@ -230,6 +230,7 @@ void ModernOpenGLRenderer::ApplyLights()
     AdjustAmbient(*worldShader, ambientIntensity);
     worldShader->SetFloat3("ambientColor", ambientRGB);
     worldShader->SetFloat("maxShininess", MAX_SHININESS_EXP);
+    worldShader->SetFloat("maxGlow", MAX_GLOW);
     worldShader->SetBool("lightsActive", true);
 
     skyShader->Use();
@@ -618,10 +619,14 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
     // Specular!
     glVertexAttribPointer(2, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(GLData), (void *)((3 * sizeof(float)) + (4 * sizeof(uint8_t))));
     glEnableVertexAttribArray(2);
+    
+    // Glow!
+    glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)((3 * sizeof(float)) + (8 * sizeof(uint8_t))));
+    glEnableVertexAttribArray(3);
 
     // Normal!
-    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)((3 * sizeof(float)) + (8 * sizeof(uint8_t))));
-    glEnableVertexAttribArray(3);
+    glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)((4 * sizeof(float)) + (8 * sizeof(uint8_t))));
+    glEnableVertexAttribArray(4);
 
     // Custom, per-object lighting and depth testing!
     float extraAmbient = ToFloat(part.extraAmbient);
@@ -656,6 +661,8 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
     glDisableVertexAttribArray(2);
+    glDisableVertexAttribArray(3);
+    glDisableVertexAttribArray(4);
 
     // Restore previous lighting and depth testing state.
     if (part.privateAmbient != -1 || extraAmbient > 0) {
