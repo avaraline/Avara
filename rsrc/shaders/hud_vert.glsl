@@ -2,7 +2,10 @@ layout(location = 0) in vec3 vertexPosition_modelspace;
 layout(location = 1) in vec4 vertexColor;
 layout(location = 2) in vec4 vertexSpecular;
 layout(location = 3) in float vertexGlow;
-layout(location = 4) in vec3 vertexNormal;
+layout(location = 4) in float vertexReserved1;
+layout(location = 5) in float vertexReserved2;
+layout(location = 6) in float vertexReserved3;
+layout(location = 7) in vec3 vertexNormal;
 
 uniform mat4 view;
 uniform mat4 proj;

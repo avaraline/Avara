@@ -621,12 +621,20 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
     glEnableVertexAttribArray(2);
     
     // Glow!
-    glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)((3 * sizeof(float)) + (8 * sizeof(uint8_t))));
+    glVertexAttribPointer(3, 1, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(GLData), (void *)((3 * sizeof(float)) + (8 * sizeof(uint8_t))));
     glEnableVertexAttribArray(3);
+    
+    // Reserved
+    glVertexAttribPointer(4, 1, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(GLData), (void *)((3 * sizeof(float)) + (9 * sizeof(uint8_t))));
+    glEnableVertexAttribArray(4);
+    glVertexAttribPointer(5, 1, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(GLData), (void *)((3 * sizeof(float)) + (10 * sizeof(uint8_t))));
+    glEnableVertexAttribArray(5);
+    glVertexAttribPointer(6, 1, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(GLData), (void *)((3 * sizeof(float)) + (11 * sizeof(uint8_t))));
+    glEnableVertexAttribArray(6);
 
     // Normal!
-    glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)((4 * sizeof(float)) + (8 * sizeof(uint8_t))));
-    glEnableVertexAttribArray(4);
+    glVertexAttribPointer(7, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)((3 * sizeof(float)) + (12 * sizeof(uint8_t))));
+    glEnableVertexAttribArray(7);
 
     // Custom, per-object lighting and depth testing!
     float extraAmbient = ToFloat(part.extraAmbient);
@@ -663,6 +671,9 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
     glDisableVertexAttribArray(2);
     glDisableVertexAttribArray(3);
     glDisableVertexAttribArray(4);
+    glDisableVertexAttribArray(5);
+    glDisableVertexAttribArray(6);
+    glDisableVertexAttribArray(7);
 
     // Restore previous lighting and depth testing state.
     if (part.privateAmbient != -1 || extraAmbient > 0) {
