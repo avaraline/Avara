@@ -91,6 +91,10 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>powershell.exe -ExecutionPolicy Bypass -nologo -NoProfile -NonInteractive -File $(SolutionDir)..\bin\git_version.ps1</Command>
+      <Message>Specify Git commit for ersatz version tracking.</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -107,6 +111,10 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>powershell.exe -ExecutionPolicy Bypass -nologo -NoProfile -NonInteractive -File $(SolutionDir)..\bin\git_version.ps1</Command>
+      <Message>Specify Git commit for ersatz version tracking.</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -125,8 +133,8 @@
       <AdditionalDependencies>shell32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>
-      </Command>
+      <Command>powershell.exe -ExecutionPolicy Bypass -nologo -NoProfile -NonInteractive -File $(SolutionDir)..\bin\git_version.ps1</Command>
+      <Message>Specify Git commit for ersatz version tracking.</Message>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy /E /Y "$(SolutionDir)..\rsrc\" "$(TargetDir)rsrc\" &amp;&amp; xcopy /E /Y "$(SolutionDir)..\levels\" "$(TargetDir)levels\"</Command>
@@ -152,6 +160,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>powershell.exe -ExecutionPolicy Bypass -nologo -NoProfile -NonInteractive -File $(SolutionDir)..\bin\git_version.ps1</Command>
+      <Message>Specify Git commit for ersatz version tracking.</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\platform\windows\resource.h" />

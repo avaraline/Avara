@@ -73,17 +73,21 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(VCPKG_ROOT)\installed\x64-windows\debug\lib\manual-link</LibraryPath>
-    <PreBuildEventUseInBuild>true</PreBuildEventUseInBuild>
+    <PreBuildEventUseInBuild>
+    </PreBuildEventUseInBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(VCPKG_ROOT)\installed\x64-windows\lib\manual-link</LibraryPath>
-    <PreBuildEventUseInBuild>true</PreBuildEventUseInBuild>
+    <PreBuildEventUseInBuild>
+    </PreBuildEventUseInBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <PreBuildEventUseInBuild>true</PreBuildEventUseInBuild>
+    <PreBuildEventUseInBuild>
+    </PreBuildEventUseInBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <PreBuildEventUseInBuild>true</PreBuildEventUseInBuild>
+    <PreBuildEventUseInBuild>
+    </PreBuildEventUseInBuild>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg">
     <VcpkgEnableManifest>true</VcpkgEnableManifest>
@@ -100,10 +104,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>powershell.exe -ExecutionPolicy Bypass -nologo -NoProfile -NonInteractive -File $(SolutionDir)..\bin\git_version.ps1</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
     <PreBuildEvent>
-      <Message>Specify Git commit for ersatz version tracking.</Message>
+      <Message>
+      </Message>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -122,10 +128,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>powershell.exe -ExecutionPolicy Bypass -nologo -NoProfile -NonInteractive -File $(SolutionDir)..\bin\git_version.ps1</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
     <PreBuildEvent>
-      <Message>Specify Git commit for ersatz version tracking.</Message>
+      <Message>
+      </Message>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -146,8 +154,10 @@
       <AdditionalDependencies>SDL2maind.lib;shell32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>powershell.exe -ExecutionPolicy Bypass -nologo -NoProfile -NonInteractive -File $(SolutionDir)..\bin\git_version.ps1</Command>
-      <Message>Specify Git commit for ersatz version tracking.</Message>
+      <Command>
+      </Command>
+      <Message>
+      </Message>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy /E /Y "$(SolutionDir)..\rsrc\" "$(TargetDir)rsrc\" &amp;&amp; xcopy /E /Y "$(SolutionDir)..\levels\" "$(TargetDir)levels\"</Command>
@@ -177,8 +187,10 @@
       <Command>xcopy /E /Y "$(SolutionDir)..\rsrc\" "$(TargetDir)rsrc\" &amp;&amp; xcopy /E /Y "$(SolutionDir)..\levels\" "$(TargetDir)levels\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>powershell.exe -ExecutionPolicy Bypass -nologo -NoProfile -NonInteractive -File $(SolutionDir)..\bin\git_version.ps1</Command>
-      <Message>Specify Git commit for ersatz version tracking.</Message>
+      <Command>
+      </Command>
+      <Message>
+      </Message>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
