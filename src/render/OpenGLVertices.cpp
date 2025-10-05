@@ -170,6 +170,7 @@ void OpenGLVertices::Append(const CBSPPart &part)
                 vertex.specG = material.GetSpecG();
                 vertex.specB = material.GetSpecB();
                 vertex.specS = material.GetShininess();
+                vertex.glow = material.GetGlow();
                 vertex.nx = poly.normal.x;
                 vertex.ny = poly.normal.y;
                 vertex.nz = poly.normal.z;
@@ -199,6 +200,7 @@ void OpenGLVertices::Append(const CBSPPart &part)
                 vertex.specG = material.GetSpecG();
                 vertex.specB = material.GetSpecB();
                 vertex.specS = material.GetShininess();
+                vertex.glow = material.GetGlow();
                 vertex.nx = -poly.normal.x;
                 vertex.ny = -poly.normal.y;
                 vertex.nz = -poly.normal.z;
