@@ -343,7 +343,7 @@ void CScoreKeeper::ReceiveResults(int32_t *newResults) {
     int playerCount = 0;
     static int gameIdCheck = -1;
 
-    SDL_Log("scoreKeeper results received in frame %d", itsGame->frameNumber);
+//    SDL_Log("scoreKeeper results received in frame %d", itsGame->frameNumber);
 
     for (i = 0; i < kMaxAvaraPlayers; i++) {
         offset = i * PLAYER_SCORE_FIELD_COUNT;
