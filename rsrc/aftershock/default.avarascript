@@ -265,8 +265,10 @@
   // Material properties:
   defaultMaterial.specular = 0
   defaultMaterial.shininess = 0
-  baseMaterial.specular = defaultMaterial.specular
-  baseMaterial.shininess = defaultMaterial.shininess
+  defaultMaterial.glow = 0
+  baseMaterial.specular = 0
+  baseMaterial.shininess = 0
+  baseMaterial.glow = 0
 
   // Advanced weapon powers:
   grenadePower = 2.05
