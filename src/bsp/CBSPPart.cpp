@@ -139,7 +139,7 @@ void CBSPPart::IBSPPart(short resId) {
         }
         current = current.WithSpecular(spec).WithShininess(spec.GetA());
         
-        spec = mat.value<uint8_t>("glow", 0);
+        glow = mat.value<uint8_t>("glow", 0);
         original = original.WithGlow(glow);
         if (glow == defaultMaterial.GetGlow()) {
             glow = baseMaterial.GetGlow();

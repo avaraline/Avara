@@ -198,7 +198,7 @@
 <unique vars="mShow mTaken" />
 <And in="@start" out="mShow" />
 <Timer in="mTaken" out="mShow" wait="400" />
-<Goody shape="bspAvaraA" y="6 + mGoodyOffset" speed="-2" grenades="mLgGrenade" missiles="mLgMissile" start="mShow" out="mTaken" color="hsl(280, 100%, 82%)" cx="0" cz="0" angle="225" />
+<Goody shape="bspAvaraA" y="6 + mGoodyOffset" speed="-2" grenades="mLgGrenade" missiles="mLgMissile" start="mShow" out="mTaken" color="hsl(280, 100%, 82%)" material.glow="0.0" cx="0" cz="0" angle="225" />
 <unique vars="mShow mTaken" />
 <And in="@start" out="mShow" />
 <Timer in="mTaken" out="mShow" wait="250" />
@@ -210,11 +210,11 @@
 <unique vars="mShow mTaken" />
 <And in="@start" out="mShow" />
 <Timer in="mTaken" out="mShow" wait="150" />
-<Goody shape="bspMissile" y="mGoodyOffset" speed="-2" missiles="mLgMissile" start="mShow" out="mTaken" color="hsl(280, 100%, 82%)" material.glow="16.0" cx="0" cz="-40" angle="225" />
+<Goody shape="bspMissile" y="mGoodyOffset" speed="-2" missiles="mLgMissile" start="mShow" out="mTaken" color="hsl(280, 100%, 82%)" cx="0" cz="-40" angle="225" />
 <unique vars="mShow mTaken" />
 <And in="@start" out="mShow" />
 <Timer in="mTaken" out="mShow" wait="150" />
-<Goody shape="bspMissile" y="mGoodyOffset" speed="-2" missiles="mLgMissile" start="mShow" out="mTaken" color="hsl(280, 100%, 82%)" material.glow="16.0" cx="0" cz="40" angle="225" />
+<Goody shape="bspMissile" y="mGoodyOffset" speed="-2" missiles="mLgMissile" start="mShow" out="mTaken" color="hsl(280, 100%, 82%)" cx="0" cz="40" angle="225" />
 <unique vars="mShow mTaken" />
 <And in="@start" out="mShow" />
 <Timer in="mTaken" out="mShow" wait="200" />
@@ -226,11 +226,11 @@
 <unique vars="mShow mTaken" />
 <And in="@start" out="mShow" />
 <Timer in="mTaken" out="mShow" wait="100" />
-<Goody shape="bspMissile" y="4 + mGoodyOffset" speed="-2" missiles="mMdMissile" start="mShow" out="mTaken" color="hsl(280, 100%, 82%)" material.glow="16.0" cx="-20" cz="0" angle="225" />
+<Goody shape="bspMissile" y="4 + mGoodyOffset" speed="-2" missiles="mMdMissile" start="mShow" out="mTaken" color="hsl(280, 100%, 82%)" cx="-20" cz="0" angle="225" />
 <unique vars="mShow mTaken" />
 <And in="@start" out="mShow" />
 <Timer in="mTaken" out="mShow" wait="100" />
-<Goody shape="bspMissile" y="4 + mGoodyOffset" speed="-2" missiles="mMdMissile" start="mShow" out="mTaken" color="hsl(280, 100%, 82%)" material.glow="16.0" cx="20" cz="0" angle="225" />
+<Goody shape="bspMissile" y="4 + mGoodyOffset" speed="-2" missiles="mMdMissile" start="mShow" out="mTaken" color="hsl(280, 100%, 82%)" cx="20" cz="0" angle="225" />
 
 <Hologram cx="0" cz="-15.05" y="2" color="hsl(280, 100%, 82%)" material.glow="16.0" color.1="#ffffff" material.1.glow="16.0" scale="1.5" shape="bspVines" angle="0" />
 <Hologram cx="0" cz="15.05" y="2" color="hsl(280, 100%, 82%)" material.glow="16.0" color.1="#ffffff" material.1.glow="16.0" scale="1.5" shape="bspVines" angle="180" />

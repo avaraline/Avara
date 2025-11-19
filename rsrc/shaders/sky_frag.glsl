@@ -1,4 +1,4 @@
-#define GROUND_PHI -0.0075
+#define GROUND_PHI 0.0
 #define MAX_LIGHTS 4
 
 in vec3 tex_coord;
