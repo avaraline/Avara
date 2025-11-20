@@ -3,6 +3,7 @@
 #include <json.hpp>
 #include <SDL2/SDL.h>
 #include <fstream>
+#include <sstream>
 #include <string>
 
 using json = nlohmann::json;
