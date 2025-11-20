@@ -41,10 +41,60 @@ void SetHiDPI() {
 #include <nanogui/nanogui.h>
 #include <sstream>
 #include <string>
+#include <fstream>
+#include <chrono>
 
 using namespace nanogui;
 
+std::ofstream logFile;
+
+static const char * const _priority_names[] = {
+    NULL,
+    "TRACE",
+    "VERBOSE",
+    "DEBUG",
+    "INFO",
+    "WARN",
+    "ERROR",
+    "CRITICAL"
+};
+
+
 void NullLogger(void *userdata, int category, SDL_LogPriority priority, const char *message) {}
+
+void FileLogger(void *userdata, int category, SDL_LogPriority priority, const char *message) {
+    if (logFile.is_open()) {
+        const auto now = std::chrono::system_clock::now();
+        const auto nowAsTimeT = std::chrono::system_clock::to_time_t(now);
+        const auto nowMs = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()) % 1000;
+        logFile << std::put_time(std::localtime(&nowAsTimeT), "%Y%m%d %H%M%S");
+        logFile << '.' << std::setfill('0') << std::setw(3) << nowMs.count() << " ";
+        logFile << _priority_names[priority] << ": " << message << "\n";
+        logFile.flush();
+    }
+    printf("%s: %s\n", _priority_names[priority], message);
+}
+
+void OpenLogFile() {
+    try {
+        std::string logPath = PrefPath("avara.log");
+        logFile.open(logPath, std::ios::out | std::ios::trunc);
+        if (logFile.fail()) {
+            SDL_Log("Failed to open log file at %s.", logPath.c_str());
+        }
+        else {
+            SDL_LogSetOutputFunction(FileLogger, nullptr);
+        }
+    }
+    catch (std::exception e) {
+        SDL_Log("Error opening log file.");
+    }
+}
+
+void CloseLogFile() {
+    logFile.close();
+}
+
 
 // combine 'defaultArgs' and command-line arguments
 std::vector<std::string> combinedArgs(std::string defaultArgs, int argc, char* argv[]) {
@@ -83,6 +133,8 @@ std::vector<std::string> combinedArgs(std::string defaultArgs, int argc, char* a
 }
 
 int main(int argc, char *argv[]) {
+    // Open log file.
+    OpenLogFile();
     // Check basepath override.
     for (int i = 0; i < argc; i++) {
         if (strcmp(argv[i], "--basepath") == 0) {
@@ -170,7 +222,7 @@ int main(int argc, char *argv[]) {
 
     // Shut it down!!
     shutdown();
-
+    CloseLogFile();
     return 0;
 }
 
