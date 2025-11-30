@@ -10,4 +10,5 @@ public:
     static void OpenLog();
     static void Log(void *userdata, int category, SDL_LogPriority priority, const char *message);
     static void CloseLog();
+    static std::ofstream& LogFile() { return logFile; }
 };

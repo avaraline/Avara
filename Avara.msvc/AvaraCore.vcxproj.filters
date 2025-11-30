@@ -105,6 +105,12 @@
     <ClInclude Include="..\vendor\nanovg\nanovg_gl_utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\vendor\backward.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\signalhandling.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\vendor\pugixml\pugiconfig.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>

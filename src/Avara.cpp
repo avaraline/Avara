@@ -16,7 +16,8 @@
 #include "Preferences.h"
 #include "BasePath.h"
 #include "Logging.h"
-
+#include "signal.h"
+#include "signalhandling.hpp"
 #ifdef _WIN32
 #include <Windows.h>
 #include <ShellAPI.h>
@@ -42,6 +43,8 @@ void SetHiDPI() {
 #include <nanogui/nanogui.h>
 #include <sstream>
 #include <string>
+
+SignalHandling sh;
 
 using namespace nanogui;
 
@@ -165,7 +168,6 @@ int main(int argc, char *argv[]) {
     } else if(connectAddress.size() > 0) {
         app->GetNet()->ChangeNet(kClientNet, connectAddress);
     }
-
     // outside of the game, use INACTIVE_LOOP_REFRESH (no need to poll when not playing)
     mainloop(INACTIVE_LOOP_REFRESH);
 

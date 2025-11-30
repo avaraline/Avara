@@ -325,6 +325,7 @@
     <ClInclude Include="..\src\util\RolloverCounter.h" />
     <ClInclude Include="..\src\util\SlidingHistogram.h" />
     <ClInclude Include="..\vendor\AudioFile.h" />
+    <ClInclude Include="..\vendor\backward.hpp" />
     <ClInclude Include="..\vendor\cute_files.h" />
     <ClInclude Include="..\vendor\glm\glm.hpp" />
     <ClInclude Include="..\vendor\httplib.h" />
@@ -369,6 +370,7 @@
     <ClInclude Include="..\vendor\nanovg\stb_truetype.h" />
     <ClInclude Include="..\vendor\pugixml\pugiconfig.hpp" />
     <ClInclude Include="..\vendor\pugixml\pugixml.hpp" />
+    <ClInclude Include="..\vendor\signalhandling.h" />
     <ClInclude Include="..\vendor\stb_image_write.h" />
     <ClInclude Include="..\vendor\stb_vorbis.h" />
     <ClInclude Include="..\vendor\utf8.h" />

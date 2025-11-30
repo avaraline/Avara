@@ -83,9 +83,11 @@ else
 	LDFLAGS += -lstdc++ -lm -lpthread -ldl -lsqlite3
 	LDFLAGS += $(shell ${PKG_CONFIG} --libs-only-l glu)
 	LDFLAGS += $(shell ${PKG_CONFIG} --libs-only-l sdl2)
+	LDFLAGS += $(shell ${PKG_CONFIG} --libs-only-l libdwarf)
 	CPPFLAGS += $(shell ${PKG_CONFIG} --cflags-only-I directfb)
 	CPPFLAGS += $(shell ${PKG_CONFIG} --cflags-only-I sdl2)
-	CPPFLAGS += -fPIC
+	CPPFLAGS += $(shell ${PKG_CONFIG} --cflags-only-I libdwarf)
+	CPPFLAGS += -fPIC -DBACKWARD_HAS_DWARF=1
 	POST_PROCESS ?= ls -lh
 endif
 
