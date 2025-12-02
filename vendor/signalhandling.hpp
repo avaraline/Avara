@@ -123,6 +123,7 @@ public:
     printer.address = true;
     printer.snippet = true;
     printer.print(st, stderr);
+    // print a copy to the log file
     auto &log = Logging::LogFile();
     printer.print(st, log);
     log.flush();
@@ -327,7 +328,10 @@ private:
     printer.address = true;
     printer.snippet = true;
     printer.print(st, std::cerr);
-    printer.print(st, Logging::LogFile());
+    // print a copy to the log file
+    auto &log = Logging::LogFile();
+    printer.print(st, log);
+    log.flush();
   }
 };
 
