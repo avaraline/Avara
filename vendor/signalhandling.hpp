@@ -125,7 +125,10 @@ public:
     printer.print(st, stderr);
     // print a copy to the log file
     auto &log = Logging::LogFile();
-    printer.print(st, log);
+    if (log.is_open()) {
+        printer.print(st, log);
+        log.flush();
+    }
     log.flush();
 
 #if (defined(_XOPEN_SOURCE) && _XOPEN_SOURCE >= 700) || \
@@ -330,8 +333,10 @@ private:
     printer.print(st, std::cerr);
     // print a copy to the log file
     auto &log = Logging::LogFile();
-    printer.print(st, log);
-    log.flush();
+    if (log.is_open()) {
+        printer.print(st, log);
+        log.flush();
+    }
   }
 };
 
