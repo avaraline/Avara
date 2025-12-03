@@ -319,11 +319,13 @@
     <ClInclude Include="..\src\util\huffman\CAbstractPipe.h" />
     <ClInclude Include="..\src\util\huffman\CHuffProcessor.h" />
     <ClInclude Include="..\src\util\JSONify.h" />
+    <ClInclude Include="..\src\util\Logging.h" />
     <ClInclude Include="..\src\util\RamFiles.h" />
     <ClInclude Include="..\src\util\RayHit.h" />
     <ClInclude Include="..\src\util\RolloverCounter.h" />
     <ClInclude Include="..\src\util\SlidingHistogram.h" />
     <ClInclude Include="..\vendor\AudioFile.h" />
+    <ClInclude Include="..\vendor\backward.hpp" />
     <ClInclude Include="..\vendor\cute_files.h" />
     <ClInclude Include="..\vendor\glm\glm.hpp" />
     <ClInclude Include="..\vendor\httplib.h" />
@@ -368,6 +370,7 @@
     <ClInclude Include="..\vendor\nanovg\stb_truetype.h" />
     <ClInclude Include="..\vendor\pugixml\pugiconfig.hpp" />
     <ClInclude Include="..\vendor\pugixml\pugixml.hpp" />
+    <ClInclude Include="..\vendor\signalhandling.h" />
     <ClInclude Include="..\vendor\stb_image_write.h" />
     <ClInclude Include="..\vendor\stb_vorbis.h" />
     <ClInclude Include="..\vendor\utf8.h" />
@@ -507,6 +510,7 @@
     <ClCompile Include="..\src\util\huffman\CAbstractHuffPipe.cpp" />
     <ClCompile Include="..\src\util\huffman\CAbstractPipe.cpp" />
     <ClCompile Include="..\src\util\huffman\CHuffProcessor.cpp" />
+    <ClCompile Include="..\src\util\Logging.cpp" />
     <ClCompile Include="..\src\util\RamFiles.cpp" />
     <ClCompile Include="..\vendor\csscolorparser.cpp" />
     <ClCompile Include="..\vendor\nanogui\button.cpp" />

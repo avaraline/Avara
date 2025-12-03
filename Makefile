@@ -85,7 +85,7 @@ else
 	LDFLAGS += $(shell ${PKG_CONFIG} --libs-only-l sdl2)
 	CPPFLAGS += $(shell ${PKG_CONFIG} --cflags-only-I directfb)
 	CPPFLAGS += $(shell ${PKG_CONFIG} --cflags-only-I sdl2)
-	CPPFLAGS += -fPIC
+	CPPFLAGS += -fPIC 
 	POST_PROCESS ?= ls -lh
 endif
 
