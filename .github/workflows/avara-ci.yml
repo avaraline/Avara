@@ -60,7 +60,7 @@ jobs:
           max_releases: 1
   macOS:
     name: macOS
-    runs-on: macos-13
+    runs-on: macos-15
     steps:
       - name: install dependencies
         run: |
