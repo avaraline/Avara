@@ -39,6 +39,8 @@
 
 typedef short tokentype;
 
+std::string currentlyRunning = "";
+
 ParserVariables parserVar = {0, 0, 0, 0, {0}, 0, 0};
 long lastKeyword = 0;
 long lastVariable = 0;
@@ -515,7 +517,14 @@ void LexRead(LexSymbol *theSymbol) {
                 if (matchCount > 0) {
                     std::string s((char *)parserVar.input, matchCount);
                     theSymbol->kind = kLexConstant;
-                    theSymbol->value.floating = std::stod(s);
+                    double floatResult = 0;
+                    try {
+                        floatResult = std::stod(s);
+                    } catch (...) {
+                        SDL_Log("Parser error: Invalid floating point value: %s", s.c_str());
+                        SDL_Log("In script: '%s'", currentlyRunning.c_str());
+                    }
+                    theSymbol->value.floating = floatResult;
                     // SDL_Log("\natof(%s) --> %f\n", tempString, theSymbol->value.floating);
                     parserVar.input += matchCount;
                 }
@@ -825,6 +834,7 @@ void ParseStatement(LexSymbol *statement) {
     }
 }
 
+
 void SetupCompiler(unsigned char *theInput) {
     parserVar.input = theInput;
     parserVar.output = NewHandle(1024);
@@ -970,6 +980,7 @@ char *fixedString(unsigned char *s) {
 }
 
 void RunThis(std::string script) {
+    currentlyRunning = script;
     LexSymbol statement;
 
     //char *scriptPtr = (StringPtr)script.c_str();
