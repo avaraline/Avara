@@ -121,6 +121,14 @@ macapp:
         ONLY_ACTIVE_ARCH=NO \
         CONFIGURATION_BUILD_DIR=$(BUILD_DIR)
 
+mactests:
+	xcodebuild -configuration Debug -scheme AvaraTests \
+        -IDEBuildOperationMaxNumberOfConcurrentCompileTasks=$(JOBS) \
+        -derivedDataPath $(BUILD_DIR)/DerivedData \
+        ONLY_ACTIVE_ARCH=NO \
+        CONFIGURATION_BUILD_DIR=$(BUILD_DIR)
+	$(BUILD_DIR)/AvaraTests
+
 macdist: macapp
 	cd $(BUILD_DIR) && zip $(ZIPFLAGS) MacAvara.zip Avara.app && cd ..
 
