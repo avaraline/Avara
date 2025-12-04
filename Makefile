@@ -125,7 +125,6 @@ mactests:
 	xcodebuild -configuration Debug -scheme AvaraTests \
         -IDEBuildOperationMaxNumberOfConcurrentCompileTasks=$(JOBS) \
         -derivedDataPath $(BUILD_DIR)/DerivedData \
-        ONLY_ACTIVE_ARCH=NO \
         CONFIGURATION_BUILD_DIR=$(BUILD_DIR)
 	$(BUILD_DIR)/AvaraTests
 

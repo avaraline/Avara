@@ -2204,9 +2204,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E517F052299713990036B206 /* Build configuration list for PBXNativeTarget "AvaraTests" */;
 			buildPhases = (
-				E2DCC6552BDE0D1B00D70C49 /* Embed Frameworks */,
+				E573B9452EE1CC9B0086D426 /* Update GitVersion.h */,
 				E517F048299713990036B206 /* Sources */,
 				E517F049299713990036B206 /* Frameworks */,
+				E2DCC6552BDE0D1B00D70C49 /* Embed Frameworks */,
 				E517F04A299713990036B206 /* CopyFiles */,
 			);
 			buildRules = (
@@ -2341,6 +2342,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "RESOURCEDIR=\"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\nrm \"$RESOURCEDIR\"/levels/*.r\nrm \"$RESOURCEDIR\"/rsrc/Avara.r\n";
+		};
+		E573B9452EE1CC9B0086D426 /* Update GitVersion.h */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Update GitVersion.h";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "GIT_HASH=`/usr/bin/git describe --always --dirty` \ngrep -q $GIT_HASH src/util/GitVersion.h || (echo \"#define GIT_VERSION \\\"$GIT_HASH\\\"\" > src/util/GitVersion.h)\n";
 		};
 		E5C57BC3298997B6008740F4 /* Update GitVersion.h */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2896,11 +2916,18 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CODE_SIGN_STYLE = Manual;
 				EXCLUDED_ARCHS = x86_64;
-				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Library/Frameworks,
+				);
 				HEADER_SEARCH_PATHS = (
 					"vendor/**",
 					/opt/homebrew/include,
 					/usr/local/include,
+				);
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2923,11 +2950,18 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CODE_SIGN_STYLE = Manual;
 				EXCLUDED_ARCHS = x86_64;
-				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Library/Frameworks,
+				);
 				HEADER_SEARCH_PATHS = (
 					"vendor/**",
 					/opt/homebrew/include,
 					/usr/local/include,
+				);
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3067,7 +3101,11 @@
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
-				HEADER_SEARCH_PATHS = "vendor/**";
+				HEADER_SEARCH_PATHS = (
+					"vendor/**",
+					/opt/homebrew/include,
+					/usr/local/include,
+				);
 				INFOPLIST_FILE = platform/macos/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.action-games";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -3077,6 +3115,12 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/homebrew/lib,
+					/usr/local/lib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.0;
 				OTHER_CFLAGS = (
 					"$(inherited)",
@@ -3108,7 +3152,11 @@
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
-				HEADER_SEARCH_PATHS = "vendor/**";
+				HEADER_SEARCH_PATHS = (
+					"vendor/**",
+					/opt/homebrew/include,
+					/usr/local/include,
+				);
 				INFOPLIST_FILE = platform/macos/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.action-games";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -3118,6 +3166,12 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/homebrew/lib,
+					/usr/local/lib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.0;
 				OTHER_CFLAGS = (
 					"$(inherited)",
