@@ -70,9 +70,9 @@ jobs:
           brew install googletest
       - uses: actions/checkout@v4
       - name: Run headless tests
-        run: make tests
+        run: make -j4 mactests
       - name: make macdist
-        run: make -j4 clean macdist
+        run: make -j4 macdist
       - name: deploy main nightly
         if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'main')
         uses: WebFreak001/deploy-nightly@v1.0.1
