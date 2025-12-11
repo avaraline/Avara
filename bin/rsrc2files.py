@@ -1,5 +1,10 @@
-#!/usr/bin/env python3
-
+# /// script
+# dependencies = [
+#   "numpy",
+#   "triangle",
+#   "pyparsing",
+# ]
+# ///
 import json
 import os
 import re
