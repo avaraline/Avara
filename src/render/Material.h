@@ -16,7 +16,7 @@ public:
     void* operator new(std::size_t) = delete;
     bool operator==(const Material& other) { return color == other.color && specular == other.specular && glow == other.glow; }
     bool operator!=(const Material& other) { return color != other.color && specular != other.specular && glow != other.glow; }
-    constexpr Material(ARGBColor color = 0xFF000000, ARGBColor specular = 0x00000000, uint8_t glow = 0): color(color), specular(specular), glow(glow) {}
+    constexpr Material(ARGBColor color = 0xFFFFFFFF, ARGBColor specular = 0x00000000, uint8_t glow = 0): color(color), specular(specular), glow(glow) {}
     inline ARGBColor GetColor() const { return color; }
     inline ARGBColor GetSpecular() const { return specular.WithA(0x00); }
     inline uint8_t GetGlow() const { return glow; }
@@ -83,7 +83,7 @@ public:
         return Material(color, specular.WithA(ConstrainShininess(shininess)), glow);
     }
 private:
-    ARGBColor color = 0xFF000000;
+    ARGBColor color = 0xFFFFFFFF;
     ARGBColor specular = 0x00000000; // Alpha channel = shininess value
     uint8_t glow = 0;
     

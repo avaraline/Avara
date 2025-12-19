@@ -108,7 +108,7 @@ void CBSPPart::IBSPPart(short resId) {
         original = baseMaterial;
         current = baseMaterial;
         nlohmann::json const &mat = doc["materials"][i];
-        ARGBColor color = ARGBColor(0x00ffffff); // Default to invisible "white."
+        ARGBColor color = defaultMaterial.GetColor();
         ARGBColor spec = defaultMaterial.GetSpecular().WithA(defaultMaterial.GetShininess());
         uint8_t glow = defaultMaterial.GetGlow();
         
@@ -491,6 +491,18 @@ void CBSPPart::ReplaceGlowForColor(ARGBColor origColor, uint8_t newGlow) {
             material.current = material.current.WithGlow(newGlow);
             glowReplaced = true;
         }
+    }
+    // (No need to check for alpha here.)
+    if (glowReplaced && vData) vData->Replace(*this);
+}
+
+void CBSPPart::ReplaceAllGlow(uint8_t newGlow) {
+    bool glowReplaced = false;
+    for (auto &material : materialTable) {
+        if (material.current.GetGlow() != newGlow) {
+            glowReplaced = true;
+        }
+        material.current = material.current.WithGlow(newGlow);
     }
     // (No need to check for alpha here.)
     if (glowReplaced && vData) vData->Replace(*this);

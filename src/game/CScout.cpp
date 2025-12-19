@@ -45,6 +45,16 @@ CScout::CScout(CAbstractPlayer *thePlayer, short theTeam, ARGBColor longTeamColo
     partCount = 1;
     LoadPart(0, kScoutBSP);
     partList[0]->ReplaceColor(*ColorManager::getMarkerColor(0), longTeamColor);
+    for (CSmartPart **thePart = partList; *thePart; thePart++) {
+        (*thePart)->ReplaceSpecularForColor(*ColorManager::getMarkerColor(0), ARGBColor(0x333333));
+        (*thePart)->ReplaceShininessForColor(*ColorManager::getMarkerColor(0), 4);
+        (*thePart)->ReplaceSpecularForColor(*ColorManager::getMarkerColor(1), ARGBColor(0x454545));
+        (*thePart)->ReplaceShininessForColor(*ColorManager::getMarkerColor(1), 8);
+        (*thePart)->ReplaceSpecularForColor(*ColorManager::getMarkerColor(2), ARGBColor(0xa6a6a6));
+        (*thePart)->ReplaceShininessForColor(*ColorManager::getMarkerColor(2), 48);
+        (*thePart)->ReplaceSpecularForColor(*ColorManager::getMarkerColor(3), ARGBColor(0x808080));
+        (*thePart)->ReplaceShininessForColor(*ColorManager::getMarkerColor(3), 24);
+    }
 
     hitSoundId = 220;
 

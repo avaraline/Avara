@@ -215,6 +215,7 @@ public:
     virtual void ReplaceSpecularForColor(ARGBColor origColor, ARGBColor newSpecular);
     virtual void ReplaceShininessForColor(ARGBColor origColor, uint8_t newShininess);
     virtual void ReplaceGlowForColor(ARGBColor origColor, uint8_t newGlow);
+    virtual void ReplaceAllGlow(uint8_t newGlow);
     virtual void ReplaceMaterial(Material origMaterial, Material newMaterial);
     virtual void ReplaceAllMaterials(Material newMaterial);
 
