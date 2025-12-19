@@ -274,8 +274,10 @@ enum {
     //  Materials
     iDefaultMaterialSpecular,
     iDefaultMaterialShininess,
+    iDefaultMaterialGlow,
     iBaseMaterialSpecular,
     iBaseMaterialShininess,
+    iBaseMaterialGlow,
 
     // Advanced weapons
     iGrenadePower,
