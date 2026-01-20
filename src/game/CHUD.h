@@ -1,6 +1,5 @@
 #pragma once
 
-#include "CDirectObject.h"
 #include <vector>
 #include "CViewParameters.h"
 #include "CPlayerManager.h"
@@ -8,7 +7,7 @@
 
 class CAvaraGame;
 
-class CHUD : CDirectObject {
+class CHUD {
 public:
     CAvaraGame *itsGame;
     int images;

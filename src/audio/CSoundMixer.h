@@ -8,7 +8,6 @@
 */
 
 #pragma once
-#include "CDirectObject.h"
 #include "FastMat.h"
 #include "SoundSystemDefines.h"
 
@@ -47,7 +46,7 @@ typedef struct {
     Vector speed; //  Linear motion
 } SoundMotionInfo;
 
-class CSoundMixer : public CDirectObject {
+class CSoundMixer {
 public:
     int32_t globRegister = 0;
     int32_t volumeMax = 0;
@@ -106,13 +105,15 @@ public:
     Boolean stereo = false;
     Boolean strongStereo = false;
 
-    void ISoundMixer(Fixed sampRate,
+
+    CSoundMixer(Fixed sampRate,
         int16_t maxChannelCount,
         int16_t maxMixCount,
         Boolean stereoEnable,
         Boolean sample16Enable,
         Boolean interpolateEnable,
         Boolean openAudioDevice);
+    virtual ~CSoundMixer();
 
     void SetSoundEnvironment(Fixed speedOfSound, Fixed distanceToLevelOne, int timeUnit);
     void SetStereoSeparation(Boolean strongFlag);
@@ -130,7 +131,6 @@ public:
 
     void DoubleBack(uint8_t *stream, int size);
 
-    virtual void Dispose() override;
     void HouseKeep();
     void AddSound(CBasicSound *theSound);
 };

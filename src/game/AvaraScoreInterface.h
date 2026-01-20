@@ -77,7 +77,7 @@ typedef struct {
     long command; //	One of ScoreInterfaceMessages
     long result; //	Reserved for future calls that may return results.
     long capabilities; //	Your capabilities.
-    Handle plugIn; //	Your plug-in code handle
+    //Handle plugIn; //	Your plug-in code handle
 
     long maxPlayers; //	ksiInit sets this. (current default is 6)
     long maxTeams; //	ksiInit sets this. (current default is 6) Doesn't include neutral team!!
@@ -100,20 +100,8 @@ typedef struct {
     **	forever unless you are carelessly setting the resultsChanged flag
     **	even when the text has not changed.
     */
-    Handle resultsHandle;
-    long resultsChanged;
-
-    /*
-    **	Alternatively, you can draw the results yourself when you receive a
-    **	ksiResultsDraw call. If you add any controls to the window, you have
-    **	to remove them when you are closed and you have to hide them when you
-    **	receive a ksiResultsHide call.
-    */
-    /*
-    WindowPtr		resultsWindow;	//	Guaranteed to be valid only for hide/draw/click
-    Rect			resultsRect;	//	Valid only for draw/click calls
-    EventRecord		*theEvent;
-    */
+    //Handle resultsHandle;
+    //long resultsChanged;
 
     /*
     **	The following parameters are valid for all calls and usually change

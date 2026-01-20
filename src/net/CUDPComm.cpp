@@ -1257,10 +1257,8 @@ ClockTick CUDPComm::GetClock() {
 **	more urgent data. If not, any data marked urgent will be resent even if there
 **	no other data to send within twice that period.
 */
-void CUDPComm::IUDPComm(short clientCount, short bufferCount, uint16_t version, ClockTick urgentTimePeriod) {
-    // create queues big enough to hold UDPPacketInfo packets
-    InitializePacketQueues(bufferCount, sizeof(UDPPacketInfo));
-
+CUDPComm::CUDPComm(short clientCount, short bufferCount, uint16_t version, ClockTick urgentTimePeriod) : CCommManager(bufferCount, sizeof(UDPPacketInfo))
+{
     inviteString[0] = 0;
 
     softwareVersion = version;
@@ -1273,11 +1271,6 @@ void CUDPComm::IUDPComm(short clientCount, short bufferCount, uint16_t version, 
 
     // latencyConvert = urgentTimePeriod * 2;  // no longer being used
 
-    /*
-    prefs = new CTagBase;
-    prefs->ITagBase();
-    prefs->ConvertFromHandle(gApplication->prefsBase->ReadHandle(kUDPCommPrefsTag));
-    */
     retransmitToRoundTripRatio = 192 + (gApplication->Number(kUDPResendPrefTag) << 5);
 
     isConnected = false;
@@ -1295,21 +1288,12 @@ void CUDPComm::IUDPComm(short clientCount, short bufferCount, uint16_t version, 
     maxClients = clientCount;
 
     while (clientCount--) {
-        CUDPConnection *newConn;
-
-        newConn = new CUDPConnection;
-        newConn->IUDPConnection(this);
+        CUDPConnection *newConn = new CUDPConnection(this);
         newConn->next = connections;
         connections = newConn;
     }
 
     nextSender = connections;
-
-    /*
-    writeComplete = NewUDPIOCompletionProc(UDPWriteComplete);
-    readComplete = NewUDPIOCompletionProc(UDPReadComplete);
-    bufferReturnComplete = NewUDPIOCompletionProc(UDPBufferReturnComplete);
-    */
 
     receiverRecord.handler = ImmedProtoHandler;
     receiverRecord.userData = (Ptr)this;
@@ -1339,6 +1323,32 @@ void CUDPComm::IUDPComm(short clientCount, short bufferCount, uint16_t version, 
     localPort = 0;
     localIP = 0;
     password[0] = 0;
+}
+
+CUDPComm::~CUDPComm() {
+    CUDPConnection *nextConn;
+
+    Finalize();
+
+    while (connections) {
+        nextConn = connections->next;
+
+        delete connections;
+        connections = nextConn;
+    }
+}
+
+void CUDPComm::Finalize() {
+    if (isConnected && !isClosed) {
+        if (myId == 0)
+            SendPacket(kdEveryone, kpPacketProtocolLogout, 0, 0, 0, 0, 0);
+        else
+            SendPacket(kdServerOnly, kpPacketProtocolLogout, myId, 0, 0, 0, 0);
+
+        Disconnect();
+    }
+
+    RemoveReceiver(&receiverRecord, kUDPProtoHandlerIsAsync);
 }
 
 void CUDPComm::Disconnect() {
@@ -1381,30 +1391,6 @@ void CUDPComm::Disconnect() {
 
     //	Just in case...
     isClosed = true;
-}
-
-void CUDPComm::Dispose() {
-    CUDPConnection *nextConn;
-
-    if (isConnected && !isClosed) {
-        if (myId == 0)
-            SendPacket(kdEveryone, kpPacketProtocolLogout, 0, 0, 0, 0, 0);
-        else
-            SendPacket(kdServerOnly, kpPacketProtocolLogout, myId, 0, 0, 0, 0);
-
-        Disconnect();
-    }
-
-    RemoveReceiver(&receiverRecord, kUDPProtoHandlerIsAsync);
-
-    while (connections) {
-        nextConn = connections->next;
-
-        connections->Dispose();
-        connections = nextConn;
-    }
-
-    CCommManager::Dispose();
 }
 
 void CUDPComm::CreateServer() {

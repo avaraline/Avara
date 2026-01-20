@@ -93,7 +93,7 @@ void CSoundMixer::UpdateRightVector(Fixed *right) {
     newRightMeta = true;
 }
 
-void CSoundMixer::ISoundMixer(Fixed sampRate,
+CSoundMixer::CSoundMixer(Fixed sampRate,
     short maxChannelCount,
     short maxMixCount,
     Boolean stereoEnable,
@@ -221,63 +221,7 @@ void CSoundMixer::ISoundMixer(Fixed sampRate,
     SDL_PauseAudioDevice(outputDevice, 0);
 }
 
-void CSoundMixer::PrepareScaleLookup() {
-    int i;
-    int value;
-    Sample *output;
-    int scaleLookupSize;
-
-    scaleLookupSize = sizeof(Sample) << (VOLUMEBITS + BITSPERSAMPLE - 1);
-    scaleLookup = NewPtr(scaleLookupSize);
-    output = (Sample *)scaleLookup;
-    scaleLookupSize >>= 1;
-    scaleLookupZero = scaleLookup + scaleLookupSize;
-
-    for (i = -scaleLookupSize; i < scaleLookupSize; i++) {
-        value = (i + (i >> 1)) >> (BITSPERSAMPLE + VOLUMEBITS - 10);
-        value = (value + 257) >> 1;
-        if (value > 255)
-            value = 255;
-        else if (value < 0)
-            value = 0;
-
-        *output++ = value;
-    }
-}
-
-void CSoundMixer::PrepareVolumeLookup(uint8_t mixerVolume /* 0-100 */) {
-    WordSample *dest;
-    short vol, samp;
-
-    dest = &volumeLookup[0][0];
-
-    if (sample16flag) {
-        for (vol = 1; vol <= VOLUMERANGE; vol++) {
-            for (samp = -SAMPLERANGE / 2; samp < SAMPLERANGE / 2; samp++) {
-                *dest++ = (samp * vol * mixerVolume / 100) << (16 - BITSPERSAMPLE - VOLUMEBITS);
-            }
-        }
-    } else {
-        for (vol = 1; vol <= VOLUMERANGE; vol++) {
-            for (samp = -SAMPLERANGE / 2; samp < SAMPLERANGE / 2; samp++) {
-                *dest++ = (samp * vol * mixerVolume / 100);
-            }
-        }
-    }
-}
-
-void CSoundMixer::SetVolume(uint8_t volume) {
-    PrepareVolumeLookup(std::min(volume, uint8_t(100)));
-}
-
-void CSoundMixer::SilenceBuffers() {
-    for (int j = 0; j < 2; j++) {
-        size_t numChannels = 2;
-        memset(doubleBuffers[j], 0, numChannels * soundBufferSize);
-    }
-}
-
-void CSoundMixer::Dispose() {
+CSoundMixer::~CSoundMixer() {
     //OSErr iErr;
     short i;
     MixerInfo *mix;
@@ -321,6 +265,65 @@ void CSoundMixer::Dispose() {
     OBLITERATE(volumeLookup)
     OBLITERATE(scaleLookup)
     OBLITERATE(sortSpace[0])
+}
+
+void CSoundMixer::PrepareScaleLookup() {
+    int i;
+    int value;
+    Sample *output;
+    int scaleLookupSize;
+
+    scaleLookupSize = sizeof(Sample) << (VOLUMEBITS + BITSPERSAMPLE - 1);
+    scaleLookup = NewPtr(scaleLookupSize);
+    output = (Sample *)scaleLookup;
+    scaleLookupSize >>= 1;
+    scaleLookupZero = scaleLookup + scaleLookupSize;
+
+    for (i = -scaleLookupSize; i < scaleLookupSize; i++) {
+        value = (i + (i >> 1)) >> (BITSPERSAMPLE + VOLUMEBITS - 10);
+        value = (value + 257) >> 1;
+        if (value > 255)
+            value = 255;
+        else if (value < 0)
+            value = 0;
+
+        *output++ = value;
+    }
+}
+
+void CSoundMixer::PrepareVolumeLookup(uint8_t mixerVolume /* 0-100 */) {
+    WordSample *dest;
+    short vol, samp;
+
+    dest = &volumeLookup[0][0];
+
+    if (sample16flag) {
+        for (vol = 1; vol <= VOLUMERANGE; vol++) {
+            for (samp = -SAMPLERANGE / 2; samp < SAMPLERANGE / 2; samp++) {
+                // the below line was causing problems when samp is negative.
+                // each left shift is a multiplication by two. This might have saved cpu time on 68k.
+                //*dest++ = (samp * vol * mixerVolume / 100) << (16 - BITSPERSAMPLE - VOLUMEBITS);
+                *dest++ = (samp * vol * mixerVolume / 100) * (2 * (16 - BITSPERSAMPLE - VOLUMEBITS));
+            }
+        }
+    } else {
+        for (vol = 1; vol <= VOLUMERANGE; vol++) {
+            for (samp = -SAMPLERANGE / 2; samp < SAMPLERANGE / 2; samp++) {
+                *dest++ = (samp * vol * mixerVolume / 100);
+            }
+        }
+    }
+}
+
+void CSoundMixer::SetVolume(uint8_t volume) {
+    PrepareVolumeLookup(std::min(volume, uint8_t(100)));
+}
+
+void CSoundMixer::SilenceBuffers() {
+    for (int j = 0; j < 2; j++) {
+        size_t numChannels = 2;
+        memset(doubleBuffers[j], 0, numChannels * soundBufferSize);
+    }
 }
 
 void CSoundMixer::HouseKeep() {

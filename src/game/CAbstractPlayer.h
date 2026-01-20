@@ -161,8 +161,8 @@ public:
 
     //	Winning/loosing:
     FrameNumber winFrame = 0;
-    Quaternion winStart = {0};
-    Quaternion winEnd = {0};
+    Quaternion winStart = {0, 0, 0, 0};
+    Quaternion winEnd = {0, 0, 0, 0};
     Boolean isOut = 0;
     short lives = 0;
 
