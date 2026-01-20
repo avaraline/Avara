@@ -57,6 +57,9 @@
     <ClInclude Include="..\src\assets\BaseAssetStorage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\assets\BasePath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\assets\LocalAssetRepository.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -97,6 +100,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\vendor\nanovg\nanovg_gl_utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\backward.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\signalhandling.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\vendor\pugixml\pugiconfig.hpp">
@@ -151,6 +160,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\util\Beeper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\util\Logging.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\util\CharWordLongPointer.h">
@@ -647,6 +659,9 @@
     <ClCompile Include="..\src\util\FastMat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\util\Logging.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\util\RamFiles.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -963,6 +978,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\assets\BaseAssetStorage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\assets\BasePath.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\vendor\csscolorparser.cpp">

@@ -91,6 +91,10 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>powershell.exe -ExecutionPolicy Bypass -nologo -NoProfile -NonInteractive -File $(SolutionDir)..\bin\git_version.ps1</Command>
+      <Message>Specify Git commit for ersatz version tracking.</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -107,6 +111,10 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>powershell.exe -ExecutionPolicy Bypass -nologo -NoProfile -NonInteractive -File $(SolutionDir)..\bin\git_version.ps1</Command>
+      <Message>Specify Git commit for ersatz version tracking.</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -125,8 +133,8 @@
       <AdditionalDependencies>shell32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>
-      </Command>
+      <Command>powershell.exe -ExecutionPolicy Bypass -nologo -NoProfile -NonInteractive -File $(SolutionDir)..\bin\git_version.ps1</Command>
+      <Message>Specify Git commit for ersatz version tracking.</Message>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy /E /Y "$(SolutionDir)..\rsrc\" "$(TargetDir)rsrc\" &amp;&amp; xcopy /E /Y "$(SolutionDir)..\levels\" "$(TargetDir)levels\"</Command>
@@ -152,6 +160,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>powershell.exe -ExecutionPolicy Bypass -nologo -NoProfile -NonInteractive -File $(SolutionDir)..\bin\git_version.ps1</Command>
+      <Message>Specify Git commit for ersatz version tracking.</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\platform\windows\resource.h" />
@@ -159,6 +171,7 @@
     <ClInclude Include="..\src\assets\AssetRepository.h" />
     <ClInclude Include="..\src\assets\AssetStorage.h" />
     <ClInclude Include="..\src\assets\BaseAssetStorage.h" />
+    <ClInclude Include="..\src\assets\BasePath.h" />
     <ClInclude Include="..\src\assets\LocalAssetRepository.h" />
     <ClInclude Include="..\src\assets\PackageManifest.h" />
     <ClInclude Include="..\src\audio\CBasicSound.h" />
@@ -302,11 +315,13 @@
     <ClInclude Include="..\src\util\Debug.h" />
     <ClInclude Include="..\src\util\FastMat.h" />
     <ClInclude Include="..\src\util\JSONify.h" />
+    <ClInclude Include="..\src\util\Logging.h" />
     <ClInclude Include="..\src\util\RamFiles.h" />
     <ClInclude Include="..\src\util\RayHit.h" />
     <ClInclude Include="..\src\util\RolloverCounter.h" />
     <ClInclude Include="..\src\util\SlidingHistogram.h" />
     <ClInclude Include="..\vendor\AudioFile.h" />
+    <ClInclude Include="..\vendor\backward.hpp" />
     <ClInclude Include="..\vendor\cute_files.h" />
     <ClInclude Include="..\vendor\glm\glm.hpp" />
     <ClInclude Include="..\vendor\httplib.h" />
@@ -351,6 +366,7 @@
     <ClInclude Include="..\vendor\nanovg\stb_truetype.h" />
     <ClInclude Include="..\vendor\pugixml\pugiconfig.hpp" />
     <ClInclude Include="..\vendor\pugixml\pugixml.hpp" />
+    <ClInclude Include="..\vendor\signalhandling.h" />
     <ClInclude Include="..\vendor\stb_image_write.h" />
     <ClInclude Include="..\vendor\stb_vorbis.h" />
     <ClInclude Include="..\vendor\utf8.h" />
@@ -362,6 +378,7 @@
   <ItemGroup>
     <ClCompile Include="..\src\assets\AssetManager.cpp" />
     <ClCompile Include="..\src\assets\BaseAssetStorage.cpp" />
+    <ClCompile Include="..\src\assets\BasePath.cpp" />
     <ClCompile Include="..\src\assets\LocalAssetRepository.cpp" />
     <ClCompile Include="..\src\assets\PackageManifest.cpp" />
     <ClCompile Include="..\src\audio\CBasicSound.cpp" />
@@ -485,6 +502,7 @@
     <ClCompile Include="..\src\util\CStringDictionary.cpp" />
     <ClCompile Include="..\src\util\Debug.cpp" />
     <ClCompile Include="..\src\util\FastMat.cpp" />
+    <ClCompile Include="..\src\util\Logging.cpp" />
     <ClCompile Include="..\src\util\RamFiles.cpp" />
     <ClCompile Include="..\vendor\csscolorparser.cpp" />
     <ClCompile Include="..\vendor\nanogui\button.cpp" />

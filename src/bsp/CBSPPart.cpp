@@ -108,8 +108,9 @@ void CBSPPart::IBSPPart(short resId) {
         original = baseMaterial;
         current = baseMaterial;
         nlohmann::json const &mat = doc["materials"][i];
-        ARGBColor color = ARGBColor(0x00ffffff); // Default to invisible "white."
+        ARGBColor color = defaultMaterial.GetColor();
         ARGBColor spec = defaultMaterial.GetSpecular().WithA(defaultMaterial.GetShininess());
+        uint8_t glow = defaultMaterial.GetGlow();
         
         if (mat.find("base") != mat.end()) {
             color = ARGBColor::Parse(mat["base"])
@@ -137,6 +138,13 @@ void CBSPPart::IBSPPart(short resId) {
             spec = baseMaterial.GetSpecular().WithA(baseMaterial.GetShininess());
         }
         current = current.WithSpecular(spec).WithShininess(spec.GetA());
+        
+        glow = mat.value<uint8_t>("glow", 0);
+        original = original.WithGlow(glow);
+        if (glow == defaultMaterial.GetGlow()) {
+            glow = baseMaterial.GetGlow();
+        }
+        current = current.WithGlow(glow);
         materialTable.push_back(MaterialRecord(original, current));
     }
     
@@ -474,6 +482,30 @@ void CBSPPart::ReplaceShininessForColor(ARGBColor origColor, uint8_t newShinines
     }
     // (No need to check for alpha here.)
     if (shininessReplaced && vData) vData->Replace(*this);
+}
+
+void CBSPPart::ReplaceGlowForColor(ARGBColor origColor, uint8_t newGlow) {
+    bool glowReplaced = false;
+    for (auto &material : materialTable) {
+        if (material.original.GetColor() == origColor) {
+            material.current = material.current.WithGlow(newGlow);
+            glowReplaced = true;
+        }
+    }
+    // (No need to check for alpha here.)
+    if (glowReplaced && vData) vData->Replace(*this);
+}
+
+void CBSPPart::ReplaceAllGlow(uint8_t newGlow) {
+    bool glowReplaced = false;
+    for (auto &material : materialTable) {
+        if (material.current.GetGlow() != newGlow) {
+            glowReplaced = true;
+        }
+        material.current = material.current.WithGlow(newGlow);
+    }
+    // (No need to check for alpha here.)
+    if (glowReplaced && vData) vData->Replace(*this);
 }
 
 void CBSPPart::ReplaceMaterial(Material origMaterial, Material newMaterial) {

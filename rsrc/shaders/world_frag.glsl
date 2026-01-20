@@ -4,6 +4,7 @@
 in vec4 fragmentColor;
 in vec3 fragmentSpecular;
 in float fragmentShininess;
+in float fragmentGlow;
 in vec3 fragmentNormal;
 in vec3 fragPos;
 
@@ -81,9 +82,13 @@ float noise() {
 
 vec4 light_color(vec3 viewDir) {
     return mix(
-        ambient * vec4(ambientColor, 1.0) * fragmentColor,
-        vec4((ambient * ambientColor) + diffuse() + spec(viewDir), 1.0) * fragmentColor,
-        float(lightsActive)
+        mix(
+            ambient * vec4(ambientColor, 1.0) * fragmentColor,
+            vec4((ambient * ambientColor) + diffuse() + spec(viewDir), 1.0) * fragmentColor,
+            float(lightsActive)
+        ),
+        fragmentColor,
+        float(fragmentGlow > 0.0)
     );
 }
 

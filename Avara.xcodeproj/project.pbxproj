@@ -7,7 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		601893AF2ECF106900AB3A6D /* Logging.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 601893AE2ECF106900AB3A6D /* Logging.cpp */; };
+		601893B02ECF106900AB3A6D /* Logging.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 601893AE2ECF106900AB3A6D /* Logging.cpp */; };
+		601893B12ECF106900AB3A6D /* Logging.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 601893AE2ECF106900AB3A6D /* Logging.cpp */; };
 		6025AE4E2C255E6A00A57EFB /* LegacyOpenGLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60C274E22C23EBE9005B67A9 /* LegacyOpenGLRenderer.cpp */; };
+		6055BF212DEA8A79005E3CFB /* BasePath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6055BF202DEA8A79005E3CFB /* BasePath.cpp */; };
+		6055BF222DEA8A79005E3CFB /* BasePath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6055BF202DEA8A79005E3CFB /* BasePath.cpp */; };
+		6055BF232DEA8A79005E3CFB /* BasePath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6055BF202DEA8A79005E3CFB /* BasePath.cpp */; };
 		940541ED2B5875B200E32241 /* OpenGLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940541EC2B5875B200E32241 /* OpenGLShader.cpp */; };
 		940541EE2B5875B200E32241 /* OpenGLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940541EC2B5875B200E32241 /* OpenGLShader.cpp */; };
 		9419E8472B49ECB1007C50D0 /* CTeamColorAdjuster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9419E8462B49ECB1007C50D0 /* CTeamColorAdjuster.cpp */; };
@@ -556,6 +562,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		601893AD2ECF0FB000AB3A6D /* Logging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Logging.h; sourceTree = "<group>"; };
+		601893AE2ECF106900AB3A6D /* Logging.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Logging.cpp; sourceTree = "<group>"; };
+		601893B22ED2CB6700AB3A6D /* backward.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = backward.hpp; sourceTree = "<group>"; };
+		601893B72ED5A1F500AB3A6D /* signalhandling.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = signalhandling.hpp; sourceTree = "<group>"; };
+		6055BF1F2DEA8A79005E3CFB /* BasePath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasePath.h; sourceTree = "<group>"; };
+		6055BF202DEA8A79005E3CFB /* BasePath.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BasePath.cpp; sourceTree = "<group>"; };
 		60C274E22C23EBE9005B67A9 /* LegacyOpenGLRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LegacyOpenGLRenderer.cpp; sourceTree = "<group>"; };
 		60C274E32C23EBE9005B67A9 /* LegacyOpenGLRenderer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = LegacyOpenGLRenderer.h; sourceTree = "<group>"; };
 		940541EB2B58744500E32241 /* OpenGLShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLShader.h; sourceTree = "<group>"; };
@@ -1254,6 +1266,8 @@
 				944F2F6E2B323E2100856E53 /* LocalAssetRepository.h */,
 				948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */,
 				948CBF122B3359D700147E80 /* BaseAssetStorage.h */,
+				6055BF1F2DEA8A79005E3CFB /* BasePath.h */,
+				6055BF202DEA8A79005E3CFB /* BasePath.cpp */,
 			);
 			path = assets;
 			sourceTree = "<group>";
@@ -1390,6 +1404,8 @@
 				E5890BB029895118007A875D /* RolloverCounter.h */,
 				E5890BB129895118007A875D /* SlidingHistogram.h */,
 				E2D76F732A1680FD000D24B3 /* JSONify.h */,
+				601893AD2ECF0FB000AB3A6D /* Logging.h */,
+				601893AE2ECF106900AB3A6D /* Logging.cpp */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -1664,6 +1680,9 @@
 		E5890D1629895123007A875D /* vendor */ = {
 			isa = PBXGroup;
 			children = (
+				E5890ED829895124007A875D /* AudioFile.h */,
+				601893B22ED2CB6700AB3A6D /* backward.hpp */,
+				601893B72ED5A1F500AB3A6D /* signalhandling.hpp */,
 				E5890D3F29895123007A875D /* csscolorparser.cpp */,
 				E5890EDB29895124007A875D /* csscolorparser.hpp */,
 				E5890D1829895123007A875D /* cute_files.h */,
@@ -2325,6 +2344,7 @@
 			files = (
 				E517F0EA299714220036B206 /* glad.c in Sources */,
 				E517F0EB299714220036B206 /* nanovg.c in Sources */,
+				6055BF222DEA8A79005E3CFB /* BasePath.cpp in Sources */,
 				E517F0EC299714220036B206 /* stb_vorbis.c in Sources */,
 				E517F053299713DB0036B206 /* tests.cpp in Sources */,
 				E517F054299713DB0036B206 /* CBasicSound.cpp in Sources */,
@@ -2481,6 +2501,7 @@
 				E517F0E4299713DB0036B206 /* vscrollpanel.cpp in Sources */,
 				E517F0E5299713DB0036B206 /* widget.cpp in Sources */,
 				E517F0E6299713DB0036B206 /* window.cpp in Sources */,
+				601893B12ECF106900AB3A6D /* Logging.cpp in Sources */,
 				E517F0E7299713DB0036B206 /* pugixml.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2491,6 +2512,7 @@
 			files = (
 				E5890F1B29895124007A875D /* pugixml.cpp in Sources */,
 				E5890CFE29895118007A875D /* CSmartPart.cpp in Sources */,
+				6055BF232DEA8A79005E3CFB /* BasePath.cpp in Sources */,
 				E5890F9529895124007A875D /* nanovg.c in Sources */,
 				E5890CE729895118007A875D /* CShuriken.cpp in Sources */,
 				E5890D0E29895118007A875D /* CRosterWindow.cpp in Sources */,
@@ -2647,6 +2669,7 @@
 				E5890CFD29895118007A875D /* CBSPPart.cpp in Sources */,
 				E5890CEF29895118007A875D /* CWallSolid.cpp in Sources */,
 				E5890CB529895118007A875D /* CFreeSolid.cpp in Sources */,
+				601893AF2ECF106900AB3A6D /* Logging.cpp in Sources */,
 				E5890CC529895118007A875D /* CGuardActor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2721,6 +2744,7 @@
 				E5A219F82DC59135007D54FF /* CParasite.cpp in Sources */,
 				E5A219F92DC59135007D54FF /* CPill.cpp in Sources */,
 				E5A219FA2DC59135007D54FF /* CPlacedActors.cpp in Sources */,
+				601893B02ECF106900AB3A6D /* Logging.cpp in Sources */,
 				E5A219FB2DC59135007D54FF /* CPlayerActor.cpp in Sources */,
 				E5A219FC2DC59135007D54FF /* CPlayerManager.cpp in Sources */,
 				E5A219FD2DC59135007D54FF /* CPlayerMissile.cpp in Sources */,
@@ -2776,6 +2800,7 @@
 				E5A21A2F2DC59135007D54FF /* OpenGLShader.cpp in Sources */,
 				E5A21A302DC59135007D54FF /* OpenGLVertices.cpp in Sources */,
 				E5A21A312DC59135007D54FF /* AbstractRenderer.cpp in Sources */,
+				6055BF212DEA8A79005E3CFB /* BasePath.cpp in Sources */,
 				E5A21A322DC59135007D54FF /* CommandManager.cpp in Sources */,
 				E5A21A332DC59135007D54FF /* TextCommand.cpp in Sources */,
 				E5A21A342DC59135007D54FF /* ARGBColor.cpp in Sources */,
@@ -2999,6 +3024,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=macosx*]" = "";
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -3017,6 +3043,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 1.0;
 				OTHER_CFLAGS = (
 					"$(inherited)",
@@ -3058,6 +3085,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 1.0;
 				OTHER_CFLAGS = (
 					"$(inherited)",
