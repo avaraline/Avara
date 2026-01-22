@@ -221,7 +221,6 @@ static json defaultPrefs = {
     {kControllerDamperMillis, 500.0}
 };
 
-
 static enum optionTypes {
     kOptionTypeString, 
     kOptionTypeFloat, 
@@ -310,11 +309,16 @@ static json optionsScreens {
     }}
 };
 
-static std::string PrefPath() {
+static std::string PrefPath(const char* fn) {
     char *prefPath = SDL_GetPrefPath("Avaraline", "Avara");
-    std::string jsonPath = std::string(prefPath) + "prefs.json";
+    std::string filePath = std::string(prefPath);
+    filePath.append(fn);
     SDL_free(prefPath);
-    return jsonPath;
+    return filePath;
+}
+
+static std::string PrefPath() {
+    return PrefPath("prefs.json");
 }
 
 static inline json ReadDefaultPrefs() {

@@ -374,12 +374,23 @@ void CUDPComm::ProcessQueue() {
 
 std::string CUDPComm::FormatConnectionTable(CompleteAddress *table) {
     std::ostringstream oss;
-    oss << " Slot   myId   Host:Port\n";
-    oss << "------+------+---------------\n";
-    // oss << "   1   | " << FormatHostPort(table->host, table->port) << "\n";
-    int slot = 2;
-    for (CUDPConnection *conn = connections; conn; conn = conn->next, table++, slot++) {
-        oss << "   " << slot << "  |   " << conn->myId + 1 << "  | " << FormatHostPort(table->host, table->port) << "\n";
+    oss << " myId | Host:Port\n";
+    oss << "------+---------------\n";
+    for (int id = 1; id <= maxClients; id++, table++) {
+        oss << "   " << id << "  | " << FormatHostPort(table->host, table->port) << "\n";
+    }
+    return oss.str();
+}
+
+std::string CUDPComm::FormatConnectionsList() {
+    std::ostringstream oss;
+    oss << " myId | Host:Port             | SN       | RSN\n";
+    oss << "------+-----------------------+----------+----------\n";
+    for (auto conn = connections; conn; conn = conn->next) {
+        oss << "   " << ((conn->myId < 0) ? " " : std::to_string(conn->myId)) << "  | "
+            << std::setw(21) << FormatHostPort(conn->ipAddr, conn->port) << " | "
+            << std::setw(8) << conn->serialNumber << " | "
+            << conn->receiveSerial << "\n";
     }
     return oss.str();
 }
@@ -394,7 +405,8 @@ bool CUDPComm::IsLAN(uint32_t host) {
     ip_addr ipaddr = SDL_SwapBE32(host);
     uint8_t ip1 = (ipaddr >> 24);
     uint8_t ip2 = ((ipaddr >> 16) & 0xff);
-    return ((ip1 == 10) ||
+    return ((ip1 == 127) ||  // localhost loopback
+            (ip1 == 10) ||
             (ip1 == 172 && ip2 >= 16 && ip2 <= 31) ||
             (ip1 == 192 && ip2 == 168));
 }
@@ -454,16 +466,6 @@ void CUDPComm::SendConnectionTable() {
         }
         SendPacket(kdEveryone, kpPacketProtocolControl, udpCramInfo, cramData, 0, 0, NULL);
 
-        if (gApplication->Boolean(kPunchHoles)) {
-            DBG_Log("login", "waiting for hole-punch\n");
-            // this lambda will be called after the punch server returns the external IP address
-            SetPunchAddressHandler([this](const IPaddress &addr) -> void {
-                DBG_Log("login", "punch server returned address of %s\n", FormatAddr(addr).c_str());
-                ReplaceMatchingNAT(addr);
-            });
-        } else {
-            SetPunchAddressHandler({});
-        }
     }
 }
 
@@ -485,44 +487,39 @@ void CUDPComm::ReplaceMatchingNAT(const IPaddress &addr) {
     return;
 }
 
+void CUDPComm::PunchHandler(const PunchType cmd, const IPaddress &addr, const int8_t connId) {
+    DBG_Log("punch", "CUDPComm::PunchHandler(%u, %s, %d})\n", cmd, FormatAddr(addr).c_str(), connId);
+    switch (cmd) {
+        case kPunch:
+            PunchHole(addr, myId);
+            if (isServing) {
+                ReplaceMatchingNAT(addr);
+            }
+            break;
+        case kHolePunch:
+            // reset connection address for matching ID if different, then resend all messages
+            for (CUDPConnection *conn = connections; conn; conn = conn->next) {
+                if (conn->myId == connId) {
+                    if (addr.host != conn->ipAddr || addr.port != conn->port) {
+                        DBG_Log("punch", "   incoming address is different, updating connection from %s to %s\n",
+                                FormatAddr(conn).c_str(), FormatAddr(addr).c_str());
+                        conn->ipAddr = addr.host;
+                        conn->port = addr.port;
+                        conn->ResendNonValidatedPackets();
+                        AsyncWrite();
+                    }
+                    break;
+                }
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+
 void CUDPComm::SendRejectPacket(ip_addr remoteHost, port_num remotePort, OSErr loginErr) {
     SDL_Log("CUDPComm::SendRejectPacket\n");
-    /*
-    charWordLongP	outData;
-
-    if(rejectPB.ioResult != 1)
-    {	rejectDataTable[0].ptr = rejectData;
-        rejectDataTable[1].length = 0;
-
-        rejectPB.ioCompletion = NULL;
-        rejectPB.udpStream = stream;
-        rejectPB.ioCRefNum = gMacTCP;
-        rejectPB.csParam.send.reserved = 0;
-        rejectPB.csParam.send.checkSum = true;
-        rejectPB.csParam.send.wdsPtr = rejectDataTable;
-        rejectPB.csParam.send.userDataPtr = (Ptr) this;
-
-        rejectPB.csParam.send.remoteHost = remoteHost;
-        rejectPB.csParam.send.remotePort = remotePort;
-        rejectPB.csParam.send.localPort = localPort;
-
-        outData.c = rejectData;
-
-        *outData.w++ = softwareVersion;
-        *outData.w++ = 0;	//	ACK
-        *outData.w++ = 0;	//	Packet serial number
-        *outData.c++ = 2;	//	p2 exists.
-        *outData.c++ = kpPacketProtocolReject;
-        *outData.w++ = loginErr;
-
-        rejectDataTable[0].length = outData.c - rejectData;
-        *(short *)rejectData = CRC16((unsigned char *)rejectDataTable[0].ptr, rejectDataTable[0].length);
-
-        if(stream && remotePort)
-        {	UDPWrite(&rejectPB, true);
-        }
-    }
-    */
 }
 
 CUDPConnection *CUDPComm::DoLogin(PacketInfo *thePacket, UDPpacket *udp) {
@@ -589,6 +586,44 @@ CUDPConnection *CUDPComm::DoLogin(PacketInfo *thePacket, UDPpacket *udp) {
     return newConn;
 }
 
+CUDPConnection *CUDPComm::UpdateConnectionMatchingSender(const UDPPacketInfo &thePacket, const IPaddress &newAddress) {
+    CUDPConnection *conn = nullptr;
+    const PacketInfo &pp = thePacket.packet;
+    const uint16_t pSerial = uint16_t(thePacket.serialNumber);
+    std::string formattedAddr = FormatAddr(newAddress);
+    const char *addrStr = formattedAddr.c_str();
+
+    // for now, only update for the first "several" packets (let the UDP connection settle)
+    if (pSerial < SERIAL_NUMBER_UDP_SETTLE) {
+        // unmatched early packets will include sender which helps us figure out which connection to match with
+        for (conn = connections; conn; conn = conn->next) {
+            // is this the matching connection number?
+            if (pp.sender == conn->myId) break;
+        }
+        if (conn) {
+            // don't change the connection address if we've received newer packets than this one (ignore old resends)
+            if (pSerial >= conn->receiveSerial) {
+                DBG_Log("login", "Setting connection address from an early packet, sndr=%d cmd=%d sn=%d addr: %s\n",
+                        pp.sender, pp.command, pSerial, addrStr);
+                // we found the connection, reset its IP address from the received packet
+                conn->ipAddr = newAddress.host;
+                conn->port = newAddress.port;
+            }
+        } else {
+            SDL_Log("Got an EARLY packet with UNKNOWN SENDER, sndr=%d cmd=%d sn=%d addr: %s",
+                    pp.sender, pp.command, pSerial, addrStr);
+        }
+        DBG_Log("login+", "Current connections list: \n%s\n", FormatConnectionsList().c_str());
+//    } else {
+//        SDL_Log("Got a packet from UNMATCHED ADDRESS, sndr=%d, cmd=%d, sn=%d addr: %s",
+//                pp.sender, pp.command, pSerial, addrStr);
+    }
+
+    return conn;
+}
+
+
+
 void CUDPComm::ReadFromTOC(PacketInfo *thePacket) {
     // SDL_Log("CUDPComm::ReadFromTOC\n");
     CompleteAddress *table;
@@ -606,10 +641,12 @@ void CUDPComm::ReadFromTOC(PacketInfo *thePacket) {
     // DBG_Log("login", "After removing open connections ...\n%s", FormatConnectionTable(table).c_str());
 
     connections->RewriteConnections(table, myAddressFromTOC);
-    DBG_Log("login", "Connection Table after rewriting addresses ...\n%s", FormatConnectionTable(table).c_str());
+    DBG_Log("login", "Final Connection Table, opening remaining connections:\n%s", FormatConnectionTable(table).c_str());
 
     connections->OpenNewConnections(table);
     // DBG_Log("login", "After opening connections ...\n%s", FormatConnectionTable(table).c_str());
+
+    DBG_Log("login+", "After processing, connections list:\n%s", FormatConnectionsList().c_str());
 }
 
 Boolean CUDPComm::PacketHandler(PacketInfo *thePacket) {
@@ -777,10 +814,13 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                         p->dataLen = (flags & 8) ? *inData.w++ : (flags & 16) ? *inData.uc++ : 0;
                         p->p1 = (flags & 1) ? *inData.c++ : 0;
 
-                        if (flags & 128)
+                        bool gotSender = false;
+                        if (flags & 128) {
                             p->sender = *inData.c++;
-                        else
-                            p->sender = conn != NULL ? conn->myId : 0;
+                            gotSender = true;
+                        } else {
+                            p->sender = conn != nullptr ? conn->myId : 0;
+                        }
 
                         #if PACKET_DEBUG > 1
                             SDL_Log("        CUDPComm::ReadComplete sn=%d-%hd cmd=%d flags=0x%02x sndr=%d dist=0x%02x\n",
@@ -802,7 +842,7 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                         //         thePacket->serialNumber, p->command, p->p1, p->p2, p->p3, p->flags, p->sender, p->distribution,
                         //         FormatAddr(packet->address).c_str());
 
-                        if (conn) {
+                        if (conn && (!gotSender || p->sender == conn->myId)) {
                             #if ROUTE_THRU_SERVER
                                 if (isServing) {
                                     if (p->distribution & (1 << myId)) {
@@ -834,12 +874,24 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                             #endif
 
                         } else {
+                            // if we didn't find a connection OR the connection we found doesn't match the sender
                             if (isServing && thePacket->serialNumber == INITIAL_SERIAL_NUMBER &&
                                 thePacket->packet.command == kpPacketProtocolLogin) {
+                                // process a client Login packet
                                 conn = DoLogin((PacketInfo *)thePacket, packet);
+
+                                ReleasePacket((PacketInfo *)thePacket);
+                            } else {
+                                // look for a connection with myId==p->sender and update it to the packet's address
+                                conn = UpdateConnectionMatchingSender(*thePacket, packet->address);
+
+                                if (conn) {
+                                    conn->ReceivedPacket(thePacket);
+                                } else {
+                                    ReleasePacket((PacketInfo *)thePacket);
+                                }
                             }
 
-                            ReleasePacket((PacketInfo *)thePacket);
                         }
                     } else {
                         inData.c = inEnd;
@@ -1068,7 +1120,8 @@ Boolean CUDPComm::AsyncWrite() {
                     flags |= 128;
                 }
             #else
-                if (p->sender != myId) {
+                // transmit sender ID on initial packet in case they need that info to match up the connection
+                if (p->sender != myId || thePacket->serialNumber <= SERIAL_NUMBER_UDP_SETTLE) {
                     *outData.c++ = p->sender;
                     flags |= 128;
                 }
@@ -1262,6 +1315,16 @@ void CUDPComm::IUDPComm(short clientCount, short bufferCount, uint16_t version, 
     receiverRecord.userData = (Ptr)this;
     AddReceiver(&receiverRecord, kUDPProtoHandlerIsAsync);
 
+    if (gApplication->Boolean(kPunchHoles)) {
+        // this lambda will be called after a punch message (kPunch or kJab) is received
+        SetPunchMessageHandler([this](PunchType cmd, const IPaddress &addr, int8_t connId) -> void {
+            this->PunchHandler(cmd, addr, connId);
+        });
+    } else {
+        SetPunchMessageHandler({});
+    }
+
+
     // rejectPB.ioResult = noErr;
     rejectReason = noErr;
 
@@ -1320,25 +1383,8 @@ void CUDPComm::Disconnect() {
     isClosed = true;
 }
 
-void CUDPComm::WritePrefs() {
-    /*
-    Handle	compactPrefs;
-
-    compactPrefs = prefs->ConvertToHandle();
-    gApplication->prefsBase->WriteHandle(kUDPCommPrefsTag, compactPrefs);
-
-    DisposeHandle(compactPrefs);
-    */
-}
-
 void CUDPComm::Dispose() {
     CUDPConnection *nextConn;
-
-    /*
-    if(tracker)
-    {	tracker->StopTracking();
-    }
-    */
 
     if (isConnected && !isClosed) {
         if (myId == 0)
@@ -1357,21 +1403,6 @@ void CUDPComm::Dispose() {
         connections->Dispose();
         connections = nextConn;
     }
-
-    /*
-    DisposeUDPIOCompletionProc(readComplete);
-    DisposeUDPIOCompletionProc(writeComplete);
-    DisposeUDPIOCompletionProc(bufferReturnComplete);
-
-    if(tracker)
-    {	tracker->Dispose();
-    }
-
-    if(prefs)
-    {	prefs->Dispose();
-        prefs = NULL;
-    }
-    */
 
     CCommManager::Dispose();
 }
@@ -1418,7 +1449,7 @@ OSErr CUDPComm::ContactServer(IPaddress &serverAddr) {
         AsyncRead();
         SendPacket(kdServerOnly, kpPacketProtocolLogin, 0, 0, seed, password[0] + 1, (Ptr)password);
 
-        startTime = TickCount();
+        startTime = SDL_GetTicks();
 
         /* TODO: connecting to server dialog
         gApplication->SetCommandParams(kUDPPopStrings, kBusyContactingServer, true, 0);
@@ -1441,7 +1472,7 @@ OSErr CUDPComm::ContactServer(IPaddress &serverAddr) {
                 }
             }
 
-            if ((TickCount() - startTime) > kClientConnectTimeoutTicks) {
+            if ((SDL_GetTicks() - startTime) > kClientConnectTimeoutMsec) {
                 rejectReason = 2;
             }
 
@@ -1488,322 +1519,10 @@ void CUDPComm::Connect(std::string address, std::string passwordStr) {
     BlockMoveData(passwordStr.c_str(), password + 1, password[0]);
 
     ContactServer(addr);
-    /*
-    DialogPtr		clientDialog;
-    short			itemHit;
-    ModalFilterUPP	myFilter;
-    Str255			tempString;
-    Str255			hostName;
-    Rect			iRect,popRect;
-    Handle			iHandle;
-    Handle			hostHandle;
-    Handle			portHandle;
-    Handle			passHandle;
-    Handle			localPortHandle;
-    short			iType;
-    long			thePortNumber;
-    long			localPortLong;
-    OSErr			theErr;
-
-    if(connections)
-    {	myFilter = NewModalFilterProc(UDPClientDialogFilter);
-
-        clientDialog = GetNewDialog(kUDPConnectDialogId, 0, (WindowPtr)-1);
-        SetPort(clientDialog);
-
-        GetDItem(clientDialog, kClientHotPopupItem, &iType, &iHandle, &popRect);
-        GetDItem(clientDialog, kClientAddressTextItem, &iType, &hostHandle, &iRect);
-        GetDItem(clientDialog, kClientPortTextItem, &iType, &portHandle, &iRect);
-        GetDItem(clientDialog, kClientPasswordTextItem, &iType, &passHandle, &iRect);
-        GetDItem(clientDialog, kClientLocalPortTextItem, &iType, &localPortHandle, &iRect);
-
-        prefs->ReadString(kDefaultHostTag, tempString);
-        if(tempString[0])
-        {	SetIText(hostHandle, tempString);
-        }
-
-        NumToString(prefs->ReadLong(kDefaultPortTag, kDefaultUDPPort), tempString);
-        SetIText(portHandle, tempString);
-
-        NumToString(prefs->ReadLong(kDefaultClientPortTag, 0), tempString);
-        SetIText(localPortHandle, tempString);
-
-        do
-        {	ModalDialog(myFilter, &itemHit);
-            switch(itemHit)
-            {	case kClientConnectItem:
-                case kClientCloseItem:
-                case kClientAddressTextItem:
-                case kClientPortTextItem:
-                case kClientPasswordTextItem:
-                case kClientLocalPortTextItem:
-                    break;
-                case kClientHotPopupItem:
-                    {	short	newPort;
-
-                        GetIText(hostHandle, hostName);
-                        GetIText(portHandle, tempString);
-                        if(tempString[0])	StringToNum(tempString, &thePortNumber);
-                        else				thePortNumber = kDefaultUDPPort;
-
-                        newPort = thePortNumber;
-                        SetPort(clientDialog);
-                        if(DoHotPop(&popRect, hostName, &newPort, kHotListTag))
-                        {	SelIText(clientDialog, kClientPasswordTextItem, 0, 32767);
-                            SetIText(hostHandle, hostName);
-                            NumToString(newPort, tempString);
-                            SetIText(portHandle, tempString);
-                        }
-                    }
-                    break;
-                case kClientQueryTrackerItem:
-                    {	short	newPort;
-
-                        tracker = new CTracker;
-                        tracker->ITracker(this, prefs);
-
-                        if(tracker->QueryTracker(hostName, &newPort))
-                        {	SelIText(clientDialog, kClientPasswordTextItem, 0, 32767);
-                            SetIText(hostHandle, hostName);
-                            NumToString(newPort, tempString);
-                            SetIText(portHandle, tempString);
-                        }
-
-                        tracker->Dispose();
-                        tracker = NULL;
-                    }
-                    break;
-            }
-        } while(itemHit != kClientConnectItem && itemHit != kClientCloseItem);
-
-        GetIText(hostHandle, hostName);
-        prefs->WriteString(kDefaultHostTag, hostName);
-
-        GetIText(portHandle, tempString);
-        if(tempString[0])
-        {	StringToNum(tempString, &thePortNumber);
-        }
-        else
-        {	thePortNumber = kDefaultUDPPort;
-        }
-        prefs->WriteLong(kDefaultPortTag, thePortNumber);
-
-        GetIText(localPortHandle, tempString);
-        if(tempString[0])
-        {	StringToNum(tempString, &localPortLong);
-        }
-        else
-        {	localPortLong = 0;
-        }
-        prefs->WriteLong(kDefaultClientPortTag, localPortLong);
-
-        if(itemHit == kClientConnectItem)
-        {	ip_addr		addr;
-
-            gApplication->SetCommandParams(kUDPPopStrings, kBusyStartingClient, false, 0);
-            gApplication->BroadcastCommand(kBusyStartCmd);
-
-            theErr = OpenAvaraTCP();
-            if(theErr == noErr)
-            {
-                gApplication->SetCommandParams(kUDPPopStrings, kBusyLookingUpServer, false, 0);
-                gApplication->BroadcastCommand(kBusyStartCmd);
-                theErr = PascalStringToAddress(hostName, &addr);
-                gApplication->BroadcastCommand(kBusyEndCmd);
-
-                if(theErr)
-                {	gApplication->BroadcastCommand(kBusyHideCmd);
-                    GetIndString(hostName, kUDPPopStrings, kDNRFailureInd);
-                    ParamText(hostName, 0,0,0);
-                    Alert(412, 0);
-                }
-                else
-                {
-                    localPort = localPortLong;
-                    GetIText(passHandle, password);
-                    if(password[0] > 64)
-                        password[0] = 64;
-
-                    theErr = ContactServer(addr, thePortNumber);
-                }
-            }
-            gApplication->BroadcastCommand(kBusyEndCmd);
-        }
-
-        WritePrefs();
-        DisposeDialog(clientDialog);
-        DisposeRoutineDescriptor(myFilter);
-    }
-    else
-    {	SysBeep(10);
-    }
-    */
-}
-
-Boolean CUDPComm::ServerSetupDialog(Boolean disableSome) {
-    /*
-    DialogPtr		serverDialog;
-    short			itemHit;
-    ModalFilterUPP	myFilter;
-    Str255			tempString;
-    Rect			iRect,popRect;
-    Handle			portHandle;
-    Handle			maxPlayerHandle;
-    Handle			passHandle;
-    Handle			trackerHandle;
-    Handle			inviteHandle;
-    short			iType;
-    long			thePortNumber;
-    ControlHandle	trackerRegBox;
-    Boolean			doRegister;
-    Handle			iHandle;
-    long			maxPlayers;
-
-    myFilter = NewModalFilterProc(UDPServerDialogFilter);
-
-    serverDialog = GetNewDialog(kUDPServerDialogId, 0, (WindowPtr)-1);
-    SetPort(serverDialog);
-
-    GetDItem(serverDialog, kServerTrackerPopItem, &iType, &iHandle, &popRect);
-    if(disableSome)
-        HideDItem(serverDialog, kServerTrackerPopItem);
-
-    GetDItem(serverDialog, kServerPortTextItem, &iType, &portHandle, &iRect);
-
-    if(disableSome)
-        SetDItem(serverDialog, kServerPortTextItem, itemDisable | statText, portHandle, &iRect);
-
-    GetDItem(serverDialog, kServerMaxPlayersItem, &iType, &maxPlayerHandle, &iRect);
-    GetDItem(serverDialog, kServerPasswordTextItem, &iType, &passHandle, &iRect);
-    SetIText(passHandle, password);
-
-    GetDItem(serverDialog, kServerTrackerLocItem, &iType, &trackerHandle, &iRect);
-
-    if(disableSome)
-        SetDItem(serverDialog, kServerTrackerLocItem, itemDisable | statText, trackerHandle, &iRect);
-
-    GetDItem(serverDialog, kServerTrackerInviteItem, &iType, &inviteHandle, &iRect);
-    GetDItem(serverDialog, kServerTrackerRegItem, &iType, (Handle *)&trackerRegBox, &iRect);
-    SetCtlValue(trackerRegBox, prefs->ReadShort(kUDPRegAtTrackerTag, false));
-
-    prefs->ReadString(kUDPTrackerNameTag, tempString);
-    if(tempString[0])
-    {	SetIText(trackerHandle, tempString);
-    }
-
-    prefs->ReadString(kUDPLastInviteStringTag, tempString);
-    if(tempString[0])
-    {	SetIText(inviteHandle, tempString);
-    }
-
-    NumToString(prefs->ReadLong(kDefaultServerPortTag, kDefaultUDPPort), tempString);
-    SetIText(portHandle, tempString);
-
-    maxPlayers = prefs->ReadLong(kDefaultPlayersTag, maxClients+1);
-    if(maxPlayers < 1)						maxPlayers = 1;
-    else if(maxPlayers > maxClients + 1)	maxPlayers = maxClients + 1;
-
-    NumToString(maxPlayers, tempString);
-    SetIText(maxPlayerHandle, tempString);
-
-    SelIText(serverDialog, kServerMaxPlayersItem, 0, 32767);
-
-    do
-    {	ModalDialog(myFilter, &itemHit);
-
-        switch(itemHit)
-        {	case kServerStartItem:
-            case kServerCancelItem:
-            case kServerPortTextItem:
-            case kServerPasswordTextItem:
-            case kServerTrackerLocItem:
-            case kServerTrackerInviteItem:
-                break;
-            case kServerTrackerRegItem:
-                SetCtlValue(trackerRegBox, !GetCtlValue(trackerRegBox));
-                break;
-            case kServerTrackerPopItem:
-                {	short	newPort;
-
-                    GetIText(trackerHandle, tempString);
-
-                    newPort = kTrackerPortNumber;
-                    SetPort(serverDialog);
-                    if(DoHotPop(&popRect, tempString, &newPort, kUDPTrackerHotListTag))
-                    {	SelIText(serverDialog, kServerTrackerInviteItem, 0, 32767);
-                        SetIText(trackerHandle, tempString);
-                    }
-                }
-                break;
-        }
-
-    } while(itemHit != kServerStartItem && itemHit != kServerCancelItem);
-
-
-    if(itemHit == kServerStartItem)
-    {
-
-        doRegister = GetCtlValue(trackerRegBox);
-        prefs->WriteShort(kUDPRegAtTrackerTag, doRegister);
-
-        GetIText(portHandle, tempString);
-        if(tempString[0])
-        {	StringToNum(tempString, &thePortNumber);
-        }
-        else
-        {	thePortNumber = kDefaultUDPPort;
-        }
-
-        if(thePortNumber > 0 && thePortNumber <= 65535)
-        {	localPort = thePortNumber;
-        }
-        else
-        {	localPort = 0;
-            thePortNumber = 0;
-        }
-
-        GetIText(trackerHandle, tempString);
-        prefs->WriteString(kUDPTrackerNameTag, tempString);
-
-        GetIText(inviteHandle, inviteString);
-        prefs->WriteString(kUDPLastInviteStringTag, inviteString);
-        prefs->WriteLong(kDefaultServerPortTag, thePortNumber);
-
-        GetIText(maxPlayerHandle, tempString);
-        if(tempString[0])
-        {	StringToNum(tempString, &maxPlayers);
-        }
-        else
-        {	maxPlayers = maxClients + 1;
-        }
-
-        if(maxPlayers < 1)						maxPlayers = 1;
-        else if(maxPlayers > maxClients + 1)	maxPlayers = maxClients + 1;
-        prefs->WriteLong(kDefaultPlayersTag, maxPlayers);
-
-        clientLimit = maxPlayers - 1;
-
-        GetIText(passHandle, password);
-        if(password[0] > 64)
-            password[0] = 64;
-    }
-
-    WritePrefs();
-    DisposeDialog(serverDialog);
-    DisposeRoutineDescriptor(myFilter);
-
-    return itemHit == kServerStartItem;
-    */
-    return false;
 }
 
 void CUDPComm::StartServing() {
     CreateServer();
-    /*
-    if(ServerSetupDialog(false))
-    {	CreateServer();
-    }
-    */
 }
 
 OSErr CUDPComm::CreateStream(port_num streamPort) {
@@ -1854,113 +1573,6 @@ void CUDPComm::DisconnectSlot(short slotId) {
             SendConnectionTable();
         }
     }
-}
-
-short CUDPComm::GetStatusInfo(short slot, Handle leftColumn, Handle rightColumn) {
-    /*
-    Handle					leftInfo;
-    Handle					rightInfo;
-    UDPConnectionStatus		parms;
-    Str255					tempStr;
-    StringPtr				cName;
-    char					searchFor[2];
-    short					len;
-
-    leftInfo = GetResource('TEXT', 410);
-    HLock(leftInfo);
-    PtrToXHand(*leftInfo, leftColumn, GetHandleSize(leftInfo));
-    HUnlock(leftInfo);
-
-    rightInfo = GetResource('TEXT', 411);
-    HLock(rightInfo);
-    PtrToXHand(*rightInfo, rightColumn, GetHandleSize(rightInfo));
-    HUnlock(rightInfo);
-
-    parms.hostIP = 0;
-    parms.averageRoundTrip = 0;
-    parms.pessimistRoundTrip = 0;
-    parms.optimistRoundTrip = 0;
-    parms.estimatedRoundTrip = 0;
-    parms.connectionType = -1;
-
-    if(slot == myId)
-    {	GetIPParamBlock ip;
-
-        ip.ioCRefNum=gMacTCP; // the TCP driver refnum global...
-        GetMyIPAddr(&ip, false);
-        parms.hostIP = ip.ourAddress;
-        parms.connectionType = cramData;
-    }
-    else
-    {	connections->GetConnectionStatus(slot, &parms);
-    }
-
-    searchFor[0] = '‚Ä¢';
-    searchFor[1] = 'o';
-    NumToString(parms.optimistRoundTrip, tempStr);
-    Munger(rightColumn, 0, searchFor, 2, tempStr+1, tempStr[0]);
-
-    searchFor[1] = 'r';
-    NumToString(parms.averageRoundTrip, tempStr);
-    Munger(rightColumn, 0, searchFor, 2, tempStr+1, tempStr[0]);
-
-    searchFor[1] = 'p';
-    NumToString(parms.pessimistRoundTrip, tempStr);
-    Munger(rightColumn, 0, searchFor, 2, tempStr+1, tempStr[0]);
-
-    searchFor[1] = 'e';
-    NumToString(parms.estimatedRoundTrip, tempStr);
-    Munger(rightColumn, 0, searchFor, 2, tempStr+1, tempStr[0]);
-
-    searchFor[1] = '1';
-    NumToString((parms.optimistRoundTrip+latencyConvert-1)/latencyConvert, tempStr);
-    Munger(rightColumn, 0, searchFor, 2, tempStr+1, tempStr[0]);
-
-    searchFor[1] = '2';
-    NumToString((parms.averageRoundTrip+latencyConvert-1)/latencyConvert, tempStr);
-    Munger(rightColumn, 0, searchFor, 2, tempStr+1, tempStr[0]);
-
-    searchFor[1] = '3';
-    NumToString((parms.pessimistRoundTrip+latencyConvert-1)/latencyConvert, tempStr);
-    Munger(rightColumn, 0, searchFor, 2, tempStr+1, tempStr[0]);
-
-    searchFor[1] = '4';
-    NumToString((parms.estimatedRoundTrip+latencyConvert-1)/latencyConvert, tempStr);
-    Munger(rightColumn, 0, searchFor, 2, tempStr+1, tempStr[0]);
-
-    searchFor[1] = 'c';
-    GetIndString(tempStr, kUDPPopStrings, kModemNetType + parms.connectionType);
-    Munger(rightColumn, 0, searchFor, 2, tempStr+1, tempStr[0]);
-
-    searchFor[1] = 'i';
-    AddrToStr(parms.hostIP, (char *)tempStr);
-    len = 0;
-    for(cName = tempStr;*cName++;len++);
-    Munger(rightColumn, 0, searchFor, 2, tempStr, len);
-    */
-    return 32;
-}
-
-Boolean CUDPComm::ReconfigureAvailable() {
-    return isServing;
-}
-
-void CUDPComm::Reconfigure() {
-    /*
-    CCommander		*saved;
-
-    saved = gApplication->BeginDialog();
-    ServerSetupDialog(true);
-
-    if(prefs->ReadShort(kUDPRegAtTrackerTag, true))
-    {	tracker->StartTracking();
-    }
-    else
-    {	tracker->StopTracking();
-    }
-
-    gApplication->EndDialog(saved);
-    */
 }
 
 long CUDPComm::GetMaxRoundTrip(short distribution, float mult, short *slowPlayerId) {
@@ -2021,33 +1633,4 @@ float CUDPComm::GetMaxMeanReceiveCount(short distribution) {
         }
     }
     return maxCount;
-}
-
-void CUDPComm::BuildServerTags() {
-    /*
-    CUDPConnection	*theConn;
-    charWordLongP	p;
-
-    tracker->WriteCharTag(ktsPlayerLimit, clientLimit+1);
-    tracker->WriteStringTag(ktsInvitation, inviteString);
-
-    if(password[0])	tracker->WriteNullTag(ktsHasPassword);
-
-    p.c = tracker->WriteBufferIndexed(kisPlayerIPPort, 0, 6);
-
-    *p.l++ = localIP;
-    *p.w++ = localPort;
-
-    theConn = connections;
-
-    while(theConn)
-    {	if(theConn->port && theConn->myId >= 0)
-        {	p.c = tracker->WriteBufferIndexed(kisPlayerIPPort, theConn->myId, 6);
-            *p.l++ = theConn->ipAddr;
-            *p.w++ = theConn->port;
-        }
-
-        theConn = theConn->next;
-    }
-    */
 }

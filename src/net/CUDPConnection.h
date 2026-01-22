@@ -126,6 +126,7 @@ public:
     virtual void ValidatePacket(UDPPacketInfo *thePacket, int32_t when);
     virtual void ValidateReceivedPacket(UDPPacketInfo *thePacket);
     virtual char *ValidatePackets(char *validateInfo, int32_t curTime);
+    virtual void ResendNonValidatedPackets();
 
     virtual size_t ReceivedPacket(UDPPacketInfo *thePacket);
     virtual bool ReceiveQueuedPackets();

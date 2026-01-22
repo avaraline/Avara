@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include <SDL2/SDL_log.h>
+#include "BasePath.h"
 #include "AssetManager.h"
 #include "CAvaraApp.h"
 #include "CBSPPart.h"
@@ -30,6 +31,7 @@ using namespace std;
 class TestSoundHub : public CSoundHubImpl {
 public:
     virtual Fixed* EarLocation() { return ear; }
+    virtual bool AudioEnabled() { return false; }
 private:
     Fixed ear[3];
 
@@ -1230,11 +1232,12 @@ TEST(MATERIALS, Manipulation) {
 }
 
 int main(int argc, char **argv) {
-<<<<<<< HEAD
-    AvaraGLToggleRendering(0);
-=======
-    nanogui::init();
->>>>>>> c19a43f958cbfd6314bc9681b5e79afc6fc4a785
+    // Check basepath override.
+    for (int i = 0; i < argc; i++) {
+        if (strcmp(argv[i], "--basepath") == 0) {
+            SetBasePath(argv[++i]);
+        }
+    }
     InitMatrix();
     ::testing::InitGoogleTest(&argc, argv);
     int r = RUN_ALL_TESTS();

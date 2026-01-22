@@ -26,7 +26,7 @@ extern "C" {
 
 class CAvaraAppImpl;
 
-class CGUI : public CDirectObject {
+class CGUI {
 public:
   CGUI(CAvaraAppImpl *app);
   bool handleSDLEvent(SDL_Event &event);

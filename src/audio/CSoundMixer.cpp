@@ -98,7 +98,8 @@ void CSoundMixer::ISoundMixer(Fixed sampRate,
     short maxMixCount,
     Boolean stereoEnable,
     Boolean sample16Enable,
-    Boolean interpolateEnable) {
+    Boolean interpolateEnable,
+    Boolean openAudioDevice) {
     //OSErr iErr;
     //int globTemp;
     short i, j;
@@ -199,22 +200,24 @@ void CSoundMixer::ISoundMixer(Fixed sampRate,
 
     frameCounter = -2;
 
-    SDL_AudioSpec want, have;
+    if (openAudioDevice) {
+        SDL_AudioSpec want, have;
 
-    SDL_memset(&want, 0, sizeof(want));
-    want.freq = samplingRate / 65536;
-    want.format = AUDIO_S16;
-    want.channels = 2;
-    want.samples = soundBufferSize;
-    want.callback = AudioCallback;
-    want.userdata = this;
-    outputDevice = SDL_OpenAudioDevice(NULL, 0, &want, &have, 0);
-    SDL_Log("Sound device (id=%d): format=%d channels=%d samples=%d size=%d\n",
-        outputDevice,
-        want.format,
-        want.channels,
-        want.samples,
-        want.size);
+        SDL_memset(&want, 0, sizeof(want));
+        want.freq = samplingRate / 65536;
+        want.format = AUDIO_S16;
+        want.channels = 2;
+        want.samples = soundBufferSize;
+        want.callback = AudioCallback;
+        want.userdata = this;
+        outputDevice = SDL_OpenAudioDevice(NULL, 0, &want, &have, 0);
+        SDL_Log("Sound device (id=%d): format=%d channels=%d samples=%d size=%d\n",
+                outputDevice,
+                want.format,
+                want.channels,
+                want.samples,
+                want.size);
+    }
     SDL_PauseAudioDevice(outputDevice, 0);
 }
 

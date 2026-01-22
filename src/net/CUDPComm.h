@@ -18,12 +18,13 @@
 #include <string>
 
 #define INITIAL_SERIAL_NUMBER     SerialNumber(0)  // must be even
+#define SERIAL_NUMBER_UDP_SETTLE  SerialNumber(100)
 
 #define ROUTE_THRU_SERVER 0  // non-zero to route all messages through the server
 
 #define CRAMTIME 5000 //	About 20 seconds.
 #define CRAMPACKSIZE 64
-#define kClientConnectTimeoutTicks 600 //(60*30)
+#define kClientConnectTimeoutMsec 3000
 
 // Should be at most half of the lowest frameTime.  In classic game this was 4.096 ms.
 #define MSEC_PER_GET_CLOCK (1)
@@ -38,20 +39,6 @@ public:
     short maxClients;
     short clientLimit;
     Str255 password;
-
-    /*
-    UDPiopb				sendPB;
-    UDPiopb				receivePB;
-    UDPiopb				rejectPB;
-    char				rejectData[32];
-    wdsEntry			rejectDataTable[2];
-
-    wdsEntry            writeDataTable[2];
-
-    UDPIOCompletionUPP	readComplete;
-    UDPIOCompletionUPP	writeComplete;
-    UDPIOCompletionUPP	bufferReturnComplete;
-    */
 
     ReceiverRecord receiverRecord;
 
@@ -100,7 +87,6 @@ public:
     virtual void IUDPComm(short clientCount, short bufferCount, uint16_t version, ClockTick urgentTimePeriod);
 
     virtual void Disconnect();
-    virtual void WritePrefs();
     virtual void Dispose();
 
     ClockTick GetClock();
@@ -117,14 +103,17 @@ public:
     virtual void ProcessQueue();
 
     virtual std::string FormatConnectionTable(CompleteAddress *table);
+    virtual std::string FormatConnectionsList();
     static bool IsLAN(uint32_t host);
     virtual void SendConnectionTable();
-    virtual void ReplaceMatchingNAT(const IPaddress &addr);
     virtual void ReadFromTOC(PacketInfo *thePacket);
+    virtual void ReplaceMatchingNAT(const IPaddress &addr);
+    virtual void PunchHandler(PunchType cmd, const IPaddress &addr, int8_t connId);
 
     virtual void SendRejectPacket(ip_addr remoteHost, port_num remotePort, OSErr loginErr);
 
     virtual CUDPConnection *DoLogin(PacketInfo *thePacket, UDPpacket *udp);
+    virtual CUDPConnection *UpdateConnectionMatchingSender(const UDPPacketInfo &thePacket, const IPaddress &newAddress);
 
     virtual Boolean PacketHandler(PacketInfo *thePacket);
 
@@ -139,8 +128,6 @@ public:
     virtual void CreateServer();
     virtual OSErr ContactServer(IPaddress &serverAddr);
 
-    virtual Boolean ServerSetupDialog(Boolean disableSome);
-
     virtual void Connect(std::string address); //	Client
     virtual void Connect(std::string address, std::string passwordStr);
 
@@ -149,13 +136,7 @@ public:
     virtual void OptionCommand(long theCommand);
     virtual void DisconnectSlot(short slotId);
 
-    virtual short GetStatusInfo(short slotId, Handle leftColumn, Handle rightColumn);
-
-    virtual Boolean ReconfigureAvailable();
-    virtual void Reconfigure();
     virtual long GetMaxRoundTrip(short distribution, float multiplier = 0.0, short *slowPlayerId = nullptr);
     virtual float GetMaxMeanSendCount(short distribution);
     virtual float GetMaxMeanReceiveCount(short distribution);
-
-    virtual void BuildServerTags();
 };

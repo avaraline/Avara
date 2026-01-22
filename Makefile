@@ -85,7 +85,7 @@ else
 	LDFLAGS += $(shell ${PKG_CONFIG} --libs-only-l sdl2)
 	CPPFLAGS += $(shell ${PKG_CONFIG} --cflags-only-I directfb)
 	CPPFLAGS += $(shell ${PKG_CONFIG} --cflags-only-I sdl2)
-	CPPFLAGS += -fPIC
+	CPPFLAGS += -fPIC 
 	POST_PROCESS ?= ls -lh
 endif
 
@@ -96,16 +96,19 @@ DEPS := $(OBJS:.o=.d)
 # Alternatively set this to "NONE" for no code signing.
 SIGNING_ID := NONE
 
-avara: set-version $(BUILD_DIR)/Avara resources
+avara: set-version $(BUILD_DIR)/Avara
 
-tests: set-version $(BUILD_DIR)/tests resources
-	$(BUILD_DIR)/tests
+tests: set-version $(BUILD_DIR)/tests
+	AVARA_RSRC_PATH=$(shell pwd)/ $(BUILD_DIR)/tests
 
-bspviewer: $(BUILD_DIR)/BSPViewer resources
+run: avara
+	AVARA_RSRC_PATH=$(shell pwd)/ $(BUILD_DIR)/Avara
 
-levelviewer: $(BUILD_DIR)/AvaraLevelViewer resources
+bspviewer: $(BUILD_DIR)/BSPViewer
 
-hsnd2wav: set-version $(BUILD_DIR)/hsnd2wav resources
+levelviewer: $(BUILD_DIR)/AvaraLevelViewer
+
+hsnd2wav: set-version $(BUILD_DIR)/hsnd2wav
 
 frandom: $(BUILD_DIR)/frandom
 
@@ -124,7 +127,8 @@ macdist: macapp
 winapp: avara
 	$(RMDIR) $(BUILD_DIR)/WinAvara
 	$(MKDIR_P) $(BUILD_DIR)/WinAvara
-	cp -r $(BUILD_DIR)/{Avara.exe,levels,rsrc} $(BUILD_DIR)/WinAvara
+	cp -r $(BUILD_DIR)/Avara.exe $(BUILD_DIR)/WinAvara
+	cp -r {levels,rsrc} ${BUILD_DIR}/WinAvara
 	cp /mingw64/bin/{libstdc++-6,libwinpthread-1,libgcc_s_seh-1,SDL2}.dll $(BUILD_DIR)/WinAvara
 
 windist: winapp
@@ -191,10 +195,5 @@ clean-levels:
 	$(RM) levels/*/set.json
 	$(RM) levels/*/ogg/*.ogg
 	$(RM) levels/*/wav/*.wav
-
-resources:
-	# python3 bin/pict2svg.py
-	# cp -r bsps levels rsrc shaders $(BUILD_DIR)
-	rsync -av levels rsrc $(BUILD_DIR)
 
 -include $(DEPS)
