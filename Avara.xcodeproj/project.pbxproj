@@ -10,15 +10,16 @@
 		601893AF2ECF106900AB3A6D /* Logging.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 601893AE2ECF106900AB3A6D /* Logging.cpp */; };
 		601FD6A02C72C9E1006D5CB4 /* AvaraFonts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 601FD69D2C72C9E1006D5CB4 /* AvaraFonts.cpp */; };
 		601FD6A12C72C9E1006D5CB4 /* CGUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 601FD69E2C72C9E1006D5CB4 /* CGUI.cpp */; };
-		601FD6A62C72E619006D5CB4 /* microui.c in Sources */ = {isa = PBXBuildFile; fileRef = 601FD6A52C72E619006D5CB4 /* microui.c */; };
 		6025AE4E2C255E6A00A57EFB /* LegacyOpenGLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60C274E22C23EBE9005B67A9 /* LegacyOpenGLRenderer.cpp */; };
 		6055BF212DEA8A79005E3CFB /* BasePath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6055BF202DEA8A79005E3CFB /* BasePath.cpp */; };
 		6055BF222DEA8A79005E3CFB /* BasePath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6055BF202DEA8A79005E3CFB /* BasePath.cpp */; };
 		6055BF232DEA8A79005E3CFB /* BasePath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6055BF202DEA8A79005E3CFB /* BasePath.cpp */; };
+		6062B6F42F4D934B006464BA /* GUIItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6062B6F32F4D934B006464BA /* GUIItem.cpp */; };
+		6062B6F52F4D934B006464BA /* GUIItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6062B6F32F4D934B006464BA /* GUIItem.cpp */; };
+		6062B6F62F4D934B006464BA /* GUIItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6062B6F32F4D934B006464BA /* GUIItem.cpp */; };
 		606BD9922F22396500AFAE26 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5890F9729895294007A875D /* SDL2.framework */; };
 		606BD9932F22396500AFAE26 /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5890F9729895294007A875D /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		606BD9952F223D3D00AFAE26 /* CGUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 601FD69E2C72C9E1006D5CB4 /* CGUI.cpp */; };
-		606BD9962F223D5F00AFAE26 /* microui.c in Sources */ = {isa = PBXBuildFile; fileRef = 601FD6A52C72E619006D5CB4 /* microui.c */; };
 		606BD9972F223EB900AFAE26 /* AvaraFonts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 601FD69D2C72C9E1006D5CB4 /* AvaraFonts.cpp */; };
 		940541ED2B5875B200E32241 /* OpenGLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940541EC2B5875B200E32241 /* OpenGLShader.cpp */; };
 		940541EE2B5875B200E32241 /* OpenGLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940541EC2B5875B200E32241 /* OpenGLShader.cpp */; };
@@ -523,10 +524,10 @@
 		601FD69E2C72C9E1006D5CB4 /* CGUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CGUI.cpp; sourceTree = "<group>"; };
 		601FD69F2C72C9E1006D5CB4 /* CGUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGUI.h; sourceTree = "<group>"; };
 		601FD6A22C72CA74006D5CB4 /* CStateFunction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CStateFunction.hpp; sourceTree = "<group>"; };
-		601FD6A42C72E619006D5CB4 /* microui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = microui.h; sourceTree = "<group>"; };
-		601FD6A52C72E619006D5CB4 /* microui.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = microui.c; sourceTree = "<group>"; };
 		6055BF1F2DEA8A79005E3CFB /* BasePath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasePath.h; sourceTree = "<group>"; };
 		6055BF202DEA8A79005E3CFB /* BasePath.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BasePath.cpp; sourceTree = "<group>"; };
+		6062B6F22F4D9337006464BA /* GUIItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GUIItem.h; sourceTree = "<group>"; };
+		6062B6F32F4D934B006464BA /* GUIItem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GUIItem.cpp; sourceTree = "<group>"; };
 		60C274E22C23EBE9005B67A9 /* LegacyOpenGLRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LegacyOpenGLRenderer.cpp; sourceTree = "<group>"; };
 		60C274E32C23EBE9005B67A9 /* LegacyOpenGLRenderer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = LegacyOpenGLRenderer.h; sourceTree = "<group>"; };
 		940541EB2B58744500E32241 /* OpenGLShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLShader.h; sourceTree = "<group>"; };
@@ -1542,6 +1543,8 @@
 			children = (
 				601FD69D2C72C9E1006D5CB4 /* AvaraFonts.cpp */,
 				601FD69C2C72C9E1006D5CB4 /* AvaraFonts.h */,
+				6062B6F22F4D9337006464BA /* GUIItem.h */,
+				6062B6F32F4D934B006464BA /* GUIItem.cpp */,
 				601FD69E2C72C9E1006D5CB4 /* CGUI.cpp */,
 				601FD69F2C72C9E1006D5CB4 /* CGUI.h */,
 				E5890C8D29895118007A875D /* CApplication.cpp */,
@@ -1587,8 +1590,6 @@
 			isa = PBXGroup;
 			children = (
 				E5890ED829895124007A875D /* AudioFile.h */,
-				601FD6A52C72E619006D5CB4 /* microui.c */,
-				601FD6A42C72E619006D5CB4 /* microui.h */,
 				601893B22ED2CB6700AB3A6D /* backward.hpp */,
 				601893B72ED5A1F500AB3A6D /* signalhandling.hpp */,
 				E5890D3F29895123007A875D /* csscolorparser.cpp */,
@@ -2230,6 +2231,7 @@
 				946EF8D32B6D9CB2000EF17E /* AbstractRenderer.cpp in Sources */,
 				E517F082299713DB0036B206 /* CLogicCounter.cpp in Sources */,
 				E517F083299713DB0036B206 /* CLogicDelay.cpp in Sources */,
+				6062B6F62F4D934B006464BA /* GUIItem.cpp in Sources */,
 				E517F084299713DB0036B206 /* CLogicDistributor.cpp in Sources */,
 				E517F085299713DB0036B206 /* CLogicTimer.cpp in Sources */,
 				E2210CC12A1C9D9C000712AA /* Tags.cpp in Sources */,
@@ -2238,7 +2240,6 @@
 				E517F088299713DB0036B206 /* CMissile.cpp in Sources */,
 				940541EE2B5875B200E32241 /* OpenGLShader.cpp in Sources */,
 				941D87902B5A213200E5577C /* OpenGLVertices.cpp in Sources */,
-				606BD9962F223D5F00AFAE26 /* microui.c in Sources */,
 				E517F089299713DB0036B206 /* CNetManager.cpp in Sources */,
 				E517F08A299713DB0036B206 /* CParasite.cpp in Sources */,
 				E517F08B299713DB0036B206 /* CPill.cpp in Sources */,
@@ -2317,6 +2318,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6062B6F52F4D934B006464BA /* GUIItem.cpp in Sources */,
 				E5890F1B29895124007A875D /* pugixml.cpp in Sources */,
 				E5890CFE29895118007A875D /* CSmartPart.cpp in Sources */,
 				6055BF232DEA8A79005E3CFB /* BasePath.cpp in Sources */,
@@ -2426,7 +2428,6 @@
 				6025AE4E2C255E6A00A57EFB /* LegacyOpenGLRenderer.cpp in Sources */,
 				E5890D0529895118007A875D /* CSoundMixer.cpp in Sources */,
 				E5890CF529895118007A875D /* CRamp.cpp in Sources */,
-				601FD6A62C72E619006D5CB4 /* microui.c in Sources */,
 				E5890CCB29895118007A875D /* CGoody.cpp in Sources */,
 				E5890D1129895118007A875D /* LevelLoader.cpp in Sources */,
 				E5890CF029895118007A875D /* CPlayerManager.cpp in Sources */,
@@ -2608,6 +2609,7 @@
 				E5A21A4A2DC59135007D54FF /* (null) in Sources */,
 				E5A21A4B2DC59135007D54FF /* (null) in Sources */,
 				E5A21A4C2DC59135007D54FF /* (null) in Sources */,
+				6062B6F42F4D934B006464BA /* GUIItem.cpp in Sources */,
 				E5A21A4D2DC59135007D54FF /* (null) in Sources */,
 				E5A21A4E2DC59135007D54FF /* (null) in Sources */,
 				E5A21A4F2DC59135007D54FF /* (null) in Sources */,

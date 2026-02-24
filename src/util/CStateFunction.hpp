@@ -24,3 +24,6 @@ struct StateFunction {
 	std::function<StateFunction()> f;
 };
 
+#define STATE_STAY std::move(state)
+#define STATE_CHANGETO(t) std::bind(&CGUI::t, this)
+

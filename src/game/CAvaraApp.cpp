@@ -168,8 +168,8 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     // use sqlite to persist stuff
     itsAPI = std::make_unique<CRUDsqlite>();
     if (nvg_context) {
-        ui = std::make_unique<CHUD>(gCurrentGame);
-        ui->LoadImages(nvg_context);
+        gameUI = std::make_unique<CHUD>(gCurrentGame);
+        gameUI->LoadImages(nvg_context);
     }
 
 #if defined(AVARA_GLES)
@@ -231,6 +231,11 @@ void CAvaraAppImpl::idle() {
     static double avg = 0;
     FrameNumber curFrame = itsGame->frameNumber;
     uint32_t procTime = SDL_GetTicks();
+    if (nextAnimFrame < procTime) {
+        animate = true;
+        nextAnimFrame = procTime + itsGame->frameTime;
+    }
+    else animate = false;
     CheckSockets();
     TrackerUpdate();
 
@@ -264,10 +269,7 @@ void CAvaraAppImpl::idle() {
         lastControllerEvent = procTime;
     }
 
-    if (itsGame->GameTick()) {
-        
-    }
-    RenderContents();
+    itsGame->GameTick();
     // output a coarse estimate of cpu time & percent every second when enabled
     if (curFrame > 1 && curFrame != itsGame->frameNumber && Debug::IsEnabled("cpu")) {
         procTime = SDL_GetTicks() - procTime;
@@ -279,8 +281,8 @@ void CAvaraAppImpl::idle() {
     itsGUI->Update();
 }
 
-void CAvaraAppImpl::RenderContents() {
-    if (animatePreview) {
+void CAvaraAppImpl::drawContents() {
+    if (animatePreview && animate) {
         auto vp = gRenderer->viewParams;
         Fixed radius = 0.6*previewRadius + 0.4*FMul(previewRadius, FOneCos(previewAngle*0.7));
         Fixed x = itsGame->extentCenter[0] + FMul(radius, FOneCos(previewAngle));
@@ -292,13 +294,17 @@ void CAvaraAppImpl::RenderContents() {
         previewAngle += FIX3(1);
     }
     itsGame->Render();
-    if (ui) {
+    if (gameUI && gameUIActive) {
         if (itsGame->showNewHUD) {
-            ui->RenderNewHUD(nvg_context);
+            gameUI->RenderNewHUD(nvg_context);
         } else {
-            ui->Render(nvg_context);
+            gameUI->Render(nvg_context);
         }
     }
+}
+
+void CAvaraAppImpl::RenderContents() {
+    drawContents();
     itsGUI->Render(nvg_context);
     gRenderer->RefreshWindow();
 }
@@ -308,6 +314,7 @@ void CAvaraAppImpl::WindowResized(int width, int height) {
     if (gRenderer->viewParams->viewPixelDimensions.h != width || gRenderer->viewParams->viewPixelDimensions.v != height)
 
     gRenderer->UpdateViewRect(width, height, pixel_ratio);
+    itsGUI->Resized();
 }
 
 bool CAvaraAppImpl::handleSDLEvent(SDL_Event &event) {

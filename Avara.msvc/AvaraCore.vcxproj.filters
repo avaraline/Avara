@@ -249,28 +249,16 @@
     <ClInclude Include="..\src\gui\CApplication.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gui\CLevelWindow.h">
+    <ClInclude Include="..\src\gui\CGUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\gui\CNetworkWindow.h">
+    <ClInclude Include="..\src\gui\GUIItem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\gui\ColorManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\gui\CommandList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\gui\CPlayerWindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\gui\CRosterWindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\gui\CServerWindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\gui\CTrackerWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\gui\CWindow.h">
@@ -535,102 +523,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\bsp\CViewParameters.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\button.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\checkbox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\colorcombobox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\combobox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\common.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\compat.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\desccombobox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\entypo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\formhelper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\glcanvas.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\glutil.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\label.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\layout.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\messagedialog.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\nanogui.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\object.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\opengl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\popup.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\popupbutton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\progressbar.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\screen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\slider.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\stackedwidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\tabheader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\tabwidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\text.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\textbox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\theme.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\toolbutton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\vscrollpanel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\widget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\vendor\nanogui\nanogui\window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\platform\windows\resource.h">
@@ -1019,18 +911,6 @@
     <ClCompile Include="..\src\gui\ColorManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\gui\CPlayerWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\gui\CRosterWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\gui\CServerWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\gui\CTrackerWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\gui\CWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1040,88 +920,10 @@
     <ClCompile Include="..\src\gui\CApplication.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\gui\CLevelWindow.cpp">
+    <ClCompile Include="..\src\gui\CGUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\gui\CNetworkWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\vendor\nanogui\button.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\vendor\nanogui\checkbox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\vendor\nanogui\colorcombobox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\vendor\nanogui\combobox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\vendor\nanogui\common.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\vendor\nanogui\desccombobox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\vendor\nanogui\glcanvas.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\vendor\nanogui\glutil.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\vendor\nanogui\label.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\vendor\nanogui\layout.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\vendor\nanogui\messagedialog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\vendor\nanogui\nanogui_resources.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\vendor\nanogui\popup.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\vendor\nanogui\popupbutton.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\vendor\nanogui\progressbar.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\vendor\nanogui\screen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\vendor\nanogui\slider.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\vendor\nanogui\stackedwidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\vendor\nanogui\tabheader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\vendor\nanogui\tabwidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\vendor\nanogui\text.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\vendor\nanogui\textbox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\vendor\nanogui\theme.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\vendor\nanogui\vscrollpanel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\vendor\nanogui\widget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\vendor\nanogui\window.cpp">
+    <ClCompile Include="..\src\gui\GUIItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\vendor\pugixml\pugixml.cpp">

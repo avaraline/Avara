@@ -105,9 +105,10 @@ private:
     
     CNetManager *gameNet;
     CommandManager *itsTui;
-    std::unique_ptr<CHUD> ui;
+    std::unique_ptr<CHUD> gameUI;
     
 public:
+    bool gameUIActive = false;
     std::unique_ptr<CRUD> itsAPI;
 
     SDL_GameController *controller; // currently paired controller
@@ -121,6 +122,8 @@ public:
     std::deque<MsgLine> messageLines;
     Fixed previewAngle, previewRadius;
     bool animatePreview;
+    int nextAnimFrame = 0;
+    bool animate;
     
     CAvaraAppImpl();
     ~CAvaraAppImpl();
@@ -132,6 +135,7 @@ public:
     
     virtual std::deque<MsgLine>& MessageLines() override;
     virtual void idle();
+    virtual void drawContents();
     virtual void RenderContents() override;
     
     virtual bool DoCommand(int theCommand) override;

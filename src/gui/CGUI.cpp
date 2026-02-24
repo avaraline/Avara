@@ -10,6 +10,8 @@
 #include "CSoundHub.h"
 #include "CSwitchActor.h"
 #include <cstring>
+#include <json.hpp>
+#include "httplib.h"
 
 std::string teststring = "hella";
 bool testbool = false;
@@ -28,181 +30,149 @@ CGUI::CGUI(CAvaraAppImpl *app) {
     itsTui = app->GetTui();
     itsView = gRenderer->viewParams;
     itsLocalPlayer = CPlayerManagerImpl::LocalPlayer();
-    LookAtGUI();
-
-    mui_ctx = (mu_Context*)malloc(sizeof(mu_Context));
-    mu_init(mui_ctx);
-    mui_ctx->text_width = text_width;
-    mui_ctx->text_height = text_height;
-    itsCursor = std::make_unique<CScaledBSP>((Fixed)FIX3(100), (short)kCursorBSP, (CAbstractActor*)NULL, (short)0);
-    itsCursor->privateAmbient = FIX3(800);
-    //itsCursor->
-    //AvaraGLUpdateData(itsCursor);
-    gRenderer->AddPart(itsCursor.get());
-
     started = SDL_GetTicks();
     anim_timer = 0;
-
-    SDL_StartTextInput();
+    targetScreen = GUIScreen::Options;
+    //SDL_StartTextInput();
+    FetchRecents();
 }
 
-void CGUI::LookAtGUI() {
-    itsView->LookFrom(0, 0, FIX(1));
-    itsView->LookAt(0, 0, 0);
-    itsView->PointCamera();
+void CGUI::FetchRecents() {
+    recentSets.clear();
+    recentLevels.clear();
+    CRUD::RecentLevelsList recents = itsApp->itsAPI->GetRecentLevels(MAX_RECENTS);
+    for (auto recent : recents) {
+        recentSets.push_back(recent.setTag);
+        recentLevels.push_back(recent.levelName);
+    }
+}
+
+std::string CGUI::PlayerStringStatus(CPlayerManager *player) {
+    std::string strStatus;
+    if (player->WinFrame() >= 0) {
+        long timeTemp = FMulDiv(player->WinFrame(), itsGame->frameTime, 10);
+        auto hundreds1 = timeTemp % 10;
+        timeTemp /= 10;
+        auto hundreds2 = timeTemp % 10;
+        timeTemp /= 10;
+        auto secs1 = timeTemp % 10;
+        timeTemp /= 10;
+        auto secs2 = timeTemp % 6;
+        timeTemp /= 6;
+
+        std::ostringstream os;
+        os << "[" << timeTemp << ":" << secs2 << secs1 << "." << hundreds2 << hundreds1 << "]";
+
+        strStatus = os.str();
+        return strStatus;
+    }
+
+    LoadingState status = player->LoadingStatus();
+    PresenceType presence = player->Presence();
+    if (presence != kzAway) {
+        if (status == kLConnected) {
+            strStatus = "connected";
+        } else if (status == kLLoaded) {
+            strStatus = "loaded";
+        } else if (status == kLReady) {
+            strStatus = "ready";
+        } else if (status == kLWaiting) {
+            strStatus = "waiting";
+        } else if (status == kLTrying) {
+            strStatus = "loading";
+        } else if (status == kLMismatch) {
+            strStatus = "version mismatch";
+        } else if (status == kLNotFound) {
+            strStatus = "level not found";
+        } else if (status == kLPaused) {
+            strStatus = "paused";
+        } else if (status == kLActive) {
+            strStatus = "active";
+        } else if (status == kLNoVehicle) {
+            strStatus = "HECTOR not available";
+        } else {
+            strStatus = "";
+        }
+    } else if (status != kLNotConnected) {
+        strStatus = "away";
+    }
+    if (presence == kzSpectating) {
+        if (player->LoadingStatusIsIn(kLConnected, kLActive, kLReady, kLLoaded, kLPaused)) {
+            strStatus = "spectator";
+        } else if (strStatus.length() > 0) {
+            strStatus += "*";   // make this into an eyeball char?
+        }
+    }
+    return strStatus;
+}
+
+void CGUI::TrackerQuery() {
+    servers.clear();
+    std::string address = gApplication->String(kTrackerAddress);
+    httplib::Client client(address.c_str(), 80);
+    auto resp = client.Get("/api/v1/games/");
+    if (resp && resp->status == 200) {
+        json apiData = json::parse(resp->body);
+        auto serverCount = apiData["games"].size();
+        for (int i = 0; i < serverCount; i++) {
+            auto game = apiData["games"][i];
+            std::string players;
+            bool commas = false;
+            for (const auto &p : game["players"]) {
+                if (commas) {
+                    players += ", ";
+                }
+                players += p.get<std::string>();
+                commas = true;
+            }
+
+            bool password = false;
+            if(! game["password"].is_null())
+                 password = game["password"].get<bool>();
+            ServerInfo s;
+            s.address = game["address"].get<std::string>();
+            s.players = players;
+            s.description = game["description"].get<std::string>();
+            s.password = password;
+            s.index = i;
+            servers.push_back(s);
+        }
+
+        serverSummary = std::to_string(serverCount) + " server";
+        if(serverCount != 1)
+            serverSummary.append("s");
+    }
+}
+
+void CGUI::Resized() {
+    state = STATE_CHANGETO(_transitionScreen);
 }
 
 void CGUI::Update() {
-    if (!active) return;
     last_t = t;
     t = SDL_GetTicks();
     dt = t - last_t;
     anim_timer += dt;
-    int fb_size_x = gApplication->win_size_x;
-    int fb_size_y = gApplication->win_size_y;
-    mu_Rect screen = mu_rect(0, 0, fb_size_x, fb_size_x);
-    mui_ctx->style->padding = 20;
-    mu_begin(mui_ctx);
-    int muiflags = 0;
-    const int row_widths[] = { (int)std::floor(fb_size_x / 5.0) };
-    const int row_height = std::floor(fb_size_y / 9.0);
-    if(mu_begin_window_ex(mui_ctx, "Main", screen, muiflags)) {
-        mu_layout_row(mui_ctx, 1, row_widths, row_height);
-        
-        // state function
-        state = state();
-        
-        mu_end_window(mui_ctx);
-    }
-    mu_end(mui_ctx);
-
-    if (anim_timer > 16) {
-        itsGame->itsDepot->RunSliverActions();
+    if (anim_timer > itsGame->frameTime) {
+        //itsGame->itsDepot->RunSliverActions();
         anim_timer = 0;
     }
-
+    unit_x = itsApp->fb_size_x / 8;
+    unit_y = itsApp->fb_size_y / 6;
+    pad = unit_y / 10;
+    prevFocus[0] = focus[0];
+    prevFocus[1] = focus[1];
+    state = state();
+    if (prevFocus[0] != focus[0] && prevFocus[1] != focus[1] && focus[0] != -1 && focus[1] != -1)
+        PlaySound(kFootStepSound);
 }
 
-int CGUI::BSPWidget(mu_Rect r, int res, mu_Id mu_id) {
-    if (!active) return res;
-    Point mid = pt(r.x + (r.w / 2), r.y + (r.h / 2));
-    glm::vec3 worldpos = screenToWorld(&mid);
-
-    if (actors.count(mu_id) > std::size_t(0)) {
-        //CSmartBox* _part = boxes.at(mu_id);
-        std::shared_ptr<CAbstractActor> _wall = actors.at(mu_id);
-        //CBSPPart* _part = parts.at(mu_id);
-        auto _part = _wall->partList[0];
-        _part->Reset();
-        TranslatePart(_part, ToFixed(worldpos.x), ToFixed(worldpos.y), 0);
-        _part->MoveDone();
+void CGUI::Select() {
+    for (auto it = currentItems.begin(); it != currentItems.end(); ++it) {
+        if ((*it).focus && (*it).action) {
+            (*it).action();
+        }
     }
-    else {
-        Point s_topleft = pt(r.x, r.y);
-        Point s_bottomright = pt(r.x + r.w, r.y + r.h);
-        glm::vec3 ws_topleft = screenToWorld(&s_topleft);
-        glm::vec3 ws_bottomright = screenToWorld(&s_bottomright);
-
-        Vector dims;
-        dims[0] = ToFixed((ws_bottomright.x - ws_topleft.x) / 2.0);
-        dims[1] = ToFixed((ws_bottomright.y - ws_topleft.y) / 2.0);
-        dims[2] = FIX3(1);
-        
-        
-        ARGBColor color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BASE]);
-        std::shared_ptr<CWallActor> theWall = std::make_shared<CWallActor>();
-        theWall->MakeWallFromDims(dims, ToFixed(worldpos.x), ToFixed(worldpos.y), ToFixed(0.1f));
-        auto theBox = theWall->partList[0];
-        theBox->ReplaceColor(0x00fefefe, color);
-        actors.emplace(mu_id, theWall);
-        //boxes.emplace(mu_id, (CSmartBox*)theBox);
-    }
-    return res;
-}
-
-int CGUI::BSPButton(std::string s) {
-    int res = 0;
-    if (!active) return res;
-    mu_Id mu_id = mu_get_id(mui_ctx, s.c_str(), s.length());
-    mu_Rect r = mu_layout_next(mui_ctx);
-    mu_update_control(mui_ctx, mu_id, r, 0);
-    BSPWidget(r, res, mu_id);
-    auto _wall = actors.at(mu_id);
-    /* hover */
-    if (mui_ctx->hover == mu_id) {
-        ARGBColor color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BUTTONHOVER]);
-        //_wall->partList[0]->ReplaceColor(ColorManager::getMarkerColor(0).value(), color);
-    }
-    else {
-        ARGBColor color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BUTTON]);
-        //_wall->partList[0]->ReplaceColor(ColorManager::getMarkerColor(0).value(), color);
-        //gRenderer->r
-    }
-    /* handle click */
-    if (mui_ctx->mouse_pressed == MU_MOUSE_LEFT && mui_ctx->focus == mu_id) {
-        res |= MU_RES_SUBMIT;
-        actors.at(mu_id)->Blast();
-        return res;
-    }
-    /* draw */
-    if (s.length() > 0) { mu_draw_control_text(mui_ctx, s.c_str(), r, MU_COLOR_TEXT, 0); }
-    return res;
-}
-
-int CGUI::BSPTextInput(const char *id, std::string &s) {
-    mu_Id mu_id = mu_get_id(mui_ctx, id, sizeof(id));
-    mu_Rect r = mu_layout_next(mui_ctx);
-    int res = 0;
-    BSPWidget(r, res, mu_id);
-    auto _wall = actors.at(mu_id);
-    auto _part = _wall->partList[0];
-
-    // TODO: something different than this
-    // can the mu_textbox use a std::string buffa somehow?
-    const size_t len = TEXT_INPUT_TEMP_BUFFER_SIZE;
-    char temp[len];
-    std::strncpy(temp, s.c_str(), len);
-    if (temp[len - 1] != '\0') {
-        // overflow, truncating
-        temp[len - 1] = '\0';
-    }
-    
-    res |= mu_textbox_raw(mui_ctx, temp, len, mu_id, r, 0);
-    // temp now contains updated string
-    s.assign(temp);
-    if (!_part) return res;
-    if (mui_ctx->focus == mu_id) {
-        //_part->ReplaceColor(ColorManager::getMarkerColor(0).value(), ColorManager::getEnergyGaugeColor());
-    }
-    else {
-        ARGBColor color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BASE]);
-        //_part->ReplaceColor(0x00fefefe, color);
-    }
-    return res;
-}
-
-int CGUI::BSPCheckbox(const char *label, bool *state) {
-    mu_Id mu_id = mu_get_id(mui_ctx, &state, sizeof(state));
-    mu_Rect r = mu_layout_next(mui_ctx);
-    mu_Rect box = mu_rect(r.x, r.y, r.h, r.h);
-    mu_update_control(mui_ctx, mu_id, r, 0);
-    int res = 0;
-    BSPWidget(r, res, mu_id);
-    //std::shared_ptr<CWallActor> _wall = actors.at(mu_id);
-    //CSmartPart* _part = _wall->partList[0];
-    if (mui_ctx->mouse_pressed == MU_MOUSE_LEFT && mui_ctx->focus == mu_id) {
-        res |= MU_RES_CHANGE;
-        *state = !*state;
-    }
-    // TODO: fix marker, use hud colors, uhhh something other than yes/no
-    if (*state) {
-        mu_draw_control_text(mui_ctx, "yes", r, MU_COLOR_TEXT, 0);
-    }
-    else {
-        mu_draw_control_text(mui_ctx, "no", r, MU_COLOR_TEXT, 0);
-    }
-    r = mu_rect(r.x + box.w, r.y, r.w - box.w, r.h);
-    return res;
 }
 
 void CGUI::PlaySound(short theSound) {
@@ -223,70 +193,32 @@ void CGUI::PlaySound(short theSound) {
     gHub->ReleaseLink(aLink);
 }
 
-void CGUI::mouse(SDL_Event e) {
-    //cursor_buttons = SDL_GetMouseState(&cursor_x, &cursor_y);
-    cursor_x = e.motion.x;
-    cursor_y = e.motion.y;
-
-    Point p = pt(cursor_x, cursor_y);
-    glm::vec3 worldpos = screenToWorld(&p);
-    itsCursor->Reset();
-    itsCursor->RotateZ(FIX(15 * dt));
-    itsCursor->RotateX(FIX(270));
-    itsCursor->RotateZ(FIX(30));
-    PlacePart(itsCursor, ToFixed(worldpos.x), ToFixed(worldpos.y), 0);
-    TranslatePart(itsCursor, FIX3(15), FIX3(-25), 0);
-    itsCursor->MoveDone();
-}
-
-static const char key_map[256] = {
-  [ SDLK_LSHIFT       & 0xff ] = MU_KEY_SHIFT,
-  [ SDLK_RSHIFT       & 0xff ] = MU_KEY_SHIFT,
-  [ SDLK_LCTRL        & 0xff ] = MU_KEY_CTRL,
-  [ SDLK_RCTRL        & 0xff ] = MU_KEY_CTRL,
-  [ SDLK_LALT         & 0xff ] = MU_KEY_ALT,
-  [ SDLK_RALT         & 0xff ] = MU_KEY_ALT,
-  [ SDLK_RETURN       & 0xff ] = MU_KEY_RETURN,
-  [ SDLK_BACKSPACE    & 0xff ] = MU_KEY_BACKSPACE,
-};
-
 bool CGUI::handleSDLEvent(SDL_Event &event) {
     if (!active) return false;
     switch(event.type) {
         case SDL_MOUSEMOTION: {
-            mouse(event);
-            mu_input_mousemove(mui_ctx, event.motion.x, event.motion.y);
+            cursor_x = event.motion.x * itsApp->pixel_ratio;
+            cursor_y = event.motion.y * itsApp->pixel_ratio;
             return true;
         }
+        /*
         case SDL_MOUSEWHEEL: {
-            mu_input_scroll(mui_ctx, 0, event.wheel.y * -30);
             return true;
         }
         case SDL_TEXTINPUT: {
-            mu_input_text(mui_ctx, event.text.text);
             return true;
         }
         case SDL_KEYDOWN:
         case SDL_KEYUP: {
-            int c = key_map[event.key.keysym.sym & 0xff];
-            if (c && event.type == SDL_KEYDOWN) {
-                mu_input_keydown(mui_ctx, c);
-            }
-            if (c && event.type == SDL_KEYUP) {
-                mu_input_keyup(mui_ctx, c);
-            }
             return true;
         }
-
+         
+        */
         case SDL_MOUSEBUTTONDOWN:
         case SDL_MOUSEBUTTONUP: {
-            mouse(event);
             int b = event.button.button;
             if (b && event.type == SDL_MOUSEBUTTONDOWN) {
-                mu_input_mousedown(mui_ctx, event.button.x, event.button.y, b);
-            }
-            if (b && event.type == SDL_MOUSEBUTTONUP) {
-                mu_input_mouseup(mui_ctx, event.button.x, event.button.y, b);
+                Select();
             }
             return true;
         }
@@ -294,61 +226,318 @@ bool CGUI::handleSDLEvent(SDL_Event &event) {
     return false;
 }
 
-#define STAY std::move(state)
-#define CHANGETO(t) std::bind(&CGUI::t, this)
 
 StateFunction CGUI::_startup() {
-    //if ()
-    //auto *AvaraPart = new CBSPPart;
-    //AvaraPart->IBSPPart(kAvaraLogo);
-    PlaySound(411);
-    return CHANGETO(_transitionScreen);
+    PlaySound(kIncarnSound);
+    return STATE_CHANGETO(_transitionScreen);
+}
+
+void CGUI::Button(std::string text, short ord_x, short ord_y, NVGrect r, std::function<void()> action) {
+    GUIItem w;
+    w.itemType = GUIItemType::Button;
+    w.rect = r;
+    w.text = text;
+    w.ord_x = ord_x;
+    w.ord_y = ord_y;
+    w.interactable = true;
+    w.focus = false;
+    w.action = action;
+    w.color = nvgRGBA(20, 20, 20, 160);
+    w.textColor = invertColor(w.color);
+    currentItems.push_back(w);
+}
+
+void CGUI::Pane(NVGrect r) {
+    GUIItem p;
+    p.itemType = GUIItemType::Pane;
+    p.rect = r;
+    currentItems.push_back(p);
+}
+
+void CGUI::BigButton(std::string text, short index, GUIScreen target) {
+    BigButton(text, index, [this, target]() {
+        targetScreen = target;
+    });
+}
+
+void CGUI::BigButton(std::string text, short index, std::function<void()> action) {
+    NVGrect r;
+    r.x = unit_x + pad;
+    r.y = ((unit_y / 2) + (unit_y * index)) + ((pad * 2) * index);
+    r.w = (unit_x * 3) - pad * 2;
+    r.h = (unit_y * .75f) - pad * 2;
+    
+    Button(text, 0, index, r, action);
+}
+
+void CGUI::BackButton(std::function<void()> action) {
+    NVGrect r;
+    r.x = pad;
+    r.y = pad;
+    r.w = unit_x / 4;
+    r.h = r.w;
+    
+    Button("<", 0, 0, r, action);
+}
+
+void CGUI::JustTitleText(std::string text) {
+    NVGrect r;
+    r.x = (itsApp->fb_size_x / 2) - unit_x + pad;
+    r.y = (pad * 2);
+    r.w = (unit_x * 2) - pad * 2;
+    r.h = (unit_y * .5) - pad * 2;
+    JustText(text, r, true);
+}
+
+void CGUI::JustText(std::string text, NVGrect r) {
+    JustText(text, r, false);
+}
+
+void CGUI::JustText(std::string text, NVGrect r, bool bg) {
+    GUIItem w;
+    w.itemType = GUIItemType::JustText;
+    w.rect = r;
+    w.text = text;
+    if (bg) w.color = nvgRGB(25, 25, 25);
+    else {
+        w.color = nvgRGBA(0,0,0,0);
+        w.textAlign = NVG_ALIGN_LEFT | NVG_ALIGN_CENTER;
+    }
+    w.textColor = nvgRGB(255, 255, 255);
+    w.interactable = false;
+    currentItems.push_back(w);
+}
+
+void CGUI::JustRect(NVGrect r) {
+    JustRect(r, nvgRGBA(20, 20, 20, 160));
+}
+
+void CGUI::JustRect(NVGrect r, NVGcolor c) {
+    GUIItem w;
+    w.itemType = GUIItemType::JustRect;
+    w.rect = r;
+    w.color = c;
+    w.interactable = false;
+    currentItems.push_back(w);
+}
+
+void CGUI::JustLine(NVGrect r) {
+    GUIItem w;
+    w.itemType = GUIItemType::JustLine;
+    w.rect = r;
+    w.color = nvgRGBA(20, 20, 20, 160);
+    w.interactable = false;
+    currentItems.push_back(w);
+}
+
+void CGUI::KeyboardTab(NVGrect r) {
+    json keyboardMap = itsApp->Get(kKeyboardMappingTag);
+    short idx = 0;
+    short secondCol = 0;
+    for (auto &pair : keyboardMap.items()) {
+        NVGrect keyr;
+        keyr.x = r.x + pad;
+        keyr.y = r.y + (pad) + (((unit_y / 4) + (pad * .25f)) * idx);
+        keyr.h = unit_y / 4;
+        keyr.w = r.w / 2;
+        if (keyr.y + keyr.h > r.y + r.h) secondCol++;
+        if (secondCol > 0) {
+            keyr.x = r.x + (r.w / 2) + pad;
+            keyr.y = r.y + (pad) + (((unit_y / 4) + (pad * .25f)) * (secondCol - 1));
+        }
+        
+        NVGrect valr;
+        valr.x = keyr.x + keyr.w - unit_x;
+        valr.y = keyr.y;
+        valr.h = unit_y / 4.5;
+        valr.w = unit_x / 2;
+        std::string action = pair.key();
+        std::stringstream keylabel;
+        if (pair.value().type() == json::value_t::array) {
+            for (auto &key : pair.value()) {
+                keylabel << key;
+            }
+        }
+        else {
+            keylabel << pair.value();
+        }
+        JustText(action, keyr);
+        JustText(keylabel.str(), valr);
+        idx++;
+    }
+}
+
+void CGUI::OptionsTab(nlohmann::json config, NVGrect r) {
+    int idx = 0;
+    int secondCol = 0;
+    for (auto &opt : config.items()) {
+        std::string label = opt.value()[0];
+        auto tag = opt.value()[1];
+        optionTypes o = opt.value()[2];
+        NVGrect optr;
+        optr.x = r.x + pad;
+        optr.y = r.y + (pad * 2) + (((unit_y / 3) + pad) * idx);
+        if (optr.y > r.y + r.h) secondCol++;
+        if (secondCol > 0) {
+            optr.x = r.x + (r.w / 2) + pad;
+            optr.y = r.y + (pad * 2) + (((unit_y / 3) + pad) * (secondCol - 1));
+        }
+        optr.h = unit_y / 3;
+        optr.w = r.w / 2;
+        
+        NVGrect valr;
+        valr.x = optr.x + optr.w - unit_x;
+        valr.y = optr.y;
+        valr.h = unit_y / 3.5;
+        valr.w = unit_x / 2;
+        
+        JustText(label, optr);
+        switch (o) {
+            case optionTypes::kOptionTypeFloat: {
+                float pref = itsApp->Get(tag);
+                std::string prefs = std::to_string(pref);
+                Button(prefs, secondCol > 0 ? 1 : 2, idx, valr, [](){});
+                break;
+            }
+            case optionTypes::kOptionTypeInteger:
+            case optionTypes::kOptionTypeChoice:{
+                int pref = itsApp->Get(tag);
+                std::string prefs = std::to_string(pref);
+                Button(prefs, 1, idx, valr, [](){});
+                break;
+            }
+            case optionTypes::kOptionTypeString:{
+                std::string pref = itsApp->Get(tag);
+                Button(pref, 1, idx, valr, [](){});
+                break;
+            }
+            case optionTypes::kOptionTypeColor:{
+                std::string pref = itsApp->Get(tag);
+                auto color = ARGBColor::Parse(pref);
+                if (color.has_value())
+                    JustRect(valr, color.value().IntoNVG());
+                JustText(pref, valr);
+                break;
+            }
+            case optionTypes::kOptionTypeBool: {
+                auto pref = itsApp->Get(tag);
+                std::string val = pref ? "yes" : "no";
+                Button(val, 1, idx, valr, [](){});
+                break;
+            }
+            case optionTypes::kOptionTypeKeyboard:
+                break;
+        }
+        idx++;
+    }
 }
 
 StateFunction CGUI::_transitionScreen() {
-    //itsGame->RunFrameActions();
-    return STAY;
+    SDL_Log("_transitionScreen %d", targetScreen);
+    currentItems.clear();
+    switch (targetScreen) {
+        case GUIScreen::MainMenu: {
+            BigButton("Play Online", 0, GUIScreen::Tracker);
+            BigButton("Single Player", 1, GUIScreen::Solo);
+            BigButton("Options", 2, GUIScreen::Options);
+            BigButton("Quit", 3, []() {
+                pushQuit();
+            });
+        }
+            break;
+        case GUIScreen::Solo: {
+            BackButton([this](){ targetScreen = GUIScreen::MainMenu; });
+            JustTitleText("Select Level");
+        }
+            break;
+        case GUIScreen::Tracker:
+        case GUIScreen::HostGame:
+        case GUIScreen::Server:
+        case GUIScreen::Options: {
+            BackButton([this](){ targetScreen = GUIScreen::MainMenu; });
+            JustTitleText("Options");
+            Dim taby = unit_y * .5 + (pad * 2);
+            Dim tabx = unit_x / 4 + (pad * 2);
+            Dim tabw = itsApp->fb_size_x - tabx - (pad * 2);
+            Dim tabcount = optionsScreens.size();
+            int i = 0;
+            for(auto &tab : optionsScreens.items()) {
+                NVGrect tabr;
+                tabr.x = tabx + ((tabw / tabcount) * i);
+                tabr.y = taby;
+                tabr.w = tabw / tabcount - pad;
+                tabr.h = unit_y / 3;
+                if (optionsTab == tab.key()) {
+                    NVGrect connection;
+                    connection.x = tabr.x + (pad * .25f);
+                    connection.y = tabr.y + tabr.h + (pad * .6f);
+                    connection.w = tabr.w - (pad * .75f);
+                    connection.h = pad * .75f;
+                    JustLine(connection);
+                }
+                std::string tab_str(tab.key());
+                Button(tab_str, 0, i, tabr, [this, tab_str]() {
+                    PlaySound(kFootStepSound);
+                    optionsTab = tab_str;
+                    state = STATE_CHANGETO(_transitionScreen);
+                });
+                i++;
+            }
+            NVGrect paner;
+            paner.w = tabw - pad;
+            paner.h = itsApp->fb_size_y - unit_y * 2;
+            paner.x = tabx;
+            paner.y = taby + unit_y / 3 + pad;
+            Pane(paner);
+            if (optionsTab == "Keyboard")
+                KeyboardTab(paner);
+            else OptionsTab(optionsScreens[optionsTab], paner);
+            //BigButton("Keybinds", 2, Keybind);
+        }
+            break;
+        case GUIScreen::Keybind: {
+            BackButton([this](){ targetScreen = GUIScreen::Options; });
+            JustTitleText("Keybinds");
+        }
+            break;
+        case GUIScreen::About:
+        case GUIScreen::Test:
+            break;
+    }
+    
+    currentScreen = targetScreen;
+    
+    return STATE_CHANGETO(_drawScreen);
 }
 
-bool levelloaded = false;
+StateFunction CGUI::_drawScreen() {
+    if (currentScreen != targetScreen) {
+        PlaySound(kTeleSound);
+        return STATE_CHANGETO(_transitionScreen);
+    }
+    bool any = false;
+    for (auto it = currentItems.begin(); it != currentItems.end(); ++it) {
+        if (!(*it).interactable) continue;
+        if (isInRect(cursor_x, cursor_y, (*it).rect)) {
+            (*it).focus = true;
+            focus[0] = (*it).ord_x;
+            focus[1] = (*it).ord_y;
+            any = true;
+        }
+        else (*it).focus = false;
+    }
+    if (!any) {
+        focus[0] = -1;
+        focus[1] = -1;
+    }
+    return STATE_STAY;
+}
+
 StateFunction CGUI::_test() {
     std::stringstream fps;
     fps << "frame in: " << dt << "ms";
-    mu_label(mui_ctx, fps.str().c_str());
-    /*if (BSPButton("PLAY")) {
-        itsGame->SendStartCommand();
-        active = false;
-    }
-    return STAY;
-    */
-    /*else {
-        if (BSPButton("LOAD")) {
-            itsTui->ExecuteMatchingCommand("/rand avara aa emo ex", itsLocalPlayer);
-            levelloaded = true;
-        }
-    }
-    */
-    if (BSPButton("ABOUT")) {
-        PlaySound(411);
-    }
-    if (BSPButton("QUIT")) {
-        SetActive(false);
-        pushQuit();
-    }
     
-    const char* label = "A text input:";
-    int w = text_width(0, label, (int)strlen(label));
-    mu_layout_row(mui_ctx, 2, (int[]) { w + 50, 400 }, 0);
-    mu_label(mui_ctx, label);
-    BSPTextInput("myinputid", teststring);
-
-    const char* label2 = "A checkbox:";
-    w = text_width(0, label2, (int)strlen(label2));
-    mu_layout_row(mui_ctx, 2, (int[]) { w + 50, 75 }, 0);
-    mu_label(mui_ctx, label2);
-    BSPCheckbox("checkboxid", &testbool);
-    
-    return STAY;
+    return STATE_STAY;
 }
 
 void CGUI::Render(NVGcontext *ctx) {
@@ -356,56 +545,33 @@ void CGUI::Render(NVGcontext *ctx) {
     //nvgSave(ctx);
     nvgBeginFrame(ctx, gApplication->fb_size_x, gApplication->fb_size_y, gApplication->pixel_ratio);
     nvgBeginPath(ctx);
-
     nvgFontFace(ctx, "mono");
-    nvgFontSize(ctx, 55);
-    LookAtGUI();
-    //itsWorld->Render(itsView);
-    //screen->Render(ctx);
-
-    mu_Command *cmd = NULL;
-    while (mu_next_command(mui_ctx, &cmd)) {
-        
-        if (cmd->type == MU_COMMAND_RECT) {
-            /*
-            mu_Rect rect = cmd->rect.rect;
-            NVGcolor c = toNVGcolor(cmd->rect.color);
-            nvgBeginPath(ctx);
-            nvgRect(ctx, cmd->rect.rect.x, cmd->rect.rect.y, cmd->rect.rect.w, cmd->rect.rect.h);
-            nvgStrokeColor(ctx, c);
-            nvgFillColor(ctx, c);
-            nvgStroke(ctx);
-            nvgFill(ctx);
-            nvgClosePath(ctx);
-            */
-            
-        }
-        
-        if (cmd->type == MU_COMMAND_TEXT) {
-            nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
-            nvgFillColor(ctx, toNVGcolor(cmd->text.color));
-            nvgText(ctx, cmd->text.pos.x, cmd->text.pos.y, cmd->text.str, NULL);
-        }
+    for (auto it = currentItems.begin(); it != currentItems.end(); ++it) {
+        (*it).Draw(ctx);
     }
-    NVGcolor c = toNVGcolor(mui_ctx->style->colors[MU_COLOR_BASE]);
-    nvgBeginPath(ctx);
-    nvgStrokeColor(ctx, c);
-    nvgMoveTo(ctx, cursor_x, 0);
-    nvgLineTo(ctx, cursor_x, gApplication->fb_size_y);
-    nvgStroke(ctx);
-    nvgClosePath(ctx);
-    
-    nvgBeginPath(ctx);
-    nvgStrokeColor(ctx, c);
-    nvgMoveTo(ctx, 0, cursor_y);
-    nvgLineTo(ctx, gApplication->fb_size_x, cursor_y);
-    nvgStroke(ctx);
-    nvgClosePath(ctx);
-    
+    CursorDebug(ctx);
     nvgEndFrame(ctx);
-    //cursorWorld->Render(itsView);
 }
 
-void CGUI::Dispose() {
-    delete this;
+
+void CGUI::CursorDebug(NVGcontext *ctx) {
+    Dim sz = pad * 2.4;
+    NVGcolor c;
+    c.r = c.g = c.b = 0;
+    c.a = 255;
+    nvgBeginPath(ctx);
+    nvgStrokeColor(ctx, c);
+    nvgMoveTo(ctx, cursor_x - sz, cursor_y);
+    nvgLineTo(ctx, cursor_x + sz, cursor_y);
+    nvgStrokeWidth(ctx, 2.0);
+    nvgStroke(ctx);
+    nvgClosePath(ctx);
+    
+    nvgBeginPath(ctx);
+    nvgStrokeColor(ctx, c);
+    nvgMoveTo(ctx, cursor_x, cursor_y - sz);
+    nvgLineTo(ctx, cursor_x, cursor_y + sz);
+    nvgStrokeWidth(ctx, 2.0);
+    nvgStroke(ctx);
+    nvgClosePath(ctx);
 }
