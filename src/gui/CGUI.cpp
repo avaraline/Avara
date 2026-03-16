@@ -232,18 +232,31 @@ StateFunction CGUI::_startup() {
     return STATE_CHANGETO(_transitionScreen);
 }
 
-void CGUI::Button(std::string text, short ord_x, short ord_y, NVGrect r, std::function<void()> action) {
+GUIItem CGUI::WidgetDefaults(short ord_x, short ord_y, NVGrect r, std::function<void()>action) {
     GUIItem w;
-    w.itemType = GUIItemType::Button;
     w.rect = r;
-    w.text = text;
     w.ord_x = ord_x;
     w.ord_y = ord_y;
-    w.interactable = true;
     w.focus = false;
     w.action = action;
     w.color = nvgRGBA(20, 20, 20, 160);
     w.textColor = invertColor(w.color);
+    return w;
+}
+
+void CGUI::Button(std::string text, short ord_x, short ord_y, NVGrect r, std::function<void()> action) {
+    GUIItem w = WidgetDefaults(ord_x, ord_y, r, action);
+    w.itemType = GUIItemType::Button;
+    w.interactable = true;
+    w.text = text;
+    currentItems.push_back(w);
+}
+
+void CGUI::TextInput(std::string &text, short ord_x, short ord_y, NVGrect r, std::function<void()> action) {
+    GUIItem w = WidgetDefaults(ord_x, ord_y, r, action);
+    w.itemType = GUIItemType::TextInput;
+    w.interactable = true;
+    w.text = text;
     currentItems.push_back(w);
 }
 
@@ -401,14 +414,25 @@ void CGUI::OptionsTab(nlohmann::json config, NVGrect r) {
             }
             case optionTypes::kOptionTypeInteger:
             case optionTypes::kOptionTypeChoice:{
+                json choices;
+                if (opt.value().size() > 3)
+                    choices = opt.value()[3];
                 int pref = itsApp->Get(tag);
+                std::string selected;
+                for (auto &choice : choices.items()) {
+                    if (pref == choice.value()[0])
+                        selected = choice.value()[1];
+                }
                 std::string prefs = std::to_string(pref);
-                Button(prefs, 1, idx, valr, [](){});
+                Button(selected, 1, idx, valr, [this, opt](){
+                    dropdown = opt;
+                    STATE_CHANGETO(_dropDownMode);
+                });
                 break;
             }
             case optionTypes::kOptionTypeString:{
                 std::string pref = itsApp->Get(tag);
-                Button(pref, 1, idx, valr, [](){});
+                TextInput(pref, 1, idx, valr, [](){});
                 break;
             }
             case optionTypes::kOptionTypeColor:{
@@ -451,11 +475,15 @@ StateFunction CGUI::_transitionScreen() {
         }
             break;
         case GUIScreen::Tracker:
+            break;
         case GUIScreen::HostGame:
+            break;
         case GUIScreen::Server:
+            break;
         case GUIScreen::Options: {
             BackButton([this](){ targetScreen = GUIScreen::MainMenu; });
             JustTitleText("Options");
+            // tab rects
             Dim taby = unit_y * .5 + (pad * 2);
             Dim tabx = unit_x / 4 + (pad * 2);
             Dim tabw = itsApp->fb_size_x - tabx - (pad * 2);
@@ -467,22 +495,26 @@ StateFunction CGUI::_transitionScreen() {
                 tabr.y = taby;
                 tabr.w = tabw / tabcount - pad;
                 tabr.h = unit_y / 3;
+                // hilite the active tab
                 if (optionsTab == tab.key()) {
-                    NVGrect connection;
-                    connection.x = tabr.x + (pad * .25f);
-                    connection.y = tabr.y + tabr.h + (pad * .6f);
-                    connection.w = tabr.w - (pad * .75f);
-                    connection.h = pad * .75f;
-                    JustLine(connection);
+                    NVGrect hilite;
+                    hilite.x = tabr.x + (pad * .25f);
+                    hilite.y = tabr.y + tabr.h + (pad * .6f);
+                    hilite.w = tabr.w - (pad * .75f);
+                    hilite.h = pad * .75f;
+                    JustLine(hilite);
                 }
                 std::string tab_str(tab.key());
                 Button(tab_str, 0, i, tabr, [this, tab_str]() {
                     PlaySound(kFootStepSound);
+                    // send us to another tab
                     optionsTab = tab_str;
+                    // transition with no target updates everything
                     state = STATE_CHANGETO(_transitionScreen);
                 });
                 i++;
             }
+            // large background rect
             NVGrect paner;
             paner.w = tabw - pad;
             paner.h = itsApp->fb_size_y - unit_y * 2;
@@ -511,6 +543,7 @@ StateFunction CGUI::_transitionScreen() {
 }
 
 StateFunction CGUI::_drawScreen() {
+    // poorly named, but basically, this state waits for input
     if (currentScreen != targetScreen) {
         PlaySound(kTeleSound);
         return STATE_CHANGETO(_transitionScreen);
@@ -530,6 +563,19 @@ StateFunction CGUI::_drawScreen() {
         focus[0] = -1;
         focus[1] = -1;
     }
+    return STATE_STAY;
+}
+
+StateFunction CGUI::_dropDownMode() {
+    for (auto it = currentItems.begin(); it != currentItems.end(); ++it) {
+        if ((*it).focus) {
+            
+        }
+    return STATE_STAY;
+}
+
+StateFunction CGUI::_textInputMode() {
+    
     return STATE_STAY;
 }
 

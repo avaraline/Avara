@@ -36,10 +36,11 @@ void GUIItem::Draw(NVGcontext *ctx) {
             NVGBtn(ctx);
             break;
         case GUIItemType::TextInput:
-            NVGRect(ctx);
+            NVGRectPath(ctx);
+            NVGText(ctx);
             break;
         case GUIItemType::Checkbox:
-            NVGRect(ctx);
+            NVGRectPath(ctx);
             break;
         case GUIItemType::Dropdown:
             NVGRect(ctx);
@@ -114,4 +115,12 @@ void GUIItem::NVGRect(NVGcontext *ctx) {
     nvgRect(ctx, rect.x, rect.y, rect.w, rect.h);
     nvgFillColor(ctx, color);
     nvgFill(ctx);
+}
+
+void GUIItem::NVGRectPath(NVGcontext *ctx) {
+    nvgBeginPath(ctx);
+    nvgRect(ctx, rect.x, rect.y, rect.w, rect.h);
+    nvgStrokeColor(ctx, textColor);
+    nvgStroke(ctx);
+    nvgClosePath(ctx);
 }

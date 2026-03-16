@@ -77,7 +77,7 @@ protected:
     std::vector<GUIItem> currentItems;
 
     StateFunction _startup(), _transitionScreen(), _drawScreen(), _test();
-    StateFunction _textInput();
+    StateFunction _textInputMode(), _dropDownMode();
     StateFunction _modal();
 
     StateFunction state = std::bind(&CGUI::_startup, this);
@@ -91,6 +91,8 @@ protected:
     short focus[2] = {-1, -1};
     short prevFocus[2] = {-1, -1};
     
+    json dropdown;
+    
     uint64_t started = 0;
     uint64_t t = 0;
     uint64_t last_t = 0;
@@ -98,8 +100,9 @@ protected:
     uint16_t anim_timer = 0;
     
     void CursorDebug(NVGcontext *ctx);
-    void Pane(NVGrect r);
+    GUIItem WidgetDefaults(short ord_x, short ord_y, NVGrect r, std::function<void()>action);
     void Button(std::string text, short ord_x, short ord_y, NVGrect r, std::function<void()> action);
+    void TextInput(std::string &text, short ord_x, short ord_y, NVGrect r, std::function<void()> action);
     void BigButton(std::string text, short index, GUIScreen target);
     void BigButton(std::string text, short index, std::function<void()> action);
     void BackButton(std::function<void()> action);
@@ -109,6 +112,7 @@ protected:
     void JustText(std::string text, NVGrect r);
     void JustText(std::string text, NVGrect r, bool bg);
     void JustTitleText(std::string text);
+    void Pane(NVGrect r);
     void OptionsTab(nlohmann::json config, NVGrect r);
     void KeyboardTab(NVGrect r);
     void Select();

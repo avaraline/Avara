@@ -66,6 +66,7 @@ public:
     
     void Draw(NVGcontext *ctx);
     void NVGRect(NVGcontext *ctx);
+    void NVGRectPath(NVGcontext *ctx);
     void NVGBtn(NVGcontext *ctx);
     void NVGPane(NVGcontext *ctx);
     void NVGText(NVGcontext *ctx);
