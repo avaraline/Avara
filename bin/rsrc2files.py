@@ -61,11 +61,18 @@ def writealf(alfpath, alfd):
 
 
 ffmpeg_found = False
-for path in os.environ["PATH"].split(os.pathsep):
-    bin_file = os.path.join(path, "ffmpeg")
-    exe_file = bin_file + ".exe"
-    if is_exe(exe_file) or is_exe(bin_file):
-        ffmpeg_found = True
+ffmpeg_path = "ffmpeg"
+manual_ffmpeg = os.environ["AVARA_FFMPEG"]
+if (manual_ffmpeg):
+    ffmpeg_path = manual_ffmpeg
+    ffmpeg_found = True
+else:
+    for path in os.environ["PATH"].split(os.pathsep):
+        bin_file = os.path.join(path, "ffmpeg")
+        exe_file = bin_file + ".exe"
+        if is_exe(exe_file) or is_exe(bin_file):
+            ffmpeg_found = True
+            ffmpeg_path = exe_file if is_exe(exe_file) else bin_file
 
 if not ffmpeg_found and EXPORT_SOUNDS:
     print("Please install ffmpeg to change WAV into OGG")
@@ -176,7 +183,7 @@ def convert_to_files(datafile, thedir):
                 popen = subprocess.Popen(args, stdout=subprocess.PIPE)
                 popen.wait()
 
-            args = ["ffmpeg", "-y", "-i", wavpath, "-acodec", "libvorbis", oggpath]
+            args = [ffmpeg_path, "-y", "-i", wavpath, "-acodec", "libvorbis", oggpath]
             popen = subprocess.Popen(args, stdout=subprocess.PIPE)
             popen.wait()
 
