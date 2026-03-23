@@ -232,7 +232,7 @@ StateFunction CGUI::_startup() {
     return STATE_CHANGETO(_transitionScreen);
 }
 
-GUIItem CGUI::WidgetDefaults(short ord_x, short ord_y, NVGrect r, std::function<void()>action) {
+GUIItem CGUI::ItemDefaults(short ord_x, short ord_y, NVGrect r, std::function<void()>action) {
     GUIItem w;
     w.rect = r;
     w.ord_x = ord_x;
@@ -244,16 +244,16 @@ GUIItem CGUI::WidgetDefaults(short ord_x, short ord_y, NVGrect r, std::function<
     return w;
 }
 
-void CGUI::Button(std::string text, short ord_x, short ord_y, NVGrect r, std::function<void()> action) {
-    GUIItem w = WidgetDefaults(ord_x, ord_y, r, action);
+void CGUI::Button(const std::string &text, short ord_x, short ord_y, NVGrect r, std::function<void()> action) {
+    GUIItem w = ItemDefaults(ord_x, ord_y, r, action);
     w.itemType = GUIItemType::Button;
     w.interactable = true;
     w.text = text;
     currentItems.push_back(w);
 }
 
-void CGUI::TextInput(std::string &text, short ord_x, short ord_y, NVGrect r, std::function<void()> action) {
-    GUIItem w = WidgetDefaults(ord_x, ord_y, r, action);
+void CGUI::TextInput(const std::string &text, short ord_x, short ord_y, NVGrect r, std::function<void()> action) {
+    GUIItem w = ItemDefaults(ord_x, ord_y, r, action);
     w.itemType = GUIItemType::TextInput;
     w.interactable = true;
     w.text = text;
@@ -267,13 +267,13 @@ void CGUI::Pane(NVGrect r) {
     currentItems.push_back(p);
 }
 
-void CGUI::BigButton(std::string text, short index, GUIScreen target) {
+void CGUI::BigButton(const std::string &text, short index, GUIScreen target) {
     BigButton(text, index, [this, target]() {
         targetScreen = target;
     });
 }
 
-void CGUI::BigButton(std::string text, short index, std::function<void()> action) {
+void CGUI::BigButton(const std::string &text, short index, std::function<void()> action) {
     NVGrect r;
     r.x = unit_x + pad;
     r.y = ((unit_y / 2) + (unit_y * index)) + ((pad * 2) * index);
@@ -289,11 +289,12 @@ void CGUI::BackButton(std::function<void()> action) {
     r.y = pad;
     r.w = unit_x / 4;
     r.h = r.w;
+    std::string back_glyph = "<";
     
-    Button("<", 0, 0, r, action);
+    Button(back_glyph, 0, 0, r, action);
 }
 
-void CGUI::JustTitleText(std::string text) {
+void CGUI::JustTitleText(const std::string &text) {
     NVGrect r;
     r.x = (itsApp->fb_size_x / 2) - unit_x + pad;
     r.y = (pad * 2);
@@ -302,11 +303,11 @@ void CGUI::JustTitleText(std::string text) {
     JustText(text, r, true);
 }
 
-void CGUI::JustText(std::string text, NVGrect r) {
+void CGUI::JustText(const std::string &text, NVGrect r) {
     JustText(text, r, false);
 }
 
-void CGUI::JustText(std::string text, NVGrect r, bool bg) {
+void CGUI::JustText(const std::string &text, NVGrect r, bool bg) {
     GUIItem w;
     w.itemType = GUIItemType::JustText;
     w.rect = r;
@@ -374,8 +375,9 @@ void CGUI::KeyboardTab(NVGrect r) {
         else {
             keylabel << pair.value();
         }
+        std::string keystr = keylabel.str();
         JustText(action, keyr);
-        JustText(keylabel.str(), valr);
+        JustText(keystr, valr);
         idx++;
     }
 }
@@ -571,6 +573,7 @@ StateFunction CGUI::_dropDownMode() {
         if ((*it).focus) {
             
         }
+    }
     return STATE_STAY;
 }
 

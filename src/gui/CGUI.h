@@ -100,18 +100,18 @@ protected:
     uint16_t anim_timer = 0;
     
     void CursorDebug(NVGcontext *ctx);
-    GUIItem WidgetDefaults(short ord_x, short ord_y, NVGrect r, std::function<void()>action);
-    void Button(std::string text, short ord_x, short ord_y, NVGrect r, std::function<void()> action);
-    void TextInput(std::string &text, short ord_x, short ord_y, NVGrect r, std::function<void()> action);
-    void BigButton(std::string text, short index, GUIScreen target);
-    void BigButton(std::string text, short index, std::function<void()> action);
+    GUIItem ItemDefaults(short ord_x, short ord_y, NVGrect r, std::function<void()>action);
+    void Button(const std::string &text, short ord_x, short ord_y, NVGrect r, std::function<void()> action);
+    void TextInput(const std::string &text, short ord_x, short ord_y, NVGrect r, std::function<void()> action);
+    void BigButton(const std::string &text, short index, GUIScreen target);
+    void BigButton(const std::string &text, short index, std::function<void()> action);
     void BackButton(std::function<void()> action);
     void JustRect(NVGrect r);
     void JustRect(NVGrect r, NVGcolor c);
     void JustLine(NVGrect r);
-    void JustText(std::string text, NVGrect r);
-    void JustText(std::string text, NVGrect r, bool bg);
-    void JustTitleText(std::string text);
+    void JustText(const std::string &text, NVGrect r);
+    void JustText(const std::string &text, NVGrect r, bool bg);
+    void JustTitleText(const std::string &text);
     void Pane(NVGrect r);
     void OptionsTab(nlohmann::json config, NVGrect r);
     void KeyboardTab(NVGrect r);
