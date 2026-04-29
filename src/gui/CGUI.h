@@ -16,6 +16,7 @@
 
 #include <SDL2/SDL.h>
 #include <glm/glm.hpp>
+#include "json.hpp"
 
 #define kCursorBSP 801
 #define kAvaraLogo 100
@@ -100,7 +101,7 @@ protected:
     uint16_t anim_timer = 0;
     
     void CursorDebug(NVGcontext *ctx);
-    GUIItem ItemDefaults(short ord_x, short ord_y, NVGrect r, std::function<void()>action);
+    GUIItem ItemDefaults(short ord_x, short ord_y, NVGrect r, std::function<void()> action);
     void Button(const std::string &text, short ord_x, short ord_y, NVGrect r, std::function<void()> action);
     void TextInput(const std::string &text, short ord_x, short ord_y, NVGrect r, std::function<void()> action);
     void BigButton(const std::string &text, short index, GUIScreen target);
@@ -113,8 +114,11 @@ protected:
     void JustText(const std::string &text, NVGrect r, bool bg);
     void JustTitleText(const std::string &text);
     void Pane(NVGrect r);
-    void OptionsTab(nlohmann::json config, NVGrect r);
+    void OptionsTab(nlohmann::json &config, NVGrect r);
     void KeyboardTab(NVGrect r);
+    void KeyboardKeyControl(NVGRect r, nlohmann::json &keyboardConfigPair);
+    GUIItem GetFocused();
+    bool IsHover(NVGrect r);
     void Select();
 };
 

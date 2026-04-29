@@ -13,10 +13,6 @@
 #include <json.hpp>
 #include "httplib.h"
 
-std::string teststring = "hella";
-bool testbool = false;
-#define TEXT_INPUT_TEMP_BUFFER_SIZE 1024
-
 void pushQuit()
 {
     SDL_Event ev;
@@ -167,12 +163,17 @@ void CGUI::Update() {
         PlaySound(kFootStepSound);
 }
 
-void CGUI::Select() {
+GUIItem CGUI::GetFocused() {
     for (auto it = currentItems.begin(); it != currentItems.end(); ++it) {
-        if ((*it).focus && (*it).action) {
-            (*it).action();
+        if ((*it).focus) {
+            return (*it);
         }
     }
+}
+
+void CGUI::Select() {
+    GUIItem focus = GetFocused();
+    if (focus.action) focus.action();
 }
 
 void CGUI::PlaySound(short theSound) {
@@ -382,7 +383,11 @@ void CGUI::KeyboardTab(NVGrect r) {
     }
 }
 
-void CGUI::OptionsTab(nlohmann::json config, NVGrect r) {
+void CGUI::KeyboardKeyControl(NVGrect r, nlohmann::json &keyConfigPair) {
+    
+}
+
+void CGUI::OptionsTab(nlohmann::json &config, NVGrect r) {
     int idx = 0;
     int secondCol = 0;
     for (auto &opt : config.items()) {
@@ -529,11 +534,7 @@ StateFunction CGUI::_transitionScreen() {
             //BigButton("Keybinds", 2, Keybind);
         }
             break;
-        case GUIScreen::Keybind: {
-            BackButton([this](){ targetScreen = GUIScreen::Options; });
-            JustTitleText("Keybinds");
-        }
-            break;
+        case GUIScreen::Keybind:
         case GUIScreen::About:
         case GUIScreen::Test:
             break;
@@ -591,7 +592,6 @@ StateFunction CGUI::_test() {
 
 void CGUI::Render(NVGcontext *ctx) {
     if (!active) return;
-    //nvgSave(ctx);
     nvgBeginFrame(ctx, gApplication->fb_size_x, gApplication->fb_size_y, gApplication->pixel_ratio);
     nvgBeginPath(ctx);
     nvgFontFace(ctx, "mono");
