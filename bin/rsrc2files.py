@@ -180,6 +180,7 @@ def convert_to_files(datafile, thedir):
 
             if not os.path.exists(wavpath):
                 args = [f"build{os.path.sep}hsnd2wav", str(k), wavpath, str(datafile)]
+                print(args)
                 popen = subprocess.Popen(args, stdout=subprocess.PIPE)
                 popen.wait()
 

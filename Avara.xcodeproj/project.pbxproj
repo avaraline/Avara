@@ -14,6 +14,7 @@
 		6055BF212DEA8A79005E3CFB /* BasePath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6055BF202DEA8A79005E3CFB /* BasePath.cpp */; };
 		6055BF222DEA8A79005E3CFB /* BasePath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6055BF202DEA8A79005E3CFB /* BasePath.cpp */; };
 		6055BF232DEA8A79005E3CFB /* BasePath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6055BF202DEA8A79005E3CFB /* BasePath.cpp */; };
+		60A38E7E2FB45F6F0054A2FE /* hsnd2wav.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60A38E7D2FB45F6F0054A2FE /* hsnd2wav.cpp */; };
 		940541ED2B5875B200E32241 /* OpenGLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940541EC2B5875B200E32241 /* OpenGLShader.cpp */; };
 		940541EE2B5875B200E32241 /* OpenGLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940541EC2B5875B200E32241 /* OpenGLShader.cpp */; };
 		9419E8472B49ECB1007C50D0 /* CTeamColorAdjuster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9419E8462B49ECB1007C50D0 /* CTeamColorAdjuster.cpp */; };
@@ -580,6 +581,7 @@
 		601893B72ED5A1F500AB3A6D /* signalhandling.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = signalhandling.hpp; sourceTree = "<group>"; };
 		6055BF1F2DEA8A79005E3CFB /* BasePath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasePath.h; sourceTree = "<group>"; };
 		6055BF202DEA8A79005E3CFB /* BasePath.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BasePath.cpp; sourceTree = "<group>"; };
+		60A38E7D2FB45F6F0054A2FE /* hsnd2wav.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = hsnd2wav.cpp; sourceTree = "<group>"; };
 		60C274E22C23EBE9005B67A9 /* LegacyOpenGLRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LegacyOpenGLRenderer.cpp; sourceTree = "<group>"; };
 		60C274E32C23EBE9005B67A9 /* LegacyOpenGLRenderer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = LegacyOpenGLRenderer.h; sourceTree = "<group>"; };
 		940541EB2B58744500E32241 /* OpenGLShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLShader.h; sourceTree = "<group>"; };
@@ -1353,6 +1355,7 @@
 			isa = PBXGroup;
 			children = (
 				E5890C7929895118007A875D /* Avara.cpp */,
+				60A38E7D2FB45F6F0054A2FE /* hsnd2wav.cpp */,
 				E2B62D7D2997052B00600401 /* tests.cpp */,
 				9465BFCF2B30C2130050681C /* assets */,
 				E5890C6E29895118007A875D /* audio */,
@@ -2651,6 +2654,7 @@
 				944F2F702B323F1900856E53 /* LocalAssetRepository.cpp in Sources */,
 				E5890D0929895118007A875D /* CNetworkWindow.cpp in Sources */,
 				9465BFD22B30C2A00050681C /* AssetManager.cpp in Sources */,
+				60A38E7E2FB45F6F0054A2FE /* hsnd2wav.cpp in Sources */,
 				E5890EFA29895124007A875D /* glcanvas.cpp in Sources */,
 				E5890CB029895118007A875D /* RamFiles.cpp in Sources */,
 				E5890CD929895118007A875D /* CRandomIncarnator.cpp in Sources */,
