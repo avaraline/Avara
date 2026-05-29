@@ -115,9 +115,10 @@
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
   <Goody shape="bspMissile" y="2" speed="6" missiles="3" start="mShow" out="mTaken" color="#a5b0c6" color.1="#e72400" cx="76.875" cz="97.43055555555556" angle="225" />
-  <Incarnator y="30" cx="168.75" cz="136.80555555555557" angle="270" />
-  <Incarnator y="30" cx="116.25" cz="189.30555555555557" angle="0" />
   <Incarnator y="30" cx="116.25" cz="84.30555555555556" angle="180" />
+  <Incarnator y="30" cx="116.25" cz="189.30555555555557" angle="0" />
+  <Incarnator y="30" cx="63.75" cz="136.80555555555557" angle="90" />
+  <Incarnator y="30" cx="168.75" cz="136.80555555555557" angle="270" />
   <Incarnator y="30" cx="63.75" cz="84.30555555555556" angle="135" />
   <Incarnator y="30" cx="168.75" cz="189.30555555555557" angle="315" />
   <Incarnator y="30" cx="168.75" cz="84.30555555555556" angle="225" />
