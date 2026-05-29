@@ -74,7 +74,8 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
                           METHOD_TO_LAMBDA_VARGS(ToggleSpectator));
     TextCommand::Register(cmd);
 
-    cmd = new TextCommand("/load chok       <- load level with name containing the letters 'chok'",
+    cmd = new TextCommand("/load chok       <- load level with name containing the letters 'chok'\n"
+                          "/load #fav       <- load random level with tag 'fav' (same as /rand #fav)",
                           METHOD_TO_LAMBDA_VARGS(LoadNamedLevel));
     TextCommand::Register(cmd);
 
@@ -427,6 +428,9 @@ bool CommandManager::LoadNamedLevel(VectorOfArgs vargs) {
         int loadIndex = loadNumber++ % bestLevels.size();  // alternates between candidates
         itsApp->levelWindow->SelectLevel(bestLevels[loadIndex].first, bestLevels[loadIndex].second);
         itsApp->levelWindow->SendLoad();
+    } else {
+        // try /rand in case user typed something like /load #tag or /load setName
+        return LoadRandomLevel(vargs);
     }
     return true;
 }
