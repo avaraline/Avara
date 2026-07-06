@@ -116,8 +116,8 @@ protected:
     void Pane(NVGrect r);
     void OptionsTab(nlohmann::json &config, NVGrect r);
     void KeyboardTab(NVGrect r);
-    void KeyboardKeyControl(NVGRect r, nlohmann::json &keyboardConfigPair);
-    GUIItem GetFocused();
+    void KeyboardKeyControl(NVGrect r, nlohmann::json &keyboardConfigPair);
+    GUIItem* GetFocused();
     bool IsHover(NVGrect r);
     void Select();
 };

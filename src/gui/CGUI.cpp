@@ -163,17 +163,18 @@ void CGUI::Update() {
         PlaySound(kFootStepSound);
 }
 
-GUIItem CGUI::GetFocused() {
+GUIItem *CGUI::GetFocused() {
     for (auto it = currentItems.begin(); it != currentItems.end(); ++it) {
         if ((*it).focus) {
-            return (*it);
+            return &(*it);
         }
     }
+    return NULL;
 }
 
 void CGUI::Select() {
-    GUIItem focus = GetFocused();
-    if (focus.action) focus.action();
+    GUIItem* focus = GetFocused();
+    if (focus && focus->action) focus->action();
 }
 
 void CGUI::PlaySound(short theSound) {
