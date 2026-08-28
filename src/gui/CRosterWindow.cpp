@@ -458,6 +458,19 @@ bool CRosterWindow::handleSDLEvent(SDL_Event &event) {
                 //SDL_Log("CRosterWindow::handleSDLEvent CLEAR");
 
                 return true;
+            case SDLK_q:
+                if (SDL_GetModState() & KMOD_CTRL) {
+                    ((CAvaraAppImpl *)gApplication)->Done();
+                    leave();
+                    return true;
+                } else
+                    return false;
+            case SDLK_r:
+                if (SDL_GetModState() & KMOD_CTRL) {
+                    ((CAvaraAppImpl *)gApplication)->GetGame()->SendStartCommand();
+                    return true;
+                } else
+                    return false;
             case SDLK_g:
                 if (SDL_GetModState() & KMOD_CTRL) {
                     SendRosterMessage(1, bellline);
