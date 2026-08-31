@@ -39,6 +39,8 @@
 #include "System.h"
 #include "Tags.h"
 #include "httplib.h"
+#include "NVGUtil.h"
+#include <glm/glm.hpp>
 
 #include <chrono>
 #include <cmath>
@@ -189,13 +191,20 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
 
     itsGame->IAvaraGame(this);
 
-    gameNet->ChangeNet(kNullNet, "");
-
     previewAngle = 0;
     previewRadius = 0;
     animatePreview = false;
 
-    setLayout(new nanogui::FlowLayout(nanogui::Orientation::Vertical, true, 20, 20));
+    setLayout(new nanogui::BoxLayout(nanogui::Orientation::Horizontal, nanogui::Alignment::Minimum, 25, 25));
+
+    itsGUIState = GUIState::title;
+
+    mainMenu = new CMainMenu(this, mNVGContext);
+
+    backButton = new nanogui::Button(this, "Back");
+    backButton->setFixedWidth(50);
+    backButton->setTextPosition(nanogui::Button::TextPosition::Left);
+    backButton->setVisible(false);
 
     playerWindow = new CPlayerWindow(this);
     playerWindow->setFixedWidth(200);
@@ -210,20 +219,30 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     serverWindow->setFixedWidth(200);
 
     trackerWindow = new CTrackerWindow(this);
-    trackerWindow->setFixedWidth(325);
+    trackerWindow->setFixedWidth(500);
 
     rosterWindow = new CRosterWindow(this);
+
+    settingsWindow = new CSettingsWindow(this);
+
+    keyMapWindow = new CKeyboardMappingWindow(this);
+    settingsWindow->setKeyMapWindow(keyMapWindow);
 
     performLayout();
 
     for (auto win : windowList) {
-        win->restoreState();
+        // win->restoreState();
+        win->setVisible(false);
     }
+
+    mainMenu->setVisible(true);
 
     nextTrackerUpdate = 0;
     trackerUpdatePending = false;
     trackerThread = new std::thread(TrackerPinger, this);
     trackerThread->detach();
+
+    gameNet->ChangeNet(kNullNet, "");
 
     // register and handle text commands
     itsTui = new CommandManager(this);
@@ -244,6 +263,68 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
 CAvaraAppImpl::~CAvaraAppImpl() {
     DeallocParser();
 }
+
+void CAvaraAppImpl::SetGUIState(GUIState g) {
+    if (g != itsGUIState) {
+        auto prevState = itsGUIState;
+        SDL_Log("GUIState %i %i", prevState, g);
+        UpdateGUI(g);
+    }
+}
+
+GUIState CAvaraAppImpl::GetGUIState() {
+    return itsGUIState;
+}
+
+void CAvaraAppImpl::UpdateGUI(GUIState g) {
+    auto oldState = itsGUIState;
+    if (g != GUIState::title) {
+        backButton->setCallback([this, oldState] () {
+            UpdateGUI(oldState);
+            backButton->setVisible(false);
+        });
+        backButton->setVisible(true);
+        backButton->setNeedsLayout();
+    }
+    else backButton->setVisible(false);
+    for (auto win : windowList) {
+        win->setVisible(false);
+    }
+    mainMenu->setVisible(false);
+    switch (g) {
+        case GUIState::title:
+            mainMenu->setVisible(true);
+            break;
+        case GUIState::hostSettings:
+            serverWindow->setVisible(true);
+            serverWindow->setNeedsLayout();
+            break;
+        case GUIState::hostServer:
+            serverWindow->setVisible(true);
+            serverWindow->setNeedsLayout();
+            levelWindow->setVisible(true);
+            levelWindow->setNeedsLayout();
+            rosterWindow->setVisible(true);
+            rosterWindow->setNeedsLayout();
+            break;
+        case GUIState::tracker:
+            trackerWindow->setVisible(true);
+            break;
+        case GUIState::about:
+        case GUIState::singlePlayer:
+            levelWindow->setVisible(true);
+            rosterWindow->setVisible(true);
+            break;
+        case GUIState::settings:
+            settingsWindow->setVisible(true);
+            break;
+        default:
+            break;
+    }
+    setNeedsLayout();
+    itsGUIState = g;
+}
+
 
 void CAvaraAppImpl::Done() {
     // This will trigger a clean disconnect if connected.
@@ -294,7 +375,6 @@ void CAvaraAppImpl::idle() {
     if (itsGame->GameTick()) {
         RenderContents();
     }
-
     // output a coarse estimate of cpu time & percent every second when enabled
     if (curFrame > 1 && curFrame != itsGame->frameNumber && Debug::IsEnabled("cpu")) {
         procTime = SDL_GetTicks() - procTime;
@@ -387,6 +467,7 @@ void CAvaraAppImpl::drawAll() {
     }
 }
 
+
 void CAvaraAppImpl::GameStarted(LevelInfo &loadedLevel) {
     auto vp = gRenderer->viewParams;
     animatePreview = false;
@@ -425,6 +506,22 @@ bool CAvaraAppImpl::DoCommand(int theCommand) {
             // break;
         case kGetReadyToStartCmd:
             break;
+        case kNetChangedCmd: {
+            switch(gameNet->netStatus) {
+                case kNullNet:
+                    UpdateGUI(GUIState::title);
+                    break;
+                case kServerNet:
+                    UpdateGUI(GUIState::hostServer);
+                    break;
+                case kClientNet:
+                    UpdateGUI(GUIState::joinedServer);
+                    break;
+                default:
+                    break;
+            }
+            break;
+        }
         default:
             break;
     }

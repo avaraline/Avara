@@ -367,6 +367,7 @@ void Screen::drawWidgets() {
     glViewport(0, 0, mFBSize[0], mFBSize[1]);
 #if !defined(AVARA_GLES)
     glBindSampler(0, 0);
+    glBindSampler(0, 0);
 #endif
     nvgBeginFrame(mNVGContext, mSize[0], mSize[1], mPixelRatio);
 

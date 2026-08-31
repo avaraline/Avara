@@ -10,6 +10,7 @@
 #include "Preferences.h"
 #include "ARGBColor.h"
 #include "Debug.h"
+#include "NVGUtil.h"
 
 #include <nanogui/colorcombobox.h>
 #include <nanogui/layout.h>
@@ -53,16 +54,6 @@ char endline[1] = {13};
 char bellline[1] = {7};
 char checkline[1] = {6};
 Widget *chatPanel;
-
-
-// quick & dirty color converter
-inline nanogui::Color ToNanoguiColor(const ARGBColor &argbColor) {
-    return nanogui::Color(argbColor.GetR(),
-                          argbColor.GetG(),
-                          argbColor.GetB(),
-                          argbColor.GetA());
-}
-
 
 CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     setFixedWidth(470);

@@ -12,12 +12,16 @@
 #include "CApplication.h"
 //#include "PolyColor.h"
 #include "CHUD.h"
+#include "NVGUtil.h"
 #include "CLevelWindow.h"
 #include "CNetworkWindow.h"
 #include "CServerWindow.h"
 #include "CPlayerWindow.h"
 #include "CRosterWindow.h"
 #include "CTrackerWindow.h"
+#include "CSettingsWindow.h"
+#include "CKeyboardMappingWindow.h"
+#include "CMainMenu.h"
 #include "CommandManager.h"
 #include "Messages.h"
 #include "CRUD.h"
@@ -105,12 +109,19 @@ public:
 class CAvaraAppImpl : public CApplication, public CAvaraApp {
 private:
     std::unique_ptr<CAvaraGame> itsGame;
-    
+
     CNetManager *gameNet;
     CommandManager *itsTui;
     std::unique_ptr<CHUD> ui;
-    
+    GUIState itsGUIState;
+    nanogui::Button* backButton;
+
 public:
+    void SetGUIState(GUIState g);
+    GUIState GetGUIState();
+    void UpdateGUI(GUIState g);
+    void UpdateGUI() { UpdateGUI(itsGUIState); };
+
     std::unique_ptr<CRUD> itsAPI;
     CPlayerWindow *playerWindow;
     CLevelWindow *levelWindow;
@@ -118,6 +129,9 @@ public:
     CServerWindow *serverWindow;
     CRosterWindow *rosterWindow;
     CTrackerWindow *trackerWindow;
+    CSettingsWindow *settingsWindow;
+    CKeyboardMappingWindow *keyMapWindow;
+    CMainMenu *mainMenu;
     
     SDL_GameController *controller; // currently paired controller
     uint32_t controllerBaseEvent; // registered with SDL_RegisterEvents

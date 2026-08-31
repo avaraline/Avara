@@ -17,7 +17,7 @@ void CWindow::restoreState() {
     long y = mApplication->Number(title() + "Y", LONG_MIN);
     
     if(x != LONG_MIN && y != LONG_MIN)
-        setPosition(nanogui::Vector2i(x, y));
+        setPosition(nanogui::Vector2i(std::max(x, 0L), std::max(y, 0L)));
 }
 
 void CWindow::saveState() {
