@@ -218,6 +218,7 @@ public:
     virtual void ReplaceAllGlow(uint8_t newGlow);
     virtual void ReplaceMaterial(Material origMaterial, Material newMaterial);
     virtual void ReplaceAllMaterials(Material newMaterial);
+    virtual void ScaleAlpha(uint8_t newAlpha);
 
     virtual Boolean PrepareForRender();
 

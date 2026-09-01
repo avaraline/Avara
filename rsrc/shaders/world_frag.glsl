@@ -18,6 +18,7 @@ uniform vec3 lightColor[MAX_LIGHTS];
 uniform float lightCelestialRadius[MAX_LIGHTS];
 uniform bool lightApplySpecular[MAX_LIGHTS];
 uniform float ambient; // = 0.0;
+uniform float extraAmbient; // = 0.0;
 uniform vec3 ambientColor; // = vec3(1, 1, 1);
 uniform bool lightsActive; // = true;
 uniform float worldYon; // = 180.0;
@@ -83,11 +84,11 @@ float noise() {
 vec4 light_color(vec3 viewDir) {
     return mix(
         mix(
-            ambient * vec4(ambientColor, 1.0) * fragmentColor,
-            vec4((ambient * ambientColor) + diffuse() + spec(viewDir), 1.0) * fragmentColor,
+            (ambient + extraAmbient) * vec4(ambientColor, 1.0) * fragmentColor,
+            vec4(((ambient + extraAmbient) * ambientColor) + diffuse() + spec(viewDir), 1.0) * fragmentColor,
             float(lightsActive)
         ),
-        fragmentColor,
+        (1 + extraAmbient) * fragmentColor,
         float(fragmentGlow > 0.0)
     );
 }
@@ -96,12 +97,12 @@ void main() {
     vec3 viewRay = camPos - fragPos;
     vec3 viewRayNormalized = normalize(viewRay);
     color = light_color(viewRayNormalized);
-    
+
     float dist = length(viewRay);
     if (hazeDensity > 0.0) {
         color.rgb = apply_fog(color.rgb, dist);
     }
-    
+
     float yonFadeRange = min(5.0, objectYon - (objectYon * 0.9));
     float yonFadeDist = objectYon - yonFadeRange;
     float alphaMult = pow(clamp((yonFadeRange + yonFadeDist - dist) / yonFadeRange, 0.0, 1.0), 0.5);

@@ -44,6 +44,7 @@ void CSliverPart::Activate(Fixed *origin,
     ARGBColor c = fromObject->materialTable[borrowPoly->materialIdx].current.GetColor();
 
     ReplaceColor(*ColorManager::getMarkerColor(0), c);
+    ReplaceGlowForColor(*ColorManager::getMarkerColor(0), 1);
 
     Fixed vLen;
     Fixed smallVector[2];
@@ -121,6 +122,8 @@ Boolean CSliverPart::SliverAction() {
         speed[2] = FMul(speed[2], fpsFriction);
 
         extraAmbient = FIX3(500) - (FIX3(2000) >> int(lifeCount*ToFloat(fpsScale)));
+
+        ScaleAlpha(255 - static_cast<uint8_t>(ToFloat(fpsScale) * 20));
     }
 
     return lifeCount == 0;
