@@ -154,7 +154,7 @@ ModernOpenGLRenderer::ModernOpenGLRenderer(SDL_Window *window) : AbstractRendere
     ApplyLights();
     ApplyPrefs();
     ApplyProjection();
-    
+
     alphaParts = {};
 
     // Create a separate VBO and VAO for the skybox, and upload its geometry to the GPU.
@@ -240,7 +240,7 @@ void ModernOpenGLRenderer::ApplyLights()
         float rgb[3];
         viewParams->dirLightSettings[i].color.ExportGLFloats(rgb, 3);
         bool applySpecular = viewParams->dirLightSettings[i].applySpecular;
-        
+
         const std::string dirUniform = "lightDir[" + std::to_string(i) + "]";
         const std::string posUniform = "lightPos[" + std::to_string(i) + "]";
         const std::string colorUniform = "lightColor[" + std::to_string(i) + "]";
@@ -254,7 +254,7 @@ void ModernOpenGLRenderer::ApplyLights()
         worldShader->SetFloat3(colorUniform, rgb);
         worldShader->SetFloat(radUniform, ToFloat(viewParams->dirLightSettings[i].celestialRadius));
         worldShader->SetBool(specUniform, applySpecular);
-        
+
         skyShader->Use();
         skyShader->SetFloat3(dirUniform, viewParams->dirLightSettings[i].direction);
         skyShader->SetFloat3(posUniform, viewParams->dirLightSettings[i].position);
@@ -270,30 +270,30 @@ void ModernOpenGLRenderer::ApplyPrefs(std::optional<std::string> name) {
         if (!name || *name == kFOV) {
             SetFOV(gApplication->Get<float>(kFOV));
         }
-        
+
         if (!name || *name == kDither) {
             dither = gApplication->Get<bool>(kDither);
-            
+
             worldShader->Use();
             worldShader->SetBool("dither", dither);
-            
+
             skyShader->Use();
             skyShader->SetBool("dither", dither);
         }
-        
+
         if (!name || *name == kSpecular) {
             showSpecular = gApplication->Get<bool>(kSpecular);
-            
+
             worldShader->Use();
             worldShader->SetBool("showSpecular", showSpecular);
-            
+
             skyShader->Use();
             skyShader->SetBool("showSpecular", showSpecular);
         }
-        
+
         if (!name || *name == kFXAA) {
             fxaa = gApplication->Get<bool>(kFXAA);
-            
+
             finalShader->Use();
             finalShader->SetBool("fxaa", fxaa);
         }
@@ -339,11 +339,11 @@ void ModernOpenGLRenderer::ApplySky()
     skyParams->groundMaterial.GetColor().ExportGLFloats(groundColorRGB, 3);
     skyParams->groundMaterial.GetSpecular().ExportGLFloats(groundSpecRGB, 3);
     groundShininess = skyParams->groundMaterial.GetShininess() / 255.0f * MAX_SHININESS_EXP;
-    
+
     float lowAlt = ToFloat(skyParams->lowSkyAltitude) / 20000.0f;
     float highAlt = ToFloat(skyParams->highSkyAltitude) / 20000.0f;
     float hazeDensity = skyParams->hazeDensity;
-    
+
     skyShader->Use();
     skyShader->SetFloat3("skyColor", highSkyColorRGB);
     skyShader->SetFloat3("horizonColor", lowSkyColorRGB);
@@ -353,7 +353,7 @@ void ModernOpenGLRenderer::ApplySky()
     skyShader->SetFloat("lowAlt", lowAlt);
     skyShader->SetFloat("highAlt", highAlt);
     skyShader->SetFloat("hazeDensity", hazeDensity);
-    
+
     worldShader->Use();
     worldShader->SetFloat3("skyColor", highSkyColorRGB);
     worldShader->SetFloat3("horizonColor", lowSkyColorRGB);
@@ -415,7 +415,7 @@ void ModernOpenGLRenderer::RenderFrame()
 {
     Clear();
     ApplyView();
-    
+
     // RENDER SKYBOX ///////////////////////////////////////////////////////////////////////////////
 
     // Switch to first offscreen FBO.
@@ -535,19 +535,20 @@ void ModernOpenGLRenderer::RenderFrame()
     glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
-void ModernOpenGLRenderer::AdjustAmbient(OpenGLShader &shader, float intensity)
+void ModernOpenGLRenderer::AdjustAmbient(OpenGLShader &shader, float intensity, float extraAmbient)
 {
     shader.SetFloat("ambient", intensity);
+    shader.SetFloat("extraAmbient", extraAmbient);
 }
 
 void ModernOpenGLRenderer::ApplyView()
 {
     glm::mat4 glMatrix = ToFloatMat(viewParams->viewMatrix);
-    
+
     // Get rid of the view translation for the sky.
     glm::mat4 glSkyMatrix = ToFloatMat(viewParams->viewMatrix);
     glSkyMatrix[3][0] = glSkyMatrix[3][1] = glSkyMatrix[3][2] = 0;
-    
+
     skyShader->Use();
     skyShader->SetMat4("view", glSkyMatrix);
     skyShader->SetFloat("maxHazeDist", ToFloat(viewParams->yonBound));
@@ -602,7 +603,7 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
         );
         glBindVertexArray(glData->alpha.vertexArray);
         glBindBuffer(GL_ARRAY_BUFFER, glData->alpha.vertexBuffer);
-        
+
         // Reupload sorted tris to GPU.
         glBufferData(GL_ARRAY_BUFFER, glData->alpha.glDataSize, glData->alpha.glData.data(), GL_STREAM_DRAW);
     }
@@ -615,15 +616,15 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
     // RGBAColor!
     glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(GLData), (void *)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
-    
+
     // Specular!
     glVertexAttribPointer(2, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(GLData), (void *)((3 * sizeof(float)) + (4 * sizeof(uint8_t))));
     glEnableVertexAttribArray(2);
-    
+
     // Glow!
     glVertexAttribPointer(3, 1, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(GLData), (void *)((3 * sizeof(float)) + (8 * sizeof(uint8_t))));
     glEnableVertexAttribArray(3);
-    
+
     // Reserved
     glVertexAttribPointer(4, 1, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(GLData), (void *)((3 * sizeof(float)) + (9 * sizeof(uint8_t))));
     glEnableVertexAttribArray(4);
@@ -643,7 +644,7 @@ void ModernOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
         AdjustAmbient(shader, ToFloat(part.privateAmbient));
     }
     if (extraAmbient > 0) {
-        AdjustAmbient(shader, defaultAmbient + extraAmbient);
+        AdjustAmbient(shader, defaultAmbient, extraAmbient);
     }
     if (part.ignoreDepthTesting) {
         glDisable(GL_DEPTH_TEST);
@@ -758,7 +759,7 @@ void ModernOpenGLRenderer::SetPositions(OpenGLShader &shader)
 {
     glm::mat4 glInvMatrix = ToFloatMat(*viewParams->GetInverseMatrix());
     float camPos[3] = {glInvMatrix[3][0], glInvMatrix[3][1], glInvMatrix[3][2]};
-    
+
     shader.Use();
     shader.SetFloat3("camPos", camPos);
     for (int i = 0; i < MAXLIGHTS; i++) {
@@ -767,7 +768,7 @@ void ModernOpenGLRenderer::SetPositions(OpenGLShader &shader)
             viewParams->dirLightSettings[i].position[1] + camPos[1],
             viewParams->dirLightSettings[i].position[2] + camPos[2]
         };
-        
+
         const std::string adjPosUniform = "adjustedLightPos[" + std::to_string(i) + "]";
         shader.SetVec3(adjPosUniform, adjLightPos);
     }
@@ -784,7 +785,7 @@ void ModernOpenGLRenderer::SetTransforms(const CBSPPart &part)
         );
         m = glm::scale(m, sc);
     }
-    
+
     glm::mat3 normalMat = glm::mat3(1.0f);
     for (int i = 0; i < 3; i ++) {
         normalMat[0][i] = ToFloat((part.modelTransform)[0][i]);

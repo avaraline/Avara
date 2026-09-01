@@ -3,6 +3,7 @@ in vec4 fragmentSpecular;
 in vec3 fragmentNormal;
 
 uniform float ambient; // = 0.0;
+uniform float extraAmbient; // = 0.0;
 uniform bool lightsActive; // = true;
 
 out vec4 color;
@@ -23,8 +24,8 @@ vec3 diffuse() {
 
 vec4 light_color() {
     return mix(
-        ambient * vec4(lightColor, 1.0) * fragmentColor,
-        vec4((ambient * lightColor) + diffuse(), 1.0) * fragmentColor,
+        (ambient + extraAmbient) * vec4(lightColor, 1.0) * fragmentColor,
+        vec4(((ambient + extraAmbient) * lightColor) + diffuse(), 1.0) * fragmentColor,
         float(lightsActive)
     );
 }
@@ -32,4 +33,3 @@ vec4 light_color() {
 void main() {
     color = light_color();
 }
-
