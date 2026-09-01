@@ -36,7 +36,7 @@
 CPlayerManager* CPlayerManager::theLocalPlayer;
 CPlayerManager* CPlayerManager::theServerPlayer;
 
-void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManager *aNetManager) {
+CPlayerManagerImpl::CPlayerManagerImpl(CAvaraGame *theGame, short id, CNetManager *aNetManager) {
     // Rect	*mainScreenRect;
 
     itsGame = theGame;
@@ -585,10 +585,6 @@ void CPlayerManagerImpl::ProtocolHandler(struct PacketInfo *thePacket) {
 void CPlayerManagerImpl::ViewControl() {
     if (itsPlayer)
         itsPlayer->ControlViewPoint();
-}
-
-void CPlayerManagerImpl::Dispose() {
-    CDirectObject::Dispose();
 }
 
 void CPlayerManagerImpl::SendResendRequest(short askCount) {

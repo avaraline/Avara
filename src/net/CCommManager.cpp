@@ -19,22 +19,17 @@
 **	Initialize the packet buffer queues and allocate space
 **	for buffers.
 */
-void CCommManager::ICommManager(short packetSpace) {
-    // base class creates PacketInfo buffers/queues
-    InitializePacketQueues(packetSpace, sizeof(PacketInfo));
-}
-
-void CCommManager::InitializePacketQueues(int numPackets, std::size_t pSize) {
+CCommManager::CCommManager(short packetSpace, size_t pSize) {
     packetSize = pSize;
-    myId = 0; //	Default to server.
+    myId = 0; //    Default to server.
 
     InitQueue(&freeQ);
     InitQueue(&inQ);
-    
+
     firstReceivers[0] = NULL;
     firstReceivers[1] = NULL;
 
-    AllocatePacketBuffers(numPackets);
+    AllocatePacketBuffers(packetSpace);
 }
 
 void CCommManager::AllocatePacketBuffers(int numPackets) {
@@ -47,12 +42,6 @@ void CCommManager::AllocatePacketBuffers(int numPackets) {
         Enqueue((QElemPtr)pp, &freeQ);
         pp += packetSize;
     }
-}
-
-/*
-**	Release allocated packet buffer storage and then dispose of self.
-*/
-void CCommManager::Dispose() {
 }
 
 /*

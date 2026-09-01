@@ -125,8 +125,8 @@ short ReadShortVar(short index);
 short ReadShortVar(const char *s);
 const std::optional<ARGBColor> ReadColorVar(short index);
 const std::optional<ARGBColor> ReadColorVar(const char *);
-const Fixed ReadFixedMaterialVar(short index);
-const Fixed ReadFixedMaterialVar(const char *s);
+Fixed ReadFixedMaterialVar(short index);
+Fixed ReadFixedMaterialVar(const char *s);
 std::string ReadStringVar(short index);
 std::string ReadStringVar(const char *);
 

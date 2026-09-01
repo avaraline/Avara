@@ -9,7 +9,6 @@
 
 #pragma once
 #include "AvaraDefines.h"
-#include "CDirectObject.h"
 #include "FastMat.h"
 #include "RayHit.h"
 
@@ -31,7 +30,7 @@ class CWeapon;
 enum { kmiFlat, kmiTurning, kmiShuriken };
 enum { kweGrenade, kweSmart };
 
-class CDepot : public CDirectObject {
+class CDepot {
 public:
     CAvaraGame *itsGame;
 
@@ -52,8 +51,9 @@ public:
     Fixed missileTurnRate;
     Fixed missileAcceleration;
 
-    virtual void IDepot(CAvaraGame *theGame);
-    virtual void Dispose();
+    CDepot(CAvaraGame *theGame);
+    virtual ~CDepot();
+    
     virtual void EndScript();
 
     virtual void CreateSlivers();

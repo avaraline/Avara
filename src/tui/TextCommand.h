@@ -38,7 +38,7 @@ public:
     static void Register(TextCommand* command);
     static bool FindMatchingCommands(std::string& fullCommand,
                                      std::function<bool(TextCommand *, std::string& cmd, VectorOfArgs)> matchCb);
-    static const bool ExecuteMatchingCallbacks(std::string& fullCommand);
+    static bool ExecuteMatchingCallbacks(std::string& fullCommand);
     static const std::string ListOfCommands(std::string delimeter = ", ");
     static std::string UsageForCommand(std::string& fullCommand);
 

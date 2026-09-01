@@ -56,7 +56,7 @@ void CUDPConnection::DebugPacket(char eType, UDPPacketInfo *p) {
 }
 #endif
 
-void CUDPConnection::IUDPConnection(CUDPComm *theOwner) {
+CUDPConnection::CUDPConnection(CUDPComm *theOwner) {
     short i;
 
     killed = false;
@@ -109,6 +109,11 @@ void CUDPConnection::IUDPConnection(CUDPComm *theOwner) {
     totalResent = 0;
     numResendsWithoutReceive = 0;
     recentResendRate = 0;
+}
+
+CUDPConnection::~CUDPConnection() {
+    FlushQueues();
+    delete latencyHistogram;
 }
 
 void CUDPConnection::FlushQueues() {
@@ -584,12 +589,6 @@ void CUDPConnection::ResendNonValidatedPackets() {
         }
         pp = (UDPPacketInfo *)pp->packet.qLink;
     }
-}
-
-void CUDPConnection::Dispose() {
-    FlushQueues();
-    delete latencyHistogram;
-    CDirectObject::Dispose();
 }
 
 static short receiveSerialStorage[512];

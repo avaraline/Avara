@@ -8,7 +8,6 @@
 */
 
 #pragma once
-#include "CDirectObject.h"
 #include "ColorManager.h"
 #include "KeyFuncs.h"
 #include "PlayerConfig.h"
@@ -88,7 +87,6 @@ public:
     virtual Str255& PlayerName() = 0;
     virtual std::string GetPlayerName() = 0;
     virtual std::deque<char>& LineBuffer() = 0;
-    virtual void Dispose() = 0;
     virtual void NetDisconnect() = 0;
     virtual short IsRegistered() = 0;
     virtual void IsRegistered(short) = 0;
@@ -149,12 +147,11 @@ public:
     virtual bool GetShowScoreboard() = 0;
 };
 
-class CPlayerManagerImpl : public CDirectObject, public CPlayerManager, public std::enable_shared_from_this<CPlayerManagerImpl> {
+class CPlayerManagerImpl : public CPlayerManager, public std::enable_shared_from_this<CPlayerManagerImpl> {
 private:
 
     CAbstractPlayer *itsPlayer;
     CAvaraGame *itsGame;
-    // CRosterWindow	*theRoster;
     CNetManager *theNetManager;
 
     Fixed randomKey;
@@ -215,8 +212,9 @@ private:
     float controllerCurveExp, controllerMaxMove, controllerMultiplyX, controllerMultiplyY, controllerStickThreshold, controllerTriggerThreshold, controllerDamper;
 public:
 
-    virtual void IPlayerManager(CAvaraGame *theGame, short id, CNetManager *aNetManager);
-
+    CPlayerManagerImpl(CAvaraGame *theGame, short id, CNetManager *aNetManager);
+    virtual ~CPlayerManagerImpl() {}
+    
     virtual void SetPlayer(CAbstractPlayer *thePlayer);
 
     virtual bool CalculateIsLocalPlayer();
@@ -235,11 +233,8 @@ public:
     virtual FunctionTable *GetFunctions();
     virtual void SendResendRequest(short askCount);
 
-    virtual void Dispose();
-
     virtual Boolean TestKeyPressed(short funcCode);
 
-    // virtual	void			FlushMessageText(Boolean forceAll);
     virtual void RosterMessageText(short len, const char *c);
     virtual std::string GetChatString(int maxChars);
     virtual std::string GetChatLine();
@@ -276,8 +271,6 @@ public:
 
     virtual void StoreMugShot(Handle mugHandle);
     virtual Handle GetMugShot();
-
-    // virtual	void			GetLoadingStatusString(StringPtr theStr);
 
     virtual void SpecialColorControl();
     virtual short Slot();

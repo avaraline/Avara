@@ -10,7 +10,6 @@
 #pragma once
 
 #include "CCompoundShape.h"
-#include "CDirectObject.h"
 #include "Types.h"
 
 #include <memory>

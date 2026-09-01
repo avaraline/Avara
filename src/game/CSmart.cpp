@@ -248,9 +248,9 @@ void CSmart::TurnTowardsTarget() {
                 RayTestWithGround(&rayHit, kSolidBit);
 
                 if (rayHit.closestHit && rayHit.closestHit->theOwner == targetActor) {
-                    toTarget[0] -= speed[0] << 1;
-                    toTarget[1] -= speed[1] << 1;
-                    toTarget[2] -= speed[2] << 1;
+                    toTarget[0] -= speed[0] * 2;
+                    toTarget[1] -= speed[1] * 2;
+                    toTarget[2] -= speed[2] * 2;
 
                     FindSpaceAngle(toTarget, &goodYaw, &goodPitch);
 

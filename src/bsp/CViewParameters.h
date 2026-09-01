@@ -11,7 +11,6 @@
 
 #include "ARGBColor.h"
 #include "CBSPPart.h"
-#include "CDirectObject.h"
 
 #define DEFAULT_LIGHT_COLOR 0xffffffff
 #define DIR_LIGHT_DISTANCE 1000.0f

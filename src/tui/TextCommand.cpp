@@ -67,7 +67,7 @@ bool TextCommand::FindMatchingCommands(std::string& fullText,
     return success;
 }
 
-const bool TextCommand::ExecuteMatchingCallbacks(std::string& fullCommand) {
+bool TextCommand::ExecuteMatchingCallbacks(std::string& fullCommand) {
 
     return FindMatchingCommands(fullCommand,
                                 [](TextCommand* command, std::string& cmd, VectorOfArgs vargs) -> bool {

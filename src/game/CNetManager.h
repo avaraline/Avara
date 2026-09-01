@@ -11,7 +11,6 @@
 #include "AvaraDefines.h"
 #include "ColorManager.h"
 #include "CCommManager.h"
-#include "CDirectObject.h"
 #include "KeyFuncs.h"
 //#include "LevelScoreRecord.h"
 #include "PlayerConfig.h"
@@ -68,12 +67,11 @@ typedef union
 } BlockAndValue;
 */
 
-class CNetManager : public CDirectObject {
+class CNetManager {
 public:
     CAvaraGame *itsGame;
     std::unique_ptr<CCommManager> itsCommManager;
     CProtoControl *itsProtoControl;
-    // CRosterWindow	*theRoster;
 
     short playerCount;
     std::shared_ptr<CPlayerManager> playerTable[kMaxAvaraPlayers];
@@ -88,7 +86,6 @@ public:
     uint16_t startPlayersDistribution;
     uint16_t totalDistribution;
     short netStatus;
-    CDirectObject *netOwner;
     short deadOrDonePlayers;
     Boolean isConnected;
     Boolean isPlaying;
@@ -126,12 +123,12 @@ public:
     //char msgBuffer[kMaxChatMessageBufferLen];
     std::vector<char> msgBuffer;
 
-    virtual ~CNetManager() { Dispose(); };
-    virtual void INetManager(CAvaraGame *theGame);
+    CNetManager(CAvaraGame *theGame);
+    virtual ~CNetManager();
+
     virtual std::shared_ptr<CPlayerManager> CreatePlayerManager(short);
+    virtual void InitializePlayers();
     virtual void LevelReset();
-    virtual void Dispose();
-    virtual Boolean ConfirmNetChange();
     virtual void ChangeNet(short netKind, std::string address);
     virtual void ChangeNet(short netKind, std::string address, std::string password);
 

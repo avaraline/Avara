@@ -10,7 +10,6 @@
 #pragma once
 #include "AssetManager.h"
 #include "CAvaraGame.h"
-#include "CDirectObject.h"
 #include "ColorManager.h"
 #include "CSoundHub.h"
 #include "FastMat.h"

@@ -10,7 +10,6 @@
 #pragma once
 #include "AvaraDefines.h"
 #include "AvaraScoreInterface.h"
-#include "CDirectObject.h"
 #include "PlayerRatingsSimpleElo.h"
 
 #define PLAYER_SCORE_FIELD_COUNT 6
@@ -42,7 +41,7 @@ struct FinishRecord {
 };
 
 
-class CScoreKeeper : public CDirectObject {
+class CScoreKeeper {
 public:
     CAvaraGame *itsGame;
     ScoreInterfaceRecord iface;
@@ -61,12 +60,8 @@ public:
     // player ratings stuff
     std::unique_ptr<PlayerRatingsSimpleElo> playerRatings;
 
-    virtual void IScoreKeeper(CAvaraGame *theGame);
-    virtual void Dispose();
-
-    // virtual	OSErr			OpenPlugIn(FSSpec *theFile);
-    // virtual	void			ClosePlugIn();
-    // virtual	void			CallPlugIn();
+    CScoreKeeper(CAvaraGame *theGame);
+    virtual ~CScoreKeeper();
 
     virtual void EndScript();
     virtual void StartResume(Boolean didStart);
@@ -77,13 +72,6 @@ public:
     virtual void PlayerLeft();
     virtual void PlayerJoined();
 
-
-    /*
-    virtual	void			Click(EventRecord *theEvent, Rect *theRect);
-    virtual	Handle			GetCustomText();
-    virtual	void			DrawCustomWindow(Rect *theRect);
-    virtual	void			HideShow(Boolean doHide);
-    */
     virtual void Score(ScoreInterfaceReasons reason,
         short team,
         short player,
@@ -94,11 +82,6 @@ public:
 
     virtual void ResetScores();
     virtual void ReceiveResults(int32_t *newResults);
-    // virtual	void			DrawOnePlayerResults(short slot, Rect *toRect);
-    // virtual	void			DrawResultsSummary(Rect *toRect);
-    // virtual	void			RegularClick(EventRecord *theEvent, Rect *theRect);
-
-    // virtual	void			FilterConsoleLine(StringPtr theString, short align);
 
     std::vector<FinishRecord> DetermineFinishOrder();
     void UpdatePlayerRatings(std::vector<FinishRecord>);
