@@ -226,7 +226,6 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     settingsWindow = new CSettingsWindow(this);
 
     keyMapWindow = new CKeyboardMappingWindow(this);
-    settingsWindow->setKeyMapWindow(keyMapWindow);
 
     performLayout();
 
@@ -300,12 +299,11 @@ void CAvaraAppImpl::UpdateGUI(GUIState g) {
             serverWindow->setNeedsLayout();
             break;
         case GUIState::hostServer:
+        case GUIState::joinedServer:
             serverWindow->setVisible(true);
-            serverWindow->setNeedsLayout();
             levelWindow->setVisible(true);
-            levelWindow->setNeedsLayout();
             rosterWindow->setVisible(true);
-            rosterWindow->setNeedsLayout();
+            playerWindow->setVisible(true);
             break;
         case GUIState::tracker:
             trackerWindow->setVisible(true);
@@ -314,6 +312,7 @@ void CAvaraAppImpl::UpdateGUI(GUIState g) {
         case GUIState::singlePlayer:
             levelWindow->setVisible(true);
             rosterWindow->setVisible(true);
+            playerWindow->setVisible(true);
             break;
         case GUIState::settings:
             settingsWindow->setVisible(true);

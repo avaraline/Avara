@@ -144,42 +144,46 @@ CSettingsWindow::CSettingsWindow(CApplication *app) : CWindow(app, "Avara Settin
                         longbutton->setCaption(current_keys_str.str());
                         auto p = longbutton->popup();
                         auto layout = new nanogui::GridLayout(nanogui::Orientation::Horizontal, 2);
-                        auto size = nanogui::Vector2i(300, 500);
+                        layout->setRowAlignment(nanogui::Alignment::Minimum);
+                        layout->setSpacing(1, 10);
+                        //auto size = nanogui::Vector2i(300, 500);
                         p->setLayout(layout);
-                        p->setFixedSize(size);
+                        //p->setFixedSize(size);
                         //center();
-                        auto actionIcon = p->add<SpriteWidget>();
-                        actionIcon->setImage(ctx, keyboardIconSize);
-                        actionIcon->setSpriteSize(48);
-                        actionIcon->setDisplaySize(keyboardIconSize);
-                        actionIcon->setOffset(0, keyboardIconOffset);
-                        auto actionLabel = p->add<nanogui::Label>("Action");
-                        auto currentLabel = p->add<nanogui::Label>("Currently mapped");
-                        auto currentlyMappedKeys = p->add<nanogui::Widget>();
-                        // todo figure this crap out
-                        actionIcon->setOffset(0, keyboardIconOffset);
-                        actionLabel->setCaption(actionKey);
+                        if (keyboardConfigIndex < keyboardConfigIconCount) {
+                            auto actionIcon = p->add<SpriteWidget>();
+                            actionIcon->setImage(ctx, keyboardIconsDataHandle);
+                            actionIcon->setSpriteSize(48);
+                            actionIcon->setDisplaySize(keyboardIconSize);
+                            actionIcon->setOffset(0, keyboardIconOffset);
+                        }
+                        else { p->add<nanogui::Widget>(); }
+                        p->add<nanogui::Label>(actionDesc);
+                        //p->add<nanogui::Label>("Currently mapped");
                         json allmap = mApplication->Get(kKeyboardMappingTag);
-                        json singlemap = allmap.at(actionKey);
-                        if (singlemap.is_array()) {
-                            for (auto ik : singlemap.items()) {
+                        if (k.is_array()) {
+                            for (auto ik : k.items()) {
                                 std::string sdlkey = ik.value();
-                                auto keybtn = currentlyMappedKeys->add<nanogui::Button>();
-                                keybtn->setCaption(sdlkey);
+                                p->add<nanogui::Label>(sdlkey);
+                                auto keybtn = p->add<nanogui::Button>();
+                                keybtn->setCaption("Remove");
                             }
                         }
                         else {
-                            std::string sdlkey = singlemap;
-                            auto keybtn = currentlyMappedKeys->add<nanogui::Button>();
-                            keybtn->setCaption(sdlkey);
+                            p->add<nanogui::Label>(k);
+                            auto keybtn = p->add<nanogui::Button>();
+                            keybtn->setCaption("Remove");
                         }
+                        p->add<nanogui::Widget>();
+                        p->add<nanogui::Button>("Add New");
                         longbutton->setTextPosition(nanogui::Button::TextPosition::Left);
                         if (keyboardConfigIndex % 2 == 0) {
                             longbutton->setBackgroundColor(nanogui::Color(255, 255, 255, 35));
                         }
-                        longbutton->setCallback([this, actionKey, keyboardIconOffset] {
+
+                        /*longbutton->setCallback([this, actionKey, keyboardIconOffset] {
                             keyMapWindow->startMapping(actionKey, keyboardIconOffset);
-                        });
+                        });*/
                         keyboardConfigIndex++;
                     }
                     break;
