@@ -77,24 +77,25 @@ void CAbstractActor::UnlinkLocation() {
     } while (--i);
 }
 
-#define LOCATORTABLESCALE (LOCATORRECTSCALE - 2)
-
 void CAbstractActor::LinkBox(Fixed minX, Fixed minZ, Fixed maxX, Fixed maxZ) {
-    short *linkTable;
+    ActorLocator **linkTable;
     ActorLocator *head;
     ActorLocator *loc;
     uint32_t mask = LOCCOORDMASK;
 
-    minX = (minX & mask) >> (LOCATORTABLESCALE - LOCATORTABLEBITS);
-    maxX = (maxX & mask) >> (LOCATORTABLESCALE - LOCATORTABLEBITS);
-    minZ = (minZ & mask) >> LOCATORTABLESCALE;
-    maxZ = (maxZ & mask) >> LOCATORTABLESCALE;
+    //  Cell indices, computed exactly as the lookup side computes them:
+    //  BuildPartProximityList's (x << LOCATORTABLEBITS) + z, and LOCTOTABLE.
+    //  The x term occupies bits 6..11 and the z term bits 0..5, so | is +.
+    minX = (minX & mask) >> (LOCATORRECTSCALE - LOCATORTABLEBITS);
+    maxX = (maxX & mask) >> (LOCATORRECTSCALE - LOCATORTABLEBITS);
+    minZ = (minZ & mask) >> LOCATORRECTSCALE;
+    maxZ = (maxZ & mask) >> LOCATORRECTSCALE;
 
     loc = locLinks;
     if (loc->next) {
         UnlinkLocation();
     }
-    linkTable = (short *)gCurrentGame->locatorTable;
+    linkTable = gCurrentGame->locatorTable;
 
     head = (ActorLocator *)&linkTable[minX | minZ];
     loc->prev = head;
