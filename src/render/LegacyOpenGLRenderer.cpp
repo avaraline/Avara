@@ -374,7 +374,9 @@ void LegacyOpenGLRenderer::RenderFrame()
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, sizeof(legacySkyboxVertices));
+    // legacySkyboxVertices is 36 vertices making up 12 independent triangles
+    // (a cube), and glDrawArrays counts vertices, not bytes.
+    glDrawArrays(GL_TRIANGLES, 0, sizeof(legacySkyboxVertices) / (3 * sizeof(float)));
     glDisableVertexAttribArray(0);
 
     __glCheckErrors();
