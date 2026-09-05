@@ -83,9 +83,6 @@ void CAbstractActor::LinkBox(Fixed minX, Fixed minZ, Fixed maxX, Fixed maxZ) {
     ActorLocator *loc;
     uint32_t mask = LOCCOORDMASK;
 
-    //  Cell indices, computed exactly as the lookup side computes them:
-    //  BuildPartProximityList's (x << LOCATORTABLEBITS) + z, and LOCTOTABLE.
-    //  The x term occupies bits 6..11 and the z term bits 0..5, so | is +.
     minX = (minX & mask) >> (LOCATORRECTSCALE - LOCATORTABLEBITS);
     maxX = (maxX & mask) >> (LOCATORRECTSCALE - LOCATORTABLEBITS);
     minZ = (minZ & mask) >> LOCATORRECTSCALE;
