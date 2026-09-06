@@ -401,11 +401,15 @@ bool CommandManager::LoadNamedLevel(VectorOfArgs vargs) {
     std::transform(levelSubstr.begin(), levelSubstr.end(),levelSubstr.begin(), ::toupper);
 
     std::vector<std::pair<std::string, std::string>> bestLevels = {};
+    const std::vector<std::pair<std::string, std::string>> umlauts = {{"ä", "a"}, {"ö", "o"}, {"ü", "u"}, {"ō", "o"}};
     for(std::string set : levelSets) {
         auto manifest = *AssetManager::GetManifest(set);
         for (auto &ledi : manifest->levelDirectory) {
             std::string level = ledi.levelName;
             std::string levelUpper = ledi.levelName;
+            for (const auto& [u, r] : umlauts) // let me load thorusberg (and enso)
+                for (size_t p = 0 ; (p = levelUpper.find(u, p)) != std::string::npos ; p += r.length() )
+                    levelUpper.replace(p, u.length(), r);
             std::transform(levelUpper.begin(), levelUpper.end(), levelUpper.begin(), ::toupper);
 
             // find levelSubstr anywhere within the level name
