@@ -635,7 +635,10 @@ void CHUD::Render(NVGcontext *ctx) {
         ColorManager::getEnergyGaugeColor().IntoNVG(),
         ColorManager::getPlasmaGauge1Color().IntoNVG(),
         ColorManager::getPlasmaGauge2Color().IntoNVG(),
-        ColorManager::getShieldGaugeColor().IntoNVG()
+	(int)shields >= (int)full/1.5 || itsGame->frameNumber == 0 || (int)shields == 0 ? ColorManager::getShieldGaugeColor().IntoNVG() :
+	itsGame->frameNumber % (int)shields == 0 ? ColorManager::getShieldZapColor().IntoNVG() :
+        itsGame->frameNumber % (int)shields == 1 ? ColorManager::getShieldDamageColor().IntoNVG() :
+	ColorManager::getShieldGaugeColor().IntoNVG()
     };
     NVGcolor g2c[] = {
         ColorManager::getPinwheel1Color().IntoNVG(),
