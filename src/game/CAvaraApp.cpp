@@ -206,6 +206,8 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     backButton->setTextPosition(nanogui::Button::TextPosition::Left);
     backButton->setVisible(false);
 
+    settingsWindow = new CSettingsWindow(this);
+
     playerWindow = new CPlayerWindow(this);
     playerWindow->setFixedWidth(200);
 
@@ -222,10 +224,6 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     trackerWindow->setFixedWidth(500);
 
     rosterWindow = new CRosterWindow(this);
-
-    settingsWindow = new CSettingsWindow(this);
-
-    keyMapWindow = new CKeyboardMappingWindow(this);
 
     performLayout();
 
@@ -296,17 +294,17 @@ void CAvaraAppImpl::UpdateGUI(GUIState g) {
             break;
         case GUIState::hostSettings:
             serverWindow->setVisible(true);
-            serverWindow->setNeedsLayout();
             break;
         case GUIState::hostServer:
-        case GUIState::joinedServer:
             serverWindow->setVisible(true);
+        case GUIState::joinedServer:
             levelWindow->setVisible(true);
             rosterWindow->setVisible(true);
             playerWindow->setVisible(true);
             break;
         case GUIState::tracker:
             trackerWindow->setVisible(true);
+            networkWindow->setVisible(true);
             break;
         case GUIState::about:
         case GUIState::singlePlayer:

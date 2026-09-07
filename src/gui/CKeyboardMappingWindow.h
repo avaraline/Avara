@@ -13,22 +13,18 @@
 
 class CKeyboardMappingWindow : public CWindow {
 public:
-    CKeyboardMappingWindow(CApplication *app);
-
-    virtual ~CKeyboardMappingWindow();
-
-    virtual bool editing() { return false; };
+    CKeyboardMappingWindow(CApplication *app, const std::string &actionDesc, const std::string &key, int imageOffset, int imageHandle);
+    virtual bool editing();
     bool handleSDLEvent(SDL_Event &event);
-
-    void startMapping(const std::string &key, int imageOffset);
     void gatherKey();
-    void setImage(int keyImageHandle);
 
 protected:
+    void removeMappingButton(const std::string &action, const std::string &key);
     SpriteWidget *actionIcon;
     nanogui::Label *actionLabel;
     nanogui::Label *currentLabel;
     nanogui::Widget *currentlyMappedKeys;
+    nanogui::Button *addbtn;
     std::string *currentlyMapping;
     std::vector<std::string> keys;
     bool gathering = false;

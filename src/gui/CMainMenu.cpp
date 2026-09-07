@@ -17,22 +17,22 @@ CMainMenu::CMainMenu(CAvaraAppImpl *app, NVGcontext *ctx) : nanogui::Widget((nan
     titleImageW = 0;
     titleImageH = 0;
     nvgImageSize(ctx, titleImageDataHandle, &titleImageW, &titleImageH);
+
     auto paddingterm = (phi * 80);
     auto screenX = screen()->width();
     auto screenY = screen()->height();
+    setFixedSize(nanogui::Vector2i(screenX, screenY));
     paddingX = 25;
     paddingY = screenY / paddingterm;
     titleW = screenX / phi;
     titleH = ((screenX / phi) / titleImageW) * titleImageH;
     titleImageOffsetX = paddingX;
-    titleImageOffsetY = paddingY * 4;
-
-    homeScreenButtonWidth = titleW / phicube;
+    titleImageOffsetY = (paddingY * 4) + 25;
 
     setLayout(new nanogui::FlowLayout(nanogui::Orientation::Vertical, true, 0, paddingY));
-    auto placeHolder = new nanogui::Widget(this);
-    placeHolder->setWidth(titleW);
-    placeHolder->setHeight(titleH + (titleImageOffsetY * 2));
+    placeholder = new nanogui::Widget(this);
+    placeholder->setWidth(titleW);
+    placeholder->setHeight(titleH + (titleImageOffsetY * 2) + 25);
 
     addHomeScreenButton("Play Online", GUIState::tracker);
     addHomeScreenButton("Host Server", GUIState::hostSettings);
@@ -55,14 +55,20 @@ void CMainMenu::addHomeScreenButton(const std::string text, GUIState target) {
 
 
 void CMainMenu::draw(NVGcontext *ctx) {
-    Widget::draw(ctx);
     titleW = screen()->width() / phi;
     titleH = ((screen()->width() / phi) / titleImageW) * titleImageH;
-    titleImageOffsetX = paddingX;
-    titleImageOffsetY = paddingY * 4;
-    titleImage = nvgImagePattern(ctx, titleImageOffsetX, titleImageOffsetY, titleW, titleH, 0, titleImageDataHandle, 1);
-    nvgBeginPath(ctx);
-    nvgFillPaint(ctx, titleImage);
-    nvgRect(ctx, titleImageOffsetX, titleImageOffsetY, titleW, titleH);
-    nvgFill(ctx);
+    placeholder->setFixedWidth(screen()->width());
+    placeholder->setFixedHeight(titleH + 50);
+    setLayout(new nanogui::FlowLayout(nanogui::Orientation::Vertical, true, 0, paddingY * 2));
+    setNeedsLayout();
+    titleImageOffsetX = 25;
+    paddingY = screen()->height() / (phi * 80);
+    titleImageOffsetY = (paddingY * 4) + 25;
+    //titleImage = nvgImagePattern(ctx, titleImageOffsetX, titleImageOffsetY, titleW, titleH, 0, titleImageDataHandle, 1);
+    DrawImage(ctx, titleImageDataHandle, .67, 0, 0, titleImageW, titleImageH, titleImageOffsetX, titleImageOffsetY, titleW, titleH);
+    //nvgFillPaint(ctx, titleImage);
+    //nvgRect(ctx, titleImageOffsetX, titleImageOffsetY, titleW, titleH);
+    //nvgFill(ctx);
+
+    Widget::draw(ctx);
 }

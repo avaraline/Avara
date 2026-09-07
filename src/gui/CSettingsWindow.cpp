@@ -53,6 +53,8 @@ CSettingsWindow::CSettingsWindow(CApplication *app) : CWindow(app, "Avara Settin
                 case kOptionTypeString: {
                     auto tb = panelContent->add<nanogui::TextBox>();
                     tb->setValue(mApplication->String(optKey));
+                    tb->setAlignment(nanogui::TextBox::Alignment::Left);
+                    tb->setEditable(true);
                     tb->setCallback([this, optKey](const std::string &input) -> bool {
                         mApplication->Set(optKey, input);
                         return true;
@@ -63,6 +65,7 @@ CSettingsWindow::CSettingsWindow(CApplication *app) : CWindow(app, "Avara Settin
                     auto tb = panelContent->add<nanogui::TextBox>();
                     std::string valStr = std::to_string(mApplication->Get<float>(optKey));
                     tb->setValue(valStr);
+                    tb->setEditable(true);
                     tb->setAlignment(nanogui::TextBox::Alignment::Left);
                     tb->setFormat("[-]?[0-9]*\\.?[0-9]+");
                     tb->setCallback([this, optKey](const std::string &input) -> bool {
@@ -75,8 +78,10 @@ CSettingsWindow::CSettingsWindow(CApplication *app) : CWindow(app, "Avara Settin
                     auto tb = panelContent->add<nanogui::TextBox>();
                     std::string valStr = std::to_string(mApplication->Get<long>(optKey));
                     tb->setValue(valStr);
+                    tb->setEditable(true);
                     tb->setAlignment(nanogui::TextBox::Alignment::Left);
-                    tb->setFormat("[1-9][0-9]*");
+                    tb->setFormat("[0-9]*");
+                    tb->setEnabled(true);
                     tb->setCallback([this, optKey](const std::string &input) -> bool {
                         mApplication->Set(optKey, std::stoi(input));
                         return true;
@@ -95,6 +100,24 @@ CSettingsWindow::CSettingsWindow(CApplication *app) : CWindow(app, "Avara Settin
                     cb->setCallback([this, optKey] (int input) {
                         mApplication->Set<long>(optKey, input);
                     });
+                    break;
+                }
+                case kOptionTypeColor: {
+                    auto color = panelContent->add<nanogui::Button>();
+                    color->setCaption("");
+                    color->setFixedSize(nanogui::Vector2i(35, 35));
+                    auto tb = panelContent->add<nanogui::TextBox>();
+                    std::string valStr = mApplication->Get<std::string>(optKey);
+                    tb->setValue(valStr);
+                    tb->setEditable(true);
+                    tb->setAlignment(nanogui::TextBox::Alignment::Left);
+                    tb->setFormat("#([a-f]|[A-F]|[0-9]){3}(([a-f]|[A-F]|[0-9]){3})?");
+                    tb->setCallback([this, color, optKey] (const std::string newVal) {
+                        mApplication->Set<std::string>(optKey, newVal);
+                        color->setBackgroundColor(ToNanoguiColor(ARGBColor().Parse(newVal).value_or(ColorManager::getLookForwardColor())));
+                        return true;
+                    });
+                    color->setBackgroundColor(ToNanoguiColor(ARGBColor().Parse(valStr).value_or(ColorManager::getLookForwardColor())));
                     break;
                 }
                 case kOptionTypeKeyboard: {
@@ -140,69 +163,18 @@ CSettingsWindow::CSettingsWindow(CApplication *app) : CWindow(app, "Avara Settin
                             std::string sdlkey = k;
                             current_keys_str << sdlkey;
                         }
-                        auto longbutton = container->add<nanogui::PopupButton>();
+                        auto longbutton = container->add<nanogui::Button>();
                         longbutton->setCaption(current_keys_str.str());
-                        auto p = longbutton->popup();
-                        auto layout = new nanogui::GridLayout(nanogui::Orientation::Horizontal, 2);
-                        layout->setRowAlignment(nanogui::Alignment::Minimum);
-                        layout->setSpacing(1, 10);
-                        //auto size = nanogui::Vector2i(300, 500);
-                        p->setLayout(layout);
-                        //p->setFixedSize(size);
-                        //center();
-                        if (keyboardConfigIndex < keyboardConfigIconCount) {
-                            auto actionIcon = p->add<SpriteWidget>();
-                            actionIcon->setImage(ctx, keyboardIconsDataHandle);
-                            actionIcon->setSpriteSize(48);
-                            actionIcon->setDisplaySize(keyboardIconSize);
-                            actionIcon->setOffset(0, keyboardIconOffset);
-                        }
-                        else { p->add<nanogui::Widget>(); }
-                        p->add<nanogui::Label>(actionDesc);
-                        //p->add<nanogui::Label>("Currently mapped");
-                        json allmap = mApplication->Get(kKeyboardMappingTag);
-                        if (k.is_array()) {
-                            for (auto ik : k.items()) {
-                                std::string sdlkey = ik.value();
-                                p->add<nanogui::Label>(sdlkey);
-                                auto keybtn = p->add<nanogui::Button>();
-                                keybtn->setCaption("Remove");
-                            }
-                        }
-                        else {
-                            p->add<nanogui::Label>(k);
-                            auto keybtn = p->add<nanogui::Button>();
-                            keybtn->setCaption("Remove");
-                        }
-                        p->add<nanogui::Widget>();
-                        p->add<nanogui::Button>("Add New");
                         longbutton->setTextPosition(nanogui::Button::TextPosition::Left);
                         if (keyboardConfigIndex % 2 == 0) {
                             longbutton->setBackgroundColor(nanogui::Color(255, 255, 255, 35));
                         }
 
-                        /*longbutton->setCallback([this, actionKey, keyboardIconOffset] {
-                            keyMapWindow->startMapping(actionKey, keyboardIconOffset);
-                        });*/
+                        longbutton->setCallback([this, actionDesc, actionKey, keyboardIconOffset] {
+                            new CKeyboardMappingWindow(this->mApplication, actionDesc, actionKey, keyboardIconOffset, keyboardIconsDataHandle);
+                        });
                         keyboardConfigIndex++;
                     }
-                    break;
-                }
-                case kOptionTypeColor: {
-                    auto color = panelContent->add<nanogui::Button>();
-                    color->setCaption("");
-                    color->setFixedSize(nanogui::Vector2i(35, 35));
-                    auto tb = panelContent->add<nanogui::TextBox>();
-                    std::string valStr = mApplication->Get<std::string>(optKey);
-                    tb->setValue(valStr);
-                    tb->setAlignment(nanogui::TextBox::Alignment::Left);
-                    tb->setFormat("#([a-f]|[A-F]|[0-9]){3}(([a-f]|[A-F]|[0-9]){3})?");
-                    tb->setCallback([this, color, optKey] (const std::string newVal) {
-                        mApplication->Set<std::string>(optKey, newVal);
-                        color->setBackgroundColor(ToNanoguiColor(ARGBColor().Parse(newVal).value_or(ColorManager::getLookForwardColor())));
-                        return true;
-                    });
-                    color->setBackgroundColor(ToNanoguiColor(ARGBColor().Parse(valStr).value_or(ColorManager::getLookForwardColor())));
                     break;
                 }
             }
@@ -217,10 +189,6 @@ CSettingsWindow::CSettingsWindow(CApplication *app) : CWindow(app, "Avara Settin
     */
 }
 
-void CSettingsWindow::setKeyMapWindow(CKeyboardMappingWindow *win) {
-    keyMapWindow = win;
-    keyMapWindow->setImage(keyboardIconsDataHandle);
-}
 
 CSettingsWindow::~CSettingsWindow() {
 

@@ -24,6 +24,7 @@ private:
     int titleW, titleH, paddingX, paddingY;
     std::vector<nanogui::Button*> homeScreenButtons;
     CAvaraAppImpl* app;
+    nanogui::Widget* placeholder;
     void addHomeScreenButton(const std::string text, const std::function<void()> &callback);
     void addHomeScreenButton(const std::string text, GUIState target);
 };

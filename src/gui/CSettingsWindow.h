@@ -17,12 +17,10 @@ public:
 
     virtual ~CSettingsWindow();
 
-    virtual bool editing() { return false; };
-    void setKeyMapWindow(CKeyboardMappingWindow *win);
+    virtual bool editing() { return false; }
 protected:
     nanogui::TabWidget *mPrefTabs;
     int keyboardIconsDataHandle;
-    CKeyboardMappingWindow *keyMapWindow;
 };
 
 #endif /* CSettingsWindow_hpp */

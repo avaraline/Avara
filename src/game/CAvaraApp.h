@@ -130,7 +130,6 @@ public:
     CRosterWindow *rosterWindow;
     CTrackerWindow *trackerWindow;
     CSettingsWindow *settingsWindow;
-    CKeyboardMappingWindow *keyMapWindow;
     CMainMenu *mainMenu;
     
     SDL_GameController *controller; // currently paired controller
