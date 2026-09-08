@@ -443,9 +443,12 @@ bool CAvaraAppImpl::handleSDLEvent(SDL_Event &event) {
         itsGame->HandleEvent(event);
         return true;
     } else {
+        if (settingsWindow->currentlyMapping()) {
+            settingsWindow->getKeyMapWindow()->handleSDLEvent(event);
+        }
         for (int i = 0; i < windowList.size(); i++) {
             if (windowList[i]->editing()) {
-                CApplication::handleSDLEvent(event);
+                if (CApplication::handleSDLEvent(event))
                 return true;
             }
         }

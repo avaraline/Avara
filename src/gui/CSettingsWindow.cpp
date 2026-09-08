@@ -13,11 +13,31 @@
 #include "ARGBColor.h"
 #include "NVGUtil.h"
 
+std::string stringForAction(std::string action) {
+    json theKeys = gApplication->Get(kKeyboardMappingTag);
+    auto k = theKeys.at(action);
+    auto current_keys_str = std::stringstream();
+    if (k.is_array()) {
+        auto separator = "";
+        for (auto ik : k.items()) {
+            std::string sdlkey = ik.value();
+            current_keys_str << separator << sdlkey;
+            separator = " · ";
+        }
+    }
+    else {
+        std::string sdlkey = k;
+        current_keys_str << sdlkey;
+    }
+    return current_keys_str.str();
+}
+
 CSettingsWindow::CSettingsWindow(CApplication *app) : CWindow(app, "Avara Settings") {
     setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 10, 10));
     mPrefTabs = this->add<nanogui::TabWidget>();
 
     NVGcontext *ctx = app->nvgContext();
+    currentlyMappingKey = false;
 
     std::string kbIconsPath = AssetManager::GetImagePath(NoPackage, "control48px.png");
     keyboardIconsDataHandle = nvgCreateImage(ctx, kbIconsPath.c_str(), 0);
@@ -123,7 +143,6 @@ CSettingsWindow::CSettingsWindow(CApplication *app) : CWindow(app, "Avara Settin
                 case kOptionTypeKeyboard: {
                     int keyboardConfigIndex = 0;
                     int keyboardIconSize = 25;
-                    json theKeys = app->Get(kKeyboardMappingTag);
                     auto container = panelContent->add<nanogui::Widget>();
                     auto layout = new nanogui::GridLayout(nanogui::Orientation::Horizontal, 3);
                     layout->setSpacing(1, 15);
@@ -149,29 +168,26 @@ CSettingsWindow::CSettingsWindow(CApplication *app) : CWindow(app, "Avara Settin
                             container->add<Widget>();
                         }
                         container->add<nanogui::Label>(actionDesc);
-                        auto k = theKeys.at(actionKey);
-                        auto current_keys_str = std::stringstream();
-                        if (k.is_array()) {
-                            auto separator = "";
-                            for (auto ik : k.items()) {
-                                std::string sdlkey = ik.value();
-                                current_keys_str << separator << sdlkey;
-                                separator = " · ";
-                            }
-                        }
-                        else {
-                            std::string sdlkey = k;
-                            current_keys_str << sdlkey;
-                        }
+
                         auto longbutton = container->add<nanogui::Button>();
-                        longbutton->setCaption(current_keys_str.str());
+                        
+                        longbutton->setCaption(stringForAction(actionKey));
                         longbutton->setTextPosition(nanogui::Button::TextPosition::Left);
                         if (keyboardConfigIndex % 2 == 0) {
                             longbutton->setBackgroundColor(nanogui::Color(255, 255, 255, 35));
                         }
 
-                        longbutton->setCallback([this, actionDesc, actionKey, keyboardIconOffset] {
-                            new CKeyboardMappingWindow(this->mApplication, actionDesc, actionKey, keyboardIconOffset, keyboardIconsDataHandle);
+                        longbutton->setCallback([this, actionDesc, actionKey, keyboardIconOffset, longbutton] {
+                            currentlyMappingKey = true;
+                            currentlyMappingKeyboardIconOffset = keyboardIconOffset;
+                            currentlyMappingAction = actionKey;
+                            currentlyMappingActionDesc = actionDesc;
+                            currentlyMappingButton = longbutton;
+                            keyMapWindow = new CKeyboardMappingWindow(this->mApplication, actionDesc, actionKey, keyboardIconOffset, keyboardIconsDataHandle);
+                            keyMapWindow->setCallback([this, longbutton, actionKey] (int status) {
+                                refreshKeyboardMappingWindow(status);
+                                longbutton->setCaption(stringForAction(actionKey));
+                            });
                         });
                         keyboardConfigIndex++;
                     }
@@ -189,6 +205,38 @@ CSettingsWindow::CSettingsWindow(CApplication *app) : CWindow(app, "Avara Settin
     */
 }
 
+void CSettingsWindow::refreshKeyboardMappingWindow(int status) {
+    if (status) {
+        keyMapWindow = new CKeyboardMappingWindow(this->mApplication, currentlyMappingActionDesc, currentlyMappingAction, currentlyMappingKeyboardIconOffset, keyboardIconsDataHandle);
+        keyMapWindow->setCallback([this] (int status) {
+            refreshKeyboardMappingWindow(status);
+            currentlyMappingButton->setCaption(stringForAction(currentlyMappingAction));
+        });
+    }
+    else {
+        currentlyMappingKey = false;
+    }
+}
+
+bool CSettingsWindow::currentlyMapping() {
+    return keyMapWindow && keyMapWindow->gathering;
+}
+
+CKeyboardMappingWindow* CSettingsWindow::getKeyMapWindow() {
+    return keyMapWindow;
+}
+
+bool CSettingsWindow::editing() {
+    return visible();
+}
+
+bool CSettingsWindow::handleSDLEvent(SDL_Event &event) {
+    SDL_Log("CSettingsWindowEvent");
+    if (keyMapWindow && keyMapWindow->gathering) {
+        return keyMapWindow->handleSDLEvent(event);
+    }
+    return false;
+}
 
 CSettingsWindow::~CSettingsWindow() {
 

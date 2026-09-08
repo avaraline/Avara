@@ -17,9 +17,15 @@ public:
     virtual bool editing();
     bool handleSDLEvent(SDL_Event &event);
     void gatherKey();
-
+    bool gathering = false;
+    std::function<void(int)> callback() const { return mCallback; }
+    void setCallback(const std::function<void(int)> &callback) { mCallback = callback; }
 protected:
+    std::function<void(int)> mCallback;
     void removeMappingButton(const std::string &action, const std::string &key);
+    void addKeyBind(const std::string &keyname);
+    void removeKeyBind(const std::string &keyname);
+    std::string *theKey;
     SpriteWidget *actionIcon;
     nanogui::Label *actionLabel;
     nanogui::Label *currentLabel;
@@ -27,7 +33,6 @@ protected:
     nanogui::Button *addbtn;
     std::string *currentlyMapping;
     std::vector<std::string> keys;
-    bool gathering = false;
 
 };
 

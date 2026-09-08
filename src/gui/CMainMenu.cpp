@@ -12,7 +12,7 @@
 
 CMainMenu::CMainMenu(CAvaraAppImpl *app, NVGcontext *ctx) : nanogui::Widget((nanogui::Widget *)app) {
     this->app = app;
-    std::string titleImgPath = AssetManager::GetImagePath(NoPackage, "avara_wordmark.png");
+    std::string titleImgPath = AssetManager::GetImagePath(NoPackage, "avara-logo-only-transparent.png");
     titleImageDataHandle = nvgCreateImage(ctx, titleImgPath.c_str(), 0);
     titleImageW = 0;
     titleImageH = 0;
@@ -53,7 +53,6 @@ void CMainMenu::addHomeScreenButton(const std::string text, GUIState target) {
     addHomeScreenButton(text, [this, target] { app->SetGUIState(target); });
 }
 
-
 void CMainMenu::draw(NVGcontext *ctx) {
     titleW = screen()->width() / phi;
     titleH = ((screen()->width() / phi) / titleImageW) * titleImageH;
@@ -63,12 +62,7 @@ void CMainMenu::draw(NVGcontext *ctx) {
     setNeedsLayout();
     titleImageOffsetX = 25;
     paddingY = screen()->height() / (phi * 80);
-    titleImageOffsetY = (paddingY * 4) + 25;
-    //titleImage = nvgImagePattern(ctx, titleImageOffsetX, titleImageOffsetY, titleW, titleH, 0, titleImageDataHandle, 1);
-    DrawImage(ctx, titleImageDataHandle, .67, 0, 0, titleImageW, titleImageH, titleImageOffsetX, titleImageOffsetY, titleW, titleH);
-    //nvgFillPaint(ctx, titleImage);
-    //nvgRect(ctx, titleImageOffsetX, titleImageOffsetY, titleW, titleH);
-    //nvgFill(ctx);
-
+    titleImageOffsetY = 25;
+    DrawImage(ctx, titleImageDataHandle, 1, 0, 0, titleImageW, titleImageH, 25, 25, titleW, titleH);
     Widget::draw(ctx);
 }

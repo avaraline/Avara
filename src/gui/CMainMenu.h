@@ -19,8 +19,8 @@ public:
     CMainMenu(CAvaraAppImpl *app, NVGcontext *ctx);
     void draw(NVGcontext *ctx);
 private:
-    NVGpaint titleImage;
-    int titleImageDataHandle, titleImageW, titleImageH, titleImageOffsetX, titleImageOffsetY, homeScreenButtonWidth;
+    int titleImageDataHandle;
+    int titleImageW, titleImageH, titleImageOffsetX, titleImageOffsetY;
     int titleW, titleH, paddingX, paddingY;
     std::vector<nanogui::Button*> homeScreenButtons;
     CAvaraAppImpl* app;

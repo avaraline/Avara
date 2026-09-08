@@ -11,7 +11,12 @@
 
 CKeyboardMappingWindow::CKeyboardMappingWindow(CApplication *app, const std::string &actionDesc, const std::string &key, int imageOffset, int imageHandle) : CWindow(app, "Keyboard Mapping") {
     setTitle("Map Keys to Action");
-    auto layout = new nanogui::GridLayout(nanogui::Orientation::Horizontal, 2, nanogui::Alignment::Maximum);
+    theKey = new std::string(key);
+    auto layout = new nanogui::GridLayout(nanogui::Orientation::Horizontal, 2, nanogui::Alignment::Fill, 25, 25);
+    layout->setRowAlignment(nanogui::Alignment::Middle);
+    layout->setColAlignment(nanogui::Alignment::Middle);
+    layout->setSpacing(0, 25);
+    layout->setSpacing(1, 25);
     setLayout(layout);
     //auto size = nanogui::Vector2i(700, 700);
     //setFixedSize(size);
@@ -21,7 +26,7 @@ CKeyboardMappingWindow::CKeyboardMappingWindow(CApplication *app, const std::str
     actionIcon->setDisplaySize(48);
 
     actionLabel = add<nanogui::Label>("Action");
-    actionLabel->setFixedWidth(300);
+    //actionLabel->setFixedWidth(300);
     actionLabel->setCaption(actionDesc);
 
     currentlyMapping = new std::string(key);
@@ -44,16 +49,16 @@ CKeyboardMappingWindow::CKeyboardMappingWindow(CApplication *app, const std::str
     addbtn = add<nanogui::Button>("Add New");
     addbtn->setBackgroundColor(addColor);
     addbtn->setCallback([this] {
-        actionLabel->setCaption("Press a key...");
-        addbtn->setVisible(false);
-        this->gathering = true;
-        //this->gatherKey();
+        addbtn->setCaption("<waiting>");
+        addbtn->setEnabled(false);
+        gathering = true;
     });
     auto closeBtn = add<nanogui::Button>("Done");
     closeBtn->setCallback([this] {
         setModal(false);
         setVisible(false);
-        this->dispose();
+        if (mCallback) mCallback(0);
+        dispose();
     });
     setNeedsLayout();
     setVisible(true);
@@ -69,8 +74,10 @@ void CKeyboardMappingWindow::removeMappingButton(const std::string &action, cons
     keybtn->setIcon(ENTYPO_ICON_TRASH);
     keybtn->setBackgroundColor(nanogui::Color(80, 22, 22, 255));
     keybtn->setCallback([this, action, key] {
-        //mApplication->DoCommand(kUnmapKeyCommand, ...);
-        actionLabel->setCaption("Delete " + action + " " + key);
+        SDL_Log("Delete %s bound to %s", key.c_str(), action.c_str());
+        removeKeyBind(key);
+        if (mCallback) mCallback(1);
+        dispose();
     });
 }
 
@@ -80,24 +87,71 @@ void CKeyboardMappingWindow::gatherKey() {
 
 bool CKeyboardMappingWindow::editing() {
     return true;
-    if (gathering) {
-        return true;
-    }
-    else {
-        return false;
-    }
 }
 
 bool CKeyboardMappingWindow::handleSDLEvent(SDL_Event &event) {
     if (gathering) {
         if (event.type == SDL_KEYDOWN) {
-            auto sym = event.key.keysym;
-            auto name = SDL_GetKeyName(sym.scancode);
-            // todo finish
-            actionLabel->setCaption(name);
+            auto sym = event.key.keysym.sym;
+            auto name = SDL_GetKeyName(sym);
+            //actionLabel->setCaption(name);
+            SDL_Log("%d %s", sym, name);
+            addKeyBind(name);
+            gathering = false;
+            if (mCallback) mCallback(1);
+            dispose();
+            return true;
         }
-        gathering = false;
     }
     return false;
 }
 
+
+void CKeyboardMappingWindow::addKeyBind(const std::string &keyname) {
+    json allmap = mApplication->Get(kKeyboardMappingTag);
+    auto theKeyCStr = theKey->c_str();
+    auto k = allmap.at(theKeyCStr);
+    if (k.is_array()) {
+        bool found = false;
+        for (auto ik : k.items()) {
+            if (ik.value() == keyname) {
+                found = true;
+                SDL_Log("Not binding %s to %s because it is already bound", theKeyCStr, keyname.c_str());
+            }
+        }
+        if (!found) {
+            k.push_back(json(keyname));
+            allmap[theKeyCStr] = k;
+        }
+    }
+    else if (k != keyname) {
+        json new_arr = nlohmann::json::array();
+        new_arr = {k, json(keyname)};
+        allmap[theKeyCStr] = new_arr;
+    }
+    mApplication->Set(kKeyboardMappingTag, allmap);
+}
+
+void CKeyboardMappingWindow::removeKeyBind(const std::string &keyname) {
+
+    json allmap = mApplication->Get(kKeyboardMappingTag);
+    auto k = allmap.at(theKey->c_str());
+    auto remove_idxs = std::vector<int>();
+    if (k.is_array()) {
+        int ik_idx = 0;
+        for (auto ik : k.items()) {
+            if (ik.value() == keyname) {
+                remove_idxs.push_back(ik_idx);
+            }
+            ik_idx++;
+        }
+        for (auto idx : remove_idxs) {
+            k.erase(idx);
+        }
+        allmap[theKey->c_str()] = k;
+    }
+    else {
+        allmap[theKey->c_str()] = json("");
+    }
+    mApplication->Set(kKeyboardMappingTag, allmap);
+}
