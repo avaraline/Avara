@@ -66,9 +66,6 @@
     <ClInclude Include="..\src\base\CTagBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\base\CDirectObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\vendor\AudioFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -165,19 +162,10 @@
     <ClInclude Include="..\src\util\Beeper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\util\huffman\CAbstractHuffPipe.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\util\huffman\CAbstractPipe.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\util\Logging.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\util\CharWordLongPointer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\util\huffman\CHuffProcessor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\util\CRC.h">
@@ -959,9 +947,6 @@
     <ClCompile Include="..\src\bsp\CBSPPart.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\base\CDirectObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\base\CTagBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1005,15 +990,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\vendor\nanovg\nanovg.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\util\huffman\CAbstractPipe.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\util\huffman\CHuffProcessor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\util\huffman\CAbstractHuffPipe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\gui\ColorManager.cpp">

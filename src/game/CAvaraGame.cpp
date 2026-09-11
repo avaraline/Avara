@@ -55,8 +55,7 @@ void CAvaraGame::InitMixer(Boolean silentFlag) {
 
     soundHub->MixerDispose();
 
-    aMixer = new CSoundMixer;
-    aMixer->ISoundMixer(rate22khz, 64, 8, true, true, false, soundHub->AudioEnabled());
+    aMixer = new CSoundMixer(rate22khz, 64, 8, true, true, false, soundHub->AudioEnabled());
     aMixer->SetStereoSeparation(true);
     aMixer->SetSoundEnvironment(FIX(400), FIX(5), CLASSICFRAMETIME);
     aMixer->SetVolume(gApplication ? gApplication->Get<uint8_t>(kSoundVolume) : 0);
@@ -85,7 +84,7 @@ void CAvaraGame::IncrementGameCounter() {
 }
 
 std::unique_ptr<CNetManager> CAvaraGame::CreateNetManager() {
-    return std::make_unique<CNetManager>();
+    return std::make_unique<CNetManager>(this);
 }
 
 CAvaraGame::CAvaraGame(FrameTime frameTime) {
@@ -96,7 +95,7 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     itsApp = theApp;
 
     itsNet = CreateNetManager();
-    itsNet->INetManager(this);
+    itsNet->InitializePlayers();
     itsApp->SetNet(itsNet.get());
 
     searchCount = 0;
@@ -119,11 +118,9 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     InitMixer(true);
 
-    scoreKeeper = new CScoreKeeper;
-    scoreKeeper->IScoreKeeper(this);
+    scoreKeeper = new CScoreKeeper(this);
 
-    itsDepot = new CDepot;
-    itsDepot->IDepot(this);
+    itsDepot = new CDepot(this);
 
     // mapRes = GetResource(FUNMAPTYPE, FUNMAPID);
 
@@ -151,9 +148,7 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 }
 
 CSoundHub* CAvaraGame::CreateSoundHub() {
-    CSoundHubImpl *soundHub = new CSoundHubImpl;
-    soundHub->ISoundHub(32, 32);
-    return soundHub;
+    return new CSoundHubImpl(32, 32);
 }
 
 CAvaraGame::~CAvaraGame() {
@@ -162,8 +157,8 @@ CAvaraGame::~CAvaraGame() {
     spectatePlayer = NULL;
     LevelReset(false);
 
-    scoreKeeper->Dispose();
-    itsDepot->Dispose();
+    delete scoreKeeper;
+    delete itsDepot;
 
     while (actorList) {
         nextActor = actorList->nextActor;
@@ -178,12 +173,8 @@ CAvaraGame::~CAvaraGame() {
     }
 
     if (soundHub)
-        soundHub->Dispose();
-//    if (itsNet)
-//        itsNet->Dispose();
-    // ReleaseResource(mapRes);
+        delete soundHub;
 
-    // DisposePolyWorld(&itsPolyWorld);
     DisposePtr((Ptr)locatorTable);
 }
 

@@ -123,7 +123,7 @@
       <PreprocessorDefinitions>_WINSOCK_DEPRECATED_NO_WARNINGS;NOMINMAX;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_WARNINGS;_DEBUG;NANOGUI_GLAD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>..\src\audio;..\src\assets;..\src\base;..\src\bsp;..\src\compat;..\src\game;..\src\gui;..\src\level;..\src\net;..\src\render;..\src\tui;..\src\util;..\src\util\huffman;..\vendor\;..\vendor\nanogui;..\vendor\nanovg;..\vendor\pugixml;..\vendor\utf8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\src\audio;..\src\assets;..\src\base;..\src\bsp;..\src\compat;..\src\game;..\src\gui;..\src\level;..\src\net;..\src\render;..\src\tui;..\src\util;..\vendor\;..\vendor\nanogui;..\vendor\nanovg;..\vendor\pugixml;..\vendor\utf8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ShowIncludes>false</ShowIncludes>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -148,7 +148,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINSOCK_DEPRECATED_NO_WARNINGS;NOMINMAX;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_WARNINGS;NDEBUG;NANOGUI_GLAD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\src\audio;..\src\assets;..\src\base;..\src\bsp;..\src\compat;..\src\game;..\src\gui;..\src\level;..\src\net;..\src\render;..\src\tui;..\src\util;..\src\util\huffman;..\vendor\;..\vendor\nanogui;..\vendor\nanovg;..\vendor\pugixml;..\vendor\utf8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\src\audio;..\src\assets;..\src\base;..\src\bsp;..\src\compat;..\src\game;..\src\gui;..\src\level;..\src\net;..\src\render;..\src\tui;..\src\util;..\vendor\;..\vendor\nanogui;..\vendor\nanovg;..\vendor\pugixml;..\vendor\utf8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -180,7 +180,6 @@
     <ClInclude Include="..\src\audio\CSoundMixer.h" />
     <ClInclude Include="..\src\audio\OggFile.h" />
     <ClInclude Include="..\src\audio\SoundSystemDefines.h" />
-    <ClInclude Include="..\src\base\CDirectObject.h" />
     <ClInclude Include="..\src\base\CTagBase.h" />
     <ClInclude Include="..\src\bsp\CBSPPart.h" />
     <ClInclude Include="..\src\bsp\CBSPWorld.h" />
@@ -315,9 +314,6 @@
     <ClInclude Include="..\src\util\CStringDictionary.h" />
     <ClInclude Include="..\src\util\Debug.h" />
     <ClInclude Include="..\src\util\FastMat.h" />
-    <ClInclude Include="..\src\util\huffman\CAbstractHuffPipe.h" />
-    <ClInclude Include="..\src\util\huffman\CAbstractPipe.h" />
-    <ClInclude Include="..\src\util\huffman\CHuffProcessor.h" />
     <ClInclude Include="..\src\util\JSONify.h" />
     <ClInclude Include="..\src\util\Logging.h" />
     <ClInclude Include="..\src\util\RamFiles.h" />
@@ -391,7 +387,6 @@
     <ClCompile Include="..\src\audio\CSoundMixer.cpp" />
     <ClCompile Include="..\src\audio\DopplerPlug.cpp" />
     <ClCompile Include="..\src\audio\OggFile.cpp" />
-    <ClCompile Include="..\src\base\CDirectObject.cpp" />
     <ClCompile Include="..\src\base\CTagBase.cpp" />
     <ClCompile Include="..\src\bsp\CBSPPart.cpp" />
     <ClCompile Include="..\src\bsp\CBSPWorld.cpp" />
@@ -507,9 +502,6 @@
     <ClCompile Include="..\src\util\CStringDictionary.cpp" />
     <ClCompile Include="..\src\util\Debug.cpp" />
     <ClCompile Include="..\src\util\FastMat.cpp" />
-    <ClCompile Include="..\src\util\huffman\CAbstractHuffPipe.cpp" />
-    <ClCompile Include="..\src\util\huffman\CAbstractPipe.cpp" />
-    <ClCompile Include="..\src\util\huffman\CHuffProcessor.cpp" />
     <ClCompile Include="..\src\util\Logging.cpp" />
     <ClCompile Include="..\src\util\RamFiles.cpp" />
     <ClCompile Include="..\vendor\csscolorparser.cpp" />

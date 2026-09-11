@@ -8,7 +8,6 @@
 */
 
 #pragma once
-#include "CDirectObject.h"
 #include "Memory.h"
 #include <list>
 #include <vector>
@@ -53,7 +52,7 @@ typedef struct ReceiverRecord ReceiverRecord;
 **	functionality.
 */
 
-class CCommManager : public CDirectObject {
+class CCommManager {
 public:
     short myId; //	Required/accessed publicly
 
@@ -69,18 +68,19 @@ public:
     RolloverCounter<uint32_t> totalPacketsSent = 0;
 
     //	For method documentation, see .c-file:
-    ~CCommManager() { Dispose(); }
 
-    virtual void ICommManager(short packetSpace);
+    CCommManager() : CCommManager(MINIMUMBUFFERRESERVE, sizeof(PacketInfo)) {}
+    CCommManager(short packetSpace, size_t pSize);
+    virtual ~CCommManager() {}
 
-    void InitializePacketQueues(int numPackets, size_t packetSize);
+    virtual void Finalize() {}
+
     void AllocatePacketBuffers(int numPackets);
     virtual void AddReceiver(ReceiverRecord *aReceiver, Boolean delayed);
     virtual void RemoveReceiver(ReceiverRecord *aReceiver, Boolean delayed);
 
     virtual OSErr SendPacket(short distribution, int8_t command, int8_t p1, int16_t p2, int32_t p3, int16_t dataLen, Ptr dataPtr, int16_t flags = 0);
     virtual OSErr SendUrgentPacket(short distribution, int8_t command, int8_t p1, int16_t p2, int32_t p3, int16_t dataLen, Ptr dataPtr);
-    virtual void Dispose();
 
     virtual PacketInfo *GetPacket();
     virtual PacketInfo *DuplicatePacket(PacketInfo *original);

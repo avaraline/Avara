@@ -9,7 +9,6 @@
 
 #pragma once
 #include "CCommManager.h"
-#include "CDirectObject.h"
 #include "CommDefs.h"
 #include "RolloverCounter.h"
 #include "SlidingHistogram.h"
@@ -57,7 +56,7 @@ typedef struct {
 
 enum { kReceiveQ, kTransmitQ, kBusyQ, kQueueCount };
 
-class CUDPConnection : public CDirectObject {
+class CUDPConnection {
 public:
     class CUDPConnection *next;
     class CUDPComm *itsOwner;
@@ -113,7 +112,9 @@ public:
 
     Boolean killed;
 
-    virtual void IUDPConnection(CUDPComm *theMaster);
+    CUDPConnection(CUDPComm *theMaster);
+    virtual ~CUDPConnection();
+
     virtual void SendQueuePacket(UDPPacketInfo *thePacket, short theDistribution);
     virtual void RoutePacket(UDPPacketInfo *thePacket);
     virtual UDPPacketInfo *GetOutPacket(int32_t curTime, int32_t cramTime, int32_t urgencyAdjust);
@@ -132,7 +133,6 @@ public:
     virtual bool ReceiveQueuedPackets();
 
     virtual void FlushQueues();
-    virtual void Dispose();
 
     virtual void MarkOpenConnections(CompleteAddress *table);
     virtual void RewriteConnections(CompleteAddress *table, const CompleteAddress &myAddressInTOC);

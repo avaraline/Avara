@@ -9,7 +9,6 @@
 
 #pragma once
 #include "ARGBColor.h"
-#include "CDirectObject.h"
 #include "ColorManager.h"
 #include "FastMat.h"
 #include "Material.h"

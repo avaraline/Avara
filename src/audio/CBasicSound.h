@@ -8,7 +8,6 @@
 */
 
 #pragma once
-#include "CDirectObject.h"
 #include "OggFile.h"
 #include "SoundSystemDefines.h"
 
@@ -17,7 +16,7 @@
 class CSoundMixer;
 class CSoundHub;
 
-class CBasicSound : public CDirectObject {
+class CBasicSound {
 public:
     Fixed masterVolume;
     int16_t volumes[2];
@@ -45,6 +44,8 @@ public:
     SoundLink *controlLink; //	For control, when motionLink is not good enough.
     Boolean stopNow; //	Flag to make the sound stop.
     Boolean distanceDelay; //	Delay sound depending on position.
+
+    virtual ~CBasicSound() {}
 
     //	The following four functions will usually be overridden:
     virtual int16_t CalcVolume(int16_t theChannel); //	Return volume
