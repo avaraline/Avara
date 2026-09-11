@@ -532,7 +532,7 @@ void LegacyOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
     if (part.privateAmbient != -1) {
         AdjustAmbient(shader, ToFloat(part.privateAmbient));
     }
-    if (extraAmbient > 0) {
+    if (extraAmbient != 0) {
         AdjustAmbient(shader, defaultAmbient, extraAmbient);
     }
     if (part.ignoreDepthTesting) {
@@ -567,7 +567,7 @@ void LegacyOpenGLRenderer::Draw(OpenGLShader &shader, const CBSPPart &part, floa
     __glCheckErrors();
 
     // Restore previous lighting and depth testing state.
-    if (part.privateAmbient != -1 || extraAmbient > 0) {
+    if (part.privateAmbient != -1 || extraAmbient != 0) {
         AdjustAmbient(shader, defaultAmbient);
         __glCheckErrors();
     }

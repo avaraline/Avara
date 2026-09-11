@@ -123,7 +123,7 @@ Boolean CSliverPart::SliverAction() {
 
         extraAmbient = FIX3(500) - (FIX3(2000) >> int(lifeCount*ToFloat(fpsScale)));
 
-        ScaleAlpha(255 - static_cast<uint8_t>(ToFloat(fpsScale) * 20));
+        // ScaleAlpha(255 - static_cast<uint8_t>(ToFloat(fpsScale) * 20));
     }
 
     return lifeCount == 0;
