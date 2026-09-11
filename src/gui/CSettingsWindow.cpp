@@ -1,0 +1,243 @@
+//
+//  CSettingsWindow.cpp
+//  Avara
+//
+//  Created by Andy Halstead on 8/18/26.
+//
+
+#include "CSettingsWindow.h"
+#include "CApplication.h"
+#include "Preferences.h"
+#include "ColorManager.h"
+#include "AssetManager.h"
+#include "ARGBColor.h"
+#include "NVGUtil.h"
+
+std::string stringForAction(std::string action) {
+    json theKeys = gApplication->Get(kKeyboardMappingTag);
+    auto k = theKeys.at(action);
+    auto current_keys_str = std::stringstream();
+    if (k.is_array()) {
+        auto separator = "";
+        for (auto ik : k.items()) {
+            std::string sdlkey = ik.value();
+            current_keys_str << separator << sdlkey;
+            separator = " · ";
+        }
+    }
+    else {
+        std::string sdlkey = k;
+        current_keys_str << sdlkey;
+    }
+    return current_keys_str.str();
+}
+
+CSettingsWindow::CSettingsWindow(CApplication *app) : CWindow(app, "Avara Settings") {
+    setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 10, 10));
+    mPrefTabs = this->add<nanogui::TabWidget>();
+
+    NVGcontext *ctx = app->nvgContext();
+    currentlyMappingKey = false;
+
+    std::string kbIconsPath = AssetManager::GetImagePath(NoPackage, "control48px.png");
+    keyboardIconsDataHandle = nvgCreateImage(ctx, kbIconsPath.c_str(), 0);
+
+    this->setFixedWidth(700);
+    this->setFixedHeight(600);
+    for (auto &pane : optionsScreens.items()) {
+        std::string title(pane.key());
+        Widget* layer = mPrefTabs->createTab(title);
+        layer->setLayout(new nanogui::GroupLayout());
+        nanogui::VScrollPanel *panel = new nanogui::VScrollPanel(layer);
+        panel->setFixedHeight(450);
+        panel->setLayout(new nanogui::GroupLayout());
+        nanogui::Widget *panelContent = new nanogui::Widget(panel);
+        panelContent->setLayout(new nanogui::GroupLayout());
+        for (auto &opt : pane.value().items()) {
+            std::string optLabelStr(opt.value()[0]);
+            std::string optKey(opt.value()[1]);
+            optionTypes optType = opt.value()[2];
+            panelContent->add<nanogui::Label>(optLabelStr);
+            switch(optType) {
+                case kOptionTypeBool: {
+                    bool value = mApplication->Get(optKey);
+                    auto cb = panelContent->add<nanogui::CheckBox>();
+                    cb->setChecked(value);
+                    cb->setCaption(value ? "Enabled" : "Disabled");
+                    cb->setCallback([this, optKey, cb] (bool checked) {
+                        mApplication->Set(optKey, checked);
+                        cb->setCaption(checked ? "Enabled" : "Disabled");
+                    });
+                    break;
+                }
+                case kOptionTypeString: {
+                    auto tb = panelContent->add<nanogui::TextBox>();
+                    tb->setValue(mApplication->String(optKey));
+                    tb->setAlignment(nanogui::TextBox::Alignment::Left);
+                    tb->setEditable(true);
+                    tb->setCallback([this, optKey](const std::string &input) -> bool {
+                        mApplication->Set(optKey, input);
+                        return true;
+                    });
+                    break;
+                }
+                case kOptionTypeFloat: {
+                    auto tb = panelContent->add<nanogui::TextBox>();
+                    std::string valStr = std::to_string(mApplication->Get<float>(optKey));
+                    tb->setValue(valStr);
+                    tb->setEditable(true);
+                    tb->setAlignment(nanogui::TextBox::Alignment::Left);
+                    tb->setFormat("[-]?[0-9]*\\.?[0-9]+");
+                    tb->setCallback([this, optKey](const std::string &input) -> bool {
+                        mApplication->Set(optKey, std::stof(input));
+                        return true;
+                    });
+                    break;
+                }
+                case kOptionTypeInteger: {
+                    auto tb = panelContent->add<nanogui::TextBox>();
+                    std::string valStr = std::to_string(mApplication->Get<long>(optKey));
+                    tb->setValue(valStr);
+                    tb->setEditable(true);
+                    tb->setAlignment(nanogui::TextBox::Alignment::Left);
+                    tb->setFormat("[0-9]*");
+                    tb->setEnabled(true);
+                    tb->setCallback([this, optKey](const std::string &input) -> bool {
+                        mApplication->Set(optKey, std::stoi(input));
+                        return true;
+                    });
+                    break;
+                }
+                case kOptionTypeChoice: {
+                    std::vector<std::string> labels = std::vector<std::string>();
+                    for (json &choice : opt.value()[3]) {
+                        labels.push_back(choice[1]);
+                    }
+                    auto cb = panelContent->add<nanogui::ComboBox>();
+                    cb->setItems(labels);
+                    cb->setSelectedIndex((int)mApplication->Get<long>(optKey));
+                    cb->setTextPosition(nanogui::ComboBox::TextPosition::Left);
+                    cb->setCallback([this, optKey] (int input) {
+                        mApplication->Set<long>(optKey, input);
+                    });
+                    break;
+                }
+                case kOptionTypeColor: {
+                    auto color = panelContent->add<nanogui::Button>();
+                    color->setCaption("");
+                    color->setFixedSize(nanogui::Vector2i(35, 35));
+                    auto tb = panelContent->add<nanogui::TextBox>();
+                    std::string valStr = mApplication->Get<std::string>(optKey);
+                    tb->setValue(valStr);
+                    tb->setEditable(true);
+                    tb->setAlignment(nanogui::TextBox::Alignment::Left);
+                    tb->setFormat("#([a-f]|[A-F]|[0-9]){3}(([a-f]|[A-F]|[0-9]){3})?");
+                    tb->setCallback([this, color, optKey] (const std::string newVal) {
+                        mApplication->Set<std::string>(optKey, newVal);
+                        color->setBackgroundColor(ToNanoguiColor(ARGBColor().Parse(newVal).value_or(ColorManager::getLookForwardColor())));
+                        return true;
+                    });
+                    color->setBackgroundColor(ToNanoguiColor(ARGBColor().Parse(valStr).value_or(ColorManager::getLookForwardColor())));
+                    break;
+                }
+                case kOptionTypeKeyboard: {
+                    int keyboardConfigIndex = 0;
+                    int keyboardIconSize = 25;
+                    auto container = panelContent->add<nanogui::Widget>();
+                    auto layout = new nanogui::GridLayout(nanogui::Orientation::Horizontal, 3);
+                    layout->setSpacing(1, 15);
+                    std::vector<nanogui::Alignment> aligns;
+                    aligns.push_back(nanogui::Alignment::Minimum);
+                    aligns.push_back(nanogui::Alignment::Minimum);
+                    aligns.push_back(nanogui::Alignment::Fill);
+                    layout->setColAlignment(aligns);
+                    container->setLayout(layout);
+                    for (auto &action : keyboardConfig) {
+                        int keyboardIconOffset = 48 * keyboardConfigIndex;
+                        std::string actionDesc = action.first;
+                        std::string actionKey = action.second;
+                        if (!actionKey.length()) continue;
+                        if (keyboardConfigIndex < keyboardConfigIconCount) {
+                            auto kbIcon = container->add<SpriteWidget>();
+                            kbIcon->setImage(ctx, keyboardIconsDataHandle);
+                            kbIcon->setSpriteSize(48);
+                            kbIcon->setDisplaySize(keyboardIconSize);
+                            kbIcon->setOffset(0, keyboardIconOffset);
+                        }
+                        else {
+                            container->add<Widget>();
+                        }
+                        container->add<nanogui::Label>(actionDesc);
+
+                        auto longbutton = container->add<nanogui::Button>();
+                        
+                        longbutton->setCaption(stringForAction(actionKey));
+                        longbutton->setTextPosition(nanogui::Button::TextPosition::Left);
+                        if (keyboardConfigIndex % 2 == 0) {
+                            longbutton->setBackgroundColor(nanogui::Color(255, 255, 255, 35));
+                        }
+
+                        longbutton->setCallback([this, actionDesc, actionKey, keyboardIconOffset, longbutton] {
+                            currentlyMappingKey = true;
+                            currentlyMappingKeyboardIconOffset = keyboardIconOffset;
+                            currentlyMappingAction = actionKey;
+                            currentlyMappingActionDesc = actionDesc;
+                            currentlyMappingButton = longbutton;
+                            keyMapWindow = new CKeyboardMappingWindow(this->mApplication, actionDesc, actionKey, keyboardIconOffset, keyboardIconsDataHandle);
+                            keyMapWindow->setCallback([this, longbutton, actionKey] (int status) {
+                                refreshKeyboardMappingWindow(status);
+                                longbutton->setCaption(stringForAction(actionKey));
+                            });
+                        });
+                        keyboardConfigIndex++;
+                    }
+                    break;
+                }
+            }
+        }
+        panelContent->setNeedsLayout();
+    }
+    /*
+    auto exitsettings = this->add<nanogui::Button>("Done");
+    exitsettings->setCallback([this] () {
+        this->setVisible(false);
+    });
+    */
+}
+
+void CSettingsWindow::refreshKeyboardMappingWindow(int status) {
+    if (status) {
+        keyMapWindow = new CKeyboardMappingWindow(this->mApplication, currentlyMappingActionDesc, currentlyMappingAction, currentlyMappingKeyboardIconOffset, keyboardIconsDataHandle);
+        keyMapWindow->setCallback([this] (int status) {
+            refreshKeyboardMappingWindow(status);
+            currentlyMappingButton->setCaption(stringForAction(currentlyMappingAction));
+        });
+    }
+    else {
+        currentlyMappingKey = false;
+    }
+}
+
+bool CSettingsWindow::currentlyMapping() {
+    return keyMapWindow && keyMapWindow->gathering;
+}
+
+CKeyboardMappingWindow* CSettingsWindow::getKeyMapWindow() {
+    return keyMapWindow;
+}
+
+bool CSettingsWindow::editing() {
+    return visible();
+}
+
+bool CSettingsWindow::handleSDLEvent(SDL_Event &event) {
+    SDL_Log("CSettingsWindowEvent");
+    if (keyMapWindow && keyMapWindow->gathering) {
+        return keyMapWindow->handleSDLEvent(event);
+    }
+    return false;
+}
+
+CSettingsWindow::~CSettingsWindow() {
+
+}

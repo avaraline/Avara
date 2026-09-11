@@ -14,6 +14,15 @@
 		6055BF212DEA8A79005E3CFB /* BasePath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6055BF202DEA8A79005E3CFB /* BasePath.cpp */; };
 		6055BF222DEA8A79005E3CFB /* BasePath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6055BF202DEA8A79005E3CFB /* BasePath.cpp */; };
 		6055BF232DEA8A79005E3CFB /* BasePath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6055BF202DEA8A79005E3CFB /* BasePath.cpp */; };
+		6077F4FF303947EC005D29D0 /* CMainMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6077F4FE303947EC005D29D0 /* CMainMenu.cpp */; };
+		6077F500303947EC005D29D0 /* CMainMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6077F4FE303947EC005D29D0 /* CMainMenu.cpp */; };
+		6077F501303947EC005D29D0 /* CMainMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6077F4FE303947EC005D29D0 /* CMainMenu.cpp */; };
+		6077F504303D6C8F005D29D0 /* CKeyboardMappingWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6077F503303D6C8F005D29D0 /* CKeyboardMappingWindow.cpp */; };
+		6077F505303D6C8F005D29D0 /* CKeyboardMappingWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6077F503303D6C8F005D29D0 /* CKeyboardMappingWindow.cpp */; };
+		6077F506303D6C8F005D29D0 /* CKeyboardMappingWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6077F503303D6C8F005D29D0 /* CKeyboardMappingWindow.cpp */; };
+		60E96F2C303441CD00114F0D /* CSettingsWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60E96F2B303441CD00114F0D /* CSettingsWindow.cpp */; };
+		60E96F2D303441CD00114F0D /* CSettingsWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60E96F2B303441CD00114F0D /* CSettingsWindow.cpp */; };
+		60E96F2E303441CD00114F0D /* CSettingsWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60E96F2B303441CD00114F0D /* CSettingsWindow.cpp */; };
 		940541ED2B5875B200E32241 /* OpenGLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940541EC2B5875B200E32241 /* OpenGLShader.cpp */; };
 		940541EE2B5875B200E32241 /* OpenGLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940541EC2B5875B200E32241 /* OpenGLShader.cpp */; };
 		9419E8472B49ECB1007C50D0 /* CTeamColorAdjuster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9419E8462B49ECB1007C50D0 /* CTeamColorAdjuster.cpp */; };
@@ -580,8 +589,15 @@
 		601893B72ED5A1F500AB3A6D /* signalhandling.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = signalhandling.hpp; sourceTree = "<group>"; };
 		6055BF1F2DEA8A79005E3CFB /* BasePath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasePath.h; sourceTree = "<group>"; };
 		6055BF202DEA8A79005E3CFB /* BasePath.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BasePath.cpp; sourceTree = "<group>"; };
+		6077F4FC30384BF6005D29D0 /* NVGUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NVGUtil.h; sourceTree = "<group>"; };
+		6077F4FD303947EC005D29D0 /* CMainMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMainMenu.h; sourceTree = "<group>"; };
+		6077F4FE303947EC005D29D0 /* CMainMenu.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CMainMenu.cpp; sourceTree = "<group>"; };
+		6077F502303D6C8F005D29D0 /* CKeyboardMappingWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKeyboardMappingWindow.h; sourceTree = "<group>"; };
+		6077F503303D6C8F005D29D0 /* CKeyboardMappingWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CKeyboardMappingWindow.cpp; sourceTree = "<group>"; };
 		60C274E22C23EBE9005B67A9 /* LegacyOpenGLRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LegacyOpenGLRenderer.cpp; sourceTree = "<group>"; };
 		60C274E32C23EBE9005B67A9 /* LegacyOpenGLRenderer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = LegacyOpenGLRenderer.h; sourceTree = "<group>"; };
+		60E96F2A303441CD00114F0D /* CSettingsWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSettingsWindow.h; sourceTree = "<group>"; };
+		60E96F2B303441CD00114F0D /* CSettingsWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CSettingsWindow.cpp; sourceTree = "<group>"; };
 		940541EB2B58744500E32241 /* OpenGLShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLShader.h; sourceTree = "<group>"; };
 		940541EC2B5875B200E32241 /* OpenGLShader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLShader.cpp; sourceTree = "<group>"; };
 		9419E8452B49EC89007C50D0 /* CTeamColorAdjuster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTeamColorAdjuster.h; sourceTree = "<group>"; };
@@ -1685,6 +1701,13 @@
 				E5890C8429895118007A875D /* Preferences.h */,
 				E20752ED29FF1EC500DCC210 /* Tags.h */,
 				E20752EE2A003EC600DCC210 /* Tags.cpp */,
+				60E96F2A303441CD00114F0D /* CSettingsWindow.h */,
+				60E96F2B303441CD00114F0D /* CSettingsWindow.cpp */,
+				6077F4FC30384BF6005D29D0 /* NVGUtil.h */,
+				6077F4FD303947EC005D29D0 /* CMainMenu.h */,
+				6077F4FE303947EC005D29D0 /* CMainMenu.cpp */,
+				6077F502303D6C8F005D29D0 /* CKeyboardMappingWindow.h */,
+				6077F503303D6C8F005D29D0 /* CKeyboardMappingWindow.cpp */,
 			);
 			path = gui;
 			sourceTree = "<group>";
@@ -2387,6 +2410,7 @@
 				E517F054299713DB0036B206 /* CBasicSound.cpp in Sources */,
 				E517F055299713DB0036B206 /* CRateSound.cpp in Sources */,
 				E517F056299713DB0036B206 /* CSoundHub.cpp in Sources */,
+				6077F501303947EC005D29D0 /* CMainMenu.cpp in Sources */,
 				E517F057299713DB0036B206 /* CSoundMixer.cpp in Sources */,
 				E517F058299713DB0036B206 /* DopplerPlug.cpp in Sources */,
 				948CBF152B335A1400147E80 /* BaseAssetStorage.cpp in Sources */,
@@ -2435,6 +2459,7 @@
 				E517F083299713DB0036B206 /* CLogicDelay.cpp in Sources */,
 				E517F084299713DB0036B206 /* CLogicDistributor.cpp in Sources */,
 				E517F085299713DB0036B206 /* CLogicTimer.cpp in Sources */,
+				60E96F2D303441CD00114F0D /* CSettingsWindow.cpp in Sources */,
 				E2210CC12A1C9D9C000712AA /* Tags.cpp in Sources */,
 				E517F086299713DB0036B206 /* CMarkerActor.cpp in Sources */,
 				E517F087299713DB0036B206 /* CMineActor.cpp in Sources */,
@@ -2476,6 +2501,7 @@
 				9465BFD82B30EF680050681C /* PackageManifest.cpp in Sources */,
 				E517F0A6299713DB0036B206 /* CWeapon.cpp in Sources */,
 				E517F0A7299713DB0036B206 /* CWorldShader.cpp in Sources */,
+				6077F505303D6C8F005D29D0 /* CKeyboardMappingWindow.cpp in Sources */,
 				E517F0A8299713DB0036B206 /* CYonBox.cpp in Sources */,
 				944F2F712B323F1900856E53 /* LocalAssetRepository.cpp in Sources */,
 				E517F0A9299713DB0036B206 /* CYonSphere.cpp in Sources */,
@@ -2559,6 +2585,7 @@
 				E5890D0E29895118007A875D /* CRosterWindow.cpp in Sources */,
 				E5890CD729895118007A875D /* CGlowActors.cpp in Sources */,
 				E5890CE229895118007A875D /* CRealMovers.cpp in Sources */,
+				6077F500303947EC005D29D0 /* CMainMenu.cpp in Sources */,
 				E5890EF829895124007A875D /* layout.cpp in Sources */,
 				E5890CF129895118007A875D /* CSliverPart.cpp in Sources */,
 				E5890CD329895118007A875D /* CUfo.cpp in Sources */,
@@ -2607,6 +2634,7 @@
 				E5890CA829895118007A875D /* Beeper.cpp in Sources */,
 				E5890CDE29895118007A875D /* CYonBox.cpp in Sources */,
 				E5890EF429895124007A875D /* tabheader.cpp in Sources */,
+				60E96F2C303441CD00114F0D /* CSettingsWindow.cpp in Sources */,
 				E20752EF2A003EC600DCC210 /* Tags.cpp in Sources */,
 				E5890D1029895118007A875D /* CApplication.cpp in Sources */,
 				E5890EEB29895124007A875D /* csscolorparser.cpp in Sources */,
@@ -2648,6 +2676,7 @@
 				E5890CBA29895118007A875D /* CWeapon.cpp in Sources */,
 				E247DE242A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp in Sources */,
 				E5890CE429895118007A875D /* CAreaActor.cpp in Sources */,
+				6077F504303D6C8F005D29D0 /* CKeyboardMappingWindow.cpp in Sources */,
 				944F2F702B323F1900856E53 /* LocalAssetRepository.cpp in Sources */,
 				E5890D0929895118007A875D /* CNetworkWindow.cpp in Sources */,
 				9465BFD22B30C2A00050681C /* AssetManager.cpp in Sources */,
@@ -2742,6 +2771,7 @@
 				E5A219C72DC59135007D54FF /* CDirectObject.cpp in Sources */,
 				E5A219C82DC59135007D54FF /* CTagBase.cpp in Sources */,
 				E5A219C92DC59135007D54FF /* CCompoundShape.cpp in Sources */,
+				6077F506303D6C8F005D29D0 /* CKeyboardMappingWindow.cpp in Sources */,
 				E5A219CA2DC59135007D54FF /* CBSPPart.cpp in Sources */,
 				E5A219CB2DC59135007D54FF /* CBSPWorld.cpp in Sources */,
 				E5A219CC2DC59135007D54FF /* CScaledBSP.cpp in Sources */,
@@ -2776,6 +2806,7 @@
 				E5A219EA2DC59135007D54FF /* CHologramActor.cpp in Sources */,
 				E5A219EB2DC59135007D54FF /* CHUD.cpp in Sources */,
 				E5A219EC2DC59135007D54FF /* CIncarnator.cpp in Sources */,
+				6077F4FF303947EC005D29D0 /* CMainMenu.cpp in Sources */,
 				E5A219ED2DC59135007D54FF /* CLogic.cpp in Sources */,
 				E5A219EE2DC59135007D54FF /* CLogicAnd.cpp in Sources */,
 				E5A219EF2DC59135007D54FF /* CLogicBase.cpp in Sources */,
@@ -2837,6 +2868,7 @@
 				E5A21A262DC59135007D54FF /* LinkLoose.cpp in Sources */,
 				E5A21A272DC59135007D54FF /* Parser.cpp in Sources */,
 				E5A21A282DC59135007D54FF /* AvaraTCP.cpp in Sources */,
+				60E96F2E303441CD00114F0D /* CSettingsWindow.cpp in Sources */,
 				E5A21A292DC59135007D54FF /* CCommManager.cpp in Sources */,
 				E5A21A2A2DC59135007D54FF /* CProtoControl.cpp in Sources */,
 				E5A21A2B2DC59135007D54FF /* CUDPComm.cpp in Sources */,
