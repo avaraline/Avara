@@ -79,7 +79,17 @@ public:
         mOffset.y = y;
     }
     void draw(NVGcontext *ctx) {
-        DrawImage(ctx, mImageDataHandle, 1.0, mOffset.x, mOffset.y, mSourceSize, mSourceSize, mPos.x, mPos.y, mSize, mSize);
+        DrawImage(ctx,
+            mImageDataHandle,
+            1.0f,
+            (float)mOffset.x,
+            (float)mOffset.y,
+            (float)mSourceSize,
+            (float)mSourceSize,
+            (float)mPos.x,
+            (float)mPos.y,
+            (float)mSize,
+            (float)mSize);
     };
 private:
     int mSize = 48;
