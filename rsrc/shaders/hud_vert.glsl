@@ -8,6 +8,7 @@ layout(location = 6) in float vertexReserved3;
 layout(location = 7) in vec3 vertexNormal;
 
 uniform float ambient; // = 0.0;
+uniform float extraAmbient;
 uniform bool lightsActive; // = true;
 uniform mat4 view;
 uniform mat4 proj;
@@ -41,5 +42,5 @@ void main() {
     fragmentColor = vertexColor;
     fragmentGlow = vertexGlow;
     fragmentNormal = vertexNormal;
-    baseLightColor = (ambient * lightColor) + diffuse(fragmentNormal);
+    baseLightColor = ((ambient + extraAmbient) * lightColor) + diffuse(fragmentNormal);
 }
