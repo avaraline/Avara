@@ -80,6 +80,7 @@ public:
         std::string btnStr(password ? "Connect..." : "Connect");
         nanogui::Button *btn = new nanogui::Button(this, btnStr);
         //btn->setFixedWidth(100);
+        btn->setBackgroundColor(kGUIAccentPositive);
         btn->setCallback([line1, password] {
             CAvaraAppImpl *avara = (CAvaraAppImpl *)gApplication;
             

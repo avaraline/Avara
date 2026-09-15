@@ -52,6 +52,7 @@ void ComboBox::setItems(const std::vector<std::string> &items, const std::vector
     int index = 0;
     for (const auto &str: items) {
         Button *button = new Button(mButtonWrapper, str);
+        button->setTextPosition(nanogui::Button::TextPosition::Left);
         button->setFlags(Button::RadioButton);
         button->setCallback([&, index] {
             mSelectedIndex = index;
