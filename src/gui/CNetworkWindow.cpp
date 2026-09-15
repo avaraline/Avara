@@ -5,7 +5,7 @@
 #include "Preferences.h"
 #include "CommandList.h"
 
-CNetworkWindow::CNetworkWindow(CApplication *app) : CWindow(app, "Network") {
+CNetworkWindow::CNetworkWindow(CApplication *app) : CWindow(app, "Manually Connect") {
     setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 10, 10));
 
     new nanogui::Label(this, "Connection address");

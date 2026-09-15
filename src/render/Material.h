@@ -94,7 +94,7 @@ private:
      * @return the nearest approximate value that we can cram into 8 bits, i.e. scaled to a range of 0 - 255
      */
     inline uint8_t ConstrainGlow(Fixed glow) {
-        return std::round(std::clamp(ToFloat(glow), 0.0f, MAX_GLOW) * 255 / MAX_GLOW);
+        return (uint8_t)std::round(std::clamp(ToFloat(glow), 0.0f, MAX_GLOW) * 255 / MAX_GLOW);
     }
     
     /**
@@ -104,6 +104,6 @@ private:
      * @return the nearest approximate value that we can cram into 8 bits, i.e. scaled to a range of 0 - 255
      */
     inline uint8_t ConstrainShininess(Fixed shininess) {
-        return std::round(std::clamp(ToFloat(shininess), 0.0f, MAX_SHININESS_EXP) * 255 / MAX_SHININESS_EXP);
+        return (uint8_t)std::round(std::clamp(ToFloat(shininess), 0.0f, MAX_SHININESS_EXP) * 255 / MAX_SHININESS_EXP);
     }
 };
