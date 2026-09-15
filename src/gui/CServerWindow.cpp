@@ -9,6 +9,7 @@
 CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
     setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 10, 10));
 
+    new nanogui::Label(this, "Server description");
     std::string description = app->String(kServerDescription);
     descriptionBox = new nanogui::TextBox(this);
     descriptionBox->setPlaceholder("Server Message");
@@ -19,6 +20,7 @@ CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
         return true;
     });
 
+    new nanogui::Label(this, "Server password (optional)");
     std::string password = app->String(kServerPassword);
     passwordBox = new nanogui::TextBox(this);
     passwordBox->setPlaceholder("Password");
@@ -27,15 +29,6 @@ CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
     passwordBox->setCallback([app](std::string value) -> bool {
         app->Set(kServerPassword, value);
         return true;
-    });
-
-    startBtn = new nanogui::Button(this, "Start Hosting");
-    startBtn->setCallback([app] {
-        CAvaraAppImpl *avara = (CAvaraAppImpl *)app;
-        if (avara->GetNet()->netStatus == kServerNet)
-            avara->GetNet()->ChangeNet(kNullNet, "");
-        else
-            avara->GetNet()->ChangeNet(kServerNet, "");
     });
 
     registerBox = new nanogui::CheckBox(this, "Register With Tracker:", [this, app](bool checked) {
@@ -53,7 +46,7 @@ CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
         app->Set(kTrackerRegisterAddress, value);
         return true;
     });
-
+    new nanogui::Label(this, "Latency Tolerance");
     latencyBox = new nanogui::TextBox(this);
     latencyBox->setValue(std::to_string(app->Get<float>(kLatencyToleranceTag)));
     latencyBox->setEditable(true);
@@ -89,6 +82,7 @@ CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
     autoLatencyBox->setChecked(autoLatency);
     autoLatencyBox->setEnabled(true);
 
+    new nanogui::Label(this, "Frame time (FPS)");
     std::vector<std::string> frameTimeOptions = {
         "64 ms (15.625 fps)", "32 ms (31.25 fps)", "16 ms (62.5 fps)", "8 ms (125 fps)"
     };
@@ -100,6 +94,17 @@ CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
     });
     frameTimeBox->setSelectedIndex(6-log2(gCurrentGame->frameTime));
     frameTimeBox->popup()->setSize(nanogui::Vector2i(200, 160));
+
+    startBtn = new nanogui::Button(this, "Start Hosting");
+    startBtn->setBackgroundColor(kGUIAccentPositive);
+    startBtn->setCallback([app] {
+        CAvaraAppImpl *avara = (CAvaraAppImpl *)app;
+        if (avara->GetNet()->netStatus == kServerNet)
+            avara->GetNet()->ChangeNet(kNullNet, "");
+        else
+            avara->GetNet()->ChangeNet(kServerNet, "");
+    });
+    
 }
 
 CServerWindow::~CServerWindow() {}
@@ -117,6 +122,7 @@ bool CServerWindow::DoCommand(int theCommand) {
                     startBtn->setEnabled(true);
                     frameTimeBox->setEnabled(true);
                     startBtn->setCaption("Start Hosting");
+                    startBtn->setBackgroundColor(kGUIAccentPositive);
                     this->EnableLatencyOptions(true);
                     break;
                 case kClientNet:
@@ -126,6 +132,7 @@ bool CServerWindow::DoCommand(int theCommand) {
                     break;
                 case kServerNet:
                     startBtn->setCaption("Stop Hosting");
+                    startBtn->setBackgroundColor(kGUIAccentNegative);
                     this->EnableLatencyOptions(true);
                     break;
             }

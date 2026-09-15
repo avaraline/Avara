@@ -31,8 +31,6 @@ CKeyboardMappingWindow::CKeyboardMappingWindow(CApplication *app, const std::str
 
     currentlyMapping = new std::string(key);
 
-    auto addColor = nanogui::Color(22, 80, 22, 255);
-
     json allmap = app->Get(kKeyboardMappingTag);
     auto k = allmap.at(key);
     if (k.is_array()) {
@@ -47,7 +45,7 @@ CKeyboardMappingWindow::CKeyboardMappingWindow(CApplication *app, const std::str
         removeMappingButton(key, k);
     }
     addbtn = add<nanogui::Button>("Add New");
-    addbtn->setBackgroundColor(addColor);
+    addbtn->setBackgroundColor(kGUIAccentPositive);
     addbtn->setCallback([this] {
         addbtn->setCaption("<waiting>");
         addbtn->setEnabled(false);
@@ -72,7 +70,7 @@ void CKeyboardMappingWindow::removeMappingButton(const std::string &action, cons
     keybtn->setFont("icon");
     keybtn->setCaption("");
     keybtn->setIcon(ENTYPO_ICON_TRASH);
-    keybtn->setBackgroundColor(nanogui::Color(80, 22, 22, 255));
+    keybtn->setBackgroundColor(kGUIAccentNegative);
     keybtn->setCallback([this, action, key] {
         SDL_Log("Delete %s bound to %s", key.c_str(), action.c_str());
         removeKeyBind(key);

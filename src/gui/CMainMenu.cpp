@@ -18,27 +18,30 @@ CMainMenu::CMainMenu(CAvaraAppImpl *app, NVGcontext *ctx) : nanogui::Widget((nan
     titleImageH = 0;
     nvgImageSize(ctx, titleImageDataHandle, &titleImageW, &titleImageH);
 
-    auto paddingterm = (phi * 80);
-    auto screenX = screen()->width();
-    auto screenY = screen()->height();
-    setFixedSize(nanogui::Vector2i(screenX, screenY));
-    paddingX = 25;
-    paddingY = screenY / paddingterm;
-    titleW = screenX / phi;
-    titleH = ((screenX / phi) / titleImageW) * titleImageH;
-    titleImageOffsetX = paddingX;
-    titleImageOffsetY = (paddingY * 4) + 25;
-
-    setLayout(new nanogui::FlowLayout(nanogui::Orientation::Vertical, true, 0, paddingY));
+    setLayout(new nanogui::FlowLayout(nanogui::Orientation::Vertical, true, 0, 25));
     placeholder = new nanogui::Widget(this);
-    placeholder->setWidth(titleW);
-    placeholder->setHeight(titleH + (titleImageOffsetY * 2) + 25);
 
+    updateAspectRatio();
     addHomeScreenButton("Play Online", GUIState::tracker);
     addHomeScreenButton("Host Server", GUIState::hostSettings);
     addHomeScreenButton("Single Player", GUIState::singlePlayer);
     addHomeScreenButton("Settings", GUIState::settings);
+    //addHomeScreenButton("About", GUIState::about);
     addHomeScreenButton("Quit", [] { gApplication->Done(); });
+}
+
+void CMainMenu::updateAspectRatio() {
+    auto screenX = screen()->width();
+    auto screenY = screen()->height();
+    setFixedSize(nanogui::Vector2i(screenX, screenY));
+    paddingX = 25;
+    paddingY = 25;
+    titleW = screenX / (phi * 1.6);
+    titleH = ((screenX / (phi * 1.6)) / titleImageW) * titleImageH;
+
+    placeholder->setFixedWidth(screen()->width());
+    placeholder->setFixedHeight(titleH);
+    setNeedsLayout();
 }
 
 void CMainMenu::addHomeScreenButton(const std::string text, const std::function<void()> &callback) {
@@ -50,19 +53,10 @@ void CMainMenu::addHomeScreenButton(const std::string text, const std::function<
 }
 
 void CMainMenu::addHomeScreenButton(const std::string text, GUIState target) {
-    addHomeScreenButton(text, [this, target] { app->SetGUIState(target); });
+    addHomeScreenButton(text, [this, target] { app->UpdateGUIState(target); });
 }
 
 void CMainMenu::draw(NVGcontext *ctx) {
-    titleW = screen()->width() / phi;
-    titleH = ((screen()->width() / phi) / titleImageW) * titleImageH;
-    placeholder->setFixedWidth(screen()->width());
-    placeholder->setFixedHeight(titleH + 50);
-    setLayout(new nanogui::FlowLayout(nanogui::Orientation::Vertical, true, 0, paddingY * 2));
-    setNeedsLayout();
-    titleImageOffsetX = 25;
-    paddingY = screen()->height() / (phi * 80);
-    titleImageOffsetY = 25;
-    DrawImage(ctx, titleImageDataHandle, 1, 0, 0, titleImageW, titleImageH, 25, 25, titleW, titleH);
+    DrawImage(ctx, titleImageDataHandle, 1, 0, 0, titleImageW, titleImageH, paddingX, paddingY, titleW, titleH);
     Widget::draw(ctx);
 }

@@ -195,7 +195,7 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     previewRadius = 0;
     animatePreview = false;
 
-    setLayout(new nanogui::BoxLayout(nanogui::Orientation::Horizontal, nanogui::Alignment::Minimum, 25, 25));
+    setLayout(new nanogui::FlowLayout(nanogui::Orientation::Vertical, true, 25, 25));
 
     itsGUIState = GUIState::title;
 
@@ -261,23 +261,13 @@ CAvaraAppImpl::~CAvaraAppImpl() {
     DeallocParser();
 }
 
-void CAvaraAppImpl::SetGUIState(GUIState g) {
-    if (g != itsGUIState) {
-        auto prevState = itsGUIState;
-        SDL_Log("GUIState %i %i", prevState, g);
-        UpdateGUI(g);
-    }
-}
-
-GUIState CAvaraAppImpl::GetGUIState() {
-    return itsGUIState;
-}
-
-void CAvaraAppImpl::UpdateGUI(GUIState g) {
+void CAvaraAppImpl::UpdateGUIState(GUIState g) {
     auto oldState = itsGUIState;
-    if (g != GUIState::title) {
+    if (g != GUIState::title &&
+        g != GUIState::hostServer &&
+        g != GUIState::joinedServer) {
         backButton->setCallback([this, oldState] () {
-            UpdateGUI(oldState);
+            UpdateGUIState(oldState);
             backButton->setVisible(false);
         });
         backButton->setVisible(true);
@@ -297,7 +287,12 @@ void CAvaraAppImpl::UpdateGUI(GUIState g) {
             break;
         case GUIState::hostServer:
             serverWindow->setVisible(true);
+            levelWindow->setVisible(true);
+            playerWindow->setVisible(true);
+            rosterWindow->setVisible(true);
+            break;
         case GUIState::joinedServer:
+            networkWindow->setVisible(true);
             levelWindow->setVisible(true);
             rosterWindow->setVisible(true);
             playerWindow->setVisible(true);
@@ -306,7 +301,6 @@ void CAvaraAppImpl::UpdateGUI(GUIState g) {
             trackerWindow->setVisible(true);
             networkWindow->setVisible(true);
             break;
-        case GUIState::about:
         case GUIState::singlePlayer:
             levelWindow->setVisible(true);
             rosterWindow->setVisible(true);
@@ -319,6 +313,7 @@ void CAvaraAppImpl::UpdateGUI(GUIState g) {
             break;
     }
     setNeedsLayout();
+    performLayout();
     itsGUIState = g;
 }
 
@@ -415,6 +410,7 @@ void CAvaraAppImpl::WindowResized(int width, int height) {
     if (gRenderer->viewParams->viewPixelDimensions.h != width || gRenderer->viewParams->viewPixelDimensions.v != height)
         gRenderer->UpdateViewRect(width, height, mPixelRatio);
     // performLayout();
+    mainMenu->updateAspectRatio();
 }
 
 void CAvaraAppImpl::PrefChanged(std::string name) {
@@ -509,13 +505,13 @@ bool CAvaraAppImpl::DoCommand(int theCommand) {
         case kNetChangedCmd: {
             switch(gameNet->netStatus) {
                 case kNullNet:
-                    UpdateGUI(GUIState::title);
+                    UpdateGUIState(GUIState::title);
                     break;
                 case kServerNet:
-                    UpdateGUI(GUIState::hostServer);
+                    UpdateGUIState(GUIState::hostServer);
                     break;
                 case kClientNet:
-                    UpdateGUI(GUIState::joinedServer);
+                    UpdateGUIState(GUIState::joinedServer);
                     break;
                 default:
                     break;

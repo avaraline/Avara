@@ -239,27 +239,20 @@ static json optionsScreens {
             {0, "Off"},
             {1, "Deuteranopia"},
             {2, "Protanopia"},
-            {3, "Tritanopia"}}}
-        },
-        /*
-        {"Multisampling", kMultiSamplesTag, kOptionTypeChoice, {
-            {0, "off"},
-            {4, "medium"},
-            {8, "high"}
-        }},*/
-    },
+            {3, "Tritanopia"}}},
+        {"FXAA (Anti-aliasing)", kFXAA, kOptionTypeBool},
+        {"Color dithering", kDither, kOptionTypeBool},
+        {"Specular lighting", kSpecular, kOptionTypeBool}
+    }},
     {"Game", {
         {"Yon (render distance)", kYonPrefTag, kOptionTypeInteger},
-        {"Mouse Sensitivity", kMouseSensitivityTag, kOptionTypeChoice, {
-            {0, "low"},
-            {1, "medium"},
-            {2, "high"}
-        }},
+        {"Mouse Sensitivity", kMouseSensitivityTag, kOptionTypeFloat},
         {"Invert Mouse Y-Axis", kInvertYAxisTag, kOptionTypeBool},
         {"Updated HUD", kShowNewHUD, kOptionTypeBool},
-        {"Volume", kSoundVolume, kOptionTypeInteger},
+        {"Volume (1 - 100)", kSoundVolume, kOptionTypeInteger},
         {"Ignore Custom Hull Colors", kIgnoreCustomColorsTag, kOptionTypeBool},
         {"Ignore Custom Goody Sounds", kIgnoreCustomGoodySound, kOptionTypeBool},
+        {"Default arguments", kDefaultArgs, kOptionTypeString}
     }},
     {"Network", {
         {"Player Name", kPlayerNameTag, kOptionTypeString},
@@ -279,7 +272,21 @@ static json optionsScreens {
         {"HUD Color", kHUDColor, kOptionTypeColor},
         {"HUD Warning", kHUDWarningColor, kOptionTypeColor},
         {"HUD Critical", kHUDCriticalColor, kOptionTypeColor},
-        {"HUD Positive", kHUDPositiveColor, kOptionTypeColor}
+        {"HUD Positive", kHUDPositiveColor, kOptionTypeColor},
+        {"Color vision adjustment mode", kColorBlindMode, kOptionTypeChoice, {
+            {0, "Off"},
+            {1, "Deuteranopia"},
+            {2, "Protanopia"},
+            {3, "Tritanopia"}}}
+    }},
+    {"Controller", {
+        {"Poll rate", kControllerPollRate, kOptionTypeInteger},
+        {"Exponent", kControllerExponent, kOptionTypeFloat},
+        {"X multiplier", kControllerX, kOptionTypeFloat},
+        {"Y multiplier", kControllerY, kOptionTypeFloat},
+        {"Stick threshold", kControllerStickThreshold, kOptionTypeFloat},
+        {"Trigger threshold", kControllerTriggerThreshold, kOptionTypeFloat},
+        {"Damper milliseconds", kControllerDamperMillis, kOptionTypeFloat}
     }},
     {"HUD", {
         {"Layout Preset", kHUDPreset, kOptionTypeChoice, {

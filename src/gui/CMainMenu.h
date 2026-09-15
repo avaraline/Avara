@@ -18,9 +18,10 @@ class CMainMenu : public nanogui::Widget {
 public:
     CMainMenu(CAvaraAppImpl *app, NVGcontext *ctx);
     void draw(NVGcontext *ctx);
+    void updateAspectRatio();
 private:
     int titleImageDataHandle;
-    int titleImageW, titleImageH, titleImageOffsetX, titleImageOffsetY;
+    int titleImageW, titleImageH;
     int titleW, titleH, paddingX, paddingY;
     std::vector<nanogui::Button*> homeScreenButtons;
     CAvaraAppImpl* app;

@@ -14,6 +14,10 @@
 #define phi 1.618
 #define phicube (phi * phi * phi)
 
+const nanogui::Color kGUIAccentNegative = nanogui::Color(80, 22, 22, 255);
+const nanogui::Color kGUIAccentPositive = nanogui::Color(22, 80, 22, 255);
+const nanogui::Color kGUIAccentNeutral = nanogui::Color(22, 22, 80, 255);
+
 enum GUIState {
     title = 0,
     tracker,
@@ -88,5 +92,7 @@ private:
     nanogui::Vector2i mOffset;
     nanogui::Vector2i mImageSize;
 };
+
+
 
 #endif /* NVGUtil_h */

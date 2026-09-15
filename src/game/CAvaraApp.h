@@ -117,10 +117,8 @@ private:
     nanogui::Button* backButton;
 
 public:
-    void SetGUIState(GUIState g);
     GUIState GetGUIState();
-    void UpdateGUI(GUIState g);
-    void UpdateGUI() { UpdateGUI(itsGUIState); };
+    void UpdateGUIState(GUIState g);
 
     std::unique_ptr<CRUD> itsAPI;
     CPlayerWindow *playerWindow;

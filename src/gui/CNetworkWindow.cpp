@@ -8,9 +8,11 @@
 CNetworkWindow::CNetworkWindow(CApplication *app) : CWindow(app, "Network") {
     setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 10, 10));
 
+    new nanogui::Label(this, "Connection address");
     addressBox = new nanogui::TextBox(this);
     addressBox->setPlaceholder("Address");
     addressBox->setValue(app->String(kLastAddress));
+    addressBox->setAlignment(nanogui::TextBox::Alignment::Left);
     addressBox->setEditable(true);
     addressBox->setCallback([app](std::string value) -> bool {
         app->Set(kLastAddress, value);
@@ -18,6 +20,7 @@ CNetworkWindow::CNetworkWindow(CApplication *app) : CWindow(app, "Network") {
     });
 
     connectBtn = new nanogui::Button(this, "Connect");
+    connectBtn->setTextPosition(nanogui::Button::TextPosition::Left);
     connectBtn->setCallback([this, app] {
         CAvaraAppImpl *avara = (CAvaraAppImpl *)app;
         if(avara->GetNet()->netStatus == kClientNet)
@@ -41,11 +44,13 @@ bool CNetworkWindow::DoCommand(int theCommand) {
                 case kNullNet:
                     addressBox->setEnabled(true);
                     connectBtn->setEnabled(true);
+                    connectBtn->setBackgroundColor(kGUIAccentPositive);
                     connectBtn->setCaption("Connect");
                     break;
                 case kClientNet:
                     addressBox->setEnabled(false);
                     connectBtn->setCaption("Disconnect");
+                    connectBtn->setBackgroundColor(kGUIAccentNegative);
                     break;
                 case kServerNet:
                     addressBox->setEnabled(false);

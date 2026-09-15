@@ -86,6 +86,7 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
         layout->appendRow(1, 1);
         layout->appendCol(1, 1);
         ColorComboBox *color = panel->add<ColorComboBox>(colorOptions);
+        color->setTextPosition(nanogui::Button::TextPosition::Left);
         //color->setFixedHeight(23);
         color->setSelectedIndex(theNet->teamColors[i]);
         color->setCallback([this, i](int selectedIdx) {
@@ -380,6 +381,7 @@ void CRosterWindow::NewChatLine(Str255 playerName, short slot, std::string messa
     chatPlayer->setFontSize(CHAT_FONT_SIZE);
     chatPlayer->setFont(CHAT_FONT);
     chatPlayer->setFixedWidth(CHAT_NAME_WIDTH);
+    chatPlayer->setTextPosition(nanogui::Button::TextPosition::Left);
     int i1 = theNet->teamColors[slot] + 1;
     // using Base colors in chat, not level-specific overridden colors
     chatPlayer->setBackgroundColor(ToNanoguiColor(*ColorManager::getTeamBaseColor(i1)));
