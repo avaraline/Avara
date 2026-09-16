@@ -129,6 +129,13 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
         return false;
     });
     TextCommand::Register(cmd);
+
+    cmd = new TextCommand("/tracker         <- show the tracker window",
+                          [this](VectorOfArgs vargs) -> bool {
+        itsApp->trackerWindow->setVisible(!itsApp->trackerWindow->visible());
+        return false;
+    });
+    TextCommand::Register(cmd);
 }
 
 

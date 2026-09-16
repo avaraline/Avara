@@ -12,6 +12,7 @@
 #include "AssetManager.h"
 #include "ARGBColor.h"
 #include "NVGUtil.h"
+#include "CommandList.h"
 
 std::string stringForAction(std::string action) {
     json theKeys = gApplication->Get(kKeyboardMappingTag);
@@ -38,6 +39,7 @@ CSettingsWindow::CSettingsWindow(CApplication *app) : CWindow(app, "Avara Settin
 
     NVGcontext *ctx = app->nvgContext();
     currentlyMappingKey = false;
+    keyMapWindow = 0;
 
     std::string kbIconsPath = AssetManager::GetImagePath(NoPackage, "control48px.png");
     keyboardIconsDataHandle = nvgCreateImage(ctx, kbIconsPath.c_str(), 0);
@@ -184,9 +186,9 @@ CSettingsWindow::CSettingsWindow(CApplication *app) : CWindow(app, "Avara Settin
                             currentlyMappingActionDesc = actionDesc;
                             currentlyMappingButton = longbutton;
                             keyMapWindow = new CKeyboardMappingWindow(this->mApplication, actionDesc, actionKey, keyboardIconOffset, keyboardIconsDataHandle);
-                            keyMapWindow->setCallback([this, longbutton, actionKey] (int status) {
+                            keyMapWindow->setCallback([this, longbutton] (int status) {
+                                longbutton->setCaption(stringForAction(currentlyMappingAction));
                                 refreshKeyboardMappingWindow(status);
-                                longbutton->setCaption(stringForAction(actionKey));
                             });
                         });
                         keyboardConfigIndex++;
@@ -207,19 +209,21 @@ CSettingsWindow::CSettingsWindow(CApplication *app) : CWindow(app, "Avara Settin
 
 void CSettingsWindow::refreshKeyboardMappingWindow(int status) {
     if (status) {
+        keyMapWindow->dispose();
         keyMapWindow = new CKeyboardMappingWindow(this->mApplication, currentlyMappingActionDesc, currentlyMappingAction, currentlyMappingKeyboardIconOffset, keyboardIconsDataHandle);
         keyMapWindow->setCallback([this] (int status) {
-            refreshKeyboardMappingWindow(status);
             currentlyMappingButton->setCaption(stringForAction(currentlyMappingAction));
+            refreshKeyboardMappingWindow(status);
         });
     }
     else {
         currentlyMappingKey = false;
     }
+    this->mApplication->DoCommand(kKeyboardMappingReset);
 }
 
 bool CSettingsWindow::currentlyMapping() {
-    return keyMapWindow && keyMapWindow->gathering;
+    return keyMapWindow && keyMapWindow->editing();
 }
 
 CKeyboardMappingWindow* CSettingsWindow::getKeyMapWindow() {
@@ -232,7 +236,7 @@ bool CSettingsWindow::editing() {
 
 bool CSettingsWindow::handleSDLEvent(SDL_Event &event) {
     SDL_Log("CSettingsWindowEvent");
-    if (keyMapWindow && keyMapWindow->gathering) {
+    if (keyMapWindow && keyMapWindow->editing()) {
         return keyMapWindow->handleSDLEvent(event);
     }
     return false;

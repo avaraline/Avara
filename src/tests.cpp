@@ -120,6 +120,7 @@ public:
     virtual void IncrementAskAgainTime(int) {}
     virtual void SetShowScoreboard(bool b) {}
     virtual bool GetShowScoreboard() { return false; }
+    virtual void ResetKeyMap(){}
 
 private:
     FunctionTable *ft;
