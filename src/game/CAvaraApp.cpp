@@ -520,7 +520,7 @@ bool CAvaraAppImpl::DoCommand(int theCommand) {
         }
         case kKeyboardMappingReset: {
             auto player = CPlayerManagerImpl::LocalPlayer();
-            if (player) player->SetupInputMapping();
+            if (player) player->ResetKeyMap();
         }
         default:
             break;

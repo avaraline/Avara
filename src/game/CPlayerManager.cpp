@@ -52,7 +52,7 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
     oldMouse.v = mouseCenterPosition.v;
     lastMouseControlTime = 0;
 
-    SetupInputMapping();
+    ResetKeyMap();
     // mainScreenRect = &(*GetMainDevice())->gdRect;
     // mouseCenterPosition.h = (mainScreenRect->left + mainScreenRect->right) / 2;
     // mouseCenterPosition.v = (mainScreenRect->top + mainScreenRect->bottom) / 2;
@@ -77,7 +77,7 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
     prevKeyboardActive = keyboardActive;
 }
 
-void CPlayerManagerImpl::SetupInputMapping() {
+void CPlayerManagerImpl::ResetKeyMap() {
     keyMap.clear();
     // Mirrors what's in Preferences.h for kKeyboardMappingTag
     json commandBits = {{"forward", 1 << kfuForward},
