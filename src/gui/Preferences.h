@@ -298,8 +298,8 @@ static json optionsScreens {
         {"Arrow Distance", kHUDArrowDistance, kOptionTypeFloat},
         {"Arrow Scale", kHUDArrowScale, kOptionTypeFloat},
         {"Arrow Style", kHUDArrowStyle, kOptionTypeChoice, {
-            {0, "Overhead arrow"},
-            {1, "Mystery"},
+            {0, "Mystery"},
+            {1, "Overhead arrow"},
             {2, "Ground arrow"}
         }},
         {"Inertia effect multiplier", kHUDInertia, kOptionTypeFloat},
