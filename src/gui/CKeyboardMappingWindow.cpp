@@ -8,6 +8,7 @@
 #include "CKeyboardMappingWindow.h"
 #include "Preferences.h"
 #include "CApplication.h"
+#include "CommandList.h"
 
 CKeyboardMappingWindow::CKeyboardMappingWindow(CApplication *app, const std::string &actionDesc, const std::string &key, int imageOffset, int imageHandle) : CWindow(app, "Keyboard Mapping") {
     setTitle("Map Keys to Action");
@@ -75,6 +76,7 @@ void CKeyboardMappingWindow::removeMappingButton(const std::string &action, cons
         SDL_Log("Delete %s bound to %s", key.c_str(), action.c_str());
         removeKeyBind(key);
         if (mCallback) mCallback(1);
+        gathering = false;
         dispose();
     });
 }
@@ -107,6 +109,7 @@ bool CKeyboardMappingWindow::handleSDLEvent(SDL_Event &event) {
 
 void CKeyboardMappingWindow::addKeyBind(const std::string &keyname) {
     json allmap = mApplication->Get(kKeyboardMappingTag);
+    if (!(allmap.size()) || !theKey) return;
     auto theKeyCStr = theKey->c_str();
     auto k = allmap.at(theKeyCStr);
     if (k.is_array()) {
@@ -128,6 +131,7 @@ void CKeyboardMappingWindow::addKeyBind(const std::string &keyname) {
         allmap[theKeyCStr] = new_arr;
     }
     mApplication->Set(kKeyboardMappingTag, allmap);
+    this->mApplication->DoCommand(kKeyboardMappingReset);
 }
 
 void CKeyboardMappingWindow::removeKeyBind(const std::string &keyname) {
@@ -152,4 +156,5 @@ void CKeyboardMappingWindow::removeKeyBind(const std::string &keyname) {
         allmap[theKey->c_str()] = json("");
     }
     mApplication->Set(kKeyboardMappingTag, allmap);
+    this->mApplication->DoCommand(kKeyboardMappingReset);
 }
