@@ -12,6 +12,7 @@
 #include "AssetManager.h"
 #include "ARGBColor.h"
 #include "NVGUtil.h"
+#include "CommandList.h"
 
 std::string stringForAction(std::string action) {
     json theKeys = gApplication->Get(kKeyboardMappingTag);
@@ -38,6 +39,7 @@ CSettingsWindow::CSettingsWindow(CApplication *app) : CWindow(app, "Avara Settin
 
     NVGcontext *ctx = app->nvgContext();
     currentlyMappingKey = false;
+    keyMapWindow = 0;
 
     std::string kbIconsPath = AssetManager::GetImagePath(NoPackage, "control48px.png");
     keyboardIconsDataHandle = nvgCreateImage(ctx, kbIconsPath.c_str(), 0);
@@ -187,6 +189,7 @@ CSettingsWindow::CSettingsWindow(CApplication *app) : CWindow(app, "Avara Settin
                             keyMapWindow->setCallback([this, longbutton, actionKey] (int status) {
                                 refreshKeyboardMappingWindow(status);
                                 longbutton->setCaption(stringForAction(actionKey));
+                                this->mApplication->DoCommand(kKeyboardMappingReset);
                             });
                         });
                         keyboardConfigIndex++;

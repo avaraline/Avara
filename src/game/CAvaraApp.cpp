@@ -518,6 +518,10 @@ bool CAvaraAppImpl::DoCommand(int theCommand) {
             }
             break;
         }
+        case kKeyboardMappingReset: {
+            auto mgr = itsGame->GetPlayerManager(itsGame->GetLocalPlayer());
+            mgr->SetupInputMapping();
+        }
         default:
             break;
     }

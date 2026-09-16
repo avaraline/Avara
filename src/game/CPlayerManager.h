@@ -147,6 +147,7 @@ public:
     virtual void IncrementAskAgainTime(int) = 0;
     virtual void SetShowScoreboard(bool b) = 0;
     virtual bool GetShowScoreboard() = 0;
+    virtual void SetupInputMapping() = 0;
 };
 
 class CPlayerManagerImpl : public CDirectObject, public CPlayerManager, public std::enable_shared_from_this<CPlayerManagerImpl> {
@@ -315,6 +316,6 @@ public:
     virtual void IncrementAskAgainTime(int);
     virtual void SetShowScoreboard(bool b);
     virtual bool GetShowScoreboard();
-
+    virtual void SetupInputMapping();
     void PlaybackAndRecord(FunctionTable &ft);
 };

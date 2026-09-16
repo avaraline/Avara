@@ -52,6 +52,33 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
     oldMouse.v = mouseCenterPosition.v;
     lastMouseControlTime = 0;
 
+    SetupInputMapping();
+    // mainScreenRect = &(*GetMainDevice())->gdRect;
+    // mouseCenterPosition.h = (mainScreenRect->left + mainScreenRect->right) / 2;
+    // mouseCenterPosition.v = (mainScreenRect->top + mainScreenRect->bottom) / 2;
+
+    // theRoster = aRoster;
+    theNetManager = aNetManager;
+    levelCRC = 0;
+    levelTag = "";
+    position = id;
+    itsPlayer = NULL;
+
+    mugPict = NULL;
+    mugSize = -1;
+    mugState = 0;
+
+    NetDisconnect();
+    SetLocal();
+    if (slot == 0) {
+        CPlayerManagerImpl::theServerPlayer = this;
+    }
+
+    prevKeyboardActive = keyboardActive;
+}
+
+void CPlayerManagerImpl::SetupInputMapping() {
+
     // Mirrors what's in Preferences.h for kKeyboardMappingTag
     json commandBits = {{"forward", 1 << kfuForward},
         {"backward", 1 << kfuReverse},
@@ -126,29 +153,6 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
     controllerButtonMap[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] = 1 << kfuLoadGrenade;
     controllerButtonMap[SDL_CONTROLLER_BUTTON_BACK] = 1 << kfuAbortGame;
     controllerButtonMap[SDL_CONTROLLER_BUTTON_START] = 1 << kfuPauseGame;
-
-    // mainScreenRect = &(*GetMainDevice())->gdRect;
-    // mouseCenterPosition.h = (mainScreenRect->left + mainScreenRect->right) / 2;
-    // mouseCenterPosition.v = (mainScreenRect->top + mainScreenRect->bottom) / 2;
-
-    // theRoster = aRoster;
-    theNetManager = aNetManager;
-    levelCRC = 0;
-    levelTag = "";
-    position = id;
-    itsPlayer = NULL;
-
-    mugPict = NULL;
-    mugSize = -1;
-    mugState = 0;
-
-    NetDisconnect();
-    SetLocal();
-    if (slot == 0) {
-        CPlayerManagerImpl::theServerPlayer = this;
-    }
-
-    prevKeyboardActive = keyboardActive;
 }
 
 void CPlayerManagerImpl::SetPlayer(CAbstractPlayer *thePlayer) {
