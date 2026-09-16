@@ -20,7 +20,7 @@ public:
     virtual bool editing();
     bool handleSDLEvent(SDL_Event &event);
     bool currentlyMapping();
-    CKeyboardMappingWindow* getKeyMapWindow();
+    CKeyboardMappingWindow *getKeyMapWindow();
     void refreshKeyboardMappingWindow(int status);
 protected:
     nanogui::TabWidget *mPrefTabs;

@@ -78,7 +78,7 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
 }
 
 void CPlayerManagerImpl::SetupInputMapping() {
-
+    keyMap.clear();
     // Mirrors what's in Preferences.h for kKeyboardMappingTag
     json commandBits = {{"forward", 1 << kfuForward},
         {"backward", 1 << kfuReverse},
