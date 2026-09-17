@@ -7,6 +7,7 @@ in float fragmentShininess;
 in float fragmentGlow;
 in vec3 fragmentNormal;
 in vec3 fragPos;
+in vec3 baseLightColor;
 
 uniform vec3 camPos;
 uniform bool dither;
@@ -39,21 +40,8 @@ vec3 apply_fog(vec3 color, float dist)
     return color * extColor + hazeColor * (1.0 - insColor);
 }
 
-vec3 diffuse_light(int i) {
-    return max(dot(fragmentNormal, lightDir[i]), 0.0) * lightColor[i];
-}
-
-vec3 diffuse() {
-    vec3 sum = vec3(0, 0, 0);
-    for (int i = 0; i < MAX_LIGHTS; i++) {
-        sum += diffuse_light(i);
-    }
-    return sum;
-
-}
-
 vec3 spec_light(int i, vec3 viewDir) {
-    if (!lightApplySpecular[i] || fragmentShininess == 0.0 || !lightsActive) return vec3(0);
+    if (!lightApplySpecular[i]) return vec3(0);
     vec3 lightDir = normalize(adjustedLightPos[i] - fragPos);
     vec3 halfwayDir = normalize(lightDir + viewDir);
     float spec = pow(max(dot(fragmentNormal, halfwayDir), 0.0), fragmentShininess);
@@ -63,7 +51,10 @@ vec3 spec_light(int i, vec3 viewDir) {
 
 vec3 spec(vec3 viewDir) {
     vec3 sum = vec3(0, 0, 0);
-    if (showSpecular) {
+    if (lightsActive &&
+        showSpecular &&
+        fragmentSpecular != vec3(0.0, 0.0, 0.0) &&
+        fragmentShininess > 0.0) {
         for (int i = 0; i < MAX_LIGHTS; i++) {
             sum += spec_light(i, viewDir);
         }
@@ -83,11 +74,7 @@ float noise() {
 
 vec4 light_color(vec3 viewDir) {
     return mix(
-        mix(
-            (ambient + extraAmbient) * vec4(ambientColor, 1.0) * fragmentColor,
-            vec4(((ambient + extraAmbient) * ambientColor) + diffuse() + spec(viewDir), 1.0) * fragmentColor,
-            float(lightsActive)
-        ),
+        vec4(baseLightColor + spec(viewDir), 1.0) * fragmentColor,
         (1 + extraAmbient) * fragmentColor,
         float(fragmentGlow > 0.0)
     );
