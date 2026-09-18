@@ -17,7 +17,9 @@
 #include "BasePath.h"
 #include "Logging.h"
 #include "signal.h"
+#if !defined(__linux__) || defined(__GLIBC__)
 #include "signalhandling.hpp"
+#endif
 #ifdef _WIN32
 #include <Windows.h>
 #include <ShellAPI.h>
@@ -44,7 +46,9 @@ void SetHiDPI() {
 #include <sstream>
 #include <string>
 
+#if !defined(__linux__) || defined(__GLIBC__)
 SignalHandling sh;
+#endif
 
 using namespace nanogui;
 
