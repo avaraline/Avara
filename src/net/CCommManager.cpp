@@ -28,12 +28,9 @@ void CCommManager::InitializePacketQueues(int numPackets, std::size_t pSize) {
     packetSize = pSize;
     myId = 0; //	Default to server.
 
-    freeQ.qHead = 0;
-    freeQ.qTail = 0;
-
-    inQ.qHead = 0;
-    inQ.qTail = 0;
-
+    InitQueue(&freeQ);
+    InitQueue(&inQ);
+    
     firstReceivers[0] = NULL;
     firstReceivers[1] = NULL;
 
@@ -56,9 +53,6 @@ void CCommManager::AllocatePacketBuffers(int numPackets) {
 **	Release allocated packet buffer storage and then dispose of self.
 */
 void CCommManager::Dispose() {
-    // SDL_Log("  - called Dispose with &inQ = %lx, &freeQ = %lx\n", &inQ, &freeQ);
-    DisposeQueue(&freeQ);
-    DisposeQueue(&inQ);
 }
 
 /*
@@ -183,7 +177,7 @@ PacketInfo* CCommManager::GetPacket() {
             Dequeue((QElemPtr)thePacket, &freeQ);
             break;
         } else {
-            DBG_Log("q", "CCommManager::GetPacket myId=%d, allocating %d more packets, inQ size = %zu\n", myId, FRESHALLOCSIZE, QueueSize(&inQ));
+            DBG_Log("q", "CCommManager::GetPacket myId=%d, allocating %d more packets, inQ size = %zu\n", myId, FRESHALLOCSIZE, inQ.qSize);
             // no packets left? dynamically increase the freeQ then try again
             AllocatePacketBuffers(FRESHALLOCSIZE);
         }
@@ -310,26 +304,6 @@ void CCommManager::ProcessQueue() {
 void CCommManager::DisconnectSlot(short slotId) {}
 
 void CCommManager::OptionCommand(long theCommand) {}
-
-short CCommManager::GetStatusInfo(short slot, Handle leftColumn, Handle rightColumn) {
-    /*
-    Handle		genericInfo;
-
-    genericInfo = GetResource('TEXT', genericInfoTextRes);
-    HLock(genericInfo);
-
-    PtrToXHand(*genericInfo, leftColumn, GetHandleSize(genericInfo));
-
-    HUnlock(genericInfo);
-    */
-    return 0;
-}
-
-Boolean CCommManager::ReconfigureAvailable() {
-    return false;
-}
-
-void CCommManager::Reconfigure() {}
 
 long CCommManager::GetMaxRoundTrip(short distribution, float stdMult, short *slowPlayerId) {
     return 0; //	Local net.

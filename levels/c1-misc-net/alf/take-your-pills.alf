@@ -90,7 +90,7 @@
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="300" />
   <Goody shape="bspMissile" speed="2" yon="50" y="21.5" missles="2" start="gShow" out="gTaken" color="#000000" color.1="#000000" cx="31.59722222222222" cz="102.91666666666667" angle="225" />
-  <script pixelToThickness="0.125" designer="Marc A. Richter" information="For this level, you may be able to enlist some help. There are pillboxes scattered about...&#10;Copyrigth ©1996, Marc A. Richter&#10;http://www.vitinc.com/~marc" color="#009600" cx="101.31944444444444" cz="95.27777777777779" r="2.5" angle="45" color.1="#000000" wallHeight="4" x="66.5625" z="101.25" w="24.375" d="6.25" h="0">
+  <script pixelToThickness="0.125" designer="Marc A. Richter" information="For this level, you may be able to enlist some help. There are pillboxes scattered about...&#10;Copyrigth ©1996, Marc A. Richter&#10;http://www.vitinc.com/~marc" color="#009600" cx="101.31944444444444" cz="95.27777777777779" r="2.5" angle="45" ox="57.11805555555556" oz="59.30555555555556" color.1="#000000" wallHeight="4" x="66.5625" z="101.25" w="24.375" d="6.25" h="0">
 object Teleporter
 shape=0
 group=1

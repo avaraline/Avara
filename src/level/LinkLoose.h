@@ -8,7 +8,8 @@
 */
 
 #pragma once
-#include "Types.h"
+
+#include <string>
 
 void *CreateObjectByIndex(short objectId);
-void *CreateNamedObject(StringPtr theName);
+void *CreateNamedObject(std::string objectName);

@@ -17,8 +17,8 @@ NAMESPACE_BEGIN(nanogui)
 
 Button::Button(Widget *parent, const std::string &caption, int icon)
     : Widget(parent), mCaption(caption), mIcon(icon),
-      mIconPosition(IconPosition::LeftCentered), mPushed(false),
-      mFlags(NormalButton), mBackgroundColor(Color(0, 0)),
+      mIconPosition(IconPosition::LeftCentered), mTextPosition(TextPosition::Center),
+      mPushed(false), mFlags(NormalButton), mBackgroundColor(Color(0, 0)),
       mTextColor(Color(0, 0)) { }
 
 Vector2i Button::preferredSize(NVGcontext *ctx) const {
@@ -158,6 +158,9 @@ void Button::draw(NVGcontext *ctx) {
 
     Vector2f center = (Vector2f)mPos + (Vector2f)mSize * 0.5f;
     Vector2f textPos(center.x - tw * 0.5f, center.y - 1);
+    if (mTextPosition == TextPosition::Left) {
+        textPos = Vector2f(mPos.x + 10, center.y - 1);
+    }
     NVGcolor textColor =
         mTextColor.a == 0 ? mTheme->mTextColor : mTextColor;
     if (!mEnabled)

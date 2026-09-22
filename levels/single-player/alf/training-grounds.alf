@@ -69,7 +69,7 @@
   <Incarnator y="8" stop="@start" cx="75.3125" cz="47.91666666666667" angle="180" />
   <Goody hitScore="100" shape="bspAvaraA" y="4.5" out="@pathGoody" color="#d84c79" color.1="#000000" cx="74.58333333333334" cz="82.22222222222223" angle="0" />
   <Text in="@start" showEveryone="true" text="Use your scout to get an outside
-view of your actions." cx="74.58333333333334" cz="82.22222222222223" r="1.875" />
+view of your actions." cx="95.20833333333334" cz="216.59722222222223" r="1.875" />
   <unique vars="mTopTaken" />
   <Goody hitScore="100" shape="bspAvaraA" y="4" out="mTopTaken" color="#d84c79" color.1="#000000" cx="67.70833333333334" cz="95.34722222222223" angle="0" />
   <And in="mTopTaken" out="@pathGoody" />

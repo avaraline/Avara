@@ -96,11 +96,6 @@ public:
 
     virtual void OptionCommand(long theCommand);
 
-    virtual short GetStatusInfo(short slotId, Handle leftColumn, Handle rightColumn);
-
-    virtual Boolean ReconfigureAvailable();
-    virtual void Reconfigure();
-
     virtual long GetMaxRoundTrip(short distribution, float stdMult = 0.0, short *slowPlayerId = nullptr);
     virtual float GetMaxMeanSendCount(short distribution);
     virtual float GetMaxMeanReceiveCount(short distribution);

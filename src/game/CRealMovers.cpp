@@ -88,7 +88,7 @@ void CRealMovers::FindBestMovement(CSmartPart *objHit) {
     deltaSpeed[2] = 0;
 
     for (i = 0; i < 3; i++) {
-        norm = objHit->itsTransform[i];
+        norm = objHit->modelTransform[i];
 
         dotProd = FMul(norm[0], speed[0]) + FMul(norm[1], speed[1]) + FMul(norm[2], speed[2]);
         absDot = dotProd < 0 ? -dotProd : dotProd;

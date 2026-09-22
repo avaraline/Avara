@@ -46,7 +46,7 @@ CAbstractActor *CDome::EndScript() {
             break;
         case 3:
             resId = 462 + showFloor;
-            LoadPartWithColors(1, 460 + showFloor);
+            LoadPartWithMaterials(1, 460 + showFloor);
             partList[1]->Reset();
             partList[1]->RotateZ(ReadFixedVar(iRoll));
             partList[1]->RotateX(ReadFixedVar(iPitch));
@@ -59,7 +59,7 @@ CAbstractActor *CDome::EndScript() {
             resId = 0;
     }
 
-    LoadPartWithColors(0, resId);
+    LoadPartWithMaterials(0, resId);
     partList[0]->Reset();
     partList[0]->RotateZ(ReadFixedVar(iRoll));
     partList[0]->RotateX(ReadFixedVar(iPitch));

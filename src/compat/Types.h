@@ -66,22 +66,16 @@ typedef struct Point Point;
 
 struct QElem {
     struct QElem *qLink;
-    int16_t qType;
-    int16_t qData[1];
 };
 typedef struct QElem QElem;
 typedef QElem *QElemPtr;
 struct QHdr {
-    volatile QElemPtr qHead;
-    volatile QElemPtr qTail;
+    QElemPtr qHead;
+    QElemPtr qTail;
+    size_t qSize;
 };
 typedef struct QHdr QHdr;
 typedef QHdr *QHdrPtr;
-
-// From QuickDraw
-enum { kQDGrafVerbFrame = 0, kQDGrafVerbPaint = 1, kQDGrafVerbErase = 2, kQDGrafVerbInvert = 3, kQDGrafVerbFill = 4 };
-
-typedef uint8_t GrafVerb;
 
 #ifdef _WIN32
 #include <winsock2.h>

@@ -91,7 +91,7 @@ CAbstractActor *CRamp::EndScript() {
 
             resId = ReadLongVar(dims[1] == 0 ? iFloorTemplateResource : iWallTemplateResource);
 
-            box = new CSmartBox(resId, dims, GetPixelColor(), GetOtherPixelColor(), this, 0);
+            box = new CSmartBox(resId, dims, GetPixelMaterial(), GetOtherPixelMaterial(), this, 0);
             box->Reset();
             InitialRotatePartX(box, ((heading - 0x2000) & 0x8000) ? angle : -angle);
             TranslatePart(box, location[0], location[1] + (deltaY >> 1), location[2]);
@@ -105,7 +105,7 @@ CAbstractActor *CRamp::EndScript() {
 
             resId = ReadLongVar(dims[1] == 0 ? iFloorTemplateResource : iWallTemplateResource);
 
-            box = new CSmartBox(resId, dims, GetPixelColor(), GetOtherPixelColor(), this, 0);
+            box = new CSmartBox(resId, dims, GetPixelMaterial(), GetOtherPixelMaterial(), this, 0);
             box->Reset();
             InitialRotatePartZ(box, ((heading - 0x2000) & 0x8000) ? angle : -angle);
             TranslatePart(box, location[0], location[1] + (deltaY >> 1), location[2]);

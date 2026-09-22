@@ -62,7 +62,7 @@ CAbstractActor *CSwitchActor::EndScript() {
 
         onShape = ReadLongVar(iAltShape);
         offShape = ReadLongVar(iShape);
-        LoadPartWithColors(0, offShape);
+        LoadPartWithMaterials(0, offShape);
         partList[0]->Reset();
         InitialRotatePartY(partList[0], heading);
         TranslatePart(partList[0], location[0], location[1], location[2]);
@@ -72,7 +72,7 @@ CAbstractActor *CSwitchActor::EndScript() {
             partCount = 1;
         } else {
             partCount = 2;
-            LoadPartWithColors(1, onShape);
+            LoadPartWithMaterials(1, onShape);
             partList[1]->Reset();
             InitialRotatePartY(partList[1], heading);
             TranslatePart(partList[1], location[0], location[1], location[2]);

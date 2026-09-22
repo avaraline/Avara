@@ -144,7 +144,7 @@ public:
     Fixed friction;
 
     virtual void LoadPart(short ind, short resId);
-    virtual void LoadPartWithColors(short ind, short resId);
+    virtual void LoadPartWithMaterials(short ind, short resId);
     virtual bool IsGeometryStatic();
 
     virtual void BeginScript();

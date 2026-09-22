@@ -69,14 +69,7 @@
   <Wall color="#ffffff" color.1="#000000" x="133.95833333333334" z="55.20833333333334" w="20" d="20" h="5" />
   <Ramp y="0" deltaY="4.5" color="#8a8a8a" color.1="#000000" x="160.27777777777777" z="54.02777777777778" w="22.5" d="17.5" h="0" angle="0" />
   <set baseHeight="5" />
-  <Wall color="#0048aa" color.1="#000000" x="133.02083333333334" z="50.208333333333336" w="8.125" d="1.25" h="4" />
-  <script pixelToThickness="0.125" wallHeight="0" color="#0048aa" cx="155.48611111111111" cz="54.236111111111114" r="1.875" angle="0" color.1="#000000" x="160.27777777777777" z="54.02777777777778" w="22.5" d="17.5" h="0" baseHeight="5">
-object WallDoor
-open = @oGdoor
-close = @cGdoor
-de;taY = 0
-deltaX = - 2.5
-end</script>
+  <WallDoor open="@oGdoor" close="@cGdoor" deltaY="0" deltaX="-2.5" color="#0048aa" color.1="#000000" x="133.02083333333334" z="50.208333333333336" w="8.125" d="1.25" h="4" />
   <WallDoor open="@oGdoor" close="@cGdoor" deltaY="0" deltaX="2.5" color="#0048aa" color.1="#000000" x="134.89583333333334" z="60.208333333333336" w="8.125" d="1.25" h="4" />
   <WallDoor open="@oGdoor" close="@cGdoor" deltaY="0" deltaZ="2.5" color="#0048aa" color.1="#000000" x="128.95833333333334" z="56.145833333333336" w="1.25" d="8.125" h="4" />
   <WallDoor open="@oGdoor" close="@cGdoor" deltaY="0" deltaZ="-2.5" color="#0048aa" color.1="#000000" x="138.95833333333334" z="54.270833333333336" w="1.25" d="8.125" h="4" />
@@ -84,7 +77,7 @@ end</script>
   <Hologram shape="bspGroundStar" color="#e62100" color.1="#000000" cx="133.95833333333334" cz="55.208333333333336" angle="225" />
   <Ufo shield="2" color="#fffb00" color.1="#000000" cx="143.95833333333334" cz="40.208333333333336" angle="270" />
   <set designer="Jason &quot;&quot;DuKK&quot;&quot; Fowler &lt;joebob@a.crl.com&gt;" information="A transporter was lost in an explosion leaving you stranded.  You managed to find a neighboring complex with its own functional transporter.  Break in and use it to return home." hull.0="mediumHull" hull.2="mediumHull" />
-  <Text in="@start" showEveryone="true" text="Light and heavy hulls are not available for this mission." cx="143.95833333333334" cz="40.208333333333336" r="1.875" />
+  <Text in="@start" showEveryone="true" text="Light and heavy hulls are not available for this mission." cx="27.708333333333336" cz="17.708333333333336" r="1.875" />
   <Teleporter shape="0" y="-10" group="@lost" deadRange="100" activeRange="105" color="#ffd8ff" color.1="#000000" cx="73.95833333333334" cz="40.208333333333336" angle="135" />
   <Teleporter shape="0" y="10" group="@lost" status="false" color="#ffd8ff" color.1="#000000" cx="73.95833333333334" cz="40.208333333333336" angle="135" />
   <Sound sound="snArcticWind" loopCount="-1" volume="30" rate="1" cx="73.95833333333334" cz="40.208333333333336" angle="135" />

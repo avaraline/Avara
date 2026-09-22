@@ -74,7 +74,8 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
                           METHOD_TO_LAMBDA_VARGS(ToggleSpectator));
     TextCommand::Register(cmd);
 
-    cmd = new TextCommand("/load chok       <- load level with name containing the letters 'chok'",
+    cmd = new TextCommand("/load chok       <- load level with name containing the letters 'chok'\n"
+                          "/load #fav       <- load random level with tag 'fav' (same as /rand #fav)",
                           METHOD_TO_LAMBDA_VARGS(LoadNamedLevel));
     TextCommand::Register(cmd);
 
@@ -125,6 +126,13 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
                           [this](VectorOfArgs vargs) -> bool {
         itsApp->Done();
 	leave();
+        return false;
+    });
+    TextCommand::Register(cmd);
+
+    cmd = new TextCommand("/tracker         <- show the tracker window",
+                          [this](VectorOfArgs vargs) -> bool {
+        itsApp->trackerWindow->setVisible(!itsApp->trackerWindow->visible());
         return false;
     });
     TextCommand::Register(cmd);
@@ -400,11 +408,15 @@ bool CommandManager::LoadNamedLevel(VectorOfArgs vargs) {
     std::transform(levelSubstr.begin(), levelSubstr.end(),levelSubstr.begin(), ::toupper);
 
     std::vector<std::pair<std::string, std::string>> bestLevels = {};
+    const std::vector<std::pair<std::string, std::string>> umlauts = {{"ä", "a"}, {"ö", "o"}, {"ü", "u"}, {"ō", "o"}};
     for(std::string set : levelSets) {
         auto manifest = *AssetManager::GetManifest(set);
         for (auto &ledi : manifest->levelDirectory) {
             std::string level = ledi.levelName;
             std::string levelUpper = ledi.levelName;
+            for (const auto& [u, r] : umlauts) // let me load thorusberg (and enso)
+                for (size_t p = 0 ; (p = levelUpper.find(u, p)) != std::string::npos ; p += r.length() )
+                    levelUpper.replace(p, u.length(), r);
             std::transform(levelUpper.begin(), levelUpper.end(), levelUpper.begin(), ::toupper);
 
             // find levelSubstr anywhere within the level name
@@ -427,6 +439,9 @@ bool CommandManager::LoadNamedLevel(VectorOfArgs vargs) {
         int loadIndex = loadNumber++ % bestLevels.size();  // alternates between candidates
         itsApp->levelWindow->SelectLevel(bestLevels[loadIndex].first, bestLevels[loadIndex].second);
         itsApp->levelWindow->SendLoad();
+    } else {
+        // try /rand in case user typed something like /load #tag or /load setName
+        return LoadRandomLevel(vargs);
     }
     return true;
 }
@@ -626,8 +641,8 @@ bool CommandManager::SplitIntoTeams(VectorOfArgs vargs) {
 
 
 bool CommandManager::HandleTags(VectorOfArgs vargs) {
-    Tags::LevelURL curLevel(itsApp->GetGame()->loadedSet,
-                            itsApp->GetGame()->loadedLevel);
+    Tags::LevelURL curLevel(itsApp->GetGame()->loadedLevelInfo->setTag,
+                            itsApp->GetGame()->loadedLevelInfo->levelName);
 
     if (vargs.size() > 0) {
         for (auto tag: vargs) {
@@ -645,6 +660,11 @@ bool CommandManager::HandleTags(VectorOfArgs vargs) {
 
     auto tagsStr = Tags::TagsStringForLevel(curLevel);
     itsApp->rosterWindow->UpdateTags(tagsStr);
+
+    if (vargs.size() == 0) {
+        std::string msg = "tags for \"" + curLevel.first + "/" + curLevel.second + "\": " + tagsStr;
+        itsApp->AddMessageLine(msg);
+    }
 
     return true;
 }

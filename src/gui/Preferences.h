@@ -3,6 +3,7 @@
 #include <json.hpp>
 #include <SDL2/SDL.h>
 #include <fstream>
+#include <sstream>
 #include <string>
 
 using json = nlohmann::json;
@@ -43,6 +44,8 @@ using json = nlohmann::json;
 #define kFullScreenTag "fullscreen"
 #define kFOV "fov"
 #define kFXAA "fxaa"
+#define kDither "dither"
+#define kSpecular "showSpecular"
 #define kUseLegacyRenderer "useLegacyRenderer"
 
 // Other graphics settings
@@ -87,13 +90,19 @@ using json = nlohmann::json;
 #define kPunchServerPort "udpPunchServerPort"
 #define kPunchHoles "udpHolePunch"
 
-// Levels
-#define kRecentSets "recentSets"
-#define kRecentLevels "recentLevels"
-
 // Sound
 #define kIgnoreCustomGoodySound "ignoreCustomGoodySound"
 #define kSoundVolume "soundVolume"
+
+// Controller
+#define kControllerExponent "controllerExponent"
+#define kControllerMax "controllerMax"
+#define kControllerPollRate "controllerPollRate"
+#define kControllerX "controllerX"
+#define kControllerY "controllerY"
+#define kControllerStickThreshold "controllerStickThreshold"
+#define kControllerTriggerThreshold "controllerTriggerThreshold"
+#define kControllerDamperMillis "controllerDamperMillis"
 
 // other
 #define kGoodGamePhrases "ggs"
@@ -153,6 +162,8 @@ static json defaultPrefs = {
     {kFullScreenTag, false},
     {kFOV, 50.0},
     {kFXAA, true},
+    {kDither, true},
+    {kSpecular, true},
     {kColorBlindMode, 0},
     {kHUDColor, "#03f5f5"},
     {kHUDPositiveColor, "#51e87e"},
@@ -191,8 +202,6 @@ static json defaultPrefs = {
     {kPunchServerAddress, "tracker.avara.gg"},
     {kPunchServerPort, 19555},
     {kPunchHoles, true},
-    {kRecentSets, {}},
-    {kRecentLevels, {}},
     {kSoundVolume, 100},
     {kIgnoreCustomColorsTag, false},
     {kIgnoreLevelCustomColorsTag, false},
@@ -201,16 +210,154 @@ static json defaultPrefs = {
     {kGoodGamePhrases, {}},
     {kShowElo, false},
     {kUseLegacyRenderer, false},
-    {kDefaultArgs, "-/ '/rand avara aa emo ex #fav -#bad'"}
+    {kDefaultArgs, "-/ '/rand avara aa emo ex Crook Algo #fav -#bad'"},
+    {kControllerPollRate, 60},
+    {kControllerExponent, 2.0},
+    {kControllerMax, 40},
+    {kControllerX, 1.0},
+    {kControllerY, 1.0},
+    {kControllerStickThreshold, 0.6},
+    {kControllerTriggerThreshold, 0.5},
+    {kControllerDamperMillis, 500.0}
 };
 
+static enum optionTypes {
+    kOptionTypeString,
+    kOptionTypeFloat,
+    kOptionTypeInteger,
+    kOptionTypeChoice,
+    kOptionTypeColor,
+    kOptionTypeBool,
+    kOptionTypeKeyboard
+} final;
 
+static json optionsScreens {
+    {"Graphics", {
+        {"Field of View", kFOV, kOptionTypeInteger},
+        {"Fullscreen", kFullScreenTag, kOptionTypeBool},
+        {"Color vision adjustment mode", kColorBlindMode, kOptionTypeChoice, {
+            {0, "Off"},
+            {1, "Deuteranopia"},
+            {2, "Protanopia"},
+            {3, "Tritanopia"}}},
+        {"FXAA (Anti-aliasing)", kFXAA, kOptionTypeBool},
+        {"Color dithering", kDither, kOptionTypeBool},
+        {"Specular lighting", kSpecular, kOptionTypeBool}
+    }},
+    {"Game", {
+        {"Yon (render distance)", kYonPrefTag, kOptionTypeInteger},
+        {"Mouse Sensitivity", kMouseSensitivityTag, kOptionTypeFloat},
+        {"Invert Mouse Y-Axis", kInvertYAxisTag, kOptionTypeBool},
+        {"Updated HUD", kShowNewHUD, kOptionTypeBool},
+        {"Volume (1 - 100)", kSoundVolume, kOptionTypeInteger},
+        {"Ignore Custom Hull Colors", kIgnoreCustomColorsTag, kOptionTypeBool},
+        {"Ignore Custom Goody Sounds", kIgnoreCustomGoodySound, kOptionTypeBool},
+        {"Default arguments", kDefaultArgs, kOptionTypeString}
+    }},
+    {"Network", {
+        {"Player Name", kPlayerNameTag, kOptionTypeString},
+        {"UDP host port", kDefaultUDPPort, kOptionTypeInteger},
+        {"NAT hole punching", kPunchHoles, kOptionTypeBool},
+        {"NAT hole punching server", kPunchServerAddress, kOptionTypeString},
+        {"NAT hole punching port", kPunchServerPort, kOptionTypeInteger}
+    }},
+    {"Keyboard", {
+        {"Controls", kKeyboardMappingTag, kOptionTypeKeyboard}
+    }},
+    {"Colors", {
+        {"Hull Color", kPlayerHullColorTag, kOptionTypeColor},
+        {"Trim Color", kPlayerHullTrimColorTag, kOptionTypeColor},
+        {"Cockpit Color", kPlayerCockpitColorTag, kOptionTypeColor},
+        {"Gun Color", kPlayerGunColorTag, kOptionTypeColor},
+        {"HUD Color", kHUDColor, kOptionTypeColor},
+        {"HUD Warning", kHUDWarningColor, kOptionTypeColor},
+        {"HUD Critical", kHUDCriticalColor, kOptionTypeColor},
+        {"HUD Positive", kHUDPositiveColor, kOptionTypeColor},
+        {"Color vision adjustment mode", kColorBlindMode, kOptionTypeChoice, {
+            {0, "Off"},
+            {1, "Deuteranopia"},
+            {2, "Protanopia"},
+            {3, "Tritanopia"}}}
+    }},
+    {"Controller", {
+        {"Poll rate", kControllerPollRate, kOptionTypeInteger},
+        {"Exponent", kControllerExponent, kOptionTypeFloat},
+        {"X multiplier", kControllerX, kOptionTypeFloat},
+        {"Y multiplier", kControllerY, kOptionTypeFloat},
+        {"Stick threshold", kControllerStickThreshold, kOptionTypeFloat},
+        {"Trigger threshold", kControllerTriggerThreshold, kOptionTypeFloat},
+        {"Damper milliseconds", kControllerDamperMillis, kOptionTypeFloat}
+    }},
+    {"HUD", {
+        {"Layout Preset", kHUDPreset, kOptionTypeChoice, {
+            {0, "First one"},
+            {1, "Second one"},
+            {2, "Newest one"}}
+        },
+        {"Alpha", kHUDAlpha, kOptionTypeFloat},
+        {"Arrow Distance", kHUDArrowDistance, kOptionTypeFloat},
+        {"Arrow Scale", kHUDArrowScale, kOptionTypeFloat},
+        {"Arrow Style", kHUDArrowStyle, kOptionTypeChoice, {
+            {0, "Mystery"},
+            {1, "Overhead arrow"},
+            {2, "Ground arrow"}
+        }},
+        {"Inertia effect multiplier", kHUDInertia, kOptionTypeFloat},
+        {"Show Grenade count", kHUDShowGrenadeCount, kOptionTypeBool},
+        {"Show Missile count", kHUDShowMissileCount, kOptionTypeBool},
+        {"Show Booster count", kHUDShowBoosterCount, kOptionTypeBool},
+        {"Show Life count", kHUDShowLivesCount, kOptionTypeBool},
+        {"Show Energy gauge", kHUDShowEnergyGauge, kOptionTypeBool},
+        {"Show Shield gauge", kHUDShowShieldGauge, kOptionTypeBool},
+        {"Show Player list", kHUDShowPlayerList, kOptionTypeBool},
+        {"Show Score", kHUDShowScore, kOptionTypeBool},
+        {"Show Time", kHUDShowTime, kOptionTypeBool},
+        {"Show System Messages", kHUDShowSystemMessages, kOptionTypeBool},
+        {"Show Level Messages", kHUDShowLevelMessages, kOptionTypeBool}
+    }}
+};
+
+static int keyboardConfigIconCount = 20;
+static std::vector<std::pair<std::string, std::string>> keyboardConfig {
+    {"Forward", "forward"},
+    {"Reverse", "backward"},
+    {"Rotate Left", "left"},
+    {"Rotate Right", "right"},
+    {"Vertical Motion", "verticalMotion"},
+    {"Jump", "jump"},
+    {"Aim Forward", "aimForward"},
+    {"Fire Weapon", "fire"},
+    {"Arm Grenade", "loadGrenade"},
+    {"Arm Guided Missile", "loadMissile"},
+    {"Energy Boost", "boost"},
+    {"Text Chat", "chatMode"},
+    {"Pause Game", "pause"},
+    {"Self-destruct/Abort", "abort"},
+    {"Zoom In", "zoomIn"},
+    {"Zoom Out", "zoomOut"},
+    {"Scout View", "scoutView"},
+    {"Scout Control", "scoutControl"},
+    {"Glance Left", "lookLeft"},
+    {"Glace Right", "lookRight"},
+    {"Indicate Ready", ""},
+    {"Spectator - Next Player", "spectateNext"},
+    {"Spectator - Previous Player", "spectatePrevious"},
+    {"Spectator - Toggle Free Cam", "toggleFreeCam"},
+    {"Spectator - Free Cam Up", "freeCamUp"},
+    {"Spectator - Free Cam Down", "freeCamDown"},
+    {"Scoreboard", "scoreboard"}
+};
+
+static std::string PrefPath(const char* fn) {
+    char *prefPath = SDL_GetPrefPath("Avaraline", "Avara");
+    std::string filePath = std::string(prefPath);
+    filePath.append(fn);
+    SDL_free(prefPath);
+    return filePath;
+}
 
 static std::string PrefPath() {
-    char *prefPath = SDL_GetPrefPath("Avaraline", "Avara");
-    std::string jsonPath = std::string(prefPath) + "prefs.json";
-    SDL_free(prefPath);
-    return jsonPath;
+    return PrefPath("prefs.json");
 }
 
 static inline json ReadDefaultPrefs() {

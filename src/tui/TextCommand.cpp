@@ -1,5 +1,8 @@
 #include <sstream>      // std::istringstream
+#include <regex>
+
 #include "TextCommand.h"
+#include "CPlayerManager.h"  // checkMark_utf8
 
 TextCommand::TextCommand(const char* usage, TextCommandCallbackArgs cback) {
     usageStr = usage;
@@ -25,9 +28,12 @@ void TextCommand::Register(TextCommand* command) {
     registeredCommands.push_back(command);
 }
 
-bool TextCommand::FindMatchingCommands(std::string& fullCommand,
+bool TextCommand::FindMatchingCommands(std::string& fullText,
                                        std::function<bool(TextCommand *, std::string&, VectorOfArgs)> matchCb) {
     bool success = false;
+
+    // allow for a command to start immediately after a checkmark (strip off everything before the checkmark+slash)
+    std::string fullCommand = std::regex_replace(fullText, std::regex(std::string("^.*") + checkMark_utf8 + "/"), "/");
 
     // must match at least 2 chars (eg. /xyz must have at least /x)
     if (fullCommand.length() < 2) {

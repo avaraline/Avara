@@ -148,6 +148,7 @@ public:
     virtual void FlushMessageBuffer();
     virtual void BufferMessage(size_t len, char *c);
     virtual void SendRosterMessage(size_t len, char *c);
+    virtual void SendRosterMessage(const std::string msg);
     virtual void ReceiveRosterMessage(short slotId, short len, char *c);
 
     // Color here refers to the team color, not custom color(s)!

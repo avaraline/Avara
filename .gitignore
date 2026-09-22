@@ -9,7 +9,9 @@ __pycache__
 *.pyc
 *.sublime-project
 *.sublime-workspace
+.cache
 .vscode
+.zed
 .gdbinit
 src/util/GitVersion.h
 /*.alf
@@ -20,4 +22,5 @@ vcpkg_installed
 Avara.msvc/x64/
 Avara.msvc/Avara*/
 Avara.msvc/Tests/
+compile_commands.json
 *.vcxproj.user

@@ -248,11 +248,11 @@
   <Timer in="@warning" out="@msg1" wait="781" />
   <Timer in="@reset" out="@sendMsg" wait="781" />
   <Distributor in="@sendMsg" out.0="@msg2" out.1="@msg3" out.2="@msg4" out.3="@msg5" />
-  <Text in="@msg1" sound="snTextBlip" volume="5" showEveryone="true" text="Scramble Imminent!" cx="272.22222222222223" cz="23.125" r="3.75" />
-  <Text in="@msg2" sound="snTextBlip" volume="5" showEveryone="true" text="Scramble Imminent!" cx="272.22222222222223" cz="23.125" r="3.75" />
-  <Text in="@msg3" sound="snTextBlip" volume="5" showEveryone="true" text="Scramble Imminent!" cx="272.22222222222223" cz="23.125" r="3.75" />
-  <Text in="@msg4" sound="snTextBlip" volume="5" showEveryone="true" text="Scramble Imminent!" cx="272.22222222222223" cz="23.125" r="3.75" />
-  <Text in="@msg5" sound="snTextBlip" volume="5" showEveryone="true" text="10 Seconds Left!" cx="272.22222222222223" cz="23.125" r="3.75" />
+  <Text in="@msg1" sound="snTextBlip" volume="5" showEveryone="true" text="Scramble Imminent!" cx="74.16666666666667" cz="69.0625" r="3.75" />
+  <Text in="@msg2" sound="snTextBlip" volume="5" showEveryone="true" text="Scramble Imminent!" cx="74.16666666666667" cz="69.0625" r="3.75" />
+  <Text in="@msg3" sound="snTextBlip" volume="5" showEveryone="true" text="Scramble Imminent!" cx="74.16666666666667" cz="69.0625" r="3.75" />
+  <Text in="@msg4" sound="snTextBlip" volume="5" showEveryone="true" text="Scramble Imminent!" cx="74.16666666666667" cz="69.0625" r="3.75" />
+  <Text in="@msg5" sound="snTextBlip" volume="5" showEveryone="true" text="10 Seconds Left!" cx="74.16666666666667" cz="69.0625" r="3.75" />
   <Timer in="@start" wait="1" out="@playSound" />
   <Sound y="50" start="@playSound" restart="false" isPlaced="false" sound="411" volume="1" cx="252.56944444444446" cz="5" angle="270" />
   <set isPlaced="true" />

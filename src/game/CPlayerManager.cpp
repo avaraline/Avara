@@ -52,6 +52,33 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
     oldMouse.v = mouseCenterPosition.v;
     lastMouseControlTime = 0;
 
+    ResetKeyMap();
+    // mainScreenRect = &(*GetMainDevice())->gdRect;
+    // mouseCenterPosition.h = (mainScreenRect->left + mainScreenRect->right) / 2;
+    // mouseCenterPosition.v = (mainScreenRect->top + mainScreenRect->bottom) / 2;
+
+    // theRoster = aRoster;
+    theNetManager = aNetManager;
+    levelCRC = 0;
+    levelTag = "";
+    position = id;
+    itsPlayer = NULL;
+
+    mugPict = NULL;
+    mugSize = -1;
+    mugState = 0;
+
+    NetDisconnect();
+    SetLocal();
+    if (slot == 0) {
+        CPlayerManagerImpl::theServerPlayer = this;
+    }
+
+    prevKeyboardActive = keyboardActive;
+}
+
+void CPlayerManagerImpl::ResetKeyMap() {
+    keyMap.clear();
     // Mirrors what's in Preferences.h for kKeyboardMappingTag
     json commandBits = {{"forward", 1 << kfuForward},
         {"backward", 1 << kfuReverse},
@@ -113,28 +140,19 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
     }
     itsGame->itsApp->Set(kKeyboardMappingTag, newMap);
 
-    // mainScreenRect = &(*GetMainDevice())->gdRect;
-    // mouseCenterPosition.h = (mainScreenRect->left + mainScreenRect->right) / 2;
-    // mouseCenterPosition.v = (mainScreenRect->top + mainScreenRect->bottom) / 2;
-
-    // theRoster = aRoster;
-    theNetManager = aNetManager;
-    levelCRC = 0;
-    levelTag = "";
-    position = id;
-    itsPlayer = NULL;
-
-    mugPict = NULL;
-    mugSize = -1;
-    mugState = 0;
-
-    NetDisconnect();
-    SetLocal();
-    if (slot == 0) {
-        CPlayerManagerImpl::theServerPlayer = this;
-    }
-
-    prevKeyboardActive = keyboardActive;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_DPAD_UP] = (1 << kfuScoutControl) | (1 << kfuForward);
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_DPAD_DOWN] = (1 << kfuScoutControl) | (1 << kfuReverse);
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_DPAD_LEFT] = (1 << kfuScoutControl) | (1 << kfuLeft);
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_DPAD_RIGHT] = (1 << kfuScoutControl) | (1 << kfuRight);
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_A] = 1 << kfuJump;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_B] = (1 << kfuScoutControl) | (1 << kfuAimForward);
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_X] = 1 << kfuBoostEnergy;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_Y] = 1 << kfuScoutView;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_RIGHTSTICK] = 1 << kfuAimForward;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_LEFTSHOULDER] = 1 << kfuLoadMissile;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] = 1 << kfuLoadGrenade;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_BACK] = 1 << kfuAbortGame;
+    controllerButtonMap[SDL_CONTROLLER_BUTTON_START] = 1 << kfuPauseGame;
 }
 
 void CPlayerManagerImpl::SetPlayer(CAbstractPlayer *thePlayer) {
@@ -214,9 +232,55 @@ uint32_t CPlayerManagerImpl::GetKeyBits() {
     return keys;
 }
 
+short AxisMovement(ControllerAxis &axis, float exp, float max, float mult) {
+    return axis.value * abs(pow(axis.value, exp - 1.0f)) * max * mult;
+}
+
+void CPlayerManagerImpl::HandleAxis(float value, float threshold, int bit) {
+    bool down = (threshold < 0) ? (value <= threshold) : (value >= threshold);
+    if (down) {
+        if (!TESTFUNC(bit, keysHeld) && !TESTFUNC(bit, keysDown)) HandleKeyDown(1 << bit);
+    }
+    else {
+        if (TESTFUNC(bit, keysHeld) || TESTFUNC(bit, keysDown) || TESTFUNC(bit, dupKeysHeld)) HandleKeyUp(1 << bit);
+    }
+}
+
 void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
     // Events coming in are for the next frame to be sent.
     // FrameFunction *ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & (itsGame->frameNumber + 1)];
+
+    if (event.type == itsGame->itsApp->ControllerEventType()) {
+        ControllerSticks *sticks = (ControllerSticks *)event.user.data1;
+        ControllerTriggers *triggers = (ControllerTriggers *)event.user.data2;
+
+        float damper = controllerDamper > 0 ? std::clamp(float(sticks->right.elapsed) / controllerDamper, 0.0f, 1.0f) : 1.0f;
+        mouseX += AxisMovement(sticks->right.x,
+                               controllerCurveExp,
+                               controllerMaxMove,
+                               controllerMultiplyX * damper);
+        mouseY += AxisMovement(sticks->right.y,
+                               controllerCurveExp,
+                               controllerMaxMove,
+                               controllerMultiplyY * damper);
+
+        HandleAxis(sticks->left.x.value, -controllerStickThreshold, kfuLeft);
+        HandleAxis(sticks->left.x.value, controllerStickThreshold, kfuRight);
+        HandleAxis(sticks->left.y.value, -controllerStickThreshold, kfuForward);
+        HandleAxis(sticks->left.y.value, controllerStickThreshold, kfuReverse);
+
+        if (triggers->right.t.value >= controllerTriggerThreshold) {
+            if (triggers->right.t.last < controllerTriggerThreshold) buttonStatus |= kbuWentDown;
+            buttonStatus |= kbuIsDown;
+        }
+        else {
+            if (triggers->right.t.last >= controllerTriggerThreshold) buttonStatus |= kbuWentUp;
+            buttonStatus &= ~kbuIsDown;
+        }
+
+        HandleAxis(triggers->left.t.value, controllerTriggerThreshold, kfuLoadGrenade);
+        HandleAxis(triggers->left.t.value, controllerTriggerThreshold, kfuFireWeapon);
+    }
 
     switch (event.type) {
         case SDL_KEYDOWN:
@@ -258,6 +322,12 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
             break;
         case SDL_KEYUP:
             HandleKeyUp(keyMap[event.key.keysym.scancode]);
+            break;
+        case SDL_CONTROLLERBUTTONDOWN:
+            HandleKeyDown(controllerButtonMap[event.cbutton.button]);
+            break;
+        case SDL_CONTROLLERBUTTONUP:
+            HandleKeyUp(controllerButtonMap[event.cbutton.button]);
             break;
         case SDL_MOUSEBUTTONDOWN:
             if(event.button.button == SDL_BUTTON_RIGHT) {
@@ -459,24 +529,32 @@ void CPlayerManagerImpl::ResendFrame(FrameNumber theFrame, short requesterId, sh
 
 void CPlayerManagerImpl::ResumeGame() {
     short i;
-
+    
     for (i = 0; i < FUNCTIONBUFFERS; i++) {
         SDL_memset(&frameFuncs[i], 0, sizeof(FrameFunction));
         frameFuncs[i].validFrame = -1;
     }
-
+    
     bufferStart = 0;
     bufferEnd = 0;
     keyboardActive = false;
-
+    
     oldHeld = 0;
     oldModifiers = 0;
     oldButton = 0;
     SetLocal();
-
+    
     keysDown = keysUp = keysHeld = dupKeysHeld = 0;
     mouseX = mouseY = 0;
     buttonStatus = 0;
+    
+    controllerCurveExp = itsGame->itsApp->Number(kControllerExponent);
+    controllerMaxMove = float(itsGame->itsApp->Number(kControllerMax));
+    controllerMultiplyX = itsGame->itsApp->Get(kControllerX);
+    controllerMultiplyY = itsGame->itsApp->Get(kControllerY);
+    controllerStickThreshold = itsGame->itsApp->Get(kControllerStickThreshold);
+    controllerTriggerThreshold = itsGame->itsApp->Get(kControllerTriggerThreshold);
+    controllerDamper = itsGame->itsApp->Get(kControllerDamperMillis);
 }
 
 void CPlayerManagerImpl::ProtocolHandler(struct PacketInfo *thePacket) {
@@ -557,10 +635,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                 theNetManager->HandleEvent(event);
             }
 
-            if (itsGame->canPreSend && (long)(SDL_GetTicks() - itsGame->nextScheduledFrame) >= 0) {
-                itsGame->canPreSend = false;
-                theNetManager->FrameAction();
-            }
+            itsGame->PreSendFrameActions();
 
             quickTick = TickCount();
 
@@ -594,6 +669,9 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                 itsGame->statusRequest = kAbortStatus;
                 break;
             }
+
+            // sleep 1% of frameTime (0.16msec) to reduce CPU load while we wait
+            std::this_thread::sleep_for(std::chrono::microseconds(itsGame->frameTime*10));
         }
 
         // give up after newer frames appear in the frameFuncs buffer because that
@@ -621,6 +699,12 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
 //            SDL_Log("fn=%d, waitTime = %u\n", itsGame->frameNumber, waitTime);
             itsGame->longWait = true;
         }
+
+        if (frameFuncs[i].validFrame == itsGame->frameNumber) {
+            DBG_Log("presend", "fn=%d, <-GOT pkt, ts=#%d, N=%d, ahead=%d, start=%d time=%d nSF=%d\n", itsGame->frameNumber, itsGame->topSentFrame, itsGame->preSendCount, itsGame->topSentFrame - itsGame->frameNumber, itsGame->frameStart, SDL_GetTicks(), itsGame->nextScheduledFrame);
+        }
+    } else if (!IsLocalPlayer()) {
+        DBG_Log("presend+", "fn=%d, NO waiting    #%d, N=%d, ahead=%d, start=%d time=%d nSF=%d\n", itsGame->frameNumber, itsGame->topSentFrame, itsGame->preSendCount, itsGame->topSentFrame - itsGame->frameNumber, itsGame->frameStart, SDL_GetTicks(), itsGame->nextScheduledFrame);
     }
 
     return &frameFuncs[i].ft;
@@ -665,116 +749,6 @@ void CPlayerManagerImpl::RosterKeyPress(unsigned char c) {
     }
 }
 
-/*
-static
-OSErr	WordWrapString(
-    StringPtr	fullLine)
-{
-    if(StringWidth(fullLine) <= kChatMessageWidth)
-    {	return	0;
-    }
-    else
-    {	short	relen;
-
-        relen = fullLine[0];
-
-        while(relen)
-        {	unsigned char	theChar;
-
-            theChar = fullLine[relen--];
-            if(theChar <= 32 || theChar == '†')	//	option-space
-            {	short	width;
-
-                width = TextWidth(fullLine, 1, relen);
-                if(width < kChatMessageWidth / 2)
-                {	return TruncString(kChatMessageWidth, fullLine, smTruncEnd);
-                }
-                else if(width <= kChatMessageWidth)
-                {	fullLine[0] = relen+2;
-                    fullLine[relen+2] = ' ';
-                    return 1;
-                }
-            }
-        }
-    }
-
-    return TruncString(kChatMessageWidth, fullLine, smTruncEnd);
-}
-
-void	CPlayerManagerImpl::FlushMessageText(
-    Boolean	forceAll)
-{
-    Str255			fullLine;
-    short			maxLen;
-    short			baseLen;
-    GrafPtr			savedPort;
-    TextSettings	savedTexs;
-    OSErr			err;
-
-    GetPort(&savedPort);
-    SetPort(theRoster->itsWindow);
-    GetSetTextSettings(&savedTexs, geneva, 0, 9, srcOr);
-
-    do
-    {
-        BlockMoveData(playerName, fullLine, playerName[0] + 1);
-
-#if 0
-        while(fullLine[0] && fullLine[fullLine[0]] == 32)
-        {	fullLine[0]--;
-        }
-#endif
-        TruncString(kChatMessageWidth/3, fullLine, smTruncEnd);
-
-        fullLine[++fullLine[0]] = ':';
-        fullLine[++fullLine[0]] = ' ';
-
-        baseLen = fullLine[0];
-        maxLen = lineBuffer[0];
-
-        if(maxLen + baseLen > 250)
-        {	maxLen = 250 - baseLen;
-        }
-
-        BlockMoveData(lineBuffer+1, fullLine + 1 + baseLen, maxLen);
-        fullLine[0] += maxLen;
-#if 1
-        err = WordWrapString(fullLine);
-#else
-        err = TruncString(kChatMessageWidth, fullLine, smTruncEnd);
-#endif
-
-        if(err == 1 || forceAll)
-        {	short	outLen;
-
-
-            if(err == 1)
-            {	outLen = fullLine[0] - baseLen - 1;
-            }
-            else
-            {	outLen = maxLen;
-            }
-
-            if(outLen != 0)	theRoster->NewChatLine(fullLine);
-
-            BlockMoveData(lineBuffer + outLen + 1, lineBuffer + 1, lineBuffer[0] - outLen);
-            lineBuffer[0] -= outLen;
-
-            if(err == 0)	forceAll = false;
-        }
-    } while(err == 1 || forceAll);
-
-    isLocalPlayer = (theNetManager->itsCommManager->myId == slot);
-
-    if(isLocalPlayer)
-    {	theRoster->SetChatLine(fullLine);
-    }
-
-    RestoreTextSettings(&savedTexs);
-    SetPort(savedPort);
-}
-*/
-
 bool EndsWithCheckmark(const char* c, size_t len) {
     static size_t checkLen = strlen(checkMark_utf8);
     return len >= checkLen &&
@@ -818,7 +792,7 @@ void CPlayerManagerImpl::RosterMessageText(short len, const char *c) {
                 break;
             case 13:
                 // ¬
-                ((CAvaraAppImpl*)itsGame->itsApp)->rosterWindow->NewChatLine(playerName, GetChatLine());
+                ((CAvaraAppImpl*)itsGame->itsApp)->rosterWindow->NewChatLine(playerName, slot, chatText);
 
                 lineBuffer.insert(lineBuffer.end(), lThing_utf8, lThing_utf8 + strlen(lThing_utf8));
                 // FlushMessageText(true);
@@ -860,7 +834,10 @@ std::string CPlayerManagerImpl::GetChatLine() {
     else
         found += 2;
 
-    return theChat.substr(found);
+    auto line = theChat.substr(found);
+    // usually there's a leading space character because --> "¬ ", so strip that
+    if (line[0] == ' ') line.erase(0, 1);
+    return line;
 }
 
 std::string CPlayerManagerImpl::GetChatString(int maxChars) {

@@ -125,7 +125,13 @@ OBJ_CONTEXT = {
 
 def object_context(name, context):
     keys = OBJ_CONTEXT.get(name, DEFAULT_CONTEXT)
-    return {k: context[k] for k in keys if k in context}
+    c = {k: context[k] for k in keys if k in context}
+    if name in ("Area", "Text"):
+        if "ox" in context:
+            c["cx"] = context["ox"]
+        if "oz" in context:
+            c["cz"] = context["oz"]
+    return c
 
 
 def xmlchars(astr):

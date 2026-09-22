@@ -70,7 +70,7 @@ CAbstractActor *CGoody::EndScript() {
         altShapeId = ReadLongVar(iAltShape);
 
         partCount = 1;
-        LoadPartWithColors(0, shapeId);
+        LoadPartWithMaterials(0, shapeId);
         partList[0]->RotateZ(partRoll = ReadFixedVar(iRoll));
         partList[0]->RotateOneY(heading);
         TranslatePart(partList[0], location[0], location[1], location[2]);
@@ -79,7 +79,7 @@ CAbstractActor *CGoody::EndScript() {
         if (altShapeId) {
             partCount = 2;
             LoadPart(1, shapeId);
-            partList[1]->CopyTransform(&partList[0]->itsTransform);
+            partList[1]->CopyTransform(&partList[0]->modelTransform);
             partList[1]->MoveDone();
         }
 
@@ -188,7 +188,7 @@ void CGoody::FrameAction() {
         partList[0]->MoveDone();
 
         if (partList[1]) {
-            partList[1]->CopyTransform(&partList[0]->itsTransform);
+            partList[1]->CopyTransform(&partList[0]->modelTransform);
             partList[1]->MoveDone();
         }
     }
@@ -206,4 +206,8 @@ void CGoody::FrameAction() {
     DBG_Log("frag", "fn=%d, FRandSeed=%11d, heading=%7d, goody=%ld, grenades=%d, missiles=%d\n",
 
             itsGame->frameNumber, (Fixed)FRandSeed, heading, ident, grenades, missiles);
+}
+
+bool CGoody::UseForExtent() {
+    return (grenades > 0 || missiles > 0 || boosters > 0);
 }

@@ -4,7 +4,6 @@
     Open a null pipe that does nothing. Basically a /dev/null kind of device.
  */
 OSErr CAbstractPipe::Open() {
-    IBaseObject();
     outputStream = NULL;
     return noErr;
 }

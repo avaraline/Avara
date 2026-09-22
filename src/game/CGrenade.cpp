@@ -32,7 +32,7 @@ void CGrenade::PlaceParts() {
     if (flyCount == 0 && hostPart) {
         partList[0]->Reset();
         TranslatePart(partList[0], 0, FIX3(-200), FIX3(950));
-        partList[0]->ApplyMatrix(&hostPart->itsTransform);
+        partList[0]->ApplyMatrix(&hostPart->modelTransform);
     } else {
         partList[0]->Reset();
         InitialRotatePartZ(partList[0], roll);
@@ -42,7 +42,7 @@ void CGrenade::PlaceParts() {
     }
 
     partList[0]->MoveDone();
-    LinkSphere(partList[0]->itsTransform[3], partList[0]->bigRadius);
+    LinkSphere(partList[0]->modelTransform[3], partList[0]->bigRadius);
 
     CWeapon::PlaceParts();
 }
@@ -81,8 +81,8 @@ void CGrenade::Locate() {
         speed[2] = 0;
     }
 
-    VECTORCOPY(location, partList[0]->itsTransform[3]);
-    MATRIXCOPY(fullTransform, partList[0]->itsTransform);
+    VECTORCOPY(location, partList[0]->modelTransform[3]);
+    MATRIXCOPY(fullTransform, partList[0]->modelTransform);
 
     fullTransform[3][0] = 0;
     fullTransform[3][1] = 0;
@@ -220,7 +220,7 @@ void CGrenade::ShowTarget() {
         theHost = hostPart->theOwner;
         theHost->GetSpeedEstimate(tSpeed);
 
-        m = &partList[0]->itsTransform;
+        m = &partList[0]->modelTransform;
         tLoc[0] = (*m)[3][0];
         tLoc[1] = (*m)[3][1];
         tLoc[2] = (*m)[3][2];
@@ -281,7 +281,7 @@ void CGrenade::ShowTarget() {
         sight->MoveDone();
 
         sight2 = itsDepot->grenadeTop;
-        sight2->CopyTransform(&sight->itsTransform);
+        sight2->CopyTransform(&sight->modelTransform);
         sight2->isTransparent = false;
         sight2->MoveDone();
     }

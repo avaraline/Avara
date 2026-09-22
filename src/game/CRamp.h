@@ -15,5 +15,5 @@ public:
     virtual void BeginScript() override;
     virtual CAbstractActor *EndScript() override;
     virtual bool IsGeometryStatic() override { return true; };
-    virtual bool UseForRandomIncarnator() override { return true; }
+    virtual bool UseForExtent() override { return true; }
 };

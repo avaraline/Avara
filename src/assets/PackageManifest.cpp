@@ -18,7 +18,7 @@ PackageManifest::PackageManifest(nlohmann::json json)
             }
         }
     }
-
+    
     if (json.find("LEDI") != json.end()) {
         for (auto &item : json["LEDI"].items()) {
             nlohmann::json rawLedi = item.value();
@@ -30,7 +30,7 @@ PackageManifest::PackageManifest(nlohmann::json json)
             levelDirectory.push_back(level);
         }
     }
-
+    
     if (json.find("HSND") != json.end()) {
         for (auto const &[idString, rawHsnd] : json["HSND"].items()) {
             int tmp(std::stoi(idString));
@@ -46,7 +46,7 @@ PackageManifest::PackageManifest(nlohmann::json json)
             }
         }
     }
-
+    
     if (json.find("HULL") != json.end()) {
         for (auto const &[idString, rawHull] : json["HULL"].items()) {
             int tmp(std::stoi(idString));
@@ -68,8 +68,21 @@ PackageManifest::PackageManifest(nlohmann::json json)
                 hull.rideHeight = ToFixed(rawHull.value<float>("Riding Height", 0));
                 hull.accelerationRatio = ToFixed(rawHull.value<float>("Acceleration", 0));
                 hull.jumpPowerRatio = ToFixed(rawHull.value<float>("Jump Power", 0));
-
+                
                 hullResources.insert_or_assign(id, hull);
+            }
+        }
+    }
+    
+    if (json.find("BSPS") != json.end()) {
+        for (auto const &[idString, rawBsps] : json["BSPS"].items()) {
+            int tmp(std::stoi(idString));
+            if (tmp >= static_cast<int>(INT16_MIN) && tmp <= static_cast<int>(INT16_MAX)) {
+                int16_t id = static_cast<int16_t>(tmp);
+                BSPSRecord bsps;
+                bsps.baseSize = ToFixed(rawBsps.value<float>("1:1 size", 1));
+                bsps.scaleStyle = rawBsps.value("Stretch/Scale (0/1)", 0);
+                bspsResources.insert_or_assign(id, bsps);
             }
         }
     }

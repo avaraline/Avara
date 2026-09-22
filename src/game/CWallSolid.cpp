@@ -29,7 +29,7 @@ void CWallSolid::LoadPart(short ind, short resId) {
         partList[ind] = thePart;
 
         //TranslatePartY(thePart, ReadLongVar(iHeight));
-        VECTORCOPY(location, thePart->itsTransform[3]);
+        VECTORCOPY(location, thePart->modelTransform[3]);
         gRenderer->RemovePart(thePart);
 
         heading = 0;

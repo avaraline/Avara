@@ -9,7 +9,7 @@
 
 #pragma once
 
-#include "CBaseObject.h"
+#include "Memory.h"
 
 typedef struct {
     long tag;
@@ -38,7 +38,7 @@ typedef struct {
 #define TAGMAXWASTE 2048L //	Don't waste more than 2KB of string space before compacting
 #define TAGBASEHASHSIZE 64
 
-class CTagBase : public CBaseObject {
+class CTagBase {
 public:
     CTagBase() {}
     virtual ~CTagBase() {}

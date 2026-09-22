@@ -9,18 +9,24 @@
 
 #pragma once
 #include "CSmartPart.h"
+#include "Material.h"
 
 #define BOXTEMPLATERESOURCE 400
 #define PLATETEMPLATERESOURCE 401
 #define BSPTEMPLATETYPE 'BSPT'
 #define BSPSCALETYPE 'BSPS'
 
+typedef struct {
+    Fixed baseSize;
+    short scaleStyle;
+} BSPSRecord;
+
 class CSmartBox final : public CSmartPart {
 public:
     CSmartBox(short resId,
         Fixed *dimensions,
-        ARGBColor color,
-        ARGBColor altColor,
+        Material material,
+        Material altMaterial,
         CAbstractActor *anActor,
         short aPartCode);
 

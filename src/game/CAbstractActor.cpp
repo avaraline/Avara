@@ -34,12 +34,12 @@ void CAbstractActor::LoadPart(short ind, short resId) {
     }
 }
 
-void CAbstractActor::LoadPartWithColors(short ind, short resId) {
+void CAbstractActor::LoadPartWithMaterials(short ind, short resId) {
     LoadPart(ind, resId);
-    partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(0), GetPixelColor());
-    partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(1), GetOtherPixelColor());
-    partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(2), GetTertiaryColor());
-    partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(3), GetQuaternaryColor());
+    partList[ind]->ReplaceMaterialForColor(*ColorManager::getMarkerColor(0), GetPixelMaterial());
+    partList[ind]->ReplaceMaterialForColor(*ColorManager::getMarkerColor(1), GetOtherPixelMaterial());
+    partList[ind]->ReplaceMaterialForColor(*ColorManager::getMarkerColor(2), GetTertiaryMaterial());
+    partList[ind]->ReplaceMaterialForColor(*ColorManager::getMarkerColor(3), GetQuaternaryMaterial());
 }
 
 bool CAbstractActor::IsGeometryStatic() {
@@ -439,7 +439,12 @@ CAbstractActor *CAbstractActor::EndScript() {
     teamMask = 1 << teamColor;
 
     partScale = ReadFixedVar(iScale);
-    partYon = ReadFixedVar(iYon);
+    
+    Fixed defaultYon = ReadFixedVar(iDefaultYon);
+    Fixed activeYon = ReadFixedVar(iYon);
+    partYon = (activeYon != defaultYon)
+        ? activeYon
+        : 0;
 
     traction = ReadFixedVar(iTraction);
     friction = ReadFixedVar(iFriction);
@@ -503,7 +508,8 @@ void CAbstractActor::BuildPartProximityList(Fixed *origin, Fixed range, MaskType
 
             while (head->next) {
                 anActor = head->me;
-                if (anActor->searchCount != searchCount) {
+                if (anActor->isInGame &&
+                    anActor->searchCount != searchCount) {
                     anActor->searchCount = searchCount;
                     if (anActor->maskBits & filterMask) {
                         for (thePart = anActor->partList; *thePart; thePart++) {

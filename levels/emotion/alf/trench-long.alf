@@ -295,27 +295,27 @@
   <Counter in="@yellowadd" n="80" out="@yellow80" restart="false" />
   <Counter in="@yellowadd" n="90" out="@yellow90" restart="false" />
   <Counter in="@yellowadd" n="100" out="@yellowwin" restart="false" />
-  <Text in="@yellow10" text="Yellow has 10 seconds!" showEveryone="true" cx="380.20833333333337" cz="0" r="1.875" />
-  <Text in="@yellow20" text="Yellow has 20 seconds!" showEveryone="true" cx="380.20833333333337" cz="0" r="1.875" />
-  <Text in="@yellow30" text="Yellow has 30 seconds!" showEveryone="true" cx="380.20833333333337" cz="0" r="1.875" />
-  <Text in="@yellow40" text="Yellow has 40 seconds!" showEveryone="true" cx="380.20833333333337" cz="0" r="1.875" />
-  <Text in="@yellow50" text="Yellow is halfway!" showEveryone="true" cx="380.20833333333337" cz="0" r="1.875" />
-  <Text in="@yellow60" text="Yellow has 60 seconds!" showEveryone="true" cx="380.20833333333337" cz="0" r="1.875" />
-  <Text in="@yellow70" text="Yellow has 70 seconds!" showEveryone="true" cx="380.20833333333337" cz="0" r="1.875" />
-  <Text in="@yellow80" text="Yellow has 80 seconds!" showEveryone="true" cx="380.20833333333337" cz="0" r="1.875" />
+  <Text in="@yellow10" text="Yellow has 10 seconds!" showEveryone="true" cx="118.02083333333334" cz="119.6875" r="1.875" />
+  <Text in="@yellow20" text="Yellow has 20 seconds!" showEveryone="true" cx="118.02083333333334" cz="119.6875" r="1.875" />
+  <Text in="@yellow30" text="Yellow has 30 seconds!" showEveryone="true" cx="118.02083333333334" cz="119.6875" r="1.875" />
+  <Text in="@yellow40" text="Yellow has 40 seconds!" showEveryone="true" cx="118.02083333333334" cz="119.6875" r="1.875" />
+  <Text in="@yellow50" text="Yellow is halfway!" showEveryone="true" cx="118.02083333333334" cz="119.6875" r="1.875" />
+  <Text in="@yellow60" text="Yellow has 60 seconds!" showEveryone="true" cx="118.02083333333334" cz="119.6875" r="1.875" />
+  <Text in="@yellow70" text="Yellow has 70 seconds!" showEveryone="true" cx="118.02083333333334" cz="119.6875" r="1.875" />
+  <Text in="@yellow80" text="Yellow has 80 seconds!" showEveryone="true" cx="118.02083333333334" cz="119.6875" r="1.875" />
   <Text in="@yellow90" text="Yellow only has 10 seconds to 
-go!" showEveryone="true" cx="380.20833333333337" cz="0" r="1.875" />
-  <Text in="@yellowwin2" text="Yellow Wins!" showEveryone="true" stop="@bluewin2" cx="380.20833333333337" cz="0" r="1.875" />
-  <Text in="@blue10" text="Blue has 10 seconds!" showEveryone="true" cx="380.20833333333337" cz="0" r="1.875" />
-  <Text in="@blue20" text="Blue has 20 seconds!" showEveryone="true" cx="380.20833333333337" cz="0" r="1.875" />
-  <Text in="@blue30" text="Blue has 30 seconds!" showEveryone="true" cx="380.20833333333337" cz="0" r="1.875" />
-  <Text in="@blue40" text="Blue has 40 seconds!" showEveryone="true" cx="380.20833333333337" cz="0" r="1.875" />
-  <Text in="@blue50" text="Blue is halfway!" showEveryone="true" cx="380.20833333333337" cz="0" r="1.875" />
-  <Text in="@blue60" text="Blue has 60 seconds!" showEveryone="true" cx="380.20833333333337" cz="0" r="1.875" />
-  <Text in="@blue70" text="Blue has 70 seconds!" showEveryone="true" cx="380.20833333333337" cz="0" r="1.875" />
-  <Text in="@blue80" text="Blue has 80 seconds!" showEveryone="true" cx="380.20833333333337" cz="0" r="1.875" />
-  <Text in="@blue90" text="Blue only has 10 seconds to go!" showEveryone="true" cx="380.20833333333337" cz="0" r="1.875" />
-  <Text in="@bluewin2" text="Blue Wins!" showEveryone="true" stop="@yellowwin2" cx="380.20833333333337" cz="0" r="1.875" />
+go!" showEveryone="true" cx="118.02083333333334" cz="119.6875" r="1.875" />
+  <Text in="@yellowwin2" text="Yellow Wins!" showEveryone="true" stop="@bluewin2" cx="118.02083333333334" cz="119.6875" r="1.875" />
+  <Text in="@blue10" text="Blue has 10 seconds!" showEveryone="true" cx="118.02083333333334" cz="119.6875" r="1.875" />
+  <Text in="@blue20" text="Blue has 20 seconds!" showEveryone="true" cx="118.02083333333334" cz="119.6875" r="1.875" />
+  <Text in="@blue30" text="Blue has 30 seconds!" showEveryone="true" cx="118.02083333333334" cz="119.6875" r="1.875" />
+  <Text in="@blue40" text="Blue has 40 seconds!" showEveryone="true" cx="118.02083333333334" cz="119.6875" r="1.875" />
+  <Text in="@blue50" text="Blue is halfway!" showEveryone="true" cx="118.02083333333334" cz="119.6875" r="1.875" />
+  <Text in="@blue60" text="Blue has 60 seconds!" showEveryone="true" cx="118.02083333333334" cz="119.6875" r="1.875" />
+  <Text in="@blue70" text="Blue has 70 seconds!" showEveryone="true" cx="118.02083333333334" cz="119.6875" r="1.875" />
+  <Text in="@blue80" text="Blue has 80 seconds!" showEveryone="true" cx="118.02083333333334" cz="119.6875" r="1.875" />
+  <Text in="@blue90" text="Blue only has 10 seconds to go!" showEveryone="true" cx="118.02083333333334" cz="119.6875" r="1.875" />
+  <Text in="@bluewin2" text="Blue Wins!" showEveryone="true" stop="@yellowwin2" cx="118.02083333333334" cz="119.6875" r="1.875" />
   <set wallHeight="8" />
   <Field visible="false" watch="playerMask" mask="T6" start="@secondtimer" stop="@bluestop" enter="@blueenter" color="#00a5db" color.1="#000000" x="53.333333333333336" z="50" w="15" d="13.75" h="0" cx="380.20833333333337" cz="0" angle="315" />
   <set wallHeight="8" />
@@ -326,7 +326,7 @@ go!" showEveryone="true" cx="380.20833333333337" cz="0" r="1.875" />
   <Teleporter mask="T2" shape="0" y="100" win="0" start="@yellowwin2" activeRange="5000" color="#ffffff" color.1="#000000" cx="86.45833333333334" cz="85" angle="315" />
   <Base in="@badHectors" out="@teleportTheRest" cx="3.333333333333334" cz="392.5" />
   <Text in="@badHectors" showEveryone="true" text="HECTORs must be 
-blue or yellow." sound="0" cx="3.333333333333334" cz="392.5" r="1.875" />
+blue or yellow." sound="0" cx="118.02083333333334" cz="119.6875" r="1.875" />
   <Goody out="@badHectors" shape="bspW3x3" color="#ffffff" color.1="#000000" cx="3.333333333333334" cz="392.5" angle="135" />
   <Walker team="1" defaultLives="0" cx="3.333333333333334" cz="392.5" angle="135" />
   <Walker team="1" defaultLives="0" cx="3.333333333333334" cz="392.5" angle="135" />

@@ -12,11 +12,11 @@ CCompoundShape::~CCompoundShape()
 
 void CCompoundShape::Append(CBSPPart &part)
 {
-    uint16_t startingColorCount = static_cast<uint16_t>(colorTable.size());
+    uint16_t startingMaterialCount = static_cast<uint16_t>(materialTable.size());
     uint32_t startingPointCount = static_cast<uint32_t>(pointTable.size());
     
-    for (ColorRecord &color : part.colorTable) {
-        colorTable.push_back(color);
+    for (MaterialRecord &material : part.materialTable) {
+        materialTable.push_back(material);
     }
     
     for (FixedPoint &point : part.pointTable) {
@@ -35,7 +35,7 @@ void CCompoundShape::Append(CBSPPart &part)
         
         // Dest holds new point with transform applied
         Vector dest;
-        VectorMatrixProduct(1, &p, &dest, &part.itsTransform);
+        VectorMatrixProduct(1, &p, &dest, &part.modelTransform);
 
         // Adjust bounds
         if (dest[0] > maxX) maxX = dest[0];
@@ -61,6 +61,7 @@ void CCompoundShape::Append(CBSPPart &part)
         // Construct a new polygon, correcting color and point indices.
         PolyRecord newPoly = PolyRecord();
         newPoly.normal = FloatNormal(poly.normal);
+        newPoly.normal.ApplyTransform(part.modelTransform);
         newPoly.triCount = poly.triCount;
         newPoly.triPoints = std::make_unique<uint32_t[]>(poly.triCount * 3);
         
@@ -70,7 +71,7 @@ void CCompoundShape::Append(CBSPPart &part)
         
         newPoly.front = poly.front;
         newPoly.back = poly.back;
-        newPoly.colorIdx = poly.colorIdx + startingColorCount;
+        newPoly.materialIdx = poly.materialIdx + startingMaterialCount;
         newPoly.vis = poly.vis;
         
         polyTable.push_back(std::move(newPoly));
@@ -81,7 +82,7 @@ void CCompoundShape::Append(CBSPPart &part)
 
 void CCompoundShape::Reserve(CBSPWorldImpl &world)
 {
-    size_t colorCount = 0;
+    size_t materialCount = 0;
     size_t pointCount = 0;
     size_t polyCount = 0;
     
@@ -89,12 +90,12 @@ void CCompoundShape::Reserve(CBSPWorldImpl &world)
     uint32_t partCount = world.GetPartCount();
     for (uint32_t i = 0; i < partCount; i++) {
         part = world.GetIndPart(i);
-        colorCount += part->colorTable.size();
+        materialCount += part->materialTable.size();
         pointCount += part->pointTable.size();
         polyCount += part->polyTable.size();
     }
     
-    colorTable.reserve(colorCount);
+    materialTable.reserve(materialCount);
     pointTable.reserve(pointCount);
     polyTable.reserve(polyCount);
 }

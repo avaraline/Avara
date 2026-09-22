@@ -39,7 +39,7 @@ Boolean CSmartPart::HitTestBoxes(CSmartPart *other) {
     Fixed boundary;
     Matrix combinedTransform;
 
-    CombineTransforms(&other->itsTransform, &combinedTransform, &invGlobTransform);
+    CombineTransforms(&other->modelTransform, &combinedTransform, &invModelTransform);
 
     TransformBoundingBox(&combinedTransform, &other->minBounds.x, &other->maxBounds.x, otherCorners);
 
@@ -112,10 +112,10 @@ Boolean CSmartPart::CollisionTest(CSmartPart *other) {
 
         if (!other->invGlobDone) {
             other->invGlobDone = true;
-            InverseTransform(&other->itsTransform, &other->invGlobTransform);
+            InverseTransform(&other->modelTransform, &other->invModelTransform);
         }
 
-        VectorMatrixProduct(1, &sphereGlobCenter, &localSphere, &other->invGlobTransform);
+        VectorMatrixProduct(1, &sphereGlobCenter, &localSphere, &other->invModelTransform);
 
         acc[0] = rSquare[0];
         acc[1] = rSquare[1];
@@ -153,10 +153,10 @@ Boolean CSmartPart::CollisionTest(CSmartPart *other) {
 
             if (!invGlobDone) {
                 invGlobDone = true;
-                InverseTransform(&itsTransform, &invGlobTransform);
+                InverseTransform(&modelTransform, &invModelTransform);
             }
 
-            VectorMatrixProduct(1, &other->sphereGlobCenter, &localSphere, &invGlobTransform);
+            VectorMatrixProduct(1, &other->sphereGlobCenter, &localSphere, &invModelTransform);
 
             acc[0] = other->rSquare[0];
             acc[1] = other->rSquare[1];
@@ -261,11 +261,11 @@ void CSmartPart::RayTest(RayHitRecord *hitRec) {
                 maxs = &maxBounds.x;
                 if (!invGlobDone) {
                     invGlobDone = true;
-                    InverseTransform(&itsTransform, &invGlobTransform);
+                    InverseTransform(&modelTransform, &invModelTransform);
                 }
 
-                VectorMatrixProduct(1, &hitRec->direction, &newDirection, &invGlobTransform);
-                VectorMatrixProduct(1, &hitRec->origin, &newOrigin, &invGlobTransform);
+                VectorMatrixProduct(1, &hitRec->direction, &newDirection, &invModelTransform);
+                VectorMatrixProduct(1, &hitRec->origin, &newOrigin, &invModelTransform);
 
                 for (i = 0; i < NUMDIM; i++) {
                     if (newOrigin[i] <= mins[i]) {
@@ -342,7 +342,7 @@ void CSmartPart::MinMaxGlobalBox(Fixed *minPoint, Fixed *maxPoint) {
     short i, j;
     Vector boxGlobCorners[8];
 
-    TransformBoundingBox(&itsTransform, &minBounds.x, &maxBounds.x, boxGlobCorners);
+    TransformBoundingBox(&modelTransform, &minBounds.x, &maxBounds.x, boxGlobCorners);
 
     p = &boxGlobCorners[0][0];
 
@@ -408,9 +408,9 @@ void CSmartPart::OffsetPart(Fixed *offset) {
     z = offset[2];
 
     invGlobDone = false;
-    itsTransform[3][0] += x;
-    itsTransform[3][1] += y;
-    itsTransform[3][2] += z;
+    modelTransform[3][0] += x;
+    modelTransform[3][1] += y;
+    modelTransform[3][2] += z;
 
     sphereGlobCenter[0] += x;
     sphereGlobCenter[1] += y;

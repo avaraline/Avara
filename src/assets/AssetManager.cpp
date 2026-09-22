@@ -1,7 +1,7 @@
 #include "AssetManager.h"
 #include "BaseAssetStorage.h"
 #include "LocalAssetRepository.h"
-
+#include "BasePath.h"
 #include "LevelLoader.h"
 
 #include <algorithm>
@@ -33,24 +33,19 @@ void AssetCache<T>::RemoveAll(std::vector<MaybePackage> &packageList)
     }
 };
 
-std::shared_ptr<AssetStorage> _baseStorage = BaseAssetStorage::GetInstance();
-std::shared_ptr<AssetStorage> _localStorage = LocalAssetRepository::GetInstance();
-std::shared_ptr<AssetRepository> _localRepo = LocalAssetRepository::GetInstance();
-
 // Initialize static variables.
 BasePackage AssetManager::basePackage = BasePackage::Avara;
 std::vector<std::string> AssetManager::externalPackages = {};
-std::shared_ptr<AssetStorage> AssetManager::baseStorage = _baseStorage;
-std::shared_ptr<AssetStorage> AssetManager::assetStorage = _localStorage;
-std::vector<std::shared_ptr<AssetRepository>> AssetManager::repositoryStack = {
-    _localRepo
-};
+std::shared_ptr<AssetStorage> AssetManager::baseStorage = {};
+std::shared_ptr<AssetStorage> AssetManager::assetStorage = {};
+std::vector<std::shared_ptr<AssetRepository>> AssetManager::repositoryStack = {};
 std::shared_ptr<nlohmann::json> AssetManager::objectTypes = nullptr;
 SimpleAssetCache<PackageManifest> AssetManager::manifestCache = {};
 SimpleAssetCache<std::string> AssetManager::avarascriptCache = {};
 AssetCache<nlohmann::json> AssetManager::bspCache = {};
 AssetCache<OggFile> AssetManager::sndCache = {};
 AssetCache<HullConfigRecord> AssetManager::hullCache = {};
+AssetCache<BSPSRecord> AssetManager::bspsCache = {};
 
 std::vector<std::string> AssetManager::GetAvailablePackages()
 {
@@ -161,6 +156,20 @@ std::optional<std::shared_ptr<nlohmann::json>> AssetManager::GetBsp(int16_t id)
     return std::optional<std::shared_ptr<nlohmann::json>>{};
 }
 
+std::optional<std::shared_ptr<BSPSRecord>> AssetManager::GetBspScale(int16_t id)
+{
+    if (bspsCache.count(id) > 0) {
+        return bspsCache.at(id).data;
+    }
+
+    LoadBspScale(id);
+    if (bspsCache.count(id) > 0) {
+        return bspsCache.at(id).data;
+    }
+
+    return std::optional<std::shared_ptr<BSPSRecord>>{};
+}
+
 std::optional<std::shared_ptr<OggFile>> AssetManager::GetOgg(int16_t id)
 {
     if (sndCache.count(id) > 0) {
@@ -191,9 +200,16 @@ std::optional<std::shared_ptr<HullConfigRecord>> AssetManager::GetHull(int16_t i
 
 void AssetManager::Init()
 {
+    baseStorage = BaseAssetStorage::GetInstance();
+    assetStorage = LocalAssetRepository::GetInstance();
+    repositoryStack = {
+        LocalAssetRepository::GetInstance()
+    };
+    
     LoadManifest(NoPackage);
     LoadScript(NoPackage);
     LoadEnumeratedObjectTypes();
+    InitParser();
 }
 
 OSErr AssetManager::LoadLevel(std::string packageName, std::string relativePath, std::string &levelName)
@@ -388,6 +404,33 @@ void AssetManager::LoadBsp(int16_t id)
     }
 }
 
+void AssetManager::LoadBspScale(int16_t id)
+{
+    // Note that all manifests should already be loaded due to `Init`, `SwitchBasePackage`, and
+    // `BuildDependencyList`.
+
+    // Attempt to retrieve from packages in priority order.
+    for (auto const &pkg : externalPackages) {
+        auto manifest = manifestCache.at(pkg);
+        if (manifest->bspsResources.count(id) > 0) {
+            Asset<BSPSRecord> asset;
+            asset.data = std::make_shared<BSPSRecord>(manifest->bspsResources.at(id));
+            asset.packageName = pkg;
+            bspsCache.insert_or_assign(id, asset);
+            return;
+        }
+    }
+
+    // Fallback to base package.
+    auto manifest = manifestCache.at(NoPackage);
+    if (manifest->bspsResources.count(id) > 0) {
+        Asset<BSPSRecord> asset;
+        asset.data = std::make_shared<BSPSRecord>(manifest->bspsResources.at(id));
+        asset.packageName = NoPackage;
+        bspsCache.insert_or_assign(id, asset);
+    }
+}
+
 void AssetManager::LoadOgg(int16_t id)
 {
     // Note that all manifests should already be loaded due to `Init`, `SwitchBasePackage`, and
@@ -515,6 +558,7 @@ void AssetManager::SwitchContext(std::string packageName)
         bspCache.RemoveAll(needsCacheClear);
         sndCache.RemoveAll(needsCacheClear);
         hullCache.RemoveAll(needsCacheClear);
+        bspsCache.RemoveAll(needsCacheClear);
     }
 
     externalPackages = newContext;
@@ -522,6 +566,7 @@ void AssetManager::SwitchContext(std::string packageName)
     ReviewPriorities(bspCache);
     ReviewPriorities(sndCache);
     ReviewPriorities(hullCache);
+    ReviewPriorities(bspsCache);
 }
 
 void AssetManager::BuildDependencyList(std::string currentPackage, std::vector<std::string> &list)
@@ -636,6 +681,34 @@ void AssetManager::ReviewPriorities(AssetCache<HullConfigRecord> &cache)
 
             auto manifest = manifestCache.at(pkg);
             if (manifest->hullResources.count(id) > 0) {
+                needsRemoval.push_back(id);
+
+                // We've found a higher priority asset than the one in the cache, so we can stop
+                // looking for this particular asset ID.
+                break;
+            }
+        }
+    }
+    for (auto &id : needsRemoval) {
+        cache.erase(id);
+    }
+}
+
+void AssetManager::ReviewPriorities(AssetCache<BSPSRecord> &cache)
+{
+    std::vector<int16_t> needsRemoval = {};
+    for (auto const &[id, asset] : cache) {
+        MaybePackage assetPkg = asset.packageName;
+        for (auto const &pkg : externalPackages) {
+            if (assetPkg == pkg) {
+                // We've reached the point in the package list where the cached asset is of equal
+                // or higher priority than the remaining packages, so we can stop looking for this
+                // particular asset ID.
+                break;
+            }
+
+            auto manifest = manifestCache.at(pkg);
+            if (manifest->bspsResources.count(id) > 0) {
                 needsRemoval.push_back(id);
 
                 // We've found a higher priority asset than the one in the cache, so we can stop

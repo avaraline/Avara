@@ -194,8 +194,6 @@ void CHuffProcessor::Uncompress(Ptr fromPtr, Ptr destPtr) {
     short i, j, k;
     HuffTreeNode *lookupMem[HUFFHANDLELOOKUPSIZE];
 
-    LockThis();
-
     lookupBuf = lookupMem;
     inHeader = (HuffDataHeader *)fromPtr;
     dataCount = MEM_LONG(inHeader->decodedSize);
@@ -239,8 +237,6 @@ void CHuffProcessor::Uncompress(Ptr fromPtr, Ptr destPtr) {
             DecodeAll((unsigned char *)freqCounts, (unsigned char *)destPtr);
         }
     }
-
-    UnlockThis();
 }
 
 int CHuffProcessor::GetCompressedLen(Ptr sourceData, int sourceLen) {
@@ -249,8 +245,6 @@ int CHuffProcessor::GetCompressedLen(Ptr sourceData, int sourceLen) {
     short countDataSize;
     short nonZero = 0;
     int i;
-
-    LockThis();
 
     dataCount = sourceLen;
 
@@ -293,16 +287,12 @@ int CHuffProcessor::GetCompressedLen(Ptr sourceData, int sourceLen) {
         outCount = 0;
     }
 
-    UnlockThis();
-
     return outSize;
 }
 
 void CHuffProcessor::Compress(Ptr fromPtr, Ptr destPtr) {
     short i, j, k;
     HuffDataHeader *outHeader;
-
-    LockThis();
 
     int count;
     int *zeroL;
@@ -388,6 +378,4 @@ void CHuffProcessor::Compress(Ptr fromPtr, Ptr destPtr) {
             }
         }
     }
-
-    UnlockThis();
 }

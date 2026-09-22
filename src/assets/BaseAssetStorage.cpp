@@ -1,14 +1,12 @@
 #include "BaseAssetStorage.h"
 #include "AssetManager.h"
+#include "BasePath.h"
 
-#include <SDL2/SDL.h>
 #include <sstream>
 
 BaseAssetStorage::BaseAssetStorage()
 {
-    char *sdlPathTmp = SDL_GetBasePath();
-    basePath = std::string(sdlPathTmp);
-    SDL_free(sdlPathTmp);
+    basePath = GetBasePath();
 }
 
 std::shared_ptr<BaseAssetStorage> BaseAssetStorage::GetInstance() {

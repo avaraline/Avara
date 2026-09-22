@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include <SDL2/SDL_log.h>
+#include "BasePath.h"
 #include "AssetManager.h"
 #include "CAvaraApp.h"
 #include "CBSPPart.h"
@@ -20,6 +21,7 @@
 #include "System.h"
 #include "CUDPConnection.h"
 #include "NullRenderer.h"
+#include "Material.h"
 
 #include <iostream>
 using namespace std;
@@ -30,6 +32,7 @@ using namespace std;
 class TestSoundHub : public CSoundHubImpl {
 public:
     virtual Fixed* EarLocation() { return ear; }
+    virtual bool AudioEnabled() { return false; }
 private:
     Fixed ear[3];
 
@@ -43,7 +46,7 @@ public:
         FunctionTable &ft = *(this->ft);
         ft.down = ft.up = ft.held = ft.mouseDelta.h = ft.mouseDelta.v = ft.buttonStatus = ft.msgChar = 0;
     }
-    ~TestPlayerManager() {}
+    virtual ~TestPlayerManager() {}
     virtual CAbstractPlayer* GetPlayer() { return playa; }
     virtual void SetPlayer(CAbstractPlayer* p) { playa = p; }
     virtual short Slot() { return 0; }
@@ -117,6 +120,7 @@ public:
     virtual void IncrementAskAgainTime(int) {}
     virtual void SetShowScoreboard(bool b) {}
     virtual bool GetShowScoreboard() { return false; }
+    virtual void ResetKeyMap(){}
 
 private:
     FunctionTable *ft;
@@ -170,9 +174,11 @@ public:
     virtual CAvaraGame* GetGame() { return 0; }
     virtual void Done() {}
     virtual void BroadcastCommand(int) {}
-    virtual void GameStarted(std::string set, std::string level) {};
+    virtual void GameStarted(LevelInfo &loadedLevel) {};
     virtual std::deque<MsgLine>& MessageLines() { return msgLines; }
     virtual CommandManager* GetTui() { return 0; }
+    virtual uint32_t ControllerEventType() { return 0; }
+    virtual void Rumble(Fixed hitEnergy) {}
 public:
     std::unique_ptr<CAvaraGame> itsGame;
 private:
@@ -1171,12 +1177,69 @@ TEST(SERIAL_NUMBER, Rollover) {
     test_rollover("CUDPConnection::ackBase", conn1, conn2, &CUDPConnection::ackBase);
 }
 
-TEST(QUEUES, Clean) {
-    // after all of the tests have run, the queues should be all cleaned up suggesting all destructors did their job
-    ASSERT_EQ(QueueCount(), 0)  << "queues not empty";
+TEST(MATERIALS, Manipulation) {
+    Material defaultMaterial = Material().WithColor(0xff000000).WithSpecular(0x00000000).WithShininess(0x00);
+    ASSERT_EQ(defaultMaterial.GetColor().GetRaw(), 0xff000000) << "defaultMaterial color not black";
+    ASSERT_EQ(defaultMaterial.GetSpecular().GetRaw(), 0x00000000) << "defaultMaterial specular not invisible black";
+    ASSERT_EQ(defaultMaterial.GetShininess(), 0x00) << "defaultMaterial shininess non-zero";
+    
+    Material alteredMaterial = defaultMaterial;
+    ASSERT_EQ(alteredMaterial.GetColor().GetRaw(), 0xff000000) << "alteredMaterial color not initialized to black";
+    ASSERT_EQ(alteredMaterial.GetSpecular().GetRaw(), 0x00000000) << "alteredMaterial specular not initialized to invisible black";
+    ASSERT_EQ(alteredMaterial.GetShininess(), 0x00) << "alteredMaterial shininess initialized to non-zero";
+    
+    alteredMaterial = alteredMaterial.WithColor(0xff3a404d);
+    ASSERT_EQ(alteredMaterial.GetColor().GetRaw(), 0xff3a404d) << "failed to update material color to 0xff3a404d";
+    alteredMaterial = alteredMaterial.WithSpecular(0xff33322b); // alpha bits will be dropped!
+    ASSERT_EQ(alteredMaterial.GetSpecular().GetRaw(), 0x0033322b) << "failed to update material specular color to 0x0033322b";
+    ASSERT_EQ(alteredMaterial.GetColor().GetRaw(), 0xff3a404d) << "failed to retain material color after setting specular to 0x0033322b";
+    alteredMaterial = alteredMaterial.WithShininess(0x01);
+    ASSERT_EQ(alteredMaterial.GetShininess(), 0x01) << "failed to update material shininess to 0x01";
+    ASSERT_EQ(alteredMaterial.GetColor().GetRaw(), 0xff3a404d) << "failed to retain material color after setting shininess to 0x01";
+    ASSERT_EQ(alteredMaterial.GetSpecular().GetRaw(), 0x0033322b) << "failed to retain material specular color after setting shininess to 0x01";
+    
+    alteredMaterial = alteredMaterial.WithSpecular(0xccff0000); // alpha bits will be dropped, again
+    ASSERT_EQ(alteredMaterial.GetSpecular().GetRaw(), 0x00ff0000) << "failed to update material specular color to 0x00ff0000";
+    ASSERT_EQ(alteredMaterial.GetColor().GetRaw(), 0xff3a404d) << "failed to retain material color after setting specular to 0x00ff0000";
+    ASSERT_EQ(alteredMaterial.GetShininess(), 0x01) << "failed to retain material shininess after setting specular to 0x00ff0000";
+    
+    alteredMaterial = alteredMaterial.WithSpecB(0xff);
+    ASSERT_EQ(alteredMaterial.GetSpecular().GetRaw(), 0x00ff00ff) << "failed to update material specular B component to 0xff";
+    ASSERT_EQ(alteredMaterial.GetColor().GetRaw(), 0xff3a404d) << "failed to retain material color after setting specular B component to 0xff";
+    ASSERT_EQ(alteredMaterial.GetShininess(), 0x01) << "failed to retain material shininess after setting specular B component to 0xff";
+    
+    alteredMaterial = alteredMaterial.WithSpecG(0xdd);
+    ASSERT_EQ(alteredMaterial.GetSpecular().GetRaw(), 0x00ffddff) << "failed to update material specular G component to 0xdd";
+    ASSERT_EQ(alteredMaterial.GetColor().GetRaw(), 0xff3a404d) << "failed to retain material color after setting specular G component to 0xdd";
+    ASSERT_EQ(alteredMaterial.GetShininess(), 0x01) << "failed to retain material shininess after setting specular G component to 0xdd";
+    
+    alteredMaterial = alteredMaterial.WithSpecR(0xaa);
+    ASSERT_EQ(alteredMaterial.GetSpecular().GetRaw(), 0x00aaddff) << "failed to update material specular R component to 0xaa";
+    ASSERT_EQ(alteredMaterial.GetColor().GetRaw(), 0xff3a404d) << "failed to retain material color after setting specular R component to 0xaa";
+    ASSERT_EQ(alteredMaterial.GetShininess(), 0x01) << "failed to retain material shininess after setting specular R component to 0xaa";
+    
+    alteredMaterial = defaultMaterial;
+    ASSERT_EQ(alteredMaterial.GetColor().GetRaw(), 0xff000000) << "alteredMaterial color not reset to black";
+    ASSERT_EQ(alteredMaterial.GetSpecular().GetRaw(), 0x00000000) << "alteredMaterial specular not reset to invisible black";
+    ASSERT_EQ(alteredMaterial.GetShininess(), 0x00) << "alteredMaterial shininess not reset to zero";
+    
+    // Chained
+    alteredMaterial = defaultMaterial
+        .WithColor(0xff111111)
+        .WithSpecular(0xff00cccc) // alpha bits dropped
+        .WithShininess(0x10);
+    ASSERT_EQ(alteredMaterial.GetColor().GetRaw(), 0xff111111) << "failed to update material color to 0xff111111";
+    ASSERT_EQ(alteredMaterial.GetSpecular().GetRaw(), 0x0000cccc) << "failed to update material specular color to 0x0000cccc";
+    ASSERT_EQ(alteredMaterial.GetShininess(), 0x10) << "failed to update material shininess to 0x10";
 }
 
 int main(int argc, char **argv) {
+    // Check basepath override.
+    for (int i = 0; i < argc; i++) {
+        if (strcmp(argv[i], "--basepath") == 0) {
+            SetBasePath(argv[++i]);
+        }
+    }
     nanogui::init();
     InitMatrix();
     ::testing::InitGoogleTest(&argc, argv);

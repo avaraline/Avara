@@ -147,6 +147,7 @@ public:
     virtual void IncrementAskAgainTime(int) = 0;
     virtual void SetShowScoreboard(bool b) = 0;
     virtual bool GetShowScoreboard() = 0;
+    virtual void ResetKeyMap() = 0;
 };
 
 class CPlayerManagerImpl : public CDirectObject, public CPlayerManager, public std::enable_shared_from_this<CPlayerManagerImpl> {
@@ -210,7 +211,9 @@ private:
     PlayerConfigRecord theConfiguration {};
 
     std::unordered_map<SDL_Scancode, uint32_t> keyMap; // maps keyboard key to keyFunc
-
+    
+    std::unordered_map<uint8_t, uint32_t> controllerButtonMap;
+    float controllerCurveExp, controllerMaxMove, controllerMultiplyX, controllerMultiplyY, controllerStickThreshold, controllerTriggerThreshold, controllerDamper;
 public:
 
     virtual void IPlayerManager(CAvaraGame *theGame, short id, CNetManager *aNetManager);
@@ -223,6 +226,7 @@ public:
     virtual void HandleEvent(SDL_Event &event);
     virtual void HandleKeyDown(uint32_t keyFunc);
     virtual void HandleKeyUp(uint32_t keyFunc);
+    virtual void HandleAxis(float value, float threshold, int bit);
     virtual void SendFrame();
     virtual void ResumeGame();
 
@@ -312,6 +316,6 @@ public:
     virtual void IncrementAskAgainTime(int);
     virtual void SetShowScoreboard(bool b);
     virtual bool GetShowScoreboard();
-
+    virtual void ResetKeyMap();
     void PlaybackAndRecord(FunctionTable &ft);
 };

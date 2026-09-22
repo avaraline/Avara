@@ -224,9 +224,9 @@
   <Timer in="@start" wait="1" out="@playSound" />
   <Sound y="50" start="@playSound" restart="false" isPlaced="false" sound="411" volume="1" cx="271.31944444444446" cz="23.47222222222222" angle="270" />
   <Timer in="@start" wait="4216" out="@thirtyLeft" />
-  <Text in="@thirtyLeft" sound="snTextBlip" volume="5" showEveryone="true" text="Thirty Seconds Left!" cx="271.31944444444446" cz="23.47222222222222" r="5" />
+  <Text in="@thirtyLeft" sound="snTextBlip" volume="5" showEveryone="true" text="Thirty Seconds Left!" cx="74.16666666666667" cz="69.0625" r="5" />
   <Timer in="@thirtyLeft" wait="312" out="@ten10" />
-  <Text sound="snTextBlip" volume="5" in="@ten10" showEveryone="true" text="Ten Seconds Left!" cx="271.31944444444446" cz="23.47222222222222" r="5" />
+  <Text sound="snTextBlip" volume="5" in="@ten10" showEveryone="true" text="Ten Seconds Left!" cx="74.16666666666667" cz="69.0625" r="5" />
   <Timer in="@start" out="@gameEnds" wait="gameLength" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" color="#ff2600" color.1="#000000" cx="287.70833333333337" cz="6.597222222222223" angle="270" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" color="#ff2600" color.1="#000000" cx="287.70833333333337" cz="6.597222222222223" angle="270" />

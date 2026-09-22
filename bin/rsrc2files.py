@@ -1,5 +1,10 @@
-#!/usr/bin/env python3
-
+# /// script
+# dependencies = [
+#   "numpy",
+#   "triangle",
+#   "pyparsing",
+# ]
+# ///
 import json
 import os
 import re
@@ -214,6 +219,9 @@ def convert_to_files(datafile, thedir):
                 os.remove(datapath)
             except FileNotFoundError:
                 pass
+
+    if "BSPS" in forks:
+        result["BSPS"] = get_tmpl(forks, "BSPS")
 
     dumpdirs = [os.path.join(thedir, SETFILE)]
     if datafile == "levels/single-player.r":

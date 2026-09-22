@@ -5,5 +5,5 @@
 
 class CRandomIncarnator : public CIncarnator {
 public:
-    CRandomIncarnator(CAbstractActor* actorList);
+    CRandomIncarnator(const Vector &locMin, const Vector &locMax);
 };

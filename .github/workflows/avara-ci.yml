@@ -15,17 +15,17 @@ jobs:
       run: |
         sudo add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu `lsb_release -sc` main universe restricted multiverse"
         sudo apt-get update -y -qq
-        sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libegl1-mesa-dev libgles2-mesa-dev libdirectfb-dev libgtest-dev
+        sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libegl1-mesa-dev libgles2-mesa-dev libdirectfb-dev libgtest-dev libsqlite3-dev
     - uses: actions/checkout@v4
     - name: make
       run: make -j2
     - name: Run headless test
-      uses: GabrielBB/xvfb-action@v1.2
+      uses: GabrielBB/xvfb-action@v1.7
       with:
         run: make tests
   Windows:
     name: Windows
-    runs-on: windows-latest
+    runs-on: windows-2025
     steps:
       - uses: actions/checkout@v4
       - name: Add MSBuild to PATH
@@ -41,6 +41,8 @@ jobs:
       - name: Run headless test
         run: .\Avara.msvc\x64\Release\Tests.exe
         shell: pwsh
+        env:
+          AVARA_RSRC_PATH: ${{ github.workspace }}\
       - name: WinAvara archive
         run: .\bin\winavarazip.ps1
         shell: pwsh
@@ -58,7 +60,7 @@ jobs:
           max_releases: 1
   macOS:
     name: macOS
-    runs-on: macos-13
+    runs-on: macos-15
     steps:
       - name: install dependencies
         run: |
@@ -68,9 +70,9 @@ jobs:
           brew install googletest
       - uses: actions/checkout@v4
       - name: Run headless tests
-        run: make -j3 tests
+        run: make tests
       - name: make macdist
-        run: make -j3 clean macdist
+        run: make -j4 clean macdist
       - name: deploy main nightly
         if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'main')
         uses: WebFreak001/deploy-nightly@v1.0.1

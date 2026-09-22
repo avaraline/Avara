@@ -8,7 +8,7 @@
 #include "AvaraDefines.h"
 #include "CScoreKeeper.h"
 #include "ARGBColor.h"
-
+#include "NVGUtil.h"
 #include <stdint.h>
 
 CHUD::CHUD(CAvaraGame *game) {
@@ -207,7 +207,7 @@ void CHUD::DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, N
 
 void CHUD::DrawLevelName(NVGcontext *ctx) {
     auto view = gRenderer->viewParams;
-    std::string level = itsGame->loadedLevel;
+    auto level = itsGame->loadedLevelInfo->levelName;
     if(itsGame->gameStatus != kPlayingStatus && level.length() > 0) {
         int bufferWidth = view->viewPixelDimensions.h;
         int bufferHeight = view->viewPixelDimensions.v;
@@ -252,29 +252,6 @@ void CHUD::DrawPaused(NVGcontext *ctx) {
         nvgFillColor(ctx, nvgRGBA(255,255,255,180));
         nvgFill(ctx);
     }
-}
-
-void CHUD::DrawImage(NVGcontext* ctx, int image, float alpha,
-		float sx, float sy, float sw, float sh, // sprite location on texture
-		float x, float y, float w, float h) // position and size of the sprite rectangle on screen
-{
-	float ax, ay;
-	int iw,ih;
-	NVGpaint img;
-	
-	nvgImageSize(ctx, image, &iw, &ih);
-
-	// Aspect ration of pixel in x an y dimensions. This allows us to scale
-	// the sprite to fill the whole rectangle.
-	ax = w / sw;
-	ay = h / sh;
-
-	img = nvgImagePattern(ctx, x - sx*ax, y - sy*ay, (float)iw*ax, (float)ih*ay,
-				0, image, alpha);
-	nvgBeginPath(ctx);
-	nvgRect(ctx, x,y, w,h);
-	nvgFillPaint(ctx, img);
-	nvgFill(ctx);
 }
 
 void CHUD::Render(NVGcontext *ctx) {
@@ -995,7 +972,7 @@ void CHUD::RenderNewHUD(NVGcontext *ctx) {
 
         // Filter messages that are older than the current game
         // Don't keep reading messages when a message from a previous game is found
-        if (msg.gameId < itsGame->currentGameId) break; 
+        if (msg.gameId != itsGame->currentGameId) break; 
 
         // Set initial message params based on category
         // This determines which display panel the message gets added to

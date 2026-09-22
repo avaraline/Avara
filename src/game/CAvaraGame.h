@@ -14,6 +14,7 @@
 #include "CDirectObject.h"
 #include "Types.h"
 #include "CNetManager.h"
+#include "LevelInfo.h"
 
 #include <SDL2/SDL.h>
 #include <string>
@@ -76,19 +77,16 @@ class CAbstractYon;
 
 class CAvaraGame {
 public:
-    std::string loadedFilename = "";
-    std::string loadedLevel = "";
-    std::string loadedSet = "";
-    std::string loadedDesigner = "";
-    std::string loadedInfo = "";
-    std::string loadedTags;
+    std::unique_ptr<LevelInfo> loadedLevelInfo = std::make_unique<LevelInfo>("", "");
     long loadedTimeLimit;
+    Vector extentMin, extentMax, extentCenter;
+    Fixed extentRadius;
     int32_t timeInSeconds;
     FrameNumber frameNumber;
     bool isClassicFrame;
     int32_t frameAdjust;
 
-    int currentGameId = 0; // Increments when a new game starts
+    int currentGameId = 0; // resets when a new game starts
 
     FrameNumber topSentFrame;
 
@@ -178,11 +176,12 @@ public:
     ScoreInterfaceReasons lastReason;
     std::deque<ScoreInterfaceEvent> scoreEventList;
 
+    uint32_t frameStart;
     uint32_t nextScheduledFrame;
     uint32_t nextPingTime;
     uint32_t nextLoadTime;
 
-    Boolean canPreSend;
+    int preSendCount;
 
     uint32_t nextStatTime;
     long lastFrameTime;
@@ -200,6 +199,7 @@ public:
     Boolean keysToStdout;
 
     Boolean showNewHUD;
+    int hudLayout;
 
     // Moved here from GameLoop so it can run on the normal event loop
     // long            frameCredit;
@@ -227,11 +227,13 @@ public:
 
     virtual void AddActor(CAbstractActor *theActor);
     virtual void RemoveActor(CAbstractActor *theActor);
+    virtual void CalculateExtent();
 
     virtual void ResumeActors();
     virtual void PauseActors();
     virtual void RunFrameActions();
     virtual void RunActorFrameActions();
+    virtual void PreSendFrameActions();
 
     virtual void Score(short team, short player, long points, Fixed energy, short hitTeam, short hitPlayer);
     virtual void AddScoreNotify(ScoreInterfaceEvent event);
@@ -273,7 +275,7 @@ public:
     virtual CPlayerManager *GetPlayerManager(CAbstractPlayer *thePlayer);
     virtual CPlayerManager *FindPlayerManager(CAbstractPlayer *thePlayer);
 
-    virtual long RoundTripToFrameLatency(long rtt);
+    virtual short RoundTripToFrameLatency(long rtt);
     virtual void SetFrameLatency(short newFrameLatency, CPlayerManager *slowPlayer = nullptr);
     virtual short FrameLatency();
     virtual FrameNumber TimeToFrameCount(long timeInMsec);
@@ -285,6 +287,8 @@ public:
 
     void SetKeysFromStdin() { keysFromStdin = true; };
     void SetKeysToStdout() { keysToStdout = true; };
+    
+    virtual ARGBColor GetLocalTeamColor();
 };
 
 #ifndef MAINAVARAGAME

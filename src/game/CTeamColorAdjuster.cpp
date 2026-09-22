@@ -18,10 +18,10 @@ CAbstractActor *CTeamColorAdjuster::EndScript() {
     if (!itsGame->itsApp->Boolean(kIgnoreLevelCustomColorsTag)) {
         colorMask = ReadLongVar(iMask);
 
-        ARGBColor newColor = GetPixelColor();
+        ARGBColor newColor = GetPixelMaterial().GetColor();
 
         // Currently unused, but theoretically should be supported. (We don't do highlighting yet.)
-        // auto newHighlightColor = GetOtherPixelColor();
+        // auto newHighlightColor = GetOtherPixelMaterial().GetColor();
 
         for (uint8_t i = 1; i <= kMaxTeamColors; i++) {
             uint16_t teamMask = 1 << i;

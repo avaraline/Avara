@@ -1,6 +1,17 @@
-<set designer="Vertigo - dcwatson@gmail.com" information="The giving tree also taketh away." />
+<set
+  designer="Vertigo - dcwatson@gmail.com"
+  information="The giving tree also taketh away."
+  light.0.i="0.7"
+  light.0.a="30"
+  light.0.b="40"
+  light.0.c="#AA6633"
+  light.0.r="60.0"
+  light.0.s="true"
+  baseMaterial.specular="#3A6A1A"
+  baseMaterial.shininess="4.0"
+/>
 
-<SkyColor color="#335599" color.1="#009999" />
+<SkyColor color="#AA7733" color.1="#455D21" thickness="6666" />
 <GroundColor color="#2A201C" />
 
 <Incarnator y="30" cx="36" cz="-36" angle="225" />

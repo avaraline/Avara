@@ -119,15 +119,15 @@ in three minutes." cx="109.30555555555556" cz="97.04861111111111" r="4.236111111
   <Timer in="@startmine1" out="@stopmine1" wait="250" />
   <Wall color="#006500" color.1="#000000" x="188.54166666666669" z="115.52083333333334" w="1.25" d="10.625" h="0.25" />
   <Wall color="#006500" color.1="#000000" x="193.85416666666669" z="110.83333333333334" w="9.375" d="1.25" h="0.25" />
-  <Text in="@startmine1" showEveryone="true" restart="250" text="Sensors detect brown mines are active." cx="211.66666666666669" cz="80.83333333333334" r="2.5" />
-  <Text in="@stopmine1" restart="250" showEveryone="true" text="Brown mines have been deactivated." cx="211.66666666666669" cz="80.83333333333334" r="2.5" />
+  <Text in="@startmine1" showEveryone="true" restart="250" text="Sensors detect brown mines are active." cx="193.54166666666669" cz="115.83333333333334" r="2.5" />
+  <Text in="@stopmine1" restart="250" showEveryone="true" text="Brown mines have been deactivated." cx="193.54166666666669" cz="115.83333333333334" r="2.5" />
   <Mine shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="1" shield="-1" y="0" activateEnergy="0" activeRange="3" freq="2" power="12" activateVolume="0" activeTimer="1" hitScore="0" start="@startmine1" stop="@stopmine1" color="#ab4500" color.1="#009600" cx="152.15277777777777" cz="145.83333333333334" angle="270" />
   <Area mask="T1" freq="2" enter="@startmine2" cx="42.951388888888886" cz="124.30555555555557" r="2.2222222222222214" />
   <Timer in="@startmine2" out="@stopmine2" wait="250" />
   <Wall color="#006500" color.1="#000000" x="48.54166666666667" z="123.64583333333334" w="1.25" d="10.625" h="0.25" />
   <Wall color="#006500" color.1="#000000" x="43.22916666666667" z="118.95833333333334" w="9.375" d="1.25" h="0.25" />
-  <Text in="@startmine2" showEveryone="true" restart="250" text="Sensors detect green mines are active." cx="11.666666666666668" cz="108.95833333333334" r="2.5" />
-  <Text in="@stopmine2" restart="250" showEveryone="true" text="Green mines have been deactivated." cx="11.666666666666668" cz="108.95833333333334" r="2.5" />
+  <Text in="@startmine2" showEveryone="true" restart="250" text="Sensors detect green mines are active." cx="42.951388888888886" cz="124.30555555555557" r="2.5" />
+  <Text in="@stopmine2" restart="250" showEveryone="true" text="Green mines have been deactivated." cx="42.951388888888886" cz="124.30555555555557" r="2.5" />
   <Mine shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="1" shield="-1" y="0" activateEnergy="0" activeRange="3" freq="2" power="12" activateVolume="0" activeTimer="1" hitScore="0" start="@startmine2" stop="@stopmine2" color="#002c00" color.1="#009600" cx="46.66666666666667" cz="111.66666666666667" angle="270" />
   <Mine shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="1" shield="-1" y="0" activateEnergy="0" activeRange="3" freq="2" power="12" activateVolume="0" activeTimer="1" hitScore="0" start="@startmine2" stop="@stopmine2" color="#002c00" color.1="#009600" cx="46.66666666666667" cz="102.29166666666667" angle="270" />
   <Mine shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="1" shield="-1" y="0" activateEnergy="0" activeRange="3" freq="2" power="12" activateVolume="0" activeTimer="1" hitScore="0" start="@startmine2" stop="@stopmine2" color="#002c00" color.1="#009600" cx="46.66666666666667" cz="92.91666666666667" angle="270" />
@@ -139,15 +139,15 @@ in three minutes." cx="109.30555555555556" cz="97.04861111111111" r="4.236111111
   <Area restart="250" mask="T1" freq="2" enter="@startmine3" cx="106.73611111111111" cz="39.61805555555556" r="2.430555555555557" />
   <Timer in="@startmine3" out="@stopmine3" wait="250" />
   <Wall color="#006500" color.1="#000000" x="106.66666666666667" z="34.583333333333336" w="15" d="1.25" h="0.25" />
-  <Text in="@startmine3" showEveryone="true" restart="250" text="Sensors detect grey mines are active." cx="109.44444444444444" cz="7.5" r="2.5" />
-  <Text in="@stopmine3" restart="250" showEveryone="true" text="Grey mines have been deactivated." cx="109.44444444444444" cz="7.5" r="2.5" />
+  <Text in="@startmine3" showEveryone="true" restart="250" text="Sensors detect grey mines are active." cx="106.73611111111111" cz="39.61805555555556" r="2.5" />
+  <Text in="@stopmine3" restart="250" showEveryone="true" text="Grey mines have been deactivated." cx="106.73611111111111" cz="39.61805555555556" r="2.5" />
   <Mine shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="1" shield="-1" y="0" activateEnergy="0" activeRange="3" freq="2" power="15" activateVolume="0" activeTimer="1" hitScore="0" start="@startmine3" stop="@stopmine3" color="#686868" color.1="#009600" cx="41.875" cz="36.94444444444444" angle="270" />
   <Area mask="T1" freq="2" enter="@startmine4" cx="105.41666666666667" cz="142.3263888888889" r="2.8472222222222285" />
   <Timer in="@startmine4" out="@stopmine4" wait="250" />
   <Wall color="#006500" color.1="#000000" x="98.54166666666667" z="142.39583333333334" w="1.25" d="13.125" h="0.25" />
   <Wall color="#006500" color.1="#000000" x="106.66666666666667" z="135.52083333333334" w="8.75" d="0.625" h="0.25" />
-  <Text in="@startmine4" showEveryone="true" restart="250" text="Sensors detect blue mines are active." cx="78.26388888888889" cz="158.19444444444446" r="2.5" />
-  <Text in="@stopmine4" restart="250" showEveryone="true" text="Blue mines have been deactivated." cx="78.26388888888889" cz="158.19444444444446" r="2.5" />
+  <Text in="@startmine4" showEveryone="true" restart="250" text="Sensors detect blue mines are active." cx="105.41666666666667" cz="142.3263888888889" r="2.5" />
+  <Text in="@stopmine4" restart="250" showEveryone="true" text="Blue mines have been deactivated." cx="105.41666666666667" cz="142.3263888888889" r="2.5" />
   <Mine shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="1" shield="-1" y="0" activateEnergy="0" activeRange="3" freq="2" power="12" activateVolume="0" activeTimer="1" hitScore="0" start="@startmine4" stop="@stopmine4" color="#011a9a" color.1="#009600" cx="68.81944444444444" cz="137.01388888888889" angle="270" />
   <Wall color="#006500" color.1="#000000" x="112.91666666666667" z="142.39583333333334" w="1.25" d="13.125" h="0.25" />
   <Mine shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="1" shield="-1" y="0" activateEnergy="0" activeRange="3" freq="2" power="12" activateVolume="0" activeTimer="1" hitScore="0" start="@startmine2" stop="@stopmine2" color="#002c00" color.1="#009600" cx="46.66666666666667" cz="71.04166666666667" angle="270" />
@@ -259,7 +259,7 @@ in three minutes." cx="109.30555555555556" cz="97.04861111111111" r="4.236111111
   <Mine shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="1" shield="-1" y="0" activateEnergy="0" activeRange="3" freq="2" power="12" activateVolume="0" activeTimer="1" hitScore="0" start="@startmine4" stop="@stopmine4" color="#011a9a" color.1="#009600" cx="116.94444444444444" cz="157.63888888888889" angle="270" />
   <Mine shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="1" shield="-1" y="0" activateEnergy="0" activeRange="3" freq="2" power="12" activateVolume="0" activeTimer="1" hitScore="0" start="@startmine4" stop="@stopmine4" color="#011a9a" color.1="#009600" cx="105.06944444444444" cz="158.88888888888889" angle="270" />
   <Timer wait="15" in="@start" out="@incarn" />
-  <Text in="@start" wait="200" showEveryone="true" text="Be careful.  Green has set some mines in this area, and he can call in air strikes. Good hunting, pilots." cx="67.25694444444444" cz="211.25" r="3.854166666666668" />
+  <Text in="@start" wait="200" showEveryone="true" text="Be careful.  Green has set some mines in this area, and he can call in air strikes. Good hunting, pilots." cx="105.41666666666667" cz="142.3263888888889" r="3.854166666666668" />
   <Incarnator mask="T1" y="20" start="@incarn" cx="131.66666666666669" cz="30.208333333333336" angle="0" />
   <Incarnator mask="T1" start="@incarn" y="20" cx="89.16666666666667" cz="140.83333333333334" angle="0" />
 </map>

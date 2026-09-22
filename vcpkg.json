@@ -1,10 +1,11 @@
 {
   "name": "avara",
-  "version-date": "2024-03-19",
+  "version-date": "2026-09-16",
   "dependencies": [
     "sdl2",
     "glad",
-    "gtest"
+    "gtest",
+    "sqlite3"
   ],
-  "builtin-baseline":"000d1bda1ffa95a73e0b40334fa4103d6f4d3d48"
+  "builtin-baseline": "386d7c478221b7ee0c97bfe6ea61dcf65121d564"
 }

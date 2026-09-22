@@ -20,11 +20,11 @@ public:
     virtual void AddHUDPart(CBSPPart *part) override;
     virtual void AddPart(CBSPPart *part) override;
     virtual void ApplyLights() override;
+    virtual void ApplyPrefs(std::optional<std::string> name = std::optional<std::string>{}) override;
     virtual void ApplyProjection() override;
     virtual void ApplySky() override;
     virtual void LevelReset() override;
     virtual std::unique_ptr<VertexData> NewVertexDataInstance() override;
-    virtual void OverheadPoint(Fixed *pt, Fixed *extent) override;
     virtual void PostLevelLoad() override;
     virtual void RefreshWindow() override;
     virtual void RemoveHUDPart(CBSPPart *part) override;
@@ -33,19 +33,19 @@ public:
     virtual void UpdateViewRect(int width, int height, float pixelRatio) override;
 private:
     SDL_Window *window;
-    
+
     std::unique_ptr<CCompoundShape> staticGeometry = nullptr;
     CBSPWorldImpl *staticWorld;
     CBSPWorldImpl *dynamicWorld;
     CBSPWorldImpl *hudWorld;
-    
+
     std::unique_ptr<OpenGLShader> skyShader;
     std::unique_ptr<OpenGLShader> worldShader;
     std::unique_ptr<OpenGLShader> worldPostShader;
     std::unique_ptr<OpenGLShader> hudShader;
     std::unique_ptr<OpenGLShader> hudPostShader;
     std::unique_ptr<OpenGLShader> finalShader;
-    
+
     std::vector<CBSPPart*> alphaParts;
 
     GLsizei resolution[2];
@@ -57,7 +57,9 @@ private:
     GLuint rbo[2];
     GLuint texture[2];
 
-    void AdjustAmbient(OpenGLShader &shader, float intensity);
+    bool showSpecular, dither, fxaa;
+
+    void AdjustAmbient(OpenGLShader &shader, float intensity, float extraAmbient = 0.0f);
     void ApplyView();
     void BlendingOff();
     void BlendingOn();
@@ -66,5 +68,6 @@ private:
     void IgnoreDirectionalLights(OpenGLShader &shader, bool yn);
     std::unique_ptr<OpenGLShader> LoadShader(const std::string &vertFile, const std::string &fragFile);
     void AdjustFramebuffer(short index, GLsizei width, GLsizei height);
+    void SetPositions(OpenGLShader &shader);
     void SetTransforms(const CBSPPart &part);
 };

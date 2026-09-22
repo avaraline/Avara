@@ -1,8 +1,11 @@
-<SkyColor color="#d7f0fd" color.1="#ffffff" />
+<SkyColor color="#d7f0fd" color.1="#ffffff" thickness="750" verticalRangeMax="2000" />
 <GroundColor color="#ffffff" />
 <set
   designer="$mSilverfox"
   information="impartial nightfall&#10;yawns electronic rumble&#10;another sad song"
+  light.0.s="true"
+  baseMaterial.specular="#202020"
+  baseMaterial.shininess="8.0"
   wallHeight="0"
 />
 
@@ -106,10 +109,6 @@
 <And in="@start" out="mShow" />
 <Timer in="mTaken" out="mShow" wait="275" />
 <Goody y="4" shape="bspGrenade" speed="2" grenades="mLgGrenade" start="mShow" out="mTaken" color="#d7f0fd" color.1="#000000" cx="-47.5" cz="0" angle="315" />
-<unique vars="mShow mTaken" />
-<And in="@start" out="mShow" />
-<Timer in="mTaken" out="mShow" wait="600" />
-<Goody y="2" shape="bspAvaraA" speed="2" grenades="mLgGrenade" missiles="mXLgMissile" start="mShow" out="mTaken" color="#d7f0fd" color.1="#000000" cx="0" cz="0" angle="315" />
 
 <Incarnator y="10" cx="0" cz="40" angle="0" />
 <Incarnator y="10" cx="0" cz="-40" angle="180" />
@@ -123,3 +122,12 @@
 <Incarnator y="11" cx="27.5" cz="-40" angle="225" />
 <Incarnator y="11" cx="27.5" cz="40" angle="315" />
 <Incarnator y="11" cx="-27.5" cz="-40" angle="135" />
+
+<set
+  material.specular="#777777"
+  material.shininess="32.0"
+/>
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="600" />
+<Goody y="2" shape="bspAvaraA" speed="2" grenades="mLgGrenade" missiles="mXLgMissile" start="mShow" out="mTaken" color="#d7f0fd" color.1="#000000" cx="0" cz="0" angle="315" />

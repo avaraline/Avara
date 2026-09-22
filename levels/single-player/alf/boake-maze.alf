@@ -90,7 +90,7 @@
   <Goody shape="bspGrenade" y="1.75" speed="2" grenades="1" start="mShow" out="mTaken" color="#e62100" color.1="#000000" cx="121.45833333333334" cz="97.70833333333334" angle="225" />
   <Hologram shape="bspGroundStar" color="#e62100" color.1="#000000" cx="121.45833333333334" cz="97.70833333333334" angle="225" />
   <set designer="Jason &quot;&quot;DuKK&quot;&quot; Fowler &lt;joebob@a.crl.com&gt;" information="A rescue mission gone bad has left you trapped in an abandoned structure.  The transporter that can take you home is right in front of you, but how will you get past the barriers?" hull.0="mediumHull" hull.2="mediumHull" />
-  <Text in="@start" showEveryone="true" text="Light and heavy hulls are not available for this mission." cx="121.45833333333334" cz="97.70833333333334" r="2.5" />
+  <Text in="@start" showEveryone="true" text="Light and heavy hulls are not available for this mission." cx="85.20833333333334" cz="55.208333333333336" r="2.5" />
   <set wallYon=".5" />
   <Wall color="#ab30d6" color.1="#000000" x="55.20833333333334" z="36.458333333333336" w="45" d="27.5" h="15" />
   <Wall color="#ab30d6" color.1="#000000" x="103.95833333333334" z="21.458333333333336" w="52.5" d="2.5" h="15" />

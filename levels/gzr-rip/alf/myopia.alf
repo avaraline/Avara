@@ -104,11 +104,11 @@
   <Incarnator y="startY" status="false" start="one" stop="@beginRand" cx="102.43055555555557" cz="45.763888888888886" angle="225" />
   <Incarnator y="startY" status="false" start="five" stop="@beginRand" cx="45.69444444444444" cz="102.15277777777779" angle="45" />
   <Timer wait="1" in="@gTaken" out="@fieldOff" />
-  <Text in="@greenCenter" showEveryone="true" text="Green Hector in Center!" cx="5.416666666666667" cz="22.430555555555557" r="3.75" />
-  <Text in="@yellowCenter" showEveryone="true" text="Yellow Hector in Center!" cx="5.416666666666667" cz="22.430555555555557" r="3.75" />
-  <Text in="@redCenter" showEveryone="true" text="Red Hector in Center!" cx="5.416666666666667" cz="22.430555555555557" r="3.75" />
-  <Text in="@pinkCenter" showEveryone="true" text="Pink Hector in Center!" cx="5.416666666666667" cz="22.430555555555557" r="3.75" />
-  <Text in="@purpleCenter" showEveryone="true" text="Purple Hector in Center!" cx="5.416666666666667" cz="22.430555555555557" r="3.75" />
-  <Text in="@blueCenter" showEveryone="true" text="Blue Hector in Center!" cx="5.416666666666667" cz="22.430555555555557" r="3.75" />
-  <Text in="@gTaken" sound="1504" volume=".3" showEveryone="true" text="" cx="5.416666666666667" cz="22.430555555555557" r="3.75" />
+  <Text in="@greenCenter" showEveryone="true" text="Green Hector in Center!" cx="74.16666666666667" cz="74.0625" r="3.75" />
+  <Text in="@yellowCenter" showEveryone="true" text="Yellow Hector in Center!" cx="74.16666666666667" cz="74.0625" r="3.75" />
+  <Text in="@redCenter" showEveryone="true" text="Red Hector in Center!" cx="74.16666666666667" cz="74.0625" r="3.75" />
+  <Text in="@pinkCenter" showEveryone="true" text="Pink Hector in Center!" cx="74.16666666666667" cz="74.0625" r="3.75" />
+  <Text in="@purpleCenter" showEveryone="true" text="Purple Hector in Center!" cx="74.16666666666667" cz="74.0625" r="3.75" />
+  <Text in="@blueCenter" showEveryone="true" text="Blue Hector in Center!" cx="74.16666666666667" cz="74.0625" r="3.75" />
+  <Text in="@gTaken" sound="1504" volume=".3" showEveryone="true" text="" cx="74.16666666666667" cz="74.0625" r="3.75" />
 </map>

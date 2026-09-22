@@ -30,26 +30,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -91,6 +91,10 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>powershell.exe -ExecutionPolicy Bypass -nologo -NoProfile -NonInteractive -File $(SolutionDir)..\bin\git_version.ps1</Command>
+      <Message>Specify Git commit for ersatz version tracking.</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -107,6 +111,10 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>powershell.exe -ExecutionPolicy Bypass -nologo -NoProfile -NonInteractive -File $(SolutionDir)..\bin\git_version.ps1</Command>
+      <Message>Specify Git commit for ersatz version tracking.</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -125,8 +133,8 @@
       <AdditionalDependencies>shell32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>
-      </Command>
+      <Command>powershell.exe -ExecutionPolicy Bypass -nologo -NoProfile -NonInteractive -File $(SolutionDir)..\bin\git_version.ps1</Command>
+      <Message>Specify Git commit for ersatz version tracking.</Message>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy /E /Y "$(SolutionDir)..\rsrc\" "$(TargetDir)rsrc\" &amp;&amp; xcopy /E /Y "$(SolutionDir)..\levels\" "$(TargetDir)levels\"</Command>
@@ -152,6 +160,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>powershell.exe -ExecutionPolicy Bypass -nologo -NoProfile -NonInteractive -File $(SolutionDir)..\bin\git_version.ps1</Command>
+      <Message>Specify Git commit for ersatz version tracking.</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\platform\windows\resource.h" />
@@ -159,6 +171,7 @@
     <ClInclude Include="..\src\assets\AssetRepository.h" />
     <ClInclude Include="..\src\assets\AssetStorage.h" />
     <ClInclude Include="..\src\assets\BaseAssetStorage.h" />
+    <ClInclude Include="..\src\assets\BasePath.h" />
     <ClInclude Include="..\src\assets\LocalAssetRepository.h" />
     <ClInclude Include="..\src\assets\PackageManifest.h" />
     <ClInclude Include="..\src\audio\CBasicSound.h" />
@@ -167,7 +180,6 @@
     <ClInclude Include="..\src\audio\CSoundMixer.h" />
     <ClInclude Include="..\src\audio\OggFile.h" />
     <ClInclude Include="..\src\audio\SoundSystemDefines.h" />
-    <ClInclude Include="..\src\base\CBaseObject.h" />
     <ClInclude Include="..\src\base\CDirectObject.h" />
     <ClInclude Include="..\src\base\CTagBase.h" />
     <ClInclude Include="..\src\bsp\CBSPPart.h" />
@@ -178,7 +190,6 @@
     <ClInclude Include="..\src\bsp\CSmartPart.h" />
     <ClInclude Include="..\src\bsp\CViewParameters.h" />
     <ClInclude Include="..\src\compat\Memory.h" />
-    <ClInclude Include="..\src\compat\Resource.h" />
     <ClInclude Include="..\src\compat\System.h" />
     <ClInclude Include="..\src\compat\Types.h" />
     <ClInclude Include="..\src\game\AvaraDefines.h" />
@@ -231,6 +242,8 @@
     <ClInclude Include="..\src\game\CRandomIncarnator.h" />
     <ClInclude Include="..\src\game\CRealMovers.h" />
     <ClInclude Include="..\src\game\CRealShooters.h" />
+    <ClInclude Include="..\src\game\CRUD.h" />
+    <ClInclude Include="..\src\game\CRUDsqlite.h" />
     <ClInclude Include="..\src\game\CScoreKeeper.h" />
     <ClInclude Include="..\src\game\CScout.h" />
     <ClInclude Include="..\src\game\CShuriken.h" />
@@ -258,19 +271,24 @@
     <ClInclude Include="..\src\game\GoodyRecord.h" />
     <ClInclude Include="..\src\game\InfoMessages.h" />
     <ClInclude Include="..\src\game\KeyFuncs.h" />
+    <ClInclude Include="..\src\game\LevelInfo.h" />
     <ClInclude Include="..\src\game\Messages.h" />
     <ClInclude Include="..\src\game\PlayerConfig.h" />
     <ClInclude Include="..\src\game\PlayerRatingsSimpleElo.h" />
     <ClInclude Include="..\src\gui\CApplication.h" />
+    <ClInclude Include="..\src\gui\CKeyboardMappingWindow.h" />
     <ClInclude Include="..\src\gui\CLevelWindow.h" />
+    <ClInclude Include="..\src\gui\CMainMenu.h" />
     <ClInclude Include="..\src\gui\CNetworkWindow.h" />
     <ClInclude Include="..\src\gui\ColorManager.h" />
     <ClInclude Include="..\src\gui\CommandList.h" />
     <ClInclude Include="..\src\gui\CPlayerWindow.h" />
     <ClInclude Include="..\src\gui\CRosterWindow.h" />
     <ClInclude Include="..\src\gui\CServerWindow.h" />
+    <ClInclude Include="..\src\gui\CSettingsWindow.h" />
     <ClInclude Include="..\src\gui\CTrackerWindow.h" />
     <ClInclude Include="..\src\gui\CWindow.h" />
+    <ClInclude Include="..\src\gui\NVGUtil.h" />
     <ClInclude Include="..\src\gui\Preferences.h" />
     <ClInclude Include="..\src\gui\Tags.h" />
     <ClInclude Include="..\src\level\InternalVars.h" />
@@ -303,15 +321,15 @@
     <ClInclude Include="..\src\util\FastMat.h" />
     <ClInclude Include="..\src\util\huffman\CAbstractHuffPipe.h" />
     <ClInclude Include="..\src\util\huffman\CAbstractPipe.h" />
-    <ClInclude Include="..\src\util\huffman\CHandlePipe.h" />
     <ClInclude Include="..\src\util\huffman\CHuffProcessor.h" />
     <ClInclude Include="..\src\util\JSONify.h" />
-    <ClInclude Include="..\src\util\PascalStrings.h" />
+    <ClInclude Include="..\src\util\Logging.h" />
     <ClInclude Include="..\src\util\RamFiles.h" />
     <ClInclude Include="..\src\util\RayHit.h" />
     <ClInclude Include="..\src\util\RolloverCounter.h" />
     <ClInclude Include="..\src\util\SlidingHistogram.h" />
     <ClInclude Include="..\vendor\AudioFile.h" />
+    <ClInclude Include="..\vendor\backward.hpp" />
     <ClInclude Include="..\vendor\cute_files.h" />
     <ClInclude Include="..\vendor\glm\glm.hpp" />
     <ClInclude Include="..\vendor\httplib.h" />
@@ -356,6 +374,7 @@
     <ClInclude Include="..\vendor\nanovg\stb_truetype.h" />
     <ClInclude Include="..\vendor\pugixml\pugiconfig.hpp" />
     <ClInclude Include="..\vendor\pugixml\pugixml.hpp" />
+    <ClInclude Include="..\vendor\signalhandling.h" />
     <ClInclude Include="..\vendor\stb_image_write.h" />
     <ClInclude Include="..\vendor\stb_vorbis.h" />
     <ClInclude Include="..\vendor\utf8.h" />
@@ -367,6 +386,7 @@
   <ItemGroup>
     <ClCompile Include="..\src\assets\AssetManager.cpp" />
     <ClCompile Include="..\src\assets\BaseAssetStorage.cpp" />
+    <ClCompile Include="..\src\assets\BasePath.cpp" />
     <ClCompile Include="..\src\assets\LocalAssetRepository.cpp" />
     <ClCompile Include="..\src\assets\PackageManifest.cpp" />
     <ClCompile Include="..\src\audio\CBasicSound.cpp" />
@@ -375,7 +395,6 @@
     <ClCompile Include="..\src\audio\CSoundMixer.cpp" />
     <ClCompile Include="..\src\audio\DopplerPlug.cpp" />
     <ClCompile Include="..\src\audio\OggFile.cpp" />
-    <ClCompile Include="..\src\base\CBaseObject.cpp" />
     <ClCompile Include="..\src\base\CDirectObject.cpp" />
     <ClCompile Include="..\src\base\CTagBase.cpp" />
     <ClCompile Include="..\src\bsp\CBSPPart.cpp" />
@@ -386,7 +405,6 @@
     <ClCompile Include="..\src\bsp\CSmartPart.cpp" />
     <ClCompile Include="..\src\bsp\CViewParameters.cpp" />
     <ClCompile Include="..\src\compat\Memory.cpp" />
-    <ClCompile Include="..\src\compat\Resource.cpp" />
     <ClCompile Include="..\src\compat\System.cpp" />
     <ClCompile Include="..\src\game\CAbstractActor.cpp" />
     <ClCompile Include="..\src\game\CAbstractMissile.cpp" />
@@ -434,6 +452,7 @@
     <ClCompile Include="..\src\game\CRandomIncarnator.cpp" />
     <ClCompile Include="..\src\game\CRealMovers.cpp" />
     <ClCompile Include="..\src\game\CRealShooters.cpp" />
+    <ClCompile Include="..\src\game\CRUDsqlite.cpp" />
     <ClCompile Include="..\src\game\CScoreKeeper.cpp" />
     <ClCompile Include="..\src\game\CScout.cpp" />
     <ClCompile Include="..\src\game\CShuriken.cpp" />
@@ -459,14 +478,18 @@
     <ClCompile Include="..\src\game\CYonSphere.cpp" />
     <ClCompile Include="..\src\game\CZombieActor.cpp" />
     <ClCompile Include="..\src\game\KeyFuncs.cpp" />
+    <ClCompile Include="..\src\game\LevelInfo.cpp" />
     <ClCompile Include="..\src\game\PlayerRatingsSimpleElo.cpp" />
     <ClCompile Include="..\src\gui\CApplication.cpp" />
+    <ClCompile Include="..\src\gui\CKeyboardMappingWindow.cpp" />
     <ClCompile Include="..\src\gui\CLevelWindow.cpp" />
+    <ClCompile Include="..\src\gui\CMainMenu.cpp" />
     <ClCompile Include="..\src\gui\CNetworkWindow.cpp" />
     <ClCompile Include="..\src\gui\ColorManager.cpp" />
     <ClCompile Include="..\src\gui\CPlayerWindow.cpp" />
     <ClCompile Include="..\src\gui\CRosterWindow.cpp" />
     <ClCompile Include="..\src\gui\CServerWindow.cpp" />
+    <ClCompile Include="..\src\gui\CSettingsWindow.cpp" />
     <ClCompile Include="..\src\gui\CTrackerWindow.cpp" />
     <ClCompile Include="..\src\gui\CWindow.cpp" />
     <ClCompile Include="..\src\gui\Tags.cpp" />
@@ -493,9 +516,8 @@
     <ClCompile Include="..\src\util\FastMat.cpp" />
     <ClCompile Include="..\src\util\huffman\CAbstractHuffPipe.cpp" />
     <ClCompile Include="..\src\util\huffman\CAbstractPipe.cpp" />
-    <ClCompile Include="..\src\util\huffman\CHandlePipe.cpp" />
     <ClCompile Include="..\src\util\huffman\CHuffProcessor.cpp" />
-    <ClCompile Include="..\src\util\PascalStrings.cpp" />
+    <ClCompile Include="..\src\util\Logging.cpp" />
     <ClCompile Include="..\src\util\RamFiles.cpp" />
     <ClCompile Include="..\vendor\csscolorparser.cpp" />
     <ClCompile Include="..\vendor\nanogui\button.cpp" />

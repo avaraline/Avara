@@ -4,7 +4,7 @@ The following people have contributed to this port:
 
 * Dan Watson <@dcwatson> - initial port with SDL, compatibility, networking, level set format
 * Jonathan Voss <@jonathan-voss> - sound system port, tests, fps improvements
-* grimm <@shrizza> - user interface, levels
+* grimm <@shrizza> - legacy HUD, levels, design, playtesting, benchmarking, minor fixes
 * Andy Halstead <@assertivist> - graphics and geometry fixes, level set format
 * Ryan Herriman <@rherriman> - numerous levels, level set format, color handling, colorblind mode, custom hull colors, Aftershock support, networking fixes, asset management
 * Rob Marlin <@ScarletSwordfish> - level sets, icon, designs, playtesting
@@ -13,3 +13,4 @@ The following people have contributed to this port:
 * Tom Anderson <@tra> - critical networking fixes and updates, fps improvements
 * Jack Carlson <@JackCarlson> - user interface, bug fixes, playtesting
 * Ben Darling <@Ymihere03> - user interface, HUD design, in-game kill feed, spectator camera, bug fixes, playtesting
+* Sphinx - lots of levels, playtesting

@@ -5,56 +5,62 @@
 #include "CAvaraGame.h"
 #include "CNetManager.h"
 #include "Preferences.h"
+#include "CRUD.h"
+
+static int MAX_RECENTS = 50;
 
 CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     // Searches "levels/" directory alongside application.
     // will eventually use level search API
+
     levelSets = AssetManager::GetAvailablePackages();
 
-    json sets = app->Get(kRecentSets);
-    json levels = app->Get(kRecentLevels);
-    if (sets.size() == levels.size()) {
-        for (unsigned i = 0; i < sets.size(); ++i) {
-            std::string set = sets.at(i);
-            auto exists = AssetManager::PackageInStorage(set);
-            if (exists) {
-                recentSets.push_back(set);
-                recentLevels.push_back(levels.at(i));
-            }
-        }
-    }
-
-    app->Set(kRecentSets, recentSets);
-    app->Set(kRecentLevels, recentLevels);
+    FetchRecents();
 
     setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 10, 10));
 
     // TODO: check load permission: theNet->PermissionQuery(kAllowLoadBit, 0)
 
+    new nanogui::Label(this, "Recently played levels");
     recentsBox = new nanogui::DescComboBox(this, recentLevels, recentSets);
     recentsBox->setCaption("Recents");
+    recentsBox->setTextPosition(nanogui::Button::TextPosition::Left);
     recentsBox->setCallback([this](int selectedIdx) {
         this->SelectLevel(recentSets[selectedIdx], recentLevels[selectedIdx]);
         recentsBox->setCaption("Recents");
     });
-
+    new nanogui::Label(this, "Select level set");
     setBox = new nanogui::ComboBox(this, levelSets);
+    setBox->setTextPosition(nanogui::Button::TextPosition::Left);
     setBox->setCallback([this](int selectedIdx) {
         this->SelectSet(selectedIdx);
         levelBox->setSelectedIndex(0);
     });
-    setBox->popup()->setSize(nanogui::Vector2i(300, 600));
+    setBox->popup()->setSize(nanogui::Vector2i(300, 350));
 
+    new nanogui::Label(this, "Select level");
     levelBox = new nanogui::DescComboBox(this, levelNames, levelIntros);
+    levelBox->setTextPosition(nanogui::Button::TextPosition::Left);
     levelBox->popup()->setSize(nanogui::Vector2i(500, 350));
     levelBox->setEnabled(false);
 
     loadBtn = new nanogui::Button(this, "Load Level");
+    loadBtn->setTextPosition(nanogui::Button::TextPosition::Left);
+    loadBtn->setBackgroundColor(kGUIAccentNeutral);
     loadBtn->setCallback([this] { this->SendLoad(); });
 
-    startBtn = new nanogui::Button(this, "Start Game");
-    startBtn->setCallback([app] { ((CAvaraAppImpl *)app)->GetGame()->SendStartCommand(); });
-
+    startBtn = new nanogui::Button(this, "Start/Ready");
+    startBtn->setTextPosition(nanogui::Button::TextPosition::Left);
+    startBtn->setBackgroundColor(kGUIAccentPositive);
+    startBtn->setCallback([app] {
+        if (SDL_GetModState() & KMOD_ALT) {
+            // if ALT key pressed, start right away
+            ((CAvaraAppImpl *)app)->GetGame()->SendStartCommand();
+        } else {
+            // send the "ready" checkmark √
+            ((CAvaraAppImpl *)app)->GetNet()->SendRosterMessage(checkMark_utf8);
+        }
+    });
     SelectSet(0);
     levelBox->setSelectedIndex(0);
 }
@@ -65,34 +71,21 @@ bool CLevelWindow::DoCommand(int theCommand) {
     return false;
 }
 
-void CLevelWindow::AddRecent(std::string set, std::string levelName) {
-    if (json::accept("[\"" + set + "\", \"" + levelName + "\"]")) {
-        // remove level if it is already in recents
-        for (unsigned i = 0; i < recentSets.size(); i++) {
-            if (recentSets[i].compare(set) == 0 && recentLevels[i].compare(levelName) == 0) {
-                recentSets.erase(recentSets.begin() + i);
-                recentLevels.erase(recentLevels.begin() + i);
-                break;
-            }
-        }
-
-        recentSets.insert(recentSets.begin(), set);
-        recentLevels.insert(recentLevels.begin(), levelName);
-
-        if (recentSets.size() > 64) {
-            recentSets.pop_back();
-            recentLevels.pop_back();
-        }
-
-        recentsBox->setItems(recentLevels, recentSets);
-        recentsBox->setCaption("Recents");
-        recentsBox->setNeedsLayout();
-
-        mApplication->Set(kRecentSets, recentSets);
-        mApplication->Set(kRecentLevels, recentLevels);
-    } else {
-        SDL_Log("AddRecent ignoring bad set/level name.");
+void CLevelWindow::FetchRecents() {
+    recentSets.clear();
+    recentLevels.clear();
+    CRUD::RecentLevelsList recents = static_cast<CAvaraAppImpl *>(mApplication)->itsAPI->GetRecentLevels(MAX_RECENTS);
+    for (auto recent : recents) {
+        recentSets.push_back(recent.setTag);
+        recentLevels.push_back(recent.levelName);
     }
+}
+
+void CLevelWindow::UpdateRecents() {
+    FetchRecents();
+    recentsBox->setItems(recentLevels, recentSets);
+    recentsBox->setCaption("Recents");
+    recentsBox->setNeedsLayout();
 }
 
 void CLevelWindow::SelectLevel(std::string set, std::string levelName) {

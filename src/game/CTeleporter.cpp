@@ -91,7 +91,7 @@ CAbstractActor *CTeleporter::EndScript() {
 
     if (shapeRes) {
         partCount = 1;
-        LoadPartWithColors(0, shapeRes);
+        LoadPartWithMaterials(0, shapeRes);
         partList[0]->Reset();
         if (ReadLongVar(iIsAmbient) > 0)
             partList[0]->userFlags |= CBSPUserFlags::kIsAmbient;
@@ -233,4 +233,9 @@ Boolean CTeleporter::ReceivePlayer(CAbstractPlayer *thePlayer) {
     useCount++;
 
     return didMove;
+}
+
+bool CTeleporter::UseForExtent() {
+    // teleporters that are destinations ("group" or iGroup) tend to be best
+    return (transportGroup > 0 && location[1] >= 0);
 }

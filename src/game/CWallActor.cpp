@@ -20,7 +20,7 @@ CWallActor *lastWallActor = 0;
 #define kEastWall 4
 #define kWestWall 8
 
-void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWalls, Boolean isOrigWall) {
+void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, Fixed y_alt, short decimateWalls, Boolean isOrigWall) {
     Boolean tooBig;
     Fixed centerX, centerZ;
     Vector dim;
@@ -33,8 +33,12 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
     if (isOrigWall)
         FreshCalc();
 
-    addAlt = ReadFixedVar(iBaseHeight) + ReadFixedVar(iWallAltitude);
-    partYon = ReadFixedVar(iWallYon);
+    addAlt = ReadFixedVar(iBaseHeight) + ReadFixedVar(iWallAltitude) + y_alt;
+    Fixed defaultYon = ReadFixedVar(iDefaultYon);
+    Fixed activeYon = ReadFixedVar(iWallYon);
+    partYon = (activeYon != defaultYon)
+        ? activeYon
+        : 0;
 
     do {
         dim[0] = theRect->right - theRect->left;
@@ -62,7 +66,7 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
             }
 
             otherWall = new CWallActor;
-            otherWall->MakeWallFromRect(&smallRect, height, newDecim, false);
+            otherWall->MakeWallFromRect(&smallRect, height, y_alt, newDecim, false);
         }
     } while (tooBig);
 
@@ -81,7 +85,7 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
     resId = ReadLongVar(dim[1] == 0 ? iFloorTemplateResource : iWallTemplateResource);
 
     partCount = 1;
-    box = new CSmartBox(resId, dim, GetPixelColor(), GetOtherPixelColor(), this, 0);
+    box = new CSmartBox(resId, dim, GetPixelMaterial(), GetOtherPixelMaterial(), this, 0);
     box->Reset();
     TranslatePart(box, centerX, addAlt + dim[1], centerZ);
     box->MoveDone();

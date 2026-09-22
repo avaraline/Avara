@@ -116,7 +116,7 @@
   <Hologram shape="bspGroundStar" color="#fffb00" color.1="#000000" cx="77.22222222222223" cz="6.805555555555555" angle="315" />
   <Sound sound="snBubbles" loopCount="-1" rate=".5" volume="100" cx="77.22222222222223" cz="6.805555555555555" angle="315" />
   <set designer="Jason &quot;&quot;DuKK&quot;&quot; Fowler &lt;joebob@a.crl.com&gt;" information="A Hector unit is in captivity, scheduled to be disassembled within the hour.  Navigate this Hector to safety." hull.2="mediumHull" />
-  <Text in="@start" showEveryone="true" text="The heavy hull is not available for this mission." cx="77.22222222222223" cz="6.805555555555555" r="1.875" />
+  <Text in="@start" showEveryone="true" text="The heavy hull is not available for this mission." cx="47.22222222222222" cz="52.5" r="1.875" />
   <Incarnator stop="@start" cx="77.84722222222223" cz="46.875" angle="225" />
   <Incarnator stop="@start" cx="77.84722222222223" cz="58.125" angle="315" />
   <Incarnator stop="@start" cx="66.59722222222223" cz="58.125" angle="45" />

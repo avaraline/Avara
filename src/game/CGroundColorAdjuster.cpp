@@ -16,7 +16,7 @@ CAbstractActor *CGroundColorAdjuster::EndScript() {
     CAbstractActor::EndScript();
 
     auto theShader = gRenderer->skyParams;
-    theShader->groundColor = GetPixelColor();
+    theShader->groundMaterial = GetPixelMaterial();
 
     delete this;
     return NULL;
