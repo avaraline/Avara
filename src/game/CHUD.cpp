@@ -496,7 +496,7 @@ void CHUD::Render(NVGcontext *ctx) {
         }
     }
 
-    DrawKillFeed(ctx, net, bufferWidth, fontsz_l);
+    DrawKillFeed(ctx, net, bufferWidth, fontsz_m);
 
     if (!player)
         return;
@@ -706,7 +706,7 @@ void CHUD::DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, floa
         int eventCount = 0;
         for (auto iter = itsGame->scoreEventList.begin(); iter != itsGame->scoreEventList.end(); iter++) {
             ScoreInterfaceEvent event = *iter;
-            float imgWidth = 36.0;
+            float imgWidth = 21.0;
             float eventPositionY;
 
             switch(event.scoreType) {
@@ -714,14 +714,15 @@ void CHUD::DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, floa
                     // Event player names
                     std::string killerName = " " + event.player;
                     std::string killedName = " " + event.playerTarget;
-                    float teamColorRGB[3], teamTargetColorRGB[3], iconLeftMargin = 23.0f;
+                    float teamColorRGB[3], teamTargetColorRGB[3], iconLeftMargin = 19.0f, colorLeftMargin = 0.0f;
 
                     // Get how wide the event rect needs to be
                     std::string eventText = killerName + "     " + killedName;
                     if (event.weaponUsed == ksiObjectCollision) {
-                        eventText = "    " + killedName;
+                        eventText = "   " + killedName;
                         killerName = "";
-                        iconLeftMargin = 11.0f;
+                        iconLeftMargin = 8.0f;
+                        colorLeftMargin = -5.0f;
                     }
                     nvgBeginPath(ctx);
                     nvgTextAlign(ctx, NVG_ALIGN_RIGHT);
@@ -781,19 +782,19 @@ void CHUD::DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, floa
                     longTeamColor.ExportGLFloats(teamColorRGB, 3);
                     ARGBColor longTeamTargetColor = *ColorManager::getTeamColor(event.teamTarget);
                     longTeamTargetColor.ExportGLFloats(teamTargetColorRGB, 3);
-                    float teamTargetColorPosition = killEventPosition[0] - killEventSize[0] + killEventIconXPosition + imgWidth + 15.0f;
+                    float teamTargetColorPosition = killEventPosition[0] - killEventSize[0] + killEventIconXPosition + imgWidth + colorLeftMargin + 11.0f;
 
                     // Team color of killer
                     if (event.weaponUsed != ksiObjectCollision) {
                         nvgBeginPath(ctx);
-                        nvgRect(ctx, killEventPosition[0] - killEventSize[0] + 10.0f, eventPositionY + 10.0f, 9.0, killEventSize[1] - 20.0f);
+                        nvgRect(ctx, killEventPosition[0] - killEventSize[0] + 7.0f, eventPositionY + 7.0f, 9.0, killEventSize[1] - 14.0f);
                         nvgFillColor(ctx, nvgRGBAf(teamColorRGB[0], teamColorRGB[1], teamColorRGB[2], 1.0));
                         nvgFill(ctx);
                     }
                     
                     // Team color of killed
                     nvgBeginPath(ctx);
-                    nvgRect(ctx, teamTargetColorPosition, eventPositionY + 10.0f, 9.0, killEventSize[1] - 20.0f);
+                    nvgRect(ctx, teamTargetColorPosition, eventPositionY + 7.0f, 9.0, killEventSize[1] - 14.0f);
                     nvgFillColor(ctx, nvgRGBAf(teamTargetColorRGB[0], teamTargetColorRGB[1], teamTargetColorRGB[2], 1.0));
                     nvgFill(ctx);
 
@@ -806,7 +807,7 @@ void CHUD::DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, floa
                     nvgTextAlign(ctx, NVG_ALIGN_LEFT);
                     nvgFontSize(ctx, fontSize);
                     nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
-                    nvgText(ctx, killEventPosition[0] - killEventSize[0] + 10.0f, eventPositionY + 25.0f, eventText.c_str(), NULL);
+                    nvgText(ctx, killEventPosition[0] - killEventSize[0] + 13.0f, eventPositionY + 19.0f, eventText.c_str(), NULL);
 
                     eventCount++;
                     break;
@@ -951,7 +952,7 @@ void CHUD::RenderNewHUD(NVGcontext *ctx) {
         nvgFill(ctx);
     }
 
-    DrawKillFeed(ctx, net, bufferWidth, fontsz_l);
+    DrawKillFeed(ctx, net, bufferWidth, fontsz_m);
 
     // Read the message list starting at the end and reading backwards.
     // As newer messages are added, older messages travel up in the display
