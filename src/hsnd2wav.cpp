@@ -256,7 +256,9 @@ SampleHeaderHandle LoadSampleLegacy(short resId) {
             ReleaseResource(compressedData);
         }
     }
-
+    if (!aSample) {
+        SDL_Log("no samples to output")
+    }
     return aSample;
 }
 

@@ -118,6 +118,8 @@ def read_data_with_template(data, structure):
     return data, result
 
 def get_value(the_data, dtype):
+    if not the_data:
+        return None, 0
     # this data was compiled from ResEdit Reference For ResEdit 2.1
     # published by Apple Computer Developer Press 1995
     # page 79-80 (93-94 of PDF)
