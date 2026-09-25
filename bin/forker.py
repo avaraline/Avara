@@ -14,6 +14,9 @@ def CharConst(n):
 def get_forks(data):
     # resource header
     data_offset, map_offset, data_len, map_len = struct.unpack('!4L', data[:16])
+    #print(f"data_offset: {data_offset}, map_offset: {map_offset}, data_len: {data_len}, map_len: {map_len}")
+    if data_len == 0:
+        return {}
     # resource map
     fork_attrs, type_list_offset, name_list_offset, num_types = struct.unpack('!4H', data[map_offset+22:map_offset+30])
     offset = map_offset + type_list_offset + 2 # already read num_types above

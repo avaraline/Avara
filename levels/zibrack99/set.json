@@ -1,0 +1,92 @@
+{
+  "LEDI": [
+    {
+      "Alf": "outland-run.alf",
+      "Name": "OutLand Run",
+      "Message": "As you leave for OutLand Base your Auto Pilot kicks in and gives you your ETA stats.  You will have only 90 seconds reach the base once you reach the path."
+    },
+    {
+      "Alf": "outland-briefing.alf",
+      "Name": "OutLand Briefing",
+      "Message": "As you enter Zibrack Base you get a strange feeling something is going on. . ."
+    },
+    {
+      "Alf": "operation-zibrack.alf",
+      "Name": "Operation Zibrack",
+      "Message": "The calm of the dimly lit transport is broken as the jump doors slide open. You just keep telling yourself: \"Entry - Shield - Out - Glory!\""
+    },
+    {
+      "Alf": "zibrack-base.alf",
+      "Name": "Zibrack Base",
+      "Message": "Your comm-watch goes nuts just as your pre-programmed dream is getting good.  As your mind struggles into reality, you catch the last few words, \". . . your @&& to base IMMEDIATELY!\""
+    }
+  ],
+  "HULL": {
+    "151": {
+      "Hull Res ID": 215,
+      "Max Missiles": 6,
+      "Max Grenades": 6,
+      "Max boosters": 4,
+      "Mass": 68.66456092164492,
+      "Max Energy": 10.681162737468528,
+      "Energy Charge": 2.2888227664606697,
+      "Max Shields": 3.051758602273594,
+      "Shield Charge": 3.051758602273594,
+      "Min Shot": 0.5340657663843748,
+      "Max Shot": 0.45777065690089264,
+      "Shot Charge": 1.5258869306477454,
+      "Riding Height": 0.25177386129549095,
+      "Acceleration": 0.33569848172732125,
+      "Jump Power": 0.762951094834821
+    },
+    "154": {
+      "Hull Res ID": 216,
+      "Max Missiles": 2,
+      "Max Grenades": 4,
+      "Max boosters": 0,
+      "Mass": 119.01855497062638,
+      "Max Energy": 10.681162737468528,
+      "Energy Charge": 2.2888227664606697,
+      "Max Shields": 3.051758602273594,
+      "Shield Charge": 3.051758602273594,
+      "Min Shot": 0.5340657663843748,
+      "Max Shot": 0.45777065690089264,
+      "Shot Charge": 1.5258869306477454,
+      "Riding Height": 4.9209735255970095,
+      "Acceleration": 1.5258869306477454,
+      "Jump Power": 0.9918364232852674
+    }
+  },
+  "HSND": {
+    "1111": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 0.504646372167544,
+      "Sound": 0,
+      "Ogg": "1111.ogg",
+      "Wav": "1111.wav"
+    },
+    "1112": {
+      "Version": 2,
+      "Loop Start": 19518,
+      "Loop End": 19519,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 0.504646372167544,
+      "Sound": 0,
+      "Ogg": "1112.ogg",
+      "Wav": "1112.wav"
+    }
+  },
+  "BSPT": {
+    "1000": "levels/zibrack99/bsps/1000.json",
+    "1001": "levels/zibrack99/bsps/1001.json",
+    "215": "levels/zibrack99/bsps/215.json",
+    "1002": "levels/zibrack99/bsps/1002.json",
+    "1003": "levels/zibrack99/bsps/1003.json",
+    "216": "levels/zibrack99/bsps/216.json"
+  }
+}

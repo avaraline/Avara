@@ -495,8 +495,8 @@ class NOOP(Operation):
 class SkipRegion(Operation):
     def parse(self, data, context):
         total = data.short()
-        region = data.rect()
-        data.read(total - 10)
+        debug(f"skipping {total} - 2 = {total - 2}")
+        data.skip(total - 2)
 
 
 # This function reads embedded image pixmaps
@@ -508,7 +508,9 @@ def pixmap(data, clipped=False):
         skip = data.read(4)
     row_bytes = data.short()
     is_pixmap = row_bytes & PIXMAP_BIT != 0
-    row_bytes = row_bytes & 0x7FFF
+    row_bytes = row_bytes & 0x3FFF
+
+    debug(f"pict says {"pixmap" if is_pixmap else "bitmap"} and {row_bytes} bytes per row")
     bounds = data.rect()
     if is_pixmap:
         version = data.short()
@@ -523,7 +525,12 @@ def pixmap(data, clipped=False):
         plane_bytes = data.long()
         pmtable = data.long()
         reserved = data.long()
-    return (is_pixmap, bounds, row_bytes)
+        debug(f"version: {version}\npack_type:{pack_type}\npack_size:{pack_size}\nhres:{hres}\nvres:{vres}")
+        debug(f"pixel_type: {pixel_type}\npixel_size: {pixel_size}\ncmp_count: {cmp_count}\ncmp_size: {cmp_size}")
+        debug(f"plane_bytes: {plane_bytes}\npmtable: {pmtable}\nreserved:{reserved}")
+        return (is_pixmap, bounds, row_bytes, pack_type, pack_size)
+    else:
+        return (is_pixmap, bounds, row_bytes, False, False)
 
 
 # Color table for embedded 32 bit color images
@@ -531,9 +538,11 @@ def color_table(data):
     ct_seed = data.long()
     trans_index = data.short()
     ct_size = data.short()
+    debug(f"ct_seed: {ct_seed}\nflags: {trans_index}")
+    debug(f"ct_size: {ct_size}")
     ct = []
     while ct_size >= 0:
-        ct.append(data.short())
+        ct.append(data.read(8))
         ct_size -= 1
 
 
@@ -541,13 +550,29 @@ def pixdata(data, pmap):
     bounds = pmap[1]
     row_bytes = pmap[2]
     lines_to_read = bounds.height
+    debug(f"bounds: {bounds}, row_bytes:{row_bytes}, lines_to_read:{lines_to_read}")
     if row_bytes < 8:
         data_size = row_bytes * lines_to_read
         pixdata = data.read(data_size)
     else:
+        lines = []
+        total_bytes = 0
+        debug(f"parser position before: {data.pos}")
+        before = data.pos
         for i in range(lines_to_read):
             sl_size = data.ushort() if row_bytes > 250 else data.uchar()
             scanline = data.read(sl_size)
+            debug(f"sl_size {sl_size}")
+            if DEBUG_PARSER: print(scanline)
+            total_bytes += ((2 if row_bytes > 250 else 1) + sl_size)
+            lines.append(scanline)
+        assert(len(lines) == lines_to_read)
+        debug(f"read {total_bytes} bytes total")
+        after = data.pos
+        data.align()
+        debug(f"parser position after: {data.pos}")
+        debug(f"== {after - before}")
+        assert((after - before) == total_bytes)
 
 
 class BitsRect(Operation):
@@ -636,12 +661,14 @@ class TextMode(Operation):
 class PenSize(Operation):
     def parse(self, data, context):
         size = data.point()
+        debug(f"PenSize point: {size.x}, {size.y}")
         context.stroke = max(size.x, size.y)
 
 
 class PenMode(Operation):
     def parse(self, data, context):
         mode = data.short()
+        debug(f"PenMode mode: {mode}")
 
 
 class PenPattern(Operation):
@@ -754,6 +781,7 @@ class DVText(Operation):
     def parse(self, data, context):
         dv, size = data.read(2)
         text = data.read(size).decode("macintosh")
+        debug(text)
         context.text(text, dv=dv)
 
 
@@ -923,6 +951,26 @@ class Header(Operation):
     length = 24
 
 
+class SkipTwoBytes(Operation):
+    length = 2
+
+
+class SkipFourBytes(Operation):
+    length = 4
+
+
+class SkipTwentyTwoBytes(Operation):
+    length = 22
+
+
+class SkipTwentyFourBytes(Operation):
+    length = 24
+
+
+class SkipTwoHundredFiftyFourBytes(Operation):
+    length = 254
+
+
 PICT_OPCODES = {
     0x0: NOOP,
     0x1: SkipRegion,
@@ -993,8 +1041,17 @@ PICT_OPCODES = {
     0xA1: LongComment,
     0x84: SkipRegion,
     0xFF: EndPict,
+    0x0100: SkipTwoBytes,
+    0x0200: SkipFourBytes,
     0x02FF: Version,
+    0x0BFF: SkipTwentyTwoBytes,
     0x0C00: Header,
+    0x0C01: SkipTwentyFourBytes,
+    0x7F00: SkipTwoHundredFiftyFourBytes,
+    0x7FFF: SkipTwoHundredFiftyFourBytes,
+    0x80FF: NOOP,
+    0x8100: VariableReserved,
+    0xFFFF: VariableReserved
 }
 
 PICT_COMMENTS = {
@@ -1056,7 +1113,7 @@ def parse_pict(data):
     debug("Size=%s Frame=%s", size, frame)
     context = DrawContext(frame)
     while buf:
-        opcode = buf.short()
+        opcode = buf.ushort()
         try:
             op = PICT_OPCODES[opcode]()
         except KeyError:

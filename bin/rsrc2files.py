@@ -61,11 +61,18 @@ def writealf(alfpath, alfd):
 
 
 ffmpeg_found = False
-for path in os.environ["PATH"].split(os.pathsep):
-    bin_file = os.path.join(path, "ffmpeg")
-    exe_file = bin_file + ".exe"
-    if is_exe(exe_file) or is_exe(bin_file):
-        ffmpeg_found = True
+ffmpeg_path = "ffmpeg"
+manual_ffmpeg = os.environ["AVARA_FFMPEG"]
+if (manual_ffmpeg):
+    ffmpeg_path = manual_ffmpeg
+    ffmpeg_found = True
+else:
+    for path in os.environ["PATH"].split(os.pathsep):
+        bin_file = os.path.join(path, "ffmpeg")
+        exe_file = bin_file + ".exe"
+        if is_exe(exe_file) or is_exe(bin_file):
+            ffmpeg_found = True
+            ffmpeg_path = exe_file if is_exe(exe_file) else bin_file
 
 if not ffmpeg_found and EXPORT_SOUNDS:
     print("Please install ffmpeg to change WAV into OGG")
@@ -101,10 +108,9 @@ def convert_to_files(datafile, thedir):
     forks = get_forks(data)
     forks["TMPL"] = get_default_tmpl()
 
-    # print(forks)
-    if "LEDI" not in forks:
-        print("No LEDI found")
-        exit(1)
+    if "LEDI" not in forks or "PICT" not in forks:
+        print(f"{datafile}: No LEDI and/or PICTs found (we definitely need both)")
+        return
 
     rledi = get_tmpl(forks, "LEDI")
     rledi = rledi[list(rledi.keys())[0]]
@@ -118,11 +124,12 @@ def convert_to_files(datafile, thedir):
     result["LEDI"] = []
     # for each level
     for le in rledi["*****"]:
-        alfname = slugify(le["Name"]) + ALFEXT
+        name = le["Name"]
+        alfname = slugify(str(name)) + ALFEXT
         if alfname == ".alf":
             continue
         alfpath = os.path.join(alfdir, alfname)
-        pictk = le["Path"].lower()
+        pictk = str(le["Path"]).lower()
         if len(pictk) > 0:
             if pictk not in picts:
                 print(f"Skipping {alfpath} - Couldn't find pict '{pictk}'")
@@ -176,7 +183,7 @@ def convert_to_files(datafile, thedir):
                 popen = subprocess.Popen(args, stdout=subprocess.PIPE)
                 popen.wait()
 
-            args = ["ffmpeg", "-y", "-i", wavpath, "-acodec", "libvorbis", oggpath]
+            args = [ffmpeg_path, "-y", "-i", wavpath, "-acodec", "libvorbis", oggpath]
             popen = subprocess.Popen(args, stdout=subprocess.PIPE)
             popen.wait()
 

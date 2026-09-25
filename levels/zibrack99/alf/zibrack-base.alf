@@ -1,0 +1,241 @@
+<map>
+  <set kDeadRange="90" kHeight1="0" />
+  <Door2 shape="bspGroundArrow" y="500" open="@bridgeUp" deltaY="-480" deltaZ="0" deltaX="0" pitch="90" yaw="0" roll="0" openSpeed="100" color="#093aff" color.1="#000000" cx="37.638888888888886" cz="103.19444444444446" angle="90" />
+  <set wallHeight="0" />
+  <Wall color="#fffbfe" color.1="#050000" x="112.67361111111111" z="156.59722222222223" w="5.069444444444443" d="31.944444444444457" h="0" />
+  <Guard shotPower="2" hitMsg="@friendlyFire" speed="20" shield="-1" hitScore="0" freq="12124" start="@start" watch="playerMask" shape="bspHullLight" y="7" color="#093aff" color.1="#00f300" cx="29.305555555555557" cz="97.43055555555557" angle="180" />
+  <Hologram shape="bspHECTORLegHigh" y="6.7" roll="-48" isAmbient="false" color="#093aff" color.1="#00f300" cx="29.861111111111114" cz="97.5" angle="270" />
+  <Hologram shape="bspHECTORLegHigh" y="6.7" roll="-48" isAmbient="false" color="#093aff" color.1="#00f300" cx="28.75" cz="97.5" angle="270" />
+  <Hologram shape="bspHECTORLegLow" y="6.05" roll="33" isAmbient="false" color="#f8fb00" color.1="#00f300" cx="28.75" cz="96.875" angle="270" />
+  <Hologram shape="bspHECTORLegLow" y="6.05" roll="33" isAmbient="false" color="#f8fb00" color.1="#00f300" cx="29.861111111111114" cz="96.875" angle="270" />
+  <Guard shotPower="2" hitMsg="@friendlyFire2" speed="20" shield="-1" hitScore="0" freq="24" start="@start" watch="playerMask" stop="@stopHectorField" shape="bspHullLight" y="7" color="#000000" color.1="#00f300" cx="25.694444444444443" cz="102.84722222222223" angle="90" />
+  <Hologram shape="bspHECTORLegHigh" y="6.7" roll="-48" isAmbient="false" color="#000000" color.1="#00f300" cx="25.833333333333336" cz="102.29166666666667" angle="180" />
+  <Hologram shape="bspHECTORLegHigh" y="6.7" roll="-48" isAmbient="false" color="#000000" color.1="#00f300" cx="25.833333333333336" cz="103.40277777777777" angle="180" />
+  <Hologram shape="bspHECTORLegLow" y="6.05" roll="33" isAmbient="false" color="#000000" color.1="#00f300" cx="25.208333333333336" cz="103.40277777777777" angle="180" />
+  <Hologram shape="bspHECTORLegLow" y="6.05" roll="33" isAmbient="false" color="#000000" color.1="#00f300" cx="25.208333333333336" cz="102.29166666666667" angle="180" />
+  <set wallHeight="5" />
+  <Wall color="#fffbfe" color.1="#000000" x="156.77083333333334" z="111.25" w="11.458333333333314" d="86.52777777777777" h="0" />
+  <set wallHeight="5" />
+  <Wall color="#fffbfe" color.1="#000000" x="171.73611111111111" z="114.58333333333334" w="18.47222222222223" d="106.52777777777777" h="0" />
+  <YonBox yon="50" y="0" deltaY="20" x="112.60416666666666" z="112.36111111111111" w="43.81944444444444" d="47.08333333333333" h="0" r="1.6666666666666714" angle="180" />
+  <YonBox yon="30" y="5" deltaY="55" x="26.84027777777778" z="102.88194444444444" w="22.29166666666667" d="28.125" h="0" r="1.6666666666666714" angle="180" />
+  <set wallHeight="1" />
+  <WallDoor stepOnMsg="@lastEle" hitMsg="@lastEle" open="@lastEle" close="@lastEleUp" deltaY="-4" didOpen="@enterLastRoom" color="#fffbfe" color.1="#000000" x="40.520833333333336" z="103.15972222222223" w="6.319444444444443" d="5.069444444444443" h="0" y="9" />
+  <set wallHeight="0" />
+  <Wall color="#fffbfe" color.1="#000000" x="112.67361111111111" z="114.61805555555556" w="44.65277777777777" d="52.013888888888886" h="0" />
+  <Wall color="#fcfb01" color.1="#020105" x="171.73611111111111" z="118.88888888888889" w="15" d="15.1388888888889" h="3.375" y="5" />
+  <Field shape="0" start="@stagingField" deltaY="0" enter="@shipComing" exit="@stopShipField" stop="@stopShipField" color="#fcfb01" color.1="#020105" x="26.84027777777778" z="102.88194444444444" w="22.29166666666667" d="28.125" h="0" cx="25.208333333333336" cz="102.29166666666667" angle="180" />
+  <set wallHeight="10" />
+  <Wall color="#fcfb01" color.1="#020105" x="196.73611111111114" z="7.152777777777779" w="10.833333333333343" d="12.63888888888889" h="0" y="10" />
+  <Field y="10" shape="0" start="@fFs" deltaY="0" enter="@winTeam" color="#fcfb01" color.1="#020105" x="26.84027777777778" z="102.88194444444444" w="22.29166666666667" d="28.125" h="0" cx="25.208333333333336" cz="102.29166666666667" angle="180" />
+  <set wallHeight="1" />
+  <Wall color="#fffbfe" color.1="#000000" x="112.67361111111111" z="114.61805555555556" w="31.45833333333333" d="38.81944444444443" h="0" y="19" />
+  <set defaultLives="1" designer="Rup-1" />
+  <SkyColor color="#ff2800" color.1="#00fdf8" />
+  <GroundColor color="#000000" />
+  <set missilePower="1.5" missileAcceleration="0.5" grenadePower="4.0" missileTurnRate="0.1" />
+  <Teleporter shape="0" status="false" win="10000" start="@winTeam" activeRange="2000" color="#ff7498" color.1="#000000" cx="62.43055555555556" cz="3.263888888888889" angle="180" />
+  <set lightHull="128" mediumHull="128" heavyHull="128" />
+  <TeamColor mask="T6" color="#093aff" color.1="#d1bcfd" cx="74.51388888888889" cz="2.2222222222222223" r="1.4583333333333357" angle="135" />
+  <set information="Its early morning by the time you land at Ice &#10;&#10;Base Zibrack.  Then, as unexpected as your wake up &#10;&#10;call, Srgt. Stack's voice enters your consose again.  &#10;&#10;&quot;&quot;You can probrably tell by all the activity we're about&#10;&#10;to take this moon back!  Listen closely. . .&quot;&quot;" wallHeight="1" />
+  <Wall color="#fffbfe" color.1="#000000" x="29.65277777777778" z="102.98611111111111" w="28.611111111111114" d="28.611111111111114" h="0" y="4" />
+  <Ramp thickness="0" y="0" deltaY="19" color="#093aff" color.1="#000000" x="103.15972222222223" z="137.32638888888889" w="12.430555555555557" d="6.5972222222222285" h="0" angle="180" />
+  <Ramp thickness="0" y="0" deltaY="19" color="#093aff" color.1="#000000" x="122.1875" z="137.32638888888889" w="12.430555555555543" d="6.5972222222222285" h="0" angle="180" />
+  <set wallHeight="23" />
+  <Wall color="#fffbfe" color.1="#000000" x="109.75694444444446" z="137.77777777777777" w="0.7638888888888999" d="7.5" h="0" />
+  <set wallHeight="23" />
+  <Wall color="#fffbfe" color.1="#000000" x="115.59027777777779" z="137.77777777777777" w="0.7638888888888857" d="7.5" h="0" />
+  <Ramp thickness="0" y="5" deltaY="20" color="#093aff" color.1="#000000" x="29.618055555555557" z="114.02777777777779" w="15.486111111111114" d="6.5277777777777715" h="0" angle="180" />
+  <set wallHeight="21" />
+  <Wall color="#fffbfe" color.1="#000000" x="93.64583333333334" z="137.32638888888889" w="6.597222222222214" d="6.5972222222222285" h="0" />
+  <set wallHeight="21" />
+  <Wall color="#fffbfe" color.1="#000000" x="131.70138888888889" z="137.32638888888889" w="6.5972222222222285" d="6.5972222222222285" h="0" />
+  <set wallHeight="55" />
+  <Wall color="#fffbfe" color.1="#000000" x="18.61111111111111" z="114.02777777777779" w="6.527777777777777" d="6.5277777777777715" h="0" y="5" />
+  <set wallHeight="55" />
+  <Wall color="#fffbfe" color.1="#000000" x="40.65972222222223" z="114.02777777777779" w="6.597222222222221" d="6.5277777777777715" h="0" y="5" />
+  <set wallHeight="55" />
+  <Wall color="#fffbfe" color.1="#000000" x="40.65972222222223" z="91.97916666666667" w="6.597222222222221" d="6.5972222222222285" h="0" y="5" />
+  <set wallHeight="55" />
+  <Wall color="#fffbfe" color.1="#000000" x="18.61111111111111" z="91.97916666666667" w="6.527777777777777" d="6.5972222222222285" h="0" y="5" />
+  <set wallHeight="4" />
+  <Wall color="#fffbfe" color.1="#000000" x="18.61111111111111" z="91.97916666666667" w="6.527777777777777" d="6.5972222222222285" h="0" />
+  <set wallHeight="4" />
+  <Wall color="#fffbfe" color.1="#000000" x="40.65972222222223" z="91.97916666666667" w="6.597222222222221" d="6.5972222222222285" h="0" />
+  <set wallHeight="4" />
+  <Wall color="#fffbfe" color.1="#000000" x="18.61111111111111" z="114.02777777777779" w="6.527777777777777" d="6.5277777777777715" h="0" />
+  <set wallHeight="4" />
+  <Wall color="#fffbfe" color.1="#000000" x="40.65972222222223" z="114.02777777777779" w="6.597222222222221" d="6.5277777777777715" h="0" />
+  <Ramp thickness="0" y="5" deltaY="20" color="#093aff" color.1="#000000" x="18.61111111111111" z="102.98611111111111" w="6.527777777777777" d="15.416666666666657" h="0" angle="270" />
+  <Ramp thickness="0" y="5" deltaY="20" color="#093aff" color.1="#000000" x="29.618055555555557" z="91.97916666666667" w="15.486111111111114" d="6.5972222222222285" h="0" angle="0" />
+  <set wallHeight="55" />
+  <Wall color="#fffbfe" color.1="#000000" x="40.65972222222223" z="106.04166666666667" w="6.597222222222221" d="0.6944444444444571" h="0" y="5" />
+  <set wallHeight="55" />
+  <Wall color="#fffbfe" color.1="#000000" x="40.65972222222223" z="100.24305555555556" w="6.597222222222221" d="0.7638888888888857" h="0" y="5" />
+  <Ramp thickness="0" y="5" deltaY="20" color="#093aff" color.1="#000000" x="40.65972222222223" z="108.57638888888889" w="6.597222222222221" d="4.2361111111111" h="0" angle="90" />
+  <Ramp thickness="0" y="5" deltaY="20" color="#093aff" color.1="#000000" x="40.65972222222223" z="97.56944444444446" w="6.597222222222221" d="4.583333333333329" h="0" angle="90" />
+  <set wallHeight="5" />
+  <Wall color="#fffbfe" color.1="#000000" x="43.81944444444444" z="103.15972222222223" w="0.27777777777777857" d="5.069444444444443" h="0" y="5" />
+  <set wallHeight="50" />
+  <Wall color="#fffbfe" color.1="#000000" x="37.5" z="103.15972222222223" w="0.27777777777777857" d="5.069444444444443" h="0" y="10" />
+  <set wallHeight="1" />
+  <Wall color="#fffbfe" color.1="#000000" x="70.45138888888889" z="103.15972222222223" w="52.98611111111111" d="6.5972222222222285" h="0" y="9" />
+  <Ramp thickness="0" y="0" deltaY="19" color="#093aff" color.1="#000000" x="93.64583333333334" z="120.625" w="6.597222222222214" d="26.805555555555543" h="0" angle="270" />
+  <Ramp thickness="0" y="0" deltaY="19" color="#093aff" color.1="#000000" x="131.70138888888889" z="110.83333333333334" w="6.5972222222222285" d="7.222222222222214" h="0" angle="90" />
+  <Ramp thickness="0" y="0" deltaY="19" color="#093aff" color.1="#000000" x="131.70138888888889" z="124.23611111111111" w="6.5972222222222285" d="19.58333333333333" h="0" angle="90" />
+  <set wallHeight="21" />
+  <Wall color="#fffbfe" color.1="#000000" x="93.64583333333334" z="91.90972222222223" w="6.597222222222214" d="6.5972222222222285" h="0" />
+  <Ramp thickness="0" y="0" deltaY="19" color="#093aff" color.1="#000000" x="122.1875" z="91.90972222222223" w="12.430555555555543" d="6.5972222222222285" h="0" angle="0" />
+  <Ramp thickness="0" y="0" deltaY="19" color="#093aff" color.1="#000000" x="106.45833333333334" z="91.90972222222223" w="19.027777777777786" d="6.5972222222222285" h="0" angle="0" />
+  <set wallHeight="1" />
+  <Wall color="#fffbfe" color.1="#000000" x="196.59722222222223" z="101.875" w="8.333333333333314" d="198.61111111111111" h="0" y="9" />
+  <set wallHeight="21" />
+  <Wall color="#fffbfe" color.1="#000000" x="131.70138888888889" z="97.91666666666667" w="6.5972222222222285" d="18.611111111111114" h="0" />
+  <set wallHeight="23" />
+  <Wall color="#fffbfe" color.1="#000000" x="93.64583333333334" z="106.84027777777779" w="6.597222222222214" d="0.7638888888888857" h="0" />
+  <set wallHeight="23" />
+  <Wall color="#fffbfe" color.1="#000000" x="93.64583333333334" z="99.47916666666667" w="6.597222222222214" d="0.7638888888888857" h="0" />
+  <set wallHeight="1" />
+  <Wall color="#fffbfe" color.1="#000000" x="112.67361111111111" z="99.75694444444446" w="31.45833333333333" d="14.930555555555557" h="0" y="9" />
+  <set wallHeight="0.5" />
+  <WallDoor stepOnMsg="@upTime" open="@upTime" close="@eleDown" yaw="0" y="0" deltaY="9.5" didOpen="@eleUp" deltaZ="0" pitch="0" color="#093aff" color.1="#050000" x="93.92361111111111" z="97.15277777777779" w="6.041666666666657" d="3.8888888888888857" h="0" />
+  <Timer in="@eleUp" out="@eleDown" wait="100" />
+  <set wallHeight="9" />
+  <Wall color="#fffbfe" color.1="#000000" x="96.84027777777777" z="103.15972222222223" w="0.2083333333333286" d="6.5972222222222285" h="0" y="0" />
+  <set wallHeight="21" />
+  <Wall color="#fffbfe" color.1="#000000" x="90.625" z="97.15277777777779" w="0.5555555555555571" d="3.8888888888888857" h="0" />
+  <set wallHeight="1" />
+  <Wall color="#fffbfe" color.1="#050000" x="93.92361111111111" z="97.15277777777779" w="6.041666666666657" d="3.8888888888888857" h="0" y="20" />
+  <Ramp thickness="0" y="25" deltaY="35" color="#093aff" color.1="#000000" x="29.618055555555557" z="114.02777777777779" w="15.486111111111114" d="6.5277777777777715" h="0" angle="180" />
+  <Ramp thickness="0" y="25" deltaY="35" color="#093aff" color.1="#000000" x="29.618055555555557" z="91.97916666666667" w="15.486111111111114" d="6.5972222222222285" h="0" angle="0" />
+  <Ramp thickness="0" y="25" deltaY="35" color="#093aff" color.1="#000000" x="40.65972222222223" z="97.56944444444446" w="6.597222222222221" d="4.583333333333329" h="0" angle="90" />
+  <Ramp thickness="0" y="25" deltaY="35" color="#093aff" color.1="#000000" x="18.61111111111111" z="102.98611111111111" w="6.527777777777777" d="15.416666666666657" h="0" angle="270" />
+  <Ramp thickness="0" y="25" deltaY="35" color="#093aff" color.1="#000000" x="40.65972222222223" z="108.57638888888889" w="6.597222222222221" d="4.2361111111111" h="0" angle="90" />
+  <set wallHeight="21" />
+  <WallDoor hitMsg="@mainUp" open="@mainUp" close="@mainIsUp" yaw="0" y="0" deltaY="10" didOpen="@mainIsUp" closeDelay="200" deltaZ="0" pitch="0" color="#fffbfe" color.1="#050000" x="112.67361111111111" z="134.375" w="5.069444444444443" d="0.6944444444444571" h="0" />
+  <Wall color="#fcfb01" color.1="#020105" x="100.06944444444446" z="97.77777777777777" w="5.694444444444443" d="5.694444444444443" h="3.375" y="10" />
+  <Field shape="0" deltaY="0" enter="@enterBriefingRoom" stop="@bFieldStop" exit="@bFieldStop" color="#fcfb01" color.1="#020105" x="40.65972222222223" z="108.57638888888889" w="6.597222222222221" d="4.2361111111111" h="0" cx="58.26388888888889" cz="114.79166666666667" angle="90" />
+  <Timer in="@enterBriefingRoom" out="@bridgeUp" wait="2300" />
+  <set wallHeight="10" />
+  <WallDoor open="@bridgeUp" deltaY="4" didOpen="@stopHectorField" color="#fffbfe" color.1="#050000" x="96.59722222222223" z="103.15972222222223" w="0.6944444444444429" d="6.5972222222222285" h="0" y="10" />
+  <Switch shape="bspWallSwitchOff" altShape="shape + 1" out.0="@lastEle" out.1="@lastEleUp" y="7" color="#093aff" color.1="#000000" cx="22.01388888888889" cz="112.70833333333334" angle="270" />
+  <Wall color="#fcfb01" color.1="#020105" x="46.63194444444444" z="103.15972222222223" w="4.236111111111107" d="5.9027777777777715" h="3.375" y="10" />
+  <Field shape="0" start="@enterHectorRoom" deltaY="0" enter="@enterBridge" stop="@sf2FieldStop" exit="@sf2FieldStop" color="#fcfb01" color.1="#020105" x="40.65972222222223" z="108.57638888888889" w="6.597222222222221" d="4.2361111111111" h="0" cx="22.01388888888889" cz="112.70833333333334" angle="270" />
+  <Door2 shape="bspStarFighter" status="isOpen" y="12" deltaY="50" deltaZ="-500" deltaX="150" close="@shipComing" didClose="@fFs" closeSpeed="0.4" volume="100" closeDelay="0" pitch="20" yaw="-10" roll="80" color="#093aff" color.1="#fbfb00" cx="196.59722222222223" cz="5.555555555555555" angle="0" />
+  <Teleporter mask="0" shape="bspGroundStar" speed="0" y="5" color="#093aff" color.1="#000000" cx="25.694444444444446" cz="102.91666666666667" angle="90" />
+  <Teleporter mask="0" shape="bspGroundStar" speed="0" y="5" color="#093aff" color.1="#000000" cx="34.44444444444444" cz="102.98611111111111" angle="90" />
+  <Teleporter start="@stagingField" shape="bspFloorFrame" mask="0" speed="0" y="5" color="#093aff" color.1="#000000" cx="171.73611111111111" cz="118.88888888888889" angle="0" />
+  <Wall color="#fcfb01" color.1="#020105" x="34.583333333333336" z="103.19444444444446" w="5.694444444444443" d="5.694444444444443" h="3.375" y="5" />
+  <Field shape="0" start="@stopHectorField" deltaY="0" enter="@enterHectorRoom" stop="@hFieldStop" exit="@hFieldStop" color="#fcfb01" color.1="#020105" x="40.65972222222223" z="108.57638888888889" w="6.597222222222221" d="4.2361111111111" h="0" cx="171.73611111111111" cz="118.88888888888889" angle="0" />
+  <Text in="@shipComing" text="Transport Ship Approaching
+from arrow direction
+Get on Board when it lands" showEveryone="true" align="centerAlign" cx="171.73611111111111" cz="118.88888888888889" r="1.6666666666666643" />
+  <Text in="@start" wait="48" text="Head for the main headquarters." showEveryone="true" align="centerAlign" cx="171.73611111111111" cz="118.88888888888889" r="1.6666666666666643" />
+  <Text in="@start" wait="96" text="Once inside, go up the elevator to the 
+briefing room." showEveryone="true" align="centerAlign" cx="171.73611111111111" cz="118.88888888888889" r="1.6666666666666643" />
+  <Text in="@enterBriefingRoom" text="Welcome." showEveryone="true" align="centerAlign" cx="171.73611111111111" cz="118.88888888888889" r="1.6666666666666643" />
+  <Text in="@enterBriefingRoom" wait="24" text="1/13
+We are now at war with the RHC -- 
+the Red HECTOR Clan." showEveryone="true" align="centerAlign" cx="171.73611111111111" cz="118.88888888888889" r="1.6666666666666643" />
+  <Text in="@enterBriefingRoom" wait="400" text="3/13
+You must destroy their guards and use 
+their passes to gain initial entry." showEveryone="true" align="centerAlign" cx="171.73611111111111" cz="118.88888888888889" r="1.6666666666666643" />
+  <Text in="@enterBriefingRoom" wait="600" text="4/13
+Once inside you must kill higher 
+ranking RHC to get more security 
+clearance." showEveryone="true" align="centerAlign" cx="171.73611111111111" cz="118.88888888888889" r="1.6666666666666643" />
+  <Text in="@enterBriefingRoom" wait="200" text="2/13
+Your mission is to shut down their 
+force field for a bombing run." showEveryone="true" align="centerAlign" cx="171.73611111111111" cz="118.88888888888889" r="1.6666666666666643" />
+  <Text in="@enterBriefingRoom" wait="800" text="5/13
+Once you have a Level 3 pass, 
+you need to find the shield generator building." showEveryone="true" align="centerAlign" cx="171.73611111111111" cz="118.88888888888889" r="1.6666666666666643" />
+  <Text in="@enterBriefingRoom" wait="1000" text="6/13
+Figure out how to disable it before you
+are killed." showEveryone="true" align="centerAlign" cx="171.73611111111111" cz="118.88888888888889" r="1.6666666666666643" />
+  <Text in="@enterBriefingRoom" wait="1200" text="7/13
+Once it is disabled the bombing
+raid will start shortly." showEveryone="true" align="centerAlign" cx="171.73611111111111" cz="118.88888888888889" r="1.6666666666666643" />
+  <Text in="@enterBriefingRoom" wait="1400" text="8/13
+Needless to say -- get back on 
+the transport as fast as you can." showEveryone="true" align="centerAlign" cx="171.73611111111111" cz="118.88888888888889" r="1.6666666666666643" />
+  <Text in="@enterBriefingRoom" wait="1600" text="9/13
+You will be rewarded quite 
+well if you return with a job
+well done." showEveryone="true" align="centerAlign" cx="171.73611111111111" cz="118.88888888888889" r="1.6666666666666643" />
+  <Text in="@enterBriefingRoom" wait="1800" text="10/13
+The hologram here displays a
+layout of the enemy fortress." showEveryone="true" align="centerAlign" cx="171.73611111111111" cz="118.88888888888889" r="1.6666666666666643" />
+  <Text in="@enterBriefingRoom" wait="2000" text="11/13
+The drop zone, entrance, and 
+approximate generator location
+points are highlighted in yellow." showEveryone="true" align="centerAlign" cx="171.73611111111111" cz="118.88888888888889" r="1.6666666666666643" />
+  <Text in="@enterBriefingRoom" wait="2200" text="12/13
+After reviewing the hologram, head 
+over the bridge to see General Su 
+for some technical information." showEveryone="true" align="centerAlign" cx="171.73611111111111" cz="118.88888888888889" r="1.6666666666666643" />
+  <Text in="@enterHectorRoom" wait="12" text="1/7
+This is the latest model HECTOR." showEveryone="true" align="centerAlign" cx="171.73611111111111" cz="118.88888888888889" r="1.6666666666666643" />
+  <Text in="@enterHectorRoom" wait="100" text="2/7
+You will notice an increase in
+all around fire-power, speed, and
+jumping-power." showEveryone="true" align="centerAlign" cx="171.73611111111111" cz="118.88888888888889" r="1.6666666666666643" />
+  <Text in="@enterHectorRoom" wait="300" text="3/7
+All of these improvements will be
+necessary for your upcoming 
+mission." showEveryone="true" align="centerAlign" cx="171.73611111111111" cz="118.88888888888889" r="1.6666666666666643" />
+  <Text in="@enterHectorRoom" wait="500" text="4/7
+A transport ship is in enroute to take
+you to the drop zone." showEveryone="true" align="centerAlign" cx="171.73611111111111" cz="118.88888888888889" r="1.6666666666666643" />
+  <Text in="@enterHectorRoom" wait="700" text="5/7
+Wait for the transport ship in the 
+staging area near the runway." showEveryone="true" align="centerAlign" cx="171.73611111111111" cz="118.88888888888889" r="1.6666666666666643" />
+  <Text in="@enterHectorRoom" wait="900" text="6/7
+Your new HECTOR will be loaded onto
+the ship as soon as it arrives." showEveryone="true" align="centerAlign" cx="171.73611111111111" cz="118.88888888888889" r="1.6666666666666643" />
+  <Timer in="@enterBriefingRoom" out="@startHoloMap" wait="1800" />
+  <Text in="@enterBriefingRoom" wait="2400" text="13/13
+Good Luck!" showEveryone="true" align="centerAlign" cx="171.73611111111111" cz="118.88888888888889" r="1.6666666666666643" />
+  <Text in="@enterHectorRoom" wait="1100" text="7/7
+Good Luck!" showEveryone="true" align="centerAlign" cx="171.73611111111111" cz="118.88888888888889" r="1.6666666666666643" />
+  <Ramp thickness="0" y="5" deltaY="5" color="#093aff" color.1="#000000" x="186.7013888888889" z="57.986111111111114" w="11.458333333333343" d="6.666666666666671" h="0" angle="270" />
+  <set wallHeight="9" />
+  <Wall color="#fffbfe" color.1="#000000" x="106.04166666666667" z="106.84027777777779" w="18.194444444444457" d="0.7638888888888857" h="0" />
+  <set wallHeight="0.1" />
+  <Wall color="#093aff" color.1="#000000" x="121.94444444444446" z="99.75694444444446" w="4.8611111111111" d="4.791666666666671" h="0" y="10" />
+  <set wallHeight="0" />
+  <Wall color="#093aff" color.1="#000000" x="112.67361111111111" z="106.84027777777779" w="31.45833333333333" d="0.7638888888888857" h="0" y="10" />
+  <Text in="@friendlyFire" text="Your puny weapons don't even scratch me!" showEveryone="true" align="centerAlign" stop="@stopFriendlyFire" cx="182.56944444444446" cz="57.77777777777778" r="2.7777777777777786" />
+  <Text in="@friendlyFire2" text="You must be kidding!!" showEveryone="true" align="centerAlign" stop="@stopFriendlyFire2" cx="182.56944444444446" cz="57.77777777777778" r="2.7777777777777786" />
+  <Door2 hitMsg="@goShip" shape="bspStarFighter" y="12" deltaY="50" deltaZ="500" deltaX="-150" open="@start" openSpeed="0.8" volume="100" openDelay="32" pitch="20" yaw="-10" roll="380" color="#093aff" color.1="#fbfb00" cx="197.0138888888889" cz="10.347222222222221" angle="180" />
+  <Door2 shape="1000" open="@start" midPitch="90" midRoll="90" roll="90" pitch="90" deltaY="0" y="5" scale="1" color="#093aff" color.1="#00f300" cx="104.02777777777777" cz="110.34722222222223" angle="180" />
+  <Door2 shape="1000" open="@start" midPitch="90" midRoll="90" roll="90" pitch="90" deltaY="0" y="5.5" scale="1" color="#093aff" color.1="#00f300" cx="102.63888888888889" cz="111.31944444444446" angle="180" />
+  <Door2 shape="1000" open="@start" midPitch="90" midRoll="90" roll="90" pitch="90" deltaY="0" y="50" scale="0.6" color="#093aff" color.1="#00f300" cx="39.72222222222223" cz="105.34722222222223" angle="90" />
+  <Teleporter start="@bridgeUp" shape="bspGroundArrow" mask="0" speed="0" y="10" color="#093aff" color.1="#000000" cx="92.08333333333334" cz="103.26388888888889" angle="270" />
+  <Door2 shape="1000" open="@mainUp" close="@mainIsUp" midPitch="90" midRoll="90" roll="90" pitch="90" deltaY="10" closeDelay="200" y="17" scale="0.6" color="#093aff" color.1="#00f300" cx="110.69444444444446" cz="137.29166666666669" angle="180" />
+  <set wallHeight="5" />
+  <Wall color="#fffbfe" color.1="#000000" x="91.04166666666667" z="57.986111111111114" w="179.86111111111111" d="6.666666666666671" h="0" />
+  <Ramp thickness="0" y="0" deltaY="5" color="#093aff" color.1="#000000" x="156.77083333333334" z="64.65277777777779" w="11.458333333333314" d="6.666666666666664" h="0" angle="270" />
+  <set wallHeight="5" />
+  <Wall color="#fffbfe" color.1="#000000" x="55.625" z="164.5138888888889" w="109.02777777777779" d="6.666666666666657" h="0" />
+  <Ramp thickness="0" y="5" deltaY="5" color="#093aff" color.1="#000000" x="186.7013888888889" z="164.5138888888889" w="11.458333333333343" d="6.666666666666657" h="0" angle="270" />
+  <Ramp thickness="0" y="0" deltaY="5" color="#093aff" color.1="#000000" x="156.77083333333334" z="157.84722222222223" w="11.458333333333314" d="6.666666666666686" h="0" angle="270" />
+  <Guard shotPower="2" hitMsg="@friendlyFire" speed="20" shield="-1" hitScore="0" freq="12124" start="@enterBriefingRoom" watch="playerMask" shape="bspHullLight" y="12" color="#093aff" color.1="#00f300" cx="111.38888888888889" cz="104.09722222222223" angle="0" />
+  <Hologram shape="bspHECTORLegHigh" y="11.7" roll="-48" isAmbient="false" color="#093aff" color.1="#00f300" cx="110.83333333333334" cz="103.95833333333334" angle="90" />
+  <Hologram shape="bspHECTORLegHigh" y="11.7" roll="-48" isAmbient="false" color="#093aff" color.1="#00f300" cx="111.94444444444446" cz="103.95833333333334" angle="90" />
+  <Hologram shape="bspHECTORLegLow" y="11.05" roll="33" isAmbient="false" color="#fffb00" color.1="#00f300" cx="111.94444444444446" cz="104.58333333333334" angle="90" />
+  <Hologram shape="bspHECTORLegLow" y="11.05" roll="33" isAmbient="false" color="#fffb00" color.1="#00f300" cx="110.83333333333334" cz="104.58333333333334" angle="90" />
+  <set wallHeight="5" />
+  <Wall color="#fffbfe" color.1="#000000" x="4.444444444444445" z="111.25" w="6.666666666666668" d="99.86111111111111" h="0" />
+  <set wallHeight="5" />
+  <Wall color="#fffbfe" color.1="#000000" x="138.85416666666669" z="164.5138888888889" w="47.29166666666666" d="6.666666666666657" h="0" />
+  <Door2 shape="1000" status="isOpen" midPitch="90" midRoll="90" roll="90" pitch="90" deltaY="0" y="2.7" scale="0.6" color="#093aff" color.1="#f9f600" cx="120.34722222222223" cz="170.34722222222223" angle="180" />
+  <Teleporter start="@shipComing" shape="bspGroundArrow" mask="0" speed="0" y="5" color="#093aff" color.1="#000000" cx="171.73611111111111" cz="126.45833333333334" angle="180" />
+  <Door2 shape="bspGroundArrow" y="5.3" status="isOpen" deltaY="0" pitch="270" color="#093aff" color.1="#000000" cx="91.04166666666667" cz="97.15277777777777" angle="90" />
+  <Timer in="@enterHectorRoom" out="@stagingField" wait="1150" />
+  <Timer in="@friendlyFire" wait="4" out="@stopFriendlyFire" />
+  <Timer in="@friendlyFire2" wait="4" out="@stopFriendlyFire2" />
+  <Teleporter mask="0" shape="1002" scale="1.5" speed="4" y="11.3" start="@startHoloMap" color="#6e0a00" color.1="#ff2800" cx="121.94444444444446" cz="99.79166666666667" angle="0" />
+  <set ambient.i="0.2" light.0.i="1" light.0.a="50" light.0.b="20" light.1.i="0.6" light.1.a="60" light.1.b="150" light.2.i="0.5" light.2.a="230" light.2.b="-60" />
+  <Incarnator mask="T6" y="40" cx="103.33333333333334" cz="204.02777777777777" angle="45" />
+</map>
