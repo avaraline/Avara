@@ -1,4 +1,10 @@
-#!/usr/bin/env python3
+# /// script
+# dependencies = [
+#   "numpy",
+#   "triangle",
+#   "pyparsing",
+# ]
+# ///
 from rsrc2files import convert_to_files
 import multiprocessing
 
@@ -19,5 +25,8 @@ if __name__ == "__main__":
             continue
         lpath = os.path.join(ldir, rsrc_file.replace(".r", ""))
         paths.append((rpath, lpath))
-    with multiprocessing.Pool() as pool:
+    with multiprocessing.get_context("fork").Pool() as pool:
         pool.starmap(convert_to_files, paths)
+
+    #for p in paths:
+    #    convert_to_files(p[0], p[1])

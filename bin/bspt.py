@@ -447,6 +447,7 @@ class BSP(object):
                 p1 = np.array(points[1])
                 p = [p0 - p1]
                 u = p / np.linalg.norm(p)
+                print(u, normal)
                 v = np.cross(u, normal)
 
                 # "flatten" the 3d points into 2d points in the
@@ -500,9 +501,13 @@ class BSP(object):
                     v2 = point2 - point1
                     v3 = np.array([-rayDirection[1], rayDirection[0]])
                     divisor = np.dot(v2, v3)
+                    # the following one liner is because numpy upstream deprecated
+                    # the cross product function that handled 2d vectors and put 
+                    # this weak one-liner in the issue comments instead of fixing it
+                    t1cross = v2[..., 0] * v1[..., 1] - v2[..., 1] * v1[..., 0]
                     # Sometimes divisor can be zero, infinity will work but
                     # numpy gives a warning so we just put a big number instead
-                    t1 = (np.cross(v2, v1) / divisor) if divisor != 0 else 1000000
+                    t1 = (t1cross / divisor) if divisor != 0 else 1000000
                     t2 = (np.dot(v1, v3) / divisor) if divisor != 0 else 1000000
                     if t1 >= 0.0 and t2 >= 0.0 and t2 <= 1.0:
                         return [rayOrigin + t1 * rayDirection]

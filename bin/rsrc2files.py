@@ -108,10 +108,9 @@ def convert_to_files(datafile, thedir):
     forks = get_forks(data)
     forks["TMPL"] = get_default_tmpl()
 
-    # print(forks)
-    if "LEDI" not in forks:
-        print("No LEDI found")
-        exit(1)
+    if "LEDI" not in forks or "PICT" not in forks:
+        print(f"{datafile}: No LEDI and/or PICTs found (we definitely need both)")
+        return
 
     rledi = get_tmpl(forks, "LEDI")
     rledi = rledi[list(rledi.keys())[0]]
@@ -125,11 +124,14 @@ def convert_to_files(datafile, thedir):
     result["LEDI"] = []
     # for each level
     for le in rledi["*****"]:
-        alfname = slugify(le["Name"]) + ALFEXT
+        name = le["Name"]
+        #print(name)
+        
+        alfname = slugify(str(name)) + ALFEXT
         if alfname == ".alf":
             continue
         alfpath = os.path.join(alfdir, alfname)
-        pictk = le["Path"].lower()
+        pictk = str(le["Path"]).lower()
         if len(pictk) > 0:
             if pictk not in picts:
                 print(f"Skipping {alfpath} - Couldn't find pict '{pictk}'")
