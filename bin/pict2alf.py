@@ -499,13 +499,6 @@ class SkipRegion(Operation):
         data.skip(total - 2)
 
 
-class SkipPoly(Operation):
-    def parse(self, data, context):
-        total = data.short()
-        regionbb = data.rect()
-
-
-
 # This function reads embedded image pixmaps
 PIXMAP_BIT = 0x8000
 
