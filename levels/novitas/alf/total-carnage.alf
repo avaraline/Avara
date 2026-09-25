@@ -1,0 +1,82 @@
+<map>
+  <SkyColor n="1000" verticalRangeMax="2000" color="#407979" color.1="#00a8aa" />
+  <GroundColor color="#004242" />
+  <set designer="Robin Hood &lt;http://i.am/hib&gt;" information="Total Carnage:&#10;It is recommended to play this level with more that one player. Please &#10;blow something up, fast..." />
+  <Ramp deltaY="6" color="#e62100" color.1="#000000" x="58.125" z="13.055555555555557" w="15" d="10" h="0.5" angle="270" />
+  <Wall color="#565656" color.1="#000000" x="73.125" z="13.055555555555557" w="15" d="10" h="2" y="4" />
+  <Ramp deltaY="6" color="#e62100" color.1="#000000" x="88.125" z="13.055555555555557" w="15" d="10" h="0.5" angle="90" />
+  <Wall color="#e62100" color.1="#000000" x="73.125" z="16.805555555555557" w="13.75" d="1.25" h="1.25" y="6" />
+  <Ramp deltaY="6" color="#e62100" color.1="#000000" x="55.625" z="70.55555555555556" w="20" d="15" h="0.5" angle="270" />
+  <Ramp deltaY="6" color="#e62100" color.1="#000000" x="73.125" z="88.05555555555556" w="15" d="20" h="0.5" angle="180" />
+  <Ramp deltaY="6" color="#e62100" color.1="#000000" x="73.125" z="53.05555555555556" w="15" d="20" h="0.5" angle="0" />
+  <Ramp deltaY="6" color="#e62100" color.1="#000000" x="90.625" z="70.55555555555556" w="20" d="15" h="0.5" angle="90" />
+  <Wall color="#565656" color.1="#000000" x="73.125" z="70.55555555555556" w="15" d="15" h="0.5" y="5.5" />
+  <Wall color="#565656" color.1="#000000" x="43.125" z="33.05555555555556" w="5" d="20" h="2" />
+  <Wall color="#565656" color.1="#000000" x="28.125" z="33.05555555555556" w="5" d="20" h="2" />
+  <Wall color="#565656" color.1="#000000" x="35.625" z="40.55555555555556" w="10" d="5" h="2" />
+  <Wall color="#565656" color.1="#000000" x="35.625" z="25.555555555555557" w="10" d="5" h="2" />
+  <Wall color="#565656" color.1="#000000" x="118.125" z="33.05555555555556" w="5" d="20" h="2" />
+  <Wall color="#565656" color.1="#000000" x="103.125" z="33.05555555555556" w="5" d="20" h="2" />
+  <Wall color="#565656" color.1="#000000" x="110.625" z="40.55555555555556" w="10" d="5" h="2" />
+  <Wall color="#565656" color.1="#000000" x="110.625" z="25.555555555555557" w="10" d="5" h="2" />
+  <Wall color="#565656" color.1="#000000" x="118.125" z="108.05555555555556" w="5" d="20" h="2" />
+  <Wall color="#565656" color.1="#000000" x="103.125" z="108.05555555555556" w="5" d="20" h="2" />
+  <Wall color="#565656" color.1="#000000" x="110.625" z="115.55555555555556" w="10" d="5" h="2" />
+  <Wall color="#565656" color.1="#000000" x="110.625" z="100.55555555555556" w="10" d="5" h="2" />
+  <Wall color="#565656" color.1="#000000" x="43.125" z="108.05555555555556" w="5" d="20" h="2" />
+  <Wall color="#565656" color.1="#000000" x="28.125" z="108.05555555555556" w="5" d="20" h="2" />
+  <Wall color="#565656" color.1="#000000" x="35.625" z="115.55555555555556" w="10" d="5" h="2" />
+  <Wall color="#565656" color.1="#000000" x="35.625" z="100.55555555555556" w="10" d="5" h="2" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody shape="bspGrenade" y="2" speed="6" grenades="4" start="mShow" out="mTaken" color="#e62100" color.1="#000000" cx="35.625" cz="33.05555555555556" angle="315" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody shape="bspGrenade" y="2" speed="6" grenades="4" start="mShow" out="mTaken" color="#e62100" color.1="#000000" cx="110.625" cz="33.05555555555556" angle="315" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody shape="bspGrenade" y="2" speed="6" grenades="4" start="mShow" out="mTaken" color="#e62100" color.1="#000000" cx="110.625" cz="108.05555555555556" angle="315" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody shape="bspGrenade" y="2" speed="6" grenades="4" start="mShow" out="mTaken" color="#e62100" color.1="#000000" cx="35.625" cz="108.05555555555556" angle="315" />
+  <Wall color="#565656" color.1="#000000" x="62.5" z="81.18055555555556" w="6.25" d="6.25" h="6" />
+  <Teleporter shape="bspGroundStar" speed="10" y="6" group="@dummy" color="#e62100" color.1="#000000" cx="62.5" cz="81.18055555555556" angle="225" />
+  <Wall color="#565656" color.1="#000000" x="83.75" z="81.18055555555556" w="6.25" d="6.25" h="6" />
+  <Teleporter shape="bspGroundStar" speed="10" y="6" group="@dummy" color="#e62100" color.1="#000000" cx="83.75" cz="81.18055555555556" angle="225" />
+  <Wall color="#565656" color.1="#000000" x="83.75" z="59.93055555555556" w="6.25" d="6.25" h="6" />
+  <Teleporter shape="bspGroundStar" speed="10" y="6" group="@dummy" color="#e62100" color.1="#000000" cx="83.75" cz="59.93055555555556" angle="225" />
+  <Wall color="#565656" color.1="#000000" x="62.5" z="59.93055555555556" w="6.25" d="6.25" h="6" />
+  <Teleporter shape="bspGroundStar" speed="10" y="6" group="@dummy" color="#e62100" color.1="#000000" cx="62.5" cz="59.93055555555556" angle="225" />
+  <Teleporter group="-1" y="14" speed="8" activeRange="27 * 5" deadRange="22 * 5" destGroup="@recenter" shape="215" scale="5" color="#e62100" color.1="#000000" cx="73.125" cz="70.55555555555556" angle="315" />
+  <Teleporter y="30" shape="0" group="@recenter" color="#e62100" color.1="#000000" cx="73.125" cz="70.55555555555556" angle="315" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspDoubleCube" y="8" speed="8" missiles="3" boosters="1" grenades="6" start="mShow" out="mTaken" color="#e62100" color.1="#000000" cx="73.125" cz="70.55555555555556" angle="45" />
+  <Sound y="50" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="100" cx="72.95138888888889" cz="70.55555555555556" angle="45" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#e62100" color.1="#000000" cx="72.95138888888889" cz="70.55555555555556" angle="45" />
+  <Ramp deltaY="6" color="#e62100" color.1="#000000" x="58.125" z="128.05555555555557" w="15" d="10" h="0.5" angle="270" />
+  <Wall color="#565656" color.1="#000000" x="73.125" z="128.05555555555557" w="15" d="10" h="2" y="4" />
+  <Ramp deltaY="6" color="#e62100" color.1="#000000" x="88.125" z="128.05555555555557" w="15" d="10" h="0.5" angle="90" />
+  <Wall color="#e62100" color.1="#000000" x="73.125" z="124.30555555555556" w="13.75" d="1.25" h="1.25" y="6" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody shape="bspMissile" y="8" speed="6" missiles="8" start="mShow" out="mTaken" color="#e62100" color.1="#000000" cx="73.125" cz="128.05555555555557" angle="315" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody shape="bspMissile" y="8" speed="6" missiles="8" start="mShow" out="mTaken" color="#e62100" color.1="#000000" cx="73.125" cz="13.055555555555555" angle="315" />
+  <Incarnator y="30" cx="73.19444444444446" cz="128.125" angle="359" />
+  <Hologram shape="bspAvara" y="5.5" color="#e62100" color.1="#000000" cx="73.125" cz="18.055555555555557" angle="180" />
+  <Hologram shape="bspAvara" y="5.5" color="#e62100" color.1="#000000" cx="73.125" cz="123.05555555555556" angle="0" />
+  <Incarnator y="30" cx="73.19444444444446" cz="13.125" angle="179" />
+  <Incarnator y="30" cx="35.41666666666667" cz="108.40277777777777" angle="89" />
+  <Incarnator y="30" cx="110.97222222222223" cz="107.91666666666667" angle="269" />
+  <Incarnator y="30" cx="110.97222222222223" cz="33.54166666666667" angle="269" />
+  <Incarnator y="30" cx="35.41666666666667" cz="32.77777777777778" angle="89" />
+</map>

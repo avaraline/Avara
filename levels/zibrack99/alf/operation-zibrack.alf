@@ -1,0 +1,338 @@
+<map>
+  <set wallHeight="1" />
+  <Wall color="#fbffff" color.1="#000000" x="188.54166666666669" z="146.0763888888889" w="18.47222222222223" d="18.541666666666657" h="0" y="52" />
+  <set wallHeight="0" />
+  <Wall color="#fbffff" color.1="#000000" x="24.09722222222222" z="146.11111111111111" w="23.61111111111111" d="54.16666666666667" h="0" y="25" />
+  <set wallHeight="0" />
+  <Wall color="#fbffff" color.1="#000000" x="8.75" z="146.11111111111111" w="7.083333333333334" d="40" h="0" y="25" />
+  <set wallHeight="0" />
+  <Wall color="#fbffff" color.1="#000000" x="39.44444444444444" z="158.64583333333334" w="7.083333333333336" d="14.791666666666686" h="0" y="25" />
+  <set wallHeight="0" />
+  <Wall color="#fbffff" color.1="#000000" x="39.44444444444444" z="133.50694444444446" w="7.083333333333336" d="14.791666666666657" h="0" y="25" />
+  <set wallHeight="0" />
+  <Wall color="#ff2d08" color.1="#000000" x="162.70833333333334" z="190.1388888888889" w="94.02777777777779" d="1.1111111111111143" h="0" />
+  <set wallHeight="40" />
+  <Wall color="#fbffff" color.1="#000000" x="113.22916666666667" z="189.93055555555554" w="4.930555555555543" d="4.861111111111114" h="0" />
+  <set wallHeight="40" />
+  <Wall color="#fbffff" color.1="#000000" x="98.09027777777777" z="189.93055555555554" w="4.930555555555557" d="4.861111111111114" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ff2d08" color.1="#000000" x="48.958333333333336" z="190.1388888888889" w="93.47222222222221" d="1.1111111111111143" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ff2d08" color.1="#000000" x="2.7777777777777777" z="97.36111111111111" w="1.1111111111111112" d="186.66666666666669" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ff2d08" color.1="#000000" x="209.16666666666669" z="97.36111111111111" w="1.1111111111111143" d="186.66666666666669" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ff2d08" color.1="#000000" x="105.41666666666667" z="4.583333333333334" w="206.38888888888889" d="1.1111111111111116" h="0" />
+  <set wallHeight="8" />
+  <Wall color="#fbffff" color.1="#000000" x="202.29166666666669" z="146.11111111111111" w="9.027777777777771" d="54.16666666666667" h="0" y="9" />
+  <set wallHeight="1" />
+  <Wall color="#fbffff" color.1="#000000" x="178.8888888888889" z="146.11111111111111" w="37.7777777777778" d="54.16666666666667" h="0" y="9" />
+  <set wallHeight="1" />
+  <Wall color="#fbffff" color.1="#000000" x="182.43055555555557" z="146.11111111111111" w="30.694444444444457" d="40" h="0" y="16" />
+  <set wallHeight="1" />
+  <Wall color="#fbffff" color.1="#000000" x="185.24305555555557" z="146.0763888888889" w="17.15277777777777" d="27.291666666666657" h="0" y="30" />
+  <set defaultLives="1" maxStartBoosts="3" maxStartGrenades="4" maxStartMissiles="2" designer="Rup-1" missilePower="3" missileAcceleration="0.7" grenadePower="4.0" missileTurnRate="0.1" />
+  <Teleporter shape="0" status="false" win="10000" start="@winTeam" activeRange="2000" color="#ff7498" color.1="#000000" cx="17.98611111111111" cz="22.22222222222222" angle="180" />
+  <set lightHull="151" mediumHull="151" heavyHull="151" />
+  <TeamColor mask="T6" color="#000000" color.1="#d1bcfd" cx="2.777777777777778" cz="16.458333333333336" r="1.458333333333334" angle="135" />
+  <set information="In your decent into the drop zone&#10;&#10;you notice one thing - Its a Hot Drop Zone.  &#10;&#10;Your motto of &quot;&quot;Entry - Shield - Out - Glory&quot;&quot; &#10;&#10;quickly focuses on &quot;&quot;Entry&quot;&quot; as you charge &#10;&#10;for the Guards." />
+  <set ambient.i="0.2" light.0.i="1" light.0.a="50" light.0.b="110" light.1.i="0.6" light.1.a="60" light.1.b="240" light.2.i="0.5" light.2.a="230" light.2.b="30" />
+  <SkyColor color="#ff2800" color.1="#f8fb00" />
+  <GroundColor color="#000000" />
+  <Ramp thickness="0" y="0" deltaY="10" color="#fbffff" color.1="#000000" x="56.423611111111114" z="82.01388888888889" w="10.208333333333329" d="24.027777777777786" h="0" angle="180" />
+  <set wallHeight="1" />
+  <Wall color="#fbffff" color.1="#000000" x="101.49305555555556" z="146.11111111111111" w="117.01388888888889" d="10.277777777777771" h="0" y="9" />
+  <Ramp thickness="0" y="10" deltaY="7" color="#ff2d08" color.1="#000000" x="163.54166666666669" z="133.54166666666669" w="7.083333333333343" d="14.861111111111114" h="0" angle="270" />
+  <Ramp thickness="0" y="17" deltaY="14" color="#ff2d08" color.1="#000000" x="174.02777777777777" z="146.0763888888889" w="5.2777777777778" d="27.291666666666657" h="0" angle="270" />
+  <Ramp thickness="0" y="31" deltaY="21" color="#b61d02" color.1="#000000" x="181.28472222222223" z="146.0763888888889" w="3.9583333333333144" d="18.541666666666657" h="0" angle="270" />
+  <Ramp thickness="0" y="10" deltaY="7" color="#ff2d08" color.1="#000000" x="163.54166666666669" z="158.68055555555554" w="7.083333333333343" d="14.861111111111114" h="0" angle="270" />
+  <set wallHeight="8" />
+  <Wall color="#ffffff" color.1="#000000" x="163.54166666666669" z="169.65277777777777" w="7.083333333333343" d="7.083333333333343" h="0" y="10" />
+  <set wallHeight="15" />
+  <Wall color="#ffffff" color.1="#000000" x="174.02777777777777" z="162.39583333333334" w="5.2777777777778" d="5.3472222222222285" h="0" y="17" />
+  <set wallHeight="24" />
+  <Wall color="#ffffff" color.1="#000000" x="181.28472222222223" z="157.36111111111111" w="3.9583333333333144" d="4.0277777777777715" h="0" y="31" />
+  <set wallHeight="24" />
+  <Wall color="#ffffff" color.1="#000000" x="181.28472222222223" z="134.8263888888889" w="3.9583333333333144" d="3.958333333333343" h="0" y="31" />
+  <set wallHeight="15" />
+  <Wall color="#ffffff" color.1="#000000" x="174.02777777777777" z="129.79166666666669" w="5.2777777777778" d="5.277777777777786" h="0" y="17" />
+  <set wallHeight="8" />
+  <Wall color="#ffffff" color.1="#000000" x="163.54166666666669" z="122.56944444444446" w="7.083333333333343" d="7.083333333333329" h="0" y="10" />
+  <Ramp thickness="0" y="17" deltaY="14" color="#ff2d08" color.1="#000000" x="187.22222222222223" z="162.39583333333334" w="21.111111111111114" d="5.3472222222222285" h="0" angle="180" />
+  <Ramp thickness="0" y="17" deltaY="14" color="#ff2d08" color.1="#000000" x="187.22222222222223" z="129.79166666666669" w="21.111111111111114" d="5.277777777777786" h="0" angle="0" />
+  <Ramp thickness="0" y="10" deltaY="7" color="#ff2d08" color.1="#000000" x="182.43055555555557" z="122.56944444444446" w="30.694444444444457" d="7.083333333333329" h="0" angle="0" />
+  <Ramp thickness="0" y="10" deltaY="7" color="#ff2d08" color.1="#000000" x="182.43055555555557" z="169.65277777777777" w="30.694444444444457" d="7.083333333333343" h="0" angle="180" />
+  <Ramp thickness="0" y="31" deltaY="21" color="#ff2d08" color.1="#000000" x="190.52083333333334" z="157.36111111111111" w="14.513888888888914" d="4.0277777777777715" h="0" angle="180" />
+  <Ramp thickness="0" y="31" deltaY="21" color="#ff2d08" color.1="#000000" x="190.52083333333334" z="134.8263888888889" w="14.513888888888914" d="3.958333333333343" h="0" angle="0" />
+  <set wallHeight="14" />
+  <Wall color="#fbffff" color.1="#000000" x="200.79861111111114" z="146.11111111111111" w="6.041666666666657" d="37.91666666666667" h="0" y="17" />
+  <set wallHeight="21" />
+  <Wall color="#fbffff" color.1="#000000" x="199.30555555555557" z="146.11111111111111" w="3.055555555555543" d="26.52777777777777" h="0" y="31" />
+  <set wallHeight="1" />
+  <Wall color="#fbffff" color.1="#000000" x="24.097222222222225" z="146.11111111111111" w="37.77777777777778" d="54.16666666666667" h="0" y="9" />
+  <Ramp thickness="0" y="0" deltaY="10" color="#fbffff" color.1="#000000" x="154.89583333333334" z="82.01388888888889" w="10.208333333333314" d="24.027777777777786" h="0" angle="180" />
+  <set wallHeight="1" />
+  <Wall color="#fbffff" color.1="#000000" x="105.65972222222223" z="105.48611111111111" w="10.208333333333343" d="70.97222222222223" h="0" y="9" />
+  <Ufo watch="targ1 + playerMask" start="@blah" y="170" shield="5" acceleration="0.057" checkPeriod="45" attack="0.99" defense="0.01" activeRange="70" motionRange="70" verticalRangeMin="16" verticalRangeMax="24" visionScore="1" hideScore="0.01" homeSick="0.99" homeRange="30" shotPower="2.0" burstLength="3" burstSpeed="16" burstCharge="40" killMsg="@ufoKilled" status="false" color="#ff2600" color.1="#f8fb00" cx="56.458333333333336" cz="66.80555555555556" angle="135" />
+  <set wallHeight="1" />
+  <Wall color="#ff2d08" color.1="#000000" x="105.65972222222223" z="66.45833333333334" w="108.68055555555554" d="7.083333333333329" h="0" y="9" />
+  <set wallHeight="1" />
+  <Wall color="#ff2d08" color.1="#000000" x="54.82638888888889" z="36.458333333333336" w="7.013888888888886" d="52.91666666666667" h="0" y="9" />
+  <set wallHeight="1" />
+  <Wall color="#ff2d08" color.1="#000000" x="156.49305555555554" z="36.458333333333336" w="7.013888888888886" d="52.91666666666667" h="0" y="9" />
+  <set wallHeight="21" />
+  <Wall color="#fbffff" color.1="#000000" x="60.590277777777786" z="60.65972222222223" w="4.513888888888893" d="4.513888888888893" h="0" />
+  <set wallHeight="21" />
+  <Wall color="#fbffff" color.1="#000000" x="150.72916666666669" z="60.65972222222223" w="4.513888888888886" d="4.513888888888893" h="0" />
+  <set wallHeight="1" />
+  <Wall color="#b81d02" color.1="#000000" x="66.38888888888889" z="34.201388888888886" w="7.083333333333329" d="48.40277777777778" h="0" y="15" />
+  <set wallHeight="1" />
+  <Wall color="#b81d02" color.1="#000000" x="144.93055555555554" z="34.201388888888886" w="7.083333333333343" d="48.40277777777778" h="0" y="15" />
+  <set wallHeight="1" />
+  <Wall color="#b81d02" color.1="#000000" x="105.65972222222223" z="54.861111111111114" w="71.45833333333333" d="7.083333333333329" h="0" y="15" />
+  <set wallHeight="27" />
+  <Wall color="#fbffff" color.1="#000000" x="72.1875" z="49.0625" w="4.513888888888886" d="4.513888888888893" h="0" />
+  <set wallHeight="27" />
+  <Wall color="#fbffff" color.1="#000000" x="139.13194444444446" z="49.0625" w="4.513888888888886" d="4.513888888888893" h="0" />
+  <set wallHeight="1" />
+  <Wall color="#841201" color.1="#000000" x="77.98611111111111" z="28.40277777777778" w="7.083333333333343" d="36.80555555555556" h="0" y="21" />
+  <set wallHeight="1" />
+  <Wall color="#841201" color.1="#000000" x="133.33333333333334" z="28.40277777777778" w="7.083333333333314" d="36.80555555555556" h="0" y="21" />
+  <set wallHeight="1" />
+  <Wall color="#841201" color.1="#000000" x="105.65972222222223" z="43.298611111111114" w="48.2638888888889" d="7.013888888888886" h="0" y="21" />
+  <set wallHeight="33" />
+  <Wall color="#fbffff" color.1="#000000" x="127.53472222222223" z="37.53472222222223" w="4.5138888888889" d="4.513888888888893" h="0" />
+  <set wallHeight="33" />
+  <Wall color="#fbffff" color.1="#000000" x="83.78472222222223" z="37.53472222222223" w="4.513888888888886" d="4.513888888888893" h="0" />
+  <set wallHeight="1" />
+  <Wall color="#370100" color.1="#000000" x="105.65972222222223" z="22.63888888888889" w="39.236111111111114" d="25.27777777777778" h="0" y="27" />
+  <Ufo watch="targ1 + playerMask" start="@blah" y="170" shield="5" acceleration="0.057" checkPeriod="45" attack="0.99" defense="0.01" activeRange="70" motionRange="70" verticalRangeMin="16" verticalRangeMax="24" visionScore="1" hideScore="0.01" homeSick="0.99" homeRange="30" shotPower="2.0" burstLength="3" burstSpeed="16" burstCharge="40" killMsg="@ufoKilled" status="false" color="#ff2600" color.1="#f8fb00" cx="156.66666666666669" cz="67.29166666666667" angle="135" />
+  <Guard watch="targ1 + playerMask" start="@blah" y="23" killMsg="@guardKilled" speed="2" shotPower="2" shield="2" color="#ff2d08" color.1="#000000" cx="150.83333333333331" cz="60.76388888888889" angle="135" />
+  <Guard watch="targ1 + playerMask" start="@blah" y="29" killMsg="@guardKilled" speed="3" shotPower="3" shield="3" color="#b81d02" color.1="#000000" cx="139.02777777777777" cz="48.68055555555556" angle="135" />
+  <Guard watch="targ1 + playerMask" start="@blah" y="35" killMsg="@guardKilled" speed="4" shotPower="4" shield="4" color="#841201" color.1="#000000" cx="83.68055555555556" cz="37.638888888888886" angle="135" />
+  <Guard yon="kYon" y="25" killMsg="@guardKilled" speed="5" shotPower="5" shield="5" color="#ff2d08" color.1="#000000" cx="104.79166666666667" cz="22.916666666666664" angle="135" />
+  <Guard watch="targ1 + playerMask" start="@blah" y="29" killMsg="@guardKilled" speed="3" shotPower="3" shield="3" color="#b81d02" color.1="#000000" cx="72.5" cz="49.236111111111114" angle="135" />
+  <Guard watch="targ1 + playerMask" start="@blah" y="23" killMsg="@guardKilled" speed="2" shotPower="2" shield="2" color="#ff2d08" color.1="#000000" cx="60.69444444444444" cz="60.76388888888889" angle="135" />
+  <Guard watch="targ1 + playerMask" start="@blah" y="35" killMsg="@guardKilled" speed="4" shotPower="4" shield="4" color="#841201" color.1="#000000" cx="127.15277777777779" cz="37.361111111111114" angle="135" />
+  <Goody shape="250" y="12" grenades="4" missiles="2" color="#f8fb00" color.1="#ff2806" cx="156.45833333333334" cz="14.791666666666668" angle="180" />
+  <Goody shape="250" y="18" grenades="4" missiles="2" color="#f8fb00" color.1="#ff2806" cx="144.93055555555554" cz="14.791666666666668" angle="180" />
+  <Goody shape="250" y="24" grenades="4" missiles="2" color="#f8fb00" color.1="#ff2806" cx="133.40277777777777" cz="14.791666666666668" angle="180" />
+  <Goody shape="250" y="12" grenades="4" missiles="2" color="#f8fb00" color.1="#ff2806" cx="54.652777777777786" cz="14.791666666666668" angle="180" />
+  <Goody shape="250" y="18" grenades="4" missiles="2" color="#f8fb00" color.1="#ff2806" cx="66.45833333333334" cz="14.791666666666668" angle="180" />
+  <Goody shape="250" y="24" grenades="4" missiles="2" color="#f8fb00" color.1="#ff2806" cx="77.98611111111111" cz="14.791666666666668" angle="180" />
+  <Goody shape="250" y="54" boosters="1" color="#f8fb00" color.1="#0236ff" cx="199.375" cz="146.18055555555554" angle="180" />
+  <Goody shape="250" y="19" boosters="1" color="#f8fb00" color.1="#0236ff" cx="205.55555555555554" cz="146.18055555555554" angle="180" />
+  <Goody shape="250" y="33" boosters="1" color="#f8fb00" color.1="#0236ff" cx="202.22222222222223" cz="146.18055555555554" angle="180" />
+  <set wallHeight="15" />
+  <Wall color="#fbffff" color.1="#000000" x="163.54166666666669" z="150.83333333333334" w="7.083333333333343" d="0.8333333333333144" h="0" y="10" />
+  <set wallHeight="15" />
+  <Wall color="#fbffff" color.1="#000000" x="163.54166666666669" z="141.35416666666669" w="7.083333333333343" d="0.7638888888888857" h="0" y="10" />
+  <Guard y="14" killMsg="@L2GKilled" speed="4" shotPower="6" shield="5" color="#780f01" color.1="#000000" cx="195.48611111111114" cz="128.68055555555554" angle="135" />
+  <Counter in="@L2GKilled" out="@L2Tele" n="3" />
+  <Guard y="14" killMsg="@L2GKilled" speed="4" shotPower="6" shield="5" color="#780f01" color.1="#000000" cx="195.625" cz="146.18055555555554" angle="135" />
+  <Guard y="14" killMsg="@L2GKilled" speed="4" shotPower="6" shield="5" color="#780f01" color.1="#000000" cx="196.11111111111114" cz="163.40277777777777" angle="135" />
+  <Teleporter start="@L2Tele" y="10" destGroup="@L22" color="#9e1701" color.1="#000000" cx="194.86111111111114" cz="146.11111111111111" angle="0" />
+  <Teleporter start="@L2Tele" group="@L22" spin="0" y="17" mask="0" shape="0" color="#009800" color.1="#ffe41c" cx="180.55555555555554" cz="146.11111111111111" angle="0" />
+  <Teleporter start="@L2Tele2" y="17" destGroup="@L21" color="#9e1701" color.1="#000000" cx="195.625" cz="130.06944444444446" angle="0" />
+  <Teleporter start="@L2Tele2" mask="0" shape="0" y="10" group="@L21" color="#489600" color.1="#000000" cx="169.44444444444446" cz="146.11111111111111" angle="0" />
+  <set wallHeight="1" />
+  <WallSolid start="@L2Tele2" canGlow="0" isTarget="1" shield="30" color="#fbffff" color.1="#000000" x="195.79861111111114" z="146.0763888888889" w="3.958333333333343" d="27.291666666666657" h="0" y="30" />
+  <Guard shotPower="6" speed="20" shield="5" killMsg="@L2Killed" shape="bspHullLight" y="30.2" color="#971601" color.1="#00f300" cx="104.79166666666667" cz="22.708333333333336" angle="180" />
+  <Solid shield="7" shape="bspHECTORLegHigh" y="29.7" roll="-48" color="#971601" color.1="#00f300" cx="105.34722222222223" cz="22.84722222222222" angle="270" />
+  <Solid shield="6" shape="bspHECTORLegHigh" y="29.7" roll="-48" color="#971601" color.1="#00f300" cx="104.23611111111111" cz="22.84722222222222" angle="270" />
+  <Solid shield="3" shape="bspHECTORLegLow" y="29.05" roll="33" color="#971601" color.1="#00f300" cx="104.23611111111111" cz="22.22222222222222" angle="270" />
+  <Solid shield="3" shape="bspHECTORLegLow" y="29.05" roll="33" color="#971601" color.1="#00f300" cx="105.34722222222223" cz="22.22222222222222" angle="270" />
+  <Ball changeOwnerTime="19200" shape="215" team="T2" y="33.15" color="#971601" color.1="#ff2600" cx="182.91666666666669" cz="145.83333333333334" angle="270" />
+  <Solid shield="1" shape="bspHECTORLegHigh" y="32.7" roll="-48" color="#fffb00" color.1="#00f300" cx="182.84722222222223" cz="146.3888888888889" angle="0" />
+  <Solid shield="1" shape="bspHECTORLegHigh" y="32.7" roll="-48" color="#fffb00" color.1="#00f300" cx="182.84722222222223" cz="145.20833333333334" angle="0" />
+  <Solid shield="1" shape="bspHECTORLegLow" y="32.05" roll="33" color="#971601" color.1="#00f300" cx="183.47222222222223" cz="145.20833333333334" angle="0" />
+  <Solid shield="1" shape="bspHECTORLegLow" y="32.05" roll="33" color="#971601" color.1="#00f300" cx="183.47222222222223" cz="146.3888888888889" angle="0" />
+  <Guard activeRange="100" shotPower="2" power="4" speed="20" shield="4" killMsg="@L1Killed" shape="bspHullLight" y="2.2" color="#ff2d08" color.1="#00f300" cx="98.125" cz="194.16666666666669" angle="180" />
+  <Solid shield="2" shape="bspHECTORLegHigh" y="1.7" roll="-48" color="#ff2d08" color.1="#00f300" cx="98.68055555555557" cz="194.30555555555554" angle="270" />
+  <Solid shield="2" shape="bspHECTORLegHigh" y="1.7" roll="-48" color="#ff2d08" color.1="#00f300" cx="97.56944444444446" cz="194.30555555555554" angle="270" />
+  <Solid shield="2" shape="bspHECTORLegLow" y="1.05" roll="33" color="#ff2d08" color.1="#00f300" cx="97.56944444444446" cz="193.68055555555554" angle="270" />
+  <Solid shield="2" shape="bspHECTORLegLow" y="1.05" roll="33" color="#ff2d08" color.1="#00f300" cx="98.68055555555557" cz="193.68055555555554" angle="270" />
+  <set wallHeight="5" />
+  <Field deltaZ="2" exit="@beginning" stop="@beginning" color="#68fa47" color.1="#72fa08" x="105.86805555555556" z="205.17361111111111" w="8.402777777777771" d="8.402777777777771" h="0" cx="98.68055555555557" cz="193.68055555555554" angle="270" y="50" />
+  <Incarnator mask="T6" y="100" cx="106.04166666666667" cz="202.43055555555557" angle="0" />
+  <set wallHeight="9" />
+  <Wall color="#ffffff" color.1="#000000" x="8.75" z="169.65277777777777" w="7.083333333333334" d="7.083333333333343" h="0" />
+  <set wallHeight="9" />
+  <Wall color="#ffffff" color.1="#000000" x="39.44444444444444" z="169.65277777777777" w="7.083333333333336" d="7.083333333333343" h="0" />
+  <set wallHeight="9" />
+  <Wall color="#ffffff" color.1="#000000" x="39.44444444444444" z="122.56944444444446" w="7.083333333333336" d="7.083333333333329" h="0" />
+  <set wallHeight="9" />
+  <Wall color="#ffffff" color.1="#000000" x="8.75" z="122.56944444444446" w="7.083333333333334" d="7.083333333333329" h="0" />
+  <Ramp thickness="0" y="10" deltaY="15" color="#ff2d08" color.1="#000000" x="39.44444444444444" z="158.68055555555554" w="7.083333333333336" d="14.861111111111114" h="0" angle="270" />
+  <Ramp thickness="0" y="10" deltaY="15" color="#ff2d08" color.1="#000000" x="39.44444444444444" z="133.54166666666669" w="7.083333333333336" d="14.861111111111114" h="0" angle="270" />
+  <set wallHeight="25" />
+  <Wall color="#fbffff" color.1="#000000" x="39.44444444444444" z="150.83333333333334" w="7.083333333333336" d="0.8333333333333144" h="0" y="10" />
+  <set wallHeight="25" />
+  <Wall color="#fbffff" color.1="#000000" x="39.44444444444444" z="141.35416666666669" w="7.083333333333336" d="0.7638888888888857" h="0" y="10" />
+  <set wallHeight="9" />
+  <Wall color="#ffffff" color.1="#000000" x="163.54166666666669" z="169.65277777777777" w="7.083333333333343" d="7.083333333333343" h="0" />
+  <set wallHeight="9" />
+  <Wall color="#ffffff" color.1="#000000" x="203.2638888888889" z="169.65277777777777" w="7.083333333333343" d="7.083333333333343" h="0" />
+  <set wallHeight="9" />
+  <Wall color="#ffffff" color.1="#000000" x="203.2638888888889" z="122.56944444444446" w="7.083333333333343" d="7.083333333333329" h="0" />
+  <set wallHeight="9" />
+  <Wall color="#ffffff" color.1="#000000" x="163.54166666666669" z="122.56944444444446" w="7.083333333333343" d="7.083333333333329" h="0" />
+  <Ramp thickness="0" y="10" deltaY="15" color="#ff2d08" color.1="#000000" x="24.09722222222222" z="169.65277777777777" w="23.61111111111111" d="7.083333333333343" h="0" angle="0" />
+  <Ramp thickness="0" y="10" deltaY="15" color="#ff2d08" color.1="#000000" x="24.09722222222222" z="122.56944444444446" w="23.61111111111111" d="7.083333333333329" h="0" angle="180" />
+  <Ramp thickness="0" y="10" deltaY="15" color="#ff2d08" color.1="#000000" x="8.75" z="146.0763888888889" w="7.083333333333334" d="14.791666666666657" h="0" angle="90" />
+  <set wallHeight="15" />
+  <Wall color="#fbffff" color.1="#000000" x="5.590277777777779" z="132.0138888888889" w="0.7638888888888884" d="11.805555555555571" h="0" y="10" />
+  <set wallHeight="15" />
+  <Wall color="#fbffff" color.1="#000000" x="8.75" z="138.29861111111114" w="7.083333333333334" d="0.7638888888888857" h="0" y="10" />
+  <set wallHeight="15" />
+  <Wall color="#fbffff" color.1="#000000" x="8.75" z="153.8888888888889" w="7.083333333333334" d="0.8333333333333428" h="0" y="10" />
+  <set wallHeight="15" />
+  <Wall color="#fbffff" color.1="#000000" x="5.590277777777779" z="160.20833333333334" w="0.7638888888888884" d="11.805555555555543" h="0" y="10" />
+  <set wallHeight="25" />
+  <Wall color="#ffffff" color.1="#000000" x="39.44444444444444" z="122.56944444444446" w="7.083333333333336" d="7.083333333333329" h="0" y="10" />
+  <Door2 scale="0.75" shape="bspGroundArrow" y="500" open="@L2Tele2" deltaY="-480" deltaZ="0" deltaX="0" pitch="90" yaw="0" roll="0" openSpeed="100" color="#ff2d08" color.1="#000000" cx="197.70833333333334" cz="129.86111111111111" angle="90" />
+  <set wallHeight="15" />
+  <WallDoor open="@openL2" didOpen="@L2Opened" close="@L2Opened" closeDelay="100" deltaY="10" color="#fbffff" color.1="#000000" x="166.7013888888889" z="146.0763888888889" w="0.7638888888888857" d="8.680555555555571" h="0" y="10" />
+  <Text in="@openL1" wait="48" text="You have acquired a
+Level One Pass" showEveryone="true" align="centerAlign" sound="411" cx="197.70833333333334" cz="129.86111111111111" r="1.6666666666666572" />
+  <Timer in="@L2Killed" out.0="@L2Field" out.1="@L2Text" />
+  <set wallHeight="35" />
+  <WallDoor openDelay="48" open="@openL1" didOpen="@blah" deltaY="15" color="#ff2d08" color.1="#000000" x="105.65972222222223" z="189.93055555555554" w="10.208333333333343" d="1.3888888888888857" h="0" />
+  <Distributor in="@L1Killed" out.0="@doNothing" out.1="@openL1" />
+  <Door2 status="isClosed" y="12" shape="1001" midPitch="-90" midYaw="180" pitch="-90" yaw="180" openDelay="47" open="@openL1" deltaY="15" color="#fffefb" color.1="#000000" cx="105.48611111111111" cz="191.04166666666669" angle="0" />
+  <set wallHeight="0.25" />
+  <Field start="@L2Field" enter="@openL2" deltaY="0" color="#ff2d08" color.1="#000000" x="154.58333333333331" z="146.04166666666669" w="8.611111111111114" d="8.611111111111114" h="0" cx="105.48611111111111" cz="191.04166666666669" angle="0" y="10" />
+  <set wallHeight="15" />
+  <WallDoor open="@openL3" didOpen="@L3Opened" close="@L3Opened" closeDelay="10" deltaY="10" color="#fbffff" color.1="#000000" x="36.49305555555556" z="146.0763888888889" w="1.1805555555555571" d="8.680555555555571" h="0" y="10" />
+  <Timer in="@L2Tele2" out.0="@L3Field" out.1="@L3Text" />
+  <set wallHeight="0.25" />
+  <Field start="@L3Field" enter="@openL3" deltaY="0" color="#ff2d08" color.1="#000000" x="50.208333333333336" z="146.11111111111114" w="8.611111111111114" d="8.611111111111114" h="0" cx="105.48611111111111" cz="191.04166666666669" angle="0" y="10" />
+  <Guard activeRange="100" shotPower="2" power="4" speed="20" shield="4" killMsg="@L1Killed" shape="bspHullLight" y="2.2" color="#ff2d08" color.1="#00f300" cx="113.40277777777777" cz="194.23611111111114" angle="180" />
+  <Solid shield="2" shape="bspHECTORLegHigh" y="1.7" roll="-48" color="#ff2d08" color.1="#00f300" cx="113.95833333333334" cz="194.375" angle="270" />
+  <Solid shield="2" shape="bspHECTORLegHigh" y="1.7" roll="-48" color="#ff2d08" color.1="#00f300" cx="112.84722222222223" cz="194.375" angle="270" />
+  <Solid shield="2" shape="bspHECTORLegLow" y="1.05" roll="33" color="#ff2d08" color.1="#00f300" cx="112.84722222222223" cz="193.75" angle="270" />
+  <Solid shield="2" shape="bspHECTORLegLow" y="1.05" roll="33" color="#ff2d08" color.1="#00f300" cx="113.95833333333334" cz="193.75" angle="270" />
+  <Solid y="31" shape="bspW1x1" yon="0.1" shield="1" power="1" color="#ff2d08" color.1="#000000" cx="183.47222222222223" cz="145.97222222222223" angle="0" />
+  <set wallHeight="5" />
+  <WallDoor open="@sDoorUp" didOpen="@sDoorDown" close="@sDoorDown" stepOnMsg="@sDoorUp" deltaY="9" closeDelay="10" color="#ff2600" color.1="#000000" x="195.79861111111114" z="146.0763888888889" w="3.958333333333343" d="27.291666666666657" h="0" y="17" />
+  <Door2 scale="0.75" shape="bspGroundArrow" y="500" open="@L2Tele" deltaY="-487" deltaZ="0" deltaX="0" pitch="-90" yaw="0" roll="0" openSpeed="100" color="#ff2d08" color.1="#000000" cx="197.77777777777777" cz="146.11111111111111" angle="90" />
+  <Door2 status="isClosed" y="14" shape="1001" close="@L2Opened" closeDelay="100" midPitch="-90" midYaw="180" pitch="-90" yaw="180" open="@openL2" deltaY="10" color="#ff2600" color.1="#000000" cx="166.31944444444446" cz="146.04166666666669" angle="90" />
+  <Door2 status="isClosed" y="14" shape="1001" midPitch="-90" midYaw="180" pitch="-90" yaw="180" open="@openL3" didOpen="@L3Opened" close="@L3Opened" closeDelay="10" deltaY="10" color="#ff2600" color.1="#000000" cx="37.152777777777786" cz="146.04166666666669" angle="270" />
+  <set wallHeight="25" />
+  <Wall color="#ffffff" color.1="#000000" x="8.75" z="122.56944444444446" w="7.083333333333334" d="7.083333333333329" h="0" y="10" />
+  <set wallHeight="25" />
+  <Wall color="#ffffff" color.1="#000000" x="39.44444444444444" z="169.65277777777777" w="7.083333333333336" d="7.083333333333343" h="0" y="10" />
+  <set wallHeight="25" />
+  <Wall color="#ffffff" color.1="#000000" x="8.75" z="169.65277777777777" w="7.083333333333334" d="7.083333333333343" h="0" y="10" />
+  <Guard start="@blah" yon="0.1" y="30" speed="4" shotPower="3" shield="-1" color="#ff2d08" color.1="#000000" cx="106.31944444444446" cz="146.66666666666669" angle="135" />
+  <Guard start="@blah" y="8" yon="0.1" speed="4" shotPower="3" shield="-1" color="#ff2d08" color.1="#000000" cx="106.31944444444446" cz="146.59722222222223" angle="135" />
+  <Text in="@L2Killed" wait="48" text="You have acquired a
+Level Two Pass" showEveryone="true" align="centerAlign" sound="411" cx="106.31944444444446" cz="146.59722222222223" r="2.569444444444457" />
+  <Text in="@L2Tele2" wait="48" text="You have acquired a
+Level Three Pass" showEveryone="true" align="centerAlign" sound="411" cx="106.31944444444446" cz="146.59722222222223" r="2.569444444444457" />
+  <Teleporter speed="0" mask="0" shape="bspFloorFrame" scale="0.5" y="10" start="@L2Killed" color="#ff2d08" color.1="#000000" cx="154.51388888888889" cz="146.11111111111111" angle="270" />
+  <Teleporter speed="0" mask="0" shape="bspFloorFrame" scale="0.5" y="10" start="@L2Tele2" color="#ff2d08" color.1="#000000" cx="49.861111111111114" cz="146.11111111111111" angle="270" />
+  <Switch y="14" scale="4" shape="701" out="@openL31" restart="false" color="#ff2d08" color.1="#00f900" cx="6.041666666666667" cz="160.06944444444446" angle="270" />
+  <Switch y="12" shape="562" out="@openL3" color="#ff2d08" color.1="#00f900" cx="35.902777777777786" cz="141.38888888888889" angle="90" />
+  <Text in="@openL31" wait="1" text="1/4
+Shut down procedure initiated" showEveryone="true" align="centerAlign" stop="@stopText1" cx="35.902777777777786" cz="141.38888888888889" r="1.3888888888888893" />
+  <Text in="@text25" text="2/4
+Prepare for Retina Scan Validation" showEveryone="true" align="centerAlign" stop="@stopText1" cx="35.902777777777786" cz="141.38888888888889" r="1.3888888888888893" />
+  <Text in="@text35" text="3/4 
+Failure to Pass will be met with 
+Hostile Action" showEveryone="true" align="centerAlign" stop="@stopText1" cx="35.902777777777786" cz="141.38888888888889" r="1.3888888888888893" />
+  <Text in="@text45" text="4/4
+Enter red sphere to begin 
+Scanning Procedure" showEveryone="true" align="centerAlign" stop="@stopText1" cx="35.902777777777786" cz="141.38888888888889" r="1.3888888888888893" />
+  <Text in="@enterRS" text="1/3
+Retina Scan Started" showEveryone="true" align="centerAlign" stop="@stopText5" cx="35.902777777777786" cz="141.38888888888889" r="1.3888888888888893" />
+  <Goal yon="0.01" shape="bspSphere" y="12.75" goalMsg="@doNothing" motionRange="7" goalAction="0" activeRange="7" color="#ff2d08" color.1="#000000" cx="8.75" cz="132.01388888888889" angle="180" />
+  <Text in="@RSPassed" wait="100" text="2/3
+Retina Scan Passed
+-------
+Shields Deactivating" showEveryone="true" align="centerAlign" cx="8.75" cz="132.01388888888889" r="1.3888888888888888" />
+  <Timer in="@RSFailed" out.0="@enterRS" wait="1" />
+  <set wallHeight="100" wallYon="0.001" />
+  <WallDoor open="@kOut" yaw="0" deltaY="100" shotPower="1000" color="#0441ff" color.1="#5f0800" x="26.38888888888889" z="55.833333333333336" w="14.861111111111107" d="14.861111111111114" h="0" y="500" />
+  <Teleporter shape="0" status="false" start="@timeExpired" out="@kOut" activeRange="2000" destGroup="@death1" color="#ff7498" color.1="#000000" cx="37.84722222222223" cz="50.69444444444444" angle="180" />
+  <Teleporter group="@death1" shape="0" status="false" start="@start" y="550" color="#ff7498" color.1="#000000" cx="26.041666666666668" cz="54.16666666666667" angle="180" />
+  <Timer in="@RSFailed" out.0="@timeExpired" wait="198" />
+  <Text in="@RSFailed" wait="200" text="2/3
+Retina Scan Failed" showEveryone="true" align="centerAlign" cx="26.041666666666668" cz="54.16666666666667" r="1.3888888888888893" />
+  <Field visible="false" start="@text45" mask="T6" stop="@stopRSField" shape="bspSphere" y="12.75" enter="@RSFailed" deltaY="0" color="#ff2d08" color.1="#000000" x="8.75" z="146.0763888888889" w="7.083333333333334" d="14.791666666666657" h="0" cx="8.75" cz="132.01388888888889" angle="180" />
+  <Timer in="@RSPassed" out.0="@enterRS" wait="1" />
+  <Guard power="7" shotPower="4" speed="20" shield="7" killMsg="@L2Tele2" shape="bspHullLight" y="19.15" color="#971601" color.1="#00f300" cx="189.58333333333334" cz="146.04166666666669" angle="270" />
+  <Solid shield="7" shape="bspHECTORLegHigh" y="18.7" roll="-48" color="#fbfb00" color.1="#00f300" cx="189.5138888888889" cz="146.59722222222223" angle="0" />
+  <Solid shield="7" shape="bspHECTORLegHigh" y="18.7" roll="-48" color="#fbfb00" color.1="#00f300" cx="189.5138888888889" cz="145.41666666666669" angle="0" />
+  <Solid shield="4" shape="bspHECTORLegLow" y="18.05" roll="33" color="#971601" color.1="#00f300" cx="190.1388888888889" cz="145.41666666666669" angle="0" />
+  <Solid shield="4" shape="bspHECTORLegLow" y="18.05" roll="33" color="#971601" color.1="#00f300" cx="190.1388888888889" cz="146.59722222222223" angle="0" />
+  <Text in="@RSFailed" wait="250" text="3/3
+Mission Failed" showEveryone="true" align="centerAlign" cx="190.1388888888889" cz="146.59722222222223" r="1.6666666666666714" />
+  <Text in="@start" text="-MESSAGE FROM COMMAND-
+You have 10 minutes until
+Bombing Raid Starts" showEveryone="true" align="centerAlign" cx="190.1388888888889" cz="146.59722222222223" r="1.6666666666666714" />
+  <Field visible="false" start="@text45" mask="allTeams -T6" shape="bspSphere" y="12.75" enter="@RSPassed" stop="@stopRSField" deltaY="0" color="#4e9200" color.1="#000000" x="8.75" z="146.0763888888889" w="7.083333333333334" d="14.791666666666657" h="0" cx="8.75" cz="132.01388888888889" angle="180" />
+  <TeamColor mask="T2" color="#971601" color.1="#0081ff" cx="17.22222222222222" cz="33.47222222222223" r="1.458333333333334" angle="135" />
+  <TeamColor mask="T1" color="#971601" color.1="#0081ff" cx="17.083333333333336" cz="36.04166666666667" r="1.458333333333334" angle="135" />
+  <TeamColor mask="T3" color="#971601" color.1="#0081ff" cx="16.944444444444446" cz="38.611111111111114" r="1.458333333333333" angle="135" />
+  <TeamColor mask="T5" color="#971601" color.1="#0081ff" cx="16.805555555555557" cz="41.18055555555556" r="1.4583333333333357" angle="135" />
+  <TeamColor mask="T4" color="#971601" color.1="#0081ff" cx="16.666666666666668" cz="43.75" r="1.458333333333333" angle="135" />
+  <Switch y="12" shape="562" out="@openL2" color="#ff2d08" color.1="#00f900" cx="167.15277777777777" cz="150.97222222222223" angle="270" />
+  <Timer in="@RSPassed" out.0="@stopRSField" out.1="@stopText1" wait="1" />
+  <Timer in="@RSFailed" out.0="@stopRSField" out.1="@stopText1" wait="1" />
+  <Timer in="@openL31" out="@text25" wait="200" />
+  <Timer in="@openL31" out="@text35" wait="400" />
+  <Timer in="@openL31" out="@text45" wait="600" />
+  <Timer in="@RSFailed" out.1="@stopText5" wait="1" />
+  <Timer in="@RSPassed" out.1="@stopText5" wait="8" />
+  <Teleporter start="@text45" mask="0" speed="1" shape="bspSphere" y="12.75" color="#ff2d08" color.1="#000000" cx="8.75" cz="132.01388888888889" angle="180" />
+  <Text in="@timeExpired2" wait="32" text="Shileds Not Down In Time
+------ 
+Mission Failed" showEveryone="true" align="centerAlign" stop="@RSPassed" cx="8.75" cz="132.01388888888889" r="1.3888888888888888" />
+  <Text in="@timeExpired2" wait="32" text="You were Killed in the 
+Bombing Raid 
+------ 
+Mission Failed" showEveryone="true" align="centerAlign" stop="@start" start="@RSPassed" cx="8.75" cz="132.01388888888889" r="1.3888888888888888" />
+  <set timeLimit="600" />
+  <Timer in="@start" out.0="@timeExpired" out.1="@timeExpired2" wait="9373" />
+  <Text in="@gameText10" text="-MESSAGE FROM COMMAND-
+You have 5 minutes until
+Bombing Raid Starts" showEveryone="true" align="centerAlign" cx="8.75" cz="132.01388888888889" r="1.3888888888888888" />
+  <Timer in="@start" out="@gameText10" wait="4686" />
+  <Text in="@gameText2" text="-MESSAGE FROM COMMAND-
+You have 2 minutes until
+Bombing Raid Starts" showEveryone="true" align="centerAlign" cx="8.75" cz="132.01388888888889" r="1.3888888888888888" />
+  <Timer in="@start" out="@gameText2" wait="7497" />
+  <Text in="@RSPassed" wait="300" text="3/3
+--Shields Down--
+Meet Transport Ship 
+at Center of Enemy Base" showEveryone="true" align="centerAlign" cx="8.75" cz="132.01388888888889" r="1.3888888888888888" />
+  <Door2 hitMsg="@hitTransShip" stepOnMsg="@winTeam" shape="bspStarFighter" y="12" deltaY="50" deltaZ="-800" deltaX="-200" open="@start" volume="100" openDelay="1" openSpeed="100" close="@RSPassed" closeSpeed="0.3" closeDelay="400" pitch="20" yaw="-10" roll="380" targetGroup="targ1" color="#093aff" color.1="#f8fb00" cx="106.25" cz="103.61111111111111" angle="0" />
+  <Text in="@help1" text="-TRANSPORT SHIP-
+Get on Board before we 
+take too much damage" showEveryone="true" align="centerAlign" cx="106.25" cz="103.61111111111111" r="1.6666666666666714" />
+  <Text in="@help2" text="-TRANSPORT SHIP-
+Hurry up, We are taking
+some damage here!" showEveryone="true" align="centerAlign" cx="106.25" cz="103.61111111111111" r="1.6666666666666714" />
+  <Text in="@help3" text="-TRANSPORT SHIP-
+One More Shot And We 
+Are All Finished !!" showEveryone="true" align="centerAlign" cx="106.25" cz="103.61111111111111" r="1.6666666666666714" />
+  <Text in="@transKilledText" text="Transport Ship Destroyed
+------
+Mission Failed" wait="48" showEveryone="true" align="centerAlign" cx="106.25" cz="103.61111111111111" r="1.6666666666666714" />
+  <Hologram isAmbient="true" y="25" scale="5" shape="bspLargeDome" color="#ff2600" color.1="#000000" cx="23.88888888888889" cz="145.625" angle="90" />
+  <Incarnator mask="T6" y="100" cx="103.54166666666667" cz="206.66666666666669" angle="0" />
+  <Incarnator mask="T6" y="100" cx="108.40277777777779" cz="206.66666666666669" angle="0" />
+  <set wallHeight="100" wallYon="0.001" />
+  <Wall color="#7cfa00" color.1="#000000" x="2.7777777777777777" z="97.36111111111111" w="1.1111111111111112" d="186.66666666666669" h="0" />
+  <set wallHeight="100" wallYon="0.001" />
+  <Wall color="#7cfa00" color.1="#000000" x="209.16666666666669" z="97.36111111111111" w="1.1111111111111143" d="186.66666666666669" h="0" />
+  <set wallHeight="100" wallYon="0.001" />
+  <Wall color="#7cfa00" color.1="#000000" x="105.9375" z="2.777777777777778" w="207.43055555555557" d="4.722222222222222" h="0" />
+  <set wallHeight="100" wallYon="0.001" />
+  <Wall color="#7cfa00" color.1="#000000" x="49.0625" z="189.96527777777777" w="92.98611111111111" d="1.4583333333333428" h="0" />
+  <set wallHeight="100" wallYon="0.001" />
+  <Wall color="#7cfa00" color.1="#000000" x="162.70833333333334" z="189.96527777777777" w="94.02777777777779" d="1.4583333333333428" h="0" />
+  <Distributor in="@hitTransShip" out.0="@help1" out.5="@help2" out.8="@help3" out.9="@transKilled" restart="false" />
+  <Timer in="@transKilled" out.0="@timeExpired" out.1="@transKilledText" wait="1" />
+</map>
