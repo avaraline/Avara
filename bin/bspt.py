@@ -447,7 +447,7 @@ class BSP(object):
                 p1 = np.array(points[1])
                 p = [p0 - p1]
                 u = p / np.linalg.norm(p)
-                print(u, normal)
+                # print(u, normal)
                 v = np.cross(u, normal)
 
                 # "flatten" the 3d points into 2d points in the
