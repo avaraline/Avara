@@ -25,7 +25,7 @@ if __name__ == "__main__":
             continue
         lpath = os.path.join(ldir, rsrc_file.replace(".r", ""))
         paths.append((rpath, lpath))
-    with multiprocessing.get_context("fork").Pool() as pool:
+    with multiprocessing.Pool() as pool:
         pool.starmap(convert_to_files, paths)
 
     #for p in paths:

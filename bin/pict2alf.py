@@ -1126,8 +1126,6 @@ def parse_pict(data):
         except KeyError:
             print("No support for opcode 0x%s" % format(opcode, "02x"))
             print(" ".join(format(x, "02x") for x in buf.data[buf.pos : buf.pos + 300]))
-            print("Attempting to skip with first two bytes of opcode * 2")
-            
             raise PictParseError
         if isinstance(op, EndPict):
             break

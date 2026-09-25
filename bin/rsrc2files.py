@@ -125,8 +125,6 @@ def convert_to_files(datafile, thedir):
     # for each level
     for le in rledi["*****"]:
         name = le["Name"]
-        #print(name)
-        
         alfname = slugify(str(name)) + ALFEXT
         if alfname == ".alf":
             continue
@@ -182,7 +180,6 @@ def convert_to_files(datafile, thedir):
 
             if not os.path.exists(wavpath):
                 args = [f"build{os.path.sep}hsnd2wav", str(k), wavpath, str(datafile)]
-                print(args)
                 popen = subprocess.Popen(args, stdout=subprocess.PIPE)
                 popen.wait()
 
