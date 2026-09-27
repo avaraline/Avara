@@ -151,9 +151,9 @@
   <Timer in="mTaken" out="zShow" wait="450" />
   <Goody shape="6002" scale="0.45" y="5" speed="6" boosters="1" start="zShow" yon="500" out="zTaken" color="#ecb500" color.1="#000000" cx="78.75" cz="79.30555555555556" angle="45" />
   <set wallHeight="0" />
-  <Wall color="#554164" color.1="#000000" x="78.75" z="41.80555555555556" w="2.5" d="2.5" h="0" />
+  <Wall color="#8768a1" color.1="#000000" x="78.75" z="41.80555555555556" w="2.5" d="2.5" h="0" />
   <set wallHeight="0" />
-  <Wall color="#554164" color.1="#000000" x="116.25" z="79.30555555555556" w="2.5" d="2.5" h="0" />
+  <Wall color="#8768a1" color.1="#000000" x="116.25" z="79.30555555555556" w="2.5" d="2.5" h="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
@@ -165,7 +165,7 @@
   <set wallHeight="1.5" />
   <Wall color="#8a7d8b" color.1="#000000" x="78.75" z="126.80555555555557" w="20" d="5" h="0" />
   <set wallHeight="0" />
-  <Wall color="#554164" color.1="#000000" x="78.75" z="116.80555555555556" w="2.5" d="2.5" h="0" />
+  <Wall color="#8768a1" color.1="#000000" x="78.75" z="116.80555555555556" w="2.5" d="2.5" h="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
@@ -173,7 +173,7 @@
   <set wallHeight="1.5" />
   <Wall color="#8a7d8b" color.1="#000000" x="31.25" z="79.30555555555556" w="5" d="20" h="0" />
   <set wallHeight="0" />
-  <Wall color="#554164" color.1="#000000" x="41.25" z="79.30555555555556" w="2.5" d="2.5" h="0" />
+  <Wall color="#8768a1" color.1="#000000" x="41.25" z="79.30555555555556" w="2.5" d="2.5" h="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
