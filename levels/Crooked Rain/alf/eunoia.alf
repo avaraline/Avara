@@ -120,7 +120,7 @@
   <set wallHeight="0" />
   <Wall color="#f7ead1" color.1="#000000" x="116.875" z="189.30555555555557" w="3.75" d="2.5" h="0" y="6" />
   <set wallHeight="0" />
-  <Wall color="#fff2d8" color.1="#000000" x="113.75" z="189.30555555555557" w="2.5" d="2.5" h="0" y="6" />
+  <Wall color="#e6dac3" color.1="#000000" x="113.75" z="189.30555555555557" w="2.5" d="2.5" h="0" y="6" />
   <set wallHeight="0" />
   <Wall color="#f7ead1" color.1="#000000" x="113.75" z="146.18055555555557" w="10" d="3.75" h="0" y="6" />
   <set wallHeight="0" />
@@ -130,7 +130,7 @@
   <set wallHeight="0" />
   <Wall color="#f7ead1" color.1="#000000" x="116.875" z="149.30555555555557" w="3.75" d="2.5" h="0" y="6" />
   <set wallHeight="0" />
-  <Wall color="#fff2d8" color.1="#000000" x="113.75" z="149.30555555555557" w="2.5" d="2.5" h="0" y="6" />
+  <Wall color="#e6dac3" color.1="#000000" x="113.75" z="149.30555555555557" w="2.5" d="2.5" h="0" y="6" />
   <set wallHeight="0" />
   <Wall color="#f7ead1" color.1="#000000" x="133.75" z="166.18055555555557" w="10" d="3.75" h="0" y="6" />
   <set wallHeight="0" />
@@ -140,7 +140,7 @@
   <set wallHeight="0" />
   <Wall color="#f7ead1" color.1="#000000" x="136.875" z="169.30555555555557" w="3.75" d="2.5" h="0" y="6" />
   <set wallHeight="0" />
-  <Wall color="#fff2d8" color.1="#000000" x="133.75" z="169.30555555555557" w="2.5" d="2.5" h="0" y="6" />
+  <Wall color="#e6dac3" color.1="#000000" x="133.75" z="169.30555555555557" w="2.5" d="2.5" h="0" y="6" />
   <set wallHeight="0" />
   <Wall color="#f7ead1" color.1="#000000" x="93.75" z="166.18055555555557" w="10" d="3.75" h="0" y="6" />
   <set wallHeight="0" />
@@ -150,7 +150,7 @@
   <set wallHeight="0" />
   <Wall color="#f7ead1" color.1="#000000" x="96.875" z="169.30555555555557" w="3.75" d="2.5" h="0" y="6" />
   <set wallHeight="0" />
-  <Wall color="#fff2d8" color.1="#000000" x="93.75" z="169.30555555555557" w="2.5" d="2.5" h="0" y="6" />
+  <Wall color="#e6dac3" color.1="#000000" x="93.75" z="169.30555555555557" w="2.5" d="2.5" h="0" y="6" />
   <Incarnator y="30" cx="68.75" cz="124.30555555555556" angle="135" />
   <Incarnator y="30" cx="158.75" cz="214.30555555555557" angle="315" />
   <Incarnator y="30" cx="158.75" cz="124.30555555555556" angle="225" />
@@ -180,27 +180,27 @@
   <Goody shape="bspMissile" y="2" speed="6" missiles="3" start="mShow" out="mTaken" color="#a5b0c6" color.1="#fef0d6" cx="151.25" cz="131.80555555555557" angle="45" />
   <unique vars="mShow mTaken zShow zTaken" />
   <And in="@start" out="mShow" />
-  <Timer in="zTaken" out="mShow" wait="300" />
+  <Timer in="zTaken" out="mShow" wait="150" />
   <Goody shape="bspGrenade" y="8" speed="6" grenades="6" start="mShow" yon="500" out="mTaken" color="#2e415f" color.1="#000000" cx="133.75" cz="169.30555555555557" angle="135" />
-  <Timer in="mTaken" out="zShow" wait="300" />
+  <Timer in="mTaken" out="zShow" wait="150" />
   <Goody shape="bspGrenade" y="2" speed="6" grenades="6" start="zShow" yon="500" out="zTaken" color="#2e415f" color.1="#000000" cx="133.75" cz="169.30555555555557" angle="135" />
   <unique vars="mShow mTaken zShow zTaken" />
   <And in="@start" out="mShow" />
-  <Timer in="zTaken" out="mShow" wait="300" />
+  <Timer in="zTaken" out="mShow" wait="150" />
   <Goody shape="bspGrenade" y="8" speed="6" grenades="6" start="mShow" yon="500" out="mTaken" color="#2e415f" color.1="#000000" cx="113.75" cz="149.30555555555557" angle="135" />
-  <Timer in="mTaken" out="zShow" wait="300" />
+  <Timer in="mTaken" out="zShow" wait="150" />
   <Goody shape="bspGrenade" y="2" speed="6" grenades="6" start="zShow" yon="500" out="zTaken" color="#2e415f" color.1="#000000" cx="113.75" cz="149.30555555555557" angle="135" />
   <unique vars="mShow mTaken zShow zTaken" />
   <And in="@start" out="mShow" />
-  <Timer in="zTaken" out="mShow" wait="300" />
+  <Timer in="zTaken" out="mShow" wait="150" />
   <Goody shape="bspGrenade" y="8" speed="6" grenades="6" start="mShow" yon="500" out="mTaken" color="#2e415f" color.1="#000000" cx="93.75" cz="169.30555555555557" angle="135" />
-  <Timer in="mTaken" out="zShow" wait="300" />
+  <Timer in="mTaken" out="zShow" wait="150" />
   <Goody shape="bspGrenade" y="2" speed="6" grenades="6" start="zShow" yon="500" out="zTaken" color="#2e415f" color.1="#000000" cx="93.75" cz="169.30555555555557" angle="135" />
   <unique vars="mShow mTaken zShow zTaken" />
   <And in="@start" out="mShow" />
-  <Timer in="zTaken" out="mShow" wait="300" />
+  <Timer in="zTaken" out="mShow" wait="150" />
   <Goody shape="bspGrenade" y="8" speed="6" grenades="6" start="mShow" yon="500" out="mTaken" color="#2e415f" color.1="#000000" cx="113.75" cz="189.30555555555557" angle="135" />
-  <Timer in="mTaken" out="zShow" wait="300" />
+  <Timer in="mTaken" out="zShow" wait="150" />
   <Goody shape="bspGrenade" y="2" speed="6" grenades="6" start="zShow" yon="500" out="zTaken" color="#2e415f" color.1="#000000" cx="113.75" cz="189.30555555555557" angle="135" />
   <set wallHeight="0" />
   <WallDoor midYaw="45" color="#3f3b3c" color.1="#000000" x="113.75" z="169.30555555555557" w="2.5" d="2.5" h="0" y="7.501" />
