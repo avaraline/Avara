@@ -22,6 +22,16 @@ INCFLAGS := $(addprefix -I, $(SRC_DIRS))
 CPPFLAGS := ${CPPFLAGS}
 CPPFLAGS += $(INCFLAGS) -MMD -MP -DNANOGUI_GLAD -g -Wall
 
+# install prefix
+PREFIX ?= /usr/local
+DATADIR ?= $(PREFIX)/share
+AVARA_DATADIR = $(DATADIR)/Avara
+AVARA_PREFIX = $(PREFIX)/bin
+INSTALL ?= install
+CP ?= /bin/cp
+SH ?= /bin/sh
+RM ?= /bin/rm
+
 # Compile with clang UBSAN
 ifeq ($(AVARA_UBSAN), TRUE)
 LD = clang++
@@ -195,5 +205,23 @@ clean-levels:
 	$(RM) levels/*/set.json
 	$(RM) levels/*/ogg/*.ogg
 	$(RM) levels/*/wav/*.wav
+
+build: set-version avara
+
+install: set-version avara
+	$(INSTALL) -d $(AVARA_PREFIX) $(AVARA_DATADIR)/rsrc $(AVARA_DATADIR)/levels
+	$(INSTALL) $(BUILD_DIR)/Avara $(AVARA_PREFIX)/Avara
+	# copy levels and resources
+	$(CP) -R ./rsrc $(AVARA_DATADIR)
+	$(CP) -R ./levels $(AVARA_DATADIR)
+	# wrapper script to set resource path
+	echo "#!$(SH)" > $(AVARA_PREFIX)/avara
+	echo 'exec $(AVARA_PREFIX)/Avara --basepath $(AVARA_DATADIR)/ $$@' >> $(AVARA_PREFIX)/avara
+	chmod +x $(AVARA_PREFIX)/avara
+
+uninstall:
+	$(RM) $(AVARA_PREFIX)/Avara
+	$(RM) $(AVARA_PREFIX)/avara
+	$(RM) -R $(AVARA_DATADIR)
 
 -include $(DEPS)
