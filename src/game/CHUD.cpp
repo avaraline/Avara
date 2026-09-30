@@ -447,33 +447,40 @@ void CHUD::Render(NVGcontext *ctx) {
             int y = 50;
             float fontsz_m = 24.0;
             float fontsz_s = 18.0;
-            float bounds[4], nextBounds[4], prevBounds[4];
+            float bounds[4], nextBounds[4], prevBounds[4], toggleBounds[4];
+            std::string on("On");
+            std::string off("Off");
+
             std::string specMessage("Spectating " + playerName);
             std::string nextMessage("Spectate Next: ]");
             std::string prevMessage("Spectate Previous: [");
+            std::string toggleCamMessage("Toggle Free Cam: Space Bar");
+            std::string camStatusMessage("Free Cam: " + (player->freeView ? on : off));
 
-            nvgBeginPath(ctx);
-            nvgFontFace(ctx, "mono");
-            nvgTextAlign(ctx, NVG_ALIGN_MIDDLE | NVG_ALIGN_BOTTOM);
-            nvgFontSize(ctx, fontsz_m);
-            nvgTextBounds(ctx, x,y, specMessage.c_str(), NULL, bounds);
-
-            //draw box for text
-            nvgBeginPath(ctx);
-            nvgRoundedRect(ctx, x - 100, y, (bounds[2]-bounds[0])+10, 28.0, 3.0);
-            nvgFillColor(ctx, BACKGROUND_COLOR);
-            nvgFill(ctx);
-
-            //draw text
-            nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
-            nvgText(ctx, x - 100 + 5, y + 14, specMessage.c_str(), NULL);
-
+            if (!player->freeView || (player->freeView && player->IsFreeCamAttached())) {
+                nvgBeginPath(ctx);
+                nvgFontFace(ctx, "mono");
+                nvgTextAlign(ctx, NVG_ALIGN_MIDDLE | NVG_ALIGN_BOTTOM);
+                nvgFontSize(ctx, fontsz_m);
+                nvgTextBounds(ctx, x,y, specMessage.c_str(), NULL, bounds);
+    
+                //draw box for text
+                nvgBeginPath(ctx);
+                nvgRoundedRect(ctx, x - 100, y, (bounds[2]-bounds[0])+10, 28.0, 3.0);
+                nvgFillColor(ctx, BACKGROUND_COLOR);
+                nvgFill(ctx);
+    
+                //draw text
+                nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+                nvgText(ctx, x - 100 + 5, y + 14, specMessage.c_str(), NULL);
+            }
             nvgBeginPath(ctx);
             nvgFontFace(ctx, "mono");
             nvgTextAlign(ctx, NVG_ALIGN_MIDDLE | NVG_ALIGN_BOTTOM);
             nvgFontSize(ctx, fontsz_s);
             nvgTextBounds(ctx, x, y, nextMessage.c_str(), NULL, nextBounds);
             nvgTextBounds(ctx, x, y, prevMessage.c_str(), NULL, prevBounds);
+            nvgTextBounds(ctx, x, y, toggleCamMessage.c_str(), NULL, toggleBounds);
 
             //Spectate Next
             nvgBeginPath(ctx);
@@ -493,6 +500,29 @@ void CHUD::Render(NVGcontext *ctx) {
 
             nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
             nvgText(ctx, x - 220 + 5, y + 44, prevMessage.c_str(), NULL);
+
+            // Toggle Free Cam Message
+            nvgBeginPath(ctx);
+            nvgRoundedRect(ctx, x - 270, y + 60, (toggleBounds[2]-toggleBounds[0])+10, 28.0, 3.0);
+            nvgFillColor(ctx, BACKGROUND_COLOR);
+            nvgFill(ctx);
+
+            nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+            nvgText(ctx, x - 270 + 5, y + 74, toggleCamMessage.c_str(), NULL);
+
+            // Free Cam Status Message
+            nvgBeginPath(ctx);
+            nvgFontSize(ctx, fontsz_s);
+            nvgRoundedRect(ctx, x + 25, y + 60, (nextBounds[2]-nextBounds[0])+10, 28.0, 3.0);
+            if (player->freeView) {
+                nvgFillColor(ctx, nvgRGBA(0, 50, 0, 180));
+            } else {
+                nvgFillColor(ctx, nvgRGBA(50, 0, 0, 180));
+            }
+            nvgFill(ctx);
+
+            nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+            nvgText(ctx, x + 25 + 5, y + 74, camStatusMessage.c_str(), NULL);
         }
     }
 
