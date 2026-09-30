@@ -106,6 +106,14 @@ public:
         return shieldGaugeColor;
     }
 
+    static inline ARGBColor getShieldDamageColor() {
+        return shieldDamageColor;
+    }
+
+    static inline ARGBColor getShieldZapColor() {
+        return shieldZapColor;
+    }
+
     static inline ARGBColor getHUDColor() {
         return hudColor;
     }
@@ -238,6 +246,8 @@ private:
     static ARGBColor plasmaSightsOffColor;
     static ARGBColor plasmaSightsOnColor;
     static ARGBColor shieldGaugeColor;
+    static ARGBColor shieldDamageColor;
+    static ARGBColor shieldZapColor;
     static ARGBColor teamColors[kMaxTeamColors + 1];
     static ARGBColor teamTextColors[kMaxTeamColors + 1];
     static std::string teamColorNames[kMaxTeamColors + 1];
