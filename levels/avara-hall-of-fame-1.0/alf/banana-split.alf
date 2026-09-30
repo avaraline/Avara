@@ -1,0 +1,167 @@
+<map>
+  <set designer="Viking - 
+carina.hellman@mbox309.swi
+pnet.se" information="Hang on the mokey bar but u &#10;dont take falls..as well as &#10;mokeys...." />
+  <SkyColor color="#d4fdd5" color.1="#d6a800" />
+  <GroundColor color="#73fa00" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#fffb00" color.1="#000000" cx="35.625" cz="25.555555555555557" angle="45" />
+  <set wallHeight=".5" />
+  <Wall color="#00fba9" color.1="#000000" x="73.61111111111111" z="43.333333333333336" w="3.75" d="3.75" h="0" y="90" />
+  <set wallHeight=".5" />
+  <Wall color="#00fba9" color.1="#000000" x="73.61111111111111" z="50.833333333333336" w="1.25" d="11.25" h="0" y="90" />
+  <set wallHeight=".5" />
+  <Wall color="#00fba9" color.1="#000000" x="86.11111111111111" z="62.083333333333336" w="13.75" d="1.25" h="0" y="90" />
+  <set wallHeight=".5" />
+  <Wall color="#00fba9" color.1="#000000" x="61.111111111111114" z="62.083333333333336" w="13.75" d="1.25" h="0" y="90" />
+  <set wallHeight=".5" />
+  <Wall color="#00fba9" color.1="#000000" x="73.61111111111111" z="73.33333333333334" w="1.25" d="11.25" h="0" y="90" />
+  <set wallHeight=".5" />
+  <Wall color="#00fba9" color.1="#000000" x="94.86111111111111" z="62.083333333333336" w="3.75" d="3.75" h="0" y="90" />
+  <set wallHeight=".5" />
+  <Wall color="#00fba9" color.1="#000000" x="52.361111111111114" z="62.083333333333336" w="3.75" d="3.75" h="0" y="90" />
+  <set wallHeight=".5" />
+  <Wall color="#00fba9" color.1="#000000" x="73.61111111111111" z="62.08333333333334" w="11.25" d="11.25" h="0" y="90" />
+  <set wallHeight=".5" />
+  <Wall color="#00fba9" color.1="#000000" x="73.61111111111111" z="80.83333333333334" w="3.75" d="3.75" h="0" y="90" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspAvaraA" y="92.5" speed="2" grenades="12" missiles="8" start="mShow" out="mTaken" color="#fffb00" color.1="#000000" cx="52.84722222222222" cz="61.66666666666667" angle="45" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspAvaraA" y="92.5" speed="2" grenades="12" missiles="8" start="mShow" out="mTaken" color="#fffb00" color.1="#000000" cx="74.09722222222223" cz="80.41666666666667" angle="45" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="400" />
+  <Goody shape="bspAvaraA" y="92.5" speed="2" grenades="12" missiles="8" start="mShow" out="mTaken" color="#fffb00" color.1="#000000" cx="95.34722222222223" cz="61.66666666666667" angle="45" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspAvaraA" y="92.5" speed="2" grenades="12" missiles="8" start="mShow" out="mTaken" color="#fffb00" color.1="#000000" cx="74.09722222222223" cz="42.91666666666667" angle="45" />
+  <Incarnator y="130" cx="52.15277777777778" cz="62.0138888888889" angle="92" />
+  <Incarnator y="130" cx="94.375" cz="62.777777777777786" angle="264.5" />
+  <Incarnator y="130" cx="73.68055555555557" cz="80.34722222222223" angle="1" />
+  <Incarnator y="130" cx="73.26388888888889" cz="43.54166666666667" angle="179.5" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="25.555555555555557" cz="80.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="50.55555555555556" cz="64.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="38.05555555555556" cz="64.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="106.80555555555556" cz="89.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="95.55555555555556" cz="83.125" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="103.05555555555556" cz="74.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="103.05555555555556" cz="61.875" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="103.05555555555556" cz="46.875" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="54.30555555555556" cz="65.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="91.80555555555556" cz="46.875" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="80.55555555555556" cz="49.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="29.305555555555557" cz="45.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="40.55555555555556" cz="53.125" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="54.30555555555556" cz="53.125" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="66.80555555555556" cz="46.875" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="91.80555555555556" cz="68.125" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="80.55555555555556" cz="64.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="68.05555555555556" cz="65.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="38.05555555555556" cz="80.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="50.13888888888889" cz="80.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="63.888888888888886" cz="79.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="81.38888888888889" cz="81.875" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="27.222222222222225" cz="124.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="52.22222222222222" cz="108.125" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="39.72222222222222" cz="108.125" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="108.47222222222223" cz="133.125" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="97.22222222222223" cz="126.875" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="105.97222222222223" cz="119.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="104.72222222222223" cz="105.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="104.72222222222223" cz="90.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="59.72222222222222" cz="108.125" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="87.22222222222223" cz="85.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="94.72222222222223" cz="90.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="30.97222222222222" cz="89.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="43.47222222222222" cz="89.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="55.97222222222222" cz="90.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="68.47222222222223" cz="90.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="93.47222222222223" cz="111.875" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="82.22222222222223" cz="108.125" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="69.72222222222223" cz="109.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="39.72222222222222" cz="124.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="51.80555555555556" cz="124.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="65.55555555555556" cz="123.125" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="83.05555555555556" cz="125.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="28.472222222222225" cz="39.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="53.47222222222222" cz="23.125" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="40.97222222222222" cz="23.125" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="109.72222222222223" cz="48.125" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="98.47222222222223" cz="41.875" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="107.22222222222223" cz="34.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="105.97222222222223" cz="20.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="105.97222222222223" cz="5.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="60.97222222222223" cz="23.125" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="83.47222222222223" cz="5.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="95.97222222222223" cz="5.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="32.22222222222222" cz="4.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="44.72222222222222" cz="4.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="57.22222222222222" cz="5.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="69.72222222222223" cz="5.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="94.72222222222223" cz="26.875" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="83.47222222222223" cz="23.125" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="70.97222222222223" cz="24.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="40.97222222222222" cz="39.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="53.05555555555556" cz="39.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="66.80555555555556" cz="38.125" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="84.30555555555556" cz="40.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="10.555555555555555" cz="79.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="23.055555555555557" cz="63.125" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="14.305555555555557" cz="44.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="25.555555555555557" cz="56.875" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="23.055555555555557" cz="79.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="12.222222222222223" cz="123.125" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="24.722222222222225" cz="106.875" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="15.972222222222221" cz="88.125" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="28.472222222222225" cz="88.125" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="24.722222222222225" cz="123.125" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="112.6388888888889" cz="91.875" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="116.3888888888889" cz="50.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="116.3888888888889" cz="56.875" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="128.88888888888889" cz="71.875" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="125.1388888888889" cz="91.875" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="114.30555555555556" cz="135.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="126.80555555555557" cz="119.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="118.05555555555556" cz="100.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="130.55555555555557" cz="100.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="126.80555555555557" cz="135.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="115.1388888888889" cz="84.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="116.3888888888889" cz="71.875" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="118.8888888888889" cz="49.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="131.38888888888889" cz="49.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="127.63888888888889" cz="84.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="116.80555555555556" cz="128.125" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="141.80555555555557" cz="115.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="138.05555555555557" cz="74.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="115.55555555555556" cz="115.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="129.30555555555557" cz="128.125" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="75.55555555555556" cz="66.875" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="88.05555555555556" cz="66.875" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="80.97222222222223" cz="75.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="93.47222222222223" cz="75.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="60.55555555555556" cz="65.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="73.05555555555556" cz="65.625" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="65.97222222222223" cz="74.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="78.47222222222223" cz="74.375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="98.8888888888889" cz="101.25" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="95.1388888888889" cz="88.75" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="88.05555555555556" cz="97.5" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="100.55555555555556" cz="97.5" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="67.63888888888889" cz="87.5" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="80.13888888888889" cz="97.5" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="68.05555555555556" cz="100" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="76.80555555555556" cz="90" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="107.6388888888889" cz="53.22916666666667" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="120.1388888888889" cz="53.22916666666667" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="113.05555555555556" cz="53.50694444444444" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="125.55555555555556" cz="53.50694444444444" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="92.6388888888889" cz="53.15972222222223" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="105.1388888888889" cz="53.15972222222223" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="98.05555555555556" cz="53.4375" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="400" color="#ab82ff" color.1="#2e0100" cx="110.55555555555556" cz="53.4375" angle="270" />
+  <set defaultLives="6" />
+</map>

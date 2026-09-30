@@ -33,19 +33,19 @@ public:
     virtual void UpdateViewRect(int width, int height, float pixelRatio) override;
 private:
     SDL_Window *window;
-    
+
     std::unique_ptr<CCompoundShape> staticGeometry = nullptr;
     CBSPWorldImpl *staticWorld;
     CBSPWorldImpl *dynamicWorld;
     CBSPWorldImpl *hudWorld;
-    
+
     std::unique_ptr<OpenGLShader> skyShader;
     std::unique_ptr<OpenGLShader> worldShader;
     std::unique_ptr<OpenGLShader> worldPostShader;
     std::unique_ptr<OpenGLShader> hudShader;
     std::unique_ptr<OpenGLShader> hudPostShader;
     std::unique_ptr<OpenGLShader> finalShader;
-    
+
     std::vector<CBSPPart*> alphaParts;
 
     GLsizei resolution[2];
@@ -59,7 +59,7 @@ private:
 
     bool showSpecular, dither, fxaa;
 
-    void AdjustAmbient(OpenGLShader &shader, float intensity);
+    void AdjustAmbient(OpenGLShader &shader, float intensity, float extraAmbient = 0.0f);
     void ApplyView();
     void BlendingOff();
     void BlendingOn();

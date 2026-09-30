@@ -1,0 +1,94 @@
+{
+  "LEDI": [
+    {
+      "Alf": "find-paper-shredder.alf",
+      "Name": "Find Paper Shredder",
+      "Message": "Find/Rescue one of our agents, Paper Shredder"
+    }
+  ],
+  "HULL": {
+    "1251": {
+      "Hull Res ID": 215,
+      "Max Missiles": 3,
+      "Max Grenades": 6,
+      "Max boosters": 3,
+      "Mass": 140.0,
+      "Max Energy": 12.207034409094376,
+      "Energy Charge": 1220.7031357289998,
+      "Max Shields": 152.58788433661402,
+      "Shield Charge": 1525.8789044022278,
+      "Min Shot": 30.517586022735944,
+      "Max Shot": 30.517586022735944,
+      "Shot Charge": 30.517586022735944,
+      "Riding Height": 0.2500038147554742,
+      "Acceleration": 1.0,
+      "Jump Power": 1.0
+    }
+  },
+  "HSND": {
+    "1251": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 0.504646372167544,
+      "Sound": 0,
+      "Ogg": "1251.ogg",
+      "Wav": "1251.wav"
+    },
+    "1250": {
+      "Version": 2,
+      "Loop Start": 1,
+      "Loop End": 7385,
+      "Loop Count": -1,
+      "Data offset": 24,
+      "Base Rate": 1.0092774853131914,
+      "Sound": 0,
+      "Ogg": "1250.ogg",
+      "Wav": "1250.wav"
+    },
+    "1285": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 0.33643091477836273,
+      "Sound": 0,
+      "Ogg": "1285.ogg",
+      "Wav": "1285.wav"
+    },
+    "1253": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0092774853131914,
+      "Sound": 0,
+      "Ogg": "1253.ogg",
+      "Wav": "1253.wav"
+    }
+  },
+  "BSPT": {
+    "1263": "levels/pc's-t-plus-five-solo/bsps/1263.json",
+    "1250": "levels/pc's-t-plus-five-solo/bsps/1250.json",
+    "1256": "levels/pc's-t-plus-five-solo/bsps/1256.json",
+    "1259": "levels/pc's-t-plus-five-solo/bsps/1259.json",
+    "1264": "levels/pc's-t-plus-five-solo/bsps/1264.json",
+    "1265": "levels/pc's-t-plus-five-solo/bsps/1265.json",
+    "1271": "levels/pc's-t-plus-five-solo/bsps/1271.json",
+    "1277": "levels/pc's-t-plus-five-solo/bsps/1277.json",
+    "1279": "levels/pc's-t-plus-five-solo/bsps/1279.json",
+    "1280": "levels/pc's-t-plus-five-solo/bsps/1280.json",
+    "1281": "levels/pc's-t-plus-five-solo/bsps/1281.json",
+    "1282": "levels/pc's-t-plus-five-solo/bsps/1282.json",
+    "1284": "levels/pc's-t-plus-five-solo/bsps/1284.json",
+    "1283": "levels/pc's-t-plus-five-solo/bsps/1283.json",
+    "1286": "levels/pc's-t-plus-five-solo/bsps/1286.json",
+    "1285": "levels/pc's-t-plus-five-solo/bsps/1285.json",
+    "1287": "levels/pc's-t-plus-five-solo/bsps/1287.json",
+    "809": "levels/pc's-t-plus-five-solo/bsps/809.json"
+  }
+}

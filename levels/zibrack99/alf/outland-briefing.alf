@@ -1,0 +1,189 @@
+<map>
+  <set wallHeight="1" />
+  <Wall color="#fffbfe" color.1="#000000" x="122.0138888888889" z="176.84027777777777" w="26.80555555555557" d="31.458333333333343" h="0" y="19" />
+  <set kDeadRange="90" kHeight1="0" />
+  <set wallHeight="0" />
+  <Wall color="#fffbfe" color.1="#000000" x="51.28472222222223" z="113.50694444444444" w="44.65277777777778" d="52.013888888888886" h="0" />
+  <set wallHeight="1" />
+  <Wall color="#fffbfe" color.1="#000000" x="51.28472222222222" z="113.50694444444446" w="31.45833333333333" d="38.81944444444446" h="0" y="19" />
+  <set defaultLives="1" maxStartBoosts="3" maxStartGrenades="10" maxStartMissiles="10" designer="Rup-1" />
+  <SkyColor color="#ff2800" color.1="#00fdf8" />
+  <GroundColor color="#000000" />
+  <set missilePower="1.5" missileAcceleration="0.5" grenadePower="4.0" missileTurnRate="0.1" />
+  <Teleporter shape="0" status="false" win="10000" start="@winTeam" activeRange="2000" color="#ff7498" color.1="#000000" cx="62.43055555555556" cz="3.263888888888889" angle="180" />
+  <set lightHull="151" mediumHull="151" heavyHull="151" />
+  <TeamColor mask="T6" color="#000000" color.1="#d1bcfd" cx="74.51388888888889" cz="2.2222222222222223" r="1.4583333333333357" angle="135" />
+  <set information="You are starting to wonder why nobody is&#10;&#10;coming out to congradulate your success when you&#10;&#10;hear Sgt. Stacks voice from above. . ." />
+  <Ramp thickness="0" y="0" deltaY="19" color="#093aff" color.1="#000000" x="41.770833333333336" z="136.21527777777777" w="12.430555555555557" d="6.5972222222222" h="0" angle="180" />
+  <Ramp thickness="0" y="0" deltaY="19" color="#093aff" color.1="#000000" x="60.798611111111114" z="136.21527777777777" w="12.43055555555555" d="6.5972222222222" h="0" angle="180" />
+  <set wallHeight="23" />
+  <Wall color="#fffbfe" color.1="#000000" x="48.36805555555556" z="136.66666666666669" w="0.7638888888888857" d="7.5" h="0" />
+  <set wallHeight="23" />
+  <Wall color="#fffbfe" color.1="#000000" x="54.20138888888889" z="136.66666666666669" w="0.7638888888888857" d="7.5" h="0" />
+  <Wall color="#fffbfe" color.1="#000000" x="32.25694444444444" z="136.21527777777777" w="6.597222222222221" d="6.5972222222222" h="0" />
+  <set wallHeight="21" />
+  <Wall color="#fffbfe" color.1="#000000" x="70.3125" z="136.21527777777777" w="6.5972222222222285" d="6.5972222222222" h="0" />
+  <Ramp thickness="0" y="0" deltaY="19" color="#093aff" color.1="#000000" x="32.25694444444444" z="119.5138888888889" w="6.597222222222221" d="26.80555555555557" h="0" angle="270" />
+  <Ramp thickness="0" y="0" deltaY="19" color="#093aff" color.1="#000000" x="70.3125" z="109.72222222222223" w="6.5972222222222285" d="7.2222222222222285" h="0" angle="90" />
+  <Ramp thickness="0" y="0" deltaY="19" color="#093aff" color.1="#000000" x="70.3125" z="123.125" w="6.5972222222222285" d="19.583333333333343" h="0" angle="90" />
+  <set wallHeight="21" />
+  <Wall color="#fffbfe" color.1="#000000" x="32.25694444444444" z="90.79861111111111" w="6.597222222222221" d="6.5972222222222285" h="0" />
+  <Ramp thickness="0" y="0" deltaY="19" color="#093aff" color.1="#000000" x="60.798611111111114" z="90.79861111111111" w="12.43055555555555" d="6.5972222222222285" h="0" angle="0" />
+  <Ramp thickness="0" y="0" deltaY="19" color="#093aff" color.1="#000000" x="45.06944444444444" z="90.79861111111111" w="19.02777777777778" d="6.5972222222222285" h="0" angle="0" />
+  <set wallHeight="21" />
+  <Wall color="#fffbfe" color.1="#000000" x="70.3125" z="96.80555555555556" w="6.5972222222222285" d="18.611111111111114" h="0" />
+  <Wall color="#fffbfe" color.1="#000000" x="32.25694444444444" z="105.72916666666667" w="6.597222222222221" d="0.7638888888888857" h="0" />
+  <Wall color="#fffbfe" color.1="#000000" x="32.25694444444444" z="98.36805555555556" w="6.597222222222221" d="0.7638888888888857" h="0" />
+  <set wallHeight="1" />
+  <Wall color="#fffbfe" color.1="#000000" x="51.28472222222222" z="98.64583333333334" w="31.45833333333333" d="14.930555555555557" h="0" y="9" />
+  <set wallHeight="0.5" />
+  <WallDoor stepOnMsg="@upTime" open="@upTime" close="@eleDown" yaw="0" y="0" deltaY="9.5" didOpen="@eleUp" deltaZ="0" pitch="0" color="#093aff" color.1="#050000" x="32.53472222222222" z="96.04166666666667" w="6.041666666666668" d="3.8888888888888857" h="0" />
+  <Timer in="@eleUp" out="@eleDown" wait="100" />
+  <set wallHeight="9" />
+  <Wall color="#fffbfe" color.1="#000000" x="35.451388888888886" z="102.04861111111111" w="0.2083333333333357" d="6.5972222222222285" h="0" y="0" />
+  <set wallHeight="21" />
+  <Wall color="#fffbfe" color.1="#000000" x="29.236111111111114" z="96.04166666666667" w="0.5555555555555536" d="3.8888888888888857" h="0" />
+  <set wallHeight="1" />
+  <Wall color="#fffbfe" color.1="#050000" x="32.53472222222222" z="96.04166666666667" w="6.041666666666668" d="3.8888888888888857" h="0" y="20" />
+  <set wallHeight="21" />
+  <Wall color="#fffbfe" color.1="#050000" x="51.28472222222223" z="133.2638888888889" w="5.06944444444445" d="0.6944444444444287" h="0" y="0" />
+  <Wall color="#fcfb01" color.1="#020105" x="38.68055555555556" z="96.66666666666667" w="5.694444444444443" d="5.694444444444457" h="3.375" y="10" />
+  <Field shape="0" deltaY="0" enter="@enterBriefingRoom" stop="@bFieldStop" exit="@bFieldStop" color="#fcfb01" color.1="#020105" x="45.06944444444444" z="90.79861111111111" w="19.02777777777778" d="6.5972222222222285" h="0" cx="40.625" cz="84.375" angle="0" />
+  <set wallHeight="10" />
+  <Wall color="#fffbfe" color.1="#050000" x="35.208333333333336" z="102.04861111111111" w="0.6944444444444429" d="6.5972222222222285" h="0" y="10" />
+  <Text in="@enterBriefingRoom" wait="0" text="1/13
+Great Job !!" showEveryone="true" align="centerAlign" restart="false" cx="40.625" cz="84.375" r="2.7777777777777786" />
+  <set wallHeight="9" />
+  <Wall color="#fffbfe" color.1="#000000" x="44.65277777777778" z="105.72916666666667" w="18.194444444444443" d="0.7638888888888857" h="0" />
+  <set wallHeight="0.1" />
+  <Wall color="#093aff" color.1="#000000" x="60.55555555555556" z="98.64583333333334" w="4.861111111111114" d="4.791666666666671" h="0" y="10" />
+  <set wallHeight="0" />
+  <Wall color="#093aff" color.1="#000000" x="51.28472222222222" z="105.72916666666667" w="31.45833333333333" d="0.7638888888888857" h="0" y="10" />
+  <Text in="@friendlyFire" text="Yo Dude thats un-cool" showEveryone="true" align="centerAlign" stop="@stopFriendlyFire" cx="40.625" cz="84.375" r="2.7777777777777786" />
+  <Door2 shape="1000" open="@start" midPitch="90" midRoll="90" roll="90" pitch="90" deltaY="0" y="5" scale="1" color="#093aff" color.1="#00f300" cx="42.638888888888886" cz="109.23611111111111" angle="180" />
+  <Door2 shape="1000" open="@start" midPitch="90" midRoll="90" roll="90" pitch="90" deltaY="0" y="5.5" scale="1" color="#093aff" color.1="#00f300" cx="41.736111111111114" cz="110.20833333333334" angle="180" />
+  <Guard shotPower="2" hitMsg="@friendlyFire" speed="20" shield="-1" hitScore="0" freq="12124" start="@enterBriefingRoom" watch="playerMask" shape="bspHullLight" y="12" color="#093aff" color.1="#00f300" cx="50.138888888888886" cz="103.47222222222223" angle="0" />
+  <Hologram shape="bspHECTORLegHigh" y="11.7" roll="-48" isAmbient="false" color="#093aff" color.1="#00f300" cx="49.583333333333336" cz="103.33333333333334" angle="90" />
+  <Hologram shape="bspHECTORLegHigh" y="11.7" roll="-48" isAmbient="false" color="#093aff" color.1="#00f300" cx="50.69444444444444" cz="103.33333333333334" angle="90" />
+  <Hologram shape="bspHECTORLegLow" y="11.05" roll="33" isAmbient="false" color="#fffb00" color.1="#00f300" cx="50.69444444444444" cz="103.95833333333334" angle="90" />
+  <Hologram shape="bspHECTORLegLow" y="11.05" roll="33" isAmbient="false" color="#fffb00" color.1="#00f300" cx="49.583333333333336" cz="103.95833333333334" angle="90" />
+  <Door2 shape="bspGroundArrow" y="5.3" status="isOpen" deltaY="0" pitch="270" color="#093aff" color.1="#000000" cx="29.65277777777778" cz="96.04166666666667" angle="90" />
+  <Timer in="@friendlyFire" wait="4" out="@stopFriendlyFire" />
+  <Teleporter mask="0" shape="216" scale="1" speed="4" y="11.3" start="@holoStart1" stop="@holoStart2" color="#093aff" color.1="#f8fb00" cx="60.55555555555556" cz="98.68055555555557" angle="0" />
+  <set ambient.i="0.2" light.0.i="1" light.0.a="50" light.0.b="20" light.1.i="0.6" light.1.a="60" light.1.b="150" light.2.i="0.5" light.2.a="230" light.2.b="-60" />
+  <Text in="@enterBriefingRoom" wait="200" text="2/13
+However, we have no time to
+celebrate our small victory" showEveryone="true" align="centerAlign" restart="false" cx="60.55555555555556" cz="98.68055555555557" r="2.7777777777777786" />
+  <Text in="@enterBriefingRoom" wait="400" text="3/13
+We have just found out that our 
+codes have been cracked" showEveryone="true" align="centerAlign" restart="false" cx="60.55555555555556" cz="98.68055555555557" r="2.7777777777777786" />
+  <Text in="@enterBriefingRoom" wait="600" text="4/13
+This leads us to believe that 
+OutLand Base's current mission
+will be met with an ambush" showEveryone="true" align="centerAlign" restart="false" cx="60.55555555555556" cz="98.68055555555557" r="2.7777777777777786" />
+  <Text in="@enterBriefingRoom" wait="800" text="5/13
+Their mission to attack the RHC
+main power plant starts shortly" showEveryone="true" align="centerAlign" restart="false" cx="60.55555555555556" cz="98.68055555555557" r="2.7777777777777786" />
+  <Text in="@enterBriefingRoom" wait="1000" text="6/13
+To make sure OutLand Base 
+receives the warning correctly we 
+need you to deliver it in person" showEveryone="true" align="centerAlign" restart="false" cx="60.55555555555556" cz="98.68055555555557" r="2.7777777777777786" />
+  <Text in="@enterBriefingRoom" wait="1200" text="7/13
+We have only minutes to deliver 
+the warning so I'll be quick" showEveryone="true" align="centerAlign" restart="false" cx="60.55555555555556" cz="98.68055555555557" r="2.7777777777777786" />
+  <Text in="@enterBriefingRoom" wait="1400" text="8/13
+We can't risk flying through 
+any RHC air defences so you
+will be using this Ice Speeder" showEveryone="true" align="centerAlign" restart="false" cx="60.55555555555556" cz="98.68055555555557" r="2.7777777777777786" />
+  <Text in="@enterBriefingRoom" wait="1600" text="9/13
+As you can see by the hologram
+image it looks very fast and agile.
+It is !" showEveryone="true" align="centerAlign" restart="false" cx="60.55555555555556" cz="98.68055555555557" r="2.7777777777777786" />
+  <Text in="@enterBriefingRoom" wait="1800" text="10/13
+Also, it's auto pilot will take to
+the start of the path.  After 
+that you are on your own" showEveryone="true" align="centerAlign" restart="false" cx="60.55555555555556" cz="98.68055555555557" r="2.7777777777777786" />
+  <Text in="@enterBriefingRoom" wait="2000" text="11/13
+Just remember that one wrong 
+turn off the path and a fall to 
+your death is certain" showEveryone="true" align="centerAlign" restart="false" cx="60.55555555555556" cz="98.68055555555557" r="2.7777777777777786" />
+  <Text in="@enterBriefingRoom" wait="2200" text="12/13
+Here is a Hologram of the path. 
+You will enter on the lower part
+and note the elevation changes" showEveryone="true" align="centerAlign" restart="false" cx="60.55555555555556" cz="98.68055555555557" r="2.7777777777777786" />
+  <Text in="@enterBriefingRoom" wait="2400" text="13/13
+Enter the teleporter to see Gen. Su 
+He will give you more detail in 
+the Hanger -- Good Luck" showEveryone="true" align="centerAlign" restart="false" cx="60.55555555555556" cz="98.68055555555557" r="2.7777777777777786" />
+  <Hologram shape="bspHullLight" isAmbient="true" y="2" color="#093aff" color.1="#00f300" cx="51.04166666666667" cz="108.47222222222223" angle="180" />
+  <Hologram shape="bspHECTORLegHigh" y="1.7" roll="-48" isAmbient="true" color="#093aff" color.1="#00f300" cx="51.59722222222223" cz="108.54166666666667" angle="270" />
+  <Hologram shape="bspHECTORLegHigh" y="1.7" roll="-48" isAmbient="true" color="#093aff" color.1="#00f300" cx="50.486111111111114" cz="108.54166666666667" angle="270" />
+  <Hologram shape="bspHECTORLegLow" y="1.05" roll="33" isAmbient="true" color="#093aff" color.1="#00f300" cx="50.486111111111114" cz="107.91666666666667" angle="270" />
+  <Hologram shape="bspHECTORLegLow" y="1.05" roll="33" isAmbient="true" color="#093aff" color.1="#00f300" cx="51.59722222222223" cz="107.91666666666667" angle="270" />
+  <Hologram shape="bspHullLight" isAmbient="true" y="2" color="#093aff" color.1="#00f300" cx="38.611111111111114" cz="108.75" angle="180" />
+  <Hologram shape="bspHECTORLegHigh" y="1.7" roll="-48" isAmbient="true" color="#093aff" color.1="#00f300" cx="39.16666666666667" cz="108.81944444444446" angle="270" />
+  <Hologram shape="bspHECTORLegHigh" y="1.7" roll="-48" isAmbient="true" color="#093aff" color.1="#00f300" cx="38.05555555555556" cz="108.81944444444446" angle="270" />
+  <Hologram shape="bspHECTORLegLow" y="1.05" roll="33" isAmbient="true" color="#093aff" color.1="#00f300" cx="38.05555555555556" cz="108.19444444444446" angle="270" />
+  <Hologram shape="bspHECTORLegLow" y="1.05" roll="33" isAmbient="true" color="#093aff" color.1="#00f300" cx="39.16666666666667" cz="108.19444444444446" angle="270" />
+  <Incarnator mask="T6" cx="45.13888888888889" cz="129.86111111111111" angle="0" />
+  <Text in="@start" wait="32" text="Welcome Back
+------
+Come on up" showEveryone="true" align="centerAlign" restart="false" cx="45.13888888888889" cz="129.86111111111111" r="2.7777777777777786" />
+  <Ramp thickness="0" y="0" deltaY="19" color="#093aff" color.1="#000000" x="138.68055555555557" z="186.35416666666669" w="6.5277777777777715" d="12.430555555555571" h="0" angle="90" />
+  <Ramp thickness="0" y="0" deltaY="19" color="#093aff" color.1="#000000" x="138.68055555555557" z="167.36111111111114" w="6.5277777777777715" d="12.361111111111114" h="0" angle="90" />
+  <Ramp thickness="0" y="0" deltaY="19" color="#093aff" color.1="#000000" x="122.0138888888889" z="195.86805555555557" w="26.80555555555557" d="6.5972222222222285" h="0" angle="180" />
+  <Ramp thickness="0" y="0" deltaY="19" color="#093aff" color.1="#000000" x="112.22222222222223" z="157.84722222222223" w="7.2222222222222285" d="6.5277777777777715" h="0" angle="0" />
+  <Ramp thickness="0" y="0" deltaY="19" color="#093aff" color.1="#000000" x="125.625" z="157.84722222222223" w="19.583333333333343" d="6.5277777777777715" h="0" angle="0" />
+  <set wallHeight="21" />
+  <Wall color="#fffbfe" color.1="#000000" x="138.68055555555557" z="157.84722222222223" w="6.5277777777777715" d="6.5277777777777715" h="0" />
+  <set wallHeight="21" />
+  <Wall color="#fffbfe" color.1="#000000" x="139.13194444444446" z="173.95833333333334" w="7.430555555555543" d="0.6944444444444571" h="0" />
+  <set wallHeight="21" />
+  <Wall color="#fffbfe" color.1="#050000" x="135.7638888888889" z="176.84027777777777" w="0.6944444444444287" d="5.069444444444429" h="0" />
+  <set wallHeight="21" />
+  <Wall color="#fffbfe" color.1="#000000" x="139.13194444444446" z="179.75694444444446" w="7.430555555555543" d="0.7638888888888857" h="0" />
+  <set wallHeight="21" />
+  <Wall color="#fffbfe" color.1="#000000" x="138.68055555555557" z="195.86805555555557" w="6.5277777777777715" d="6.5972222222222285" h="0" />
+  <set wallHeight="21" />
+  <Wall color="#fffbfe" color.1="#000000" x="108.15972222222223" z="175.9375" w="0.7638888888888857" d="46.45833333333334" h="0" />
+  <set wallHeight="0.1" />
+  <Door2 shape="1000" open="@start" midPitch="90" midRoll="90" roll="90" pitch="90" deltaY="0" y="11" scale="2" color="#093aff" color.1="#00f300" cx="116.73611111111111" cz="180.625" angle="90" />
+  <Teleporter destGroup="@kGroup" y="10" start="@teleStart" color="#093aff" color.1="#000000" cx="39.583333333333336" cz="101.38888888888889" angle="0" />
+  <Teleporter in="@stopTele" stop="@stopTele" spin="false" group="@kGroup" start="@start" color="#093aff" color.1="#000000" cx="130.83333333333334" cz="166.3888888888889" angle="270" />
+  <Guard shotPower="2" hitMsg="@friendlyFire" speed="20" shield="-1" hitScore="0" freq="12124" start="@stopTele" watch="playerMask" shape="bspHullLight" y="2" color="#093aff" color.1="#00f300" cx="115.90277777777777" cz="165.34722222222223" angle="180" />
+  <Hologram shape="bspHECTORLegHigh" y="1.7" roll="-48" isAmbient="false" color="#093aff" color.1="#00f300" cx="116.45833333333334" cz="165.41666666666669" angle="270" />
+  <Hologram shape="bspHECTORLegHigh" y="1.7" roll="-48" isAmbient="false" color="#093aff" color.1="#00f300" cx="115.34722222222223" cz="165.41666666666669" angle="270" />
+  <Hologram shape="bspHECTORLegLow" y="1.05" roll="33" isAmbient="false" color="#f8fb00" color.1="#00f300" cx="115.34722222222223" cz="164.79166666666669" angle="270" />
+  <Hologram shape="bspHECTORLegLow" y="1.05" roll="33" isAmbient="false" color="#f8fb00" color.1="#00f300" cx="116.45833333333334" cz="164.79166666666669" angle="270" />
+  <Solid y="2" shape="216" scale="2" color="#093aff" color.1="#f8fb00" cx="115.625" cz="186.80555555555554" angle="45" />
+  <Text in="@stopTele" wait="32" text="1/6
+I'll be brief, but there are
+a few things you need to know
+before you go" showEveryone="true" align="centerAlign" restart="false" cx="115.625" cz="186.80555555555554" r="1.4583333333333357" />
+  <Text in="@stopTele" wait="200" text="2/6
+First there are several jumps 
+that you need to make in 
+order to reach OutLand Base" showEveryone="true" align="centerAlign" restart="false" cx="115.625" cz="186.80555555555554" r="1.4583333333333357" />
+  <Text in="@stopTele" wait="400" text="3/6
+Your Ice Speeder has built 
+in sensors to activate the jumping
+mechanism to make the jumps" showEveryone="true" align="centerAlign" restart="false" cx="115.625" cz="186.80555555555554" r="1.4583333333333357" />
+  <Text in="@stopTele" wait="600" text="4/6
+However, once activated the 
+recharge time is about 4 seconds." showEveryone="true" align="centerAlign" restart="false" cx="115.625" cz="186.80555555555554" r="1.4583333333333357" />
+  <Text in="@stopTele" wait="800" text="5/6 
+Basically, hit the jumps the
+first time in order to complete 
+the mission in time." showEveryone="true" align="centerAlign" restart="false" cx="115.625" cz="186.80555555555554" r="1.4583333333333357" />
+  <Text in="@stopTele" wait="1000" text="6/6
+Time is critical so enter your Ice
+Speeder to start your mission.
+Good Luck" showEveryone="true" align="centerAlign" restart="false" cx="115.625" cz="186.80555555555554" r="1.4583333333333357" />
+  <Timer in="@enterBriefingRoom" wait="2450" out="@teleStart" />
+  <Timer in="@enterBriefingRoom" wait="1400" out="@holoStart1" />
+  <Timer in="@enterBriefingRoom" wait="2200" out="@holoStart2" />
+  <Teleporter mask="0" shape="1003" scale="0.7" speed="1" y="10.2" start="@holoStart2" color="#b61b08" color.1="#00ae00" cx="60.55555555555556" cz="98.75" angle="0" />
+  <Timer in="@stopTele" wait="1000" out="@startWinner" />
+  <Wall color="#fcfb01" color.1="#020105" x="115" z="187.3263888888889" w="9.305555555555557" d="9.236111111111114" h="9" y="0" />
+  <Field shape="0" start="@startWinner" deltaY="0" enter="@winTeam" color="#fcfb01" color.1="#020105" x="125.625" z="157.84722222222223" w="19.583333333333343" d="6.5277777777777715" h="0" cx="60.55555555555556" cz="98.75" angle="0" />
+</map>

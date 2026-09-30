@@ -41,6 +41,11 @@ public:
         Right         ///< Button icon on the far right.
     };
 
+    enum class TextPosition {
+        Left,
+        Center
+    };
+
     /**
      * \brief Creates a button attached to the specified parent.
      *
@@ -90,6 +95,12 @@ public:
 
     /// Sets the position of the icon for this Button.
     void setIconPosition(IconPosition iconPosition) { mIconPosition = iconPosition; }
+
+    /// The position of the text for this Button.
+    TextPosition textPosition() const { return mTextPosition; }
+
+    /// Sets the position of the text for this Button.
+    void setTextPosition(TextPosition textPosition) { mTextPosition = textPosition; }
 
     /// Whether or not this Button is currently pushed.
     bool pushed() const { return mPushed; }
@@ -143,6 +154,9 @@ protected:
 
     /// The position to draw the icon at.
     IconPosition mIconPosition;
+
+    /// The position to draw the text.
+    TextPosition mTextPosition;
 
     /// Whether or not this Button is currently pushed.
     bool mPushed;

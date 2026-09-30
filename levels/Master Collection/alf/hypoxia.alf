@@ -1,0 +1,1085 @@
+<map>
+// FISH SCHOOLS
+<set material.glow="256" material.1.glow="256" />
+<Teleporter y="100" shape="4965" scale="3.4" yon="2000" speed="-0.16" group="@center" mask="0" spin="false" color="#1d2229" color.1="#0d0f0f" cx="162.98611111111111" cz="166.80555555555557" angle="315" />
+<Teleporter y="85" shape="4950" scale="3.25" yon="2000" speed="-0.2" group="@center" mask="0" spin="false" color="#1d2229" color.1="#0d0f0f" cx="162.98611111111111" cz="166.80555555555557" angle="45" />
+
+<Teleporter y="165" shape="4964" scale="3.3" yon="2000" speed="0.16" group="@center" mask="0" spin="false" color="#3d5a70" color.1="#5b6069" cx="162.98611111111111" cz="166.80555555555557" angle="135" />
+<set material.glow="0" material.1.glow="0" />
+
+
+<Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#00011b" color.1="#00011b" cx="4.444444444444445" cz="2.5" angle="0" />
+<set wallYon="0.01" />
+<set wallHeight="1.25" />
+  <WallDoor midYaw="30" color="rgba(150,0,0,0.6)" color.1="#000000" x="169.58611111111111" z="177.00555555555557" w="1.25" d="2.5" h="0" y="6.85" />
+<set wallHeight="1.5" />
+  <WallDoor midYaw="30" color="rgba(255,0,255,0.6)" color.1="#000000" x="173.08611111111111" z="183.00555555555557" w="3.5" d="12" h="0" y="6.6" />
+<set wallHeight="1.25" />
+  <WallDoor midYaw="120" color="rgba(255,255,255,0.6)" color.1="#000000" x="152.78611111111111" z="173.10555555555557" w="1.25" d="2.5" h="0" y="6.85" />
+<set wallHeight="1.5" />
+  <WallDoor midYaw="120" color="rgba(255,255,255,0.6)" color.1="#000000" x="146.88611111111111" z="176.90555555555557" w="3.5" d="12" h="0" y="6.6" />
+<set wallHeight="1.25" />
+  <WallDoor midYaw="120" color="#ff0000" color.1="#000000" x="173.48611111111111" z="160.30555555555557" w="1.25" d="2.5" h="0" y="6.85" />
+<set wallHeight="1.5" />
+  <WallDoor midYaw="120" color="rgba(255,255,0,0.6)" color.1="#000000" x="178.48611111111111" z="157.00555555555557" w="3.5" d="12" h="0" y="6.6" />
+<set wallHeight="1.25" />
+  <WallDoor midYaw="30" color="#fff000" color.1="#000000" x="156.58611111111111" z="156.70555555555557" w="1.25" d="2.5" h="0" y="6.85" />
+<set wallHeight="1.5" />
+  <WallDoor midYaw="30" color="rgba(255,0,0,0.6)" color.1="#000000" x="152.98611111111111" z="150.80555555555557" w="3.5" d="12" h="0" y="6.6" />
+<set wallYon="defaultYon" />
+
+<Solid shape="5005" scale="0.92" y="1.1" yon="0.01" color="#fff000" color.1="#000000" cx="162.98611111111111" cz="166.80555555555557" />
+
+<Solid shape="5005" scale="1" y="0.75" yon="0.01" color="#ff0000" color.1="#000000" cx="162.98611111111111" cz="166.80555555555557" />
+
+<Solid shape="5005" scale="1.05" y="0.5" yon="0.01" color="#fff000" color.1="#000000" cx="162.98611111111111" cz="166.80555555555557" />
+
+  <set gravity="0.50" />
+
+<Field watch="playerMask" shape="bspSphere" scale="1000" start="@start" deltaY="0.02" color="#ffffff" color.1="#000000" cx="61.111111111111114" cz="91.11111111111111" angle="45" />
+
+<set ambient.i="0.05" light.3.i="0.0" light.3.a="90" light.3.b="90" light.3.r="38.00" light.3.c="#334a5c" light.2.i="0.0" light.2.a="90" light.2.b="90" light.2.r="80.00" light.2.c="#314657" light.0.s="true" light.1.s="true" />
+
+<Sound y="10" sound="snBubbles" rate="1" isAmbient="false" loopCount="-1" volume="0.3" isPlaced="false" cx="162.98611111111111" cz="166.80555555555557" angle="135" />
+
+  <set wallYon="0.01" wallHeight="1.9" />
+  <Wall color="#ff3ff6" color.1="#000000" x="181.73611111111111" z="166.49305555555557" w="6.25" d="29.375" h="0" y="8.1" />
+  <set wallHeight="1.9" />
+  <Wall color="#ff3ff6" color.1="#000000" x="150.79861111111111" z="166.80555555555557" w="6.875" d="43.75" h="0" y="8.1" />
+  <set wallHeight="1.9" />
+  <Wall color="#ff3ff6" color.1="#000000" x="162.98611111111111" z="151.49305555555557" w="17.5" d="13.125" h="0" y="8.1" />
+  <set wallHeight="1.9" />
+  <Wall color="#ff3ff6" color.1="#000000" x="175.17361111111111" z="166.80555555555557" w="6.875" d="43.75" h="0" y="8.1" />
+  <set wallHeight="1.9" />
+  <Wall color="#ff3ff6" color.1="#000000" x="162.98611111111111" z="182.11805555555557" w="17.5" d="13.125" h="0" y="8.1" />
+  <set wallHeight="1.9" />
+  <Wall color="#ff3ff6" color.1="#000000" x="162.98611111111111" z="159.30555555555557" w="17.5" d="2.5" h="0" y="8.1" />
+  <set wallHeight="1.9" />
+  <Wall color="#ff3ff6" color.1="#000000" x="162.98611111111111" z="174.30555555555557" w="17.5" d="2.5" h="0" y="8.1" />
+  <set wallHeight="1.9" />
+  <Wall color="#ff3ff6" color.1="#000000" x="155.48611111111111" z="166.80555555555557" w="2.5" d="12.5" h="0" y="8.1" />
+  <set wallHeight="1.9" />
+  <Wall color="#ff3ff6" color.1="#000000" x="170.48611111111111" z="166.80555555555557" w="2.5" d="12.5" h="0" y="8.1" />
+  <set wallHeight="1.9" />
+  <Wall color="#ff3ff6" color.1="#000000" x="144.23611111111111" z="166.49305555555557" w="6.25" d="29.375" h="0" y="8.1" />
+  <set wallHeight="1.9" />
+  <WallDoor midYaw="68" color="#00f900" color.1="#000000" x="171.84027777777777" z="144.75694444444446" w="5.625" d="11.875" h="0" y="8.1" />
+  <set wallHeight="1.9" />
+  <WallDoor midYaw="45" color="#00f900" color.1="#000000" x="180.45138888888889" z="150.52083333333334" w="5.625" d="10.625" h="0" y="8.1" />
+  <set wallHeight="1.9" />
+  <WallDoor midYaw="23" color="#00f900" color.1="#000000" x="185.38194444444446" z="158.4375" w="5.625" d="10.625" h="0" y="8.1" />
+  <set wallHeight="1.9" />
+  <Wall color="#00f900" color.1="#000000" x="162.98611111111111" z="142.74305555555557" w="8.75" d="5.625" h="0" y="8.1" />
+  <set wallHeight="1.9" />
+  <Wall color="#00f900" color.1="#000000" x="162.98611111111111" z="190.86805555555557" w="8.75" d="5.625" h="0" y="8.1" />
+  <set wallHeight="1.9" />
+  <Wall color="#00f900" color.1="#000000" x="187.04861111111111" z="166.80555555555557" w="5.625" d="8.75" h="0" y="8.1" />
+  <set wallHeight="1.9" />
+  <Wall color="#00f900" color.1="#000000" x="138.92361111111111" z="166.80555555555557" w="5.625" d="8.75" h="0" y="8.1" />
+  <set wallHeight="1.9" />
+  <WallDoor midYaw="110" color="#00f900" color.1="#000000" x="154.34027777777777" z="144.75694444444446" w="5.625" d="11.875" h="0" y="8.1" />
+  <set wallHeight="1.9" />
+  <WallDoor midYaw="136" color="#00f900" color.1="#000000" x="146.07638888888889" z="149.89583333333334" w="5.625" d="10.625" h="0" y="8.1" />
+  <set wallHeight="1.9" />
+  <WallDoor midYaw="158" color="#00f900" color.1="#000000" x="140.79861111111111" z="158.09027777777777" w="5.625" d="11.875" h="0" y="8.1" />
+  <set wallHeight="1.9" />
+  <WallDoor midYaw="200" color="#00f900" color.1="#000000" x="140.79861111111111" z="175.59027777777777" w="5.625" d="11.875" h="0" y="8.1" />
+  <set wallHeight="1.9" />
+  <WallDoor midYaw="226" color="#00f900" color.1="#000000" x="146.07638888888889" z="183.64583333333334" w="5.625" d="10.625" h="0" y="8.1" />
+  <set wallHeight="1.9" />
+  <WallDoor midYaw="248" color="#00f900" color.1="#000000" x="154.96527777777777" z="189.13194444444446" w="5.625" d="11.875" h="0" y="8.1" />
+  <set wallHeight="1.9" />
+  <WallDoor midYaw="292" color="#00f900" color.1="#000000" x="171.21527777777777" z="189.13194444444446" w="5.625" d="11.875" h="0" y="8.1" />
+  <set wallHeight="1.9" />
+  <WallDoor midYaw="315" color="#00f900" color.1="#000000" x="179.82638888888889" z="183.64583333333334" w="5.625" d="10.625" h="0" y="8.1" />
+  <set wallHeight="1.9" />
+  <WallDoor midYaw="338" color="#00f900" color.1="#000000" x="185.38194444444446" z="175.3125" w="5.625" d="10.625" h="0" y="8.1" />
+  <set wallYon="defaultYon" />
+
+  <set wallYon="0.01" wallHeight="2.2" />
+  <Wall color="#00f900" color.1="#000000" x="154.54861111111111" z="166.80555555555557" w="1.875" d="2.5" h="0" y="8.1" />
+  <set wallHeight="2.2" />
+  <Wall color="#00f900" color.1="#000000" x="162.98611111111111" z="158.36805555555557" w="2.5" d="1.875" h="0" y="8.1" />
+  <set wallHeight="2.2" />
+  <Wall color="#00f900" color.1="#000000" x="171.42361111111111" z="166.80555555555557" w="1.875" d="2.5" h="0" y="8.1" />
+  <set wallHeight="2.2" />
+  <Wall color="#00f900" color.1="#000000" x="162.98611111111111" z="175.24305555555557" w="2.5" d="1.875" h="0" y="8.1" />
+  <set wallHeight="2.2" />
+  <WallDoor midYaw="205" color="#00f900" color.1="#000000" x="155.38194444444446" z="169.61805555555557" w="1.875" d="4.375" h="0" y="8.1" />
+  <set wallHeight="2.2" />
+  <WallDoor midYaw="158" color="#00f900" color.1="#000000" x="155.24305555555557" z="163.99305555555557" w="1.875" d="4.375" h="0" y="8.1" />
+  <set wallHeight="2.2" />
+  <WallDoor midYaw="136" color="#00f900" color.1="#000000" x="157.04861111111111" z="161.18055555555557" w="1.875" d="3.75" h="0" y="8.1" />
+  <set wallHeight="2.2" />
+  <WallDoor midYaw="110" color="#00f900" color.1="#000000" x="160.10416666666669" z="159.13194444444446" w="1.875" d="4.375" h="0" y="8.1" />
+  <set wallHeight="2.2" />
+  <WallDoor midYaw="68" color="#00f900" color.1="#000000" x="165.9375" z="159.13194444444446" w="1.875" d="4.375" h="0" y="8.1" />
+  <set wallHeight="2.2" />
+  <WallDoor midYaw="45" color="#00f900" color.1="#000000" x="168.92361111111111" z="161.18055555555557" w="1.875" d="3.75" h="0" y="8.1" />
+  <set wallHeight="2.2" />
+  <WallDoor midYaw="23" color="#00f900" color.1="#000000" x="170.65972222222223" z="163.99305555555557" w="1.875" d="4.375" h="0" y="8.1" />
+  <set wallHeight="2.2" />
+  <WallDoor midYaw="315" color="#00f900" color.1="#000000" x="168.92361111111111" z="172.43055555555557" w="1.875" d="3.75" h="0" y="8.1" />
+  <set wallHeight="2.2" />
+  <WallDoor midYaw="338" color="#00f900" color.1="#000000" x="170.65972222222223" z="169.61805555555557" w="1.875" d="4.375" h="0" y="8.1" />
+  <set wallHeight="2.2" />
+  <WallDoor midYaw="292" color="#00f900" color.1="#000000" x="165.72916666666669" z="174.47916666666669" w="1.875" d="4.375" h="0" y="8.1" />
+  <set wallHeight="2.2" />
+  <WallDoor midYaw="248" color="#00f900" color.1="#000000" x="160.45138888888889" z="174.47916666666669" w="1.875" d="4.375" h="0" y="8.1" />
+  <set wallHeight="2.2" />
+  <WallDoor midYaw="226" color="#00f900" color.1="#000000" x="157.60416666666669" z="172.56944444444446" w="1.875" d="3.75" h="0" y="8.1" />
+  <set wallYon="defaultYon" />
+
+  <set wallYon="0.01" wallHeight="0.41" />
+  <Wall color="#00f900" color.1="#000000" x="154.54861111111111" z="166.80555555555557" w="1.875" d="2.5" h="0" y="0" />
+  <set wallHeight="0.41" />
+  <Wall color="#00f900" color.1="#000000" x="162.98611111111111" z="158.36805555555557" w="2.5" d="1.875" h="0" y="0" />
+  <set wallHeight="0.41" />
+  <Wall color="#00f900" color.1="#000000" x="171.42361111111111" z="166.80555555555557" w="1.875" d="2.5" h="0" y="0" />
+  <set wallHeight="0.41" />
+  <Wall color="#00f900" color.1="#000000" x="162.98611111111111" z="175.24305555555557" w="2.5" d="1.875" h="0" y="0" />
+  <set wallHeight="0.41" />
+  <WallDoor midYaw="205" color="#00f900" color.1="#000000" x="155.38194444444446" z="169.61805555555557" w="1.875" d="4.375" h="0" y="0" />
+  <set wallHeight="0.41" />
+  <WallDoor midYaw="158" color="#00f900" color.1="#000000" x="155.24305555555557" z="163.99305555555557" w="1.875" d="4.375" h="0" y="0" />
+  <set wallHeight="0.41" />
+  <WallDoor midYaw="136" color="#00f900" color.1="#000000" x="157.04861111111111" z="161.18055555555557" w="1.875" d="3.75" h="0" y="0" />
+  <set wallHeight="0.41" />
+  <WallDoor midYaw="110" color="#00f900" color.1="#000000" x="160.10416666666669" z="159.13194444444446" w="1.875" d="4.375" h="0" y="0" />
+  <set wallHeight="0.41" />
+  <WallDoor midYaw="68" color="#00f900" color.1="#000000" x="165.9375" z="159.13194444444446" w="1.875" d="4.375" h="0" y="0" />
+  <set wallHeight="0.41" />
+  <WallDoor midYaw="45" color="#00f900" color.1="#000000" x="168.92361111111111" z="161.18055555555557" w="1.875" d="3.75" h="0" y="0" />
+  <set wallHeight="0.41" />
+  <WallDoor midYaw="23" color="#00f900" color.1="#000000" x="170.65972222222223" z="163.99305555555557" w="1.875" d="4.375" h="0" y="0" />
+  <set wallHeight="0.41" />
+  <WallDoor midYaw="315" color="#00f900" color.1="#000000" x="168.92361111111111" z="172.43055555555557" w="1.875" d="3.75" h="0" y="0" />
+  <set wallHeight="0.41" />
+  <WallDoor midYaw="338" color="#00f900" color.1="#000000" x="170.65972222222223" z="169.61805555555557" w="1.875" d="4.375" h="0" y="0" />
+  <set wallHeight="0.41" />
+  <WallDoor midYaw="292" color="#00f900" color.1="#000000" x="165.72916666666669" z="174.47916666666669" w="1.875" d="4.375" h="0" y="0" />
+  <set wallHeight="0.41" />
+  <WallDoor midYaw="248" color="#00f900" color.1="#000000" x="160.45138888888889" z="174.47916666666669" w="1.875" d="4.375" h="0" y="0" />
+  <set wallHeight="0.41" />
+  <WallDoor midYaw="226" color="#00f900" color.1="#000000" x="157.60416666666669" z="172.56944444444446" w="1.875" d="3.75" h="0" y="0" />
+  <set wallYon="defaultYon" />
+
+  <Hologram shape="4921" visible="true" scale="22.85" y="10" color="#2f4656" color.1="#474747" cx="162.98611111111111" cz="166.80555555555557" angle="315" />
+
+  <Hologram shape="4447" visible="true" scale="22.85" yon="0.01" y="10.01" color="#ffffff" color.1="#888a88" cx="162.98611111111111" cz="166.80555555555557" angle="315" />
+  <Hologram shape="4009" visible="true" scale="22.85" y="0" color="#233542" color.1="#636362" cx="162.98611111111111" cz="166.80555555555557" angle="315" />
+  <set defaultTraction="0.75" defaultFriction="0.75" wallTraction="0.75" wallFriction="0.75" traction="defaultTraction" friction="defaultFriction" />
+  <GroundColor color="#030608" />
+
+<SkyColor n="10000" verticalRangeMax="15000" color="#060a0f" color.1="#2f4657" thickness="3300" />
+<set designer="Designed by Sphinx" information="&#10;Map Size: Medium&#10;   Features: Reduced gravity&#10;&#10;Deep beneath the sea." />
+
+  <FreeSolid shape="4010" scale="22.85" shield="-1" canGlow="true" mass="500" accel="0" customGravity="0" hitVolume="0" y="0" color="#ffffff" color.1="#8b8b8b" cx="162.98611111111111" cz="166.80555555555557" angle="315" />
+  <set wallYon="0.01" wallHeight="0.1" />
+  <set wallYon="defaultYon" />
+  <WallDoor guardDelay="0" open="@start" deltaY="10" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="1" color="rgba(0,0,0,0)" color.1="#000000" x="162.9513888888889" z="166.77083333333334" w="0.06944444444442865" d="0.06944444444445708" h="0" y="0" />
+  <set wallHeight="2.2" />
+  <Wall color="#1b2a35" color.1="#000000" x="139.86111111111111" z="166.80555555555557" w="5" d="10" h="0" />
+  <set wallHeight="0.2" />
+  <Wall color="#0f1921" color.1="#000000" x="139.86111111111111" z="166.80555555555557" w="3.75" d="8.75" h="0" y="2.2" />
+  <set wallHeight="0.2" />
+  <Wall color="#0f1921" color.1="#000000" x="139.86111111111111" z="164.61805555555557" w="2.5" d="3.125" h="0" y="7.9" />
+  <set wallHeight="0.2" />
+  <Wall color="#0f1921" color.1="#000000" x="139.86111111111111" z="168.99305555555557" w="2.5" d="3.125" h="0" y="7.9" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="139.89583333333334" z="164.61805555555557" w="1.875" d="0.625" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="139.13194444444446" z="163.99305555555557" w="0.34722222222222854" d="0.625" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="140.65972222222223" z="163.99305555555557" w="0.34722222222222854" d="0.625" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="139.13194444444446" z="165.24305555555557" w="0.34722222222222854" d="0.625" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="140.65972222222223" z="165.24305555555557" w="0.34722222222222854" d="0.625" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="139.89583333333334" z="168.99305555555557" w="1.875" d="0.625" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="139.13194444444446" z="168.36805555555557" w="0.34722222222222854" d="0.625" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="140.65972222222223" z="168.36805555555557" w="0.34722222222222854" d="0.625" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="139.13194444444446" z="169.61805555555557" w="0.34722222222222854" d="0.625" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="140.65972222222223" z="169.61805555555557" w="0.34722222222222854" d="0.625" h="0" y="2.4" />
+  <set wallHeight="0.5" />
+  <Wall color="#0f1921" color.1="#000000" x="139.89583333333334" z="166.80555555555557" w="0.20833333333331439" d="3.75" h="0" y="5.7" />
+  <set wallHeight="2.2" />
+  <Wall color="#1b2a35" color.1="#000000" x="186.11111111111111" z="166.80555555555557" w="5" d="10" h="0" />
+  <set wallHeight="0.2" />
+  <Wall color="#0f1921" color.1="#000000" x="186.11111111111111" z="166.80555555555557" w="3.75" d="8.75" h="0" y="2.2" />
+  <set wallHeight="0.2" />
+  <Wall color="#0f1921" color.1="#000000" x="186.11111111111111" z="164.61805555555557" w="2.5" d="3.125" h="0" y="7.9" />
+  <set wallHeight="0.2" />
+  <Wall color="#0f1921" color.1="#000000" x="186.11111111111111" z="168.99305555555557" w="2.5" d="3.125" h="0" y="7.9" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="186.14583333333334" z="164.61805555555557" w="1.875" d="0.625" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="185.38194444444446" z="163.99305555555557" w="0.34722222222222854" d="0.625" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="186.90972222222223" z="163.99305555555557" w="0.34722222222222854" d="0.625" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="185.38194444444446" z="165.24305555555557" w="0.34722222222222854" d="0.625" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="186.90972222222223" z="165.24305555555557" w="0.34722222222222854" d="0.625" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="186.14583333333334" z="168.99305555555557" w="1.875" d="0.625" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="185.38194444444446" z="168.36805555555557" w="0.34722222222222854" d="0.625" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="186.90972222222223" z="168.36805555555557" w="0.34722222222222854" d="0.625" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="185.38194444444446" z="169.61805555555557" w="0.34722222222222854" d="0.625" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="186.90972222222223" z="169.61805555555557" w="0.34722222222222854" d="0.625" h="0" y="2.4" />
+  <set wallHeight="0.5" />
+  <Wall color="#0f1921" color.1="#000000" x="186.14583333333334" z="166.80555555555557" w="0.20833333333331439" d="3.75" h="0" y="5.7" />
+  <set wallHeight="2.2" />
+  <Wall color="#1b2a35" color.1="#000000" x="162.98611111111111" z="189.93055555555557" w="10" d="5" h="0" />
+  <set wallHeight="0.2" />
+  <Wall color="#0f1921" color.1="#000000" x="162.98611111111111" z="189.93055555555557" w="8.75" d="3.75" h="0" y="2.2" />
+  <set wallHeight="0.2" />
+  <Wall color="#0f1921" color.1="#000000" x="160.79861111111111" z="189.93055555555557" w="3.125" d="2.5" h="0" y="7.9" />
+  <set wallHeight="0.2" />
+  <Wall color="#0f1921" color.1="#000000" x="165.17361111111111" z="189.93055555555557" w="3.125" d="2.5" h="0" y="7.9" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="160.79861111111111" z="189.9652777777778" w="0.625" d="1.875" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="160.17361111111111" z="190.72916666666669" w="0.625" d="0.34722222222222854" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="160.17361111111111" z="189.2013888888889" w="0.625" d="0.3472222222222001" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="161.42361111111111" z="190.72916666666669" w="0.625" d="0.34722222222222854" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="161.42361111111111" z="189.2013888888889" w="0.625" d="0.3472222222222001" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="165.17361111111111" z="189.9652777777778" w="0.625" d="1.875" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="164.54861111111111" z="190.72916666666669" w="0.625" d="0.34722222222222854" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="164.54861111111111" z="189.2013888888889" w="0.625" d="0.3472222222222001" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="165.79861111111111" z="190.72916666666669" w="0.625" d="0.34722222222222854" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="165.79861111111111" z="189.2013888888889" w="0.625" d="0.3472222222222001" h="0" y="2.4" />
+  <set wallHeight="2.2" />
+  <Wall color="#1b2a35" color.1="#000000" x="162.98611111111111" z="143.68055555555557" w="10" d="5" h="0" />
+  <set wallHeight="0.2" />
+  <Wall color="#0f1921" color.1="#000000" x="162.98611111111111" z="143.68055555555557" w="8.75" d="3.75" h="0" y="2.2" />
+  <set wallHeight="0.2" />
+  <Wall color="#0f1921" color.1="#000000" x="160.79861111111111" z="143.68055555555557" w="3.125" d="2.5" h="0" y="7.9" />
+  <set wallHeight="0.2" />
+  <Wall color="#0f1921" color.1="#000000" x="165.17361111111111" z="143.68055555555557" w="3.125" d="2.5" h="0" y="7.9" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="160.79861111111111" z="143.71527777777777" w="0.625" d="1.875" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="160.17361111111111" z="144.47916666666669" w="0.625" d="0.3472222222222001" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="160.17361111111111" z="142.95138888888889" w="0.625" d="0.34722222222222854" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="161.42361111111111" z="144.47916666666669" w="0.625" d="0.3472222222222001" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="161.42361111111111" z="142.95138888888889" w="0.625" d="0.34722222222222854" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="165.17361111111111" z="143.71527777777777" w="0.625" d="1.875" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="164.54861111111111" z="144.47916666666669" w="0.625" d="0.3472222222222001" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="164.54861111111111" z="142.95138888888889" w="0.625" d="0.34722222222222854" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="165.79861111111111" z="144.47916666666669" w="0.625" d="0.3472222222222001" h="0" y="2.4" />
+  <set wallHeight="5.5" />
+  <Wall color="#0f1921" color.1="#000000" x="165.79861111111111" z="142.95138888888889" w="0.625" d="0.34722222222222854" h="0" y="2.4" />
+  <set wallHeight="0.5" />
+  <Wall color="#0f1921" color.1="#000000" x="162.98611111111111" z="189.96527777777777" w="3.75" d="0.2083333333333428" h="0" y="5.7" />
+  <set wallHeight="0.5" />
+  <Wall color="#0f1921" color.1="#000000" x="162.98611111111111" z="143.71527777777777" w="3.75" d="0.2083333333333428" h="0" y="5.7" />
+  <Hologram shape="4090" scale="22.85" y="10" color="#1b2a35" color.1="#0f1921" cx="162.98611111111111" cz="166.80555555555557" angle="315" />
+  <Hologram shape="4090" scale="22.85" y="10" color="#1b2a35" color.1="#0f1921" cx="162.98611111111111" cz="166.80555555555557" angle="45" />
+  <Hologram shape="4090" scale="22.85" y="10" color="#1b2a35" color.1="#0f1921" cx="162.98611111111111" cz="166.80555555555557" angle="135" />
+  <Hologram shape="4090" scale="22.85" y="10" color="#1b2a35" color.1="#0f1921" cx="162.98611111111111" cz="166.80555555555557" angle="225" />
+  <FreeSolid shape="4091" scale="1" shield="-1" canGlow="true" mass="500" accel="0" customGravity="0" hitVolume="0" y="6.7" color="#ffffff" color.1="#8b8b8b" cx="140.69444444444446" cz="150.90277777777777" angle="315" />
+  <set wallYon="0.01" wallHeight="0.1" />
+  <set wallYon="defaultYon" />
+  <WallDoor guardDelay="0" open="@start" deltaY="10" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="0.1" color="rgba(0,0,0,0)" color.1="#000000" x="140.52083333333334" z="150.72916666666669" w="0.06944444444445708" d="0.06944444444442865" h="0" y="5.5" />
+  <FreeSolid shape="4091" scale="1" shield="-1" canGlow="true" mass="500" accel="0" customGravity="0" hitVolume="0" y="6.74" color="#ffffff" color.1="#8b8b8b" cx="185.20833333333334" cz="182.63888888888889" angle="135" />
+  <set wallYon="0.01" wallHeight="0.1" />
+  <set wallYon="defaultYon" />
+
+  <WallDoor guardDelay="0" open="@start" deltaY="10" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="0.1" color="rgba(0,0,0,0)" color.1="#000000" x="185.3125" z="182.74305555555557" w="0.06944444444442865" d="0.06944444444445708" h="0" y="5.5" />
+
+  <FreeSolid shape="4091" scale="1" shield="-1" canGlow="true" mass="500" accel="0" customGravity="0" hitVolume="0" y="6.78" color="#ffffff" color.1="#8b8b8b" cx="178.81944444444446" cz="144.65277777777777" angle="45" />
+  <set wallYon="0.01" wallHeight="0.1" />
+  <set wallYon="defaultYon" />
+  <WallDoor guardDelay="0" open="@start" deltaY="10" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="0.1" color="rgba(0,0,0,0)" color.1="#000000" x="178.92361111111111" z="144.34027777777777" w="0.06944444444445708" d="0.06944444444442865" h="0" y="5.5" />
+
+  <Hologram shape="4012" scale="22.85" y="0" visible="true" color="rgba(255,255,255,0.04)" color.1="rgba(255,255,255,0.05)" cx="162.98611111111111" cz="166.80555555555557" angle="315" />
+  <Hologram shape="4014" scale="22.85" y="0" visible="true" color="rgba(255,255,255,0.005)" color.1="rgba(255,255,255,0.01)" cx="162.98611111111111" cz="166.80555555555557" angle="315" />
+  <Hologram shape="4013" scale="22.85" y="0" visible="true" color="rgba(255,255,255,0.02)" color.1="rgba(255,255,255,0.03)" cx="162.98611111111111" cz="166.80555555555557" angle="315" />
+  <FreeSolid shape="4091" scale="1" shield="-1" canGlow="true" mass="500" accel="0" customGravity="0" hitVolume="0" y="6.8" color="#ffffff" color.1="#8b8b8b" cx="147.15277777777777" cz="189.0277777777778" angle="225" />
+  <set wallYon="0.01" wallHeight="0.1" />
+  <set wallYon="defaultYon" />
+  <WallDoor guardDelay="0" open="@start" deltaY="10" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="0.1" color="rgba(0,0,0,0)" color.1="#000000" x="146.97916666666669" z="188.99305555555557" w="0.06944444444442865" d="0.06944444444445708" h="0" y="5.5" />
+  <Ramp y="5.7" deltaY="3.25" thickness="0.4" color="#0f1921" color.1="#000000" x="162.98611111111111" z="189.96527777777777" w="3.75" d="0.2083333333333428" h="0" angle="90" />
+  <Ramp y="5.7" deltaY="3.25" thickness="0.4" color="#0f1921" color.1="#000000" x="162.98611111111111" z="189.96527777777777" w="3.75" d="0.2083333333333428" h="0" angle="270" />
+  <Ramp y="5.7" deltaY="3.25" thickness="0.4" color="#0f1921" color.1="#000000" x="162.98611111111111" z="143.71527777777777" w="3.75" d="0.2083333333333428" h="0" angle="90" />
+  <Ramp y="5.7" deltaY="3.25" thickness="0.4" color="#0f1921" color.1="#000000" x="162.98611111111111" z="143.71527777777777" w="3.75" d="0.2083333333333428" h="0" angle="270" />
+  <Ramp y="5.7" deltaY="3.25" thickness="0.4" color="#0f1921" color.1="#000000" x="186.14583333333334" z="166.80555555555557" w="0.20833333333331439" d="3.75" h="0" angle="0" />
+  <Ramp y="5.7" deltaY="3.25" thickness="0.4" color="#0f1921" color.1="#000000" x="186.14583333333334" z="166.80555555555557" w="0.20833333333331439" d="3.75" h="0" angle="180" />
+  <Ramp y="5.7" deltaY="3.25" thickness="0.4" color="#0f1921" color.1="#000000" x="139.89583333333334" z="166.80555555555557" w="0.20833333333331439" d="3.75" h="0" angle="0" />
+  <Ramp y="5.7" deltaY="3.25" thickness="0.4" color="#0f1921" color.1="#000000" x="139.89583333333334" z="166.80555555555557" w="0.20833333333331439" d="3.75" h="0" angle="180" />
+
+
+  <Hologram shape="4105" scale="1" y="6.7" color="rgba(255,255,255,0.08)" color.1="#8b8b8b" cx="140.69444444444446" cz="150.90277777777777" angle="315" />
+  <Hologram shape="4106" scale="1" y="6.7" color="#d0d3d9" color.1="#7e868c" cx="140.69444444444446" cz="150.90277777777777" angle="315" />
+  <Hologram shape="4105" scale="1" y="6.7" color="rgba(255,255,255,0.08)" color.1="#8b8b8b" cx="178.81944444444446" cz="144.65277777777777" angle="45" />
+  <Hologram shape="4106" scale="1" y="6.7" color="#d0d3d9" color.1="#7e868c" cx="178.81944444444446" cz="144.65277777777777" angle="45" />
+  <Hologram shape="4105" scale="1" y="6.7" color="rgba(255,255,255,0.08)" color.1="#8b8b8b" cx="185.20833333333334" cz="182.63888888888889" angle="135" />
+  <Hologram shape="4106" scale="1" y="6.7" color="#d0d3d9" color.1="#7e868c" cx="185.20833333333334" cz="182.63888888888889" angle="135" />
+  <Hologram shape="4105" scale="1" y="6.7" color="rgba(255,255,255,0.08)" color.1="#8b8b8b" cx="147.15277777777777" cz="189.0277777777778" angle="225" />
+  <Hologram shape="4106" scale="1" y="6.7" color="#d0d3d9" color.1="#7e868c" cx="147.15277777777777" cz="189.0277777777778" angle="225" />
+
+  <Solid shape="4096" scale="2.25" y="10.0" color="#233542" color.1="#16242d" cx="162.98611111111111" cz="150.55555555555557" angle="270" />
+<unique vars="mShow mTaken zShow zTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="zTaken" out="mShow" wait="300" />
+  <Goody shape="bspGrenade" y="12.35" speed="3" grenades="8" start="mShow" yon="500" out="mTaken" color="#004242" color.1="#c1f600" cx="162.98611111111111" cz="150.55555555555557" angle="135" />
+  <Timer in="mTaken" out="zShow" wait="200" />
+  <Goody shape="bspMissile" y="12.35" speed="3" missiles="5" start="zShow" yon="500" out="zTaken" color="#750000" color.1="#750000" cx="162.98611111111111" cz="150.55555555555557" angle="135" />
+
+  <Solid shape="4096" scale="2.25" y="10.0" color="#233542" color.1="#16242d" cx="162.98611111111111" cz="183.05555555555557" angle="270" />
+<unique vars="mShow mTaken zShow zTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="zTaken" out="mShow" wait="300" />
+  <Goody shape="bspGrenade" y="12.35" speed="3" grenades="8" start="mShow" yon="500" out="mTaken" color="#004242" color.1="#c1f600" cx="162.98611111111111" cz="183.05555555555557" angle="135" />
+  <Timer in="mTaken" out="zShow" wait="200" />
+  <Goody shape="bspMissile" y="12.35" speed="3" missiles="5" start="zShow" yon="500" out="zTaken" color="#750000" color.1="#750000" cx="162.98611111111111" cz="183.05555555555557" angle="135" />
+
+  <Solid shape="4096" scale="2.25" y="10.0" color="#233542" color.1="#16242d" cx="179.23611111111111" cz="166.80555555555557" angle="270" />
+<unique vars="mShow mTaken zShow zTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="zTaken" out="mShow" wait="300" />
+  <Goody shape="bspGrenade" y="12.35" speed="3" grenades="8" start="mShow" yon="500" out="mTaken" color="#004242" color.1="#c1f600" cx="179.23611111111111" cz="166.80555555555557" angle="135" />
+  <Timer in="mTaken" out="zShow" wait="200" />
+  <Goody shape="bspMissile" y="12.35" speed="3" missiles="5" start="zShow" yon="500" out="zTaken" color="#750000" color.1="#750000" cx="179.23611111111111" cz="166.80555555555557" angle="135" />
+
+  <Solid shape="4096" scale="2.25" y="10.0" color="#233542" color.1="#16242d" cx="146.73611111111111" cz="166.80555555555557" angle="270" />
+<unique vars="mShow mTaken zShow zTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="zTaken" out="mShow" wait="300" />
+  <Goody shape="bspGrenade" y="12.35" speed="3" grenades="8" start="mShow" yon="500" out="mTaken" color="#004242" color.1="#c1f600" cx="146.73611111111111" cz="166.80555555555557" angle="135" />
+  <Timer in="mTaken" out="zShow" wait="200" />
+  <Goody shape="bspMissile" y="12.35" speed="3" missiles="5" start="zShow" yon="500" out="zTaken" color="#750000" color.1="#750000" cx="146.73611111111111" cz="166.80555555555557" angle="135" />
+
+  <Teleporter group="-1" y="-30" activeRange="33 * 5" deadRange="22 * 5" destGroup="@bubble" shape="0" sound="0" spin="false" color="#8e1000" color.1="#000000" cx="162.98611111111111" cz="166.80555555555557" angle="135" />
+  <Teleporter y="25" shape="0" group="@bubble" mask="0" spin="false" color="#ff2600" color.1="#000000" cx="152.36111111111111" cz="177.43055555555557" angle="45" />
+  <Teleporter y="25" shape="0" group="@bubble" mask="0" spin="false" color="#ff2600" color.1="#000000" cx="152.36111111111111" cz="156.18055555555557" angle="45" />
+  <Teleporter y="25" shape="0" group="@bubble" mask="0" spin="false" color="#ff2600" color.1="#000000" cx="173.61111111111111" cz="156.18055555555557" angle="45" />
+  <Teleporter y="25" shape="0" group="@bubble" mask="0" spin="false" color="#ff2600" color.1="#000000" cx="173.61111111111111" cz="177.43055555555557" angle="45" />
+
+
+  <FreeSolid shape="4910" scale="22.85" shield="-1" canGlow="true" mass="500" accel="0" customGravity="0" hitVolume="0" y="10" color="#4c738f" color.1="#000000" x="139.89583333333334" z="166.80555555555557" w="0.20833333333331439" d="3.75" h="0" cx="138.26388888888889" cz="170.625" angle="315" />
+  <set wallYon="0.01" wallHeight="0.1" />
+  <set wallYon="defaultYon" />
+  <WallDoor guarddelay="1" open="@L1" deltaY="10" deltaZ="0" shotPower="10" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="0.2" color="#ffffff" color.1="#000000" x="138.09027777777777" z="170.4513888888889" w="0.06944444444442865" d="0.06944444444442865" h="0" y="9" />
+<Timer in="@start" wait="5" out="@L1" />
+
+  <FreeSolid shape="4910" scale="22.85" shield="-1" canGlow="true" mass="500" accel="0" customGravity="0" hitVolume="0" y="10" color="#4c738f" color.1="#000000" x="139.89583333333334" z="166.80555555555557" w="0.20833333333331439" d="3.75" h="0" cx="138.26388888888889" cz="162.84722222222223" angle="315" />
+  <set wallYon="0.01" wallHeight="0.1" />
+  <set wallYon="defaultYon" />
+  <WallDoor guarddelay="1" open="@L10" deltaY="10" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="0.2" color="#ffffff" color.1="#000000" x="138.09027777777777" z="162.67361111111111" w="0.06944444444442865" d="0.06944444444445708" h="0" y="9" />
+<Timer in="@start" wait="50" out="@L10" />
+
+  <FreeSolid shape="4910" scale="22.85" shield="-1" canGlow="true" mass="500" accel="0" customGravity="0" hitVolume="0" y="10" color="#4c738f" color.1="#000000" x="139.89583333333334" z="166.80555555555557" w="0.20833333333331439" d="3.75" h="0" cx="140.625" cz="155.41666666666669" angle="315" />
+  <set wallYon="0.01" wallHeight="0.1" />
+  <set wallYon="defaultYon" />
+  <WallDoor guarddelay="1" open="@L9" deltaY="10" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="0.2" color="#ffffff" color.1="#000000" x="140.4513888888889" z="155.24305555555554" w="0.06944444444442865" d="0.06944444444442865" h="0" y="9" />
+<Timer in="@start" wait="45" out="@L9" />
+
+  <FreeSolid shape="4910" scale="22.85" shield="-1" canGlow="true" mass="500" accel="0" customGravity="0" hitVolume="0" y="10" color="#4c738f" color.1="#000000" x="139.89583333333334" z="166.80555555555557" w="0.20833333333331439" d="3.75" h="0" cx="145.20833333333334" cz="149.09722222222223" angle="315" />
+  <set wallYon="0.01" wallHeight="0.1" />
+  <set wallYon="defaultYon" />
+  <WallDoor guarddelay="1" open="@L8" deltaY="10" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="0.2" color="#ffffff" color.1="#000000" x="145.03472222222223" z="148.92361111111111" w="0.06944444444445708" d="0.06944444444445708" h="0" y="9" />
+<Timer in="@start" wait="40" out="@L8" />
+
+  <FreeSolid shape="4910" scale="22.85" shield="-1" canGlow="true" mass="500" accel="0" customGravity="0" hitVolume="0" y="10" color="#4c738f" color.1="#000000" x="139.89583333333334" z="166.80555555555557" w="0.20833333333331439" d="3.75" h="0" cx="151.52777777777777" cz="144.44444444444446" angle="315" />
+  <set wallYon="0.01" wallHeight="0.1" />
+  <set wallYon="defaultYon" />
+  <WallDoor guarddelay="1" open="@L7" deltaY="10" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="0.2" color="#ffffff" color.1="#000000" x="151.35416666666669" z="144.27083333333334" w="0.06944444444442865" d="0.06944444444445708" h="0" y="9" />
+<Timer in="@start" wait="35" out="@L7" />
+
+  <FreeSolid shape="4910" scale="22.85" shield="-1" canGlow="true" mass="500" accel="0" customGravity="0" hitVolume="0" y="10" color="#4c738f" color.1="#000000" x="139.89583333333334" z="166.80555555555557" w="0.20833333333331439" d="3.75" h="0" cx="159.02777777777777" cz="142.08333333333334" angle="315" />
+  <set wallYon="0.01" wallHeight="0.1" />
+  <set wallYon="defaultYon" />
+  <WallDoor guarddelay="1" open="@L6" deltaY="10" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="0.2" color="#ffffff" color.1="#000000" x="158.85416666666669" z="141.90972222222223" w="0.06944444444442865" d="0.06944444444445708" h="0" y="9" />
+<Timer in="@start" wait="30" out="@L6" />
+
+  <FreeSolid shape="4910" scale="22.85" shield="-1" canGlow="true" mass="500" accel="0" customGravity="0" hitVolume="0" y="10" color="#4c738f" color.1="#000000" x="139.89583333333334" z="166.80555555555557" w="0.20833333333331439" d="3.75" h="0" cx="140.625" cz="178.05555555555557" angle="315" />
+  <set wallYon="0.01" wallHeight="0.1" />
+  <set wallYon="defaultYon" />
+  <WallDoor guarddelay="1" open="@L2" deltaY="10" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="0.2" color="#ffffff" color.1="#000000" x="140.4513888888889" z="177.88194444444446" w="0.06944444444442865" d="0.06944444444445708" h="0" y="9" />
+<Timer in="@start" wait="10" out="@L2" />
+
+  <FreeSolid shape="4910" scale="22.85" shield="-1" canGlow="true" mass="500" accel="0" customGravity="0" hitVolume="0" y="10" color="#4c738f" color.1="#000000" x="139.89583333333334" z="166.80555555555557" w="0.20833333333331439" d="3.75" h="0" cx="145.20833333333334" cz="184.375" angle="315" />
+  <set wallYon="0.01" wallHeight="0.1" />
+  <set wallYon="defaultYon" />
+  <WallDoor guarddelay="1" open="@L3" deltaY="10" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="0.2" color="#ffffff" color.1="#000000" x="145.03472222222223" z="184.2013888888889" w="0.06944444444445708" d="0.06944444444442865" h="0" y="9" />
+<Timer in="@start" wait="15" out="@L3" />
+
+  <FreeSolid shape="4910" scale="22.85" shield="-1" canGlow="true" mass="500" accel="0" customGravity="0" hitVolume="0" y="10" color="#4c738f" color.1="#000000" x="139.89583333333334" z="166.80555555555557" w="0.20833333333331439" d="3.75" h="0" cx="151.59722222222223" cz="189.0277777777778" angle="315" />
+  <set wallYon="0.01" wallHeight="0.1" />
+  <set wallYon="defaultYon" />
+  <WallDoor guarddelay="1" open="@L4" deltaY="10" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="0.2" color="#ffffff" color.1="#000000" x="151.42361111111111" z="188.85416666666669" w="0.06944444444445708" d="0.06944444444442865" h="0" y="9" />
+<Timer in="@start" wait="20" out="@L4" />
+
+  <FreeSolid shape="4910" scale="22.85" shield="-1" canGlow="true" mass="500" accel="0" customGravity="0" hitVolume="0" y="10" color="#4c738f" color.1="#000000" x="139.89583333333334" z="166.80555555555557" w="0.20833333333331439" d="3.75" h="0" cx="159.02777777777777" cz="191.38888888888889" angle="315" />
+  <set wallYon="0.01" wallHeight="0.1" />
+  <set wallYon="defaultYon" />
+  <WallDoor guarddelay="1" open="@L5" deltaY="10" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="0.2" color="#ffffff" color.1="#000000" x="158.85416666666669" z="191.21527777777777" w="0.06944444444442865" d="0.06944444444442865" h="0" y="9" />
+<Timer in="@start" wait="25" out="@L5" />
+
+  <FreeSolid shape="4910" scale="22.85" shield="-1" canGlow="true" mass="500" accel="0" customGravity="0" hitVolume="0" y="10" color="#4c738f" color.1="#000000" x="139.89583333333334" z="166.80555555555557" w="0.20833333333331439" d="3.75" h="0" cx="166.80555555555557" cz="191.38888888888889" angle="315" />
+  <set wallYon="0.01" wallHeight="0.1" />
+  <set wallYon="defaultYon" />
+  <WallDoor guarddelay="1" open="@L6" deltaY="10" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="0.2" color="#ffffff" color.1="#000000" x="166.63194444444446" z="191.21527777777777" w="0.06944444444445708" d="0.06944444444442865" h="0" y="9" />
+<Timer in="@start" wait="30" out="@L6" />
+
+  <FreeSolid shape="4910" scale="22.85" shield="-1" canGlow="true" mass="500" accel="0" customGravity="0" hitVolume="0" y="10" color="#4c738f" color.1="#000000" x="139.89583333333334" z="166.80555555555557" w="0.20833333333331439" d="3.75" h="0" cx="174.30555555555557" cz="189.0277777777778" angle="315" />
+  <set wallYon="0.01" wallHeight="0.1" />
+  <set wallYon="defaultYon" />
+  <WallDoor guarddelay="1" open="@L7" deltaY="10" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="0.2" color="#ffffff" color.1="#000000" x="174.13194444444446" z="188.85416666666669" w="0.06944444444445708" d="0.06944444444442865" h="0" y="9" />
+<Timer in="@start" wait="35" out="@L7" />
+
+  <FreeSolid shape="4910" scale="22.85" shield="-1" canGlow="true" mass="500" accel="0" customGravity="0" hitVolume="0" y="10" color="#4c738f" color.1="#000000" x="139.89583333333334" z="166.80555555555557" w="0.20833333333331439" d="3.75" h="0" cx="180.625" cz="184.375" angle="315" />
+  <set wallYon="0.01" wallHeight="0.1" />
+  <set wallYon="defaultYon" />
+  <WallDoor guarddelay="1" open="@L8" deltaY="10" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="0.2" color="#ffffff" color.1="#000000" x="180.4513888888889" z="184.2013888888889" w="0.06944444444442865" d="0.06944444444442865" h="0" y="9" />
+<Timer in="@start" wait="40" out="@L8" />
+
+  <FreeSolid shape="4910" scale="22.85" shield="-1" canGlow="true" mass="500" accel="0" customGravity="0" hitVolume="0" y="10" color="#4c738f" color.1="#000000" x="139.89583333333334" z="166.80555555555557" w="0.20833333333331439" d="3.75" h="0" cx="185.20833333333334" cz="178.125" angle="315" />
+  <set wallYon="0.01" wallHeight="0.1" />
+  <set wallYon="defaultYon" />
+  <WallDoor guarddelay="1" open="@L9" deltaY="10" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="0.2" color="#ffffff" color.1="#000000" x="185.03472222222223" z="177.9513888888889" w="0.06944444444445708" d="0.06944444444442865" h="0" y="9" />
+<Timer in="@start" wait="45" out="@L9" />
+
+  <FreeSolid shape="4910" scale="22.85" shield="-1" canGlow="true" mass="500" accel="0" customGravity="0" hitVolume="0" y="10" color="#4c738f" color.1="#000000" x="139.89583333333334" z="166.80555555555557" w="0.20833333333331439" d="3.75" h="0" cx="187.63888888888889" cz="170.625" angle="315" />
+  <set wallYon="0.01" wallHeight="0.1" />
+  <set wallYon="defaultYon" />
+  <WallDoor guarddelay="1" open="@L10" deltaY="10" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="0.2" color="#ffffff" color.1="#000000" x="187.46527777777777" z="170.4513888888889" w="0.06944444444442865" d="0.06944444444442865" h="0" y="9" />
+<Timer in="@start" wait="50" out="@L10" />
+
+  <FreeSolid shape="4910" scale="22.85" shield="-1" canGlow="true" mass="500" accel="0" customGravity="0" hitVolume="0" y="10" color="#4c738f" color.1="#000000" x="139.89583333333334" z="166.80555555555557" w="0.20833333333331439" d="3.75" h="0" cx="187.63888888888889" cz="162.84722222222223" angle="315" />
+  <set wallYon="0.01" wallHeight="0.1" />
+  <set wallYon="defaultYon" />
+  <WallDoor guarddelay="2" open="@L1" deltaY="10" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="0.2" color="#ffffff" color.1="#000000" x="187.46527777777777" z="162.67361111111111" w="0.06944444444442865" d="0.06944444444445708" h="0" y="9" />
+<Timer in="@start" wait="5" out="@L1" />
+
+  <FreeSolid shape="4910" scale="22.85" shield="-1" canGlow="true" mass="500" accel="0" customGravity="0" hitVolume="0" y="10" color="#4c738f" color.1="#000000" x="139.89583333333334" z="166.80555555555557" w="0.20833333333331439" d="3.75" h="0" cx="185.20833333333334" cz="155.34722222222223" angle="315" />
+  <set wallYon="0.01" wallHeight="0.1" />
+  <set wallYon="defaultYon" />
+  <WallDoor guarddelay="1" open="@L2" deltaY="10" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="0.2" color="#ffffff" color.1="#000000" x="185.03472222222223" z="155.17361111111111" w="0.06944444444445708" d="0.06944444444445708" h="0" y="9" />
+<Timer in="@start" wait="10" out="@L2" />
+
+  <FreeSolid shape="4910" scale="22.85" shield="-1" canGlow="true" mass="500" accel="0" customGravity="0" hitVolume="0" y="10" color="#4c738f" color.1="#000000" x="139.89583333333334" z="166.80555555555557" w="0.20833333333331439" d="3.75" h="0" cx="180.55555555555557" cz="149.02777777777777" angle="315" />
+  <set wallYon="0.01" wallHeight="0.1" />
+  <set wallYon="defaultYon" />
+  <WallDoor guarddelay="1" open="@L3" deltaY="10" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="0.2" color="#ffffff" color.1="#000000" x="180.38194444444446" z="148.85416666666669" w="0.06944444444445708" d="0.06944444444442865" h="0" y="9" />
+<Timer in="@start" wait="15" out="@L3" />
+
+  <FreeSolid shape="4910" scale="22.85" shield="-1" canGlow="true" mass="500" accel="0" customGravity="0" hitVolume="0" y="10" color="#4c738f" color.1="#000000" x="139.89583333333334" z="166.80555555555557" w="0.20833333333331439" d="3.75" h="0" cx="174.23611111111111" cz="144.44444444444446" angle="315" />
+  <set wallYon="0.01" wallHeight="0.1" />
+  <set wallYon="defaultYon" />
+  <WallDoor guarddelay="1" open="@L4" deltaY="10" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="0.2" color="#ffffff" color.1="#000000" x="174.0625" z="144.27083333333334" w="0.06944444444445708" d="0.06944444444445708" h="0" y="9" />
+<Timer in="@start" wait="20" out="@L4" />
+
+  <FreeSolid shape="4910" scale="22.85" shield="-1" canGlow="true" mass="500" accel="0" customGravity="0" hitVolume="0" y="10" color="#4c738f" color.1="#000000" x="139.89583333333334" z="166.80555555555557" w="0.20833333333331439" d="3.75" h="0" cx="166.80555555555557" cz="142.08333333333334" angle="315" />
+  <set wallYon="0.01" wallHeight="0.1" />
+  <set wallYon="defaultYon" />
+  <WallDoor guarddelay="1" open="@L5" deltaY="10" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="0.2" color="#ffffff" color.1="#000000" x="166.63194444444446" z="141.90972222222223" w="0.06944444444445708" d="0.06944444444445708" h="0" y="9" />
+<Timer in="@start" wait="25" out="@L5" />
+
+
+
+
+  <Dome y="0" yon="0.01" color="#dffefd" color.1="#000000" cx="225.17361111111111" cz="104.89583333333334" r="2.8125" angle="0" quarters="4" />
+  <Dome y="2.5" yon="0.01" roll="180" color="#c5feef" color.1="#000000" cx="225.79861111111111" cz="104.27083333333334" r="2.8125" angle="0" quarters="4" />
+  <Dome y="1.8" yon="0.01" color="#c5feef" color.1="#000000" cx="225.45138888888889" cz="104.27083333333334" r="2.8125" angle="0" quarters="4" />
+  <Hologram shape="4832" scale="4.5" color="#16232e" color.1="#1c2c39" cx="225.83333333333334" cz="104.30555555555556" angle="135" />
+  <set wallYon="0.01" wallHeight="1.7" />
+  <Wall color="#dffefd" color.1="#000000" x="230.625" z="148.75" w="2.5" d="2.5" h="0" />
+  <set wallHeight="0.3" />
+  <Wall color="#4c738f" color.1="#000000" x="230.79861111111111" z="148.71527777777777" w="1.875" d="1.875" h="0" y="1.7" />
+  <set wallYon="defaultYon" />
+  <Hologram shape="4833" scale="3" color="#16232e" color.1="#1c2c39" cx="230.55555555555557" cz="148.68055555555557" angle="135" />
+  <set wallYon="0.01" wallHeight="1" />
+  <Wall color="#dffefd" color.1="#000000" x="85.48611111111111" z="137.91666666666669" w="2.5" d="2.083333333333343" h="0" />
+  <set wallYon="defaultYon" />
+  <Ramp y="0.75" deltaY="0.9" thickness="0.6" yon="0.01" color="#4c738f" color.1="#000000" x="85.48611111111111" z="137.84722222222223" w="2.5" d="2.0833333333333144" h="0" angle="270" />
+  <Hologram shape="4834" scale="3" color="#16232e" color.1="#1c2c39" cx="85.48611111111111" cz="138.05555555555557" angle="0" />
+  <set wallYon="0.01" wallHeight="2" />
+  <WallDoor midYaw="45" color="#dffefd" color.1="#000000" x="81.94444444444444" z="209.82638888888889" w="6.25" d="5.625" h="0" />
+  <set wallHeight="2" />
+  <WallDoor midYaw="45" color="#4c738f" color.1="#000000" x="83.71527777777779" z="211.11111111111111" w="4.375" d="1.25" h="0" />
+  <set wallYon="defaultYon" />
+  <Dome y="1" yon="0.01" color="#c5feef" color.1="#000000" cx="79.86111111111111" cz="211.80555555555557" r="2.5" angle="0" quarters="4" />
+  <Dome y="0" yon="0.01" color="#c5feef" color.1="#000000" cx="79.93055555555556" cz="211.73611111111111" r="2.5" angle="0" quarters="4" />
+  <Dome y="1" yon="0.01" color="#c5feef" color.1="#000000" cx="84.23611111111111" cz="208.05555555555557" r="2.5" angle="0" quarters="4" />
+  <Dome y="0" yon="0.01" color="#c5feef" color.1="#000000" cx="84.23611111111111" cz="208.05555555555557" r="2.5" angle="0" quarters="4" />
+  <Dome y="1" yon="0.01" color="#c5feef" color.1="#000000" cx="81.73611111111111" cz="210.20833333333334" r="2.5" angle="0" quarters="4" />
+  <Hologram shape="4835" scale="3.5" color="#16232e" color.1="#1c2c39" cx="81.73611111111111" cz="209.93055555555557" angle="135" />
+  <set wallYon="0.01" wallHeight="2.7" />
+  <Wall color="#dffefd" color.1="#000000" x="197.25694444444446" z="248.0902777777778" w="3.4027777777777715" d="3.125" h="0" />
+  <set wallYon="defaultYon" />
+  <Hologram shape="4836" scale="3.75" color="#16232e" color.1="#1c2c39" cx="197.29166666666669" cz="248.05555555555557" angle="180" />
+  <set wallYon="0.01" wallHeight="4.8" />
+  <Wall color="#dffefd" color.1="#000000" x="155.24305555555554" z="90.625" w="6.736111111111114" d="6.25" h="0" />
+  <set wallHeight="0.5" />
+  <Wall color="#4c738f" color.1="#000000" x="155.17361111111111" z="90.55555555555556" w="4.375" d="3.75" h="0" y="4.8" />
+  <set wallYon="defaultYon" />
+  <Hologram shape="4836" scale="7.5" color="#16232e" color.1="#1c2c39" cx="155.41666666666669" cz="90.55555555555556" angle="0" />
+  <set wallYon="0.01" wallHeight="2.5" />
+  <Wall color="#4c738f" color.1="#000000" x="172.46527777777777" z="242.43055555555557" w="9.375" d="7.5" h="0" />
+  <set wallHeight="1.5" />
+  <Wall color="#dffefd" color.1="#000000" x="170.48611111111111" z="238.19444444444446" w="4.166666666666686" d="0.9722222222222285" h="0" y="1" />
+  <set wallHeight="1.5" />
+  <Wall color="#dffefd" color.1="#000000" x="171.52777777777777" z="246.49305555555557" w="6.25" d="0.625" h="0" y="0.75" />
+  <set wallHeight="1.5" />
+  <Wall color="#dffefd" color.1="#000000" x="174.34027777777777" z="238.36805555555557" w="3.125" d="0.625" h="0" y="1" />
+  <set wallHeight="0.25" />
+  <Wall color="#00faff" color.1="#000000" x="172.46527777777777" z="241.18055555555557" w="5.625" d="5" h="0" y="2.5" />
+  <set wallHeight="0.3" />
+  <Wall color="#008e90" color.1="#000000" x="172.36111111111111" z="240.03472222222223" w="2.5" d="1.875" h="0" y="2.75" />
+  <set wallYon="defaultYon" />
+  <Hologram shape="4839" scale="4.5" color="#16232e" color.1="#1c2c39" cx="172.08333333333334" cz="242.43055555555557" angle="180" />
+  <set wallYon="0.01" wallHeight="1.7" />
+  <Wall color="#dffefd" color.1="#000000" x="99.375" z="166.25" w="2.5" d="2.5" h="0" />
+  <set wallHeight="0.3" />
+  <Wall color="#4c738f" color.1="#000000" x="99.54861111111111" z="166.21527777777777" w="1.875" d="1.875" h="0" y="1.7" />
+  <set wallYon="defaultYon" />
+  <Hologram shape="4833" scale="3" color="#16232e" color.1="#1c2c39" cx="99.30555555555556" cz="166.18055555555557" angle="135" />
+  <set wallYon="0.01" wallHeight="2.5" />
+  <Wall color="#4c738f" color.1="#000000" x="230.5902777777778" z="85.55555555555556" w="9.375" d="7.5" h="0" />
+  <set wallHeight="1.5" />
+  <Wall color="#dffefd" color.1="#000000" x="228.61111111111114" z="81.31944444444446" w="4.166666666666657" d="0.9722222222222143" h="0" y="1" />
+  <set wallHeight="1.5" />
+  <Wall color="#dffefd" color.1="#000000" x="229.6527777777778" z="89.61805555555556" w="6.25" d="0.625" h="0" y="0.75" />
+  <set wallHeight="1.5" />
+  <Wall color="#dffefd" color.1="#000000" x="232.4652777777778" z="81.49305555555556" w="3.125" d="0.625" h="0" y="1" />
+  <set wallHeight="0.25" />
+  <Wall color="#00faff" color.1="#000000" x="230.5902777777778" z="84.30555555555556" w="5.625" d="5" h="0" y="2.5" />
+  <set wallHeight="0.3" />
+  <Wall color="#008e90" color.1="#000000" x="230.48611111111111" z="83.15972222222223" w="2.5" d="1.875" h="0" y="2.75" />
+  <set wallYon="defaultYon" />
+  <Hologram shape="4839" scale="4.5" color="#16232e" color.1="#1c2c39" cx="230.20833333333334" cz="85.55555555555556" angle="180" />
+  <set wallYon="0.01" wallHeight="1" />
+  <Wall color="#dffefd" color.1="#000000" x="206.11111111111111" z="91.04166666666667" w="2.5" d="2.083333333333343" h="0" />
+  <set wallYon="defaultYon" />
+  <Ramp y="0.75" deltaY="0.9" thickness="0.6" yon="0.01" color="#4c738f" color.1="#000000" x="206.11111111111111" z="90.97222222222223" w="2.5" d="2.083333333333343" h="0" angle="270" />
+
+
+  <Hologram shape="4834" scale="3" color="#16232e" color.1="#1c2c39" cx="206.11111111111111" cz="91.18055555555556" angle="0" />
+
+
+<Hologram shape="4920" visible="true" scale="22.85" yon="2000" y="10" color="#2f4656" color.1="#2f4656" cx="162.98611111111111" cz="166.80555555555557" angle="315" />
+
+ <set wallYon="0.01" />
+  <set wallHeight="8.5" />
+  <Wall color="#dffefd" color.1="#000000" x="139.86111111111111" z="168.99305555555557" w="1.25" d="1.875" h="0" />
+  <set wallHeight="8.5" />
+  <Wall color="#dffefd" color.1="#000000" x="139.86111111111111" z="164.61805555555557" w="1.25" d="1.875" h="0" />
+  <set wallHeight="8.5" />
+  <Wall color="#dffefd" color.1="#000000" x="186.11111111111111" z="168.99305555555557" w="1.25" d="1.875" h="0" />
+  <set wallHeight="8.5" />
+  <Wall color="#dffefd" color.1="#000000" x="186.11111111111111" z="164.61805555555557" w="1.25" d="1.875" h="0" />
+  <set wallHeight="8.5" />
+  <Wall color="#dffefd" color.1="#000000" x="160.79861111111111" z="189.93055555555557" w="1.875" d="1.25" h="0" />
+  <set wallHeight="8.5" />
+  <Wall color="#dffefd" color.1="#000000" x="165.17361111111111" z="189.93055555555557" w="1.875" d="1.25" h="0" />
+  <set wallHeight="8.5" />
+  <Wall color="#dffefd" color.1="#000000" x="160.79861111111111" z="143.68055555555557" w="1.875" d="1.25" h="0" />
+  <set wallHeight="8.5" />
+  <Wall color="#dffefd" color.1="#000000" x="165.17361111111111" z="143.68055555555557" w="1.875" d="1.25" h="0" />
+  <set wallYon="defaultYon" />
+
+<Solid shape="4935" scale="2.25" y="10.003" color="#233542" color.1="#16242d" cx="150.48611111111111" cz="154.30555555555557" angle="135" />
+  <unique vars="flakeFall flakeReset" />
+  <Timer in="@start" out="flakeFall" wait="200" />
+  <Door y="9.25" yon="175" scale="0.3" shape="4934" open="flakeFall" close="flakeReset" didOpen="flakeReset" didClose="flakeFall" deltaY="75" yaw="2880" openSpeed="0.98" closeSpeed="100" guardDelay="100" volume="0" openSound="0" closeSound="0" stopSound="0" color="rgba(255,255,255,0.17)" color.1="#000000" cx="150.48611111111111" cz="153.68055555555557" angle="90" />
+  <unique vars="flakeFall flakeReset" />
+  <Timer in="@start" out="flakeFall" wait="110" />
+  <Door y="9.25" yon="175" scale="0.25" shape="4433" open="flakeFall" close="flakeReset" didOpen="flakeReset" didClose="flakeFall" deltaY="75" yaw="2880" openSpeed="1" closeSpeed="100" guardDelay="100" volume="0" openSound="0" closeSound="0" stopSound="0" color="rgba(255,255,255,0.17)" color.1="#000000" cx="150.48611111111111" cz="153.98055555555557" angle="90" />
+<unique vars="flakeFall flakeReset" />
+  <Timer in="@start" out="flakeFall" wait="40" />
+  <Door y="9.25" yon="175" scale="0.25" shape="4934" open="flakeFall" close="flakeReset" didOpen="flakeReset" didClose="flakeFall" deltaY="75" yaw="2880" openSpeed="1.02" closeSpeed="100" guardDelay="100" volume="0" openSound="0" closeSound="0" stopSound="0" color="rgba(255,255,255,0.17)" color.1="#000000" cx="150.48611111111111" cz="153.98055555555557" angle="90" />
+<unique vars="flakeFall flakeReset" />
+  <Timer in="@start" out="flakeFall" wait="350" />
+  <Door y="9.25" yon="175" scale="0.31" shape="4433" open="flakeFall" close="flakeReset" didOpen="flakeReset" didClose="flakeFall" deltaY="75" yaw="2880" openSpeed="0.97" closeSpeed="100" guardDelay="100" volume="0" openSound="0" closeSound="0" stopSound="0" color="rgba(255,255,255,0.17)" color.1="#000000" cx="150.48611111111111" cz="154.28055555555557" angle="90" />
+<unique vars="flakeFall flakeReset" />
+  <Timer in="@start" out="flakeFall" wait="500" />
+  <Door y="9.25" yon="175" scale="0.35" shape="4934" open="flakeFall" close="flakeReset" didOpen="flakeReset" didClose="flakeFall" deltaY="75" yaw="2880" openSpeed="0.95" closeSpeed="100" guardDelay="100" volume="0" openSound="0" closeSound="0" stopSound="0" color="rgba(255,255,255,0.17)" color.1="#000000" cx="150.48611111111111" cz="154.18055555555557" angle="90" />
+
+
+  <Solid shape="4935" scale="2.25" y="10.003" color="#233542" color.1="#16242d" cx="175.48611111111111" cz="179.30555555555557" angle="315" />
+  <unique vars="flakeFall flakeReset" />
+  <Timer in="@start" out="flakeFall" wait="245" />
+  <Door y="9.25" yon="175" scale="0.3" shape="4934" open="flakeFall" close="flakeReset" didOpen="flakeReset" didClose="flakeFall" deltaY="75" yaw="2880" openSpeed="0.98" closeSpeed="100" guardDelay="100" volume="0" openSound="0" closeSound="0" stopSound="0" color="rgba(255,255,255,0.17)" color.1="#000000" cx="175.38611111111111" cz="179.30555555555557" angle="90" />
+  <unique vars="flakeFall flakeReset" />
+  <Timer in="@start" out="flakeFall" wait="190" />
+  <Door y="9.25" yon="175" scale="0.25" shape="4433" open="flakeFall" close="flakeReset" didOpen="flakeReset" didClose="flakeFall" deltaY="75" yaw="2880" openSpeed="1" closeSpeed="100" guardDelay="100" volume="0" openSound="0" closeSound="0" stopSound="0" color="rgba(255,255,255,0.17)" color.1="#000000" cx="175.58611111111111" cz="179.30555555555557" angle="90" />
+<unique vars="flakeFall flakeReset" />
+  <Timer in="@start" out="flakeFall" wait="70" />
+  <Door y="9.25" yon="175" scale="0.25" shape="4934" open="flakeFall" close="flakeReset" didOpen="flakeReset" didClose="flakeFall" deltaY="75" yaw="2880" openSpeed="1.02" closeSpeed="100" guardDelay="100" volume="0" openSound="0" closeSound="0" stopSound="0" color="rgba(255,255,255,0.17)" color.1="#000000" cx="175.50611111111111" cz="179.30555555555557" angle="90" />
+<unique vars="flakeFall flakeReset" />
+  <Timer in="@start" out="flakeFall" wait="300" />
+  <Door y="9.25" yon="175" scale="0.31" shape="4433" open="flakeFall" close="flakeReset" didOpen="flakeReset" didClose="flakeFall" deltaY="75" yaw="2880" openSpeed="0.97" closeSpeed="100" guardDelay="100" volume="0" openSound="0" closeSound="0" stopSound="0" color="rgba(255,255,255,0.17)" color.1="#000000" cx="175.34611111111111" cz="179.30555555555557" angle="90" />
+<unique vars="flakeFall flakeReset" />
+  <Timer in="@start" out="flakeFall" wait="400" />
+  <Door y="9.25" yon="175" scale="0.35" shape="4934" open="flakeFall" close="flakeReset" didOpen="flakeReset" didClose="flakeFall" deltaY="75" yaw="2880" openSpeed="0.95" closeSpeed="100" guardDelay="100" volume="0" openSound="0" closeSound="0" stopSound="0" color="rgba(255,255,255,0.17)" color.1="#000000" cx="175.48611111111111" cz="179.30555555555557" angle="90" />
+
+  <Solid shape="4935" scale="2.25" y="10.003" color="#233542" color.1="#16242d" cx="150.48611111111111" cz="179.30555555555557" angle="45" />
+  <unique vars="flakeFall flakeReset" />
+  <Timer in="@start" out="flakeFall" wait="100" />
+  <Door y="9.25" yon="175" scale="0.3" shape="4934" open="flakeFall" close="flakeReset" didOpen="flakeReset" didClose="flakeFall" deltaY="75" yaw="2880" openSpeed="0.98" closeSpeed="100" guardDelay="100" volume="0" openSound="0" closeSound="0" stopSound="0" color="rgba(255,255,255,0.17)" color.1="#000000" cx="150.48611111111111" cz="179.30555555555557" angle="90" />
+  <unique vars="flakeFall flakeReset" />
+  <Timer in="@start" out="flakeFall" wait="250" />
+  <Door y="9.25" yon="175" scale="0.25" shape="4433" open="flakeFall" close="flakeReset" didOpen="flakeReset" didClose="flakeFall" deltaY="75" yaw="2880" openSpeed="1" closeSpeed="100" guardDelay="100" volume="0" openSound="0" closeSound="0" stopSound="0" color="rgba(255,255,255,0.17)" color.1="#000000" cx="150.48611111111111" cz="179.30555555555557" angle="90" />
+<unique vars="flakeFall flakeReset" />
+  <Timer in="@start" out="flakeFall" wait="170" />
+  <Door y="9.25" yon="175" scale="0.25" shape="4934" open="flakeFall" close="flakeReset" didOpen="flakeReset" didClose="flakeFall" deltaY="75" yaw="2880" openSpeed="1.02" closeSpeed="100" guardDelay="100" volume="0" openSound="0" closeSound="0" stopSound="0" color="rgba(255,255,255,0.17)" color.1="#000000" cx="150.38611111111111" cz="179.30555555555557" angle="90" />
+<unique vars="flakeFall flakeReset" />
+  <Timer in="@start" out="flakeFall" wait="30" />
+  <Door y="9.25" yon="175" scale="0.31" shape="4433" open="flakeFall" close="flakeReset" didOpen="flakeReset" didClose="flakeFall" deltaY="75" yaw="2880" openSpeed="0.97" closeSpeed="100" guardDelay="100" volume="0" openSound="0" closeSound="0" stopSound="0" color="rgba(255,255,255,0.17)" color.1="#000000" cx="150.35611111111111" cz="179.30555555555557" angle="90" />
+<unique vars="flakeFall flakeReset" />
+  <Timer in="@start" out="flakeFall" wait="95" />
+  <Door y="9.25" yon="175" scale="0.35" shape="4934" open="flakeFall" close="flakeReset" didOpen="flakeReset" didClose="flakeFall" deltaY="75" yaw="2880" openSpeed="0.95" closeSpeed="100" guardDelay="100" volume="0" openSound="0" closeSound="0" stopSound="0" color="rgba(255,255,255,0.17)" color.1="#000000" cx="150.54611111111111" cz="179.30555555555557" angle="90" />
+
+  <Solid shape="4935" scale="2.25" y="10.003" color="#233542" color.1="#16242d" cx="175.48611111111111" cz="154.30555555555557" angle="225" />
+  <unique vars="flakeFall flakeReset" />
+  <Timer in="@start" out="flakeFall" wait="30" />
+  <Door y="9.25" yon="175" scale="0.3" shape="4934" open="flakeFall" close="flakeReset" didOpen="flakeReset" didClose="flakeFall" deltaY="75" yaw="2880" openSpeed="0.98" closeSpeed="100" guardDelay="100" volume="0" openSound="0" closeSound="0" stopSound="0" color="rgba(255,255,255,0.17)" color.1="#000000" cx="175.48611111111111" cz="154.40555555555557" angle="90" />
+  <unique vars="flakeFall flakeReset" />
+  <Timer in="@start" out="flakeFall" wait="200" />
+  <Door y="9.25" yon="175" scale="0.25" shape="4433" open="flakeFall" close="flakeReset" didOpen="flakeReset" didClose="flakeFall" deltaY="75" yaw="2880" openSpeed="1" closeSpeed="100" guardDelay="100" volume="0" openSound="0" closeSound="0" stopSound="0" color="rgba(255,255,255,0.17)" color.1="#000000" cx="175.48611111111111" cz="153.90555555555557" angle="90" />
+<unique vars="flakeFall flakeReset" />
+  <Timer in="@start" out="flakeFall" wait="120" />
+  <Door y="9.25" yon="175" scale="0.25" shape="4934" open="flakeFall" close="flakeReset" didOpen="flakeReset" didClose="flakeFall" deltaY="75" yaw="2880" openSpeed="1.02" closeSpeed="100" guardDelay="100" volume="0" openSound="0" closeSound="0" stopSound="0" color="rgba(255,255,255,0.17)" color.1="#000000" cx="175.48611111111111" cz="154.30555555555557" angle="90" />
+<unique vars="flakeFall flakeReset" />
+  <Timer in="@start" out="flakeFall" wait="80" />
+  <Door y="9.25" yon="175" scale="0.31" shape="4433" open="flakeFall" close="flakeReset" didOpen="flakeReset" didClose="flakeFall" deltaY="75" yaw="2880" openSpeed="0.97" closeSpeed="100" guardDelay="100" volume="0" openSound="0" closeSound="0" stopSound="0" color="rgba(255,255,255,0.17)" color.1="#000000" cx="175.48611111111111" cz="154.70555555555557" angle="90" />
+<unique vars="flakeFall flakeReset" />
+  <Timer in="@start" out="flakeFall" wait="315" />
+  <Door y="9.25" yon="175" scale="0.35" shape="4934" open="flakeFall" close="flakeReset" didOpen="flakeReset" didClose="flakeFall" deltaY="75" yaw="2880" openSpeed="0.95" closeSpeed="100" guardDelay="100" volume="0" openSound="0" closeSound="0" stopSound="0" color="rgba(255,255,255,0.17)" color.1="#000000" cx="175.48611111111111" cz="153.60555555555557" angle="90" />
+
+<set material.specular="#a8a8a7" material.shininess="50.0" />
+  <Hologram shape="4936" scale="3" y="0.006" color="#9b9b9a" color.1="#636362" cx="137.98611111111111" cz="201.80555555555557" angle="36" />
+
+  <Hologram shape="4936" scale="3" y="0.006" color="#9b9b9a" color.1="#636362" cx="197.98611111111111" cz="191.80555555555557" angle="306" />
+<set wallHeight="0.48" />
+
+  <Hologram shape="4936" scale="3" y="0.006" color="#9b9b9a" color.1="#636362" cx="187.98611111111111" cz="131.80555555555557" angle="216" />
+
+  <Hologram shape="4936" scale="3" y="0.006" color="#9b9b9a" color.1="#636362" cx="127.98611111111111" cz="141.80555555555557" angle="126" />
+<set wallHeight="0.48" />
+<set material.specular="$defaultMaterial.specular" />
+
+<set wallYon="0.01" />
+<set wallHeight="0.48" />
+  <WallDoor midYaw="144" color="#ffff00" color.1="#000000" x="127.98611111111111" z="141.80555555555557" w="5.1" d="5.1" h="0" y="0" />
+<set wallHeight="0.48" />
+  <WallDoor midYaw="234" color="#000000" color.1="#000000" x="187.98611111111111" z="131.80555555555557" w="5.1" d="5.1" h="0" y="0" />
+  <WallDoor midYaw="324" color="#fff000" color.1="#000000" x="197.98611111111111" z="191.80555555555557" w="5.1" d="5.1" h="0" y="0" />
+<set wallHeight="0.48" />
+  <WallDoor midYaw="54" color="#ff0000" color.1="#000000" x="137.98611111111111" z="201.80555555555557" w="5.1" d="5.1" h="0" y="0" />
+<set wallYon="defaultYon" />
+
+<unique vars="mShow mTaken zShow zTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="zTaken" out="mShow" wait="300" />
+  <Goody shape="bspMissile" y="2.5" speed="3" missiles="3" start="mShow" yon="500" out="mTaken" color="#004242" color.1="#750000" cx="127.98611111111111" cz="141.80555555555557" angle="135" />
+  <Timer in="mTaken" out="zShow" wait="300" />
+  <Goody shape="bspGrenade" y="2.5" speed="3" grenades="6" start="zShow" yon="500" out="zTaken" color="#004242" color.1="#c1f600" cx="127.98611111111111" cz="141.80555555555557" angle="135" />
+
+<unique vars="mShow mTaken zShow zTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="zTaken" out="mShow" wait="300" />
+  <Goody shape="bspMissile" y="2.5" speed="3" missiles="3" start="mShow" yon="500" out="mTaken" color="#004242" color.1="#750000" cx="187.98611111111111" cz="131.80555555555557" angle="135" />
+  <Timer in="mTaken" out="zShow" wait="300" />
+  <Goody shape="bspGrenade" y="2.5" speed="3" grenades="6" start="zShow" yon="500" out="zTaken" color="#004242" color.1="#c1f600" cx="187.98611111111111" cz="131.80555555555557" angle="135" />
+
+<unique vars="mShow mTaken zShow zTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="zTaken" out="mShow" wait="300" />
+  <Goody shape="bspMissile" y="2.5" speed="3" missiles="3" start="mShow" yon="500" out="mTaken" color="#004242" color.1="#750000" cx="197.98611111111111" cz="191.80555555555557" angle="135" />
+  <Timer in="mTaken" out="zShow" wait="300" />
+  <Goody shape="bspGrenade" y="2.5" speed="3" grenades="6" start="zShow" yon="500" out="zTaken" color="#004242" color.1="#c1f600" cx="197.98611111111111" cz="191.80555555555557" angle="135" />
+
+<unique vars="mShow mTaken zShow zTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="zTaken" out="mShow" wait="300" />
+  <Goody shape="bspMissile" y="2.5" speed="3" missiles="3" start="mShow" yon="500" out="mTaken" color="#004242" color.1="#750000" cx="137.98611111111111" cz="201.80555555555557" angle="135" />
+  <Timer in="mTaken" out="zShow" wait="300" />
+  <Goody shape="bspGrenade" y="2.5" speed="3" grenades="6" start="zShow" yon="500" out="zTaken" color="#004242" color.1="#c1f600" cx="137.98611111111111" cz="201.80555555555557" angle="135" />
+
+
+<Hologram shape="4960" scale="1" y="6.704" color="#d5d8de" color.1="#7e868c" cx="140.45444444444446" cz="150.90277777777777" angle="315" />
+  <Hologram shape="4960" scale="1" y="6.704" color="#d5d8de" color.1="#7e868c" cx="178.57944444444446" cz="144.65277777777777" angle="45" />
+  <Hologram shape="4960" scale="1" y="6.704" color="#d5d8de" color.1="#7e868c" cx="185.44833333333334" cz="182.63888888888889" angle="135" />
+  <Hologram shape="4960" scale="1" y="6.704" color="#d5d8de" color.1="#7e868c" cx="147.39277777777777" cz="189.0277777777778" angle="225" />
+
+
+<Hologram shape="4955" scale="0.7" y="0.006" color="#b05923" color.1="#783912" cx="120.98611111111111" cz="154.80555555555557" angle="345" />
+<Hologram shape="4956" scale="0.9" y="0.006" color="#605978" color.1="#7e868c" cx="132.98611111111111" cz="147.80555555555557" angle="315" />
+
+<Hologram shape="4956" scale="0.6" y="0.001" color="#030608" color.1="#7e868c" cx="172.98611111111111" cz="235.80555555555557" angle="325" />
+<Hologram shape="4956" scale="0.5" y="0.001" color="030608" color.1="#7e868c" cx="165.98611111111111" cz="238.80555555555557" angle="280" />
+<Hologram shape="4956" scale="0.55" y="0.001" color="#030608" color.1="#7e868c" cx="130.98611111111111" cz="235.80555555555557" angle="200" />
+
+
+<unique vars="gShow gTaken" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="400" />
+  <Goody shape="4962" scale="0.65" speed="3" y="3.5" grenades="8" missiles="5" start="gShow" out="gTaken" color="#9b9b9a" color.1="#4a4a4a" cx="162.98611111111111" cz="166.80555555555557" angle="45" />
+
+
+
+<set material.specular="#5e5f61" material.shininess="5.0" material.1.specular="#5e5f61" material.1.shininess="5.0" />
+<Teleporter y="55" shape="4961" scale="3.6" speed="-0.53" group="@center" mask="0" spin="false" color="#111314" color.1="#0d0f0f" cx="250.98611111111111" cz="250.80555555555557" angle="135" />
+<set material.specular="$defaultMaterial.specular" material.1.specular="$defaultMaterial.specular" />
+
+<set material.specular="#5e5f61" material.shininess="5.0" material.1.specular="#5e5f61" material.1.shininess="5.0" />
+<Teleporter y="40" shape="4961" scale="3" speed="-0.53" group="@center" mask="0" spin="false" color="#111314" color.1="#0d0f0f" cx="78.75" cz="79.30555555555556" angle="135" />
+<set material.specular="$defaultMaterial.specular" material.1.specular="$defaultMaterial.specular" />
+
+<set material.specular="#5e5f61" material.shininess="5.0" material.1.specular="#5e5f61" material.1.shininess="5.0" />
+<Teleporter y="30" shape="4961" scale="1.5" speed="-1" group="@center" mask="0" spin="false" color="#111314" color.1="#0d0f0f" cx="78.75" cz="200.30555555555556" angle="135" />
+<set material.specular="$defaultMaterial.specular" material.1.specular="$defaultMaterial.specular" />
+
+<set material.specular="#5e5f61" material.shininess="5.0" material.1.specular="#5e5f61" material.1.shininess="5.0" />
+<Teleporter y="30" shape="4963" scale="1.3" speed="1" group="@center" mask="0" spin="false" color="#111314" color.1="#0d0f0f" cx="49.75" cz="180.30555555555556" angle="135" />
+<set material.specular="$defaultMaterial.specular" material.1.specular="$defaultMaterial.specular" />
+
+<set material.specular="#5e5f61" material.shininess="5.0" material.1.specular="#5e5f61" material.1.shininess="5.0" />
+<Teleporter y="33" shape="4963" scale="2" speed="1" group="@center" mask="0" spin="false" color="#111314" color.1="#0d0f0f" cx="250.75" cz="150.30555555555556" angle="135" />
+<set material.specular="$defaultMaterial.specular" material.1.specular="$defaultMaterial.specular" />
+
+
+  <Incarnator y="30" incarnateSound="snBubbles" incarnateVolume="12" cx="216.73611111111111" cz="219.93055555555557" angle="315" />
+  <Incarnator y="30" incarnateSound="snBubbles" incarnateVolume="12" cx="109.23611111111111" cz="113.05555555555556" angle="135" />
+  <Incarnator incarnateSound="snBubbles" incarnateVolume="12" y="30" cx="216.73611111111111" cz="113.05555555555556" angle="225" />
+  <Incarnator y="30" incarnateSound="snBubbles" incarnateVolume="12" cx="109.23611111111111" cz="220.55555555555557" angle="45" />
+  <Incarnator y="30" incarnateSound="snBubbles" incarnateVolume="12" cx="221.73611111111111" cz="166.80555555555557" angle="270" />
+  <Incarnator y="30" incarnateSound="snBubbles" incarnateVolume="12" cx="104.23611111111111" cz="166.80555555555557" angle="90" />
+  <Incarnator y="30" incarnateSound="snBubbles" incarnateVolume="12" cx="162.98611111111111" cz="225.55555555555557" angle="0" />
+  <Incarnator y="30" incarnateSound="snBubbles" incarnateVolume="12" cx="162.98611111111111" cz="108.05555555555556" angle="180" />
+
+  <Hologram shape="4100" scale="10" color="#15130a" color.1="#2d2a1a" cx="164.86111111111111" cz="253.05555555555557" angle="135" />
+  <Hologram shape="4100" scale="7.5" color="#15130a" color.1="#2d2a1a" cx="190.48611111111111" cz="250.55555555555557" angle="135" />
+  <Hologram shape="4100" scale="8.8" color="#15130a" color.1="#2d2a1a" cx="175.41666666666669" cz="234.30555555555557" angle="180" />
+  <Hologram shape="4100" scale="7" color="#15130a" color.1="#2d2a1a" cx="181.11111111111111" cz="232.43055555555557" angle="225" />
+  <Hologram shape="4100" scale="8.6" color="#15130a" color.1="#2d2a1a" cx="179.23611111111111" cz="238.05555555555557" angle="0" />
+  <Hologram shape="4100" scale="6.8" color="#15130a" color.1="#2d2a1a" cx="158.61111111111111" cz="256.18055555555554" angle="45" />
+  <Hologram shape="4101" scale="10" color="#15130a" color.1="#2d2a1a" cx="184.86111111111111" cz="257.43055555555554" angle="135" />
+  <Hologram shape="4101" scale="8.8" color="#15130a" color.1="#2d2a1a" cx="205.48611111111111" cz="234.30555555555557" angle="270" />
+  <Hologram shape="4101" scale="7.2" color="#15130a" color.1="#2d2a1a" cx="169.86111111111111" cz="254.93055555555554" angle="315" />
+  <Hologram shape="4101" scale="9.25" color="#15130a" color.1="#2d2a1a" cx="159.86111111111111" cz="246.80555555555557" angle="90" />
+  <Hologram shape="4101" scale="8" color="#15130a" color.1="#2d2a1a" cx="184.86111111111111" cz="248.68055555555557" angle="270" />
+  <Hologram shape="4101" scale="7" color="#15130a" color.1="#2d2a1a" cx="188.61111111111111" cz="261.80555555555554" angle="285" />
+  <Hologram shape="4102" scale="9" color="#15130a" color.1="#2d2a1a" cx="154.86111111111111" cz="251.80555555555557" angle="135" />
+  <Hologram shape="4102" scale="8" color="#15130a" color.1="#2d2a1a" cx="171.66666666666669" cz="260.55555555555554" angle="0" />
+  <Hologram shape="4102" scale="7" color="#15130a" color.1="#2d2a1a" cx="185.48611111111111" cz="235.55555555555557" angle="225" />
+  <Hologram shape="4102" scale="7" color="#15130a" color.1="#2d2a1a" cx="200.48611111111111" cz="238.05555555555557" angle="90" />
+  <Hologram shape="4102" scale="5.2" color="#15130a" color.1="#2d2a1a" cx="165.48611111111111" cz="258.05555555555554" angle="225" />
+  <Hologram shape="4102" scale="4.5" color="#15130a" color.1="#2d2a1a" cx="186.73611111111111" cz="244.93055555555557" angle="45" />
+  <Hologram shape="4100" scale="10" color="#15130a" color.1="#2d2a1a" cx="94.23611111111111" cz="231.80555555555557" angle="135" />
+  <Hologram shape="4100" scale="7.5" color="#15130a" color.1="#2d2a1a" cx="112.98611111111111" cz="248.68055555555557" angle="135" />
+  <Hologram shape="4100" scale="8.8" color="#15130a" color.1="#2d2a1a" cx="129.16666666666669" cz="254.93055555555554" angle="180" />
+  <Hologram shape="4100" scale="8.6" color="#15130a" color.1="#2d2a1a" cx="133.05555555555557" cz="259.93055555555554" angle="0" />
+  <Hologram shape="4101" scale="10" color="#15130a" color.1="#2d2a1a" cx="89.30555555555556" cz="239.93055555555557" angle="135" />
+  <Hologram shape="4101" scale="8.8" color="#15130a" color.1="#2d2a1a" cx="110.48611111111111" cz="251.80555555555557" angle="270" />
+  <Hologram shape="4101" scale="9.25" color="#15130a" color.1="#2d2a1a" cx="86.11111111111111" cz="249.30555555555557" angle="90" />
+  <Hologram shape="4101" scale="8" color="#15130a" color.1="#2d2a1a" cx="89.23611111111111" cz="244.30555555555557" angle="270" />
+  <Hologram shape="4101" scale="7" color="#15130a" color.1="#2d2a1a" cx="115.48611111111111" cz="254.30555555555554" angle="285" />
+  <Hologram shape="4102" scale="9" color="#15130a" color.1="#2d2a1a" cx="92.36111111111111" cz="241.80555555555557" angle="135" />
+  <Hologram shape="4102" scale="8" color="#15130a" color.1="#2d2a1a" cx="109.16666666666667" cz="246.18055555555557" angle="0" />
+  <Hologram shape="4102" scale="7" color="#15130a" color.1="#2d2a1a" cx="83.05555555555556" cz="243.05555555555557" angle="90" />
+  <Hologram shape="4102" scale="5.2" color="#15130a" color.1="#2d2a1a" cx="93.61111111111111" cz="236.80555555555557" angle="225" />
+  <Hologram shape="4100" scale="7.5" color="#15130a" color.1="#2d2a1a" cx="66.11111111111111" cz="192.43055555555557" angle="135" />
+  <Hologram shape="4100" scale="7" color="#15130a" color.1="#2d2a1a" cx="75.48611111111111" cz="219.30555555555557" angle="225" />
+  <Hologram shape="4100" scale="6.8" color="#15130a" color.1="#2d2a1a" cx="79.23611111111111" cz="220.55555555555557" angle="45" />
+  <Hologram shape="4101" scale="10" color="#15130a" color.1="#2d2a1a" cx="59.236111111111114" cz="164.93055555555557" angle="135" />
+  <Hologram shape="4101" scale="7.2" color="#15130a" color.1="#2d2a1a" cx="72.36111111111111" cz="196.18055555555557" angle="315" />
+  <Hologram shape="4101" scale="8" color="#15130a" color.1="#2d2a1a" cx="75.48611111111111" cz="189.93055555555557" angle="270" />
+  <Hologram shape="4102" scale="7" color="#15130a" color.1="#2d2a1a" cx="77.36111111111111" cz="224.30555555555557" angle="225" />
+  <Hologram shape="4102" scale="7" color="#15130a" color.1="#2d2a1a" cx="61.111111111111114" cz="188.05555555555557" angle="90" />
+  <Hologram shape="4102" scale="5.2" color="#15130a" color.1="#2d2a1a" cx="61.736111111111114" cz="194.30555555555557" angle="225" />
+  <Hologram shape="4102" scale="4.5" color="#15130a" color.1="#2d2a1a" cx="85.48611111111111" cz="218.05555555555557" angle="45" />
+  <Hologram shape="4100" scale="10" color="#15130a" color.1="#2d2a1a" cx="74.86111111111111" cz="110.55555555555556" angle="135" />
+  <Hologram shape="4100" scale="7.5" color="#15130a" color.1="#2d2a1a" cx="72.36111111111111" cz="114.30555555555556" angle="135" />
+  <Hologram shape="4100" scale="8.8" color="#15130a" color.1="#2d2a1a" cx="71.66666666666667" cz="166.80555555555557" angle="180" />
+  <Hologram shape="4100" scale="7" color="#15130a" color.1="#2d2a1a" cx="66.73611111111111" cz="158.05555555555557" angle="225" />
+  <Hologram shape="4100" scale="8.6" color="#15130a" color.1="#2d2a1a" cx="76.73611111111111" cz="141.80555555555557" angle="0" />
+  <Hologram shape="4100" scale="6.8" color="#15130a" color.1="#2d2a1a" cx="77.98611111111111" cz="133.68055555555557" angle="45" />
+  <Hologram shape="4101" scale="10" color="#15130a" color.1="#2d2a1a" cx="80.48611111111111" cz="89.30555555555556" angle="135" />
+  <Hologram shape="4101" scale="8.8" color="#15130a" color.1="#2d2a1a" cx="82.36111111111111" cz="129.30555555555557" angle="270" />
+  <Hologram shape="4101" scale="7.2" color="#15130a" color.1="#2d2a1a" cx="62.986111111111114" cz="133.05555555555557" angle="315" />
+  <Hologram shape="4101" scale="9.25" color="#15130a" color.1="#2d2a1a" cx="69.23611111111111" cz="110.55555555555556" angle="90" />
+  <Hologram shape="4101" scale="8" color="#15130a" color.1="#2d2a1a" cx="77.36111111111111" cz="129.30555555555557" angle="270" />
+  <Hologram shape="4101" scale="7" color="#15130a" color.1="#2d2a1a" cx="61.111111111111114" cz="159.30555555555557" angle="285" />
+  <Hologram shape="4102" scale="9" color="#15130a" color.1="#2d2a1a" cx="79.86111111111111" cz="108.05555555555556" angle="135" />
+  <Hologram shape="4102" scale="8" color="#15130a" color.1="#2d2a1a" cx="54.79166666666667" cz="137.43055555555557" angle="0" />
+  <Hologram shape="4102" scale="7" color="#15130a" color.1="#2d2a1a" cx="56.736111111111114" cz="141.18055555555557" angle="225" />
+  <Hologram shape="4102" scale="7" color="#15130a" color.1="#2d2a1a" cx="86.73611111111111" cz="89.93055555555556" angle="90" />
+  <Hologram shape="4102" scale="5.2" color="#15130a" color.1="#2d2a1a" cx="82.36111111111111" cz="144.30555555555557" angle="225" />
+  <Hologram shape="4102" scale="4.5" color="#15130a" color.1="#2d2a1a" cx="71.11111111111111" cz="171.18055555555557" angle="45" />
+  <Hologram shape="4100" scale="10" color="#15130a" color.1="#2d2a1a" cx="145.48611111111111" cz="84.93055555555556" angle="135" />
+  <Hologram shape="4100" scale="7.5" color="#15130a" color.1="#2d2a1a" cx="137.98611111111111" cz="61.18055555555556" angle="135" />
+  <Hologram shape="4100" scale="8.8" color="#15130a" color.1="#2d2a1a" cx="118.54166666666667" cz="76.18055555555556" angle="180" />
+  <Hologram shape="4100" scale="7" color="#15130a" color.1="#2d2a1a" cx="112.98611111111111" cz="99.93055555555556" angle="225" />
+  <Hologram shape="4100" scale="8.6" color="#15130a" color.1="#2d2a1a" cx="112.36111111111111" cz="74.30555555555556" angle="0" />
+  <Hologram shape="4100" scale="6.8" color="#15130a" color.1="#2d2a1a" cx="115.48611111111111" cz="95.55555555555556" angle="45" />
+  <Hologram shape="4101" scale="10" color="#15130a" color.1="#2d2a1a" cx="143.61111111111111" cz="89.93055555555556" angle="135" />
+  <Hologram shape="4101" scale="8.8" color="#15130a" color.1="#2d2a1a" cx="114.86111111111111" cz="78.68055555555556" angle="270" />
+  <Hologram shape="4101" scale="7.2" color="#15130a" color.1="#2d2a1a" cx="118.61111111111111" cz="82.43055555555556" angle="315" />
+  <Hologram shape="4101" scale="9.25" color="#15130a" color.1="#2d2a1a" cx="150.48611111111111" cz="82.43055555555556" angle="90" />
+  <Hologram shape="4101" scale="8" color="#15130a" color.1="#2d2a1a" cx="141.73611111111111" cz="66.18055555555556" angle="270" />
+  <Hologram shape="4101" scale="7" color="#15130a" color.1="#2d2a1a" cx="119.86111111111111" cz="100.55555555555556" angle="285" />
+  <Hologram shape="4102" scale="9" color="#15130a" color.1="#2d2a1a" cx="134.86111111111111" cz="68.05555555555556" angle="135" />
+  <Hologram shape="4102" scale="8" color="#15130a" color.1="#2d2a1a" cx="98.54166666666667" cz="100.55555555555556" angle="0" />
+  <Hologram shape="4102" scale="7" color="#15130a" color.1="#2d2a1a" cx="105.48611111111111" cz="92.43055555555556" angle="225" />
+  <Hologram shape="4102" scale="7" color="#15130a" color.1="#2d2a1a" cx="137.36111111111111" cz="85.55555555555556" angle="90" />
+  <Hologram shape="4102" scale="5.2" color="#15130a" color.1="#2d2a1a" cx="139.86111111111111" cz="71.18055555555556" angle="225" />
+  <Hologram shape="4102" scale="4.5" color="#15130a" color.1="#2d2a1a" cx="101.73611111111111" cz="88.05555555555556" angle="45" />
+  <Hologram shape="4100" scale="10" color="#15130a" color.1="#2d2a1a" cx="202.36111111111111" cz="67.43055555555556" angle="135" />
+  <Hologram shape="4100" scale="7.5" color="#15130a" color.1="#2d2a1a" cx="180.48611111111111" cz="86.80555555555556" angle="135" />
+  <Hologram shape="4100" scale="8.8" color="#15130a" color.1="#2d2a1a" cx="156.04166666666669" cz="54.93055555555556" angle="180" />
+  <Hologram shape="4100" scale="7" color="#15130a" color.1="#2d2a1a" cx="172.36111111111111" cz="68.68055555555556" angle="225" />
+  <Hologram shape="4100" scale="8.6" color="#15130a" color.1="#2d2a1a" cx="182.98611111111111" cz="55.55555555555556" angle="0" />
+  <Hologram shape="4100" scale="6.8" color="#15130a" color.1="#2d2a1a" cx="176.73611111111111" cz="89.30555555555556" angle="45" />
+  <Hologram shape="4101" scale="10" color="#15130a" color.1="#2d2a1a" cx="200.48611111111111" cz="75.55555555555556" angle="135" />
+  <Hologram shape="4101" scale="8.8" color="#15130a" color.1="#2d2a1a" cx="159.23611111111111" cz="51.80555555555556" angle="270" />
+  <Hologram shape="4101" scale="7.2" color="#15130a" color.1="#2d2a1a" cx="166.11111111111111" cz="63.05555555555556" angle="315" />
+  <Hologram shape="4101" scale="9.25" color="#15130a" color.1="#2d2a1a" cx="193.61111111111111" cz="69.93055555555556" angle="90" />
+  <Hologram shape="4101" scale="8" color="#15130a" color.1="#2d2a1a" cx="146.73611111111111" cz="49.30555555555556" angle="270" />
+  <Hologram shape="4101" scale="7" color="#15130a" color.1="#2d2a1a" cx="171.73611111111111" cz="64.93055555555556" angle="285" />
+  <Hologram shape="4102" scale="9" color="#15130a" color.1="#2d2a1a" cx="181.73611111111111" cz="82.43055555555556" angle="135" />
+  <Hologram shape="4102" scale="8" color="#15130a" color.1="#2d2a1a" cx="176.66666666666669" cz="93.68055555555556" angle="0" />
+  <Hologram shape="4102" scale="7" color="#15130a" color.1="#2d2a1a" cx="186.73611111111111" cz="90.55555555555556" angle="225" />
+  <Hologram shape="4102" scale="7" color="#15130a" color.1="#2d2a1a" cx="195.48611111111111" cz="73.68055555555556" angle="90" />
+  <Hologram shape="4102" scale="5.2" color="#15130a" color.1="#2d2a1a" cx="151.73611111111111" cz="51.80555555555556" angle="225" />
+  <Hologram shape="4102" scale="4.5" color="#15130a" color.1="#2d2a1a" cx="174.23611111111111" cz="61.18055555555556" angle="45" />
+  <Hologram shape="4100" scale="10" color="#15130a" color.1="#2d2a1a" cx="246.73611111111111" cz="125.55555555555556" angle="135" />
+  <Hologram shape="4100" scale="7.5" color="#15130a" color.1="#2d2a1a" cx="214.86111111111111" cz="90.55555555555556" angle="135" />
+  <Hologram shape="4100" scale="8.8" color="#15130a" color.1="#2d2a1a" cx="238.54166666666669" cz="96.80555555555556" angle="180" />
+  <Hologram shape="4100" scale="8.6" color="#15130a" color.1="#2d2a1a" cx="241.18055555555557" cz="99.93055555555556" angle="0" />
+  <Hologram shape="4101" scale="10" color="#15130a" color.1="#2d2a1a" cx="224.30555555555557" cz="121.80555555555556" angle="135" />
+  <Hologram shape="4101" scale="8.8" color="#15130a" color.1="#2d2a1a" cx="245.48611111111111" cz="123.05555555555556" angle="270" />
+  <Hologram shape="4101" scale="7.2" color="#15130a" color.1="#2d2a1a" cx="260.48611111111114" cz="123.05555555555556" angle="315" />
+  <Hologram shape="4101" scale="9.25" color="#15130a" color.1="#2d2a1a" cx="217.36111111111111" cz="94.30555555555556" angle="90" />
+  <Hologram shape="4101" scale="8" color="#15130a" color.1="#2d2a1a" cx="214.86111111111111" cz="94.93055555555556" angle="270" />
+  <Hologram shape="4101" scale="7" color="#15130a" color.1="#2d2a1a" cx="242.98611111111111" cz="106.80555555555556" angle="285" />
+  <Hologram shape="4102" scale="9" color="#15130a" color.1="#2d2a1a" cx="256.11111111111114" cz="119.30555555555556" angle="135" />
+  <Hologram shape="4102" scale="8" color="#15130a" color.1="#2d2a1a" cx="239.16666666666669" cz="103.05555555555556" angle="0" />
+  <Hologram shape="4102" scale="7" color="#15130a" color.1="#2d2a1a" cx="226.80555555555557" cz="118.68055555555556" angle="90" />
+  <Hologram shape="4102" scale="5.2" color="#15130a" color.1="#2d2a1a" cx="259.23611111111114" cz="126.80555555555557" angle="225" />
+  <Hologram shape="4100" scale="10" color="#15130a" color.1="#2d2a1a" cx="269.23611111111114" cz="143.68055555555557" angle="135" />
+  <Hologram shape="4100" scale="7.5" color="#15130a" color.1="#2d2a1a" cx="241.11111111111111" cz="176.18055555555557" angle="135" />
+  <Hologram shape="4100" scale="8.8" color="#15130a" color.1="#2d2a1a" cx="272.9166666666667" cz="159.93055555555557" angle="180" />
+  <Hologram shape="4100" scale="7" color="#15130a" color.1="#2d2a1a" cx="235.48611111111111" cz="144.30555555555557" angle="225" />
+  <Hologram shape="4100" scale="8.6" color="#15130a" color.1="#2d2a1a" cx="240.48611111111111" cz="144.93055555555557" angle="0" />
+  <Hologram shape="4100" scale="6.8" color="#15130a" color.1="#2d2a1a" cx="235.48611111111111" cz="148.68055555555557" angle="45" />
+  <Hologram shape="4101" scale="10" color="#15130a" color.1="#2d2a1a" cx="266.73611111111114" cz="148.05555555555557" angle="135" />
+  <Hologram shape="4101" scale="8.8" color="#15130a" color.1="#2d2a1a" cx="251.11111111111111" cz="154.93055555555557" angle="270" />
+  <Hologram shape="4101" scale="7.2" color="#15130a" color.1="#2d2a1a" cx="241.73611111111111" cz="154.30555555555557" angle="315" />
+  <Hologram shape="4101" scale="9.25" color="#15130a" color.1="#2d2a1a" cx="272.36111111111114" cz="154.93055555555557" angle="90" />
+  <Hologram shape="4101" scale="8" color="#15130a" color.1="#2d2a1a" cx="247.98611111111111" cz="159.30555555555557" angle="270" />
+  <Hologram shape="4101" scale="7" color="#15130a" color.1="#2d2a1a" cx="245.48611111111111" cz="150.55555555555557" angle="285" />
+  <Hologram shape="4102" scale="9" color="#15130a" color.1="#2d2a1a" cx="233.61111111111111" cz="175.55555555555557" angle="135" />
+  <Hologram shape="4102" scale="8" color="#15130a" color.1="#2d2a1a" cx="272.2916666666667" cz="150.55555555555557" angle="0" />
+  <Hologram shape="4102" scale="7" color="#15130a" color.1="#2d2a1a" cx="278.61111111111114" cz="151.18055555555557" angle="225" />
+  <Hologram shape="4102" scale="7" color="#15130a" color.1="#2d2a1a" cx="245.48611111111111" cz="178.68055555555557" angle="90" />
+  <Hologram shape="4102" scale="5.2" color="#15130a" color.1="#2d2a1a" cx="238.61111111111111" cz="179.30555555555557" angle="225" />
+  <Hologram shape="4102" scale="4.5" color="#15130a" color.1="#2d2a1a" cx="243.61111111111111" cz="139.30555555555557" angle="45" />
+  <Hologram shape="4100" scale="10" color="#15130a" color.1="#2d2a1a" cx="241.73611111111111" cz="233.05555555555557" angle="135" />
+  <Hologram shape="4100" scale="7.5" color="#15130a" color.1="#2d2a1a" cx="251.11111111111111" cz="209.30555555555557" angle="135" />
+  <Hologram shape="4100" scale="8.8" color="#15130a" color.1="#2d2a1a" cx="235.41666666666669" cz="221.80555555555557" angle="180" />
+  <Hologram shape="4100" scale="7" color="#15130a" color.1="#2d2a1a" cx="237.36111111111111" cz="228.68055555555557" angle="225" />
+  <Hologram shape="4100" scale="8.6" color="#15130a" color.1="#2d2a1a" cx="220.48611111111111" cz="249.93055555555557" angle="0" />
+  <Hologram shape="4100" scale="6.8" color="#15130a" color.1="#2d2a1a" cx="224.23611111111111" cz="259.30555555555554" angle="45" />
+  <Hologram shape="4101" scale="10" color="#15130a" color.1="#2d2a1a" cx="259.23611111111114" cz="196.18055555555557" angle="135" />
+  <Hologram shape="4101" scale="8.8" color="#15130a" color.1="#2d2a1a" cx="221.73611111111111" cz="254.30555555555554" angle="270" />
+  <Hologram shape="4101" scale="7.2" color="#15130a" color.1="#2d2a1a" cx="246.73611111111111" cz="229.30555555555557" angle="315" />
+  <Hologram shape="4101" scale="9.25" color="#15130a" color.1="#2d2a1a" cx="264.86111111111114" cz="181.80555555555557" angle="90" />
+  <Hologram shape="4101" scale="8" color="#15130a" color.1="#2d2a1a" cx="227.36111111111111" cz="253.05555555555557" angle="270" />
+  <Hologram shape="4101" scale="7" color="#15130a" color.1="#2d2a1a" cx="264.86111111111114" cz="194.30555555555557" angle="285" />
+  <Hologram shape="4102" scale="9" color="#15130a" color.1="#2d2a1a" cx="246.73611111111111" cz="206.18055555555557" angle="135" />
+  <Hologram shape="4102" scale="8" color="#15130a" color.1="#2d2a1a" cx="263.5416666666667" cz="206.18055555555557" angle="0" />
+  <Hologram shape="4102" scale="7" color="#15130a" color.1="#2d2a1a" cx="247.98611111111111" cz="233.68055555555557" angle="225" />
+  <Hologram shape="4102" scale="7" color="#15130a" color.1="#2d2a1a" cx="257.36111111111114" cz="199.93055555555557" angle="90" />
+  <Hologram shape="4102" scale="5.2" color="#15130a" color.1="#2d2a1a" cx="259.86111111111114" cz="214.93055555555557" angle="225" />
+  <Hologram shape="4102" scale="4.5" color="#15130a" color.1="#2d2a1a" cx="252.98611111111111" cz="213.68055555555557" angle="45" />
+  <Hologram shape="4100" scale="8.8" color="#15130a" color.1="#2d2a1a" cx="255.41666666666669" cz="195.55555555555557" angle="180" />
+  <Hologram shape="4100" scale="7" color="#15130a" color.1="#2d2a1a" cx="231.73611111111111" cz="198.05555555555557" angle="225" />
+  <Hologram shape="4102" scale="8" color="#15130a" color.1="#2d2a1a" cx="230.41666666666669" cz="201.80555555555557" angle="0" />
+  <Hologram shape="4104" scale="10" color="#15130a" color.1="#2d2a1a" cx="183.68055555555557" cz="261.18055555555554" angle="135" />
+  <Hologram shape="4104" scale="10" color="#15130a" color.1="#2d2a1a" cx="57.361111111111114" cz="162.43055555555557" angle="270" />
+  <Hologram shape="4104" scale="10" color="#15130a" color.1="#2d2a1a" cx="113.61111111111111" cz="91.18055555555556" angle="135" />
+  <Hologram shape="4104" scale="10" color="#15130a" color.1="#2d2a1a" cx="148.61111111111111" cz="71.80555555555556" angle="270" />
+  <Hologram shape="4104" scale="10" color="#15130a" color.1="#2d2a1a" cx="255.48611111111114" cz="161.80555555555557" angle="135" />
+  <Hologram shape="4104" scale="10" color="#15130a" color.1="#2d2a1a" cx="243.61111111111111" cz="127.43055555555557" angle="270" />
+  <Hologram shape="4104" scale="10" color="#15130a" color.1="#2d2a1a" cx="234.23611111111111" cz="201.18055555555557" angle="135" />
+  <Hologram shape="4104" scale="10" color="#15130a" color.1="#2d2a1a" cx="236.73611111111111" cz="205.55555555555557" angle="270" />
+  <Hologram shape="4100" scale="8.6" color="#15130a" color.1="#2d2a1a" cx="269.23611111111114" cz="202.43055555555557" angle="0" />
+  <Hologram shape="4100" scale="8.6" color="#15130a" color.1="#2d2a1a" cx="109.86111111111111" cz="59.30555555555556" angle="0" />
+  <Hologram shape="4100" scale="6.8" color="#15130a" color.1="#2d2a1a" cx="113.61111111111111" cz="55.55555555555556" angle="45" />
+  <Hologram shape="4101" scale="7.2" color="#15130a" color.1="#2d2a1a" cx="132.36111111111111" cz="51.80555555555556" angle="315" />
+  <Hologram shape="4101" scale="7" color="#15130a" color.1="#2d2a1a" cx="129.86111111111111" cz="56.18055555555556" angle="285" />
+  <Hologram shape="4102" scale="9" color="#15130a" color.1="#2d2a1a" cx="90.48611111111111" cz="66.18055555555556" angle="135" />
+  <Hologram shape="4102" scale="7" color="#15130a" color.1="#2d2a1a" cx="111.11111111111111" cz="54.93055555555556" angle="225" />
+  <Hologram shape="4102" scale="7" color="#15130a" color.1="#2d2a1a" cx="87.98611111111111" cz="71.18055555555556" angle="90" />
+  <Hologram shape="4102" scale="4.5" color="#15130a" color.1="#2d2a1a" cx="134.86111111111111" cz="56.18055555555556" angle="45" />
+  <Hologram shape="4104" scale="10" color="#15130a" color.1="#2d2a1a" cx="85.48611111111111" cz="71.80555555555556" angle="270" />
+  <Hologram shape="4100" scale="10" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="174.86111111111111" cz="318.05555555555554" angle="135" />
+  <Hologram shape="4100" scale="7.5" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="176.73611111111111" cz="314.30555555555554" angle="135" />
+  <Hologram shape="4100" scale="8.8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="230.41666666666669" cz="286.18055555555554" angle="180" />
+  <Hologram shape="4100" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="139.86111111111111" cz="298.68055555555554" angle="225" />
+  <Hologram shape="4100" scale="8.6" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="224.23611111111111" cz="287.43055555555554" angle="0" />
+  <Hologram shape="4100" scale="6.8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="135.48611111111111" cz="294.93055555555554" angle="45" />
+  <Hologram shape="4101" scale="10" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="213.61111111111111" cz="311.18055555555554" angle="135" />
+  <Hologram shape="4101" scale="8.8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="229.23611111111111" cz="290.55555555555554" angle="270" />
+  <Hologram shape="4101" scale="7.2" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="187.98611111111111" cz="304.30555555555554" angle="315" />
+  <Hologram shape="4101" scale="9.25" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="214.23611111111111" cz="314.93055555555554" angle="90" />
+  <Hologram shape="4101" scale="8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="136.11111111111111" cz="299.30555555555554" angle="270" />
+  <Hologram shape="4101" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="177.36111111111111" cz="309.30555555555554" angle="285" />
+  <Hologram shape="4102" scale="9" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="206.73611111111111" cz="319.93055555555554" angle="135" />
+  <Hologram shape="4102" scale="8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="219.79166666666669" cz="312.43055555555554" angle="0" />
+  <Hologram shape="4102" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="186.11111111111111" cz="309.30555555555554" angle="225" />
+  <Hologram shape="4102" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="199.23611111111111" cz="283.05555555555554" angle="90" />
+  <Hologram shape="4102" scale="5.2" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="222.98611111111111" cz="318.05555555555554" angle="225" />
+  <Hologram shape="4102" scale="4.5" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="146.73611111111111" cz="314.93055555555554" angle="45" />
+  <Hologram shape="4104" scale="10" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="149.23611111111111" cz="318.05555555555554" angle="135" />
+  <Hologram shape="4104" scale="10" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="139.86111111111111" cz="303.05555555555554" angle="270" />
+  <Hologram shape="4100" scale="10" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="317.36111111111114" cz="154.30555555555557" angle="135" />
+  <Hologram shape="4100" scale="7.5" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="307.98611111111114" cz="189.93055555555557" angle="135" />
+  <Hologram shape="4100" scale="8.8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="304.7916666666667" cz="234.30555555555557" angle="180" />
+  <Hologram shape="4100" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="327.36111111111114" cz="168.68055555555557" angle="225" />
+  <Hologram shape="4100" scale="8.6" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="266.73611111111114" cz="266.80555555555554" angle="0" />
+  <Hologram shape="4100" scale="6.8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="330.48611111111114" cz="169.30555555555557" angle="45" />
+  <Hologram shape="4101" scale="10" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="322.36111111111114" cz="153.68055555555557" angle="135" />
+  <Hologram shape="4101" scale="8.8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="303.61111111111114" cz="229.93055555555557" angle="270" />
+  <Hologram shape="4101" scale="7.2" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="270.48611111111114" cz="261.80555555555554" angle="315" />
+  <Hologram shape="4101" scale="9.25" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="259.86111111111114" cz="294.93055555555554" angle="90" />
+  <Hologram shape="4101" scale="8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="304.23611111111114" cz="224.30555555555557" angle="270" />
+  <Hologram shape="4101" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="276.11111111111114" cz="264.93055555555554" angle="285" />
+  <Hologram shape="4102" scale="9" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="303.61111111111114" cz="263.68055555555554" angle="135" />
+  <Hologram shape="4102" scale="8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="300.4166666666667" cz="236.18055555555557" angle="0" />
+  <Hologram shape="4102" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="273.61111111111114" cz="268.68055555555554" angle="225" />
+  <Hologram shape="4102" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="318.61111111111114" cz="150.55555555555557" angle="90" />
+  <Hologram shape="4102" scale="5.2" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="307.36111111111114" cz="260.55555555555554" angle="225" />
+  <Hologram shape="4102" scale="4.5" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="312.98611111111114" cz="193.68055555555557" angle="45" />
+  <Hologram shape="4104" scale="10" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="310.48611111111114" cz="186.18055555555557" angle="135" />
+  <Hologram shape="4104" scale="10" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="261.73611111111114" cz="299.30555555555554" angle="270" />
+  <Hologram shape="4100" scale="10" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="267.36111111111114" cz="43.05555555555556" angle="135" />
+  <Hologram shape="4100" scale="7.5" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="328.61111111111114" cz="121.80555555555556" angle="135" />
+  <Hologram shape="4100" scale="8.8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="313.5416666666667" cz="87.43055555555556" angle="180" />
+  <Hologram shape="4100" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="289.23611111111114" cz="71.80555555555556" angle="225" />
+  <Hologram shape="4100" scale="8.6" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="294.86111111111114" cz="116.80555555555556" angle="0" />
+  <Hologram shape="4100" scale="6.8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="283.61111111111114" cz="70.55555555555556" angle="45" />
+  <Hologram shape="4101" scale="10" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="272.98611111111114" cz="48.68055555555556" angle="135" />
+  <Hologram shape="4101" scale="8.8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="270.48611111111114" cz="47.43055555555556" angle="270" />
+  <Hologram shape="4101" scale="7.2" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="299.23611111111114" cz="113.05555555555556" angle="315" />
+  <Hologram shape="4101" scale="9.25" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="222.36111111111111" cz="23.680555555555557" angle="90" />
+  <Hologram shape="4101" scale="8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="303.61111111111114" cz="109.93055555555556" angle="270" />
+  <Hologram shape="4101" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="233.61111111111111" cz="50.55555555555556" angle="285" />
+  <Hologram shape="4102" scale="9" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="312.98611111111114" cz="91.80555555555556" angle="135" />
+  <Hologram shape="4102" scale="8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="277.9166666666667" cz="78.05555555555556" angle="0" />
+  <Hologram shape="4102" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="293.61111111111114" cz="111.80555555555556" angle="225" />
+  <Hologram shape="4102" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="323.61111111111114" cz="129.30555555555557" angle="90" />
+  <Hologram shape="4102" scale="5.2" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="275.48611111111114" cz="74.30555555555556" angle="225" />
+  <Hologram shape="4102" scale="4.5" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="236.73611111111111" cz="49.93055555555556" angle="45" />
+  <Hologram shape="4104" scale="10" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="234.23611111111111" cz="46.80555555555556" angle="135" />
+  <Hologram shape="4104" scale="10" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="327.98611111111114" cz="125.55555555555556" angle="270" />
+  <Hologram shape="4100" scale="10" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="180.48611111111111" cz="4.930555555555556" angle="135" />
+  <Hologram shape="4100" scale="7.5" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="76.73611111111111" cz="29.305555555555557" angle="135" />
+  <Hologram shape="4100" scale="8.8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="216.04166666666669" cz="18.680555555555557" angle="180" />
+  <Hologram shape="4100" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="106.11111111111111" cz="14.305555555555557" angle="225" />
+  <Hologram shape="4100" scale="8.6" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="201.11111111111111" cz="47.43055555555556" angle="0" />
+  <Hologram shape="4100" scale="6.8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="137.98611111111111" cz="25.555555555555557" angle="45" />
+  <Hologram shape="4101" scale="10" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="217.36111111111111" cz="23.055555555555557" angle="135" />
+  <Hologram shape="4101" scale="8.8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="83.61111111111111" cz="31.180555555555557" angle="270" />
+  <Hologram shape="4101" scale="7.2" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="177.98611111111111" cz="8.055555555555555" angle="315" />
+  <Hologram shape="4101" scale="9.25" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="39.236111111111114" cz="56.18055555555556" angle="90" />
+  <Hologram shape="4101" scale="8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="109.86111111111111" cz="6.180555555555555" angle="270" />
+  <Hologram shape="4101" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="101.73611111111111" cz="3.6805555555555554" angle="285" />
+  <Hologram shape="4102" scale="9" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="35.486111111111114" cz="60.55555555555556" angle="135" />
+  <Hologram shape="4102" scale="8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="105.41666666666667" cz="9.305555555555555" angle="0" />
+  <Hologram shape="4102" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="137.98611111111111" cz="19.930555555555557" angle="225" />
+  <Hologram shape="4102" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="44.861111111111114" cz="31.180555555555557" angle="90" />
+  <Hologram shape="4102" scale="5.2" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="36.736111111111114" cz="52.43055555555556" angle="225" />
+  <Hologram shape="4102" scale="4.5" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="77.36111111111111" cz="34.93055555555556" angle="45" />
+  <Hologram shape="4104" scale="10" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="203.61111111111111" cz="44.30555555555556" angle="135" />
+  <Hologram shape="4104" scale="10" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="134.86111111111111" cz="24.305555555555557" angle="270" />
+  <Hologram shape="4100" scale="10" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="16.11111111111111" cz="163.05555555555557" angle="135" />
+  <Hologram shape="4100" scale="7.5" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="6.736111111111111" cz="131.80555555555557" angle="135" />
+  <Hologram shape="4100" scale="8.8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="23.541666666666668" cz="96.18055555555556" angle="180" />
+  <Hologram shape="4100" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="57.361111111111114" cz="86.18055555555556" angle="225" />
+  <Hologram shape="4100" scale="8.6" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="39.236111111111114" cz="30.555555555555557" angle="0" />
+  <Hologram shape="4100" scale="6.8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="46.736111111111114" cz="134.93055555555557" angle="45" />
+  <Hologram shape="4101" scale="10" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="36.111111111111114" cz="186.80555555555557" angle="135" />
+  <Hologram shape="4101" scale="8.8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="18.61111111111111" cz="100.55555555555556" angle="270" />
+  <Hologram shape="4101" scale="7.2" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="16.73611111111111" cz="94.30555555555556" angle="315" />
+  <Hologram shape="4101" scale="9.25" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="16.11111111111111" cz="168.05555555555557" angle="90" />
+  <Hologram shape="4101" scale="8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="53.611111111111114" cz="87.43055555555556" angle="270" />
+  <Hologram shape="4101" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="11.73611111111111" cz="123.05555555555556" angle="285" />
+  <Hologram shape="4102" scale="9" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="1.7361111111111112" cz="188.68055555555557" angle="135" />
+  <Hologram shape="4102" scale="8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="11.041666666666668" cz="127.43055555555557" angle="0" />
+  <Hologram shape="4102" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="35.486111111111114" cz="137.43055555555557" angle="225" />
+  <Hologram shape="4102" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="36.111111111111114" cz="189.93055555555557" angle="90" />
+  <Hologram shape="4102" scale="5.2" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="22.36111111111111" cz="164.93055555555557" angle="225" />
+  <Hologram shape="4102" scale="4.5" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="56.111111111111114" cz="82.43055555555556" angle="45" />
+  <Hologram shape="4104" scale="10" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="3.6111111111111116" cz="185.55555555555557" angle="135" />
+  <Hologram shape="4104" scale="10" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="19.23611111111111" cz="97.43055555555556" angle="270" />
+  <Hologram shape="4100" scale="7.5" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="23.61111111111111" cz="274.93055555555554" angle="135" />
+  <Hologram shape="4100" scale="8.8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="26.666666666666668" cz="236.18055555555557" angle="180" />
+  <Hologram shape="4100" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="10.48611111111111" cz="212.43055555555557" angle="225" />
+  <Hologram shape="4100" scale="8.6" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="56.736111111111114" cz="282.43055555555554" angle="0" />
+  <Hologram shape="4100" scale="6.8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="24.23611111111111" cz="230.55555555555557" angle="45" />
+  <Hologram shape="4101" scale="10" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="92.36111111111111" cz="285.55555555555554" angle="135" />
+  <Hologram shape="4101" scale="8.8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="68.61111111111111" cz="246.80555555555557" angle="270" />
+  <Hologram shape="4101" scale="7.2" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="55.486111111111114" cz="284.93055555555554" angle="315" />
+  <Hologram shape="4101" scale="9.25" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="50.486111111111114" cz="286.80555555555554" angle="90" />
+  <Hologram shape="4101" scale="8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="34.236111111111114" cz="241.80555555555557" angle="270" />
+  <Hologram shape="4101" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="24.86111111111111" cz="269.30555555555554" angle="285" />
+  <Hologram shape="4102" scale="9" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="12.36111111111111" cz="258.05555555555554" angle="135" />
+  <Hologram shape="4102" scale="8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="63.54166666666667" cz="250.55555555555557" angle="0" />
+  <Hologram shape="4102" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="21.11111111111111" cz="272.43055555555554" angle="225" />
+  <Hologram shape="4102" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="65.48611111111111" cz="284.93055555555554" angle="90" />
+  <Hologram shape="4102" scale="5.2" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="32.361111111111114" cz="238.05555555555557" angle="225" />
+  <Hologram shape="4102" scale="4.5" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="5.486111111111112" cz="216.18055555555557" angle="45" />
+  <Hologram shape="4104" scale="10" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="96.73611111111111" cz="288.05555555555554" angle="135" />
+  <Hologram shape="4104" scale="10" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="29.861111111111114" cz="241.18055555555557" angle="270" />
+  <Hologram shape="4100" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="110.48611111111111" cz="313.05555555555554" angle="225" />
+  <Hologram shape="4100" scale="6.8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="110.48611111111111" cz="308.68055555555554" angle="45" />
+  <Hologram shape="4101" scale="7.2" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="105.48611111111111" cz="309.93055555555554" angle="315" />
+  <Hologram shape="4101" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="75.48611111111111" cz="315.55555555555554" angle="285" />
+  <Hologram shape="4100" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="158.61111111111111" cz="279.93055555555554" angle="225" />
+  <Hologram shape="4100" scale="6.8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="75.48611111111111" cz="319.30555555555554" angle="45" />
+  <Hologram shape="4101" scale="7.2" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="162.36111111111111" cz="281.80555555555554" angle="315" />
+  <Hologram shape="4101" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="297.98611111111114" cz="168.05555555555557" angle="285" />
+  <Hologram shape="4100" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="291.11111111111114" cz="173.68055555555557" angle="225" />
+  <Hologram shape="4100" scale="6.8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="126.73611111111111" cz="337.43055555555554" angle="45" />
+  <Hologram shape="4101" scale="7.2" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="274.23611111111114" cz="238.68055555555557" angle="315" />
+  <Hologram shape="4101" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="269.23611111111114" cz="238.05555555555557" angle="285" />
+  <Hologram shape="4100" scale="7" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="341.11111111111114" cz="215.55555555555557" angle="225" />
+  <Hologram shape="4100" scale="6.8" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="330.48611111111114" cz="216.18055555555557" angle="45" />
+  <Hologram shape="4101" scale="7.2" yon="110.2" color="#15130a" color.1="#2d2a1a" cx="339.23611111111114" cz="219.30555555555557" angle="315" />
+
+<Hologram shape="4095" scale="22.85" y="10" color="#1b2a35" color.1="#0f1921" cx="162.98611111111111" cz="166.73611111111111" angle="292" />
+  <Hologram shape="4095" scale="22.85" y="10" color="#1b2a35" color.1="#0f1921" cx="162.98611111111111" cz="166.73611111111111" angle="112" />
+  <Hologram shape="4095" scale="22.85" y="10" color="#1b2a35" color.1="#0f1921" cx="162.98611111111111" cz="166.80555555555557" angle="22" />
+  <Hologram shape="4095" scale="22.85" y="10" color="#1b2a35" color.1="#0f1921" cx="162.98611111111111" cz="166.80555555555557" angle="202" />
+
+</map>

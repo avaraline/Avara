@@ -1,0 +1,1247 @@
+<map>
+
+// PREVIEW HEIGHT BOOSTER
+<Ramp y="25" deltaY="3" yon="0.01" thickness="0" color="#495374" color.1="#000000" x="136.21527777777777" z="171.84027777777777" w="0.001" d="0.001" h="0" angle="180" />
+
+
+// SCOUT CONTROL FIELD
+<Field shape="bspSphere" visible="false" scale="39.75" color="#ffffff" color.1="#000000" start="@start" watch="scoutMask" deltaY="0.035" y="0" cx="136.21527777777777" cz="171.84027777777777" />
+
+
+
+// TEAM COLORS
+  <TeamColor mask="T1" color="#3C7706" color.1="#000000" cx="59.65277777777778" cz="67.70833333333334" r="1.25" angle="45" />
+  <TeamColor mask="T2" color="#D5D227" color.1="#ffd7ea" cx="54.72222222222222" cz="0.2777777777777777" r="2.5" angle="45" />
+  <TeamColor mask="T3" color="#D8392F" color.1="#ff9ccb" cx="54.72222222222222" cz="4.027777777777778" r="2.5" angle="45" />
+  <TeamColor mask="T4" color="#D849A9" color.1="#ff9cd1" cx="54.72222222222222" cz="7.777777777777779" r="2.5" angle="45" />
+  <TeamColor mask="T5" color="#AD4BD5" color.1="#ffd7f1" cx="78.47222222222223" cz="0.9027777777777779" r="2.5" angle="45" />
+  <TeamColor mask="T6" color="#47AAD6" color.1="#ffb1ea" cx="78.47222222222223" cz="4.652777777777778" r="2.5" angle="45" />
+  <TeamColor mask="T7" color="#e38400" color.1="#ffd7f1" cx="78.47222222222223" cz="0.9027777777777779" r="2.5" angle="45" />
+  <TeamColor mask="T8" color="#E6E6E6" color.1="#ffb1ea" cx="78.47222222222223" cz="4.652777777777778" r="2.5" angle="45" />
+
+
+
+// OTHER LOGIC
+  <Teleporter group="-1" y="-30" activeRange="33 * 5" deadRange="18.75 * 5" destGroup="@recenter" shape="0" spin="false" color="#817777" color.1="#000000" cx="136.21527777777777" cz="171.84027777777777" angle="225" />
+
+  <Teleporter y="0.85" mask="0" shape="0" group="@recenter" spin="false" color="#f1f0ed" color.1="#000000" cx="136.21527777777777" cz="171.84027777777777" angle="135" />
+  <Teleporter y="0.85" mask="0" shape="0" group="@recenter" spin="false" color="#f1f0ed" color.1="#000000" cx="136.21527777777777" cz="173.84027777777777" angle="135" />
+  <Teleporter y="0.85" mask="0" shape="0" group="@recenter" spin="false" color="#f1f0ed" color.1="#000000" cx="138.21527777777777" cz="173.84027777777777" angle="135" />
+  <Teleporter y="0.85" mask="0" shape="0" group="@recenter" spin="false" color="#f1f0ed" color.1="#000000" cx="138.21527777777777" cz="171.84027777777777" angle="135" />
+  <Teleporter y="0.85" mask="0" shape="0" group="@recenter" spin="false" color="#f1f0ed" color.1="#000000" cx="136.21527777777777" cz="169.84027777777777" angle="135" />
+  <Teleporter y="0.85" mask="0" shape="0" group="@recenter" spin="false" color="#f1f0ed" color.1="#000000" cx="134.21527777777777" cz="169.84027777777777" angle="135" />
+  <Teleporter y="0.85" mask="0" shape="0" group="@recenter" spin="false" color="#f1f0ed" color.1="#000000" cx="134.21527777777777" cz="171.84027777777777" angle="135" />
+
+  <Sound y="80" sound="1000" isAmbient="true" rate="1" loopCount="-1" volume="150" cx="136.21527777777777" cz="171.84027777777777" angle="315" />
+
+
+
+
+  <SkyColor verticalRangeMax="7000" n="2000" color="#3d3423" color.1="#000000" thickness="4333" />
+
+  <GroundColor color="#0f0d09" />
+
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#f1f0ed" color.1="#f1f0ed" cx="4.444444444444445" cz="2.5" angle="0" />
+
+  <set designer="Designed by Sphinx" information="Map Size: Medium&#10;   Boundary: Open" defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" ambient.c="#ffdb96" light.0.i="1.3" light.0.a="35" light.0.b="10" light.1.i="0.001" light.0.s="true" light.1.s="true" light.2.i="0.6" light.2.a="90" light.2.s="true" light.1.c="#ffa600" light.1.r="290" light.3.r="610" light.3.i="0" light.1.a="90" light.3.a="90" light.3.c="#4d412d" light.3.b="200" />
+
+
+
+// CENTER GOODY
+  <unique vars="mShow mTaken zShow zTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="zTaken" out="mShow" wait="225" />
+  <Goody shape="1300" y="2.85" scale="0.9" speed="6" missiles="3" grenades="6" start="mShow" yon="500" out="mTaken" color="rgba(255,219,150,0.5)" color.1="rgba(255,219,150,0.5)" cx="136.21527777777777" cz="171.84027777777777" angle="45" />
+  <Timer in="mTaken" out="zShow" wait="225" />
+  <Goody shape="1301" scale="0.4" y="2.85" speed="6" boosters="1" start="zShow" yon="500" out="zTaken" color="rgba(255,219,150,0.5)" color.1="#000000" cx="136.21527777777777" cz="171.84027777777777" angle="45" />
+
+
+
+
+<set material.specular="#ffffff" material.shininess="400.0" material.1.specular="#ffffff" material.1.shininess="400.0" />
+
+// INCARN PLATFORMS
+  <set wallHeight="0.25" />
+  <Wall color="rgba(255,219,150,0.2)" color.1="#ffdb96" x="166.25" z="111.80555555555556" w="5" d="5" h="0" y="7.75" />
+  <set wallHeight="0.25" />
+  <Wall color="rgba(255,219,150,0.2)" color.1="#ffdb96" x="196.25" z="141.80555555555557" w="5" d="5" h="0" y="7.75" />
+  <set wallHeight="0.25" />
+  <Wall color="rgba(255,219,150,0.2)" color.1="#ffdb96" x="106.25" z="111.80555555555556" w="5" d="5" h="0" y="7.75" />
+  <set wallHeight="0.25" />
+  <Wall color="rgba(255,219,150,0.2)" color.1="#ffdb96" x="76.25" z="141.80555555555557" w="5" d="5" h="0" y="7.75" />
+  <set wallHeight="0.25" />
+  <Wall color="rgba(255,219,150,0.2)" color.1="#ffdb96" x="76.25" z="201.80555555555557" w="5" d="5" h="0" y="7.75" />
+  <set wallHeight="0.25" />
+  <Wall color="rgba(255,219,150,0.2)" color.1="#ffdb96" x="106.25" z="231.80555555555557" w="5" d="5" h="0" y="7.75" />
+  <set wallHeight="0.25" />
+  <Wall color="rgba(255,219,150,0.2)" color.1="#ffdb96" x="166.25" z="231.80555555555557" w="5" d="5" h="0" y="7.75" />
+  <set wallHeight="0.25" />
+  <Wall color="rgba(255,219,150,0.2)" color.1="#ffdb96" x="196.25" z="201.80555555555557" w="5" d="5" h="0" y="7.75" />
+  <set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="rgba(255,219,150,0.2)" color.1="#ffdb96" x="193.75" z="229.30555555555557" w="5" d="5" h="0" y="7.75" />
+  <set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="rgba(255,219,150,0.2)" color.1="#ffdb96" x="193.75" z="114.30555555555556" w="5" d="5" h="0" y="7.75" />
+  <set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="rgba(255,219,150,0.2)" color.1="#ffdb96" x="78.75" z="114.30555555555556" w="5" d="5" h="0" y="7.75" />
+  <set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="rgba(255,219,150,0.2)" color.1="#ffdb96" x="78.75" z="229.30555555555557" w="5" d="5" h="0" y="7.75" />
+
+
+// INCARNS
+  <Incarnator y="8" cx="78.75" cz="114.30555555555556" angle="135" />
+  <Incarnator y="8" cx="193.75" cz="229.30555555555557" angle="315" />
+  <Incarnator y="8" cx="78.75" cz="229.30555555555557" angle="45" />
+  <Incarnator y="8" cx="193.75" cz="114.30555555555556" angle="225" />
+  <Incarnator y="8" cx="106.25" cz="111.80555555555556" angle="180" />
+  <Incarnator y="8" cx="166.25" cz="231.80555555555557" angle="0" />
+  <Incarnator y="8" cx="76.25" cz="201.80555555555557" angle="90" />
+  <Incarnator y="8" cx="196.25" cz="141.80555555555557" angle="270" />
+  <Incarnator y="8" cx="76.25" cz="141.80555555555557" angle="90" />
+  <Incarnator y="8" cx="196.25" cz="201.80555555555557" angle="270" />
+  <Incarnator y="8" cx="106.25" cz="231.80555555555557" angle="0" />
+  <Incarnator y="8" cx="166.25" cz="111.80555555555556" angle="180" />
+
+
+
+<set material.specular="#ffffff" material.shininess="32.0" material.1.specular="#ffffff" material.1.shininess="32.0" />
+
+
+// CENTER GLOW BANDS
+<set material.glow="256" material.1.glow="256" />
+  <set wallHeight="0" />
+  <WallDoor midYaw="45" color="#ffdb96" color.1="#000000" x="136.21527777777777" z="171.84027777777777" w="9.125" d="9.125" h="0" y="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="136.18055555555557" z="171.80555555555557" w="11" d="11" h="0" />
+<set material.glow="0" material.1.glow="0" />
+
+
+
+// CENTER TOP BLOCK
+  <set wallHeight="0.25" />
+  <WallDoor midYaw="0" color="#24221f" color.1="#000000" x="136.21527777777777" z="171.84027777777777" w="5" d="5" h="0" y="0.6" />
+
+  <set wallHeight="0" />
+  <WallDoor midYaw="0" color="#302e2a" color.1="#000000" x="136.21527777777777" z="171.84027777777777" w="2.5" d="2.5" h="0" y="0.853" />
+
+  <set wallHeight="0" />
+  <WallDoor midYaw="0" color="#24221f" color.1="#000000" x="136.21527777777777" z="171.84027777777777" w="1.5" d="1.5" h="0" y="0.856" />
+
+<set material.glow="256" material.1.glow="256" />
+  <set wallHeight="0" />
+  <WallDoor midYaw="0" color="#ffdb96" color.1="#000000" x="136.21527777777777" z="171.84027777777777" w="0.5" d="0.5" h="0" y="0.859" />
+<set material.glow="0" material.1.glow="0" />
+
+
+
+<set material.specular="#ffffff" material.shininess="8.0" material.1.specular="#ffffff" material.1.shininess="8.0" />
+
+
+// CENTER BLOCKS
+  <set wallHeight="0.125" />
+  <Wall color="#0a0806" color.1="#000000" x="136.18055555555557" z="171.80555555555557" w="10" d="10" h="0" />
+
+  <set wallHeight="0.25" />
+  <Wall color="#0f0c09" color.1="#000000" x="136.25" z="171.80555555555557" w="8.75" d="8.75" h="0" />
+
+  <set wallHeight="0.35" />
+  <WallDoor midYaw="45" color="#141312" color.1="#000000" x="136.21527777777777" z="171.84027777777777" w="8.125" d="8.125" h="0" y="0" />
+<set material.glow="256" material.1.glow="256" />
+  <set wallHeight="0.1" />
+  <WallDoor midYaw="45" color="#ffdb96" color.1="#000000" x="136.21527777777777" z="171.84027777777777" w="7.875" d="7.875" h="0" y="0.35" />
+<set material.glow="0" material.1.glow="0" />
+  <set wallHeight="0.15" />
+  <WallDoor midYaw="45" color="#141312" color.1="#000000" x="136.21527777777777" z="171.84027777777777" w="8.125" d="8.125" h="0" y="0.45" />
+
+  <set wallHeight="0.6" />
+  <WallDoor midYaw="45" color="#141312" color.1="#000000" x="136.21527777777777" z="171.84027777777777" w="8.125" d="8.125" h="0" y="0" />
+
+
+
+
+
+
+// TOWER GLOW BAND HORIZONTAL
+<set material.glow="256" material.1.glow="256" />
+<set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="#ffdb96" color.1="#000000" x="91.25" z="126.80555555555557" w="7.75" d="7.75" h="0" y="3.25" />
+<set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="#ffdb96" color.1="#000000" x="181.25" z="216.80555555555557" w="7.75" d="7.75" h="0" y="3.25" />
+<set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="#ffdb96" color.1="#000000" x="181.25" z="126.80555555555557" w="7.75" d="7.75" h="0" y="3.25" />
+<set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="#ffdb96" color.1="#000000" x="91.25" z="216.80555555555557" w="7.75" d="7.75" h="0" y="3.25" />
+<set material.glow="0" material.1.glow="0" />
+
+
+
+// TOWER TOP GLOW BANDS
+<set material.glow="256" material.1.glow="256" />
+
+<set wallHeight="19.93" />
+  <WallDoor midYaw="45" color="#ffdb96" color.1="#000000" x="91.25" z="126.80555555555557" w="7.75" d="0.3" h="0" y="3.25" />
+<set wallHeight="19.93" />
+  <WallDoor midYaw="45" color="#ffdb96" color.1="#000000" x="181.25" z="216.80555555555557" w="7.75" d="0.3" h="0" y="3.25" />
+<set wallHeight="19.93" />
+  <WallDoor midYaw="45" color="#ffdb96" color.1="#000000" x="181.25" z="126.80555555555557" w="0.3" d="7.75" h="0" y="3.25" />
+<set wallHeight="19.93" />
+  <WallDoor midYaw="45" color="#ffdb96" color.1="#000000" x="91.25" z="216.80555555555557" w="0.3" d="7.75" h="0" y="3.25" />
+
+<set material.glow="0" material.1.glow="0" />
+
+
+
+// TOWER EMBLEMS
+<set material.3.glow="256" material.2.glow="256" />
+
+<Field shape="1305" visible="true" scale="0.875" color="#120e0b" color.1="#080605" color.2="#ffdb96" color.3="#ffdb96" start="@start" cx="93.8516" cz="129.50715555555557" angle="135" y="13" />
+
+<Field shape="1305" visible="true" scale="0.875" color="#120e0b" color.1="#080605" color.2="#ffdb96" color.3="#ffdb96" start="@start" cx="178.6484" cz="214.10395555555557" angle="315" y="13" />
+
+<Field shape="1305" visible="true" scale="0.875" color="#120e0b" color.1="#080605" color.2="#ffdb96" color.3="#ffdb96" start="@start" cx="178.6484" cz="129.50715555555557" angle="225" y="13" />
+
+<Field shape="1305" visible="true" scale="0.875" color="#120e0b" color.1="#080605" color.2="#ffdb96" color.3="#ffdb96" start="@start" cx="93.8516" cz="214.10395555555557"   angle="45" y="13" />
+
+
+<set material.3.glow="0" material.2.glow="0" />
+
+
+
+
+// TOWER BLOCKS
+<set wallHeight="3" />
+  <WallDoor midYaw="45" color="#050403" color.1="#000000" x="91.25" z="126.80555555555557" w="8.25" d="8.25" h="0" />
+<set wallHeight="9.625" />
+  <WallDoor midYaw="45" color="#080605" color.1="#000000" x="91.25" z="126.80555555555557" w="7.5" d="7.5" h="0" y="3" />
+<set wallHeight="9.625" />
+  <WallDoor midYaw="45" color="#080605" color.1="#000000" x="91.25" z="126.80555555555557" w="7.5" d="7.5" h="0" y="13.375" />
+<set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="#120e0b" color.1="#000000" x="91.25" z="126.80555555555557" w="7.25" d="7.25" h="0" y="13.125" />
+<set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="#080605" color.1="#000000" x="91.25" z="126.80555555555557" w="7.5" d="7.5" h="0" y="12.875" />
+<set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="#120e0b" color.1="#000000" x="91.25" z="126.80555555555557" w="7.25" d="7.25" h="0" y="12.625" />
+<set wallHeight="20" />
+  <WallDoor midYaw="45" color="#080605" color.1="#000000" x="91.25" z="126.80555555555557" w="7.5" d="2" h="0" y="3" />
+
+
+
+  <set wallHeight="3" />
+  <WallDoor midYaw="45" color="#080605" color.1="#000000" x="181.25" z="216.80555555555557" w="8.25" d="8.25" h="0" />
+<set wallHeight="9.625" />
+  <WallDoor midYaw="45" color="#080605" color.1="#000000" x="181.25" z="216.80555555555557" w="7.5" d="7.5" h="0" y="3" />
+<set wallHeight="9.625" />
+  <WallDoor midYaw="45" color="#080605" color.1="#000000" x="181.25" z="216.80555555555557" w="7.5" d="7.5" h="0" y="13.375" />
+<set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="#120e0b" color.1="#000000" x="181.25" z="216.80555555555557" w="7.25" d="7.25" h="0" y="13.125" />
+<set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="#080605" color.1="#000000" x="181.25" z="216.80555555555557" w="7.5" d="7.5" h="0" y="12.875" />
+<set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="#120e0b" color.1="#000000" x="181.25" z="216.80555555555557" w="7.25" d="7.25" h="0" y="12.625" />
+<set wallHeight="20" />
+  <WallDoor midYaw="45" color="#080605" color.1="#000000" x="181.25" z="216.80555555555557" w="7.5" d="2" h="0" y="3" />
+
+
+<set wallHeight="3" />
+  <WallDoor midYaw="45" color="#080605" color.1="#000000" x="181.25" z="126.80555555555557" w="8.25" d="8.25" h="0" />
+<set wallHeight="9.625" />
+  <WallDoor midYaw="45" color="#080605" color.1="#000000" x="181.25" z="126.80555555555557" w="7.5" d="7.5" h="0" y="3" />
+<set wallHeight="9.625" />
+  <WallDoor midYaw="45" color="#080605" color.1="#000000" x="181.25" z="126.80555555555557" w="7.5" d="7.5" h="0" y="13.375" />
+<set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="#120e0b" color.1="#000000" x="181.25" z="126.80555555555557" w="7.25" d="7.25" h="0" y="13.125" />
+<set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="#080605" color.1="#000000" x="181.25" z="126.80555555555557" w="7.5" d="7.5" h="0" y="12.875" />
+<set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="#120e0b" color.1="#000000" x="181.25" z="126.80555555555557" w="7.25" d="7.25" h="0" y="12.625" />
+<set wallHeight="20" />
+  <WallDoor midYaw="45" color="#080605" color.1="#000000" x="181.25" z="126.80555555555557" w="2" d="7.5" h="0" y="3" />
+
+<set wallHeight="3" />
+  <WallDoor midYaw="45" color="#080605" color.1="#000000" x="91.25" z="216.80555555555557" w="8.25" d="8.25" h="0" />
+<set wallHeight="9.625" />
+  <WallDoor midYaw="45" color="#080605" color.1="#000000" x="91.25" z="216.80555555555557"  w="7.5" d="7.5" h="0" y="3" />
+<set wallHeight="9.625" />
+  <WallDoor midYaw="45" color="#080605" color.1="#000000" x="91.25" z="216.80555555555557"  w="7.5" d="7.5" h="0" y="13.375" />
+<set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="#120e0b" color.1="#000000" x="91.25" z="216.80555555555557"  w="7.25" d="7.25" h="0" y="13.125" />
+<set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="#080605" color.1="#000000" x="91.25" z="216.80555555555557"  w="7.5" d="7.5" h="0" y="12.875" />
+<set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="#120e0b" color.1="#000000" x="91.25" z="216.80555555555557"  w="7.25" d="7.25" h="0" y="12.625" />
+<set wallHeight="20" />
+  <WallDoor midYaw="45" color="#080605" color.1="#000000" x="91.25" z="216.80555555555557"  w="2" d="7.5" h="0" y="3" />
+
+
+
+// TOWER BLOCK GLOW BANDS
+<set material.glow="256" material.1.glow="256" />
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#ffdb96" color.1="#000000" x="91.25" z="126.80555555555557" w="9.25" d="9.25" h="0" />
+  <set wallHeight="0" />
+  <WallDoor midYaw="45" color="#ffdb96" color.1="#000000" x="181.25" z="216.80555555555557" w="9.25" d="9.25" h="0" />
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#ffdb96" color.1="#000000" x="181.25" z="126.80555555555557" w="9.25" d="9.25" h="0" />
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#ffdb96" color.1="#000000" x="91.25" z="216.80555555555557" w="9.25" d="9.25" h="0" />
+<set material.glow="0" material.1.glow="0" />
+
+
+
+
+
+// CYAN LOW BLOCKS
+<set wallHeight="1.5" />
+  <Wall color="#17140e" color.1="#000000" x="98.75" z="134.30555555555557" w="15" d="15" h="0" />
+  <set wallHeight="1.5" />
+  <Wall color="#17140e" color.1="#000000" x="173.75" z="134.30555555555557" w="15" d="15" h="0" />
+  <set wallHeight="1.5" />
+  <Wall color="#17140e" color.1="#000000" x="173.75" z="209.30555555555557" w="15" d="15" h="0" />
+  <set wallHeight="1.5" />
+  <Wall color="#17140e" color.1="#000000" x="98.75" z="209.30555555555557" w="15" d="15" h="0" />
+
+  <set wallHeight="1.5" />
+  <Wall color="#17140e" color.1="#000000" x="191.25" z="171.80555555555557" w="5" d="30" h="0" />
+  <set wallHeight="1.5" />
+  <Wall color="#17140e" color.1="#000000" x="118.75" z="158.05555555555557" w="5" d="12.5" h="0" />
+  <set wallHeight="1.5" />
+  <Wall color="#17140e" color.1="#000000" x="125" z="154.30555555555557" w="7.5" d="5" h="0" />
+  <set wallHeight="1.5" />
+  <Wall color="#17140e" color.1="#000000" x="153.75" z="158.05555555555557" w="5" d="12.5" h="0" />
+  <set wallHeight="1.5" />
+  <Wall color="#17140e" color.1="#000000" x="147.5" z="154.30555555555557" w="7.5" d="5" h="0" />
+  <set wallHeight="1.5" />
+  <Wall color="#17140e" color.1="#000000" x="118.75" z="185.55555555555557" w="5" d="12.5" h="0" />
+  <set wallHeight="1.5" />
+  <Wall color="#17140e" color.1="#000000" x="125" z="189.30555555555557" w="7.5" d="5" h="0" />
+  <set wallHeight="1.5" />
+  <Wall color="#17140e" color.1="#000000" x="153.75" z="185.55555555555557" w="5" d="12.5" h="0" />
+  <set wallHeight="1.5" />
+  <Wall color="#17140e" color.1="#000000" x="147.5" z="189.30555555555557" w="7.5" d="5" h="0" />
+  <set wallHeight="1.5" />
+  <Wall color="#17140e" color.1="#000000" x="81.25" z="171.80555555555557" w="5" d="30" h="0" />
+  <set wallHeight="1.5" />
+  <Wall color="#17140e" color.1="#000000" x="136.25" z="116.80555555555556" w="30" d="5" h="0" />
+  <set wallHeight="1.5" />
+  <Wall color="#17140e" color.1="#000000" x="136.25" z="226.80555555555557" w="30" d="5" h="0" />
+  <set wallHeight="1.5" />
+  <WallDoor midYaw="45" color="#17140e" color.1="#000000" x="120.625" z="187.43055555555557" w="10" d="10" h="0" />
+  <set wallHeight="1.5" />
+  <WallDoor midYaw="45" color="#17140e" color.1="#000000" x="120.625" z="156.18055555555557" w="10" d="10" h="0" />
+  <set wallHeight="1.5" />
+  <WallDoor midYaw="45" color="#17140e" color.1="#000000" x="151.875" z="156.18055555555557" w="10" d="10" h="0" />
+  <set wallHeight="1.5" />
+  <WallDoor midYaw="45" color="#17140e" color.1="#000000" x="151.875" z="187.43055555555557" w="10" d="10" h="0" />
+
+
+// CYAN LOW BLOCK GLOW BANDS
+<set material.glow="256" material.1.glow="256" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="191.25" z="171.80555555555557" w="6" d="31" h="0" />
+
+<set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="98.75" z="134.30555555555557" w="16" d="16" h="0" />
+
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="118.75" z="158.05555555555557" w="6" d="13.5" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="125" z="154.30555555555557" w="8.5" d="6" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="153.75" z="158.05555555555557" w="6" d="13.5" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="147.5" z="154.30555555555557" w="8.5" d="6" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="118.75" z="185.55555555555557" w="6" d="13.5" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="125" z="189.30555555555557" w="8.5" d="6" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="153.75" z="185.55555555555557" w="6" d="13.5" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="147.5" z="189.30555555555557" w="8.5" d="6" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="173.75" z="134.30555555555557" w="16" d="16" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="173.75" z="209.30555555555557" w="16" d="16" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="98.75" z="209.30555555555557" w="16" d="16" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="81.25" z="171.80555555555557" w="6" d="31" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="136.25" z="116.80555555555556" w="31" d="6" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="136.25" z="226.80555555555557" w="31" d="6" h="0" />
+  <set wallHeight="0" />
+  <WallDoor midYaw="45" color="#ffdb96" color.1="#000000" x="120.625" z="187.43055555555557" w="11" d="11" h="0" />
+  <set wallHeight="0" />
+  <WallDoor midYaw="45" color="#ffdb96" color.1="#000000" x="120.625" z="156.18055555555557" w="11" d="11" h="0" />
+  <set wallHeight="0" />
+  <WallDoor midYaw="45" color="#ffdb96" color.1="#000000" x="151.875" z="156.18055555555557" w="11" d="11" h="0" />
+  <set wallHeight="0" />
+  <WallDoor midYaw="45" color="#ffdb96" color.1="#000000" x="151.875" z="187.43055555555557" w="11" d="11" h="0" />
+
+<set material.glow="0" material.1.glow="0" />
+
+
+
+
+
+// PINK BLOCKS
+ <set wallHeight="2.175" />
+  <Wall color="#0a0805" color.1="#000000" x="165" z="135.55555555555557" w="2.5" d="12.5" h="0" />
+  <set wallHeight="0.25" />
+  <Wall color="#030201" color.1="#000000" x="165" z="135.55555555555557" w="2.25" d="12.25" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <Wall color="#0a0805" color.1="#000000" x="165" z="135.55555555555557" w="2.5" d="12.5" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="165" z="135.55555555555557" w="2.5" d="12.5" h="0" />
+<set wallYon="defaultYon" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="164.375" z="135.55555555555557" w="1.25" d="12.5" h="0" />
+
+
+ <set wallHeight="2.175" />
+  <Wall color="#0a0805" color.1="#000000" x="165" z="208.05555555555557" w="2.5" d="12.5" h="0" />
+  <set wallHeight="0.25" />
+  <Wall color="#030201" color.1="#000000" x="165" z="208.05555555555557" w="2.25" d="12.25" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <Wall color="#0a0805" color.1="#000000" x="165" z="208.05555555555557" w="2.5" d="12.5" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="165" z="208.05555555555557" w="2.5" d="12.5" h="0" />
+<set wallYon="defaultYon" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="164.375" z="208.05555555555557" w="1.25" d="12.5" h="0" />
+
+
+
+ <set wallHeight="2.175" />
+  <Wall color="#0a0805" color.1="#000000" x="107.5" z="135.55555555555557" w="2.5" d="12.5" h="0" />
+  <set wallHeight="0.25" />
+  <Wall color="#030201" color.1="#000000" x="107.5" z="135.55555555555557" w="2.25" d="12.25" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <Wall color="#0a0805" color.1="#000000" x="107.5" z="135.55555555555557" w="2.5" d="12.5" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="107.5" z="135.55555555555557" w="2.5" d="12.5" h="0" />
+<set wallYon="defaultYon" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="108.125" z="135.55555555555557" w="1.25" d="12.5" h="0" />
+
+
+
+ <set wallHeight="2.175" />
+  <Wall color="#0a0805" color.1="#000000" x="107.5" z="208.05555555555557" w="2.5" d="12.5" h="0" />
+  <set wallHeight="0.25" />
+  <Wall color="#030201" color.1="#000000" x="107.5" z="208.05555555555557" w="2.25" d="12.25" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <Wall color="#0a0805" color.1="#000000" x="107.5" z="208.05555555555557" w="2.5" d="12.5" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="107.5" z="208.05555555555557" w="2.5" d="12.5" h="0" />
+<set wallYon="defaultYon" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="108.125" z="208.05555555555557" w="1.25" d="12.5" h="0" />
+
+
+
+ <set wallHeight="2.175" />
+  <Wall color="#0a0805" color.1="#000000" x="101.25" z="143.05555555555557" w="15" d="2.5" h="0" />
+  <set wallHeight="0.25" />
+  <Wall color="#030201" color.1="#000000" x="101.25" z="143.05555555555557" w="14.75" d="2.25" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <Wall color="#0a0805" color.1="#000000" x="101.25" z="143.05555555555557" w="15" d="2.5" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="101.25" z="143.05555555555557" w="15" d="2.5" h="0" />
+<set wallYon="defaultYon" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="101.25" z="143.68055555555557" w="15" d="1.25" h="0" />
+
+
+ <set wallHeight="2.175" />
+  <Wall color="#0a0805" color.1="#000000" x="171.25" z="143.05555555555557" w="15" d="2.5" h="0" />
+  <set wallHeight="0.25" />
+  <Wall color="#030201" color.1="#000000" x="171.25" z="143.05555555555557" w="14.75" d="2.25" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <Wall color="#0a0805" color.1="#000000" x="171.25" z="143.05555555555557" w="15" d="2.5" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="171.25" z="143.05555555555557" w="15" d="2.5" h="0" />
+<set wallYon="defaultYon" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="171.25" z="143.68055555555557" w="15" d="1.25" h="0" />
+
+
+ <set wallHeight="2.175" />
+  <Wall color="#0a0805" color.1="#000000" x="171.25" z="200.55555555555557" w="15" d="2.5" h="0" />
+  <set wallHeight="0.25" />
+  <Wall color="#030201" color.1="#000000" x="171.25" z="200.55555555555557" w="14.75" d="2.25" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <Wall color="#0a0805" color.1="#000000" x="171.25" z="200.55555555555557" w="15" d="2.5" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="171.25" z="200.55555555555557" w="15" d="2.5" h="0" />
+<set wallYon="defaultYon" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="171.25" z="199.93055555555557" w="15" d="1.25" h="0" />
+
+
+
+
+ <set wallHeight="2.175" />
+  <Wall color="#0a0805" color.1="#000000" x="101.25" z="200.55555555555557" w="15" d="2.5" h="0" />
+  <set wallHeight="0.25" />
+  <Wall color="#030201" color.1="#000000" x="101.25" z="200.55555555555557" w="14.75" d="2.25" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <Wall color="#0a0805" color.1="#000000" x="101.25" z="200.55555555555557" w="15" d="2.5" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="101.25" z="200.55555555555557" w="15" d="2.5" h="0" />
+<set wallYon="defaultYon" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="101.25" z="199.93055555555557" w="15" d="1.25" h="0" />
+
+
+
+  <set wallHeight="2.175" />
+  <WallDoor midYaw="45" color="#0a0805" color.1="#000000" x="105.97222222222223" z="141.5625" w="4.4" d="3.125" h="0" />
+  <set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="#030201" color.1="#000000" x="105.97222222222223" z="141.5625" w="4.15" d="2.875" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <WallDoor midYaw="45" color="#0a0805" color.1="#000000" x="105.97222222222223" z="141.5625" w="4.4" d="3.125" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <WallDoor midYaw="45" color="#0a0805" color.1="#000000" x="105.97222222222223" z="141.5625" w="4.4" d="3.125" h="0" />
+<set wallYon="defaultYon" />
+
+
+  <set wallHeight="2.175" />
+  <WallDoor midYaw="45" color="#0a0805" color.1="#000000" x="166.42361111111111" z="141.52777777777777" w="3.125" d="4.4" h="0" />
+  <set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="#030201" color.1="#000000" x="166.42361111111111" z="141.52777777777777" w="2.875" d="4.15" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <WallDoor midYaw="45" color="#0a0805" color.1="#000000" x="166.42361111111111" z="141.52777777777777" w="3.125" d="4.4" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <WallDoor midYaw="45" color="#0a0805" color.1="#000000" x="166.42361111111111" z="141.52777777777777" w="3.125" d="4.4" h="0" />
+<set wallYon="defaultYon" />
+
+
+
+  <set wallHeight="2.175" />
+  <WallDoor midYaw="45" color="#0a0805" color.1="#000000" x="166.45833333333334" z="201.97916666666669" w="4.4" d="3.125" h="0" />
+  <set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="#030201" color.1="#000000" x="166.45833333333334" z="201.97916666666669" w="4.15" d="2.875" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <WallDoor midYaw="45" color="#0a0805" color.1="#000000" x="166.45833333333334" z="201.97916666666669" w="4.4" d="3.125" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <WallDoor midYaw="45" color="#0a0805" color.1="#000000" x="166.45833333333334" z="201.97916666666669" w="4.4" d="3.125" h="0" />
+<set wallYon="defaultYon" />
+
+  <set wallHeight="2.175" />
+  <WallDoor midYaw="45" color="#0a0805" color.1="#000000" x="106.00694444444444" z="202.01388888888889" w="3.125" d="4.4" h="0" />
+  <set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="#030201" color.1="#000000" x="106.00694444444444" z="202.01388888888889" w="2.875" d="4.15" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <WallDoor midYaw="45" color="#0a0805" color.1="#000000" x="106.00694444444444" z="202.01388888888889" w="3.125" d="4.4" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <WallDoor midYaw="45" color="#0a0805" color.1="#000000" x="106.00694444444444" z="202.01388888888889" w="3.125" d="4.4" h="0" />
+<set wallYon="defaultYon" />
+
+
+
+
+// INNER PINK BLOCKS
+ <set wallHeight="2.175" />
+  <Wall color="#0a0805" color.1="#000000" x="118.75" z="195.55555555555557" w="20" d="7.5" h="0" />
+  <set wallHeight="0.25" />
+  <Wall color="#030201" color.1="#000000" x="118.75" z="195.55555555555557" w="19.75" d="7.25" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <Wall color="#0a0805" color.1="#000000" x="118.75" z="195.55555555555557" w="20" d="7.5" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="118.75" z="195.55555555555557" w="20" d="7.5" h="0" />
+<set wallYon="defaultYon" />
+
+
+ <set wallHeight="2.175" />
+  <Wall color="#0a0805" color.1="#000000" x="153.75" z="195.55555555555557" w="20" d="7.5" h="0" />
+  <set wallHeight="0.25" />
+  <Wall color="#030201" color.1="#000000" x="153.75" z="195.55555555555557" w="19.75" d="7.25" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <Wall color="#0a0805" color.1="#000000" x="153.75" z="195.55555555555557" w="20" d="7.5" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="153.75" z="195.55555555555557" w="20" d="7.5" h="0" />
+<set wallYon="defaultYon" />
+
+ <set wallHeight="2.175" />
+  <Wall color="#0a0805" color.1="#000000" x="153.75" z="148.05555555555557" w="20" d="7.5" h="0" />
+  <set wallHeight="0.25" />
+  <Wall color="#030201" color.1="#000000" x="153.75" z="148.05555555555557" w="19.75" d="7.25" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <Wall color="#0a0805" color.1="#000000" x="153.75" z="148.05555555555557" w="20" d="7.5" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="153.75" z="148.05555555555557" w="20" d="7.5" h="0" />
+<set wallYon="defaultYon" />
+
+ <set wallHeight="2.175" />
+  <Wall color="#0a0805" color.1="#000000" x="118.75" z="148.05555555555557" w="20" d="7.5" h="0" />
+  <set wallHeight="0.25" />
+  <Wall color="#030201" color.1="#000000" x="118.75" z="148.05555555555557" w="19.75" d="7.25" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <Wall color="#0a0805" color.1="#000000" x="118.75" z="148.05555555555557" w="20" d="7.5" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="118.75" z="148.05555555555557" w="20" d="7.5" h="0" />
+<set wallYon="defaultYon" />
+
+
+
+ <set wallHeight="2.175" />
+  <Wall color="#0a0805" color.1="#000000" x="128.75" z="149.30555555555557" w="2.5" d="5" h="0" />
+  <set wallHeight="0.25" />
+  <Wall color="#030201" color.1="#000000" x="128.75" z="149.30555555555557" w="2.25" d="4.75" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <Wall color="#0a0805" color.1="#000000" x="128.75" z="149.30555555555557" w="2.5" d="5" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="128.75" z="149.30555555555557" w="2.5" d="5" h="0" />
+<set wallYon="defaultYon" />
+
+ <set wallHeight="2.175" />
+  <Wall color="#0a0805" color.1="#000000" x="143.75" z="194.30555555555557" w="2.5" d="5" h="0" />
+  <set wallHeight="0.25" />
+  <Wall color="#030201" color.1="#000000" x="143.75" z="194.30555555555557" w="2.25" d="4.75" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <Wall color="#0a0805" color.1="#000000" x="143.75" z="194.30555555555557" w="2.5" d="5" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="143.75" z="194.30555555555557" w="2.5" d="5" h="0" />
+<set wallYon="defaultYon" />
+
+ <set wallHeight="2.175" />
+  <Wall color="#0a0805" color.1="#000000" x="128.75" z="194.30555555555557" w="2.5" d="5" h="0" />
+  <set wallHeight="0.25" />
+  <Wall color="#030201" color.1="#000000" x="128.75" z="194.30555555555557" w="2.25" d="4.75" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <Wall color="#0a0805" color.1="#000000" x="128.75" z="194.30555555555557" w="2.5" d="5" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="128.75" z="194.30555555555557" w="2.5" d="5" h="0" />
+<set wallYon="defaultYon" />
+
+ <set wallHeight="2.175" />
+  <Wall color="#0a0805" color.1="#000000" x="143.75" z="149.30555555555557" w="2.5" d="5" h="0" />
+  <set wallHeight="0.25" />
+  <Wall color="#030201" color.1="#000000" x="143.75" z="149.30555555555557" w="2.25" d="4.75" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <Wall color="#0a0805" color.1="#000000" x="143.75" z="149.30555555555557" w="2.5" d="5" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="143.75" z="149.30555555555557" w="2.5" d="5" h="0" />
+<set wallYon="defaultYon" />
+
+
+ <set wallHeight="2.175" />
+  <Wall color="#0a0805" color.1="#000000" x="113.75" z="164.30555555555557" w="5" d="2.5" h="0" />
+  <set wallHeight="0.25" />
+  <Wall color="#030201" color.1="#000000" x="113.75" z="164.30555555555557" w="4.75" d="2.25" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <Wall color="#0a0805" color.1="#000000" x="113.75" z="164.30555555555557" w="5" d="2.5" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="113.75" z="164.30555555555557" w="5" d="2.5" h="0" />
+<set wallYon="defaultYon" />
+
+ <set wallHeight="2.175" />
+  <Wall color="#0a0805" color.1="#000000" x="113.75" z="179.30555555555557" w="5" d="2.5" h="0" />
+  <set wallHeight="0.25" />
+  <Wall color="#030201" color.1="#000000" x="113.75" z="179.30555555555557" w="4.75" d="2.25" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <Wall color="#0a0805" color.1="#000000" x="113.75" z="179.30555555555557" w="5" d="2.5" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="113.75" z="179.30555555555557" w="5" d="2.5" h="0" />
+<set wallYon="defaultYon" />
+
+ <set wallHeight="2.175" />
+  <Wall color="#0a0805" color.1="#000000" x="158.75" z="179.30555555555557" w="5" d="2.5" h="0" />
+  <set wallHeight="0.25" />
+  <Wall color="#030201" color.1="#000000" x="158.75" z="179.30555555555557" w="4.75" d="2.25" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <Wall color="#0a0805" color.1="#000000" x="158.75" z="179.30555555555557" w="5" d="2.5" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="158.75" z="179.30555555555557" w="5" d="2.5" h="0" />
+<set wallYon="defaultYon" />
+
+ <set wallHeight="2.175" />
+  <Wall color="#0a0805" color.1="#000000" x="158.75" z="164.30555555555557" w="5" d="2.5" h="0" />
+  <set wallHeight="0.25" />
+  <Wall color="#030201" color.1="#000000" x="158.75" z="164.30555555555557" w="4.75" d="2.25" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <Wall color="#0a0805" color.1="#000000" x="158.75" z="164.30555555555557" w="5" d="2.5" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="158.75" z="164.30555555555557" w="5" d="2.5" h="0" />
+<set wallYon="defaultYon" />
+
+
+ <set wallHeight="2.175" />
+  <Wall color="#0a0805" color.1="#000000" x="112.5" z="189.30555555555557" w="7.5" d="20" h="0" />
+  <set wallHeight="0.25" />
+  <Wall color="#030201" color.1="#000000" x="112.5" z="189.30555555555557" w="7.25" d="19.75" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <Wall color="#0a0805" color.1="#000000" x="112.5" z="189.30555555555557" w="7.5" d="20" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="112.5" z="189.30555555555557" w="7.5" d="20" h="0" />
+<set wallYon="defaultYon" />
+
+ <set wallHeight="2.175" />
+  <Wall color="#0a0805" color.1="#000000" x="160" z="189.30555555555557" w="7.5" d="20" h="0" />
+  <set wallHeight="0.25" />
+  <Wall color="#030201" color.1="#000000" x="160" z="189.30555555555557" w="7.25" d="19.75" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <Wall color="#0a0805" color.1="#000000" x="160" z="189.30555555555557" w="7.5" d="20" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="160" z="189.30555555555557" w="7.5" d="20" h="0" />
+<set wallYon="defaultYon" />
+
+ <set wallHeight="2.175" />
+  <Wall color="#0a0805" color.1="#000000" x="160" z="154.30555555555557" w="7.5" d="20" h="0" />
+  <set wallHeight="0.25" />
+  <Wall color="#030201" color.1="#000000" x="160" z="154.30555555555557" w="7.25" d="19.75" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <Wall color="#0a0805" color.1="#000000" x="160" z="154.30555555555557" w="7.5" d="20" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="160" z="154.30555555555557" w="7.5" d="20" h="0" />
+<set wallYon="defaultYon" />
+
+ <set wallHeight="2.175" />
+  <Wall color="#0a0805" color.1="#000000" x="112.5" z="154.30555555555557" w="7.5" d="20" h="0" />
+  <set wallHeight="0.25" />
+  <Wall color="#030201" color.1="#000000" x="112.5" z="154.30555555555557" w="7.25" d="19.75" h="0" y="2.175" />
+  <set wallHeight="0.675" />
+  <Wall color="#0a0805" color.1="#000000" x="112.5" z="154.30555555555557" w="7.5" d="20" h="0" y="2.425" />
+<set wallYon="0.01" />
+  <set wallHeight="3.1" />
+  <Wall color="#0a0805" color.1="#000000" x="112.5" z="154.30555555555557" w="7.5" d="20" h="0" />
+<set wallYon="defaultYon" />
+
+
+
+
+// PINK BLOCK GLOW BANDS
+<set material.glow="256" material.1.glow="256" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="165" z="135.55555555555557" w="3.47" d="13.47" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="165" z="208.05555555555557" w="3.47" d="13.47" h="0" />
+
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="107.5" z="135.55555555555557" w="3.47" d="13.47" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="101.25" z="143.05555555555557" w="15.97" d="3.47" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="171.25" z="143.05555555555557" w="15.97" d="3.47" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="171.25" z="200.55555555555557" w="15.97" d="3.47" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="101.25" z="200.55555555555557" w="15.97" d="3.47" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="107.5" z="208.05555555555557" w="3.47" d="13.47" h="0" />
+
+
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="122.5" z="148.05555555555557" w="13.5" d="8.5" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="112.5" z="189.30555555555557" w="8.5" d="21" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="122.5" z="195.55555555555557" w="13.5" d="8.5" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="160" z="189.30555555555557" w="8.5" d="21" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="150" z="195.55555555555557" w="13.5" d="8.5" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="160" z="154.30555555555557" w="8.5" d="21" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="150" z="148.05555555555557" w="13.5" d="8.5" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="129.375" z="193.68055555555557" w="2.25" d="4.75" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="143.125" z="193.68055555555557" w="2.25" d="4.75" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="129.375" z="149.93055555555557" w="2.25" d="4.75" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="143.125" z="149.93055555555557" w="2.25" d="4.75" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="114.375" z="164.93055555555557" w="4.75" d="2.25" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="114.375" z="178.68055555555557" w="4.75" d="2.25" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="158.125" z="164.93055555555557" w="4.75" d="2.25" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="158.125" z="178.68055555555557" w="4.75" d="2.25" h="0" />
+  <set wallHeight="0" />
+  <WallDoor midYaw="45" color="#ffdb96" color.1="#000000" x="105.97222222222223" z="141.5625" w="4.75" d="4.125" h="0" />
+  <set wallHeight="0" />
+  <WallDoor midYaw="45" color="#ffdb96" color.1="#000000" x="166.42361111111111" z="141.52777777777777" w="4.125" d="4.75" h="0" />
+  <set wallHeight="0" />
+  <WallDoor midYaw="45" color="#ffdb96" color.1="#000000" x="166.45833333333334" z="201.97916666666669" w="4.75" d="4.125" h="0" />
+  <set wallHeight="0" />
+  <WallDoor midYaw="45" color="#ffdb96" color.1="#000000" x="106.00694444444444" z="202.01388888888889" w="4.125" d="4.75" h="0" />
+<set material.glow="0" material.1.glow="0" />
+
+
+
+// MAIN RAMPS
+<set material.glow="256" material.1.glow="256" />
+
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#0f0d09" color.1="#000000" x="101.00694444444446" z="154.30555555555557" w="14.5138888888889" d="19.02777777777777" h="0" angle="270" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#0f0d09" color.1="#000000" x="101.00694444444446" z="189.30555555555557" w="14.5138888888889" d="19.02777777777777" h="0" angle="270" />
+
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#0f0d09" color.1="#000000" x="118.75" z="136.5625" w="19.02777777777777" d="14.513888888888886" h="0" angle="0" />
+
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#0f0d09" color.1="#000000" x="153.75" z="136.5625" w="19.02777777777777" d="14.513888888888886" h="0" angle="0" />
+
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#0f0d09" color.1="#000000" x="171.49305555555554" z="189.30555555555557" w="14.513888888888886" d="19.02777777777777" h="0" angle="90" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#0f0d09" color.1="#000000" x="171.49305555555554" z="154.30555555555557" w="14.513888888888886" d="19.02777777777777" h="0" angle="90" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#0f0d09" color.1="#000000" x="118.75" z="207.04861111111114" w="19.02777777777777" d="14.513888888888886" h="0" angle="180" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#0f0d09" color.1="#000000" x="153.75" z="207.04861111111114" w="19.02777777777777" d="14.513888888888886" h="0" angle="180" />
+
+<set material.glow="0" material.1.glow="0" />
+
+
+
+
+
+// RAMP GLOW BANDS
+<set material.glow="256" material.1.glow="256" />
+
+  <Ramp y="3" deltaY="0.1" yon="1000" thickness="0" color="#ffdb96" color.1="#000000" x="108.50694444444446" z="189.30555555555557" w="0.48611111111110006" d="20" h="0" angle="270" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#ffdb96" color.1="#000000" x="101.00694444444446" z="199.0625" w="14.5138888888889" d="0.48611111111111427" h="0" angle="270" />
+
+  <Ramp y="3" deltaY="0.1" yon="1000" thickness="0" color="#ffdb96" color.1="#000000" x="118.75" z="144.0625" w="20" d="0.48611111111111427" h="0" angle="0" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#ffdb96" color.1="#000000" x="108.99305555555556" z="136.5625" w="0.48611111111111427" d="14.513888888888886" h="0" angle="0" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#ffdb96" color.1="#000000" x="128.50694444444446" z="136.5625" w="0.48611111111111427" d="14.513888888888886" h="0" angle="0" />
+
+
+  <Ramp y="3" deltaY="0.1" yon="1000" thickness="0" color="#ffdb96" color.1="#000000" x="153.75" z="144.0625" w="20" d="0.48611111111111427" h="0" angle="0" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#ffdb96" color.1="#000000" x="143.99305555555554" z="136.5625" w="0.48611111111111427" d="14.513888888888886" h="0" angle="0" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#ffdb96" color.1="#000000" x="163.50694444444446" z="136.5625" w="0.48611111111111427" d="14.513888888888886" h="0" angle="0" />
+
+
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#ffdb96" color.1="#000000" x="171.49305555555554" z="179.54861111111114" w="14.513888888888886" d="0.48611111111111427" h="0" angle="90" />
+  <Ramp y="3" deltaY="0.1" yon="1000" thickness="0" color="#ffdb96" color.1="#000000" x="163.99305555555554" z="189.30555555555557" w="0.48611111111111427" d="20" h="0" angle="90" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#ffdb96" color.1="#000000" x="171.49305555555554" z="199.0625" w="14.513888888888886" d="0.48611111111111427" h="0" angle="90" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#ffdb96" color.1="#000000" x="171.49305555555554" z="144.54861111111114" w="14.513888888888886" d="0.48611111111111427" h="0" angle="90" />
+  <Ramp y="3" deltaY="0.1" yon="1000" thickness="0" color="#ffdb96" color.1="#000000" x="163.99305555555554" z="154.30555555555557" w="0.48611111111111427" d="20" h="0" angle="90" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#ffdb96" color.1="#000000" x="171.49305555555554" z="164.0625" w="14.513888888888886" d="0.48611111111111427" h="0" angle="90" />
+  <Ramp y="3" deltaY="0.1" yon="1000" thickness="0" color="#ffdb96" color.1="#000000" x="118.75" z="199.54861111111114" w="20" d="0.48611111111111427" h="0" angle="180" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#ffdb96" color.1="#000000" x="108.99305555555556" z="207.04861111111114" w="0.48611111111111427" d="14.513888888888886" h="0" angle="180" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#ffdb96" color.1="#000000" x="128.50694444444446" z="207.04861111111114" w="0.48611111111111427" d="14.513888888888886" h="0" angle="180" />
+  <Ramp y="3" deltaY="0.1" yon="1000" thickness="0" color="#ffdb96" color.1="#000000" x="153.75" z="199.54861111111114" w="20" d="0.48611111111111427" h="0" angle="180" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#ffdb96" color.1="#000000" x="143.99305555555554" z="207.04861111111114" w="0.48611111111111427" d="14.513888888888886" h="0" angle="180" />
+
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#ffdb96" color.1="#000000" x="163.50694444444446" z="207.04861111111114" w="0.48611111111111427" d="14.513888888888886" h="0" angle="180" />
+
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#ffdb96" color.1="#000000" x="101.00694444444446" z="144.54861111111114" w="14.5138888888889" d="0.48611111111111427" h="0" angle="270" />
+  <Ramp y="3" deltaY="0.1" yon="1000" thickness="0" color="#ffdb96" color.1="#000000" x="108.50694444444446" z="154.30555555555557" w="0.48611111111110006" d="20" h="0" angle="270" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#ffdb96" color.1="#000000" x="101.00694444444446" z="164.0625" w="14.5138888888889" d="0.48611111111111427" h="0" angle="270" />
+  <Ramp y="0" deltaY="3" yon="1000" thickness="0" color="#ffdb96" color.1="#000000" x="101.00694444444446" z="179.54861111111114" w="14.5138888888889" d="0.48611111111111427" h="0" angle="270" />
+
+<set material.glow="0" material.1.glow="0" />
+
+
+
+// CD RAMPS
+  <Ramp y="0" deltaY="5.03" yon="0.01" thickness="0.45" color="#e72400" color.1="#000000" x="169.375" z="177.29166666666669" w="18.75" d="2.916666666666657" h="0" angle="0" />
+  <Ramp y="0" deltaY="5.03" yon="0.01" thickness="0.45" color="#e72400" color.1="#000000" x="103.125" z="166.3888888888889" w="18.75" d="2.916666666666657" h="0" angle="180" />
+
+
+
+
+// GREEN TUNNEL WALL
+  <set wallHeight="5.03" />
+  <Wall color="#050403" color.1="#000000" x="103.125" z="164.47916666666669" w="18.75" d="0.3472222222222001" h="0" />
+  <set wallHeight="5.03" />
+  <Wall color="#050403" color.1="#000000" x="169.375" z="164.47916666666669" w="18.75" d="0.3472222222222001" h="0" />
+  <set wallHeight="5.03" />
+  <Wall color="#050403" color.1="#000000" x="169.375" z="179.13194444444446" w="18.75" d="0.34722222222222854" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#050403" color.1="#000000" x="103.125" z="164.47916666666669" w="18.75" d="0.3472222222222001" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#050403" color.1="#000000" x="169.375" z="164.47916666666669" w="18.75" d="0.3472222222222001" h="0" />
+  <set wallHeight="5.03" />
+  <Wall color="#050403" color.1="#000000" x="143.57638888888889" z="138.68055555555557" w="0.34722222222222854" d="18.75" h="0" />
+  <set wallHeight="5.03" />
+  <Wall color="#050403" color.1="#000000" x="128.92361111111111" z="204.93055555555557" w="0.34722222222222854" d="18.75" h="0" />
+  <set wallHeight="5.03" />
+  <Wall color="#050403" color.1="#000000" x="143.57638888888889" z="204.93055555555557" w="0.34722222222222854" d="18.75" h="0" />
+  <set wallHeight="5.03" />
+  <Wall color="#050403" color.1="#000000" x="143.57638888888889" z="138.68055555555557" w="0.34722222222222854" d="18.75" h="0" />
+  <set wallHeight="5.03" />
+  <Wall color="#050403" color.1="#000000" x="143.57638888888889" z="204.93055555555557" w="0.34722222222222854" d="18.75" h="0" />
+  <set wallHeight="5.03" />
+  <Wall color="#050403" color.1="#000000" x="103.125" z="179.13194444444446" w="18.75" d="0.34722222222222854" h="0" />
+  <set wallHeight="5.03" />
+  <Wall color="#050403" color.1="#000000" x="128.92361111111111" z="138.68055555555557" w="0.34722222222222854" d="18.75" h="0" />
+
+
+
+
+// TUNNEL PENTAGONS
+<set material.1.glow="256" />
+  <Hologram shape="1375" scale="13" color="#050403" color.1="#ffdb96" cx="93.75" cz="171.80555555555557" angle="90" />
+  <Hologram shape="1375" scale="13" color="#050403" color.1="#ffdb96" cx="112.5" cz="171.80555555555557" angle="270" />
+  <Hologram shape="1376" scale="13" color="#050403" color.1="#ffdb96" cx="103.125" cz="171.80555555555557" angle="90" />
+
+  <Hologram shape="1375" scale="13" color="#050403" color.1="#ffdb96" cx="160" cz="171.80555555555557" angle="90" />
+  <Hologram shape="1375" scale="13" color="#050403" color.1="#ffdb96" cx="178.75" cz="171.80555555555557" angle="270" />
+  <Hologram shape="1376" scale="13" color="#050403" color.1="#ffdb96" cx="169.375" cz="171.80555555555557" angle="90" />
+
+  <Hologram shape="1375" scale="13" color="#050403" color.1="#ffdb96" cx="136.25" cz="195.55555555555557" angle="180" />
+  <Hologram shape="1375" scale="13" color="#050403" color.1="#ffdb96" cx="136.25" cz="214.30555555555557" angle="0" />
+  <Hologram shape="1376" scale="13" color="#050403" color.1="#ffdb96" cx="136.25" cz="204.93055555555557" angle="0" />
+  <Hologram shape="1375" scale="13" color="#050403" color.1="#ffdb96" cx="136.25" cz="129.30555555555557" angle="180" />
+  <Hologram shape="1375" scale="13" color="#050403" color.1="#ffdb96" cx="136.25" cz="148.05555555555557" angle="0" />
+  <Hologram shape="1376" scale="13" color="#050403" color.1="#ffdb96" cx="136.25" cz="138.68055555555557" angle="0" />
+
+
+// TUNNEL SIDES
+  <Hologram shape="1377" scale="13" color="#050403" color.1="#000000" cx="136.25" cz="138.68055555555557" angle="0" />
+  <Hologram shape="1377" scale="13" color="#050403" color.1="#000000" cx="136.25" cz="204.93055555555557" angle="0" />
+  <Hologram shape="1377" scale="13" color="#050403" color.1="#000000" cx="169.375" cz="171.80555555555557" angle="90" />
+  <Hologram shape="1377" scale="13" color="#050403" color.1="#000000" cx="103.125" cz="171.80555555555557" angle="90" />
+
+<set material.1.glow="0" />
+
+
+
+
+// TUNNEL CD
+  <Ramp y="0" deltaY="4.03" yon="0.01" thickness="0.45" color="#0638ff" color.1="#000000" x="130.4513888888889" z="138.68055555555557" w="2.291666666666657" d="18.75" h="0" angle="90" />
+  <Ramp y="0" deltaY="2.53" yon="0.01" thickness="0.45" color="#0a0805" color.1="#000000" x="130.24305555555557" z="138.68055555555557" w="1.5972222222222285" d="18.75" h="0" angle="90" />
+  <Ramp y="0" deltaY="5.03" yon="0.01" thickness="0.45" color="#e72400" color.1="#000000" x="130.79861111111111" z="138.68055555555557" w="2.8472222222222285" d="18.75" h="0" angle="90" />
+  <set wallYon="0.01" wallHeight="5.03" />
+  <Wall color="#e72400" color.1="#000000" x="129.23611111111111" z="138.68055555555557" w="0.9722222222222285" d="18.75" h="0" />
+  <set wallYon="0.01" wallHeight="1.5" />
+  <Wall color="#e9faef" color.1="#000000" x="130" z="138.68055555555557" w="1.25" d="18.75" h="0" />
+  <set wallYon="defaultYon" />
+  <Ramp y="0" deltaY="5.03" yon="0.01" thickness="0.45" color="#e72400" color.1="#000000" x="103.125" z="177.29166666666669" w="18.75" d="2.916666666666657" h="0" angle="0" />
+  <Ramp y="0" deltaY="2.53" yon="0.01" thickness="0.45" color="#0a0805" color.1="#000000" x="103.125" z="177.91666666666669" w="18.75" d="1.6666666666666572" h="0" angle="0" />
+  <Ramp y="0" deltaY="4.03" yon="0.01" thickness="0.45" color="#0638ff" color.1="#000000" x="103.05555555555556" z="177.60416666666669" w="18.75" d="2.291666666666657" h="0" angle="0" />
+  <set wallYon="0.01" wallHeight="5.03" />
+  <Wall color="#e72400" color.1="#000000" x="103.125" z="178.81944444444446" w="18.75" d="0.9722222222222285" h="0" />
+  <set wallYon="0.01" wallHeight="1.5" />
+  <Wall color="#e9faef" color.1="#000000" x="103.125" z="178.125" w="18.75" d="1.25" h="0" />
+  <set wallYon="defaultYon" />
+  <Ramp y="0" deltaY="2.53" yon="0.01" thickness="0.45" color="#0a0805" color.1="#000000" x="169.375" z="177.91666666666669" w="18.75" d="1.6666666666666572" h="0" angle="0" />
+  <Ramp y="0" deltaY="4.03" yon="0.01" thickness="0.45" color="#0638ff" color.1="#000000" x="169.30555555555557" z="177.60416666666669" w="18.75" d="2.291666666666657" h="0" angle="0" />
+  <set wallYon="0.01" wallHeight="5.03" />
+  <Wall color="#e72400" color.1="#000000" x="169.375" z="178.81944444444446" w="18.75" d="0.9722222222222285" h="0" />
+  <set wallYon="0.01" wallHeight="1.5" />
+  <Wall color="#e9faef" color.1="#000000" x="169.375" z="178.125" w="18.75" d="1.25" h="0" />
+  <set wallYon="defaultYon" /> 
+
+  <Ramp y="0" deltaY="4.03" yon="0.01" thickness="0.45" color="#0638ff" color.1="#000000" x="103.125" z="166.0763888888889" w="18.75" d="2.291666666666657" h="0" angle="180" />
+  <Ramp y="0" deltaY="2.53" yon="0.01" thickness="0.45" color="#0a0805" color.1="#000000" x="103.125" z="165.7638888888889" w="18.75" d="1.6666666666666572" h="0" angle="180" />
+  <set wallYon="0.01" wallHeight="1.5" />
+  <Wall color="#e9faef" color.1="#000000" x="103.125" z="165.55555555555557" w="18.75" d="1.25" h="0" />
+  <set wallYon="0.01" wallHeight="5.03" />
+  <Wall color="#e72400" color.1="#000000" x="103.125" z="164.79166666666669" w="18.75" d="0.9722222222222001" h="0" />
+  <set wallYon="defaultYon" /> 
+
+  <Ramp y="0" deltaY="4.03" yon="0.01" thickness="0.45" color="#0638ff" color.1="#000000" x="169.375" z="166.0763888888889" w="18.75" d="2.291666666666657" h="0" angle="180" />
+  <Ramp y="0" deltaY="2.53" yon="0.01" thickness="0.45" color="#0a0805" color.1="#000000" x="169.375" z="165.7638888888889" w="18.75" d="1.6666666666666572" h="0" angle="180" />
+  <Ramp y="0" deltaY="5.03" yon="0.01" thickness="0.45" color="#e72400" color.1="#000000" x="169.375" z="166.3888888888889" w="18.75" d="2.916666666666657" h="0" angle="180" />
+  <set wallYon="0.01" wallHeight="1.5" />
+  <Wall color="#e9faef" color.1="#000000" x="169.375" z="165.55555555555557" w="18.75" d="1.25" h="0" />
+  <set wallYon="0.01" wallHeight="5.03" />
+  <Wall color="#e72400" color.1="#000000" x="169.375" z="164.79166666666669" w="18.75" d="0.9722222222222001" h="0" />
+  <set wallYon="defaultYon" />
+
+
+  <set wallYon="0.01" wallHeight="5.03" />
+  <Wall color="#e72400" color.1="#000000" x="143.26388888888889" z="138.68055555555557" w="0.9722222222222285" d="18.75" h="0" />
+  <set wallYon="0.01" wallHeight="1.5" />
+  <Wall color="#e9faef" color.1="#000000" x="142.5" z="138.68055555555557" w="1.25" d="18.75" h="0" />
+  <set wallYon="defaultYon" />
+  <Ramp y="0" deltaY="5.03" yon="0.01" thickness="0.45" color="#e72400" color.1="#000000" x="141.63194444444446" z="138.68055555555557" w="2.8472222222222285" d="18.75" h="0" angle="270" />
+  <Ramp y="0" deltaY="4.03" yon="0.01" thickness="0.45" color="#0638ff" color.1="#000000" x="141.97916666666669" z="138.68055555555557" w="2.291666666666657" d="18.75" h="0" angle="270" />
+  <Ramp y="0" deltaY="2.53" yon="0.01" thickness="0.45" color="#0a0805" color.1="#000000" x="142.1875" z="138.68055555555557" w="1.5972222222222285" d="18.75" h="0" angle="270" />
+  <Ramp y="0" deltaY="4.03" yon="0.01" thickness="0.45" color="#0638ff" color.1="#000000" x="130.4513888888889" z="204.93055555555557" w="2.291666666666657" d="18.75" h="0" angle="90" />
+  <Ramp y="0" deltaY="2.53" yon="0.01" thickness="0.45" color="#0a0805" color.1="#000000" x="130.24305555555557" z="204.93055555555557" w="1.5972222222222285" d="18.75" h="0" angle="90" />
+  <Ramp y="0" deltaY="5.03" yon="0.01" thickness="0.45" color="#e72400" color.1="#000000" x="130.79861111111111" z="204.93055555555557" w="2.8472222222222285" d="18.75" h="0" angle="90" />
+  <set wallYon="0.01" wallHeight="5.03" />
+  <Wall color="#e72400" color.1="#000000" x="129.23611111111111" z="204.93055555555557" w="0.9722222222222285" d="18.75" h="0" />
+  <set wallYon="0.01" wallHeight="1.5" />
+  <Wall color="#e9faef" color.1="#000000" x="130" z="204.93055555555557" w="1.25" d="18.75" h="0" />
+  <set wallYon="defaultYon" /> 
+  <set wallYon="0.01" wallHeight="5.03" />
+  <Wall color="#e72400" color.1="#000000" x="143.26388888888889" z="204.93055555555557" w="0.9722222222222285" d="18.75" h="0" />
+  <set wallYon="0.01" wallHeight="1.5" />
+  <Wall color="#e9faef" color.1="#000000" x="142.5" z="204.93055555555557" w="1.25" d="18.75" h="0" />
+  <set wallYon="defaultYon" />
+  <Ramp y="0" deltaY="5.03" yon="0.01" thickness="0.45" color="#e72400" color.1="#000000" x="141.63194444444446" z="204.93055555555557" w="2.8472222222222285" d="18.75" h="0" angle="270" />
+  <Ramp y="0" deltaY="4.03" yon="0.01" thickness="0.45" color="#0638ff" color.1="#000000" x="141.97916666666669" z="204.93055555555557" w="2.291666666666657" d="18.75" h="0" angle="270" />
+  <Ramp y="0" deltaY="2.53" yon="0.01" thickness="0.45" color="#0a0805" color.1="#000000" x="142.1875" z="204.93055555555557" w="1.5972222222222285" d="18.75" h="0" angle="270" />
+
+
+
+// TUNNEL GLOW BANDS
+<set material.glow="256" material.1.glow="256" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="103.125" z="166.11111111111114" w="19.72" d="4.5811111111111143" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="103.125" z="177.5" w="19.72" d="4.5811111111111143" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="169.375" z="166.11111111111114" w="19.72" d="4.5811111111111143" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="169.375" z="177.5" w="19.72" d="4.5811111111111143" h="0" />
+
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="130.52013333333334" z="138.68055555555557" w="4.5116666666666856" d="19.72" h="0" />
+
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="141.99516666666669" z="138.68055555555557" w="4.481666666666657" d="19.72" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="130.52083333333334" z="204.93055555555557" w="4.5116666666666856" d="19.72" h="0" />
+  <set wallHeight="0" />
+  <Wall color="#ffdb96" color.1="#000000" x="141.99516666666669" z="204.93055555555557" w="4.481666666666657" d="19.72" h="0" />
+<set material.glow="0" material.1.glow="0" />
+
+
+
+// MORE TUNNEL CD
+  <Ramp y="4.5" deltaY="7.5" yon="0.01" thickness="0.5" color="#e72400" color.1="#000000" x="95.06944444444446" z="168.05555555555557" w="2.6388888888889" d="7.5" h="0" angle="0" />
+  <Ramp y="4.5" deltaY="7.5" yon="0.01" thickness="0.5" color="#e72400" color.1="#000000" x="95.06944444444446" z="175.41666666666669" w="2.6388888888889" d="7.5" h="0" angle="180" />
+  <set wallYon="0.01" wallHeight="0.5" />
+  <WallDoor midPitch="45" color="#f73096" color.1="#000000" x="95.06944444444446" z="171.77083333333334" w="2.6388888888889" d="0.625" h="0" y="11.62" />
+  <set wallYon="defaultYon" />
+
+  <Ramp y="4.5" deltaY="7.5" yon="0.01" thickness="0.5" color="#e72400" color.1="#000000" x="111.31944444444446" z="168.05555555555557" w="2.6388888888889" d="7.5" h="0" angle="0" />
+  <Ramp y="4.5" deltaY="7.5" yon="0.01" thickness="0.5" color="#e72400" color.1="#000000" x="111.31944444444446" z="175.41666666666669" w="2.6388888888889" d="7.5" h="0" angle="180" />
+
+  <set wallYon="0.01" wallHeight="0.5" />
+  <WallDoor midPitch="45" color="#f73096" color.1="#000000" x="111.31944444444446" z="171.77083333333334" w="2.6388888888889" d="0.625" h="0" y="11.62" />
+  <set wallYon="defaultYon" />
+
+  <Ramp y="4.5" deltaY="7.5" yon="0.01" thickness="0.5" color="#e72400" color.1="#000000" x="103.125" z="168.05555555555557" w="2.6388888888888857" d="7.5" h="0" angle="0" />
+  <Ramp y="4.5" deltaY="7.5" yon="0.01" thickness="0.5" color="#e72400" color.1="#000000" x="103.125" z="175.41666666666669" w="2.6388888888888857" d="7.5" h="0" angle="180" />
+  <set wallYon="0.01" wallHeight="0.5" />
+  <WallDoor midPitch="45" color="#f73096" color.1="#000000" x="103.125" z="171.77083333333334" w="2.6388888888888857" d="0.625" h="0" y="11.62" />
+  <set wallYon="defaultYon" />
+  <Ramp y="4.5" deltaY="7.5" yon="0.01" thickness="0.5" color="#e72400" color.1="#000000" x="161.31944444444446" z="168.05555555555557" w="2.6388888888888857" d="7.5" h="0" angle="0" />
+  <Ramp y="4.5" deltaY="7.5" yon="0.01" thickness="0.5" color="#e72400" color.1="#000000" x="161.31944444444446" z="175.41666666666669" w="2.6388888888888857" d="7.5" h="0" angle="180" />
+  <set wallYon="0.01" wallHeight="0.5" />
+  <WallDoor midPitch="45" color="#f73096" color.1="#000000" x="161.31944444444446" z="171.77083333333334" w="2.6388888888888857" d="0.625" h="0" y="11.62" />
+  <set wallYon="defaultYon" />
+  <Ramp y="4.5" deltaY="7.5" yon="0.01" thickness="0.5" color="#e72400" color.1="#000000" x="177.56944444444446" z="168.05555555555557" w="2.6388888888888857" d="7.5" h="0" angle="0" />
+  <Ramp y="4.5" deltaY="7.5" yon="0.01" thickness="0.5" color="#e72400" color.1="#000000" x="177.56944444444446" z="175.41666666666669" w="2.6388888888888857" d="7.5" h="0" angle="180" />
+  <set wallYon="0.01" wallHeight="0.5" />
+  <WallDoor midPitch="45" color="#f73096" color.1="#000000" x="177.56944444444446" z="171.77083333333334" w="2.6388888888888857" d="0.625" h="0" y="11.62" />
+  <set wallYon="defaultYon" />
+  <Ramp y="4.5" deltaY="7.5" yon="0.01" thickness="0.5" color="#e72400" color.1="#000000" x="169.375" z="168.05555555555557" w="2.6388888888888857" d="7.5" h="0" angle="0" />
+  <Ramp y="4.5" deltaY="7.5" yon="0.01" thickness="0.5" color="#e72400" color.1="#000000" x="169.375" z="175.41666666666669" w="2.6388888888888857" d="7.5" h="0" angle="180" />
+  <set wallYon="0.01" wallHeight="0.5" />
+  <WallDoor midPitch="45" color="#f73096" color.1="#000000" x="169.375" z="171.77083333333334" w="2.6388888888888857" d="0.625" h="0" y="11.62" />
+  <set wallYon="defaultYon" />
+  <Ramp y="4.5" deltaY="7.5" yon="0.01" thickness="0.5" color="#e72400" color.1="#000000" x="139.93055555555557" z="146.875" w="7.5" d="2.6388888888888857" h="0" angle="90" />
+  <Ramp y="4.5" deltaY="7.5" yon="0.01" thickness="0.5" color="#e72400" color.1="#000000" x="132.43055555555557" z="146.875" w="7.5" d="2.6388888888888857" h="0" angle="270" />
+  <set wallYon="0.01" wallHeight="0.5" />
+  <WallDoor midRoll="45" color="#f73096" color.1="#000000" x="136.07638888888889" z="146.875" w="0.625" d="2.6388888888888857" h="0" y="11.62" />
+  <set wallYon="defaultYon" />
+  <Ramp y="4.5" deltaY="7.5" yon="0.01" thickness="0.5" color="#e72400" color.1="#000000" x="139.93055555555557" z="138.68055555555554" w="7.5" d="2.6388888888888857" h="0" angle="90" />
+  <Ramp y="4.5" deltaY="7.5" yon="0.01" thickness="0.5" color="#e72400" color.1="#000000" x="132.43055555555557" z="138.68055555555554" w="7.5" d="2.6388888888888857" h="0" angle="270" />
+  <set wallYon="0.01" wallHeight="0.5" />
+  <WallDoor midRoll="45" color="#f73096" color.1="#000000" x="136.07638888888889" z="138.68055555555554" w="0.625" d="2.6388888888888857" h="0" y="11.62" />
+  <set wallYon="defaultYon" />
+  <Ramp y="4.5" deltaY="7.5" yon="0.01" thickness="0.5" color="#e72400" color.1="#000000" x="139.93055555555557" z="130.625" w="7.5" d="2.6388888888888857" h="0" angle="90" />
+  <Ramp y="4.5" deltaY="7.5" yon="0.01" thickness="0.5" color="#e72400" color.1="#000000" x="132.43055555555557" z="130.625" w="7.5" d="2.6388888888888857" h="0" angle="270" />
+  <set wallYon="0.01" wallHeight="0.5" />
+  <WallDoor midRoll="45" color="#f73096" color.1="#000000" x="136.07638888888889" z="130.625" w="0.625" d="2.6388888888888857" h="0" y="11.62" />
+  <set wallYon="defaultYon" />
+  <Ramp y="4.5" deltaY="7.5" yon="0.01" thickness="0.5" color="#e72400" color.1="#000000" x="139.93055555555557" z="213.125" w="7.5" d="2.6388888888888857" h="0" angle="90" />
+  <Ramp y="4.5" deltaY="7.5" yon="0.01" thickness="0.5" color="#e72400" color.1="#000000" x="132.43055555555557" z="213.125" w="7.5" d="2.6388888888888857" h="0" angle="270" />
+  <set wallYon="0.01" wallHeight="0.5" />
+  <WallDoor midRoll="45" color="#f73096" color.1="#000000" x="136.07638888888889" z="213.125" w="0.625" d="2.6388888888888857" h="0" y="11.62" />
+  <set wallYon="defaultYon" />
+  <Ramp y="4.5" deltaY="7.5" yon="0.01" thickness="0.5" color="#e72400" color.1="#000000" x="139.93055555555557" z="204.93055555555554" w="7.5" d="2.6388888888888857" h="0" angle="90" />
+  <Ramp y="4.5" deltaY="7.5" yon="0.01" thickness="0.5" color="#e72400" color.1="#000000" x="132.43055555555557" z="204.93055555555554" w="7.5" d="2.6388888888888857" h="0" angle="270" />
+  <set wallYon="0.01" wallHeight="0.5" />
+  <WallDoor midRoll="45" color="#f73096" color.1="#000000" x="136.07638888888889" z="204.93055555555554" w="0.625" d="2.6388888888888857" h="0" y="11.62" />
+  <set wallYon="defaultYon" />
+  <Ramp y="4.5" deltaY="7.5" yon="0.01" thickness="0.5" color="#e72400" color.1="#000000" x="139.93055555555557" z="196.875" w="7.5" d="2.6388888888888857" h="0" angle="90" />
+  <Ramp y="4.5" deltaY="7.5" yon="0.01" thickness="0.5" color="#e72400" color.1="#000000" x="132.43055555555557" z="196.875" w="7.5" d="2.6388888888888857" h="0" angle="270" />
+  <set wallYon="0.01" wallHeight="0.5" />
+  <WallDoor midRoll="45" color="#f73096" color.1="#000000" x="136.07638888888889" z="196.875" w="0.625" d="2.6388888888888857" h="0" y="11.62" />
+  <set wallYon="defaultYon" />
+
+
+
+
+
+// RED BLOCKS
+  <set wallHeight="2" />
+  <WallDoor midYaw="45" color="#24221f" color.1="#000000" x="81.25" z="171.80555555555557" w="5" d="5" h="0" />
+  <set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="#1a1816" color.1="#000000" x="81.25" z="171.80555555555557" w="4.75" d="4.75" h="0" y="2" />
+  <set wallHeight="0.75" />
+  <WallDoor midYaw="45" color="#24221f" color.1="#000000" x="81.25" z="171.80555555555557" w="5" d="5" h="0" y="2.25" />
+<set wallYon="0.01" />
+  <set wallHeight="3" />
+  <WallDoor midYaw="45" color="#24221f" color.1="#000000" x="81.25" z="171.80555555555557" w="5" d="5" h="0" />
+<set wallYon="defaultYon" />
+
+  <set wallHeight="2" />
+  <WallDoor midYaw="45" color="#24221f" color.1="#000000" x="136.25" z="226.80555555555557" w="5" d="5" h="0" />
+  <set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="#1a1816" color.1="#000000" x="136.25" z="226.80555555555557" w="4.75" d="4.75" h="0" y="2" />
+  <set wallHeight="0.75" />
+  <WallDoor midYaw="45" color="#24221f" color.1="#000000" x="136.25" z="226.80555555555557" w="5" d="5" h="0" y="2.25" />
+<set wallYon="0.01" />
+  <set wallHeight="3" />
+  <WallDoor midYaw="45" color="#24221f" color.1="#000000" x="136.25" z="226.80555555555557" w="5" d="5" h="0" />
+<set wallYon="defaultYon" />
+
+  <set wallHeight="2" />
+  <WallDoor midYaw="45" color="#24221f" color.1="#000000" x="191.25" z="171.80555555555557" w="5" d="5" h="0" />
+  <set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="#1a1816" color.1="#000000" x="191.25" z="171.80555555555557" w="4.75" d="4.75" h="0" y="2" />
+  <set wallHeight="0.75" />
+  <WallDoor midYaw="45" color="#24221f" color.1="#000000" x="191.25" z="171.80555555555557" w="5" d="5" h="0" y="2.25" />
+<set wallYon="0.01" />
+  <set wallHeight="3" />
+  <WallDoor midYaw="45" color="#24221f" color.1="#000000" x="191.25" z="171.80555555555557" w="5" d="5" h="0" />
+<set wallYon="defaultYon" />
+
+  <set wallHeight="2" />
+  <WallDoor midYaw="45" color="#24221f" color.1="#000000" x="136.25" z="116.80555555555556" w="5" d="5" h="0" />
+  <set wallHeight="0.25" />
+  <WallDoor midYaw="45" color="#1a1816" color.1="#000000" x="136.25" z="116.80555555555556" w="4.75" d="4.75" h="0" y="2" />
+  <set wallHeight="0.75" />
+  <WallDoor midYaw="45" color="#24221f" color.1="#000000" x="136.25" z="116.80555555555556" w="5" d="5" h="0" y="2.25" />
+<set wallYon="0.01" />
+  <set wallHeight="3" />
+  <WallDoor midYaw="45" color="#24221f" color.1="#000000" x="136.25" z="116.80555555555556" w="5" d="5" h="0" />
+<set wallYon="defaultYon" />
+
+
+// RED BLOCK GLOW BANDS
+<set material.glow="256" material.1.glow="256" />
+  <set wallHeight="0" />
+  <WallDoor midYaw="45" color="#ffdb96" color.1="#000000" x="81.25" z="171.80555555555557" w="6" d="6" h="0" />
+  <set wallHeight="0" />
+  <WallDoor midYaw="45" color="#ffdb96" color.1="#000000" x="136.25" z="226.80555555555557" w="6" d="6" h="0" />
+  <set wallHeight="0" />
+  <WallDoor midYaw="45" color="#ffdb96" color.1="#000000" x="191.25" z="171.80555555555557" w="6" d="6" h="0" />
+  <set wallHeight="0" />
+  <WallDoor midYaw="45" color="#ffdb96" color.1="#000000" x="136.25" z="116.80555555555556" w="6" d="6" h="0" />
+<set material.glow="0" material.1.glow="0" />
+
+
+
+
+// AMMO PADS
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#1f1b13" color.1="#000000" x="98.75" z="134.30555555555557" w="1.5" d="1.5" h="0" y="1.503" />
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#17140e" color.1="#000000" x="98.75" z="134.30555555555557" w="0.7" d="0.7" h="0" y="1.506" />
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#302a1e" color.1="#000000" x="98.75" z="134.30555555555557" w="0.2" d="0.2" h="0" y="1.509" />
+
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#1f1b13" color.1="#000000" x="121.25" z="156.80555555555557" w="1.5" d="1.5" h="0" y="1.503" />
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#17140e" color.1="#000000" x="121.25" z="156.80555555555557" w="0.7" d="0.7" h="0" y="1.506" />
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#302a1e" color.1="#000000" x="121.25" z="156.80555555555557" w="0.2" d="0.2" h="0" y="1.509" />
+
+
+
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#1f1b13" color.1="#000000" x="173.75" z="134.30555555555557" w="1.5" d="1.5" h="0" y="1.503" />
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#17140e" color.1="#000000" x="173.75" z="134.30555555555557" w="0.7" d="0.7" h="0" y="1.506" />
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#302a1e" color.1="#000000" x="173.75" z="134.30555555555557" w="0.2" d="0.2" h="0" y="1.509" />
+
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#1f1b13" color.1="#000000" x="151.25" z="156.80555555555557" w="1.5" d="1.5" h="0" y="1.503" />
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#17140e" color.1="#000000" x="151.25" z="156.80555555555557" w="0.7" d="0.7" h="0" y="1.506" />
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#302a1e" color.1="#000000" x="151.25" z="156.80555555555557" w="0.2" d="0.2" h="0" y="1.509" />
+
+
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#1f1b13" color.1="#000000" x="173.75" z="209.30555555555557" w="1.5" d="1.5" h="0" y="1.503" />
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#17140e" color.1="#000000" x="173.75" z="209.30555555555557" w="0.7" d="0.7" h="0" y="1.506" />
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#302a1e" color.1="#000000" x="173.75" z="209.30555555555557" w="0.2" d="0.2" h="0" y="1.509" />
+
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#1f1b13" color.1="#000000" x="151.25" z="186.80555555555557" w="1.5" d="1.5" h="0" y="1.503" />
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#17140e" color.1="#000000" x="151.25" z="186.80555555555557" w="0.7" d="0.7" h="0" y="1.506" />
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#302a1e" color.1="#000000" x="151.25" z="186.80555555555557" w="0.2" d="0.2" h="0" y="1.509" />
+
+
+
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#1f1b13" color.1="#000000" x="98.75" z="209.30555555555557" w="1.5" d="1.5" h="0" y="1.503" />
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#17140e" color.1="#000000" x="98.75" z="209.30555555555557" w="0.7" d="0.7" h="0" y="1.506" />
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#302a1e" color.1="#000000" x="98.75" z="209.30555555555557" w="0.2" d="0.2" h="0" y="1.509" />
+
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#1f1b13" color.1="#000000" x="121.25" z="186.80555555555557" w="1.5" d="1.5" h="0" y="1.503" />
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#17140e" color.1="#000000" x="121.25" z="186.80555555555557" w="0.7" d="0.7" h="0" y="1.506" />
+<set wallHeight="0" />
+  <WallDoor midYaw="45" color="#302a1e" color.1="#000000" x="121.25" z="186.80555555555557" w="0.2" d="0.2" h="0" y="1.509" />
+
+
+
+// GOODIES
+  <And in="@start" out="@s1" />
+  <Timer in="@n2" out="@s1" wait="150" />
+  <Goody shape="bspGrenade" speed="6" y="3.5" scale="1" start="@s1" out="@n1" grenades="12" color="#e9faef" color.1="#000000" cx="121.25" cz="156.80555555555557" angle="315" />
+  <Timer in="@n1" out="@s2" wait="150" />
+  <Goody shape="bspMissile" speed="6" y="3.5" scale="1" start="@s2" out="@n2" missiles="12" color="#e72400" color.1="#ffdb96" cx="98.75" cz="134.30555555555557" angle="135" />
+
+
+  <And in="@start" out="@s3" />
+  <Timer in="@n4" out="@s3" wait="150" />
+  <Goody shape="bspGrenade" speed="6" y="3.5" scale="1" start="@s3" out="@n3" grenades="12" color="#e72400" color.1="#ffdb96" cx="151.25" cz="186.80555555555557" angle="135" />
+  <Timer in="@n3" out="@s4" wait="150" />
+  <Goody shape="bspMissile" speed="6" y="3.5" scale="1" start="@s4" out="@n4" missiles="12" color="#e72400" color.1="#ffdb96" cx="173.75" cz="209.30555555555557" angle="135" />
+
+
+  <And in="@start" out="@s5" />
+  <Timer in="@n6" out="@s5" wait="150" />
+  <Goody shape="bspMissile" speed="6" y="3.5" scale="1" start="@s5" out="@n5" missiles="12" color="#e72400" color.1="#ffdb96" cx="151.25" cz="156.80555555555557" angle="135" />
+  <Timer in="@n5" out="@s6" wait="150" />
+  <Goody shape="bspGrenade" speed="6" y="3.5" scale="1" start="@s6" out="@n6" grenades="12" color="#e72400" color.1="#ffdb96" cx="173.75" cz="134.30555555555557" angle="135" />
+
+
+  <And in="@start" out="@s7" />
+  <Timer in="@n8" out="@s7" wait="150" />
+  <Goody shape="bspMissile" speed="6" y="3.5" scale="1" start="@s7" out="@n7" missiles="12" color="#e72400" color.1="#ffdb96" cx="121.25" cz="186.80555555555557" angle="135" />
+  <Timer in="@n7" out="@s8" wait="150" />
+  <Goody shape="bspGrenade" speed="6" y="3.5" scale="1" start="@s8" out="@n8" grenades="12" color="#e72400" color.1="#ffdb96" cx="98.75" cz="209.30555555555557"  angle="135" />
+
+
+
+</map>

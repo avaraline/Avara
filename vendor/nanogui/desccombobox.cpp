@@ -55,6 +55,7 @@ void DescComboBox::setItems(const std::vector<std::string> &items, const std::ve
     for (const auto &str: items) {
         Button *button = new Button(mButtonWrapper, str);
         button->setFlags(Button::RadioButton);
+        button->setTextPosition(nanogui::Button::TextPosition::Left);
         button->setCallback([&, index] {
             mSelectedIndex = index;
             setCaption(mItems[index]);

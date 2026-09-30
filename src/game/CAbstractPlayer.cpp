@@ -1599,7 +1599,7 @@ void CAbstractPlayer::PlayerAction() {
     }
     if (lives) {
         itsGame->playersStanding++;
-        // Send score updates to other players every 17 seconds worth of frames
+        // Send score updates to other players every 256 frames (4.096 sec)
         if ((itsGame->frameNumber & 255) == 255 && itsGame->playersStanding == 1 && itsManager->IsLocalPlayer()) {
             itsGame->scoreKeeper->NetResultsUpdate();
         }

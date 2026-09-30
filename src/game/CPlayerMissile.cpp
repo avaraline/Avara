@@ -19,6 +19,7 @@ CPlayerMissile::CPlayerMissile(CDepot *theDepot) : CAbstractMissile(theDepot){
 
     partCount = 1;
     LoadPart(0, kPlayerMissileBSP);
+    partList[0]->ReplaceAllGlow(1);
 }
 
 void CPlayerMissile::MoveForward() {

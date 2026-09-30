@@ -10,15 +10,17 @@
 CPlayerWindow::CPlayerWindow(CApplication *app) : CWindow(app, "Player") {
     setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 10, 10));
 
-    auto versionLabel = new nanogui::Text(this);
+    new nanogui::Label(this, "Build #");
+    auto versionLabel = new nanogui::Label(this, GIT_VERSION);
     versionLabel->setFont("mono");
     versionLabel->setFontSize(15);
-    versionLabel->setValue(GIT_VERSION);
 
+    new nanogui::Label(this, "Player name");
     std::string name = app->String(kPlayerNameTag);
     nameBox = new nanogui::TextBox(this);
     nameBox->setValue(name);
     nameBox->setEditable(true);
+    nameBox->setAlignment(nanogui::TextBox::Alignment::Left);
     nameBox->setCallback([app](std::string value) -> bool {
         app->Set(kPlayerNameTag, value);
 
@@ -30,10 +32,13 @@ CPlayerWindow::CPlayerWindow(CApplication *app) : CWindow(app, "Player") {
         return true;
     });
 
+    new nanogui::Label(this, "Select Hull");
+
     std::vector<std::string> hullTypes = {10,""};
     hullValues = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
     hullBox = new nanogui::ComboBox(this, hullTypes);
+    hullBox->setTextPosition(nanogui::Button::TextPosition::Left);
     hullBox->setCallback([app, this](int selectedIdx) {
         app->Set(kHullTypeTag, hullValues[selectedIdx]);
     });

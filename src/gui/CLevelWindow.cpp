@@ -21,28 +21,37 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
 
     // TODO: check load permission: theNet->PermissionQuery(kAllowLoadBit, 0)
 
+    new nanogui::Label(this, "Recently played levels");
     recentsBox = new nanogui::DescComboBox(this, recentLevels, recentSets);
     recentsBox->setCaption("Recents");
+    recentsBox->setTextPosition(nanogui::Button::TextPosition::Left);
     recentsBox->setCallback([this](int selectedIdx) {
         this->SelectLevel(recentSets[selectedIdx], recentLevels[selectedIdx]);
         recentsBox->setCaption("Recents");
     });
-
+    new nanogui::Label(this, "Select level set");
     setBox = new nanogui::ComboBox(this, levelSets);
+    setBox->setTextPosition(nanogui::Button::TextPosition::Left);
     setBox->setCallback([this](int selectedIdx) {
         this->SelectSet(selectedIdx);
         levelBox->setSelectedIndex(0);
     });
-    setBox->popup()->setSize(nanogui::Vector2i(300, 600));
+    setBox->popup()->setSize(nanogui::Vector2i(300, 350));
 
+    new nanogui::Label(this, "Select level");
     levelBox = new nanogui::DescComboBox(this, levelNames, levelIntros);
+    levelBox->setTextPosition(nanogui::Button::TextPosition::Left);
     levelBox->popup()->setSize(nanogui::Vector2i(500, 350));
     levelBox->setEnabled(false);
 
     loadBtn = new nanogui::Button(this, "Load Level");
+    loadBtn->setTextPosition(nanogui::Button::TextPosition::Left);
+    loadBtn->setBackgroundColor(kGUIAccentNeutral);
     loadBtn->setCallback([this] { this->SendLoad(); });
 
     startBtn = new nanogui::Button(this, "Start/Ready");
+    startBtn->setTextPosition(nanogui::Button::TextPosition::Left);
+    startBtn->setBackgroundColor(kGUIAccentPositive);
     startBtn->setCallback([app] {
         if (SDL_GetModState() & KMOD_ALT) {
             // if ALT key pressed, start right away

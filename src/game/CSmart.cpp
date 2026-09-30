@@ -60,6 +60,7 @@ long CSmart::Arm(CSmartPart *aPart) {
     shields = FIX3(100);
 
     partList[0]->ReplaceColor(*ColorManager::getMarkerColor(1), ColorManager::getMissileArmedColor());
+    partList[0]->ReplaceGlowForColor(*ColorManager::getMarkerColor(1), 16);
     targetIdent = 0;
     targetPart = NULL;
 

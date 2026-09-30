@@ -1,0 +1,104 @@
+<map>
+  <set designer="Viking - 
+carina.hellman@mbox309.swi
+pnet.se" information="At last i got to do a level &#10;based on me....well this level &#10;is more a copy of the Swedish &#10;flag...." />
+  <SkyColor color="#0080ff" color.1="#0052ff" />
+  <Wall color="#0080ff" color.1="#0052ff" x="27.118055555555557" z="0.9375" w="11.319444444444443" d="0.9027777777777777" h="0" />
+  <GroundColor color="#0052ff" />
+  <Wall color="#0052ff" color.1="#000000" x="61.66666666666667" z="30.833333333333336" w="20" d="1.25" h="25" />
+  <Wall color="#0052ff" color.1="#000000" x="86.66666666666667" z="30.833333333333336" w="20" d="1.25" h="25" />
+  <Wall color="#0052ff" color.1="#000000" x="52.29166666666667" z="40.833333333333336" w="1.25" d="18.75" h="25" />
+  <Wall color="#0052ff" color.1="#000000" x="52.29166666666667" z="65.20833333333334" w="1.25" d="20" h="25" />
+  <Wall color="#0052ff" color.1="#000000" x="96.04166666666667" z="40.833333333333336" w="1.25" d="18.75" h="25" />
+  <Wall color="#0052ff" color.1="#000000" x="96.04166666666667" z="65.20833333333334" w="1.25" d="20" h="25" />
+  <Wall color="#0052ff" color.1="#000000" x="61.66666666666667" z="75.83333333333334" w="20" d="1.25" h="25" />
+  <Wall color="#0052ff" color.1="#000000" x="86.66666666666667" z="75.83333333333334" w="20" d="1.25" h="25" />
+  <Wall color="#fffb00" color.1="#000000" x="74.16666666666667" z="30.833333333333336" w="5" d="1.25" h="13.5" />
+  <Wall color="#fffb00" color.1="#000000" x="52.29166666666667" z="52.708333333333336" w="1.25" d="5" h="13.5" />
+  <Wall color="#fffb00" color.1="#000000" x="96.04166666666667" z="52.708333333333336" w="1.25" d="5" h="13.5" />
+  <Wall color="#fffb00" color.1="#000000" x="74.16666666666667" z="75.83333333333334" w="5" d="1.25" h="13.5" />
+  <set wallHeight="1" />
+  <Wall color="#fffb00" color.1="#000000" x="62.29166666666667" z="52.708333333333336" w="18.75" d="5" h="0" y="12.5" />
+  <set wallHeight="1" />
+  <Wall color="#fffb00" color.1="#000000" x="86.04166666666667" z="52.708333333333336" w="18.75" d="5" h="0" y="12.5" />
+  <set wallHeight="1" />
+  <Wall color="#fffb00" color.1="#000000" x="74.16666666666667" z="53.33333333333334" w="5" d="43.75" h="0" y="12.5" />
+  <set wallHeight="1" />
+  <Wall color="#fffb00" color.1="#000000" x="49.16666666666667" z="53.33333333333334" w="5" d="56.25" h="0" y="12.5" />
+  <set wallHeight="1" />
+  <Wall color="#fffb00" color.1="#000000" x="99.16666666666667" z="53.33333333333334" w="5" d="56.25" h="0" y="12.5" />
+  <set wallHeight="1" />
+  <Wall color="#fffb00" color.1="#000000" x="74.16666666666667" z="78.95833333333334" w="45" d="5" h="0" y="12.5" />
+  <set wallHeight="1" />
+  <Wall color="#fffb00" color.1="#000000" x="74.16666666666667" z="27.708333333333336" w="45" d="5" h="0" y="12.5" />
+  <Wall color="#0052ff" color.1="#000000" x="74.16666666666667" z="24.583333333333336" w="55" d="1.25" h="25" />
+  <Wall color="#0052ff" color.1="#000000" x="74.16666666666667" z="82.08333333333334" w="55" d="1.25" h="25" />
+  <Wall color="#0052ff" color.1="#000000" x="102.29166666666667" z="53.33333333333334" w="1.25" d="58.75" h="25" />
+  <Wall color="#0052ff" color.1="#000000" x="46.04166666666667" z="53.33333333333334" w="1.25" d="58.75" h="25" />
+  <set wallHeight="7.5" />
+  <Wall color="#0052ff" color.1="#000000" x="52.29166666666667" z="52.708333333333336" w="1.25" d="5" h="0" y="17.5" />
+  <set wallHeight="7.5" />
+  <Wall color="#0052ff" color.1="#000000" x="96.04166666666667" z="52.708333333333336" w="1.25" d="5" h="0" y="17.5" />
+  <set wallHeight="7.5" />
+  <Wall color="#0052ff" color.1="#000000" x="74.16666666666667" z="75.83333333333334" w="5" d="1.25" h="0" y="17.5" />
+  <set wallHeight="7.5" />
+  <Wall color="#0052ff" color.1="#000000" x="74.16666666666667" z="30.833333333333336" w="5" d="1.25" h="0" y="17.5" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="2650" y="15.5" speed="2" grenades="12" missiles="8" start="mShow" out="mTaken" color="#ffd300" color.1="#000000" cx="74.16666666666667" cz="51.458333333333336" angle="45" />
+  <Incarnator y="20" cx="74.02777777777777" cz="36.66666666666667" angle="179.5" />
+  <Incarnator y="20" cx="73.95833333333334" cz="71.04166666666667" angle="1" />
+  <Incarnator y="20" cx="91.73611111111111" cz="53.26388888888889" angle="264.5" />
+  <Incarnator y="20" cx="56.38888888888889" cz="53.125" angle="92" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
+  <Goody shape="bspGrenade" y="15.5" speed="2" grenades="4" start="mShow" out="mTaken" color="#fffb00" color.1="#000000" cx="49.72222222222222" cz="27.53472222222222" angle="45" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
+  <Goody shape="bspGrenade" y="15.5" speed="2" grenades="4" start="mShow" out="mTaken" color="#fffb00" color.1="#000000" cx="99.23611111111111" cz="77.67361111111111" angle="45" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#fffb00" color.1="#000000" cx="7.5" cz="0.5555555555555556" angle="45" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody shape="bspMissile" y="15.5" speed="2" missiles="8" start="mShow" out="mTaken" color="#fffb00" color.1="#000000" cx="99.16666666666667" cz="27.916666666666668" angle="45" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody shape="bspMissile" y="15.5" speed="2" missiles="8" start="mShow" out="mTaken" color="#fffb00" color.1="#000000" cx="49.16666666666667" cz="77.91666666666667" angle="45" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="55.27777777777778" cz="46.25" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="65.27777777777779" cz="46.25" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="66.52777777777779" cz="36.25" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="61.52777777777778" cz="36.25" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="56.52777777777778" cz="36.25" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="62.777777777777786" cz="46.25" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="76.52777777777779" cz="45" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="86.52777777777779" cz="45" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="87.77777777777779" cz="35" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="82.77777777777779" cz="35" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="77.77777777777779" cz="35" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="84.02777777777779" cz="45" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="76.52777777777779" cz="67.5" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="86.52777777777779" cz="67.5" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="87.77777777777779" cz="57.5" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="82.77777777777779" cz="57.5" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="77.77777777777779" cz="57.5" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="84.02777777777779" cz="67.5" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="54.02777777777778" cz="68.75" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="64.02777777777779" cz="68.75" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="65.27777777777779" cz="58.75" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="60.27777777777778" cz="58.75" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="55.27777777777778" cz="58.75" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="61.52777777777778" cz="68.75" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="74.02777777777779" cz="52.5" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="74.02777777777779" cz="61.25" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="74.02777777777779" cz="70" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="74.02777777777779" cz="45" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="74.02777777777779" cz="36.25" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="57.77777777777778" cz="53.75" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="69.02777777777779" cz="53.75" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="84.02777777777779" cz="52.5" angle="270" />
+  <Mine yon="1" shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="5" activeRange="7.5" shield="-1" power="100" color="#ab82ff" color.1="#2e0100" cx="90.27777777777779" cz="52.5" angle="270" />
+</map>

@@ -30,6 +30,7 @@
 struct PlayerResult {
     std::string playerId;
     int teamId;
+    bool isTied;   // score tied with previous player in the list.
 //    int lives;
 //    long score;
     bool operator==(const PlayerResult &rhs) {

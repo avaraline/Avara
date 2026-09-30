@@ -1,0 +1,125 @@
+<map>
+  <SkyColor color="#ecfedf" color.1="#e3e6c4" />
+  <GroundColor color="#630800" />
+  <set designer="G. Wiseman (Mondo)" information="Healthless fortism." ambient.i=".05" light.0.i="2" light.0.a="-30" light.0.b="20" light.1.i="2" light.1.a="10" light.1.b="200" defaultLives="3" />
+  <Incarnator cx="38.333333333333336" cz="10.555555555555555" angle="135" />
+  <set wallHeight="6" />
+  <Wall color="#e8b58d" color.1="#000000" x="40.208333333333336" z="21.805555555555557" w="10" d="10" h="0" />
+  <Ramp deltaY="3" thickness=".6" color="#ecfedf" color.1="#000000" x="50.208333333333336" z="26.805555555555557" w="10" d="20" h="0" angle="0" />
+  <set wallHeight="3" />
+  <Wall color="#c4443b" color.1="#000000" x="40.208333333333336" z="31.805555555555557" w="10" d="10" h="0" />
+  <Wall color="#c4443b" color.1="#000000" x="50.208333333333336" z="41.80555555555556" w="10" d="10" h="0" />
+  <set wallHeight="1.5" />
+  <Wall color="#ffdb79" color.1="#000000" x="40.208333333333336" z="41.80555555555556" w="10" d="10" h="0" />
+  <Wall color="#ffdb79" color.1="#000000" x="55.20833333333334" z="51.80555555555556" w="20" d="10" h="0" />
+  <Wall color="#c4443b" color.1="#000000" x="60.20833333333334" z="16.805555555555557" w="10" d="20" h="0" />
+  <set wallHeight="4" />
+  <Wall color="#e8b58d" color.1="#000000" x="65.20833333333334" z="36.80555555555556" w="20" d="20" h="0" />
+  <set wallHeight="3" />
+  <Wall color="#ffdb79" color.1="#000000" x="80.20833333333334" z="26.805555555555557" w="10" d="10" h="0" />
+  <set wallHeight="1.5" />
+  <Wall color="#e8b58d" color.1="#000000" x="95.20833333333334" z="24.305555555555557" w="20" d="15" h="0" />
+  <set wallHeight="6" />
+  <Wall color="#c4443b" color.1="#000000" x="115.20833333333334" z="26.805555555555557" w="20" d="20" h="0" />
+  <Ramp deltaY="4" thickness=".6" color="#ecfedf" color.1="#000000" x="115.20833333333334" z="41.80555555555556" w="20" d="10" h="0" angle="90" />
+  <set wallHeight="4" />
+  <Wall color="#e8b58d" color.1="#000000" x="100.20833333333334" z="44.30555555555556" w="10" d="25" h="0" />
+  <Wall color="#e8b58d" color.1="#000000" x="120.20833333333334" z="51.80555555555556" w="10" d="10" h="0" />
+  <set wallHeight="6" />
+  <Wall color="#c4443b" color.1="#000000" x="110.20833333333334" z="51.80555555555556" w="10" d="10" h="0" />
+  <set wallHeight="8" />
+  <Wall color="#ffdb79" color.1="#000000" x="100.20833333333334" z="61.80555555555556" w="30" d="10" h="0" />
+  <set wallHeight="1.5" />
+  <Wall color="#e8b58d" color.1="#000000" x="90.20833333333334" z="71.80555555555556" w="10" d="10" h="0" />
+  <set wallHeight="3" />
+  <Wall color="#c4443b" color.1="#000000" x="100.20833333333334" z="81.80555555555556" w="10" d="30" h="0" />
+  <set wallHeight="4" />
+  <Wall color="#ffdb79" color.1="#000000" x="110.20833333333334" z="86.80555555555556" w="10" d="20" h="0" />
+  <set wallHeight="6" />
+  <Wall color="#e8b58d" color.1="#000000" x="95.20833333333334" z="101.80555555555556" w="40" d="10" h="0" />
+  <set wallHeight="1.5" />
+  <Wall color="#ffdb79" color.1="#000000" x="70.20833333333334" z="96.80555555555556" w="10" d="20" h="0" />
+  <set wallHeight="3" />
+  <Wall color="#c4443b" color.1="#000000" x="60.20833333333334" z="91.80555555555556" w="10" d="10" h="0" />
+  <Wall color="#ffdb79" color.1="#000000" x="47.708333333333336" z="79.30555555555556" w="15" d="15" h="0" />
+  <Wall color="#c4443b" color.1="#000000" x="37.708333333333336" z="91.80555555555556" w="5" d="10" h="0" />
+  <Ramp deltaY="3" thickness=".6" color="#ecfedf" color.1="#000000" x="47.708333333333336" z="91.80555555555556" w="15" d="10" h="0" angle="180" />
+  <set wallHeight="6" />
+  <Wall color="#c4443b" color.1="#000000" x="40.208333333333336" z="64.30555555555556" w="10" d="15" h="0" />
+  <set wallHeight="1.5" />
+  <Wall color="#e8b58d" color.1="#000000" x="55.20833333333334" z="64.30555555555556" w="20" d="15" h="0" />
+  <set baseHeight="0" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="100" />
+  <Goody speed="12" shape="bspGrenade" y="2" grenades="12" missiles="0" start="mShow" out="mTaken" color="#c4443b" color.1="#000000" cx="85.20833333333334" cz="36.80555555555556" angle="225" />
+  <set baseHeight="0" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="100" />
+  <Goody speed="12" shape="bspGrenade" y="2" grenades="12" missiles="0" start="mShow" out="mTaken" color="#c4443b" color.1="#000000" cx="90.20833333333334" cz="86.80555555555556" angle="225" />
+  <set baseHeight="0" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="100" />
+  <Goody speed="12" shape="bspGrenade" y="2" grenades="12" missiles="0" start="mShow" out="mTaken" color="#c4443b" color.1="#000000" cx="40.208333333333336" cz="51.80555555555556" angle="225" />
+  <set baseHeight="0" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="100" />
+  <Goody speed="12" shape="bspMissile" y="2" grenades="0" missiles="6" start="mShow" out="mTaken" color="#c4443b" color.1="#000000" cx="70.20833333333334" cz="16.805555555555557" angle="225" />
+  <set baseHeight="0" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="100" />
+  <Goody speed="12" shape="bspMissile" y="2" grenades="0" missiles="6" start="mShow" out="mTaken" color="#c4443b" color.1="#000000" cx="110.20833333333334" cz="71.80555555555556" angle="225" />
+  <set baseHeight="0" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="100" />
+  <Goody speed="12" shape="bspMissile" y="2" grenades="0" missiles="6" start="mShow" out="mTaken" color="#c4443b" color.1="#000000" cx="60.208333333333336" cz="79.30555555555556" angle="225" />
+  <set baseHeight="0" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="100" />
+  <Goody speed="12" shape="bspMissile" y="2" grenades="0" missiles="6" start="mShow" out="mTaken" color="#c4443b" color.1="#000000" cx="70.20833333333334" cz="51.80555555555556" angle="225" />
+  <set baseHeight="0" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="100" />
+  <Goody speed="12" shape="bspMissile" y="2" grenades="0" missiles="6" start="mShow" out="mTaken" color="#c4443b" color.1="#000000" cx="50.208333333333336" cz="11.805555555555555" angle="225" />
+  <Incarnator cx="30.208333333333336" cz="51.80555555555556" angle="135" />
+  <Incarnator cx="40.208333333333336" cz="106.80555555555556" angle="45" />
+  <Incarnator cx="125.20833333333334" cz="101.80555555555556" angle="315" />
+  <Incarnator cx="130.20833333333334" cz="61.80555555555556" angle="315" />
+  <Incarnator cx="135.20833333333334" cz="31.805555555555557" angle="225" />
+  <Incarnator cx="90.20833333333334" cz="36.80555555555556" angle="225" />
+  <script pixelToThickness="0.125" color="#e8b58d" cx="80.20833333333334" cz="61.80555555555556" r="1.25" angle="135" color.1="#000000" designer="G. Wiseman (Mondo)" information="Healthless fortism." ambient.i=".05" light.0.i="2" light.0.a="-30" light.0.b="20" light.1.i="2" light.1.a="10" light.1.b="200" defaultLives="3" wallHeight="1.5" x="47.708333333333336" z="91.80555555555556" w="15" d="10" h="0" baseHeight="0">
+object Teleporter
+spin = 0
+y = -10
+activeRange = 18 * 5
+deadRange = 16 * 5
+sound = 0
+shape = 0
+destGroup = @recenter
+group = -1
+end
+object Teleporter
+shape = 0
+spin = 0
+y = 40
+group = @recenter
+destGroup = -1
+end
+object Teleporter
+shape = 0
+y = 200
+win = 1000
+start = @winTeam
+activeRange = 2000
+end
+
+v1.0   11-29-99
+© 1999 Gus Wiseman</script>
+</map>

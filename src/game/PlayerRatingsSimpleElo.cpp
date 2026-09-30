@@ -60,8 +60,9 @@ void PlayerRatingsSimpleElo::UpdateRatings(std::vector<PlayerResult> &playerResu
             // prevPlayer loses to currPlayer
             std::string prevId = prevPlayer.playerId;
 
-            // 1.0 is result (win for currPlayer), expectation represents probability they should have won
-            float delta = (1.0 - expectation(ratingsMap[currId].rating, ratingsMap[prevId].rating));
+            // 1.0 is win (for currPlayer), 0.5 is tie, expectation represents probability they should have won
+            float result = currPlayer.isTied ? 0.5 : 1.0;
+            float delta = (result - expectation(ratingsMap[currId].rating, ratingsMap[prevId].rating));
 
             // all adjustments are made all at once after exiting this loop
             adjustments[currId].rating += kFactor(ratingsMap[currId].count, playerResults.size()) * delta;

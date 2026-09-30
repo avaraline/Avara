@@ -45,5 +45,5 @@ public:
 
 
     CWorldShader();
-    virtual void Reset();
+    void Reset();
 };

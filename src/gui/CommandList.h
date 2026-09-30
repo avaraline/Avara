@@ -51,6 +51,7 @@ enum {
     kShowInfoPanel,
     kShowLevelListWind,
     kPrepareShowLevelListWind,
+    kKeyboardMappingReset,
 
     kUseDefaultDirectory = 250,
     kAutoSaveScores,

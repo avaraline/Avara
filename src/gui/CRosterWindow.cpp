@@ -10,6 +10,7 @@
 #include "Preferences.h"
 #include "ARGBColor.h"
 #include "Debug.h"
+#include "NVGUtil.h"
 
 #include <nanogui/colorcombobox.h>
 #include <nanogui/layout.h>
@@ -54,16 +55,6 @@ char bellline[1] = {7};
 char checkline[1] = {6};
 Widget *chatPanel;
 
-
-// quick & dirty color converter
-inline nanogui::Color ToNanoguiColor(const ARGBColor &argbColor) {
-    return nanogui::Color(argbColor.GetR(),
-                          argbColor.GetG(),
-                          argbColor.GetB(),
-                          argbColor.GetA());
-}
-
-
 CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     setFixedWidth(470);
 
@@ -95,6 +86,7 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
         layout->appendRow(1, 1);
         layout->appendCol(1, 1);
         ColorComboBox *color = panel->add<ColorComboBox>(colorOptions);
+        color->setTextPosition(nanogui::Button::TextPosition::Left);
         //color->setFixedHeight(23);
         color->setSelectedIndex(theNet->teamColors[i]);
         color->setCallback([this, i](int selectedIdx) {
@@ -389,6 +381,7 @@ void CRosterWindow::NewChatLine(Str255 playerName, short slot, std::string messa
     chatPlayer->setFontSize(CHAT_FONT_SIZE);
     chatPlayer->setFont(CHAT_FONT);
     chatPlayer->setFixedWidth(CHAT_NAME_WIDTH);
+    chatPlayer->setTextPosition(nanogui::Button::TextPosition::Left);
     int i1 = theNet->teamColors[slot] + 1;
     // using Base colors in chat, not level-specific overridden colors
     chatPlayer->setBackgroundColor(ToNanoguiColor(*ColorManager::getTeamBaseColor(i1)));
@@ -458,6 +451,19 @@ bool CRosterWindow::handleSDLEvent(SDL_Event &event) {
                 //SDL_Log("CRosterWindow::handleSDLEvent CLEAR");
 
                 return true;
+            case SDLK_q:
+                if (SDL_GetModState() & KMOD_CTRL) {
+                    ((CAvaraAppImpl *)gApplication)->Done();
+                    leave();
+                    return true;
+                } else
+                    return false;
+            case SDLK_r:
+                if (SDL_GetModState() & KMOD_CTRL) {
+                    ((CAvaraAppImpl *)gApplication)->GetGame()->SendStartCommand();
+                    return true;
+                } else
+                    return false;
             case SDLK_g:
                 if (SDL_GetModState() & KMOD_CTRL) {
                     SendRosterMessage(1, bellline);

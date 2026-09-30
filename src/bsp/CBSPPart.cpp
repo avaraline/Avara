@@ -41,7 +41,7 @@ CBSPPart *CBSPPart::Create(short resId) {
 
 void CBSPPart::IBSPPart(short resId) {
     DBG_Log("bsp", "Loading BSP: %d\n", resId);
-    
+
     uint16_t materialCount = 0;
     uint32_t pointCount = 0;
     uint32_t polyCount = 0;
@@ -96,7 +96,7 @@ void CBSPPart::IBSPPart(short resId) {
     materialTable = std::vector<MaterialRecord>();
     pointTable = std::vector<FixedPoint>();
     polyTable = std::vector<PolyRecord>();
-    
+
     materialTable.reserve(materialCount);
     pointTable.reserve(pointCount);
     polyTable.reserve(polyCount);
@@ -108,9 +108,10 @@ void CBSPPart::IBSPPart(short resId) {
         original = baseMaterial;
         current = baseMaterial;
         nlohmann::json const &mat = doc["materials"][i];
-        ARGBColor color = ARGBColor(0x00ffffff); // Default to invisible "white."
+        ARGBColor color = defaultMaterial.GetColor();
         ARGBColor spec = defaultMaterial.GetSpecular().WithA(defaultMaterial.GetShininess());
-        
+        uint8_t glow = defaultMaterial.GetGlow();
+
         if (mat.find("base") != mat.end()) {
             color = ARGBColor::Parse(mat["base"])
                 .value_or(color);
@@ -124,7 +125,7 @@ void CBSPPart::IBSPPart(short resId) {
         } else {
             current = current.WithColor(color);
         }
-        
+
         if (mat.find("spec") != mat.end()) {
             spec = ARGBColor::Parse(mat["spec"])
                 .value_or(spec);
@@ -137,9 +138,16 @@ void CBSPPart::IBSPPart(short resId) {
             spec = baseMaterial.GetSpecular().WithA(baseMaterial.GetShininess());
         }
         current = current.WithSpecular(spec).WithShininess(spec.GetA());
+
+        glow = mat.value<uint8_t>("glow", 0);
+        original = original.WithGlow(glow);
+        if (glow == defaultMaterial.GetGlow()) {
+            glow = baseMaterial.GetGlow();
+        }
+        current = current.WithGlow(glow);
         materialTable.push_back(MaterialRecord(original, current));
     }
-    
+
     CheckForAlpha();
 
     // if command is "/dbg bsp 666" then show points for resId 666
@@ -476,6 +484,30 @@ void CBSPPart::ReplaceShininessForColor(ARGBColor origColor, uint8_t newShinines
     if (shininessReplaced && vData) vData->Replace(*this);
 }
 
+void CBSPPart::ReplaceGlowForColor(ARGBColor origColor, uint8_t newGlow) {
+    bool glowReplaced = false;
+    for (auto &material : materialTable) {
+        if (material.original.GetColor() == origColor) {
+            material.current = material.current.WithGlow(newGlow);
+            glowReplaced = true;
+        }
+    }
+    // (No need to check for alpha here.)
+    if (glowReplaced && vData) vData->Replace(*this);
+}
+
+void CBSPPart::ReplaceAllGlow(uint8_t newGlow) {
+    bool glowReplaced = false;
+    for (auto &material : materialTable) {
+        if (material.current.GetGlow() != newGlow) {
+            glowReplaced = true;
+        }
+        material.current = material.current.WithGlow(newGlow);
+    }
+    // (No need to check for alpha here.)
+    if (glowReplaced && vData) vData->Replace(*this);
+}
+
 void CBSPPart::ReplaceMaterial(Material origMaterial, Material newMaterial) {
     bool materialReplaced = false;
     for (auto &material : materialTable) {
@@ -498,6 +530,20 @@ void CBSPPart::ReplaceAllMaterials(Material newMaterial) {
     }
     hasAlpha = (newMaterial.GetA() != 0xff);
     if (materialReplaced && vData) vData->Replace(*this);
+}
+
+void CBSPPart::ScaleAlpha(uint8_t newAlpha) {
+    hasAlpha = false;
+    for (auto &material : materialTable) {
+        uint8_t origAlpha = material.current.GetA();
+        if (origAlpha != 0xff) {
+            hasAlpha = true;
+        }
+        material.current = material.current.WithA(
+            static_cast<uint8_t>(origAlpha * (newAlpha / 255.0f))
+        );
+    }
+    if (vData) vData->Replace(*this);
 }
 
 void CBSPPart::BuildBoundingVolumes() {

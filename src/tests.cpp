@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include <SDL2/SDL_log.h>
+#include "BasePath.h"
 #include "AssetManager.h"
 #include "CAvaraApp.h"
 #include "CBSPPart.h"
@@ -119,6 +120,7 @@ public:
     virtual void IncrementAskAgainTime(int) {}
     virtual void SetShowScoreboard(bool b) {}
     virtual bool GetShowScoreboard() { return false; }
+    virtual void ResetKeyMap(){}
 
 private:
     FunctionTable *ft;
@@ -1232,6 +1234,12 @@ TEST(MATERIALS, Manipulation) {
 }
 
 int main(int argc, char **argv) {
+    // Check basepath override.
+    for (int i = 0; i < argc; i++) {
+        if (strcmp(argv[i], "--basepath") == 0) {
+            SetBasePath(argv[++i]);
+        }
+    }
     nanogui::init();
     InitMatrix();
     ::testing::InitGoogleTest(&argc, argv);
