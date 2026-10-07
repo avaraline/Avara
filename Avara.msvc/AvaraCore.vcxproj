@@ -137,7 +137,8 @@
       <Message>Specify Git commit for ersatz version tracking.</Message>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy /E /Y "$(SolutionDir)..\rsrc\" "$(TargetDir)rsrc\" &amp;&amp; xcopy /E /Y "$(SolutionDir)..\levels\" "$(TargetDir)levels\"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
