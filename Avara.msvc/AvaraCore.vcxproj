@@ -95,6 +95,11 @@
       <Command>powershell.exe -ExecutionPolicy Bypass -nologo -NoProfile -NonInteractive -File $(SolutionDir)..\bin\git_version.ps1</Command>
       <Message>Specify Git commit for ersatz version tracking.</Message>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>robocopy "$(SolutionDir)..\rsrc" "$(TargetDir)rsrc" /E /Z
+IF %ERRORLEVEL% LEQ 8 EXIT 0</Command>
+      <Message>Smart-Copy Resources to target Dir. https://stackoverflow.com/questions/5470828/using-robocopy-with-visual-studio-2010-post-build-and-pre-build-events</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -115,6 +120,11 @@
       <Command>powershell.exe -ExecutionPolicy Bypass -nologo -NoProfile -NonInteractive -File $(SolutionDir)..\bin\git_version.ps1</Command>
       <Message>Specify Git commit for ersatz version tracking.</Message>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>robocopy "$(SolutionDir)..\rsrc" "$(TargetDir)rsrc" /E /Z
+IF %ERRORLEVEL% LEQ 8 EXIT 0</Command>
+      <Message>Smart-Copy Resources to target Dir. https://stackoverflow.com/questions/5470828/using-robocopy-with-visual-studio-2010-post-build-and-pre-build-events</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -137,7 +147,9 @@
       <Message>Specify Git commit for ersatz version tracking.</Message>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy /E /Y "$(SolutionDir)..\rsrc\" "$(TargetDir)rsrc\" &amp;&amp; xcopy /E /Y "$(SolutionDir)..\levels\" "$(TargetDir)levels\"</Command>
+      <Command>robocopy "$(SolutionDir)..\rsrc" "$(TargetDir)rsrc" /E /Z
+IF %ERRORLEVEL% LEQ 8 EXIT 0</Command>
+      <Message>Smart-Copy Resources to target Dir. https://stackoverflow.com/questions/5470828/using-robocopy-with-visual-studio-2010-post-build-and-pre-build-events</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -164,6 +176,11 @@
       <Command>powershell.exe -ExecutionPolicy Bypass -nologo -NoProfile -NonInteractive -File $(SolutionDir)..\bin\git_version.ps1</Command>
       <Message>Specify Git commit for ersatz version tracking.</Message>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>robocopy "$(SolutionDir)..\rsrc" "$(TargetDir)rsrc" /E /Z
+IF %ERRORLEVEL% LEQ 8 EXIT 0</Command>
+      <Message>Smart-Copy Resources to target Dir. https://stackoverflow.com/questions/5470828/using-robocopy-with-visual-studio-2010-post-build-and-pre-build-events</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\platform\windows\resource.h" />
