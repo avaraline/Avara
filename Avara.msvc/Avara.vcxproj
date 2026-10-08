@@ -112,12 +112,11 @@
       </Message>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>robocopy "$(SolutionDir)..\rsrc" "$(TargetDir)rsrc" /E /Z
-robocopy "$(SolutionDir)..\levels" "$(TargetDir)levels" /E /Z
+      <Command>robocopy "$(SolutionDir)..\levels" "$(TargetDir)levels" /E /Z
 IF %ERRORLEVEL% LEQ 8 EXIT 0</Command>
     </PostBuildEvent>
     <PostBuildEvent>
-      <Message>https://stackoverflow.com/questions/5470828/using-robocopy-with-visual-studio-2010-post-build-and-pre-build-events</Message>
+      <Message>Smart-Copy Levels to Target Dir: https://stackoverflow.com/questions/5470828/using-robocopy-with-visual-studio-2010-post-build-and-pre-build-events</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -144,12 +143,11 @@ IF %ERRORLEVEL% LEQ 8 EXIT 0</Command>
       </Message>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>robocopy "$(SolutionDir)..\rsrc" "$(TargetDir)rsrc" /E /Z
-robocopy "$(SolutionDir)..\levels" "$(TargetDir)levels" /E /Z
+      <Command>robocopy "$(SolutionDir)..\levels" "$(TargetDir)levels" /E /Z
 IF %ERRORLEVEL% LEQ 8 EXIT 0</Command>
     </PostBuildEvent>
     <PostBuildEvent>
-      <Message>https://stackoverflow.com/questions/5470828/using-robocopy-with-visual-studio-2010-post-build-and-pre-build-events</Message>
+      <Message>Smart-Copy Levels to Target Dir: https://stackoverflow.com/questions/5470828/using-robocopy-with-visual-studio-2010-post-build-and-pre-build-events</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -176,10 +174,9 @@ IF %ERRORLEVEL% LEQ 8 EXIT 0</Command>
       </Message>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>robocopy "$(SolutionDir)..\rsrc" "$(TargetDir)rsrc" /E /Z
-robocopy "$(SolutionDir)..\levels" "$(TargetDir)levels" /E /Z
+      <Command>robocopy "$(SolutionDir)..\levels" "$(TargetDir)levels" /E /Z
 IF %ERRORLEVEL% LEQ 8 EXIT 0</Command>
-      <Message>https://stackoverflow.com/questions/5470828/using-robocopy-with-visual-studio-2010-post-build-and-pre-build-events</Message>
+      <Message>Smart-Copy Levels to Target Dir: https://stackoverflow.com/questions/5470828/using-robocopy-with-visual-studio-2010-post-build-and-pre-build-events</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -203,10 +200,9 @@ IF %ERRORLEVEL% LEQ 8 EXIT 0</Command>
       <AdditionalDependencies>SDL2main.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>robocopy "$(SolutionDir)..\rsrc" "$(TargetDir)rsrc" /E /Z
-robocopy "$(SolutionDir)..\levels" "$(TargetDir)levels" /E /Z
+      <Command>robocopy "$(SolutionDir)..\levels" "$(TargetDir)levels" /E /Z
 IF %ERRORLEVEL% LEQ 8 EXIT 0</Command>
-      <Message>https://stackoverflow.com/questions/5470828/using-robocopy-with-visual-studio-2010-post-build-and-pre-build-events</Message>
+      <Message>Smart-Copy Levels to Target Dir: https://stackoverflow.com/questions/5470828/using-robocopy-with-visual-studio-2010-post-build-and-pre-build-events</Message>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>
