@@ -20,7 +20,9 @@ vcpkg-configuration.json
 vcpkg_installed
 .vs
 Avara.msvc/x64/
+/Avara.msvc/Win32/
 Avara.msvc/Avara*/
 Avara.msvc/Tests/
 compile_commands.json
 *.vcxproj.user
+
