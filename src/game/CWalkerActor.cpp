@@ -762,7 +762,6 @@ void CWalkerActor::UndoLegs() {
 
 void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
     if (itsGame->frameNumber == 0) {
-        short hullRes;
 
         hullRes = config->hullType;
         if (hullRes < 0 || hullRes > 9)
@@ -772,10 +771,10 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
 
         hullConfig = **AssetManager::GetHull(hullRes);
 
-        hullRes = hullConfig.hullBSP;
+        hullBSP = hullConfig.hullBSP;
         gRenderer->RemovePart(viewPortPart);
         delete viewPortPart;
-        LoadPart(0, hullRes);
+        LoadPart(0, hullBSP);
 
         viewPortPart = partList[0];
         viewPortPart->ReplaceColor(*ColorManager::getMarkerColor(0), longTeamColor);

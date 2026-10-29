@@ -30,6 +30,9 @@ public:
     LegInfo legs[2] = {};   // init all zeroes
     LegInfo legUndo[2] = {};
     Fixed legSpeeds[2] = {};
+    
+    uint16_t hullRes = 0;
+    uint16_t hullBSP = 0;
 
     Fixed viewPortHeight;
 

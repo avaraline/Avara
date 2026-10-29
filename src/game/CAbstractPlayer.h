@@ -79,15 +79,15 @@ public:
     Fixed maxShields = 0; //	Maximum shield energy
     Fixed classicShieldRegen, shieldRegen = 0; //	Shield regeneration rate
 
-    short missileCount = 0;
-    short grenadeCount = 0;
+    uint16_t missileCount = 0;
+    uint16_t grenadeCount = 0;
     FrameNumber nextGrenadeLoad = 0;
     FrameNumber nextMissileLoad = 0;
     FrameNumber nextPlasmaShot = 0;
 
-    short missileLimit = 0;
-    short grenadeLimit = 0;
-    short boosterLimit = 0;
+    uint16_t missileLimit = 0;
+    uint16_t grenadeLimit = 0;
+    uint16_t boosterLimit = 0;
 
     //	Movement related variables:
     Fixed baseMass = 0;

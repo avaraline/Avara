@@ -1,5 +1,5 @@
 #include "OggFile.h"
-#include "SDL2/SDL.h"
+#include <SDL2/SDL.h>
 #include "FastMat.h"
 
 
