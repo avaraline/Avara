@@ -11,9 +11,6 @@
 		601893B02ECF106900AB3A6D /* Logging.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 601893AE2ECF106900AB3A6D /* Logging.cpp */; };
 		601893B12ECF106900AB3A6D /* Logging.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 601893AE2ECF106900AB3A6D /* Logging.cpp */; };
 		6025AE4E2C255E6A00A57EFB /* LegacyOpenGLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60C274E22C23EBE9005B67A9 /* LegacyOpenGLRenderer.cpp */; };
-		60A3DBEF2DF4284F007EF706 /* GameFilm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60A3DBEE2DF4284F007EF706 /* GameFilm.cpp */; };
-		60A3DBF02DF4284F007EF706 /* GameFilm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60A3DBEE2DF4284F007EF706 /* GameFilm.cpp */; };
-		60A3DBF12DF4284F007EF706 /* GameFilm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60A3DBEE2DF4284F007EF706 /* GameFilm.cpp */; };
 		6055BF212DEA8A79005E3CFB /* BasePath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6055BF202DEA8A79005E3CFB /* BasePath.cpp */; };
 		6055BF222DEA8A79005E3CFB /* BasePath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6055BF202DEA8A79005E3CFB /* BasePath.cpp */; };
 		6055BF232DEA8A79005E3CFB /* BasePath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6055BF202DEA8A79005E3CFB /* BasePath.cpp */; };
@@ -23,6 +20,9 @@
 		6077F504303D6C8F005D29D0 /* CKeyboardMappingWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6077F503303D6C8F005D29D0 /* CKeyboardMappingWindow.cpp */; };
 		6077F505303D6C8F005D29D0 /* CKeyboardMappingWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6077F503303D6C8F005D29D0 /* CKeyboardMappingWindow.cpp */; };
 		6077F506303D6C8F005D29D0 /* CKeyboardMappingWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6077F503303D6C8F005D29D0 /* CKeyboardMappingWindow.cpp */; };
+		60A3DBEF2DF4284F007EF706 /* GameFilm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60A3DBEE2DF4284F007EF706 /* GameFilm.cpp */; };
+		60A3DBF02DF4284F007EF706 /* GameFilm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60A3DBEE2DF4284F007EF706 /* GameFilm.cpp */; };
+		60A3DBF12DF4284F007EF706 /* GameFilm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60A3DBEE2DF4284F007EF706 /* GameFilm.cpp */; };
 		60E96F2C303441CD00114F0D /* CSettingsWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60E96F2B303441CD00114F0D /* CSettingsWindow.cpp */; };
 		60E96F2D303441CD00114F0D /* CSettingsWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60E96F2B303441CD00114F0D /* CSettingsWindow.cpp */; };
 		60E96F2E303441CD00114F0D /* CSettingsWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60E96F2B303441CD00114F0D /* CSettingsWindow.cpp */; };
@@ -586,8 +586,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		60A3DBED2DF42791007EF706 /* GameFilm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameFilm.h; sourceTree = "<group>"; };
-		60A3DBEE2DF4284F007EF706 /* GameFilm.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameFilm.cpp; sourceTree = "<group>"; };
 		601893AD2ECF0FB000AB3A6D /* Logging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Logging.h; sourceTree = "<group>"; };
 		601893AE2ECF106900AB3A6D /* Logging.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Logging.cpp; sourceTree = "<group>"; };
 		601893B22ED2CB6700AB3A6D /* backward.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = backward.hpp; sourceTree = "<group>"; };
@@ -599,6 +597,9 @@
 		6077F4FE303947EC005D29D0 /* CMainMenu.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CMainMenu.cpp; sourceTree = "<group>"; };
 		6077F502303D6C8F005D29D0 /* CKeyboardMappingWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKeyboardMappingWindow.h; sourceTree = "<group>"; };
 		6077F503303D6C8F005D29D0 /* CKeyboardMappingWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CKeyboardMappingWindow.cpp; sourceTree = "<group>"; };
+		609C7B4A309374E000FFA666 /* portable_endian.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = portable_endian.h; sourceTree = "<group>"; };
+		60A3DBED2DF42791007EF706 /* GameFilm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameFilm.h; sourceTree = "<group>"; };
+		60A3DBEE2DF4284F007EF706 /* GameFilm.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameFilm.cpp; sourceTree = "<group>"; };
 		60C274E22C23EBE9005B67A9 /* LegacyOpenGLRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LegacyOpenGLRenderer.cpp; sourceTree = "<group>"; };
 		60C274E32C23EBE9005B67A9 /* LegacyOpenGLRenderer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = LegacyOpenGLRenderer.h; sourceTree = "<group>"; };
 		60E96F2A303441CD00114F0D /* CSettingsWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSettingsWindow.h; sourceTree = "<group>"; };
@@ -1764,6 +1765,7 @@
 				E5890ED929895124007A875D /* stb_vorbis.h */,
 				E5890D4029895123007A875D /* utf8 */,
 				E5890EDA29895124007A875D /* utf8.h */,
+				609C7B4A309374E000FFA666 /* portable_endian.h */,
 			);
 			path = vendor;
 			sourceTree = "<group>";

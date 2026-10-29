@@ -476,6 +476,7 @@ void CAvaraAppImpl::GameStarted(LevelInfo &loadedLevel) {
         SDL_GameControllerSetLED(controller, color.GetR(), color.GetG(), color.GetB());
     }
     itsAPI->RecordGameStart(itsGame);
+    itsGame->itsFilm->SaveGameInfo(itsGame);
 }
 
 void CAvaraAppImpl::Rumble(Fixed hitEnergy) {
@@ -559,19 +560,17 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
     SDL_Log("LOADING LEVEL %s FROM %s\n", levelTag.c_str(), set.c_str());
     if (itsGame->itsFilm->HasUnflushedFrames()) {
         // film sql
-        itsAPI->RecordFrames(itsGame);
-        
+        //itsAPI->RecordFrames(itsGame);
+
         // film file test
         char *ppath = SDL_GetPrefPath("Avaraline", "Avara");
-        const auto ts(std::chrono::steady_clock::now());
-        const size_t ms = std::chrono::duration_cast<std::chrono::milliseconds>(ts.time_since_epoch()).count();
-        auto path = std::string(ppath) + std::to_string(ms) + "-film.bin";
+        auto path = std::string(ppath) + "film-" +std::to_string(itsGame->currentGameId) + ".bin";
         std::ofstream filmFile(path, std::ios::out | std::ios::binary);
-        itsGame->itsFilm->Serialize(filmFile, itsGame);
+        itsGame->itsFilm->Serialize(filmFile);
         filmFile.close();
         
         std::ifstream testInputFilm(path, std::ios::in | std::ios::binary);
-        itsGame->itsFilm->DeserializeTest(testInputFilm, itsGame);
+        itsGame->itsFilm->Deserialize(testInputFilm);
         testInputFilm.close();
     }
     

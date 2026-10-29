@@ -10,59 +10,23 @@
 #include "CAbstractPlayer.h"
 #include "CWalkerActor.h"
 #include "GitVersion.h"
+#include "Debug.h"
+#include "portable_endian.h"
 
-GameFilm::GameFilm() {
-    frames = std::make_unique<FilmReel>();
-    written = 0;
-}
-
-void GameFilm::RecordFrame(short slot, FunctionTable *ft) {
-    FunctionTable ftc(*ft);
-    PlayerFrameFunc pff = {slot, ftc};
-    frames->push_back(pff);
-}
-
-std::unique_ptr<FilmReel> *GameFilm::GetReelRef() {
-    return &frames;
-}
-
-bool GameFilm::HasUnflushedFrames() {
-    return frames->size() > written;
-}
-
-const char FilmHeader[9] = {'A', 'V', 'A', 'R', 'A', 'F', 'I', 'L', 'M'};
 
 #define oswrite(x) os.write(reinterpret_cast<const char *>(&x), sizeof(x))
 #define isread(x) is.read(reinterpret_cast<char *>(&x), sizeof(x))
 
-#if !defined(_WIN32) && !defined(__APPLE__)
-unsigned long long htonll(unsigned long long v) {
-    union { unsigned long lv[2]; unsigned long long llv; } u;
-    u.lv[0] = htonl(v >> 32);
-    u.lv[1] = htonl(v & 0xFFFFFFFFULL);
-    return u.llv;
-}
 
-unsigned long long ntohll(unsigned long long v) {
-    union { unsigned long lv[2]; unsigned long long llv; } u;
-    u.llv = v;
-    return ((unsigned long long)ntohl(u.lv[0]) << 32) | (unsigned long long)ntohl(u.lv[1]);
-}
-#endif
-
-void GameFilm::Serialize(std::ostream &os, GamePointer &game) {
+void GameFilm::SaveGameInfo(GamePointer &game) {
+    filmCast->clear();
     auto linfo = game->loadedLevelInfo.get();
-    uint64_t gameId = htonll(game->currentGameId);
-    std::string lurl = linfo->URL();
-    uint8_t frameTime = 0;
-    uint8_t spawnOrder = 0;
-    uint8_t totalPlayers = 0;
+    gameId = game->currentGameId;
+    lurl = linfo->URL();
     bool hostInfo = false;
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
         auto manager = (&game->itsNet->playerTable[i])->get();
         if (!manager) continue;
-        auto thePlayer = manager->GetPlayer();
-        if (!thePlayer) continue;
         if (!hostInfo) {
             CPlayerManager* host = manager->ServerPlayer();
             auto hostConfig = host->TheConfiguration();
@@ -70,13 +34,39 @@ void GameFilm::Serialize(std::ostream &os, GamePointer &game) {
             spawnOrder = (uint8_t)hostConfig.spawnOrder;
             hostInfo = true;
         }
-        totalPlayers++;
+        auto thePlayer = manager->GetPlayer();
+        if (!thePlayer) continue;
+        auto p = PlayerInfo();
+        p.name = manager->GetPlayerName();
+        p.slot = manager->Slot();
+        p.team = thePlayer->teamColor;
+        auto walker = (CWalkerActor*) thePlayer;
+        p.hull = walker->hullRes;
+        p.grenades = thePlayer->grenadeCount;
+        p.missiles = thePlayer->missileCount;
+        p.boosters = (int)thePlayer->boostsRemaining;
+        auto playerConfig = manager->TheConfiguration();
+        p.hullColor = playerConfig.hullColor.GetRaw();
+        p.gunColor = playerConfig.gunColor.GetRaw();
+        p.cockpitColor = playerConfig.cockpitColor.GetRaw();
+        p.trimColor = playerConfig.trimColor.GetRaw();
+        // player name
+        p.nameSize = (uint16_t)p.name.size();
+        filmCast->push_back(p);
     }
-    
+    totalPlayers = filmCast->size();
+}
+
+void GameFilm::LoadGameInfo(GamePointer &game) {
+
+}
+
+void GameFilm::Serialize(std::ostream &os) {
     // header
-    for (int i = 0; i < sizeof(FilmHeader); i++) {
+    for (int i = 0; i < FilmHeaderLength; i++) {
         oswrite(FilmHeader[i]);
     }
+
     // level url
     uint16_t lurlSize = htons((uint16_t)lurl.size());
     oswrite(lurlSize);
@@ -85,46 +75,37 @@ void GameFilm::Serialize(std::ostream &os, GamePointer &game) {
         oswrite(lurlStr[j]);
     }
     // game id
-    oswrite(gameId);
+    uint64_t gid = htobe64(this->gameId);
+    oswrite(gid);
     // frame time
-    oswrite(frameTime);
+    uint16_t ft = htons(this->frameTime);
+    oswrite(ft);
     // spawn order
-    oswrite(spawnOrder);
+    uint16_t so = htons(this->spawnOrder);
+    oswrite(so);
     // total players
-    oswrite(totalPlayers);
+    uint16_t tp = htons(this->filmCast->size());
+    oswrite(tp);
     // player list
-    for (int i = 0; i < kMaxAvaraPlayers; i++) {
-        auto manager = (&game->itsNet->playerTable[i])->get();
-        if (!manager) continue;
-        auto thePlayer = manager->GetPlayer();
-        if (!thePlayer) continue;
-        if (!hostInfo) {
-            CPlayerManager* host = manager->ServerPlayer();
-            auto hostConfig = host->TheConfiguration();
-            frameTime = (uint8_t)hostConfig.frameTime;
-            spawnOrder = (uint8_t)hostConfig.spawnOrder;
-            hostInfo = true;
-        }
-        std::string name = manager->GetPlayerName();
-        uint8_t slot = manager->Slot();
-        uint8_t team = thePlayer->teamColor;
-        auto walker = (CWalkerActor*) thePlayer;
-        uint16_t hull = htons(walker->hullRes);
-        uint16_t grenades = htons(thePlayer->grenadeCount);
-        uint16_t missiles = htons(thePlayer->missileCount);
-        uint16_t boosters = htons((int)thePlayer->boostsRemaining);
-        auto playerConfig = manager->TheConfiguration();
-        uint32_t hullColor = htonl(playerConfig.hullColor.GetRaw());
-        uint32_t gunColor = htonl(playerConfig.gunColor.GetRaw());
-        uint32_t cockpitColor = htonl(playerConfig.cockpitColor.GetRaw());
-        uint32_t trimColor = htonl(playerConfig.trimColor.GetRaw());
-        // player name
-        uint16_t nameSize = htons((uint16_t)name.size());
+    for (const PlayerInfo &p : *filmCast) {
+        std::string name = p.name;
+        uint16_t nameSize = htons(name.length());
         oswrite(nameSize);
-        const char* nameStr = name.c_str();
-        for (int k = 0; k < name.size(); k++) {
+        const char* nameStr = p.name.c_str();
+        for (int k = 0; k < p.name.size(); k++) {
             oswrite(nameStr[k]);
         }
+
+        uint16_t slot = htons(p.slot);
+        uint16_t team = htons(p.team);
+        uint16_t hull = htons(p.hull);
+        uint16_t grenades = htons(p.grenades);
+        uint16_t missiles = htons(p.missiles);
+        uint16_t boosters = htons(p.boosters);
+        uint32_t hullColor = htonl(p.hullColor);
+        uint32_t gunColor = htonl(p.gunColor);
+        uint32_t cockpitColor = htonl(p.cockpitColor);
+        uint32_t trimColor = htonl(p.trimColor);
         // slot
         oswrite(slot);
         // team
@@ -141,20 +122,21 @@ void GameFilm::Serialize(std::ostream &os, GamePointer &game) {
         oswrite(trimColor);
     }
     // number of frame funcs
-    uint64_t frameCount = htonll((uint64_t)frames->size());
+    uint64_t total = (uint64_t)frames->size();
+    uint64_t frameCount = htobe64(total);
     oswrite(frameCount);
     uint64_t currentFrame = 0;
-    for (auto it = frames->begin(); it < frames->end(); ++it, ++currentFrame) {
-        uint8_t slot = it->slot;
-        uint64_t frame = htonll(currentFrame);
-        uint32_t down = htonl(it->ft.down);
-        uint32_t up = htonl(it->ft.up);
-        uint32_t held = htonl(it->ft.held);
-        uint8_t buttonStatus = it->ft.buttonStatus;
-        uint16_t mouseH = htons(it->ft.mouseDelta.h);
-        uint16_t mouseV = htons(it->ft.mouseDelta.v);
-        char msgChar = it->ft.msgChar;
-        
+    for (const PlayerFrameFunc &it : *frames) {
+        uint8_t slot = htons(it.slot);
+        uint64_t frame = htobe64(currentFrame);
+        uint32_t down = htonl(it.ft.down);
+        uint32_t up = htonl(it.ft.up);
+        uint32_t held = htonl(it.ft.held);
+        uint8_t buttonStatus = it.ft.buttonStatus;
+        uint16_t mouseH = htons(it.ft.mouseDelta.h);
+        uint16_t mouseV = htons(it.ft.mouseDelta.v);
+        char msgChar = it.ft.msgChar;
+
         oswrite(slot);
         oswrite(frame);
         oswrite(down);
@@ -164,44 +146,51 @@ void GameFilm::Serialize(std::ostream &os, GamePointer &game) {
         oswrite(mouseH);
         oswrite(mouseV);
         oswrite(msgChar);
+        currentFrame++;
     }
 }
 
-void GameFilm::DeserializeTest(std::istream &is, GamePointer &game) {
+void GameFilm::Deserialize(std::istream &is) {
     // header
-    is.ignore(sizeof(FilmHeader));
+    is.ignore(FilmHeaderLength);
     // level url
     uint16_t lurlLength;
     isread(lurlLength);
     lurlLength = ntohs(lurlLength);
-    std::string lurl = "";
+    lurl = "";
     for (uint16_t i = 0; i < lurlLength; i++) {
         char theByte = '\0';
         isread(theByte);
         lurl += theByte;
     }
-    uint64_t gameId;
-    uint8_t frameTime;
-    uint8_t spawnOrder;
-    uint8_t totalPlayers;
+    DBG_Log("films", "deserialize lurl %s", lurl.c_str());
     // game id
-    isread(gameId);
-    gameId = ntohll(gameId);
+    uint64_t gid;
+    isread(gid);
+    gameId = be64toh(gid);
     // frame time
-    isread(frameTime);
+    uint16_t ft;
+    isread(ft);
+    frameTime = ntohs(ft);
     // spawn order
-    isread(spawnOrder);
+    uint16_t so;
+    isread(so);
+    spawnOrder = ntohs(so);
     // total players
-    isread(totalPlayers);
-    
-    SDL_Log("deserialize game %0llxd with %i players", gameId, totalPlayers);
-    
+    uint16_t tp;
+    isread(tp);
+    totalPlayers = ntohs(tp);
+
+    DBG_Log("films", "deserialize game %0llxd with %i players", gameId, totalPlayers);
+
+    filmCast->clear();
+
     // player list
     for (int j = 0; j < totalPlayers; j++) {
-        uint16_t nameLength;
         std::string name = "";
-        uint8_t slot;
-        uint8_t team;
+        uint16_t nameSize;
+        uint16_t slot;
+        uint16_t team;
         uint16_t hull;
         uint16_t grenades;
         uint16_t missiles;
@@ -210,18 +199,23 @@ void GameFilm::DeserializeTest(std::istream &is, GamePointer &game) {
         uint32_t gunColor;
         uint32_t cockpitColor;
         uint32_t trimColor;
+
+        PlayerInfo p;
         // player name
-        isread(nameLength);
-        nameLength = ntohs(nameLength);
-        for(uint16_t k = 0; k < nameLength; k++) {
+        isread(nameSize);
+        p.name = "";
+        p.nameSize = ntohs(nameSize);
+        for(uint16_t k = 0; k < p.nameSize; k++) {
             char theByte = '\0';
             isread(theByte);
-            name += theByte;
+            p.name += theByte;
         }
         // slot
         isread(slot);
+        slot = ntohs(slot);
         // team
         isread(team);
+        team = ntohs(team);
         // config
         isread(hull);
         hull = ntohs(hull);
@@ -240,13 +234,25 @@ void GameFilm::DeserializeTest(std::istream &is, GamePointer &game) {
         cockpitColor = ntohl(cockpitColor);
         isread(trimColor);
         trimColor = ntohl(trimColor);
-        SDL_Log("deserialize player %s in slot %i team %i hull %i", name.c_str(), slot, team, hull);
+        DBG_Log("films", "deserialize player %s in slot %i team %i hull %i", p.name.c_str(), slot, team, hull);
+        p.slot = slot;
+        p.hull = hull;
+        p.grenades = grenades;
+        p.missiles = missiles;
+        p.boosters = boosters;
+        p.hullColor = hullColor;
+        p.gunColor = gunColor;
+        p.cockpitColor = cockpitColor;
+        p.trimColor = trimColor;
+        filmCast->push_back(p);
     }
+
+    frames->clear();
     // frame total
-    uint64_t frameCount;
-    isread(frameCount);
-    frameCount = ntohll(frameCount);
-    SDL_Log("try to deserialize %llu frames", frameCount);
+    uint64_t fc;
+    isread(fc);
+    uint64_t frameCount = be64toh(fc);
+    DBG_Log("films", "try to deserialize %llu frames", frameCount);
     for (size_t m = 0; m < frameCount; m++) {
         uint8_t slot;
         uint64_t frame;
@@ -260,7 +266,7 @@ void GameFilm::DeserializeTest(std::istream &is, GamePointer &game) {
 
         isread(slot);
         isread(frame);
-        frame = ntohll(frame);
+        frame = be64toh(frame);
         isread(down);
         down = ntohl(down);
         isread(up);
@@ -274,7 +280,15 @@ void GameFilm::DeserializeTest(std::istream &is, GamePointer &game) {
         mouseV = ntohs(mouseV);
         isread(msgChar);
         if (msgChar > 0) SDL_Log("MsgChar %c", msgChar);
+        PlayerFrameFunc f;
+        f.slot = slot;
+        f.ft = FunctionTable();
+        f.ft.down = down;
+        f.ft.up = up;
+        f.ft.held = held;
+        f.ft.buttonStatus = buttonStatus;
+        f.ft.msgChar = msgChar;
+        frames->push_back(f);
     }
-    SDL_Log("No problem!!");
-    
+    DBG_Log("films", "got %i frames!", (int)frames->size());
 }
