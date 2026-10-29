@@ -10,6 +10,7 @@
 #include "KeyFuncs.h"
 #include "LevelInfo.h"
 #include <memory>
+#include <portable_endian.h>
 
 struct PlayerFrameFunc {
     short slot;
@@ -70,6 +71,13 @@ public:
     void LoadGameInfo(GamePointer &game);
     void Serialize(std::ostream &os);
     void Deserialize(std::istream &is);
+
+    static inline unsigned long long _htonll(unsigned long long v) {
+        return BIG_ENDIAN ? v : htobe64(v);
+    }
+    static inline unsigned long long _ntohll(unsigned long long v) {
+        return BIG_ENDIAN ? v : be64toh(v);
+    }
 
 private:
     std::unique_ptr<FilmCast> filmCast;

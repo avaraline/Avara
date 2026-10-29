@@ -75,7 +75,7 @@ void GameFilm::Serialize(std::ostream &os) {
         oswrite(lurlStr[j]);
     }
     // game id
-    uint64_t gid = htobe64(this->gameId);
+    uint64_t gid = _htonll(this->gameId);
     oswrite(gid);
     // frame time
     uint16_t ft = htons(this->frameTime);
@@ -123,7 +123,7 @@ void GameFilm::Serialize(std::ostream &os) {
     }
     // number of frame funcs
     uint64_t total = (uint64_t)frames->size();
-    uint64_t frameCount = htobe64(total);
+    uint64_t frameCount = _htonll(total);
     oswrite(frameCount);
     uint64_t currentFrame = 0;
     for (const PlayerFrameFunc &it : *frames) {
@@ -167,7 +167,7 @@ void GameFilm::Deserialize(std::istream &is) {
     // game id
     uint64_t gid;
     isread(gid);
-    gameId = be64toh(gid);
+    gameId = _ntohll(gid);
     // frame time
     uint16_t ft;
     isread(ft);
@@ -251,7 +251,7 @@ void GameFilm::Deserialize(std::istream &is) {
     // frame total
     uint64_t fc;
     isread(fc);
-    uint64_t frameCount = be64toh(fc);
+    uint64_t frameCount = _ntohll(fc);
     DBG_Log("films", "try to deserialize %llu frames", frameCount);
     for (size_t m = 0; m < frameCount; m++) {
         uint8_t slot;
@@ -266,7 +266,7 @@ void GameFilm::Deserialize(std::istream &is) {
 
         isread(slot);
         isread(frame);
-        frame = be64toh(frame);
+        frame = _ntohll(frame);
         isread(down);
         down = ntohl(down);
         isread(up);
