@@ -44,6 +44,7 @@ LDFLAGS := ${LDFLAGS}
 
 ifeq ($(UNAME), Darwin)
 	# MacOS
+	MACOSX_DEPLOYMENT_TARGET ?= 10.15  # override to latest> export MACOSX_DEPLOYMENT_TARGET=`xcrun --show-sdk-version`
 	SRCS += $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.mm')
 	INC_EXTRA := -I/opt/homebrew/include -I/usr/local/include
 	CXXFLAGS += -mmacosx-version-min=10.9 $(INC_EXTRA)
@@ -119,6 +120,7 @@ macapp:
         -IDEBuildOperationMaxNumberOfConcurrentCompileTasks=$(JOBS) \
         -derivedDataPath $(BUILD_DIR)/DerivedData \
         ONLY_ACTIVE_ARCH=NO \
+        MACOSX_DEPLOYMENT_TARGET=$(MACOSX_DEPLOYMENT_TARGET) \
         CONFIGURATION_BUILD_DIR=$(BUILD_DIR)
 
 macdist: macapp
